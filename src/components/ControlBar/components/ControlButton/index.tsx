@@ -1,9 +1,15 @@
+import React from "react";
+
 import "./index.css";
 
-const ControlButton = (props) => {
+interface ControlButton {
+    text: string
+}
+
+const ControlButton: React.FC<ControlButton> = ({text}) => {
     return (
-        <div>
-            {props.text}
+        <div className="control-button">
+            {text}
         </div>
     )
 }
