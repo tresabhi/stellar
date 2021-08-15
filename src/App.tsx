@@ -1,8 +1,9 @@
-import React from "react";1
+import React from "react";
+import ControlBar from "./components/ControlBar"
 
 function App() {
   return (
-    
+    <ControlBar></ControlBar>
   );
 }
 
