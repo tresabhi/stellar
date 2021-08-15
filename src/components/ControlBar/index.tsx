@@ -1,8 +1,12 @@
-import "./index.css"
+import ControlButton from "./components/ControlButton";
+
+import "./index.css";
 
 const ControlBar = () => {
     return (
-        <div className="control-bar-root"></div>
+        <div className="control-bar-root">
+            <ControlButton text="File"></ControlButton>
+        </div>
     );
 }
 
