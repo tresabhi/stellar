@@ -1,7 +1,0 @@
-.control-button {
-    background-color: var(--bg-control-bar);
-}
-
-.control-button:hover {
-    background-color: var(--bg-control-bar-hover);
-}

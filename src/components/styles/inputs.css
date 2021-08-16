@@ -1,0 +1,14 @@
+button {
+    cursor: pointer;
+}
+
+button.context-menu-button {
+    background-color: var(--bg-context-menu);
+    border: none;
+    color: white;
+    margin: none;
+}
+
+button.context-menu-button:hover {
+    background-color: var(--bg-context-menu-hover);
+}

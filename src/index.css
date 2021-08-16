@@ -1,12 +1,1 @@
-:root {
-    /* Sizes */
-    --control-bar-height: 24px;
-
-    /* Colors */
-    --bg-control-bar: #22272e;
-    --bg-control-bar-hover: #393d43;
-}
-
-body {
-    margin: 0px;
-}
+@import url(./components/styles/server.css);

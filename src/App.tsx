@@ -1,9 +1,9 @@
 import React from "react";
-import ControlBar from "./components/ControlBar"
+import ContextMenuBar from "./components/ContextMenuBar"
 
 function App() {
   return (
-    <ControlBar></ControlBar>
+    <ContextMenuBar></ContextMenuBar>
   );
 }
 

@@ -1,0 +1,8 @@
+:root {
+    /* Sizes */
+    --control-bar-height: 24px;
+
+    /* Colors */
+    --bg-context-menu: #22272e;
+    --bg-context-menu-hover: #393d43;
+}
