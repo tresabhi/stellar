@@ -1,9 +1,10 @@
-import React from "react";
 import ContextMenuBar from "./components/ContextMenuBar"
 
 function App() {
   return (
-    <ContextMenuBar></ContextMenuBar>
+    <ContextMenuBar buttons={[
+      "File"
+    ]}></ContextMenuBar>
   );
 }
 

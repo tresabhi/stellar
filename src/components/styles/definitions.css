@@ -5,4 +5,7 @@
     /* Colors */
     --bg-context-menu: #22272e;
     --bg-context-menu-hover: #393d43;
+
+    /* Paddings */
+    --padding-button-thin: 4px;
 }

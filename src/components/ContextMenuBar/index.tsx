@@ -2,12 +2,16 @@ import ContextMenuBarButton from "./components/ContextMenuBarButton";
 
 import "./index.css"
 
-const ControlBar = () => {
+type ContextMenuBarProps = {
+    buttons?: object
+}
+
+const ContextMenuBar = ({buttons}: ContextMenuBarProps) => {
     return (
-        <div className="control-bar">
-            <ContextMenuBarButton text="File"></ContextMenuBarButton>
+        <div className="context-menu-bar">
+            <ContextMenuBarButton text="Asd" />
         </div>
     );
 }
 
-export default ControlBar;
+export default ContextMenuBar;

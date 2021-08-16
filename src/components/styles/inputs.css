@@ -1,12 +1,15 @@
 button {
     cursor: pointer;
+    margin: 0px;
+    padding: 0px;
+    display: block;
 }
 
 button.context-menu-button {
     background-color: var(--bg-context-menu);
     border: none;
     color: white;
-    margin: none;
+    padding: var(--padding-button-thin);
 }
 
 button.context-menu-button:hover {
