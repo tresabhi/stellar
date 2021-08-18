@@ -1,6 +1,7 @@
-/* strip away bad default css */
 button {
     display: block;
     border: none;
     padding: 0px;
+    text-align: center;
+    cursor: pointer;
 }

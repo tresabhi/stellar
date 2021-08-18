@@ -1,5 +1,10 @@
 .context-menu-bar-button {
     color: white;
-    background: var(--context-menu-bg);
+    background-color: var(--context-menu-bg);
     padding: var(--padding-button-thin);
+    cursor: default;
+}
+
+.context-menu-bar-button:hover {
+    background-color: var(--context-menu-hover-bg);
 }
