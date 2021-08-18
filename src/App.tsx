@@ -1,10 +1,16 @@
-import ContextMenuBar from "./components/ContextMenuBar"
+import ContextMenuBar from "@components/ContextMenuBar";
+import ContextMenuBarButton from "@components/ContextMenuBarButton";
+
 
 function App() {
   return (
-    <ContextMenuBar buttons={[
-      "File"
-    ]}></ContextMenuBar>
+    <ContextMenuBar>
+      <ContextMenuBarButton>File</ContextMenuBarButton>
+      <ContextMenuBarButton>Edit</ContextMenuBarButton>
+      <ContextMenuBarButton>Selection</ContextMenuBarButton>
+      <ContextMenuBarButton>View</ContextMenuBarButton>
+      <ContextMenuBarButton>Help</ContextMenuBarButton>
+    </ContextMenuBar>
   );
 }
 

@@ -1,17 +1,13 @@
-import ContextMenuBarButton from "./components/ContextMenuBarButton";
-
-import "./index.css"
-
 type ContextMenuBarProps = {
-    buttons?: object
+    children?: any
 }
 
-const ContextMenuBar = ({buttons}: ContextMenuBarProps) => {
+const ContextMenuBar = ({children}: ContextMenuBarProps) => {
     return (
         <div className="context-menu-bar">
-            <ContextMenuBarButton text="Asd" />
+            {children}
         </div>
-    );
+    )
 }
 
-export default ContextMenuBar;
+export default ContextMenuBar

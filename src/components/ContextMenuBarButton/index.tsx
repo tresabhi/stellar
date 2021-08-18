@@ -1,13 +1,13 @@
 type ContextMenuBarButtonProp = {
-    text: string
+    children: string
 }
 
-const ContextMenuBarButton = ({text}: ContextMenuBarButtonProp) => {
+const ContextMenuBarButton = ({children}: ContextMenuBarButtonProp) => {
     return (
-        <button className="context-menu-button">
-            {text}
-        </button>
+        <div className="context-menu-bar-button">
+            {children}
+        </div>
     )
 }
 
-export default ContextMenuBarButton;
+export default ContextMenuBarButton
