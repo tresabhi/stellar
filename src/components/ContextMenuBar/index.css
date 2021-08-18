@@ -1,0 +1,5 @@
+.context-menu-bar {
+    width: 100%;
+    height: var(--context-menu-bar-height);
+    background-color: var(--context-menu-bg);
+}

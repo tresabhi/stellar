@@ -1,7 +1,6 @@
 import ContextMenuBar from "@components/ContextMenuBar";
 import ContextMenuBarButton from "@components/ContextMenuBarButton";
 
-
 function App() {
   return (
     <ContextMenuBar>

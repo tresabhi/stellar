@@ -1,12 +1,14 @@
+import "./index.css"
+
 type ContextMenuBarButtonProp = {
     children: string
 }
 
 const ContextMenuBarButton = ({children}: ContextMenuBarButtonProp) => {
     return (
-        <div className="context-menu-bar-button">
+        <button className="context-menu-bar-button general-font-size">
             {children}
-        </div>
+        </button>
     )
 }
 

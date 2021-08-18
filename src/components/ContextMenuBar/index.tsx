@@ -1,3 +1,5 @@
+import "./index.css"
+
 type ContextMenuBarProps = {
     children?: any
 }
