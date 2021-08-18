@@ -1,7 +1,5 @@
-import {ReactElement} from "react";
-
 type SFSBERootProp = {
-    children: ReactElement
+    children: object
 }
 
 const SFSBERoot = ({children}: SFSBERootProp) => {

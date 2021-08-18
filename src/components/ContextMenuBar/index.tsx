@@ -1,8 +1,7 @@
-import {ReactElement} from "react";
 import "./index.css";
 
 type ContextMenuBarProps = {
-    children: ReactElement
+    children: object
 }
 
 const ContextMenuBar = ({children}: ContextMenuBarProps) => {
