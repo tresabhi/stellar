@@ -1,7 +1,8 @@
-import "./index.css"
+import {ReactElement} from "react";
+import "./index.css";
 
 type ContextMenuBarProps = {
-    children?: any
+    children: ReactElement
 }
 
 const ContextMenuBar = ({children}: ContextMenuBarProps) => {
@@ -12,4 +13,4 @@ const ContextMenuBar = ({children}: ContextMenuBarProps) => {
     )
 }
 
-export default ContextMenuBar
+export default ContextMenuBar;
