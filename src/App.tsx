@@ -4,11 +4,13 @@ import ContextMenuBarButton from "@components/ContextMenuBarButton";
 import EditingPanel from "@components/EditingPanel";
 import EditingCanvas from "@components/EditingCanvas";
 
+import fileContextMenu from "./assets/contextMenus/file.json";
+
 function App() {
   return (
     <SFSBERoot>
       <ContextMenuBar>
-        <ContextMenuBarButton>File</ContextMenuBarButton>
+        <ContextMenuBarButton contextMenu={fileContextMenu}>File</ContextMenuBarButton>
         <ContextMenuBarButton>Edit</ContextMenuBarButton>
         <ContextMenuBarButton>Selection</ContextMenuBarButton>
         <ContextMenuBarButton>View</ContextMenuBarButton>

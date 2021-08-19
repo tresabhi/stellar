@@ -1,12 +1,20 @@
 import "./index.css"
 
 type ContextMenuBarButtonProp = {
-    children: string
+    children: string,
+    contextMenu?: object
 }
 
-const ContextMenuBarButton = ({children}: ContextMenuBarButtonProp) => {
+const ContextMenuBarButton = ({children, contextMenu}: ContextMenuBarButtonProp) => {
+    const onClick = () => {
+        
+    }
+
     return (
-        <button className="context-menu-bar-button general-font-size">
+        <button
+            className="context-menu-bar-button general-font-size"
+            onClick={onClick}
+        >
             {children}
         </button>
     )

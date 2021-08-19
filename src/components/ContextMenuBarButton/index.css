@@ -2,7 +2,6 @@
     color: white;
     background-color: var(--context-menu-bg);
     padding: var(--padding-button-thin);
-    cursor: default;
 }
 
 .context-menu-bar-button:hover {
