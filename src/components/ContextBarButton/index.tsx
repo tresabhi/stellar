@@ -1,7 +1,7 @@
 import "./index.css"
 
 const ContextBarButton = (
-    {children}: {children: string}
+    {children}: {children: string, contextMenu?: object}
 ) => {
 
     const onClick = () => {
@@ -10,7 +10,7 @@ const ContextBarButton = (
 
     return (
         <button
-            className="context-menu-bar-button general-font-size"
+            className="context-bar-button general-font-size"
             onClick={onClick}
         >
             {children}

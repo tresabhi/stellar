@@ -1,6 +1,6 @@
-.context-menu-bar {
+.context-bar {
     width: 100%;
-    height: var(--context-menu-bar-height);
+    height: var(--context-bar-height);
     background-color: var(--context-menu-bg);
     display: flex;
 }

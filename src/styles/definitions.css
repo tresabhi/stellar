@@ -1,12 +1,15 @@
 :root {
     /* Sizes */
-    --context-menu-bar-height: 24px;
+    --context-bar-height: 24px;
+
+    --context-menu-width: 240px;
 
     /* Colors */
     --context-menu-bg: #22272e;
     --context-menu-hover-bg: #393d43;
 
     /* Paddings */
+    --padding-button-thinner: 4px;
     --padding-button-thin: 6px;
 
     /* Fonts */

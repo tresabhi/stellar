@@ -1,0 +1,6 @@
+.context-menu {
+    display: flex;
+    width: var(--context-menu-width);
+    flex-direction: column;
+    background-color: var(--context-menu-bg);
+}

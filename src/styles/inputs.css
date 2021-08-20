@@ -4,4 +4,5 @@ button {
     padding: 0px;
     text-align: center;
     cursor: pointer;
+    background: none;
 }

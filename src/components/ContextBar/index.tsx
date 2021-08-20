@@ -4,7 +4,7 @@ const ContextBar = (
     {children}: {children: object}
 ) => {
     return (
-        <div className="context-menu-bar">
+        <div className="context-bar">
             {children}
         </div>
     )

@@ -1,3 +1,5 @@
+import "./index.css";
+
 const ContextMenu = (
     {children}: {children: object}
 ) => {
