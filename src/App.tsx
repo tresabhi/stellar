@@ -1,8 +1,8 @@
-import SFSBERoot from "@components/SFSBERoot";
-import ContextMenuBar from "@components/ContextMenuBar";
-import ContextMenuBarButton from "@components/ContextMenuBarButton";
-import EditingPanel from "@components/EditingPanel";
-import EditingCanvas from "@components/EditingCanvas";
+import SFSBERoot from "./components/SFSBERoot";
+import ContextMenuBar from "./components/ContextMenuBar";
+import ContextMenuBarButton from "./components/ContextMenuBarButton";
+import EditingPanel from "./components/EditingPanel";
+import EditingCanvas from "./components/EditingCanvas";
 
 import fileContextMenu from "./assets/contextMenus/file.json";
 
