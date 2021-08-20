@@ -1,10 +1,8 @@
 import "./index.css"
 
-type EditingPanelProps = {
-    children: object
-}
-
-const EditingPanel = ({children}: EditingPanelProps) => {
+const EditingPanel = (
+    {children}: {children: object}
+) => {
     return (
         <div className="editing-panel">
             {children}

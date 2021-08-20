@@ -1,6 +1,6 @@
 const ContextMenu = (
     {children}: {children: object}
-    ) => {
+) => {
     return (
         <div className="context-menu">
             {children}

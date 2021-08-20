@@ -1,11 +1,9 @@
 import "./index.css"
 
-type ContextMenuBarButtonProp = {
-    children: string,
-    contextMenu?: object
-}
+const ContextBarButton = (
+    {children}: {children: string}
+) => {
 
-const ContextMenuBarButton = ({children, contextMenu}: ContextMenuBarButtonProp) => {
     const onClick = () => {
         
     }
@@ -20,4 +18,4 @@ const ContextMenuBarButton = ({children, contextMenu}: ContextMenuBarButtonProp)
     )
 }
 
-export default ContextMenuBarButton
+export default ContextBarButton;

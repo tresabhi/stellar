@@ -1,8 +1,6 @@
-type SFSBERootProp = {
-    children: object
-}
-
-const SFSBERoot = ({children}: SFSBERootProp) => {
+const SFSBERoot = (
+    {children}: {children: object}
+) => {
     return (
         <div className="sfsbe-root">
             {children}
