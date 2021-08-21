@@ -1,11 +1,9 @@
 # Stellar Editor
 **Lightweight, Open Source, Fluent** blueprint editor for [Spaceflight Simulator](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator)
 
-**⚠⚠ This tool is still in development. It may not work as intended at any time. ⚠⚠**
+![](https://i.imgur.com/JiWO3Jn.png)
 
-*Place holder image for now*
-
-![](https://via.placeholder.com/350x150)
+**⚠⚠ This tool is still in development; expect issues! ⚠⚠**
 
 ## About
 This open source tool allows anyone to create complex craft designs visually through the help of blueprint editing. This tool is designed for the game [Spaceflight Simulator](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator), based on the many [open source technologies](#main-technologies-used).
