@@ -4,3 +4,13 @@
     background-color: var(--context-menu-bg);
     display: flex;
 }
+
+.context-bar-button {
+    color: white;
+    background-color: var(--context-menu-bg);
+    padding: var(--padding-button-thin);
+}
+
+.context-bar-button:hover {
+    background-color: var(--context-menu-hover-bg);
+}

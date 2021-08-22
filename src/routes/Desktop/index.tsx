@@ -1,8 +1,15 @@
 import PageRoot from "components/PageRoot";
+import ContextBar from "components/ContextBar";
+
+import "index.css";
 
 function Desktop() {
     return (
-        <PageRoot>Desktop Editor Coming Soon...</PageRoot>
+        <PageRoot>
+            <ContextBar.Container>
+                <ContextBar.Button>Hello</ContextBar.Button>
+            </ContextBar.Container>
+        </PageRoot>
     );
 }
 

@@ -1,6 +1,6 @@
 import "./index.css";
 
-const ContextBar = (
+const Container = (
     {children}: {children: object}
 ) => {
     return (
@@ -10,4 +10,17 @@ const ContextBar = (
     )
 }
 
-export default ContextBar;
+const Button = (
+    {children}: {children: string}
+) => {
+    return (
+        <button className="context-bar-button general-font-size">
+            {children}
+        </button>
+    )
+}
+
+export default Object.assign({
+    Container: Container,
+    Button: Button
+});
