@@ -1,20 +1,31 @@
+import PropTypes from "prop-types";
+import React from "react";
+
 import "./index.css";
 
-const Container = (
-    {children}: {children: object}
-) => {
-    return (
-        <div className="context-bar">
-            {children}
-        </div>
-    )
+class Container extends React.Component {
+    render () {
+        return (
+            <div className={`
+                context-bar
+                ${maxWidth && maxWidth != undefined ? "max-width" : ""}
+            `}>
+                {children}
+            </div>
+        )
+    }
+}
+
+Container.propTypes = {
+    children: PropTypes.object,
+    maxWidth: PropTypes.bool
 }
 
 const Button = (
     {children}: {children: string}
 ) => {
     return (
-        <button className="context-bar-button general-font-size">
+        <button className="context-bar-button">
             {children}
         </button>
     )

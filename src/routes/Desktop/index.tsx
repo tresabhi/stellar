@@ -1,13 +1,15 @@
 import PageRoot from "components/PageRoot";
 import ContextBar from "components/ContextBar";
 
-import "index.css";
-
 function Desktop() {
     return (
         <PageRoot>
             <ContextBar.Container>
-                <ContextBar.Button>Hello</ContextBar.Button>
+                <ContextBar.Button maxWidth={true}>File</ContextBar.Button>
+                <ContextBar.Button>Edit</ContextBar.Button>
+                <ContextBar.Button>Selection</ContextBar.Button>
+                <ContextBar.Button>View</ContextBar.Button>
+                <ContextBar.Button>Help</ContextBar.Button>
             </ContextBar.Container>
         </PageRoot>
     );

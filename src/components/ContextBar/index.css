@@ -1,8 +1,12 @@
 .context-bar {
-    width: 100%;
+    width: 0px;
     height: var(--context-bar-height);
     background-color: var(--context-menu-bg);
     display: flex;
+}
+
+.context-bar.max-width {
+    width: 100%;
 }
 
 .context-bar-button {
