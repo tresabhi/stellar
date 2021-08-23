@@ -1,8 +1,8 @@
-import "./index.css";
+import { FC } from 'react';
 
-const ContextMenuButton = (
-    {children}: {children: string}
-) => {
+import './index.css';
+
+const ContextMenuButton: FC = () => {
     return (
         <button className="context-menu-button">
             {children}

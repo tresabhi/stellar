@@ -1,6 +1,6 @@
-const PageRoot = (
-    {children}: {children: object | string}
-) => {
+import { FC } from 'react';
+
+const PageRoot: FC = () => {
     return (
         <div className="page-root">
             {children}

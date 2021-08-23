@@ -1,8 +1,8 @@
-import "./index.css";
+import { FC } from 'react';
 
-const ContextMenu = (
-    {children}: {children: object}
-) => {
+import './index.css';
+
+const ContextMenu: FC = ({ children }) => {
     return (
         <div className="context-menu">
             {children}

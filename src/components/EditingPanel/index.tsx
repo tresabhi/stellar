@@ -1,8 +1,8 @@
-import "./index.css"
+import { FC } from 'react';
 
-const EditingPanel = (
-    {children}: {children: object}
-) => {
+import './index.css';
+
+const EditingPanel: FC = () => {
     return (
         <div className="editing-panel">
             {children}

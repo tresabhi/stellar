@@ -53,7 +53,7 @@ interface IContainer {
 			context-bar
 			${(maxWidth ?? true) ? "max-width" : ""}
 		`}>
-			{ children }
+			{children}
 		</div>
 	)
 }*/
