@@ -12,6 +12,9 @@
 # production
 /build
 
+# remote environment
+.replit
+
 # misc
 .DS_Store
 .env.local
