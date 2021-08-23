@@ -1,19 +1,24 @@
-import PropTypes from "prop-types";
+/*import PropTypes from "prop-types";
 import React from "react";
 
 import "./index.css";
 
-class Container extends React.Component {
-    render () {
-        return (
-            <div className={`
+interface IContainer {
+	children: object,
+	maxWidth: boolean
+}
+
+const Container = (
+	{children, maxWidth = true}: IContainer
+) => {
+  return (
+		<div className={`
                 context-bar
                 ${maxWidth && maxWidth != undefined ? "max-width" : ""}
-            `}>
-                {children}
-            </div>
-        )
-    }
+		`}>
+			{children}
+		</div>
+	)
 }
 
 Container.propTypes = {
@@ -34,4 +39,29 @@ const Button = (
 export default Object.assign({
     Container: Container,
     Button: Button
-});
+});*/
+
+import { FC } from 'react';
+
+interface IContainer {
+	maxWidth: boolean
+}
+
+/*const Container: FC<IContainer> = ({ children, maxWidth }) => {
+	return (
+		<div className={`
+			context-bar
+			${(maxWidth ?? true) ? "max-width" : ""}
+		`}>
+			{ children }
+		</div>
+	)
+}*/
+
+const Container = () => {
+	return <div></div>;
+}
+
+export default Object.assign({
+	Container
+})
