@@ -2,14 +2,16 @@
     /* Sizes */
     --context-bar-height: 24px;
 
-    --context-menu-width: 240px;
-
     /* Colors */
     --context-menu-bg: #22272e;
     --context-menu-hover-bg: #393d43;
 
-    /* Paddings */
+    --border-color: #444c56;
+
+    /* Paddings, Margins, Border-Widths */
     --padding-button-thin: 6px;
+
+    --border-width-general: 1px;
 
     /* Fonts */
     --font-general: "Montserrat";

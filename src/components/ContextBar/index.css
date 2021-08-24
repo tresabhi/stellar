@@ -3,6 +3,7 @@
     height: var(--context-bar-height);
     background-color: var(--context-menu-bg);
     display: flex;
+    border-bottom: var(--border-width-general) var(--border-color) solid;
 }
 
 .context-bar.max-width {
