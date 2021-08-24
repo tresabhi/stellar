@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const PageRoot: FC = () => {
+const PageRoot: FC = ({ children }) => {
     return (
         <div className="page-root">
             {children}

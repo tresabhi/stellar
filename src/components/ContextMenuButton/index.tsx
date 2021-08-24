@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import './index.css';
 
-const ContextMenuButton: FC = () => {
+const ContextMenuButton: FC = ({ children }) => {
     return (
         <button className="context-menu-button">
             {children}
