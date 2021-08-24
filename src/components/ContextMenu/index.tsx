@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import './index.css';
 
-const ContextMenu: FC = ({ children }) => {
+const Container: FC = ({ children }) => {
     return (
         <div className="context-menu">
             {children}
@@ -10,4 +10,15 @@ const ContextMenu: FC = ({ children }) => {
     )
 }
 
-export default ContextMenu;
+const Button: FC = ({ children }) => {
+    return (
+        <button className="context-menu-button">
+            {children}
+        </button>
+    )
+}
+
+export default Object.assign({
+    Container,
+    Button
+});
