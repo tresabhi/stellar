@@ -1,7 +1,7 @@
 # Stellar Editor
 **Lightweight, Open Source, Fluent** blueprint editor for [Spaceflight Simulator](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator)
 
-![](https://i.imgur.com/JiWO3Jn.png)
+![](https://i.imgur.com/nWJzRLA.png)
 
 **⚠⚠ This tool is still in development; expect issues! ⚠⚠**
 
