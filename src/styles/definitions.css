@@ -2,6 +2,7 @@
     --tool-bar-height: 34px;
     --tool-bar-padding: 5px;
     --tool-bar-button-padding: 3px;
+    --tool-bar-button-border-radius: 4px;
     
     --context-bar-height: 24px;
     --context-bar-button-padding: 6px;
@@ -14,6 +15,10 @@
     --focus-area-border-color: #444c56;
     --focus-area-border-width: 1px;
     --focus-area-border: var(--focus-area-border-width) var(--focus-area-border-color) solid;
+    --focus-area-seperator-width: 1px;
+    --focus-area-seperator-color: #444c56;
+    --focus-area-seperator-margin: 8px;
+    --focus-area-icon-size: 18px;
 
     --font-size-general: 12px;
     
