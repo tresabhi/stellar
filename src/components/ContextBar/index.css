@@ -1,13 +1,9 @@
 .context-bar {
-    width: 0px;
+    width: 100%;
     height: var(--context-bar-height);
     background-color: var(--context-menu-bg);
     display: flex;
     border-bottom: var(--border-width-general) var(--border-color) solid;
-}
-
-.context-bar.max-width {
-    width: 100%;
 }
 
 .context-bar-button {
