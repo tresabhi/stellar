@@ -1,5 +1,8 @@
 import PageRoot from 'components/PageRoot';
 import ContextBar from 'components/ContextBar';
+import ToolBar from 'components/ToolBar';
+
+import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 
 function Desktop() {
     return (
@@ -11,6 +14,9 @@ function Desktop() {
                 <ContextBar.Button>View</ContextBar.Button>
                 <ContextBar.Button>Help</ContextBar.Button>
             </ContextBar.Container>
+            <ToolBar.Container>
+                <ToolBar.Button><SaveIcon /></ToolBar.Button>
+            </ToolBar.Container>
         </PageRoot>
     );
 }

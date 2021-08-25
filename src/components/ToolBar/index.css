@@ -1,0 +1,19 @@
+.tool-bar {
+    background-color: var(--focus-area-bg);
+    padding: var(--tool-bar-padding);
+}
+
+.tool-bar-button {
+    padding: var(--tool-bar-button-padding);
+    background-color: var(--button-flush-bg);
+}
+
+.tool-bar-button:hover {
+    background-color: var(--button-flush-hover-bg);
+}
+
+.tool-bar-button > svg, 
+.tool-bar-button > img {
+    width: 18px;
+    height: 18px;
+}

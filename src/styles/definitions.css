@@ -1,21 +1,21 @@
 :root {
-    /* Sizes */
+    --tool-bar-height: 34px;
+    --tool-bar-padding: 5px;
+    --tool-bar-button-padding: 3px;
+    
     --context-bar-height: 24px;
+    --context-bar-button-padding: 6px;
+    --context-bar-button-font-size: var(--font-size-general);
 
-    /* Colors */
-    --context-menu-bg: #22272e;
-    --context-menu-hover-bg: #393d43;
+    --button-flush-bg: #22272e;
+    --button-flush-hover-bg: #393d43;
 
-    --border-color: #444c56;
+    --focus-area-bg: #22272e;
+    --focus-area-border-color: #444c56;
+    --focus-area-border-width: 1px;
+    --focus-area-border: var(--focus-area-border-width) var(--focus-area-border-color) solid;
 
-    /* Paddings, Margins, Border-Widths */
-    --padding-button-thin: 6px;
-
-    --border-width-general: 1px;
-
-    /* Fonts */
-    --font-general: "Montserrat";
-
-    /* Font sizes */
     --font-size-general: 12px;
+    
+    --font-general: "Montserrat";
 }

@@ -1,17 +1,18 @@
 .context-bar {
     width: 100%;
     height: var(--context-bar-height);
-    background-color: var(--context-menu-bg);
+    background-color: var(--focus-area-bg);
     display: flex;
-    border-bottom: var(--border-width-general) var(--border-color) solid;
+    border-bottom: var(--focus-area-border);
 }
 
 .context-bar-button {
     color: white;
-    background-color: var(--context-menu-bg);
-    padding: var(--padding-button-thin);
+    background-color: var(--button-flush-bg);
+    padding: var(--context-bar-button-padding);
+    font-size: var(--context-bar-button-font-size);
 }
 
 .context-bar-button:hover {
-    background-color: var(--context-menu-hover-bg);
+    background-color: var(--button-flush-hover-bg);
 }
