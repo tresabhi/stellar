@@ -24,8 +24,21 @@ const Seperator = () => {
     )
 }
 
+interface ITextFeild {
+    defaultValue: number | string
+}
+const TextFeild: FC<ITextFeild> = ({ defaultValue }) => {
+    return (
+        <input
+            className="tool-bar-text-feild"
+            value = {defaultValue}
+        />
+    )
+}
+
 export default Object.assign({
     Container,
     Button,
-    Seperator
+    Seperator,
+    TextFeild
 });

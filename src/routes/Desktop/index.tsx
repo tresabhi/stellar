@@ -26,6 +26,7 @@ function Desktop() {
                 <ToolBar.Seperator />
                 <ToolBar.Button><ZoomInIcon /></ToolBar.Button>
                 <ToolBar.Button><ZoomOutIcon /></ToolBar.Button>
+                <ToolBar.TextFeild defaultValue="100%"></ToolBar.TextFeild>
             </ToolBar.Container>
         </PageRoot>
     );

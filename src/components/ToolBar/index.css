@@ -9,6 +9,7 @@
     padding: var(--tool-bar-button-padding);
     background-color: var(--button-flush-bg);
     border-radius: var(--tool-bar-button-border-radius);
+    margin: 0px var(--tool-bar-button-margin) 0px var(--tool-bar-button-margin);
 }
 
 .tool-bar-button:hover {
@@ -26,4 +27,9 @@
     width: var(--focus-area-seperator-width);
     background-color: var(--focus-area-seperator-color);
     margin: 0px var(--focus-area-seperator-margin) 0px var(--focus-area-seperator-margin);
+}
+
+.tool-bar-text-feild {
+    background-color: red;
+    width: 10px;
 }
