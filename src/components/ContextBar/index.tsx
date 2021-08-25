@@ -2,16 +2,9 @@ import { FC } from "react";
 
 import "./index.css";
 
-interface IContainer {
-	maxWidth?: boolean
-}
-
-const Container: FC<IContainer> = ({ children, maxWidth = true }) => {
+const Container: FC = ({ children }) => {
   return (
-		<div className={`
-                context-bar
-                ${maxWidth ? "max-width" : ""}
-		`}>
+		<div className="context-bar">
 		  {children}
 		</div>
 	)
