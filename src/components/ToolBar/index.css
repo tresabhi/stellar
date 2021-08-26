@@ -1,35 +1,36 @@
 .tool-bar {
-    background-color: var(--focus-area-bg);
-    padding: var(--tool-bar-padding);
-    display: flex;
-    flex-direction: row;
+  background-color: var(--focus-area-bg);
+  padding: var(--tool-bar-padding);
+  display: flex;
+  flex-direction: row;
 }
 
 .tool-bar-button {
-    padding: var(--tool-bar-button-padding);
-    background-color: var(--button-flush-bg);
-    border-radius: var(--tool-bar-button-border-radius);
-    margin: 0px var(--tool-bar-button-margin) 0px var(--tool-bar-button-margin);
+  padding: var(--tool-bar-button-padding);
+  background-color: var(--button-flush-bg);
+  border-radius: var(--tool-bar-button-border-radius);
+  margin: 0px var(--tool-bar-button-margin) 0px var(--tool-bar-button-margin);
 }
 
 .tool-bar-button:hover {
-    background-color: var(--button-flush-hover-bg);
+  background-color: var(--button-flush-hover-bg);
 }
 
-.tool-bar-button > svg, 
+.tool-bar-button > svg,
 .tool-bar-button > img {
-    width: var(--focus-area-icon-size);
-    height: var(--focus-area-icon-size);
-    display: block;
+  width: var(--focus-area-icon-size);
+  height: var(--focus-area-icon-size);
+  display: block;
 }
 
 .tool-bar-seperator {
-    width: var(--focus-area-seperator-width);
-    background-color: var(--focus-area-seperator-color);
-    margin: 0px var(--focus-area-seperator-margin) 0px var(--focus-area-seperator-margin);
+  width: var(--focus-area-seperator-width);
+  background-color: var(--focus-area-seperator-color);
+  margin: 0px var(--focus-area-seperator-margin) 0px
+    var(--focus-area-seperator-margin);
 }
 
 .tool-bar-text-feild {
-    background-color: red;
-    width: 10px;
+  background-color: red;
+  width: 10px;
 }

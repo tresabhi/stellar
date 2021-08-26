@@ -1,11 +1,7 @@
-import { FC } from 'react';
+import { FC } from "react";
 
 const PageRoot: FC = ({ children }) => {
-    return (
-        <div className="page-root">
-            {children}
-        </div>
-    )
-}
+  return <div className="page-root">{children}</div>;
+};
 
 export default PageRoot;
