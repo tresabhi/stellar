@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import UnitTextBox from "components/UnitTextBox";
+
 import "./index.css";
 
 const Container: FC = ({ children }) => {
@@ -18,7 +20,13 @@ interface ITextFeild {
   defaultValue: number | string;
 }
 const TextFeild: FC<ITextFeild> = ({ defaultValue }) => {
-  return <input className="tool-bar-text-feild" value={defaultValue} />;
+  return (
+    <UnitTextBox
+      className="tool-bar-text-feild"
+      defaultValue={defaultValue}
+      suffix="%"
+    />
+  );
 };
 
 export default Object.assign({

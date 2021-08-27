@@ -36,7 +36,7 @@ function Desktop() {
         <ToolBar.Button>
           <ZoomOutIcon />
         </ToolBar.Button>
-        <ToolBar.TextFeild defaultValue="100%"></ToolBar.TextFeild>
+        <ToolBar.TextFeild defaultValue={100} suffix="%"></ToolBar.TextFeild>
       </ToolBar.Container>
     </PageRoot>
   );

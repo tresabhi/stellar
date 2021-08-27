@@ -10,6 +10,9 @@
 # testing
 /coverage
 
+# remote editing
+sandbox.config.json
+
 # production
 /build
 
