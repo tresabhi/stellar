@@ -2,17 +2,17 @@
 
 .context-menu {
   display: flex;
-  width: var(--context-menu-width);
+  width: $context-menu-width;
   flex-direction: column;
-  background-color: var(--context-menu-bg);
+  background-color: $context-menu-bg;
 }
 
 .context-menu-button {
   color: white;
-  background-color: var(--context-menu-bg);
-  padding: var(--padding-button-thinner);
+  background-color: $context-menu-bg;
+  padding: $padding-button-thinner;
 }
 
 .context-menu-button:hover {
-  background-color: var(--context-menu-hover-bg);
+  background-color: $context-menu-hover-bg;
 }

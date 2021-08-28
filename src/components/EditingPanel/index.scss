@@ -2,6 +2,6 @@
 
 .editing-panel {
   width: 100vw;
-  height: calc(100vh - var(--context-menu-bar-height));
+  height: calc(100vh - $context-menu-bar-height);
   display: flex;
 }
