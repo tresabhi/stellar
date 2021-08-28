@@ -11,6 +11,7 @@
 /coverage
 
 # remote editing
+/.codesandbox
 sandbox.config.json
 
 # production
