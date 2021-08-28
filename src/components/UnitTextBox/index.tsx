@@ -1,4 +1,5 @@
-import { FC, useState } from "react";
+import { FC, useState, Component } from "react";
+import { JsxElement } from "typescript";
 
 interface IUnitTextBox {
   prefix?: string;
@@ -6,23 +7,20 @@ interface IUnitTextBox {
   defaultValue: string | number;
 }
 
-const UnitTextBox: FC<IUnitTextBox> = ({
-  prefix = "",
-  suffix = "",
-  defaultValue
-}) => {
-  let trueValue = defaultValue;
-  const [value, setValue] = useState(`${prefix}${defaultValue}${suffix}`);
+class UnitTextBox extends Component {
+  constructor(props) {
+    super(props);
 
-  const onFocus = () => {
-    setValue(String(defaultValue));
-  };
+    this.setState({ value: "asd" });
+  }
 
-  const onBlur = () => {
-    setValue(`${prefix}${defaultValue}${suffix}`);
-  };
+  onFocus() {
+    this.setState({ value: "asd" });
+  }
 
-  return <input value={value} onFocus={onFocus} onBlur={onBlur} />;
-};
+  render() {
+    return <input />;
+  }
+}
 
 export default UnitTextBox;
