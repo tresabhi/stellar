@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "components": "^0.1.0",
+    "node-sass": "^6.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

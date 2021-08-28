@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import "./index.css";
+import "./index.scss";
 
 const Container: FC = ({ children }) => {
   return <div className="tool-bar">{children}</div>;
