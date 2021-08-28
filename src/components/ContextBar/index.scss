@@ -1,18 +1,20 @@
+@use "styles/index.scss";
+
 .context-bar {
   width: 100%;
-  height: var(--context-bar-height);
-  background-color: var(--focus-area-bg);
+  height: $context-bar-height;
+  background-color: $focus-area-bg;
   display: flex;
-  border-bottom: var(--focus-area-border);
+  border-bottom: $focus-area-border;
 }
 
 .context-bar-button {
   color: white;
-  background-color: var(--button-flush-bg);
-  padding: var(--context-bar-button-padding);
-  font-size: var(--context-bar-button-font-size);
+  background-color: $button-flush-bg;
+  padding: $context-bar-button-padding;
+  font-size: $context-bar-button-font-size;
 }
 
 .context-bar-button:hover {
-  background-color: var(--button-flush-hover-bg);
+  background-color: $button-flush-hover-bg;
 }

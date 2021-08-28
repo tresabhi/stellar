@@ -1,16 +1,20 @@
+// Context Bar
+$context-bar-height: 24px;
+$context-bar-button-padding: 6px;
+$context-bar-button-font-size: $font-size-general;
+
+// Tool Bar
 $tool-bar-height: 34px;
 $tool-bar-padding: 5px;
 $tool-bar-button-padding: 3px;
 $tool-bar-button-border-radius: 4px;
 $tool-bar-button-margin: 1px;
 
-$context-bar-height: 24px;
-$context-bar-button-padding: 6px;
-$context-bar-button-font-size: $font-size-general;
-
+// Button Colors
 $button-flush-bg: #22272e;
 $button-flush-hover-bg: #393d43;
 
+// Focus Areas Colors
 $focus-area-bg: #22272e;
 $focus-area-border-color: #444c56;
 $focus-area-border-width: 1px;
@@ -20,6 +24,8 @@ $focus-area-seperator-color: #444c56;
 $focus-area-seperator-margin: 8px;
 $focus-area-icon-size: 18px;
 
+// Fonts Sizes
 $font-size-general: 12px;
 
+// Fonts
 $font-general: "Montserrat";
