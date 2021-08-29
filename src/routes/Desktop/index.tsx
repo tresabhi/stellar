@@ -7,6 +7,7 @@ import { ReactComponent as UndoIcon } from "assets/icons/undo.svg";
 import { ReactComponent as RedoIcon } from "assets/icons/redo.svg";
 import { ReactComponent as ZoomInIcon } from "assets/icons/zoom-in.svg";
 import { ReactComponent as ZoomOutIcon } from "assets/icons/zoom-out.svg";
+import { ReactComponent as GrabIcon } from "assets/icons/grab.svg";
 
 function Desktop() {
   return (
@@ -37,6 +38,9 @@ function Desktop() {
           <ZoomOutIcon />
         </ToolBar.Button>
         <ToolBar.TextFeild defaultValue={100} suffix="%"></ToolBar.TextFeild>
+        <ToolBar.Button>
+          <GrabIcon />
+        </ToolBar.Button>
       </ToolBar.Container>
     </PageRoot>
   );
