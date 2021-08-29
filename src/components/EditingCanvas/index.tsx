@@ -1,4 +1,4 @@
-import "./index.scss";
+import '../../styles/index.scss';
 
 const EditingCanvas = () => {
   return <canvas className="editing-canvas" />;

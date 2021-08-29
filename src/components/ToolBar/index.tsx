@@ -1,8 +1,8 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { ReactComponent as MoreOptionsIcon } from "assets/icons/more-options.svg";
+import { ReactComponent as MoreOptionsIcon } from 'assets/icons/more-options.svg';
 
-import "./index.scss";
+import './index.scss';
 
 const Container: FC = ({ children }) => {
   return <div className="tool-bar">{children}</div>;
@@ -21,22 +21,13 @@ interface ITextFeild {
   prefix?: string;
   suffix?: string;
 }
-const TextFeild: FC<ITextFeild> = ({ defaultValue, prefix = "", suffix = "" }) => {
+const TextFeild: FC<ITextFeild> = ({ defaultValue, prefix = '', suffix = '' }) => {
   // functionality coming soon...
-  return (
-    <input
-      className="tool-bar-text-feild"
-      defaultValue={`${prefix}${defaultValue}${suffix}`}
-    />
-  );
+  return <input className="tool-bar-text-feild" defaultValue={`${prefix}${defaultValue}${suffix}`} />;
 };
 
 const StaticIcon: FC = ({ children }) => {
-  return (
-    <div className="tool-bar-static-icon">
-      {children}
-    </div>
-  )
+  return <div className="tool-bar-static-icon">{children}</div>;
 };
 
 interface IDropDownButton {
@@ -63,5 +54,5 @@ export default Object.assign({
   Seperator,
   TextFeild,
   StaticIcon,
-  DropDownButton
+  DropDownButton,
 });

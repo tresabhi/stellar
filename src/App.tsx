@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Desktop from "routes/Desktop";
-import Mobile from "routes/Mobile";
+import Desktop from 'routes/Desktop';
+import Mobile from 'routes/Mobile';
 
-import "styles/index.scss";
+import 'styles/index.scss';
 
 const App = () => {
   return (

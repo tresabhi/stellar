@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import "./index.scss";
+import './index.scss';
 
 const Container: FC = ({ children }) => {
   return <div className="context-bar">{children}</div>;
@@ -12,5 +12,5 @@ const Button: FC = ({ children }) => {
 
 export default Object.assign({
   Container,
-  Button
+  Button,
 });

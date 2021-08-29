@@ -1,34 +1,34 @@
 [
-    {
-        "text": "New Blueprint...",
-        "action": "$newBlueprint"
-    },
-    {
-        "text": "Open Blueprint...",
-        "action": "$openBlueprint"
-    },
-    {
-        "text": "Close Blueprint",
-        "action": "$closeBlueprint"
-    },
+  {
+    "text": "New Blueprint...",
+    "action": "$newBlueprint"
+  },
+  {
+    "text": "Open Blueprint...",
+    "action": "$openBlueprint"
+  },
+  {
+    "text": "Close Blueprint",
+    "action": "$closeBlueprint"
+  },
 
-    "seperator",
-    {
-        "text": "Import Blueprint...",
-        "action": "$importBlueprint"
-    },
-    {
-        "text": "Export Blueprint...",
-        "action": "$exportBlueprint"
-    },
+  "seperator",
+  {
+    "text": "Import Blueprint...",
+    "action": "$importBlueprint"
+  },
+  {
+    "text": "Export Blueprint...",
+    "action": "$exportBlueprint"
+  },
 
-    "seperator",
-    {
-        "text": "Save Blueprint",
-        "action": "$saveBlueprint"
-    },
-    {
-        "text": "Save Blueprint As...",
-        "action": "$saveBlueprintAs"
-    }
+  "seperator",
+  {
+    "text": "Save Blueprint",
+    "action": "$saveBlueprint"
+  },
+  {
+    "text": "Save Blueprint As...",
+    "action": "$saveBlueprintAs"
+  }
 ]
