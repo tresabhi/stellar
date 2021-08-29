@@ -12,7 +12,9 @@
 }
 
 .tool-bar-button,
-.tool-bar-static-icon {
+.tool-bar-static-icon,
+.tool-bar-drop-down-button-action,
+.tool-bar-drop-down-button-more-options {
   font-family: $font-family-bold;
   background-color: $button-flush-bg;
 
@@ -21,14 +23,18 @@
   margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
 }
 
-.tool-bar-button:hover {
+.tool-bar-button:hover,
+.tool-bar-drop-down-button-action:hover,
+.tool-bar-drop-down-button-more-options:hover {
   background-color: $button-flush-hover-bg;
 }
 
 .tool-bar-button>svg,
 .tool-bar-button>img,
 .tool-bar-static-icon>svg,
-.tool-bar-static-icon>img {
+.tool-bar-static-icon>img,
+.tool-bar-drop-down-button-action>svg,
+.tool-bar-drop-down-button-action>img {
   width: $focus-area-icon-size;
   height: $focus-area-icon-size;
   display: block;
@@ -54,4 +60,26 @@
   margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
   min-width: $tool-bar-text-feild-min-width;
   margin: 0px $tool-bar-text-feild-margin 0px $tool-bar-text-feild-margin-connection;
+}
+
+.tool-bar-drop-down-button-root {
+  display: flex;
+}
+
+.tool-bar-drop-down-button-action {
+  margin: 0px;
+}
+
+.tool-bar-drop-down-button-more-options {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-bar-drop-down-button-more-options>img,
+.tool-bar-drop-down-button-more-options>svg {
+  // strict image dimensions
+  width: 6px;
+  height: 4px;
 }
