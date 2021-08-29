@@ -16,11 +16,14 @@ const Seperator = () => {
 
 interface ITextFeild {
   defaultValue: number | string;
+  prefix?: string;
+  suffix?: string;
 }
-const TextFeild: FC<ITextFeild> = ({ defaultValue }) => {
+const TextFeild: FC<ITextFeild> = ({ defaultValue, prefix = "", suffix = "" }) => {
   return (
     <input
       className="tool-bar-text-feild"
+      defaultValue={`${prefix}${defaultValue}${suffix}`}
     />
   );
 };

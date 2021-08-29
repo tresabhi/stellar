@@ -5,31 +5,47 @@ $black-3: #393d43;
 
 $gray-1: #444c56;
 
-// Button Colors
-$button-flush-bg: $black-2;
-$button-flush-hover-bg: $black-3;
+// Border Radii
+$border-radius-button: 4px;
+$border-radius-text-feild: 4px;
+
+// Fonts
+$font-family-regular: "Montserrat-Regular";
+$font-family-semi-bold: "Montserrat-SemiBold";
+$font-family-bold: "Montserrat-Bold";
 
 // Fonts Sizes
 $font-size-general: 12px;
 
+// Button Colors
+$button-flush-bg: $black-2;
+$button-flush-hover-bg: $black-3;
+
 // Context Bar
 $context-bar-height: 24px;
 $context-bar-button-padding: 6px;
-$context-bar-button-font-size: $font-size-general;
 
 // Tool Bar
 $tool-bar-height: 34px;
 $tool-bar-padding: 5px;
+$tool-bar-children-margin: 1px;
+
 $tool-bar-button-padding: 3px;
-$tool-bar-button-border-radius: 4px;
-$tool-bar-button-margin: 1px;
+$tool-bar-button-border-radius: $border-radius-button;
+
+$tool-bar-text-feild-height: 18px;
+$tool-bar-text-feild-min-width: 40px;
+$tool-bar-text-feild-margin: 4px;
+
+$tool-bar-seperator-width: 1px;
+$tool-bar-seperator-height: 24px;
+$tool-bar-seperator-color: $gray-1;
+$tool-bar-seperator-margin: 8px;
 
 // Focus Areas Colors
 $focus-area-bg: $black-2;
 $focus-area-border-color: $gray-1;
 $focus-area-border-width: 1px;
 $focus-area-border: $focus-area-border-width $focus-area-border-color solid;
-$focus-area-seperator-width: 1px;
-$focus-area-seperator-color: $gray-1;
-$focus-area-seperator-margin: 8px;
+
 $focus-area-icon-size: 18px;

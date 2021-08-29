@@ -1,17 +1,23 @@
 @import "styles/index.scss";
 
 .tool-bar {
-  background-color: $focus-area-bg;
-  padding: $tool-bar-padding;
-  display: flex;
   flex-direction: row;
+  display: flex;
+  align-items: center;
+
+  height: $tool-bar-height;
+  padding: 0px $tool-bar-padding 0px $tool-bar-padding;
+  
+  background-color: $focus-area-bg;
 }
 
 .tool-bar-button {
-  padding: $tool-bar-button-padding;
+  font-family: $font-family-bold;
   background-color: $button-flush-bg;
-  border-radius: $tool-bar-button-border-radius;
-  margin: 0px $tool-bar-button-margin 0px $tool-bar-button-margin;
+
+  padding: $tool-bar-button-padding;
+  border-radius: $border-radius-button;
+  margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
 }
 
 .tool-bar-button:hover {
@@ -26,13 +32,24 @@
 }
 
 .tool-bar-seperator {
-  width: $focus-area-seperator-width;
-  background-color: $focus-area-seperator-color;
-  margin: 0px $focus-area-seperator-margin 0px
-    $focus-area-seperator-margin;
+  height: $tool-bar-seperator-height;
+
+  width: $tool-bar-seperator-width;
+  background-color: $tool-bar-seperator-color;
+  margin: 0px $tool-bar-seperator-margin 0px
+    $tool-bar-seperator-margin;
 }
 
 .tool-bar-text-feild {
-  background-color: red;
-  width: 10px;
+  width: 0px;
+  color: white;
+  text-align: center;
+
+  background-color: $black-1;
+  font-family: $font-family-regular;
+  
+  border-radius: $border-radius-text-feild;
+  margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
+  min-width: $tool-bar-text-feild-min-width;
+  margin: 0px $tool-bar-text-feild-margin 0px $tool-bar-text-feild-margin;
 }
