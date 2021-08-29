@@ -28,9 +28,18 @@ const TextFeild: FC<ITextFeild> = ({ defaultValue, prefix = "", suffix = "" }) =
   );
 };
 
+const StaticIcon: FC = ({ children }) => {
+  return (
+    <div className="tool-bar-static-icon">
+      {children}
+    </div>
+  )
+};
+
 export default Object.assign({
   Container,
   Button,
   Seperator,
-  TextFeild
+  TextFeild,
+  StaticIcon
 });

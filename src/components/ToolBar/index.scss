@@ -7,11 +7,12 @@
 
   height: $tool-bar-height;
   padding: 0px $tool-bar-padding 0px $tool-bar-padding;
-  
+
   background-color: $focus-area-bg;
 }
 
-.tool-bar-button {
+.tool-bar-button,
+.tool-bar-static-icon {
   font-family: $font-family-bold;
   background-color: $button-flush-bg;
 
@@ -24,8 +25,10 @@
   background-color: $button-flush-hover-bg;
 }
 
-.tool-bar-button > svg,
-.tool-bar-button > img {
+.tool-bar-button>svg,
+.tool-bar-button>img,
+.tool-bar-static-icon>svg,
+.tool-bar-static-icon>img {
   width: $focus-area-icon-size;
   height: $focus-area-icon-size;
   display: block;
@@ -36,8 +39,7 @@
 
   width: $tool-bar-seperator-width;
   background-color: $tool-bar-seperator-color;
-  margin: 0px $tool-bar-seperator-margin 0px
-    $tool-bar-seperator-margin;
+  margin: 0px $tool-bar-seperator-margin 0px $tool-bar-seperator-margin;
 }
 
 .tool-bar-text-feild {
@@ -47,9 +49,9 @@
 
   background-color: $black-1;
   font-family: $font-family-regular;
-  
+
   border-radius: $border-radius-text-feild;
   margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
   min-width: $tool-bar-text-feild-min-width;
-  margin: 0px $tool-bar-text-feild-margin 0px $tool-bar-text-feild-margin;
+  margin: 0px $tool-bar-text-feild-margin 0px $tool-bar-text-feild-margin-connection;
 }
