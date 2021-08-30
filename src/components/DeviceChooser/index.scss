@@ -1,8 +1,11 @@
 @import '../../styles/index.scss';
 
 .device-chooser-root {
-  background-color: red;
   text-align: center;
+  position: fixed;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .device-chooser-title {
@@ -18,4 +21,32 @@
 
 .device-chooser-card {
   display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+
+  font-family: $font-family-bold;
+  background-color: $button-flush-bg;
+  font-size: $font-size-general;
+  border-radius: 4px;
+
+  width: 128px;
+  height: 128px;
+  margin: 10px;
+}
+
+.device-chooser-card:hover {
+  background-color: $button-flush-hover-bg;
+}
+
+.device-chooser-card>svg,
+.device-chooser-card>img {
+  display: block;
+
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
 }
