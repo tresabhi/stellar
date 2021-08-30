@@ -1,17 +1,18 @@
-import { BrowserView, MobileView } from 'react-device-detect';
+import { isDesktop, isMobile } from 'react-device-detect';
 
 import PseudoRoot from 'components/PseudoRoot';
+import DeviceChooser from 'components/DeviceChooser';
 
 const Home = () => {
   return (
     <PseudoRoot>
-      <a href="Desktop">Desktop</a>
-      <br />
-      <a href="Mobile">Mobile</a>
-      <br />
-      <br />
-      <BrowserView>You're on a desktop</BrowserView>
-      <MobileView>You're on a mobile</MobileView>
+      <DeviceChooser.Container>
+        <DeviceChooser.Title>Choose Your Device</DeviceChooser.Title>
+        <DeviceChooser.List>
+          <DeviceChooser.Card href="Desktop" text="Desktop"></DeviceChooser.Card>
+          <DeviceChooser.Card href="Mobile" text="Mobile"></DeviceChooser.Card>
+        </DeviceChooser.List>
+      </DeviceChooser.Container>
     </PseudoRoot>
   );
 };

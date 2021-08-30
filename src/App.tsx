@@ -4,8 +4,6 @@ import Home from 'routes/Home';
 import Desktop from 'routes/Desktop';
 import Mobile from 'routes/Mobile';
 
-import 'styles/index.scss';
-
 const App = () => {
   return (
     <Router>

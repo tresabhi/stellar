@@ -57,11 +57,11 @@ const DropDownButton: FC<IDropDownButton> = ({ children }) => {
   );
 };
 
-export default Object.assign({
+export default {
   Container,
   Button,
   Seperator,
   TextFeild,
   StaticIcon,
   DropDownButton,
-});
+};

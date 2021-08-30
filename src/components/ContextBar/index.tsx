@@ -10,7 +10,7 @@ const Button: FC = ({ children }) => {
   return <button className="context-bar-button">{children}</button>;
 };
 
-export default Object.assign({
+export default {
   Container,
   Button,
-});
+};
