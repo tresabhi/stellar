@@ -30,12 +30,12 @@
 
   font-family: $font-family-bold;
   background-color: $button-flush-bg;
-  font-size: $font-size-general;
-  border-radius: 4px;
+  font-size: $font-size-emphasis;
+  border-radius: $border-radius-button;
 
-  width: 128px;
-  height: 128px;
-  margin: 10px;
+  width: $device-chooser-card-size;
+  height: $device-chooser-card-size;
+  margin: $device-chooser-card-margin;
 }
 
 .device-chooser-card:hover {
@@ -46,7 +46,7 @@
 .device-chooser-card>img {
   display: block;
 
-  width: 48px;
-  height: 48px;
-  margin-bottom: 10px;
+  width: $device-chooser-card-icon-size;
+  height: $device-chooser-card-icon-size;
+  margin-bottom: $device-chooser-card-icon-margin-bottom;
 }

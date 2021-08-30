@@ -17,6 +17,7 @@ $font-family-bold: "Montserrat-Bold";
 
 // Fonts Sizes
 $font-size-general: 12px;
+$font-size-emphasis: 16px;
 
 // Button Colors
 $button-flush-bg: $black-2;
@@ -45,10 +46,16 @@ $tool-bar-seperator-height: 24px;
 $tool-bar-seperator-color: $gray-1;
 $tool-bar-seperator-margin: 8px;
 
-// Focus Areas Colors
+// Focus Area
 $focus-area-bg: $black-2;
 $focus-area-border-color: $gray-1;
 $focus-area-border-width: 1px;
 $focus-area-border: $focus-area-border-width $focus-area-border-color solid;
 
 $focus-area-icon-size: 18px;
+
+// Device Chooser
+$device-chooser-card-size: 128px;
+$device-chooser-card-margin: 8px;
+$device-chooser-card-icon-size: 48px;
+$device-chooser-card-icon-margin-bottom: 16px;
