@@ -2,10 +2,20 @@
 
 .device-chooser-root {
   background-color: red;
+  text-align: center;
 }
 
-.device-chooser-list {}
+.device-chooser-title {
+  color: white;
 
-.device-chooser-title {}
+  font-family: $font-family-regular;
+}
 
-.device-chooser-card {}
+.device-chooser-list {
+  display: flex;
+  justify-content: center;
+}
+
+.device-chooser-card {
+  display: block;
+}
