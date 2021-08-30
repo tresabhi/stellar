@@ -10,9 +10,9 @@
 
 .context-bar-button {
   color: white;
+  font-size: $font-size-general;
   background-color: $button-flush-bg;
   padding: $context-bar-button-padding;
-  font-size: $font-size-general;
 }
 
 .context-bar-button:hover {

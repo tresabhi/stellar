@@ -1,4 +1,4 @@
-import PageRoot from 'components/PageRoot';
+import PseudoRoot from 'components/PseudoRoot';
 import ContextBar from 'components/ContextBar';
 import ToolBar from 'components/ToolBar';
 
@@ -17,14 +17,14 @@ import { ReactComponent as WheelIcon } from 'assets/icons/wheel.svg';
 
 function Desktop() {
   return (
-    <PageRoot>
-      <ContextBar.Container>
-        <ContextBar.Button>File</ContextBar.Button>
-        <ContextBar.Button>Edit</ContextBar.Button>
-        <ContextBar.Button>Selection</ContextBar.Button>
-        <ContextBar.Button>View</ContextBar.Button>
-        <ContextBar.Button>Help</ContextBar.Button>
-      </ContextBar.Container>
+    <PseudoRoot>
+      <ToolBar.Container>
+        <ToolBar.Button>File</ToolBar.Button>
+        <ToolBar.Button>Edit</ToolBar.Button>
+        <ToolBar.Button>Selection</ToolBar.Button>
+        <ToolBar.Button>View</ToolBar.Button>
+        <ToolBar.Button>Help</ToolBar.Button>
+      </ToolBar.Container>
       <ToolBar.Container>
         <ToolBar.Button>
           <SaveIcon />
@@ -72,7 +72,7 @@ function Desktop() {
           <WheelIcon />
         </ToolBar.DropDownButton>
       </ToolBar.Container>
-    </PageRoot>
+    </PseudoRoot>
   );
 }
 

@@ -1,7 +1,7 @@
-import PageRoot from 'components/PageRoot';
+import PseudoRoot from 'components/PseudoRoot';
 
 function Mobile() {
-  return <PageRoot>Mobile Coming Soon...</PageRoot>;
+  return <PseudoRoot>Mobile Coming Soon...</PseudoRoot>;
 }
 
 export default Mobile;

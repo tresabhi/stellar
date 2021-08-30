@@ -9,15 +9,19 @@
   padding: 0px $tool-bar-padding 0px $tool-bar-padding;
 
   background-color: $focus-area-bg;
+  border-bottom: $focus-area-border;
 }
 
 .tool-bar-button,
 .tool-bar-static-icon,
 .tool-bar-drop-down-button-action,
 .tool-bar-drop-down-button-more-options {
-  font-family: $font-family-bold;
-  background-color: $button-flush-bg;
+  color: white;
 
+  background-color: $button-flush-bg;
+  font-size: $font-size-general;
+
+  min-height: $tool-bar-button-height;
   padding: $tool-bar-button-padding;
   border-radius: $border-radius-button;
   margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;

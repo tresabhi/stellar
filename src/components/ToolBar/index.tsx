@@ -9,7 +9,16 @@ const Container: FC = ({ children }) => {
 };
 
 const Button: FC = ({ children }) => {
-  return <button className="tool-bar-button">{children}</button>;
+  return (
+    <button
+      className={`
+        tool-bar-button
+        ${typeof children === 'string' ? 'tool-bar-text-button' : ''}
+      `}
+    >
+      {children}
+    </button>
+  );
 };
 
 const Seperator = () => {
