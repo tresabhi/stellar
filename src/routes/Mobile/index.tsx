@@ -1,7 +1,7 @@
-import PseudoRoot from 'components/PseudoRoot';
+import PseudoContainer from 'components/PseudoContainer';
 
 function Mobile() {
-  return <PseudoRoot>Mobile Coming Soon...</PseudoRoot>;
+  return <PseudoContainer>Mobile Coming Soon...</PseudoContainer>;
 }
 
 export default Mobile;

@@ -2,6 +2,13 @@
 
 .editing-panel {
   width: 100vw;
-  height: calc(100vh - $context-menu-bar-height);
   display: flex;
+  
+  height: calc(
+    100vh
+    - (#{
+      $tool-bar-height +
+      $focus-area-border-width
+    } * 2)
+  );
 }

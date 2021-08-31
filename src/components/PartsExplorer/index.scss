@@ -1,3 +1,22 @@
-.parts-explorer-root {
+@import '../../styles/index.scss';
+
+.parts-explorer-container {
   background-color: red;
+}
+
+.parts-explorer-button {
+  display: flex;
+  align-items: center;
+  color: white;
+
+  background-color: $black-2;
+  font-family: $font-family-regular;
+
+  height: $parts-explorer-button-height;
+  
+  width: 200px;
+}
+
+.parts-explorer-button:hover {
+  background-color: $black-3;
 }

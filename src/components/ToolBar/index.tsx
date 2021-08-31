@@ -44,7 +44,7 @@ interface IDropDownButton {
 }
 const DropDownButton: FC<IDropDownButton> = ({ children, icon }) => {
   return (
-    <div className="tool-bar-drop-down-button-root">
+    <div className="tool-bar-drop-down-button-container">
       <button className="tool-bar-drop-down-button-action">{icon}</button>
       <button className="tool-bar-drop-down-button-more-options">
         <MoreOptionsIcon />

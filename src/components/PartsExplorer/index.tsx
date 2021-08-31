@@ -1,7 +1,9 @@
 import { FC } from 'react';
 
+import './index.scss';
+
 const Container: FC = ({ children }) => {
-  return <div className="parts-explorer-root">{children}</div>;
+  return <div className="parts-explorer-container">{children}</div>;
 };
 
 interface IButton {
@@ -9,7 +11,7 @@ interface IButton {
 }
 const Button: FC<IButton> = ({ children, icon }) => {
   return (
-    <button>
+    <button className="parts-explorer-button">
       {/* icon */}
       {icon}
 

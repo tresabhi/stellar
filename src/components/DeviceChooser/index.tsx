@@ -3,7 +3,7 @@ import { FC } from 'react';
 import './index.scss';
 
 const Container: FC = ({ children }) => {
-  return <div className="device-chooser-root">{children}</div>;
+  return <div className="device-chooser-container">{children}</div>;
 };
 
 const List: FC = ({ children }) => {

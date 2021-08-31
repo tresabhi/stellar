@@ -1,6 +1,7 @@
-import PseudoRoot from 'components/PseudoRoot';
-import ContextBar from 'components/ContextBar';
+import PseudoContainer from 'components/PseudoContainer';
 import ToolBar from 'components/ToolBar';
+import EditingPanel from 'components/EditingPanel';
+import PartsExplorer from 'components/PartsExplorer';
 
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
@@ -17,7 +18,7 @@ import { ReactComponent as WheelIcon } from 'assets/icons/wheel.svg';
 
 function Desktop() {
   return (
-    <PseudoRoot>
+    <PseudoContainer>
       <ToolBar.Container>
         <ToolBar.Button>File</ToolBar.Button>
         <ToolBar.Button>Edit</ToolBar.Button>
@@ -64,7 +65,13 @@ function Desktop() {
         <ToolBar.DropDownButton icon={<StructureIcon />} />
         <ToolBar.DropDownButton icon={<WheelIcon />} />
       </ToolBar.Container>
-    </PseudoRoot>
+
+      <EditingPanel>
+        <PartsExplorer.Container>
+          <PartsExplorer.Button icon={<FuelCellIcon />}>4w Fuel Cell</PartsExplorer.Button>
+        </PartsExplorer.Container>
+      </EditingPanel>
+    </PseudoContainer>
   );
 }
 
