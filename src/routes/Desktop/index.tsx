@@ -59,18 +59,10 @@ function Desktop() {
         <ToolBar.TextFeild defaultValue={90} suffix="°" />
 
         <ToolBar.Seperator />
-        <ToolBar.DropDownButton>
-          <FuelCellIcon />
-        </ToolBar.DropDownButton>
-        <ToolBar.DropDownButton>
-          <EngineIcon />
-        </ToolBar.DropDownButton>
-        <ToolBar.DropDownButton>
-          <StructureIcon />
-        </ToolBar.DropDownButton>
-        <ToolBar.DropDownButton>
-          <WheelIcon />
-        </ToolBar.DropDownButton>
+        <ToolBar.DropDownButton icon={<FuelCellIcon />} />
+        <ToolBar.DropDownButton icon={<EngineIcon />} />
+        <ToolBar.DropDownButton icon={<StructureIcon />} />
+        <ToolBar.DropDownButton icon={<WheelIcon />} />
       </ToolBar.Container>
     </PseudoRoot>
   );

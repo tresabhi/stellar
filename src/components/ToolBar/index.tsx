@@ -40,19 +40,19 @@ const StaticIcon: FC = ({ children }) => {
 };
 
 interface IDropDownButton {
-  // data coming soon...
+  icon: object;
 }
-const DropDownButton: FC<IDropDownButton> = ({ children }) => {
+const DropDownButton: FC<IDropDownButton> = ({ children, icon }) => {
   return (
     <div className="tool-bar-drop-down-button-root">
-      <button className="tool-bar-drop-down-button-action">
-        {/* icons will be passed as children */}
-        {children}
-      </button>
+      <button className="tool-bar-drop-down-button-action">{icon}</button>
       <button className="tool-bar-drop-down-button-more-options">
-        {/* drop downs will be procedurely generated */}
         <MoreOptionsIcon />
       </button>
+      <div className="tool-bar-drop-down-button-container">
+        {/* this component's visibility will be toggled */}
+        {children}
+      </div>
     </div>
   );
 };
