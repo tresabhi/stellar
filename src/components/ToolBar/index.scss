@@ -17,13 +17,15 @@
 .tool-bar-drop-down-button-action,
 .tool-bar-drop-down-button-more-options {
   color: white;
-  font-weight: bold; 
+  font-weight: bold;
+  display: flex;
+align-items: center;
 
   background-color: $button-flush-bg;
   font-size: $font-size-general;
   font-family: $font-family-regular;
 
-  min-height: $tool-bar-button-height;
+  height: $tool-bar-button-height;
   padding: $tool-bar-button-padding;
   border-radius: $border-radius-button;
   margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
