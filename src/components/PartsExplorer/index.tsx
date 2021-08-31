@@ -1,20 +1,20 @@
 import { FC } from 'react';
 
 const Container: FC = ({ children }) => {
-  return <div />;
+  return <div className="parts-explorer-root">{children}</div>;
 };
 
 interface IButton {
-  text: string;
+  icon: object;
 }
-const Button: FC<IButton> = ({ children, text }) => {
+const Button: FC<IButton> = ({ children, icon }) => {
   return (
     <button>
       {/* icon */}
-      {children}
+      {icon}
 
-      {/* text... obviously */}
-      {text}
+      {/* text */}
+      {children}
     </button>
   );
 };
