@@ -11,10 +11,10 @@ const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/Desktop">
+        <Route exact path="/desktop">
           <Desktop />
         </Route>
-        <Route exact path="/Mobile">
+        <Route exact path="/mobile">
           <Mobile />
         </Route>
       </Switch>
