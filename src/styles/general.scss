@@ -4,3 +4,8 @@ body {
   margin: 0px;
   background-color: $black-4;
 }
+
+*:focus,
+*:focus-within {
+  outline: none;
+}

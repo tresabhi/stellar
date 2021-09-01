@@ -1,7 +1,7 @@
 @import '../../styles/index.scss';
 
 .parts-explorer-container {
-  background-color: red;
+  background-color: $black-2;
 }
 
 .parts-explorer-button {
@@ -33,9 +33,15 @@
   background: none;
   color: white;
   text-overflow: ellipsis;
+  cursor: pointer;
 
   font-family: $font-family-regular;
 
   margin-left: $parts-explorer-inner-padding;
   width: calc(#{$parts-explorer-width - $focus-area-icon-size - (2 * $parts-explorer-button-padding) - $parts-explorer-inner-padding});
+}
+
+.parts-explorer-button>input.editing,
+.parts-explorer-button>input:focus {
+  cursor: text;
 }
