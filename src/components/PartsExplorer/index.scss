@@ -24,12 +24,12 @@
 
 .parts-explorer-button>svg,
 .parts-explorer-button>img {
-
   width: $focus-area-icon-size;
   height: $focus-area-icon-size;
 }
 
 .parts-explorer-button>input {
+  display: none;
   background: none;
   color: white;
   text-overflow: ellipsis;
@@ -37,8 +37,8 @@
 
   font-family: $font-family-regular;
 
-  margin-left: $parts-explorer-inner-padding;
-  width: calc(#{$parts-explorer-width - $focus-area-icon-size - (2 * $parts-explorer-button-padding) - $parts-explorer-inner-padding});
+  margin-left: $parts-explorer-inner-padding 0px $parts-explorer-inner-padding 0px;
+  // width: calc(#{$parts-explorer-width - $focus-area-icon-size - (2 * $parts-explorer-button-padding) - $parts-explorer-inner-padding});
 }
 
 .parts-explorer-button>input.editing,
