@@ -13,10 +13,29 @@
   font-family: $font-family-regular;
 
   height: $parts-explorer-button-height;
-  
-  width: 200px;
+  padding: $parts-explorer-button-padding;
+
+  width: $parts-explorer-width;
 }
 
 .parts-explorer-button:hover {
   background-color: $black-3;
+}
+
+.parts-explorer-button>svg,
+.parts-explorer-button>img {
+
+  width: $focus-area-icon-size;
+  height: $focus-area-icon-size;
+}
+
+.parts-explorer-button>input {
+  background: none;
+  color: white;
+  text-overflow: ellipsis;
+
+  font-family: $font-family-regular;
+
+  margin-left: $parts-explorer-inner-padding;
+  width: calc(#{$parts-explorer-width - $focus-area-icon-size - (2 * $parts-explorer-button-padding) - $parts-explorer-inner-padding});
 }

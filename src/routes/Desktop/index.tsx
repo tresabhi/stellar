@@ -68,7 +68,7 @@ function Desktop() {
 
       <EditingPanel>
         <PartsExplorer.Container>
-          <PartsExplorer.Button icon={<FuelCellIcon />}>4w Fuel Cell</PartsExplorer.Button>
+          <PartsExplorer.Button icon={<FuelCellIcon />}>4w Fuel Cell Overflow Text Overflow Text Overflow Text Overflow Text</PartsExplorer.Button>
         </PartsExplorer.Container>
       </EditingPanel>
     </PseudoContainer>

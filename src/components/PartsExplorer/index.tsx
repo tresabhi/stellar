@@ -16,7 +16,7 @@ const Button: FC<IButton> = ({ children, icon }) => {
       {icon}
 
       {/* text */}
-      {children}
+      <input defaultValue={children} />
     </button>
   );
 };
