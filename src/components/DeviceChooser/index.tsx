@@ -17,12 +17,14 @@ const Title: FC = ({ children }) => {
 interface ICard {
   href: string;
   text?: string;
+  recomended?: boolean;
 }
-const Card: FC<ICard> = ({ href, text, children }) => {
+const Card: FC<ICard> = ({ href, text, recomended, children }) => {
   return (
     <a href={href} className="device-chooser-card">
       {children}
       {text}
+      {recomended ? <p className="device-chooser-recomended">Recommended For You</p> : null}
     </a>
   );
 };

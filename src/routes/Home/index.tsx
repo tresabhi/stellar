@@ -12,10 +12,10 @@ const Home = () => {
       <DeviceChooser.Container>
         <DeviceChooser.Title>Choose Your Device</DeviceChooser.Title>
         <DeviceChooser.List>
-          <DeviceChooser.Card href="desktop" text="Desktop">
+          <DeviceChooser.Card recomended={isDesktop} href="desktop" text="Desktop">
             <DesktopIcon />
           </DeviceChooser.Card>
-          <DeviceChooser.Card href="mobile" text="Mobile">
+          <DeviceChooser.Card recomended={isMobile} href="mobile" text="Mobile">
             <MobileIcon />
           </DeviceChooser.Card>
         </DeviceChooser.List>

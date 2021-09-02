@@ -51,3 +51,11 @@
   height: $device-chooser-card-icon-size;
   margin-bottom: $device-chooser-card-icon-margin-bottom;
 }
+
+.device-chooser-recomended {
+  margin: 0px;
+  height: 0px;
+  font-style: italic;
+
+  font-size: $font-size-minor;
+}
