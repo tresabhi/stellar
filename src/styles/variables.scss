@@ -8,6 +8,8 @@ $gray-1: #444c56;
 $gray-2: #65707d;
 $gray-3: #a9b4c2;
 
+$green-1: #b0ffb0;
+
 // Border Radii
 $border-radius-button: 4px;
 $border-radius-text-feild: 4px;
@@ -66,6 +68,7 @@ $device-chooser-card-size: 128px;
 $device-chooser-card-margin: 8px;
 $device-chooser-card-icon-size: 48px;
 $device-chooser-card-icon-margin-bottom: 16px;
+$device-chooser-card-recommended-color: $green-1;
 
 // Parts Explorer
 $parts-explorer-width: 240px;

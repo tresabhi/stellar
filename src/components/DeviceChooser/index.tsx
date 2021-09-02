@@ -24,7 +24,7 @@ const Card: FC<ICard> = ({ href, text, recomended, children }) => {
     <a href={href} className="device-chooser-card">
       {children}
       {text}
-      {recomended ? <p className="device-chooser-recomended">Recommended For You</p> : null}
+      {recomended ? <p className="device-chooser-recomended">Recommended</p> : null}
     </a>
   );
 };
