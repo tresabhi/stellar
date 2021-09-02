@@ -68,10 +68,10 @@ function Desktop() {
 
       <EditingPanel>
         <PartsExplorer.Container>
-          <PartsExplorer.Button icon={<FuelCellIcon />}>4w Fuel Cell</PartsExplorer.Button>
-          <PartsExplorer.Button icon={<FuelCellIcon />}>4w Fuel Cell</PartsExplorer.Button>
-          <PartsExplorer.Button icon={<FuelCellIcon />}>4w Fuel Cell</PartsExplorer.Button>
-          <PartsExplorer.Button icon={<FuelCellIcon />}>4w Fuel Cell</PartsExplorer.Button>
+          <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
+          <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
+          <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
+          <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
         </PartsExplorer.Container>
       </EditingPanel>
     </PseudoContainer>

@@ -20,11 +20,11 @@ const Button: FC<IButton> = ({ children, icon }) => {
       {icon}
 
       {/* text */}
-      <input defaultValue={children} />
+      <input className="parts-explorer-button-input" defaultValue={children} />
 
-      <DeleteIcon />
-      <LockIcon />
-      <EyeIcon />
+      <DeleteIcon className="parts-explorer-button-icon" />
+      <LockIcon className="parts-explorer-button-icon" />
+      <EyeIcon className="parts-explorer-button-icon" />
     </button>
   );
 };

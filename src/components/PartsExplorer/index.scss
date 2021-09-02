@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   color: white;
+  flex-wrap: nowrap;
 
   background-color: $black-2;
   font-family: $font-family-regular;
@@ -22,26 +23,44 @@
   background-color: $black-3;
 }
 
+.parts-explorer-button-icon,
 .parts-explorer-button>svg,
 .parts-explorer-button>img {
   width: $focus-area-icon-size;
   height: $focus-area-icon-size;
+  // min width to make it not shrink
+  min-width: $focus-area-icon-size;
+  min-height: $focus-area-icon-size;
 }
 
-.parts-explorer-button>input {
+.parts-explorer-button>svg:not(.parts-explorer-button-icon),
+.parts-explorer-button>img:not(.parts-explorer-button-icon) {
+  margin-right: $parts-explorer-button-spacing;
+}
+
+.parts-explorer-button-icon {
   display: none;
+
+  margin-left: $parts-explorer-button-spacing;
+}
+
+.parts-explorer-button:hover>.parts-explorer-button-icon {
+  display: block;
+}
+
+.parts-explorer-button-input {
   background: none;
   color: white;
   text-overflow: ellipsis;
   cursor: pointer;
+  min-width: 0px;
 
   font-family: $font-family-regular;
 
   margin-left: $parts-explorer-inner-padding 0px $parts-explorer-inner-padding 0px;
-  // width: calc(#{$parts-explorer-width - $focus-area-icon-size - (2 * $parts-explorer-button-padding) - $parts-explorer-inner-padding});
 }
 
-.parts-explorer-button>input.editing,
-.parts-explorer-button>input:focus {
+.parts-explorer-button-input.editing,
+.parts-explorer-button-input:focus {
   cursor: text;
 }
