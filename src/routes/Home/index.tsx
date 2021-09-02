@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <PseudoContainer>
       <DeviceChooser.Container>
-        <DeviceChooser.Title>Choose Your Device</DeviceChooser.Title>
+        <DeviceChooser.Title>Choose Your Editor Version</DeviceChooser.Title>
         <DeviceChooser.List>
           <DeviceChooser.Card recomended={isDesktop} href="desktop" text="Desktop">
             <DesktopIcon />
