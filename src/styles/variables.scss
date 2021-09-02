@@ -46,6 +46,7 @@ $tool-bar-seperator-margin: 8px;
 
 // Focus Area
 $focus-area-bg: $black-2;
+$focus-area-emphasis-bg: $black-3;
 $focus-area-border-color: $gray-1;
 $focus-area-border-width: 1px;
 $focus-area-border: $focus-area-border-width $focus-area-border-color solid;
@@ -65,3 +66,6 @@ $parts-explorer-inner-padding: 4px;
 $parts-explorer-button-height: 34px;
 $parts-explorer-button-padding: 8px;
 $parts-explorer-button-spacing: 4px;
+
+$parts-explorer-title-height: 34px;
+$parts-explorer-title-font-size: 14px;

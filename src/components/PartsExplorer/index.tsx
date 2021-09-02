@@ -29,7 +29,12 @@ const Button: FC<IButton> = ({ children, icon }) => {
   );
 };
 
+const Title: FC = ({ children }) => {
+  return <div className="parts-explorer-title">{children}</div>;
+};
+
 export default {
   Container,
   Button,
+  Title,
 };

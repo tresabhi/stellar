@@ -1,7 +1,8 @@
 @import '../../styles/index.scss';
 
 .parts-explorer-container {
-  background-color: $black-2;
+  background-color: $focus-area-bg;
+  border-right: $focus-area-border;
 }
 
 .parts-explorer-button {
@@ -15,7 +16,6 @@
 
   height: $parts-explorer-button-height;
   padding: $parts-explorer-button-padding;
-
   width: $parts-explorer-width;
 }
 
@@ -63,4 +63,19 @@
 .parts-explorer-button-input.editing,
 .parts-explorer-button-input:focus {
   cursor: text;
+}
+
+.parts-explorer-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+
+  font-family: $font-family-regular;
+  background-color: $focus-area-emphasis-bg;
+  border-bottom: $focus-area-border;
+
+  height: $parts-explorer-title-height;
+  font-size: $parts-explorer-title-font-size;
 }

@@ -68,6 +68,7 @@ function Desktop() {
 
       <EditingPanel>
         <PartsExplorer.Container>
+          <PartsExplorer.Title>Parts</PartsExplorer.Title>
           <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
           <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
           <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
