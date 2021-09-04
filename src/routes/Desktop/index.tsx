@@ -82,7 +82,7 @@ function Desktop() {
 
         <EditingCanvas />
 
-        <Explorer.Container>
+        <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
             <Explorer.Tab>Parts</Explorer.Tab>
           </Explorer.TabsContainer>

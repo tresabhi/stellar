@@ -6,8 +6,20 @@ import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 
 import './index.scss';
 
-const Container: FC = ({ children }) => {
-  return <div className="explorer-container">{children}</div>;
+interface IContainer {
+  rightSide: boolean;
+}
+const Container: FC = ({ children, rightSide }) => {
+  return (
+    <div
+      className={`
+        explorer-container
+        ${rightSide ? 'right-side' : 'left-side'}
+      `}
+    >
+      {children}
+    </div>
+  );
 };
 
 const TabsContainer: FC = ({ children }) => {

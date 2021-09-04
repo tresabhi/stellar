@@ -7,13 +7,20 @@
   width: $explorer-width;
 }
 
+.explorer-container.left-side {
+  border-right: $focus-area-border;
+}
+
+.explorer-container.right-side {
+  border-left: $focus-area-border;
+}
+
 .explorer-listing-container {
   overflow-y: auto;
   flex: 1;
 
   background-color: $black-2;
   
-  border-right: $focus-area-border;
   height: calc(
     100%
     - (#{
@@ -101,7 +108,7 @@
   font-family: $font-family-regular;
   background-color: $focus-area-emphasis-bg;
   border-bottom: $focus-area-border;
-  border-right: $focus-area-border;
+  // border-right: $focus-area-border;
 
   font-size: $explorer-tab-font-size;
 }
