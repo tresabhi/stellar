@@ -2,6 +2,7 @@ import PseudoContainer from 'components/PseudoContainer';
 import ToolBar from 'components/ToolBar';
 import EditingPanel from 'components/EditingPanel';
 import PartsExplorer from 'components/PartsExplorer';
+import EditingCanvas from 'components/EditingCanvas';
 
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
@@ -104,6 +105,8 @@ function Desktop() {
             <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
           </PartsExplorer.Container>
         </PartsExplorer.StaticContainer>
+
+        <EditingCanvas />
       </EditingPanel>
     </PseudoContainer>
   );
