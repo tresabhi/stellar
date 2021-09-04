@@ -3,6 +3,7 @@ import ToolBar from 'components/ToolBar';
 import EditingPanel from 'components/EditingPanel';
 import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
+import UnitTextBox from 'components/UnitTextBox';
 
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
@@ -45,7 +46,7 @@ function Desktop() {
         <ToolBar.Button>
           <ZoomOutIcon />
         </ToolBar.Button>
-        <ToolBar.TextFeild defaultValue={100} suffix="%" />
+        <UnitTextBox defaultValue={100} suffix="%" />
         <ToolBar.Button>
           <GrabIcon />
         </ToolBar.Button>
@@ -54,11 +55,11 @@ function Desktop() {
         <ToolBar.StaticIcon>
           <GridIcon />
         </ToolBar.StaticIcon>
-        <ToolBar.TextFeild defaultValue={2} suffix="m" />
+        <UnitTextBox defaultValue={2} suffix="m" />
         <ToolBar.StaticIcon>
           <RotationIcon />
         </ToolBar.StaticIcon>
-        <ToolBar.TextFeild defaultValue={90} suffix="°" />
+        <UnitTextBox defaultValue={90} suffix="°" />
 
         <ToolBar.Seperator />
         <ToolBar.DropDownButton icon={<FuelCellIcon />} />
@@ -88,7 +89,7 @@ function Desktop() {
             <Explorer.Tab>Staging</Explorer.Tab>
           </Explorer.TabsContainer>
           <Explorer.ListingContainer>
-            <Explorer.PropertyListing>Position</Explorer.PropertyListing>
+            <Explorer.PropertyListing subProperties={[<button>hello</button>]}>Position</Explorer.PropertyListing>
           </Explorer.ListingContainer>
         </Explorer.Container>
       </EditingPanel>

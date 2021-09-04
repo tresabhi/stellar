@@ -15,8 +15,7 @@ const Container: FC<IContainer> = ({ children, rightSide }) => {
       className={`
         explorer-container
         ${rightSide ? 'right-side' : 'left-side'}
-      `}
-    >
+      `}>
       {children}
     </div>
   );
@@ -60,9 +59,7 @@ const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
 
       <div className="explorer-property-listing-sub-properties-container">
         {/* sub properties */}
-        {subProperties?.map((component) => {
-          return component;
-        })}
+        {subProperties?.map((component) => component)}
       </div>
     </button>
   );
@@ -79,8 +76,7 @@ const Tab: FC<ITab> = ({ children, defaultSelected }) => {
       className={`
         explorer-tab
         ${selected ? 'selected' : ''}
-      `}
-    >
+      `}>
       {children}
     </button>
   );

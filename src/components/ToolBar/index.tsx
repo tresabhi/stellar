@@ -14,8 +14,7 @@ const Button: FC = ({ children }) => {
       className={`
         tool-bar-button
         ${typeof children === 'string' ? 'tool-bar-text-button' : ''}
-      `}
-    >
+      `}>
       {children}
     </button>
   );
@@ -23,16 +22,6 @@ const Button: FC = ({ children }) => {
 
 const Seperator = () => {
   return <div className="tool-bar-seperator" />;
-};
-
-interface ITextFeild {
-  defaultValue: number | string;
-  prefix?: string;
-  suffix?: string;
-}
-const TextFeild: FC<ITextFeild> = ({ defaultValue, prefix = '', suffix = '' }) => {
-  // functionality coming soon...
-  return <input className="tool-bar-text-feild" defaultValue={`${prefix}${defaultValue}${suffix}`} />;
 };
 
 const StaticIcon: FC = ({ children }) => {
@@ -61,7 +50,6 @@ export default {
   Container,
   Button,
   Seperator,
-  TextFeild,
   StaticIcon,
   DropDownButton,
 };

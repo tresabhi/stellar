@@ -1,0 +1,15 @@
+@import '../../styles/index.scss';
+
+.unit-text-feild {
+  width: 0px;
+  color: white;
+  text-align: center;
+
+  background-color: $black-1;
+  font-family: $font-family-regular;
+
+  border-radius: $border-radius-text-feild;
+  margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
+  min-width: $tool-bar-text-feild-min-width;
+  margin: 0px $tool-bar-text-feild-margin 0px $tool-bar-text-feild-margin-connection;
+}
