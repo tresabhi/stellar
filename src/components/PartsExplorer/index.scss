@@ -1,7 +1,32 @@
 @import '../../styles/index.scss';
 
 .parts-explorer-container {
+  height: calc(
+    100vh
+    - (#{
+      $tool-bar-height +
+      $focus-area-border-width
+    } * 2)
+  );
   overflow-y: auto;
+
+  background-color: $focus-area-bg;
+  border-right: $focus-area-border;
+}
+
+.parts-explorer-container.with-title {
+  height: calc(
+    100vh
+    - (#{
+      $tool-bar-height +
+      $focus-area-border-width
+    } * 2)
+    - #{$parts-explorer-title-height}
+  );
+}
+
+.parts-explorer-static-container {
+  overflow-y: hidden;
 
   background-color: $focus-area-bg;
   border-right: $focus-area-border;

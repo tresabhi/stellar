@@ -6,8 +6,23 @@ import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 
 import './index.scss';
 
-const Container: FC = ({ children }) => {
-  return <div className="parts-explorer-container">{children}</div>;
+interface IContainer {
+  withTitle?: boolean;
+}
+const Container: FC<IContainer> = ({ children, withTitle }) => {
+  return (
+    <div
+      className={`
+        parts-explorer-container
+        ${withTitle ? 'with-title' : ''}
+      `}>
+      {children}
+    </div>
+  );
+};
+
+const StaticContainer: FC = ({ children }) => {
+  return <div className="parts-explorer-static-container">{children}</div>;
 };
 
 interface IButton {
@@ -35,6 +50,7 @@ const Title: FC = ({ children }) => {
 
 export default {
   Container,
+  StaticContainer,
   Button,
   Title,
 };
