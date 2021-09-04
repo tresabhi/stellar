@@ -10,8 +10,12 @@ const Container: FC = ({ children }) => {
   return <div className="explorer-container">{children}</div>;
 };
 
-const StaticContainer: FC = ({ children }) => {
-  return <div className="explorer-static-container">{children}</div>;
+const TabsContainer: FC = ({ children }) => {
+  return <div className="explorer-tabs-container">{children}</div>;
+};
+
+const ListingContainer: FC = ({ children }) => {
+  return <div className="explorer-listing-container">{children}</div>;
 };
 
 interface IPartListing {
@@ -33,18 +37,14 @@ const PartListing: FC<IPartListing> = ({ children, icon }) => {
   );
 };
 
-const TabContainer: FC = ({ children }) => {
-  return <div className="explorer-tab-container">{children}</div>;
-};
-
 const Tab: FC = ({ children }) => {
-  return <div className="explorer-tab">{children}</div>;
+  return <button className="explorer-tab">{children}</button>;
 };
 
 export default {
   Container,
-  StaticContainer,
+  TabsContainer,
+  ListingContainer,
   PartListing,
-  TabContainer,
   Tab,
 };

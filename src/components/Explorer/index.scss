@@ -1,13 +1,13 @@
 @import '../../styles/index.scss';
 
-.explorer-static-container {
+.explorer-container {
   height: 100%;
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
 }
 
-.explorer-container {
+.explorer-listing-container {
   overflow-y: auto;
   flex: 1;
 
@@ -18,8 +18,14 @@
       $tool-bar-height +
       $focus-area-border-width
     } * 2)
-    - #{$parts-explorer-title-height}
+    - #{$explorer-tab-height}
   );
+}
+
+.explorer-tabs-container {
+  display: flex;
+
+  height: $explorer-tab-height;
 }
 
 .explorer-part-listing {
@@ -31,9 +37,9 @@
   background-color: $black-2;
   font-family: $font-family-regular;
 
-  height: $parts-explorer-button-height;
-  padding: $parts-explorer-button-padding;
-  width: $parts-explorer-width;
+  height: $explorer-listing-height;
+  padding: $explorer-listing-padding;
+  width: $explorer-width;
 }
 
 .explorer-part-listing:hover {
@@ -52,13 +58,13 @@
 
 .explorer-part-listing>svg:not(.explorer-part-listing-icon),
 .explorer-part-listing>img:not(.explorer-part-listing-icon) {
-  margin-right: $parts-explorer-button-spacing;
+  margin-right: $explorer-listing-spacing;
 }
 
 .explorer-part-listing-icon {
   display: none;
 
-  margin-left: $parts-explorer-button-spacing;
+  margin-left: $explorer-listing-spacing;
 }
 
 .explorer-part-listing:hover>.explorer-part-listing-icon {
@@ -74,7 +80,7 @@
 
   font-family: $font-family-regular;
 
-  margin-left: $parts-explorer-inner-padding 0px $parts-explorer-inner-padding 0px;
+  margin-left: $explorer-inner-padding 0px $explorer-inner-padding 0px;
 }
 
 .explorer-part-listing-input.editing,
@@ -88,12 +94,12 @@
   justify-content: center;
   color: white;
   font-weight: bold;
+  flex: 1;
 
   font-family: $font-family-regular;
   background-color: $focus-area-emphasis-bg;
   border-bottom: $focus-area-border;
   border-right: $focus-area-border;
 
-  height: $parts-explorer-title-height;
-  font-size: $parts-explorer-title-font-size;
+  font-size: $explorer-tab-font-size;
 }

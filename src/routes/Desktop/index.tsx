@@ -68,43 +68,17 @@ function Desktop() {
       </ToolBar.Container>
 
       <EditingPanel>
-        <Explorer.StaticContainer>
-          <Explorer.Tab>Parts</Explorer.Tab>
-          <Explorer.Container>
+        <Explorer.Container>
+          <Explorer.TabsContainer>
+            <Explorer.Tab>Parts</Explorer.Tab>
+          </Explorer.TabsContainer>
+          <Explorer.ListingContainer>
             <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
             <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
             <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
             <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
-          </Explorer.Container>
-        </Explorer.StaticContainer>
+          </Explorer.ListingContainer>
+        </Explorer.Container>
 
         <EditingCanvas />
       </EditingPanel>
