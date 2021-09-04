@@ -17,3 +17,6 @@ This open source tool allows anyone to create complex craft designs visually thr
 
 - [Website](http://coolabhi1290.github.io/Stellar-Editor) (not available yet)
 - UWP App (not available yet)
+
+## Compatibility
+*coming soon*
