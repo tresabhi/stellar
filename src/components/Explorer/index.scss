@@ -1,20 +1,17 @@
 @import '../../styles/index.scss';
 
-.parts-explorer-static-container {
+.explorer-static-container {
   height: 100%;
   overflow-y: hidden;
   display: flex;
   flex-direction: column;
 }
 
-.parts-explorer-container {
+.explorer-container {
   overflow-y: auto;
   flex: 1;
 
   border-right: $focus-area-border;
-}
-
-.parts-explorer-container.with-title {
   height: calc(
     100%
     - (#{
@@ -25,7 +22,7 @@
   );
 }
 
-.parts-explorer-button {
+.explorer-part-listing {
   display: flex;
   align-items: center;
   color: white;
@@ -39,13 +36,13 @@
   width: $parts-explorer-width;
 }
 
-.parts-explorer-button:hover {
+.explorer-part-listing:hover {
   background-color: $black-3;
 }
 
-.parts-explorer-button-icon,
-.parts-explorer-button>svg,
-.parts-explorer-button>img {
+.explorer-part-listing-icon,
+.explorer-part-listing>svg,
+.explorer-part-listing>img {
   width: $focus-area-icon-size;
   height: $focus-area-icon-size;
   // min width to make it not shrink
@@ -53,22 +50,22 @@
   min-height: $focus-area-icon-size;
 }
 
-.parts-explorer-button>svg:not(.parts-explorer-button-icon),
-.parts-explorer-button>img:not(.parts-explorer-button-icon) {
+.explorer-part-listing>svg:not(.explorer-part-listing-icon),
+.explorer-part-listing>img:not(.explorer-part-listing-icon) {
   margin-right: $parts-explorer-button-spacing;
 }
 
-.parts-explorer-button-icon {
+.explorer-part-listing-icon {
   display: none;
 
   margin-left: $parts-explorer-button-spacing;
 }
 
-.parts-explorer-button:hover>.parts-explorer-button-icon {
+.explorer-part-listing:hover>.explorer-part-listing-icon {
   display: block;
 }
 
-.parts-explorer-button-input {
+.explorer-part-listing-input {
   background: none;
   color: white;
   text-overflow: ellipsis;
@@ -80,12 +77,12 @@
   margin-left: $parts-explorer-inner-padding 0px $parts-explorer-inner-padding 0px;
 }
 
-.parts-explorer-button-input.editing,
-.parts-explorer-button-input:focus {
+.explorer-part-listing-input.editing,
+.explorer-part-listing-input:focus {
   cursor: text;
 }
 
-.parts-explorer-title {
+.explorer-tab {
   display: flex;
   align-items: center;
   justify-content: center;
