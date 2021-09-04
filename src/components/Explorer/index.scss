@@ -97,7 +97,8 @@
   cursor: text;
 }
 
-.explorer-tab {
+.explorer-tab,
+.explorer-static-tab {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,4 +112,8 @@
   // border-right: $focus-area-border;
 
   font-size: $explorer-tab-font-size;
+}
+
+.explorer-tab.selected {
+  background-color: $purple-1;
 }

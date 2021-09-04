@@ -49,8 +49,26 @@ const PartListing: FC<IPartListing> = ({ children, icon }) => {
   );
 };
 
-const Tab: FC = ({ children }) => {
-  return <button className="explorer-tab">{children}</button>;
+interface ITab {
+  defaultSelected?: boolean;
+}
+const Tab: FC<ITab> = ({ children, defaultSelected }) => {
+  // let for now, react state hook in the future
+  let selected = defaultSelected;
+  return (
+    <button
+      className={`
+        explorer-tab
+        ${selected ? 'selected' : ''}
+      `}
+    >
+      {children}
+    </button>
+  );
+};
+
+const StaticTab: FC<ITab> = ({ children }) => {
+  return <div className="explorer-static-tab">{children}</div>;
 };
 
 export default {
@@ -59,4 +77,5 @@ export default {
   ListingContainer,
   PartListing,
   Tab,
+  StaticTab,
 };

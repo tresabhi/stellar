@@ -70,7 +70,7 @@ function Desktop() {
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>
-            <Explorer.Tab>Parts</Explorer.Tab>
+            <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.ListingContainer>
             <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
@@ -84,7 +84,8 @@ function Desktop() {
 
         <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
-            <Explorer.Tab>Parts</Explorer.Tab>
+            <Explorer.Tab defaultSelected={true}>Properties</Explorer.Tab>
+            <Explorer.Tab>Staging</Explorer.Tab>
           </Explorer.TabsContainer>
           <Explorer.ListingContainer>
             <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
