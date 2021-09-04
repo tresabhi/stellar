@@ -1,16 +1,18 @@
 @import '../../styles/index.scss';
 
 .explorer-container {
-  height: 100%;
-  overflow-y: hidden;
   display: flex;
   flex-direction: column;
+
+  width: $explorer-width;
 }
 
 .explorer-listing-container {
   overflow-y: auto;
   flex: 1;
 
+  background-color: $black-2;
+  
   border-right: $focus-area-border;
   height: calc(
     100%
@@ -33,13 +35,13 @@
   align-items: center;
   color: white;
   flex-wrap: nowrap;
+  width: 100%;
 
   background-color: $black-2;
   font-family: $font-family-regular;
 
   height: $explorer-listing-height;
   padding: $explorer-listing-padding;
-  width: $explorer-width;
 }
 
 .explorer-part-listing:hover {

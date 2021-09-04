@@ -81,6 +81,18 @@ function Desktop() {
         </Explorer.Container>
 
         <EditingCanvas />
+
+        <Explorer.Container>
+          <Explorer.TabsContainer>
+            <Explorer.Tab>Parts</Explorer.Tab>
+          </Explorer.TabsContainer>
+          <Explorer.ListingContainer>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+          </Explorer.ListingContainer>
+        </Explorer.Container>
       </EditingPanel>
     </PseudoContainer>
   );
