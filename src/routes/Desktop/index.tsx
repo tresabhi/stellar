@@ -1,7 +1,7 @@
 import PseudoContainer from 'components/PseudoContainer';
 import ToolBar from 'components/ToolBar';
 import EditingPanel from 'components/EditingPanel';
-import PartsExplorer from 'components/PartsExplorer';
+import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
 
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
@@ -68,43 +68,43 @@ function Desktop() {
       </ToolBar.Container>
 
       <EditingPanel>
-        <PartsExplorer.StaticContainer>
-          <PartsExplorer.Title>Parts</PartsExplorer.Title>
-          <PartsExplorer.Container withTitle={true}>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<StructureIcon />}>4m Structural Piece</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<WheelIcon />}>Big Wheel</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<EngineIcon />}>Hawk Engine</PartsExplorer.Button>
-            <PartsExplorer.Button icon={<FuelCellIcon />}>4m Fuel Cell</PartsExplorer.Button>
-          </PartsExplorer.Container>
-        </PartsExplorer.StaticContainer>
+        <Explorer.StaticContainer>
+          <Explorer.Tab>Parts</Explorer.Tab>
+          <Explorer.Container>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+          </Explorer.Container>
+        </Explorer.StaticContainer>
 
         <EditingCanvas />
       </EditingPanel>
