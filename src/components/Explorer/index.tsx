@@ -7,9 +7,9 @@ import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import './index.scss';
 
 interface IContainer {
-  rightSide: boolean;
+  rightSide?: boolean;
 }
-const Container: FC = ({ children, rightSide }) => {
+const Container: FC<IContainer> = ({ children, rightSide }) => {
   return (
     <div
       className={`
