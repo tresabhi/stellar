@@ -49,6 +49,25 @@ const PartListing: FC<IPartListing> = ({ children, icon }) => {
   );
 };
 
+interface IPropertyListing {
+  subProperties?: Array<object>;
+}
+const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
+  return (
+    <button className="explorer-property-listing">
+      {/* text */}
+      {children}
+
+      <div className="explorer-property-listing-sub-properties-container">
+        {/* sub properties */}
+        {subProperties?.map((component) => {
+          return component;
+        })}
+      </div>
+    </button>
+  );
+};
+
 interface ITab {
   defaultSelected?: boolean;
 }
@@ -76,6 +95,7 @@ export default {
   TabsContainer,
   ListingContainer,
   PartListing,
+  PropertyListing,
   Tab,
   StaticTab,
 };
