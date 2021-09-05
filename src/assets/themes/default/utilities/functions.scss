@@ -1,0 +1,7 @@
+@function get-var($var-name) {
+  @return var(--#{$var-name});
+}
+
+@function v($var-name) {
+  @return get-var($var-name);
+}
