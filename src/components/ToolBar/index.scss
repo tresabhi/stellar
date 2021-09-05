@@ -48,6 +48,10 @@ align-items: center;
   display: block;
 }
 
+.tool-bar-static-icon {
+  margin-right: $tool-bar-text-feild-margin-connection;
+}
+
 .tool-bar-seperator {
   height: $tool-bar-seperator-height;
 
