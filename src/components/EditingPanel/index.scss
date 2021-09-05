@@ -1,14 +1,14 @@
-@import '../../styles/index.scss';
+// @import '../../styles/index.scss';
 
-.editing-panel {
-  width: 100vw;
-  display: flex;
+// .editing-panel {
+//   width: 100vw;
+//   display: flex;
   
-  height: calc(
-    100vh
-    - (#{
-      $tool-bar-height +
-      $focus-area-border-width
-    } * 2)
-  );
-}
+//   height: calc(
+//     100vh
+//     - (#{
+//       $tool-bar-height +
+//       $focus-area-border-width
+//     } * 2)
+//   );
+// }

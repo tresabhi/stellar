@@ -1,20 +1,20 @@
-@import '../../styles/index.scss';
+// @import '../../styles/index.scss';
 
-.context-bar {
-  width: 100%;
-  height: $context-bar-height;
-  background-color: $focus-area-bg;
-  display: flex;
-  border-bottom: $focus-area-border;
-}
+// .context-bar {
+//   width: 100%;
+//   height: $context-bar-height;
+//   background-color: $focus-area-bg;
+//   display: flex;
+//   border-bottom: $focus-area-border;
+// }
 
-.context-bar-button {
-  color: white;
-  font-size: $font-size-general;
-  background-color: $button-flush-bg;
-  padding: $context-bar-button-padding;
-}
+// .context-bar-button {
+//   color: white;
+//   font-size: $font-size-general;
+//   background-color: $button-flush-bg;
+//   padding: $context-bar-button-padding;
+// }
 
-.context-bar-button:hover {
-  background-color: $button-flush-hover-bg;
-}
+// .context-bar-button:hover {
+//   background-color: $button-flush-hover-bg;
+// }

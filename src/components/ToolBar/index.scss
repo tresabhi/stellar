@@ -1,83 +1,83 @@
-@import '../../styles/index.scss';
+// @import '../../styles/index.scss';
 
-.tool-bar {
-  flex-direction: row;
-  display: flex;
-  align-items: center;
+// .tool-bar {
+//   flex-direction: row;
+//   display: flex;
+//   align-items: center;
 
-  height: $tool-bar-height;
-  padding: 0px $tool-bar-padding 0px $tool-bar-padding;
+//   height: $tool-bar-height;
+//   padding: 0px $tool-bar-padding 0px $tool-bar-padding;
 
-  background-color: $focus-area-bg;
-  border-bottom: $focus-area-border;
-}
+//   background-color: $focus-area-bg;
+//   border-bottom: $focus-area-border;
+// }
 
-.tool-bar-button,
-.tool-bar-static-icon,
-.tool-bar-drop-down-button-action,
-.tool-bar-drop-down-button-more-options {
-  color: white;
-  font-weight: bold;
-  display: flex;
-align-items: center;
+// .tool-bar-button,
+// .tool-bar-static-icon,
+// .tool-bar-drop-down-button-action,
+// .tool-bar-drop-down-button-more-options {
+//   color: white;
+//   font-weight: bold;
+//   display: flex;
+// align-items: center;
 
-  background-color: $button-flush-bg;
-  font-size: $font-size-general;
-  font-family: $font-family-regular;
+//   background-color: $button-flush-bg;
+//   font-size: $font-size-general;
+//   font-family: $font-family-regular;
 
-  height: $tool-bar-button-height;
-  padding: $tool-bar-button-padding;
-  border-radius: $border-radius-button;
-  margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
-}
+//   height: $tool-bar-button-height;
+//   padding: $tool-bar-button-padding;
+//   border-radius: $border-radius-button;
+//   margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
+// }
 
-.tool-bar-button:hover,
-.tool-bar-drop-down-button-action:hover,
-.tool-bar-drop-down-button-more-options:hover {
-  background-color: $button-flush-hover-bg;
-}
+// .tool-bar-button:hover,
+// .tool-bar-drop-down-button-action:hover,
+// .tool-bar-drop-down-button-more-options:hover {
+//   background-color: $button-flush-hover-bg;
+// }
 
-.tool-bar-button>svg,
-.tool-bar-button>img,
-.tool-bar-static-icon>svg,
-.tool-bar-static-icon>img,
-.tool-bar-drop-down-button-action>svg,
-.tool-bar-drop-down-button-action>img {
-  width: $focus-area-icon-size;
-  height: $focus-area-icon-size;
-  display: block;
-}
+// .tool-bar-button>svg,
+// .tool-bar-button>img,
+// .tool-bar-static-icon>svg,
+// .tool-bar-static-icon>img,
+// .tool-bar-drop-down-button-action>svg,
+// .tool-bar-drop-down-button-action>img {
+//   width: $focus-area-icon-size;
+//   height: $focus-area-icon-size;
+//   display: block;
+// }
 
-.tool-bar-static-icon {
-  margin-right: $tool-bar-text-feild-margin-connection;
-}
+// .tool-bar-static-icon {
+//   margin-right: $tool-bar-text-feild-margin-connection;
+// }
 
-.tool-bar-seperator {
-  height: $tool-bar-seperator-height;
+// .tool-bar-seperator {
+//   height: $tool-bar-seperator-height;
 
-  width: $tool-bar-seperator-width;
-  background-color: $tool-bar-seperator-color;
-  margin: 0px $tool-bar-seperator-margin 0px $tool-bar-seperator-margin;
-}
+//   width: $tool-bar-seperator-width;
+//   background-color: $tool-bar-seperator-color;
+//   margin: 0px $tool-bar-seperator-margin 0px $tool-bar-seperator-margin;
+// }
 
-.tool-bar-drop-down-button-container {
-  display: flex;
-}
+// .tool-bar-drop-down-button-container {
+//   display: flex;
+// }
 
-.tool-bar-drop-down-button-action {
-  margin: 0px;
-}
+// .tool-bar-drop-down-button-action {
+//   margin: 0px;
+// }
 
-.tool-bar-drop-down-button-more-options {
-  margin: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+// .tool-bar-drop-down-button-more-options {
+//   margin: 0px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
-.tool-bar-drop-down-button-more-options>img,
-.tool-bar-drop-down-button-more-options>svg {
-  // strict image dimensions
-  width: 6px;
-  height: 4px;
-}
+// .tool-bar-drop-down-button-more-options>img,
+// .tool-bar-drop-down-button-more-options>svg {
+//   // strict image dimensions
+//   width: 6px;
+//   height: 4px;
+// }

@@ -5,6 +5,8 @@ import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
 import UnitTextBox from 'components/UnitTextBox';
 
+import '../../assets/themes/default/index.scss';
+
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
 import { ReactComponent as RedoIcon } from 'assets/icons/redo.svg';

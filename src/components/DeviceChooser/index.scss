@@ -1,64 +1,64 @@
-@import '../../styles/index.scss';
+// @import '../../styles/index.scss';
 
-.device-chooser-container {
-  text-align: center;
-  position: fixed;
-  width: 100%;
-  top: 50%;
-  transform: translateY(-50%);
-}
+// .device-chooser-container {
+//   text-align: center;
+//   position: fixed;
+//   width: 100%;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
 
-.device-chooser-title {
-  color: white;
+// .device-chooser-title {
+//   color: white;
 
-  font-family: $font-family-regular;
-}
+//   font-family: $font-family-regular;
+// }
 
-.device-chooser-list {
-  display: flex;
-  justify-content: center;
-}
+// .device-chooser-list {
+//   display: flex;
+//   justify-content: center;
+// }
 
-.device-chooser-card {
-  display: block;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
+// .device-chooser-card {
+//   display: block;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   color: white;
+//   text-decoration: none;
+//   font-weight: bold;
 
-  font-family: $font-family-regular;
-  background-color: $button-flush-bg;
-  font-size: $font-size-emphasis;
-  border-radius: $border-radius-button;
+//   font-family: $font-family-regular;
+//   background-color: $button-flush-bg;
+//   font-size: $font-size-emphasis;
+//   border-radius: $border-radius-button;
 
-  width: $device-chooser-card-size;
-  height: $device-chooser-card-size;
-  margin: $device-chooser-card-margin;
-}
+//   width: $device-chooser-card-size;
+//   height: $device-chooser-card-size;
+//   margin: $device-chooser-card-margin;
+// }
 
-.device-chooser-card:hover {
-  background-color: $button-flush-hover-bg;
-}
+// .device-chooser-card:hover {
+//   background-color: $button-flush-hover-bg;
+// }
 
-.device-chooser-card>svg,
-.device-chooser-card>img {
-  display: block;
+// .device-chooser-card>svg,
+// .device-chooser-card>img {
+//   display: block;
 
-  width: $device-chooser-card-icon-size;
-  height: $device-chooser-card-icon-size;
-  margin-bottom: $device-chooser-card-icon-margin-bottom;
-}
+//   width: $device-chooser-card-icon-size;
+//   height: $device-chooser-card-icon-size;
+//   margin-bottom: $device-chooser-card-icon-margin-bottom;
+// }
 
-.device-chooser-recomended {
-  margin: 0px;
-  height: 0px;
-  font-style: italic;
-  font-weight: normal;
+// .device-chooser-recomended {
+//   margin: 0px;
+//   height: 0px;
+//   font-style: italic;
+//   font-weight: normal;
 
-  font-size: $font-size-minor;
+//   font-size: $font-size-minor;
 
-  color: $device-chooser-card-recommended-color;
-}
+//   color: $device-chooser-card-recommended-color;
+// }
