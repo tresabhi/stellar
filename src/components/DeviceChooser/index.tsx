@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-import './index.scss';
-
 const Container: FC = ({ children }) => {
   return <div className="device-chooser-container">{children}</div>;
 };

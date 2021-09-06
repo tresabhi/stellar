@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-import './index.scss';
-
 interface IUnitTextBox {
   defaultValue: number | string;
   prefix?: string;

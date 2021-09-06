@@ -1,4 +1,4 @@
-@import '../assets/themes/default/index.scss';
+@import '../resources/index.scss';
 
 body {
   height: 100vh;
@@ -7,7 +7,7 @@ body {
   overflow-x: hidden;
   // overflow-y: hidden;
 
-  background-color: v(unimportant-panel-background-color);
+  background-color: v(background-panel-background-color);
 }
 
 *:focus {
