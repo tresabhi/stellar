@@ -1,1 +1,8 @@
-@import './abstract.scss';
+@import './theme.scss';
+@import './utilities.scss';
+
+:root {
+  // Panels
+  --important-panel-background-color: #{$black-regular};
+  --unimportant-panel-background-color: #{$black-dark};
+}

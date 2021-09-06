@@ -1,0 +1,14 @@
+// @import './utilities.scss';
+// @import './presets.scss';
+
+// Panels
+@mixin important-panel {
+  background-color: v(important-panel-background-color);
+}
+
+@mixin unimportant-panel {
+  background-color: v(unimportant-panel-background-color);
+}
+
+// States
+// @mixin scroll-bar
