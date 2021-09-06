@@ -4,6 +4,8 @@ import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 
+import './index.scss';
+
 interface IContainer {
   rightSide?: boolean;
 }
@@ -13,8 +15,7 @@ const Container: FC<IContainer> = ({ children, rightSide }) => {
       className={`
         explorer-container
         ${rightSide ? 'right-side' : 'left-side'}
-      `}
-    >
+      `}>
       {children}
     </div>
   );
@@ -75,8 +76,7 @@ const Tab: FC<ITab> = ({ children, defaultSelected }) => {
       className={`
         explorer-tab
         ${selected ? 'selected' : ''}
-      `}
-    >
+      `}>
       {children}
     </button>
   );

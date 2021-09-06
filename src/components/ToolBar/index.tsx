@@ -2,6 +2,8 @@ import { FC } from 'react';
 
 import { ReactComponent as MoreOptionsIcon } from 'assets/icons/more-options.svg';
 
+import './index.scss';
+
 const Container: FC = ({ children }) => {
   return <div className="tool-bar">{children}</div>;
 };
@@ -12,8 +14,7 @@ const Button: FC = ({ children }) => {
       className={`
         tool-bar-button
         ${typeof children === 'string' ? 'tool-bar-text-button' : ''}
-      `}
-    >
+      `}>
       {children}
     </button>
   );

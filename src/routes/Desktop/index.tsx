@@ -5,7 +5,7 @@ import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
 import UnitTextBox from 'components/UnitTextBox';
 
-import '../../assets/themes/default/index.scss';
+// import '../../assets/themes/default/index.scss';
 // then import the theme
 
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';

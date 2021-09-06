@@ -1,41 +1,41 @@
-@import '../resources/index.scss';
+// @import '../resources/index.scss';
 
-button {
-  display: block;
-  border: none;
-  padding: 0px;
-  text-align: center;
-  cursor: pointer;
-  background: none;
-}
+// button {
+//   display: block;
+//   border: none;
+//   padding: 0px;
+//   text-align: center;
+//   cursor: pointer;
+//   background: none;
+// }
 
-input {
-  border: none;
-}
+// input {
+//   border: none;
+// }
 
-::-webkit-scrollbar-corner {
-  display: none;
-}
+// ::-webkit-scrollbar-corner {
+//   display: none;
+// }
 
-*::-webkit-scrollbar {
-  width: 12px;
-}
+// *::-webkit-scrollbar {
+//   width: 12px;
+// }
 
-// See if this makes it flush
-*::-webkit-scrollbar-track {
-  background-color: v(scroll-bar-track-background-color);
-}
+// // See if this makes it flush
+// *::-webkit-scrollbar-track {
+//   background-color: v(scroll-bar-track-background-color);
+// }
 
-*::-webkit-scrollbar-thumb {
-  border-radius: 2px;
+// *::-webkit-scrollbar-thumb {
+//   border-radius: 2px;
 
-  background-color: v(scroll-bar-button-background-color);
-  border: 5px solid v(scroll-bar-track-background-color);
-}
+//   background-color: v(scroll-bar-button-background-color);
+//   border: 5px solid v(scroll-bar-track-background-color);
+// }
 
-*::-webkit-scrollbar-thumb:hover {
-  border-radius: 6px;
+// *::-webkit-scrollbar-thumb:hover {
+//   border-radius: 6px;
 
-  background-color: v(scroll-bar-button-hover-background-color);
-  border: 3px solid v(scroll-bar-track-background-color);
-}
+//   background-color: v(scroll-bar-button-hover-background-color);
+//   border: 3px solid v(scroll-bar-track-background-color);
+// }
