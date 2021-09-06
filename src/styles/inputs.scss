@@ -27,13 +27,15 @@ input {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: v(scroll-bar-button-background-color);
   border-radius: 2px;
+
+  background-color: v(scroll-bar-button-background-color);
   border: 5px solid v(scroll-bar-track-background-color);
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: v(scroll-bar-button-hover-background-color);
   border-radius: 6px;
+
+  background-color: v(scroll-bar-button-hover-background-color);
   border: 3px solid v(scroll-bar-track-background-color);
 }

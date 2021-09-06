@@ -1,18 +1,16 @@
-// @import '../../assets/themes/default/index.scss';
+.device-chooser-container {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-// .device-chooser-container {
-//   text-align: center;
-//   position: fixed;
-//   width: 100%;
-//   top: 50%;
-//   transform: translateY(-50%);
-// }
+.device-chooser-title {
+  // color: v(panel-text-color);
 
-// .device-chooser-title {
-//   color: v(panel-text-color);
-
-//   font-family: v(font-regular);
-// }
+  // font-family: v(font-regular);
+}
 
 // .device-chooser-list {
 //   display: flex;
