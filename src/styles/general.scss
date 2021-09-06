@@ -1,16 +1,15 @@
-// @import './variables.scss';
+@import '../assets/themes/default/index.scss';
 
-// body {
-//   height: 100vh;
-//   width: 100vw;
-//   margin: 0px;
-//   overflow-x: hidden;
-//   overflow-y: hidden;
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0px;
+  overflow-x: hidden;
+  // overflow-y: hidden;
 
-//   background-color: $black-dark;
-// }
+  background-color: v(unimportant-panel-background-color);
+}
 
-// *:focus,
-// *:focus-within {
-//   outline: none;
-// }
+*:focus {
+  outline: none;
+}
