@@ -1,3 +1,5 @@
+@import '../../styles/index.scss';
+
 .device-chooser-container {
   text-align: center;
   position: fixed;
@@ -7,56 +9,54 @@
 }
 
 .device-chooser-title {
-  // color: v(panel-text-color);
-
-  // font-family: v(font-regular);
+  color: v(foreground-panel-text-color);
+  font-family: v(font-family-regular);
 }
 
-// .device-chooser-list {
-//   display: flex;
-//   justify-content: center;
-// }
+.device-chooser-list {
+  display: flex;
+  justify-content: center;
+}
 
-// .device-chooser-card {
-//   display: block;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   color: white;
-//   text-decoration: none;
-//   font-weight: bold;
+.device-chooser-card {
+  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-weight: bold;
+  width: 128px;
+  height: 128px;
+  
+  font-family: v(font-family-regular);
+  background-color: v(button-flush-background-color);
+  font-size: v(font-size-emphasis);
+  border-radius: v(button-border-radius);
+  margin: v(margin-irrelevant);
+  color: v(foreground-panel-text-color);
+}
 
-//   font-family: $font-family-regular;
-//   background-color: $button-flush-bg;
-//   font-size: $font-size-emphasis;
-//   border-radius: $border-radius-button;
+.device-chooser-card:hover {
+  background-color: v(button-flush-hover-background-color);
+}
 
-//   width: $device-chooser-card-size;
-//   height: $device-chooser-card-size;
-//   margin: $device-chooser-card-margin;
-// }
+.device-chooser-card>svg,
+.device-chooser-card>img {
+  display: block;
 
-// .device-chooser-card:hover {
-//   background-color: $button-flush-hover-bg;
-// }
+  width: 48px;
+  height: 48px;
+  margin-bottom: v(margin-relevant);
+}
 
-// .device-chooser-card>svg,
-// .device-chooser-card>img {
-//   display: block;
+.device-chooser-recomended {
+  margin: 0px;
+  height: 0px;
+  font-style: italic;
+  font-weight: normal;
 
-//   width: $device-chooser-card-icon-size;
-//   height: $device-chooser-card-icon-size;
-//   margin-bottom: $device-chooser-card-icon-margin-bottom;
-// }
+  font-size: v(font-size-minor);
 
-// .device-chooser-recomended {
-//   margin: 0px;
-//   height: 0px;
-//   font-style: italic;
-//   font-weight: normal;
-
-//   font-size: $font-size-minor;
-
-//   color: $device-chooser-card-recommended-color;
-// }
+  color: v(color-recomended);
+}
