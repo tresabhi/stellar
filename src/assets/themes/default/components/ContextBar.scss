@@ -1,12 +1,14 @@
-// @import '../../styles/index.scss';
+@import '../resources/index.scss';
+@import '../utilities.scss';
 
-// .context-bar {
-//   width: 100%;
-//   height: $context-bar-height;
-//   background-color: $focus-area-bg;
-//   display: flex;
-//   border-bottom: $focus-area-border;
-// }
+.context-bar {
+  width: 100%;
+  height: 24px;
+  display: flex;
+
+  background-color: v(foreground-panel-background-color);
+  border-bottom: v(background-panel-border);
+}
 
 // .context-bar-button {
 //   color: white;
