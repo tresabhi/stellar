@@ -1,4 +1,4 @@
-// @import '../../styles/index.scss';
+// @import '../../assets/themes/default/index.scss';
 
 // .device-chooser-container {
 //   text-align: center;
@@ -9,9 +9,9 @@
 // }
 
 // .device-chooser-title {
-//   color: white;
+//   color: v(panel-text-color);
 
-//   font-family: $font-family-regular;
+//   font-family: v(font-regular);
 // }
 
 // .device-chooser-list {

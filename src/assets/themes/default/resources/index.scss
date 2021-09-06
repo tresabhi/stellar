@@ -1,0 +1,29 @@
+@import './colors.scss';
+@import './fonts.scss';
+@import './dimensions.scss';
+
+@import '../utilities.scss';
+
+:root {
+  // Foreground panel
+  --foreground-panel-background-color: #{$black-regular};
+  --foreground-panel-text-color: white;
+
+  --background-panel-background-color: #{$black-dark};
+  --background-panel-text-color: white;
+
+  // Fonts
+  --font-regular: 'Montserrat', 'Montserrat-Google-Regular', 'Sans-serif', 'Roboto', 'Arial';
+
+  // Scroll bar
+  --scroll-bar-track-width: 12px;
+  --scroll-bar-track-background-color: #{$black-darker};
+
+  --scroll-bar-button-width: 2px;
+  --scroll-bar-button-border-radius: 2px;
+  --scroll-bar-button-background-color: #{$gray-regular};
+
+  --scroll-bar-button-hover-width: 6px;
+  --scroll-bar-button-hover-border-radius: 6px;
+  --scroll-bar-button-hover-background-color: #{$gray-lighter};
+}
