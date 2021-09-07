@@ -1,13 +1,14 @@
 @import './measurements.scss';
 
 // Tool bar
-$tool-bar-height: 32px;
+$tool-bar-height: 34px;
 
-// Border widths
-$border-width-regular: 1px;
+$tool-bar-button-height: 24px;
+
+$tool-bar-seperator-height: 24px;
 
 // Foreground panels
-$foreground-panel-border: #{$border-width-regular solid v(foreground-panel-border-color)};
+$foreground-panel-border: #{$border-width-thin solid v(foreground-panel-border-color)};
 
 // Background panels
-$background-panel-border: #{$border-width-regular solid v(background-panel-border-color)};
+$background-panel-border: #{$border-width-thin solid v(background-panel-border-color)};

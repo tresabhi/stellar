@@ -5,60 +5,59 @@
   display: flex;
   align-items: center;
 
-  height: $tool-bar-height;
-  // padding: 0px $tool-bar-padding 0px $tool-bar-padding;
-
   background-color: v(foreground-panel-background-color);
+
+  height: $tool-bar-height;
+  padding: 0px $padding-regular 0px $padding-regular;
   border-bottom: $foreground-panel-border;
 }
 
-// .tool-bar-button,
-// .tool-bar-static-icon,
-// .tool-bar-drop-down-button-action,
-// .tool-bar-drop-down-button-more-options {
-//   color: white;
-//   font-weight: bold;
-//   display: flex;
-// align-items: center;
+.tool-bar-button,
+.tool-bar-static-icon,
+.tool-bar-drop-down-button-action,
+.tool-bar-drop-down-button-more-options {
+  color: v(foreground-panel-text-color);
+  display: flex;
+  align-items: center;
 
-//   background-color: $button-flush-bg;
-//   font-size: $font-size-general;
-//   font-family: $font-family-regular;
+  color: v(foreground-panel-text-color);
+  background-color: v(button-flush-background-color);
+  font-family: v(font-family-regular);
 
-//   height: $tool-bar-button-height;
-//   padding: $tool-bar-button-padding;
-//   border-radius: $border-radius-button;
-//   margin: 0px $tool-bar-children-margin 0px $tool-bar-children-margin;
-// }
+  border-radius: $border-radius-regular;
+  padding: 0px $padding-regular 0px $padding-regular;
+  height: $tool-bar-button-height;
+  font-size: $font-size-big;
+}
 
-// .tool-bar-button:hover,
-// .tool-bar-drop-down-button-action:hover,
-// .tool-bar-drop-down-button-more-options:hover {
-//   background-color: $button-flush-hover-bg;
-// }
+.tool-bar-button:hover,
+.tool-bar-drop-down-button-action:hover,
+.tool-bar-drop-down-button-more-options:hover {
+  background-color: v(button-flush-hover-background-color);
+}
 
-// .tool-bar-button>svg,
-// .tool-bar-button>img,
-// .tool-bar-static-icon>svg,
-// .tool-bar-static-icon>img,
-// .tool-bar-drop-down-button-action>svg,
-// .tool-bar-drop-down-button-action>img {
-//   width: $focus-area-icon-size;
-//   height: $focus-area-icon-size;
-//   display: block;
-// }
+.tool-bar-button>svg,
+.tool-bar-button>img,
+.tool-bar-static-icon>svg,
+.tool-bar-static-icon>img,
+.tool-bar-drop-down-button-action>svg,
+.tool-bar-drop-down-button-action>img {
+  width: $icon-size-regular;
+  height: $icon-size-regular;
+  display: block;
+}
 
-// .tool-bar-static-icon {
-//   margin-right: $tool-bar-text-feild-margin-connection;
-// }
+.tool-bar-static-icon {
+  margin-right: $margin-smaller;
+}
 
-// .tool-bar-seperator {
-//   height: $tool-bar-seperator-height;
+.tool-bar-seperator {
+  height: $tool-bar-seperator-height;
 
-//   width: $tool-bar-seperator-width;
-//   background-color: $tool-bar-seperator-color;
-//   margin: 0px $tool-bar-seperator-margin 0px $tool-bar-seperator-margin;
-// }
+  width: $border-width-thin;
+  background-color: v(foreground-panel-border-color);
+  margin: 0px $margin-regular 0px $margin-regular;
+}
 
 // .tool-bar-drop-down-button-container {
 //   display: flex;

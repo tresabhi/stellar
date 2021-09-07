@@ -13,7 +13,11 @@ $padding-big:     8px;
 $padding-bigger:  12px;
 
 // Border widths
-$border-width-regular: 1px;
+$border-width-thinner: 0.5px;
+$border-width-thin:    1px;
+$border-width-regular: 2px;
+$border-width-thick:    4px;
+$border-width-thicker: 6px;
 
 // Border radii
 $border-radius-regular: 4px;
@@ -24,3 +28,6 @@ $font-size-small:   10px;
 $font-size-regular: 12px;
 $font-size-big:     14px;
 $font-size-bigger:  16px;
+
+// Icon sizes
+$icon-size-regular: 18px;
