@@ -1,14 +1,16 @@
-// .tool-bar {
-//   flex-direction: row;
-//   display: flex;
-//   align-items: center;
+@import '../../styles/index.scss';
 
-//   height: $tool-bar-height;
-//   padding: 0px $tool-bar-padding 0px $tool-bar-padding;
+.tool-bar {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
 
-//   background-color: red;
-//   border-bottom: $focus-area-border;
-// }
+  height: $tool-bar-height;
+  // padding: 0px $tool-bar-padding 0px $tool-bar-padding;
+
+  background-color: v(foreground-panel-background-color);
+  border-bottom: $foreground-panel-border;
+}
 
 // .tool-bar-button,
 // .tool-bar-static-icon,

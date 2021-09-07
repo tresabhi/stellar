@@ -31,10 +31,11 @@
   
   font-family: v(font-family-regular);
   background-color: v(button-flush-background-color);
-  font-size: v(font-size-emphasis);
+  font-size: $font-size-big;
   border-radius: v(button-border-radius);
-  margin: v(margin-irrelevant);
   color: v(foreground-panel-text-color);
+
+  margin: $margin-regular;
 }
 
 .device-chooser-card:hover {
@@ -47,7 +48,8 @@
 
   width: 48px;
   height: 48px;
-  margin-bottom: v(margin-relevant);
+
+  margin-bottom: $margin-smaller;
 }
 
 .device-chooser-recomended {
@@ -56,7 +58,7 @@
   font-style: italic;
   font-weight: normal;
 
-  font-size: v(font-size-minor);
+  font-size: $font-size-small;
 
   color: v(color-recomended);
 }
