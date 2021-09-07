@@ -1,11 +1,11 @@
-// @import '../../styles/index.scss';
+@import '../../styles/index.scss';
 
-// .explorer-container {
-//   display: flex;
-//   flex-direction: column;
+.explorer-container {
+  display: flex;
+  flex-direction: column;
 
-//   width: $explorer-width;
-// }
+  // width: $explorer-width;
+}
 
 // .explorer-container.left-side {
 //   border-right: $focus-area-border;
