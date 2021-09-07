@@ -16,9 +16,8 @@
 .tool-bar-static-icon,
 .tool-bar-drop-down-button-action,
 .tool-bar-drop-down-button-more-options {
-  color: v(foreground-panel-text-color);
-  display: flex;
   align-items: center;
+  display: flex;
 
   color: v(foreground-panel-text-color);
   background-color: v(button-flush-background-color);
@@ -42,9 +41,10 @@
 .tool-bar-static-icon>img,
 .tool-bar-drop-down-button-action>svg,
 .tool-bar-drop-down-button-action>img {
+  display: block;
+
   width: $icon-size-regular;
   height: $icon-size-regular;
-  display: block;
 }
 
 .tool-bar-static-icon {
@@ -52,31 +52,33 @@
 }
 
 .tool-bar-seperator {
-  height: $tool-bar-seperator-height;
+  flex-shrink: 0;
 
-  width: $border-width-thin;
   background-color: v(foreground-panel-border-color);
+
+  height: $tool-bar-seperator-height;
+  width: $border-width-thin;
   margin: 0px $margin-regular 0px $margin-regular;
 }
 
-// .tool-bar-drop-down-button-container {
-//   display: flex;
-// }
+.tool-bar-drop-down-button-container {
+  display: flex;
+}
 
-// .tool-bar-drop-down-button-action {
-//   margin: 0px;
-// }
+.tool-bar-drop-down-button-action {
+  margin: 0px;
+}
 
-// .tool-bar-drop-down-button-more-options {
-//   margin: 0px;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
+.tool-bar-drop-down-button-more-options {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-// .tool-bar-drop-down-button-more-options>img,
-// .tool-bar-drop-down-button-more-options>svg {
-//   // strict image dimensions
-//   width: 6px;
-//   height: 4px;
-// }
+.tool-bar-drop-down-button-more-options>img,
+.tool-bar-drop-down-button-more-options>svg {
+  // strict image dimensions
+  width: v($tool-bar-drop-down-button-more-options-width);
+  height: v($tool-bar-drop-down-button-more-options-height);
+}
