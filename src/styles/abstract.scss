@@ -1,0 +1,11 @@
+// Tool bar
+$tool-bar-height: 32px;
+
+// Border widths
+$border-width-regular: 1px;
+
+// Foreground panels
+$foreground-panel-border: #{$border-width-regular solid v(foreground-panel-border-color)};
+
+// Background panels
+$background-panel-border: #{$border-width-regular solid v(background-panel-border-color)};

@@ -1,6 +1,5 @@
 @import './pallete.scss';
 @import './fonts.scss';
-@import './dimensions.scss';
 @import '../../../../styles/utilities.scss';
 
 :root {
@@ -8,26 +7,13 @@
   --foreground-panel-text-color:       white;
   --foreground-panel-background-color: #{$black-regular};
   --foreground-panel-border-color:     #{$gray-lighter};
-  --foreground-panel-border:           #{$border-width-regular solid v(foreground-panel-border-color)};
 
   --background-panel-text-color:       white;
   --background-panel-background-color: #{$black-dark};
   --background-panel-border-color:     #{$gray-regular};
-  --background-panel-border:           #{$border-width-regular solid v(background-panel-border-color)};
-
-  // Margin
-  --margin-relevant:   #{$margin-regular};
-  --margin-irrelevant: #{$margin-big};
 
   // Fonts
   --font-family-regular: 'Montserrat', 'Montserrat-Google-Regular', 'Sans-serif', 'Roboto', 'Arial';
-
-  // Font sizes
-  --font-size-ignorable: #{$font-size-smaller};
-  --font-size-minor:     #{$font-size-small};
-  --font-size-regular:   #{$font-size-regular};
-  --font-size-emphasis:  #{$font-size-big};
-  --font-size-obvious:   #{$font-size-bigger};
 
   // Scroll bar
   --scroll-bar-track-background-color:        #{$black-darker};
@@ -35,7 +21,6 @@
   --scroll-bar-button-hover-background-color: #{$gray-lighter};
 
   // Buttons
-  --button-regular-padding:   4px;
   --button-border-radius:     #{$border-radius-regular};
 
   --button-flush-background-color: #{$black-regular};
@@ -43,7 +28,4 @@
 
   // Color abstractions
   --color-recomended: #{$green-lighter};
-
-  // Panels
-  --horizontal-panel-height: 32px;
 }
