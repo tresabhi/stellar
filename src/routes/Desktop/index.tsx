@@ -92,7 +92,7 @@ function Desktop() {
             <Explorer.Tab>Staging</Explorer.Tab>
           </Explorer.TabsContainer>
           <Explorer.ListingContainer>
-            <Explorer.PropertyListing subProperties={[<button>hello</button>]}>Position</Explorer.PropertyListing>
+            <Explorer.PropertyListing subProperties={[<Explorer.SubPropertyTextInput defaultValue={0} suffix={'m'} name="X" />, <Explorer.SubPropertyTextInput defaultValue={0} suffix={'m'} name="X" />]}>Position</Explorer.PropertyListing>
           </Explorer.ListingContainer>
         </Explorer.Container>
       </EditingPanel>

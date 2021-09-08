@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import UnitTextInput from 'components/UnitTextInput';
+
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
@@ -15,7 +17,8 @@ const Container: FC<IContainer> = ({ children, rightSide }) => {
       className={`
         explorer-container
         ${rightSide ? 'right-side' : 'left-side'}
-      `}>
+      `}
+    >
       {children}
     </div>
   );
@@ -76,7 +79,8 @@ const Tab: FC<ITab> = ({ children, defaultSelected }) => {
       className={`
         explorer-tab
         ${selected ? 'selected' : ''}
-      `}>
+      `}
+    >
       {children}
     </button>
   );
@@ -86,12 +90,32 @@ const StaticTab: FC<ITab> = ({ children }) => {
   return <div className="explorer-static-tab">{children}</div>;
 };
 
+interface ISubPropertyTextInput {
+  defaultValue: number | string;
+  prefix?: string;
+  suffix?: string;
+  name?: string;
+}
+const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({ children, defaultValue, prefix, suffix, name }) => {
+  return (
+    <div className="explorer-sub-property-text-input">
+      <span>{name ?? children}</span>
+      <UnitTextInput defaultValue={defaultValue} suffix={suffix} prefix={prefix} />
+    </div>
+  );
+};
+
 export default {
   Container,
   TabsContainer,
+
   ListingContainer,
-  PartListing,
-  PropertyListing,
+
   Tab,
   StaticTab,
+
+  PartListing,
+  PropertyListing,
+
+  SubPropertyTextInput,
 };
