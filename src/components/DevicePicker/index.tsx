@@ -3,15 +3,15 @@ import { FC } from 'react';
 import './index.scss';
 
 const Container: FC = ({ children }) => {
-  return <div className="device-chooser-container">{children}</div>;
+  return <div className="device-picker-container">{children}</div>;
 };
 
 const List: FC = ({ children }) => {
-  return <div className="device-chooser-list">{children}</div>;
+  return <div className="device-picker-list">{children}</div>;
 };
 
 const Title: FC = ({ children }) => {
-  return <h2 className="device-chooser-title">{children}</h2>;
+  return <h2 className="device-picker-title">{children}</h2>;
 };
 
 interface ICard {
@@ -21,10 +21,10 @@ interface ICard {
 }
 const Card: FC<ICard> = ({ href, text, recomended, children }) => {
   return (
-    <a href={href} className="device-chooser-card">
+    <a href={href} className="device-picker-card">
       {children}
       {text}
-      {recomended ? <p className="device-chooser-recomended">Recommended</p> : null}
+      {recomended ? <p className="device-picker-recomended">Recommended</p> : null}
     </a>
   );
 };

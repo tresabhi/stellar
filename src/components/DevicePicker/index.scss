@@ -1,6 +1,6 @@
 @import '../../styles/index.scss';
 
-.device-chooser-container {
+.device-picker-container {
   text-align: center;
   position: fixed;
   width: 100%;
@@ -8,17 +8,17 @@
   transform: translateY(-50%);
 }
 
-.device-chooser-title {
+.device-picker-title {
   color: v(background-panel-text-color);
   font-family: v(font-family-regular);
 }
 
-.device-chooser-list {
+.device-picker-list {
   display: flex;
   justify-content: center;
 }
 
-.device-chooser-card {
+.device-picker-card {
   display: block;
   display: flex;
   flex-direction: column;
@@ -38,12 +38,12 @@
   margin: $margin-regular;
 }
 
-.device-chooser-card:hover {
+.device-picker-card:hover {
   background-color: v(button-flush-hover-background-color);
 }
 
-.device-chooser-card>svg,
-.device-chooser-card>img {
+.device-picker-card>svg,
+.device-picker-card>img {
   display: block;
 
   width: 48px;
@@ -52,7 +52,7 @@
   margin-bottom: $margin-smaller;
 }
 
-.device-chooser-recomended {
+.device-picker-recomended {
   margin: 0px;
   height: 0px;
   font-style: italic;
