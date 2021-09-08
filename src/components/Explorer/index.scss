@@ -83,28 +83,34 @@
   margin-left: $margin-smaller 0px $margin-smaller 0px;
 }
 
-// .explorer-part-listing-input.editing,
-// .explorer-part-listing-input:focus {
-//   cursor: text;
-// }
+.explorer-part-listing-input.editing,
+.explorer-part-listing-input:focus {
+  cursor: text;
+}
 
-// .explorer-tab,
-// .explorer-static-tab {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: white;
-//   font-weight: bold;
-//   flex: 1;
+.explorer-tab,
+.explorer-static-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  flex: 1;
 
-//   font-family: $font-family-regular;
-//   background-color: $focus-area-emphasis-bg;
-//   border-bottom: $foreground-panel-border;
-//   // border-right: $foreground-panel-border;
+  font-family: v(font-family-regular);
+  border-bottom: $foreground-panel-border;
 
-//   font-size: $explorer-tab-font-size;
-// }
+  font-size: $font-size-big;
+}
 
-// .explorer-tab.selected {
-//   background-color: $purple-1;
-// }
+.explorer-tab {
+  background-color: v(tab-unselected-background-color);
+}
+
+.explorer-static-tab {
+  background-color: v(tab-static-background-color);
+}
+
+.explorer-tab.selected {
+  background-color: v(tab-selected-background-color);
+}

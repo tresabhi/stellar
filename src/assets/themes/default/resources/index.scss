@@ -32,4 +32,9 @@
 
   // Color abstractions
   --color-recomended: #{$green-lighter};
+
+  // Tabs
+  --tab-static-background-color:     #{$black-light};
+  --tab-unselected-background-color: #{$black-light};
+  --tab-selected-background-color:   #{$accent-regular};
 }
