@@ -1,6 +1,7 @@
 @import '../../styles/index.scss';
 
 .unit-text-input {
+  min-width: 0px;
   color: white;
   text-align: center;
 
@@ -9,6 +10,6 @@
 
   border-radius: $border-radius-regular;
   margin: 0px $margin-smaller 0px 0px;
-  min-width: $tool-bar-text-feild-width;
+  width: $tool-bar-text-feild-width;
   height: $tool-bar-text-feild-height;
 }
