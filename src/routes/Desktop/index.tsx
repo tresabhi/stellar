@@ -3,7 +3,7 @@ import ToolBar from 'components/ToolBar';
 import EditingPanel from 'components/EditingPanel';
 import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
-import UnitTextBox from 'components/UnitTextBox';
+import UnitTextInput from 'components/UnitTextInput';
 
 // import '../../assets/themes/default/index.scss';
 // then import the theme
@@ -49,7 +49,7 @@ function Desktop() {
         <ToolBar.Button>
           <ZoomOutIcon />
         </ToolBar.Button>
-        <UnitTextBox defaultValue={100} suffix="%" />
+        <UnitTextInput defaultValue={100} suffix="%" />
         <ToolBar.Button>
           <GrabIcon />
         </ToolBar.Button>
@@ -58,11 +58,11 @@ function Desktop() {
         <ToolBar.StaticIcon>
           <GridIcon />
         </ToolBar.StaticIcon>
-        <UnitTextBox defaultValue={2} suffix="m" />
+        <UnitTextInput defaultValue={2} suffix="m" />
         <ToolBar.StaticIcon>
           <RotationIcon />
         </ToolBar.StaticIcon>
-        <UnitTextBox defaultValue={90} suffix="°" />
+        <UnitTextInput defaultValue={90} suffix="°" />
 
         <ToolBar.Seperator />
         <ToolBar.DropDownButton icon={<FuelCellIcon />} />

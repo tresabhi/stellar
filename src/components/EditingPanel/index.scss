@@ -3,10 +3,11 @@
 .editing-panel {
   width: 100vw;
   display: flex;
-  
+
+  // background-color: red;
+
   height: calc(
     100vh
-    - #{($tool-bar-height + v(foreground-panel-border))
-     }* 2
-  );
+    - (#{$tool-bar-height + $border-width-thin}) * 2
+  )
 }

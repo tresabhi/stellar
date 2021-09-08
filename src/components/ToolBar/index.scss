@@ -19,7 +19,7 @@
   align-items: center;
   display: flex;
 
-  color: v(foreground-panel-text-color);
+  color: v(button-flush-content-color);
   background-color: v(button-flush-background-color);
   font-family: v(font-family-regular);
 
@@ -34,6 +34,7 @@
 .tool-bar-button:hover,
 .tool-bar-drop-down-button-action:hover,
 .tool-bar-drop-down-button-more-options:hover {
+  color: v(button-flush-hover-content-color);
   background-color: v(button-flush-hover-background-color);
 }
 

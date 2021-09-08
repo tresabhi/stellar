@@ -4,7 +4,7 @@
 
 :root {
   // Foreground panel
-  --foreground-panel-text-color:       white;
+  --foreground-panel-text-color:       red;
   --foreground-panel-background-color: #{$black-regular};
   --foreground-panel-border-color:     #{$gray-dark};
 
@@ -21,8 +21,14 @@
   --scroll-bar-button-hover-background-color: #{$gray-lighter};
 
   // Buttons
-  --button-flush-background-color: #{$black-regular};
+  --button-flush-content-color:          white;
+  --button-flush-background-color:       #{$black-regular};
+  --button-flush-hover-content-color:    #{$accent-lighter};
   --button-flush-hover-background-color: #{$black-light};
+
+  // Text input
+  --input-content-color:    white;
+  --input-background-color: #{$black-dark};
 
   // Color abstractions
   --color-recomended: #{$green-lighter};

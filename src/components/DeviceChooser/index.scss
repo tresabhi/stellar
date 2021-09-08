@@ -9,7 +9,7 @@
 }
 
 .device-chooser-title {
-  color: v(foreground-panel-text-color);
+  color: v(button-flush-text-color);
   font-family: v(font-family-regular);
 }
 
@@ -33,7 +33,7 @@
   background-color: v(button-flush-background-color);
   font-size: $font-size-big;
   border-radius: $border-radius-regular;
-  color: v(foreground-panel-text-color);
+  color: v(button-flush-text-color);
 
   margin: $margin-regular;
 }
