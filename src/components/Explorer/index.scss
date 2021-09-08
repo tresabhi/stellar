@@ -4,7 +4,8 @@
   display: flex;
   flex-direction: column;
 
-  width: $explorer-width;
+  width: $explorer-left-width;
+
 }
 
 .explorer-container.left-side {
@@ -13,6 +14,7 @@
 
 .explorer-container.right-side {
   border-left: $foreground-panel-border;
+  width: $explorer-right-width;
 }
 
 .explorer-listing-container {
@@ -28,7 +30,8 @@
   height: $explorer-tab-height;
 }
 
-.explorer-part-listing {
+.explorer-part-listing,
+.explorer-property-listing {
   display: flex;
   align-items: center;
   color: white;
@@ -39,10 +42,11 @@
   font-family: v(font-family-regular);
 
   height: $explorer-listing-height;
-  padding: 0px $padding-regular 0px $padding-regular;
+  padding: 0px $padding-bigger 0px $padding-bigger;
 }
 
-.explorer-part-listing:hover {
+.explorer-part-listing:hover,
+.explorer-property-listing:hover {
   background-color: v(button-flush-hover-background-color);
 }
 
@@ -113,4 +117,22 @@
 
 .explorer-tab.selected {
   background-color: v(tab-selected-background-color);
+}
+
+.explorer-property-listing {}
+
+.explorer-property-listing-sub-properties-container {
+  height: 100%;
+  flex: 1;
+  align-items: center;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.explorer-sub-property-text-input {
+  margin-left: $margin-regular;
+}
+
+.explorer-sub-property-text-input>span {
+  margin-right: $margin-smaller;
 }

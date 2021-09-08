@@ -20,7 +20,8 @@ $foreground-panel-border: #{$border-width-thin solid v(foreground-panel-border-c
 $background-panel-border: #{$border-width-thin solid v(background-panel-border-color)};
 
 // Explorer
-$explorer-width: 240px;
+$explorer-left-width: 240px;
+$explorer-right-width: 320px;
 
 $explorer-tab-height: 34px;
 
