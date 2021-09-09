@@ -31,7 +31,8 @@ const Card: FC<ICard> = ({ href, text, recomended, children }) => {
 
 export default {
   Container,
+  Card,
+
   Title,
   List,
-  Card,
 };

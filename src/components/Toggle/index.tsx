@@ -8,6 +8,11 @@ interface IToggle {
 const Toggle: FC<IToggle> = ({ defaultOn }) => {
   const [state, setState] = useState(defaultOn);
 
+  // TODO: REMOVE THIS SOON
+  setInterval(() => {
+    setState(!state);
+  }, 1000);
+
   return (
     <button
       className={`

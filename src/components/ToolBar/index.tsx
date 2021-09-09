@@ -14,7 +14,8 @@ const Button: FC = ({ children }) => {
       className={`
         tool-bar-button
         ${typeof children === 'string' ? 'tool-bar-text-button' : ''}
-      `}>
+      `}
+    >
       {children}
     </button>
   );

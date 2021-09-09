@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-const PageContainer: FC = ({ children }) => {
+const PseudoContainer: FC = ({ children }) => {
   return children;
 };
 
-export default PageContainer;
+export default PseudoContainer;

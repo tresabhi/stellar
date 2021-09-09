@@ -78,10 +78,10 @@ function Desktop() {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.ListingContainer>
-            <Explorer.PartListing icon={<StructureIcon />}>4m Structural Piece</Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />}>Big Wheel</Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />}>Hawk Engine</Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />}>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<StructureIcon />} defaultName="4m Structural Piece"></Explorer.PartListing>
+            <Explorer.PartListing icon={<WheelIcon />} defaultName="Big Wheel"></Explorer.PartListing>
+            <Explorer.PartListing icon={<EngineIcon />} defaultName="Hawk Engine"></Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName='4m Fuel Cell'>4m Fuel Cell</Explorer.PartListing>
           </Explorer.ListingContainer>
         </Explorer.Container>
 
