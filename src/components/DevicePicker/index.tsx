@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import MetaData from 'metadata.json';
 import './index.scss';
 
 const Container: FC = ({ children }) => {
@@ -29,10 +30,25 @@ const Card: FC<ICard> = ({ href, text, recomended, children }) => {
   );
 };
 
+const Build: FC = () => {
+  let version = 'v' + (MetaData?.version?.join('.') || 'Unknown');
+  const unknownDomainName = 'Unkown Build';
+  const domainNames = {
+    'oxrqt.csb.app': 'Dev Sandbox',
+
+    'stellareditor.vercel.app': 'Release Build',
+    'stellarbeta.vercel.app': 'Beta Build',
+    'stellardev.vercel.app': 'Dev Build',
+  };
+
+  return <span className="device-picker-build">{version + ' - ' + ((domainNames as any)[window.location.hostname] ?? unknownDomainName)}</span>;
+};
+
 export default Object.assign({
   Container,
   Card,
 
   Title,
   List,
+  Build,
 });

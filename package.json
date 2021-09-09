@@ -1,5 +1,5 @@
 {
-  "name": "stellar-editor",
+  "name": "stellareditor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -61,5 +61,5 @@
     ]
   },
   "keywords": [],
-  "description": "Stellar - A Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator"
+  "description": "Stellar - A Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator\n\nThis sand box is used to code and commit to the dev branch (StellarEditor/StellarEditor)."
 }

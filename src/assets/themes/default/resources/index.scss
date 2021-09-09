@@ -4,13 +4,15 @@
 
 :root {
   // Foreground panel
-  --foreground-panel-text-color:       white;
-  --foreground-panel-background-color: #{$black-regular};
-  --foreground-panel-border-color:     #{$gray-dark};
+  --foreground-panel-text-color:             white;
+  --foreground-panel-unimportant-text-color: #{$gray-dark};
+  --foreground-panel-background-color:       #{$black-regular};
+  --foreground-panel-border-color:           #{$gray-dark};
 
-  --background-panel-text-color:       white;
-  --background-panel-background-color: #{$black-dark};
-  --background-panel-border-color:     #{$gray-regular};
+  --background-panel-text-color:             white;
+  --background-panel-unimportant-text-color: #{$gray-dark};
+  --background-panel-background-color:       #{$black-dark};
+  --background-panel-border-color:           #{$gray-regular};
 
   // Fonts
   --font-family-regular: 'Montserrat', 'Montserrat-Google-Regular', 'Sans-serif', 'Roboto', 'Arial';

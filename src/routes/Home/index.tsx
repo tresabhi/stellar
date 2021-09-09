@@ -19,6 +19,7 @@ const Home = () => {
             <MobileIcon />
           </DevicePicker.Card>
         </DevicePicker.List>
+        <DevicePicker.Build />
       </DevicePicker.Container>
     </PseudoContainer>
   );
