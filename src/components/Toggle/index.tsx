@@ -9,13 +9,13 @@ const Toggle: FC<IToggle> = ({ defaultOn }) => {
   const [state, setState] = useState(defaultOn);
 
   return (
-    <button className="toggle">
-      <div
-        className={`
-          toggle-dot
-          ${state ? 'on' : 'off'}
-        `}
-      />
+    <button
+      className={`
+        toggle
+        ${state ? 'on' : 'off'}
+      `}
+    >
+      <div className="toggle-dot" />
     </button>
   );
 };

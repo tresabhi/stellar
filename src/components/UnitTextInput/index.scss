@@ -8,8 +8,9 @@
   font-family: v(font-family-regular);
 
   border-radius: $border-radius-regular;
-  margin: 0px $margin-smaller 0px 0px;
-  width: $tool-bar-text-feild-width;
-  min-width: $tool-bar-text-feild-width;
-  height: $tool-bar-text-feild-height;
+  width: $unit-text-input-width;
+  height: $unit-text-input-height;
+  min-width: $unit-text-input-width;
+
+  padding: 0px;
 }

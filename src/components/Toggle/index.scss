@@ -1,12 +1,29 @@
+@import '../../styles/index.scss';
+
 .toggle {
-  width: 20px;
-  height: 10px;
-  background-color: red;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+
+  background-color: v(input-background-color);
+
+  padding: $padding-small;
+  border-radius: $border-radius-regular;
+  width: $toggle-width;
+  height: $toggle-height;
+}
+
+.toggle.on {
+  flex-direction: row-reverse;
+  
+  background-color: v(input-content-selected-color);
 }
 
 .toggle-dot {
+  background-color: v(input-content-color);
   display: block;
-  width: 10px;
-  height: 10px;
-  background-color: green;
+
+  border-radius: $border-radius-regular;
+  width: $toggle-dot-size;
+  height: $toggle-dot-size;
 }

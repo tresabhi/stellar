@@ -10,8 +10,12 @@ $tool-bar-seperator-height: 24px;
 $tool-bar-drop-down-button-more-options-width:  6px;
 $tool-bar-drop-down-button-more-options-height: 4px;
 
-$tool-bar-text-feild-width:  40px;
-$tool-bar-text-feild-height: 18px;
+$unit-text-input-width:  42px;
+$unit-text-input-height: 22px;
+
+$toggle-width:    42px;
+$toggle-height:   22px;
+$toggle-dot-size: 18px;
 
 // Foreground panels
 $foreground-panel-border: #{$border-width-thin solid v(foreground-panel-border-color)};

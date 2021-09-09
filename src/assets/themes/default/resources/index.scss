@@ -26,9 +26,10 @@
   --button-flush-hover-content-color:    #{$accent-lighter};
   --button-flush-hover-background-color: #{$black-light};
 
-  // Text input
-  --input-content-color:    white;
-  --input-background-color: #{$black-dark};
+  // Inputs in general
+  --input-content-color:          white;
+  --input-content-selected-color: #{$accent-regular};
+  --input-background-color:       #{$black-dark};
 
   // Color abstractions
   --color-recomended: #{$green-lighter};
