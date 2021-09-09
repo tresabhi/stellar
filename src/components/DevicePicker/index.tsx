@@ -34,7 +34,7 @@ const Build: FC = () => {
   let version = 'v' + (MetaData?.version?.join('.') || 'Unknown');
   const unknownDomainName = 'Unkown Build';
   const domainNames = {
-    'oxrqt.csb.app': 'Dev Sandbox',
+    'wddos.csb.app': 'Sandbox Build',
 
     'stellareditor.vercel.app': 'Release Build',
     'stellarbeta.vercel.app': 'Beta Build',
