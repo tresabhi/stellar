@@ -4,6 +4,7 @@ import EditingPanel from 'components/EditingPanel';
 import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
 import UnitTextInput from 'components/UnitTextInput';
+import Toggle from 'components/Toggle';
 
 // import '../../assets/themes/default/index.scss';
 // then import the theme
@@ -95,6 +96,7 @@ function Desktop() {
             <Explorer.PropertyListing subProperties={[<Explorer.SubPropertyTextInput defaultValue={0} suffix={'m'} name="X" />, <Explorer.SubPropertyTextInput defaultValue={0} suffix={'m'} name="Y" />]}>Position</Explorer.PropertyListing>
             <Explorer.PropertyListing subProperties={[<Explorer.SubPropertyTextInput defaultValue={1} suffix={'x'} name="X" />, <Explorer.SubPropertyTextInput defaultValue={1} suffix={'x'} name="Y" />]}>Scale</Explorer.PropertyListing>
             <Explorer.PropertyListing subProperties={[<Explorer.SubPropertyTextInput defaultValue={0} suffix={'°'} />]}>Rotation</Explorer.PropertyListing>
+            <Explorer.PropertyListing subProperties={[<Toggle defaultOn={true} />]}>Toggle</Explorer.PropertyListing>
           </Explorer.ListingContainer>
         </Explorer.Container>
       </EditingPanel>
