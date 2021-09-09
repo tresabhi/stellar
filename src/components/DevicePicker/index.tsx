@@ -29,10 +29,10 @@ const Card: FC<ICard> = ({ href, text, recomended, children }) => {
   );
 };
 
-export default {
-  Container: Container,
-  Card: Card,
+export default Object.assign({
+  Container,
+  Card,
 
-  Title: Title,
-  List: List,
-};
+  Title,
+  List,
+});

@@ -106,16 +106,16 @@ const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({ children, defaultValu
   );
 };
 
-export default {
-  Container: Container,
-  TabsContainer: TabsContainer,
-  ListingContainer: ListingContainer,
+export default Object.assign({
+  Container,
+  TabsContainer,
+  ListingContainer,
 
-  Tab: Tab,
-  StaticTab: StaticTab,
+  Tab,
+  StaticTab,
 
-  PartListing: PartListing,
-  PropertyListing: PropertyListing,
+  PartListing,
+  PropertyListing,
 
-  SubPropertyTextInput: SubPropertyTextInput,
-};
+  SubPropertyTextInput,
+});
