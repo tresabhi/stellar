@@ -48,9 +48,10 @@ const DropDownButton: FC<IDropDownButton> = ({ children, icon }) => {
 };
 
 export default {
-  Container,
-  Button,
-  Seperator,
-  StaticIcon,
-  DropDownButton,
+  Container: Container,
+
+  Button: Button,
+  Seperator: Seperator,
+  StaticIcon: StaticIcon,
+  DropDownButton: DropDownButton,
 };

@@ -30,9 +30,9 @@ const Card: FC<ICard> = ({ href, text, recomended, children }) => {
 };
 
 export default {
-  Container,
-  Card,
+  Container: Container,
+  Card: Card,
 
-  Title,
-  List,
+  Title: Title,
+  List: List,
 };
