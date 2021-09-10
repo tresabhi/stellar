@@ -69,14 +69,15 @@
 }
 
 .tool-bar-drop-down-button-action {
-  margin: 0px;
+  margin: 0px 0px 0px $margin-smaller;
 }
 
 .tool-bar-drop-down-button-more-options {
-  margin: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  margin: 0px $margin-smaller 0px 0px;
 }
 
 .tool-bar-drop-down-button-more-options>img,
