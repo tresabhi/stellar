@@ -7,11 +7,12 @@ interface IToggle {
 }
 const Toggle: FC<IToggle> = ({ defaultOn }) => {
   const [state, setState] = useState(defaultOn);
+  let trueState = defaultOn;
 
-  // TODO: REMOVE THIS SOON
-  setInterval(() => {
-    setState(!state);
-  }, 1000);
+  const handleClick = () => {
+    trueState = !trueState;
+    setState(trueState);
+  };
 
   return (
     <button
@@ -19,6 +20,7 @@ const Toggle: FC<IToggle> = ({ defaultOn }) => {
         toggle
         ${state ? 'on' : 'off'}
       `}
+      onClick={handleClick}
     >
       <div className="toggle-dot" />
     </button>
