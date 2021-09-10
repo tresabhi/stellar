@@ -57,7 +57,7 @@ interface IPropertyListing {
 }
 const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
   return (
-    <button className="explorer-property-listing">
+    <div className="explorer-property-listing">
       {/* text */}
       {children}
 
@@ -65,7 +65,7 @@ const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
         {/* sub properties */}
         {subProperties?.map((component) => component)}
       </div>
-    </button>
+    </div>
   );
 };
 
