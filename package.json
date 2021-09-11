@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-three/drei": "7.7.0",
     "@react-three/fiber": "7.0.6",
     "components": "^0.1.0",
     "node-sass": "^6.0.1",
@@ -44,11 +45,22 @@
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "keywords": [],
   "description": "Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator\n\nThis sandbox is used to commit to the dev branch."

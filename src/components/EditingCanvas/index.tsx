@@ -2,6 +2,7 @@ import { FC, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { Canvas, useFrame } from '@react-three/fiber';
 import 'react-dom';
+import { OrbitControls } from '@react-three/drei';
 
 import './index.scss';
 
@@ -16,13 +17,12 @@ const EditingCanvas = () => {
   };
 
   return (
-    <Canvas orthographic camera={{ zoom: 40, position: [0, 0, 100] }} className="editing-canvas">
-      <TempCyl position={[-2, 0, 0]} height={6} />
-      <TempCyl position={[2, 2, 0]} height={2} />
-      <TempCyl position={[4, -3, 0]} height={4} />
+    <Canvas orthographic camera={{ zoom: 4, position: [0, 0, 10] }} className="editing-canvas">
+      <OrbitControls enablePan={true} enableZoom={true} enableRotate={false} />
+      <TempCyl position={[2, -2, 0]} height={4} />
       <directionalLight position={[-0.5, 0, 5]} />
 
-      <gridHelper args={[100, 100, `white`, `gray`]} position={[0, 0, -100]} rotation={[90, 0, 0]} />
+      <gridHelper args={[100, 50, `white`, `gray`]} position={[0, 0, -100]} rotation={[(Math.PI / 180) * 90, 0, 0]} />
     </Canvas>
   );
 };
