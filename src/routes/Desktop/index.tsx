@@ -1,13 +1,10 @@
 import PseudoContainer from 'components/PseudoContainer';
 import ToolBar from 'components/ToolBar';
 import EditingPanel from 'components/EditingPanel';
-import Explorer from 'components/Explorer';
+// import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
 import UnitTextInput from 'components/UnitTextInput';
-import Toggle from 'components/Toggle';
-
-// import '../../assets/themes/default/index.scss';
-// then import the theme
+// import Toggle from 'components/Toggle';
 
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
