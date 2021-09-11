@@ -1,10 +1,10 @@
 import PseudoContainer from 'components/PseudoContainer';
 import ToolBar from 'components/ToolBar';
 import EditingPanel from 'components/EditingPanel';
-// import Explorer from 'components/Explorer';
+import Explorer from 'components/Explorer';
 import EditingCanvas from 'components/EditingCanvas';
 import UnitTextInput from 'components/UnitTextInput';
-// import Toggle from 'components/Toggle';
+import Toggle from 'components/Toggle';
 
 import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
@@ -70,7 +70,7 @@ function Desktop() {
       </ToolBar.Container>
 
       <EditingPanel>
-        {/* <Explorer.Container>
+        <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
@@ -78,13 +78,15 @@ function Desktop() {
             <Explorer.PartListing icon={<StructureIcon />} defaultName="4m Structural Piece"></Explorer.PartListing>
             <Explorer.PartListing icon={<WheelIcon />} defaultName="Big Wheel"></Explorer.PartListing>
             <Explorer.PartListing icon={<EngineIcon />} defaultName="Hawk Engine"></Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />} defaultName='4m Fuel Cell'>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="4m Fuel Cell">
+              4m Fuel Cell
+            </Explorer.PartListing>
           </Explorer.ListingContainer>
-        </Explorer.Container> */}
+        </Explorer.Container>
 
         <EditingCanvas />
 
-        {/* <Explorer.Container rightSide={true}>
+        <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
             <Explorer.Tab defaultSelected={true}>Properties</Explorer.Tab>
             <Explorer.Tab>Staging</Explorer.Tab>
@@ -96,7 +98,7 @@ function Desktop() {
             <Explorer.PropertyListing subProperties={[<Toggle defaultOn={true} />]}>Toggle On</Explorer.PropertyListing>
             <Explorer.PropertyListing subProperties={[<Toggle defaultOn={false} />]}>Toggle Off</Explorer.PropertyListing>
           </Explorer.ListingContainer>
-        </Explorer.Container> */}
+        </Explorer.Container>
       </EditingPanel>
     </PseudoContainer>
   );
