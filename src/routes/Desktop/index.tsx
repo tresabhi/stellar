@@ -70,23 +70,21 @@ function Desktop() {
       </ToolBar.Container>
 
       <EditingPanel>
-        <Explorer.Container>
+        {/* <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.ListingContainer>
-            <Explorer.PartListing icon={<StructureIcon />} defaultName="4m Structural Piece"></Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />} defaultName="Big Wheel"></Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />} defaultName="Hawk Engine"></Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="4m Fuel Cell">
-              4m Fuel Cell
-            </Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
           </Explorer.ListingContainer>
-        </Explorer.Container>
+        </Explorer.Container> */}
 
         <EditingCanvas />
 
-        <Explorer.Container rightSide={true}>
+        {/* <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
             <Explorer.Tab defaultSelected={true}>Properties</Explorer.Tab>
             <Explorer.Tab>Staging</Explorer.Tab>
@@ -98,7 +96,7 @@ function Desktop() {
             <Explorer.PropertyListing subProperties={[<Toggle defaultOn={true} />]}>Toggle On</Explorer.PropertyListing>
             <Explorer.PropertyListing subProperties={[<Toggle defaultOn={false} />]}>Toggle Off</Explorer.PropertyListing>
           </Explorer.ListingContainer>
-        </Explorer.Container>
+        </Explorer.Container> */}
       </EditingPanel>
     </PseudoContainer>
   );
