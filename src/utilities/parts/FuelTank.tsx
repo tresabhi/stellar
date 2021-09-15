@@ -1,10 +1,9 @@
 import { FC } from 'react';
+import _ from 'lodash';
 
 import root from './Root';
 
-const data = {
-  ...root.data,
-
+const data = _.merge(root.data, {
   n: 'Fuel Tank',
   N: {
     width_original: 2,
@@ -17,13 +16,10 @@ const data = {
     color_tex: '_',
     shape_tex: '_',
   },
-};
+});
 
 const Part: FC<{ overrideData: typeof data }> = ({ overrideData }) => {
-  let liveData = {
-    ...data,
-    ...overrideData,
-  };
+  let liveData = _.merge(data, overrideData);
 
   return (
     <mesh position={[liveData.N.width_original + liveData.p.x, liveData.N.height / -2 - liveData.p.y, 0]}>
