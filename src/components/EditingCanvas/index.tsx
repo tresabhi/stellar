@@ -1,17 +1,15 @@
-import { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import 'react-dom';
 import { OrbitControls } from '@react-three/drei';
 
-import FuelTank from '../../utilities/parts/FuelTank';
+import Part from 'components/Part';
 
 import './index.scss';
 
 const EditingCanvas = () => {
   return (
     <Canvas orthographic camera={{ zoom: 32, position: [0, 0, 10] }} className="editing-canvas">
-      {/* TO DO PROVIDING AN OVERRIDE IN SUB OBJECT REPLACES SUB OBJECT ||||| MERGE THEM INSTEAD */}
-      <FuelTank.Part />
+      <Part.FuelTank />
 
       <directionalLight position={[-0, 0, 5]} />
       <ambientLight intensity={0.1} />
