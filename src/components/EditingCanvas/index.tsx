@@ -15,7 +15,7 @@ const EditingCanvas = () => {
       <ambientLight intensity={0.1} />
 
       <OrbitControls enablePan={true} enableZoom={true} enableRotate={false} />
-      <gridHelper args={[100, 50, `white`, `gray`]} position={[0, 0, -100]} rotation={[(Math.PI / 180) * 90, 0, 0]} />
+      <gridHelper args={[100, 50, 'green', 'red']} position={[0, 0, -100]} rotation={[(Math.PI / 180) * 90, 0, 0]} />
     </Canvas>
   );
 };

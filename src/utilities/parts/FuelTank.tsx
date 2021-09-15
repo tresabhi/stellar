@@ -3,14 +3,14 @@ import { FC } from 'react';
 import root from './Root';
 
 const data = {
-  ...root,
+  ...root.data,
 
   n: 'Fuel Tank',
   N: {
     width_original: 2,
     width_a: 2,
     width_b: 2,
-    height: 1,
+    height: 2,
     fuel_percent: 1,
   },
   T: {
@@ -26,9 +26,9 @@ const Part: FC<{ overrideData: typeof data }> = ({ overrideData }) => {
   };
 
   return (
-    <mesh position={[1, -0.5, 0.5]}>
-      <cylinderGeometry />
-      <meshStandardMaterial />
+    <mesh position={[liveData.N.width_original + liveData.p.x, liveData.N.height / -2 - liveData.p.y, 0]}>
+      <cylinderGeometry args={[liveData.N.width_a, liveData.N.width_b, liveData.N.height, 24]} />
+      <meshStandardMaterial roughness={0.2} metalness={0.2} flatShading={true} />
     </mesh>
   );
 };
