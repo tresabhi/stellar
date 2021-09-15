@@ -18,8 +18,8 @@ const data = _.merge(root.data, {
   },
 });
 
-const Part: FC<{ overrideData: typeof data }> = ({ overrideData }) => {
-  let liveData = _.merge(data, overrideData);
+const Part: FC<{ override: typeof data }> = ({ override }) => {
+  let liveData = _.merge(data, override);
 
   return (
     <mesh position={[liveData.N.width_original + liveData.p.x, liveData.N.height / -2 - liveData.p.y, 0]}>
