@@ -12,6 +12,4 @@ const data = {
   t: '-Infinity',
 };
 
-export default {
-  data,
-};
+export default data;

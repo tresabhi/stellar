@@ -1,9 +1,10 @@
 import { FC } from 'react';
+import '@react-three/fiber';
 import _ from 'lodash';
 
-import root from './Root';
+import root from './root';
 
-const data = _.merge(root.data, {
+const data = _.merge(root, {
   n: 'Fuel Tank',
   N: {
     width_original: 2,
@@ -19,7 +20,7 @@ const data = _.merge(root.data, {
 });
 
 const Part: FC<{ override: typeof data }> = ({ override }) => {
-  let liveData = _.merge(data, override);
+  let liveData = _.merge(root, data, override);
 
   return (
     <mesh position={[liveData.N.width_original + liveData.p.x, liveData.N.height / -2 - liveData.p.y, 0]}>
@@ -35,7 +36,4 @@ const Part: FC<{ override: typeof data }> = ({ override }) => {
 //   </mesh>
 // );
 
-export default Object.assign({
-  Part,
-  data,
-});
+export default Part;
