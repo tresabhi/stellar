@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ReactComponent as MoreOptionsIcon } from 'assets/icons/more-options.svg';
+import { ReactComponent as MoreOptionsIcon } from '../../assets/icons/more-options.svg';
 
 import './index.scss';
 

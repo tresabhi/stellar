@@ -1,4 +1,4 @@
-import PseudoContainer from 'components/PseudoContainer';
+import PseudoContainer from '../../components/PseudoContainer';
 
 function Mobile() {
   return <PseudoContainer>Mobile Coming Soon...</PseudoContainer>;

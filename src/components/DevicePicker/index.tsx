@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import MetaData from 'metadata.json';
+import MetaData from '../../metadata.json';
 import './index.scss';
 
 const Container: FC = ({ children }) => {

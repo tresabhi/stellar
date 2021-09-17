@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import UnitTextInput from 'components/UnitTextInput';
+import UnitTextInput from '../UnitTextInput';
 
-import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
-import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
-import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
+import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
+import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 import './index.scss';
 

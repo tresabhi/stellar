@@ -3,8 +3,8 @@ import 'react-dom';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
-import Part from 'components/Part';
-import InfiniteGridHelper from 'components/InfiniteGridHelper';
+import Part from '../Part';
+import InfiniteGridHelper from '../InfiniteGridHelper';
 
 import './index.scss';
 
