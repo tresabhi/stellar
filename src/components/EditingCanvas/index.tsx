@@ -1,10 +1,8 @@
 import { Canvas } from '@react-three/fiber';
 import 'react-dom';
 import { OrbitControls } from '@react-three/drei';
-import * as THREE from 'three';
 
 import Part from '../Part';
-import InfiniteGridHelper from '../InfiniteGridHelper';
 
 import './index.scss';
 
@@ -18,8 +16,8 @@ const EditingCanvas = () => {
       <ambientLight intensity={0.1} />
 
       <OrbitControls enableDamping={false} enablePan={true} enableZoom={true} enableRotate={false} />
-
-      <InfiniteGridHelper distance={Math.pow(2, 12)} axes="yxz" size1={1} size2={2} />
+      <gridHelper args={[1000, 1000, '#b062f5', '#22272e']} rotation={[Math.PI / 2, 0, 0]} />
+      {/* <InfiniteGridHelper axes="yxz" size1={1} size2={2} /> */}
     </Canvas>
   );
 };

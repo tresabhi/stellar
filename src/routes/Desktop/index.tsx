@@ -20,6 +20,10 @@ import { ReactComponent as StructureIcon } from '../../assets/icons/structure.sv
 import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 
 function Desktop() {
+  const tempSpawner = () => {
+    alert('wow');
+  };
+
   return (
     <PseudoContainer>
       <ToolBar.Container>
@@ -63,14 +67,14 @@ function Desktop() {
         <UnitTextInput defaultValue={90} suffix="°" />
 
         <ToolBar.Seperator />
-        <ToolBar.DropDownButton icon={<FuelCellIcon />} />
+        <ToolBar.DropDownButton onClick={tempSpawner} icon={<FuelCellIcon />} />
         <ToolBar.DropDownButton icon={<EngineIcon />} />
         <ToolBar.DropDownButton icon={<StructureIcon />} />
         <ToolBar.DropDownButton icon={<WheelIcon />} />
       </ToolBar.Container>
 
       <EditingPanel>
-        {/* <Explorer.Container>
+        <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
@@ -80,7 +84,7 @@ function Desktop() {
             <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
             <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
           </Explorer.ListingContainer>
-        </Explorer.Container> */}
+        </Explorer.Container>
 
         <EditingCanvas />
 
