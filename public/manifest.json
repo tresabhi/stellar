@@ -8,6 +8,7 @@
 
   "theme_color": "#22272e",
   "background_color": "#22272e",
+  "orientation": "landscape",
 
   "icons": [
     {
