@@ -1,1 +1,1 @@
-alert('yolo');
+console.log('test');
