@@ -14,7 +14,8 @@ const Button: FC = ({ children }) => {
       className={`
         tool-bar-button
         ${typeof children === 'string' ? 'tool-bar-text-button' : ''}
-      `}>
+      `}
+    >
       {children}
     </button>
   );
@@ -35,9 +36,7 @@ interface IDropDownButton {
 const DropDownButton: FC<IDropDownButton> = ({ onClick, children, icon }) => {
   return (
     <div className="tool-bar-drop-down-button-container">
-      <button onClick={onClick} className="tool-bar-drop-down-button-action">
-        {icon}
-      </button>
+      <button className="tool-bar-drop-down-button-action">{icon}</button>
       <button className="tool-bar-drop-down-button-more-options">
         <MoreOptionsIcon />
       </button>
