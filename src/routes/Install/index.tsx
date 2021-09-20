@@ -4,7 +4,7 @@ const Install = () => {
   window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
     deferredPrompt = event;
-    window['showInstallPromotion']();
+    // window['showInstallPromotion']();
   });
 
   return <a href="https://nice.com/">Nice</a>;
