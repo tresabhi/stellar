@@ -13,6 +13,7 @@
 # remote editing
 /.codesandbox
 sandbox.config.json
+.replit
 
 # production
 /build

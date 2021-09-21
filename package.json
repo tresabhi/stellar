@@ -16,6 +16,9 @@
     "three": "^0.131.3",
     "three-stdlib": "2.4.0",
     "typescript": "^4.3.5",
+    "workbox-cacheable-response": "^6.3.0",
+    "workbox-cli": "^6.3.0",
+    "workbox-expiration": "^6.3.0",
     "workbox-precaching": "^6.3.0",
     "workbox-routing": "^6.3.0",
     "workbox-strategies": "^6.3.0"
@@ -40,11 +43,22 @@
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
-    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "keywords": [],
   "description": "Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator\n\nThis sandbox is used to commit to the dev branch."
