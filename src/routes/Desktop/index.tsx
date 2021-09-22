@@ -19,10 +19,11 @@ import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as StructureIcon } from '../../assets/icons/structure.svg';
 import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 
+import TempBlueprint from '../../blueprint.json';
+
 function Desktop() {
-  const tempSpawner = () => {
-    alert('wow');
-  };
+  // temoporary data
+  let data = TempBlueprint;
 
   return (
     <PseudoContainer>
@@ -67,14 +68,14 @@ function Desktop() {
         <UnitTextInput defaultValue={90} suffix="°" />
 
         <ToolBar.Seperator />
-        <ToolBar.DropDownButton onClick={tempSpawner} icon={<FuelCellIcon />} />
+        <ToolBar.DropDownButton icon={<FuelCellIcon />} />
         <ToolBar.DropDownButton icon={<EngineIcon />} />
         <ToolBar.DropDownButton icon={<StructureIcon />} />
         <ToolBar.DropDownButton icon={<WheelIcon />} />
       </ToolBar.Container>
 
       <EditingPanel>
-        <Explorer.Container>
+        {/* <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
@@ -84,9 +85,9 @@ function Desktop() {
             <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
             <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
           </Explorer.ListingContainer>
-        </Explorer.Container>
+        </Explorer.Container> */}
 
-        <EditingCanvas />
+        <EditingCanvas render={data.parts} />
 
         {/* <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>

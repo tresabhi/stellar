@@ -32,8 +32,8 @@ interface IPart {
 export const Part: FC<IPart> = ({ data }) => {
   return (
     <mesh position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
-      <cylinderGeometry args={[data.N.width_a / 2, data.N.width_b / 2, data.N.height, 24]} />
-      <meshStandardMaterial roughness={0.2} metalness={0.2} color={getRandomColor()} flatShading={true} />
+      <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24]} />
+      <meshStandardMaterial roughness={0.2} metalness={0.2} flatShading={true} />
     </mesh>
   );
 
