@@ -1,0 +1,63 @@
+[debug] [2021-09-21T17:32:33.972Z] ----------------------------------------------------------------------
+[debug] [2021-09-21T17:32:33.974Z] Command:       /home/sandbox/.nvm/versions/node/v14.17.6/bin/node /sandbox/node_modules/.bin/firebase login
+[debug] [2021-09-21T17:32:33.974Z] CLI Version:   9.18.0
+[debug] [2021-09-21T17:32:33.974Z] Platform:      linux
+[debug] [2021-09-21T17:32:33.974Z] Node Version:  v14.17.6
+[debug] [2021-09-21T17:32:33.975Z] Time:          Tue Sep 21 2021 17:32:33 GMT+0000 (Coordinated Universal Time)
+[debug] [2021-09-21T17:32:33.975Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=749598984&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-09-21T17:38:26.344Z] ----------------------------------------------------------------------
+[debug] [2021-09-21T17:38:26.345Z] Command:       /home/sandbox/.nvm/versions/node/v14.17.6/bin/node /sandbox/node_modules/.bin/firebase login
+[debug] [2021-09-21T17:38:26.346Z] CLI Version:   9.18.0
+[debug] [2021-09-21T17:38:26.346Z] Platform:      linux
+[debug] [2021-09-21T17:38:26.346Z] Node Version:  v14.17.6
+[debug] [2021-09-21T17:38:26.346Z] Time:          Tue Sep 21 2021 17:38:26 GMT+0000 (Coordinated Universal Time)
+[debug] [2021-09-21T17:38:26.346Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-09-21T17:38:26.350Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] i  Firebase optionally collects CLI usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[debug] [2021-09-21T17:38:27.155Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-09-21T17:38:27.155Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=1021562012&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-09-21T17:41:11.717Z] ----------------------------------------------------------------------
+[debug] [2021-09-21T17:41:11.718Z] Command:       /home/sandbox/.nvm/versions/node/v14.17.6/bin/node /sandbox/node_modules/.bin/firebase login
+[debug] [2021-09-21T17:41:11.718Z] CLI Version:   9.18.0
+[debug] [2021-09-21T17:41:11.719Z] Platform:      linux
+[debug] [2021-09-21T17:41:11.719Z] Node Version:  v14.17.6
+[debug] [2021-09-21T17:41:11.719Z] Time:          Tue Sep 21 2021 17:41:11 GMT+0000 (Coordinated Universal Time)
+[debug] [2021-09-21T17:41:11.719Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=579128248&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2021-09-21T17:43:27.035Z] ----------------------------------------------------------------------
+[debug] [2021-09-21T17:43:27.036Z] Command:       /home/sandbox/.nvm/versions/node/v14.17.6/bin/node /sandbox/node_modules/.bin/firebase login
+[debug] [2021-09-21T17:43:27.036Z] CLI Version:   9.18.0
+[debug] [2021-09-21T17:43:27.036Z] Platform:      linux
+[debug] [2021-09-21T17:43:27.036Z] Node Version:  v14.17.6
+[debug] [2021-09-21T17:43:27.036Z] Time:          Tue Sep 21 2021 17:43:27 GMT+0000 (Coordinated Universal Time)
+[debug] [2021-09-21T17:43:27.037Z] ----------------------------------------------------------------------
+[debug] 
+[info] i  Firebase optionally collects CLI usage and error reporting information to help improve our products. Data is collected in accordance with Google's privacy policy (https://policies.google.com/privacy) and is not used to identify you.
+ 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=1017171961&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
