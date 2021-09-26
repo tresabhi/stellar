@@ -1,3 +1,15 @@
 {
-  "version": [0, 1]
+  "version": [0, 1],
+  "builds": {
+    "2gigp.sse.codesandbox.io": "Sandbox Build",
+    "2gigp.csb.app": "Sandbox Build",
+
+    "stellareditor.vercel.app": "Release Build",
+    "stellarbeta.vercel.app": "Beta Build",
+    "stellardev.vercel.app": "Dev Build",
+
+    "stellarsfs.web.app": "Release Build",
+    "stellarbeta.web.app": "Beta Build",
+    "stellardev.web.app": "Dev Build"
+  }
 }

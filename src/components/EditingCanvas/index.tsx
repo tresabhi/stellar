@@ -19,7 +19,7 @@ const EditingCanvas: FC<IEditingCanvas> = ({ render }) => {
       <directionalLight position={[-0, 0, 5]} />
       <ambientLight intensity={0.1} />
 
-      <OrbitControls enableDamping={false} enablePan={true} enableZoom={true} enableRotate={true} />
+      <OrbitControls enableDamping={false} enablePan={true} enableZoom={true} enableRotate={false} />
       <gridHelper position={[0, 0, -100]} args={[1000, 1000, '#b062f5', '#22272e']} rotation={[Math.PI / 2, 0, 0]} />
       {/* <InfiniteGridHelper axes="yxz" size1={1} size2={2} /> */}
 
