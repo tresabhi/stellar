@@ -1,4 +1,6 @@
-interface Root {
+import '@react-three/fiber';
+
+export interface Type {
   n: string;
   p: {
     x: number;
@@ -12,4 +14,6 @@ interface Root {
   t: string;
 }
 
-export default Root;
+export const Part = () => {
+  return <mesh />;
+};

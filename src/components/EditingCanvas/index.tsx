@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import 'react-dom';
 import { OrbitControls } from '@react-three/drei';
 
-import Part from '../Part';
 import * as FuelTank from '../../parts/FuelTank';
 
 import './index.scss';

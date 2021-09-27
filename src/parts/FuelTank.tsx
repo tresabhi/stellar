@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import Root from './Root';
-import * as THREE from 'three';
+import { Mesh } from 'three';
+import { Type as Root } from './Root';
 import '@react-three/fiber';
 
 export interface Type extends Root {
@@ -18,22 +18,21 @@ export interface Type extends Root {
 }
 
 // ONLY FOR DEBUGGING PURPOSES
-const randomColor = () => {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return new THREE.Color(color);
-};
-
-const rad = (degrees: number) => degrees * (Math.PI / 180);
+// const randomColor = () => {
+//   var letters = '0123456789ABCDEF';
+//   var color = '#';
+//   for (var i = 0; i < 6; i++) {
+//     color += letters[Math.floor(Math.random() * 16)];
+//   }
+//   return new THREE.Color(color);
+// };
 
 interface IPart {
   data: Type;
 }
 export const Part: FC<IPart> = ({ data }) => {
   const bevel = 0.06;
+  const rotation = data.o.z * (Math.PI / 180);
 
   const materials = {
     flat: <meshBasicMaterial />,
@@ -56,7 +55,7 @@ export const Part: FC<IPart> = ({ data }) => {
 
     case 'Flat': {
       return (
-        <mesh rotation={[0, 0, rad(data.o.z)]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
+        <mesh rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 4, undefined, true]} />
           {materials.flat}
         </mesh>
@@ -79,7 +78,7 @@ export const Part: FC<IPart> = ({ data }) => {
     case '_':
     case 'Edges Faces': {
       return (
-        <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rad(data.o.z)]}>
+        <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rotation]}>
           <mesh>
             <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - bevel * 2), 24, undefined, true]} />
             {materials.faces}
@@ -89,7 +88,7 @@ export const Part: FC<IPart> = ({ data }) => {
             {materials.faces}
           </mesh>
           <mesh position={[0, (data.N.height / 2 - bevel / 2) * -1, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel) / 2, Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel * 2), Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
             {materials.faces}
           </mesh>
         </group>
@@ -97,10 +96,8 @@ export const Part: FC<IPart> = ({ data }) => {
     }
 
     case 'Edges Smooth': {
-      const edge = 0.1;
-
       return (
-        <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rad(data.o.z)]}>
+        <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rotation]}>
           <mesh>
             <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - bevel * 2), 24, undefined, true]} />
             {materials.smooth}
@@ -110,7 +107,7 @@ export const Part: FC<IPart> = ({ data }) => {
             {materials.smooth}
           </mesh>
           <mesh position={[0, (data.N.height / 2 - bevel / 2) * -1, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel) / 2, Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel * 2), Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
             {materials.smooth}
           </mesh>
         </group>
@@ -119,7 +116,7 @@ export const Part: FC<IPart> = ({ data }) => {
 
     case 'Flat Smooth': {
       return (
-        <mesh rotation={[0, 0, rad(data.o.z)]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
+        <mesh rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24, undefined, true]} />
           {materials.smooth}
         </mesh>
