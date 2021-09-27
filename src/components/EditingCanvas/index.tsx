@@ -16,8 +16,8 @@ const EditingCanvas: FC<IEditingCanvas> = ({ render }) => {
 
   return (
     <Canvas frameloop={'demand'} orthographic camera={{ zoom: 32, position: [0, 0, 10] }} className="editing-canvas">
-      <directionalLight position={[-0, 0, 5]} />
-      <ambientLight intensity={0.1} />
+      <directionalLight position={[-10, 20, 100]} />
+      <ambientLight intensity={0.5} />
 
       <OrbitControls enableDamping={false} enablePan={true} enableZoom={true} enableRotate={false} />
       <gridHelper position={[0, 0, -100]} args={[1000, 1000, '#b062f5', '#22272e']} rotation={[Math.PI / 2, 0, 0]} />
