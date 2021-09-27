@@ -33,23 +33,13 @@ interface IPart {
   data: Type;
 }
 export const Part: FC<IPart> = ({ data }) => {
-  // if (data.T.shape_tex === 'Flat Smooth') {
-  //   return (
-  //     <mesh position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
-  //       <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24, undefined, true]} />
-  //       <meshStandardMaterial roughness={0.2} metalness={0.2} flatShading={true} />
-  //     </mesh>
-  //   );
-  // } else {
-  //   return (
-  //     <mesh>
-  //       <cylinderGeometry />
-  //       <meshBasicMaterial />
-  //     </mesh>
-  //   );
-  // }
+  const bevel = 0.06;
 
-  const color = new THREE.Color('rgb(160, 160, 160)');
+  const materials = {
+    flat: <meshBasicMaterial />,
+    faces: <meshStandardMaterial color={'white'} roughness={0.8} metalness={0.8} flatShading={true} />,
+    smooth: <meshStandardMaterial color={'white'} roughness={0.8} metalness={0.4} flatShading={true} />,
+  };
 
   switch (data.T.shape_tex) {
     case 'Rivets': {
@@ -68,7 +58,7 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <mesh rotation={[0, 0, rad(data.o.z)]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24, undefined, true]} />
-          <meshBasicMaterial />
+          {materials.flat}
         </mesh>
       );
     }
@@ -85,28 +75,22 @@ export const Part: FC<IPart> = ({ data }) => {
       return <mesh />;
     }
 
+    default:
+    case '_':
     case 'Edges Faces': {
-      const edge = 0.1;
-      const material = <meshStandardMaterial color={color} roughness={0.5} metalness={0.5} flatShading={true} />;
-
       return (
         <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rad(data.o.z)]}>
-          {/* middle */}
           <mesh>
-            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - edge * 2), 24, undefined, true]} />
-            {material}
+            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - bevel * 2), 24, undefined, true]} />
+            {materials.faces}
           </mesh>
-
-          {/* top */}
-          <mesh position={[0, data.N.height / 2 - edge / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2 - edge / 2, data.N.width_a / 2, edge, 24, undefined, true]} />
-            {material}
+          <mesh position={[0, data.N.height / 2 - bevel / 2, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2 - bevel / 2, data.N.width_a / 2, bevel, 24, undefined, true]} />
+            {materials.faces}
           </mesh>
-
-          {/* bottom */}
-          <mesh position={[0, (data.N.height / 2 - edge / 2) * -1, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2 - edge / 2, edge, 24, undefined, true]} />
-            {material}
+          <mesh position={[0, (data.N.height / 2 - bevel / 2) * -1, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2 - bevel / 2, bevel, 24, undefined, true]} />
+            {materials.faces}
           </mesh>
         </group>
       );
@@ -114,26 +98,20 @@ export const Part: FC<IPart> = ({ data }) => {
 
     case 'Edges Smooth': {
       const edge = 0.1;
-      const material = <meshStandardMaterial color={color} roughness={0.2} metalness={0.2} flatShading={true} />;
 
       return (
         <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rad(data.o.z)]}>
-          {/* middle */}
           <mesh>
             <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - edge * 2), 24, undefined, true]} />
-            {material}
+            {materials.smooth}
           </mesh>
-
-          {/* top */}
           <mesh position={[0, data.N.height / 2 - edge / 2, 0]}>
             <cylinderGeometry args={[data.N.width_b / 2 - edge / 2, data.N.width_a / 2, edge, 24, undefined, true]} />
-            {material}
+            {materials.smooth}
           </mesh>
-
-          {/* bottom */}
           <mesh position={[0, (data.N.height / 2 - edge / 2) * -1, 0]}>
             <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2 - edge / 2, edge, 24, undefined, true]} />
-            {material}
+            {materials.smooth}
           </mesh>
         </group>
       );
@@ -143,20 +121,9 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <mesh rotation={[0, 0, rad(data.o.z)]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24, undefined, true]} />
-          <meshStandardMaterial color={color} roughness={0.2} metalness={0.2} flatShading={true} />
+          {materials.smooth}
         </mesh>
       );
     }
-
-    default: {
-      return <mesh />;
-    }
   }
-
-  // return (
-  //   <mesh position={[data.N.width_original + data.p.x, data.N.height / -2 - data.p.y, 0]}>
-  //     <cylinderGeometry />
-  //     <meshStandardMaterial />
-  //   </mesh>
-  // );
 };
