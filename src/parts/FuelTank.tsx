@@ -57,7 +57,7 @@ export const Part: FC<IPart> = ({ data }) => {
     case 'Flat': {
       return (
         <mesh rotation={[0, 0, rad(data.o.z)]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
-          <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24, undefined, true]} />
+          <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 4, undefined, true]} />
           {materials.flat}
         </mesh>
       );
