@@ -1,5 +1,5 @@
 const color = 'Color_White';
-const shape = 'Edge Faces';
+const shape = 'Rivets';
 
 export default Object.assign({
   center: 9,
@@ -168,6 +168,102 @@ export default Object.assign({
         width_original: 1,
         width_a: 1,
         width_b: 1,
+        height: 2,
+        fuel_percent: 1,
+      },
+      T: {
+        color_tex: color,
+        shape_tex: shape,
+      },
+    },
+    {
+      n: 'Fuel Tank',
+      p: {
+        x: -5.5,
+        y: -3,
+      },
+      o: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      t: '-Infinity',
+      N: {
+        width_original: 0.5,
+        width_a: 0.5,
+        width_b: 0.5,
+        height: 2,
+        fuel_percent: 1,
+      },
+      T: {
+        color_tex: color,
+        shape_tex: shape,
+      },
+    },
+    {
+      n: 'Fuel Tank',
+      p: {
+        x: -6,
+        y: 0,
+      },
+      o: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      t: '-Infinity',
+      N: {
+        width_original: 0.2,
+        width_a: 0.2,
+        width_b: 0.2,
+        height: 2,
+        fuel_percent: 1,
+      },
+      T: {
+        color_tex: color,
+        shape_tex: shape,
+      },
+    },
+    {
+      n: 'Fuel Tank',
+      p: {
+        x: -5,
+        y: 2,
+      },
+      o: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      t: '-Infinity',
+      N: {
+        width_original: 0.1,
+        width_a: 0.1,
+        width_b: 0.1,
+        height: 2,
+        fuel_percent: 1,
+      },
+      T: {
+        color_tex: color,
+        shape_tex: shape,
+      },
+    },
+    {
+      n: 'Fuel Tank',
+      p: {
+        x: -3,
+        y: 3,
+      },
+      o: {
+        x: 0,
+        y: 0,
+        z: 0,
+      },
+      t: '-Infinity',
+      N: {
+        width_original: 0,
+        width_a: 0,
+        width_b: 0,
         height: 2,
         fuel_percent: 1,
       },

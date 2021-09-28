@@ -19,11 +19,11 @@ import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as StructureIcon } from '../../assets/icons/structure.svg';
 import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 
-import TempBlueprint from '../../blueprint.json';
+import devBlueprint from '../../blueprints/fuelTankBenchmark';
 
 function Desktop() {
   // temoporary data
-  let data = TempBlueprint;
+  let data = devBlueprint;
 
   return (
     <PseudoContainer>
