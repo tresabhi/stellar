@@ -1,5 +1,5 @@
 const color = 'Color_White';
-const shape = 'Interstage';
+const shape = 'Interstage Full';
 
 export default Object.assign({
   center: 9,

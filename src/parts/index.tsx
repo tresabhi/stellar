@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Part as FuelTank } from './FuelTank';
 import { Part as Root } from './FuelTank';
 
@@ -14,4 +16,4 @@ const Components: any = {
 };
 
 export const getComponentNameFromPartName = (partName: string): string => PartComponentNames.get(partName) ?? 'Root';
-export const getComponentFromPartName = (partName: string) => Components[getComponentNameFromPartName(partName) ?? 'Root'];
+export const getComponentFromPartName = (partName: string): React.ReactElement => Components[getComponentNameFromPartName(partName) ?? 'Root'];

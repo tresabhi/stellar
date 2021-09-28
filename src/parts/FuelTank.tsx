@@ -38,8 +38,8 @@ export const Part: FC<IPart> = ({ data }) => {
   const rivetMargin = 0.04;
   const rivetCount = Math.floor(faces / 4);
   const rotation = data.o.z * (Math.PI / 180);
+  const rimHeight = 0.1;
   const rimSlopeHeight = 0.1;
-  const rimHeight = 0.3;
   const color = 'white';
 
   const materials = {
@@ -146,19 +146,19 @@ export const Part: FC<IPart> = ({ data }) => {
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
             {materials.faces}
           </mesh>
-          <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight - rimSlopeHeight * 2) / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - rivetMargin), Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 - rimHeight, 0]}>
+            <cylinderGeometry args={[lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.max(0, lerp(data.N.width_b, data.N.width_a, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / -2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[lerp(data.N.width_a, data.N.width_b, rimHeight / data.N.height / 1) / 2, data.N.width_a / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
             {materials.faces}
           </mesh>
-          <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight - rimSlopeHeight * 2) / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - rivetMargin), Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight) / -2 + rimHeight, 0]}>
+            <cylinderGeometry args={[Math.max(0, lerp(data.N.width_a, data.N.width_b, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), lerp(data.N.width_a, data.N.width_b, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
             {materials.faces}
           </mesh>
           {rivets}
