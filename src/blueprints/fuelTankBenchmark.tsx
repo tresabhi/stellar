@@ -1,5 +1,5 @@
 const color = 'Color_White';
-const shape = 'Rivets';
+const shape = 'Half Rivets';
 
 export default Object.assign({
   center: 9,
