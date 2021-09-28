@@ -118,7 +118,7 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <mesh rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24, undefined, true]} />
-          {materials.flat}
+          {materials.smooth}
         </mesh>
       );
     }
