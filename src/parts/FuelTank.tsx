@@ -27,6 +27,8 @@ export interface Type extends Root {
 //   return new THREE.Color(color);
 // };
 
+const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;
+
 interface IPart {
   data: Type;
 }
@@ -36,8 +38,8 @@ export const Part: FC<IPart> = ({ data }) => {
   const rivetMargin = 0.04;
   const rivetCount = Math.floor(faces / 4);
   const rotation = data.o.z * (Math.PI / 180);
-  const rimHeight = 0.1;
   const rimSlopeHeight = 0.1;
+  const rimHeight = 0.3;
   const color = 'white';
 
   const materials = {
@@ -116,12 +118,12 @@ export const Part: FC<IPart> = ({ data }) => {
             <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faces, undefined, true]} />
             {materials.faces}
           </mesh>
-          <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / 2, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2, lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
             {materials.faces}
           </mesh>
-          <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight - rimHeight * 2) / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - rivetMargin), Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 - rimHeight, 0]}>
+            <cylinderGeometry args={[lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.max(0, lerp(data.N.width_b, data.N.width_a, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
             {materials.faces}
           </mesh>
           {rivets}
@@ -130,7 +132,38 @@ export const Part: FC<IPart> = ({ data }) => {
     }
 
     case 'Interstage Full': {
-      return <mesh />;
+      const rivets = _.times(rivetCount, (index) => (
+        <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}>
+          <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 4, undefined, true]} />
+          {materials.faces}
+        </mesh>
+      ));
+
+      return (
+        <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
+          <mesh>
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faces, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / 2, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight - rimSlopeHeight * 2) / 2, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - rivetMargin), Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / -2, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight - rimSlopeHeight * 2) / 2, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - rivetMargin), Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          {rivets}
+        </group>
+      );
     }
 
     case 'Nozzle_4': {
