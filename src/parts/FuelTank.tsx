@@ -65,7 +65,22 @@ export const Part: FC<IPart> = ({ data }) => {
     }
 
     case 'Half Rivets': {
-      return <mesh />;
+      const rivets = _.times(rivetCount, (index) => (
+        <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]} position={[0, data.N.height / -4, 0]}>
+          <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height / 2, 4, undefined, true]} />
+          {materials.faces}
+        </mesh>
+      ));
+
+      return (
+        <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
+          <mesh>
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faces, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          {rivets}
+        </group>
+      );
     }
 
     case 'Strut': {
