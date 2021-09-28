@@ -76,8 +76,12 @@ export const Part: FC<IPart> = ({ data }) => {
 
       return (
         <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
-          <mesh>
-            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faces, undefined, true]} />
+          <mesh position={[0, data.N.height / -4, 0]}>
+            <cylinderGeometry args={[Math.max(0, (data.N.width_b + data.N.width_a) / 4 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height / 2, faces, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          <mesh position={[0, data.N.height / 4, 0]}>
+            <cylinderGeometry args={[data.N.width_b / 2, (data.N.width_b + data.N.width_a) / 4, data.N.height / 2, faces, undefined, true]} />
             {materials.faces}
           </mesh>
           {rivets}
