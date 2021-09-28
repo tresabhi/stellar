@@ -88,7 +88,7 @@ export const Part: FC<IPart> = ({ data }) => {
             {materials.faces}
           </mesh>
           <mesh position={[0, (data.N.height / 2 - bevel / 2) * -1, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel * 2), Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel / 2), Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
             {materials.faces}
           </mesh>
         </group>
@@ -107,7 +107,7 @@ export const Part: FC<IPart> = ({ data }) => {
             {materials.smooth}
           </mesh>
           <mesh position={[0, (data.N.height / 2 - bevel / 2) * -1, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel * 2), Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, Math.max(0, data.N.width_a / 2 - bevel / 2), Math.min(bevel, data.N.height / 2), 24, undefined, true]} />
             {materials.smooth}
           </mesh>
         </group>
@@ -118,7 +118,7 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <mesh rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, 24, undefined, true]} />
-          {materials.smooth}
+          {materials.flat}
         </mesh>
       );
     }
