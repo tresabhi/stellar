@@ -33,13 +33,22 @@ interface IPart {
   data: Type;
 }
 export const Part: FC<IPart> = ({ data }) => {
-  const faces = 24;
+  const faceCount = 24;
+
   const bevelMargin = 0.1;
+
   const rivetMargin = 0.04;
-  const rivetCount = Math.floor(faces / 4);
+  const rivetCount = Math.floor(faceCount / 4);
+
   const rotation = data.o.z * (Math.PI / 180);
+
   const rimHeight = 0.1;
   const rimSlopeHeight = 0.1;
+
+  const nozzlesPerMeter = 3;
+  const nozzleHeight = 0.1;
+  const nozzleOffset = 1 / 6;
+
   const color = 'white';
 
   const materials = {
@@ -60,7 +69,7 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <mesh>
-            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faces, undefined, true]} />
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           {rivets}
@@ -79,11 +88,11 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <mesh position={[0, data.N.height / -4, 0]}>
-            <cylinderGeometry args={[Math.max(0, (data.N.width_b + data.N.width_a) / 4 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height / 2, faces, undefined, true]} />
+            <cylinderGeometry args={[Math.max(0, (data.N.width_b + data.N.width_a) / 4 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height / 2, faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, data.N.height / 4, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, (data.N.width_b + data.N.width_a) / 4, data.N.height / 2, faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, (data.N.width_b + data.N.width_a) / 4, data.N.height / 2, faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           {rivets}
@@ -115,15 +124,15 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <mesh>
-            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faces, undefined, true]} />
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimHeight), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 - rimHeight, 0]}>
-            <cylinderGeometry args={[lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.max(0, lerp(data.N.width_b, data.N.width_a, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.max(0, lerp(data.N.width_b, data.N.width_a, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), Math.min(data.N.height, rimSlopeHeight), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           {rivets}
@@ -142,23 +151,23 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
           <mesh>
-            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faces, undefined, true]} />
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / 2, 0]}>
-            <cylinderGeometry args={[data.N.width_b / 2, lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimHeight), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 - rimHeight, 0]}>
-            <cylinderGeometry args={[lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.max(0, lerp(data.N.width_b, data.N.width_a, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[lerp(data.N.width_b, data.N.width_a, rimHeight / data.N.height / 1) / 2, Math.max(0, lerp(data.N.width_b, data.N.width_a, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), Math.min(data.N.height, rimSlopeHeight), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimHeight) / -2, 0]}>
-            <cylinderGeometry args={[lerp(data.N.width_a, data.N.width_b, rimHeight / data.N.height / 1) / 2, data.N.width_a / 2, Math.min(data.N.height, rimHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[lerp(data.N.width_a, data.N.width_b, rimHeight / data.N.height / 1) / 2, data.N.width_a / 2, Math.min(data.N.height, rimHeight), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height, data.N.height - rimSlopeHeight) / -2 + rimHeight, 0]}>
-            <cylinderGeometry args={[Math.max(0, lerp(data.N.width_a, data.N.width_b, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), lerp(data.N.width_a, data.N.width_b, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimSlopeHeight), faces, undefined, true]} />
+            <cylinderGeometry args={[Math.max(0, lerp(data.N.width_a, data.N.width_b, (rimHeight + rimSlopeHeight) / data.N.height / 1) / 2 - rivetMargin), lerp(data.N.width_a, data.N.width_b, rimHeight / data.N.height / 1) / 2, Math.min(data.N.height, rimSlopeHeight), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           {rivets}
@@ -167,7 +176,29 @@ export const Part: FC<IPart> = ({ data }) => {
     }
 
     case 'Nozzle_4': {
-      return <mesh />;
+      const nozzleCount = Math.floor(data.N.height * nozzlesPerMeter);
+      const nozzles = _.times(nozzleCount, (index) => (
+        <group position={[0, (index / nozzleCount) * data.N.height - data.N.height / 2 + nozzleOffset, 0]}>
+          <mesh position={[0, nozzleHeight / 2, 0]}>
+            <cylinderGeometry args={[Math.max(0, lerp(data.N.width_a, data.N.width_b, index / nozzleCount + (nozzleHeight / 2 + nozzleOffset) / data.N.height) / 2 - rivetMargin), lerp(data.N.width_a, data.N.width_b, index / nozzleCount + nozzleOffset / data.N.height) / 2, nozzleHeight / 2, faceCount, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          <mesh>
+            <cylinderGeometry args={[lerp(data.N.width_a, data.N.width_b, index / nozzleCount + nozzleOffset / data.N.height) / 2, Math.max(0, lerp(data.N.width_a, data.N.width_b, index / nozzleCount - (nozzleHeight / 2 - nozzleOffset) / data.N.height) / 2 - rivetMargin), nozzleHeight / 2, faceCount, undefined, true]} />
+            {materials.faces}
+          </mesh>
+        </group>
+      ));
+
+      return (
+        <group rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
+          <mesh>
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - rivetMargin), Math.max(0, data.N.width_a / 2 - rivetMargin), data.N.height, faceCount, undefined, true]} />
+            {materials.faces}
+          </mesh>
+          {nozzles}
+        </group>
+      );
     }
 
     default:
@@ -176,15 +207,15 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rotation]}>
           <mesh>
-            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - bevelMargin * 2), faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - bevelMargin * 2), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.max(data.N.height / 4, (data.N.height - bevelMargin) / 2), 0]}>
-            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - bevelMargin), data.N.width_b / 2, Math.min(bevelMargin, data.N.height / 2), faces, undefined, true]} />
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - bevelMargin), data.N.width_b / 2, Math.min(bevelMargin, data.N.height / 2), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
           <mesh position={[0, Math.min(data.N.height / -4, (data.N.height - bevelMargin) / -2), 0]}>
-            <cylinderGeometry args={[data.N.width_a / 2, Math.max(0, data.N.width_a / 2 - bevelMargin), Math.min(bevelMargin, data.N.height / 2), faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_a / 2, Math.max(0, data.N.width_a / 2 - bevelMargin), Math.min(bevelMargin, data.N.height / 2), faceCount, undefined, true]} />
             {materials.faces}
           </mesh>
         </group>
@@ -195,15 +226,15 @@ export const Part: FC<IPart> = ({ data }) => {
       return (
         <group position={[data.p.x, data.p.y + data.N.height / 2, 0]} rotation={[0, 0, rotation]}>
           <mesh>
-            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - bevelMargin * 2), faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, Math.max(0, data.N.height - bevelMargin * 2), faceCount, undefined, true]} />
             {materials.smooth}
           </mesh>
           <mesh position={[0, Math.max(data.N.height / 4, (data.N.height - bevelMargin) / 2), 0]}>
-            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - bevelMargin), data.N.width_b / 2, Math.min(bevelMargin, data.N.height / 2), faces, undefined, true]} />
+            <cylinderGeometry args={[Math.max(0, data.N.width_b / 2 - bevelMargin), data.N.width_b / 2, Math.min(bevelMargin, data.N.height / 2), faceCount, undefined, true]} />
             {materials.smooth}
           </mesh>
           <mesh position={[0, Math.min(data.N.height / -4, (data.N.height - bevelMargin) / -2), 0]}>
-            <cylinderGeometry args={[data.N.width_a / 2, Math.max(0, data.N.width_a / 2 - bevelMargin), Math.min(bevelMargin, data.N.height / 2), faces, undefined, true]} />
+            <cylinderGeometry args={[data.N.width_a / 2, Math.max(0, data.N.width_a / 2 - bevelMargin), Math.min(bevelMargin, data.N.height / 2), faceCount, undefined, true]} />
             {materials.smooth}
           </mesh>
         </group>
@@ -213,7 +244,7 @@ export const Part: FC<IPart> = ({ data }) => {
     case 'Flat Smooth': {
       return (
         <mesh rotation={[0, 0, rotation]} position={[data.p.x, data.p.y + data.N.height / 2, 0]}>
-          <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, faces, undefined, true]} />
+          <cylinderGeometry args={[data.N.width_b / 2, data.N.width_a / 2, data.N.height, faceCount, undefined, true]} />
           {materials.smooth}
         </mesh>
       );
