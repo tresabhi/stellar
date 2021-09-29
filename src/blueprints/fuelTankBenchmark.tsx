@@ -1,5 +1,6 @@
 const color = 'Color_White';
-const shape = 'Nozzle_4';
+
+const shape = 'Rivets';
 
 export default Object.assign({
   center: 9,
