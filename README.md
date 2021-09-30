@@ -1,22 +1,27 @@
-# ![](https://i.imgur.com/1CQqq9m.png)
+# ![](./public/favicon-32x32.png) Stellar Editor
 
-**Lightweight, Open Source, Fluent** blueprint editor for [Spaceflight Simulator](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator)
+Lightweight, Open Source, and Fluent blueprint editor for Spaceflight Simulator.
 
 ![](https://i.imgur.com/nWJzRLA.png)
 
 ## About
 
-This open source tool allows anyone to create complex craft designs visually through the help of blueprint editing. This tool is designed for the game [Spaceflight Simulator](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator), based on the many [open source technologies](#main-technologies-used).
+Stellar Editor allows for anyone to make custom blueprints with extensive customization without having any knowledge of blueprint editing. Beauty, performance, agility, it's all in here.
 
-## Main Technologies Used
+## Tech Inside
 
-- [React](https://reactjs.org/)
-- [Typescript](https://www.typescriptlang.org/)
-
-## Getting a hold of it yourself
-
-- [Website](http://coolabhi1290.github.io/Stellar-Editor) (not available yet)
-- UWP App (not available yet)
+- **Framework**: React (create-react-app)
+- **Languages:** - Typescript (XML) - SASS (scss)
 
 ## Compatibility
-*coming soon*
+
+**Disclaimer:** Stellar Editor _might work on unsupported devices_ (anything not listed below), but it's not guaranteed. Don't expect patches for issues on unsupported devices.
+**Rule of thumb:** if it runs Chrome, it runs Stellar Editor
+
+- **Operating System:** - Windows 7+ - OS X/macOS 10.11+ - Linux - Ubuntu 18.04+ - Debian 10+ - openSUSE 15.2+ - Fedora Linux 32+ - Android 5+ - iOS 12+ (Chrome PWA) - iOS 11+ (Safari PWA)
+
+## Contributing
+
+Things to keep in mind
+
+ADD DISCORD SERVER TO CODE OF CONDUCT
