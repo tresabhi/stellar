@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-A list of supported Stellar Editor versions can be found [here](./docs/supported-versions.md).
+A list of supported Stellar Editor versions can be found [here](./docs/supported_versions.md).
 
 ## Reporting a Vulnerability
 
