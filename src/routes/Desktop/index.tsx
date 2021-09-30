@@ -23,10 +23,7 @@ import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 import devBlueprint from '../../blueprints/shapeAndTextures1.json';
 
 function Desktop() {
-  // temoporary data
   let data = devBlueprint;
-
-  // let tbjson = new Tbjson();
 
   return (
     <PseudoContainer>
