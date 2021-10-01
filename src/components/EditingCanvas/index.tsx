@@ -3,17 +3,19 @@ import { Canvas } from '@react-three/fiber';
 import 'react-dom';
 import { OrbitControls } from '@react-three/drei';
 
-import * as FuelTank from '../../parts/FuelTank';
+// import * as FuelTank from '../../parts/FuelTank';\
+import * as Part from '../../parts/index';
 
 import './index.scss';
 
 interface IEditingCanvas {
-  render: Array<FuelTank.Type>;
+  render: Array<any>;
 }
 const EditingCanvas: FC<IEditingCanvas> = ({ render }) => {
-  let partsJsx = render.map((part) => (
-    <FuelTank.Part key={Math.random()} data={part} />
-  ));
+  let partsJsx = render.map((part) => {
+    const PartComponent = Part.getComponentFromPartName(part.n, true);
+    return <PartComponent data={part} />;
+  });
 
   return (
     <Canvas

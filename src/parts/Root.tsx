@@ -14,6 +14,10 @@ export interface Type {
   t: string;
 }
 
-export const Part = () => {
+export const HighPoly = () => {
+  return <mesh />;
+};
+
+export const LowPoly = () => {
   return <mesh />;
 };

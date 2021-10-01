@@ -32,7 +32,13 @@ const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;
 interface IPart {
   data: Type;
 }
-export const Part: FC<IPart> = ({ data }) => {
+
+export const LowPoly: FC<IPart> = () => {
+  return <mesh />;
+};
+
+export const HighPoly: FC<IPart> = ({ data }) => {
+  // alert(JSON.stringify(data));
   const faceCount = 24;
 
   const bevelMargin = 0.1;
