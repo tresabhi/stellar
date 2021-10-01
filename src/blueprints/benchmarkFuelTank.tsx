@@ -1,6 +1,6 @@
 const color = 'Color_White';
-
 const shape = 'Strut';
+const scale = [1, 1];
 
 export default Object.assign({
   center: 9,
@@ -16,8 +16,8 @@ export default Object.assign({
         y: 0,
       },
       o: {
-        x: 1,
-        y: 1,
+        x: scale[0],
+        y: scale[1],
         z: 0,
       },
       t: '-Infinity',
@@ -40,8 +40,8 @@ export default Object.assign({
         y: 0,
       },
       o: {
-        x: 1,
-        y: 1,
+        x: scale[0],
+        y: scale[1],
         z: 0,
       },
       t: '-Infinity',
@@ -64,8 +64,8 @@ export default Object.assign({
         y: 3,
       },
       o: {
-        x: 1,
-        y: 1,
+        x: scale[0],
+        y: scale[1],
         z: 0,
       },
       t: '-Infinity',
@@ -88,8 +88,8 @@ export default Object.assign({
         y: 0,
       },
       o: {
-        x: 1,
-        y: 1,
+        x: scale[0],
+        y: scale[1],
         z: 0,
       },
       t: '-Infinity',
@@ -112,8 +112,8 @@ export default Object.assign({
         y: -3,
       },
       o: {
-        x: 1,
-        y: 1,
+        x: scale[0],
+        y: scale[1],
         z: 0,
       },
       t: '-Infinity',
@@ -136,8 +136,8 @@ export default Object.assign({
         y: -3,
       },
       o: {
-        x: 1,
-        y: 1,
+        x: scale[0],
+        y: scale[1],
         z: 45,
       },
       t: '-Infinity',
