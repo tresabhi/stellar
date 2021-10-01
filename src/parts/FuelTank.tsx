@@ -38,7 +38,6 @@ export const LowPoly: FC<IPart> = () => {
 };
 
 export const HighPoly: FC<IPart> = ({ data }) => {
-  // alert(JSON.stringify(data));
   const faceCount = 24;
 
   const bevelMargin = 0.1;
@@ -97,6 +96,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
 
       return (
         <group
+          scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
@@ -140,6 +140,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
 
       return (
         <group
+          scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
@@ -180,6 +181,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
     case 'Flat': {
       return (
         <mesh
+          scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
@@ -217,6 +219,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
 
       return (
         <group
+          scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
@@ -313,6 +316,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
 
       return (
         <group
+          scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
@@ -517,6 +521,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
 
       return (
         <group
+          scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
@@ -544,6 +549,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
     case 'Edges Faces': {
       return (
         <group
+          scale={[data.o.x, data.o.y, 1]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
           rotation={[0, 0, rotation]}
         >
@@ -605,6 +611,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
     case 'Edges Smooth': {
       return (
         <group
+          scale={[data.o.x, data.o.y, 1]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
           rotation={[0, 0, rotation]}
         >
@@ -666,6 +673,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
     case 'Flat Smooth': {
       return (
         <mesh
+          scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
