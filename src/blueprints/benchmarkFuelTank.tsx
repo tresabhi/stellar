@@ -3,7 +3,7 @@ const shape = 'Strut';
 const scale = [1, 1];
 
 export default Object.assign({
-  center: 9,
+  center: 0,
   offset: {
     x: 0,
     y: 0,

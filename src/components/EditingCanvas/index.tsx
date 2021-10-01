@@ -9,19 +9,21 @@ import * as Part from '../../parts/index';
 import './index.scss';
 
 interface IEditingCanvas {
-  render: Array<any>;
+  center: number;
+  offset: { x: number; y: number };
+  parts: Array<any>;
 }
-const EditingCanvas: FC<IEditingCanvas> = ({ render }) => {
-  let partsJsx = render.map((part) => {
+const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
+  let partsJsx = parts.map((part) => {
     const PartComponent = Part.getComponentFromPartName(part.n, true);
-    return <PartComponent data={part} />;
+    return <PartComponent data={part} offset={offset} />;
   });
 
   return (
     <Canvas
       frameloop={'demand'}
       orthographic
-      camera={{ zoom: 32, position: [0, 0, 10] }}
+      camera={{ zoom: 16, position: [center * -1, 0, 100] }}
       className="editing-canvas"
     >
       <directionalLight position={[-20, 20, 100]} />
@@ -34,7 +36,7 @@ const EditingCanvas: FC<IEditingCanvas> = ({ render }) => {
         enableRotate={false}
       />
       <gridHelper
-        position={[0, 0, -100]}
+        position={[center, 0, -100]}
         args={[1000, 1000, '#b062f5', '#22272e']}
         rotation={[Math.PI / 2, 0, 0]}
       />

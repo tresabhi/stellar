@@ -31,13 +31,19 @@ const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;
 
 interface IPart {
   data: Type;
+  offset: { x: number; y: number };
 }
 
 export const LowPoly: FC<IPart> = () => {
   return <mesh />;
 };
 
-export const HighPoly: FC<IPart> = ({ data }) => {
+export const HighPoly: FC<IPart> = ({ data, offset }) => {
+  const position = {
+    x: data.p.x + offset.x,
+    y: data.p.y + offset.y,
+  };
+
   const faceCount = 24;
 
   const bevelMargin = 0.1;
@@ -98,7 +104,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -142,7 +148,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
         >
           <mesh position={[0, data.N.height / -4, 0]}>
             <cylinderGeometry
@@ -183,7 +189,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
         <mesh
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
         >
           <cylinderGeometry
             args={[
@@ -221,7 +227,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -318,7 +324,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -523,7 +529,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -550,7 +556,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
           rotation={[0, 0, rotation]}
         >
           <mesh>
@@ -612,7 +618,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
           rotation={[0, 0, rotation]}
         >
           <mesh>
@@ -675,7 +681,7 @@ export const HighPoly: FC<IPart> = ({ data }) => {
         <mesh
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
+          position={[position.x, position.y + data.N.height / 2, 0]}
         >
           <cylinderGeometry
             args={[

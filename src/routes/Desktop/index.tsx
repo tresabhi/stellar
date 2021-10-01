@@ -20,9 +20,10 @@ import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as StructureIcon } from '../../assets/icons/structure.svg';
 import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 
-import devBlueprint from '../../blueprints/fuelTankBenchmark';
+import devBlueprint from '../../blueprints/shapeAndTextures1.json';
 
 function Desktop() {
+  // temporarily this blueprint
   let data = devBlueprint;
 
   return (
@@ -87,7 +88,11 @@ function Desktop() {
           </Explorer.ListingContainer>
         </Explorer.Container> */}
 
-        <EditingCanvas render={data.parts} />
+        <EditingCanvas
+          center={data.center}
+          offset={data.offset}
+          parts={data.parts}
+        />
 
         {/* <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
