@@ -8,7 +8,12 @@ interface IUnitTextInput {
   suffix?: string;
   isolated?: boolean;
 }
-const UnitTextInput: FC<IUnitTextInput> = ({ defaultValue, prefix = '', suffix = '', isolated = true }) => {
+const UnitTextInput: FC<IUnitTextInput> = ({
+  defaultValue,
+  prefix = '',
+  suffix = '',
+  isolated = true,
+}) => {
   // functionality coming soon...
   return (
     <input

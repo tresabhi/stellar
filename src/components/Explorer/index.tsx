@@ -43,7 +43,10 @@ const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
       {icon}
 
       {/* text */}
-      <input className="explorer-part-listing-input" defaultValue={defaultName} />
+      <input
+        className="explorer-part-listing-input"
+        defaultValue={defaultName}
+      />
 
       <DeleteIcon className="explorer-part-listing-icon" />
       <LockIcon className="explorer-part-listing-icon" />
@@ -97,11 +100,21 @@ interface ISubPropertyTextInput {
   suffix?: string;
   name?: string;
 }
-const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({ children, defaultValue, prefix, suffix, name }) => {
+const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
+  children,
+  defaultValue,
+  prefix,
+  suffix,
+  name,
+}) => {
   return (
     <div className="explorer-sub-property-text-input">
       <span>{name || children}</span>
-      <UnitTextInput defaultValue={defaultValue} suffix={suffix} prefix={prefix} />
+      <UnitTextInput
+        defaultValue={defaultValue}
+        suffix={suffix}
+        prefix={prefix}
+      />
     </div>
   );
 };

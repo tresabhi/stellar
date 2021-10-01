@@ -15,5 +15,9 @@ const Components: any = {
   FuelTank,
 };
 
-export const getComponentNameFromPartName = (partName: string): string => PartComponentNames.get(partName) ?? 'Root';
-export const getComponentFromPartName = (partName: string): React.ReactElement => Components[getComponentNameFromPartName(partName) ?? 'Root'];
+export const getComponentNameFromPartName = (partName: string): string =>
+  PartComponentNames.get(partName) ?? 'Root';
+export const getComponentFromPartName = (
+  partName: string,
+): React.ReactElement =>
+  Components[getComponentNameFromPartName(partName) ?? 'Root'];

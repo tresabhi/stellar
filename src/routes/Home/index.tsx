@@ -12,7 +12,11 @@ const Home = () => {
       <DevicePicker.Container>
         <DevicePicker.Title>Which Device Are You On?</DevicePicker.Title>
         <DevicePicker.List>
-          <DevicePicker.Card recomended={isDesktop} href="desktop" text="Desktop">
+          <DevicePicker.Card
+            recomended={isDesktop}
+            href="desktop"
+            text="Desktop"
+          >
             <DesktopIcon />
           </DevicePicker.Card>
           <DevicePicker.Card recomended={isMobile} href="mobile" text="Mobile">
