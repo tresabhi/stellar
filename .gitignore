@@ -19,6 +19,8 @@ sandbox.config.json
 
 # production
 /build
+firebase.json
+/.firebase
 
 # misc
 .DS_Store
