@@ -1,6 +1,6 @@
 const color = 'Color_White';
 
-const shape = 'Rivets';
+const shape = 'Strut';
 
 export default Object.assign({
   center: 9,
