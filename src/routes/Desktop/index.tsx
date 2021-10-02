@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import PseudoContainer from '../../components/PseudoContainer';
 import ToolBar from '../../components/ToolBar';
 import EditingPanel from '../../components/EditingPanel';
-import Explorer from '../../components/Explorer';
+// import Explorer from '../../components/Explorer';
 import EditingCanvas from '../../components/EditingCanvas';
 import UnitTextInput from '../../components/UnitTextInput';
-import Toggle from '../../components/Toggle';
+// import Toggle from '../../components/Toggle';
 
 import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from '../../assets/icons/undo.svg';
@@ -88,11 +87,7 @@ function Desktop() {
           </Explorer.ListingContainer>
         </Explorer.Container> */}
 
-        <EditingCanvas
-          center={data.center}
-          offset={data.offset}
-          parts={data.parts}
-        />
+        <EditingCanvas center={data.center} offset={data.offset} parts={data.parts} />
 
         {/* <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
