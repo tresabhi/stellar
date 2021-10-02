@@ -1,0 +1,7 @@
+{
+  "hosting": {
+    "site": "stellarbeta",
+
+    "public": "public"
+  }
+}
