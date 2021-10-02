@@ -1,8 +1,8 @@
 {
   "version": [0, 1],
   "builds": {
-    "t27gk.sse.codesandbox.io": "Sandbox Build",
-    "t27gk.csb.app": "Sandbox Build",
+    "zvz7r.sse.codesandbox.io": "Sandbox Build",
+    "zvz7r.csb.app": "Sandbox Build",
 
     "stellareditor.vercel.app": "Release Build",
     "stellarbeta.vercel.app": "Beta Build",
