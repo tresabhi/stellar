@@ -1,6 +1,10 @@
 {
   "hosting": {
-    "site": "stellarbeta",
-    "public": "public"
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
 }
