@@ -1,10 +1,10 @@
-name: Release CD
+name: Beta CD
 
 on:
   push:
-    branches: [release-cd]
+    branches: [beta-cd]
   pull_request:
-    branches: [release-cd]
+    branches: [beta-cd]
 
 jobs:
   build:
@@ -46,6 +46,6 @@ jobs:
       - name: deploy to firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:release
+          args: deploy --only hosting:beta
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

@@ -1,17 +1,17 @@
 {
   "hosting": [
     {
-      "target": "stellaredit",
+      "target": "release",
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     },
     {
-      "target": "stellarbeta",
+      "target": "beta",
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     },
     {
-      "target": "stellaralpha",
+      "target": "dev",
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
     }

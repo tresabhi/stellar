@@ -1,5 +1,20 @@
 {
   "projects": {
     "default": "stellareditor-cb0a4"
+  },
+  "targets": {
+    "stellareditor-cb0a4": {
+      "hosting": {
+        "release": [
+          "stellaredit"
+        ],
+        "beta": [
+          "stellarbeta"
+        ],
+        "dev": [
+          "stallardev"
+        ]
+      }
+    }
   }
 }
