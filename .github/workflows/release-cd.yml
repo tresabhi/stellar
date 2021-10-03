@@ -1,0 +1,54 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Release CD
+
+on:
+  push:
+    branches: [ release-cd ]
+  pull_request:
+    branches: [ release-cd ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install -g yarn
+    - name: yarn install, build & test
+      run: |
+        yarn install
+        yarn build
+    - name: archive build
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: build
+  
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: download build
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+      - name: deploy to firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:stellaredit
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

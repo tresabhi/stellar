@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import UnitTextInput from 'components/UnitTextInput';
+import UnitTextInput from '../UnitTextInput';
 
-import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
-import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
-import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
+import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
+import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
+import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 
 import './index.scss';
 
@@ -43,7 +43,10 @@ const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
       {icon}
 
       {/* text */}
-      <input className="explorer-part-listing-input" defaultValue={defaultName} />
+      <input
+        className="explorer-part-listing-input"
+        defaultValue={defaultName}
+      />
 
       <DeleteIcon className="explorer-part-listing-icon" />
       <LockIcon className="explorer-part-listing-icon" />
@@ -57,7 +60,7 @@ interface IPropertyListing {
 }
 const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
   return (
-    <button className="explorer-property-listing">
+    <div className="explorer-property-listing">
       {/* text */}
       {children}
 
@@ -65,7 +68,7 @@ const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
         {/* sub properties */}
         {subProperties?.map((component) => component)}
       </div>
-    </button>
+    </div>
   );
 };
 
@@ -97,11 +100,21 @@ interface ISubPropertyTextInput {
   suffix?: string;
   name?: string;
 }
-const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({ children, defaultValue, prefix, suffix, name }) => {
+const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
+  children,
+  defaultValue,
+  prefix,
+  suffix,
+  name,
+}) => {
   return (
     <div className="explorer-sub-property-text-input">
       <span>{name || children}</span>
-      <UnitTextInput defaultValue={defaultValue} suffix={suffix} prefix={prefix} />
+      <UnitTextInput
+        defaultValue={defaultValue}
+        suffix={suffix}
+        prefix={prefix}
+      />
     </div>
   );
 };

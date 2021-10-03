@@ -1,28 +1,30 @@
-import PseudoContainer from 'components/PseudoContainer';
-import ToolBar from 'components/ToolBar';
-import EditingPanel from 'components/EditingPanel';
-import Explorer from 'components/Explorer';
-import EditingCanvas from 'components/EditingCanvas';
-import UnitTextInput from 'components/UnitTextInput';
-import Toggle from 'components/Toggle';
+import PseudoContainer from '../../components/PseudoContainer';
+import ToolBar from '../../components/ToolBar';
+import EditingPanel from '../../components/EditingPanel';
+// import Explorer from '../../components/Explorer';
+import EditingCanvas from '../../components/EditingCanvas';
+import UnitTextInput from '../../components/UnitTextInput';
+// import Toggle from '../../components/Toggle';
 
-// import '../../assets/themes/default/index.scss';
-// then import the theme
+import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
+import { ReactComponent as UndoIcon } from '../../assets/icons/undo.svg';
+import { ReactComponent as RedoIcon } from '../../assets/icons/redo.svg';
+import { ReactComponent as ZoomInIcon } from '../../assets/icons/zoom-in.svg';
+import { ReactComponent as ZoomOutIcon } from '../../assets/icons/zoom-out.svg';
+import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
+import { ReactComponent as GridIcon } from '../../assets/icons/grid.svg';
+import { ReactComponent as RotationIcon } from '../../assets/icons/rotation.svg';
+import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-cell.svg';
+import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
+import { ReactComponent as StructureIcon } from '../../assets/icons/structure.svg';
+import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 
-import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
-import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
-import { ReactComponent as RedoIcon } from 'assets/icons/redo.svg';
-import { ReactComponent as ZoomInIcon } from 'assets/icons/zoom-in.svg';
-import { ReactComponent as ZoomOutIcon } from 'assets/icons/zoom-out.svg';
-import { ReactComponent as GrabIcon } from 'assets/icons/grab.svg';
-import { ReactComponent as GridIcon } from 'assets/icons/grid.svg';
-import { ReactComponent as RotationIcon } from 'assets/icons/rotation.svg';
-import { ReactComponent as FuelCellIcon } from 'assets/icons/fuel-cell.svg';
-import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
-import { ReactComponent as StructureIcon } from 'assets/icons/structure.svg';
-import { ReactComponent as WheelIcon } from 'assets/icons/wheel.svg';
+import devBlueprint from '../../blueprints/shapeAndTextures1.json';
 
 function Desktop() {
+  // temporarily this blueprint
+  let data = devBlueprint;
+
   return (
     <PseudoContainer>
       <ToolBar.Container>
@@ -73,21 +75,21 @@ function Desktop() {
       </ToolBar.Container>
 
       <EditingPanel>
-        <Explorer.Container>
+        {/* <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.ListingContainer>
-            <Explorer.PartListing icon={<StructureIcon />} defaultName="4m Structural Piece"></Explorer.PartListing>
-            <Explorer.PartListing icon={<WheelIcon />} defaultName="Big Wheel"></Explorer.PartListing>
-            <Explorer.PartListing icon={<EngineIcon />} defaultName="Hawk Engine"></Explorer.PartListing>
-            <Explorer.PartListing icon={<FuelCellIcon />} defaultName='4m Fuel Cell'>4m Fuel Cell</Explorer.PartListing>
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
+            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
           </Explorer.ListingContainer>
-        </Explorer.Container>
+        </Explorer.Container> */}
 
-        <EditingCanvas />
+        <EditingCanvas center={data.center} offset={data.offset} parts={data.parts} />
 
-        <Explorer.Container rightSide={true}>
+        {/* <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
             <Explorer.Tab defaultSelected={true}>Properties</Explorer.Tab>
             <Explorer.Tab>Staging</Explorer.Tab>
@@ -99,7 +101,7 @@ function Desktop() {
             <Explorer.PropertyListing subProperties={[<Toggle defaultOn={true} />]}>Toggle On</Explorer.PropertyListing>
             <Explorer.PropertyListing subProperties={[<Toggle defaultOn={false} />]}>Toggle Off</Explorer.PropertyListing>
           </Explorer.ListingContainer>
-        </Explorer.Container>
+        </Explorer.Container> */}
       </EditingPanel>
     </PseudoContainer>
   );

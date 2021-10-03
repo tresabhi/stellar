@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ReactComponent as MoreOptionsIcon } from 'assets/icons/more-options.svg';
+import { ReactComponent as MoreOptionsIcon } from '../../assets/icons/more-options.svg';
 
 import './index.scss';
 
@@ -31,8 +31,9 @@ const StaticIcon: FC = ({ children }) => {
 
 interface IDropDownButton {
   icon: object;
+  onClick: Function;
 }
-const DropDownButton: FC<IDropDownButton> = ({ children, icon }) => {
+const DropDownButton: FC<IDropDownButton> = ({ onClick, children, icon }) => {
   return (
     <div className="tool-bar-drop-down-button-container">
       <button className="tool-bar-drop-down-button-action">{icon}</button>

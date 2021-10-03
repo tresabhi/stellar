@@ -1,4 +1,4 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+W# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
@@ -6,16 +6,20 @@
 /.pnp
 .pnp.js
 /.upm
+yarn.lock
 
 # testing
 /coverage
+firebase-debug.log
 
 # remote editing
 /.codesandbox
 sandbox.config.json
+.replit
 
 # production
 /build
+/.firebase
 
 # misc
 .DS_Store

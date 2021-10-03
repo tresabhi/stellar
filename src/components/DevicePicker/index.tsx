@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import MetaData from '../../metadata.json';
 import './index.scss';
 
 const Container: FC = ({ children }) => {
@@ -24,8 +25,24 @@ const Card: FC<ICard> = ({ href, text, recomended, children }) => {
     <a href={href} className="device-picker-card">
       {children}
       {text}
-      {recomended ? <p className="device-picker-recomended">Recommended</p> : null}
+      {recomended ? (
+        <p className="device-picker-recomended">(Recommended)</p>
+      ) : null}
     </a>
+  );
+};
+
+const Build: FC = () => {
+  let version = 'v' + (MetaData?.version?.join('.') || 'Unknown');
+  const unknownDomainName = 'Unkown Build';
+  const domainNames = MetaData.builds;
+
+  return (
+    <span className="device-picker-build">
+      {version +
+        ' - ' +
+        ((domainNames as any)[window.location.hostname] ?? unknownDomainName)}
+    </span>
   );
 };
 
@@ -35,4 +52,5 @@ export default Object.assign({
 
   Title,
   List,
+  Build,
 });

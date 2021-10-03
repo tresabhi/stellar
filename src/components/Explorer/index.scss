@@ -36,17 +36,20 @@
   align-items: center;
   color: white;
   flex-wrap: nowrap;
-  width: 100%;
 
   background-color: v(button-flush-background-color);
   font-family: v(font-family-regular);
+  font-size: $font-size-big;
 
   height: $explorer-listing-height;
   padding: 0px $padding-bigger 0px $padding-bigger;
 }
 
-.explorer-part-listing:hover,
-.explorer-property-listing:hover {
+.explorer-part-listing {
+  width: 100%;
+}
+
+.explorer-part-listing:hover {
   background-color: v(button-flush-hover-background-color);
 }
 
