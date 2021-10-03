@@ -1,13 +1,13 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Firebase CI
+name: Release CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [ release-cd ]
   pull_request:
-    branches: [ main ]
+    branches: [ release-cd ]
 
 jobs:
   build:
@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
@@ -50,6 +49,6 @@ jobs:
       - name: deploy to firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: deploy --only hosting:stellaredit
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
