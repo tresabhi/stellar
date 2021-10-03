@@ -1,4 +1,4 @@
-name: Dev CD
+name: Alpha CD
 
 on:
   push:
@@ -46,6 +46,6 @@ jobs:
       - name: deploy to firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:dev
+          args: deploy --only hosting:alpha
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

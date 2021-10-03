@@ -11,8 +11,8 @@
         "beta": [
           "stellarbeta"
         ],
-        "dev": [
-          "stallardev"
+        "alpha": [
+          "stellaralpha"
         ]
       }
     }
