@@ -1,18 +1,25 @@
 import '@react-three/fiber';
 
-export interface Type {
-  n: string;
-  p: {
-    x: number;
-    y: number;
+export class Data {
+  '.stellar' = {
+    label: 'Unlabeled Part',
+    visibe: true,
+    locked: false,
   };
-  o: {
-    x: number;
-    y: number;
-    z: number;
+  n = 'Root';
+  p = {
+    x: 0,
+    y: 0,
   };
-  t: string;
+  o = {
+    x: 1,
+    y: 1,
+    z: 0,
+  };
+  t = '-Infinity';
 }
+
+export type Type = InstanceType<typeof Data>;
 
 export const HighPoly = () => {
   return <mesh />;

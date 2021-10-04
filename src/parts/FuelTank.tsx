@@ -1,21 +1,26 @@
 import { FC } from 'react';
 import * as _ from 'lodash';
-import { Type as Root } from './Root';
+import * as Root from './Root';
 import '@react-three/fiber';
 
-export interface Type extends Root {
-  N: {
-    width_original: number;
-    width_a: number;
-    width_b: number;
-    height: number;
-    fuel_percent: number;
+export const DefaultData = {};
+
+export class Data extends Root.Data {
+  n = 'Fuel Tank';
+  N = {
+    width_original: 2,
+    width_a: 2,
+    width_b: 2,
+    height: 2,
+    fuel_percent: 1,
   };
-  T: {
-    color_tex: string;
-    shape_tex: string;
+  T = {
+    color_tex: '_',
+    shape_tex: '_',
   };
 }
+
+export type Type = InstanceType<typeof Data>;
 
 // ONLY FOR DEBUGGING PURPOSES
 // const randomColor = () => {
@@ -27,7 +32,7 @@ export interface Type extends Root {
 //   return new THREE.Color(color);
 // };
 
-const lerp = (a: number, b: number, t: number) => a * (1 - t) + b * t;
+const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
 interface IPart {
   data: Type;
