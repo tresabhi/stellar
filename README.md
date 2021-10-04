@@ -11,7 +11,9 @@ Stellar Editor allows for anyone to make custom blueprints with extensive custom
 ## Tech Inside
 
 - **Framework**: React (create-react-app)
-- **Languages:** - Typescript (XML) - SASS (scss)
+- **Languages:**
+  - Typescript (XML)
+  - SASS (scss)
 
 ## Compatibility
 
