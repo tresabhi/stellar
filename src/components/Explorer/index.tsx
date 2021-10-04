@@ -1,11 +1,8 @@
-import { FC } from 'react';
-
-import UnitTextInput from '../UnitTextInput';
-
+import { FC, ReactNode } from 'react';
+import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
-import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
-
+import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
 interface IContainer {
@@ -28,8 +25,44 @@ const TabsContainer: FC = ({ children }) => {
   return <div className="explorer-tabs-container">{children}</div>;
 };
 
-const ListingContainer: FC = ({ children }) => {
-  return <div className="explorer-listing-container">{children}</div>;
+interface IListingContainer {
+  list: Array<any>;
+}
+const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
+  /*
+  <Explorer.PartListing
+    icon={<FuelCellIcon />}
+    defaultName="Fuel Tank"
+  />
+  <Explorer.PartListing
+    icon={<FuelCellIcon />}
+    defaultName="Fuel Tank"
+  />
+  <Explorer.PartListing
+    icon={<FuelCellIcon />}
+    defaultName="Fuel Tank"
+  />
+  <Explorer.PartListing
+    icon={<FuelCellIcon />}
+    defaultName="Fuel Tank"
+  />
+  */
+
+  const parsedArray = list?.map((listing, index) => {
+    // alert(index);
+    return (
+      <PartListing
+        icon={<EyeIcon />}
+        defaultName={listing['.stellar']?.name ?? 'Unnamed Part'}
+      />
+    );
+  });
+
+  return (
+    <div className="explorer-listing-container">
+      {list ? parsedArray : children}
+    </div>
+  );
 };
 
 interface IPartListing {

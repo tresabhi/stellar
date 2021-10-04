@@ -1,7 +1,7 @@
 import PseudoContainer from '../../components/PseudoContainer';
 import ToolBar from '../../components/ToolBar';
 import EditingPanel from '../../components/EditingPanel';
-// import Explorer from '../../components/Explorer';
+import Explorer from '../../components/Explorer';
 import EditingCanvas from '../../components/EditingCanvas';
 import UnitTextInput from '../../components/UnitTextInput';
 // import Toggle from '../../components/Toggle';
@@ -22,7 +22,7 @@ import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 import devBlueprint from '../../blueprints/shapeAndTextures1.json';
 
 function Desktop() {
-  // temporarily this blueprint
+  // temporarily  blueprint
   let data = devBlueprint;
 
   return (
@@ -75,19 +75,18 @@ function Desktop() {
       </ToolBar.Container>
 
       <EditingPanel>
-        {/* <Explorer.Container>
+        <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
-          <Explorer.ListingContainer>
-            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
-            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
-            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
-            <Explorer.PartListing icon={<FuelCellIcon />} defaultName="Fuel Tank" />
-          </Explorer.ListingContainer>
-        </Explorer.Container> */}
+          <Explorer.ListingContainer list={data.parts} />
+        </Explorer.Container>
 
-        <EditingCanvas center={data.center} offset={data.offset} parts={data.parts} />
+        <EditingCanvas
+          center={data.center}
+          offset={data.offset}
+          parts={data.parts}
+        />
 
         {/* <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
