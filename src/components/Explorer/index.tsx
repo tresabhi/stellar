@@ -1,9 +1,10 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
+import { type as rootType } from '../../utilities/parts/Root';
 
 interface IContainer {
   rightSide?: boolean;
@@ -26,34 +27,14 @@ const TabsContainer: FC = ({ children }) => {
 };
 
 interface IListingContainer {
-  list: Array<any>;
+  list: Array<rootType>;
 }
 const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
-  /*
-  <Explorer.PartListing
-    icon={<FuelCellIcon />}
-    defaultName="Fuel Tank"
-  />
-  <Explorer.PartListing
-    icon={<FuelCellIcon />}
-    defaultName="Fuel Tank"
-  />
-  <Explorer.PartListing
-    icon={<FuelCellIcon />}
-    defaultName="Fuel Tank"
-  />
-  <Explorer.PartListing
-    icon={<FuelCellIcon />}
-    defaultName="Fuel Tank"
-  />
-  */
-
-  const parsedArray = list?.map((listing, index) => {
-    // alert(index);
+  const parsedArray = list?.map((listing) => {
     return (
       <PartListing
         icon={<EyeIcon />}
-        defaultName={listing['.stellar']?.name || 'Internally Unlabeled Part'}
+        defaultName={listing['.stellar']?.label || 'Internally Unlabeled Part'}
       />
     );
   });

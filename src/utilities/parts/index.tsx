@@ -1,7 +1,6 @@
+import { merge } from 'lodash';
 import * as FuelTank from './FuelTank';
 import * as Root from './Root';
-import { merge } from 'lodash';
-import defaultBlueprint from '../../blueprints/default.json';
 
 const partComponentNames = new Map([
   ['Root', 'Root'],
@@ -33,14 +32,6 @@ export const getComponentDefaultDataFromComponentName = (partName: string) =>
 export const updatePartDataWithPartName = (partData: Root.type) =>
   merge(partData, getComponentFromPartName(partData.n).defaultData);
 
-export const mergeBlueprintGlobals = (blueprint: Object) =>
-  merge(defaultBlueprint, blueprint);
-
-/**
- *Nothing for now
- */
-export const blueprintToLatestVersion = (blueprint: Object) => blueprint;
-
 export const updatePartData = (partData: Root.type) => {
   const component = getComponentFromPartName(partData.n);
   return merge(component.defaultData, partData);
@@ -48,14 +39,4 @@ export const updatePartData = (partData: Root.type) => {
 
 export const updatePartsData = (parts: Array<Root.type>) => {
   return parts.map((currentPart) => updatePartData(currentPart));
-};
-
-/**
- *Procedure
- *1. Merge whole blueprint with default data
- *2. Merge all parts their with default data
- *3. Use version updaters
- */
-export const updateBlueprint = (blueprint: Object) => {
-  blueprint = blueprintToLatestVersion(mergeBlueprintGlobals(blueprint));
 };

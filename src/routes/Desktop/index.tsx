@@ -10,17 +10,17 @@ import { ReactComponent as UndoIcon } from '../../assets/icons/undo.svg';
 import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
 import { ReactComponent as ZoomInIcon } from '../../assets/icons/zoom-in.svg';
 import { ReactComponent as ZoomOutIcon } from '../../assets/icons/zoom-out.svg';
-import devBlueprint from '../../blueprints/shapeAndTextures1.json';
 import EditingCanvas from '../../components/EditingCanvas';
 import EditingPanel from '../../components/EditingPanel';
 import Explorer from '../../components/Explorer';
 import PseudoContainer from '../../components/PseudoContainer';
 import ToolBar from '../../components/ToolBar';
 import UnitTextInput from '../../components/UnitTextInput';
-import * as parts from '../../utilities/parts';
+import * as blueprints from '../../utilities/blueprints';
+import devBlueprint from '../../utilities/blueprints/shapeAndTextures1.json';
 
 function Desktop() {
-  let data = parts.updateBlueprint(devBlueprint);
+  let data = blueprints.updateBlueprint(devBlueprint);
 
   return (
     <PseudoContainer>
