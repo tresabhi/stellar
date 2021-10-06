@@ -1,31 +1,26 @@
-import PseudoContainer from '../../components/PseudoContainer';
-import ToolBar from '../../components/ToolBar';
-import EditingPanel from '../../components/EditingPanel';
-import Explorer from '../../components/Explorer';
-import EditingCanvas from '../../components/EditingCanvas';
-import UnitTextInput from '../../components/UnitTextInput';
-// import Toggle from '../../components/Toggle';
-
-import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
-import { ReactComponent as UndoIcon } from '../../assets/icons/undo.svg';
-import { ReactComponent as RedoIcon } from '../../assets/icons/redo.svg';
-import { ReactComponent as ZoomInIcon } from '../../assets/icons/zoom-in.svg';
-import { ReactComponent as ZoomOutIcon } from '../../assets/icons/zoom-out.svg';
+import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
+import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-cell.svg';
 import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
 import { ReactComponent as GridIcon } from '../../assets/icons/grid.svg';
+import { ReactComponent as RedoIcon } from '../../assets/icons/redo.svg';
 import { ReactComponent as RotationIcon } from '../../assets/icons/rotation.svg';
-import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-cell.svg';
-import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
+import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
 import { ReactComponent as StructureIcon } from '../../assets/icons/structure.svg';
+import { ReactComponent as UndoIcon } from '../../assets/icons/undo.svg';
 import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
-
+import { ReactComponent as ZoomInIcon } from '../../assets/icons/zoom-in.svg';
+import { ReactComponent as ZoomOutIcon } from '../../assets/icons/zoom-out.svg';
 import devBlueprint from '../../blueprints/shapeAndTextures1.json';
+import EditingCanvas from '../../components/EditingCanvas';
+import EditingPanel from '../../components/EditingPanel';
+import Explorer from '../../components/Explorer';
+import PseudoContainer from '../../components/PseudoContainer';
+import ToolBar from '../../components/ToolBar';
+import UnitTextInput from '../../components/UnitTextInput';
+import * as parts from '../../utilities/parts';
 
 function Desktop() {
-  // temporarily  blueprint
-  let data = devBlueprint;
-
-  // map updatePartDataWithPartName
+  let data = parts.updateBlueprint(devBlueprint);
 
   return (
     <PseudoContainer>

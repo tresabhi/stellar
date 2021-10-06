@@ -1,6 +1,6 @@
 import '@react-three/fiber';
 
-export class Data {
+export class defaultData {
   '.stellar' = {
     label: 'Unlabeled Part',
     visibe: true,
@@ -19,7 +19,7 @@ export class Data {
   t = '-Infinity';
 }
 
-export type Type = InstanceType<typeof Data>;
+export type type = InstanceType<typeof defaultData>;
 
 export const HighPoly = () => {
   return <mesh />;

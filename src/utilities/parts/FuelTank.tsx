@@ -3,9 +3,7 @@ import { times } from 'lodash';
 import { FC } from 'react';
 import * as Root from './Root';
 
-export const DefaultData = {};
-
-export class Data extends Root.Data {
+export class defaultData extends Root.defaultData {
   n = 'Fuel Tank';
   N = {
     width_original: 2,
@@ -20,7 +18,7 @@ export class Data extends Root.Data {
   };
 }
 
-export type Type = InstanceType<typeof Data>;
+export type type = InstanceType<typeof defaultData>;
 
 // ONLY FOR DEBUGGING PURPOSES
 // const randomColor = () => {
@@ -35,7 +33,7 @@ export type Type = InstanceType<typeof Data>;
 const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
 interface IPart {
-  data: Type;
+  data: type;
   offset: { x: number; y: number };
 }
 

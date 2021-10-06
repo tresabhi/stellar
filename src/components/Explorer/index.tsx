@@ -53,7 +53,7 @@ const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
     return (
       <PartListing
         icon={<EyeIcon />}
-        defaultName={listing['.stellar']?.name ?? 'Unnamed Part'}
+        defaultName={listing['.stellar']?.name || 'Internally Unlabeled Part'}
       />
     );
   });
