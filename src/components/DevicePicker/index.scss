@@ -28,7 +28,7 @@
   font-weight: bold;
   width: 128px;
   height: 128px;
-  
+
   font-family: v(font-family-regular);
   background-color: v(button-flush-background-color);
   font-size: $font-size-big;
@@ -42,8 +42,8 @@
   background-color: v(button-flush-hover-background-color);
 }
 
-.device-picker-card>svg,
-.device-picker-card>img {
+.device-picker-card > svg,
+.device-picker-card > img {
   display: block;
 
   width: 48px;

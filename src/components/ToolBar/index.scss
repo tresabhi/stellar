@@ -38,12 +38,12 @@
   background-color: v(button-flush-hover-background-color);
 }
 
-.tool-bar-button>svg,
-.tool-bar-button>img,
-.tool-bar-static-icon>svg,
-.tool-bar-static-icon>img,
-.tool-bar-drop-down-button-action>svg,
-.tool-bar-drop-down-button-action>img {
+.tool-bar-button > svg,
+.tool-bar-button > img,
+.tool-bar-static-icon > svg,
+.tool-bar-static-icon > img,
+.tool-bar-drop-down-button-action > svg,
+.tool-bar-drop-down-button-action > img {
   display: block;
 
   width: $icon-size-regular;
@@ -80,8 +80,8 @@
   margin: 0px $margin-smaller 0px 0px;
 }
 
-.tool-bar-drop-down-button-more-options>img,
-.tool-bar-drop-down-button-more-options>svg {
+.tool-bar-drop-down-button-more-options > img,
+.tool-bar-drop-down-button-more-options > svg {
   // strict image dimensions
   width: v($tool-bar-drop-down-button-more-options-width);
   height: v($tool-bar-drop-down-button-more-options-height);

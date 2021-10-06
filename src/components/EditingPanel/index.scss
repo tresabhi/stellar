@@ -6,8 +6,5 @@
 
   // background-color: red;
 
-  height: calc(
-    100vh
-    - (#{$tool-bar-height + $border-width-thin}) * 2
-  )
+  height: calc(100vh - (#{$tool-bar-height + $border-width-thin}) * 2);
 }

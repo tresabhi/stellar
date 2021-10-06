@@ -1,7 +1,7 @@
-import { FC } from 'react';
-import * as _ from 'lodash';
-import * as Root from './Root';
 import '@react-three/fiber';
+import { times } from 'lodash';
+import { FC } from 'react';
+import * as Root from './Root';
 
 export const DefaultData = {};
 
@@ -89,7 +89,7 @@ export const HighPoly: FC<IPart> = ({ data, offset }) => {
 
   switch (data.T.shape_tex) {
     case 'Rivets': {
-      const rivets = _.times(rivetCount, (index) => (
+      const rivets = times(rivetCount, (index) => (
         <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}>
           <cylinderGeometry
             args={[
@@ -130,7 +130,7 @@ export const HighPoly: FC<IPart> = ({ data, offset }) => {
     }
 
     case 'Half Rivets': {
-      const rivets = _.times(rivetCount, (index) => (
+      const rivets = times(rivetCount, (index) => (
         <mesh
           rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
           position={[0, data.N.height / -4, 0]}
@@ -212,7 +212,7 @@ export const HighPoly: FC<IPart> = ({ data, offset }) => {
     }
 
     case 'Interstage': {
-      const rivets = _.times(rivetCount, (index) => (
+      const rivets = times(rivetCount, (index) => (
         <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}>
           <cylinderGeometry
             args={[
@@ -309,7 +309,7 @@ export const HighPoly: FC<IPart> = ({ data, offset }) => {
     }
 
     case 'Interstage Full': {
-      const rivets = _.times(rivetCount, (index) => (
+      const rivets = times(rivetCount, (index) => (
         <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}>
           <cylinderGeometry
             args={[
@@ -463,7 +463,7 @@ export const HighPoly: FC<IPart> = ({ data, offset }) => {
 
     case 'Nozzle_4': {
       const nozzleCount = Math.floor(data.N.height * nozzlesPerMeter);
-      const nozzles = _.times(nozzleCount, (index) => (
+      const nozzles = times(nozzleCount, (index) => (
         <group
           position={[
             0,

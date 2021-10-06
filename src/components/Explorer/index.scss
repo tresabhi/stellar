@@ -5,7 +5,6 @@
   flex-direction: column;
 
   width: $explorer-left-width;
-
 }
 
 .explorer-container.left-side {
@@ -54,8 +53,8 @@
 }
 
 .explorer-part-listing-icon,
-.explorer-part-listing>svg,
-.explorer-part-listing>img {
+.explorer-part-listing > svg,
+.explorer-part-listing > img {
   width: $icon-size-regular;
   height: $icon-size-regular;
   // min width to make it not shrink
@@ -63,8 +62,8 @@
   min-height: $icon-size-regular;
 }
 
-.explorer-part-listing>svg:not(.explorer-part-listing-icon),
-.explorer-part-listing>img:not(.explorer-part-listing-icon) {
+.explorer-part-listing > svg:not(.explorer-part-listing-icon),
+.explorer-part-listing > img:not(.explorer-part-listing-icon) {
   margin-right: $margin-smaller;
 }
 
@@ -74,7 +73,7 @@
   margin-left: $margin-smaller;
 }
 
-.explorer-part-listing:hover>.explorer-part-listing-icon {
+.explorer-part-listing:hover > .explorer-part-listing-icon {
   display: block;
 }
 
@@ -122,7 +121,8 @@
   background-color: v(tab-selected-background-color);
 }
 
-.explorer-property-listing {}
+.explorer-property-listing {
+}
 
 .explorer-property-listing-sub-properties-container {
   height: 100%;
@@ -136,6 +136,6 @@
   margin-left: $margin-regular;
 }
 
-.explorer-sub-property-text-input>span {
+.explorer-sub-property-text-input > span {
   margin-right: $margin-smaller;
 }

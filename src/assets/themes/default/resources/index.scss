@@ -4,40 +4,41 @@
 
 :root {
   // Foreground panel
-  --foreground-panel-text-color:             white;
+  --foreground-panel-text-color: white;
   --foreground-panel-unimportant-text-color: #{$gray-dark};
-  --foreground-panel-background-color:       #{$black-regular};
-  --foreground-panel-border-color:           #{$gray-dark};
+  --foreground-panel-background-color: #{$black-regular};
+  --foreground-panel-border-color: #{$gray-dark};
 
-  --background-panel-text-color:             white;
+  --background-panel-text-color: white;
   --background-panel-unimportant-text-color: #{$gray-dark};
-  --background-panel-background-color:       #{$black-dark};
-  --background-panel-border-color:           #{$gray-regular};
+  --background-panel-background-color: #{$black-dark};
+  --background-panel-border-color: #{$gray-regular};
 
   // Fonts
-  --font-family-regular: 'Montserrat', 'Montserrat-Google-Regular', 'Sans-serif', 'Roboto', 'Arial';
+  --font-family-regular: 'Montserrat', 'Montserrat-Google-Regular', 'Sans-serif',
+    'Roboto', 'Arial';
 
   // Scroll bar
-  --scroll-bar-track-background-color:        #{$black-darker};
-  --scroll-bar-button-background-color:       #{$gray-regular};
+  --scroll-bar-track-background-color: #{$black-darker};
+  --scroll-bar-button-background-color: #{$gray-regular};
   --scroll-bar-button-hover-background-color: #{$gray-lighter};
 
   // Buttons
-  --button-flush-content-color:          white;
-  --button-flush-background-color:       #{$black-regular};
-  --button-flush-hover-content-color:    #{$accent-lighter};
+  --button-flush-content-color: white;
+  --button-flush-background-color: #{$black-regular};
+  --button-flush-hover-content-color: #{$accent-lighter};
   --button-flush-hover-background-color: #{$black-light};
 
   // Inputs in general
-  --input-content-color:          white;
+  --input-content-color: white;
   --input-content-selected-color: #{$accent-regular};
-  --input-background-color:       #{$black-dark};
+  --input-background-color: #{$black-dark};
 
   // Color abstractions
   --color-recomended: #{$green-lighter};
 
   // Tabs
-  --tab-static-background-color:     #{$black-light};
+  --tab-static-background-color: #{$black-light};
   --tab-unselected-background-color: #{$black-light};
-  --tab-selected-background-color:   #{$accent-regular};
+  --tab-selected-background-color: #{$accent-regular};
 }

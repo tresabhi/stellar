@@ -1,11 +1,8 @@
-import { FC } from 'react';
-import { Canvas } from '@react-three/fiber';
-import 'react-dom';
 import { OrbitControls } from '@react-three/drei';
-
-// import * as FuelTank from '../../parts/FuelTank';\
-import * as Part from '../../parts/index';
-
+import { Canvas } from '@react-three/fiber';
+import { FC } from 'react';
+import 'react-dom';
+import * as Part from '../../utilities/parts/index';
 import './index.scss';
 
 interface IEditingCanvas {
@@ -15,7 +12,7 @@ interface IEditingCanvas {
 }
 const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
   let partsJsx = parts.map((part) => {
-    const PartComponent = Part.getComponentFromPartName(part.n, true);
+    const PartComponent = Part.getMeshFromPartName(part.n, true);
     return <PartComponent data={part} offset={offset} />;
   });
 

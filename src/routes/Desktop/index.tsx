@@ -25,6 +25,8 @@ function Desktop() {
   // temporarily  blueprint
   let data = devBlueprint;
 
+  // map updatePartDataWithPartName
+
   return (
     <PseudoContainer>
       <ToolBar.Container>
