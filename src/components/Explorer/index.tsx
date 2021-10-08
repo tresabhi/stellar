@@ -1,10 +1,15 @@
 import { FC } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
+import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
 import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
+import { type as rootType } from '../../utilities/parts/Root';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
-import { type as rootType } from '../../utilities/parts/Root';
+
+const listingIcons = {
+  'Fuel Tank': <FuelTankIcon />,
+};
 
 interface IContainer {
   rightSide?: boolean;
@@ -33,7 +38,7 @@ const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
   const parsedArray = list?.map((listing) => {
     return (
       <PartListing
-        icon={<EyeIcon />}
+        icon={(listingIcons as any)?.[listing.n] || <EyeIcon />}
         defaultName={listing['.stellar'].label || 'Internally Unlabeled Part'}
       />
     );

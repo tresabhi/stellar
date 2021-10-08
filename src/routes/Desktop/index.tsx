@@ -1,5 +1,5 @@
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
-import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-cell.svg';
+import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
 import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
 import { ReactComponent as GridIcon } from '../../assets/icons/grid.svg';
 import { ReactComponent as RedoIcon } from '../../assets/icons/redo.svg';

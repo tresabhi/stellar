@@ -1,5 +1,4 @@
 import { merge } from 'lodash';
-import { ModuleReference } from 'typescript';
 import * as FuelTank from './FuelTank';
 import * as Root from './Root';
 
