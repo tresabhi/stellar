@@ -3,11 +3,13 @@ name: Alpha CD
 on:
   push:
     branches: [main]
+
   pull_request:
     branches: [main]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,18 +17,25 @@ jobs:
         node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Get code
+        uses: actions/checkout@v2
+
+      - name: Use node
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm install -g yarn
-      - name: yarn install, build & test
-        run: |
-          yarn install
-          yarn build
-      - name: archive build
+          cache: 'npm'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build static
+        run: yarn build
+
+      - name: Archive build
         uses: actions/upload-artifact@v2
         with:
           name: build
@@ -36,14 +45,18 @@ jobs:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: download build
+      - name: Get code
+        uses: actions/checkout@v2
+
+      - name: Unarchive build
         uses: actions/download-artifact@v2
         with:
           name: build
           path: build
-      - name: deploy to firebase
+
+      - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:alpha
