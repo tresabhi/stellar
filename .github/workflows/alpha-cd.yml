@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Build static
+      - name: Build static site
         run: yarn build
 
       - name: Archive build
