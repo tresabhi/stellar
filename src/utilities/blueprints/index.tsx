@@ -1,6 +1,8 @@
 import { merge } from 'lodash';
+import { updatePartData } from '../parts';
+import { dataType as rootPartType } from '../parts/Root';
 import defaultBlueprint from './default.json';
-import { type as rootBlueprintType } from './root';
+import { dataType as rootBlueprintType } from './root';
 
 export const mergeBlueprintGlobals = (blueprint: Object) =>
   merge<rootBlueprintType, Object>(defaultBlueprint, blueprint);
@@ -21,5 +23,10 @@ export const blueprintToLatestVersion = (
 export const updateBlueprint = (blueprint: Object): rootBlueprintType => {
   let newBlueprint = mergeBlueprintGlobals(blueprint);
   newBlueprint = blueprintToLatestVersion(newBlueprint);
+  newBlueprint.parts = updatePartsData(newBlueprint.parts);
   return newBlueprint;
+};
+
+export const updatePartsData = (parts: Array<rootPartType>) => {
+  return parts.map((currentPart) => updatePartData(currentPart));
 };

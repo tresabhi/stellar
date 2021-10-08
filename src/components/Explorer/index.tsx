@@ -4,7 +4,7 @@ import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
-import { type as rootType } from '../../utilities/parts/Root';
+import { dataType as rootType } from '../../utilities/parts/Root';
 
 interface IContainer {
   rightSide?: boolean;
@@ -34,7 +34,7 @@ const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
     return (
       <PartListing
         icon={<EyeIcon />}
-        defaultName={listing['.stellar']?.label || 'Internally Unlabeled Part'}
+        defaultName={listing['.stellar']?.label ?? 'Internally Unlabeled Part'}
       />
     );
   });

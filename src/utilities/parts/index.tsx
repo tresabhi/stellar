@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { ModuleReference } from 'typescript';
 import * as FuelTank from './FuelTank';
 import * as Root from './Root';
 
@@ -26,17 +27,16 @@ export const getMeshFromPartName = (partName: string, highPoly = true) => {
   return component[poly];
 };
 
-export const getComponentDefaultDataFromComponentName = (partName: string) =>
-  components[partName].defaultData;
-
-export const updatePartDataWithPartName = (partData: Root.type) =>
-  merge(partData, getComponentFromPartName(partData.n).defaultData);
-
-export const updatePartData = (partData: Root.type) => {
-  const component = getComponentFromPartName(partData.n);
-  return merge(component.defaultData, partData);
+export const getComponentDefaultDataFromComponentName = (
+  componentName: string,
+) => {
+  return components[componentName].defaultData;
 };
 
-export const updatePartsData = (parts: Array<Root.type>) => {
-  return parts.map((currentPart) => updatePartData(currentPart));
+export const getComponentDefaultDataFromPartName = (partName: string) => {
+  alert(getComponentFromPartName(partName).defaultData());
+  return getComponentFromPartName(partName).defaultData;
 };
+
+export const updatePartData = (partData: Root.dataType) =>
+  merge(getComponentDefaultDataFromPartName(partData.n), partData);

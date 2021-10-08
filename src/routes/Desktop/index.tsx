@@ -20,7 +20,7 @@ import * as blueprints from '../../utilities/blueprints';
 import devBlueprint from '../../utilities/blueprints/shapeAndTextures1.json';
 
 function Desktop() {
-  let data = blueprints.updateBlueprint(devBlueprint);
+  let blueprint = blueprints.updateBlueprint(devBlueprint);
 
   return (
     <PseudoContainer>
@@ -76,13 +76,13 @@ function Desktop() {
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
-          <Explorer.ListingContainer list={data.parts} />
+          <Explorer.ListingContainer list={blueprint.parts} />
         </Explorer.Container>
 
         <EditingCanvas
-          center={data.center}
-          offset={data.offset}
-          parts={data.parts}
+          center={blueprint.center}
+          offset={blueprint.offset}
+          parts={blueprint.parts}
         />
 
         {/* <Explorer.Container rightSide={true}>
