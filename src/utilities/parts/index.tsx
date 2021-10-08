@@ -27,16 +27,13 @@ export const getMeshFromPartName = (partName: string, highPoly = true) => {
   return component[poly];
 };
 
-export const getComponentDefaultDataFromComponentName = (
-  componentName: string,
-) => {
-  return components[componentName].defaultData;
+export const getComponentDataFromComponentName = (componentName: string) => {
+  return components[componentName].data;
 };
 
-export const getComponentDefaultDataFromPartName = (partName: string) => {
-  alert(getComponentFromPartName(partName).defaultData());
-  return getComponentFromPartName(partName).defaultData;
+export const getComponentDataFromPartName = (partName: string) => {
+  return getComponentFromPartName(partName).data;
 };
 
-export const updatePartData = (partData: Root.dataType) =>
-  merge(getComponentDefaultDataFromPartName(partData.n), partData);
+export const updatePartData = (partData: Root.type) =>
+  merge(getComponentDataFromPartName(partData.n), partData);

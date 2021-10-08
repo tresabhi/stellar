@@ -1,8 +1,8 @@
 import { merge } from 'lodash';
 import { updatePartData } from '../parts';
-import { dataType as rootPartType } from '../parts/Root';
-import defaultBlueprint from './default.json';
-import { dataType as rootBlueprintType } from './root';
+import { type as rootPartType } from '../parts/Root';
+import { data as defaultBlueprint } from './Root';
+import { type as rootBlueprintType } from './Root';
 
 export const mergeBlueprintGlobals = (blueprint: Object) =>
   merge<rootBlueprintType, Object>(defaultBlueprint, blueprint);

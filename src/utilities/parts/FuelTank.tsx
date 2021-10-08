@@ -1,12 +1,9 @@
 import '@react-three/fiber';
 import { times, merge } from 'lodash';
 import { FC } from 'react';
-import {
-  defaultData as rootDefaultData,
-  dataType as rootDataType,
-} from './Root';
+import * as Root from './Root';
 
-export const defaultData = merge(rootDefaultData, {
+export const data = merge(Root.data, {
   '.stellar': {
     label: 'Fuel Tank',
     visible: true,
@@ -26,26 +23,7 @@ export const defaultData = merge(rootDefaultData, {
   },
 });
 
-// TODO: FIND A WAY TO EXTRACT INTERFACE FROM OBJET ABOVE (ASK TYPESCIPRT COMMUNITY)
-export interface dataType extends rootDataType {
-  '.stellar': {
-    label: string;
-    visible: boolean;
-    locked: boolean;
-  };
-  n: string;
-  N: {
-    width_original: number;
-    width_a: number;
-    width_b: number;
-    height: number;
-    fuel_percent: number;
-  };
-  T: {
-    color_tex: string;
-    shape_tex: string;
-  };
-}
+export type type = Root.type & typeof data;
 
 // ONLY FOR DEBUGGING PURPOSES
 // const randomColor = () => {
@@ -60,7 +38,7 @@ export interface dataType extends rootDataType {
 const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
 interface IPart {
-  data: dataType;
+  data: type;
   offset: { x: number; y: number };
 }
 

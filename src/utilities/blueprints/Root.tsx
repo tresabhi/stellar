@@ -1,8 +1,8 @@
-import { dataType as rootPartType } from '../parts/Root';
+import { type as rootPartType } from '../parts/Root';
 
 const typedParts: Array<rootPartType> = [];
 const typedStages: Array<number> = [];
-export const defaultData = {
+export const data = {
   '.stellar': {
     format_version: 1,
   },
@@ -15,4 +15,4 @@ export const defaultData = {
   stages: typedStages,
 };
 
-export type dataType = typeof defaultData;
+export type type = typeof data;
