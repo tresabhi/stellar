@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import MetaData from '../../metadata.json';
 import './index.scss';
@@ -16,19 +17,19 @@ const Title: FC = ({ children }) => {
 };
 
 interface ICard {
-  href: string;
+  to: string;
   text?: string;
   recomended?: boolean;
 }
-const Card: FC<ICard> = ({ href, text, recomended, children }) => {
+const Card: FC<ICard> = ({ to, text, recomended, children }) => {
   return (
-    <a href={href} className="device-picker-card">
+    <Link to={to} className="device-picker-card">
       {children}
       {text}
       {recomended ? (
         <p className="device-picker-recomended">(Recommended)</p>
       ) : null}
-    </a>
+    </Link>
   );
 };
 
