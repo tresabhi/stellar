@@ -4,12 +4,12 @@ import { type as rootPartType } from '../parts/Root';
 import { data as defaultBlueprint } from './Root';
 import { type as rootBlueprintType } from './Root';
 
-export const mergeBlueprintGlobals = (blueprint: Object) =>
-  merge<rootBlueprintType, Object>(defaultBlueprint, blueprint);
+export const mergeBlueprintGlobals = (
+  blueprint: Object | rootBlueprintType,
+) => {
+  return merge(defaultBlueprint, blueprint);
+};
 
-/**
- *Nothing for now, don't worry about the types yet
- */
 export const blueprintToLatestVersion = (
   blueprint: rootBlueprintType,
 ): rootBlueprintType => blueprint;
@@ -20,13 +20,15 @@ export const blueprintToLatestVersion = (
  *2. Merge all parts their with default data
  *3. Use version updaters
  */
-export const updateBlueprint = (blueprint: Object): rootBlueprintType => {
-  let newBlueprint = mergeBlueprintGlobals(blueprint);
-  newBlueprint = blueprintToLatestVersion(newBlueprint);
-  newBlueprint.parts = updatePartsData(newBlueprint.parts);
-  return newBlueprint;
+export const updateBlueprint = (
+  blueprint: Object | rootBlueprintType,
+): rootBlueprintType => {
+  let updatedBlueprint = mergeBlueprintGlobals(blueprint);
+  updatedBlueprint = blueprintToLatestVersion(updatedBlueprint);
+  updatedBlueprint.parts = updatePartsData(updatedBlueprint.parts);
+
+  return updatedBlueprint;
 };
 
-export const updatePartsData = (parts: Array<rootPartType>) => {
-  return parts.map((currentPart) => updatePartData(currentPart));
-};
+export const updatePartsData = (parts: Array<rootPartType>) =>
+  parts.map((part) => updatePartData(part));

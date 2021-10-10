@@ -1,4 +1,3 @@
-import { merge } from 'lodash';
 import * as FuelTank from './FuelTank';
 import * as Root from './Root';
 
@@ -34,5 +33,7 @@ export const getComponentDataFromPartName = (partName: string) => {
   return getComponentFromPartName(partName).data;
 };
 
-export const updatePartData = (partData: Root.type) =>
-  merge(getComponentDataFromPartName(partData.n), partData);
+export const updatePartData = (partData: Root.type) => ({
+  ...getComponentDataFromPartName(partData.n),
+  ...partData,
+});

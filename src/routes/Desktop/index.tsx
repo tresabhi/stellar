@@ -13,6 +13,7 @@ import { ReactComponent as ZoomOutIcon } from '../../assets/icons/zoom-out.svg';
 import EditingCanvas from '../../components/EditingCanvas';
 import EditingPanel from '../../components/EditingPanel';
 import Explorer from '../../components/Explorer';
+import LaunchPrompt from '../../components/LaunchPrompt';
 import PseudoContainer from '../../components/PseudoContainer';
 import ToolBar from '../../components/ToolBar';
 import UnitTextInput from '../../components/UnitTextInput';
@@ -24,6 +25,7 @@ function Desktop() {
 
   return (
     <PseudoContainer>
+      <LaunchPrompt.Container></LaunchPrompt.Container>
       <ToolBar.Container>
         <ToolBar.Button>File</ToolBar.Button>
         <ToolBar.Button>Edit</ToolBar.Button>
