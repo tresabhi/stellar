@@ -60,8 +60,13 @@
           }
         }
 
-        .launch-prompt-draft-type:hover {
+        .launch-prompt-draft-type:not(.disabled):hover {
           @include button-hover;
+        }
+
+        .launch-prompt-draft-type.disabled {
+          cursor: default;
+          opacity: 0.5;
         }
       }
 

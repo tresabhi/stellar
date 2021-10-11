@@ -109,17 +109,37 @@ function Desktop() {
             <LaunchPrompt.Title>Draft new...</LaunchPrompt.Title>
             <LaunchPrompt.DraftRow>
               <LaunchPrompt.DraftType icon={<RocketIcon />} name="Blueprint" />
-              <LaunchPrompt.DraftType icon={<PlanetIcon />} name="System" />
-              <LaunchPrompt.DraftType icon={<TextIcon />} name="Translation" />
+              <LaunchPrompt.DraftType
+                enabled={false}
+                icon={<PlanetIcon />}
+                name="System"
+              />
+              <LaunchPrompt.DraftType
+                enabled={false}
+                icon={<TextIcon />}
+                name="Translation"
+              />
             </LaunchPrompt.DraftRow>
 
             <LaunchPrompt.InvisibleVerticleSeperator />
 
             <LaunchPrompt.Title>Import local...</LaunchPrompt.Title>
             <LaunchPrompt.DraftRow>
-              <LaunchPrompt.DraftType icon={<RocketIcon />} name="Blueprint" />
-              <LaunchPrompt.DraftType icon={<PlanetIcon />} name="System" />
-              <LaunchPrompt.DraftType icon={<TextIcon />} name="Translation" />
+              <LaunchPrompt.DraftType
+                enabled={false}
+                icon={<RocketIcon />}
+                name="Blueprint"
+              />
+              <LaunchPrompt.DraftType
+                enabled={false}
+                icon={<PlanetIcon />}
+                name="System"
+              />
+              <LaunchPrompt.DraftType
+                enabled={false}
+                icon={<TextIcon />}
+                name="Translation"
+              />
             </LaunchPrompt.DraftRow>
           </LaunchPrompt.SubContainer>
           <LaunchPrompt.Seperator />

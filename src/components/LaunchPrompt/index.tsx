@@ -30,9 +30,15 @@ const DraftRow: FC = ({ children }) => (
 interface IDraftType {
   icon: Object;
   name: string;
+  enabled: boolean;
 }
-const DraftType: FC<IDraftType> = ({ icon, name }) => (
-  <button className="launch-prompt-draft-type">
+const DraftType: FC<IDraftType> = ({ icon, name, enabled = true }) => (
+  <button
+    className={`
+      launch-prompt-draft-type
+      ${enabled ? 'enabled' : 'disabled'}
+    `}
+  >
     {icon}
     <span className="launch-prompt-draft-type-text">{name}</span>
   </button>
