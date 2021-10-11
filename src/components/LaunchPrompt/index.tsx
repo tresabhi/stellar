@@ -1,4 +1,8 @@
 import { FC } from 'react';
+import { ReactComponent as PlanetIcon } from '../../assets/icons/planet.svg';
+import { ReactComponent as RocketIcon } from '../../assets/icons/rocket.svg';
+import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
+import { ReactComponent as TextIcon } from '../../assets/icons/text.svg';
 import './index.scss';
 
 const ShadeContainer: FC = ({ children }) => (
@@ -38,13 +42,19 @@ const RecentsColumn: FC = ({ children }) => (
   <div className="launch-prompt-recents-column">{children}</div>
 );
 
+const listingIcons = new Map([
+  ['blueprint', <RocketIcon />],
+  ['system', <PlanetIcon />],
+  ['translation', <TextIcon />],
+  ['unkown', <SaveIcon />],
+]);
 interface IRecentListing {
-  icon: Object;
+  type?: string;
   name: string;
 }
-const RecentListing: FC<IRecentListing> = ({ icon, name }) => (
+const RecentListing: FC<IRecentListing> = ({ type = 'unkown', name }) => (
   <button className="launch-prompt-recents-listing">
-    {icon}
+    {listingIcons.get(type)}
     <span className="launch-prompt-recents-listing-text">{name}</span>
   </button>
 );

@@ -127,17 +127,18 @@ function Desktop() {
             <LaunchPrompt.Title>Open recent...</LaunchPrompt.Title>
             <LaunchPrompt.RecentsColumn>
               <LaunchPrompt.RecentListing
-                icon={<RocketIcon />}
-                name="recent blueprint example"
+                type="blueprint"
+                name="recent_blueprint_example.sebp"
               />
               <LaunchPrompt.RecentListing
-                icon={<PlanetIcon />}
-                name="recent system example"
+                type="system"
+                name="recent_system_example.seps"
               />
               <LaunchPrompt.RecentListing
-                icon={<TextIcon />}
-                name="recent text example"
+                type="translation"
+                name="recent_text_example.setl"
               />
+              <LaunchPrompt.RecentListing name="unkown_file_exmaple.abcd" />
             </LaunchPrompt.RecentsColumn>
           </LaunchPrompt.SubContainer>
         </LaunchPrompt.Container>
