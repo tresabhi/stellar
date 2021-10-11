@@ -4,9 +4,9 @@ import { ReactComponent as MoreOptionsIcon } from '../../assets/icons/more-optio
 
 import './index.scss';
 
-const Container: FC = ({ children }) => {
-  return <div className="tool-bar">{children}</div>;
-};
+const Container: FC = ({ children }) => (
+  <div className="tool-bar">{children}</div>
+);
 
 const Button: FC = ({ children }) => {
   return (
@@ -21,16 +21,14 @@ const Button: FC = ({ children }) => {
   );
 };
 
-const Seperator = () => {
-  return <div className="tool-bar-seperator" />;
-};
+const Seperator = () => <div className="tool-bar-seperator" />;
 
-const StaticIcon: FC = ({ children }) => {
-  return <div className="tool-bar-static-icon">{children}</div>;
-};
+const StaticIcon: FC = ({ children }) => (
+  <div className="tool-bar-static-icon">{children}</div>
+);
 
 interface IDropDownButton {
-  icon: object;
+  icon: Object;
   onClick: Function;
 }
 const DropDownButton: FC<IDropDownButton> = ({ onClick, children, icon }) => {

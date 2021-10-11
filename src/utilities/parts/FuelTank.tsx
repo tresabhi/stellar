@@ -42,9 +42,7 @@ interface IPart {
   offset: { x: number; y: number };
 }
 
-export const LowPoly: FC<IPart> = () => {
-  return <mesh />;
-};
+export const LowPoly: FC<IPart> = () => <mesh />;
 
 export const HighPoly: FC<IPart> = ({ data, offset }) => {
   const position = {

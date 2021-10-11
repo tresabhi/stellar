@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-const PseudoContainer: FC = ({ children }) => {
-  return <div className="pseudo-container">{children}</div>;
-};
+const PseudoContainer: FC = ({ children }) => (
+  <div className="pseudo-container">{children}</div>
+);
 
 export default PseudoContainer;

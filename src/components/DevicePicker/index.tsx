@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 import MetaData from '../../metadata.json';
 import './index.scss';
 
-const Container: FC = ({ children }) => {
-  return <div className="device-picker-container">{children}</div>;
-};
+const Container: FC = ({ children }) => (
+  <div className="device-picker-container">{children}</div>
+);
 
-const List: FC = ({ children }) => {
-  return <div className="device-picker-list">{children}</div>;
-};
+const List: FC = ({ children }) => (
+  <div className="device-picker-list">{children}</div>
+);
 
-const Title: FC = ({ children }) => {
-  return <h2 className="device-picker-title">{children}</h2>;
-};
+const Title: FC = ({ children }) => (
+  <h2 className="device-picker-title">{children}</h2>
+);
 
 interface ICard {
   to: string;

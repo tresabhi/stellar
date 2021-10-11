@@ -27,10 +27,9 @@ const Container: FC<IContainer> = ({ children, rightSide }) => {
   );
 };
 
-const TabsContainer: FC = ({ children }) => {
-  return <div className="explorer-tabs-container">{children}</div>;
-};
-
+const TabsContainer: FC = ({ children }) => (
+  <div className="explorer-tabs-container">{children}</div>
+);
 interface IListingContainer {
   list: Array<rootType>;
 }
@@ -54,7 +53,7 @@ const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
 };
 
 interface IPartListing {
-  icon: object;
+  icon: Object;
   defaultName: string;
 }
 const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
@@ -77,7 +76,7 @@ const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
 };
 
 interface IPropertyListing {
-  subProperties?: Array<object>;
+  subProperties?: Array<Object>;
 }
 const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
   return (
@@ -111,9 +110,9 @@ const Tab: FC<ITab> = ({ children, defaultSelected }) => {
   );
 };
 
-const StaticTab: FC<ITab> = ({ children }) => {
-  return <div className="explorer-static-tab">{children}</div>;
-};
+const StaticTab: FC<ITab> = ({ children }) => (
+  <div className="explorer-static-tab">{children}</div>
+);
 
 interface ISubPropertyTextInput {
   defaultValue: number | string;

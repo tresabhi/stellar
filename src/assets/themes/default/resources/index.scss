@@ -3,7 +3,6 @@
 @import '../../../../styles/utilities.scss';
 
 :root {
-  // Foreground panel
   --foreground-panel-text-color: white;
   --foreground-panel-unimportant-text-color: #{$gray-dark};
   --foreground-panel-background-color: #{$black-regular};
@@ -14,30 +13,34 @@
   --background-panel-background-color: #{$black-dark};
   --background-panel-border-color: #{$gray-regular};
 
-  // Fonts
+  --prompt-shade-color: #{$black-shade-dark};
+
+  --prompt-generic-text-color: white;
+  --prompt-generic-background-color: #{$black-regular};
+
   --font-family-regular: 'Montserrat', 'Montserrat-Google-Regular', 'Sans-serif',
     'Roboto', 'Arial';
 
-  // Scroll bar
   --scroll-bar-track-background-color: #{$black-darker};
   --scroll-bar-button-background-color: #{$gray-regular};
   --scroll-bar-button-hover-background-color: #{$gray-lighter};
 
-  // Buttons
+  --button-content-color: white;
+  --button-background-color: #{$black-light};
+  --button-hover-content-color: #{$accent-lighter};
+  --button-hover-background-color: #{$black-lighter};
+
   --button-flush-content-color: white;
   --button-flush-background-color: #{$black-regular};
   --button-flush-hover-content-color: #{$accent-lighter};
   --button-flush-hover-background-color: #{$black-light};
 
-  // Inputs in general
   --input-content-color: white;
   --input-content-selected-color: #{$accent-regular};
   --input-background-color: #{$black-dark};
 
-  // Color abstractions
   --color-recomended: #{$green-lighter};
 
-  // Tabs
   --tab-static-background-color: #{$black-light};
   --tab-unselected-background-color: #{$black-light};
   --tab-selected-background-color: #{$accent-regular};

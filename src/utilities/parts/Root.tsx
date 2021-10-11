@@ -21,10 +21,6 @@ export const data = {
 
 export type type = typeof data;
 
-export const HighPoly = () => {
-  return <mesh />;
-};
+export const HighPoly = () => <mesh />;
 
-export const LowPoly = () => {
-  return <mesh />;
-};
+export const LowPoly = () => <mesh />;

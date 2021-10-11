@@ -13,29 +13,18 @@ input {
   border: none;
 }
 
-// ::-webkit-scrollbar-corner {
-//   display: none;
-// }
+@mixin button {
+  background-color: v(button-background-color);
+}
 
-// *::-webkit-scrollbar {
-//   width: 12px;
-// }
+@mixin button-hover {
+  background-color: v(button-hover-background-color);
+}
 
-// // See if this makes it flush
-// *::-webkit-scrollbar-track {
-//   background-color: v(scroll-bar-track-background-color);
-// }
+@mixin button-flush {
+  background-color: v(button-flush-background-color);
+}
 
-// *::-webkit-scrollbar-thumb {
-//   border-radius: 2px;
-
-//   background-color: v(scroll-bar-button-background-color);
-//   border: 5px solid v(scroll-bar-track-background-color);
-// }
-
-// *::-webkit-scrollbar-thumb:hover {
-//   border-radius: 6px;
-
-//   background-color: v(scroll-bar-button-hover-background-color);
-//   border: 3px solid v(scroll-bar-track-background-color);
-// }
+@mixin button-flush-hover {
+  background-color: v(button-flush-hover-background-color);
+}
