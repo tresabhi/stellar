@@ -1,3 +1,4 @@
+import translator from 'utilities/translator';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
 import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
@@ -103,7 +104,7 @@ function Desktop() {
           </Explorer.ListingContainer>
         </Explorer.Container> */}
       </EditingPanel>
-      <LaunchPrompt.ShadeContainer>
+      {/* <LaunchPrompt.ShadeContainer>
         <LaunchPrompt.Container>
           <LaunchPrompt.SubContainer>
             <LaunchPrompt.Title>Draft new...</LaunchPrompt.Title>
@@ -162,7 +163,7 @@ function Desktop() {
             </LaunchPrompt.RecentsColumn>
           </LaunchPrompt.SubContainer>
         </LaunchPrompt.Container>
-      </LaunchPrompt.ShadeContainer>
+      </LaunchPrompt.ShadeContainer> */}
     </PseudoContainer>
   );
 }
