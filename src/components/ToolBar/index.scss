@@ -16,6 +16,7 @@
 .tool-bar-static-icon,
 .tool-bar-drop-down-button-action,
 .tool-bar-drop-down-button-more-options {
+  @include static;
   align-items: center;
   display: flex;
 

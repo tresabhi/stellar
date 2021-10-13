@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
-import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
 import { type as rootType } from '../../utilities/parts/Root';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
@@ -69,7 +68,6 @@ const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
       />
 
       <DeleteIcon className="explorer-part-listing-icon" />
-      <LockIcon className="explorer-part-listing-icon" />
       <EyeIcon className="explorer-part-listing-icon" />
     </button>
   );
