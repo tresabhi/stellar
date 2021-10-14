@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { type as rootBlueprintType } from 'utilities/blueprints/Root';
+import { type as rootPartType } from 'utilities/parts/Root';
 
 export default class blueprintCoreAPI {
   blueprint: rootBlueprintType;
@@ -17,11 +18,22 @@ export default class blueprintCoreAPI {
     this.setBlueprint({ ...this.blueprint, ...merge });
   };
 
+  setSelfStateBlueprint = () => {
+    this.shallowMerge(this.blueprint);
+  };
+
   deletePart = (index: number) => {
-    alert(index);
     this.blueprint.parts.splice(index, 1);
-    this.shallowMerge({
-      parts: this.blueprint.parts,
-    });
+    this.setSelfStateBlueprint();
+  };
+
+  mutatePartData = (index: number, data: rootPartType) => {
+    this.blueprint.parts[index] = data;
+    this.setSelfStateBlueprint();
+  };
+
+  mutatePartDataByShallowMerge = (index: number, data: rootPartType) => {
+    this.blueprint.parts[index] = { ...this.blueprint, ...data };
+    this.setSelfStateBlueprint();
   };
 }
