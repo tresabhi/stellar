@@ -20,15 +20,19 @@ import ToolBar from '../../components/ToolBar';
 import UnitTextInput from '../../components/UnitTextInput';
 import { updateBlueprint } from '../../utilities/blueprints';
 import devBlueprint from '../../utilities/blueprints/shapeAndTextures1.json';
-import { type as rootBlueprintType } from '../../utilities/blueprints/Root';
 
 const Desktop = () => {
-  const [blueprint, setBlueprint] = useState(updateBlueprint(devBlueprint));
-  /**
-   * Does it approprietly to ensure react re-render
-   */
-  const shallowMergeToBlueprint = (object: Object) => {
-    setBlueprint({ ...blueprint, ...object });
+  // let [blueprint, setBlueprint] = useState(
+  //   blueprints.updateBlueprint(devBlueprint),
+  // );
+
+  const originalBlueprint = updateBlueprint(devBlueprint);
+  const [parts, setParts] = useState(originalBlueprint.parts);
+  const blueprint = {
+    ...originalBlueprint,
+
+    parts: parts,
+    setParts: setParts,
   };
 
   return (
@@ -87,8 +91,16 @@ const Desktop = () => {
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
             parts={blueprint.parts}
+            onPartDataMutate={() => {
+              alert('something changed');
+            }}
             onPartDelete={() => {
-              shallowMergeToBlueprint({ parts: [] });
+              let lol = parts;
+              lol = lol.splice(1);
+              setParts(lol);
+
+              // alert(JSON.stringify(blueprint));
+              alert('something got yeeted out of existance');
             }}
           />
         </Explorer.Container>

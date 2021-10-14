@@ -4,15 +4,18 @@ import { FC } from 'react';
 import 'react-dom';
 import * as Part from '../../utilities/parts/index';
 import './index.scss';
+import { type as rootPartType } from '../../utilities/parts/Root';
 
 interface IEditingCanvas {
   center: number;
   offset: { x: number; y: number };
-  parts: Array<any>;
+  parts: Array<rootPartType>;
 }
 const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
   let partsJsx = parts.map((part) => {
-    const PartComponent = Part.getMeshFromPartName(part.n, true);
+    const PartComponent = part['.stellar'].visible
+      ? Part.getMeshFromPartName(part.n, true)
+      : undefined;
     return <PartComponent data={part} offset={offset} />;
   });
 

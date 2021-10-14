@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
-import { type as rootType } from '../../utilities/parts/Root';
+import { ReactComponent as NoEyeIcon } from '../../assets/icons/no-eye.svg';
+import { type as rootPartType } from '../../utilities/parts/Root';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
@@ -29,24 +30,41 @@ const Container: FC<IContainer> = ({ children, rightSide }) => {
 const TabsContainer: FC = ({ children }) => (
   <div className="explorer-tabs-container">{children}</div>
 );
-interface IListingContainer {
-  list: Array<rootType>;
+
+interface IPartsListingContainer {
+  parts: Array<rootPartType>;
+  onPartDataMutate: Function;
+  onPartDelete: Function;
 }
-const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
-  const parsedArray = list?.map((listing) => {
+const PartsListingContainer: FC<IPartsListingContainer> = ({
+  children,
+  parts,
+  onPartDataMutate,
+  onPartDelete,
+}) => {
+  const parsedArray = parts?.map((partData, index) => {
     return (
       <PartListing
-        icon={(listingIcons as any)?.[listing.n] || <EyeIcon />}
+        icon={(listingIcons as any)?.[partData.n] || <EyeIcon />}
         defaultName={
-          listing?.['.stellar']?.label || 'Internally Unlabeled Part'
+          partData?.['.stellar']?.label || 'Internally Unlabeled Part'
         }
+        visible={partData['.stellar'].visible}
+        onVisibilityClick={() => {
+          partData['.stellar'].visible = !partData['.stellar'].visible;
+          onPartDataMutate(index, partData);
+        }}
+        // cannot pass directly because it isn't a mouse click event handler
+        onDeleteClick={() => {
+          onPartDelete();
+        }}
       />
     );
   });
 
   return (
     <div className="explorer-listing-container">
-      {list ? parsedArray : children}
+      {parts ? parsedArray : children}
     </div>
   );
 };
@@ -54,8 +72,17 @@ const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
 interface IPartListing {
   icon: Object;
   defaultName: string;
+  visible: boolean;
+  onVisibilityClick?: MouseEventHandler<SVGSVGElement>;
+  onDeleteClick?: MouseEventHandler<SVGSVGElement>;
 }
-const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
+const PartListing: FC<IPartListing> = ({
+  icon,
+  defaultName,
+  visible,
+  onVisibilityClick,
+  onDeleteClick,
+}) => {
   return (
     <button className="explorer-part-listing">
       {/* icon */}
@@ -67,8 +94,21 @@ const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
         defaultValue={defaultName}
       />
 
-      <DeleteIcon className="explorer-part-listing-icon" />
-      <EyeIcon className="explorer-part-listing-icon" />
+      <DeleteIcon
+        onClick={onDeleteClick}
+        className="explorer-part-listing-icon"
+      />
+      {visible ? (
+        <EyeIcon
+          onClick={onVisibilityClick}
+          className="explorer-part-listing-icon"
+        />
+      ) : (
+        <NoEyeIcon
+          onClick={onVisibilityClick}
+          className="explorer-part-listing-icon"
+        />
+      )}
     </button>
   );
 };
@@ -140,7 +180,7 @@ const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
 export default Object.assign({
   Container,
   TabsContainer,
-  ListingContainer,
+  PartsListingContainer,
 
   Tab,
   StaticTab,
