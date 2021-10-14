@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import blueprintCoreAPI from 'utilities/blueprintCoreAPI';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
 import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
@@ -20,16 +21,10 @@ import ToolBar from '../../components/ToolBar';
 import UnitTextInput from '../../components/UnitTextInput';
 import { updateBlueprint } from '../../utilities/blueprints';
 import devBlueprint from '../../utilities/blueprints/shapeAndTextures1.json';
-import { type as rootBlueprintType } from '../../utilities/blueprints/Root';
 
 const Desktop = () => {
   const [blueprint, setBlueprint] = useState(updateBlueprint(devBlueprint));
-  /**
-   * Does it approprietly to ensure react re-render
-   */
-  const shallowMergeToBlueprint = (object: Object) => {
-    setBlueprint({ ...blueprint, ...object });
-  };
+  const blueprintAPI = new blueprintCoreAPI(blueprint, setBlueprint);
 
   return (
     <PseudoContainer>
@@ -86,17 +81,17 @@ const Desktop = () => {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
-            parts={blueprint.parts}
-            onPartDelete={() => {
-              shallowMergeToBlueprint({ parts: [] });
+            parts={blueprintAPI.blueprint.parts}
+            onPartDelete={(index: number) => {
+              blueprintAPI.deletePart(index);
             }}
           />
         </Explorer.Container>
 
         <EditingCanvas
-          center={blueprint.center}
-          offset={blueprint.offset}
-          parts={blueprint.parts}
+          center={blueprintAPI.blueprint.center}
+          offset={blueprintAPI.blueprint.offset}
+          parts={blueprintAPI.blueprint.parts}
         />
 
         {/* <Explorer.Container rightSide={true}>

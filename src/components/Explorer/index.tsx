@@ -56,7 +56,7 @@ const PartsListingContainer: FC<IPartsListingContainer> = ({
         }}
         // cannot pass directly because it isn't a mouse click event handler
         onDeleteClick={() => {
-          onPartDelete();
+          onPartDelete(index);
         }}
       />
     );
@@ -73,8 +73,8 @@ interface IPartListing {
   icon: Object;
   defaultName: string;
   visible: boolean;
-  onVisibilityClick?: MouseEventHandler<SVGSVGElement>;
-  onDeleteClick?: MouseEventHandler<SVGSVGElement>;
+  onVisibilityClick?: Function;
+  onDeleteClick?: Function;
 }
 const PartListing: FC<IPartListing> = ({
   icon,
@@ -95,17 +95,23 @@ const PartListing: FC<IPartListing> = ({
       />
 
       <DeleteIcon
-        onClick={onDeleteClick}
+        onClick={() => {
+          if (onDeleteClick) onDeleteClick();
+        }}
         className="explorer-part-listing-icon"
       />
       {visible ? (
         <EyeIcon
-          onClick={onVisibilityClick}
+          onClick={() => {
+            if (onVisibilityClick) onVisibilityClick();
+          }}
           className="explorer-part-listing-icon"
         />
       ) : (
         <NoEyeIcon
-          onClick={onVisibilityClick}
+          onClick={() => {
+            if (onVisibilityClick) onVisibilityClick();
+          }}
           className="explorer-part-listing-icon"
         />
       )}
