@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import blueprintCoreAPI from 'utilities/blueprintCoreAPI';
+import { type as rootPartType } from 'utilities/parts/Root';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
 import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
@@ -82,9 +83,10 @@ const Desktop = () => {
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
             parts={blueprintAPI.blueprint.parts}
-            onPartDelete={(index: number) => {
-              blueprintAPI.deletePart(index);
-            }}
+            onPartDelete={(index: number) => blueprintAPI.deletePart(index)}
+            onPartDataMutate={(index: number, data: rootPartType) =>
+              blueprintAPI.mutatePartData(index, data)
+            }
           />
         </Explorer.Container>
 

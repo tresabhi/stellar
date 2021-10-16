@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react';
+import { FC } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
@@ -50,9 +50,11 @@ const PartsListingContainer: FC<IPartsListingContainer> = ({
           partData?.['.stellar']?.label || 'Internally Unlabeled Part'
         }
         visible={partData['.stellar'].visible}
-        onVisibilityClick={() => {
-          partData['.stellar'].visible = !partData['.stellar'].visible;
-          onPartDataMutate(index, partData);
+        onEyeClick={() => {
+          onPartDataMutate(index, {
+            ...partData,
+            '.stellar': { visible: !partData['.stellar'].visible },
+          });
         }}
         // cannot pass directly because it isn't a mouse click event handler
         onDeleteClick={() => {
@@ -73,14 +75,14 @@ interface IPartListing {
   icon: Object;
   defaultName: string;
   visible: boolean;
-  onVisibilityClick?: Function;
-  onDeleteClick?: Function;
+  onEyeClick: Function;
+  onDeleteClick: Function;
 }
 const PartListing: FC<IPartListing> = ({
   icon,
   defaultName,
   visible,
-  onVisibilityClick,
+  onEyeClick,
   onDeleteClick,
 }) => {
   return (
@@ -103,14 +105,14 @@ const PartListing: FC<IPartListing> = ({
       {visible ? (
         <EyeIcon
           onClick={() => {
-            if (onVisibilityClick) onVisibilityClick();
+            onEyeClick();
           }}
           className="explorer-part-listing-icon"
         />
       ) : (
         <NoEyeIcon
           onClick={() => {
-            if (onVisibilityClick) onVisibilityClick();
+            onEyeClick();
           }}
           className="explorer-part-listing-icon"
         />

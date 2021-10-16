@@ -13,9 +13,7 @@ interface IEditingCanvas {
 }
 const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
   let partsJsx = parts.map((part) => {
-    const PartComponent = part['.stellar'].visible
-      ? Part.getMeshFromPartName(part.n, true)
-      : undefined;
+    const PartComponent = Part.getMeshFromPartName(part.n, true);
     return <PartComponent data={part} offset={offset} />;
   });
 

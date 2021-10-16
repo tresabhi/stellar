@@ -18,22 +18,22 @@ export default class blueprintCoreAPI {
     this.setBlueprint({ ...this.blueprint, ...merge });
   };
 
-  setSelfStateBlueprint = () => {
+  updateState = () => {
     this.shallowMerge(this.blueprint);
   };
 
   deletePart = (index: number) => {
     this.blueprint.parts.splice(index, 1);
-    this.setSelfStateBlueprint();
+    this.updateState();
   };
 
   mutatePartData = (index: number, data: rootPartType) => {
     this.blueprint.parts[index] = data;
-    this.setSelfStateBlueprint();
+    this.updateState();
   };
 
   mutatePartDataByShallowMerge = (index: number, data: rootPartType) => {
     this.blueprint.parts[index] = { ...this.blueprint, ...data };
-    this.setSelfStateBlueprint();
+    this.updateState();
   };
 }

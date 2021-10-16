@@ -45,6 +45,8 @@ interface IPart {
 export const LowPoly: FC<IPart> = () => <mesh />;
 
 export const HighPoly: FC<IPart> = ({ data, offset }) => {
+  if (!data['.stellar'].visible) return <mesh />;
+
   const position = {
     x: data.p.x + offset.x,
     y: data.p.y + offset.y,
