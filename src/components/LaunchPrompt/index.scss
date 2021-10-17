@@ -70,16 +70,16 @@
         }
       }
 
-      .invisible-verticle-seperator {
+      .invisible-vertical-separator {
         height: $margin-larger;
       }
 
-      .launch-prompt-recents-column {
+      .launch-prompt-resents-column {
         flex: 1;
         display: flex;
         flex-direction: column;
 
-        .launch-prompt-recents-listing {
+        .launch-prompt-resents-listing {
           @include button-flush;
 
           display: flex;
@@ -95,7 +95,7 @@
             margin-right: $margin-small;
           }
 
-          .launch-prompt-recents-listing-text {
+          .launch-prompt-resents-listing-text {
             display: block;
             color: v(prompt-generic-text-color);
             font-family: v(font-family-regular);
@@ -103,14 +103,14 @@
           }
         }
 
-        .launch-prompt-recents-listing:hover {
+        .launch-prompt-resents-listing:hover {
           @include button-flush-hover;
         }
       }
     }
 
-    .launch-prompt-seperator {
-      height: $launch-prompt-seperator-height;
+    .launch-prompt-separator {
+      height: $launch-prompt-separator-height;
       width: 1px;
       background-color: v(foreground-panel-border-color);
       margin: 0px $margin-larger 0px $margin-larger;

@@ -17,7 +17,7 @@ const SubContainer: FC = ({ children }) => (
   <div className="launch-prompt-subcontainer">{children}</div>
 );
 
-const Seperator = () => <div className="launch-prompt-seperator"></div>;
+const Separator = () => <div className="launch-prompt-separator"></div>;
 
 const Title: FC = ({ children }) => (
   <span className="launch-prompt-title">{children}</span>
@@ -44,29 +44,29 @@ const DraftType: FC<IDraftType> = ({ icon, name, enabled = true }) => (
   </button>
 );
 
-const RecentsColumn: FC = ({ children }) => (
-  <div className="launch-prompt-recents-column">{children}</div>
+const ResentsColumn: FC = ({ children }) => (
+  <div className="launch-prompt-resents-column">{children}</div>
 );
 
 const listingIcons = new Map([
   ['blueprint', <RocketIcon />],
   ['system', <PlanetIcon />],
   ['translation', <TextIcon />],
-  ['unkown', <SaveIcon />],
+  ['unknown', <SaveIcon />],
 ]);
 interface IRecentListing {
   type?: string;
   name: string;
 }
-const RecentListing: FC<IRecentListing> = ({ type = 'unkown', name }) => (
-  <button className="launch-prompt-recents-listing">
+const RecentListing: FC<IRecentListing> = ({ type = 'unknown', name }) => (
+  <button className="launch-prompt-resents-listing">
     {listingIcons.get(type)}
-    <span className="launch-prompt-recents-listing-text">{name}</span>
+    <span className="launch-prompt-resents-listing-text">{name}</span>
   </button>
 );
 
-const InvisibleVerticleSeperator = () => (
-  <div className="invisible-verticle-seperator" />
+const InvisibleVerticalSeparator = () => (
+  <div className="invisible-vertical-separator" />
 );
 
 export default Object.assign({
@@ -74,14 +74,14 @@ export default Object.assign({
   Container,
   SubContainer,
 
-  Seperator,
-  InvisibleVerticleSeperator,
+  Separator,
+  InvisibleVerticalSeparator,
 
   Title,
 
   DraftRow,
   DraftType,
 
-  RecentsColumn,
+  ResentsColumn,
   RecentListing,
 });

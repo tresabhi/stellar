@@ -55,12 +55,12 @@
   margin-right: $margin-smaller;
 }
 
-.tool-bar-seperator {
+.tool-bar-separator {
   flex-shrink: 0;
 
   background-color: v(foreground-panel-border-color);
 
-  height: $tool-bar-seperator-height;
+  height: $tool-bar-separator-height;
   width: $border-width-thin;
   margin: 0px $margin-regular 0px $margin-regular;
 }

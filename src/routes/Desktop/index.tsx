@@ -46,7 +46,7 @@ const Desktop = () => {
         <ToolBar.Button>
           <RedoIcon />
         </ToolBar.Button>
-        <ToolBar.Seperator />
+        <ToolBar.Separator />
 
         <ToolBar.Button>
           <ZoomInIcon />
@@ -58,7 +58,7 @@ const Desktop = () => {
         <ToolBar.Button>
           <GrabIcon />
         </ToolBar.Button>
-        <ToolBar.Seperator />
+        <ToolBar.Separator />
 
         <ToolBar.StaticIcon>
           <GridIcon />
@@ -69,7 +69,7 @@ const Desktop = () => {
         </ToolBar.StaticIcon>
         <UnitTextInput defaultValue={90} suffix="°" />
 
-        <ToolBar.Seperator />
+        <ToolBar.Separator />
         <ToolBar.DropDownButton icon={<FuelCellIcon />} />
         <ToolBar.DropDownButton icon={<EngineIcon />} />
         <ToolBar.DropDownButton icon={<StructureIcon />} />
@@ -87,6 +87,7 @@ const Desktop = () => {
             onPartDataMutate={(index: number, data: rootPartType) =>
               blueprintAPI.mutatePartData(index, data)
             }
+            on
           />
         </Explorer.Container>
 
@@ -128,7 +129,7 @@ const Desktop = () => {
               />
             </LaunchPrompt.DraftRow>
 
-            <LaunchPrompt.InvisibleVerticleSeperator />
+            <LaunchPrompt.InvisibleVerticalSeparator />
 
             <LaunchPrompt.Title>Import local...</LaunchPrompt.Title>
             <LaunchPrompt.DraftRow>
@@ -149,10 +150,10 @@ const Desktop = () => {
               />
             </LaunchPrompt.DraftRow>
           </LaunchPrompt.SubContainer>
-          <LaunchPrompt.Seperator />
+          <LaunchPrompt.Separator />
           <LaunchPrompt.SubContainer>
             <LaunchPrompt.Title>Open recent...</LaunchPrompt.Title>
-            <LaunchPrompt.RecentsColumn>
+            <LaunchPrompt.ResentsColumn>
               <LaunchPrompt.RecentListing
                 type="blueprint"
                 name="recent_blueprint_example.sebp"
@@ -165,8 +166,8 @@ const Desktop = () => {
                 type="translation"
                 name="recent_text_example.setl"
               />
-              <LaunchPrompt.RecentListing name="unkown_file_exmaple.abcd" />
-            </LaunchPrompt.RecentsColumn>
+              <LaunchPrompt.RecentListing name="unknown_file_example.abcd" />
+            </LaunchPrompt.ResentsColumn>
           </LaunchPrompt.SubContainer>
         </LaunchPrompt.Container>
       </LaunchPrompt.ShadeContainer> */}

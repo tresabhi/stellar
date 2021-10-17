@@ -12,7 +12,7 @@
     "action": "$closeBlueprint"
   },
 
-  "seperator",
+  "separator",
   {
     "text": "Import Blueprint...",
     "action": "$importBlueprint"
@@ -22,7 +22,7 @@
     "action": "$exportBlueprint"
   },
 
-  "seperator",
+  "separator",
   {
     "text": "Save Blueprint",
     "action": "$saveBlueprint"

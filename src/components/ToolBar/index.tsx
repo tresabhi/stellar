@@ -21,7 +21,7 @@ const Button: FC = ({ children }) => {
   );
 };
 
-const Seperator = () => <div className="tool-bar-seperator" />;
+const Separator = () => <div className="tool-bar-separator" />;
 
 const StaticIcon: FC = ({ children }) => (
   <div className="tool-bar-static-icon">{children}</div>
@@ -50,7 +50,7 @@ export default Object.assign({
   Container,
 
   Button,
-  Seperator,
+  Separator,
   StaticIcon,
   DropDownButton,
 });

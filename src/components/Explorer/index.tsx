@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, SyntheticEvent, useRef } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
@@ -56,9 +56,12 @@ const PartsListingContainer: FC<IPartsListingContainer> = ({
             '.stellar': { visible: !partData['.stellar'].visible },
           });
         }}
-        // cannot pass directly because it isn't a mouse click event handler
-        onDeleteClick={() => {
-          onPartDelete(index);
+        onDeleteClick={() => onPartDelete(index)}
+        onLabelChange={(label: boolean) => {
+          onPartDataMutate(index, {
+            ...partData,
+            '.stellar': { label: label },
+          });
         }}
       />
     );
@@ -77,6 +80,7 @@ interface IPartListing {
   visible: boolean;
   onEyeClick: Function;
   onDeleteClick: Function;
+  onLabelChange: Function;
 }
 const PartListing: FC<IPartListing> = ({
   icon,
@@ -84,7 +88,11 @@ const PartListing: FC<IPartListing> = ({
   visible,
   onEyeClick,
   onDeleteClick,
+  onLabelChange,
 }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  let preLabel = defaultName;
+
   return (
     <button className="explorer-part-listing">
       {/* icon */}
@@ -94,6 +102,13 @@ const PartListing: FC<IPartListing> = ({
       <input
         className="explorer-part-listing-input"
         defaultValue={defaultName}
+        ref={inputRef}
+        onBlur={() => {
+          if (preLabel !== inputRef.current?.value) {
+            onLabelChange(inputRef.current?.value);
+            preLabel = inputRef.current?.value!;
+          }
+        }}
       />
 
       <DeleteIcon
@@ -104,16 +119,12 @@ const PartListing: FC<IPartListing> = ({
       />
       {visible ? (
         <EyeIcon
-          onClick={() => {
-            onEyeClick();
-          }}
+          onClick={() => onEyeClick()}
           className="explorer-part-listing-icon"
         />
       ) : (
         <NoEyeIcon
-          onClick={() => {
-            onEyeClick();
-          }}
+          onClick={() => onEyeClick()}
           className="explorer-part-listing-icon"
         />
       )}
