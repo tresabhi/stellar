@@ -14,7 +14,7 @@ const UnitTextInput: FC<IUnitTextInput> = ({
   suffix = '',
   isolated = true,
 }) => {
-  // functionality coming soon...
+  // TODO: functionality coming soon...
   return (
     <input
       className={`

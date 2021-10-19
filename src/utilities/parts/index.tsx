@@ -1,3 +1,5 @@
+import { merge } from 'lodash';
+import { FC } from 'react';
 import * as FuelTank from './FuelTank';
 import * as Root from './Root';
 
@@ -14,26 +16,21 @@ const components: any = {
 export const getComponentNameFromPartName = (partName: string): string =>
   partComponentNames.get(partName) ?? 'Root';
 
-export const getComponentFromPartName = (partName: string) => {
+export const getAllFromPartName = (partName: string): Root.partFile => {
   const componentName = getComponentNameFromPartName(partName);
   return components[componentName];
 };
 
-export const getMeshFromPartName = (partName: string, highPoly = true) => {
-  const component = getComponentFromPartName(partName);
-  const poly = highPoly ? 'HighPoly' : 'LowPoly';
-  return component[poly];
+export const getComponentFromPartName = (
+  partName: string,
+): FC<Root.partComponentProps> => {
+  return getAllFromPartName(partName).Component;
 };
 
-export const getComponentDataFromComponentName = (componentName: string) => {
-  return components[componentName].data;
+export const getComponentDataFromPartName = (partName: string): Root.type => {
+  return getAllFromPartName(partName).data;
 };
 
-export const getComponentDataFromPartName = (partName: string) => {
-  return getComponentFromPartName(partName).data;
+export const updatePartData = (partData: Root.minimalType): Root.type => {
+  return merge(getComponentDataFromPartName(partData.n), partData);
 };
-
-export const updatePartData = (partData: Root.type) => ({
-  ...getComponentDataFromPartName(partData.n),
-  ...partData,
-});

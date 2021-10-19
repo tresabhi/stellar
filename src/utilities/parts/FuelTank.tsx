@@ -37,14 +37,8 @@ export type type = Root.type & typeof data;
 
 const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
-interface IPart {
-  data: type;
-  offset: { x: number; y: number };
-}
-
-export const LowPoly: FC<IPart> = () => <mesh />;
-
-export const HighPoly: FC<IPart> = ({ data, offset }) => {
+type partComponentProps = Root.partComponentProps & { data: type; key: string };
+export const Component: FC<partComponentProps> = ({ data, offset, key }) => {
   if (!data['.stellar'].visible) return <mesh />;
 
   const position = {
@@ -559,7 +553,12 @@ export const HighPoly: FC<IPart> = ({ data, offset }) => {
 
     default:
     case '_':
-    case 'Strut': // not supported yet, se we're gonna supply this instead
+    /**
+     * Strut fuel tanks are not supported yet, I'm going to add them when I
+     * implement low poly parts (which are going to be closer to what's
+     * in-game) and it's going to replace this hi-poly crap
+     */
+    case 'Strut':
     case 'Edges Faces': {
       return (
         <group

@@ -1,39 +1,25 @@
 import { Dispatch, SetStateAction } from 'react';
+import { updateBlueprint } from 'utilities/blueprints';
 import { type as rootBlueprintType } from 'utilities/blueprints/Root';
 import { type as rootPartType } from 'utilities/parts/Root';
 
+const a = (a: Object) => alert(JSON.stringify(a, undefined, 2));
+
 export default class blueprintCoreAPI {
   blueprint: rootBlueprintType;
-  setBlueprint: Dispatch<SetStateAction<rootBlueprintType>>;
 
-  constructor(
-    blueprint: rootBlueprintType,
-    setBlueprint: Dispatch<SetStateAction<rootBlueprintType>>,
-  ) {
-    this.blueprint = { ...blueprint };
-    this.setBlueprint = setBlueprint;
+  setPartState: Array<Dispatch<SetStateAction<rootPartType>>> = [];
+  constructor(blueprint: Object) {
+    (() => {
+      this.blueprint = updateBlueprint(blueprint);
+    })();
   }
 
-  shallowMerge = (merge: Object) => {
-    this.setBlueprint({ ...this.blueprint, ...merge });
-  };
+  createPart(data: rootPartType, index?: number, updateParts = false) {
+    (() => {})();
+  }
 
-  updateState = () => {
-    this.shallowMerge(this.blueprint);
-  };
+  deletePart(index: number) {}
 
-  deletePart = (index: number) => {
-    this.blueprint.parts.splice(index, 1);
-    this.updateState();
-  };
-
-  mutatePartData = (index: number, data: rootPartType) => {
-    this.blueprint.parts[index] = data;
-    this.updateState();
-  };
-
-  mutatePartDataByShallowMerge = (index: number, data: rootPartType) => {
-    this.blueprint.parts[index] = { ...this.blueprint, ...data };
-    this.updateState();
-  };
+  mutatePartData(data: rootPartType, index: number) {}
 }

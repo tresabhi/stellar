@@ -24,7 +24,6 @@
   background-color: v(button-flush-background-color);
   font-family: v(font-family-regular);
 
-  // we want it to be 8px, but 2 * 4px stack up to 8px anyways
   margin: 0px $margin-smaller 0px $margin-smaller;
   border-radius: $border-radius-regular;
   padding: 0px $padding-regular 0px $padding-regular;
@@ -83,7 +82,6 @@
 
 .tool-bar-drop-down-button-more-options > img,
 .tool-bar-drop-down-button-more-options > svg {
-  // strict image dimensions
   width: v($tool-bar-drop-down-button-more-options-width);
   height: v($tool-bar-drop-down-button-more-options-height);
 }

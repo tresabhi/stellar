@@ -1,0 +1,14 @@
+{
+  "cSpell.words": [
+    "drei",
+    "frameloop",
+    "lerp",
+    "metalness",
+    "sebp",
+    "seps",
+    "setl"
+  ],
+  "search.exclude": {
+    "**/src/assets/icons": true
+  }
+}

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import blueprintCoreAPI from 'utilities/blueprintCoreAPI';
 import { type as rootPartType } from 'utilities/parts/Root';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
@@ -8,7 +7,6 @@ import { ReactComponent as GridIcon } from '../../assets/icons/grid.svg';
 import { ReactComponent as RedoIcon } from '../../assets/icons/redo.svg';
 import { ReactComponent as RotationIcon } from '../../assets/icons/rotation.svg';
 import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
-// import LaunchPrompt from '../../components/LaunchPrompt';
 import { ReactComponent as StructureIcon } from '../../assets/icons/structure.svg';
 import { ReactComponent as UndoIcon } from '../../assets/icons/undo.svg';
 import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
@@ -20,12 +18,10 @@ import Explorer from '../../components/Explorer';
 import PseudoContainer from '../../components/PseudoContainer';
 import ToolBar from '../../components/ToolBar';
 import UnitTextInput from '../../components/UnitTextInput';
-import { updateBlueprint } from '../../utilities/blueprints';
 import devBlueprint from '../../utilities/blueprints/shapeAndTextures1.json';
 
 const Desktop = () => {
-  const [blueprint, setBlueprint] = useState(updateBlueprint(devBlueprint));
-  const blueprintAPI = new blueprintCoreAPI(blueprint, setBlueprint);
+  const blueprintAPI = new blueprintCoreAPI(devBlueprint);
 
   return (
     <PseudoContainer>
@@ -84,10 +80,9 @@ const Desktop = () => {
           <Explorer.PartsListingContainer
             parts={blueprintAPI.blueprint.parts}
             onPartDelete={(index: number) => blueprintAPI.deletePart(index)}
-            onPartDataMutate={(index: number, data: rootPartType) =>
-              blueprintAPI.mutatePartData(index, data)
+            onPartDataMutate={(data: rootPartType, index: number) =>
+              blueprintAPI.mutatePartData(data, index)
             }
-            on
           />
         </Explorer.Container>
 

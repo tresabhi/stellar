@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
@@ -47,22 +47,21 @@ const PartsListingContainer: FC<IPartsListingContainer> = ({
       <PartListing
         icon={(listingIcons as any)?.[partData.n] || <EyeIcon />}
         defaultName={
-          partData?.['.stellar']?.label || 'Internally Unlabeled Part'
+          partData?.['.stellar']?.label ?? 'Internally Unlabeled Part'
         }
-        visible={partData['.stellar'].visible}
+        visible={partData?.['.stellar']?.visible ?? true}
         onEyeClick={() => {
           onPartDataMutate(index, {
-            ...partData,
             '.stellar': { visible: !partData['.stellar'].visible },
           });
         }}
         onDeleteClick={() => onPartDelete(index)}
         onLabelChange={(label: boolean) => {
           onPartDataMutate(index, {
-            ...partData,
             '.stellar': { label: label },
           });
         }}
+        key={`part-listing-${index}`}
       />
     );
   });
@@ -93,6 +92,10 @@ const PartListing: FC<IPartListing> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   let preLabel = defaultName;
 
+  useEffect(() => {
+    inputRef.current!.value = defaultName;
+  });
+
   return (
     <button className="explorer-part-listing">
       {/* icon */}
@@ -101,7 +104,6 @@ const PartListing: FC<IPartListing> = ({
       {/* text */}
       <input
         className="explorer-part-listing-input"
-        defaultValue={defaultName}
         ref={inputRef}
         onBlur={() => {
           if (preLabel !== inputRef.current?.value) {
@@ -153,8 +155,8 @@ interface ITab {
   defaultSelected?: boolean;
 }
 const Tab: FC<ITab> = ({ children, defaultSelected }) => {
-  // let for now, react state hook in the future
-  let selected = defaultSelected;
+  // const for now, react state hook in the future
+  const selected = defaultSelected;
   return (
     <button
       className={`

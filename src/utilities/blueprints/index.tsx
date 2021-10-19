@@ -1,13 +1,13 @@
 import { merge } from 'lodash';
 import { updatePartData } from '../parts';
 import { type as rootPartType } from '../parts/Root';
-import { data as defaultBlueprint } from './Root';
-import { type as rootBlueprintType } from './Root';
+import {
+  data as defaultBlueprintData,
+  type as rootBlueprintType,
+} from './Root';
 
-export const mergeBlueprintGlobals = (
-  blueprint: Object | rootBlueprintType,
-) => {
-  return merge(defaultBlueprint, blueprint);
+export const mergeBlueprintGlobals = (blueprint: Object): rootBlueprintType => {
+  return merge(defaultBlueprintData, blueprint);
 };
 
 export const blueprintToLatestVersion = (

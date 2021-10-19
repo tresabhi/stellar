@@ -1,4 +1,6 @@
 import '@react-three/fiber';
+import { FC } from 'react';
+import { Type } from 'typescript';
 
 export const data = {
   '.stellar': {
@@ -19,8 +21,19 @@ export const data = {
   t: '-Infinity',
 };
 
+export type minimalType = { n: string };
+
 export type type = typeof data;
 
-export const HighPoly = () => <mesh />;
+export type partFile = {
+  data: type;
+  type: Type;
+  Component: FC;
+};
 
-export const LowPoly = () => <mesh />;
+export type partComponentProps = {
+  data: type;
+  offset: { x: number; y: number };
+};
+
+export const Component = () => <mesh />;
