@@ -3,8 +3,6 @@ import { updateBlueprint } from 'utilities/blueprints';
 import { type as rootBlueprintType } from 'utilities/blueprints/Root';
 import { type as rootPartType } from 'utilities/parts/Root';
 
-const a = (a: Object) => alert(JSON.stringify(a, undefined, 2));
-
 export default class blueprintCoreAPI {
   blueprint: rootBlueprintType;
 

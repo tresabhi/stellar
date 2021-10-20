@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
 import * as FuelTank from './FuelTank';
 import * as Root from './Root';
@@ -32,5 +32,5 @@ export const getComponentDataFromPartName = (partName: string): Root.type => {
 };
 
 export const updatePartData = (partData: Root.minimalType): Root.type => {
-  return merge(getComponentDataFromPartName(partData.n), partData);
+  return merge(cloneDeep(getComponentDataFromPartName(partData.n)), partData);
 };

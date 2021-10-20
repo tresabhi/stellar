@@ -4,7 +4,7 @@ import { Type } from 'typescript';
 
 export const data = {
   '.stellar': {
-    label: 'Internally Unlabeled Part',
+    label: 'Root Part',
     visible: true,
     locked: false,
   },

@@ -25,6 +25,7 @@ export const updateBlueprint = (
 ): rootBlueprintType => {
   let updatedBlueprint = mergeBlueprintGlobals(blueprint);
   updatedBlueprint = blueprintToLatestVersion(updatedBlueprint);
+
   updatedBlueprint.parts = updatePartsData(updatedBlueprint.parts);
 
   return updatedBlueprint;

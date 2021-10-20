@@ -1,15 +1,43 @@
 import '@react-three/fiber';
-import { times, merge } from 'lodash';
+import { times } from 'lodash';
 import { FC } from 'react';
 import * as Root from './Root';
 
-export const data = merge(Root.data, {
+// export const data = merge(Root.data, {
+//   '.stellar': {
+//     label: 'Fuel Tank',
+//   },
+//   n: 'Fuel Tank',
+//   N: {
+//     width_original: 2,
+//     width_a: 2,
+//     width_b: 2,
+//     height: 2,
+//     fuel_percent: 1,
+//   },
+//   T: {
+//     color_tex: '_',
+//     shape_tex: '_',
+//   },
+// });
+
+export const data = {
+  n: 'Fuel Tank',
+  p: {
+    x: 0,
+    y: 0,
+  },
+  o: {
+    x: 1,
+    y: 1,
+    z: 0,
+  },
+  t: '-Infinity',
   '.stellar': {
     label: 'Fuel Tank',
     visible: true,
     locked: false,
   },
-  n: 'Fuel Tank',
   N: {
     width_original: 2,
     width_a: 2,
@@ -21,7 +49,7 @@ export const data = merge(Root.data, {
     color_tex: '_',
     shape_tex: '_',
   },
-});
+};
 
 export type type = Root.type & typeof data;
 
@@ -37,8 +65,8 @@ export type type = Root.type & typeof data;
 
 const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
-type partComponentProps = Root.partComponentProps & { data: type; key: string };
-export const Component: FC<partComponentProps> = ({ data, offset, key }) => {
+type partComponentProps = Root.partComponentProps & { data: type };
+export const Component: FC<partComponentProps> = ({ data, offset }) => {
   if (!data['.stellar'].visible) return <mesh />;
 
   const position = {
@@ -551,13 +579,13 @@ export const Component: FC<partComponentProps> = ({ data, offset, key }) => {
       );
     }
 
-    default:
-    case '_':
     /**
      * Strut fuel tanks are not supported yet, I'm going to add them when I
      * implement low poly parts (which are going to be closer to what's
      * in-game) and it's going to replace this hi-poly crap
      */
+    default:
+    case '_':
     case 'Strut':
     case 'Edges Faces': {
       return (
