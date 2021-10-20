@@ -51,15 +51,21 @@ const PartsListingContainer: FC<IPartsListingContainer> = ({
         }
         visible={partData?.['.stellar']?.visible ?? true}
         onEyeClick={() => {
-          onPartDataMutate(index, {
-            '.stellar': { visible: !partData['.stellar'].visible },
-          });
+          onPartDataMutate(
+            {
+              '.stellar': { visible: !partData['.stellar'].visible },
+            },
+            index,
+          );
         }}
         onDeleteClick={() => onPartDelete(index)}
         onLabelChange={(label: boolean) => {
-          onPartDataMutate(index, {
-            '.stellar': { label: label },
-          });
+          onPartDataMutate(
+            {
+              '.stellar': { label: label },
+            },
+            index,
+          );
         }}
         key={`part-listing-${index}`}
       />
