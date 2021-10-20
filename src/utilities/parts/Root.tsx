@@ -1,5 +1,5 @@
 import '@react-three/fiber';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { Type } from 'typescript';
 
 export const data = {
@@ -36,4 +36,4 @@ export type partComponentProps = {
   offset: { x: number; y: number };
 };
 
-export const Component = () => <mesh />;
+export const Component = memo(() => <mesh />);

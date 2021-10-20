@@ -23,7 +23,12 @@ export default class blueprintCoreAPI {
     (() => {})();
   }
 
-  deletePart(index: number) {}
+  deletePart(index: number) {
+    const newParts = [...this.blueprint.parts];
+
+    // newParts.splice(index, 1);
+    this.setPartsState(newParts);
+  }
 
   mutatePartData(data: rootPartType, index: number) {
     const newPartData = merge(this.blueprint.parts[index], data);

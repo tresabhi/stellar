@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, memo, useEffect, useRef } from 'react';
 import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
 import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
@@ -87,58 +87,60 @@ interface IPartListing {
   onDeleteClick: Function;
   onLabelChange: Function;
 }
-const PartListing: FC<IPartListing> = ({
-  icon,
-  defaultName,
-  visible,
-  onEyeClick,
-  onDeleteClick,
-  onLabelChange,
-}) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  let preLabel = defaultName;
+const PartListing: FC<IPartListing> = memo(
+  ({
+    icon,
+    defaultName,
+    visible,
+    onEyeClick,
+    onDeleteClick,
+    onLabelChange,
+  }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    let preLabel = defaultName;
 
-  useEffect(() => {
-    inputRef.current!.value = defaultName;
-  });
+    useEffect(() => {
+      inputRef.current!.value = defaultName;
+    });
 
-  return (
-    <button className="explorer-part-listing">
-      {/* icon */}
-      {icon}
+    return (
+      <button className="explorer-part-listing">
+        {/* icon */}
+        {icon}
 
-      {/* text */}
-      <input
-        className="explorer-part-listing-input"
-        ref={inputRef}
-        onBlur={() => {
-          if (preLabel !== inputRef.current?.value) {
-            onLabelChange(inputRef.current?.value);
-            preLabel = inputRef.current?.value!;
-          }
-        }}
-      />
+        {/* text */}
+        <input
+          className="explorer-part-listing-input"
+          ref={inputRef}
+          onBlur={() => {
+            if (preLabel !== inputRef.current?.value) {
+              onLabelChange(inputRef.current?.value);
+              preLabel = inputRef.current?.value!;
+            }
+          }}
+        />
 
-      <DeleteIcon
-        onClick={() => {
-          if (onDeleteClick) onDeleteClick();
-        }}
-        className="explorer-part-listing-icon"
-      />
-      {visible ? (
-        <EyeIcon
-          onClick={() => onEyeClick()}
+        <DeleteIcon
+          onClick={() => {
+            if (onDeleteClick) onDeleteClick();
+          }}
           className="explorer-part-listing-icon"
         />
-      ) : (
-        <NoEyeIcon
-          onClick={() => onEyeClick()}
-          className="explorer-part-listing-icon"
-        />
-      )}
-    </button>
-  );
-};
+        {visible ? (
+          <EyeIcon
+            onClick={() => onEyeClick()}
+            className="explorer-part-listing-icon"
+          />
+        ) : (
+          <NoEyeIcon
+            onClick={() => onEyeClick()}
+            className="explorer-part-listing-icon"
+          />
+        )}
+      </button>
+    );
+  },
+);
 
 interface IPropertyListing {
   subProperties?: Array<Object>;
