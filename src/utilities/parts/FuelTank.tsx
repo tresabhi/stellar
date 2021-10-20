@@ -1,6 +1,6 @@
 import '@react-three/fiber';
 import { times } from 'lodash';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import * as Root from './Root';
 
 // export const data = merge(Root.data, {
@@ -66,7 +66,7 @@ export type type = Root.type & typeof data;
 const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
 type partComponentProps = Root.partComponentProps & { data: type };
-export const Component: FC<partComponentProps> = ({ data, offset }) => {
+export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
   if (!data['.stellar'].visible) return <mesh />;
 
   const position = {
@@ -733,4 +733,4 @@ export const Component: FC<partComponentProps> = ({ data, offset }) => {
       );
     }
   }
-};
+});
