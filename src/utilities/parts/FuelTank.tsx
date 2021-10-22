@@ -65,7 +65,10 @@ export type type = Root.type & typeof data;
 
 const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
-type partComponentProps = Root.partComponentProps & { data: type };
+type partComponentProps = Root.partComponentProps & {
+  data: type;
+};
+
 export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
   if (!data['.stellar'].visible) return <mesh />;
 

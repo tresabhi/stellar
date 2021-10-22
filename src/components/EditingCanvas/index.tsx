@@ -1,10 +1,10 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { FC, ReactElement } from 'react';
+import { FC } from 'react';
 import 'react-dom';
 import * as Part from '../../utilities/parts/index';
-import './index.scss';
 import { type as rootPartType } from '../../utilities/parts/Root';
+import './index.scss';
 
 interface IEditingCanvas {
   center: number;
@@ -12,7 +12,7 @@ interface IEditingCanvas {
   parts: Array<rootPartType>;
 }
 const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
-  const partsJsx: Array<ReactElement> = parts.map((part, index) => {
+  const partsJsx = parts.map((part, index) => {
     const PartComponent = Part.getComponentFromPartName(part.n);
 
     return (

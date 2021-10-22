@@ -1,4 +1,5 @@
-import blueprintCoreAPI from 'utilities/blueprintCoreAPI';
+import blueprintCore from 'core/blueprint';
+import { useEffect } from 'react';
 import { type as rootPartType } from 'utilities/parts/Root';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
@@ -21,7 +22,7 @@ import UnitTextInput from '../../components/UnitTextInput';
 import devBlueprint from '../../utilities/blueprints/shapeAndTextures1.json';
 
 const Desktop = () => {
-  const blueprintAPI = new blueprintCoreAPI(devBlueprint);
+  const blueprint = new blueprintCore(devBlueprint);
 
   return (
     <PseudoContainer>
@@ -78,18 +79,18 @@ const Desktop = () => {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
-            parts={blueprintAPI.blueprint.parts}
-            onPartDelete={(index: number) => blueprintAPI.deletePart(index)}
+            parts={blueprint.state.parts}
+            onPartDelete={(index: number) => blueprint.deletePart(index)}
             onPartDataMutate={(data: rootPartType, index: number) =>
-              blueprintAPI.mutatePartData(data, index)
+              blueprint.mutatePartData(data, index)
             }
           />
         </Explorer.Container>
 
         <EditingCanvas
-          center={blueprintAPI.blueprint.center}
-          offset={blueprintAPI.blueprint.offset}
-          parts={blueprintAPI.blueprint.parts}
+          center={blueprint.state.center}
+          offset={blueprint.state.offset}
+          parts={blueprint.state.parts}
         />
 
         {/* <Explorer.Container rightSide={true}>

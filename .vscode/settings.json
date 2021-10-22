@@ -1,13 +1,17 @@
 {
   "cSpell.words": [
+    "browserslist",
     "drei",
     "frameloop",
     "Interstage",
     "lerp",
     "metalness",
+    "predeploy",
     "sebp",
     "seps",
-    "setl"
+    "setl",
+    "stdlib",
+    "stellareditor"
   ],
   "search.exclude": {
     "**/src/assets/icons": true
