@@ -11,6 +11,9 @@
     "seps",
     "setl",
     "stdlib",
+    "stellaralpha",
+    "stellarbeta",
+    "stellaredit",
     "stellareditor"
   ],
   "search.exclude": {
