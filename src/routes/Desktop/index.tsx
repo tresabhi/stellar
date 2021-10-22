@@ -1,5 +1,5 @@
 import blueprintCore from 'core/blueprint';
-import { type as rootPartType } from 'utilities/parts/Root';
+import { type as rootPartType } from 'core/parts/Root';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
 import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
@@ -18,7 +18,7 @@ import Explorer from '../../components/Explorer';
 import PseudoContainer from '../../components/PseudoContainer';
 import ToolBar from '../../components/ToolBar';
 import UnitTextInput from '../../components/UnitTextInput';
-import devBlueprint from '../../utilities/blueprints/shapeAndTextures1.json';
+import devBlueprint from '../../assets/blueprints/shapeAndTextures1.json';
 
 const Desktop = () => {
   const blueprint = new blueprintCore(devBlueprint);

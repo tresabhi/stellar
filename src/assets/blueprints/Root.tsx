@@ -1,4 +1,4 @@
-import { type as rootPartType } from '../parts/Root';
+import { type as rootPartType } from '../../core/parts/Root';
 
 const typedParts: Array<rootPartType> = [];
 const typedStages: Array<number> = [];

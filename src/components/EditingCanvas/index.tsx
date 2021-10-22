@@ -2,8 +2,8 @@ import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { FC } from 'react';
 import 'react-dom';
-import * as Part from '../../utilities/parts/index';
-import { type as rootPartType } from '../../utilities/parts/Root';
+import * as Part from '../../core/parts/index';
+import { type as rootPartType } from '../../core/parts/Root';
 import './index.scss';
 
 interface IEditingCanvas {
