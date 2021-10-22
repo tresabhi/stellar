@@ -1,5 +1,4 @@
 import blueprintCore from 'core/blueprint';
-import { useEffect } from 'react';
 import { type as rootPartType } from 'utilities/parts/Root';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
