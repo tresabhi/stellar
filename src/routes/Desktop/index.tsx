@@ -1,5 +1,7 @@
 import blueprintCore from 'core/blueprint';
-import { type as rootPartType } from 'core/parts/Root';
+import { type as rootPartType } from 'core/blueprint/parts/Root';
+import devBlueprint from '../../assets/blueprints/shapeAndTextures1.json';
+import toolbarTop from '../../assets/contexts/toolbarTop';
 import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
 import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
 import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
@@ -16,62 +18,13 @@ import EditingCanvas from '../../components/EditingCanvas';
 import EditingPanel from '../../components/EditingPanel';
 import Explorer from '../../components/Explorer';
 import PseudoContainer from '../../components/PseudoContainer';
-import ToolBar from '../../components/ToolBar';
 import UnitTextInput from '../../components/UnitTextInput';
-import devBlueprint from '../../assets/blueprints/shapeAndTextures1.json';
 
 const Desktop = () => {
   const blueprint = new blueprintCore(devBlueprint);
 
   return (
     <PseudoContainer>
-      <ToolBar.Container>
-        <ToolBar.Button>File</ToolBar.Button>
-        <ToolBar.Button>Edit</ToolBar.Button>
-        <ToolBar.Button>Selection</ToolBar.Button>
-        <ToolBar.Button>View</ToolBar.Button>
-        <ToolBar.Button>Help</ToolBar.Button>
-      </ToolBar.Container>
-      <ToolBar.Container>
-        <ToolBar.Button>
-          <SaveIcon />
-        </ToolBar.Button>
-        <ToolBar.Button>
-          <UndoIcon />
-        </ToolBar.Button>
-        <ToolBar.Button>
-          <RedoIcon />
-        </ToolBar.Button>
-        <ToolBar.Separator />
-
-        <ToolBar.Button>
-          <ZoomInIcon />
-        </ToolBar.Button>
-        <ToolBar.Button>
-          <ZoomOutIcon />
-        </ToolBar.Button>
-        <UnitTextInput defaultValue={100} suffix="%" />
-        <ToolBar.Button>
-          <GrabIcon />
-        </ToolBar.Button>
-        <ToolBar.Separator />
-
-        <ToolBar.StaticIcon>
-          <GridIcon />
-        </ToolBar.StaticIcon>
-        <UnitTextInput defaultValue={2} suffix="m" />
-        <ToolBar.StaticIcon>
-          <RotationIcon />
-        </ToolBar.StaticIcon>
-        <UnitTextInput defaultValue={90} suffix="°" />
-
-        <ToolBar.Separator />
-        <ToolBar.DropDownButton icon={<FuelCellIcon />} />
-        <ToolBar.DropDownButton icon={<EngineIcon />} />
-        <ToolBar.DropDownButton icon={<StructureIcon />} />
-        <ToolBar.DropDownButton icon={<WheelIcon />} />
-      </ToolBar.Container>
-
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>

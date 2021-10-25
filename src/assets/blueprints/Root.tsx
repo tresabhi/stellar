@@ -1,4 +1,4 @@
-import { type as rootPartType } from '../../core/parts/Root';
+import { type as rootPartType } from '../../core/blueprint/parts/Root';
 
 const typedParts: Array<rootPartType> = [];
 const typedStages: Array<number> = [];

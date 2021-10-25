@@ -2,7 +2,7 @@ import { merge } from 'lodash';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { updateBlueprint } from 'assets/blueprints';
 import { type as rootBlueprintType } from 'assets/blueprints/Root';
-import { type as rootPartType } from 'core/parts/Root';
+import { type as rootPartType } from 'core/blueprint/parts/Root';
 
 export default class blueprintCoreAPI {
   state: rootBlueprintType;
