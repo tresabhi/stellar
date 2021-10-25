@@ -1,30 +1,16 @@
 import blueprintCore from 'core/blueprint';
 import { type as rootPartType } from 'core/blueprint/parts/Root';
 import devBlueprint from '../../assets/blueprints/shapeAndTextures1.json';
-import toolbarTop from '../../assets/contexts/toolbarTop';
-import { ReactComponent as EngineIcon } from '../../assets/icons/engine.svg';
-import { ReactComponent as FuelCellIcon } from '../../assets/icons/fuel-tank.svg';
-import { ReactComponent as GrabIcon } from '../../assets/icons/grab.svg';
-import { ReactComponent as GridIcon } from '../../assets/icons/grid.svg';
-import { ReactComponent as RedoIcon } from '../../assets/icons/redo.svg';
-import { ReactComponent as RotationIcon } from '../../assets/icons/rotation.svg';
-import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
-import { ReactComponent as StructureIcon } from '../../assets/icons/structure.svg';
-import { ReactComponent as UndoIcon } from '../../assets/icons/undo.svg';
-import { ReactComponent as WheelIcon } from '../../assets/icons/wheel.svg';
-import { ReactComponent as ZoomInIcon } from '../../assets/icons/zoom-in.svg';
-import { ReactComponent as ZoomOutIcon } from '../../assets/icons/zoom-out.svg';
 import EditingCanvas from '../../components/EditingCanvas';
 import EditingPanel from '../../components/EditingPanel';
 import Explorer from '../../components/Explorer';
 import PseudoContainer from '../../components/PseudoContainer';
-import UnitTextInput from '../../components/UnitTextInput';
 
 const Desktop = () => {
   const blueprint = new blueprintCore(devBlueprint);
 
   return (
-    <PseudoContainer>
+    <PseudoContainer fullscreen={true} flex={true}>
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>
