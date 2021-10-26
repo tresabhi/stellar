@@ -23,7 +23,6 @@
     "@types/react-router": "^5.1.16",
     "@types/react-router-dom": "^5.1.8",
     "@types/three": "^0.131.0",
-    "firebase-tools": "^9.18.0"
   },
   "scripts": {
     "format": "prettier --write \"**/*.@(json|js|jsx|css|scss|sass|md|ts|tsx|html|xml|yml)\"",
@@ -33,6 +32,8 @@
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
     "deploy": "gh-pages -d build",
+    "firebase-tools": "^9.18.0",
+    "prettier": "^2.4.1",
     "pseudo": "npm -v"
   },
   "eslintConfig": {
