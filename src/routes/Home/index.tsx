@@ -13,13 +13,13 @@ const Home = () => {
         <DevicePicker.Title>Which Device Are You On?</DevicePicker.Title>
         <DevicePicker.List>
           <DevicePicker.Card
-            recomended={isDesktop}
+            recommended={isDesktop}
             to="/desktop"
             text="Desktop"
           >
             <DesktopIcon />
           </DevicePicker.Card>
-          <DevicePicker.Card recomended={isMobile} to="/mobile" text="Mobile">
+          <DevicePicker.Card recommended={isMobile} to="/mobile" text="Mobile">
             <MobileIcon />
           </DevicePicker.Card>
         </DevicePicker.List>

@@ -35,7 +35,7 @@ const Card: FC<CardProps> = ({ to, text, recommended, children }) => {
 
 const Build: FC = () => {
   let version = 'v' + (MetaData?.version?.join('.') || 'Unknown');
-  const unknownDomainName = 'Unkown Build';
+  const unknownDomainName = 'Unknown Build';
   const domainNames = MetaData.builds;
 
   return (
