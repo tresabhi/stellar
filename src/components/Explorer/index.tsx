@@ -11,10 +11,10 @@ const listingIcons = {
   'Fuel Tank': <FuelTankIcon />,
 };
 
-interface IContainer {
+type ContainerProps = {
   rightSide?: boolean;
-}
-const Container: FC<IContainer> = ({ children, rightSide }) => {
+};
+const Container: FC<ContainerProps> = ({ children, rightSide }) => {
   return (
     <div
       className={`
@@ -31,12 +31,12 @@ const TabsContainer: FC = ({ children }) => (
   <div className="explorer-tabs-container">{children}</div>
 );
 
-interface IPartsListingContainer {
+type PartsListingContainerProps = {
   parts: Array<rootPartType>;
   onPartDataMutate: Function;
   onPartDelete: Function;
-}
-const PartsListingContainer: FC<IPartsListingContainer> = ({
+};
+const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
   parts,
   onPartDataMutate,
@@ -67,7 +67,6 @@ const PartsListingContainer: FC<IPartsListingContainer> = ({
             index,
           );
         }}
-        key={`part-listing-${index}`}
       />
     );
   });
@@ -79,15 +78,15 @@ const PartsListingContainer: FC<IPartsListingContainer> = ({
   );
 };
 
-interface IPartListing {
+type PartListingProps = {
   icon: Object;
   defaultName: string;
   visible: boolean;
   onEyeClick: Function;
   onDeleteClick: Function;
   onLabelChange: Function;
-}
-const PartListing: FC<IPartListing> = memo(
+};
+const PartListing: FC<PartListingProps> = memo(
   ({
     icon,
     defaultName,
@@ -142,10 +141,13 @@ const PartListing: FC<IPartListing> = memo(
   },
 );
 
-interface IPropertyListing {
+type PropertyListingProps = {
   subProperties?: Array<Object>;
-}
-const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
+};
+const PropertyListing: FC<PropertyListingProps> = ({
+  children,
+  subProperties,
+}) => {
   return (
     <div className="explorer-property-listing">
       {/* text */}
@@ -159,10 +161,10 @@ const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
   );
 };
 
-interface ITab {
+type TabProps = {
   defaultSelected?: boolean;
-}
-const Tab: FC<ITab> = ({ children, defaultSelected }) => {
+};
+const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
   // const for now, react state hook in the future
   const selected = defaultSelected;
   return (
@@ -177,17 +179,17 @@ const Tab: FC<ITab> = ({ children, defaultSelected }) => {
   );
 };
 
-const StaticTab: FC<ITab> = ({ children }) => (
+const StaticTab: FC<TabProps> = ({ children }) => (
   <div className="explorer-static-tab">{children}</div>
 );
 
-interface ISubPropertyTextInput {
+type SubPropertyTextInputProps = {
   defaultValue: number | string;
   prefix?: string;
   suffix?: string;
   name?: string;
-}
-const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
+};
+const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
   children,
   defaultValue,
   prefix,
@@ -206,16 +208,18 @@ const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
   );
 };
 
-export default Object.assign({
-  Container,
-  TabsContainer,
-  PartsListingContainer,
+export default {
+  ...{
+    Container,
+    TabsContainer,
+    PartsListingContainer,
 
-  Tab,
-  StaticTab,
+    Tab,
+    StaticTab,
 
-  PartListing,
-  PropertyListing,
+    PartListing,
+    PropertyListing,
 
-  SubPropertyTextInput,
-});
+    SubPropertyTextInput,
+  },
+};

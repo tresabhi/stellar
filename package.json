@@ -26,6 +26,7 @@
     "firebase-tools": "^9.18.0"
   },
   "scripts": {
+    "format": "prettier --write \"**/*.@(json|js|jsx|css|scss|sass|md|ts|tsx|html|xml|yml)\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

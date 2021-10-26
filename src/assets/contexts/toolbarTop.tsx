@@ -1,7 +1,7 @@
 export default [
   {
     type: 'textButton',
-    content: 'File',
+    text: 'File',
     action: {
       type: 'function',
       name: 'testFunction',
@@ -9,18 +9,18 @@ export default [
   },
   {
     type: 'textButton',
-    content: 'Edit',
+    text: 'Edit',
   },
   {
     type: 'textButton',
-    content: 'Selection',
+    text: 'Selection',
   },
   {
     type: 'textButton',
-    content: 'View',
+    text: 'View',
   },
   {
     type: 'textButton',
-    content: 'Help',
+    text: 'Help',
   },
 ];

@@ -27,12 +27,12 @@ const DraftRow: FC = ({ children }) => (
   <div className="launch-prompt-draft-row">{children}</div>
 );
 
-interface IDraftType {
+type DraftTypeProps = {
   icon: Object;
   name: string;
   enabled: boolean;
-}
-const DraftType: FC<IDraftType> = ({ icon, name, enabled = true }) => (
+};
+const DraftType: FC<DraftTypeProps> = ({ icon, name, enabled = true }) => (
   <button
     className={`
       launch-prompt-draft-type
@@ -54,11 +54,12 @@ const listingIcons = new Map([
   ['translation', <TextIcon />],
   ['unknown', <SaveIcon />],
 ]);
-interface IRecentListing {
+
+type RecentListingProps = {
   type?: string;
   name: string;
-}
-const RecentListing: FC<IRecentListing> = ({ type = 'unknown', name }) => (
+};
+const RecentListing: FC<RecentListingProps> = ({ type = 'unknown', name }) => (
   <button className="launch-prompt-resents-listing">
     {listingIcons.get(type)}
     <span className="launch-prompt-resents-listing-text">{name}</span>
@@ -69,19 +70,21 @@ const InvisibleVerticalSeparator = () => (
   <div className="invisible-vertical-separator" />
 );
 
-export default Object.assign({
-  ShadeContainer,
-  Container,
-  SubContainer,
+export default {
+  ...{
+    ShadeContainer,
+    Container,
+    SubContainer,
 
-  Separator,
-  InvisibleVerticalSeparator,
+    Separator,
+    InvisibleVerticalSeparator,
 
-  Title,
+    Title,
 
-  DraftRow,
-  DraftType,
+    DraftRow,
+    DraftType,
 
-  ResentsColumn,
-  RecentListing,
-});
+    ResentsColumn,
+    RecentListing,
+  },
+};

@@ -2,10 +2,10 @@ import { FC, useState } from 'react';
 
 import './index.scss';
 
-interface IToggle {
+type ToggleProps = {
   defaultOn: boolean;
-}
-const Toggle: FC<IToggle> = ({ defaultOn }) => {
+};
+const Toggle: FC<ToggleProps> = ({ defaultOn }) => {
   const [state, setState] = useState(defaultOn);
   let trueState = defaultOn;
 

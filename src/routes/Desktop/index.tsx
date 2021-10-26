@@ -1,3 +1,4 @@
+import ContextMenu from 'components/ContextMenu';
 import blueprintCore from 'core/blueprint';
 import { type as rootPartType } from 'core/blueprint/parts/Root';
 import devBlueprint from '../../assets/blueprints/shapeAndTextures1.json';
@@ -11,6 +12,7 @@ const Desktop = () => {
 
   return (
     <PseudoContainer fullscreen={true} flex={true}>
+      <ContextMenu.Container toolbar={true} data={[]} />
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>

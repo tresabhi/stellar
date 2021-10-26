@@ -16,18 +16,18 @@ const Title: FC = ({ children }) => (
   <h2 className="device-picker-title">{children}</h2>
 );
 
-interface ICard {
+type CardProps = {
   to: string;
   text?: string;
-  recomended?: boolean;
-}
-const Card: FC<ICard> = ({ to, text, recomended, children }) => {
+  recommended?: boolean;
+};
+const Card: FC<CardProps> = ({ to, text, recommended, children }) => {
   return (
     <Link to={to} className="device-picker-card">
       {children}
       {text}
-      {recomended ? (
-        <p className="device-picker-recomended">(Recommended)</p>
+      {recommended ? (
+        <p className="device-picker-recommended">(Recommended)</p>
       ) : null}
     </Link>
   );
@@ -47,11 +47,13 @@ const Build: FC = () => {
   );
 };
 
-export default Object.assign({
-  Container,
-  Card,
+export default {
+  ...{
+    Container,
+    Card,
 
-  Title,
-  List,
-  Build,
-});
+    Title,
+    List,
+    Build,
+  },
+};

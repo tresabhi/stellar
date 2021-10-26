@@ -6,22 +6,16 @@ import * as Part from '../../core/blueprint/parts/index';
 import { type as rootPartType } from '../../core/blueprint/parts/Root';
 import './index.scss';
 
-interface IEditingCanvas {
+type EditingCanvasProps = {
   center: number;
   offset: { x: number; y: number };
   parts: Array<rootPartType>;
-}
-const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
-  const partsJsx = parts.map((part, index) => {
+};
+const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
+  const partsJsx = parts.map((part) => {
     const PartComponent = Part.getComponentFromPartName(part.n);
 
-    return (
-      <PartComponent
-        data={part}
-        offset={offset}
-        key={`part-component-${index}`}
-      />
-    );
+    return <PartComponent data={part} offset={offset} />;
   });
 
   return (

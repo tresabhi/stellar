@@ -3,9 +3,5 @@
 .editing-panel {
   width: 100vw;
   display: flex;
-  align-items: stretch;
   flex: 1;
-  background-color: red;
-
-  // height: calc(100vh - (#{$tool-bar-height + $border-width-thin}) * 2);
 }
