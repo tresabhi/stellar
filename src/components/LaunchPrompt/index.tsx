@@ -5,25 +5,25 @@ import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
 import { ReactComponent as TextIcon } from '../../assets/icons/text.svg';
 import './index.scss';
 
-const ShadeContainer: FC = ({ children }) => (
+export const ShadeContainer: FC = ({ children }) => (
   <div className="launch-prompt-shade-container">{children}</div>
 );
 
-const Container: FC = ({ children }) => (
+export const Container: FC = ({ children }) => (
   <div className="launch-prompt-container">{children}</div>
 );
 
-const SubContainer: FC = ({ children }) => (
+export const SubContainer: FC = ({ children }) => (
   <div className="launch-prompt-subcontainer">{children}</div>
 );
 
-const Separator = () => <div className="launch-prompt-separator"></div>;
+export const Separator = () => <div className="launch-prompt-separator"></div>;
 
-const Title: FC = ({ children }) => (
+export const Title: FC = ({ children }) => (
   <span className="launch-prompt-title">{children}</span>
 );
 
-const DraftRow: FC = ({ children }) => (
+export const DraftRow: FC = ({ children }) => (
   <div className="launch-prompt-draft-row">{children}</div>
 );
 
@@ -32,7 +32,11 @@ type DraftTypeProps = {
   name: string;
   enabled: boolean;
 };
-const DraftType: FC<DraftTypeProps> = ({ icon, name, enabled = true }) => (
+export const DraftType: FC<DraftTypeProps> = ({
+  icon,
+  name,
+  enabled = true,
+}) => (
   <button
     className={`
       launch-prompt-draft-type
@@ -44,7 +48,7 @@ const DraftType: FC<DraftTypeProps> = ({ icon, name, enabled = true }) => (
   </button>
 );
 
-const ResentsColumn: FC = ({ children }) => (
+export const ResentsColumn: FC = ({ children }) => (
   <div className="launch-prompt-resents-column">{children}</div>
 );
 
@@ -59,32 +63,16 @@ type RecentListingProps = {
   type?: string;
   name: string;
 };
-const RecentListing: FC<RecentListingProps> = ({ type = 'unknown', name }) => (
+export const RecentListing: FC<RecentListingProps> = ({
+  type = 'unknown',
+  name,
+}) => (
   <button className="launch-prompt-resents-listing">
     {listingIcons.get(type)}
     <span className="launch-prompt-resents-listing-text">{name}</span>
   </button>
 );
 
-const InvisibleVerticalSeparator = () => (
+export const InvisibleVerticalSeparator = () => (
   <div className="invisible-vertical-separator" />
 );
-
-export default {
-  ...{
-    ShadeContainer,
-    Container,
-    SubContainer,
-
-    Separator,
-    InvisibleVerticalSeparator,
-
-    Title,
-
-    DraftRow,
-    DraftType,
-
-    ResentsColumn,
-    RecentListing,
-  },
-};

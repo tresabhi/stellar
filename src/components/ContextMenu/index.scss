@@ -1,0 +1,58 @@
+@import '../../styles/index.scss';
+
+.context-menu-container {
+  background-color: v(foreground-panel-background-color);
+  display: flex;
+
+  &.generic {
+    flex-direction: column;
+    border-radius: $border-radius-regular;
+    min-width: $context-menu-min-width;
+    max-width: $context-menu-max-width;
+    padding: $padding-big;
+
+    .context-menu-text-button {
+      text-align: left;
+      display: flex;
+      align-items: center;
+      height: $context-menu-button-height;
+
+      .context-menu-text-button-icon-container {
+        width: $icon-size-regular;
+        height: $icon-size-regular;
+        margin-right: $margin-bigger;
+
+        img,
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
+  &.toolbar {
+    padding: 0px $padding-big 0px $padding-big;
+    align-items: center;
+    height: $tool-bar-height;
+    flex-direction: row;
+    // background-color: red;
+
+    .context-menu-text-button-icon-container {
+      display: none;
+    }
+  }
+
+  .context-menu-text-button {
+    &:hover {
+      @include button-flush-hover;
+    }
+
+    @include button-flush;
+    @include text;
+
+    padding: 0px $padding-big 0px $padding-big;
+    font-size: $font-size-big;
+    height: $tool-bar-button-height;
+  }
+}

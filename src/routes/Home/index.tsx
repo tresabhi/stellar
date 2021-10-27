@@ -1,10 +1,8 @@
 import { isDesktop, isMobile } from 'react-device-detect';
-
-import PseudoContainer from '../../components/PseudoContainer';
-import DevicePicker from '../../components/DevicePicker';
-
 import { ReactComponent as DesktopIcon } from '../../assets/icons/desktop.svg';
 import { ReactComponent as MobileIcon } from '../../assets/icons/mobile.svg';
+import * as DevicePicker from '../../components/DevicePicker';
+import PseudoContainer from '../../components/PseudoContainer';
 
 const Home = () => {
   return (

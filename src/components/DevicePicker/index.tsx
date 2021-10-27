@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import MetaData from '../../metadata.json';
 import './index.scss';
 
-const Container: FC = ({ children }) => (
+export const Container: FC = ({ children }) => (
   <div className="device-picker-container">{children}</div>
 );
 
-const List: FC = ({ children }) => (
+export const List: FC = ({ children }) => (
   <div className="device-picker-list">{children}</div>
 );
 
-const Title: FC = ({ children }) => (
+export const Title: FC = ({ children }) => (
   <h2 className="device-picker-title">{children}</h2>
 );
 
@@ -21,7 +21,7 @@ type CardProps = {
   text?: string;
   recommended?: boolean;
 };
-const Card: FC<CardProps> = ({ to, text, recommended, children }) => {
+export const Card: FC<CardProps> = ({ to, text, recommended, children }) => {
   return (
     <Link to={to} className="device-picker-card">
       {children}
@@ -33,7 +33,7 @@ const Card: FC<CardProps> = ({ to, text, recommended, children }) => {
   );
 };
 
-const Build: FC = () => {
+export const Build: FC = () => {
   let version = 'v' + (MetaData?.version?.join('.') || 'Unknown');
   const unknownDomainName = 'Unknown Build';
   const domainNames = MetaData.builds;
@@ -45,15 +45,4 @@ const Build: FC = () => {
         ((domainNames as any)[window.location.hostname] ?? unknownDomainName)}
     </span>
   );
-};
-
-export default {
-  ...{
-    Container,
-    Card,
-
-    Title,
-    List,
-    Build,
-  },
 };

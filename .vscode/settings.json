@@ -14,7 +14,8 @@
     "stellaralpha",
     "stellarbeta",
     "stellaredit",
-    "stellareditor"
+    "stellareditor",
+    "subcontainer"
   ],
   "search.exclude": {
     "**/src/assets/icons": true

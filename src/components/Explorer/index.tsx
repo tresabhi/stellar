@@ -14,7 +14,7 @@ const listingIcons = {
 type ContainerProps = {
   rightSide?: boolean;
 };
-const Container: FC<ContainerProps> = ({ children, rightSide }) => {
+export const Container: FC<ContainerProps> = ({ children, rightSide }) => {
   return (
     <div
       className={`
@@ -27,7 +27,7 @@ const Container: FC<ContainerProps> = ({ children, rightSide }) => {
   );
 };
 
-const TabsContainer: FC = ({ children }) => (
+export const TabsContainer: FC = ({ children }) => (
   <div className="explorer-tabs-container">{children}</div>
 );
 
@@ -36,7 +36,7 @@ type PartsListingContainerProps = {
   onPartDataMutate: Function;
   onPartDelete: Function;
 };
-const PartsListingContainer: FC<PartsListingContainerProps> = ({
+export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
   parts,
   onPartDataMutate,
@@ -86,7 +86,7 @@ type PartListingProps = {
   onDeleteClick: Function;
   onLabelChange: Function;
 };
-const PartListing: FC<PartListingProps> = memo(
+export const PartListing: FC<PartListingProps> = memo(
   ({
     icon,
     defaultName,
@@ -144,7 +144,7 @@ const PartListing: FC<PartListingProps> = memo(
 type PropertyListingProps = {
   subProperties?: Array<Object>;
 };
-const PropertyListing: FC<PropertyListingProps> = ({
+export const PropertyListing: FC<PropertyListingProps> = ({
   children,
   subProperties,
 }) => {
@@ -164,7 +164,7 @@ const PropertyListing: FC<PropertyListingProps> = ({
 type TabProps = {
   defaultSelected?: boolean;
 };
-const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
+export const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
   // const for now, react state hook in the future
   const selected = defaultSelected;
   return (
@@ -179,7 +179,7 @@ const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
   );
 };
 
-const StaticTab: FC<TabProps> = ({ children }) => (
+export const StaticTab: FC<TabProps> = ({ children }) => (
   <div className="explorer-static-tab">{children}</div>
 );
 
@@ -189,7 +189,7 @@ type SubPropertyTextInputProps = {
   suffix?: string;
   name?: string;
 };
-const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
+export const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
   children,
   defaultValue,
   prefix,
@@ -206,20 +206,4 @@ const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
       />
     </div>
   );
-};
-
-export default {
-  ...{
-    Container,
-    TabsContainer,
-    PartsListingContainer,
-
-    Tab,
-    StaticTab,
-
-    PartListing,
-    PropertyListing,
-
-    SubPropertyTextInput,
-  },
 };
