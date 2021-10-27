@@ -1,4 +1,5 @@
-import toolbarTop from 'assets/contexts/toolbarTop';
+import toolbarBenchmark from 'assets/contexts/toolbarBenchmark';
+import contextMenuBenchmark from 'assets/contexts/contextMenuBenchmark';
 import * as ContextMenu from 'components/ContextMenu';
 import blueprintCore from 'core/blueprint';
 import { type as rootPartType } from 'core/blueprint/parts/Root';
@@ -13,8 +14,8 @@ const Desktop = () => {
 
   return (
     <PseudoContainer fullscreen={true} flex={true}>
-      <ContextMenu.Container toolbar={true} data={toolbarTop} />
-      <ContextMenu.Container toolbar={false} data={toolbarTop} />
+      <ContextMenu.Container toolbar={true} data={toolbarBenchmark} />
+      <ContextMenu.Container data={contextMenuBenchmark} />
       {/* <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>
