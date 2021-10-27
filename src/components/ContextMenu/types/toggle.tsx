@@ -5,4 +5,5 @@ export type type = rootType & {
   text: string;
   action: Function;
   icon?: FunctionComponent;
+  default?: boolean;
 };
