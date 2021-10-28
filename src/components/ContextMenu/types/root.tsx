@@ -7,6 +7,10 @@ export type type = {
   type: string;
 };
 
-export type listing = Array<
-  extendButtonType | separatorType | textButtonType | toggleType
->;
+export type listing = {
+  x: number;
+  y: number;
+  listing: Array<
+    extendButtonType | separatorType | textButtonType | toggleType
+  >;
+};

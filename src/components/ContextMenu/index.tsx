@@ -1,9 +1,8 @@
+import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { FC } from 'react';
 import './index.scss';
 import { type as extendButtonType } from './types/extendButton';
 import { listing as listingType } from './types/root';
-import { type as separatorType } from './types/separator';
-import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { type as textButtonType } from './types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
@@ -56,7 +55,7 @@ type ContainerProps = {
   toolbar?: boolean;
 };
 export const Container: FC<ContainerProps> = ({ data, toolbar = false }) => {
-  const listingComponents = data.map((listing) => {
+  const listingComponents = data.listing.map((listing) => {
     const Component = typeToComponent[listing.type];
     return <Component data={listing} />;
   });
@@ -67,6 +66,11 @@ export const Container: FC<ContainerProps> = ({ data, toolbar = false }) => {
         context-menu-container
         ${toolbar ? 'toolbar' : 'generic'}
       `}
+      style={{
+        position: 'fixed',
+        left: data.x,
+        top: data.y,
+      }}
     >
       {listingComponents}
     </div>
