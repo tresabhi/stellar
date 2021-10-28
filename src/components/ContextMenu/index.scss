@@ -3,6 +3,7 @@
 .context-menu-container {
   background-color: v(foreground-panel-background-color);
   display: flex;
+  user-select: none;
 
   &.generic {
     flex-direction: column;
