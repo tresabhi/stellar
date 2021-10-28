@@ -3,7 +3,7 @@ import { type as rootType } from './root';
 
 export type type = rootType & {
   text: string;
-  action: Function;
+  onClick: Function;
   icon?: FunctionComponent;
   default?: boolean;
 };

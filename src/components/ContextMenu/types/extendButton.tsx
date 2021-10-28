@@ -3,6 +3,6 @@ import { listing, type as rootType } from './root';
 
 export type type = rootType & {
   text: string;
-  action: listing;
+  extend: listing;
   icon?: FunctionComponent;
 };
