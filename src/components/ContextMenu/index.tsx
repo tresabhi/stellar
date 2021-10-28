@@ -3,7 +3,7 @@ import './index.scss';
 import { type as extendButtonType } from './types/extendButton';
 import { listing as listingType } from './types/root';
 import { type as separatorType } from './types/separator';
-import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { type as textButtonType } from './types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
@@ -15,24 +15,13 @@ export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
   const Icon = data?.icon;
 
   return (
-    <button
-      className="context-menu-text-button"
-      onClick={() => {
-        if (typeof data.action == 'function') {
-          data.action();
-        } else {
-          // TODO:
-          // spawn new context menu
-          // also, add arrow to the right
-        }
-      }}
-    >
+    <button className="context-menu-text-button" onClick={() => data.onClick()}>
       <div className="context-menu-text-button-icon-container">
         {Icon ? <Icon /> : undefined}
       </div>
       <span className="context-menu-text-button-text">{data.text}</span>
-      <div className="context-menu-text-button-icon-container">
-        {extended ? <LockIcon /> : undefined}
+      <div className="context-menu-text-button-icon-container right">
+        {extended ? <NextIcon /> : undefined}
       </div>
     </button>
   );
@@ -50,7 +39,7 @@ const ExtendButton: FC<ExtendButtonProps> = ({ data }) => {
     <TextButton
       data={{
         ...data,
-        action: () => alert(`fine, i'll extend it`),
+        onClick: () => alert(`fine, i'll extend it`),
       }}
       extended={true}
     />

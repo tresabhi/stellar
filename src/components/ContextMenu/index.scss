@@ -22,6 +22,11 @@
         height: $icon-size-regular;
         margin-right: $margin-bigger;
 
+        &.right {
+          margin-right: 0px;
+          margin-left: $margin-bigger;
+        }
+
         img,
         svg {
           width: 100%;
