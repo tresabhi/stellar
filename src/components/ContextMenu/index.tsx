@@ -1,14 +1,17 @@
 import { FC } from 'react';
-import { listing as listingType } from './types/root';
-import { type as textButtonType } from './types/textButton';
-
 import './index.scss';
+import { type as extendButtonType } from './types/extendButton';
+import { listing as listingType } from './types/root';
+import { type as separatorType } from './types/separator';
+import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import { type as textButtonType } from './types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
 type TextButtonProps = {
   data: textButtonType;
+  extended?: boolean;
 };
-export const TextButton: FC<TextButtonProps> = ({ data }) => {
+export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
   const Icon = data?.icon;
 
   return (
@@ -28,12 +31,36 @@ export const TextButton: FC<TextButtonProps> = ({ data }) => {
         {Icon ? <Icon /> : undefined}
       </div>
       <span className="context-menu-text-button-text">{data.text}</span>
+      <div className="context-menu-text-button-icon-container">
+        {extended ? <LockIcon /> : undefined}
+      </div>
     </button>
   );
 };
 
+const Separator = () => {
+  return <div className="context-menu-separator" />;
+};
+
+type ExtendButtonProps = {
+  data: extendButtonType;
+};
+const ExtendButton: FC<ExtendButtonProps> = ({ data }) => {
+  return (
+    <TextButton
+      data={{
+        ...data,
+        action: () => alert(`fine, i'll extend it`),
+      }}
+      extended={true}
+    />
+  );
+};
+
 const typeToComponent: any = {
-  textButton: TextButton,
+  text_button: TextButton,
+  separator: Separator,
+  extend_button: ExtendButton,
 };
 type ContainerProps = {
   data: listingType;

@@ -3,7 +3,7 @@ import { listing } from 'components/ContextMenu/types/root';
 
 const toolbarBenchmark: listing = [
   {
-    type: 'textButton',
+    type: 'text_button',
     action: () => alert('Woo! You clicked me!'),
     text: 'Click me :)',
   },
