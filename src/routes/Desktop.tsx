@@ -1,48 +1,19 @@
 import * as ContextMenu from 'components/ContextMenu';
 import contextLayerCore from 'core/contextLayer';
-// import blueprintCore from 'core/blueprint';
-// import { type as rootPartType } from 'core/blueprint/parts/Root';
-// import devBlueprint from '../../assets/blueprints/shapeAndTextures1.json';
-// import EditingCanvas from '../../components/EditingCanvas';
-// import EditingPanel from '../../components/EditingPanel';
-// import * as Explorer from '../../components/Explorer';
+import blueprintCore from 'core/blueprint';
+import { type as rootPartType } from 'core/blueprint/parts/Root';
+import devBlueprint from 'assets/blueprints/shapeAndTextures1.json';
+import EditingCanvas from 'components/EditingCanvas';
+import EditingPanel from 'components/EditingPanel';
+import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
 
 const Desktop = () => {
-  // const blueprint = new blueprintCore(devBlueprint);
-  const contextLayer = new contextLayerCore([
-    {
-      x: 0,
-      y: 0,
-      listing: [
-        {
-          type: 'text_button',
-          text: 'nice',
-          onClick: () => alert('woah'),
-        },
-      ],
-    },
-  ]);
-
-  contextLayer.addContext({
-    x: 200,
-    y: 100,
-    listing: [
-      {
-        type: 'text_button',
-        text: 'nice',
-        onClick: () => alert('woah'),
-      },
-    ],
-  });
-
-  console.log('component', contextLayer.contexts.length);
+  const blueprint = new blueprintCore(devBlueprint);
+  const contextLayer = new contextLayerCore([]);
 
   return (
     <PseudoContainer fullscreen={true} flex={true}>
-      nice
-      {/* <ContextMenu.Container toolbar={true} data={toolbarBenchmark} />
-      <ContextMenu.Container toolbar={true} data={toolbarBenchmark} />
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>
@@ -62,7 +33,7 @@ const Desktop = () => {
           offset={blueprint.state.offset}
           parts={blueprint.state.parts}
         />
-      </EditingPanel> */}
+      </EditingPanel>
       <ContextMenu.Container
         contexts={contextLayer.contexts}
         onBlur={contextLayer.removeAll}
