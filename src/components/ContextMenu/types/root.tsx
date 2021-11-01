@@ -8,8 +8,8 @@ export type type = {
 };
 
 export type listing = {
-  x: number;
-  y: number;
+  x?: number;
+  y?: number;
   listing: Array<
     extendButtonType | separatorType | textButtonType | toggleType
   >;

@@ -48,7 +48,7 @@ const typeToComponent: any = {
 type ContextContainerProps = {
   data: listingType;
   toolbar?: boolean;
-  onActionTaken: Function;
+  onActionTaken?: Function;
 };
 export const ContextContainer: FC<ContextContainerProps> = ({
   data,
@@ -64,7 +64,7 @@ export const ContextContainer: FC<ContextContainerProps> = ({
           onClick: () => {
             // if it has it, run it
             (listing as any)?.onClick();
-            onActionTaken();
+            if (onActionTaken) onActionTaken();
           },
         }}
       />
@@ -77,11 +77,15 @@ export const ContextContainer: FC<ContextContainerProps> = ({
         context-menu-container
         ${toolbar ? 'toolbar' : 'generic'}
       `}
-      style={{
-        position: 'fixed',
-        left: data.x,
-        top: data.y,
-      }}
+      style={
+        toolbar
+          ? {}
+          : {
+              position: 'fixed',
+              left: data.x,
+              top: data.y,
+            }
+      }
     >
       {listingComponents}
     </div>

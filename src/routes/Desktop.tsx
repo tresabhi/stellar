@@ -1,12 +1,12 @@
-import * as ContextMenu from 'components/ContextMenu';
-import contextLayerCore from 'core/contextLayer';
-import blueprintCore from 'core/blueprint';
-import { type as rootPartType } from 'core/blueprint/parts/Root';
 import devBlueprint from 'assets/blueprints/shapeAndTextures1.json';
+import * as ContextMenu from 'components/ContextMenu';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
+import blueprintCore from 'core/blueprint';
+import { type as rootPartType } from 'core/blueprint/parts/Root';
+import contextLayerCore from 'core/contextLayer';
 
 const Desktop = () => {
   const blueprint = new blueprintCore(devBlueprint);
@@ -14,6 +14,10 @@ const Desktop = () => {
 
   return (
     <PseudoContainer fullscreen={true} flex={true}>
+      <ContextMenu.ContextContainer
+        toolbar={true}
+        data={{ listing: [{ type: 'text_button', text: 'File' }] }}
+      />
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>
