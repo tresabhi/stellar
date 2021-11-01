@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
-import { updatePartData } from '../../core/blueprint/parts';
-import { type as rootPartType } from '../../core/blueprint/parts/Root';
+import { updatePartData } from 'core/blueprint/parts';
+import { type as rootPartType } from 'core/blueprint/parts/Root';
 import {
   data as defaultBlueprintData,
   type as rootBlueprintType,

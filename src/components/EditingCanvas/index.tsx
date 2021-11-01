@@ -2,8 +2,8 @@ import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { FC } from 'react';
 import 'react-dom';
-import * as Part from '../../core/blueprint/parts/index';
-import { type as rootPartType } from '../../core/blueprint/parts/Root';
+import * as Part from 'core/blueprint/parts/index';
+import { type as rootPartType } from 'core/blueprint/parts/Root';
 import './index.scss';
 
 type EditingCanvasProps = {

@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { ReactComponent as PlanetIcon } from '../../assets/icons/planet.svg';
-import { ReactComponent as RocketIcon } from '../../assets/icons/rocket.svg';
-import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
-import { ReactComponent as TextIcon } from '../../assets/icons/text.svg';
+import { ReactComponent as PlanetIcon } from 'assets/icons/planet.svg';
+import { ReactComponent as RocketIcon } from 'assets/icons/rocket.svg';
+import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
+import { ReactComponent as TextIcon } from 'assets/icons/text.svg';
 import './index.scss';
 
 export const ShadeContainer: FC = ({ children }) => (

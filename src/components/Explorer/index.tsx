@@ -1,9 +1,9 @@
 import { FC, memo, useEffect, useRef } from 'react';
-import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
-import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
-import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
-import { ReactComponent as NoEyeIcon } from '../../assets/icons/no-eye.svg';
-import { type as rootPartType } from '../../core/blueprint/parts/Root';
+import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
+import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
+import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
+import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
+import { type as rootPartType } from 'core/blueprint/parts/Root';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
