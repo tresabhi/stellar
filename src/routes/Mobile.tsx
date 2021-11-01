@@ -1,4 +1,4 @@
-import PseudoContainer from '../../components/PseudoContainer';
+import PseudoContainer from 'components/PseudoContainer';
 
 const Mobile = () => <PseudoContainer>Mobile Coming Soon...</PseudoContainer>;
 

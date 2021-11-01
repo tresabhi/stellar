@@ -1,14 +1,12 @@
-import toolbarBenchmark from 'assets/contexts/toolbarBenchmark';
-import contextMenuBenchmark from 'assets/contexts/contextMenuBenchmark';
 import * as ContextMenu from 'components/ContextMenu';
+import contextLayerCore from 'core/contextLayer';
 // import blueprintCore from 'core/blueprint';
 // import { type as rootPartType } from 'core/blueprint/parts/Root';
 // import devBlueprint from '../../assets/blueprints/shapeAndTextures1.json';
 // import EditingCanvas from '../../components/EditingCanvas';
 // import EditingPanel from '../../components/EditingPanel';
 // import * as Explorer from '../../components/Explorer';
-import PseudoContainer from '../../components/PseudoContainer';
-import contextLayerCore from 'core/contextLayer';
+import PseudoContainer from 'components/PseudoContainer';
 
 const Desktop = () => {
   // const blueprint = new blueprintCore(devBlueprint);
@@ -26,16 +24,26 @@ const Desktop = () => {
     },
   ]);
 
+  contextLayer.addContext({
+    x: 200,
+    y: 100,
+    listing: [
+      {
+        type: 'text_button',
+        text: 'nice',
+        onClick: () => alert('woah'),
+      },
+    ],
+  });
+
+  console.log('component', contextLayer.contexts.length);
+
   return (
     <PseudoContainer fullscreen={true} flex={true}>
+      nice
+      {/* <ContextMenu.Container toolbar={true} data={toolbarBenchmark} />
       <ContextMenu.Container toolbar={true} data={toolbarBenchmark} />
-      <ContextMenu.Container toolbar={true} data={toolbarBenchmark} />
-      <br />
-      <br />
-      <br />
-      <br />
-      <ContextMenu.Container data={contextMenuBenchmark} />
-      {/* <EditingPanel>
+      <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
@@ -55,7 +63,10 @@ const Desktop = () => {
           parts={blueprint.state.parts}
         />
       </EditingPanel> */}
-      <contextLayer.component />
+      <ContextMenu.Container
+        contexts={contextLayer.contexts}
+        onBlur={contextLayer.removeAll}
+      />
     </PseudoContainer>
   );
 };

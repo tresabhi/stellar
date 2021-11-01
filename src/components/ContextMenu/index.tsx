@@ -1,15 +1,12 @@
 import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import './index.scss';
 import { type as extendButtonType } from './types/extendButton';
-import { listing as listingType } from './types/root';
+import { listing, listing as listingType } from './types/root';
 import { type as textButtonType } from './types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
-type TextButtonProps = {
-  data: textButtonType;
-  extended?: boolean;
-};
+type TextButtonProps = { data: textButtonType; extended?: boolean };
 export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
   const Icon = data?.icon;
 
@@ -30,9 +27,7 @@ const Separator = () => {
   return <div className="context-menu-separator" />;
 };
 
-type ExtendButtonProps = {
-  data: extendButtonType;
-};
+type ExtendButtonProps = { data: extendButtonType };
 const ExtendButton: FC<ExtendButtonProps> = ({ data }) => {
   return (
     <TextButton
@@ -50,14 +45,30 @@ const typeToComponent: any = {
   separator: Separator,
   extend_button: ExtendButton,
 };
-type ContainerProps = {
+type ContextContainerProps = {
   data: listingType;
   toolbar?: boolean;
+  onActionTaken: Function;
 };
-export const Container: FC<ContainerProps> = ({ data, toolbar = false }) => {
+export const ContextContainer: FC<ContextContainerProps> = ({
+  data,
+  toolbar = false,
+  onActionTaken,
+}) => {
   const listingComponents = data.listing.map((listing) => {
     const Component = typeToComponent[listing.type];
-    return <Component data={listing} />;
+    return (
+      <Component
+        data={{
+          ...listing,
+          onClick: () => {
+            // if it has it, run it
+            (listing as any)?.onClick();
+            onActionTaken();
+          },
+        }}
+      />
+    );
   });
 
   return (
@@ -73,6 +84,30 @@ export const Container: FC<ContainerProps> = ({ data, toolbar = false }) => {
       }}
     >
       {listingComponents}
+    </div>
+  );
+};
+
+type ContainerProps = { contexts: Array<listing>; onBlur: Function };
+export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {
+  const contextMenus = contexts.map((contextMenu) => {
+    return <ContextContainer data={contextMenu} onActionTaken={onBlur} />;
+  });
+
+  const componentRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={componentRef}
+      onClick={(event) => {
+        if (event.target === componentRef.current) onBlur();
+      }}
+      className={`
+    contexts-container
+    ${contexts.length > 0 ? 'active' : 'inactive'}
+  `}
+    >
+      {contextMenus}
     </div>
   );
 };

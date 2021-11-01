@@ -1,5 +1,21 @@
 @import '../../styles/index.scss';
 
+.contexts-container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+
+  &.active {
+    display: block;
+  }
+
+  &.inactive {
+    display: none;
+  }
+}
+
 .context-menu-container {
   background-color: v(foreground-panel-background-color);
   display: flex;
