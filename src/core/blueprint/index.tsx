@@ -1,22 +1,34 @@
-import { merge } from 'lodash';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { updateBlueprint } from 'assets/blueprints';
 import { type as rootBlueprintType } from 'assets/blueprints/Root';
 import { type as rootPartType } from 'core/blueprint/parts/Root';
+import { merge } from 'lodash';
+import { Dispatch, SetStateAction } from 'react';
 
 export default class blueprintCoreAPI {
   state: rootBlueprintType;
   setState: Dispatch<SetStateAction<rootBlueprintType>>;
 
-  constructor(blueprint: Object) {
-    // wrapped in anonymous function to let us use react states
-    (() => {
-      [this.state, this.setState] = useState(updateBlueprint(blueprint));
-    })();
+  constructor(
+    blueprint: rootBlueprintType,
+    setBlueprint: Dispatch<SetStateAction<rootBlueprintType>>,
+  ) {
+    this.state = blueprint;
+    this.setState = setBlueprint;
   }
 
-  createPart(data: rootPartType, index?: number) {
-    (() => {})();
+  createPart(data: rootPartType, insertIndex?: number) {
+    // let newParts: Array<rootPartType>;
+    // if (insertIndex) {
+    //   const oldParts = [...this.state.parts];
+    //   newParts = oldParts.map((item, index) => {
+    //     if (index < insertIndex) return item;
+    //     if (index > insertIndex) return oldParts[index - 1];
+    //     if (index === insertIndex) return data;
+    //   });
+    //   newParts.push(oldParts[oldParts.length - 1]);
+    // } else {
+    //   newParts = [...this.state.parts, data];
+    // }
+    // this.setState(newParts);
   }
 
   deletePart(index: number) {

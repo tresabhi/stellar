@@ -2,7 +2,7 @@ import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { FC, useRef } from 'react';
 import './index.scss';
 import { type as extendButtonType } from './types/extendButton';
-import { listing, listing as listingType } from './types/root';
+import { contextMenuListing, contextMenuListing as listingType } from './types/root';
 import { type as textButtonType } from './types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
@@ -55,7 +55,9 @@ export const ContextContainer: FC<ContextContainerProps> = ({
   toolbar = false,
   onActionTaken,
 }) => {
-  const listingComponents = data.listing.map((listing) => {
+  let listingComponents;
+
+  listingComponents = data.listing.map((listing) => {
     const Component = typeToComponent[listing.type];
     return (
       <Component
@@ -92,7 +94,7 @@ export const ContextContainer: FC<ContextContainerProps> = ({
   );
 };
 
-type ContainerProps = { contexts: Array<listing>; onBlur: Function };
+type ContainerProps = { contexts: Array<contextMenuListing>; onBlur: Function };
 export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {
   const contextMenus = contexts.map((contextMenu) => {
     return <ContextContainer data={contextMenu} onActionTaken={onBlur} />;

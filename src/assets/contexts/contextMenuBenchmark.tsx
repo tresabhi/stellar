@@ -1,7 +1,7 @@
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
-import { listing } from 'components/ContextMenu/types/root';
+import { contextMenuListing } from 'components/ContextMenu/types/root';
 
-const contextMenuBenchmark: listing = {
+const contextMenuBenchmark: contextMenuListing = {
   x: 0,
   y: 0,
   listing: [

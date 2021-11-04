@@ -7,7 +7,7 @@ export type type = {
   type: string;
 };
 
-export type listing = {
+export type contextMenuListing = {
   x?: number;
   y?: number;
   listing: Array<

@@ -1,22 +1,49 @@
+import { updateBlueprint } from 'assets/blueprints';
 import devBlueprint from 'assets/blueprints/shapeAndTextures1.json';
 import * as ContextMenu from 'components/ContextMenu';
+import { contextMenuListing } from 'components/ContextMenu/types/root';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
 import blueprintCore from 'core/blueprint';
 import { type as rootPartType } from 'core/blueprint/parts/Root';
-import contextLayerCore from 'core/contextLayer';
+import useContextLayer from 'core/useContextLayer';
+import { useEffect, useState } from 'react';
 
 const Desktop = () => {
-  const blueprint = new blueprintCore(devBlueprint);
-  const contextLayer = new contextLayerCore([]);
+  const emptyListing: Array<contextMenuListing> = [];
+
+  const blueprint = new blueprintCore(
+    ...useState(updateBlueprint(devBlueprint)),
+  );
+  const contextLayer = useContextLayer(emptyListing);
 
   return (
     <PseudoContainer fullscreen={true} flex={true}>
       <ContextMenu.ContextContainer
         toolbar={true}
-        data={{ listing: [{ type: 'text_button', text: 'File' }] }}
+        data={{
+          listing: [
+            {
+              type: 'text_button',
+              text: 'File',
+              onClick: () => {
+                contextLayer.addContext({
+                  x: 400,
+                  y: 400,
+                  listing: [
+                    {
+                      type: 'text_button',
+                      text: 'Hello There',
+                      onClick: () => alert('what a nice click :)'),
+                    },
+                  ],
+                });
+              },
+            },
+          ],
+        }}
       />
       <EditingPanel>
         <Explorer.Container>
@@ -39,7 +66,7 @@ const Desktop = () => {
         />
       </EditingPanel>
       <ContextMenu.Container
-        contexts={contextLayer.contexts}
+        contexts={contextLayer.state}
         onBlur={contextLayer.removeAll}
       />
     </PseudoContainer>

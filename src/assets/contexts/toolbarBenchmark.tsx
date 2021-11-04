@@ -1,6 +1,6 @@
-import { listing } from 'components/ContextMenu/types/root';
+import { contextMenuListing } from 'components/ContextMenu/types/root';
 
-const toolbarBenchmark: listing = {
+const toolbarBenchmark: contextMenuListing = {
   x: 0,
   y: 0,
   listing: [
