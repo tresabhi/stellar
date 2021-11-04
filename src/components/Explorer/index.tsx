@@ -1,6 +1,6 @@
 import { FC, memo, useEffect, useRef } from 'react';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
-import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
+import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
 import { type as rootPartType } from 'core/blueprint/parts/Root';
@@ -45,7 +45,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   const parsedArray = parts?.map((partData, index) => {
     return (
       <PartListing
-        icon={(listingIcons as any)?.[partData.n] || <EyeIcon />}
+        icon={(listingIcons as any)?.[partData.n] || <LockIcon />}
         defaultName={
           partData?.['.stellar']?.label ?? 'Internally Unlabeled Part'
         }
@@ -126,7 +126,7 @@ export const PartListing: FC<PartListingProps> = memo(
           className="explorer-part-listing-icon"
         />
         {visible ? (
-          <EyeIcon
+          <LockIcon
             onClick={() => onEyeClick()}
             className="explorer-part-listing-icon"
           />

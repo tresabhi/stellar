@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/shapeAndTextures1.json';
+import devBlueprint from 'assets/blueprints/saturnV.json';
 import * as ContextMenu from 'components/ContextMenu';
 import { contextMenuListing } from 'components/ContextMenu/types/root';
 import EditingCanvas from 'components/EditingCanvas';
