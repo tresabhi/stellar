@@ -10,21 +10,21 @@ export default function useBlueprint(initialBlueprint: Object) {
     state,
 
     deletePart: (index: number) => {
-      setState({
+      setState((state) => ({
         ...state,
         parts: state.parts.filter((part, partIndex) => {
           return partIndex !== index;
         }),
-      });
+      }));
     },
 
     mutatePartData: (data: rootPartType, index: number) => {
-      setState({
+      setState((state) => ({
         ...state,
         parts: state.parts.map((part, partIndex) => {
           return partIndex === index ? { ...merge(part, data) } : part;
         }),
-      });
+      }));
     },
   };
 }
