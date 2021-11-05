@@ -12,10 +12,10 @@ type EditingCanvasProps = {
   parts: Array<rootPartType>;
 };
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
-  const partsJsx = parts.map((part) => {
+  const partsJsx = parts.map((part, index) => {
     const PartComponent = Part.getComponentFromPartName(part.n);
 
-    return <PartComponent data={part} offset={offset} />;
+    return <PartComponent key={`part-${index}`} data={part} offset={offset} />;
   });
 
   return (

@@ -2,7 +2,10 @@ import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { FC, useRef } from 'react';
 import './index.scss';
 import { type as extendButtonType } from './types/extendButton';
-import { contextMenuListing, contextMenuListing as listingType } from './types/root';
+import {
+  contextMenuListing,
+  contextMenuListing as listingType,
+} from './types/root';
 import { type as textButtonType } from './types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
@@ -57,10 +60,11 @@ export const ContextContainer: FC<ContextContainerProps> = ({
 }) => {
   let listingComponents;
 
-  listingComponents = data.listing.map((listing) => {
+  listingComponents = data.listing.map((listing, index) => {
     const Component = typeToComponent[listing.type];
     return (
       <Component
+        key={`listing-${index}`}
         data={{
           ...listing,
           onClick: () => {
@@ -96,8 +100,14 @@ export const ContextContainer: FC<ContextContainerProps> = ({
 
 type ContainerProps = { contexts: Array<contextMenuListing>; onBlur: Function };
 export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {
-  const contextMenus = contexts.map((contextMenu) => {
-    return <ContextContainer data={contextMenu} onActionTaken={onBlur} />;
+  const contextMenus = contexts.map((contextMenu, index) => {
+    return (
+      <ContextContainer
+        key={`context-menu-${index}`}
+        data={contextMenu}
+        onActionTaken={onBlur}
+      />
+    );
   });
 
   const componentRef = useRef<HTMLDivElement>(null);

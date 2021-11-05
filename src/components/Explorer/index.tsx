@@ -42,9 +42,10 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   onPartDataMutate,
   onPartDelete,
 }) => {
-  const parsedArray = parts?.map((partData, index) => {
+  const parsedArray = parts.map((partData, index) => {
     return (
       <PartListing
+        key={`part-${index}`}
         icon={(listingIcons as any)?.[partData.n] || <LockIcon />}
         defaultName={
           partData?.['.stellar']?.label ?? 'Internally Unlabeled Part'
@@ -155,6 +156,7 @@ export const PropertyListing: FC<PropertyListingProps> = ({
 
       <div className="explorer-property-listing-sub-properties-container">
         {/* sub properties */}
+        {/* TODO: what the heck is this? */}
         {subProperties?.map((component) => component)}
       </div>
     </div>
