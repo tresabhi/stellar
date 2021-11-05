@@ -3,7 +3,7 @@ import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
-import { type as rootPartType } from 'core/blueprint/parts/Root';
+import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 

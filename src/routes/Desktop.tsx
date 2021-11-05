@@ -5,9 +5,9 @@ import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
-import useBlueprintCore from 'core/blueprint';
-import { type as rootPartType } from 'core/blueprint/parts/Root';
-import useContextLayer from 'core/useContextLayer';
+import useBlueprintCore from 'core/hooks/useBlueprint';
+import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
+import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {
   const emptyListing: Array<contextMenuListing> = [];

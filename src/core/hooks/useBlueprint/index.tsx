@@ -1,5 +1,5 @@
 import { updateBlueprint } from 'assets/blueprints';
-import { type as rootPartType } from 'core/blueprint/parts/Root';
+import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
 import { merge } from 'lodash';
 import { useState } from 'react';
 

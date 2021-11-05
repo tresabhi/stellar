@@ -1,4 +1,4 @@
-import { type as rootPartType } from 'core/blueprint/parts/Root';
+import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
 
 const typedParts: Array<rootPartType> = [];
 const typedStages: Array<number> = [];
