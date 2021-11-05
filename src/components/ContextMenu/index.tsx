@@ -14,12 +14,10 @@ export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
   const Icon = data?.icon;
 
   return (
-    <button className="context-menu-text-button" onClick={() => data.onClick()}>
-      <div className="context-menu-text-button-icon-container">
-        {Icon ? <Icon /> : undefined}
-      </div>
-      <span className="context-menu-text-button-text">{data.text}</span>
-      <div className="context-menu-text-button-icon-container right">
+    <button className="text-button" onClick={() => data.onClick()}>
+      <div className="icon-container">{Icon ? <Icon /> : undefined}</div>
+      <span className="text">{data.text}</span>
+      <div className="icon-container right">
         {extended ? <NextIcon /> : undefined}
       </div>
     </button>
@@ -27,7 +25,7 @@ export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
 };
 
 const Separator = () => {
-  return <div className="context-menu-separator" />;
+  return <div className="separator" />;
 };
 
 type ExtendButtonProps = { data: extendButtonType };
@@ -80,7 +78,7 @@ export const ContextContainer: FC<ContextContainerProps> = ({
   return (
     <div
       className={`
-        context-menu-container
+        menu-container
         ${toolbar ? 'toolbar' : 'generic'}
       `}
       style={

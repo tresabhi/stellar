@@ -16,7 +16,7 @@
   }
 }
 
-.context-menu-container {
+.menu-container {
   background-color: v(foreground-panel-background-color);
   display: flex;
   user-select: none;
@@ -27,13 +27,13 @@
     width: $context-menu-width;
     padding: $padding-bigger $padding-big $padding-bigger $padding-big;
 
-    .context-menu-text-button {
+    .text-button {
       text-align: left;
       display: flex;
       align-items: center;
       height: $context-menu-button-height;
 
-      .context-menu-text-button-icon-container {
+      .icon-container {
         width: $icon-size-regular;
         height: $icon-size-regular;
         margin-right: $margin-bigger;
@@ -50,7 +50,7 @@
         }
       }
 
-      .context-menu-text-button-text {
+      .text {
         white-space: nowrap;
         text-overflow: ellipsis;
         flex: 1;
@@ -58,7 +58,7 @@
       }
     }
 
-    .context-menu-separator {
+    .separator {
       height: 1px;
       background-color: v(foreground-panel-border-color);
       margin: $margin-bigger $margin-big $margin-bigger $margin-big;
@@ -72,12 +72,12 @@
     flex-direction: row;
     border-bottom: $foreground-panel-border;
 
-    .context-menu-text-button-icon-container {
+    .icon-container {
       display: none;
     }
   }
 
-  .context-menu-text-button {
+  .text-button {
     &:hover {
       @include button-flush-hover;
     }
