@@ -40,7 +40,7 @@ Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](
 - RAM: 1GB+
 - Storage: 50MB+
 
-### 🪜 Major Dependencies
+## 🪜 Major Dependencies
 
 | Name                                                          | Usage                                                                   |
 | ------------------------------------------------------------- | ----------------------------------------------------------------------- |
@@ -57,7 +57,7 @@ Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](
 | [Three](https://npmjs.org/three/)                             | WebGL rendering library                                                 |
 | [Typescript](https://npmjs.org/typescript/)                   | Typescript language compiler for Nod dev. environment                   |
 
-### 👉 Main Built-in commands
+## 👉 Main Built-in commands
 
 | Command           | Use                                            |
 | ----------------- | ---------------------------------------------- |
