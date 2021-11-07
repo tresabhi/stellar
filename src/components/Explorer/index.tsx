@@ -19,7 +19,7 @@ export const Container: FC<ContainerProps> = ({ children, rightSide }) => {
     <div
       className={`
         explorer-container
-        ${rightSide ? 'right-side' : 'left-side'}
+        ${rightSide ? 'right' : 'left'}
       `}
     >
       {children}
@@ -28,7 +28,7 @@ export const Container: FC<ContainerProps> = ({ children, rightSide }) => {
 };
 
 export const TabsContainer: FC = ({ children }) => (
-  <div className="explorer-tabs-container">{children}</div>
+  <div className="tabs-container">{children}</div>
 );
 
 type PartsListingContainerProps = {
@@ -73,9 +73,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   });
 
   return (
-    <div className="explorer-listing-container">
-      {parts ? parsedArray : children}
-    </div>
+    <div className="listing-container">{parts ? parsedArray : children}</div>
   );
 };
 
@@ -104,13 +102,13 @@ export const PartListing: FC<PartListingProps> = memo(
     });
 
     return (
-      <button className="explorer-part-listing">
+      <button className="part-listing">
         {/* icon */}
         {icon}
 
         {/* text */}
         <input
-          className="explorer-part-listing-input"
+          className="input"
           ref={inputRef}
           onBlur={() => {
             if (preLabel !== inputRef.current?.value) {
@@ -124,18 +122,12 @@ export const PartListing: FC<PartListingProps> = memo(
           onClick={() => {
             if (onDeleteClick) onDeleteClick();
           }}
-          className="explorer-part-listing-icon"
+          className="icon"
         />
         {visible ? (
-          <LockIcon
-            onClick={() => onEyeClick()}
-            className="explorer-part-listing-icon"
-          />
+          <LockIcon onClick={() => onEyeClick()} className="icon" />
         ) : (
-          <NoEyeIcon
-            onClick={() => onEyeClick()}
-            className="explorer-part-listing-icon"
-          />
+          <NoEyeIcon onClick={() => onEyeClick()} className="icon" />
         )}
       </button>
     );
@@ -150,11 +142,11 @@ export const PropertyListing: FC<PropertyListingProps> = ({
   subProperties,
 }) => {
   return (
-    <div className="explorer-property-listing">
+    <div className="property-listing">
       {/* text */}
       {children}
 
-      <div className="explorer-property-listing-sub-properties-container">
+      <div className="sub-properties-container">
         {/* sub properties */}
         {/* TODO: what the heck is this? */}
         {subProperties?.map((component) => component)}
@@ -167,12 +159,12 @@ type TabProps = {
   defaultSelected?: boolean;
 };
 export const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
-  // const for now, react state hook in the future
+  // TODO: const for now, react state hook in the future
   const selected = defaultSelected;
   return (
     <button
       className={`
-        explorer-tab
+        tab
         ${selected ? 'selected' : ''}
       `}
     >
@@ -182,7 +174,7 @@ export const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
 };
 
 export const StaticTab: FC<TabProps> = ({ children }) => (
-  <div className="explorer-static-tab">{children}</div>
+  <div className="tab-static">{children}</div>
 );
 
 type SubPropertyTextInputProps = {
@@ -199,7 +191,7 @@ export const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
   name,
 }) => {
   return (
-    <div className="explorer-sub-property-text-input">
+    <div className="explorer-input">
       <span>{name || children}</span>
       <UnitTextInput
         defaultValue={defaultValue}

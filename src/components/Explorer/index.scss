@@ -4,23 +4,22 @@
   display: flex;
   flex-direction: column;
 
-  width: $explorer-left-width;
+  width: $explorer-width;
 
-  &.left-side {
+  &.left {
     border-right: $foreground-panel-border;
   }
-  &.right-side {
+  &.right {
     border-left: $foreground-panel-border;
-    width: $explorer-right-width;
   }
 
-  .explorer-tabs-container {
+  .tabs-container {
     display: flex;
 
-    height: $explorer-tab-height;
+    height: $tab-height;
 
-    .explorer-tab,
-    .explorer-static-tab {
+    .tab,
+    .tab-static {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -35,32 +34,32 @@
       font-size: $font-size-big;
     }
 
-    .explorer-tab {
+    .tab {
       background-color: v(tab-unselected-background-color);
     }
 
-    .explorer-tab.selected {
+    .tab.selected {
       background-color: v(tab-selected-background-color);
     }
 
-    .explorer-static-tab {
+    .tab-static {
       @include static;
 
       background-color: v(tab-static-background-color);
     }
   }
 
-  .explorer-listing-container {
+  .listing-container {
     overflow-y: auto;
     flex: 1;
 
     background-color: v(foreground-panel-background-color);
 
-    .explorer-part-listing {
+    .part-listing {
       width: 100%;
       display: flex;
 
-      .explorer-part-listing-icon,
+      .icon,
       svg,
       img {
         width: $icon-size-regular;
@@ -69,22 +68,24 @@
         min-height: $icon-size-regular;
       }
 
-      .explorer-part-listing-icon {
+      .icon {
         display: none;
 
         margin-left: $margin-smaller;
       }
 
-      &:hover > .explorer-part-listing-icon {
-        display: block;
+      &:hover {
+        .icon {
+          display: block;
+        }
       }
 
-      svg:not(.explorer-part-listing-icon),
-      img:not(.explorer-part-listing-icon) {
+      svg:not(.icon),
+      img:not(.icon) {
         margin-right: $margin-smaller;
       }
 
-      .explorer-part-listing-input {
+      .input {
         background: none;
         text-overflow: ellipsis;
         cursor: pointer;
@@ -102,8 +103,8 @@
       }
     }
 
-    .explorer-part-listing,
-    .explorer-property-listing {
+    .part-listing,
+    .property-listing {
       display: flex;
       align-items: center;
       flex-wrap: nowrap;
@@ -117,19 +118,19 @@
       padding: 0px $padding-bigger 0px $padding-bigger;
     }
 
-    .explorer-part-listing:hover {
+    .part-listing:hover {
       background-color: v(button-flush-hover-background-color);
     }
 
-    .explorer-property-listing {
-      .explorer-property-listing-sub-properties-container {
+    .property-listing {
+      .sub-properties-container {
         height: 100%;
         flex: 1;
         align-items: center;
         display: flex;
         flex-direction: row-reverse;
 
-        .explorer-sub-property-text-input {
+        .input {
           margin-left: $margin-regular;
 
           span {
