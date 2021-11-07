@@ -78,7 +78,7 @@ export const ContextContainer: FC<ContextContainerProps> = ({
   return (
     <div
       className={`
-        menu-container
+        context-container
         ${toolbar ? 'toolbar' : 'generic'}
       `}
       style={

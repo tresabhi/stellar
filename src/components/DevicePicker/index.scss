@@ -7,16 +7,16 @@
   top: 50%;
   transform: translateY(-50%);
 
-  .device-picker-title {
+  .title {
     color: v(background-panel-text-color);
     font-family: v(font-family-regular);
   }
 
-  .device-picker-list {
+  .card-list {
     display: flex;
     justify-content: center;
 
-    .device-picker-card {
+    .card {
       display: block;
       display: flex;
       flex-direction: column;
@@ -48,22 +48,22 @@
 
         margin-bottom: $margin-smaller;
       }
+
+      .recommended-text {
+        margin: 0px;
+        height: 0px;
+        font-style: italic;
+        font-weight: normal;
+
+        font-size: $font-size-small;
+
+        color: v(color-recommended);
+      }
     }
   }
-}
 
-.device-picker-recommended {
-  margin: 0px;
-  height: 0px;
-  font-style: italic;
-  font-weight: normal;
-
-  font-size: $font-size-small;
-
-  color: v(color-recommended);
-}
-
-.device-picker-build {
-  color: v(background-panel-unimportant-text-color);
-  font-family: v(font-family-regular);
+  .build {
+    color: v(background-panel-unimportant-text-color);
+    font-family: v(font-family-regular);
+  }
 }
