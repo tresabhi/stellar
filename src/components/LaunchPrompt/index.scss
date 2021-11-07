@@ -10,110 +10,110 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  .launch-prompt-container {
-    background-color: v(prompt-generic-background-color);
+.launch-prompt-container {
+  background-color: v(prompt-generic-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $padding-larger;
+  border-radius: $border-radius-regular;
+
+  .subcontainer {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: $padding-larger;
-    border-radius: $border-radius-regular;
+    flex-direction: column;
+    align-self: flex-start;
 
-    .launch-prompt-subcontainer {
+    .title {
+      font-size: $font-size-larger;
+      color: v(prompt-generic-text-color);
+      font-family: v(font-family-regular);
+      margin-bottom: $margin-bigger;
+    }
+
+    .draft-row {
       display: flex;
-      flex-direction: column;
-      align-self: flex-start;
 
-      .launch-prompt-title {
-        font-size: $font-size-larger;
-        color: v(prompt-generic-text-color);
-        font-family: v(font-family-regular);
-        margin-bottom: $margin-bigger;
-      }
+      .draft-type {
+        @include button;
 
-      .launch-prompt-draft-row {
-        display: flex;
-
-        .launch-prompt-draft-type {
-          @include button;
-
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          width: $launch-prompt-draft-type-size;
-          height: $launch-prompt-draft-type-size;
-          border-radius: $border-radius-regular;
-          margin: $margin-big;
-
-          svg,
-          img {
-            width: $icon-size-large;
-            height: $icon-size-large;
-          }
-
-          span {
-            margin-top: $margin-regular;
-            font-size: $font-size-bigger;
-            color: v(prompt-generic-text-color);
-            font-family: v(font-family-regular);
-          }
-        }
-
-        .launch-prompt-draft-type:not(.disabled):hover {
-          @include button-hover;
-        }
-
-        .launch-prompt-draft-type.disabled {
-          cursor: default;
-          opacity: 0.5;
-        }
-      }
-
-      .invisible-vertical-separator {
-        height: $margin-larger;
-      }
-
-      .launch-prompt-resents-column {
-        flex: 1;
         display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: $launch-prompt-draft-type-size;
+        height: $launch-prompt-draft-type-size;
+        border-radius: $border-radius-regular;
+        margin: $margin-big;
 
-        .launch-prompt-resents-listing {
-          @include button-flush;
-
-          display: flex;
-          align-items: center;
-          height: $launch-prompt-recent-listing-height;
-          padding: 0px $padding-bigger 0px $padding-bigger;
-          border-radius: $border-radius-regular;
-
-          svg,
-          img {
-            width: $icon-size-regular;
-            height: $icon-size-regular;
-            margin-right: $margin-small;
-          }
-
-          .launch-prompt-resents-listing-text {
-            display: block;
-            color: v(prompt-generic-text-color);
-            font-family: v(font-family-regular);
-            font-size: $font-size-bigger;
-          }
+        svg,
+        img {
+          width: $icon-size-large;
+          height: $icon-size-large;
         }
 
-        .launch-prompt-resents-listing:hover {
-          @include button-flush-hover;
+        span {
+          margin-top: $margin-regular;
+          font-size: $font-size-bigger;
+          color: v(prompt-generic-text-color);
+          font-family: v(font-family-regular);
         }
+      }
+
+      .draft-type:not(.disabled):hover {
+        @include button-hover;
+      }
+
+      .draft-type.disabled {
+        cursor: default;
+        opacity: 0.5;
       }
     }
 
-    .launch-prompt-separator {
-      height: $launch-prompt-separator-height;
-      width: 1px;
-      background-color: v(foreground-panel-border-color);
-      margin: 0px $margin-larger 0px $margin-larger;
+    .invisible-vertical-separator {
+      height: $margin-larger;
     }
+
+    .resents-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .resents-listing {
+        @include button-flush;
+
+        display: flex;
+        align-items: center;
+        height: $launch-prompt-recent-listing-height;
+        padding: 0px $padding-bigger 0px $padding-bigger;
+        border-radius: $border-radius-regular;
+
+        svg,
+        img {
+          width: $icon-size-regular;
+          height: $icon-size-regular;
+          margin-right: $margin-small;
+        }
+
+        .resents-listing-text {
+          display: block;
+          color: v(prompt-generic-text-color);
+          font-family: v(font-family-regular);
+          font-size: $font-size-bigger;
+        }
+      }
+
+      .resents-listing:hover {
+        @include button-flush-hover;
+      }
+    }
+  }
+
+  .separator {
+    height: $launch-prompt-separator-height;
+    width: 1px;
+    background-color: v(foreground-panel-border-color);
+    margin: 0px $margin-larger 0px $margin-larger;
   }
 }

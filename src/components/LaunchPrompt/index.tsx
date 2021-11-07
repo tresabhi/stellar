@@ -14,17 +14,17 @@ export const Container: FC = ({ children }) => (
 );
 
 export const SubContainer: FC = ({ children }) => (
-  <div className="launch-prompt-subcontainer">{children}</div>
+  <div className="subcontainer">{children}</div>
 );
 
-export const Separator = () => <div className="launch-prompt-separator"></div>;
+export const Separator = () => <div className="separator"></div>;
 
 export const Title: FC = ({ children }) => (
-  <span className="launch-prompt-title">{children}</span>
+  <span className="title">{children}</span>
 );
 
 export const DraftRow: FC = ({ children }) => (
-  <div className="launch-prompt-draft-row">{children}</div>
+  <div className="draft-row">{children}</div>
 );
 
 type DraftTypeProps = {
@@ -39,17 +39,17 @@ export const DraftType: FC<DraftTypeProps> = ({
 }) => (
   <button
     className={`
-      launch-prompt-draft-type
+      draft-type
       ${enabled ? 'enabled' : 'disabled'}
     `}
   >
     {icon}
-    <span className="launch-prompt-draft-type-text">{name}</span>
+    <span className="draft-type-text">{name}</span>
   </button>
 );
 
 export const ResentsColumn: FC = ({ children }) => (
-  <div className="launch-prompt-resents-column">{children}</div>
+  <div className="resents-column">{children}</div>
 );
 
 const listingIcons = new Map([
@@ -67,9 +67,9 @@ export const RecentListing: FC<RecentListingProps> = ({
   type = 'unknown',
   name,
 }) => (
-  <button className="launch-prompt-resents-listing">
+  <button className="resents-listing">
     {listingIcons.get(type)}
-    <span className="launch-prompt-resents-listing-text">{name}</span>
+    <span className="resents-listing-text">{name}</span>
   </button>
 );
 
