@@ -1,4 +1,4 @@
-# 🚀 Stellar Editor
+# 🚀 Stellar
 
 Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator
 
@@ -6,7 +6,7 @@ Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator
 
 ## 🤔 About
 
-Stellar Editor allows for anyone to make custom blueprints with extensive customization without having any knowledge of blueprint editing. Beauty, performance, agility, it's all here.
+Stellar allows for anyone to make custom blueprints with extensive customization without having any knowledge of blueprint editing. Beauty, performance, agility, it's all here.
 
 Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](https://store.steampowered.com/app/1718870/), [Play Store](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator), and [App Store](https://apps.apple.com/us/app/id1308057272).
 
@@ -19,7 +19,7 @@ Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](
 
 ## 🔌 Compatibility
 
-- **👍 Rule of thumb:** if it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it runs Stellar Editor
+- **👍 Rule of thumb:** if it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it runs Stellar
 
 ### 🕹️ Minimum Operating System
 
