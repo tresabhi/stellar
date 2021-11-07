@@ -11,19 +11,19 @@
   border-radius: $border-radius-regular;
   width: $toggle-width;
   height: $toggle-height;
-}
 
-.toggle.on {
-  flex-direction: row-reverse;
+  &.on {
+    flex-direction: row-reverse;
 
-  background-color: v(input-content-selected-color);
-}
+    background-color: v(input-content-selected-color);
+  }
 
-.toggle-dot {
-  background-color: v(input-content-color);
-  display: block;
+  .dot {
+    background-color: v(input-content-color);
+    display: block;
 
-  border-radius: $border-radius-regular;
-  width: $toggle-dot-size;
-  height: $toggle-dot-size;
+    border-radius: $border-radius-regular;
+    width: $toggle-dot-size;
+    height: $toggle-dot-size;
+  }
 }

@@ -22,7 +22,7 @@ const Toggle: FC<ToggleProps> = ({ defaultOn }) => {
       `}
       onClick={handleClick}
     >
-      <div className="toggle-dot" />
+      <div className="dot" />
     </button>
   );
 };
