@@ -87,7 +87,7 @@ export const PartListing: FC<PartListingProps> = memo(
 
     useEffect(() => {
       inputRef.current!.value = defaultName;
-    });
+    }, []);
 
     return (
       <button className="part-listing">
