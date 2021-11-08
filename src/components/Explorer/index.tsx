@@ -114,6 +114,8 @@ export const PartListing: FC<PartListingProps> = memo(
             if (event.key === 'Enter') inputRef.current?.blur();
           }}
           onBlur={() => {
+            inputRef.current!.value = inputRef.current?.value.trim() ?? '';
+
             if (previousLabel !== inputRef.current?.value) {
               onLabelChange(inputRef.current?.value);
               previousLabel = inputRef.current?.value!;
