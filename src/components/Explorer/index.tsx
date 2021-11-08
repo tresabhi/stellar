@@ -2,7 +2,7 @@ import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
-import { getIconComponentFromPartName } from 'core/hooks/useBlueprint/parts';
+import { getPartIconComponent } from 'core/hooks/useBlueprint/parts';
 import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
 import { FC, memo, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
@@ -43,11 +43,9 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
     return (
       <PartListing
         key={`part-${index}`}
-        icon={getIconComponentFromPartName(partData.n) ?? <LockIcon />}
-        defaultName={
-          partData?.['.stellar']?.label ?? 'Internally Unlabeled Part'
-        }
-        visible={partData?.['.stellar']?.visible ?? true}
+        icon={getPartIconComponent(partData.n) ?? <LockIcon />}
+        defaultName={partData?.['.stellar']?.label}
+        visible={partData?.['.stellar']?.visible}
         onEyeClick={() => {
           onPartDataMutate(
             { '.stellar': { visible: !partData['.stellar'].visible } },

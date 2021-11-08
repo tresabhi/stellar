@@ -13,7 +13,7 @@ type EditingCanvasProps = {
 };
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const partsJsx = parts.map((part, index) => {
-    const PartComponent = Part.getComponentFromPartName(part.n);
+    const PartComponent = Part.getPartComponent(part.n);
 
     return PartComponent ? (
       <PartComponent key={`part-${index}`} data={part} />

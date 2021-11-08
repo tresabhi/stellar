@@ -1,15 +1,11 @@
 import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import { merge } from 'lodash';
 import { memo } from 'react';
 
 export const icon = <LockIcon />;
 
-export const data = {
-  '.stellar': {
-    label: 'Root Part',
-    visible: true,
-    locked: false,
-  },
+export const vanillaData = {
   n: 'Root',
   p: {
     x: 0,
@@ -22,6 +18,16 @@ export const data = {
   },
   t: '-Infinity',
 };
+
+export const data = merge(vanillaData, {
+  '.stellar': {
+    label: 'Internally Unlabeled Part',
+    visible: true,
+    locked: false,
+  },
+});
+
+export type vanillaType = typeof vanillaData & { n: 'Root' };
 
 export type type = typeof data & { n: 'Root' };
 

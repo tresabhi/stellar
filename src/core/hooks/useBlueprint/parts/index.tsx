@@ -1,51 +1,48 @@
+import {
+  type as rootPartType,
+  vanillaType as rootVanillaPartType,
+} from 'core/hooks/useBlueprint/parts/Root';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
+import { Type } from 'typescript';
 import * as FuelTank from './FuelTank';
 import * as Root from './Root';
 
-export type partFile = {
+export type partModule = {
+  type: Type;
   data: Root.type;
-  type: Root.type;
   Component: FC;
   icon: JSX.Element;
 };
 
-export type rootComponentProps = {
+export type RootPartComponentProps = {
   data: Root.type;
 };
 
-const partComponentNames = new Map([
-  ['Root', 'Root'],
-  ['Fuel Tank', 'FuelTank'],
-]);
-
-const components: any = {
+const partComponentNames: { [key: string]: any } = {
   Root,
-  FuelTank,
+
+  'Fuel Tank': FuelTank,
 };
 
-export const getComponentNameFromPartName = (partName: string): string =>
-  partComponentNames.get(partName) ?? 'Root';
-
-export const getAllFromPartName = (partName: string): partFile | undefined => {
-  const componentName = getComponentNameFromPartName(partName);
-  return components[componentName];
+export const getPartModule = (partName: string): partModule | undefined => {
+  return partComponentNames[partName];
 };
 
-export const getComponentFromPartName = (
+export const getPartComponent = (
   partName: string,
-): FC<rootComponentProps> | undefined => {
-  return getAllFromPartName(partName)?.Component;
+): FC<RootPartComponentProps> | undefined => {
+  return getPartModule(partName)?.Component;
 };
 
-export const getComponentDataFromPartName = (partName: string) => {
-  return getAllFromPartName(partName)?.data;
+export const getPartData = (partName: string) => {
+  return getPartModule(partName)?.data;
 };
 
-export const updatePartData = (partData: { n: string }): Root.type => {
-  return merge(cloneDeep(getComponentDataFromPartName(partData.n)), partData);
+export const updatePartData = (partData: rootVanillaPartType): rootPartType => {
+  return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
 };
 
-export const getIconComponentFromPartName = (partName: string) => {
-  return getAllFromPartName(partName)?.icon;
+export const getPartIconComponent = (partName: string) => {
+  return getPartModule(partName)?.icon;
 };
