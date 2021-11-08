@@ -95,7 +95,7 @@ export const PartListing: FC<PartListingProps> = memo(
     onLabelChange,
   }) => {
     const inputRef = useRef<HTMLInputElement>(null);
-    let preLabel = defaultName;
+    let previousLabel = defaultName;
 
     useEffect(() => {
       inputRef.current!.value = defaultName;
@@ -110,10 +110,13 @@ export const PartListing: FC<PartListingProps> = memo(
         <input
           className="input"
           ref={inputRef}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') inputRef.current?.blur();
+          }}
           onBlur={() => {
-            if (preLabel !== inputRef.current?.value) {
+            if (previousLabel !== inputRef.current?.value) {
               onLabelChange(inputRef.current?.value);
-              preLabel = inputRef.current?.value!;
+              previousLabel = inputRef.current?.value!;
             }
           }}
         />
