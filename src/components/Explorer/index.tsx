@@ -109,6 +109,7 @@ export const PartListing: FC<PartListingProps> = memo(
         {/* text */}
         <input
           className="input"
+          placeholder="Unlabeled Part"
           ref={inputRef}
           onKeyPress={(event) => {
             if (event.key === 'Enter') inputRef.current?.blur();
