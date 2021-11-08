@@ -3,6 +3,9 @@ import lerp from 'core/methods/lerp';
 import { merge, times } from 'lodash';
 import { FC, memo } from 'react';
 import { data as rootPartData } from './Root';
+import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
+
+export const icon = <FuelTankIcon />;
 
 export const data = merge(rootPartData, {
   '.stellar': { label: 'Fuel Tank' },

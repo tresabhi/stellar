@@ -1,5 +1,8 @@
 import '@react-three/fiber';
+import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { memo } from 'react';
+
+export const icon = <LockIcon />;
 
 export const data = {
   '.stellar': {
