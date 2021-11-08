@@ -1,4 +1,5 @@
 import '@react-three/fiber';
+import lerp from 'core/methods/lerp';
 import { merge, times } from 'lodash';
 import { FC, memo } from 'react';
 import { data as rootPartData } from './Root';
@@ -20,18 +21,6 @@ export const data = merge(rootPartData, {
 });
 
 export type type = typeof data & { n: 'Fuel Tank' };
-
-//  ONLY FOR DEBUGGING PURPOSES
-//  const randomColor = () => {
-//    var letters = '0123456789ABCDEF';
-//    var color = '#';
-//    for (var i = 0; i < 6; i++) {
-//      color += letters[Math.floor(Math.random() * 16)];
-//    }
-//    return new THREE.Color(color);
-//  };
-
-const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
 type ComponentProps = {
   data: type;
