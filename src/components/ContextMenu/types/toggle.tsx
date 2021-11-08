@@ -1,9 +1,8 @@
-import { FunctionComponent } from 'react';
-import { type as rootType } from './root';
+import { type as rootListingType } from './root';
 
-export type type = rootType & {
+export type type = rootListingType & {
+  type: 'toggle';
   text: string;
   onClick: Function;
-  icon?: FunctionComponent;
   default?: boolean;
 };

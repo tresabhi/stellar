@@ -1,5 +1,3 @@
-import { type as rootType } from './root';
-
-export type type = rootType & {
-  type: string;
+export type type = {
+  type: 'separator';
 };

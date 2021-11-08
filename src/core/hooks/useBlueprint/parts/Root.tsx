@@ -2,6 +2,7 @@ import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { merge } from 'lodash';
 import { memo } from 'react';
+// import { type as fuelTankType } from './FuelTank';
 
 export const icon = <LockIcon />;
 
@@ -26,6 +27,8 @@ export const data = merge(vanillaData, {
     locked: false,
   },
 });
+
+// export type allTypes =
 
 export type vanillaType = typeof vanillaData & { n: 'Root' };
 

@@ -1,8 +1,7 @@
-import { FunctionComponent } from 'react';
-import { contextMenuListing, type as rootType } from './root';
+import { contextMenuListing, type as rootListingType } from './root';
 
-export type type = rootType & {
+export type type = rootListingType & {
+  type: 'extend_button';
   text: string;
   extend: contextMenuListing;
-  icon?: FunctionComponent;
 };

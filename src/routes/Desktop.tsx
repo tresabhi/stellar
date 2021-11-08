@@ -22,20 +22,18 @@ const Desktop = () => {
         data={{
           listing: [
             {
-              type: 'text_button',
+              type: 'extend_button',
               text: 'File',
-              onClick: () => {
-                contextLayer.addContext({
-                  x: 400,
-                  y: 400,
-                  listing: [
-                    {
-                      type: 'text_button',
-                      text: 'Hello There',
-                      onClick: () => alert('what a nice click :)'),
-                    },
-                  ],
-                });
+              extend: {
+                x: 12,
+                y: 32,
+                listing: [
+                  {
+                    type: 'text_button',
+                    text: 'Click me for an alert',
+                    onClick: () => alert('what a mighty click bro'),
+                  },
+                ],
               },
             },
           ],
@@ -70,3 +68,5 @@ const Desktop = () => {
 };
 
 export default Desktop;
+
+// const lol: type
