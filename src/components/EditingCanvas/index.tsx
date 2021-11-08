@@ -15,7 +15,7 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const partsJsx = parts.map((part, index) => {
     const PartComponent = Part.getComponentFromPartName(part.n);
 
-    return <PartComponent key={`part-${index}`} data={part} offset={offset} />;
+    return <PartComponent key={`part-${index}`} data={part} />;
   });
 
   return (
@@ -40,7 +40,7 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
         rotation={[Math.PI / 2, 0, 0]}
       />
 
-      {partsJsx}
+      <group position={[offset.x, offset.y, 0]}>{partsJsx}</group>
     </Canvas>
   );
 };

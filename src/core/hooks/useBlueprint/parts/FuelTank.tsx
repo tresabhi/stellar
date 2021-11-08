@@ -1,43 +1,12 @@
 import '@react-three/fiber';
-import { times } from 'lodash';
+import { merge, times } from 'lodash';
 import { FC, memo } from 'react';
-import * as Root from './Root';
+import { data as rootPartData, type as rootPartType } from './Root';
+import { rootComponentProps } from './';
 
-// export const data = merge(Root.data, {
-//   '.stellar': {
-//     label: 'Fuel Tank',
-//   },
-//   n: 'Fuel Tank',
-//   N: {
-//     width_original: 2,
-//     width_a: 2,
-//     width_b: 2,
-//     height: 2,
-//     fuel_percent: 1,
-//   },
-//   T: {
-//     color_tex: '_',
-//     shape_tex: '_',
-//   },
-// });
-
-export const data = {
+export const data = merge(rootPartData, {
+  '.stellar': { label: 'Fuel Tank' },
   n: 'Fuel Tank',
-  p: {
-    x: 0,
-    y: 0,
-  },
-  o: {
-    x: 1,
-    y: 1,
-    z: 0,
-  },
-  t: '-Infinity',
-  '.stellar': {
-    label: 'Fuel Tank',
-    visible: true,
-    locked: false,
-  },
   N: {
     width_original: 2,
     width_a: 2,
@@ -49,33 +18,27 @@ export const data = {
     color_tex: '_',
     shape_tex: '_',
   },
-};
+});
 
-export type type = Root.type & typeof data;
+export type type = typeof data & { n: 'Fuel Tank' };
 
-// ONLY FOR DEBUGGING PURPOSES
-// const randomColor = () => {
-//   var letters = '0123456789ABCDEF';
-//   var color = '#';
-//   for (var i = 0; i < 6; i++) {
-//     color += letters[Math.floor(Math.random() * 16)];
-//   }
-//   return new THREE.Color(color);
-// };
+//  ONLY FOR DEBUGGING PURPOSES
+//  const randomColor = () => {
+//    var letters = '0123456789ABCDEF';
+//    var color = '#';
+//    for (var i = 0; i < 6; i++) {
+//      color += letters[Math.floor(Math.random() * 16)];
+//    }
+//    return new THREE.Color(color);
+//  };
 
 const lerp = (x: number, y: number, lerp: number) => x * (1 - lerp) + y * lerp;
 
-type partComponentProps = Root.partComponentProps & {
+type ComponentProps = {
   data: type;
 };
-
-export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
+export const Component: FC<ComponentProps> = memo(({ data }) => {
   if (!data['.stellar'].visible) return <mesh />;
-
-  const position = {
-    x: data.p.x + offset.x,
-    y: data.p.y + offset.y,
-  };
 
   const faceCount = 24;
 
@@ -137,7 +100,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -181,7 +144,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh position={[0, data.N.height / -4, 0]}>
             <cylinderGeometry
@@ -222,7 +185,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
         <mesh
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <cylinderGeometry
             args={[
@@ -260,7 +223,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -357,7 +320,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -562,7 +525,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
@@ -594,7 +557,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
           rotation={[0, 0, rotation]}
         >
           <mesh>
@@ -656,7 +619,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
           rotation={[0, 0, rotation]}
         >
           <mesh>
@@ -719,7 +682,7 @@ export const Component: FC<partComponentProps> = memo(({ data, offset }) => {
         <mesh
           scale={[data.o.x, data.o.y, 1]}
           rotation={[0, 0, rotation]}
-          position={[position.x, position.y + data.N.height / 2, 0]}
+          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <cylinderGeometry
             args={[

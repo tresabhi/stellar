@@ -1,6 +1,5 @@
 import '@react-three/fiber';
-import { FC, memo } from 'react';
-import { Type } from 'typescript';
+import { memo } from 'react';
 
 export const data = {
   '.stellar': {
@@ -21,19 +20,6 @@ export const data = {
   t: '-Infinity',
 };
 
-export type minimalType = { n: string };
-
-export type type = typeof data;
-
-export type partFile = {
-  data: type;
-  type: Type;
-  Component: FC;
-};
-
-export type partComponentProps = {
-  data: type;
-  offset: { x: number; y: number };
-};
+export type type = typeof data & { n: 'Root' };
 
 export const Component = memo(() => <mesh />);
