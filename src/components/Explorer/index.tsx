@@ -1,9 +1,10 @@
-import { FC, memo, useEffect, useRef } from 'react';
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
-import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
+import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
 import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
+import { FC, memo, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
@@ -53,20 +54,13 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         visible={partData?.['.stellar']?.visible ?? true}
         onEyeClick={() => {
           onPartDataMutate(
-            {
-              '.stellar': { visible: !partData['.stellar'].visible },
-            },
+            { '.stellar': { visible: !partData['.stellar'].visible } },
             index,
           );
         }}
         onDeleteClick={() => onPartDelete(index)}
         onLabelChange={(label: boolean) => {
-          onPartDataMutate(
-            {
-              '.stellar': { label: label },
-            },
-            index,
-          );
+          onPartDataMutate({ '.stellar': { label: label } }, index);
         }}
       />
     );
@@ -126,12 +120,12 @@ export const PartListing: FC<PartListingProps> = memo(
 
         <DeleteIcon
           onClick={() => {
-            if (onDeleteClick) onDeleteClick();
+            onDeleteClick();
           }}
           className="icon"
         />
         {visible ? (
-          <LockIcon onClick={() => onEyeClick()} className="icon" />
+          <EyeIcon onClick={() => onEyeClick()} className="icon" />
         ) : (
           <NoEyeIcon onClick={() => onEyeClick()} className="icon" />
         )}

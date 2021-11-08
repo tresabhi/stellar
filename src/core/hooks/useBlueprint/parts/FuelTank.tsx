@@ -1,8 +1,7 @@
 import '@react-three/fiber';
 import { merge, times } from 'lodash';
 import { FC, memo } from 'react';
-import { data as rootPartData, type as rootPartType } from './Root';
-import { rootComponentProps } from './';
+import { data as rootPartData } from './Root';
 
 export const data = merge(rootPartData, {
   '.stellar': { label: 'Fuel Tank' },
