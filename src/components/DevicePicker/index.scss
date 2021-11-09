@@ -6,64 +6,64 @@
   width: 100%;
   top: 50%;
   transform: translateY(-50%);
-}
 
-.device-picker-title {
-  color: v(background-panel-text-color);
-  font-family: v(font-family-regular);
-}
+  .title {
+    color: v(background-panel-text-color);
+    font-family: v(font-family-regular);
+  }
 
-.device-picker-list {
-  display: flex;
-  justify-content: center;
-}
+  .card-list {
+    display: flex;
+    justify-content: center;
 
-.device-picker-card {
-  display: block;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  font-weight: bold;
-  width: 128px;
-  height: 128px;
+    .card {
+      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-weight: bold;
+      width: 128px;
+      height: 128px;
 
-  font-family: v(font-family-regular);
-  background-color: v(button-flush-background-color);
-  font-size: $font-size-big;
-  border-radius: $border-radius-regular;
-  color: v(button-flush-content-color);
+      font-family: v(font-family-regular);
+      background-color: v(button-flush-background-color);
+      font-size: $font-size-big;
+      border-radius: $border-radius-regular;
+      color: v(button-flush-content-color);
 
-  margin: $margin-regular;
-}
+      margin: $margin-regular;
 
-.device-picker-card:hover {
-  background-color: v(button-flush-hover-background-color);
-}
+      &:hover {
+        background-color: v(button-flush-hover-background-color);
+      }
 
-.device-picker-card > svg,
-.device-picker-card > img {
-  display: block;
+      svg,
+      img {
+        display: block;
 
-  width: 48px;
-  height: 48px;
+        width: 48px;
+        height: 48px;
 
-  margin-bottom: $margin-smaller;
-}
+        margin-bottom: $margin-smaller;
+      }
 
-.device-picker-recomended {
-  margin: 0px;
-  height: 0px;
-  font-style: italic;
-  font-weight: normal;
+      .recommended-text {
+        margin: 0px;
+        height: 0px;
+        font-style: italic;
+        font-weight: normal;
 
-  font-size: $font-size-small;
+        font-size: $font-size-small;
 
-  color: v(color-recomended);
-}
+        color: v(color-recommended);
+      }
+    }
+  }
 
-.device-picker-build {
-  color: v(background-panel-unimportant-text-color);
-  font-family: v(font-family-regular);
+  .build {
+    color: v(background-panel-unimportant-text-color);
+    font-family: v(font-family-regular);
+  }
 }

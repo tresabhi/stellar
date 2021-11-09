@@ -1,87 +1,78 @@
 import { FC } from 'react';
-import { ReactComponent as PlanetIcon } from '../../assets/icons/planet.svg';
-import { ReactComponent as RocketIcon } from '../../assets/icons/rocket.svg';
-import { ReactComponent as SaveIcon } from '../../assets/icons/save.svg';
-import { ReactComponent as TextIcon } from '../../assets/icons/text.svg';
+import { ReactComponent as PlanetIcon } from 'assets/icons/planet.svg';
+import { ReactComponent as RocketIcon } from 'assets/icons/rocket.svg';
+import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
+import { ReactComponent as TextIcon } from 'assets/icons/text.svg';
 import './index.scss';
 
-const ShadeContainer: FC = ({ children }) => (
+export const ShadeContainer: FC = ({ children }) => (
   <div className="launch-prompt-shade-container">{children}</div>
 );
 
-const Container: FC = ({ children }) => (
+export const Container: FC = ({ children }) => (
   <div className="launch-prompt-container">{children}</div>
 );
 
-const SubContainer: FC = ({ children }) => (
-  <div className="launch-prompt-subcontainer">{children}</div>
+export const SubContainer: FC = ({ children }) => (
+  <div className="subcontainer">{children}</div>
 );
 
-const Seperator = () => <div className="launch-prompt-seperator"></div>;
+export const Separator = () => <div className="separator"></div>;
 
-const Title: FC = ({ children }) => (
-  <span className="launch-prompt-title">{children}</span>
+export const Title: FC = ({ children }) => (
+  <span className="title">{children}</span>
 );
 
-const DraftRow: FC = ({ children }) => (
-  <div className="launch-prompt-draft-row">{children}</div>
+export const DraftRow: FC = ({ children }) => (
+  <div className="draft-row">{children}</div>
 );
 
-interface IDraftType {
+type DraftTypeProps = {
   icon: Object;
   name: string;
   enabled: boolean;
-}
-const DraftType: FC<IDraftType> = ({ icon, name, enabled = true }) => (
+};
+export const DraftType: FC<DraftTypeProps> = ({
+  icon,
+  name,
+  enabled = true,
+}) => (
   <button
     className={`
-      launch-prompt-draft-type
+      draft-type
       ${enabled ? 'enabled' : 'disabled'}
     `}
   >
     {icon}
-    <span className="launch-prompt-draft-type-text">{name}</span>
+    <span className="draft-type-text">{name}</span>
   </button>
 );
 
-const RecentsColumn: FC = ({ children }) => (
-  <div className="launch-prompt-recents-column">{children}</div>
+export const ResentsColumn: FC = ({ children }) => (
+  <div className="resents-column">{children}</div>
 );
 
 const listingIcons = new Map([
   ['blueprint', <RocketIcon />],
   ['system', <PlanetIcon />],
   ['translation', <TextIcon />],
-  ['unkown', <SaveIcon />],
+  ['unknown', <SaveIcon />],
 ]);
-interface IRecentListing {
+
+type RecentListingProps = {
   type?: string;
   name: string;
-}
-const RecentListing: FC<IRecentListing> = ({ type = 'unkown', name }) => (
-  <button className="launch-prompt-recents-listing">
+};
+export const RecentListing: FC<RecentListingProps> = ({
+  type = 'unknown',
+  name,
+}) => (
+  <button className="resents-listing">
     {listingIcons.get(type)}
-    <span className="launch-prompt-recents-listing-text">{name}</span>
+    <span className="resents-listing-text">{name}</span>
   </button>
 );
 
-const InvisibleVerticleSeperator = () => (
-  <div className="invisible-verticle-seperator" />
+export const InvisibleVerticalSeparator = () => (
+  <div className="invisible-vertical-separator" />
 );
-
-export default Object.assign({
-  ShadeContainer,
-  Container,
-  SubContainer,
-
-  Seperator,
-  InvisibleVerticleSeperator,
-
-  Title,
-
-  DraftRow,
-  DraftType,
-
-  RecentsColumn,
-  RecentListing,
-});

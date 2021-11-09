@@ -2,23 +2,29 @@ import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { FC } from 'react';
 import 'react-dom';
-import * as Part from '../../utilities/parts/index';
+import * as Part from 'core/hooks/useBlueprint/parts/index';
+import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
 import './index.scss';
 
-interface IEditingCanvas {
+type EditingCanvasProps = {
   center: number;
   offset: { x: number; y: number };
-  parts: Array<any>;
-}
-const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
-  let partsJsx = parts.map((part) => {
-    const PartComponent = Part.getMeshFromPartName(part.n, true);
-    return <PartComponent data={part} offset={offset} />;
+  parts: Array<rootPartType>;
+};
+const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
+  const partsJsx = parts.map((part, index) => {
+    const PartComponent = Part.getPartComponent(part.n);
+
+    return PartComponent ? (
+      <PartComponent key={`part-${index}`} data={part} />
+    ) : (
+      <mesh />
+    );
   });
 
   return (
     <Canvas
-      frameloop={'demand'}
+      frameloop="demand"
       orthographic
       camera={{ zoom: 16, position: [center * -1, 0, 100] }}
       className="editing-canvas"
@@ -37,9 +43,8 @@ const EditingCanvas: FC<IEditingCanvas> = ({ center, offset, parts }) => {
         args={[1000, 1000, '#b062f5', '#22272e']}
         rotation={[Math.PI / 2, 0, 0]}
       />
-      {/* <InfiniteGridHelper axes="yxz" size1={1} size2={2} /> */}
 
-      {partsJsx}
+      <group position={[offset.x, offset.y, 0]}>{partsJsx}</group>
     </Canvas>
   );
 };

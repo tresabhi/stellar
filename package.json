@@ -10,12 +10,10 @@
     "react": "^17.0.2",
     "react-device-detect": "^1.17.0",
     "react-dom": "^17.0.2",
-    "react-i18next": "^11.12.0",
+    "react-icons": "^4.3.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "three": "^0.131.3",
-    "three-stdlib": "^2.4.0",
-    "typed-binary-json": "1.18.1",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
@@ -25,18 +23,18 @@
     "@types/react-dom": "^17.0.9",
     "@types/react-router": "^5.1.16",
     "@types/react-router-dom": "^5.1.8",
-    "@types/three": "^0.131.0",
-    "firebase-tools": "^9.18.0",
-    "gh-pages": "^3.2.3",
-    "node-cmd": "^5.0.0"
+    "@types/three": "^0.131.0"
   },
   "scripts": {
+    "format": "prettier --write \"**/*.@(json|js|jsx|css|scss|sass|md|ts|tsx|html|xml|yml)\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
     "deploy": "gh-pages -d build",
+    "firebase-tools": "^9.18.0",
+    "prettier": "^2.4.1",
     "pseudo": "npm -v"
   },
   "eslintConfig": {

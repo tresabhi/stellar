@@ -1,5 +1,10 @@
 @import './utilities.scss';
 
+@mixin static {
+  cursor: default;
+  user-select: none;
+}
+
 body {
   margin: 0px;
   height: 100vh;

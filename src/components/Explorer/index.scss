@@ -4,138 +4,140 @@
   display: flex;
   flex-direction: column;
 
-  width: $explorer-left-width;
-}
+  width: $explorer-width;
 
-.explorer-container.left-side {
-  border-right: $foreground-panel-border;
-}
+  &.left {
+    border-right: $foreground-panel-border;
+  }
+  &.right {
+    border-left: $foreground-panel-border;
+  }
 
-.explorer-container.right-side {
-  border-left: $foreground-panel-border;
-  width: $explorer-right-width;
-}
+  .tabs-container {
+    display: flex;
 
-.explorer-listing-container {
-  overflow-y: auto;
-  flex: 1;
+    height: $explorer-tab-height;
 
-  background-color: v(foreground-panel-background-color);
-}
+    .tab,
+    .tab-static {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex: 1;
 
-.explorer-tabs-container {
-  display: flex;
+      color: v(foreground-panel-text-color);
+      font-family: v(font-family-regular);
 
-  height: $explorer-tab-height;
-}
+      border-bottom: $foreground-panel-border;
 
-.explorer-part-listing,
-.explorer-property-listing {
-  display: flex;
-  align-items: center;
-  color: white;
-  flex-wrap: nowrap;
+      font-size: $font-size-big;
+    }
 
-  background-color: v(button-flush-background-color);
-  font-family: v(font-family-regular);
-  font-size: $font-size-big;
+    .tab {
+      background-color: v(tab-unselected-background-color);
+    }
 
-  height: $explorer-listing-height;
-  padding: 0px $padding-bigger 0px $padding-bigger;
-}
+    .tab.selected {
+      background-color: v(tab-selected-background-color);
+    }
 
-.explorer-part-listing {
-  width: 100%;
-}
+    .tab-static {
+      @include static;
 
-.explorer-part-listing:hover {
-  background-color: v(button-flush-hover-background-color);
-}
+      background-color: v(tab-static-background-color);
+    }
+  }
 
-.explorer-part-listing-icon,
-.explorer-part-listing > svg,
-.explorer-part-listing > img {
-  width: $icon-size-regular;
-  height: $icon-size-regular;
-  // min width to make it not shrink
-  min-width: $icon-size-regular;
-  min-height: $icon-size-regular;
-}
+  .listing-container {
+    overflow-y: auto;
+    flex: 1;
 
-.explorer-part-listing > svg:not(.explorer-part-listing-icon),
-.explorer-part-listing > img:not(.explorer-part-listing-icon) {
-  margin-right: $margin-smaller;
-}
+    background-color: v(foreground-panel-background-color);
 
-.explorer-part-listing-icon {
-  display: none;
+    .part-listing {
+      width: 100%;
+      display: flex;
 
-  margin-left: $margin-smaller;
-}
+      .icon,
+      svg,
+      img {
+        width: $icon-size-regular;
+        height: $icon-size-regular;
+        min-width: $icon-size-regular;
+        min-height: $icon-size-regular;
+      }
 
-.explorer-part-listing:hover > .explorer-part-listing-icon {
-  display: block;
-}
+      .icon {
+        display: none;
 
-.explorer-part-listing-input {
-  background: none;
-  color: white;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  min-width: 0px;
+        margin-left: $margin-smaller;
+      }
 
-  font-family: v(font-family-regular);
+      &:hover {
+        .icon {
+          display: block;
+        }
+      }
 
-  margin-left: $margin-smaller 0px $margin-smaller 0px;
-}
+      svg:not(.icon),
+      img:not(.icon) {
+        margin-right: $margin-smaller;
+      }
 
-.explorer-part-listing-input.editing,
-.explorer-part-listing-input:focus {
-  cursor: text;
-}
+      .input {
+        background: none;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        min-width: 0px;
+        flex: 1;
 
-.explorer-tab,
-.explorer-static-tab {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  flex: 1;
+        color: v(foreground-panel-text-color);
+        font-family: v(font-family-regular);
 
-  font-family: v(font-family-regular);
-  border-bottom: $foreground-panel-border;
+        margin-left: $margin-smaller 0px $margin-smaller 0px;
 
-  font-size: $font-size-big;
-}
+        &:focus {
+          cursor: text;
+        }
+      }
+    }
 
-.explorer-tab {
-  background-color: v(tab-unselected-background-color);
-}
+    .part-listing,
+    .property-listing {
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
 
-.explorer-static-tab {
-  background-color: v(tab-static-background-color);
-}
+      color: v(foreground-panel-text-color);
+      background-color: v(button-flush-background-color);
+      font-family: v(font-family-regular);
 
-.explorer-tab.selected {
-  background-color: v(tab-selected-background-color);
-}
+      font-size: $font-size-big;
+      height: $explorer-listing-height;
+      padding: 0px $padding-bigger 0px $padding-bigger;
+    }
 
-.explorer-property-listing {
-}
+    .part-listing:hover {
+      background-color: v(button-flush-hover-background-color);
+    }
 
-.explorer-property-listing-sub-properties-container {
-  height: 100%;
-  flex: 1;
-  align-items: center;
-  display: flex;
-  flex-direction: row-reverse;
-}
+    .property-listing {
+      .sub-properties-container {
+        height: 100%;
+        flex: 1;
+        align-items: center;
+        display: flex;
+        flex-direction: row-reverse;
 
-.explorer-sub-property-text-input {
-  margin-left: $margin-regular;
-}
+        .input {
+          margin-left: $margin-regular;
 
-.explorer-sub-property-text-input > span {
-  margin-right: $margin-smaller;
+          span {
+            margin-right: $margin-smaller;
+          }
+        }
+      }
+    }
+  }
 }

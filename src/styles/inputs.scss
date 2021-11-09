@@ -1,5 +1,3 @@
-// @import '../resources/index.scss';
-
 button {
   display: block;
   border: none;
@@ -15,6 +13,9 @@ input {
 
 @mixin button {
   background-color: v(button-background-color);
+  color: v(foreground-panel-text-color);
+  border-radius: $border-radius-regular;
+  text-align: center;
 }
 
 @mixin button-hover {
@@ -22,9 +23,11 @@ input {
 }
 
 @mixin button-flush {
+  @include button;
   background-color: v(button-flush-background-color);
 }
 
 @mixin button-flush-hover {
+  @include button-hover;
   background-color: v(button-flush-hover-background-color);
 }

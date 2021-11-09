@@ -1,25 +1,22 @@
-import { FC } from 'react';
-import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
-import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg';
-import { ReactComponent as FuelTankIcon } from '../../assets/icons/fuel-tank.svg';
-import { ReactComponent as LockIcon } from '../../assets/icons/lock.svg';
-import { type as rootType } from '../../utilities/parts/Root';
+import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
+import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
+import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
+import { getPartIconComponent } from 'core/hooks/useBlueprint/parts';
+import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
+import { FC, memo, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
-const listingIcons = {
-  'Fuel Tank': <FuelTankIcon />,
-};
-
-interface IContainer {
+type ContainerProps = {
   rightSide?: boolean;
-}
-const Container: FC<IContainer> = ({ children, rightSide }) => {
+};
+export const Container: FC<ContainerProps> = ({ children, rightSide }) => {
   return (
     <div
       className={`
         explorer-container
-        ${rightSide ? 'right-side' : 'left-side'}
+        ${rightSide ? 'right' : 'left'}
       `}
     >
       {children}
@@ -27,81 +24,141 @@ const Container: FC<IContainer> = ({ children, rightSide }) => {
   );
 };
 
-const TabsContainer: FC = ({ children }) => (
-  <div className="explorer-tabs-container">{children}</div>
+export const TabsContainer: FC = ({ children }) => (
+  <div className="tabs-container">{children}</div>
 );
-interface IListingContainer {
-  list: Array<rootType>;
-}
-const ListingContainer: FC<IListingContainer> = ({ children, list }) => {
-  const parsedArray = list?.map((listing) => {
+
+type PartsListingContainerProps = {
+  parts: Array<rootPartType>;
+  onPartDataMutate: Function;
+  onPartDelete: Function;
+};
+export const PartsListingContainer: FC<PartsListingContainerProps> = ({
+  children,
+  parts,
+  onPartDataMutate,
+  onPartDelete,
+}) => {
+  const parsedArray = parts.map((partData, index) => {
     return (
       <PartListing
-        icon={(listingIcons as any)?.[listing.n] || <EyeIcon />}
-        defaultName={
-          listing?.['.stellar']?.label || 'Internally Unlabeled Part'
-        }
+        key={`part-${index}`}
+        icon={getPartIconComponent(partData.n) ?? <LockIcon />}
+        defaultName={partData?.['.stellar']?.label}
+        visible={partData?.['.stellar']?.visible}
+        onEyeClick={() => {
+          onPartDataMutate(
+            { '.stellar': { visible: !partData['.stellar'].visible } },
+            index,
+          );
+        }}
+        onDeleteClick={() => onPartDelete(index)}
+        onLabelChange={(label: boolean) => {
+          onPartDataMutate({ '.stellar': { label: label } }, index);
+        }}
       />
     );
   });
 
   return (
-    <div className="explorer-listing-container">
-      {list ? parsedArray : children}
-    </div>
+    <div className="listing-container">{parts ? parsedArray : children}</div>
   );
 };
 
-interface IPartListing {
+type PartListingProps = {
   icon: Object;
   defaultName: string;
-}
-const PartListing: FC<IPartListing> = ({ children, icon, defaultName }) => {
-  return (
-    <button className="explorer-part-listing">
-      {/* icon */}
-      {icon}
-
-      {/* text */}
-      <input
-        className="explorer-part-listing-input"
-        defaultValue={defaultName}
-      />
-
-      <DeleteIcon className="explorer-part-listing-icon" />
-      <LockIcon className="explorer-part-listing-icon" />
-      <EyeIcon className="explorer-part-listing-icon" />
-    </button>
-  );
+  visible: boolean;
+  onEyeClick: Function;
+  onDeleteClick: Function;
+  onLabelChange: Function;
 };
+export const PartListing: FC<PartListingProps> = memo(
+  ({
+    icon,
+    defaultName,
+    visible,
+    onEyeClick,
+    onDeleteClick,
+    onLabelChange,
+  }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    let previousLabel = defaultName;
 
-interface IPropertyListing {
+    useEffect(() => {
+      inputRef.current!.value = defaultName;
+    }, []);
+
+    return (
+      <button className="part-listing">
+        {/* icon */}
+        {icon}
+
+        {/* text */}
+        <input
+          className="input"
+          placeholder="Unlabeled Part"
+          ref={inputRef}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') inputRef.current?.blur();
+          }}
+          onBlur={() => {
+            inputRef.current!.value = inputRef.current?.value.trim() ?? '';
+
+            if (previousLabel !== inputRef.current?.value) {
+              onLabelChange(inputRef.current?.value);
+              previousLabel = inputRef.current?.value!;
+            }
+          }}
+        />
+
+        <DeleteIcon
+          onClick={() => {
+            onDeleteClick();
+          }}
+          className="icon"
+        />
+        {visible ? (
+          <EyeIcon onClick={() => onEyeClick()} className="icon" />
+        ) : (
+          <NoEyeIcon onClick={() => onEyeClick()} className="icon" />
+        )}
+      </button>
+    );
+  },
+);
+
+type PropertyListingProps = {
   subProperties?: Array<Object>;
-}
-const PropertyListing: FC<IPropertyListing> = ({ children, subProperties }) => {
+};
+export const PropertyListing: FC<PropertyListingProps> = ({
+  children,
+  subProperties,
+}) => {
   return (
-    <div className="explorer-property-listing">
+    <div className="property-listing">
       {/* text */}
       {children}
 
-      <div className="explorer-property-listing-sub-properties-container">
+      <div className="sub-properties-container">
         {/* sub properties */}
+        {/* TODO: what the heck is this? */}
         {subProperties?.map((component) => component)}
       </div>
     </div>
   );
 };
 
-interface ITab {
+type TabProps = {
   defaultSelected?: boolean;
-}
-const Tab: FC<ITab> = ({ children, defaultSelected }) => {
-  // let for now, react state hook in the future
-  let selected = defaultSelected;
+};
+export const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
+  // TODO: const for now, react state hook in the future
+  const selected = defaultSelected;
   return (
     <button
       className={`
-        explorer-tab
+        tab
         ${selected ? 'selected' : ''}
       `}
     >
@@ -110,17 +167,17 @@ const Tab: FC<ITab> = ({ children, defaultSelected }) => {
   );
 };
 
-const StaticTab: FC<ITab> = ({ children }) => (
-  <div className="explorer-static-tab">{children}</div>
+export const StaticTab: FC<TabProps> = ({ children }) => (
+  <div className="tab-static">{children}</div>
 );
 
-interface ISubPropertyTextInput {
+type SubPropertyTextInputProps = {
   defaultValue: number | string;
   prefix?: string;
   suffix?: string;
   name?: string;
-}
-const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
+};
+export const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
   children,
   defaultValue,
   prefix,
@@ -128,7 +185,7 @@ const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
   name,
 }) => {
   return (
-    <div className="explorer-sub-property-text-input">
+    <div className="explorer-input">
       <span>{name || children}</span>
       <UnitTextInput
         defaultValue={defaultValue}
@@ -138,17 +195,3 @@ const SubPropertyTextInput: FC<ISubPropertyTextInput> = ({
     </div>
   );
 };
-
-export default Object.assign({
-  Container,
-  TabsContainer,
-  ListingContainer,
-
-  Tab,
-  StaticTab,
-
-  PartListing,
-  PropertyListing,
-
-  SubPropertyTextInput,
-});

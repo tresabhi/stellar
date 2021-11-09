@@ -2,19 +2,19 @@ import { FC } from 'react';
 
 import './index.scss';
 
-interface IUnitTextInput {
+type UnitTextInputProps = {
   defaultValue: number | string;
   prefix?: string;
   suffix?: string;
   isolated?: boolean;
-}
-const UnitTextInput: FC<IUnitTextInput> = ({
+};
+const UnitTextInput: FC<UnitTextInputProps> = ({
   defaultValue,
   prefix = '',
   suffix = '',
   isolated = true,
 }) => {
-  // functionality coming soon...
+  // TODO: functionality coming soon...
   return (
     <input
       className={`

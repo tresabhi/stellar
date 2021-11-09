@@ -1,15 +1,10 @@
 {
   "version": [0, 1],
   "builds": {
-    "zvz7r.sse.codesandbox.io": "Sandbox Build",
-    "zvz7r.csb.app": "Sandbox Build",
+    "*": "Sandbox Build",
 
-    "stellareditor.vercel.app": "Release Build",
-    "stellarbeta.vercel.app": "Beta Build",
-    "stellardev.vercel.app": "Dev Build",
-
-    "stellarsfs.web.app": "Release Build",
+    "stellaralpha.web.app": "Dev Build",
     "stellarbeta.web.app": "Beta Build",
-    "stellardev.web.app": "Dev Build"
+    "stellaredit.web.app": "Release Build"
   }
 }

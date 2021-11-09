@@ -1,0 +1,27 @@
+{
+  "cSpell.words": [
+    "browserslist",
+    "drei",
+    "frameloop",
+    "fullscreen",
+    "Interstage",
+    "lerp",
+    "metalness",
+    "msapplication",
+    "mstile",
+    "predeploy",
+    "rerenderer",
+    "sebp",
+    "seps",
+    "setl",
+    "stdlib",
+    "stellaralpha",
+    "stellarbeta",
+    "stellaredit",
+    "stellareditor",
+    "subcontainer"
+  ],
+  "search.exclude": {
+    "**/src/assets/icons": true
+  }
+}
