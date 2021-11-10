@@ -3,12 +3,13 @@ import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import lerp from 'core/methods/lerp';
 import { merge, times } from 'lodash';
 import { FC, memo } from 'react';
-import { data as rootPartData } from './Root';
+import * as Root from './Root';
 
 export const icon = <FuelTankIcon />;
 
-export const data = merge({}, rootPartData, {
-  '.stellar': { label: 'Fuel Tank' },
+export const vanillaData = {
+  ...Root.vanillaData,
+
   n: 'Fuel Tank',
   N: {
     width_original: 2,
@@ -21,7 +22,19 @@ export const data = merge({}, rootPartData, {
     color_tex: '_',
     shape_tex: '_',
   },
-});
+};
+
+export const data = {
+  ...vanillaData,
+
+  '.stellar': {
+    ...Root.data['.stellar'],
+
+    label: 'Fuel Tank',
+  },
+};
+
+export type vanillaType = typeof vanillaData & { n: 'Fuel Tank' };
 
 export type type = typeof data & { n: 'Fuel Tank' };
 

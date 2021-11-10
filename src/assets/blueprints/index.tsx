@@ -1,8 +1,5 @@
 import { updatePartData } from 'core/hooks/useBlueprint/parts';
-import {
-  type as rootPartType,
-  vanillaType as rootVanillaPartType,
-} from 'core/hooks/useBlueprint/parts/Root';
+import * as Root from 'core/hooks/useBlueprint/parts/Root';
 import { merge } from 'lodash';
 import {
   data as defaultBlueprintData,
@@ -26,7 +23,7 @@ export const blueprintToLatestVersion = (
  *3. Use version updaters
  */
 export const updateBlueprint = (
-  blueprint: Object | rootBlueprintType,
+  blueprint: rootBlueprintType,
 ): rootBlueprintType => {
   let updatedBlueprint = mergeToDefaultBlueprint(blueprint);
   updatedBlueprint = blueprintToLatestVersion(updatedBlueprint);
@@ -36,5 +33,5 @@ export const updateBlueprint = (
 };
 
 export const updatePartsData = (
-  parts: Array<rootVanillaPartType>,
-): Array<rootPartType> => parts.map((part) => updatePartData(part));
+  parts: Array<Root.allVanillaPartsType>,
+): Array<Root.allPartsType> => parts.map((part) => updatePartData(part));

@@ -2,7 +2,7 @@ import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { merge } from 'lodash';
 import { memo } from 'react';
-import { type as fuelTankType } from './FuelTank';
+import * as FuelTank from './FuelTank';
 
 export const icon = <LockIcon />;
 
@@ -20,20 +20,24 @@ export const vanillaData = {
   t: '-Infinity',
 };
 
-export const data = merge({}, vanillaData, {
+// TODO: SPLIT ALL PART DATA TO VANILLA AND STELLAR VERSIONS
+
+export const data = {
+  ...vanillaData,
+
   '.stellar': {
     label: 'Internally Unlabeled Part',
     visible: true,
     locked: false,
   },
-});
-
-export type vanillaType = typeof vanillaData;
+};
 
 export type type = typeof data;
 
 // TODO: Add more part types here
 // Example: fuelTankType | wheelBigType | wheelSmallType
-export type allTypes = fuelTankType;
+export type allPartsType = FuelTank.type;
+
+export type allVanillaPartsType = FuelTank.vanillaType;
 
 export const Component = memo(() => <mesh />);

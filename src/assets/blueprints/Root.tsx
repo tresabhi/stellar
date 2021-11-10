@@ -2,10 +2,7 @@ import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
 
 const typedParts: Array<rootPartType> = [];
 const typedStages: Array<number> = [];
-export const data = {
-  '.stellar': {
-    format_version: 1,
-  },
+export const vanillaData = {
   center: 0,
   offset: {
     x: 0,
@@ -15,4 +12,14 @@ export const data = {
   stages: typedStages,
 };
 
+export const data = {
+  ...vanillaData,
+
+  '.stellar': {
+    format_version: 1,
+  },
+};
+
 export type type = typeof data;
+
+export type vanillaType = typeof vanillaData;

@@ -1,6 +1,6 @@
 import {
   type as rootPartType,
-  vanillaType as rootVanillaPartType,
+  allPartsType as rootVanillaPartType,
 } from 'core/hooks/useBlueprint/parts/Root';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
