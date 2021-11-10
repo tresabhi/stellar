@@ -1,5 +1,5 @@
-import * as PartsAPI from 'core/hooks/useBlueprint/parts';
-import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
+import * as PartsAPI from 'core/APIs/parts';
+import * as RootPart from 'core/APIs/parts/Root';
 import { merge } from 'lodash';
 import * as RootBlueprint from './Root';
 

@@ -1,4 +1,4 @@
-import * as Root from 'core/hooks/useBlueprint/parts/Root';
+import * as Root from 'core/APIs/parts/Root';
 
 const vanillaTypedParts: Array<Root.allVanillaPartTypes> = [];
 const vanillaTypedStages: Array<number> = [];

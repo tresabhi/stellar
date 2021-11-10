@@ -1,4 +1,4 @@
-import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
+import * as RootPart from 'core/APIs/parts/Root';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
 import { Type } from 'typescript';

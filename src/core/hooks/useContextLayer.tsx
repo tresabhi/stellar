@@ -1,4 +1,4 @@
-import * as RootContextListing from 'components/ContextMenu/types/root';
+import * as RootContextListing from 'core/APIs/contextListings/root';
 import { useState } from 'react';
 
 export default function useContextLayer(

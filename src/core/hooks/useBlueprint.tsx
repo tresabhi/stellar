@@ -1,5 +1,5 @@
 import * as BlueprintAPI from 'assets/blueprints';
-import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
+import * as RootPart from 'core/APIs/parts/Root';
 import { merge } from 'lodash';
 import { useState } from 'react';
 
