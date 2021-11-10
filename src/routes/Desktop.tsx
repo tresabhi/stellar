@@ -1,16 +1,16 @@
 import devBlueprint from 'assets/blueprints/saturnV.json';
 import * as ContextMenu from 'components/ContextMenu';
-import { contextMenuListing } from 'components/ContextMenu/types/root';
+import * as RootContextListing from 'components/ContextMenu/types/root';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
 import useBlueprintCore from 'core/hooks/useBlueprint';
-import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
+import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
 import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {
-  const emptyListing: Array<contextMenuListing> = [];
+  const emptyListing: Array<RootContextListing.contextMenuListing> = [];
 
   const blueprint = useBlueprintCore(devBlueprint);
   const contextLayer = useContextLayer(emptyListing);
@@ -47,7 +47,7 @@ const Desktop = () => {
           <Explorer.PartsListingContainer
             parts={blueprint.state.parts}
             onPartDelete={(index: number) => blueprint.deletePart(index)}
-            onPartDataMutate={(data: rootPartType, index: number) =>
+            onPartDataMutate={(data: RootPart.allPartTypes, index: number) =>
               blueprint.mutatePartData(data, index)
             }
           />

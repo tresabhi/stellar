@@ -1,15 +1,12 @@
 import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { FC, useRef } from 'react';
 import './index.scss';
-import { type as extendButtonType } from './types/extendButton';
-import {
-  contextMenuListing,
-  contextMenuListing as listingType,
-} from './types/root';
-import { type as textButtonType } from './types/textButton';
+import * as ExtendContextListing from './types/extendButton';
+import * as RootContextListing from './types/root';
+import * as TextContextListing from './types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
-type TextButtonProps = { data: textButtonType; extended?: boolean };
+type TextButtonProps = { data: TextContextListing.type; extended?: boolean };
 export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
   const Icon = data?.icon;
 
@@ -28,12 +25,14 @@ const Separator = () => {
   return <div className="separator" />;
 };
 
-type ExtendButtonProps = { data: extendButtonType };
+type ExtendButtonProps = { data: ExtendContextListing.type };
 const ExtendButton: FC<ExtendButtonProps> = ({ data }) => {
   return (
     <TextButton
       data={{
-        ...data,
+        type: 'text_button',
+        text: data.text,
+        icon: data.icon,
         onClick: () => alert(`fine, i'll extend it`),
       }}
       extended={true}
@@ -47,7 +46,7 @@ const typeToComponent: any = {
   extend_button: ExtendButton,
 };
 type ContextContainerProps = {
-  data: listingType;
+  data: RootContextListing.contextMenuListing;
   toolbar?: boolean;
   onActionTaken?: Function;
 };
@@ -96,7 +95,10 @@ export const ContextContainer: FC<ContextContainerProps> = ({
   );
 };
 
-type ContainerProps = { contexts: Array<contextMenuListing>; onBlur: Function };
+type ContainerProps = {
+  contexts: Array<RootContextListing.contextMenuListing>;
+  onBlur: Function;
+};
 export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {
   const contextMenus = contexts.map((contextMenu, index) => {
     return (

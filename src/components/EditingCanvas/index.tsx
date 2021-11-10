@@ -1,15 +1,14 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { FC } from 'react';
-import 'react-dom';
 import * as Part from 'core/hooks/useBlueprint/parts/index';
-import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
+import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
+import { FC } from 'react';
 import './index.scss';
 
 type EditingCanvasProps = {
   center: number;
   offset: { x: number; y: number };
-  parts: Array<rootPartType>;
+  parts: Array<RootPart.type>;
 };
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const partsJsx = parts.map((part, index) => {

@@ -1,7 +1,7 @@
-import { contextMenuListing, type as rootListingType } from './root';
+import * as RootContextListing from './root';
 
-export type type = rootListingType & {
+export type type = RootContextListing.type & {
   type: 'extend_button';
   text: string;
-  extend: contextMenuListing;
+  extend: RootContextListing.contextMenuListing;
 };

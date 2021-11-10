@@ -1,5 +1,9 @@
-import { contextMenuListing } from 'components/ContextMenu/types/root';
+import * as RootContextListing from 'components/ContextMenu/types/root';
 
-const toolbarTop: contextMenuListing = { x: 0, y: 0, listing: [] };
+const toolbarTop: RootContextListing.contextMenuListing = {
+  x: 0,
+  y: 0,
+  listing: [],
+};
 
 export default toolbarTop;

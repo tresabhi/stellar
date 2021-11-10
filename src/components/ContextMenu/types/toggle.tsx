@@ -1,6 +1,6 @@
-import { type as rootListingType } from './root';
+import * as RootContextListing from './root';
 
-export type type = rootListingType & {
+export type type = RootContextListing.type & {
   type: 'toggle';
   text: string;
   onClick: Function;

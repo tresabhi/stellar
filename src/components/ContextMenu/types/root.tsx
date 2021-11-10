@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
-import { type as extendButtonType } from './extendButton';
-import { type as separatorType } from './separator';
-import { type as textButtonType } from './textButton';
-import { type as toggleType } from './toggle';
+import * as ExtendContextListing from './extendButton';
+import * as SeparatorContextListing from './separator';
+import * as TextContextListing from './textButton';
+import * as ToggleContextListing from './toggle';
 
 export type contextMenuListing = {
   x?: number;
@@ -16,7 +16,7 @@ export type type = {
 };
 
 export type allTypes =
-  | extendButtonType
-  | separatorType
-  | textButtonType
-  | toggleType;
+  | ExtendContextListing.type
+  | SeparatorContextListing.type
+  | TextContextListing.type
+  | ToggleContextListing.type;

@@ -1,4 +1,4 @@
-import { updatePartData } from 'core/hooks/useBlueprint/parts';
+import * as PartsAPI from 'core/hooks/useBlueprint/parts';
 import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
 import { merge } from 'lodash';
 import * as RootBlueprint from './Root';
@@ -35,4 +35,5 @@ export const updateBlueprint = (
 
 export const updatePartsData = (
   parts: Array<RootPart.allVanillaPartTypes> | Array<RootPart.allPartTypes>,
-): Array<RootPart.allPartTypes> => parts.map((part) => updatePartData(part));
+): Array<RootPart.allPartTypes> =>
+  parts.map((part) => PartsAPI.updatePartData(part));

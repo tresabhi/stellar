@@ -1,8 +1,8 @@
-import { contextMenuListing } from 'components/ContextMenu/types/root';
+import * as RootContextListing from 'components/ContextMenu/types/root';
 import { useState } from 'react';
 
 export default function useContextLayer(
-  initialState: Array<contextMenuListing>,
+  initialState: Array<RootContextListing.contextMenuListing>,
 ) {
   const [state, setState] = useState(initialState);
 
@@ -11,7 +11,7 @@ export default function useContextLayer(
 
     removeAll: () => setState([]),
 
-    addContext: (context: contextMenuListing) => {
+    addContext: (context: RootContextListing.contextMenuListing) => {
       setState((state) => [...state, context]);
     },
   };

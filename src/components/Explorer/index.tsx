@@ -2,8 +2,8 @@ import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
-import { getPartIconComponent } from 'core/hooks/useBlueprint/parts';
-import { type as rootPartType } from 'core/hooks/useBlueprint/parts/Root';
+import * as PartsAPI from 'core/hooks/useBlueprint/parts';
+import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
 import { FC, memo, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
@@ -29,7 +29,7 @@ export const TabsContainer: FC = ({ children }) => (
 );
 
 type PartsListingContainerProps = {
-  parts: Array<rootPartType>;
+  parts: Array<RootPart.allPartTypes>;
   onPartDataMutate: Function;
   onPartDelete: Function;
 };
@@ -43,7 +43,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
     return (
       <PartListing
         key={`part-${index}`}
-        icon={getPartIconComponent(partData.n) ?? <LockIcon />}
+        icon={PartsAPI.getPartIconComponent(partData.n) ?? <LockIcon />}
         defaultName={partData?.['.stellar']?.label}
         visible={partData?.['.stellar']?.visible}
         onEyeClick={() => {
