@@ -1,8 +1,8 @@
-# 🚀 Stellar
-
-Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator
+<p align="center"><img src="./public/mstile-310x150.png" /></p>
 
 ![](https://i.imgur.com/nWJzRLA.png)
+
+Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator
 
 ## 🤔 About
 
