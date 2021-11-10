@@ -85,9 +85,12 @@ export const PartListing: FC<PartListingProps> = memo(
     const inputRef = useRef<HTMLInputElement>(null);
     let previousLabel = defaultName;
 
-    useEffect(() => {
-      inputRef.current!.value = defaultName;
-    }, []);
+    const updateLabel = () => {
+      if (inputRef?.current) inputRef.current.value = defaultName;
+    };
+    updateLabel();
+
+    useEffect(updateLabel, []);
 
     return (
       <button className="part-listing">
