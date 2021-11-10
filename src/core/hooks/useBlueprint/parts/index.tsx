@@ -1,7 +1,4 @@
-import {
-  type as rootPartType,
-  allPartsType as rootVanillaPartType,
-} from 'core/hooks/useBlueprint/parts/Root';
+import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
 import { Type } from 'typescript';
@@ -39,7 +36,9 @@ export const getPartData = (partName: string) => {
   return getPartModule(partName)?.data;
 };
 
-export const updatePartData = (partData: rootVanillaPartType): rootPartType => {
+export const updatePartData = (
+  partData: RootPart.allVanillaPartTypes,
+): RootPart.allPartTypes => {
   return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
 };
 

@@ -1,20 +1,17 @@
 import { updatePartData } from 'core/hooks/useBlueprint/parts';
-import * as Root from 'core/hooks/useBlueprint/parts/Root';
+import * as RootPart from 'core/hooks/useBlueprint/parts/Root';
 import { merge } from 'lodash';
-import {
-  data as defaultBlueprintData,
-  type as rootBlueprintType,
-} from './Root';
+import * as RootBlueprint from './Root';
 
 export const mergeToDefaultBlueprint = (
-  blueprint: Object,
-): rootBlueprintType => {
-  return merge(defaultBlueprintData, blueprint);
+  blueprint: RootBlueprint.vanillaType | Object,
+): RootBlueprint.type => {
+  return merge(RootBlueprint.data, blueprint);
 };
 
 export const blueprintToLatestVersion = (
-  blueprint: rootBlueprintType,
-): rootBlueprintType => blueprint;
+  blueprint: RootBlueprint.type,
+): RootBlueprint.type => blueprint;
 
 /**
  *Procedure
@@ -23,15 +20,19 @@ export const blueprintToLatestVersion = (
  *3. Use version updaters
  */
 export const updateBlueprint = (
-  blueprint: rootBlueprintType,
-): rootBlueprintType => {
-  let updatedBlueprint = mergeToDefaultBlueprint(blueprint);
-  updatedBlueprint = blueprintToLatestVersion(updatedBlueprint);
-  updatedBlueprint.parts = updatePartsData(updatedBlueprint.parts);
+  blueprint: RootBlueprint.vanillaType | Object,
+): RootBlueprint.type => {
+  const mergedBlueprint = mergeToDefaultBlueprint(blueprint);
+  const latestVersionBlueprint = blueprintToLatestVersion(mergedBlueprint);
+  const partDataUpdatedBlueprint = {
+    ...latestVersionBlueprint,
 
-  return updatedBlueprint;
+    parts: updatePartsData(latestVersionBlueprint.parts),
+  };
+
+  return partDataUpdatedBlueprint;
 };
 
 export const updatePartsData = (
-  parts: Array<Root.allVanillaPartsType>,
-): Array<Root.allPartsType> => parts.map((part) => updatePartData(part));
+  parts: Array<RootPart.allVanillaPartTypes>,
+): Array<RootPart.allPartTypes> => parts.map((part) => updatePartData(part));
