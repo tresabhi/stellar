@@ -34,5 +34,5 @@ export const updateBlueprint = (
 };
 
 export const updatePartsData = (
-  parts: Array<RootPart.allVanillaPartTypes>,
+  parts: Array<RootPart.allVanillaPartTypes> | Array<RootPart.allPartTypes>,
 ): Array<RootPart.allPartTypes> => parts.map((part) => updatePartData(part));
