@@ -59,7 +59,7 @@ const Desktop = () => {
           parts={blueprint.state.parts}
         />
 
-        <Explorer.Container>
+        <Explorer.Container rightSide={true}>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Properties</Explorer.StaticTab>
             {/* <Explorer.PropertyListingContainer /> */}
