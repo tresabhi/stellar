@@ -12,11 +12,11 @@ export default function useBlueprint(initialBlueprint: Object) {
     state,
 
     deletePart: (index: number) => {
+      let newParts = [...state.parts];
+      newParts.splice(index, 1);
       setState((state) => ({
         ...state,
-        parts: state.parts.filter((part, partIndex) => {
-          return partIndex !== index;
-        }),
+        parts: newParts,
       }));
     },
 
