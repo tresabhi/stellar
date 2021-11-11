@@ -37,8 +37,8 @@ export const getPartData = (partName: string) => {
 };
 
 export const updatePartData = (
-  partData: RootPart.allVanillaPartTypes,
-): RootPart.allPartTypes => {
+  partData: RootPart.anyVanillaPartType,
+): RootPart.anyPartType => {
   return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
 };
 

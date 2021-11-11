@@ -1,6 +1,6 @@
 import * as Root from 'core/APIs/parts/Root';
 
-const vanillaTypedParts: Array<Root.allVanillaPartTypes> = [];
+const vanillaTypedParts: Array<Root.anyVanillaPartType> = [];
 const vanillaTypedStages: Array<number> = [];
 export const vanillaData = {
   center: 0,
@@ -12,7 +12,7 @@ export const vanillaData = {
   stages: vanillaTypedStages,
 };
 
-const typedParts: Array<Root.allPartTypes> = [];
+const typedParts: Array<Root.anyPartType> = [];
 const typedStages: Array<number> = [];
 export const data = {
   ...vanillaData,

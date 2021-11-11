@@ -5827,6 +5827,11 @@ hosted-git-info@^4.0.1:
   dependencies:
     lru-cache "^6.0.0"
 
+hotkeys-js@^3.8.1:
+  version "3.8.7"
+  resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.8.7.tgz#c16cab978b53d7242f860ca3932e976b92399981"
+  integrity sha512-ckAx3EkUr5XjDwjEHDorHxRO2Kb7z6Z2Sxul4MbBkN8Nho7XDslQsgMJT+CiJ5Z4TgRxxvKHEpuLE3imzqy4Lg==
+
 hpack.js@^2.1.6:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/hpack.js/-/hpack.js-2.1.6.tgz#87774c0949e513f42e84575b3c45681fade2a0b2"
@@ -9616,6 +9621,14 @@ react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
+
+react-hot-keys@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/react-hot-keys/-/react-hot-keys-2.7.1.tgz#a811445e66551c9f5b0e6b130d12096a59688539"
+  integrity sha512-h2LfJGs450z58/DvKuzal1LetoEGjXUbcxJyKFvWOJPy+IRpQsyxZv7FYDAJ7W0my3ySI3sVB3h5xcgvMdxS1g==
+  dependencies:
+    hotkeys-js "^3.8.1"
+    prop-types "^15.7.2"
 
 react-icons@^4.3.1:
   version "4.3.1"

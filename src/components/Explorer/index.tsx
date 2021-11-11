@@ -29,7 +29,7 @@ export const TabsContainer: FC = ({ children }) => (
 );
 
 type PartsListingContainerProps = {
-  parts: Array<RootPart.allPartTypes>;
+  parts: Array<RootPart.anyPartType>;
   onPartDataMutate: Function;
   onPartDelete: Function;
 };
@@ -156,7 +156,7 @@ export const PartListing: FC<PartListingProps> = memo(
 
 // TODO: Add function arguments and return value
 type PropertyListingContainerProps = {
-  parts: Array<RootPart.allPartTypes>;
+  parts: Array<RootPart.anyPartType>;
   currentPartIndex: number;
   onPartDataMutate: Function;
 };

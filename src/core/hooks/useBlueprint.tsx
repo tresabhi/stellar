@@ -20,7 +20,7 @@ export default function useBlueprint(initialBlueprint: Object) {
       }));
     },
 
-    mutatePartData: (data: RootPart.allPartTypes, index: number) => {
+    mutatePartData: (data: RootPart.anyPartType, index: number) => {
       setState((state) => ({
         ...state,
         parts: state.parts.map((part, partIndex) => {

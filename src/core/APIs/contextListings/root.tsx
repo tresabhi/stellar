@@ -7,7 +7,7 @@ import * as ToggleContextListing from './toggle';
 export type contextMenuListing = {
   x?: number;
   y?: number;
-  listing: Array<allTypes>;
+  listing: Array<anyContextListingType>;
 };
 
 export type type = {
@@ -15,7 +15,7 @@ export type type = {
   icon?: FunctionComponent;
 };
 
-export type allTypes =
+export type anyContextListingType =
   | ExtendContextListing.type
   | SeparatorContextListing.type
   | TextContextListing.type

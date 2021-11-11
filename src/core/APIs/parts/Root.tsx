@@ -35,8 +35,8 @@ export type type = typeof data;
 
 // TODO: Add more part types here
 // Example: fuelTankType | wheelBigType | wheelSmallType
-export type allPartTypes = FuelTank.type;
+export type anyPartType = FuelTank.type;
 
-export type allVanillaPartTypes = FuelTank.vanillaType;
+export type anyVanillaPartType = FuelTank.vanillaType;
 
 export const Component = memo(() => <mesh />);
