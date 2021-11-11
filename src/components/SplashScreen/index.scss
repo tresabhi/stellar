@@ -12,8 +12,48 @@
   justify-content: center;
   flex-direction: column;
 
-  .icon {
+  .stellar-icon {
     width: $icon-size-gigantic;
     height: $icon-size-gigantic;
+  }
+
+  .loading-icon {
+    @keyframes bounce {
+      0% {
+        transform: rotate(0deg);
+      }
+      13% {
+        transform: rotate(45deg);
+      }
+      25% {
+        transform: rotate(90deg);
+      }
+      38% {
+        transform: rotate(135deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+      63% {
+        transform: rotate(225deg);
+      }
+      75% {
+        transform: rotate(270deg);
+      }
+      83% {
+        transform: rotate(315deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    margin-top: $margin-larger;
+    width: $icon-size-regular;
+    height: $icon-size-regular;
+    animation-name: bounce;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(1);
   }
 }
