@@ -84,12 +84,12 @@ export const PartListing: FC<PartListingProps> = memo(
   }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     let previousLabel = defaultName;
+    let focusable = false;
 
     const updateLabel = () => {
       if (inputRef?.current) inputRef.current.value = defaultName;
     };
     updateLabel();
-
     useEffect(updateLabel, [defaultName]);
 
     return (
@@ -99,19 +99,27 @@ export const PartListing: FC<PartListingProps> = memo(
 
         {/* text */}
         <input
-          className="input"
-          placeholder="Unlabeled Part"
-          ref={inputRef}
-          onKeyPress={(event) => {
-            if (event.key === 'Enter') inputRef.current?.blur();
+          onFocus={() => {
+            if (!focusable) inputRef.current?.blur();
           }}
           onBlur={() => {
             inputRef.current!.value = inputRef.current?.value.trim() ?? '';
+            focusable = false;
 
             if (previousLabel !== inputRef.current?.value) {
               onLabelChange(inputRef.current?.value);
               previousLabel = inputRef.current?.value!;
             }
+          }}
+          onDoubleClick={() => {
+            focusable = true;
+            inputRef.current?.focus();
+          }}
+          className="input"
+          placeholder="Unlabeled Part"
+          ref={inputRef}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') inputRef.current?.blur();
           }}
         />
 

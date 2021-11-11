@@ -62,7 +62,7 @@ const Desktop = () => {
         <Explorer.Container>
           <Explorer.TabsContainer>
             <Explorer.StaticTab>Properties</Explorer.StaticTab>
-            <Explorer.PropertyListing />
+            {/* <Explorer.PropertyListingContainer /> */}
           </Explorer.TabsContainer>
         </Explorer.Container>
       </EditingPanel>
