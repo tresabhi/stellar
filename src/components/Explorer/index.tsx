@@ -90,7 +90,7 @@ export const PartListing: FC<PartListingProps> = memo(
     };
     updateLabel();
 
-    useEffect(updateLabel, []);
+    useEffect(updateLabel, [defaultName]);
 
     return (
       <button className="part-listing">
