@@ -1,28 +1,18 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-import Home from 'routes/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
+import Home from 'routes/Home';
 import Mobile from 'routes/Mobile';
-import Install from 'routes/Install';
 
 const Routed = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/">
-          <Home />
-        </Route>
-        <Route path="/desktop">
-          <Desktop />
-        </Route>
-        <Route path="/mobile">
-          <Mobile />
-        </Route>
-        <Route path="/install">
-          <Install />
+        <Route path="/" element={<Home />}>
+          <Route path="desktop" element={<Desktop />} />
+          <Route path="mobile" element={<Mobile />} />
         </Route>
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
