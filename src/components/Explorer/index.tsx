@@ -4,7 +4,7 @@ import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
 import * as PartsAPI from 'core/APIs/parts';
 import * as RootPart from 'core/APIs/parts/Root';
-import { FC, memo, useEffect, useRef } from 'react';
+import { FC, KeyboardEvent, memo, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
@@ -86,11 +86,34 @@ export const PartListing: FC<PartListingProps> = memo(
     let previousLabel = defaultName;
     let focusable = false;
 
-    const updateLabel = () => {
+    const handleLabelUpdate = () => {
       if (inputRef?.current) inputRef.current.value = defaultName;
     };
-    updateLabel();
-    useEffect(updateLabel, [defaultName]);
+    handleLabelUpdate();
+    useEffect(handleLabelUpdate, [defaultName]);
+
+    const handleFocus = () => {
+      if (!focusable) inputRef.current?.blur();
+    };
+
+    const handleBlur = () => {
+      inputRef.current!.value = inputRef.current?.value.trim() ?? '';
+      focusable = false;
+
+      if (previousLabel !== inputRef.current?.value) {
+        onLabelChange(inputRef.current?.value);
+        previousLabel = inputRef.current?.value!;
+      }
+    };
+
+    const handleDoubleClick = () => {
+      focusable = true;
+      inputRef.current?.focus();
+    };
+
+    const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') inputRef.current?.blur();
+    };
 
     return (
       <button className="part-listing">
@@ -99,28 +122,13 @@ export const PartListing: FC<PartListingProps> = memo(
 
         {/* text */}
         <input
-          onFocus={() => {
-            if (!focusable) inputRef.current?.blur();
-          }}
-          onBlur={() => {
-            inputRef.current!.value = inputRef.current?.value.trim() ?? '';
-            focusable = false;
-
-            if (previousLabel !== inputRef.current?.value) {
-              onLabelChange(inputRef.current?.value);
-              previousLabel = inputRef.current?.value!;
-            }
-          }}
-          onDoubleClick={() => {
-            focusable = true;
-            inputRef.current?.focus();
-          }}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onDoubleClick={handleDoubleClick}
+          onKeyPress={handleKeyPress}
           className="input"
           placeholder="Unlabeled Part"
           ref={inputRef}
-          onKeyPress={(event) => {
-            if (event.key === 'Enter') inputRef.current?.blur();
-          }}
         />
 
         <DeleteIcon
