@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
-
-import MetaData from '../../metadata.json';
+import Package from '../../../package.json';
 import './index.scss';
 
 export const Container: FC = ({ children }) => (
@@ -31,16 +30,6 @@ export const Card: FC<CardProps> = ({ to, text, recommended, children }) => {
   );
 };
 
-export const Build: FC = () => {
-  let version = 'v' + (MetaData?.version?.join('.') || 'Unknown');
-  const unknownDomainName = 'Unknown Build';
-  const domainNames = MetaData.builds;
-
-  return (
-    <span className="build">
-      {version +
-        ' - ' +
-        ((domainNames as any)[window.location.hostname] ?? unknownDomainName)}
-    </span>
-  );
-};
+export const Build: FC = () => (
+  <span className="build">{'v' + Package.version}</span>
+);

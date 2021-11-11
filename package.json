@@ -1,6 +1,6 @@
 {
   "name": "stellar",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha",
   "private": true,
   "dependencies": {
     "@react-three/drei": "^7.7.0",
