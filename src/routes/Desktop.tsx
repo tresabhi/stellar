@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/saturnV.json';
+import devBlueprint from 'assets/blueprints/static/saturn-v.json';
 import * as ContextMenu from 'components/ContextMenu';
 import * as RootContextListing from 'core/APIs/contextListings/root';
 import EditingCanvas from 'components/EditingCanvas';
@@ -6,7 +6,7 @@ import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
 import useBlueprintCore from 'core/hooks/useBlueprint';
-import * as RootPart from 'core/APIs/parts/Root';
+import * as RootPart from 'core/APIs/parts/root';
 import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {

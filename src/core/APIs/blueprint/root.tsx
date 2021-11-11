@@ -1,4 +1,4 @@
-import * as Root from 'core/APIs/parts/Root';
+import * as Root from 'core/APIs/parts/root';
 
 const vanillaTypedParts: Array<Root.anyVanillaPartType> = [];
 const vanillaTypedStages: Array<number> = [];

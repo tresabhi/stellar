@@ -1,7 +1,7 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import * as Part from 'core/APIs/parts/index';
-import * as RootPart from 'core/APIs/parts/Root';
+import * as RootPart from 'core/APIs/parts/root';
 import { FC } from 'react';
 import './index.scss';
 

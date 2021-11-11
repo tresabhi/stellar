@@ -3,7 +3,7 @@ import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
 import * as PartsAPI from 'core/APIs/parts';
-import * as RootPart from 'core/APIs/parts/Root';
+import * as RootPart from 'core/APIs/parts/root';
 import { FC, KeyboardEvent, memo, MouseEvent, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';

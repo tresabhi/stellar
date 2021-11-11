@@ -1,7 +1,7 @@
 import * as PartsAPI from 'core/APIs/parts';
-import * as RootPart from 'core/APIs/parts/Root';
+import * as RootPart from 'core/APIs/parts/root';
 import { merge } from 'lodash';
-import * as RootBlueprint from './Root';
+import * as RootBlueprint from './root';
 
 export const mergeToDefaultBlueprint = (
   blueprint: RootBlueprint.vanillaType | Object,

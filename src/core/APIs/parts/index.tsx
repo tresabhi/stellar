@@ -1,9 +1,9 @@
-import * as RootPart from 'core/APIs/parts/Root';
+import * as RootPart from 'core/APIs/parts/root';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
 import { Type } from 'typescript';
-import * as FuelTank from './FuelTank';
-import * as Root from './Root';
+import * as FuelTank from './fuelTank';
+import * as Root from './root';
 
 export type partModule = {
   type: Type;

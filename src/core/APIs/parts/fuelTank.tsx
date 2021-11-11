@@ -3,7 +3,7 @@ import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import lerp from 'core/methods/lerp';
 import { times } from 'lodash';
 import { FC, memo } from 'react';
-import * as Root from './Root';
+import * as Root from './root';
 
 export const icon = <FuelTankIcon />;
 
