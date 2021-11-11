@@ -1,6 +1,5 @@
 import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
-import { merge } from 'lodash';
 import { memo } from 'react';
 import * as FuelTank from './FuelTank';
 

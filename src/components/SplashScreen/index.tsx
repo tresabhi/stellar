@@ -5,7 +5,9 @@ import { ReactComponent as LoadingIcon } from 'assets/icons/loading.svg';
 const SplashScreen = () => (
   <div className="splash-screen">
     <StellarIcon className="stellar-icon" />
-    <LoadingIcon className="loading-icon"/>
+    <p className="loading-text">
+      Loading Stellar... <LoadingIcon className="loading-icon" />
+    </p>
   </div>
 );
 

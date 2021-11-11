@@ -1,7 +1,7 @@
 import '@react-three/fiber';
 import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import lerp from 'core/methods/lerp';
-import { merge, times } from 'lodash';
+import { times } from 'lodash';
 import { FC, memo } from 'react';
 import * as Root from './Root';
 
