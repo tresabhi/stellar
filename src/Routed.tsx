@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Home from 'routes/Home';
 import Desktop from 'routes/Desktop';
@@ -8,7 +8,7 @@ import Install from 'routes/Install';
 const Routed = () => {
   return (
     <Router>
-      <Switch>
+      <Routes>
         <Route exact path="/">
           <Home />
         </Route>
@@ -21,7 +21,7 @@ const Routed = () => {
         <Route exact path="/install">
           <Install />
         </Route>
-      </Switch>
+      </Routes>
     </Router>
   );
 };
