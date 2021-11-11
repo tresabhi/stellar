@@ -58,6 +58,13 @@ const Desktop = () => {
           offset={blueprint.state.offset}
           parts={blueprint.state.parts}
         />
+
+        <Explorer.Container>
+          <Explorer.TabsContainer>
+            <Explorer.StaticTab>Properties</Explorer.StaticTab>
+            <Explorer.PropertyListing />
+          </Explorer.TabsContainer>
+        </Explorer.Container>
       </EditingPanel>
       <ContextMenu.Container
         contexts={contextLayer.state}

@@ -131,26 +131,39 @@ export const PartListing: FC<PartListingProps> = memo(
   },
 );
 
+// TODO: Add function arguments and return value
+type PropertyListingContainerProps = {
+  parts: Array<RootPart.allPartTypes>;
+  currentPartIndex: number;
+  onPartDataMutate: Function;
+};
+export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
+  parts,
+  currentPartIndex,
+  onPartDataMutate,
+}) => {
+  return <div />;
+};
+
 type PropertyListingProps = {
   subProperties?: Array<Object>;
 };
-export const PropertyListing: FC<PropertyListingProps> = ({
-  children,
-  subProperties,
-}) => {
-  return (
-    <div className="property-listing">
-      {/* text */}
-      {children}
+export const PropertyListing: FC<PropertyListingProps> = memo(
+  ({ children, subProperties }) => {
+    return (
+      <div className="property-listing">
+        {/* text */}
+        {children}
 
-      <div className="sub-properties-container">
-        {/* sub properties */}
-        {/* TODO: what the heck is this? */}
-        {subProperties?.map((component) => component)}
+        <div className="sub-properties-container">
+          {/* sub properties */}
+          {/* TODO: what the heck is this? */}
+          {subProperties?.map((component) => component)}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 type TabProps = {
   defaultSelected?: boolean;
