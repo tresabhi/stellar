@@ -1,0 +1,19 @@
+@import '../../styles/index.scss';
+
+.splash-screen {
+  background-color: v(foreground-panel-background-color);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .icon {
+    width: $icon-size-gigantic;
+    height: $icon-size-gigantic;
+  }
+}
