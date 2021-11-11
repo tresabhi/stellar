@@ -13,7 +13,7 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.0.1",
     "react-scripts": "^4.0.3",
-    "three": "^0.131.3",
+    "three": "^0.134.0",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
