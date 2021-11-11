@@ -7,10 +7,9 @@ const Routed = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}>
-          <Route path="desktop" element={<Desktop />} />
-          <Route path="mobile" element={<Mobile />} />
-        </Route>
+        <Route path="" element={<Home />} />
+        <Route path="mobile" element={<Mobile />} />
+        <Route path="desktop" element={<Desktop />} />
       </Routes>
     </BrowserRouter>
   );
