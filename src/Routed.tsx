@@ -9,16 +9,16 @@ const Routed = () => {
   return (
     <Router>
       <Routes>
-        <Route exact path="/">
+        <Route path="/">
           <Home />
         </Route>
-        <Route exact path="/desktop">
+        <Route path="/desktop">
           <Desktop />
         </Route>
-        <Route exact path="/mobile">
+        <Route path="/mobile">
           <Mobile />
         </Route>
-        <Route exact path="/install">
+        <Route path="/install">
           <Install />
         </Route>
       </Routes>
