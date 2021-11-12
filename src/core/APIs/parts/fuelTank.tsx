@@ -34,9 +34,29 @@ export const data = {
   },
 };
 
-export type vanillaType = typeof vanillaData & { n: 'Fuel Tank' };
+type constantTypes = {
+  n: 'Fuel Tank';
+  // TODO: add more color tex's
+  T: {
+    color_tex: '_';
+    shape_tex:
+      | '_'
+      | 'Rivets'
+      | 'Half Rivets'
+      | 'Flat'
+      | 'Interstage'
+      | 'Interstage Full'
+      | 'Nozzle_4'
+      | 'Strut'
+      | 'Edges Face'
+      | 'Edges Smooth'
+      | 'Flat Smooth';
+  };
+};
 
-export type type = typeof data & { n: 'Fuel Tank' };
+export type vanillaType = typeof vanillaData & constantTypes;
+
+export type type = typeof data & constantTypes;
 
 type ComponentProps = {
   data: type;

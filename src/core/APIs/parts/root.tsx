@@ -31,7 +31,11 @@ export const data = {
   },
 };
 
-export type type = typeof data;
+type constantType = {
+  t: '-Infinity';
+};
+
+export type type = typeof data & constantType;
 
 // TODO: Add more part types here
 // Example: fuelTankType | wheelBigType | wheelSmallType
