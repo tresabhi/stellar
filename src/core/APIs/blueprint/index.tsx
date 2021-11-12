@@ -1,12 +1,11 @@
 import * as PartsAPI from 'core/APIs/parts';
 import * as RootPart from 'core/APIs/parts/root';
-import { merge } from 'lodash';
 import * as RootBlueprint from './root';
 
-export const mergeToDefaultBlueprint = (
-  blueprint: RootBlueprint.vanillaType | Object,
+export const mergeWithDefaultBlueprintGlobals = (
+  blueprint: Object,
 ): RootBlueprint.type => {
-  return merge(RootBlueprint.data, blueprint);
+  return { ...RootBlueprint.data, ...blueprint };
 };
 
 export const blueprintToLatestVersion = (
@@ -22,19 +21,19 @@ export const blueprintToLatestVersion = (
 export const updateBlueprint = (
   blueprint: RootBlueprint.vanillaType | Object,
 ): RootBlueprint.type => {
-  const mergedBlueprint = mergeToDefaultBlueprint(blueprint);
-  const latestVersionBlueprint = blueprintToLatestVersion(mergedBlueprint);
+  const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {
-    ...latestVersionBlueprint,
-
-    // TODO: remove this any
-    parts: updatePartsData(latestVersionBlueprint.parts as any),
+    ...mergedBlueprint,
+    parts: updatePartsData(mergedBlueprint.parts),
   };
+  const latestVersionBlueprint = blueprintToLatestVersion(
+    partDataUpdatedBlueprint,
+  );
 
-  return partDataUpdatedBlueprint;
+  return latestVersionBlueprint;
 };
 
 export const updatePartsData = (
-  parts: Array<RootPart.anyVanillaPartType> | Array<RootPart.anyPartType>,
+  parts: RootBlueprint.partArrayType,
 ): Array<RootPart.anyPartType> =>
   parts.map((part) => PartsAPI.updatePartData(part));

@@ -52,7 +52,7 @@ type constantTypes = {
       | 'Edges Smooth'
       | 'Flat Smooth';
   };
-};
+} & Root.mutualVanillaConstantType;
 
 export type vanillaType = typeof vanillaData & constantTypes;
 

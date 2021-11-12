@@ -1,25 +1,33 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import * as RootBlueprint from 'core/APIs/blueprint/root';
 import * as Part from 'core/APIs/parts/index';
-import * as RootPart from 'core/APIs/parts/root';
 import { FC } from 'react';
 import './index.scss';
 
 type EditingCanvasProps = {
   center: number;
   offset: { x: number; y: number };
-  parts: Array<RootPart.type>;
+  parts: RootBlueprint.partArrayType;
 };
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
-  const partsJsx = parts.map((part, index) => {
-    const PartComponent = Part.getPartComponent(part.n);
+  const partsJsx: Array<JSX.Element> = [];
 
-    return PartComponent ? (
-      <PartComponent key={`part-${index}`} data={part} />
-    ) : (
-      <mesh />
-    );
-  });
+  const getAllComponentsRecursively = (parts: RootBlueprint.partArrayType) => {
+    parts.forEach((part) => {
+      if (part.n === 'Group') {
+        getAllComponentsRecursively(part.parts);
+      } else {
+        const PartComponent = Part.getPartComponent(part.n);
+        if (PartComponent)
+          partsJsx.push(
+            <PartComponent key={`part-${partsJsx.length}`} data={part} />,
+          );
+      }
+    });
+  };
+
+  getAllComponentsRecursively(parts);
 
   return (
     <Canvas

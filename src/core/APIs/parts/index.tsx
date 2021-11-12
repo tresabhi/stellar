@@ -16,9 +16,9 @@ export type RootPartComponentProps = {
   data: Root.type;
 };
 
+// TODO: Fix this any
 const partComponentNames: { [key: string]: any } = {
   Root,
-
   'Fuel Tank': FuelTank,
 };
 
@@ -37,7 +37,7 @@ export const getPartData = (partName: string) => {
 };
 
 export const updatePartData = (
-  partData: RootPart.anyVanillaPartType,
+  partData: RootPart.anyVanillaPartType | RootPart.anyPartType,
 ): RootPart.anyPartType => {
   return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
 };

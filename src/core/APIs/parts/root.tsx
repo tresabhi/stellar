@@ -1,7 +1,8 @@
 import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { memo } from 'react';
-import * as FuelTank from './fuelTank';
+import * as FuelTankPart from './fuelTank';
+import * as GroupPart from './group';
 
 export const icon = <LockIcon />;
 
@@ -31,16 +32,14 @@ export const data = {
   },
 };
 
-type constantType = {
+export type mutualVanillaConstantType = {
   t: '-Infinity';
 };
 
-export type type = typeof data & constantType;
+export type type = typeof data & mutualVanillaConstantType;
 
-// TODO: Add more part types here
-// Example: fuelTankType | wheelBigType | wheelSmallType
-export type anyPartType = FuelTank.type;
+export type anyPartType = FuelTankPart.type | GroupPart.type;
 
-export type anyVanillaPartType = FuelTank.vanillaType;
+export type anyVanillaPartType = FuelTankPart.vanillaType;
 
 export const Component = memo(() => <mesh />);
