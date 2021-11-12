@@ -9,6 +9,8 @@
     "metalness",
     "msapplication",
     "mstile",
+    "precache",
+    "precaching",
     "predeploy",
     "rerenderer",
     "sebp",
@@ -19,7 +21,8 @@
     "stellarbeta",
     "stellaredit",
     "stellareditor",
-    "subcontainer"
+    "subcontainer",
+    "titlebar"
   ],
   "search.exclude": {
     "**/src/assets/icons": true

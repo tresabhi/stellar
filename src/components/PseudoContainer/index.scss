@@ -2,11 +2,20 @@
   &.fullscreen {
     height: 100vh;
     width: 100vw;
+
+    &.occupyTitleBar {
+      height: calc(100vh + env(titlebar-area-height, 0px));
+    }
   }
 
   &.flex {
     display: flex;
     flex-direction: column;
     overflow: none;
+  }
+
+  &.occupyTitleBar {
+    position: fixed;
+    top: env(titlebar-area-y, 0);
   }
 }

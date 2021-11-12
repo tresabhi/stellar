@@ -5,17 +5,20 @@ import './index.scss';
 type PseudoContainerProps = {
   fullscreen?: boolean;
   flex?: boolean;
+  occupyTitleBar?: boolean;
 };
 const PseudoContainer: FC<PseudoContainerProps> = ({
   children,
   fullscreen = false,
   flex = false,
+  occupyTitleBar = false,
 }) => (
   <div
     className={`
       pseudo-container
       ${fullscreen ? 'fullscreen' : ''}
       ${flex ? 'flex' : ''}
+      ${occupyTitleBar ? 'occupyTitleBar' : ''}
     `}
   >
     {children}

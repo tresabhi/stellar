@@ -16,7 +16,7 @@ const Desktop = () => {
   const contextLayer = useContextLayer(emptyListing);
 
   return (
-    <PseudoContainer fullscreen={true} flex={true}>
+    <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
       <ContextMenu.ContextContainer
         toolbar={true}
         data={{
