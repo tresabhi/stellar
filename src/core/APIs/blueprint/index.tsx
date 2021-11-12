@@ -27,7 +27,8 @@ export const updateBlueprint = (
   const partDataUpdatedBlueprint = {
     ...latestVersionBlueprint,
 
-    parts: updatePartsData(latestVersionBlueprint.parts),
+    // TODO: remove this any
+    parts: updatePartsData(latestVersionBlueprint.parts as any),
   };
 
   return partDataUpdatedBlueprint;
