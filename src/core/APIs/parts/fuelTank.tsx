@@ -48,7 +48,7 @@ type constantTypes = {
       | 'Interstage Full'
       | 'Nozzle_4'
       | 'Strut'
-      | 'Edges Face'
+      | 'Edges Faces'
       | 'Edges Smooth'
       | 'Flat Smooth';
   };
