@@ -30,7 +30,7 @@ jobs:
         run: yarn install
 
       - name: Build static site
-        run: yarn build
+        run: yarn buildalpha
 
       - name: Archive build
         uses: actions/upload-artifact@v2

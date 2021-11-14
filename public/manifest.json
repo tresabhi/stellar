@@ -1,8 +1,8 @@
 {
-  "short_name": "Stellar Editor",
-  "name": "Stellar Editor",
+  "short_name": "Stellar",
+  "name": "Stellar",
 
-  "start_url": "/",
+  "start_url": "/?manifest-version=1",
   "scope": "/",
   "display": "fullscreen",
 

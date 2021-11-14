@@ -29,7 +29,10 @@
   "scripts": {
     "format": "prettier --write \"**/*.@(json|js|jsx|css|scss|sass|md|ts|tsx|html|xml|yml)\"",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "node scripts/build.js",
+    "buildalpha": "node scripts/build.js alpha",
+    "buildbeta": "node scripts/build.js beta",
+    "buildrelease": "node scripts/build.js release",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "react-scripts build",
