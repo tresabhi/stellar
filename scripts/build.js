@@ -3,7 +3,7 @@ const { writeFileSync } = require('fs');
 const { chdir, argv } = require('process');
 
 console.log('Building with react-scripts');
-// exec('npx react-scripts build');
+exec('npx react-scripts build');
 
 const appName = 'Stellar';
 const buildNames = {
@@ -16,7 +16,7 @@ const buildNames = {
 const argv2 = argv[2] ?? 'default';
 
 console.log(`Updating manifest.json keys for "${argv2}"`);
-const manifest = require('../build/manifest.json');
+const manifest = require('./build/manifest.json');
 const newName = `${appName} ${buildNames[argv2] ?? ''}`.trim();
 [manifest.name, manifest.short_name] = [newName, newName];
 
