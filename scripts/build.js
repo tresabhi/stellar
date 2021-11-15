@@ -1,6 +1,7 @@
 import argsParser from 'args-parser';
 import { argv, exit } from 'process';
 import build from '../modules/build.js';
+import generateFavicons from '../modules/generateFavicons.js';
 import updateManifestKeys from '../modules/updateManifestKeys.js';
 
 const APP_NAME = 'Stellar';
@@ -24,6 +25,10 @@ switch (true) {
 
 build((error) => {
   if (error) exit(1);
-}, true);
 
-updateManifestKeys(BUILD_TYPE, APP_NAME);
+  updateManifestKeys(BUILD_TYPE, APP_NAME);
+
+  if (ARGS['favicon-api-key'])
+    generateFavicons(BUILD_TYPE, ARGS['favicon-api-key']);
+  else console.warn('No favicon API token provided');
+}, true);

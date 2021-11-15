@@ -27,7 +27,8 @@
     "stellaredit",
     "stellareditor",
     "subcontainer",
-    "titlebar"
+    "titlebar",
+    "unzipper"
   ],
   "search.exclude": {
     "**/src/assets/icons": true
