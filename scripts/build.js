@@ -1,9 +1,16 @@
 import { exec } from 'child_process';
-import { createWriteStream, existsSync, mkdirSync, writeFileSync } from 'fs';
+import {
+  createReadStream,
+  createWriteStream,
+  existsSync,
+  mkdirSync,
+  writeFileSync,
+} from 'fs';
 import { get } from 'https';
 import { createRequire } from 'module';
 import fetch from 'node-fetch';
 import { argv, exit } from 'process';
+import { Extract } from 'unzip';
 
 const APP_NAME = 'Stellar';
 const BUILD_NAMES = {
@@ -69,13 +76,18 @@ exec('echo', async (error) => {
         }
 
         console.log('Downloading favicons');
-        const faviconZipWriteStream = createWriteStream('temp/favicon.zip');
+        const faviconZipWriteStream = createWriteStream('temp/favicons.zip');
         const faviconZipFile = get(
           faviconAPIResult.favicon_generation_result.favicon.package_url,
           (response) => {
             response.pipe(faviconZipWriteStream);
           },
         );
+        console.log('Downloading successful');
+
+        console.log('Unzipping favicons');
+        const faviconZipReadStream = createReadStream('temp/favicons.zip');
+        faviconZipReadStream.pipe(Extract({ path: 'temp/favicons' }));
       } else console.error('Fetching failed');
     } else console.warn('No favicon API token provided');
   }
