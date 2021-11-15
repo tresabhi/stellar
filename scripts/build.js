@@ -1,23 +1,32 @@
 const { exec } = require('child_process');
 const { writeFileSync } = require('fs');
-const { chdir, argv } = require('process');
+const { argv, exit } = require('process');
 
-console.log('Building with react-scripts');
-exec('npx react-scripts build');
-
-const appName = 'Stellar';
-const buildNames = {
+const APP_NAME = 'Stellar';
+const BUILD_NAMES = {
   default: '',
 
   alpha: 'Alpha',
   beta: 'Beta',
   release: '',
 };
-const argv2 = argv[2] ?? 'default';
+const ARGV2 = argv[2] ?? 'default';
 
-console.log(`Updating manifest.json keys for "${argv2}"`);
-const manifest = require('./build/manifest.json');
-const newName = `${appName} ${buildNames[argv2] ?? ''}`.trim();
-[manifest.name, manifest.short_name] = [newName, newName];
+console.log('Building with react-scripts');
+exec('npx react-scripts build', (error) => {
+  if (error) {
+    console.error(`Build failed; attached error:\n${error}`);
+    exit(1);
+  }
 
-writeFileSync('./build/manifest.json', JSON.stringify(manifest));
+  console.log('Build succeeded');
+
+  console.log(`Updating manifest.json keys for "${ARGV2}"`);
+  const manifest = require('../build/manifest.json');
+  const newName = `${APP_NAME} ${BUILD_NAMES[ARGV2] ?? ''}`.trim();
+  [manifest.name, manifest.short_name] = [newName, newName];
+
+  // NOTE TO SELF: require is relative to current file; node file mutation is
+  // relative to caller
+  writeFileSync('./build/manifest.json', JSON.stringify(manifest));
+});
