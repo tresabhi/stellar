@@ -3,7 +3,7 @@
   "version": "0.1.0-alpha",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^7.20.5",
+    "@react-three/drei": "^7.20.6",
     "@react-three/fiber": "^7.0.19",
     "lodash": "^4.17.21",
     "node-sass": "^6.0.1",
