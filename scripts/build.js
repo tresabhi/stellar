@@ -1,7 +1,8 @@
-const { exec } = require('child_process');
-const { writeFileSync } = require('fs');
-const { argv, exit } = require('process');
-const fetch = require('node-fetch');
+import { exec } from 'child_process';
+import { createWriteStream } from 'fs';
+import { get } from 'https';
+import fetch from 'node-fetch';
+import { argv, exit } from 'process';
 
 const APP_NAME = 'Stellar';
 const BUILD_NAMES = {
@@ -16,7 +17,7 @@ const FAVICON_API_URL = 'https://realfavicongenerator.net/api/favicon';
 
 console.log('Building with react-scripts');
 // exec('npx react-scripts build', (error) => {
-exec('echo', (error) => {
+exec('echo', async (error) => {
   if (error) {
     console.error(`Build failed; attached error:\n${error}`);
     exit(1);
@@ -40,17 +41,30 @@ exec('echo', (error) => {
      * 2. add browserconfig.xml
      */
     // https://realfavicongenerator.net/api/favicon
-    fetch(FAVICON_API_URL, {
-      method: 'post',
-      body: JSON.stringify({
-        favicon_generation: {
-          api_key: argv[3],
+    const faviconAPIResult = await (
+      await fetch(FAVICON_API_URL, {
+        method: 'post',
+        body: JSON.stringify({
+          favicon_generation: {
+            api_key: argv[3],
 
-          master_picture: { type: 'url', url: ICON_IMG },
+            master_picture: { type: 'url', url: ICON_IMG },
 
-          files_location: { type: 'root' },
-        },
-      }),
-    });
+            files_location: { type: 'root' },
+          },
+        }),
+      })
+    ).json();
+
+    const faviconZipWriteStream = createWriteStream('temp/favicon.jpg');
+    const faviconZip = get(
+      // faviconAPIResult.favicon_generation_result.favicon.package_url,
+      'https://i.imgur.com/sm4Id90.jpg',
+      (response) => {
+        response.pipe(faviconZipWriteStream);
+      },
+    );
+
+    // console.log();
   }
 });

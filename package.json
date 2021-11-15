@@ -2,6 +2,7 @@
   "name": "stellar",
   "version": "0.1.0-alpha",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@react-three/drei": "^7.20.5",
     "@react-three/fiber": "^7.0.19",
@@ -16,7 +17,8 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "^4.0.3",
     "three": "^0.134.0",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "unzip": "^0.1.11"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.172",
