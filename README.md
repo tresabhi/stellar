@@ -2,8 +2,6 @@
 
 ![](https://i.imgur.com/nWJzRLA.png)
 
-Lightweight, Open Source, Fluent blueprint editor for Spaceflight Simulator
-
 ## 🤔 About
 
 Stellar allows for anyone to make custom blueprints with extensive customization without having any knowledge of blueprint editing. Beauty, performance, agility, it's all here.
