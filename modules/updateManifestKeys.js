@@ -15,7 +15,7 @@ export default function renameBuild(buildType, appName) {
   const manifest = require('../build/manifest.json');
   const newName = `${appName} ${BUILD_NAMES[buildType] ?? ''}`.trim();
   writeFileSync(
-    './build/manifest.json',
+    'build/manifest.json',
     JSON.stringify({
       ...manifest,
       name: newName,

@@ -6,7 +6,9 @@ import {
   mkdirSync,
   readdirSync,
   renameSync,
+  writeFileSync,
 } from 'fs';
+import { createRequire } from 'module';
 import { DownloaderHelper } from 'node-downloader-helper';
 import { extname } from 'path';
 import { Extract } from 'unzipper';
@@ -17,72 +19,68 @@ const ICON_IMG = {
   beta: 'https://i.imgur.com/OfK5jC5.png',
   release: 'https://i.imgur.com/OfK5jC5.png',
 };
-const BLIND_COPY_EXTENSIONS = ['.png', '.ico', '.svg'];
-const BLIND_COPY_FILES = ['browserconfig.xml'];
+const BLIND_COPY_EXTENSIONS = ['.png', '.ico', '.svg', '.xml'];
+
+const require = createRequire(import.meta.url);
 
 async function generateFavicons(buildType, faviconAPIKey) {
   /**
-   * 1. add all png, svg, ico files
-   * 2. add browserconfig.xml
-   * 3. merge manifest keys
+   * 1. add all .png, .svg, .ico, .xml
+   * 2. merge manifest icons
    */
   console.log(`Generating and fetching new favicons for "${buildType}"`);
-  // [HIDE]
-  // const faviconAPIResult = (
-  //   await (
-  //     await fetch(FAVICON_API_URL, {
-  //       method: 'post',
-  //       body: JSON.stringify({
-  //         favicon_generation: {
-  //           api_key: faviconAPIKey,
-  //           master_picture: { type: 'url', url: ICON_IMG[buildType] },
-  //           files_location: { type: 'root' },
-  //           favicon_design: {
-  //             desktop_browser: {},
-  //             ios: {
-  //               picture_aspect: 'background_and_margin',
-  //               margin: 10,
-  //               background_color: '#000000',
-  //               assets: {
-  //                 ios6_and_prior_icons: true,
-  //                 ios7_and_later_icons: true,
-  //               },
-  //             },
-  //             windows: {
-  //               picture_aspect: 'white_silhouette',
-  //               background_color: '#892cdc',
-  //               assets: {
-  //                 windows_80_ie_10_tile: true,
-  //                 windows_10_ie_11_edge_tiles: {
-  //                   small: true,
-  //                   medium: true,
-  //                   big: true,
-  //                   rectangle: true,
-  //                 },
-  //               },
-  //             },
-  //             android_chrome: {
-  //               picture_aspect: 'shadow',
-  //               manifest: {},
-  //               assets: {
-  //                 legacy_icon: true,
-  //                 low_resolution_icons: true,
-  //               },
-  //             },
-  //             safari_pinned_tab: {
-  //               picture_aspect: 'silhouette',
-  //               theme_color: '#892cdc',
-  //             },
-  //           },
-  //           html_code_file: true,
-  //         },
-  //       }),
-  //     })
-  //   ).json()
-  // ).favicon_generation_result;
-
-  // [SHOW]
-  const faviconAPIResult = { result: { status: 'success' } };
+  const faviconAPIResult = (
+    await (
+      await fetch(FAVICON_API_URL, {
+        method: 'post',
+        body: JSON.stringify({
+          favicon_generation: {
+            api_key: faviconAPIKey,
+            master_picture: { type: 'url', url: ICON_IMG[buildType] },
+            files_location: { type: 'root' },
+            favicon_design: {
+              desktop_browser: {},
+              ios: {
+                picture_aspect: 'background_and_margin',
+                margin: 10,
+                background_color: '#000000',
+                assets: {
+                  ios6_and_prior_icons: true,
+                  ios7_and_later_icons: true,
+                },
+              },
+              windows: {
+                picture_aspect: 'white_silhouette',
+                background_color: '#892cdc',
+                assets: {
+                  windows_80_ie_10_tile: true,
+                  windows_10_ie_11_edge_tiles: {
+                    small: true,
+                    medium: true,
+                    big: true,
+                    rectangle: true,
+                  },
+                },
+              },
+              android_chrome: {
+                picture_aspect: 'shadow',
+                manifest: {},
+                assets: {
+                  legacy_icon: true,
+                  low_resolution_icons: true,
+                },
+              },
+              safari_pinned_tab: {
+                picture_aspect: 'silhouette',
+                theme_color: '#892cdc',
+              },
+            },
+            html_code_file: true,
+          },
+        }),
+      })
+    ).json()
+  ).favicon_generation_result;
 
   if (faviconAPIResult.result.status === 'success') {
     if (!existsSync('temp')) {
@@ -91,15 +89,10 @@ async function generateFavicons(buildType, faviconAPIKey) {
     }
 
     console.log('Downloading favicons');
-    new DownloaderHelper(
-      // [HIDE]
-      // faviconAPIResult.favicon.package_url,
-      'https://google.com/',
-      'temp',
-      // [HIDE]
-      // { fileName: 'favicons.zip', override: true },
-      { fileName: 'lol', override: true },
-    )
+    new DownloaderHelper(faviconAPIResult.favicon.package_url, 'temp', {
+      fileName: 'favicons.zip',
+      override: true,
+    })
       .on('end', () => {
         if (existsSync('temp/favicons')) {
           console.log(`"temp/favicons" already exists; it will be deleted`);
@@ -117,6 +110,21 @@ async function generateFavicons(buildType, faviconAPIKey) {
                 copyFileSync(`temp/favicons/${favicon}`, `build/${favicon}`);
               }
             });
+
+            console.log('Appending icons to manifest.json');
+            renameSync(
+              'temp/favicons/site.webmanifest',
+              'temp/favicons/manifest.json',
+            );
+            const providedManifest = require('../temp/favicons/manifest.json');
+            const existingManifest = require('../build/manifest.json');
+            writeFileSync(
+              'build/manifest.json',
+              JSON.stringify({
+                ...existingManifest,
+                icons: [...existingManifest?.icons, ...providedManifest?.icons],
+              }),
+            );
           });
       })
       .on('error', () => console.log('Downloading failed'))
