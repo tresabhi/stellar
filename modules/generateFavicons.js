@@ -123,7 +123,7 @@ async function generateFavicons(buildType, faviconAPIKey) {
               'build/manifest.json',
               JSON.stringify({
                 ...existingManifest,
-                icons: [...existingManifest?.icons, ...providedManifest?.icons],
+                icons: [...existingManifest.icons, ...providedManifest.icons],
               }),
             );
           });
