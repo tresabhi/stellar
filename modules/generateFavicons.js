@@ -10,6 +10,7 @@ import {
 } from 'fs';
 import { createRequire } from 'module';
 import { DownloaderHelper } from 'node-downloader-helper';
+import fetch from 'node-fetch';
 import { extname } from 'path';
 import { Extract } from 'unzipper';
 
