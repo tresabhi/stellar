@@ -22,6 +22,4 @@ export default function renameBuild(buildType, appName) {
       short_name: newName,
     }),
   );
-
-  console.log(`Updating manifest.json keys successful`);
 }

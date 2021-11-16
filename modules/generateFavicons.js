@@ -1,14 +1,15 @@
+import { sync as delSync } from 'del';
 import {
+  copyFileSync,
   createReadStream,
   existsSync,
   mkdirSync,
   readdirSync,
-  rmdirSync,
+  renameSync,
 } from 'fs';
 import { DownloaderHelper } from 'node-downloader-helper';
-import fetch from 'node-fetch';
+import { extname } from 'path';
 import { Extract } from 'unzipper';
-import { sync as delSync } from 'del';
 
 const FAVICON_API_URL = 'https://realfavicongenerator.net/api/favicon';
 const ICON_IMG = {
@@ -16,6 +17,8 @@ const ICON_IMG = {
   beta: 'https://i.imgur.com/OfK5jC5.png',
   release: 'https://i.imgur.com/OfK5jC5.png',
 };
+const BLIND_COPY_EXTENSIONS = ['.png', '.ico', '.svg'];
+const BLIND_COPY_FILES = ['browserconfig.xml'];
 
 async function generateFavicons(buildType, faviconAPIKey) {
   /**
@@ -77,14 +80,11 @@ async function generateFavicons(buildType, faviconAPIKey) {
   //     })
   //   ).json()
   // ).favicon_generation_result;
-  console.log(`Generating favicons successful`);
 
   // [SHOW]
   const faviconAPIResult = { result: { status: 'success' } };
 
   if (faviconAPIResult.result.status === 'success') {
-    console.log('Generating and fetching successful');
-
     if (!existsSync('temp')) {
       console.log(`"temp" directory didn't exist; it will be created`);
       mkdirSync('temp');
@@ -101,8 +101,6 @@ async function generateFavicons(buildType, faviconAPIKey) {
       { fileName: 'lol', override: true },
     )
       .on('end', () => {
-        console.log('Downloading successful');
-
         if (existsSync('temp/favicons')) {
           console.log(`"temp/favicons" already exists; it will be deleted`);
           delSync('temp/favicons');
@@ -112,11 +110,13 @@ async function generateFavicons(buildType, faviconAPIKey) {
         createReadStream('temp/favicons.zip')
           .pipe(Extract({ path: 'temp/favicons' }))
           .on('close', () => {
-            console.log('Unzipping successful');
-
             console.log('Cloning favicons');
             const favicons = readdirSync('temp/favicons');
-            console.log(favicons);
+            favicons.forEach((favicon) => {
+              if (BLIND_COPY_EXTENSIONS.includes(extname(favicon))) {
+                copyFileSync(`temp/favicons/${favicon}`, `build/${favicon}`);
+              }
+            });
           });
       })
       .on('error', () => console.log('Downloading failed'))
