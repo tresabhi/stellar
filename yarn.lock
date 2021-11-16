@@ -1539,10 +1539,10 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@react-three/drei@^7.20.5":
-  version "7.20.5"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-7.20.5.tgz#b872e55d0c260a60a5e458236ec1fdf168e0e25e"
-  integrity sha512-KJhN3Uo0/g4P9wNlDyl4Uf2m1e33WBafRs7N6OwPqTQ9/jf0vlA6UHtZVYeRKOauuQw8tiq8Y4AyVP0HqVirpQ==
+"@react-three/drei@^7.22.0":
+  version "7.22.0"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-7.22.0.tgz#934387a04b9791b1d3aa9ef3af670055b14ed6ee"
+  integrity sha512-TkNXg9VddYSNiVcc6UQui1zkOtCuCmwU3Ts080NPOFvoel34w8K/PZ70iPSr6FBC+2WCjECnSSwQYwb3/9c1oQ==
   dependencies:
     "@babel/runtime" "^7.11.2"
     detect-gpu "^3.1.25"
