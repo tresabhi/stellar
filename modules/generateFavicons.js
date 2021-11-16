@@ -1,7 +1,8 @@
-import { createReadStream, createWriteStream, existsSync, mkdirSync } from 'fs';
-import { get } from 'https';
+import { createReadStream, existsSync, mkdirSync, rmdirSync } from 'fs';
+import { DownloaderHelper } from 'node-downloader-helper';
 import fetch from 'node-fetch';
 import { Extract } from 'unzipper';
+import { sync as delSync } from 'del';
 
 const FAVICON_API_URL = 'https://realfavicongenerator.net/api/favicon';
 const ICON_IMG = {
@@ -16,141 +17,95 @@ async function generateFavicons(buildType, faviconAPIKey) {
    * 2. add browserconfig.xml
    * 3. merge manifest keys
    */
-  console.log('Fetching new favicons');
+  console.log(`Fetching new favicons for "${buildType}"`);
 
-  const faviconAPIResult = await (
-    await fetch(FAVICON_API_URL, {
-      method: 'post',
-      body: JSON.stringify({
-        favicon_generation: {
-          api_key: faviconAPIKey,
-
-          master_picture: { type: 'url', url: ICON_IMG[buildType] },
-
-          files_location: { type: 'root' },
-
-          favicon_design: {
-            desktop_browser: {},
-            ios: {
-              picture_aspect: 'background_and_margin',
-              margin: '4',
-              background_color: '#123456',
-              startup_image: {
-                background_color: '#654321',
-              },
-              assets: {
-                ios6_and_prior_icons: false,
-                ios7_and_later_icons: true,
-                precomposed_icons: false,
-                declare_only_default_icon: true,
-              },
-            },
-            windows: {
-              picture_aspect: 'white_silhouette',
-              background_color: '#654321',
-              assets: {
-                windows_80_ie_10_tile: true,
-                windows_10_ie_11_edge_tiles: {
-                  small: false,
-                  medium: true,
-                  big: true,
-                  rectangle: false,
+  const faviconAPIResult = (
+    await (
+      await fetch(FAVICON_API_URL, {
+        method: 'post',
+        body: JSON.stringify({
+          favicon_generation: {
+            api_key: faviconAPIKey,
+            master_picture: { type: 'url', url: ICON_IMG[buildType] },
+            files_location: { type: 'root' },
+            favicon_design: {
+              desktop_browser: {},
+              ios: {
+                picture_aspect: 'background_and_margin',
+                margin: 10,
+                background_color: '#000000',
+                assets: {
+                  ios6_and_prior_icons: true,
+                  ios7_and_later_icons: true,
                 },
               },
-            },
-            firefox_app: {
-              picture_aspect: 'circle',
-              keep_picture_in_circle: 'true',
-              circle_inner_margin: '5',
-              background_color: '#456789',
-              manifest: {
-                app_name: 'My sample app',
-                app_description: 'Yet another sample application',
-                developer_name: 'Philippe Bernard',
-                developer_url:
-                  'http://stackoverflow.com/users/499917/philippe-b',
+              windows: {
+                picture_aspect: 'white_silhouette',
+                background_color: '#892cdc',
+                assets: {
+                  windows_80_ie_10_tile: true,
+                  windows_10_ie_11_edge_tiles: {
+                    small: true,
+                    medium: true,
+                    big: true,
+                    rectangle: true,
+                  },
+                },
               },
-            },
-            android_chrome: {
-              picture_aspect: 'shadow',
-              manifest: {
-                name: 'My sample app',
-                display: 'standalone',
-                orientation: 'portrait',
-                start_url: '/homepage.html',
-                existing_manifest: '{"name": "Yet another app"}',
-              },
-              assets: {
-                legacy_icon: true,
-                low_resolution_icons: false,
-              },
-              theme_color: '#4972ab',
-            },
-            safari_pinned_tab: {
-              picture_aspect: 'black_and_white',
-              threshold: 60,
-              theme_color: '#136497',
-            },
-            coast: {
-              picture_aspect: 'background_and_margin',
-              background_color: '#136497',
-              margin: '12%',
-            },
-            open_graph: {
-              picture_aspect: 'background_and_margin',
-              background_color: '#136497',
-              margin: '12%',
-              ratio: '1.91:1',
-            },
-            yandex_browser: {
-              background_color: 'background_color',
-              manifest: {
-                show_title: true,
-                version: '1.0',
-              },
-            },
-          },
-          settings: {
-            compression: '3',
-            scaling_algorithm: 'Mitchell',
-            error_on_image_too_small: true,
-            readme_file: true,
-            html_code_file: false,
-            use_path_as_is: false,
-          },
-          versioning: {
-            param_name: 'ver',
-            param_value: '15Zd8',
-          },
-        },
-      }),
-    })
-  ).json();
+              android_chrome: {
+                picture_aspect: 'shadow',
+                // manifest: {
+                //   // These don't really matter as we have them specified in our
+                //   // manifest already
+                //   name: 'Stellar',
+                //   start_url: '/',
+                //   display: 'standalone'
 
-  console.log(faviconAPIResult);
+                // },
+                manifest: {},
+              },
+            },
+          },
+        }),
+      })
+    ).json()
+  ).favicon_generation_result;
 
-  if (faviconAPIResult.favicon_generation_result.result.status === 'success') {
-    console.log('Fetching successful');
+  // const faviconAPIResult = { result: { status: 'success' } };
+
+  if (faviconAPIResult.result.status === 'success') {
+    console.log('Generating and fetching successful');
 
     if (!existsSync('temp')) {
-      console.log(`"temp" directory didn't exist; it was created`);
+      console.log(`"temp" directory didn't exist; it will be created`);
       mkdirSync('temp');
     }
 
     console.log('Downloading favicons');
-    const faviconZipWriteStream = createWriteStream('temp/favicons.zip');
-    const faviconZipFile = get(
-      faviconAPIResult.favicon_generation_result.favicon.package_url,
-      (response) => {
-        response.pipe(faviconZipWriteStream);
-      },
+    const faviconZipDownloader = new DownloaderHelper(
+      faviconAPIResult.favicon.package_url,
+      'temp',
+      { fileName: 'favicons.zip', override: true },
     );
-    console.log('Downloading successful');
+    faviconZipDownloader.on('end', () => {
+      console.log('Downloading successful');
 
-    console.log('Unzipping favicons');
-    const faviconZipReadStream = createReadStream('temp/favicons.zip');
-    faviconZipReadStream.pipe(Extract({ path: 'temp/favicons' }));
-  } else console.error('Fetching failed');
+      if (existsSync('temp/favicons')) {
+        console.log(`"temp/favicons" already exists; it will be deleted`);
+        delSync('temp/favicons');
+      }
+
+      console.log('Unzipping favicons');
+      const faviconZipReadStream = createReadStream('temp/favicons.zip');
+      faviconZipReadStream.pipe(Extract({ path: 'temp/favicons' }));
+      console.log('Unzipping successful');
+    });
+    faviconZipDownloader.on('error', () => console.log('Downloading failed'));
+    faviconZipDownloader.start();
+  } else {
+    console.error('Fetching failed; result:');
+    console.error(faviconAPIResult);
+  }
 }
 
 export default generateFavicons;

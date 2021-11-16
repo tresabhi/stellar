@@ -28,7 +28,7 @@ build((error) => {
 
   updateManifestKeys(BUILD_TYPE, APP_NAME);
 
-  if (ARGS['favicon-api-key'])
-    generateFavicons(BUILD_TYPE, ARGS['favicon-api-key']);
+  if (ARGS['favicon-api-token'])
+    generateFavicons(BUILD_TYPE, ARGS['favicon-api-token']);
   else console.warn('No favicon API token provided');
 }, true);
