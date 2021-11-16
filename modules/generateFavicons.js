@@ -16,9 +16,9 @@ import { Extract } from 'unzipper';
 
 const FAVICON_API_URL = 'https://realfavicongenerator.net/api/favicon';
 const ICON_IMG = {
-  alpha: 'https://i.imgur.com/OfK5jC5.png',
-  beta: 'https://i.imgur.com/OfK5jC5.png',
-  release: 'https://i.imgur.com/OfK5jC5.png',
+  alpha: 'https://i.imgur.com/d5N129o.png',
+  beta: 'https://i.imgur.com/v84uCWm.png',
+  release: 'https://i.imgur.com/30IHOc2.png',
 };
 const BLIND_COPY_EXTENSIONS = ['.png', '.ico', '.svg', '.xml'];
 
