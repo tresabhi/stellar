@@ -31,4 +31,5 @@ build((error) => {
   if (ARGS['favicon-api-token'])
     generateFavicons(BUILD_TYPE, ARGS['favicon-api-token']);
   else console.warn('No favicon API token provided');
+  // set to true if you want to use the previous build
 }, false);

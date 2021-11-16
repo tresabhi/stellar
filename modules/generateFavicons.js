@@ -5,10 +5,10 @@ import {
   existsSync,
   mkdirSync,
   readdirSync,
+  readFileSync,
   renameSync,
   writeFileSync,
 } from 'fs';
-import { createRequire } from 'module';
 import { DownloaderHelper } from 'node-downloader-helper';
 import fetch from 'node-fetch';
 import { extname } from 'path';
@@ -21,8 +21,6 @@ const ICON_IMG = {
   release: 'https://i.imgur.com/30IHOc2.png',
 };
 const BLIND_COPY_EXTENSIONS = ['.png', '.ico', '.svg', '.xml'];
-
-const require = createRequire(import.meta.url);
 
 async function generateFavicons(buildType, faviconAPIKey) {
   /**
@@ -113,12 +111,12 @@ async function generateFavicons(buildType, faviconAPIKey) {
             });
 
             console.log('Appending icons to manifest.json');
-            renameSync(
-              'temp/favicons/site.webmanifest',
-              'temp/favicons/manifest.json',
+            const providedManifest = JSON.parse(
+              readFileSync('temp/favicons/site.webmanifest'),
             );
-            const providedManifest = require('../temp/favicons/manifest.json');
-            const existingManifest = require('../build/manifest.json');
+            const existingManifest = JSON.parse(
+              readFileSync('build/manifest.json'),
+            );
             writeFileSync(
               'build/manifest.json',
               JSON.stringify({
@@ -126,6 +124,11 @@ async function generateFavicons(buildType, faviconAPIKey) {
                 icons: [...existingManifest.icons, ...providedManifest.icons],
               }),
             );
+
+            console.log({
+              ...existingManifest,
+              icons: [...existingManifest.icons, ...providedManifest.icons],
+            });
           });
       })
       .on('error', () => console.log('Downloading failed'))

@@ -1,5 +1,4 @@
-import { writeFileSync } from 'fs';
-import { createRequire } from 'module';
+import { readFileSync, writeFileSync } from 'fs';
 
 const BUILD_NAMES = {
   alpha: 'Alpha',
@@ -7,12 +6,10 @@ const BUILD_NAMES = {
   release: '',
 };
 
-const require = createRequire(import.meta.url);
-
 export default function renameBuild(buildType, appName) {
   console.log(`Updating manifest.json keys for "${buildType}"`);
 
-  const manifest = require('../build/manifest.json');
+  const manifest = JSON.parse(readFileSync('build/manifest.json'));
   const newName = `${appName} ${BUILD_NAMES[buildType] ?? ''}`.trim();
   writeFileSync(
     'build/manifest.json',
