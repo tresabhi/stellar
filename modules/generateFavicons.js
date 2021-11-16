@@ -54,17 +54,18 @@ async function generateFavicons(buildType, faviconAPIKey) {
               },
               android_chrome: {
                 picture_aspect: 'shadow',
-                // manifest: {
-                //   // These don't really matter as we have them specified in our
-                //   // manifest already
-                //   name: 'Stellar',
-                //   start_url: '/',
-                //   display: 'standalone'
-
-                // },
                 manifest: {},
+                assets: {
+                  legacy_icon: true,
+                  low_resolution_icons: true,
+                },
+              },
+              safari_pinned_tab: {
+                picture_aspect: 'silhouette',
+                theme_color: '#892cdc',
               },
             },
+            html_code_file: true,
           },
         }),
       })
