@@ -1,12 +1,14 @@
-import './index.scss';
-import { ReactComponent as StellarIcon } from 'assets/icons/stellar.svg';
 import { ReactComponent as LoadingIcon } from 'assets/icons/loading.svg';
+import IconProvider from 'components/IconProvider';
+import useStellarName from 'core/hooks/useStellarName';
+import './index.scss';
 
 const SplashScreen = () => (
   <div className="splash-screen">
-    <StellarIcon className="stellar-icon" />
+    <IconProvider className="stellar-icon" />
     <p className="loading-text">
-      Loading Stellar... <LoadingIcon className="loading-icon" />
+      Loading {useStellarName}...
+      <LoadingIcon className="loading-icon" />
     </p>
   </div>
 );
