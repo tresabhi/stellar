@@ -30,7 +30,7 @@ jobs:
         run: yarn install
 
       - name: Build static site
-        run: yarn buildrelease
+        run: yarn build --release -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
 
       - name: Archive build
         uses: actions/upload-artifact@v2
