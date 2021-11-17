@@ -1,19 +1,20 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import * as RootBlueprint from 'core/APIs/blueprint/root';
 import * as Part from 'core/APIs/parts/index';
+import * as RootPart from 'core/APIs/parts/root';
+import * as RootBlueprint from 'core/APIs/blueprint/root';
 import { FC } from 'react';
 import './index.scss';
 
 type EditingCanvasProps = {
   center: number;
   offset: { x: number; y: number };
-  parts: RootBlueprint.partArrayType;
+  parts: RootBlueprint.anyPartTypeArray;
 };
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const partsJsx: Array<JSX.Element> = [];
 
-  const getAllComponentsRecursively = (parts: RootBlueprint.partArrayType) => {
+  const getAllComponentsRecursively = (parts: Array<RootPart.anyPartType>) => {
     parts.forEach((part) => {
       if (part.n === 'Group') {
         getAllComponentsRecursively(part.parts);
@@ -39,7 +40,7 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
       <directionalLight position={[-20, 20, 100]} />
       <ambientLight intensity={0.5} />
 
-      <OrbitControls 
+      <OrbitControls
         enableDamping={false}
         enablePan={true}
         enableZoom={true}

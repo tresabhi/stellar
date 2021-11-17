@@ -1,6 +1,6 @@
 import * as PartsAPI from 'core/APIs/parts';
-import * as RootPart from 'core/APIs/parts/root';
 import * as RootBlueprint from './root';
+import * as GroupPart from 'core/APIs/parts/group';
 
 export const mergeWithDefaultBlueprintGlobals = (
   blueprint: Object,
@@ -34,6 +34,20 @@ export const updateBlueprint = (
 };
 
 export const updatePartsData = (
-  parts: RootBlueprint.partArrayType,
-): Array<RootPart.anyPartType> =>
-  parts.map((part) => PartsAPI.updatePartData(part));
+  parts: RootBlueprint.anyVanillaPartTypeArray | RootBlueprint.anyPartTypeArray,
+): RootBlueprint.anyPartTypeArray => {
+  let newParts: RootBlueprint.anyPartTypeArray = [];
+
+  parts.forEach((part) => {
+    if (part.n === 'Group') {
+      newParts.push({
+        ...(PartsAPI.updatePartData(part) as GroupPart.type),
+        parts: updatePartsData(part.parts),
+      });
+    } else {
+      newParts.push(PartsAPI.updatePartData(part));
+    }
+  });
+
+  return newParts;
+};

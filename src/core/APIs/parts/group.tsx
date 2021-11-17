@@ -1,12 +1,14 @@
 import '@react-three/fiber';
 import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import { memo } from 'react';
-import * as RootPart from './root';
 import * as RootBlueprint from '../blueprint/root';
+import * as RootPart from './root';
 
 export const icon = <FuelTankIcon />;
 
-const typedParts: RootBlueprint.partArrayType = [];
+// allows recursive references
+
+const typedParts: RootBlueprint.anyPartTypeArray = [];
 export const data = {
   '.stellar': {
     ...RootPart.data['.stellar'],

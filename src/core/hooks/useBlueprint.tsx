@@ -7,9 +7,11 @@ export default function useBlueprint(initialBlueprint: Object) {
   const [state, setState] = useState(
     BlueprintAPI.updateBlueprint(initialBlueprint),
   );
+  let selection: Array<string> = [];
 
   return {
     state,
+    selection,
 
     deletePart: (index: number) => {
       let newParts = [...state.parts];

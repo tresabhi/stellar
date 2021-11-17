@@ -2,8 +2,8 @@ import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
+import * as RootBlueprint from 'core/APIs/blueprint/root';
 import * as PartsAPI from 'core/APIs/parts';
-import * as RootPart from 'core/APIs/parts/root';
 import { FC, KeyboardEvent, memo, MouseEvent, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
@@ -29,7 +29,7 @@ export const TabsContainer: FC = ({ children }) => (
 );
 
 type PartsListingContainerProps = {
-  parts: Array<RootPart.anyPartType>;
+  parts: RootBlueprint.anyPartTypeArray;
   onPartDataMutate: Function;
   onPartDelete: Function;
 };
@@ -154,9 +154,13 @@ export const PartListing: FC<PartListingProps> = memo(
   },
 );
 
+export const GroupListing: FC = () => {
+  return <button />;
+};
+
 // TODO: Add function arguments and return value
 type PropertyListingContainerProps = {
-  parts: Array<RootPart.anyPartType>;
+  parts: RootBlueprint.anyPartTypeArray;
   currentPartIndex: number;
   onPartDataMutate: Function;
 };
@@ -169,6 +173,7 @@ export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
 };
 
 type PropertyListingProps = {
+  // TODO: give this types
   subProperties?: Array<Object>;
 };
 export const PropertyListing: FC<PropertyListingProps> = memo(
