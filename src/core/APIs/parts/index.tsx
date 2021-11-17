@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Type } from 'typescript';
 import * as FuelTank from './fuelTank';
 import * as Root from './root';
+import * as Group from './group';
 import { v4 as UUIDV4 } from 'uuid';
 
 export type partModule = {
@@ -21,6 +22,7 @@ export type RootPartComponentProps = {
 const partComponentNames: { [key: string]: any } = {
   Root,
   'Fuel Tank': FuelTank,
+  Group,
 };
 
 export const getPartModule = (partName: string): partModule | undefined => {

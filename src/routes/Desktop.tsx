@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/static/saturn-v.json';
+import devBlueprint from 'assets/blueprints/static/grouping.json';
 import * as ContextMenu from 'components/ContextMenu';
 import * as RootContextListing from 'core/APIs/contextListings/root';
 import EditingCanvas from 'components/EditingCanvas';
