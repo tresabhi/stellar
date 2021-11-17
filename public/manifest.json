@@ -1,8 +1,8 @@
 {
-  "short_name": "Stellar",
-  "name": "Stellar",
+  "short_name": "Stellar Dev",
+  "name": "Stellar Dev",
 
-  "start_url": "/?manifest-version=1",
+  "start_url": "/",
   "scope": "/",
   "display": "fullscreen",
 
@@ -11,5 +11,16 @@
   "orientation": "landscape",
   "display_override": ["window-controls-overlay"],
 
-  "icons": []
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

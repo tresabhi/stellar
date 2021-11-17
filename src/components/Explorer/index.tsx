@@ -8,6 +8,8 @@ import { FC, KeyboardEvent, memo, MouseEvent, useEffect, useRef } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
+const INPUT_BLUR_KEYS = ['Enter', 'Escape'];
+
 type ContainerProps = {
   rightSide?: boolean;
 };
@@ -119,7 +121,8 @@ export const PartListing: FC<PartListingProps> = memo(
     };
 
     const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter') inputRef.current?.blur();
+      event.preventDefault();
+      if (INPUT_BLUR_KEYS.includes(event.key)) inputRef.current?.blur();
     };
 
     return (
