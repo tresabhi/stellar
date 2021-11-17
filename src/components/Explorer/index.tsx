@@ -121,7 +121,6 @@ export const PartListing: FC<PartListingProps> = memo(
     };
 
     const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-      event.preventDefault();
       if (INPUT_BLUR_KEYS.includes(event.key)) inputRef.current?.blur();
     };
 
