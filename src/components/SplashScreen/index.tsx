@@ -7,7 +7,7 @@ const SplashScreen = () => (
   <div className="splash-screen">
     <IconProvider className="stellar-icon" />
     <p className="loading-text">
-      Loading {useStellarName}...
+      Loading {useStellarName()}...
       <LoadingIcon className="loading-icon" />
     </p>
   </div>
