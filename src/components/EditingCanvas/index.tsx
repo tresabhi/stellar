@@ -39,7 +39,7 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
       <directionalLight position={[-20, 20, 100]} />
       <ambientLight intensity={0.5} />
 
-      <OrbitControls
+      <OrbitControls 
         enableDamping={false}
         enablePan={true}
         enableZoom={true}

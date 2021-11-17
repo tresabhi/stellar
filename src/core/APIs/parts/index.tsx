@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Type } from 'typescript';
 import * as FuelTank from './fuelTank';
 import * as Root from './root';
+import { v4 as UUIDV4 } from 'uuid';
 
 export type partModule = {
   type: Type;
@@ -39,7 +40,9 @@ export const getPartData = (partName: string) => {
 export const updatePartData = (
   partData: RootPart.anyVanillaPartType | RootPart.anyPartType,
 ): RootPart.anyPartType => {
-  return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
+  return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData, {
+    '.stellar': { UUID: UUIDV4() },
+  });
 };
 
 export const getPartIconComponent = (partName: string) => {
