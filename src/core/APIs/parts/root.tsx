@@ -1,7 +1,6 @@
 import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { memo } from 'react';
-import { NIL as NIL_UUID } from 'uuid';
 import * as FuelTankPart from './fuelTank';
 import * as GroupPart from './group';
 
@@ -31,7 +30,6 @@ export const data = {
     visible: true,
     locked: false,
     selected: false,
-    UUID: NIL_UUID,
   },
 };
 

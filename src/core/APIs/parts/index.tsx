@@ -2,7 +2,6 @@ import * as RootPart from 'core/APIs/parts/root';
 import { cloneDeep, merge } from 'lodash';
 import { FC, SVGProps } from 'react';
 import { Type } from 'typescript';
-import { v4 as UUIDV4 } from 'uuid';
 import * as FuelTank from './fuelTank';
 import * as Group from './group';
 import * as Root from './root';
@@ -42,9 +41,7 @@ export const getPartData = (partName: string) => {
 export const updatePartData = (
   partData: RootPart.anyVanillaPartType | RootPart.anyPartType,
 ): RootPart.anyPartType => {
-  return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData, {
-    '.stellar': { UUID: UUIDV4() },
-  });
+  return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
 };
 
 export const getPartIconComponent = (

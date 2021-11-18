@@ -30,8 +30,7 @@
     "stellareditor",
     "subcontainer",
     "titlebar",
-    "unzipper",
-    "UUIDV"
+    "unzipper"
   ],
   "search.exclude": {
     "**/src/assets/icons": true
