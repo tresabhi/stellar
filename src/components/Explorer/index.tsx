@@ -96,12 +96,7 @@ type PartListingProps = {
   onEyeClick: Function;
   onDeleteClick: Function;
   onLabelChange: Function;
-  onSelect: (
-    event: MouseEvent<HTMLInputElement, MouseEvent>,
-    isSingleSelect: boolean,
-    isListSelect: boolean,
-    isAdditiveSelect: boolean,
-  ) => void;
+  onSelect: (type: 'single' | 'multi' | 'list' | 'multi_list') => void;
 };
 export const PartListing: FC<PartListingProps> = memo(
   ({
@@ -111,6 +106,7 @@ export const PartListing: FC<PartListingProps> = memo(
     onEyeClick,
     onDeleteClick,
     onLabelChange,
+    onSelect,
   }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     let previousLabel = defaultName;
@@ -145,13 +141,34 @@ export const PartListing: FC<PartListingProps> = memo(
 
     let [expanded, setExpanded] = useState(false);
 
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+      /**
+       * empty       : only selection ("single")
+       * ctrl        : one new selection ("multi")
+       * shift       : everything from last selection to this selection
+       *               ("list")
+       * ctrl + shift: everything from last selection to this selection
+       *               without forgetting the other selections
+       *               ("milti_list")
+       */
+      onSelect(
+        event.ctrlKey // is ctrl
+          ? event.shiftKey // is ctrl shift
+            ? 'multi_list' // is ctrl shift
+            : 'multi' // is ctrl
+          : event.shiftKey // is shift
+          ? 'list' // is shift
+          : 'single', // is single
+      );
+    };
+
     const handleGroupIconClick = () => {
       setExpanded((state) => !state);
     };
 
     return (
       <div className="part-listing">
-        <button className="button">
+        <button className="button" onClick={handleClick}>
           {data.n === 'Group' ? (
             expanded ? (
               <ExpandedIcon
