@@ -13,7 +13,7 @@ import {
   memo,
   MouseEvent,
   SVGProps,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -116,11 +116,9 @@ export const PartListing: FC<PartListingProps> = memo(
     let previousLabel = defaultName;
     let focusable = false;
 
-    const handleLabelUpdate = () => {
+    useLayoutEffect(() => {
       if (inputRef?.current) inputRef.current.value = defaultName;
-    };
-    handleLabelUpdate();
-    useEffect(handleLabelUpdate, [defaultName]);
+    }, [defaultName]);
 
     const handleFocus = () => {
       if (!focusable) inputRef.current?.blur();
