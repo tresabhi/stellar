@@ -5,7 +5,7 @@ import { NIL as NIL_UUID } from 'uuid';
 import * as FuelTankPart from './fuelTank';
 import * as GroupPart from './group';
 
-export const icon = <LockIcon />;
+export const icon = LockIcon;
 
 export const vanillaData = {
   n: 'Root',

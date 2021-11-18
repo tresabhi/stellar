@@ -5,7 +5,7 @@ import { times } from 'lodash';
 import { FC, memo } from 'react';
 import * as Root from './root';
 
-export const icon = <FuelTankIcon />;
+export const icon = FuelTankIcon;
 
 export const vanillaData = {
   ...Root.vanillaData,

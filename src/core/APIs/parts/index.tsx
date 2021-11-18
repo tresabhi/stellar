@@ -1,17 +1,17 @@
 import * as RootPart from 'core/APIs/parts/root';
 import { cloneDeep, merge } from 'lodash';
-import { FC } from 'react';
+import { FC, SVGProps } from 'react';
 import { Type } from 'typescript';
-import * as FuelTank from './fuelTank';
-import * as Root from './root';
-import * as Group from './group';
 import { v4 as UUIDV4 } from 'uuid';
+import * as FuelTank from './fuelTank';
+import * as Group from './group';
+import * as Root from './root';
 
 export type partModule = {
   type: Type;
   data: Root.type;
   Component: FC;
-  icon: JSX.Element;
+  icon: FC<SVGProps<SVGSVGElement>>;
 };
 
 export type RootPartComponentProps = {
@@ -47,6 +47,8 @@ export const updatePartData = (
   });
 };
 
-export const getPartIconComponent = (partName: string) => {
+export const getPartIconComponent = (
+  partName: string,
+): FC<SVGProps<SVGSVGElement>> | undefined => {
   return getPartModule(partName)?.icon;
 };

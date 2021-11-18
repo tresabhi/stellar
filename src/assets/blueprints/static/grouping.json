@@ -8,7 +8,7 @@
     {
       "n": "Group",
       ".stellar": {
-        "label": "lol"
+        "label": "a very deep group"
       },
       "parts": [
         {
@@ -58,6 +58,253 @@
             "color_tex": "Color_Black",
             "shape_tex": "Rivets"
           }
+        },
+        {
+          "n": "Group",
+          ".stellar": {
+            "label": "yet another one"
+          },
+          "parts": [
+            {
+              "n": "Parachute",
+              "p": {
+                "x": 10.0,
+                "y": 47.5
+              },
+              "o": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 270.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "deploy_state": 0.0,
+                "animation_state": 0.0
+              }
+            },
+            {
+              "n": "Fuel Tank",
+              "p": {
+                "x": 9.0,
+                "y": 47.0
+              },
+              "o": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "width_original": 2.0,
+                "width_a": 2.0,
+                "width_b": 5.0,
+                "height": 2.0,
+                "fuel_percent": 1.0
+              },
+              "T": {
+                "color_tex": "Color_Orange",
+                "shape_tex": "_"
+              }
+            },
+            {
+              "n": "Parachute",
+              "p": {
+                "x": 8.0,
+                "y": 47.5
+              },
+              "o": {
+                "x": 1.0,
+                "y": -1.0,
+                "z": 270.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "deploy_state": 0.0,
+                "animation_state": 0.0
+              }
+            },
+            {
+              "n": "Parachute",
+              "p": {
+                "x": 8.0,
+                "y": 47.5
+              },
+              "o": {
+                "x": -1.0,
+                "y": 1.0,
+                "z": 270.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "deploy_state": 0.0,
+                "animation_state": 0.0
+              }
+            },
+            {
+              "n": "Parachute",
+              "p": {
+                "x": 11.5,
+                "y": 49.5
+              },
+              "o": {
+                "x": 1.0,
+                "y": -1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "deploy_state": 0.0,
+                "animation_state": 0.0
+              }
+            },
+            {
+              "n": "Fuel Tank",
+              "p": {
+                "x": 11.5,
+                "y": 49.5
+              },
+              "o": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "width_original": 2.0,
+                "width_a": 0.800000011920929,
+                "width_b": 0.800000011920929,
+                "height": 1.0,
+                "fuel_percent": 1.0
+              },
+              "T": {
+                "color_tex": "_",
+                "shape_tex": "Edges Faces"
+              }
+            },
+            {
+              "n": "Parachute",
+              "p": {
+                "x": 11.5,
+                "y": 50.5
+              },
+              "o": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "deploy_state": 0.0,
+                "animation_state": 0.0
+              }
+            },
+            {
+              "n": "Parachute",
+              "p": {
+                "x": 6.5,
+                "y": 50.5
+              },
+              "o": {
+                "x": -1.0,
+                "y": 1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "deploy_state": 0.0,
+                "animation_state": 0.0
+              }
+            },
+            {
+              "n": "Fuel Tank",
+              "p": {
+                "x": 6.5,
+                "y": 49.5
+              },
+              "o": {
+                "x": -1.0,
+                "y": 1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "width_original": 2.0,
+                "width_a": 0.800000011920929,
+                "width_b": 0.800000011920929,
+                "height": 1.0,
+                "fuel_percent": 1.0
+              },
+              "T": {
+                "color_tex": "_",
+                "shape_tex": "Edges Faces"
+              }
+            },
+            {
+              "n": "Parachute",
+              "p": {
+                "x": 6.5,
+                "y": 49.5
+              },
+              "o": {
+                "x": -1.0,
+                "y": -1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "deploy_state": 0.0,
+                "animation_state": 0.0
+              }
+            },
+            {
+              "n": "Fuel Tank",
+              "p": {
+                "x": 9.0,
+                "y": 15.5
+              },
+              "o": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "width_original": 6.0,
+                "width_a": 6.0,
+                "width_b": 6.0,
+                "height": 4.0,
+                "fuel_percent": 1.0
+              },
+              "T": {
+                "color_tex": "_",
+                "shape_tex": "Rivets"
+              }
+            },
+            {
+              "n": "Fuel Tank",
+              "p": {
+                "x": 9.0,
+                "y": 17.5
+              },
+              "o": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 0.0
+              },
+              "t": "-Infinity",
+              "N": {
+                "width_original": 4.0,
+                "width_a": 4.0,
+                "width_b": 4.0,
+                "height": 8.0,
+                "fuel_percent": 1.0
+              },
+              "T": {
+                "color_tex": "_",
+                "shape_tex": "_"
+              }
+            }
+          ]
         },
         {
           "n": "Fuel Tank",
@@ -118,245 +365,7 @@
         }
       ]
     },
-    {
-      "n": "Parachute",
-      "p": {
-        "x": 10.0,
-        "y": 47.5
-      },
-      "o": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 270.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "deploy_state": 0.0,
-        "animation_state": 0.0
-      }
-    },
-    {
-      "n": "Fuel Tank",
-      "p": {
-        "x": 9.0,
-        "y": 47.0
-      },
-      "o": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "width_original": 2.0,
-        "width_a": 2.0,
-        "width_b": 5.0,
-        "height": 2.0,
-        "fuel_percent": 1.0
-      },
-      "T": {
-        "color_tex": "Color_Orange",
-        "shape_tex": "_"
-      }
-    },
-    {
-      "n": "Parachute",
-      "p": {
-        "x": 8.0,
-        "y": 47.5
-      },
-      "o": {
-        "x": 1.0,
-        "y": -1.0,
-        "z": 270.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "deploy_state": 0.0,
-        "animation_state": 0.0
-      }
-    },
-    {
-      "n": "Parachute",
-      "p": {
-        "x": 8.0,
-        "y": 47.5
-      },
-      "o": {
-        "x": -1.0,
-        "y": 1.0,
-        "z": 270.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "deploy_state": 0.0,
-        "animation_state": 0.0
-      }
-    },
-    {
-      "n": "Parachute",
-      "p": {
-        "x": 11.5,
-        "y": 49.5
-      },
-      "o": {
-        "x": 1.0,
-        "y": -1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "deploy_state": 0.0,
-        "animation_state": 0.0
-      }
-    },
-    {
-      "n": "Fuel Tank",
-      "p": {
-        "x": 11.5,
-        "y": 49.5
-      },
-      "o": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "width_original": 2.0,
-        "width_a": 0.800000011920929,
-        "width_b": 0.800000011920929,
-        "height": 1.0,
-        "fuel_percent": 1.0
-      },
-      "T": {
-        "color_tex": "_",
-        "shape_tex": "Edges Faces"
-      }
-    },
-    {
-      "n": "Parachute",
-      "p": {
-        "x": 11.5,
-        "y": 50.5
-      },
-      "o": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "deploy_state": 0.0,
-        "animation_state": 0.0
-      }
-    },
-    {
-      "n": "Parachute",
-      "p": {
-        "x": 6.5,
-        "y": 50.5
-      },
-      "o": {
-        "x": -1.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "deploy_state": 0.0,
-        "animation_state": 0.0
-      }
-    },
-    {
-      "n": "Fuel Tank",
-      "p": {
-        "x": 6.5,
-        "y": 49.5
-      },
-      "o": {
-        "x": -1.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "width_original": 2.0,
-        "width_a": 0.800000011920929,
-        "width_b": 0.800000011920929,
-        "height": 1.0,
-        "fuel_percent": 1.0
-      },
-      "T": {
-        "color_tex": "_",
-        "shape_tex": "Edges Faces"
-      }
-    },
-    {
-      "n": "Parachute",
-      "p": {
-        "x": 6.5,
-        "y": 49.5
-      },
-      "o": {
-        "x": -1.0,
-        "y": -1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "deploy_state": 0.0,
-        "animation_state": 0.0
-      }
-    },
-    {
-      "n": "Fuel Tank",
-      "p": {
-        "x": 9.0,
-        "y": 15.5
-      },
-      "o": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "width_original": 6.0,
-        "width_a": 6.0,
-        "width_b": 6.0,
-        "height": 4.0,
-        "fuel_percent": 1.0
-      },
-      "T": {
-        "color_tex": "_",
-        "shape_tex": "Rivets"
-      }
-    },
-    {
-      "n": "Fuel Tank",
-      "p": {
-        "x": 9.0,
-        "y": 17.5
-      },
-      "o": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 0.0
-      },
-      "t": "-Infinity",
-      "N": {
-        "width_original": 4.0,
-        "width_a": 4.0,
-        "width_b": 4.0,
-        "height": 8.0,
-        "fuel_percent": 1.0
-      },
-      "T": {
-        "color_tex": "_",
-        "shape_tex": "_"
-      }
-    },
+
     {
       "n": "Fuel Tank",
       "p": {

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import * as RootBlueprint from '../blueprint/root';
 import * as RootPart from './root';
 
-export const icon = <GroupIcon />;
+export const icon = GroupIcon;
 
 const typedParts: RootBlueprint.anyPartTypeArray = [];
 export const data = {

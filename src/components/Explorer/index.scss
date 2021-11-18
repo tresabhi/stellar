@@ -55,55 +55,72 @@
 
     background-color: v(foreground-panel-background-color);
 
+    &.indented {
+      padding-left: $padding-bigger;
+    }
+
     .part-listing {
-      width: 100%;
-      display: flex;
+      .button {
+        width: 100%;
+        display: flex;
 
-      .icon,
-      svg,
-      img {
-        width: $icon-size-regular;
-        height: $icon-size-regular;
-        min-width: $icon-size-regular;
-        min-height: $icon-size-regular;
-      }
-
-      .icon {
-        display: none;
-
-        margin-left: $margin-smaller;
-      }
-
-      &:hover {
+        .quick-action,
         .icon {
-          display: block;
+          width: $icon-size-regular;
+          height: $icon-size-regular;
+          min-width: $icon-size-regular;
+          min-height: $icon-size-regular;
+        }
+
+        .quick-action {
+          display: none;
+
+          &.left-most {
+            margin-left: $margin-smaller;
+          }
+        }
+
+        .icon.group {
+          width: $icon-size-regular;
+          height: $icon-size-regular;
+          // SVG cannot go smaller than 18x18
+          transform: scale(#{$icon-size-small / $icon-size-regular});
+        }
+
+        &:hover {
+          .quick-action {
+            display: block;
+          }
+        }
+
+        .quick-action {
+          margin-right: $margin-smaller;
+        }
+
+        .input {
+          background: none;
+          text-overflow: ellipsis;
+          cursor: pointer;
+          min-width: 0px;
+          flex: 1;
+
+          color: v(foreground-panel-text-color);
+          font-family: v(font-family-regular);
+
+          margin-left: $margin-smaller 0px $margin-smaller 0px;
+
+          &:focus {
+            cursor: text;
+          }
         }
       }
 
-      svg:not(.icon),
-      img:not(.icon) {
-        margin-right: $margin-smaller;
-      }
-
-      .input {
-        background: none;
-        text-overflow: ellipsis;
-        cursor: pointer;
-        min-width: 0px;
-        flex: 1;
-
-        color: v(foreground-panel-text-color);
-        font-family: v(font-family-regular);
-
-        margin-left: $margin-smaller 0px $margin-smaller 0px;
-
-        &:focus {
-          cursor: text;
-        }
+      .button:hover {
+        background-color: v(button-flush-hover-background-color);
       }
     }
 
-    .part-listing,
+    .part-listing .button,
     .property-listing {
       display: flex;
       align-items: center;
@@ -116,10 +133,6 @@
       font-size: $font-size-big;
       height: $explorer-listing-height;
       padding: 0px $padding-bigger 0px $padding-bigger;
-    }
-
-    .part-listing:hover {
-      background-color: v(button-flush-hover-background-color);
     }
 
     .property-listing {

@@ -1,10 +1,22 @@
 import { ReactComponent as DeleteIcon } from 'assets/icons/delete.svg';
+import { ReactComponent as ExpandIcon } from 'assets/icons/expand.svg';
+import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
 import * as RootBlueprint from 'core/APIs/blueprint/root';
 import * as PartsAPI from 'core/APIs/parts';
-import { FC, KeyboardEvent, memo, MouseEvent, useEffect, useRef } from 'react';
+import * as RootPart from 'core/APIs/parts/root';
+import {
+  FC,
+  KeyboardEvent,
+  memo,
+  MouseEvent,
+  SVGProps,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
@@ -34,21 +46,23 @@ type PartsListingContainerProps = {
   parts: RootBlueprint.anyPartTypeArray;
   onPartDataMutate: Function;
   onPartDelete: Function;
+  indented?: boolean;
 };
 export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
   parts,
   onPartDataMutate,
   onPartDelete,
+  indented = false,
 }) => {
   const parsedArray = parts.map((partData, index) => {
     return (
       <PartListing
         onSelect={() => undefined}
         key={`part-${index}`}
-        icon={PartsAPI.getPartIconComponent(partData.n) ?? <LockIcon />}
+        icon={PartsAPI.getPartIconComponent(partData.n) ?? LockIcon}
         defaultName={partData?.['.stellar']?.label}
-        visible={partData?.['.stellar']?.visible}
+        data={partData}
         onEyeClick={() => {
           onPartDataMutate(
             { '.stellar': { visible: !partData['.stellar'].visible } },
@@ -64,14 +78,21 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   });
 
   return (
-    <div className="listing-container">{parts ? parsedArray : children}</div>
+    <div
+      className={`
+        listing-container
+        ${indented ? 'indented' : ''}
+      `}
+    >
+      {parts ? parsedArray : children}
+    </div>
   );
 };
 
 type PartListingProps = {
-  icon: Object;
+  icon: FC<SVGProps<SVGSVGElement>>;
   defaultName: string;
-  visible: boolean;
+  data: RootPart.anyPartType;
   onEyeClick: Function;
   onDeleteClick: Function;
   onLabelChange: Function;
@@ -84,9 +105,9 @@ type PartListingProps = {
 };
 export const PartListing: FC<PartListingProps> = memo(
   ({
-    icon,
+    icon: Icon,
     defaultName,
-    visible,
+    data,
     onEyeClick,
     onDeleteClick,
     onLabelChange,
@@ -124,41 +145,66 @@ export const PartListing: FC<PartListingProps> = memo(
       if (INPUT_BLUR_KEYS.includes(event.key)) inputRef.current?.blur();
     };
 
+    let [expanded, setExpanded] = useState(false);
+
+    const handleGroupIconClick = () => {
+      setExpanded((state) => !state);
+    };
+
     return (
-      <button className="part-listing">
-        {/* icon */}
-        {icon}
+      <div className="part-listing">
+        <button className="button">
+          {data.n === 'Group' ? (
+            expanded ? (
+              <ExpandedIcon
+                className="icon group"
+                onClick={handleGroupIconClick}
+              />
+            ) : (
+              <ExpandIcon
+                className="icon group"
+                onClick={handleGroupIconClick}
+              />
+            )
+          ) : (
+            <Icon className="icon" />
+          )}
 
-        {/* text */}
-        <input
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onDoubleClick={handleDoubleClick}
-          onKeyPress={handleKeyPress}
-          className="input"
-          placeholder="Unlabeled Part"
-          ref={inputRef}
-        />
+          <input
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onDoubleClick={handleDoubleClick}
+            onKeyPress={handleKeyPress}
+            className="input"
+            placeholder="Unlabeled Part"
+            ref={inputRef}
+          />
 
-        <DeleteIcon
-          onClick={() => {
-            onDeleteClick();
-          }}
-          className="icon"
-        />
-        {visible ? (
-          <EyeIcon onClick={() => onEyeClick()} className="icon" />
-        ) : (
-          <NoEyeIcon onClick={() => onEyeClick()} className="icon" />
-        )}
-      </button>
+          <DeleteIcon
+            onClick={() => {
+              onDeleteClick();
+            }}
+            className="quick-action left-most"
+          />
+          {data['.stellar'].visible ? (
+            <EyeIcon onClick={() => onEyeClick()} className="quick-action" />
+          ) : (
+            <NoEyeIcon onClick={() => onEyeClick()} className="quick-action" />
+          )}
+        </button>
+
+        {data.n === 'Group' && expanded ? (
+          <PartsListingContainer
+            parts={data.parts}
+            onPartDataMutate={() => {}}
+            onPartDelete={() => {}}
+            indented={true}
+          />
+        ) : undefined}
+      </div>
     );
   },
 );
-
-export const GroupListing: FC = () => {
-  return <button />;
-};
 
 // TODO: Add function arguments and return value
 type PropertyListingContainerProps = {
