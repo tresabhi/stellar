@@ -3,11 +3,13 @@ import * as RootPart from 'core/APIs/parts/root';
 import { merge } from 'lodash';
 import { useState } from 'react';
 
+export type recursiveNumberArray = Array<number | recursiveNumberArray>;
+
 export default function useBlueprint(initialBlueprint: Object) {
   const [state, setState] = useState(
     BlueprintAPI.updateBlueprint(initialBlueprint),
   );
-  let selection: Array<string> = [];
+  let selection: recursiveNumberArray = [];
 
   return {
     state,

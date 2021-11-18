@@ -47,6 +47,7 @@ type PartsListingContainerProps = {
   onPartDataMutate: Function;
   onPartDelete: Function;
   indented?: boolean;
+  address?: Array<number>;
 };
 export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
@@ -54,6 +55,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   onPartDataMutate,
   onPartDelete,
   indented = false,
+  address = [],
 }) => {
   const parsedArray = parts.map((partData, index) => {
     return (
@@ -63,6 +65,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         icon={PartsAPI.getPartIconComponent(partData.n) ?? LockIcon}
         defaultName={partData?.['.stellar']?.label}
         data={partData}
+        address={[...address, index]}
         onEyeClick={() => {
           onPartDataMutate(
             { '.stellar': { visible: !partData['.stellar'].visible } },
@@ -93,6 +96,7 @@ type PartListingProps = {
   icon: FC<SVGProps<SVGSVGElement>>;
   defaultName: string;
   data: RootPart.anyPartType;
+  address: Array<number>;
   onEyeClick: Function;
   onDeleteClick: Function;
   onLabelChange: Function;
@@ -103,6 +107,7 @@ export const PartListing: FC<PartListingProps> = memo(
     icon: Icon,
     defaultName,
     data,
+    address,
     onEyeClick,
     onDeleteClick,
     onLabelChange,
