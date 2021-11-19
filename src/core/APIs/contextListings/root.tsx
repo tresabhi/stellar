@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import {  FC } from 'react';
 import * as ExtendContextListing from './extendButton';
 import * as SeparatorContextListing from './separator';
 import * as TextContextListing from './textButton';
@@ -12,7 +12,7 @@ export type contextMenuListing = {
 
 export type type = {
   type: string;
-  icon?: FunctionComponent;
+  icon?: FC;
 };
 
 export type anyContextListingType =

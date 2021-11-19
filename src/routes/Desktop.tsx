@@ -50,8 +50,8 @@ const Desktop = () => {
             }
             parts={blueprint.state.parts}
             onPartDelete={(index: number) => blueprint.deletePart(index)}
-            onPartDataMutate={(data: RootPart.anyPartType, index: number) =>
-              blueprint.mutatePartData(data, index)
+            onPartDataMutate={(data, index) =>
+              blueprint.mutatePartData(data as RootPart.anyPartType, index)
             }
           />
         </Explorer.Container>

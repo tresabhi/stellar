@@ -44,8 +44,8 @@ export const TabsContainer: FC = ({ children }) => (
 
 type PartsListingContainerProps = {
   parts: RootBlueprint.anyPartTypeArray;
-  onPartDataMutate: Function;
-  onPartDelete: Function;
+  onPartDataMutate: (data: Object, index: number) => void;
+  onPartDelete: (index: number) => void;
   indented?: boolean;
   address?: Array<number>;
   onSelect: (
@@ -77,8 +77,8 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
           );
         }}
         onDeleteClick={() => onPartDelete(index)}
-        onLabelChange={(label: boolean) => {
-          onPartDataMutate({ '.stellar': { label: label } }, index);
+        onLabelChange={(label: string) => {
+          onPartDataMutate({ '.stellar': { label } }, index);
         }}
         onSelect={onSelect}
       />
@@ -102,9 +102,9 @@ type PartListingProps = {
   defaultName: string;
   data: RootPart.anyPartType;
   address: Array<number>;
-  onEyeClick: Function;
-  onDeleteClick: Function;
-  onLabelChange: Function;
+  onEyeClick: () => void;
+  onDeleteClick: () => void;
+  onLabelChange: (label: string) => void;
   onSelect: (
     address: Array<number>,
     type: 'single' | 'multi' | 'list' | 'multi_list',
@@ -126,7 +126,10 @@ export const PartListing: FC<PartListingProps> = memo(
     let focusable = false;
 
     useLayoutEffect(() => {
-      if (inputRef?.current) inputRef.current.value = defaultName;
+      if (inputRef?.current)
+        inputRef.current.value = `${
+          data['.stellar'].selected ? '*' : ''
+        }${defaultName}`;
     }, [defaultName]);
 
     const handleFocus = () => {
@@ -138,7 +141,7 @@ export const PartListing: FC<PartListingProps> = memo(
       focusable = false;
 
       if (previousLabel !== inputRef.current?.value) {
-        onLabelChange(inputRef.current?.value);
+        onLabelChange(inputRef.current!.value);
         previousLabel = inputRef.current?.value!;
       }
     };
@@ -176,7 +179,9 @@ export const PartListing: FC<PartListingProps> = memo(
       );
     };
 
-    const handleGroupIconClick = () => {
+    const handleGroupIconClick = (event: MouseEvent<SVGSVGElement>) => {
+      // stop parent from getting clicked too
+      event.stopPropagation();
       setExpanded((state) => !state);
     };
 
@@ -241,7 +246,7 @@ export const PartListing: FC<PartListingProps> = memo(
 type PropertyListingContainerProps = {
   parts: RootBlueprint.anyPartTypeArray;
   currentPartIndex: number;
-  onPartDataMutate: Function;
+  onPartDataMutate: () => void;
 };
 export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
   parts,

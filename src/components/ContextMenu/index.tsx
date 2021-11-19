@@ -48,7 +48,7 @@ const typeToComponent: any = {
 type ContextContainerProps = {
   data: RootContextListing.contextMenuListing;
   toolbar?: boolean;
-  onActionTaken?: Function;
+  onActionTaken?: () => void;
 };
 export const ContextContainer: FC<ContextContainerProps> = ({
   data,
@@ -97,7 +97,7 @@ export const ContextContainer: FC<ContextContainerProps> = ({
 
 type ContainerProps = {
   contexts: Array<RootContextListing.contextMenuListing>;
-  onBlur: Function;
+  onBlur: () => void;
 };
 export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {
   const contextMenus = contexts.map((contextMenu, index) => {
