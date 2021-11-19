@@ -48,6 +48,10 @@ type PartsListingContainerProps = {
   onPartDelete: Function;
   indented?: boolean;
   address?: Array<number>;
+  onSelect: (
+    address: Array<number>,
+    type: 'single' | 'multi' | 'list' | 'multi_list',
+  ) => void;
 };
 export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
@@ -56,11 +60,11 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   onPartDelete,
   indented = false,
   address = [],
+  onSelect,
 }) => {
   const parsedArray = parts.map((partData, index) => {
     return (
       <PartListing
-        onSelect={() => undefined}
         key={`part-${index}`}
         icon={PartsAPI.getPartIconComponent(partData.n) ?? LockIcon}
         defaultName={partData?.['.stellar']?.label}
@@ -76,6 +80,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         onLabelChange={(label: boolean) => {
           onPartDataMutate({ '.stellar': { label: label } }, index);
         }}
+        onSelect={onSelect}
       />
     );
   });
@@ -100,7 +105,10 @@ type PartListingProps = {
   onEyeClick: Function;
   onDeleteClick: Function;
   onLabelChange: Function;
-  onSelect: (type: 'single' | 'multi' | 'list' | 'multi_list') => void;
+  onSelect: (
+    address: Array<number>,
+    type: 'single' | 'multi' | 'list' | 'multi_list',
+  ) => void;
 };
 export const PartListing: FC<PartListingProps> = memo(
   ({
@@ -157,6 +165,7 @@ export const PartListing: FC<PartListingProps> = memo(
        *               ("milti_list")
        */
       onSelect(
+        address,
         event.ctrlKey // is ctrl
           ? event.shiftKey // is ctrl shift
             ? 'multi_list' // is ctrl shift
@@ -219,6 +228,7 @@ export const PartListing: FC<PartListingProps> = memo(
             onPartDataMutate={() => {}}
             onPartDelete={() => {}}
             indented={true}
+            onSelect={onSelect}
           />
         ) : undefined}
       </div>

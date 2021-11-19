@@ -1,15 +1,14 @@
 import * as BlueprintAPI from 'core/APIs/blueprint';
+import * as RootBlueprint from 'core/APIs/blueprint/root';
 import * as RootPart from 'core/APIs/parts/root';
 import { merge } from 'lodash';
 import { useState } from 'react';
-
-export type recursiveNumberArray = Array<number | recursiveNumberArray>;
 
 export default function useBlueprint(initialBlueprint: Object) {
   const [state, setState] = useState(
     BlueprintAPI.updateBlueprint(initialBlueprint),
   );
-  let selection: recursiveNumberArray = [];
+  let selection: RootBlueprint.selectionAddresses = [];
 
   return {
     state,

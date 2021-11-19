@@ -32,3 +32,5 @@ export type vanillaType = typeof vanillaData;
 export interface anyPartTypeArray extends Array<RootPart.anyPartType> {}
 
 export type anyVanillaPartTypeArray = Array<RootPart.anyVanillaPartType>;
+
+export type selectionAddresses = Array<number | selectionAddresses>;

@@ -45,6 +45,9 @@ const Desktop = () => {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
+            onSelect={(address, type) =>
+              alert(address.join(', ') + '\n' + type)
+            }
             parts={blueprint.state.parts}
             onPartDelete={(index: number) => blueprint.deletePart(index)}
             onPartDataMutate={(data: RootPart.anyPartType, index: number) =>
