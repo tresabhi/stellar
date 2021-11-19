@@ -224,6 +224,7 @@ export const PartListing: FC<PartListingProps> = memo(
 
         {data.n === 'Group' && expanded ? (
           <PartsListingContainer
+            address={address}
             parts={data.parts}
             onPartDataMutate={() => {}}
             onPartDelete={() => {}}
