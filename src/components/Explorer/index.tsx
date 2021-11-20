@@ -9,13 +9,14 @@ import * as PartsAPI from 'core/APIs/parts';
 import * as RootPart from 'core/APIs/parts/root';
 import DeepPartial from 'core/types/DeepPartial';
 import {
-  FC, KeyboardEvent,
+  FC,
+  KeyboardEvent,
   memo,
   MouseEvent,
   SVGProps,
   useLayoutEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
@@ -80,12 +81,6 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         defaultName={partData?.['.stellar']?.label}
         data={partData}
         address={[...address, index]}
-        onEyeClick={() => {
-          onPartsDataMutate(
-            { '.stellar': { visible: !partData['.stellar'].visible } },
-            [[...address, index]],
-          );
-        }}
         onDelete={(providedAddress) =>
           onPartsDelete(providedAddress ?? [[...address, index]])
         }
@@ -115,7 +110,6 @@ type PartListingProps = {
   defaultName: string;
   data: RootPart.anyPartType;
   address: Array<number>;
-  onEyeClick: () => void;
   onDelete: (addresses?: RootBlueprint.partAddresses) => void;
   onDataMutate: (
     data: DeepPartial<RootPart.anyPartType>,
@@ -132,7 +126,6 @@ export const PartListing: FC<PartListingProps> = memo(
     defaultName,
     data,
     address,
-    onEyeClick,
     onDelete,
     onDataMutate,
     onSelect,
@@ -140,6 +133,7 @@ export const PartListing: FC<PartListingProps> = memo(
     const inputRef = useRef<HTMLInputElement>(null);
     let previousLabel = defaultName;
     let focusable = false;
+    let [expanded, setExpanded] = useState(false);
 
     useLayoutEffect(() => {
       if (inputRef?.current)
@@ -171,8 +165,6 @@ export const PartListing: FC<PartListingProps> = memo(
       if (INPUT_BLUR_KEYS.includes(event.key)) inputRef.current?.blur();
     };
 
-    let [expanded, setExpanded] = useState(false);
-
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       /**
        * empty       : only selection ("single")
@@ -195,10 +187,14 @@ export const PartListing: FC<PartListingProps> = memo(
       );
     };
 
-    const handleGroupIconClick = (event: MouseEvent<SVGSVGElement>) => {
+    const handleExpandClick = (event: MouseEvent<SVGSVGElement>) => {
       // stop parent from getting clicked too
       event.stopPropagation();
       setExpanded((state) => !state);
+    };
+
+    const handleEyeClick = () => {
+      onDataMutate({ '.stellar': { visible: !data['.stellar'].visible } });
     };
 
     return (
@@ -208,13 +204,10 @@ export const PartListing: FC<PartListingProps> = memo(
             expanded ? (
               <ExpandedIcon
                 className="icon group"
-                onClick={handleGroupIconClick}
+                onClick={handleExpandClick}
               />
             ) : (
-              <ExpandIcon
-                className="icon group"
-                onClick={handleGroupIconClick}
-              />
+              <ExpandIcon className="icon group" onClick={handleExpandClick} />
             )
           ) : (
             <Icon className="icon" />
@@ -235,9 +228,9 @@ export const PartListing: FC<PartListingProps> = memo(
             className="quick-action left-most"
           />
           {data['.stellar'].visible ? (
-            <EyeIcon onClick={() => onEyeClick()} className="quick-action" />
+            <EyeIcon onClick={handleEyeClick} className="quick-action" />
           ) : (
-            <NoEyeIcon onClick={() => onEyeClick()} className="quick-action" />
+            <NoEyeIcon onClick={handleEyeClick} className="quick-action" />
           )}
         </button>
 
