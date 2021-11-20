@@ -49,14 +49,19 @@
     }
   }
 
-  .listing-container {
+  .part-listing-container {
     overflow-y: auto;
     flex: 1;
+    display: none;
 
     background-color: v(foreground-panel-background-color);
 
     &.indented {
       padding-left: $padding-bigger;
+    }
+
+    &.visible {
+      display: block;
     }
 
     .part-listing {

@@ -9,14 +9,13 @@ import * as PartsAPI from 'core/APIs/parts';
 import * as RootPart from 'core/APIs/parts/root';
 import DeepPartial from 'core/types/DeepPartial';
 import {
-  FC,
-  KeyboardEvent,
+  FC, KeyboardEvent,
   memo,
   MouseEvent,
   SVGProps,
   useLayoutEffect,
   useRef,
-  useState,
+  useState
 } from 'react';
 import UnitTextInput from '../UnitTextInput';
 import './index.scss';
@@ -26,9 +25,14 @@ const INPUT_BLUR_KEYS = ['Enter', 'Escape'];
 type ContainerProps = {
   rightSide?: boolean;
 };
-export const Container: FC<ContainerProps> = ({ children, rightSide }) => {
+export const Container: FC<ContainerProps> = ({
+  children,
+  rightSide,
+  ...props
+}) => {
   return (
     <div
+      {...props}
       className={`
         explorer-container
         ${rightSide ? 'right' : 'left'}
@@ -47,6 +51,7 @@ type PartsListingContainerProps = {
   parts: RootBlueprint.anyPartTypeArray;
   indented?: boolean;
   address?: Array<number>;
+  visible?: boolean;
   onSelect: (
     address: Array<number>,
     type: 'single' | 'multi' | 'list' | 'multi_list',
@@ -62,6 +67,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   parts,
   indented = false,
   address = [],
+  visible = true,
   onSelect,
   onPartsDataMutate,
   onPartsDelete,
@@ -94,8 +100,9 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   return (
     <div
       className={`
-        listing-container
+        part-listing-container
         ${indented ? 'indented' : ''}
+        ${visible ? 'visible' : ''}
       `}
     >
       {parts ? parsedArray : children}
@@ -234,8 +241,9 @@ export const PartListing: FC<PartListingProps> = memo(
           )}
         </button>
 
-        {data.n === 'Group' && expanded ? (
+        {data.n === 'Group' ? (
           <PartsListingContainer
+            visible={expanded}
             address={address}
             parts={data.parts}
             onPartsDataMutate={onDataMutate}
