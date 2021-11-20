@@ -50,6 +50,7 @@ export default function useBlueprint(initialBlueprint: Object) {
           if (index + 1 === address.length) {
             // last item; the part to modify
             followedAddress[addressIndex] = merge(
+              {},
               followedAddress[addressIndex],
               data,
             );
