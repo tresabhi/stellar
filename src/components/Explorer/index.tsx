@@ -7,6 +7,7 @@ import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
 import * as RootBlueprint from 'core/APIs/blueprint/root';
 import * as PartsAPI from 'core/APIs/parts';
 import * as RootPart from 'core/APIs/parts/root';
+import DeepPartial from 'core/types/DeepPartial';
 import {
   FC,
   KeyboardEvent,
@@ -44,23 +45,26 @@ export const TabsContainer: FC = ({ children }) => (
 
 type PartsListingContainerProps = {
   parts: RootBlueprint.anyPartTypeArray;
-  onPartDataMutate: (data: Object, index: number) => void;
-  onPartDelete: (index: number) => void;
   indented?: boolean;
   address?: Array<number>;
   onSelect: (
     address: Array<number>,
     type: 'single' | 'multi' | 'list' | 'multi_list',
   ) => void;
+  onPartsDataMutate: (
+    data: DeepPartial<RootPart.anyPartType>,
+    addresses: RootBlueprint.partAddresses,
+  ) => void;
+  onPartsDelete: (index: RootBlueprint.partAddresses) => void;
 };
 export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
   parts,
-  onPartDataMutate,
-  onPartDelete,
   indented = false,
   address = [],
   onSelect,
+  onPartsDataMutate,
+  onPartsDelete,
 }) => {
   const parsedArray = parts.map((partData, index) => {
     return (
@@ -71,14 +75,16 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         data={partData}
         address={[...address, index]}
         onEyeClick={() => {
-          onPartDataMutate(
+          onPartsDataMutate(
             { '.stellar': { visible: !partData['.stellar'].visible } },
-            index,
+            [[...address, index]],
           );
         }}
-        onDeleteClick={() => onPartDelete(index)}
-        onLabelChange={(label: string) => {
-          onPartDataMutate({ '.stellar': { label } }, index);
+        onDelete={(providedAddress) =>
+          onPartsDelete(providedAddress ?? [[...address, index]])
+        }
+        onDataMutate={(data, providedAddress) => {
+          onPartsDataMutate(data, providedAddress ?? [[...address, index]]);
         }}
         onSelect={onSelect}
       />
@@ -103,8 +109,11 @@ type PartListingProps = {
   data: RootPart.anyPartType;
   address: Array<number>;
   onEyeClick: () => void;
-  onDeleteClick: () => void;
-  onLabelChange: (label: string) => void;
+  onDelete: (addresses?: RootBlueprint.partAddresses) => void;
+  onDataMutate: (
+    data: DeepPartial<RootPart.anyPartType>,
+    addresses?: RootBlueprint.partAddresses,
+  ) => void;
   onSelect: (
     address: Array<number>,
     type: 'single' | 'multi' | 'list' | 'multi_list',
@@ -117,8 +126,8 @@ export const PartListing: FC<PartListingProps> = memo(
     data,
     address,
     onEyeClick,
-    onDeleteClick,
-    onLabelChange,
+    onDelete,
+    onDataMutate,
     onSelect,
   }) => {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -130,7 +139,7 @@ export const PartListing: FC<PartListingProps> = memo(
         inputRef.current.value = `${
           data['.stellar'].selected ? '*' : ''
         }${defaultName}`;
-    }, [defaultName]);
+    });
 
     const handleFocus = () => {
       if (!focusable) inputRef.current?.blur();
@@ -141,7 +150,7 @@ export const PartListing: FC<PartListingProps> = memo(
       focusable = false;
 
       if (previousLabel !== inputRef.current?.value) {
-        onLabelChange(inputRef.current!.value);
+        onDataMutate({ '.stellar': { label: inputRef.current!.value } });
         previousLabel = inputRef.current?.value!;
       }
     };
@@ -215,9 +224,7 @@ export const PartListing: FC<PartListingProps> = memo(
           />
 
           <DeleteIcon
-            onClick={() => {
-              onDeleteClick();
-            }}
+            onClick={() => onDelete([address])}
             className="quick-action left-most"
           />
           {data['.stellar'].visible ? (
@@ -231,8 +238,8 @@ export const PartListing: FC<PartListingProps> = memo(
           <PartsListingContainer
             address={address}
             parts={data.parts}
-            onPartDataMutate={() => {}}
-            onPartDelete={() => {}}
+            onPartsDataMutate={onDataMutate}
+            onPartsDelete={onDelete}
             indented={true}
             onSelect={onSelect}
           />

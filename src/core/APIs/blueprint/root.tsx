@@ -33,4 +33,6 @@ export interface anyPartTypeArray extends Array<RootPart.anyPartType> {}
 
 export type anyVanillaPartTypeArray = Array<RootPart.anyVanillaPartType>;
 
-export type selectionAddresses = Array<number | selectionAddresses>;
+export type partAddress = Array<number>;
+
+export type partAddresses = Array<partAddress>;

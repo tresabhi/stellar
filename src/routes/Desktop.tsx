@@ -1,12 +1,11 @@
 import devBlueprint from 'assets/blueprints/static/grouping.json';
 import * as ContextMenu from 'components/ContextMenu';
-import * as RootContextListing from 'core/APIs/contextListings/root';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
+import * as RootContextListing from 'core/APIs/contextListings/root';
 import useBlueprintCore from 'core/hooks/useBlueprint';
-import * as RootPart from 'core/APIs/parts/root';
 import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {
@@ -45,14 +44,12 @@ const Desktop = () => {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
-            onSelect={(address, type) =>
-              alert(address.join(', ') + '\n' + type)
-            }
+            onSelect={(address, type) => {
+              // alert(`${JSON.stringify(address)}\n${type}`);
+            }}
             parts={blueprint.state.parts}
-            onPartDelete={(index: number) => blueprint.deletePart(index)}
-            onPartDataMutate={(data, index) =>
-              blueprint.mutatePartData(data as RootPart.anyPartType, index)
-            }
+            onPartsDelete={blueprint.deleteParts}
+            onPartsDataMutate={blueprint.mutatePartsData}
           />
         </Explorer.Container>
 
