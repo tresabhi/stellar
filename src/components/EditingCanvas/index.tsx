@@ -17,7 +17,7 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const getAllComponentsRecursively = (parts: Array<RootPart.anyPartType>) => {
     parts.forEach((part) => {
       if (part.n === 'Group') {
-        getAllComponentsRecursively(part.parts);
+        if (part['.stellar'].visible) getAllComponentsRecursively(part.parts);
       } else {
         const PartComponent = Part.getPartComponent(part.n);
         if (PartComponent)
