@@ -65,6 +65,10 @@
     }
 
     .part-listing {
+      &.invisible {
+        opacity: 0.5;
+      }
+
       .button {
         width: 100%;
         display: flex;

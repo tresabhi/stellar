@@ -133,7 +133,7 @@ export const PartListing: FC<PartListingProps> = memo(
     const inputRef = useRef<HTMLInputElement>(null);
     let previousLabel = defaultName;
     let focusable = false;
-    let [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(false);
 
     useLayoutEffect(() => {
       if (inputRef?.current)
@@ -198,7 +198,12 @@ export const PartListing: FC<PartListingProps> = memo(
     };
 
     return (
-      <div className="part-listing">
+      <div
+        className={`
+          part-listing
+          ${data['.stellar'].visible ? '' : 'invisible'}
+        `}
+      >
         <button className="button" onClick={handleClick}>
           {data.n === 'Group' ? (
             expanded ? (
