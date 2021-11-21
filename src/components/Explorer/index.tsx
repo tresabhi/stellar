@@ -51,12 +51,8 @@ export const TabsContainer: FC = ({ children }) => (
 type PartsListingContainerProps = {
   parts: RootBlueprint.anyPartTypeArray;
   indented?: boolean;
-  address?: Array<number>;
+  address?: RootBlueprint.partAddress;
   visible?: boolean;
-  onSelect: (
-    address: Array<number>,
-    type: 'single' | 'multi' | 'list' | 'multi_list',
-  ) => void;
   onPartsDataMutate: (
     data: DeepPartial<RootPart.anyPartType>,
     addresses: RootBlueprint.partAddresses,
@@ -69,7 +65,6 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   indented = false,
   address = [],
   visible = true,
-  onSelect,
   onPartsDataMutate,
   onPartsDelete,
 }) => {
@@ -80,14 +75,13 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         icon={PartsAPI.getPartIconComponent(partData.n) ?? LockIcon}
         defaultName={partData?.['.stellar']?.label}
         data={partData}
-        address={[...address, index]}
+        parentAddress={[...address, index]}
         onDelete={(providedAddress) =>
           onPartsDelete(providedAddress ?? [[...address, index]])
         }
         onDataMutate={(data, providedAddress) => {
           onPartsDataMutate(data, providedAddress ?? [[...address, index]]);
         }}
-        onSelect={onSelect}
       />
     );
   });
@@ -109,15 +103,11 @@ type PartListingProps = {
   icon: FC<SVGProps<SVGSVGElement>>;
   defaultName: string;
   data: RootPart.anyPartType;
-  address: Array<number>;
+  parentAddress: RootBlueprint.partAddress;
   onDelete: (addresses?: RootBlueprint.partAddresses) => void;
   onDataMutate: (
     data: DeepPartial<RootPart.anyPartType>,
     addresses?: RootBlueprint.partAddresses,
-  ) => void;
-  onSelect: (
-    address: Array<number>,
-    type: 'single' | 'multi' | 'list' | 'multi_list',
   ) => void;
 };
 export const PartListing: FC<PartListingProps> = memo(
@@ -125,21 +115,19 @@ export const PartListing: FC<PartListingProps> = memo(
     icon: Icon,
     defaultName,
     data,
-    address,
+    parentAddress: address,
     onDelete,
     onDataMutate,
-    onSelect,
   }) => {
     const inputRef = useRef<HTMLInputElement>(null);
+    const listingRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const [expanded, setExpanded] = useState(false);
     let previousLabel = defaultName;
     let focusable = false;
-    const [expanded, setExpanded] = useState(false);
 
     useLayoutEffect(() => {
-      if (inputRef?.current)
-        inputRef.current.value = `${
-          data['.stellar'].selected ? '*' : ''
-        }${defaultName}`;
+      if (inputRef?.current) inputRef.current.value = defaultName;
     });
 
     const handleFocus = () => {
@@ -175,8 +163,9 @@ export const PartListing: FC<PartListingProps> = memo(
        *               without forgetting the other selections
        *               ("milti_list")
        */
+      /*
       onSelect(
-        address,
+        addresses,
         event.ctrlKey // is ctrl
           ? event.shiftKey // is ctrl shift
             ? 'multi_list' // is ctrl shift
@@ -185,26 +174,38 @@ export const PartListing: FC<PartListingProps> = memo(
           ? 'list' // is shift
           : 'single', // is single
       );
+      */
+
+      onDataMutate({ '.stellar': { selected: true } });
     };
 
     const handleExpandClick = (event: MouseEvent<SVGSVGElement>) => {
-      // stop parent from getting clicked too
       event.stopPropagation();
+
       setExpanded((state) => !state);
     };
 
-    const handleEyeClick = () => {
-      onDataMutate({ '.stellar': { visible: !data['.stellar'].visible } });
+    const handleEyeClick = (event: MouseEvent<SVGSVGElement>) => {
+      event.stopPropagation();
+
+      if (data['.stellar'].visible)
+        listingRef.current?.classList.add('invisible');
+      else listingRef.current?.classList.remove('invisible');
+
+      (async () =>
+        onDataMutate({ '.stellar': { visible: !data['.stellar'].visible } }))();
     };
 
     return (
       <div
+        ref={listingRef}
         className={`
           part-listing
           ${data['.stellar'].visible ? '' : 'invisible'}
+          ${data['.stellar'].selected ? 'selected' : ''}
         `}
       >
-        <button className="button" onClick={handleClick}>
+        <button ref={buttonRef} className="button" onClick={handleClick}>
           {data.n === 'Group' ? (
             expanded ? (
               <ExpandedIcon
@@ -247,12 +248,12 @@ export const PartListing: FC<PartListingProps> = memo(
             onPartsDataMutate={onDataMutate}
             onPartsDelete={onDelete}
             indented={true}
-            onSelect={onSelect}
           />
         ) : undefined}
       </div>
     );
   },
+  (oldProps, newProps) => oldProps.data === newProps.data,
 );
 
 // TODO: Add function arguments and return value

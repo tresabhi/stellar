@@ -1,7 +1,7 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import * as RootBlueprint from 'core/APIs/blueprint/root';
-import * as Part from 'core/APIs/parts/index';
+import * as PartAPI from 'core/APIs/parts/index';
 import * as RootPart from 'core/APIs/parts/root';
 import { FC } from 'react';
 import { MOUSE, TOUCH } from 'three';
@@ -15,21 +15,23 @@ type EditingCanvasProps = {
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const partsJsx: Array<JSX.Element> = [];
 
-  const getAllComponentsRecursively = (parts: Array<RootPart.anyPartType>) => {
+  const insertPartComponents = (parts: Array<RootPart.anyPartType>) => {
     parts.forEach((part) => {
-      if (part.n === 'Group') {
-        if (part['.stellar'].visible) getAllComponentsRecursively(part.parts);
-      } else {
-        const PartComponent = Part.getPartComponent(part.n);
-        if (PartComponent)
-          partsJsx.push(
-            <PartComponent key={`part-${partsJsx.length}`} data={part} />,
-          );
+      if (part['.stellar'].visible) {
+        if (part.n === 'Group') {
+          insertPartComponents(part.parts);
+        } else {
+          const PartComponent = PartAPI.getPartComponent(part.n);
+          if (PartComponent)
+            partsJsx.push(
+              <PartComponent key={`part-${partsJsx.length}`} data={part} />,
+            );
+        }
       }
     });
   };
 
-  getAllComponentsRecursively(parts);
+  insertPartComponents(parts);
 
   return (
     <Canvas

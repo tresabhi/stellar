@@ -44,9 +44,6 @@ const Desktop = () => {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
-            onSelect={(address, type) => {
-              // alert(`${JSON.stringify(address)}\n${type}`);
-            }}
             parts={blueprint.state.parts}
             onPartsDelete={blueprint.deleteParts}
             onPartsDataMutate={blueprint.mutatePartsData}

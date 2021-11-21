@@ -64,5 +64,7 @@ export default function useBlueprint(initialBlueprint: Object) {
       // TODO: maybe try functional update here for efficiency?
       setState(newState);
     },
+
+    select: () => {},
   };
 }

@@ -124,6 +124,10 @@
         }
       }
 
+      &.selected .button {
+        background-color: v(button-flush-selected-background-color);
+      }
+
       .button:hover {
         background-color: v(button-flush-hover-background-color);
       }
