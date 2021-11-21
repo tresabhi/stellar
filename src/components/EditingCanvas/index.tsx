@@ -1,9 +1,10 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import * as RootBlueprint from 'core/APIs/blueprint/root';
 import * as Part from 'core/APIs/parts/index';
 import * as RootPart from 'core/APIs/parts/root';
-import * as RootBlueprint from 'core/APIs/blueprint/root';
 import { FC } from 'react';
+import { MOUSE, TOUCH } from 'three';
 import './index.scss';
 
 type EditingCanvasProps = {
@@ -41,10 +42,17 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
       <ambientLight intensity={0.5} />
 
       <OrbitControls
-        enableDamping={false}
-        enablePan={true}
-        enableZoom={true}
+        mouseButtons={{
+          LEFT: MOUSE.RIGHT,
+          MIDDLE: MOUSE.MIDDLE,
+          RIGHT: MOUSE.LEFT,
+        }}
+        touches={{
+          ONE: TOUCH.PAN,
+          TWO: TOUCH.DOLLY_PAN,
+        }}
         enableRotate={false}
+        enableDamping={false}
       />
       <gridHelper
         position={[center, 0, -100]}
