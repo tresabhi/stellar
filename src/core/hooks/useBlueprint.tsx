@@ -37,6 +37,8 @@ export default function useBlueprint(initialBlueprint: Object) {
       setState(newState);
     },
 
+    deletePartsBySelection: () => {},
+
     mutatePartsData: (
       data: DeepPartial<RootPart.anyPartType>,
       addresses: RootBlueprint.partAddresses,
@@ -65,6 +67,11 @@ export default function useBlueprint(initialBlueprint: Object) {
       setState(newState);
     },
 
-    select: () => {},
+    mutatePartsBySelection: () => {},
+
+    selectParts: (
+      type: RootBlueprint.selectionType,
+      addresses: RootBlueprint.partAddress,
+    ) => {},
   };
 }

@@ -45,8 +45,13 @@ const Desktop = () => {
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
             parts={blueprint.state.parts}
-            onPartsDelete={blueprint.deleteParts}
-            onPartsDataMutate={blueprint.mutatePartsData}
+            onPartDelete={(address) => blueprint.deleteParts([address])}
+            onPartDataMutate={(data, address) =>
+              blueprint.mutatePartsData(data, [address])
+            }
+            onPartSelect={(type, address) =>
+              blueprint.selectParts(type, address)
+            }
           />
         </Explorer.Container>
 

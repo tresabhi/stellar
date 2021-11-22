@@ -36,3 +36,5 @@ export type anyVanillaPartTypeArray = Array<RootPart.anyVanillaPartType>;
 export type partAddress = Array<number>;
 
 export type partAddresses = Array<partAddress>;
+
+export type selectionType = 'single' | 'multi' | 'list' | 'multi_list';

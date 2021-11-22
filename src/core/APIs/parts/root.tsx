@@ -29,7 +29,6 @@ export const data = {
     label: 'Internally Unlabeled Part',
     visible: true,
     locked: false,
-    selected: false,
   },
 };
 

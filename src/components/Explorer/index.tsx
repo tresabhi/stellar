@@ -53,11 +53,15 @@ type PartsListingContainerProps = {
   indented?: boolean;
   address?: RootBlueprint.partAddress;
   visible?: boolean;
-  onPartsDataMutate: (
+  onPartDataMutate: (
     data: DeepPartial<RootPart.anyPartType>,
-    addresses: RootBlueprint.partAddresses,
+    address: RootBlueprint.partAddress,
   ) => void;
-  onPartsDelete: (index: RootBlueprint.partAddresses) => void;
+  onPartDelete: (address: RootBlueprint.partAddress) => void;
+  onPartSelect: (
+    type: RootBlueprint.selectionType,
+    address: RootBlueprint.partAddress,
+  ) => void;
 };
 export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
@@ -65,8 +69,9 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   indented = false,
   address = [],
   visible = true,
-  onPartsDataMutate,
-  onPartsDelete,
+  onPartDataMutate: onPartsDataMutate,
+  onPartDelete: onPartsDelete,
+  onPartSelect,
 }) => {
   const parsedArray = parts.map((partData, index) => {
     return (
@@ -77,11 +82,12 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         data={partData}
         parentAddress={[...address, index]}
         onDelete={(providedAddress) =>
-          onPartsDelete(providedAddress ?? [[...address, index]])
+          onPartsDelete(providedAddress ?? [...address, index])
         }
         onDataMutate={(data, providedAddress) => {
-          onPartsDataMutate(data, providedAddress ?? [[...address, index]]);
+          onPartsDataMutate(data, providedAddress ?? [...address, index]);
         }}
+        onSelect={onPartSelect}
       />
     );
   });
@@ -104,10 +110,14 @@ type PartListingProps = {
   defaultName: string;
   data: RootPart.anyPartType;
   parentAddress: RootBlueprint.partAddress;
-  onDelete: (addresses?: RootBlueprint.partAddresses) => void;
+  onDelete: (address?: RootBlueprint.partAddress) => void;
   onDataMutate: (
     data: DeepPartial<RootPart.anyPartType>,
-    addresses?: RootBlueprint.partAddresses,
+    address?: RootBlueprint.partAddress,
+  ) => void;
+  onSelect: (
+    type: RootBlueprint.selectionType,
+    address: RootBlueprint.partAddress,
   ) => void;
 };
 export const PartListing: FC<PartListingProps> = memo(
@@ -118,6 +128,7 @@ export const PartListing: FC<PartListingProps> = memo(
     parentAddress: address,
     onDelete,
     onDataMutate,
+    onSelect,
   }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const listingRef = useRef<HTMLDivElement>(null);
@@ -153,19 +164,19 @@ export const PartListing: FC<PartListingProps> = memo(
       if (INPUT_BLUR_KEYS.includes(event.key)) inputRef.current?.blur();
     };
 
+    /**
+     * - none: only selection (`single`)
+     *
+     * - ctrl: one new selection (`multi`)
+     *
+     * - shift: everything from last selection to this selection (`list`)
+     *
+     * - ctrl + shift: everything from last selection to this selection without
+     *   forgetting the other selections (`milti_list`)
+     *
+     */
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-      /**
-       * empty       : only selection ("single")
-       * ctrl        : one new selection ("multi")
-       * shift       : everything from last selection to this selection
-       *               ("list")
-       * ctrl + shift: everything from last selection to this selection
-       *               without forgetting the other selections
-       *               ("milti_list")
-       */
-      /*
       onSelect(
-        addresses,
         event.ctrlKey // is ctrl
           ? event.shiftKey // is ctrl shift
             ? 'multi_list' // is ctrl shift
@@ -173,10 +184,8 @@ export const PartListing: FC<PartListingProps> = memo(
           : event.shiftKey // is shift
           ? 'list' // is shift
           : 'single', // is single
+        address,
       );
-      */
-
-      onDataMutate({ '.stellar': { selected: true } });
     };
 
     const handleExpandClick = (event: MouseEvent<SVGSVGElement>) => {
@@ -202,7 +211,6 @@ export const PartListing: FC<PartListingProps> = memo(
         className={`
           part-listing
           ${data['.stellar'].visible ? '' : 'invisible'}
-          ${data['.stellar'].selected ? 'selected' : ''}
         `}
       >
         <button ref={buttonRef} className="button" onClick={handleClick}>
@@ -230,7 +238,7 @@ export const PartListing: FC<PartListingProps> = memo(
           />
 
           <DeleteIcon
-            onClick={() => onDelete([address])}
+            onClick={() => onDelete(address)}
             className="quick-action left-most"
           />
           {data['.stellar'].visible ? (
@@ -245,9 +253,10 @@ export const PartListing: FC<PartListingProps> = memo(
             visible={expanded}
             address={address}
             parts={data.parts}
-            onPartsDataMutate={onDataMutate}
-            onPartsDelete={onDelete}
             indented={true}
+            onPartDataMutate={onDataMutate}
+            onPartDelete={onDelete}
+            onPartSelect={onSelect}
           />
         ) : undefined}
       </div>
