@@ -79,5 +79,3 @@ const Desktop = () => {
 };
 
 export default Desktop;
-
-// const lol: type

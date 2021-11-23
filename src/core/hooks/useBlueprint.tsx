@@ -65,7 +65,10 @@ export default function useBlueprint(initialBlueprint: Object) {
               let groupPart = followedParts[addressValue] as GroupPart.type;
 
               // assign new object pointer to force rerender
-              groupPart.parts = [...groupPart.parts];
+              followedParts[addressValue] = {
+                ...groupPart,
+                parts: [...groupPart.parts],
+              };
               followedParts = groupPart.parts;
             }
           });
