@@ -49,7 +49,7 @@ export default function useBlueprint(initialBlueprint: Object) {
     ) => {
       setState((state) => {
         // assign new object pointer to force rerender
-        let newState = { ...state, parts: [...state.parts] };
+        let newState = { ...state };
 
         addresses.forEach((address) => {
           let followedParts = newState.parts;
@@ -65,10 +65,7 @@ export default function useBlueprint(initialBlueprint: Object) {
               let groupPart = followedParts[addressValue] as GroupPart.type;
 
               // assign new object pointer to force rerender
-              followedParts[addressValue] = {
-                ...groupPart,
-                parts: [...groupPart.parts],
-              };
+              followedParts[addressValue] = { ...groupPart };
               followedParts = groupPart.parts;
             }
           });
