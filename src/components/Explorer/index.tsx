@@ -270,16 +270,17 @@ export const PartListing: FC<PartListingProps> = memo(
 
 // TODO: Add function arguments and return value
 type PropertyListingContainerProps = {
-  parts: RootBlueprint.anyPartTypeArray;
-  currentPartIndex: number;
-  onPartDataMutate: () => void;
+  // parts: RootBlueprint.anyPartTypeArray;
+  // currentPartIndex: number;
+  // onPartDataMutate: () => void;
 };
 export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
-  parts,
-  currentPartIndex,
-  onPartDataMutate,
+  children,
+  // parts,
+  // currentPartIndex,
+  // onPartDataMutate,
 }) => {
-  return <div />;
+  return <div className="property-listing-container">{children}</div>;
 };
 
 type PropertyListingProps = {

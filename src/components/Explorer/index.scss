@@ -1,6 +1,7 @@
 @import '../../styles/index.scss';
 
 .explorer-container {
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 
@@ -49,7 +50,8 @@
     }
   }
 
-  .part-listing-container {
+  .part-listing-container,
+  .property-listing-container {
     overflow-y: auto;
     flex: 1;
     display: none;

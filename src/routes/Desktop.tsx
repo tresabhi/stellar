@@ -7,8 +7,6 @@ import PseudoContainer from 'components/PseudoContainer';
 import * as RootContextListing from 'core/APIs/contextListings/root';
 import useBlueprintCore from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
-import { merge } from 'lodash';
-import { useEffect } from 'react';
 
 const Desktop = () => {
   const emptyListing: Array<RootContextListing.contextMenuListing> = [];
@@ -64,10 +62,11 @@ const Desktop = () => {
         />
 
         <Explorer.Container rightSide={true}>
-          <Explorer.TabsContainer>
-            <Explorer.StaticTab>Properties</Explorer.StaticTab>
-            {/* <Explorer.PropertyListingContainer /> */}
-          </Explorer.TabsContainer>
+          {/* {JSON.stringify(blueprint.state, undefined, 2)
+            .split('\n')
+            .map((line) => (
+              <span>{line}</span>
+            ))} */}
         </Explorer.Container>
       </EditingPanel>
       <ContextMenu.Container

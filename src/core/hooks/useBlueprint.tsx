@@ -21,24 +21,30 @@ export default function useBlueprint(initialBlueprint: Object) {
     selection,
 
     deleteParts: (addresses: RootBlueprint.partAddresses) => {
-      setState((state) => {
-        addresses.forEach((address) => {
-          let followedAddress = state.parts;
+      if (addresses.length > 0) {
+        /**
+         * TODO: delete parts in descending index order to avoid deleting offset
+         * parts
+         */
+        setState((state) => {
+          addresses.forEach((address) => {
+            let followedAddress = state.parts;
 
-          address.forEach((addressIndex, index) => {
-            if (index + 1 === address.length) {
-              // last item; the part to modify
-              followedAddress.splice(addressIndex, 1);
-            } else {
-              followedAddress = (
-                followedAddress[addressIndex] as GroupPart.type
-              ).parts;
-            }
+            address.forEach((addressIndex, index) => {
+              if (index + 1 === address.length) {
+                // last item; the part to modify
+                followedAddress.splice(addressIndex, 1);
+              } else {
+                followedAddress = (
+                  followedAddress[addressIndex] as GroupPart.type
+                ).parts;
+              }
+            });
           });
-        });
 
-        return { ...state };
-      });
+          return { ...state };
+        });
+      }
     },
 
     deletePartsBySelection: () => {},
@@ -47,32 +53,34 @@ export default function useBlueprint(initialBlueprint: Object) {
       data: DeepPartial<RootPart.anyPartType>,
       addresses: RootBlueprint.partAddresses,
     ) => {
-      setState((state) => {
-        // assign new object pointer to force rerender
-        let newState = { ...state };
+      if (addresses.length > 0) {
+        setState((state) => {
+          // assign new object pointer to force rerender
+          let newState = { ...state };
 
-        addresses.forEach((address) => {
-          let followedParts = newState.parts;
+          addresses.forEach((address) => {
+            let followedParts = newState.parts;
 
-          address.forEach((addressValue, index) => {
-            // last part of address, it's the part to mutate
-            if (index + 1 === address.length) {
-              // assign new object pointer to force rerender
-              followedParts[addressValue] = {
-                ...merge(followedParts[addressValue], data),
-              };
-            } else {
-              let groupPart = followedParts[addressValue] as GroupPart.type;
+            address.forEach((addressValue, index) => {
+              // last part of address, it's the part to mutate
+              if (index + 1 === address.length) {
+                // assign new object pointer to force rerender
+                followedParts[addressValue] = {
+                  ...merge(followedParts[addressValue], data),
+                };
+              } else {
+                let groupPart = followedParts[addressValue] as GroupPart.type;
 
-              // assign new object pointer to force rerender
-              followedParts[addressValue] = { ...groupPart };
-              followedParts = groupPart.parts;
-            }
+                // assign new object pointer to force rerender
+                followedParts[addressValue] = { ...groupPart };
+                followedParts = groupPart.parts;
+              }
+            });
           });
-        });
 
-        return newState;
-      });
+          return newState;
+        });
+      }
     },
 
     mutatePartsBySelection: (data: DeepPartial<RootPart.anyPartType>) => {
@@ -83,11 +91,13 @@ export default function useBlueprint(initialBlueprint: Object) {
       type: RootBlueprint.selectionType,
       address: RootBlueprint.partAddress,
     ) => {
+      alert('before:\n' + JSON.stringify(hook.selection));
       if (type === 'single') {
         hook.deselectAllParts();
         hook.selection = [address];
         hook.mutatePartsData({ '.stellar': { selected: true } }, [address]);
       }
+      alert('after:\n' + JSON.stringify(hook.selection));
     },
 
     deselectAllParts: () => {
