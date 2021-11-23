@@ -124,7 +124,7 @@
         }
       }
 
-      &.selected .button {
+      &.selected > .button {
         background-color: v(button-flush-selected-background-color);
       }
 

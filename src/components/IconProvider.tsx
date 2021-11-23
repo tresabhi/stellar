@@ -13,8 +13,6 @@ const DOMAIN_ICONS = {
 
 type IconProviderProps = { className: string };
 const IconProvider: FC<IconProviderProps> = (props) => {
-  // alert(window.location.hostname);
-  // return <div {...props} />;
   const IconComponent =
     (DOMAIN_ICONS as any)?.[window.location.host] ?? DOMAIN_ICONS.default;
   return <IconComponent {...props} />;

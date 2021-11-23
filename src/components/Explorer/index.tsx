@@ -51,7 +51,7 @@ export const TabsContainer: FC = ({ children }) => (
 type PartsListingContainerProps = {
   parts: RootBlueprint.anyPartTypeArray;
   indented?: boolean;
-  address?: RootBlueprint.partAddress;
+  parentAddress?: RootBlueprint.partAddress;
   visible?: boolean;
   onPartDataMutate: (
     data: DeepPartial<RootPart.anyPartType>,
@@ -67,10 +67,10 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
   parts,
   indented = false,
-  address = [],
+  parentAddress = [],
   visible = true,
-  onPartDataMutate: onPartsDataMutate,
-  onPartDelete: onPartsDelete,
+  onPartDataMutate,
+  onPartDelete,
   onPartSelect,
 }) => {
   const parsedArray = parts.map((partData, index) => {
@@ -80,12 +80,12 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
         icon={PartsAPI.getPartIconComponent(partData.n) ?? LockIcon}
         defaultName={partData?.['.stellar']?.label}
         data={partData}
-        parentAddress={[...address, index]}
+        address={[...parentAddress, index]}
         onDelete={(providedAddress) =>
-          onPartsDelete(providedAddress ?? [...address, index])
+          onPartDelete(providedAddress ?? [...parentAddress, index])
         }
         onDataMutate={(data, providedAddress) => {
-          onPartsDataMutate(data, providedAddress ?? [...address, index]);
+          onPartDataMutate(data, providedAddress ?? [...parentAddress, index]);
         }}
         onSelect={onPartSelect}
       />
@@ -109,7 +109,7 @@ type PartListingProps = {
   icon: FC<SVGProps<SVGSVGElement>>;
   defaultName: string;
   data: RootPart.anyPartType;
-  parentAddress: RootBlueprint.partAddress;
+  address: RootBlueprint.partAddress;
   onDelete: (address?: RootBlueprint.partAddress) => void;
   onDataMutate: (
     data: DeepPartial<RootPart.anyPartType>,
@@ -120,12 +120,13 @@ type PartListingProps = {
     address: RootBlueprint.partAddress,
   ) => void;
 };
+// TODO: BRING BACK MEMO HERE
 export const PartListing: FC<PartListingProps> = memo(
   ({
     icon: Icon,
     defaultName,
     data,
-    parentAddress: address,
+    address,
     onDelete,
     onDataMutate,
     onSelect,
@@ -211,6 +212,7 @@ export const PartListing: FC<PartListingProps> = memo(
         className={`
           part-listing
           ${data['.stellar'].visible ? '' : 'invisible'}
+          ${data['.stellar'].selected ? 'selected' : ''}
         `}
       >
         <button ref={buttonRef} className="button" onClick={handleClick}>
@@ -251,7 +253,7 @@ export const PartListing: FC<PartListingProps> = memo(
         {data.n === 'Group' ? (
           <PartsListingContainer
             visible={expanded}
-            address={address}
+            parentAddress={address}
             parts={data.parts}
             indented={true}
             onPartDataMutate={onDataMutate}
@@ -262,7 +264,8 @@ export const PartListing: FC<PartListingProps> = memo(
       </div>
     );
   },
-  (oldProps, newProps) => oldProps.data === newProps.data,
+  // only compare data prop
+  (prevProps, nextProps) => Object.is(prevProps.data, nextProps.data),
 );
 
 // TODO: Add function arguments and return value

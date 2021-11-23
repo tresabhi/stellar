@@ -3,16 +3,12 @@ import { FC, useState } from 'react';
 import './index.scss';
 
 type ToggleProps = {
-  defaultOn: boolean;
+  defaultState: boolean;
 };
-const Toggle: FC<ToggleProps> = ({ defaultOn }) => {
-  const [state, setState] = useState(defaultOn);
-  let trueState = defaultOn;
+const Toggle: FC<ToggleProps> = ({ defaultState }) => {
+  const [state, setState] = useState(defaultState);
 
-  const handleClick = () => {
-    trueState = !trueState;
-    setState(trueState);
-  };
+  const handleClick = () => setState((state) => !state);
 
   return (
     <button

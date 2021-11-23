@@ -26,15 +26,12 @@ export const data = {
 };
 
 export type type = typeof data;
-
 export type vanillaType = typeof vanillaData;
 
 export interface anyPartTypeArray extends Array<RootPart.anyPartType> {}
-
 export type anyVanillaPartTypeArray = Array<RootPart.anyVanillaPartType>;
 
 export type partAddress = Array<number>;
-
 export type partAddresses = Array<partAddress>;
 
 export type selectionType = 'single' | 'multi' | 'list' | 'multi_list';
