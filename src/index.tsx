@@ -1,5 +1,6 @@
 import App from 'App';
-import { StrictMode } from 'react';
+import SplashScreen from 'components/SplashScreen';
+import { StrictMode, Suspense } from 'react';
 import { render } from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
@@ -7,7 +8,9 @@ serviceWorkerRegistration.register();
 
 render(
   <StrictMode>
-    <App />
+    <Suspense fallback={<SplashScreen />}>
+      <App />
+    </Suspense>
   </StrictMode>,
   document.getElementById('root'),
 );

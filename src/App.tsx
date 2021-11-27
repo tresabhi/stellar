@@ -1,14 +1,21 @@
-import SplashScreen from 'components/SplashScreen';
-import { lazy, Suspense } from 'react';
+import useStellarName from 'core/hooks/useStellarName';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Desktop from 'routes/Desktop';
+import Home from 'routes/Home';
+import Mobile from 'routes/Mobile';
 
-const App = () => {
-  const Routed = lazy(() => import('Routed'));
+const Routed = () => {
+  document.title = useStellarName();
 
   return (
-    <Suspense fallback={<SplashScreen />}>
-      <Routed />
-    </Suspense>
+    <BrowserRouter>
+      <Routes>
+        <Route path="" element={<Home />} />
+        <Route path="mobile" element={<Mobile />} />
+        <Route path="desktop" element={<Desktop />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
-export default App;
+export default Routed;
