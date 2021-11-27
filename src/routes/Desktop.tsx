@@ -47,7 +47,7 @@ const Desktop = () => {
             parts={blueprint.state.parts}
             onPartDelete={(address) => blueprint.deleteParts([address])}
             onPartDataMutate={(data, address) =>
-              blueprint.mutatePartsData(data, [address])
+              blueprint.mutateParts(data, [address])
             }
             onPartSelect={(type, address) =>
               blueprint.selectParts(type, address)

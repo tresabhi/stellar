@@ -3,14 +3,14 @@ import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import lerp from 'core/methods/lerp';
 import { times } from 'lodash';
 import { FC, memo } from 'react';
-import * as Root from './root';
+import * as RootPart from './root';
 
 export const icon = FuelTankIcon;
 
 export const vanillaData = {
-  ...Root.vanillaData,
+  ...RootPart.vanillaData,
 
-  n: 'Fuel Tank',
+  n: 'Fuel Tank' as 'Fuel Tank',
   N: {
     width_original: 2,
     width_a: 2,
@@ -19,27 +19,8 @@ export const vanillaData = {
     fuel_percent: 1,
   },
   T: {
-    color_tex: '_',
-    shape_tex: '_',
-  },
-};
-
-export const data = {
-  ...vanillaData,
-
-  '.stellar': {
-    ...Root.data['.stellar'],
-
-    label: 'Fuel Tank',
-  },
-};
-
-type constantTypes = {
-  n: 'Fuel Tank';
-  // TODO: add more color tex's
-  T: {
-    color_tex: '_';
-    shape_tex:
+    color_tex: '_' as '_',
+    shape_tex: '_' as
       | '_'
       | 'Rivets'
       | 'Half Rivets'
@@ -50,13 +31,23 @@ type constantTypes = {
       | 'Strut'
       | 'Edges Faces'
       | 'Edges Smooth'
-      | 'Flat Smooth';
-  };
-} & Root.mutualVanillaConstantType;
+      | 'Flat Smooth',
+  },
+};
 
-export type vanillaType = typeof vanillaData & constantTypes;
+export const data = {
+  ...vanillaData,
 
-export type type = typeof data & constantTypes;
+  '.stellar': {
+    ...RootPart.data['.stellar'],
+
+    label: 'Fuel Tank',
+  },
+};
+
+export type vanillaType = typeof vanillaData;
+
+export type type = typeof data;
 
 type ComponentProps = {
   data: type;

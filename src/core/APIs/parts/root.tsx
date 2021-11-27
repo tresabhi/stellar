@@ -17,7 +17,7 @@ export const vanillaData = {
     y: 1,
     z: 0,
   },
-  t: '-Infinity',
+  t: '-Infinity' as '-Infinity',
 };
 
 // TODO: SPLIT ALL PART DATA TO VANILLA AND STELLAR VERSIONS
@@ -33,11 +33,7 @@ export const data = {
   },
 };
 
-export type mutualVanillaConstantType = {
-  t: '-Infinity';
-};
-
-export type type = typeof data & mutualVanillaConstantType;
+export type type = typeof data;
 
 export type anyPartType = FuelTankPart.type | GroupPart.type;
 

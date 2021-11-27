@@ -10,7 +10,6 @@ export default function useBlueprint(initialBlueprint: Object) {
   const [state, setState] = useState(
     BlueprintAPI.updateBlueprint(initialBlueprint),
   );
-  let selection: RootBlueprint.partAddresses = [];
 
   // let lastSelectionAddress: RootBlueprint.partAddress = [];
 
@@ -18,14 +17,14 @@ export default function useBlueprint(initialBlueprint: Object) {
     state,
     setState,
 
-    selection,
+    selection: [] as RootBlueprint.partAddresses,
 
+    /**
+     * TODO: delete parts in descending index order to avoid deleting offset
+     * parts
+     */
     deleteParts: (addresses: RootBlueprint.partAddresses) => {
       if (addresses.length > 0) {
-        /**
-         * TODO: delete parts in descending index order to avoid deleting offset
-         * parts
-         */
         setState((state) => {
           addresses.forEach((address) => {
             let followedAddress = state.parts;
@@ -49,7 +48,7 @@ export default function useBlueprint(initialBlueprint: Object) {
 
     deletePartsBySelection: () => {},
 
-    mutatePartsData: (
+    mutateParts: (
       data: DeepPartial<RootPart.anyPartType>,
       addresses: RootBlueprint.partAddresses,
     ) => {
@@ -83,21 +82,25 @@ export default function useBlueprint(initialBlueprint: Object) {
       }
     },
 
-    mutatePartsBySelection: (data: DeepPartial<RootPart.anyPartType>) => {
-      hook.mutatePartsData(data, hook.selection);
-    },
+    mutatePartsBySelection: (data: DeepPartial<RootPart.anyPartType>) =>
+      hook.mutateParts(data, hook.selection),
 
     selectParts: (
       type: RootBlueprint.selectionType,
       address: RootBlueprint.partAddress,
     ) => {
-      alert('before:\n' + JSON.stringify(hook.selection));
+      // alert('before:\n' + JSON.stringify(hook.selection));
       if (type === 'single') {
         hook.deselectAllParts();
         hook.selection = [address];
-        hook.mutatePartsData({ '.stellar': { selected: true } }, [address]);
+        hook.mutatePartsBySelection({ '.stellar': { selected: true } });
       }
-      alert('after:\n' + JSON.stringify(hook.selection));
+      // alert('after:\n' + JSON.stringify(hook.selection));
+
+      setInterval(() => {
+        document.querySelector('.explorer-container.right')!.innerHTML =
+          JSON.stringify(hook.selection);
+      });
     },
 
     deselectAllParts: () => {

@@ -13,11 +13,10 @@ export const data = {
     label: 'Unlabeled Group',
   },
 
+  n: 'Group' as 'Group',
   parts: typedParts,
 };
 
-type constantTypes = { n: 'Group' };
-
-export type type = typeof data & constantTypes;
+export type type = typeof data;
 
 export const Component = memo(() => <mesh />);
