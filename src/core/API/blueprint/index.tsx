@@ -1,6 +1,6 @@
-import * as PartsAPI from 'core/APIs/parts';
-import * as RootBlueprint from './root';
-import * as GroupPart from 'core/APIs/parts/group';
+import * as PartsAPI from 'core/API/part';
+import * as RootBlueprint from './types/root';
+import * as GroupPart from 'core/API/part/types/group';
 
 export const mergeWithDefaultBlueprintGlobals = (
   blueprint: Object,

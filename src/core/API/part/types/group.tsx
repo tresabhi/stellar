@@ -1,7 +1,7 @@
 import '@react-three/fiber';
 import { ReactComponent as GroupIcon } from 'assets/icons/group.svg';
 import { memo } from 'react';
-import * as RootBlueprint from '../blueprint/root';
+import * as RootBlueprint from '../../blueprint/types/root';
 import * as RootPart from './root';
 
 export const icon = GroupIcon;

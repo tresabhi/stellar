@@ -4,9 +4,9 @@ import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import { ReactComponent as NoEyeIcon } from 'assets/icons/no-eye.svg';
-import * as RootBlueprint from 'core/APIs/blueprint/root';
-import * as PartsAPI from 'core/APIs/parts';
-import * as RootPart from 'core/APIs/parts/root';
+import * as RootBlueprint from 'core/API/blueprint/types/root';
+import * as PartsAPI from 'core/API/part';
+import * as RootPart from 'core/API/part/types/root';
 import DeepPartial from 'core/types/DeepPartial';
 import {
   FC,

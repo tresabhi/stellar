@@ -1,4 +1,4 @@
-import * as RootPart from 'core/APIs/parts/root';
+import * as RootPart from 'core/API/part/types/root';
 
 export const vanillaData = {
   center: 0,

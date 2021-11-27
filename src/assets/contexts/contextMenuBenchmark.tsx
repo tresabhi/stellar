@@ -1,5 +1,5 @@
 import { ReactComponent as EyeIcon } from 'assets/icons/eye.svg';
-import * as RootContextListing from 'core/APIs/contextListings/root';
+import * as RootContextListing from 'core/API/contextListings/types/root';
 
 const contextMenuBenchmark: RootContextListing.contextMenuListing = {
   x: 0,

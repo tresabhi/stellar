@@ -1,9 +1,9 @@
 import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { FC, useRef } from 'react';
 import './index.scss';
-import * as ExtendContextListing from '../../core/APIs/contextListings/extendButton';
-import * as RootContextListing from '../../core/APIs/contextListings/root';
-import * as TextContextListing from '../../core/APIs/contextListings/textButton';
+import * as ExtendContextListing from '../../core/API/contextListings/types/extendButton';
+import * as RootContextListing from '../../core/API/contextListings/types/root';
+import * as TextContextListing from '../../core/API/contextListings/types/textButton';
 
 // TODO: SIMPLIFY ALL CLASS NAMES
 type TextButtonProps = { data: TextContextListing.type; extended?: boolean };

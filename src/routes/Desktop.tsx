@@ -4,7 +4,7 @@ import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
-import * as RootContextListing from 'core/APIs/contextListings/root';
+import * as RootContextListing from 'core/API/contextListings/types/root';
 import useBlueprintCore from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
 

@@ -1,7 +1,7 @@
-import * as BlueprintAPI from 'core/APIs/blueprint';
-import * as RootBlueprint from 'core/APIs/blueprint/root';
-import * as GroupPart from 'core/APIs/parts/group';
-import * as RootPart from 'core/APIs/parts/root';
+import * as BlueprintAPI from 'core/API/blueprint';
+import * as RootBlueprint from 'core/API/blueprint/types/root';
+import * as GroupPart from 'core/API/part/types/group';
+import * as RootPart from 'core/API/part/types/root';
 import DeepPartial from 'core/types/DeepPartial';
 import { merge } from 'lodash';
 import { useState } from 'react';
