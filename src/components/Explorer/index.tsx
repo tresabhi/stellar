@@ -285,7 +285,7 @@ export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
 
 type PropertyListingProps = {
   // TODO: give this types
-  subProperties?: Array<Object>;
+  subProperties?: Object[];
 };
 export const PropertyListing: FC<PropertyListingProps> = memo(
   ({ children, subProperties }) => {

@@ -1,4 +1,5 @@
 import * as RootPart from 'core/API/part/types/root';
+import { TupleType } from 'typescript';
 
 export const vanillaData = {
   center: 0,
@@ -7,7 +8,7 @@ export const vanillaData = {
     y: 0,
   },
   parts: [] as anyVanillaPartTypeArray,
-  stages: [] as Array<{ partIndexes: Array<number> }>,
+  stages: [] as { partIndexes: number[] }[],
 };
 
 export const data = {
@@ -17,16 +18,28 @@ export const data = {
     format_version: 1,
   },
   parts: [] as anyPartTypeArray,
-  stages: [] as Array<{ partIndexes: Array<number> }>,
 };
 
 export type type = typeof data;
 export type vanillaType = typeof vanillaData;
 
 export interface anyPartTypeArray extends Array<RootPart.anyPartType> {}
-export type anyVanillaPartTypeArray = Array<RootPart.anyVanillaPartType>;
+export type anyVanillaPartTypeArray = RootPart.anyVanillaPartType[];
 
-export type partAddress = Array<number>;
-export type partAddresses = Array<partAddress>;
+export type partAddress = number[];
+export type partAddresses = partAddress[];
+
+export type lol = [number, true | lol][];
+const asd: lol = [
+  [0, true],
+  [
+    1,
+    [
+      [0, true],
+      [1, true],
+      [2, true],
+    ],
+  ],
+];
 
 export type selectionType = 'single' | 'multi' | 'list' | 'multi_list';

@@ -2,7 +2,7 @@ import * as RootContextListing from 'core/API/contextListings/types/root';
 import { useState } from 'react';
 
 export default function useContextLayer(
-  initialState: Array<RootContextListing.contextMenuListing>,
+  initialState: RootContextListing.contextMenuListing[],
 ) {
   const [state, setState] = useState(initialState);
 

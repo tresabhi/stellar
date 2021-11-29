@@ -9,7 +9,7 @@ import useBlueprintCore from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {
-  const emptyListing: Array<RootContextListing.contextMenuListing> = [];
+  const emptyListing: RootContextListing.contextMenuListing[] = [];
 
   const blueprint = useBlueprintCore(devBlueprint);
   const contextLayer = useContextLayer(emptyListing);

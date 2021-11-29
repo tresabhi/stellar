@@ -13,9 +13,9 @@ type EditingCanvasProps = {
   parts: RootBlueprint.anyPartTypeArray;
 };
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
-  const partsJsx: Array<JSX.Element> = [];
+  const partsJsx: JSX.Element[] = [];
 
-  const insertPartComponents = (parts: Array<RootPart.anyPartType>) => {
+  const insertPartComponents = (parts: RootPart.anyPartType[]) => {
     parts.forEach((part) => {
       if (part['.stellar'].visible) {
         if (part.n === 'Group') {

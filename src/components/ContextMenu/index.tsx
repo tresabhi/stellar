@@ -96,7 +96,7 @@ export const ContextContainer: FC<ContextContainerProps> = ({
 };
 
 type ContainerProps = {
-  contexts: Array<RootContextListing.contextMenuListing>;
+  contexts: RootContextListing.contextMenuListing[];
   onBlur: () => void;
 };
 export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {

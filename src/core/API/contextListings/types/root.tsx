@@ -1,4 +1,4 @@
-import {  FC } from 'react';
+import { FC } from 'react';
 import * as ExtendContextListing from './extendButton';
 import * as SeparatorContextListing from './separator';
 import * as TextContextListing from './textButton';
@@ -7,7 +7,7 @@ import * as ToggleContextListing from './toggle';
 export type contextMenuListing = {
   x?: number;
   y?: number;
-  listing: Array<anyContextListingType>;
+  listing: anyContextListingType[];
 };
 
 export type type = {
