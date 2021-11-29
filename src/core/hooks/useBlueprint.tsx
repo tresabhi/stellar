@@ -7,25 +7,24 @@ import { merge } from 'lodash';
 import { useState } from 'react';
 
 export default function useBlueprint(initialBlueprint: Object) {
-  const [state, setState] = useState(
+  const [stateExternal, setStateExternal] = useState(
     BlueprintAPI.updateBlueprint(initialBlueprint),
   );
 
-  // let lastSelectionAddress: RootBlueprint.partAddress = [];
-
   const hook = {
-    state,
-    setState,
+    state: stateExternal,
+    setState: setStateExternal,
 
     selection: [] as RootBlueprint.partAddresses,
+    lastSelection: [] as RootBlueprint.partAddress,
 
     /**
-     * TODO: delete parts in descending index order to avoid deleting offset
-     * parts
+     * TODO: delete parts in descending index order to avoid deleting
+     * already offset parts
      */
     deleteParts: (addresses: RootBlueprint.partAddresses) => {
       if (addresses.length > 0) {
-        setState((state) => {
+        hook.setState((state) => {
           addresses.forEach((address) => {
             let followedAddress = state.parts;
 
@@ -46,6 +45,9 @@ export default function useBlueprint(initialBlueprint: Object) {
       }
     },
 
+    /**
+     * no funtionality ...yet!
+     */
     deletePartsBySelection: () => {},
 
     mutateParts: (
@@ -53,60 +55,82 @@ export default function useBlueprint(initialBlueprint: Object) {
       addresses: RootBlueprint.partAddresses,
     ) => {
       if (addresses.length > 0) {
-        setState((state) => {
-          // assign new object pointer to force rerender
-          let newState = { ...state };
-
+        hook.setState((state) => {
           addresses.forEach((address) => {
-            let followedParts = newState.parts;
+            let followedParts = state.parts;
 
             address.forEach((addressValue, index) => {
               // last part of address, it's the part to mutate
               if (index + 1 === address.length) {
-                // assign new object pointer to force rerender
                 followedParts[addressValue] = {
                   ...merge(followedParts[addressValue], data),
                 };
               } else {
-                let groupPart = followedParts[addressValue] as GroupPart.type;
+                const groupPart = followedParts[addressValue] as GroupPart.type;
 
-                // assign new object pointer to force rerender
                 followedParts[addressValue] = { ...groupPart };
                 followedParts = groupPart.parts;
               }
             });
           });
 
-          return newState;
+          return { ...state };
         });
       }
     },
 
-    mutatePartsBySelection: (data: DeepPartial<RootPart.anyPartType>) =>
-      hook.mutateParts(data, hook.selection),
+    mutatePartsBySelection: (data: DeepPartial<RootPart.anyPartType>) => {
+      hook.mutateParts(data, hook.selection);
+    },
 
     selectParts: (
       type: RootBlueprint.selectionType,
       address: RootBlueprint.partAddress,
     ) => {
-      // alert('before:\n' + JSON.stringify(hook.selection));
       if (type === 'single') {
         hook.deselectAllParts();
         hook.selection = [address];
         hook.mutatePartsBySelection({ '.stellar': { selected: true } });
+      } else if (type === 'multi') {
+        // check if it's already selected
+        if (!hook.isPartSelected(address)) {
+          hook.selection.push(address);
+          hook.mutateParts({ '.stellar': { selected: true } }, [address]);
+        } else {
+          // deselect it
+        }
       }
-      // alert('after:\n' + JSON.stringify(hook.selection));
 
-      setInterval(() => {
-        document.querySelector('.explorer-container.right')!.innerHTML =
-          JSON.stringify(hook.selection);
-      });
+      document.querySelector('.explorer-container.right')!.innerHTML =
+        JSON.stringify(hook.selection);
     },
 
     deselectAllParts: () => {
       hook.mutatePartsBySelection({ '.stellar': { selected: false } });
       hook.selection = [];
     },
+
+    getPartsByAddresses: (addresses: RootBlueprint.partAddresses) => {
+      let returnArray: RootBlueprint.anyPartTypeArray = [];
+
+      addresses.forEach((address) => {
+        let followedParts = hook.state.parts;
+
+        address.forEach((addressValue, index) => {
+          if (index + 1 === address.length) {
+            returnArray.push(followedParts[addressValue]);
+          } else {
+            followedParts = (followedParts[addressValue] as GroupPart.type)
+              .parts;
+          }
+        });
+      });
+
+      return returnArray;
+    },
+
+    isPartSelected: (address: RootBlueprint.partAddress) =>
+      hook.getPartsByAddresses([address])[0]['.stellar'].selected,
   };
 
   return hook;

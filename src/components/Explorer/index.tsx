@@ -134,7 +134,9 @@ export const PartListing: FC<PartListingProps> = memo(
     const inputRef = useRef<HTMLInputElement>(null);
     const listingRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
+
     const [expanded, setExpanded] = useState(false);
+
     let previousLabel = defaultName;
     let focusable = false;
 
@@ -166,7 +168,9 @@ export const PartListing: FC<PartListingProps> = memo(
     };
 
     /**
-     * - none: only selection (`single`)
+     * Types of clicks:
+     *
+     * - none: one and only selection (`single`)
      *
      * - ctrl: one new selection (`multi`)
      *

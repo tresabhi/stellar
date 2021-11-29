@@ -5,14 +5,25 @@ import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
 import * as RootContextListing from 'core/API/contextListings/types/root';
-import useBlueprintCore from 'core/hooks/useBlueprint';
+import useBlueprint from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
+import { useEffect } from 'react';
 
 const Desktop = () => {
   const emptyListing: RootContextListing.contextMenuListing[] = [];
 
-  const blueprint = useBlueprintCore(devBlueprint);
+  const blueprint = useBlueprint(devBlueprint);
   const contextLayer = useContextLayer(emptyListing);
+
+  useEffect(() => {
+    document.querySelector(
+      '.explorer-container.right',
+    )!.innerHTML = `${blueprint.state.parts
+      .map((e, i) => (e['.stellar'].selected ? `${i}|` : ''))
+      .join(' ')}<br><br>${
+      document.querySelector('.explorer-container.right')!.innerHTML
+    }`;
+  });
 
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
@@ -49,9 +60,9 @@ const Desktop = () => {
             onPartDataMutate={(data, address) =>
               blueprint.mutateParts(data, [address])
             }
-            onPartSelect={(type, address) =>
-              blueprint.selectParts(type, address)
-            }
+            onPartSelect={(type, address) => {
+              blueprint.selectParts(type, address);
+            }}
           />
         </Explorer.Container>
 
