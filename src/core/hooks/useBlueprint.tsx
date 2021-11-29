@@ -29,8 +29,10 @@ export default function useBlueprint(initialBlueprint: Object) {
       data: DeepPartial<RootPart.anyPartType>,
       addresses: RootBlueprint.partAddresses,
     ) => {
+      let localMutableState = hook.mutableState;
+
       addresses.forEach((address) => {
-        let currentParts = hook.mutableState.parts;
+        let currentParts = localMutableState.parts;
 
         address.forEach((direction, index) => {
           if (address.length === index + 1) {
@@ -44,7 +46,7 @@ export default function useBlueprint(initialBlueprint: Object) {
         });
       });
 
-      hook.mutableState = hook.mutableState;
+      hook.mutableState = localMutableState;
     },
 
     selectParts: (
