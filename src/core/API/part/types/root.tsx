@@ -1,5 +1,6 @@
 import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import DeepPartial from 'core/types/DeepPartial';
 import { memo } from 'react';
 import * as FuelTankPart from './fuelTank';
 import * as GroupPart from './group';
@@ -36,7 +37,9 @@ export const data = {
 export type type = typeof data;
 
 export type anyPartType = FuelTankPart.type | GroupPart.type;
-
 export type anyVanillaPartType = FuelTankPart.vanillaType;
+
+export type anyPartialPartType = DeepPartial<anyPartType>;
+export type anyPartialVanillaPartType = DeepPartial<anyVanillaPartType>;
 
 export const Component = memo(() => <mesh />);

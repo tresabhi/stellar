@@ -3,7 +3,7 @@ import * as RootBlueprint from './types/root';
 import * as GroupPart from 'core/API/part/types/group';
 
 export const mergeWithDefaultBlueprintGlobals = (
-  blueprint: Object,
+  blueprint: object,
 ): RootBlueprint.type => {
   return { ...RootBlueprint.data, ...blueprint };
 };
@@ -19,7 +19,7 @@ export const blueprintToLatestVersion = (
  *3. Use version updaters
  */
 export const updateBlueprint = (
-  blueprint: RootBlueprint.vanillaType | Object,
+  blueprint: RootBlueprint.vanillaType | object,
 ): RootBlueprint.type => {
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {

@@ -28,7 +28,7 @@ export const DraftRow: FC = ({ children }) => (
 );
 
 type DraftTypeProps = {
-  icon: Object;
+  icon: object;
   name: string;
   enabled: boolean;
 };

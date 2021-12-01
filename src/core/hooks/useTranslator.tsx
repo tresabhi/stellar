@@ -1,4 +1,4 @@
-export default function (translations: Object, fallback = {}) {
+export default function (translations: object, fallback = {}) {
   return {
     translate(key: string, variables?: string[]) {
       // TODO: Fix all (object as any) problem

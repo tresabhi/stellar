@@ -54,7 +54,7 @@ type PartsListingContainerProps = {
   parentAddress?: RootBlueprint.partAddress;
   visible?: boolean;
   onPartDataMutate: (
-    data: DeepPartial<RootPart.anyPartType>,
+    data: RootPart.anyPartialPartType,
     address: RootBlueprint.partAddress,
   ) => void;
   onPartDelete: (address: RootBlueprint.partAddress) => void;
@@ -120,7 +120,7 @@ type PartListingProps = {
     address: RootBlueprint.partAddress,
   ) => void;
 };
-// TODO: BRING BACK MEMO HERE
+
 export const PartListing: FC<PartListingProps> = memo(
   ({
     icon: Icon,
@@ -268,8 +268,6 @@ export const PartListing: FC<PartListingProps> = memo(
       </div>
     );
   },
-  // only compare data prop
-  (prevProps, nextProps) => Object.is(prevProps.data, nextProps.data),
 );
 
 // TODO: Add function arguments and return value
@@ -289,7 +287,7 @@ export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
 
 type PropertyListingProps = {
   // TODO: give this types
-  subProperties?: Object[];
+  subProperties?: object[];
 };
 export const PropertyListing: FC<PropertyListingProps> = memo(
   ({ children, subProperties }) => {

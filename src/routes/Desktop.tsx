@@ -4,15 +4,12 @@ import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
-import * as RootContextListing from 'core/API/contextListings/types/root';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {
-  const emptyListing: RootContextListing.contextMenuListing[] = [];
-
-  const blueprintStore = useBlueprint(devBlueprint);
-  const contextLayer = useContextLayer(emptyListing);
+  const blueprint = useBlueprint(devBlueprint);
+  const contextLayer = useContextLayer([]);
 
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
@@ -44,24 +41,27 @@ const Desktop = () => {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
-            parts={blueprintStore.state.parts}
-            onPartDelete={(address) => blueprintStore.deleteParts([address])}
+            parts={blueprint.state.parts}
             onPartDataMutate={(data, address) =>
-              blueprintStore.mutateParts(data, [address])
+              blueprint.mutateParts(data, [address])
             }
+            onPartDelete={(address) => blueprint.deleteParts([address])}
             onPartSelect={(type, address) =>
-              blueprintStore.selectParts(type, address)
+              blueprint.selectParts(type, address)
             }
           />
         </Explorer.Container>
 
         <EditingCanvas
-          center={blueprintStore.state.center}
-          offset={blueprintStore.state.offset}
-          parts={blueprintStore.state.parts}
+          center={blueprint.state.center}
+          offset={blueprint.state.offset}
+          parts={blueprint.state.parts}
         />
 
-        <Explorer.Container rightSide={true} />
+        <Explorer.Container
+          rightSide={true}
+          children={JSON.stringify(blueprint.state.parts)}
+        />
       </EditingPanel>
       <ContextMenu.Container
         contexts={contextLayer.state}
