@@ -2,7 +2,7 @@ const color = 'Color_White';
 const shape = 'Strut';
 const scale = [1, 1];
 
-export default {
+const blueprint = {
   ...{
     center: 0,
     offset: {
@@ -278,3 +278,5 @@ export default {
     stages: [],
   },
 };
+
+export default blueprint;

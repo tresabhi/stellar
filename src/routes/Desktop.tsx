@@ -11,7 +11,7 @@ import useContextLayer from 'core/hooks/useContextLayer';
 const Desktop = () => {
   const emptyListing: RootContextListing.contextMenuListing[] = [];
 
-  const blueprint = useBlueprint(devBlueprint);
+  const blueprintStore = useBlueprint(devBlueprint);
   const contextLayer = useContextLayer(emptyListing);
 
   return (
@@ -44,30 +44,24 @@ const Desktop = () => {
             <Explorer.StaticTab>Parts</Explorer.StaticTab>
           </Explorer.TabsContainer>
           <Explorer.PartsListingContainer
-            parts={blueprint.state.parts}
-            onPartDelete={(address) => blueprint.deleteParts([address])}
+            parts={blueprintStore.state.parts}
+            onPartDelete={(address) => blueprintStore.deleteParts([address])}
             onPartDataMutate={(data, address) =>
-              blueprint.mutateParts(data, [address])
+              blueprintStore.mutateParts(data, [address])
             }
             onPartSelect={(type, address) =>
-              blueprint.selectParts(type, address)
+              blueprintStore.selectParts(type, address)
             }
           />
         </Explorer.Container>
 
         <EditingCanvas
-          center={blueprint.state.center}
-          offset={blueprint.state.offset}
-          parts={blueprint.state.parts}
+          center={blueprintStore.state.center}
+          offset={blueprintStore.state.offset}
+          parts={blueprintStore.state.parts}
         />
 
-        <Explorer.Container rightSide={true}>
-          {/* {JSON.stringify(blueprint.state, undefined, 2)
-            .split('\n')
-            .map((line) => (
-              <span>{line}</span>
-            ))} */}
-        </Explorer.Container>
+        <Explorer.Container rightSide={true} />
       </EditingPanel>
       <ContextMenu.Container
         contexts={contextLayer.state}
