@@ -38,5 +38,3 @@ export type type = typeof data;
 export type anyPartType = FuelTankPart.type | GroupPart.type;
 
 export type anyVanillaPartType = FuelTankPart.vanillaType;
-
-export const Component = memo(() => <mesh />);

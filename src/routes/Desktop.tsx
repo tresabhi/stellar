@@ -5,8 +5,8 @@ import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
 import useBlueprint from 'core/hooks/useBlueprint';
-import blueprintStore from 'core/stores/blueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
+import blueprintStore from 'core/stores/blueprint';
 
 const Desktop = () => {
   const contextLayer = useContextLayer([]);
@@ -14,9 +14,6 @@ const Desktop = () => {
 
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
-      <button onClick={() => blueprintStore.setState({ parts: [] })}>
-        asd
-      </button>
       <ContextMenu.ContextContainer
         toolbar={true}
         data={{
@@ -61,8 +58,6 @@ const Desktop = () => {
           offset={blueprintStore((state) => state.offset)}
           parts={blueprintStore((state) => state.parts)}
         />
-
-        {/* <Explorer.Container rightSide={true} /> */}
       </EditingPanel>
       <ContextMenu.Container
         contexts={contextLayer.state}
