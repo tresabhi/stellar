@@ -10,10 +10,13 @@ import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {
   const contextLayer = useContextLayer([]);
-  const blueprint = useBlueprint(blueprintStore, devBlueprint);
+  const blueprint = useBlueprint(devBlueprint);
 
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
+      <button onClick={() => blueprintStore.setState({ parts: [] })}>
+        asd
+      </button>
       <ContextMenu.ContextContainer
         toolbar={true}
         data={{
