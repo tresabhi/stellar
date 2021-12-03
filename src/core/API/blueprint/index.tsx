@@ -18,13 +18,13 @@ export const blueprintToLatestVersion = (
  *2. Merge all parts their with default data
  *3. Use version updaters
  */
-export const updateBlueprint = (
+export const importifyBlueprint = (
   blueprint: RootBlueprint.vanillaType | object,
 ): RootBlueprint.type => {
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {
     ...mergedBlueprint,
-    parts: updatePartsData(mergedBlueprint.parts),
+    parts: importifyPartsData(mergedBlueprint.parts),
   };
   const latestVersionBlueprint = blueprintToLatestVersion(
     partDataUpdatedBlueprint,
@@ -33,7 +33,7 @@ export const updateBlueprint = (
   return latestVersionBlueprint;
 };
 
-export const updatePartsData = (
+export const importifyPartsData = (
   parts: RootBlueprint.anyVanillaPartTypeArray | RootBlueprint.anyPartTypeArray,
 ): RootBlueprint.anyPartTypeArray => {
   let newParts: RootBlueprint.anyPartTypeArray = [];
@@ -41,11 +41,11 @@ export const updatePartsData = (
   parts.forEach((part) => {
     if (part.n === 'Group') {
       newParts.push({
-        ...(PartsAPI.updatePartData(part) as GroupPart.type),
-        parts: updatePartsData(part.parts),
+        ...(PartsAPI.importifyPartData(part) as GroupPart.type),
+        parts: importifyPartsData(part.parts),
       });
     } else {
-      newParts.push(PartsAPI.updatePartData(part));
+      newParts.push(PartsAPI.importifyPartData(part));
     }
   });
 

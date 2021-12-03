@@ -38,7 +38,7 @@ export const getPartData = (partName: string) => {
   return getPartModule(partName)?.data;
 };
 
-export const updatePartData = (
+export const importifyPartData = (
   partData: RootPart.anyVanillaPartType | RootPart.anyPartType,
 ): RootPart.anyPartType => {
   return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
