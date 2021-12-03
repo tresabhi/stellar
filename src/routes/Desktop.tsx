@@ -1,3 +1,4 @@
+import devBlueprint from 'assets/blueprints/static/grouping.json';
 import * as ContextMenu from 'components/ContextMenu';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
@@ -9,7 +10,7 @@ import useContextLayer from 'core/hooks/useContextLayer';
 
 const Desktop = () => {
   const contextLayer = useContextLayer([]);
-  const blueprint = useBlueprint(blueprintStore);
+  const blueprint = useBlueprint(blueprintStore, devBlueprint);
 
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>

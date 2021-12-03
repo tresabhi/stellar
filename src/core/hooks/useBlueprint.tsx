@@ -1,8 +1,14 @@
+import { importifyBlueprint } from 'core/API/blueprint';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as RootPart from 'core/API/part/types/root';
 import * as blueprintStore from 'core/stores/blueprint';
 
-export default function (store: blueprintStore.type) {
+export default function useBlueprint(
+  store: blueprintStore.type,
+  blueprint: object,
+) {
+  store.setState(() => importifyBlueprint(blueprint));
+
   const hook = {
     selection: [] as RootBlueprint.partAddresses,
     lastSelection: [] as RootBlueprint.partAddress,
