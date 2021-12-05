@@ -12,7 +12,26 @@ export default function useBlueprint() {
     createParts: () => store.setState((state) => {}),
 
     deleteParts: (addresses: RootBlueprint.partAddresses) =>
-      store.setState((state) => {}),
+      store.setState((state) => {
+        // TODO: sort addresses first to avoid deleting shifted parts
+        // ...or we could utilize the tree selection system
+        const newParts = [...state.parts];
+
+        addresses.forEach((address) => {
+          let currentParts = newParts;
+
+          address.forEach((direction, index) => {
+            if (index + 1 == address.length) {
+              currentParts.splice(direction, 1);
+            } else {
+              currentParts[direction] = { ...currentParts[direction] };
+              currentParts = (currentParts[direction] as GroupPart.type).parts;
+            }
+          });
+        });
+
+        return { parts: newParts };
+      }),
 
     mutateParts: (
       data: RootPart.anyPartialPartType,
