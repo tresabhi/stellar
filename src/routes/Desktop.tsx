@@ -4,13 +4,16 @@ import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
+import { importifyBlueprint } from 'core/API/blueprint';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
 import blueprintStore from 'core/stores/blueprint';
 
+blueprintStore.setState(importifyBlueprint(devBlueprint));
+
 const Desktop = () => {
   const contextLayer = useContextLayer([]);
-  const blueprint = useBlueprint(devBlueprint);
+  const blueprint = useBlueprint();
 
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
