@@ -1,8 +1,13 @@
-@import './pallete.scss';
+@import './pallette.scss';
 @import './fonts.scss';
 @import '../../../../styles/utilities.scss';
 
 :root {
+  --toolbar-top-background-color: $black-darker;
+  --toolbar-top-button-content-color: white;
+  --toolbar-top-button-hover-background-color: $black-regular;
+
+  // Legacy abstractions
   --foreground-panel-text-color: white;
   --foreground-panel-unimportant-text-color: #{$gray-dark};
   --foreground-panel-background-color: #{$black-regular};

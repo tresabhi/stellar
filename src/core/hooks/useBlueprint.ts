@@ -21,7 +21,7 @@ export default function useBlueprint() {
           let currentParts = newParts;
 
           address.forEach((direction, index) => {
-            if (index + 1 == address.length) {
+            if (index + 1 === address.length) {
               currentParts.splice(direction, 1);
             } else {
               currentParts[direction] = { ...currentParts[direction] };
@@ -61,7 +61,10 @@ export default function useBlueprint() {
     selectParts: (
       type: RootBlueprint.selectionType,
       address: RootBlueprint.partAddress,
-    ) => {},
+    ) => {
+      if (type === 'multi') {
+      }
+    },
   };
 
   return hook;

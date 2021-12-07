@@ -1,11 +1,12 @@
+// DEPRECATED
+
 import { ReactComponent as NextIcon } from 'assets/icons/next.svg';
 import { FC, useRef } from 'react';
-import './index.scss';
 import * as ExtendContextListing from '../../core/API/contextListings/types/extendButton';
 import * as RootContextListing from '../../core/API/contextListings/types/root';
 import * as TextContextListing from '../../core/API/contextListings/types/textButton';
+import './index.scss';
 
-// TODO: SIMPLIFY ALL CLASS NAMES
 type TextButtonProps = { data: TextContextListing.type; extended?: boolean };
 export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
   const Icon = data?.icon;
@@ -27,16 +28,17 @@ const Separator = () => {
 
 type ExtendButtonProps = { data: ExtendContextListing.type };
 const ExtendButton: FC<ExtendButtonProps> = ({ data }) => {
+  // const Icon = data?.icon;
+
   return (
-    <TextButton
-      data={{
-        type: 'text_button',
-        text: data.text,
-        icon: data.icon,
-        onClick: () => alert(`fine, i'll extend it`),
-      }}
-      extended={true}
-    />
+    // <button className="text-button" onClick={() => data.onClick()}>
+    //   <div className="icon-container">{Icon ? <Icon /> : undefined}</div>
+    //   <span className="text">{data.text}</span>
+    //   <div className="icon-container right">
+    //     {/* {extended ? <NextIcon /> : undefined} */}
+    //   </div>
+    // </button>
+    <></>
   );
 };
 

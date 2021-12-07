@@ -1,0 +1,31 @@
+@import '../../styles/index.scss';
+
+.title-bar {
+  // not attached to the title bar for now
+  background-color: v(toolbar-top-background-color);
+  height: $title-bar-height;
+  display: flex;
+
+  .context-bar {
+    display: flex;
+
+    .button {
+      font-size: $font-size-regular;
+      padding: $padding-big;
+      color: v(toolbar-top-button-content-color);
+
+      &:hover {
+        background-color: v(toolbar-top-button-hover-background-color);
+      }
+    }
+  }
+
+  .tabs-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+
+    .tab {
+    }
+  }
+}

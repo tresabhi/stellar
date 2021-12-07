@@ -4,6 +4,7 @@ import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
+import ToolBarTop from './components/ToolBarTop';
 import { importifyBlueprint } from 'core/API/blueprint';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
@@ -17,28 +18,7 @@ const Desktop = () => {
 
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
-      <ContextMenu.ContextContainer
-        toolbar={true}
-        data={{
-          listing: [
-            {
-              type: 'extend_button',
-              text: 'File',
-              extend: {
-                x: 12,
-                y: 32,
-                listing: [
-                  {
-                    type: 'text_button',
-                    text: 'Click me for an alert',
-                    onClick: () => alert('what a mighty click bro'),
-                  },
-                ],
-              },
-            },
-          ],
-        }}
-      />
+      <ToolBarTop />
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>
