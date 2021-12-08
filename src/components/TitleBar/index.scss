@@ -49,6 +49,7 @@
 
       &.selected {
         background-color: v(toolbar-top-tab-selected-background-color);
+        cursor: default;
       }
     }
   }
