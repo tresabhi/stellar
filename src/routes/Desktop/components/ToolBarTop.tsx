@@ -1,15 +1,20 @@
 import * as TitleBar from 'components/TitleBar';
+import * as ControlMenu from 'components/ControlMenu';
 import { FC } from 'react';
 
+/**
+ * A toolbar containing the control menu buttons, tabs, file name, and window
+ * controls
+ */
 const ToolBarTop: FC = () => (
   <TitleBar.Container>
-    <TitleBar.ControlMenuContainer>
-      <TitleBar.ControlMenuButton>File</TitleBar.ControlMenuButton>
-      <TitleBar.ControlMenuButton>Edit</TitleBar.ControlMenuButton>
-      <TitleBar.ControlMenuButton>View</TitleBar.ControlMenuButton>
-      <TitleBar.ControlMenuButton>Part</TitleBar.ControlMenuButton>
-      <TitleBar.ControlMenuButton>Help</TitleBar.ControlMenuButton>
-    </TitleBar.ControlMenuContainer>
+    <ControlMenu.Container>
+      <ControlMenu.Button>File</ControlMenu.Button>
+      <ControlMenu.Button>Edit</ControlMenu.Button>
+      <ControlMenu.Button>View</ControlMenu.Button>
+      <ControlMenu.Button extension={<audio />}>Part</ControlMenu.Button>
+      <ControlMenu.Button>Help</ControlMenu.Button>
+    </ControlMenu.Container>
 
     <TitleBar.TabsContainer>
       <TitleBar.Tab selected>Layout</TitleBar.Tab>

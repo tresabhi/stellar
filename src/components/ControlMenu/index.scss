@@ -1,0 +1,37 @@
+@import '../../styles/index.scss';
+
+.control-menu {
+  display: flex;
+
+  .button {
+    display: block;
+    font-size: $font-size-regular;
+    padding: $padding-big;
+    color: v(toolbar-top-control-menu-button-content-color);
+
+    .extension {
+      display: none;
+      position: fixed;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+
+    &:hover {
+      background-color: v(
+        toolbar-top-control-menu-button-hover-background-color
+      );
+    }
+
+    &:active,
+    &:focus-within {
+      background-color: v(
+        toolbar-top-control-menu-button-active-background-color
+      );
+
+      & .extension {
+        display: block;
+      }
+    }
+  }
+}

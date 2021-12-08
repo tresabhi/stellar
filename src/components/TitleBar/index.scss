@@ -6,29 +6,6 @@
   height: $title-bar-height;
   display: flex;
 
-  .context-bar {
-    display: flex;
-
-    .button {
-      font-size: $font-size-regular;
-      padding: $padding-big;
-      color: v(toolbar-top-control-menu-button-content-color);
-
-      &:hover {
-        background-color: v(
-          toolbar-top-control-menu-button-hover-background-color
-        );
-      }
-
-      &:active,
-      &:focus-within {
-        background-color: v(
-          toolbar-top-control-menu-button-active-background-color
-        );
-      }
-    }
-  }
-
   .tabs-container {
     flex: 1;
     display: flex;
