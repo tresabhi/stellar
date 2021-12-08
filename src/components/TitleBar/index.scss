@@ -12,10 +12,19 @@
     .button {
       font-size: $font-size-regular;
       padding: $padding-big;
-      color: v(toolbar-top-button-content-color);
+      color: v(toolbar-top-control-menu-button-content-color);
 
       &:hover {
-        background-color: v(toolbar-top-button-hover-background-color);
+        background-color: v(
+          toolbar-top-control-menu-button-hover-background-color
+        );
+      }
+
+      &:active,
+      &:focus-within {
+        background-color: v(
+          toolbar-top-control-menu-button-active-background-color
+        );
       }
     }
   }
@@ -23,9 +32,24 @@
   .tabs-container {
     flex: 1;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    padding-top: $padding-regular;
 
     .tab {
+      font-size: $font-size-regular;
+      color: v(toolbar-top-tab-content-color);
+      background-color: v(toolbar-top-tab-background-color);
+      padding: $padding-big;
+      border-radius: $border-radius-regular $border-radius-regular 0px 0px;
+      margin: 0px $margin-small 0px $margin-small;
+
+      &:hover {
+        background-color: v(toolbar-top-tab-hover-background-color);
+      }
+
+      &.selected {
+        background-color: v(toolbar-top-tab-selected-background-color);
+      }
     }
   }
 }

@@ -17,6 +17,9 @@ export const TabsContainer: FC = ({ children }) => (
   <div className="tabs-container">{children}</div>
 );
 
-export const Tab: FC = ({ children }) => (
-  <button className="tab">{children}</button>
+type TabProps = {
+  selected?: boolean;
+};
+export const Tab: FC<TabProps> = ({ children, selected = false }) => (
+  <button className={`tab ${selected ? 'selected' : ''}`}>{children}</button>
 );

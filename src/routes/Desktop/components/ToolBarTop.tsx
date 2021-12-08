@@ -12,7 +12,7 @@ const ToolBarTop: FC = () => (
     </TitleBar.ControlMenuContainer>
 
     <TitleBar.TabsContainer>
-      <TitleBar.Tab>Layout</TitleBar.Tab>
+      <TitleBar.Tab selected>Layout</TitleBar.Tab>
       <TitleBar.Tab>Staging</TitleBar.Tab>
       <TitleBar.Tab>Simulation</TitleBar.Tab>
       <TitleBar.Tab>Rendering</TitleBar.Tab>
