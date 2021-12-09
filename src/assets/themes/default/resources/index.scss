@@ -24,9 +24,13 @@
 
   --context-menu-button-height: 32px;
   --context-menu-button-content-color: white;
+  --context-menu-button-disabled-content-color: #{$gray-darker};
   --context-menu-button-background-color: #{$black-darker};
   --context-menu-button-hover-background-color: #{$black-dark};
   --context-menu-button-active-background-color: #{$black-regular};
+
+  --context-menu-separator-color: #{$black-regular};
+  --context-menu-separator-width: 2px;
 
   // Legacy abstractions
   --foreground-panel-text-color: white;

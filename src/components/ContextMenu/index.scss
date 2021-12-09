@@ -23,5 +23,25 @@
     &:active {
       background-color: v(context-menu-button-active-background-color);
     }
+
+    &.disabled {
+      cursor: default;
+      color: v(context-menu-button-disabled-content-color);
+      background-color: v(context-menu-button-background-color);
+    }
+  }
+
+  & > .separator {
+    height: $context-menu-button-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .line {
+      height: v(context-menu-separator-width);
+      width: 100%;
+      border-radius: $border-radius-sharper;
+      background-color: v(context-menu-separator-color);
+    }
   }
 }

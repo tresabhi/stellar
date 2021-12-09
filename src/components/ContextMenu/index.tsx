@@ -11,10 +11,22 @@ export const Container: FC = ({ children }) => (
 /**
  * A button that holds text that describes action of the context menu listing
  */
-export const Button: FC = ({ children }) => (
-  <button className="button">{children}</button>
+type ButtonProps = {
+  disabled?: boolean;
+};
+export const Button: FC<ButtonProps> = ({ children, disabled = false }) => (
+  <button
+    className={`
+      button
+      ${disabled ? 'disabled' : 'enabled'}
+    `}
+  >
+    {children}
+  </button>
 );
 
-// export const Separator: FC = ({ children }) => (
-//   <button className="separator">{children}</button>
-// );
+export const Separator = () => (
+  <div className="separator">
+    <div className="line" />
+  </div>
+);
