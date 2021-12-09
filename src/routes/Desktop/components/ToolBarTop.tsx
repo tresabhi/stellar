@@ -10,28 +10,27 @@ import { FC } from 'react';
 const ToolBarTop: FC = () => (
   <TitleBar.Container style={{ zIndex: 1 }}>
     <ControlMenu.Container>
-      <ControlMenu.Button>File</ControlMenu.Button>
-      <ControlMenu.Button>Edit</ControlMenu.Button>
-      <ControlMenu.Button>View</ControlMenu.Button>
       <ControlMenu.Button
         extension={
           <ContextMenu.Container>
-            <ContextMenu.Button>Button 0</ContextMenu.Button>
-            <ContextMenu.Button>Button 1</ContextMenu.Button>
-            <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
+            {/* Pro tip: add "..." only if further interaction is required */}
+            <ContextMenu.Button>New</ContextMenu.Button>
+            <ContextMenu.Button disabled>Open...</ContextMenu.Button>
+
             <ContextMenu.Separator />
-            <ContextMenu.Button>Button 0</ContextMenu.Button>
-            <ContextMenu.Button>Button 1</ContextMenu.Button>
-            <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
-            <ContextMenu.Separator />
-            <ContextMenu.Button>Button 0</ContextMenu.Button>
-            <ContextMenu.Button>Button 1</ContextMenu.Button>
-            <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
+
+            <ContextMenu.Button disabled>Save</ContextMenu.Button>
+            <ContextMenu.Button disabled>Save as...</ContextMenu.Button>
+            <ContextMenu.Button disabled>Import...</ContextMenu.Button>
+            <ContextMenu.Button disabled>Export...</ContextMenu.Button>
           </ContextMenu.Container>
         }
       >
-        Part
+        File
       </ControlMenu.Button>
+      <ControlMenu.Button>Edit</ControlMenu.Button>
+      <ControlMenu.Button>View</ControlMenu.Button>
+      <ControlMenu.Button>Part</ControlMenu.Button>
       <ControlMenu.Button>Help</ControlMenu.Button>
     </ControlMenu.Container>
 

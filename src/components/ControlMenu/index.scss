@@ -13,6 +13,7 @@
     .extension {
       display: none;
       position: fixed;
+      cursor: default;
     }
 
     & .extension.visible {
