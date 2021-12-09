@@ -31,6 +31,10 @@
       cursor: default;
       color: v(context-menu-button-disabled-content-color);
       background-color: v(context-menu-button-background-color);
+
+      .context-menu-button-icon-holder .context-menu-button-icon {
+        fill: v(context-menu-button-disabled-content-color);
+      }
     }
 
     .context-menu-button-icon-holder {
@@ -73,10 +77,12 @@
       transform: translateX(calc(100% + #{$padding-big}));
     }
 
-    &:hover,
-    &:focus-within {
-      .context-menu-extension-button-extension {
-        display: block;
+    &:not(.disabled) {
+      &:hover,
+      &:focus-within {
+        .context-menu-extension-button-extension {
+          display: block;
+        }
       }
     }
   }

@@ -57,7 +57,7 @@ export const Extension: FC<ExtensionProps> = ({
     >
       <span className="context-menu-button-text">{children}</span>
       <div className="context-menu-button-icon-holder">
-        <ExtendIcon />
+        <ExtendIcon className="context-menu-button-icon" />
       </div>
       {extension ? (
         <div className="context-menu-extension-button-extension">

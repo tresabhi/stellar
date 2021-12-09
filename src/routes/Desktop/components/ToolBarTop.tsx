@@ -69,6 +69,7 @@ const ToolBarTop: FC = () => (
 
             <ContextMenu.Button disabled>Toggle HUD</ContextMenu.Button>
             <ContextMenu.Extension
+              disabled
               extension={
                 <ContextMenu.Container>
                   <ContextMenu.Button>
