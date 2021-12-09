@@ -74,6 +74,7 @@ const ToolBarTop: FC = () => (
                   <ContextMenu.Button>
                     Stellar Dark (Default)
                   </ContextMenu.Button>
+                  <ContextMenu.Button>Stellar Light</ContextMenu.Button>
                 </ContextMenu.Container>
               }
             >

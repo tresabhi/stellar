@@ -49,13 +49,20 @@
   }
 
   & > .extension {
+    position: relative;
+
     & > .extension {
+      position: absolute;
       display: none;
-      position: fixed;
       cursor: default;
+
+      top: 0px;
+      right: 0px;
+      transform: translateX(calc(100% + #{$padding-big}));
     }
 
-    & > .extension.visible {
+    &:hover > .extension,
+    &:focus-within > .extension {
       display: block;
     }
   }
