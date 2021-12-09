@@ -4,7 +4,8 @@ import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
 import PseudoContainer from 'components/PseudoContainer';
-import ToolBarTop from './components/ToolBarTop';
+import ToolBarTop from './components/ToolbarTop';
+import ToolbarBottom from './components/ToolbarBottom';
 import { importifyBlueprint } from 'core/API/blueprint';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
@@ -19,6 +20,7 @@ const Desktop = () => {
   return (
     <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
       <ToolBarTop />
+      <ToolbarBottom />
       <EditingPanel>
         <Explorer.Container>
           <Explorer.TabsContainer>

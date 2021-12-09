@@ -5,30 +5,4 @@
   background-color: v(toolbar-top-background-color);
   height: $title-bar-height;
   display: flex;
-
-  .tabs-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    padding-top: $padding-regular;
-
-    .tab {
-      font-size: $font-size-regular;
-      color: v(toolbar-top-tab-content-color);
-      background-color: v(toolbar-top-tab-background-color);
-      padding: $padding-big;
-      border-radius: $border-radius-regular $border-radius-regular 0px 0px;
-      margin: 0px $margin-small 0px $margin-small;
-
-      &:hover {
-        background-color: v(toolbar-top-tab-hover-background-color);
-      }
-
-      &:active,
-      &.selected {
-        background-color: v(toolbar-top-tab-active-background-color);
-        cursor: default;
-      }
-    }
-  }
 }

@@ -3,27 +3,16 @@ import { FC, InputHTMLAttributes } from 'react';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
+  className,
   ...props
 }) => (
-  <div className="title-bar" {...props}>
-    {children}
-  </div>
-);
-
-export const TabsContainer: FC = ({ children }) => (
-  <div className="tabs-container">{children}</div>
-);
-
-type TabProps = {
-  selected?: boolean;
-};
-export const Tab: FC<TabProps> = ({ children, selected = false }) => (
-  <button
+  <div
     className={`
-      tab
-      ${selected ? 'selected' : ''}
+      ${className}
+      title-bar
     `}
+    {...props}
   >
     {children}
-  </button>
+  </div>
 );

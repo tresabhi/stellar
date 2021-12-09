@@ -1,14 +1,16 @@
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as TitleBar from 'components/TitleBar';
+import * as Tabs from 'components/Tabs';
 import { FC } from 'react';
+import './index.scss';
 
 /**
  * A toolbar containing the control menu buttons, tabs, file name, and window
  * controls
  */
 const ToolBarTop: FC = () => (
-  <TitleBar.Container style={{ zIndex: 1 }}>
+  <TitleBar.Container className="toolbar-top">
     <ControlMenu.Container>
       <ControlMenu.Button
         extension={
@@ -90,12 +92,12 @@ const ToolBarTop: FC = () => (
       <ControlMenu.Button>Help</ControlMenu.Button>
     </ControlMenu.Container>
 
-    <TitleBar.TabsContainer>
-      <TitleBar.Tab selected>Layout</TitleBar.Tab>
-      <TitleBar.Tab>Staging</TitleBar.Tab>
-      <TitleBar.Tab>Simulation</TitleBar.Tab>
-      <TitleBar.Tab>Rendering</TitleBar.Tab>
-    </TitleBar.TabsContainer>
+    <Tabs.Container className="toolbar-tabs">
+      <Tabs.Tab selected>Layout</Tabs.Tab>
+      <Tabs.Tab>Staging</Tabs.Tab>
+      <Tabs.Tab>Simulation</Tabs.Tab>
+      <Tabs.Tab>Rendering</Tabs.Tab>
+    </Tabs.Container>
   </TitleBar.Container>
 );
 export default ToolBarTop;
