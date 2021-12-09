@@ -15,6 +15,10 @@
       position: fixed;
     }
 
+    & .extension.visible {
+      display: block;
+    }
+
     &:hover {
       background-color: v(
         toolbar-top-control-menu-button-hover-background-color
@@ -26,10 +30,6 @@
       background-color: v(
         toolbar-top-control-menu-button-active-background-color
       );
-
-      & .extension {
-        display: block;
-      }
     }
   }
 }

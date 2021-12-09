@@ -27,22 +27,6 @@ const ToolBarTop: FC = () => (
             <ContextMenu.Button>Button 0</ContextMenu.Button>
             <ContextMenu.Button>Button 1</ContextMenu.Button>
             <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
-            <ContextMenu.Separator />
-            <ContextMenu.Button>Button 0</ContextMenu.Button>
-            <ContextMenu.Button>Button 1</ContextMenu.Button>
-            <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
-            <ContextMenu.Separator />
-            <ContextMenu.Button>Button 0</ContextMenu.Button>
-            <ContextMenu.Button>Button 1</ContextMenu.Button>
-            <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
-            <ContextMenu.Separator />
-            <ContextMenu.Button>Button 0</ContextMenu.Button>
-            <ContextMenu.Button>Button 1</ContextMenu.Button>
-            <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
-            <ContextMenu.Separator />
-            <ContextMenu.Button>Button 0</ContextMenu.Button>
-            <ContextMenu.Button>Button 1</ContextMenu.Button>
-            <ContextMenu.Button disabled>Button 2</ContextMenu.Button>
           </ContextMenu.Container>
         }
       >

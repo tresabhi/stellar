@@ -3,12 +3,14 @@
 .context-menu {
   background-color: v(context-menu-background-color);
   border-radius: $border-radius-regular;
-  width: $context-menu-width;
+  min-width: $context-menu-min-width;
+  max-width: $context-menu-max-width;
   padding: $padding-big;
   display: flex;
   flex-direction: column;
 
   & > .button {
+    font-size: $font-size-regular;
     color: v(context-menu-button-content-color);
     background-color: v(context-menu-button-background-color);
     height: $context-menu-button-height;
@@ -38,7 +40,7 @@
     justify-content: center;
 
     .line {
-      height: v(context-menu-separator-width);
+      height: $context-menu-separator-thickness;
       width: 100%;
       border-radius: $border-radius-sharper;
       background-color: v(context-menu-separator-color);

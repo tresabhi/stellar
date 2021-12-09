@@ -24,14 +24,14 @@
   &.generic {
     flex-direction: column;
     border-radius: $border-radius-regular;
-    width: $context-menu-width;
+    width: $legacy-context-menu-width;
     padding: $padding-bigger $padding-big $padding-bigger $padding-big;
 
     .text-button {
       text-align: left;
       display: flex;
       align-items: center;
-      height: $context-menu-button-height;
+      height: $legacy-context-menu-button-height;
 
       .icon-container {
         width: $icon-size-regular;

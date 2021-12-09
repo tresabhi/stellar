@@ -19,18 +19,15 @@
   // Toolbar bottom
 
   // Context menu
-  --context-menu-width: 240px;
-  --context-menu-background-color: #{$black-darker};
+  --context-menu-background-color: #{$black-dark};
 
-  --context-menu-button-height: 32px;
   --context-menu-button-content-color: white;
   --context-menu-button-disabled-content-color: #{$gray-darker};
-  --context-menu-button-background-color: #{$black-darker};
-  --context-menu-button-hover-background-color: #{$black-dark};
-  --context-menu-button-active-background-color: #{$black-regular};
+  --context-menu-button-background-color: #{$black-dark};
+  --context-menu-button-hover-background-color: #{$black-regular};
+  --context-menu-button-active-background-color: #{$black-light};
 
-  --context-menu-separator-color: #{$black-regular};
-  --context-menu-separator-width: 2px;
+  --context-menu-separator-color: #{$black-light};
 
   // Legacy abstractions
   --foreground-panel-text-color: white;

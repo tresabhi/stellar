@@ -18,15 +18,39 @@ type ButtonProps = {
  */
 export const Button: FC<ButtonProps> = ({ children, extension }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const extensionRef = useRef<HTMLDivElement>(null);
+  let buttonBoundingRect = buttonRef.current?.getBoundingClientRect();
+
+  // functionally shown to assign the possibly changed bounding rect
+  const handleButtonFocus = () => {
+    if (extensionRef.current) {
+      buttonBoundingRect = buttonRef.current!.getBoundingClientRect();
+
+      extensionRef.current.style.top = `${buttonBoundingRect!.bottom}px`;
+      extensionRef.current.style.left = `${buttonBoundingRect!.left}px`;
+
+      extensionRef.current.classList.add('visible');
+    }
+  };
+
+  const handleButtonBlur = () => {
+    if (extensionRef.current) extensionRef.current.classList.remove('visible');
+  };
 
   return (
-    <button ref={buttonRef} className="button">
+    <button
+      ref={buttonRef}
+      className="button"
+      onFocus={handleButtonFocus}
+      onBlur={handleButtonBlur}
+    >
       {children}
       {extension ? (
         <div
+          ref={extensionRef}
           style={{
-            left: buttonRef.current?.getBoundingClientRect().left,
-            top: buttonRef.current?.getBoundingClientRect().bottom,
+            top: buttonBoundingRect?.bottom,
+            left: buttonBoundingRect?.left,
           }}
           className="extension"
         >
