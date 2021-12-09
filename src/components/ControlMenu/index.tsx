@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import './index.scss';
 
 /**
@@ -8,14 +8,14 @@ export const Container: FC = ({ children }) => (
   <div className="control-menu">{children}</div>
 );
 
-/**
- * A button that contains texts like `File`, `Edit`, `View`, etc. and can be
- * extended with a context menu
- */
 type ButtonProps = {
   // TODO: make this not optional
   extension?: JSX.Element;
 };
+/**
+ * A button that contains texts like `File`, `Edit`, `View`, etc. and usually
+ * is extended with a context menu
+ */
 export const Button: FC<ButtonProps> = ({ children, extension }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 

@@ -3,16 +3,30 @@
 @import '../../../../styles/utilities.scss';
 
 :root {
+  // Toolbar top
   --toolbar-top-background-color: #{$black-darker};
 
   --toolbar-top-control-menu-button-content-color: white;
+  --toolbar-top-control-menu-button-background-color: #{$black-darker};
   --toolbar-top-control-menu-button-hover-background-color: #{$black-dark};
   --toolbar-top-control-menu-button-active-background-color: #{$black-regular};
 
   --toolbar-top-tab-content-color: white;
   --toolbar-top-tab-background-color: #{$black-regular};
   --toolbar-top-tab-hover-background-color: #{$black-light};
-  --toolbar-top-tab-selected-background-color: #{$black-lighter};
+  --toolbar-top-tab-active-background-color: #{$black-lighter};
+
+  // Toolbar bottom
+
+  // Context menu
+  --context-menu-width: 240px;
+  --context-menu-background-color: #{$black-darker};
+
+  --context-menu-button-height: 32px;
+  --context-menu-button-content-color: white;
+  --context-menu-button-background-color: #{$black-darker};
+  --context-menu-button-hover-background-color: #{$black-dark};
+  --context-menu-button-active-background-color: #{$black-regular};
 
   // Legacy abstractions
   --foreground-panel-text-color: white;

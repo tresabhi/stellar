@@ -3,18 +3,16 @@
 .control-menu {
   display: flex;
 
-  .button {
+  & > .button {
     display: block;
     font-size: $font-size-regular;
     padding: $padding-big;
     color: v(toolbar-top-control-menu-button-content-color);
+    background-color: v(toolbar-top-control-menu-button-background-color);
 
     .extension {
       display: none;
       position: fixed;
-      width: 100px;
-      height: 100px;
-      background-color: red;
     }
 
     &:hover {

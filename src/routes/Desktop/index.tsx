@@ -1,5 +1,5 @@
 import devBlueprint from 'assets/blueprints/static/grouping.json';
-import * as ContextMenu from 'components/ContextMenu';
+import * as ContextMenu from 'components/LegacyContextMenu';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';

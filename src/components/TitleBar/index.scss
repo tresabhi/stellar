@@ -24,8 +24,9 @@
         background-color: v(toolbar-top-tab-hover-background-color);
       }
 
+      &:active,
       &.selected {
-        background-color: v(toolbar-top-tab-selected-background-color);
+        background-color: v(toolbar-top-tab-active-background-color);
         cursor: default;
       }
     }

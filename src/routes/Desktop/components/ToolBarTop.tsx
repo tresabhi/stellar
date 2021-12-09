@@ -1,5 +1,6 @@
-import * as TitleBar from 'components/TitleBar';
+import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
+import * as TitleBar from 'components/TitleBar';
 import { FC } from 'react';
 
 /**
@@ -7,12 +8,20 @@ import { FC } from 'react';
  * controls
  */
 const ToolBarTop: FC = () => (
-  <TitleBar.Container>
+  <TitleBar.Container style={{ zIndex: 1 }}>
     <ControlMenu.Container>
       <ControlMenu.Button>File</ControlMenu.Button>
       <ControlMenu.Button>Edit</ControlMenu.Button>
       <ControlMenu.Button>View</ControlMenu.Button>
-      <ControlMenu.Button extension={<audio />}>Part</ControlMenu.Button>
+      <ControlMenu.Button
+        extension={
+          <ContextMenu.Container>
+            <ContextMenu.Button>Apple sauce</ContextMenu.Button>
+          </ContextMenu.Container>
+        }
+      >
+        Part
+      </ControlMenu.Button>
       <ControlMenu.Button>Help</ControlMenu.Button>
     </ControlMenu.Container>
 

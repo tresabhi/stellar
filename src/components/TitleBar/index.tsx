@@ -1,8 +1,13 @@
 import './index.scss';
-import { FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 
-export const Container: FC = ({ children }) => (
-  <div className="title-bar">{children}</div>
+export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
+  children,
+  ...props
+}) => (
+  <div className="title-bar" {...props}>
+    {children}
+  </div>
 );
 
 export const TabsContainer: FC = ({ children }) => (
