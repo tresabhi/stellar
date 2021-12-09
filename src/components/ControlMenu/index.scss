@@ -3,14 +3,14 @@
 .control-menu {
   display: flex;
 
-  & > .button {
+  & > .control-menu-button {
     display: block;
     font-size: $font-size-regular;
     padding: $padding-big;
     color: v(toolbar-top-control-menu-button-content-color);
     background-color: v(toolbar-top-control-menu-button-background-color);
 
-    & > .extension {
+    & > .control-menu-button-extension {
       display: none;
       position: fixed;
       cursor: default;
@@ -28,19 +28,19 @@
         toolbar-top-control-menu-button-active-background-color
       );
 
-      & > .extension {
+      & > .control-menu-button-extension {
         display: block;
       }
     }
   }
 
   &:focus-within {
-    .button:hover {
+    .control-menu-button:hover {
       background-color: v(
         toolbar-top-control-menu-button-active-background-color
       );
 
-      & > .extension {
+      & > .control-menu-button-extension {
         display: block;
       }
     }

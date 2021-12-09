@@ -18,9 +18,11 @@ type ButtonProps = {
  */
 export const Button: FC<ButtonProps> = ({ children, extension }) => {
   return (
-    <button className="button">
+    <button className="control-menu-button">
       {children}
-      {extension ? <div className="extension">{extension}</div> : undefined}
+      {extension ? (
+        <div className="control-menu-button-extension">{extension}</div>
+      ) : undefined}
     </button>
   );
 };

@@ -9,8 +9,8 @@
   display: flex;
   flex-direction: column;
 
-  & > .button,
-  & > .extension {
+  .context-menu-button,
+  .context-menu-extension-button {
     font-size: $font-size-regular;
     color: v(context-menu-button-content-color);
     background-color: v(context-menu-button-background-color);
@@ -33,25 +33,25 @@
       background-color: v(context-menu-button-background-color);
     }
 
-    .icon-holder {
+    .context-menu-button-icon-holder {
       width: $context-menu-button-height;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .text {
+    .context-menu-button-text {
       flex: 1;
     }
   }
 
-  & > .separator {
+  .context-menu-separator {
     height: $context-menu-button-height;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .line {
+    .context-menu-separator-line {
       height: $context-menu-separator-thickness;
       width: 100%;
       border-radius: $border-radius-sharper;
@@ -59,11 +59,11 @@
     }
   }
 
-  & > .extension {
+  .context-menu-extension-button {
     display: flex;
     position: relative;
 
-    & > .extension {
+    .context-menu-extension-button-extension {
       position: absolute;
       display: none;
       cursor: default;
@@ -73,9 +73,11 @@
       transform: translateX(calc(100% + #{$padding-big}));
     }
 
-    &:hover > .extension,
-    &:focus-within > .extension {
-      display: block;
+    &:hover,
+    &:focus-within {
+      .context-menu-extension-button-extension {
+        display: block;
+      }
     }
   }
 }

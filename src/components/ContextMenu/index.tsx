@@ -1,7 +1,6 @@
-import { FC, useRef } from 'react';
-import './index.scss';
-
 import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
+import { FC } from 'react';
+import './index.scss';
 
 /**
  * A container that holds context menu buttons
@@ -19,7 +18,7 @@ type ButtonProps = {
 export const Button: FC<ButtonProps> = ({ children, disabled = false }) => (
   <button
     className={`
-      button
+      context-menu-button
       ${disabled ? 'disabled' : 'enabled'}
     `}
   >
@@ -31,8 +30,8 @@ export const Button: FC<ButtonProps> = ({ children, disabled = false }) => (
  * Used to separate two distinct groups in context menus
  */
 export const Separator = () => (
-  <div className="separator">
-    <div className="line" />
+  <div className="context-menu-button-separator">
+    <div className="context-menu-separator-line" />
   </div>
 );
 
@@ -52,15 +51,19 @@ export const Extension: FC<ExtensionProps> = ({
   return (
     <button
       className={`
-        extension
+        context-menu-extension-button
         ${disabled ? 'disabled' : 'enabled'}
     `}
     >
-      <span className="text">{children}</span>
-      <div className="icon-holder">
+      <span className="context-menu-button-text">{children}</span>
+      <div className="context-menu-button-icon-holder">
         <ExtendIcon />
       </div>
-      {extension ? <div className="extension">{extension}</div> : undefined}
+      {extension ? (
+        <div className="context-menu-extension-button-extension">
+          {extension}
+        </div>
+      ) : undefined}
     </button>
   );
 };
