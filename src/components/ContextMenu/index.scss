@@ -9,7 +9,8 @@
   display: flex;
   flex-direction: column;
 
-  & > .button {
+  & > .button,
+  & > .extension {
     font-size: $font-size-regular;
     color: v(context-menu-button-content-color);
     background-color: v(context-menu-button-background-color);
@@ -44,6 +45,18 @@
       width: 100%;
       border-radius: $border-radius-sharper;
       background-color: v(context-menu-separator-color);
+    }
+  }
+
+  & > .extension {
+    & > .extension {
+      display: none;
+      position: fixed;
+      cursor: default;
+    }
+
+    & > .extension.visible {
+      display: block;
     }
   }
 }

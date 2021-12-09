@@ -10,14 +10,10 @@
     color: v(toolbar-top-control-menu-button-content-color);
     background-color: v(toolbar-top-control-menu-button-background-color);
 
-    .extension {
+    & > .extension {
       display: none;
       position: fixed;
       cursor: default;
-    }
-
-    & .extension.visible {
-      display: block;
     }
 
     &:hover {
@@ -27,10 +23,26 @@
     }
 
     &:active,
-    &:focus-within {
+    &:focus-within + &:hover {
       background-color: v(
         toolbar-top-control-menu-button-active-background-color
       );
+
+      & > .extension {
+        display: block;
+      }
+    }
+  }
+
+  &:focus-within {
+    .button:hover {
+      background-color: v(
+        toolbar-top-control-menu-button-active-background-color
+      );
+
+      & > .extension {
+        display: block;
+      }
     }
   }
 }

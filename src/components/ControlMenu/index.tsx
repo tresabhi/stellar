@@ -17,46 +17,10 @@ type ButtonProps = {
  * is extended with a context menu
  */
 export const Button: FC<ButtonProps> = ({ children, extension }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const extensionRef = useRef<HTMLDivElement>(null);
-  let buttonBoundingRect = buttonRef.current?.getBoundingClientRect();
-
-  // functionally shown to assign the possibly changed bounding rect
-  const handleButtonFocus = () => {
-    if (extensionRef.current) {
-      buttonBoundingRect = buttonRef.current!.getBoundingClientRect();
-
-      extensionRef.current.style.top = `${buttonBoundingRect!.bottom}px`;
-      extensionRef.current.style.left = `${buttonBoundingRect!.left}px`;
-
-      extensionRef.current.classList.add('visible');
-    }
-  };
-
-  const handleButtonBlur = () => {
-    if (extensionRef.current) extensionRef.current.classList.remove('visible');
-  };
-
   return (
-    <button
-      ref={buttonRef}
-      className="button"
-      onFocus={handleButtonFocus}
-      onBlur={handleButtonBlur}
-    >
+    <button className="button">
       {children}
-      {extension ? (
-        <div
-          ref={extensionRef}
-          style={{
-            top: buttonBoundingRect?.bottom,
-            left: buttonBoundingRect?.left,
-          }}
-          className="extension"
-        >
-          {extension}
-        </div>
-      ) : undefined}
+      {extension ? <div className="extension">{extension}</div> : undefined}
     </button>
   );
 };

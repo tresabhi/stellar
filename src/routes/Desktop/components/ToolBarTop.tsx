@@ -23,13 +23,67 @@ const ToolBarTop: FC = () => (
             <ContextMenu.Button disabled>Save as...</ContextMenu.Button>
             <ContextMenu.Button disabled>Import...</ContextMenu.Button>
             <ContextMenu.Button disabled>Export...</ContextMenu.Button>
+
+            <ContextMenu.Separator />
+
+            <ContextMenu.Button disabled>Save and close</ContextMenu.Button>
+            <ContextMenu.Button disabled>Close</ContextMenu.Button>
           </ContextMenu.Container>
         }
       >
         File
       </ControlMenu.Button>
-      <ControlMenu.Button>Edit</ControlMenu.Button>
-      <ControlMenu.Button>View</ControlMenu.Button>
+      <ControlMenu.Button
+        extension={
+          <ContextMenu.Container>
+            <ContextMenu.Button disabled>Undo</ContextMenu.Button>
+            <ContextMenu.Button disabled>Redo</ContextMenu.Button>
+
+            <ContextMenu.Separator />
+
+            <ContextMenu.Button disabled>Cut</ContextMenu.Button>
+            <ContextMenu.Button disabled>Copy</ContextMenu.Button>
+            <ContextMenu.Button disabled>Paste</ContextMenu.Button>
+            <ContextMenu.Button disabled>Delete</ContextMenu.Button>
+
+            <ContextMenu.Separator />
+
+            <ContextMenu.Button disabled>Hide</ContextMenu.Button>
+            <ContextMenu.Button disabled>Unhide</ContextMenu.Button>
+            <ContextMenu.Button disabled>Lock</ContextMenu.Button>
+            <ContextMenu.Button disabled>Unlock</ContextMenu.Button>
+          </ContextMenu.Container>
+        }
+      >
+        Edit
+      </ControlMenu.Button>
+      <ControlMenu.Button
+        extension={
+          <ContextMenu.Container>
+            <ContextMenu.Button disabled>Layout</ContextMenu.Button>
+            <ContextMenu.Button disabled>Staging</ContextMenu.Button>
+            <ContextMenu.Button disabled>Simulation</ContextMenu.Button>
+            <ContextMenu.Button disabled>Rendering</ContextMenu.Button>
+
+            <ContextMenu.Separator />
+
+            <ContextMenu.Button disabled>Toggle HUD</ContextMenu.Button>
+            <ContextMenu.Extension
+              extension={
+                <ContextMenu.Container>
+                  <ContextMenu.Button>
+                    Stellar Dark (Default)
+                  </ContextMenu.Button>
+                </ContextMenu.Container>
+              }
+            >
+              Theme
+            </ContextMenu.Extension>
+          </ContextMenu.Container>
+        }
+      >
+        View
+      </ControlMenu.Button>
       <ControlMenu.Button>Part</ControlMenu.Button>
       <ControlMenu.Button>Help</ControlMenu.Button>
     </ControlMenu.Container>
