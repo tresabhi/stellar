@@ -25,7 +25,7 @@
     "zustand": "^3.6.7"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.177",
+    "@types/lodash": "^4.14.178",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8"
