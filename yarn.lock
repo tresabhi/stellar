@@ -1604,10 +1604,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.3.1.tgz#20f392ecad15a1ea6c0865ffe86ca5016c05a278"
   integrity sha512-W/YMJMX35XgGGzX0gKORBTwnvQ+1loDOFN3XlZkW5fgpEY+7VkRUpPyqPWXQr3n6lHrsLmHIGdpznqZi54ACTQ==
 
-"@react-three/drei@^7.26.1":
-  version "7.26.1"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-7.26.1.tgz#febf0b2520457b0b15d772bf3e9176baca9ab77c"
-  integrity sha512-Xcbtc8b0u/jzHV2LHmytWx8yDz213NtpGVLieJAZC0n3y6BdxcE6S94Hg/pwi2YDIIH6XgHYFO7lhM9K3tY4pg==
+"@react-three/drei@^7.27.1":
+  version "7.27.1"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-7.27.1.tgz#b5427b52bd59be952d5c8f1764eaa189fc89682c"
+  integrity sha512-80CKy9Vevis8hlOTlF2bSEjS7R+kTolVkSxzy86G3SQIuUPQ9TVcY7Q7UXjr4wyjGR5dJuIEKPNFbLot5nfBow==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -1905,10 +1905,10 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/lodash@^4.14.177":
-  version "4.14.177"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.177.tgz#f70c0d19c30fab101cad46b52be60363c43c4578"
-  integrity sha512-0fDwydE2clKe9MNfvXHBHF9WEahRuj+msTuQqOmAApNORFvhMYZKNGGJdCzuhheVjMps/ti0Ak/iJPACMaevvw==
+"@types/lodash@^4.14.178":
+  version "4.14.178"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.178.tgz#341f6d2247db528d4a13ddbb374bcdc80406f4f8"
+  integrity sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==
 
 "@types/minimatch@*", "@types/minimatch@^3.0.3":
   version "3.0.5"
