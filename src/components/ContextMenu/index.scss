@@ -16,7 +16,7 @@
     background-color: v(context-menu-button-background-color);
     height: $context-menu-button-height;
     border-radius: $border-radius-regular;
-    padding: $padding-big;
+    padding: $padding-big 0px $padding-big $padding-big;
     text-align: left;
 
     &:hover {
@@ -31,6 +31,17 @@
       cursor: default;
       color: v(context-menu-button-disabled-content-color);
       background-color: v(context-menu-button-background-color);
+    }
+
+    .icon-holder {
+      width: $context-menu-button-height;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text {
+      flex: 1;
     }
   }
 
@@ -49,6 +60,7 @@
   }
 
   & > .extension {
+    display: flex;
     position: relative;
 
     & > .extension {

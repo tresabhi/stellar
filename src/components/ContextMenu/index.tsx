@@ -1,6 +1,8 @@
 import { FC, useRef } from 'react';
 import './index.scss';
 
+import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
+
 /**
  * A container that holds context menu buttons
  */
@@ -21,7 +23,7 @@ export const Button: FC<ButtonProps> = ({ children, disabled = false }) => (
       ${disabled ? 'disabled' : 'enabled'}
     `}
   >
-    {children}
+    <span className="text">{children}</span>
   </button>
 );
 
@@ -54,7 +56,10 @@ export const Extension: FC<ExtensionProps> = ({
         ${disabled ? 'disabled' : 'enabled'}
     `}
     >
-      {children}
+      <span className="text">{children}</span>
+      <div className="icon-holder">
+        <ExtendIcon />
+      </div>
       {extension ? <div className="extension">{extension}</div> : undefined}
     </button>
   );
