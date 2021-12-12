@@ -17,5 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "public"]
+  "include": ["src", "public", "src/components/ContextMenu"]
 }

@@ -1,0 +1,24 @@
+{
+  "name": "zpazio",
+  "version": "0.1.0-beta.1",
+  "description": "Stellar-flavoured React components to build editor UIs",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TresAbhi/Stellar.git",
+    "directory": "packages/zpazio"
+  },
+  "keywords": [
+    "react",
+    "stellar",
+    "component",
+    "editor"
+  ],
+  "author": "TrèsAbhi",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/TresAbhi/Stellar/issues"
+  },
+  "homepage": "https://github.com/TresAbhi/Stellar#readme"
+}
