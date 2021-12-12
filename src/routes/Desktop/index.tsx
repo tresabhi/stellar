@@ -1,15 +1,15 @@
 import devBlueprint from 'assets/blueprints/static/grouping.json';
-import * as ContextMenu from 'components/LegacyContextMenu';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
+import * as ContextMenu from 'components/LegacyContextMenu';
 import PseudoContainer from 'components/PseudoContainer';
-import ToolBarTop from './components/ToolbarTop';
-import ToolbarBottom from './components/ToolbarBottom';
 import { importifyBlueprint } from 'core/API/blueprint';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useContextLayer from 'core/hooks/useContextLayer';
 import blueprintStore from 'core/stores/blueprint';
+import ToolbarBottom from './components/ToolbarBottom';
+import ToolBarTop from './components/ToolbarTop';
 
 blueprintStore.setState(importifyBlueprint(devBlueprint));
 

@@ -1,6 +1,5 @@
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
-import * as TitleBar from 'components/TitleBar';
 import * as Tabs from 'components/Tabs';
 import { FC } from 'react';
 import './index.scss';
@@ -10,7 +9,7 @@ import './index.scss';
  * controls
  */
 const ToolBarTop: FC = () => (
-  <TitleBar.Container className="toolbar-top">
+  <div className="toolbar-top">
     <ControlMenu.Container>
       <ControlMenu.Button
         extension={
@@ -98,6 +97,6 @@ const ToolBarTop: FC = () => (
       <Tabs.Tab>Simulation</Tabs.Tab>
       <Tabs.Tab>Rendering</Tabs.Tab>
     </Tabs.Container>
-  </TitleBar.Container>
+  </div>
 );
 export default ToolBarTop;
