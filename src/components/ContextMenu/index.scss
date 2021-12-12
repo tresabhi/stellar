@@ -57,7 +57,7 @@
 
     .context-menu-separator-line {
       height: $context-menu-separator-thickness;
-      width: 100%;
+      width: calc(100% - $padding-big * 2);
       border-radius: $border-radius-sharper;
       background-color: v(context-menu-separator-color);
     }
