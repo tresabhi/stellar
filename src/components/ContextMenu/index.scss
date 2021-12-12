@@ -37,6 +37,7 @@
     }
 
     .context-menu-button-icon-holder {
+      fill: v(context-menu-button-content-color);
       width: $context-menu-button-height;
       display: flex;
       align-items: center;
@@ -49,7 +50,7 @@
   }
 
   .context-menu-separator {
-    height: $context-menu-button-height;
+    height: calc($context-menu-button-height / 2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,13 +74,13 @@
 
       top: 0px;
       right: 0px;
-      transform: translateX(100%) translateY(calc(#{$padding-big} * -1));
+      transform: translateX(100%) translateY(calc($padding-big * -1));
     }
 
     &:not(.disabled) {
       &:hover,
       &:focus-within {
-        .context-menu-extension-button-extension {
+        & > .context-menu-extension-button-extension {
           display: block;
         }
       }

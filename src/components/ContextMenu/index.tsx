@@ -30,7 +30,7 @@ export const Button: FC<ButtonProps> = ({ children, disabled = false }) => (
  * Used to separate two distinct groups in context menus
  */
 export const Separator = () => (
-  <div className="context-menu-button-separator">
+  <div className="context-menu-separator">
     <div className="context-menu-separator-line" />
   </div>
 );

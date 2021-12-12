@@ -16,19 +16,19 @@ const ToolBarTop: FC = () => (
           <ContextMenu.Container>
             {/* Pro tip: add "..." only if further interaction is required */}
             <ContextMenu.Button>New</ContextMenu.Button>
-            <ContextMenu.Button disabled>Open...</ContextMenu.Button>
+            <ContextMenu.Button>Open...</ContextMenu.Button>
 
             <ContextMenu.Separator />
 
-            <ContextMenu.Button disabled>Save</ContextMenu.Button>
-            <ContextMenu.Button disabled>Save as...</ContextMenu.Button>
-            <ContextMenu.Button disabled>Import...</ContextMenu.Button>
-            <ContextMenu.Button disabled>Export...</ContextMenu.Button>
+            <ContextMenu.Button>Save</ContextMenu.Button>
+            <ContextMenu.Button>Save as...</ContextMenu.Button>
+            <ContextMenu.Button>Import...</ContextMenu.Button>
+            <ContextMenu.Button>Export...</ContextMenu.Button>
 
             <ContextMenu.Separator />
 
-            <ContextMenu.Button disabled>Save and close</ContextMenu.Button>
-            <ContextMenu.Button disabled>Close</ContextMenu.Button>
+            <ContextMenu.Button>Save and close</ContextMenu.Button>
+            <ContextMenu.Button>Close</ContextMenu.Button>
           </ContextMenu.Container>
         }
       >
@@ -37,22 +37,22 @@ const ToolBarTop: FC = () => (
       <ControlMenu.Button
         extension={
           <ContextMenu.Container>
-            <ContextMenu.Button disabled>Undo</ContextMenu.Button>
-            <ContextMenu.Button disabled>Redo</ContextMenu.Button>
+            <ContextMenu.Button>Undo</ContextMenu.Button>
+            <ContextMenu.Button>Redo</ContextMenu.Button>
 
             <ContextMenu.Separator />
 
-            <ContextMenu.Button disabled>Cut</ContextMenu.Button>
-            <ContextMenu.Button disabled>Copy</ContextMenu.Button>
-            <ContextMenu.Button disabled>Paste</ContextMenu.Button>
-            <ContextMenu.Button disabled>Delete</ContextMenu.Button>
+            <ContextMenu.Button>Cut</ContextMenu.Button>
+            <ContextMenu.Button>Copy</ContextMenu.Button>
+            <ContextMenu.Button>Paste</ContextMenu.Button>
+            <ContextMenu.Button>Delete</ContextMenu.Button>
 
             <ContextMenu.Separator />
 
-            <ContextMenu.Button disabled>Hide</ContextMenu.Button>
-            <ContextMenu.Button disabled>Unhide</ContextMenu.Button>
-            <ContextMenu.Button disabled>Lock</ContextMenu.Button>
-            <ContextMenu.Button disabled>Unlock</ContextMenu.Button>
+            <ContextMenu.Button>Hide</ContextMenu.Button>
+            <ContextMenu.Button>Unhide</ContextMenu.Button>
+            <ContextMenu.Button>Lock</ContextMenu.Button>
+            <ContextMenu.Button>Unlock</ContextMenu.Button>
           </ContextMenu.Container>
         }
       >
@@ -61,16 +61,15 @@ const ToolBarTop: FC = () => (
       <ControlMenu.Button
         extension={
           <ContextMenu.Container>
-            <ContextMenu.Button disabled>Layout</ContextMenu.Button>
-            <ContextMenu.Button disabled>Staging</ContextMenu.Button>
-            <ContextMenu.Button disabled>Simulation</ContextMenu.Button>
-            <ContextMenu.Button disabled>Rendering</ContextMenu.Button>
+            <ContextMenu.Button>Layout</ContextMenu.Button>
+            <ContextMenu.Button>Staging</ContextMenu.Button>
+            <ContextMenu.Button>Simulation</ContextMenu.Button>
+            <ContextMenu.Button>Rendering</ContextMenu.Button>
 
             <ContextMenu.Separator />
 
-            <ContextMenu.Button disabled>Toggle HUD</ContextMenu.Button>
+            <ContextMenu.Button>Toggle HUD</ContextMenu.Button>
             <ContextMenu.Extension
-              disabled
               extension={
                 <ContextMenu.Container>
                   <ContextMenu.Button>
