@@ -10,7 +10,7 @@ export const Container: FC = ({ children }) => (
 
 type ButtonProps = {
   // TODO: make this not optional
-  extension?: JSX.Element;
+  extension: JSX.Element;
 };
 /**
  * A button that contains texts like `File`, `Edit`, `View`, etc. and usually

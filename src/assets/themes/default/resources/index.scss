@@ -1,6 +1,7 @@
 @import './pallette.scss';
 @import './fonts.scss';
 @import '../../../../styles/utilities.scss';
+@import '../../../../styles/abstract.scss';
 
 :root {
   // Toolbar top
@@ -20,6 +21,7 @@
 
   // Context menu
   --context-menu-background-color: #{$black-dark};
+  --context-menu-drop-shadow: #{opacify($black-darker, 0.8)};
 
   --context-menu-button-content-color: white;
   --context-menu-button-disabled-content-color: #{$gray-darker};

@@ -8,6 +8,7 @@
   padding: $padding-big 0px $padding-big 0px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 0px $drop-shadow-blur-regular v(context-menu-drop-shadow);
 
   .context-menu-button,
   .context-menu-extension-button {

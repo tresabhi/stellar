@@ -2,6 +2,7 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import './index.scss';
 
 /**
@@ -163,7 +164,15 @@ const ToolBarTop: FC = () => (
       >
         Part
       </ControlMenu.Button>
-      <ControlMenu.Button>Help</ControlMenu.Button>
+      <ControlMenu.Button
+        extension={
+          <ContextMenu.Container>
+            <ContextMenu.Button>Discord</ContextMenu.Button>
+          </ContextMenu.Container>
+        }
+      >
+        Help
+      </ControlMenu.Button>
     </ControlMenu.Container>
 
     <Tabs.Container className="toolbar-tabs">
