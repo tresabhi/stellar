@@ -5,7 +5,7 @@
   border-radius: $border-radius-regular;
   min-width: $context-menu-min-width;
   max-width: $context-menu-max-width;
-  padding: $padding-big;
+  padding: $padding-big 0px $padding-big 0px;
   display: flex;
   flex-direction: column;
 
@@ -15,7 +15,6 @@
     color: v(context-menu-button-content-color);
     background-color: v(context-menu-button-background-color);
     height: $context-menu-button-height;
-    border-radius: $border-radius-regular;
     padding: $padding-big 0px $padding-big $padding-big;
     text-align: left;
 
@@ -74,7 +73,7 @@
 
       top: 0px;
       right: 0px;
-      transform: translateX(calc(100% + #{$padding-big}));
+      transform: translateX(100%) translateY(calc(#{$padding-big} * -1));
     }
 
     &:not(.disabled) {
