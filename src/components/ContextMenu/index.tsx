@@ -29,7 +29,9 @@ export const Button: FC<ButtonProps> = ({
   ...props
 }) => (
   <button
-    onClick={() => window.open(to)}
+    onClick={() => {
+      if (to) window.open(to);
+    }}
     {...props}
     className={`context-menu-button ${disabled ? 'disabled' : 'enabled'}`}
   >

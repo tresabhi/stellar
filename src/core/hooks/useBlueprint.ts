@@ -2,7 +2,7 @@ import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as GroupPart from 'core/API/part/types/group';
 import * as RootPart from 'core/API/part/types/root';
 import store from 'core/stores/blueprint';
-import { merge } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 
 export default function useBlueprint() {
   const hook = {
@@ -64,6 +64,10 @@ export default function useBlueprint() {
     ) => {
       if (type === 'multi') {
       }
+    },
+
+    freshBlueprint: () => {
+      store.setState(cloneDeep(RootBlueprint.data));
     },
   };
 
