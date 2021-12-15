@@ -1,3 +1,3 @@
-export type type = {
+export interface type {
   type: 'separator';
-};
+}

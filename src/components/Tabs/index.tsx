@@ -11,9 +11,9 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   </div>
 );
 
-type TabProps = {
+interface TabProps {
   selected?: boolean;
-};
+}
 export const Tab: FC<TabProps> = ({ children, selected = false }) => (
   <button className={`tab ${selected ? 'selected' : ''}`}>{children}</button>
 );

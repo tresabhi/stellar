@@ -2,9 +2,9 @@ import { FC, useState } from 'react';
 
 import './index.scss';
 
-type ToggleProps = {
+interface ToggleProps {
   defaultState: boolean;
-};
+}
 const Toggle: FC<ToggleProps> = ({ defaultState }) => {
   const [state, setState] = useState(defaultState);
 

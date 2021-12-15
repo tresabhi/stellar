@@ -7,11 +7,11 @@ import { FC } from 'react';
 import { MOUSE, TOUCH } from 'three';
 import './index.scss';
 
-type EditingCanvasProps = {
+interface EditingCanvasProps {
   center: number;
   offset: { x: number; y: number };
   parts: RootBlueprint.anyPartTypeArray;
-};
+}
 const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const partsJsx: JSX.Element[] = [];
 

@@ -2,12 +2,12 @@ import { FC } from 'react';
 
 import './index.scss';
 
-type UnitTextInputProps = {
+interface UnitTextInputProps {
   defaultValue: number | string;
   prefix?: string;
   suffix?: string;
   isolated?: boolean;
-};
+}
 const UnitTextInput: FC<UnitTextInputProps> = ({
   defaultValue,
   prefix = '',

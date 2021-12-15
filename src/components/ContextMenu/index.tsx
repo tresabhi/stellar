@@ -1,11 +1,6 @@
-import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
 import { ReactComponent as CheckMarkIcon } from 'assets/icons/check-mark.svg';
-import {
-  FC,
-  HTMLInputTypeAttribute,
-  InputHTMLAttributes,
-  useState,
-} from 'react';
+import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
+import { FC, InputHTMLAttributes, useState } from 'react';
 import './index.scss';
 
 /**
@@ -14,8 +9,6 @@ import './index.scss';
 export const Container: FC = ({ children }) => (
   <div className="context-menu">{children}</div>
 );
-
-type asd = HTMLInputTypeAttribute;
 
 interface ButtonProps extends InputHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
@@ -53,10 +46,10 @@ export const Separator = () => (
   </div>
 );
 
-type ExtensionProps = {
+interface ExtensionProps {
   disabled?: boolean;
   extension: JSX.Element;
-};
+}
 /**
  * A button that reveals a by-default collapsed component, usually in a context
  * menu
@@ -85,10 +78,10 @@ export const Extension: FC<ExtensionProps> = ({
   );
 };
 
-type ToggleProps = {
+interface ToggleProps {
   disabled?: boolean;
   defaultState?: boolean;
-};
+}
 /**
  * A button that displays `true`/`false` through a check-mark, usually in a
  * context menu

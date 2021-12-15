@@ -7,7 +7,10 @@ import * as RootContextListing from '../../core/API/contextListings/types/root';
 import * as TextContextListing from '../../core/API/contextListings/types/textButton';
 import './index.scss';
 
-type TextButtonProps = { data: TextContextListing.type; extended?: boolean };
+interface TextButtonProps {
+  data: TextContextListing.type;
+  extended?: boolean;
+}
 export const TextButton: FC<TextButtonProps> = ({ data, extended = false }) => {
   const Icon = data?.icon;
 
@@ -26,7 +29,9 @@ const Separator = () => {
   return <div className="separator" />;
 };
 
-type ExtendButtonProps = { data: ExtendContextListing.type };
+interface ExtendButtonProps {
+  data: ExtendContextListing.type;
+}
 const ExtendButton: FC<ExtendButtonProps> = ({ data }) => {
   // const Icon = data?.icon;
 
@@ -47,11 +52,11 @@ const typeToComponent: any = {
   separator: Separator,
   extend_button: ExtendButton,
 };
-type ContextContainerProps = {
+interface ContextContainerProps {
   data: RootContextListing.contextMenuListing;
   toolbar?: boolean;
   onActionTaken?: () => void;
-};
+}
 export const ContextContainer: FC<ContextContainerProps> = ({
   data,
   toolbar = false,
@@ -94,10 +99,10 @@ export const ContextContainer: FC<ContextContainerProps> = ({
   );
 };
 
-type ContainerProps = {
+interface ContainerProps {
   contexts: RootContextListing.contextMenuListing[];
   onBlur: () => void;
-};
+}
 export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {
   const contextMenus = contexts.map((contextMenu, index) => {
     return (

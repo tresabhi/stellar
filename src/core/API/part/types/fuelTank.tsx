@@ -45,13 +45,12 @@ export const data = {
   },
 };
 
+export type type = typeof data;
 export type vanillaType = typeof vanillaData;
 
-export type type = typeof data;
-
-type ComponentProps = {
+interface ComponentProps {
   data: type;
-};
+}
 export const Component: FC<ComponentProps> = memo(({ data }) => {
   if (!data['.stellar'].visible) return <mesh />;
 

@@ -22,7 +22,7 @@ export const data = {
 export type type = typeof data;
 export type vanillaType = typeof vanillaData;
 
-export interface anyPartTypeArray extends Array<RootPart.anyPartType> {}
+export type anyPartTypeArray = Array<RootPart.anyPartType>;
 export type anyVanillaPartTypeArray = RootPart.anyVanillaPartType[];
 
 export type partAddress = number[];

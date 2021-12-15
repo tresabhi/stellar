@@ -15,11 +15,11 @@ export const Title: FC = ({ children }) => (
   <h2 className="title">{children}</h2>
 );
 
-type CardProps = {
+interface CardProps {
   to: string;
   text?: string;
   recommended?: boolean;
-};
+}
 export const Card: FC<CardProps> = ({ to, text, recommended, children }) => {
   return (
     <Link to={to} className="card">

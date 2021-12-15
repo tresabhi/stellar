@@ -23,9 +23,9 @@ import './index.scss';
 
 const INPUT_BLUR_KEYS = ['Enter', 'Escape'];
 
-type ContainerProps = {
+interface ContainerProps {
   rightSide?: boolean;
-};
+}
 export const Container: FC<ContainerProps> = ({
   children,
   rightSide,
@@ -45,7 +45,7 @@ export const TabsContainer: FC = ({ children }) => (
   <div className="tabs-container">{children}</div>
 );
 
-type PartsListingContainerProps = {
+interface PartsListingContainerProps {
   parts: RootBlueprint.anyPartTypeArray;
   indented?: boolean;
   parentAddress?: RootBlueprint.partAddress;
@@ -59,7 +59,7 @@ type PartsListingContainerProps = {
     type: RootBlueprint.selectionType,
     address: RootBlueprint.partAddress,
   ) => void;
-};
+}
 export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   children,
   parts,
@@ -100,7 +100,7 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
   );
 };
 
-type PartListingProps = {
+interface PartListingProps {
   icon: FC<SVGProps<SVGSVGElement>>;
   defaultName: string;
   data: RootPart.anyPartType;
@@ -114,8 +114,7 @@ type PartListingProps = {
     type: RootBlueprint.selectionType,
     address: RootBlueprint.partAddress,
   ) => void;
-};
-
+}
 export const PartListing: FC<PartListingProps> = memo(
   ({
     icon: Icon,
@@ -264,12 +263,7 @@ export const PartListing: FC<PartListingProps> = memo(
 );
 
 // TODO: Add function arguments and return value
-type PropertyListingContainerProps = {
-  // parts: RootBlueprint.anyPartTypeArray;
-  // currentPartIndex: number;
-  // onPartDataMutate: () => void;
-};
-export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
+export const PropertyListingContainer: FC = ({
   children,
   // parts,
   // currentPartIndex,
@@ -278,10 +272,10 @@ export const PropertyListingContainer: FC<PropertyListingContainerProps> = ({
   return <div className="property-listing-container">{children}</div>;
 };
 
-type PropertyListingProps = {
+interface PropertyListingProps {
   // TODO: give this types
   subProperties?: object[];
-};
+}
 export const PropertyListing: FC<PropertyListingProps> = memo(
   ({ children, subProperties }) => {
     return (
@@ -299,9 +293,9 @@ export const PropertyListing: FC<PropertyListingProps> = memo(
   },
 );
 
-type TabProps = {
+interface TabProps {
   defaultSelected?: boolean;
-};
+}
 export const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
   // TODO: const for now, react state hook in the future
   const selected = defaultSelected;
@@ -314,12 +308,12 @@ export const StaticTab: FC<TabProps> = ({ children }) => (
   <div className="tab-static">{children}</div>
 );
 
-type SubPropertyTextInputProps = {
+interface SubPropertyTextInputProps {
   defaultValue: number | string;
   prefix?: string;
   suffix?: string;
   name?: string;
-};
+}
 export const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
   children,
   defaultValue,

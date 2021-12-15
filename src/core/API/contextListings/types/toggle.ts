@@ -1,8 +1,8 @@
 import * as RootContextListing from './root';
 
-export type type = RootContextListing.type & {
+export interface type extends RootContextListing.type {
   type: 'toggle';
   text: string;
   onClick: () => void;
   default?: boolean;
-};
+}

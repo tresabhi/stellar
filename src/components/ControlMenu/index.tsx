@@ -8,10 +8,9 @@ export const Container: FC = ({ children }) => (
   <div className="control-menu">{children}</div>
 );
 
-type ButtonProps = {
-  // TODO: make this not optional
+interface ButtonProps {
   extension: JSX.Element;
-};
+}
 /**
  * A button that contains texts like `File`, `Edit`, `View`, etc. and usually
  * is extended with a context menu

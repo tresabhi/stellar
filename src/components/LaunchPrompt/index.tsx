@@ -27,11 +27,11 @@ export const DraftRow: FC = ({ children }) => (
   <div className="draft-row">{children}</div>
 );
 
-type DraftTypeProps = {
+interface DraftTypeProps {
   icon: object;
   name: string;
   enabled: boolean;
-};
+}
 export const DraftType: FC<DraftTypeProps> = ({
   icon,
   name,
@@ -54,10 +54,10 @@ const listingIcons = new Map([
   ['unknown', <SaveIcon />],
 ]);
 
-type RecentListingProps = {
+interface RecentListingProps {
   type?: string;
   name: string;
-};
+}
 export const RecentListing: FC<RecentListingProps> = ({
   type = 'unknown',
   name,

@@ -4,16 +4,16 @@ import * as SeparatorContextListing from './separator';
 import * as TextContextListing from './textButton';
 import * as ToggleContextListing from './toggle';
 
-export type contextMenuListing = {
+export interface contextMenuListing {
   x?: number;
   y?: number;
   listing: anyContextListingType[];
-};
+}
 
-export type type = {
+export interface type {
   type: string;
   icon?: FC;
-};
+}
 
 export type anyContextListingType =
   | ExtendContextListing.type

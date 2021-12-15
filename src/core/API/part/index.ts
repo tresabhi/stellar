@@ -6,16 +6,16 @@ import * as FuelTank from './types/fuelTank';
 import * as Group from './types/group';
 import * as Root from './types/root';
 
-export type partModule = {
+export interface partModule {
   type: Type;
   data: Root.type;
   Component: FC;
   icon: FC<SVGProps<SVGSVGElement>>;
-};
+}
 
-export type RootPartComponentProps = {
+export interface RootPartComponentProps {
   data: Root.type;
-};
+}
 
 // TODO: Fix this any
 const partComponentNames: { [key: string]: any } = {

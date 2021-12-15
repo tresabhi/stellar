@@ -2,11 +2,11 @@ import { FC } from 'react';
 
 import './index.scss';
 
-type PseudoContainerProps = {
+interface PseudoContainerProps {
   fullscreen?: boolean;
   flex?: boolean;
   occupyTitleBar?: boolean;
-};
+}
 const PseudoContainer: FC<PseudoContainerProps> = ({
   children,
   fullscreen = false,

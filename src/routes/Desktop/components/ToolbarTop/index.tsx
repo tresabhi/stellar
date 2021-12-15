@@ -3,7 +3,6 @@ import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import { random } from 'lodash';
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
 import './index.scss';
 
 /**
