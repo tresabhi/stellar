@@ -17,10 +17,7 @@ const UnitTextInput: FC<UnitTextInputProps> = ({
   // TODO: functionality coming soon...
   return (
     <input
-      className={`
-        unit-text-input
-        ${isolated ? 'isolated' : ''}
-      `}
+      className={`unit-text-input ${isolated ? 'isolated' : ''}`}
       defaultValue={`${prefix}${defaultValue}${suffix}`}
     />
   );

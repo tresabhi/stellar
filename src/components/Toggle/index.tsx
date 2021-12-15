@@ -11,13 +11,7 @@ const Toggle: FC<ToggleProps> = ({ defaultState }) => {
   const handleClick = () => setState((state) => !state);
 
   return (
-    <button
-      className={`
-        toggle
-        ${state ? 'on' : 'off'}
-      `}
-      onClick={handleClick}
-    >
+    <button className={`toggle ${state ? 'on' : 'off'}`} onClick={handleClick}>
       <div className="dot" />
     </button>
   );

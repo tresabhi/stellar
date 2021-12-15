@@ -78,10 +78,7 @@ export const ContextContainer: FC<ContextContainerProps> = ({
 
   return (
     <div
-      className={`
-        context-container
-        ${toolbar ? 'toolbar' : 'generic'}
-      `}
+      className={`context-container ${toolbar ? 'toolbar' : 'generic'}`}
       style={
         toolbar
           ? {}
@@ -120,10 +117,9 @@ export const Container: FC<ContainerProps> = ({ contexts, onBlur }) => {
       onClick={(event) => {
         if (event.target === componentRef.current) onBlur();
       }}
-      className={`
-    contexts-container
-    ${contexts.length > 0 ? 'active' : 'inactive'}
-  `}
+      className={`contexts-container ${
+        contexts.length > 0 ? 'active' : 'inactive'
+      }`}
     >
       {contextMenus}
     </div>

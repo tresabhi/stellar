@@ -14,11 +14,9 @@ const PseudoContainer: FC<PseudoContainerProps> = ({
   occupyTitleBar = false,
 }) => (
   <div
-    className={`
-      pseudo-container
-      ${fullscreen ? 'fullscreen' : ''}
-      ${flex ? 'flex' : ''}
-      ${occupyTitleBar ? 'occupyTitleBar' : ''}
+    className={`pseudo-container ${fullscreen ? 'fullscreen' : ''} ${
+      flex ? 'flex' : ''
+    } ${occupyTitleBar ? 'occupyTitleBar' : ''}
     `}
   >
     {children}

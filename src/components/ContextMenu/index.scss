@@ -11,7 +11,10 @@
   box-shadow: 0px 0px $drop-shadow-blur-regular v(context-menu-drop-shadow);
 
   .context-menu-button,
-  .context-menu-extension-button {
+  .context-menu-extension-button,
+  .context-menu-toggle-button {
+    display: flex;
+    align-items: center;
     font-size: $font-size-regular;
     color: v(context-menu-button-content-color);
     background-color: v(context-menu-button-background-color);
@@ -65,7 +68,6 @@
   }
 
   .context-menu-extension-button {
-    display: flex;
     position: relative;
 
     .context-menu-extension-button-extension {

@@ -1,6 +1,7 @@
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
+import { random } from 'lodash';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
@@ -28,8 +29,7 @@ const ToolBarTop: FC = () => (
 
             <ContextMenu.Separator />
 
-            <ContextMenu.Button>Save and close</ContextMenu.Button>
-            <ContextMenu.Button>Close</ContextMenu.Button>
+            <ContextMenu.Toggle>Auto-save</ContextMenu.Toggle>
           </ContextMenu.Container>
         }
       >
@@ -167,7 +167,18 @@ const ToolBarTop: FC = () => (
       <ControlMenu.Button
         extension={
           <ContextMenu.Container>
-            <ContextMenu.Button>Discord</ContextMenu.Button>
+            {/* TODO: add discord invite */}
+            <ContextMenu.Button to="https://discord.gg/">
+              Discord
+            </ContextMenu.Button>
+            {
+              // wonderful grown-up easter egg
+              random(0, 999, false) === 0 ? (
+                <ContextMenu.Button disabled>
+                  "You'll make a wonderful grown-up!"
+                </ContextMenu.Button>
+              ) : undefined
+            }
           </ContextMenu.Container>
         }
       >

@@ -37,12 +37,7 @@ export const DraftType: FC<DraftTypeProps> = ({
   name,
   enabled = true,
 }) => (
-  <button
-    className={`
-      draft-type
-      ${enabled ? 'enabled' : 'disabled'}
-    `}
-  >
+  <button className={`draft-type ${enabled ? 'enabled' : 'disabled'}`}>
     {icon}
     <span className="draft-type-text">{name}</span>
   </button>

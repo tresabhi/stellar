@@ -34,10 +34,7 @@ export const Container: FC<ContainerProps> = ({
   return (
     <div
       {...props}
-      className={`
-        explorer-container
-        ${rightSide ? 'right' : 'left'}
-      `}
+      className={`explorer-container ${rightSide ? 'right' : 'left'}`}
     >
       {children}
     </div>
@@ -94,11 +91,9 @@ export const PartsListingContainer: FC<PartsListingContainerProps> = ({
 
   return (
     <div
-      className={`
-        part-listing-container
-        ${indented ? 'indented' : ''}
-        ${visible ? 'visible' : ''}
-      `}
+      className={`part-listing-container ${indented ? 'indented' : ''} ${
+        visible ? 'visible' : ''
+      }`}
     >
       {parts ? parsedArray : children}
     </div>
@@ -213,11 +208,9 @@ export const PartListing: FC<PartListingProps> = memo(
     return (
       <div
         ref={listingRef}
-        className={`
-          part-listing
-          ${data['.stellar'].visible ? '' : 'invisible'}
-          ${data['.stellar'].selected ? 'selected' : ''}
-        `}
+        className={`part-listing ${
+          data['.stellar'].visible ? '' : 'invisible'
+        } ${data['.stellar'].selected ? 'selected' : ''}`}
       >
         <button ref={buttonRef} className="button" onClick={handleClick}>
           {data.n === 'Group' ? (
@@ -313,14 +306,7 @@ export const Tab: FC<TabProps> = ({ children, defaultSelected }) => {
   // TODO: const for now, react state hook in the future
   const selected = defaultSelected;
   return (
-    <button
-      className={`
-        tab
-        ${selected ? 'selected' : ''}
-      `}
-    >
-      {children}
-    </button>
+    <button className={`tab ${selected ? 'selected' : ''}`}>{children}</button>
   );
 };
 

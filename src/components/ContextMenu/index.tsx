@@ -1,5 +1,11 @@
 import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
-import { FC } from 'react';
+import { ReactComponent as CheckMarkIcon } from 'assets/icons/check-mark.svg';
+import {
+  FC,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+  useState,
+} from 'react';
 import './index.scss';
 
 /**
@@ -9,18 +15,30 @@ export const Container: FC = ({ children }) => (
   <div className="context-menu">{children}</div>
 );
 
-/**
- * A button that holds text that describes action of the context menu listing
- */
-type ButtonProps = {
+type asd = HTMLInputTypeAttribute;
+
+interface ButtonProps extends InputHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
-};
-export const Button: FC<ButtonProps> = ({ children, disabled = false }) => (
+  to?: string;
+
+  // issue in React library; fixed here
+  // TODO: pr this fix for react... too lazy rn
+  type?: 'button' | 'reset' | 'submit';
+}
+/**
+ * A button that holds text that describes it's action, usually in a context
+ * menu
+ */
+export const Button: FC<ButtonProps> = ({
+  children,
+  disabled = false,
+  to,
+  ...props
+}) => (
   <button
-    className={`
-      context-menu-button
-      ${disabled ? 'disabled' : 'enabled'}
-    `}
+    onClick={() => window.open(to)}
+    {...props}
+    className={`context-menu-button ${disabled ? 'disabled' : 'enabled'}`}
   >
     <span className="text">{children}</span>
   </button>
@@ -40,7 +58,7 @@ type ExtensionProps = {
   extension: JSX.Element;
 };
 /**
- * A button that reveals a by-default collapsed component, usually a context
+ * A button that reveals a by-default collapsed component, usually in a context
  * menu
  */
 export const Extension: FC<ExtensionProps> = ({
@@ -50,10 +68,9 @@ export const Extension: FC<ExtensionProps> = ({
 }) => {
   return (
     <button
-      className={`
-        context-menu-extension-button
-        ${disabled ? 'disabled' : 'enabled'}
-    `}
+      className={`context-menu-extension-button ${
+        disabled ? 'disabled' : 'enabled'
+      }`}
     >
       <span className="context-menu-button-text">{children}</span>
       <div className="context-menu-button-icon-holder">
@@ -64,6 +81,40 @@ export const Extension: FC<ExtensionProps> = ({
           {extension}
         </div>
       ) : undefined}
+    </button>
+  );
+};
+
+type ToggleProps = {
+  disabled?: boolean;
+  defaultState?: boolean;
+};
+/**
+ * A button that displays `true`/`false` through a check-mark, usually in a
+ * context menu
+ */
+export const Toggle: FC<ToggleProps> = ({
+  children,
+  disabled = false,
+  defaultState = false,
+}) => {
+  const [state, setState] = useState(defaultState);
+
+  const handleOnClick = () => setState((state) => !state);
+
+  return (
+    <button
+      className={`context-menu-toggle-button ${
+        disabled ? 'disabled' : 'enabled'
+      }`}
+      onClick={handleOnClick}
+    >
+      <span className="context-menu-button-text">{children}</span>
+      <div className="context-menu-button-icon-holder">
+        {state ? (
+          <CheckMarkIcon className="context-menu-button-icon" />
+        ) : undefined}
+      </div>
     </button>
   );
 };
