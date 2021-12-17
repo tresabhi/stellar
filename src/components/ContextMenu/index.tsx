@@ -1,14 +1,27 @@
 import { ReactComponent as CheckMarkIcon } from 'assets/icons/check-mark.svg';
 import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
-import { FC, InputHTMLAttributes, useState } from 'react';
+import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
 /**
  * A container that holds context menu buttons
  */
-export const Container: FC = ({ children }) => (
-  <div className="context-menu">{children}</div>
-);
+export const Container: FC = ({ children }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      onClick={() => {
+        //@ts-ignore
+        if (document.activeElement?.blur) document.activeElement?.blur();
+      }}
+      ref={containerRef}
+      className="context-menu"
+    >
+      {children}
+    </div>
+  );
+};
 
 interface ButtonProps extends InputHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;

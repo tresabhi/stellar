@@ -1,10 +1,9 @@
-import useBlueprint from 'core/hooks/useBlueprint';
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
+import useBlueprint from 'core/hooks/useBlueprint';
 import { random } from 'lodash';
 import { FC } from 'react';
-import blueprintStore from 'core/stores/blueprint';
 import './index.scss';
 
 /**
@@ -21,21 +20,25 @@ const ToolBarTop: FC = () => {
           extension={
             <ContextMenu.Container>
               {/* Pro tip: add "..." only if further interaction is required */}
-              <ContextMenu.Button onClick={() => blueprint.freshBlueprint()}>
+              <ContextMenu.Button onClick={() => blueprint.newFreshBlueprint()}>
                 New
               </ContextMenu.Button>
-              <ContextMenu.Button>Open...</ContextMenu.Button>
+              <ContextMenu.Button onClick={() => blueprint.open()}>
+                Open...
+              </ContextMenu.Button>
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Button>Save</ContextMenu.Button>
-              <ContextMenu.Button>Save as...</ContextMenu.Button>
-              <ContextMenu.Button>Import...</ContextMenu.Button>
-              <ContextMenu.Button>Export...</ContextMenu.Button>
+              <ContextMenu.Button onClick={() => blueprint.save()}>
+                Save
+              </ContextMenu.Button>
+              <ContextMenu.Button disabled>Save as...</ContextMenu.Button>
+              <ContextMenu.Button disabled>Import...</ContextMenu.Button>
+              <ContextMenu.Button disabled>Export...</ContextMenu.Button>
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Toggle>Auto-save</ContextMenu.Toggle>
+              <ContextMenu.Toggle disabled>Auto-save</ContextMenu.Toggle>
             </ContextMenu.Container>
           }
         >
@@ -44,22 +47,22 @@ const ToolBarTop: FC = () => {
         <ControlMenu.Button
           extension={
             <ContextMenu.Container>
-              <ContextMenu.Button>Undo</ContextMenu.Button>
-              <ContextMenu.Button>Redo</ContextMenu.Button>
+              <ContextMenu.Button disabled>Undo</ContextMenu.Button>
+              <ContextMenu.Button disabled>Redo</ContextMenu.Button>
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Button>Cut</ContextMenu.Button>
-              <ContextMenu.Button>Copy</ContextMenu.Button>
-              <ContextMenu.Button>Paste</ContextMenu.Button>
-              <ContextMenu.Button>Delete</ContextMenu.Button>
+              <ContextMenu.Button disabled>Cut</ContextMenu.Button>
+              <ContextMenu.Button disabled>Copy</ContextMenu.Button>
+              <ContextMenu.Button disabled>Paste</ContextMenu.Button>
+              <ContextMenu.Button disabled>Delete</ContextMenu.Button>
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Button>Hide</ContextMenu.Button>
-              <ContextMenu.Button>Unhide</ContextMenu.Button>
-              <ContextMenu.Button>Lock</ContextMenu.Button>
-              <ContextMenu.Button>Unlock</ContextMenu.Button>
+              <ContextMenu.Button disabled>Hide</ContextMenu.Button>
+              <ContextMenu.Button disabled>Unhide</ContextMenu.Button>
+              <ContextMenu.Button disabled>Lock</ContextMenu.Button>
+              <ContextMenu.Button disabled>Unlock</ContextMenu.Button>
             </ContextMenu.Container>
           }
         >
@@ -68,21 +71,24 @@ const ToolBarTop: FC = () => {
         <ControlMenu.Button
           extension={
             <ContextMenu.Container>
-              <ContextMenu.Button>Layout</ContextMenu.Button>
-              <ContextMenu.Button>Staging</ContextMenu.Button>
-              <ContextMenu.Button>Simulation</ContextMenu.Button>
-              <ContextMenu.Button>Rendering</ContextMenu.Button>
+              <ContextMenu.Button disabled>Layout</ContextMenu.Button>
+              <ContextMenu.Button disabled>Staging</ContextMenu.Button>
+              <ContextMenu.Button disabled>Simulation</ContextMenu.Button>
+              <ContextMenu.Button disabled>Rendering</ContextMenu.Button>
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Button>Toggle HUD</ContextMenu.Button>
+              <ContextMenu.Button disabled>Toggle HUD</ContextMenu.Button>
               <ContextMenu.Extension
+                disabled
                 extension={
                   <ContextMenu.Container>
-                    <ContextMenu.Button>
+                    <ContextMenu.Button disabled>
                       Stellar Dark (Default)
                     </ContextMenu.Button>
-                    <ContextMenu.Button>Stellar Light</ContextMenu.Button>
+                    <ContextMenu.Button disabled>
+                      Stellar Light
+                    </ContextMenu.Button>
                   </ContextMenu.Container>
                 }
               >
@@ -97,6 +103,7 @@ const ToolBarTop: FC = () => {
           extension={
             <ContextMenu.Container>
               <ContextMenu.Extension
+                disabled
                 extension={
                   <ContextMenu.Container>
                     <ContextMenu.Extension

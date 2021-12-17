@@ -8,6 +8,7 @@
     "buildbeta",
     "buildrelease",
     "drei",
+    "exportify",
     "favicon",
     "favicons",
     "frameloop",
@@ -39,6 +40,7 @@
     "titlebar",
     "Unhide",
     "unzipper",
+    "wicg",
     "zpazio",
     "zustand"
   ],
