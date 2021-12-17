@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@react-three/drei": "^8.2.1",
+    "@react-three/drei": "^8.3.0",
     "@react-three/fiber": "^7.0.24",
     "@types/three": "^0.135.0",
     "args-parser": "^1.3.0",
