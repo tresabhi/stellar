@@ -8,6 +8,10 @@
   height: $title-bar-height;
   display: flex;
 
+  .open-input {
+    display: none;
+  }
+
   .toolbar-tabs {
     flex: 1;
   }

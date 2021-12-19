@@ -108,14 +108,12 @@ export const Toggle: FC<ToggleProps> = ({
 }) => {
   const [state, setState] = useState(defaultState);
 
-  const handleOnClick = () => setState((state) => !state);
-
   return (
     <button
       className={`context-menu-toggle-button ${
         disabled ? 'disabled' : 'enabled'
       }`}
-      onClick={handleOnClick}
+      onClick={() => setState((state) => !state)}
     >
       <span className="context-menu-button-text">{children}</span>
       <div className="context-menu-button-icon-holder">

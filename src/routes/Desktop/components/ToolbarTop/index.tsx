@@ -3,7 +3,7 @@ import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
 import { random } from 'lodash';
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 import './index.scss';
 
 /**
@@ -12,18 +12,41 @@ import './index.scss';
  */
 const ToolBarTop: FC = () => {
   const blueprint = useBlueprint();
+  const openInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="toolbar-top">
+      <input
+        className="open-input"
+        accept=".stbp"
+        ref={openInputRef}
+        type="file"
+        onChange={() => {
+          if (openInputRef.current?.files) {
+            const fileReader = new FileReader();
+            const file = openInputRef.current.files[0];
+
+            fileReader.readAsText(file);
+
+            fileReader.onload = () =>
+              blueprint.new(JSON.parse(fileReader.result as string));
+          }
+        }}
+      />
+
       <ControlMenu.Container>
         <ControlMenu.Button
           extension={
             <ContextMenu.Container>
               {/* Pro tip: add "..." only if further interaction is required */}
-              <ContextMenu.Button onClick={() => blueprint.newFreshBlueprint()}>
+              <ContextMenu.Button onClick={() => blueprint.new()}>
                 New
               </ContextMenu.Button>
-              <ContextMenu.Button onClick={() => blueprint.open()}>
+              <ContextMenu.Button
+                onClick={() => {
+                  openInputRef.current?.click();
+                }}
+              >
                 Open...
               </ContextMenu.Button>
 
@@ -35,10 +58,6 @@ const ToolBarTop: FC = () => {
               <ContextMenu.Button disabled>Save as...</ContextMenu.Button>
               <ContextMenu.Button disabled>Import...</ContextMenu.Button>
               <ContextMenu.Button disabled>Export...</ContextMenu.Button>
-
-              <ContextMenu.Separator />
-
-              <ContextMenu.Toggle disabled>Auto-save</ContextMenu.Toggle>
             </ContextMenu.Container>
           }
         >

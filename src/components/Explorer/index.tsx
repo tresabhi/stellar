@@ -10,7 +10,6 @@ import * as RootPart from 'core/API/part/types/root';
 import DeepPartial from 'core/types/DeepPartial';
 import {
   FC,
-  KeyboardEvent,
   memo,
   MouseEvent,
   SVGProps,
@@ -138,55 +137,6 @@ export const PartListing: FC<PartListingProps> = memo(
       if (inputRef?.current) inputRef.current.value = defaultName;
     });
 
-    const handleFocus = () => {
-      if (!focusable) inputRef.current?.blur();
-    };
-
-    const handleBlur = () => {
-      inputRef.current!.value = inputRef.current?.value.trim() ?? '';
-      focusable = false;
-
-      if (previousLabel !== inputRef.current?.value) {
-        onDataMutate({ '.stellar': { label: inputRef.current!.value } });
-        previousLabel = inputRef.current?.value!;
-      }
-    };
-
-    const handleDoubleClick = () => {
-      focusable = true;
-      inputRef.current?.focus();
-    };
-
-    const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-      if (INPUT_BLUR_KEYS.includes(event.key)) inputRef.current?.blur();
-    };
-
-    /**
-     * Types of clicks:
-     *
-     * - none: one and only selection (`single`)
-     *
-     * - ctrl: one new selection (`multi`)
-     *
-     * - shift: everything from last selection to this selection (`list`)
-     *
-     * - ctrl + shift: everything from last selection to this selection without
-     *   forgetting the other selections (`milti_list`)
-     *
-     */
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-      onSelect(
-        event.ctrlKey // is ctrl
-          ? event.shiftKey // is ctrl shift
-            ? 'multi_list' // is ctrl shift
-            : 'multi' // is ctrl
-          : event.shiftKey // is shift
-          ? 'list' // is shift
-          : 'single', // is single
-        address,
-      );
-    };
-
     const handleExpandClick = (event: MouseEvent<SVGSVGElement>) => {
       event.stopPropagation();
 
@@ -211,7 +161,35 @@ export const PartListing: FC<PartListingProps> = memo(
           data['.stellar'].visible ? '' : 'invisible'
         } ${data['.stellar'].selected ? 'selected' : ''}`}
       >
-        <button ref={buttonRef} className="button" onClick={handleClick}>
+        <button
+          ref={buttonRef}
+          className="button"
+          /**
+           * Types of clicks:
+           *
+           * - none: one and only selection (`single`)
+           *
+           * - ctrl: one new selection (`multi`)
+           *
+           * - shift: everything from last selection to this selection (`list`)
+           *
+           * - ctrl + shift: everything from last selection to this selection without
+           *   forgetting the other selections (`milti_list`)
+           *
+           */
+          onClick={(event) => {
+            onSelect(
+              event.ctrlKey // is ctrl
+                ? event.shiftKey // is ctrl shift
+                  ? 'multi_list' // is ctrl shift
+                  : 'multi' // is ctrl
+                : event.shiftKey // is shift
+                ? 'list' // is shift
+                : 'single', // is single
+              address,
+            );
+          }}
+        >
           {data.n === 'Group' ? (
             expanded ? (
               <ExpandedIcon
@@ -226,10 +204,27 @@ export const PartListing: FC<PartListingProps> = memo(
           )}
 
           <input
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onDoubleClick={handleDoubleClick}
-            onKeyPress={handleKeyPress}
+            onFocus={() => {
+              if (!focusable) inputRef.current?.blur();
+            }}
+            onBlur={() => {
+              inputRef.current!.value = inputRef.current?.value.trim() ?? '';
+              focusable = false;
+
+              if (previousLabel !== inputRef.current?.value) {
+                onDataMutate({
+                  '.stellar': { label: inputRef.current!.value },
+                });
+                previousLabel = inputRef.current?.value!;
+              }
+            }}
+            onDoubleClick={() => {
+              focusable = true;
+              inputRef.current?.focus();
+            }}
+            onKeyPress={(event) => {
+              if (INPUT_BLUR_KEYS.includes(event.key)) inputRef.current?.blur();
+            }}
             className="input"
             placeholder="Unlabeled Part"
             ref={inputRef}

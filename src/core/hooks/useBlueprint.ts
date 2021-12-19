@@ -12,11 +12,12 @@ export default function useBlueprint() {
     lastSelection: [] as RootBlueprint.partAddress,
 
     hasUnsavedChanges: false,
+    currentFileName: 'blueprint.stbp',
 
     createParts: () => store.setState((state) => {}),
 
     deleteParts: (addresses: RootBlueprint.partAddresses) => {
-      hook.hasUnsavedChanges = false;
+      hook.hasUnsavedChanges = true;
 
       store.setState((state) => {
         // TODO: sort addresses first to avoid deleting shifted parts
@@ -44,7 +45,7 @@ export default function useBlueprint() {
       data: RootPart.anyPartialPartType,
       addresses: RootBlueprint.partAddresses,
     ) => {
-      hook.hasUnsavedChanges = false;
+      hook.hasUnsavedChanges = true;
 
       store.setState((state) => {
         const newParts = [...state.parts];
@@ -76,7 +77,7 @@ export default function useBlueprint() {
       }
     },
 
-    newFreshBlueprint: (blueprint = {}) => {
+    new: (blueprint = {}) => {
       const action = () => {
         hook.hasUnsavedChanges = false;
         store.setState(
@@ -89,24 +90,16 @@ export default function useBlueprint() {
       } else action();
     },
 
-    // openFromFileSystem: () => {},
     save: () => {
       // TODO: give it a name
       // TODO: use exportify functions
-
       const blob = new Blob([JSON.stringify(store.getState())], {
         type: 'text/plain;charset=utf-8',
       });
-      saveAs(blob, 'blueprint.json');
+      // TODO: fix current name not renaming file
+      saveAs(blob, hook.currentFileName);
 
       hook.hasUnsavedChanges = false;
-    },
-
-    open: async () => {
-      const [fileHandle] = await window.showOpenFilePicker();
-      const file = await fileHandle.getFile();
-      const text = await file.text();
-      hook.newFreshBlueprint(JSON.parse(text));
     },
   };
 
