@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/static/grouping.json';
+import devBlueprint from 'assets/blueprints/benchmark/fuel-tank';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
