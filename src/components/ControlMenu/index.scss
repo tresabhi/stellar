@@ -4,16 +4,18 @@
   display: flex;
 
   & > .control-menu-button {
-    display: block;
+    display: relative;
     font-size: $font-size-regular;
     padding: $padding-big;
     color: v(toolbar-top-control-menu-button-content-color);
     background-color: v(toolbar-top-control-menu-button-background-color);
 
     & > .control-menu-button-extension {
+      position: absolute;
       display: none;
-      position: fixed;
       cursor: default;
+
+      transform: translateX(calc($padding-big * -1)) translateY($padding-big);
     }
 
     &:hover {
