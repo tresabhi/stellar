@@ -25,7 +25,7 @@ const InfiniteGridHelper: FC<InfiniteGridHelperProps> = ({
   const planeAxes = axes.slice(0, 2);
 
   return (
-    //@ts-ignore
+    // @ts-ignore
     <mesh {...props} frustumCulled={false}>
       <shaderMaterial
         args={[
@@ -45,7 +45,7 @@ const InfiniteGridHelper: FC<InfiniteGridHelperProps> = ({
               uniform float uDistance;
 
               void main() {
-                vec3 pos = position.${axes} * uDistance;
+                vec3 pos = position.${axes} * uDistance * 2.0;
                 pos.${planeAxes} += cameraPosition.${planeAxes};
                 worldPosition = pos;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
