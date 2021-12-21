@@ -133,82 +133,59 @@ const ToolBarTop: FC = () => {
           extension={
             <ContextMenu.Container>
               <ContextMenu.Extension
-                disabled
                 extension={
                   <ContextMenu.Container>
-                    <ContextMenu.Extension
-                      extension={
-                        <ContextMenu.Container>
-                          <ContextMenu.Button>Fuel Tank</ContextMenu.Button>
-                          <ContextMenu.Button>
-                            Structural Part
-                          </ContextMenu.Button>
-                        </ContextMenu.Container>
-                      }
-                    >
-                      Structural
-                    </ContextMenu.Extension>
-                    <ContextMenu.Extension
-                      extension={
-                        <ContextMenu.Container>
-                          <ContextMenu.Button>Titan</ContextMenu.Button>
-                          <ContextMenu.Button>Hawk</ContextMenu.Button>
-                          <ContextMenu.Button>Frontier</ContextMenu.Button>
-                          <ContextMenu.Button>Valiant</ContextMenu.Button>
-                          <ContextMenu.Button>Ion</ContextMenu.Button>
-                          <ContextMenu.Button>RCS Thruster</ContextMenu.Button>
-                        </ContextMenu.Container>
-                      }
-                    >
-                      Propulsion
-                    </ContextMenu.Extension>
-                    <ContextMenu.Extension
-                      extension={
-                        <ContextMenu.Container>
-                          <ContextMenu.Button>Parachute</ContextMenu.Button>
-                          <ContextMenu.Button>
-                            Side Parachute
-                          </ContextMenu.Button>
-                          <ContextMenu.Button>Separator</ContextMenu.Button>
-                          <ContextMenu.Button>
-                            Side Separator
-                          </ContextMenu.Button>
-                          <ContextMenu.Button>
-                            Side Landing Leg
-                          </ContextMenu.Button>
-                          <ContextMenu.Button>Landing Legs</ContextMenu.Button>
-                          <ContextMenu.Button>
-                            Large Landing Legs
-                          </ContextMenu.Button>
-                          <ContextMenu.Button>Wheel</ContextMenu.Button>
-                          <ContextMenu.Button>Large Wheel</ContextMenu.Button>
-                          <ContextMenu.Button>Solar Panel</ContextMenu.Button>
-                          <ContextMenu.Button>
-                            Large Solar Panel
-                          </ContextMenu.Button>
-                          <ContextMenu.Button>Docking Port</ContextMenu.Button>
-                        </ContextMenu.Container>
-                      }
-                    >
-                      Electric
-                    </ContextMenu.Extension>
-                    <ContextMenu.Extension
-                      extension={
-                        <ContextMenu.Container>
-                          <ContextMenu.Button>Nose Cone</ContextMenu.Button>
-                          <ContextMenu.Button>
-                            Side Nose Cone
-                          </ContextMenu.Button>
-                          <ContextMenu.Button>Fuselage</ContextMenu.Button>
-                        </ContextMenu.Container>
-                      }
-                    >
-                      Aerodynamic
-                    </ContextMenu.Extension>
+                    <ContextMenu.Button>Fuel Tank</ContextMenu.Button>
+                    <ContextMenu.Button>Structural Part</ContextMenu.Button>
                   </ContextMenu.Container>
                 }
               >
-                Add
+                Structural
+              </ContextMenu.Extension>
+              <ContextMenu.Extension
+                extension={
+                  <ContextMenu.Container>
+                    <ContextMenu.Button>Titan</ContextMenu.Button>
+                    <ContextMenu.Button>Hawk</ContextMenu.Button>
+                    <ContextMenu.Button>Frontier</ContextMenu.Button>
+                    <ContextMenu.Button>Valiant</ContextMenu.Button>
+                    <ContextMenu.Button>Ion</ContextMenu.Button>
+                    <ContextMenu.Button>RCS Thruster</ContextMenu.Button>
+                  </ContextMenu.Container>
+                }
+              >
+                Propulsion
+              </ContextMenu.Extension>
+              <ContextMenu.Extension
+                extension={
+                  <ContextMenu.Container>
+                    <ContextMenu.Button>Parachute</ContextMenu.Button>
+                    <ContextMenu.Button>Side Parachute</ContextMenu.Button>
+                    <ContextMenu.Button>Separator</ContextMenu.Button>
+                    <ContextMenu.Button>Side Separator</ContextMenu.Button>
+                    <ContextMenu.Button>Side Landing Leg</ContextMenu.Button>
+                    <ContextMenu.Button>Landing Legs</ContextMenu.Button>
+                    <ContextMenu.Button>Large Landing Legs</ContextMenu.Button>
+                    <ContextMenu.Button>Wheel</ContextMenu.Button>
+                    <ContextMenu.Button>Large Wheel</ContextMenu.Button>
+                    <ContextMenu.Button>Solar Panel</ContextMenu.Button>
+                    <ContextMenu.Button>Large Solar Panel</ContextMenu.Button>
+                    <ContextMenu.Button>Docking Port</ContextMenu.Button>
+                  </ContextMenu.Container>
+                }
+              >
+                Electric
+              </ContextMenu.Extension>
+              <ContextMenu.Extension
+                extension={
+                  <ContextMenu.Container>
+                    <ContextMenu.Button>Nose Cone</ContextMenu.Button>
+                    <ContextMenu.Button>Side Nose Cone</ContextMenu.Button>
+                    <ContextMenu.Button>Fuselage</ContextMenu.Button>
+                  </ContextMenu.Container>
+                }
+              >
+                Aerodynamic
               </ContextMenu.Extension>
             </ContextMenu.Container>
           }

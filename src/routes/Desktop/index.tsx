@@ -2,23 +2,20 @@ import devBlueprint from 'assets/blueprints/benchmark/fuel-tank';
 import EditingCanvas from 'components/EditingCanvas';
 import EditingPanel from 'components/EditingPanel';
 import * as Explorer from 'components/Explorer';
-import * as ContextMenu from 'components/LegacyContextMenu';
-import PseudoContainer from 'components/PseudoContainer';
 import { importifyBlueprint } from 'core/API/blueprint';
 import useBlueprint from 'core/hooks/useBlueprint';
-import useContextLayer from 'core/hooks/useContextLayer';
 import blueprintStore from 'core/stores/blueprint';
 import ToolbarBottom from './components/ToolbarBottom';
 import ToolBarTop from './components/ToolbarTop';
+import './index.scss';
 
 blueprintStore.setState(importifyBlueprint(devBlueprint));
 
 const Desktop = () => {
-  const contextLayer = useContextLayer([]);
   const blueprint = useBlueprint();
 
   return (
-    <PseudoContainer occupyTitleBar={true} fullscreen={true} flex={true}>
+    <div className="desktop-container">
       <ToolBarTop />
       <ToolbarBottom />
       <EditingPanel>
@@ -44,11 +41,7 @@ const Desktop = () => {
           parts={blueprintStore((state) => state.parts)}
         />
       </EditingPanel>
-      <ContextMenu.Container
-        contexts={contextLayer.state}
-        onBlur={contextLayer.removeAll}
-      />
-    </PseudoContainer>
+    </div>
   );
 };
 

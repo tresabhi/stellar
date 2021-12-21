@@ -1,5 +1,5 @@
-import PseudoContainer from 'components/PseudoContainer';
-
-const Mobile = () => <PseudoContainer>Mobile Coming Soon...</PseudoContainer>;
+const Mobile = () => (
+  <span style={{ color: 'white' }}>Mobile Coming Soon...</span>
+);
 
 export default Mobile;
