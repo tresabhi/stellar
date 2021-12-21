@@ -3,7 +3,7 @@ import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
 import { random } from 'lodash';
-import { FC, useRef } from 'react';
+import { FC, RefObject, useRef } from 'react';
 import './index.scss';
 
 /**
@@ -13,6 +13,21 @@ import './index.scss';
 const ToolBarTop: FC = () => {
   const blueprint = useBlueprint();
   const openInputRef = useRef<HTMLInputElement>(null);
+  const importInputRef = useRef<HTMLInputElement>(null);
+
+  const handleInputClick = (ref: RefObject<HTMLInputElement>) => {
+    if (ref.current?.files) {
+      const fileReader = new FileReader();
+      const file = ref.current.files[0];
+
+      fileReader.readAsText(file);
+
+      fileReader.onload = () => {
+        if (typeof fileReader.result == 'string')
+          blueprint.new(JSON.parse(fileReader.result));
+      };
+    }
+  };
 
   return (
     <div className="toolbar-top">
@@ -21,17 +36,14 @@ const ToolBarTop: FC = () => {
         accept=".stbp"
         ref={openInputRef}
         type="file"
-        onChange={() => {
-          if (openInputRef.current?.files) {
-            const fileReader = new FileReader();
-            const file = openInputRef.current.files[0];
-
-            fileReader.readAsText(file);
-
-            fileReader.onload = () =>
-              blueprint.new(JSON.parse(fileReader.result as string));
-          }
-        }}
+        onChange={() => handleInputClick(openInputRef)}
+      />
+      <input
+        className="open-input"
+        accept=".json, .txt"
+        ref={importInputRef}
+        type="file"
+        onChange={() => handleInputClick(importInputRef)}
       />
 
       <ControlMenu.Container>
@@ -42,21 +54,20 @@ const ToolBarTop: FC = () => {
               <ContextMenu.Button onClick={() => blueprint.new()}>
                 New
               </ContextMenu.Button>
-              <ContextMenu.Button
-                onClick={() => {
-                  openInputRef.current?.click();
-                }}
-              >
+              <ContextMenu.Button onClick={() => openInputRef.current?.click()}>
                 Open...
               </ContextMenu.Button>
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Button onClick={() => blueprint.save()}>
+              <ContextMenu.Button onClick={blueprint.save}>
                 Save
               </ContextMenu.Button>
-              <ContextMenu.Button disabled>Save as...</ContextMenu.Button>
-              <ContextMenu.Button disabled>Import...</ContextMenu.Button>
+              <ContextMenu.Button
+                onClick={() => importInputRef.current?.click()}
+              >
+                Import...
+              </ContextMenu.Button>
               <ContextMenu.Button disabled>Export...</ContextMenu.Button>
             </ContextMenu.Container>
           }
