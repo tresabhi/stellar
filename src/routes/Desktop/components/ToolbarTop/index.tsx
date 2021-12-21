@@ -133,6 +133,7 @@ const ToolBarTop: FC = () => {
           extension={
             <ContextMenu.Container>
               <ContextMenu.Extension
+                disabled
                 extension={
                   <ContextMenu.Container>
                     <ContextMenu.Button>Fuel Tank</ContextMenu.Button>
@@ -143,6 +144,7 @@ const ToolBarTop: FC = () => {
                 Structural
               </ContextMenu.Extension>
               <ContextMenu.Extension
+                disabled
                 extension={
                   <ContextMenu.Container>
                     <ContextMenu.Button>Titan</ContextMenu.Button>
@@ -157,6 +159,7 @@ const ToolBarTop: FC = () => {
                 Propulsion
               </ContextMenu.Extension>
               <ContextMenu.Extension
+                disabled
                 extension={
                   <ContextMenu.Container>
                     <ContextMenu.Button>Parachute</ContextMenu.Button>
@@ -177,6 +180,7 @@ const ToolBarTop: FC = () => {
                 Electric
               </ContextMenu.Extension>
               <ContextMenu.Extension
+                disabled
                 extension={
                   <ContextMenu.Container>
                     <ContextMenu.Button>Nose Cone</ContextMenu.Button>
@@ -195,8 +199,7 @@ const ToolBarTop: FC = () => {
         <ControlMenu.Button
           extension={
             <ContextMenu.Container>
-              {/* TODO: add discord invite */}
-              <ContextMenu.Button to="https://discord.gg/">
+              <ContextMenu.Button to="https://discord.gg/nDt7AjGJQH/">
                 Discord
               </ContextMenu.Button>
               {
