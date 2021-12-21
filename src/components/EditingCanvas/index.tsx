@@ -46,8 +46,8 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
       <ambientLight intensity={0.5} />
 
       <OrbitControls
-        maxZoom={400}
-        minZoom={2}
+        maxZoom={1024}
+        minZoom={2.2}
         mouseButtons={{
           LEFT: MOUSE.RIGHT,
           MIDDLE: MOUSE.MIDDLE,
