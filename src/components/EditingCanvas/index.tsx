@@ -62,7 +62,7 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
       />
       <gridHelper
         position={[center, 0, -99]}
-        args={[100000, 2, '#b062f5']}
+        args={[100000, 2, '#9952E0']}
         rotation={[Math.PI / 2, 0, 0]}
       />
 
@@ -70,9 +70,9 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
         position={[center, 0, -100]}
         axes="xyz"
         size1={1}
-        size2={4}
+        size2={5}
         distance={1000}
-        color={new Color('gray')}
+        color={new Color('#52527A')}
       />
 
       <group position={[offset.x, offset.y, 0]}>{partsJsx}</group>
