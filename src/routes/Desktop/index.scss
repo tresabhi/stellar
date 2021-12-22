@@ -3,4 +3,10 @@
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+
+  .editing-panel {
+    display: flex;
+    flex: 1;
+    height: 200px;
+  }
 }
