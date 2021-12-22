@@ -1,3 +1,3 @@
-export type type {
+export type type = {
   type: 'separator';
-}
+};

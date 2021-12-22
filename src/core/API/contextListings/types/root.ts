@@ -10,10 +10,10 @@ export interface contextMenuListing {
   listing: anyContextListingType[];
 }
 
-export type type {
+export type type = {
   type: string;
   icon?: FC;
-}
+};
 
 export type anyContextListingType =
   | ExtendContextListing.type
