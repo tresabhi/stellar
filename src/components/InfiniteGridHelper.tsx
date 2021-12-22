@@ -45,7 +45,7 @@ const InfiniteGridHelper: FC<InfiniteGridHelperProps> = ({
               uniform float uDistance;
 
               void main() {
-                vec3 pos = position.${axes} * uDistance * 2.0;
+                vec3 pos = position.${axes} * uDistance * 1.5;
                 pos.${planeAxes} += cameraPosition.${planeAxes};
                 worldPosition = pos;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
