@@ -38,11 +38,10 @@ Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](
 - RAM: 1GB+
 - Storage: 50MB+
 
-## 🪜 Major Dependencies
+## 🐒 Major Dependencies
 
 | Name                                                          | Usage                                                                   |
 | ------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [React Three Fiber](https://npmjs.org/@react-three/fiber/)    | ThreeJS based declarative                                               |
 | [React Three Fiber](https://npmjs.org/@react-three/fiber/)    | ThreeJS based declarative 3D renderer                                   |
 | [Drei](https://npmjs.org/@react-three/drei)                   | React Three Fiber helper tools                                          |
 | [Lodash](https://npmjs.org/lodash/)                           | Useful Javascript methods                                               |
