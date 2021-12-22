@@ -1,25 +1,33 @@
 import devBlueprint from 'assets/blueprints/benchmark/fuelTank';
 import { importifyBlueprint } from 'core/API/blueprint';
+import appState from 'core/stores/appState';
 import blueprintStore from 'core/stores/blueprint';
-import { Canvas } from './components/Canvas';
-import ExplorerLeft from './components/ExplorerLeft';
+import Layout from './components/Layout';
+import Rendering from './components/Rendering';
+import Simulation from './components/Simulation';
+import Staging from './components/Staging';
 import ToolbarBottom from './components/ToolbarBottom';
 import ToolBarTop from './components/ToolbarTop';
 import './index.scss';
 
 blueprintStore.setState(importifyBlueprint(devBlueprint));
 
-const Desktop = () => {
+export default function Desktop() {
+  const tab = appState((state) => state.tab);
+
   return (
     <div className="desktop-container">
       <ToolBarTop />
       <ToolbarBottom />
-      <div className="editing-panel">
-        <ExplorerLeft />
-        <Canvas />
-      </div>
+      {tab === 'layout' ? (
+        <Layout />
+      ) : tab === 'staging' ? (
+        <Staging />
+      ) : tab === 'simulation' ? (
+        <Simulation />
+      ) : (
+        <Rendering />
+      )}
     </div>
   );
-};
-
-export default Desktop;
+}

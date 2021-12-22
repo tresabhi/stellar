@@ -5,6 +5,7 @@ import useBlueprint from 'core/hooks/useBlueprint';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import './index.scss';
+import appState from 'core/stores/appState';
 
 /**
  * A toolbar containing the control menu buttons, tabs, file name, and window
@@ -218,10 +219,30 @@ const ToolBarTop: FC = () => {
       </ControlMenu.Container>
 
       <Tabs.Container className="toolbar-tabs">
-        <Tabs.Tab selected>Layout</Tabs.Tab>
-        <Tabs.Tab>Staging</Tabs.Tab>
-        <Tabs.Tab>Simulation</Tabs.Tab>
-        <Tabs.Tab>Rendering</Tabs.Tab>
+        <Tabs.Tab
+          onClick={() => appState.setState({ tab: 'layout' })}
+          selected={appState((state) => state.tab) === 'layout'}
+        >
+          Layout
+        </Tabs.Tab>
+        <Tabs.Tab
+          onClick={() => appState.setState({ tab: 'staging' })}
+          selected={appState((state) => state.tab) === 'staging'}
+        >
+          Staging
+        </Tabs.Tab>
+        <Tabs.Tab
+          onClick={() => appState.setState({ tab: 'simulation' })}
+          selected={appState((state) => state.tab) === 'simulation'}
+        >
+          Simulation
+        </Tabs.Tab>
+        <Tabs.Tab
+          onClick={() => appState.setState({ tab: 'rendering' })}
+          selected={appState((state) => state.tab) === 'rendering'}
+        >
+          Rendering
+        </Tabs.Tab>
       </Tabs.Container>
     </div>
   );
