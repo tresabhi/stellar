@@ -27,7 +27,7 @@
   "devDependencies": {
     "@types/file-saver": "^2.0.4",
     "@types/lodash": "^4.14.178",
-    "@types/react": "^17.0.37",
+    "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.8",
     "@types/three": "^0.135.0"
