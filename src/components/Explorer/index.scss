@@ -1,18 +1,18 @@
 @import '../../styles/index.scss';
 
+// Explorer
+$explorer-width: 320px;
+
+$explorer-tab-height: 34px;
+
+$explorer-listing-height: 34px;
+
 .explorer-container {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
 
   width: $explorer-width;
-
-  &.left {
-    border-right: $foreground-panel-border;
-  }
-  &.right {
-    border-left: $foreground-panel-border;
-  }
 
   .tabs-container {
     display: flex;
@@ -27,26 +27,22 @@
       font-weight: bold;
       flex: 1;
 
-      color: v(foreground-panel-text-color);
-      font-family: v(font-family-regular);
-
-      border-bottom: $foreground-panel-border;
+      color: white;
 
       font-size: $font-size-big;
     }
 
     .tab {
-      background-color: v(tab-unselected-background-color);
+      background-color: $black-light;
     }
 
     .tab.selected {
-      background-color: v(tab-selected-background-color);
+      background-color: $accent-regular;
     }
 
     .tab-static {
-      @include static;
-
-      background-color: v(tab-static-background-color);
+      cursor: default;
+      background-color: $black-light;
     }
   }
 
@@ -56,10 +52,10 @@
     flex: 1;
     display: none;
 
-    background-color: v(foreground-panel-background-color);
+    background-color: $black-regular;
 
     &.indented {
-      padding-left: $padding-bigger;
+      padding-left: $padding-thicker;
     }
 
     &.visible {
@@ -87,7 +83,7 @@
           display: none;
 
           &.left-most {
-            margin-left: $margin-smaller;
+            margin-left: $margin-thinner;
           }
         }
 
@@ -105,7 +101,7 @@
         }
 
         .quick-action {
-          margin-right: $margin-smaller;
+          margin-right: $margin-thinner;
         }
 
         .input {
@@ -115,10 +111,9 @@
           min-width: 0px;
           flex: 1;
 
-          color: v(foreground-panel-text-color);
-          font-family: v(font-family-regular);
+          color: white;
 
-          margin-left: $margin-smaller 0px $margin-smaller 0px;
+          margin-left: $margin-thinner 0px $margin-thinner 0px;
 
           &:focus {
             cursor: text;
@@ -127,11 +122,11 @@
       }
 
       &.selected > .button {
-        background-color: v(button-flush-selected-background-color);
+        background-color: $black-dark;
       }
 
       .button:hover {
-        background-color: v(button-flush-hover-background-color);
+        background-color: $black-light;
       }
     }
 
@@ -141,13 +136,12 @@
       align-items: center;
       flex-wrap: nowrap;
 
-      color: v(foreground-panel-text-color);
-      background-color: v(button-flush-background-color);
-      font-family: v(font-family-regular);
+      color: white;
+      background-color: $black-regular;
 
       font-size: $font-size-big;
       height: $explorer-listing-height;
-      padding: 0px $padding-bigger 0px $padding-bigger;
+      padding: 0px $padding-thicker 0px $padding-thicker;
     }
 
     .property-listing {
@@ -162,7 +156,7 @@
           margin-left: $margin-regular;
 
           span {
-            margin-right: $margin-smaller;
+            margin-right: $margin-thinner;
           }
         }
       }

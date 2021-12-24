@@ -18,7 +18,7 @@ import {
   useState,
 } from 'react';
 import UnitTextInput from '../UnitTextInput';
-// import './index.scss';
+import './index.scss';
 
 const INPUT_BLUR_KEYS = ['Enter', 'Escape'];
 
