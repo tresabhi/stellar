@@ -17,7 +17,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import UnitTextInput from '../UnitTextInput';
 import './index.scss';
 
 const INPUT_BLUR_KEYS = ['Enter', 'Escape'];
@@ -319,11 +318,11 @@ export const SubPropertyTextInput: FC<SubPropertyTextInputProps> = ({
   return (
     <div className="explorer-input">
       <span>{name || children}</span>
-      <UnitTextInput
+      {/* <UnitTextInput
         defaultValue={defaultValue}
         suffix={suffix}
         prefix={prefix}
-      />
+      /> */}
     </div>
   );
 };
