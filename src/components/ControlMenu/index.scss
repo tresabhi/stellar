@@ -6,29 +6,25 @@
   & > .control-menu-button {
     display: relative;
     font-size: $font-size-regular;
-    padding: $padding-big;
-    color: v(toolbar-top-control-menu-button-content-color);
-    background-color: v(toolbar-top-control-menu-button-background-color);
+    padding: $padding-thick;
+    color: white;
+    background-color: $black-darker;
 
     & > .control-menu-button-extension {
       position: absolute;
       display: none;
       cursor: default;
 
-      transform: translateX(calc($padding-big * -1)) translateY($padding-big);
+      transform: translateX(calc($padding-thick * -1)) translateY($padding-thick);
     }
 
     &:hover {
-      background-color: v(
-        toolbar-top-control-menu-button-hover-background-color
-      );
+      background-color: $black-dark;
     }
 
     &:active,
     &:focus-within + &:hover {
-      background-color: v(
-        toolbar-top-control-menu-button-active-background-color
-      );
+      background-color: $black-regular;
 
       & > .control-menu-button-extension {
         display: block;
@@ -38,9 +34,7 @@
 
   &:focus-within {
     .control-menu-button:hover {
-      background-color: v(
-        toolbar-top-control-menu-button-active-background-color
-      );
+      background-color: $black-regular;
 
       & > .control-menu-button-extension {
         display: block;

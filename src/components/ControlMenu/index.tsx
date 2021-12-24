@@ -1,5 +1,5 @@
 import { FC } from 'react';
-// import './index.scss';
+import './index.scss';
 
 /**
  * A container that holds control menu buttons buttons in the title bar
