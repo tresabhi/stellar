@@ -1,0 +1,40 @@
+@import '../index.scss';
+
+.context-menu {
+  background-color: v(context-menu-background-color);
+  box-shadow: 0px 0px $drop-shadow-blur-regular v(context-menu-drop-shadow);
+
+  .context-menu-button,
+  .context-menu-extension-button,
+  .context-menu-toggle-button {
+    color: v(context-menu-button-content-color);
+    background-color: v(context-menu-button-background-color);
+
+    &:hover {
+      background-color: v(context-menu-button-hover-background-color);
+    }
+
+    &:active {
+      background-color: v(context-menu-button-active-background-color);
+    }
+
+    &.disabled {
+      color: v(context-menu-button-disabled-content-color);
+      background-color: v(context-menu-button-background-color);
+
+      .context-menu-button-icon-holder .context-menu-button-icon {
+        fill: v(context-menu-button-disabled-content-color);
+      }
+    }
+
+    .context-menu-button-icon-holder {
+      fill: v(context-menu-button-content-color);
+    }
+  }
+
+  .context-menu-separator {
+    .context-menu-separator-line {
+      background-color: v(context-menu-separator-color);
+    }
+  }
+}
