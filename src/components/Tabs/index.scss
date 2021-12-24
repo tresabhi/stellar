@@ -7,19 +7,19 @@
 
   .tab {
     font-size: $font-size-regular;
-    color: v(toolbar-top-tab-content-color);
-    background-color: v(toolbar-top-tab-background-color);
-    padding: $padding-big;
+    color: white;
+    background-color: $black-regular;
+    padding: $padding-thick;
     border-radius: $border-radius-regular $border-radius-regular 0px 0px;
-    margin: 0px $margin-small 0px $margin-small;
+    margin: 0px $margin-thin 0px $margin-thin;
 
     &:hover {
-      background-color: v(toolbar-top-tab-hover-background-color);
+      background-color: $black-light;
     }
 
     &:active,
     &.selected {
-      background-color: v(toolbar-top-tab-active-background-color);
+      background-color: $black-lighter;
       cursor: default;
     }
   }
