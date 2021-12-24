@@ -1,6 +1,7 @@
 import { ReactComponent as CheckMarkIcon } from 'assets/icons/check-mark.svg';
 import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
+import './index.scss';
 
 /**
  * A container that holds context menu buttons

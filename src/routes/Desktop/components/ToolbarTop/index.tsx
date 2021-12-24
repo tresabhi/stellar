@@ -4,7 +4,7 @@ import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
-import './index.scss';
+// import './index.scss';
 import appState from 'core/stores/appState';
 
 /**

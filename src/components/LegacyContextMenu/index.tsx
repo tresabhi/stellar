@@ -5,7 +5,7 @@ import { FC, useRef } from 'react';
 import * as ExtendContextListing from '../../core/API/contextListings/types/extendButton';
 import * as RootContextListing from '../../core/API/contextListings/types/root';
 import * as TextContextListing from '../../core/API/contextListings/types/textButton';
-import './index.scss';
+// import './index.scss';
 
 interface TextButtonProps {
   data: TextContextListing.type;

@@ -17,20 +17,6 @@
   --toolbar-top-tab-hover-background-color: #{$black-light};
   --toolbar-top-tab-active-background-color: #{$black-lighter};
 
-  // Toolbar bottom
-
-  // Context menu
-  --context-menu-background-color: #{$black-dark};
-  --context-menu-drop-shadow: #{opacify($black-darker, 0.8)};
-
-  --context-menu-button-content-color: white;
-  --context-menu-button-disabled-content-color: #{$gray-darker};
-  --context-menu-button-background-color: #{$black-dark};
-  --context-menu-button-hover-background-color: #{$black-regular};
-  --context-menu-button-active-background-color: #{$black-light};
-
-  --context-menu-separator-color: #{$black-light};
-
   // Legacy abstractions
   --foreground-panel-text-color: white;
   --foreground-panel-unimportant-text-color: #{$gray-dark};

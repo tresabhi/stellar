@@ -8,7 +8,7 @@ import Simulation from './components/Simulation';
 import Staging from './components/Staging';
 import ToolbarBottom from './components/ToolbarBottom';
 import ToolBarTop from './components/ToolbarTop';
-import './index.scss';
+// import './index.scss';
 
 blueprintStore.setState(importifyBlueprint(devBlueprint));
 

@@ -6,7 +6,7 @@ import * as PartAPI from 'core/API/part/index';
 import * as RootPart from 'core/API/part/types/root';
 import { FC } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
-import './index.scss';
+// import './index.scss';
 
 interface EditingCanvasProps {
   center: number;

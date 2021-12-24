@@ -1,5 +1,5 @@
 import { FC, InputHTMLAttributes } from 'react';
-import './index.scss';
+// import './index.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,

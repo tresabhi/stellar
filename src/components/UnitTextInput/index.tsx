@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import './index.scss';
+// import './index.scss';
 
 interface UnitTextInputProps {
   defaultValue: number | string;

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 
-import './index.scss';
+// import './index.scss';
 
 interface ToggleProps {
   defaultState: boolean;

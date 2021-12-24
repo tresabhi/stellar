@@ -6,13 +6,15 @@ $accent-dark: hsl(270, 70%, 45%);
 $accent-darker: hsl(270, 70%, 40%);
 
 // Blacks
-$black-xx-lighter: hsl(240, 20%, 40%);
-$black-x-lighter: hsl(240, 20%, 35%);
+$black-xx-light: hsl(240, 20%, 40%);
+$black-x-light: hsl(240, 20%, 35%);
 $black-lighter: hsl(240, 20%, 30%);
 $black-light: hsl(240, 20%, 25%);
 $black-regular: hsl(240, 20%, 20%);
 $black-dark: hsl(240, 20%, 15%);
 $black-darker: hsl(240, 20%, 10%);
+$black-x-dark: hsl(240, 20%, 5%);
+$black-xx-dark: hsl(240, 20%, 0%);
 
 // Grays
 $gray-lighter: hsl(240, 20%, 95%);
@@ -20,6 +22,8 @@ $gray-light: hsl(240, 20%, 90%);
 $gray-regular: hsl(240, 20%, 85%);
 $gray-dark: hsl(240, 20%, 80%);
 $gray-darker: hsl(240, 20%, 75%);
+$gray-x-dark: hsl(240, 20%, 70%);
+$gray-xx-dark: hsl(240, 20%, 65%);
 
 // Blues
 $blue-lighter: hsl(240, 100%, 75%);
@@ -49,11 +53,9 @@ $yellow-regular: hsl(360, 100%, 65%);
 $yellow-dark: hsl(360, 100%, 60%);
 $yellow-darker: hsl(360, 100%, 55%);
 
-// LEGACY COLORS
-
-// Black shades
-// $black-shade-lighter: #444c56;
-// $black-shade-light: #393c42;
-$black-shade-regular: rgba(34, 39, 46, 0.8);
-$black-shade-dark: rgba(25, 28, 33, 0.8);
-// $black-shade-darker: #0f1113;
+// Shadow
+$shadow-lighter: opacify($black-lighter, 0.8);
+$shadow-light: opacify($black-light, 0.8);
+$shadow-regular: opacify($black-regular, 0.8);
+$shadow-dark: opacify($black-dark, 0.8);
+$shadow-darker: opacify($black-darker, 0.8);

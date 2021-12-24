@@ -4,8 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
 import Mobile from 'routes/Mobile';
 
-import 'styles/index.scss';
-import 'styles/themes/stellark/index.scss';
+import 'styles/index.scss'; // layout
 
 const Routed = () => {
   // TODO: use `useNavigate`

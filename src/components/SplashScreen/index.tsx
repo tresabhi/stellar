@@ -1,7 +1,7 @@
 import { ReactComponent as LoadingIcon } from 'assets/icons/loading.svg';
 import IconProvider from 'components/IconProvider';
 import useStellarName from 'core/hooks/useStellarName';
-import './index.scss';
+// import './index.scss';
 
 const SplashScreen = () => (
   <div className="splash-screen">
