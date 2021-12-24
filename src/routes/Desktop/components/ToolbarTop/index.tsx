@@ -2,10 +2,10 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
+import appState from 'core/stores/appState';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
-// import './index.scss';
-import appState from 'core/stores/appState';
+import './index.scss';
 
 /**
  * A toolbar containing the control menu buttons, tabs, file name, and window

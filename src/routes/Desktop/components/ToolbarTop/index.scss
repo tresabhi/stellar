@@ -1,10 +1,12 @@
 @import '../../../../styles/index.scss';
 
+$title-bar-height: 32px;
+
 .toolbar-top {
   // not attached to the title bar for now
 
   z-index: 1;
-  background-color: v(toolbar-top-background-color);
+  background-color: $black-darker;
   height: $title-bar-height;
   display: flex;
 
