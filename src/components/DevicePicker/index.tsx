@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import Package from '../../../package.json';
-// import './index.scss';
+import './index.scss';
 
 export const Container: FC = ({ children }) => (
   <div className="device-picker-container">{children}</div>

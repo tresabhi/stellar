@@ -8,8 +8,7 @@
   transform: translateY(-50%);
 
   .title {
-    color: v(background-panel-text-color);
-    font-family: v(font-family-regular);
+    color: white;
   }
 
   .card-list {
@@ -27,16 +26,15 @@
       width: 128px;
       height: 128px;
 
-      font-family: v(font-family-regular);
-      background-color: v(button-flush-background-color);
+      background-color: $black-regular;
       font-size: $font-size-big;
       border-radius: $border-radius-regular;
-      color: v(button-flush-content-color);
+      color: white;
 
       margin: $margin-regular;
 
       &:hover {
-        background-color: v(button-flush-hover-background-color);
+        background-color: $black-light;
       }
 
       svg,
@@ -57,13 +55,12 @@
 
         font-size: $font-size-small;
 
-        color: v(color-recommended);
+        color: $green-lighter;
       }
     }
   }
 
   .build {
-    color: v(background-panel-unimportant-text-color);
-    font-family: v(font-family-regular);
+    color: $gray-dark;
   }
 }
