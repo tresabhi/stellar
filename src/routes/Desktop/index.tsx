@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/benchmark/fuelTank';
+import devBlueprint from 'assets/blueprints/static/grouping.json';
 import { importifyBlueprint } from 'core/API/blueprint';
 import appState from 'core/stores/appState';
 import blueprintState from 'core/stores/blueprintState';

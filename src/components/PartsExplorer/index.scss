@@ -1,0 +1,32 @@
+@import '../../styles/index.scss';
+
+.parts-explorer {
+  display: flex;
+  flex-direction: column;
+
+  .parts-explorer-listing {
+    display: flex;
+    height: $button-major-height;
+    background-color: $black-regular;
+
+    &:hover {
+      background-color: $black-light;
+    }
+
+    &:focus-within {
+      background-color: $black-lighter;
+    }
+
+    .parts-explorer-listing-expand {
+      height: 100%;
+      width: $part-explorer-expand-width;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .parts-explorer-listing-expand-icon {
+        fill: white;
+      }
+    }
+  }
+}
