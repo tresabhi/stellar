@@ -5,6 +5,10 @@ export const data = {
   hasUnsavedChanges: false,
 
   tab: 'layout' as 'layout' | 'staging' | 'simulation' | 'rendering',
+  layout: {
+    leftSideBar: 'parts' as 'parts' | 'snippets',
+    rightSideBar: 'properties' as 'properties' | 'inspect',
+  },
 };
 
 // TODO: capitalize all types and interfaces
