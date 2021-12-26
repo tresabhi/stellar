@@ -1,6 +1,8 @@
 import * as Partition from 'components/Partition';
 import * as SideBar from 'components/SideBar';
 import appState from 'core/stores/appState';
+import blueprintState from 'core/stores/blueprintState';
+import * as PartsExplorer from 'components/PartsExplorer';
 
 export default function Explorer() {
   return (
@@ -10,7 +12,6 @@ export default function Explorer() {
           selected={appState((state) => state.layout.leftSideBar) === 'parts'}
           onClick={() =>
             appState.setState((state) => ({
-              ...state,
               layout: { ...state.layout, leftSideBar: 'parts' },
             }))
           }
@@ -24,7 +25,6 @@ export default function Explorer() {
           }
           onClick={() =>
             appState.setState((state) => ({
-              ...state,
               layout: { ...state.layout, leftSideBar: 'snippets' },
             }))
           }
@@ -32,11 +32,30 @@ export default function Explorer() {
           Snippets
         </Partition.Option>
       </Partition.Container>
-      {appState((state) => state.layout.leftSideBar) === 'parts' ? (
-        <SideBar.Scrollable>Explorer coming soon!</SideBar.Scrollable>
-      ) : (
-        <SideBar.Scrollable>Snippets coming soon!</SideBar.Scrollable>
-      )}
+      <SideBar.Scrollable
+        style={{
+          display:
+            appState((state) => state.layout.leftSideBar) === 'parts'
+              ? 'unset'
+              : 'none',
+        }}
+      >
+        <PartsExplorer.Container>
+          {blueprintState((state) => state.parts).map((part) => (
+            <PartsExplorer.Listing data={part} />
+          ))}
+        </PartsExplorer.Container>
+      </SideBar.Scrollable>
+      <SideBar.Scrollable
+        style={{
+          display:
+            appState((state) => state.layout.leftSideBar) === 'snippets'
+              ? 'unset'
+              : 'none',
+        }}
+      >
+        Snippets coming soon!
+      </SideBar.Scrollable>
     </SideBar.Container>
   );
 }

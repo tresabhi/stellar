@@ -1,4 +1,4 @@
-import useStellarName from 'core/hooks/useStellarName';
+import useStellarContext from 'core/hooks/useStellarContext';
 import { isMobile } from 'react-device-detect';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
@@ -11,7 +11,7 @@ const Routed = () => {
   if (window.location.pathname === '/')
     window.location.pathname = isMobile ? '/mobile' : '/desktop';
 
-  document.title = useStellarName();
+  document.title = useStellarContext().title;
 
   return (
     <BrowserRouter>

@@ -1,7 +1,7 @@
 import devBlueprint from 'assets/blueprints/benchmark/fuelTank';
 import { importifyBlueprint } from 'core/API/blueprint';
 import appState from 'core/stores/appState';
-import blueprintStore from 'core/stores/blueprint';
+import blueprintState from 'core/stores/blueprintState';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';
 import Simulation from './components/Simulation';
@@ -10,7 +10,7 @@ import ToolbarBottom from './components/ToolbarBottom';
 import ToolBarTop from './components/ToolbarTop';
 import './index.scss';
 
-blueprintStore.setState(importifyBlueprint(devBlueprint));
+blueprintState.setState(importifyBlueprint(devBlueprint));
 
 export default function Desktop() {
   const tab = appState((state) => state.tab);

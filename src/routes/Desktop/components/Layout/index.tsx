@@ -1,5 +1,5 @@
 import EditingCanvas from 'components/EditingCanvas';
-import blueprintStore from 'core/stores/blueprint';
+import blueprintState from 'core/stores/blueprintState';
 import Explorer from './components/Explorer';
 
 export default function Layout() {
@@ -7,9 +7,9 @@ export default function Layout() {
     <div className="editing-panel">
       <Explorer />
       <EditingCanvas
-        center={blueprintStore((state) => state.center)}
-        offset={blueprintStore((state) => state.offset)}
-        parts={blueprintStore((state) => state.parts)}
+        center={blueprintState((state) => state.center)}
+        offset={blueprintState((state) => state.offset)}
+        parts={blueprintState((state) => state.parts)}
       />
     </div>
   );

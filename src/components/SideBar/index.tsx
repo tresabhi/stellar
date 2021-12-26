@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 import './index.scss';
 
 /**
@@ -11,6 +11,11 @@ export const Container: FC = ({ children }) => (
 /**
  * Holds list of components that can be scroll
  */
-export const Scrollable: FC = ({ children }) => (
-  <div className="side-bar-scrollable">{children}</div>
+export const Scrollable: FC<InputHTMLAttributes<HTMLDivElement>> = ({
+  children,
+  ...props
+}) => (
+  <div className="side-bar-scrollable" {...props}>
+    {children}
+  </div>
 );
