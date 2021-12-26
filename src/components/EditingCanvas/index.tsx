@@ -62,7 +62,7 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
       />
       <gridHelper
         position={[center, 0, -99]}
-        args={[1e10, 2, '#9952E0']}
+        args={[1e5, 2, '#9952E0']}
         rotation={[Math.PI / 2, 0, 0]}
       />
 

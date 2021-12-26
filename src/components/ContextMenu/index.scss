@@ -1,11 +1,5 @@
 @import '../../styles/index.scss';
 
-$context-menu-min-width: 240px;
-$context-menu-max-width: 320px;
-$context-menu-button-height: 32px;
-
-$context-menu-separator-thickness: 2px;
-
 .context-menu {
   background-color: $black-dark;
   border-radius: $border-radius-regular;
@@ -24,7 +18,7 @@ $context-menu-separator-thickness: 2px;
     font-size: $font-size-regular;
     color: white;
     background-color: $black-dark;
-    height: $context-menu-button-height;
+    height: $button-major-height;
     padding: $padding-thick 0px $padding-thick $padding-thick;
     text-align: left;
 
@@ -48,7 +42,7 @@ $context-menu-separator-thickness: 2px;
 
     .context-menu-button-icon-holder {
       fill: white;
-      width: $context-menu-button-height;
+      width: $button-major-height;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -60,13 +54,13 @@ $context-menu-separator-thickness: 2px;
   }
 
   .context-menu-separator {
-    height: calc($context-menu-button-height / 2);
+    height: calc($button-major-height / 2);
     display: flex;
     align-items: center;
     justify-content: center;
 
     .context-menu-separator-line {
-      height: $context-menu-separator-thickness;
+      height: $separator-thickness;
       width: calc(100% - $padding-thick * 2);
       border-radius: $border-radius-sharper;
       background-color: $black-light;
@@ -89,7 +83,7 @@ $context-menu-separator-thickness: 2px;
     &:not(.disabled) {
       &:hover,
       &:focus-within {
-        & > .context-menu-extension-button-extension {
+        .context-menu-extension-button-extension {
           display: block;
         }
       }

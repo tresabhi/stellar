@@ -1,17 +1,11 @@
 import EditingCanvas from 'components/EditingCanvas';
-import * as SideBar from 'components/SideBar';
-import useBlueprint from 'core/hooks/useBlueprint';
 import blueprintStore from 'core/stores/blueprint';
+import Explorer from './components/Explorer';
 
 export default function Layout() {
-  const blueprint = useBlueprint();
-
   return (
     <div className="editing-panel">
-      <SideBar.Container>
-        {/* Tabs here */}
-        <SideBar.Scrollable></SideBar.Scrollable>
-      </SideBar.Container>
+      <Explorer />
       <EditingCanvas
         center={blueprintStore((state) => state.center)}
         offset={blueprintStore((state) => state.offset)}

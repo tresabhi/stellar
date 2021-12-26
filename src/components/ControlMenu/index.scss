@@ -3,19 +3,20 @@
 .control-menu {
   display: flex;
 
-  & > .control-menu-button {
+  .control-menu-button {
     display: relative;
     font-size: $font-size-regular;
     padding: $padding-thick;
     color: white;
     background-color: $black-darker;
 
-    & > .control-menu-button-extension {
+    .control-menu-button-extension {
       position: absolute;
       display: none;
       cursor: default;
 
-      transform: translateX(calc($padding-thick * -1)) translateY($padding-thick);
+      transform: translateX(calc($padding-thick * -1))
+        translateY($padding-thick);
     }
 
     &:hover {
@@ -26,7 +27,7 @@
     &:focus-within + &:hover {
       background-color: $black-regular;
 
-      & > .control-menu-button-extension {
+      .control-menu-button-extension {
         display: block;
       }
     }
@@ -36,7 +37,7 @@
     .control-menu-button:hover {
       background-color: $black-regular;
 
-      & > .control-menu-button-extension {
+      .control-menu-button-extension {
         display: block;
       }
     }
