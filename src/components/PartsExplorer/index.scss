@@ -6,6 +6,7 @@
 
   .parts-explorer-listing {
     display: flex;
+    align-items: center;
     height: $button-major-height;
     background-color: $black-regular;
 
@@ -27,6 +28,26 @@
       .parts-explorer-listing-expand-icon {
         fill: white;
       }
+    }
+
+    .parts-explorer-listing-icon-holder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: $button-major-height;
+
+      .parts-explorer-listing-icon {
+        width: $icon-size-regular;
+        height: $icon-size-regular;
+        fill: white;
+      }
+    }
+
+    .parts-explorer-listing-label {
+      color: white;
+      flex: 1;
+      text-align: left;
     }
   }
 }
