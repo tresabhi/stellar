@@ -48,6 +48,11 @@
       color: white;
       flex: 1;
       text-align: left;
+      cursor: pointer;
+
+      &:focus {
+        cursor: text;
+      }
     }
   }
 }

@@ -1,10 +1,12 @@
 import * as RootPart from 'core/API/part/types/root';
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import './index.scss';
 import { ReactComponent as ExpandIcon } from 'assets/icons/expand.svg';
 import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import { getPartIconComponent } from 'core/API/part';
+
+const INPUT_BLUR_KEYS = ['Enter', 'Escape'];
 
 export const Container: FC = ({ children }) => (
   <div className="parts-explorer">{children}</div>
@@ -17,8 +19,10 @@ interface ListingProps {
  * A component that represents a part, usually using in `SideBar`
  */
 export const Listing: FC<ListingProps> = ({ data }) => {
-  const [expanded, setExpanded] = useState(false);
   const Icon = getPartIconComponent(data.n);
+  const [expanded, setExpanded] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
     <button className="parts-explorer-listing">
@@ -26,6 +30,7 @@ export const Listing: FC<ListingProps> = ({ data }) => {
 
       {/* expand/collapse and/or dependency graphs */}
       <button
+        ref={buttonRef}
         onClick={(event) => {
           // stop parent from being clicked
           event.stopPropagation();
@@ -54,9 +59,24 @@ export const Listing: FC<ListingProps> = ({ data }) => {
         )}
       </div>
 
-      <span className="parts-explorer-listing-label">
-        {data['.stellar'].label}
-      </span>
+      <input
+        ref={inputRef}
+        onMouseDown={(event) => {
+          event.preventDefault();
+          buttonRef.current?.focus();
+        }}
+        onDoubleClick={() => {
+          inputRef.current?.focus();
+        }}
+        onBlur={() => {
+          inputRef.current!.value = inputRef.current!.value.trim();
+        }}
+        onKeyPress={(event) => {
+          if (INPUT_BLUR_KEYS.includes(event.key)) buttonRef.current?.focus();
+        }}
+        className="parts-explorer-listing-label"
+        defaultValue={data['.stellar'].label}
+      />
 
       {/* visible */}
       {/* lock */}
