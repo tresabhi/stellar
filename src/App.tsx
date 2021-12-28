@@ -7,11 +7,13 @@ import Mobile from 'routes/Mobile';
 import 'styles/index.scss'; // layout
 
 const Routed = () => {
+  const stellarContext = useStellarContext();
+
   // TODO: use `useNavigate`
   if (window.location.pathname === '/')
     window.location.pathname = isMobile ? '/mobile' : '/desktop';
 
-  document.title = useStellarContext().title;
+  document.title = `${stellarContext.title} v${stellarContext.version}`;
 
   return (
     <BrowserRouter>

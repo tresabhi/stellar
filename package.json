@@ -1,6 +1,6 @@
 {
   "name": "stellar",
-  "version": "0.1-beta.2",
+  "version": "0.1.0-beta.2",
   "private": true,
   "type": "module",
   "dependencies": {
@@ -19,6 +19,7 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
+    "semver": "^7.3.5",
     "simplebar-react": "^2.3.6",
     "three": "^0.135.0",
     "typescript": "^4.5.4",

@@ -1,3 +1,6 @@
+import { coerce } from 'semver';
+import packageJson from '../../../package.json';
+
 export default function useStellarContext() {
   let title;
 
@@ -20,5 +23,5 @@ export default function useStellarContext() {
       break;
   }
 
-  return { title };
+  return { title, version: coerce(packageJson.version)?.version };
 }
