@@ -1,12 +1,6 @@
 .desktop-container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
-
-  .editing-panel {
-    display: flex;
-    flex: 1;
-    height: 200px;
-  }
 }

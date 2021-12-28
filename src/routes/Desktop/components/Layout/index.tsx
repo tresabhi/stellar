@@ -1,6 +1,7 @@
 import EditingCanvas from 'components/EditingCanvas';
 import blueprintState from 'core/stores/blueprintState';
 import Explorer from './components/Explorer';
+import './index.scss';
 
 export default function Layout() {
   return (

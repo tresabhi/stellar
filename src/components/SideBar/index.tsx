@@ -1,3 +1,4 @@
+import Scroller from 'components/Scroller';
 import { FC, InputHTMLAttributes } from 'react';
 import './index.scss';
 
@@ -15,7 +16,7 @@ export const Scrollable: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
 }) => (
-  <div className="side-bar-scrollable" {...props}>
+  <Scroller className="side-bar-scrollable-scroller" {...props}>
     {children}
-  </div>
+  </Scroller>
 );
