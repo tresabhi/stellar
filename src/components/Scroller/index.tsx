@@ -7,7 +7,7 @@ const Scroller: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
 }) => (
-  <SimpleBar {...props} className={`${props.className} scroller-simplebar`}>
+  <SimpleBar {...props} className={`${props.className} scroller`}>
     {children}
   </SimpleBar>
 );

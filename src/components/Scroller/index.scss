@@ -1,3 +1,20 @@
-.scroller-simplebar {
-  overflow-y: auto;
+@import '../../styles/index.scss';
+
+.simplebar-scrollbar:before {
+  background-color: $gray-xx-dark;
+  border-radius: $border-radius-regular;
+  right: $margin-regular;
+}
+
+.simplebar-track.simplebar-vertical {
+  width: calc($scrollbar-width + 6px);
+}
+
+.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+  top: $margin-regular;
+  bottom: $margin-regular;
+}
+
+.simplebar-track.simplebar-horizontal .simplebar-scrollbar {
+  // width: 40px;
 }
