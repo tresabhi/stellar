@@ -36,26 +36,23 @@ export default function useKeybind(
   options = { ...DefaultOptions, ...options };
 
   return (event: KeyboardEvent | ReactKeyboardEvent) => {
-    // runs callback a few other things from `options`
     const callCompositeCallback = () => {
-      if (options?.preventDefault) event.preventDefault;
-      if (options?.stopPropagation) event.stopPropagation;
+      if (options?.preventDefault) event.preventDefault();
+      if (options?.stopPropagation) event.stopPropagation();
 
       (async () => callback())();
     };
 
-    // parses modifier based on is<Modifier> booleans
     const parseModifier = (modifier: Modifier) =>
       event[ModifierBools[modifier]];
 
     const modifier =
       typeof keybind === 'string'
-        ? true // no modifiers
+        ? true
         : typeof keybind[0] === 'string'
-        ? parseModifier(keybind[0] as Modifier) // one modifier
-        : (keybind[0] as Modifier[]).every(parseModifier); // mutliple modifiers
+        ? parseModifier(keybind[0] as Modifier)
+        : (keybind[0] as Modifier[]).every(parseModifier);
 
-    // key is the second item when you have modifiers
     const key =
       event.key === (typeof keybind === 'string' ? keybind : keybind[1]);
 
