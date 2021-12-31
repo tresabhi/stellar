@@ -5,8 +5,7 @@ import { ReactComponent as ExpandIcon } from 'assets/icons/expand.svg';
 import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import { getPartIconComponent } from 'core/API/part';
-
-const INPUT_BLUR_KEYS = ['Enter', 'Escape'];
+import useKeybind from 'core/hooks/useKeybind';
 
 export const Container: FC = ({ children }) => (
   <div className="parts-explorer">{children}</div>
@@ -23,6 +22,11 @@ export const Listing: FC<ListingProps> = ({ data }) => {
   const [expanded, setExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const keybind = useKeybind(
+    () => alert('hello world!'),
+    [['Control', 'Shift'], 'Enter'],
+  );
 
   return (
     <button className="parts-explorer-listing">
@@ -71,9 +75,10 @@ export const Listing: FC<ListingProps> = ({ data }) => {
         onBlur={() => {
           inputRef.current!.value = inputRef.current!.value.trim();
         }}
-        onKeyPress={(event) => {
-          if (INPUT_BLUR_KEYS.includes(event.key)) buttonRef.current?.focus();
-        }}
+        // onKeyPress={(event) => {
+        //   if (INPUT_BLUR_KEYS.includes(event.key)) buttonRef.current?.focus();
+        // }}
+        onKeyPress={keybind}
         className="parts-explorer-listing-label"
         defaultValue={data['.stellar'].label}
       />
