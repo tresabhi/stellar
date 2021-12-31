@@ -1,11 +1,12 @@
 import EditingCanvas from 'components/EditingCanvas';
 import blueprintState from 'core/stores/blueprintState';
+import { FC, InputHTMLAttributes } from 'react';
 import Explorer from './components/Explorer';
 import './index.scss';
 
-export default function Layout() {
+const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   return (
-    <div className="editing-panel">
+    <div {...props} className={`${props.className} layout-tab`}>
       <Explorer />
       <EditingCanvas
         center={blueprintState((state) => state.center)}
@@ -14,4 +15,6 @@ export default function Layout() {
       />
     </div>
   );
-}
+};
+
+export default Layout;

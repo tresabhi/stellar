@@ -19,15 +19,11 @@ export default function Desktop() {
     <div className="desktop-container">
       <ToolBarTop />
       <ToolbarBottom />
-      {tab === 'layout' ? (
-        <Layout />
-      ) : tab === 'staging' ? (
-        <Staging />
-      ) : tab === 'simulation' ? (
-        <Simulation />
-      ) : (
-        <Rendering />
-      )}
+
+      <Layout style={{ display: tab === 'layout' ? 'flex' : 'none' }} />
+      <Staging style={{ display: tab === 'staging' ? 'flex' : 'none' }} />
+      <Simulation style={{ display: tab === 'simulation' ? 'flex' : 'none' }} />
+      <Rendering style={{ display: tab === 'rendering' ? 'flex' : 'none' }} />
     </div>
   );
 }
