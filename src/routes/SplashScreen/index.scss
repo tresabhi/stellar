@@ -1,7 +1,7 @@
 @import '../../styles/index.scss';
 
 .splash-screen {
-  background-color: v(foreground-panel-background-color);
+  background-color: $black-dark;
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -13,12 +13,13 @@
   flex-direction: column;
 
   .stellar-icon {
-    width: $icon-size-huge;
-    height: $icon-size-huge;
+    width: $icon-size-xxxxxx-big;
+    height: $icon-size-xxxxxx-big;
   }
 
   .loading-text {
-    margin-top: $margin-xxx-bigger;
+    color: white;
+    margin-top: $margin-xxx-thick;
     font-size: $font-size-bigger;
     display: flex;
     align-items: center;
@@ -58,10 +59,10 @@
         }
       }
 
-      margin-left: $margin-regular;
+      margin-left: $margin-thick;
       display: inline-block;
-      width: $icon-size-regular;
-      height: $icon-size-regular;
+      width: $icon-size-big;
+      height: $icon-size-big;
       animation-name: bounce;
       animation-duration: 1s;
       animation-iteration-count: infinite;

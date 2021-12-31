@@ -1,4 +1,4 @@
-import SplashScreen from 'components/SplashScreen';
+import SplashScreen from 'routes/SplashScreen';
 import { lazy, StrictMode, Suspense } from 'react';
 import { render } from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
