@@ -1,7 +1,6 @@
-import devBlueprint from 'assets/blueprints/static/grouping.json';
-import { importifyBlueprint } from 'core/API/blueprint';
+import createKeybind from 'core/methods/createKeybind';
 import appState from 'core/stores/appState';
-import blueprintState from 'core/stores/blueprintState';
+import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';
 import Simulation from './components/Simulation';
@@ -10,10 +9,28 @@ import ToolbarBottom from './components/ToolbarBottom';
 import ToolBarTop from './components/ToolbarTop';
 import './index.scss';
 
-blueprintState.setState(importifyBlueprint(devBlueprint));
+const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
+  'layout',
+  'staging',
+  'simulation',
+  'rendering',
+];
 
 export default function Desktop() {
   const tab = appState((state) => state.tab);
+
+  useEffect(() => {
+    const keybind = createKeybind(() => {
+      appState.setState((state) => ({
+        tab:
+          state.tab === tabOrder[tabOrder.length - 1]
+            ? tabOrder[0]
+            : tabOrder[tabOrder.indexOf(state.tab) + 1],
+      }));
+    }, ['Control', 'Tab']);
+
+    document.addEventListener('keypress', keybind);
+  }, []);
 
   return (
     <div className="desktop-container">

@@ -28,7 +28,7 @@ export type Options = Partial<typeof DefaultOptions>;
  * @param preventDefault Prevents the default actions taken by the browser
  * @returns `void`
  */
-export default function useKeybind(
+export default function createKeybind(
   callback: Function,
   keybind: Keybind | Keybind[],
   options?: Options,
