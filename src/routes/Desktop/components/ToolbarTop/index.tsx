@@ -2,10 +2,12 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
+import useStellarContext from 'core/hooks/useStellarContext';
 import appState from 'core/stores/appState';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import './index.scss';
+import settingsStore from 'core/stores/settings';
 
 /**
  * A toolbar containing the control menu buttons, tabs, file name, and window
@@ -13,6 +15,7 @@ import './index.scss';
  */
 const ToolBarTop: FC = () => {
   const blueprint = useBlueprint();
+  const stellarContext = useStellarContext();
   const openInputRef = useRef<HTMLInputElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
 
@@ -216,6 +219,20 @@ const ToolBarTop: FC = () => {
         >
           Help
         </ControlMenu.Button>
+        {stellarContext.codeName === 'dev' ||
+        stellarContext.codeName === 'next' ? (
+          <ControlMenu.Button
+            extension={
+              <ContextMenu.Toggle
+                defaultState={settingsStore.getState().debug.loadDummyOnLaunch}
+              >
+                Load dummy BP on launch
+              </ContextMenu.Toggle>
+            }
+          >
+            Debug
+          </ControlMenu.Button>
+        ) : undefined}
       </ControlMenu.Container>
 
       <Tabs.Container className="toolbar-tabs">

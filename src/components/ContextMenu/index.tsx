@@ -90,7 +90,7 @@ export const Extension: FC<ExtensionProps> = ({
   );
 };
 
-interface ToggleProps {
+interface ToggleProps extends InputHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   defaultState?: boolean;
 }
@@ -102,15 +102,21 @@ export const Toggle: FC<ToggleProps> = ({
   children,
   disabled = false,
   defaultState = false,
+  ...props
 }) => {
   const [state, setState] = useState(defaultState);
 
   return (
+    //@ts-ignore
     <button
-      className={`context-menu-toggle-button ${
+      {...props}
+      className={`${props.className} context-menu-toggle-button ${
         disabled ? 'disabled' : 'enabled'
       }`}
-      onClick={() => setState((state) => !state)}
+      onClick={(event) => {
+        setState((state) => !state);
+        if (props.onClick) props.onClick(event);
+      }}
     >
       <span className="context-menu-button-text">{children}</span>
       <div className="context-menu-button-icon-holder">

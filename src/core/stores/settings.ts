@@ -1,5 +1,19 @@
+import { merge } from 'lodash';
 import create from 'zustand';
+import { persist } from 'zustand/middleware';
 
-type Settings = {};
+const data = {
+  debug: {
+    loadDummyOnLaunch: false,
+  },
+};
 
-create<Settings>(() => ({}));
+type Settings = typeof data & {};
+
+export default create(
+  persist(() => data, {
+    name: 'settings',
+    merge: (persistedState, currentState) =>
+      merge(currentState, persistedState),
+  }),
+);
