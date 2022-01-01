@@ -7,11 +7,11 @@ import { FC, InputHTMLAttributes } from 'react';
 import Explorer from './components/Explorer';
 import './index.scss';
 
-const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
-  if (settingsStore.getState().debug.loadDummyOnLaunch) {
-    blueprintStore.setState(importifyBlueprint(devBlueprint));
-  }
+if (settingsStore.getState().debug.loadDummyOnLaunch) {
+  blueprintStore.setState(importifyBlueprint(devBlueprint));
+}
 
+const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   const blueprint = blueprintStore((state) => state);
 
   return (
