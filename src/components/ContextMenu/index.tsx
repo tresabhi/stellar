@@ -110,7 +110,7 @@ export const Toggle: FC<ToggleProps> = ({
     //@ts-ignore
     <button
       {...props}
-      className={`${props.className} context-menu-toggle-button ${
+      className={`${props?.className} context-menu-toggle-button ${
         disabled ? 'disabled' : 'enabled'
       }`}
       onClick={(event) => {

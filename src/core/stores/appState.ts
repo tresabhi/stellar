@@ -1,4 +1,5 @@
 import create from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 export const data = {
   name: 'blueprint',
@@ -14,4 +15,4 @@ export const data = {
 // TODO: capitalize all types and interfaces
 export type Type = typeof data;
 
-export default create<Type>(() => data);
+export default create<Type>(devtools(() => data, { name: 'app_state' }));

@@ -1,7 +1,7 @@
 import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
 import appState from 'core/stores/appState';
-import blueprintState from 'core/stores/blueprintState';
+import blueprintStore from 'core/stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
 
 export default function Explorer() {
@@ -41,7 +41,7 @@ export default function Explorer() {
         }}
       >
         <PartsExplorer.Container>
-          {blueprintState((state) => state.parts).map((part) => (
+          {blueprintStore((state) => state.parts).map((part) => (
             <PartsExplorer.Listing data={part} />
           ))}
         </PartsExplorer.Container>

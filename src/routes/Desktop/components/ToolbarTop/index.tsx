@@ -223,11 +223,23 @@ const ToolBarTop: FC = () => {
         stellarContext.codeName === 'next' ? (
           <ControlMenu.Button
             extension={
-              <ContextMenu.Toggle
-                defaultState={settingsStore.getState().debug.loadDummyOnLaunch}
-              >
-                Load dummy BP on launch
-              </ContextMenu.Toggle>
+              <ContextMenu.Container>
+                <ContextMenu.Toggle
+                  defaultState={
+                    settingsStore.getState().debug.loadDummyOnLaunch
+                  }
+                  onClick={() => {
+                    settingsStore.setState((state) => ({
+                      debug: {
+                        ...state.debug,
+                        loadDummyOnLaunch: !state.debug.loadDummyOnLaunch,
+                      },
+                    }));
+                  }}
+                >
+                  Load dummy BP on launch
+                </ContextMenu.Toggle>
+              </ContextMenu.Container>
             }
           >
             Debug

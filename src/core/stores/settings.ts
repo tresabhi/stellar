@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 import create from 'zustand';
-import { persist } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 const data = {
   debug: {
@@ -10,10 +10,13 @@ const data = {
 
 type Settings = typeof data & {};
 
-export default create(
-  persist(() => data, {
-    name: 'settings',
-    merge: (persistedState, currentState) =>
-      merge(currentState, persistedState),
-  }),
+export default create<Settings>(
+  devtools(
+    persist(() => data, {
+      name: 'settings',
+      merge: (persistedState, currentState) =>
+        merge(currentState, persistedState),
+    }),
+    { name: 'settings' },
+  ),
 );

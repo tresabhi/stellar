@@ -2,7 +2,7 @@ import { importifyBlueprint } from 'core/API/blueprint';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as GroupPart from 'core/API/part/types/group';
 import * as RootPart from 'core/API/part/types/root';
-import blueprintState from 'core/stores/blueprintState';
+import blueprintStore from 'core/stores/blueprint';
 import { saveAs } from 'file-saver';
 import { cloneDeep, merge } from 'lodash';
 
@@ -18,12 +18,12 @@ export default function useBlueprint() {
     hasUnsavedChanges: false,
     currentFileName: 'blueprint.stbp',
 
-    createParts: () => blueprintState.setState((state) => {}),
+    createParts: () => blueprintStore.setState((state) => {}),
 
     deleteParts: (addresses: RootBlueprint.PartAddresses) => {
       hook.hasUnsavedChanges = true;
 
-      blueprintState.setState((state) => {
+      blueprintStore.setState((state) => {
         // TODO: sort addresses first to avoid deleting shifted parts
         // ...or we could utilize the tree selection system
         const newParts = [...state.parts];
@@ -51,7 +51,7 @@ export default function useBlueprint() {
     ) => {
       hook.hasUnsavedChanges = true;
 
-      blueprintState.setState((state) => {
+      blueprintStore.setState((state) => {
         const newParts = [...state.parts];
 
         addresses.forEach((address) => {
@@ -84,7 +84,7 @@ export default function useBlueprint() {
     new: (blueprint = {}) => {
       const action = () => {
         hook.hasUnsavedChanges = false;
-        blueprintState.setState(
+        blueprintStore.setState(
           merge(importifyBlueprint(cloneDeep(blueprint)), RootBlueprint.data),
         );
       };
@@ -97,7 +97,7 @@ export default function useBlueprint() {
     save: () => {
       // TODO: give it a name
       // TODO: use exportify functions
-      const blob = new Blob([JSON.stringify(blueprintState.getState())], {
+      const blob = new Blob([JSON.stringify(blueprintStore.getState())], {
         type: 'text/plain;charset=utf-8',
       });
       // TODO: fix current name not renaming file
