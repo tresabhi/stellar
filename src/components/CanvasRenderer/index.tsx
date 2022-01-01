@@ -8,12 +8,17 @@ import { FC } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
 import './index.scss';
 
+// TODO: Add more renderers for simulation, rendering, debugging, etc.
+
 interface EditingCanvasProps {
   center: number;
   offset: { x: number; y: number };
   parts: RootBlueprint.anyPartTypeArray;
 }
-const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
+/**
+ * Renders the blueprint in a close-to-vanilla fashion.
+ */
+const VanillaRenderer: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   const partsJsx: JSX.Element[] = [];
 
   const insertPartComponents = (parts: RootPart.anyPartType[]) => {
@@ -80,4 +85,4 @@ const EditingCanvas: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
   );
 };
 
-export default EditingCanvas;
+export default VanillaRenderer;

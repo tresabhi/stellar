@@ -11,9 +11,13 @@ const DOMAIN_ICONS = {
   'stellaredit.web.app': StellarIcon,
 };
 
+
 interface IconProviderProps {
   className: string;
 }
+/**
+ * @deprecated TODO: provide a component in `useStellarContext`.
+ */
 const IconProvider: FC<IconProviderProps> = (props) => {
   const IconComponent =
     (DOMAIN_ICONS as any)?.[window.location.host] ?? DOMAIN_ICONS.default;

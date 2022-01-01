@@ -10,7 +10,7 @@ interface InfiniteGridHelperProps extends GroupProps {
   axes?: string;
 }
 /**
- * An infinite grid made using shader materials
+ * A helper to create a infinite grid.
  *
  * Thanks Fyrestar for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
  */

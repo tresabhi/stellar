@@ -1,16 +1,16 @@
-import Scroller from 'components/Scroller';
+import Scroller from 'components/ScrollableContainer';
 import { FC, InputHTMLAttributes } from 'react';
 import './index.scss';
 
 /**
- * Holds everything within the side bar with responsive CSS
+ * Holds various components that usually appear on the sides.
  */
 export const Container: FC = ({ children }) => (
   <div className="side-bar">{children}</div>
 );
 
 /**
- * Holds list of components that can be scroll
+ * Holds components that usually needed to be scrolled through.
  */
 export const Scrollable: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
