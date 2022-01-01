@@ -22,7 +22,7 @@ export const DefaultOptions = {
 export type Options = Partial<typeof DefaultOptions>;
 
 /**
- * Quickly create keybinds for a KeyboardEvent
+ * Binds a callback to a key combo with minimal boilerplate.
  * @param callback A function that is run when the key bind is pressed
  * @param keybinds A specific selection of keys that have to be pressed
  * @param preventDefault Prevents the default actions taken by the browser
