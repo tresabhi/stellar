@@ -5,14 +5,12 @@ import Explorer from './components/Explorer';
 import './index.scss';
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
+  const blueprint = blueprintState((state) => state);
+
   return (
     <div {...props} className={`${props.className} layout-tab`}>
       <Explorer />
-      <EditingCanvas
-        center={blueprintState((state) => state.center)}
-        offset={blueprintState((state) => state.offset)}
-        parts={blueprintState((state) => state.parts)}
-      />
+      <EditingCanvas data={blueprint} />
     </div>
   );
 };

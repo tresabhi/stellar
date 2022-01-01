@@ -34,12 +34,12 @@ export const data = {
   },
 };
 
-export type type = typeof data;
+export type Type = typeof data;
 
-export type anyPartType = FuelTankPart.type | GroupPart.type;
-export type anyVanillaPartType = FuelTankPart.vanillaType;
+export type AnyPartType = FuelTankPart.Type | GroupPart.Type;
+export type AnyVanillaPartType = FuelTankPart.VanillaType;
 
-export type anyPartialPartType = DeepPartial<anyPartType>;
-export type anyPartialVanillaPartType = DeepPartial<anyVanillaPartType>;
+export type AnyPartialPartType = DeepPartial<AnyPartType>;
+export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPartType>;
 
 export const Component = memo(() => <mesh />);

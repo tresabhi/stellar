@@ -6,15 +6,15 @@ import * as FuelTank from './types/fuelTank';
 import * as Group from './types/group';
 import * as Root from './types/root';
 
-export interface partModule {
+export type PartModule = {
   type: Type;
-  data: Root.type;
+  data: Root.Type;
   Component: FC;
   icon: FC<SVGProps<SVGSVGElement>>;
-}
+};
 
 export interface RootPartComponentProps {
-  data: Root.type;
+  data: Root.Type;
 }
 
 // TODO: Fix this `any` type.
@@ -29,15 +29,14 @@ const partComponentNames: { [key: string]: any } = {
  * @param partName The name of the part to get the module for
  * @returns The module for the given part
  */
-export const getPartModule = (partName: string): partModule | undefined => {
+export const getPartModule = (partName: string): PartModule | undefined => {
   return partComponentNames[partName];
 };
 
-// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 /**
  *
  * @param partName The name of the part to get the component for
- * @returns
+ * @returns TODO: DOCS LEFT HERE
  */
 export const getPartComponent = (
   partName: string,
@@ -50,8 +49,8 @@ export const getPartData = (partName: string) => {
 };
 
 export const importifyPartData = (
-  partData: RootPart.anyVanillaPartType | RootPart.anyPartType,
-): RootPart.anyPartType => {
+  partData: RootPart.AnyVanillaPartType | RootPart.AnyPartType,
+): RootPart.AnyPartType => {
   return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
 };
 

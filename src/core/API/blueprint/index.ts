@@ -7,7 +7,7 @@ import * as GroupPart from 'core/API/part/types/group';
  */
 export const mergeWithDefaultBlueprintGlobals = (
   blueprint: object,
-): RootBlueprint.type => {
+): RootBlueprint.Type => {
   return { ...RootBlueprint.data, ...blueprint };
 };
 
@@ -15,8 +15,8 @@ export const mergeWithDefaultBlueprintGlobals = (
  * Updates the given blueprint to compensate for changes in the format.
  */
 export const blueprintToLatestVersion = (
-  blueprint: RootBlueprint.type,
-): RootBlueprint.type => blueprint;
+  blueprint: RootBlueprint.Type,
+): RootBlueprint.Type => blueprint;
 
 /**
  * Prepares the given blueprint for use in the editor.
@@ -27,8 +27,8 @@ export const blueprintToLatestVersion = (
  * 3. Use version updaters
  */
 export const importifyBlueprint = (
-  blueprint: RootBlueprint.vanillaType | object,
-): RootBlueprint.type => {
+  blueprint: RootBlueprint.VanillaType | object,
+): RootBlueprint.Type => {
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {
     ...mergedBlueprint,
@@ -45,14 +45,14 @@ export const importifyBlueprint = (
  * Prepares all parts for use in the editor.
  */
 export const importifyPartsData = (
-  parts: RootBlueprint.anyVanillaPartTypeArray | RootBlueprint.anyPartTypeArray,
-): RootBlueprint.anyPartTypeArray => {
-  let newParts: RootBlueprint.anyPartTypeArray = [];
+  parts: RootBlueprint.AnyVanillaPartTypeArray | RootBlueprint.AnyPartTypeArray,
+): RootBlueprint.AnyPartTypeArray => {
+  let newParts: RootBlueprint.AnyPartTypeArray = [];
 
   parts.forEach((part) => {
     if (part.n === 'Group') {
       newParts.push({
-        ...(PartsAPI.importifyPartData(part) as GroupPart.type),
+        ...(PartsAPI.importifyPartData(part) as GroupPart.Type),
         parts: importifyPartsData(part.parts),
       });
     } else {

@@ -12,15 +12,15 @@ import { cloneDeep, merge } from 'lodash';
  */
 export default function useBlueprint() {
   const hook = {
-    selection: [] as RootBlueprint.partAddresses,
-    lastSelection: [] as RootBlueprint.partAddress,
+    selection: [] as RootBlueprint.PartAddresses,
+    lastSelection: [] as RootBlueprint.PartAddress,
 
     hasUnsavedChanges: false,
     currentFileName: 'blueprint.stbp',
 
     createParts: () => blueprintState.setState((state) => {}),
 
-    deleteParts: (addresses: RootBlueprint.partAddresses) => {
+    deleteParts: (addresses: RootBlueprint.PartAddresses) => {
       hook.hasUnsavedChanges = true;
 
       blueprintState.setState((state) => {
@@ -36,7 +36,7 @@ export default function useBlueprint() {
               currentParts.splice(direction, 1);
             } else {
               currentParts[direction] = { ...currentParts[direction] };
-              currentParts = (currentParts[direction] as GroupPart.type).parts;
+              currentParts = (currentParts[direction] as GroupPart.Type).parts;
             }
           });
         });
@@ -46,8 +46,8 @@ export default function useBlueprint() {
     },
 
     mutateParts: (
-      data: RootPart.anyPartialPartType,
-      addresses: RootBlueprint.partAddresses,
+      data: RootPart.AnyPartialPartType,
+      addresses: RootBlueprint.PartAddresses,
     ) => {
       hook.hasUnsavedChanges = true;
 
@@ -64,7 +64,7 @@ export default function useBlueprint() {
               };
             } else {
               currentParts[direction] = { ...currentParts[direction] };
-              currentParts = (currentParts[direction] as GroupPart.type).parts;
+              currentParts = (currentParts[direction] as GroupPart.Type).parts;
             }
           });
         });
@@ -74,8 +74,8 @@ export default function useBlueprint() {
     },
 
     selectParts: (
-      type: RootBlueprint.selectionType,
-      address: RootBlueprint.partAddress,
+      type: RootBlueprint.SelectionType,
+      address: RootBlueprint.PartAddress,
     ) => {
       if (type === 'multi') {
       }

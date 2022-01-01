@@ -9,25 +9,25 @@ import { Color, MOUSE, TOUCH } from 'three';
 import './index.scss';
 
 // TODO: Add more renderers for simulation, rendering, debugging, etc.
+// TODO: Allow parts to pull state individually for efficiency
 
 interface EditingCanvasProps {
-  center: number;
-  offset: { x: number; y: number };
-  parts: RootBlueprint.anyPartTypeArray;
+  data: RootBlueprint.Type;
 }
 /**
  * Renders the blueprint in a close-to-vanilla fashion.
  */
-const VanillaRenderer: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
+const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
   const partsJsx: JSX.Element[] = [];
 
-  const insertPartComponents = (parts: RootPart.anyPartType[]) => {
+  const insertPartComponents = (parts: RootPart.AnyPartType[]) => {
     parts.forEach((part) => {
       if (part['.stellar'].visible) {
         if (part.n === 'Group') {
           insertPartComponents(part.parts);
         } else {
           const PartComponent = PartAPI.getPartComponent(part.n);
+
           if (PartComponent)
             partsJsx.push(
               <PartComponent key={`part-${partsJsx.length}`} data={part} />,
@@ -37,14 +37,14 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
     });
   };
 
-  insertPartComponents(parts);
+  insertPartComponents(data.parts);
 
   return (
     <Canvas
       mode="concurrent"
       frameloop="demand"
       orthographic
-      camera={{ zoom: 16, position: [center * -1, 0, 100] }}
+      camera={{ zoom: 16, position: [data.center * -1, 0, 100] }}
       className="editing-canvas"
     >
       <directionalLight position={[-20, 20, 100]} />
@@ -66,13 +66,13 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
         enableDamping={false}
       />
       <gridHelper
-        position={[center, 0, -99]}
+        position={[data.center, 0, -99]}
         args={[1e5, 2, '#9952E0']}
         rotation={[Math.PI / 2, 0, 0]}
       />
 
       <InfiniteGridHelper
-        position={[center, 0, -100]}
+        position={[data.center, 0, -100]}
         axes="xyz"
         size1={1}
         size2={5}
@@ -80,7 +80,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ center, offset, parts }) => {
         color={new Color('#52527A')}
       />
 
-      <group position={[offset.x, offset.y, 0]}>{partsJsx}</group>
+      <group position={[data.offset.x, data.offset.y, 0]}>{partsJsx}</group>
     </Canvas>
   );
 };

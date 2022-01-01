@@ -6,7 +6,7 @@ export const vanillaData = {
     x: 0,
     y: 0,
   },
-  parts: [] as anyVanillaPartTypeArray,
+  parts: [] as AnyVanillaPartTypeArray,
   stages: [] as { partIndexes: number[] }[],
 };
 
@@ -16,24 +16,24 @@ export const data = {
   '.stellar': {
     format_version: 1,
   },
-  parts: [] as anyPartTypeArray,
+  parts: [] as AnyPartTypeArray,
 };
 
-export type type = typeof data;
-export type vanillaType = typeof vanillaData;
+export type Type = typeof data;
+export type VanillaType = typeof vanillaData;
 
-export type anyPartTypeArray = Array<RootPart.anyPartType>;
-export type anyVanillaPartTypeArray = RootPart.anyVanillaPartType[];
+export type AnyPartTypeArray = Array<RootPart.AnyPartType>;
+export type AnyVanillaPartTypeArray = RootPart.AnyVanillaPartType[];
 
-export type partAddress = number[];
-export type partAddresses = partAddress[];
+export type PartAddress = number[];
+export type PartAddresses = PartAddress[];
 
 /**
  * @deprecated
  * TODO: switch to `efficientSelectionType`.
  */
-export type selectionType = 'single' | 'multi' | 'list' | 'multi_list';
-export type efficientSelectionType = [
+export type SelectionType = 'single' | 'multi' | 'list' | 'multi_list';
+export type EfficientSelectionType = [
   number,
-  boolean | efficientSelectionType,
+  boolean | EfficientSelectionType,
 ][];

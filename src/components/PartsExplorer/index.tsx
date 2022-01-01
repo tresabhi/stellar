@@ -14,7 +14,7 @@ export const Container: FC = ({ children }) => (
 );
 
 interface ListingProps {
-  data: RootPart.anyPartType;
+  data: RootPart.AnyPartType;
 }
 /**
  * A component that represents a part and provides a list of its children if

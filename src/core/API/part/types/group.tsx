@@ -6,7 +6,7 @@ import * as RootPart from './root';
 
 export const icon = GroupIcon;
 
-const typedParts: RootBlueprint.anyPartTypeArray = [];
+const typedParts: RootBlueprint.AnyPartTypeArray = [];
 export const data = {
   '.stellar': {
     ...RootPart.data['.stellar'],
@@ -17,6 +17,6 @@ export const data = {
   parts: typedParts,
 };
 
-export type type = typeof data;
+export type Type = typeof data;
 
 export const Component = memo(() => <mesh />);

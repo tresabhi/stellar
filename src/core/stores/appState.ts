@@ -12,6 +12,6 @@ export const data = {
 };
 
 // TODO: capitalize all types and interfaces
-export type type = typeof data;
+export type Type = typeof data;
 
-export default create<type>(() => data);
+export default create<Type>(() => data);
