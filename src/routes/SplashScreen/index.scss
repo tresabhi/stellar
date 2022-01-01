@@ -25,8 +25,6 @@
     align-items: center;
     font-size: $font-size-bigger;
     justify-content: center;
-    color: v(foreground-panel-text-color);
-    font-family: v(font-family-regular);
 
     .loading-icon {
       @keyframes bounce {
