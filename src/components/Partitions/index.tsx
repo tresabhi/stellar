@@ -1,6 +1,9 @@
 import { FC, InputHTMLAttributes } from 'react';
 import './index.scss';
 
+/**
+ * A container that holds partition buttons.
+ */
 export const Container: FC = ({ children }) => (
   <div className="partition">{children}</div>
 );
@@ -8,6 +11,9 @@ export const Container: FC = ({ children }) => (
 interface OptionProps extends InputHTMLAttributes<HTMLButtonElement> {
   selected?: boolean;
 }
+/**
+ * A button that lets uses switch between different partitions.
+ */
 export const Option: FC<OptionProps> = ({
   children,
   selected = false,

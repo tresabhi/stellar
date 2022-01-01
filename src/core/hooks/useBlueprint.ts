@@ -6,6 +6,10 @@ import blueprintState from 'core/stores/blueprintState';
 import { saveAs } from 'file-saver';
 import { cloneDeep, merge } from 'lodash';
 
+/**
+ * Hook to manage the blueprint state
+ * @returns `void`
+ */
 export default function useBlueprint() {
   const hook = {
     selection: [] as RootBlueprint.partAddresses,

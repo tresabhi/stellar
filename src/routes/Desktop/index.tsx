@@ -1,4 +1,4 @@
-import createKeybind from 'core/methods/createKeybind';
+import createKeybind from 'core/functions/createKeybind';
 import appState from 'core/stores/appState';
 import { useEffect } from 'react';
 import Layout from './components/Layout';

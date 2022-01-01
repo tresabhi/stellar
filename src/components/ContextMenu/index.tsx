@@ -4,7 +4,7 @@ import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
 /**
- * A container that holds context menu buttons
+ * A container that holds context menu buttons.
  */
 export const Container: FC = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,14 +26,10 @@ export const Container: FC = ({ children }) => {
 interface ButtonProps extends InputHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   to?: string;
-
-  // issue in React library; fixed here
-  // TODO: pr this fix for react... too lazy rn
-  type?: 'button' | 'reset' | 'submit';
 }
 /**
  * A button that holds text that describes it's action, usually in a context
- * menu
+ * menu.
  */
 export const Button: FC<ButtonProps> = ({
   children,
@@ -41,6 +37,7 @@ export const Button: FC<ButtonProps> = ({
   to,
   ...props
 }) => (
+  //@ts-ignore
   <button
     onClick={() => {
       if (to) window.open(to);
@@ -53,7 +50,7 @@ export const Button: FC<ButtonProps> = ({
 );
 
 /**
- * Used to separate two distinct groups in context menus
+ * Used to separate two distinct groups in context menus.
  */
 export const Separator = () => (
   <div className="context-menu-separator">
@@ -67,7 +64,7 @@ interface ExtensionProps {
 }
 /**
  * A button that reveals a by-default collapsed component, usually in a context
- * menu
+ * menu.
  */
 export const Extension: FC<ExtensionProps> = ({
   children,
@@ -98,8 +95,8 @@ interface ToggleProps {
   defaultState?: boolean;
 }
 /**
- * A button that displays `true`/`false` through a check-mark, usually in a
- * context menu
+ * A button that displays a boolean state through a check-mark, usually in a
+ * context menu.
  */
 export const Toggle: FC<ToggleProps> = ({
   children,

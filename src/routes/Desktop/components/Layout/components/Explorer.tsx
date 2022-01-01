@@ -1,4 +1,4 @@
-import * as Partition from 'components/Partition';
+import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
 import appState from 'core/stores/appState';
 import blueprintState from 'core/stores/blueprintState';

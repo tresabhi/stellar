@@ -1,4 +1,4 @@
-import EditingCanvas from 'components/EditingCanvas';
+import EditingCanvas from 'components/StellarCanvasRenderer';
 import blueprintState from 'core/stores/blueprintState';
 import { FC, InputHTMLAttributes } from 'react';
 import Explorer from './components/Explorer';

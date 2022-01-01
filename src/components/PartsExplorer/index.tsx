@@ -6,6 +6,9 @@ import * as RootPart from 'core/API/part/types/root';
 import { FC, useRef, useState } from 'react';
 import './index.scss';
 
+/**
+ * A container that holds a list of all parts in the blueprint.
+ */
 export const Container: FC = ({ children }) => (
   <div className="parts-explorer">{children}</div>
 );
@@ -14,7 +17,8 @@ interface ListingProps {
   data: RootPart.anyPartType;
 }
 /**
- * A component that represents a part, usually using in `SideBar`
+ * A component that represents a part and provides a list of its children if
+ * it has any. It also provides a buttons for quick basic actions on the part.
  */
 export const Listing: FC<ListingProps> = ({ data }) => {
   const Icon = getPartIconComponent(data.n);
@@ -69,9 +73,6 @@ export const Listing: FC<ListingProps> = ({ data }) => {
         onBlur={() => {
           inputRef.current!.value = inputRef.current!.value.trim();
         }}
-        // onKeyPress={(event) => {
-        //   if (INPUT_BLUR_KEYS.includes(event.key)) buttonRef.current?.focus();
-        // }}
         className="parts-explorer-listing-label"
         defaultValue={data['.stellar'].label}
       />
