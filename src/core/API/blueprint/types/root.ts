@@ -28,7 +28,12 @@ export type anyVanillaPartTypeArray = RootPart.anyVanillaPartType[];
 export type partAddress = number[];
 export type partAddresses = partAddress[];
 
-// TODO: find a use for this 🐒
-// export type efficientPartAddresses = [number, true | efficientPartAddresses][];
-
+/**
+ * @deprecated
+ * TODO: switch to `efficientSelectionType`.
+ */
 export type selectionType = 'single' | 'multi' | 'list' | 'multi_list';
+export type efficientSelectionType = [
+  number,
+  boolean | efficientSelectionType,
+][];

@@ -17,17 +17,28 @@ export interface RootPartComponentProps {
   data: Root.type;
 }
 
-// TODO: Fix this any
+// TODO: Fix this `any` type.
 const partComponentNames: { [key: string]: any } = {
   Root,
   'Fuel Tank': FuelTank,
   Group,
 };
 
+/**
+ * Gets the module for the given part.
+ * @param partName The name of the part to get the module for
+ * @returns The module for the given part
+ */
 export const getPartModule = (partName: string): partModule | undefined => {
   return partComponentNames[partName];
 };
 
+// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+/**
+ *
+ * @param partName The name of the part to get the component for
+ * @returns
+ */
 export const getPartComponent = (
   partName: string,
 ): FC<RootPartComponentProps> | undefined => {
