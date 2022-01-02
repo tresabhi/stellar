@@ -27,7 +27,7 @@ export const Listing: FC<ListingProps> = ({ data }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   return (
-    <button className="parts-explorer-listing">
+    <div className="parts-explorer-listing">
       {/* indentations */}
 
       {/* expand/collapse and/or dependency graphs */}
@@ -79,6 +79,6 @@ export const Listing: FC<ListingProps> = ({ data }) => {
 
       {/* visible */}
       {/* lock */}
-    </button>
+    </div>
   );
 };

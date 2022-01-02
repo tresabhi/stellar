@@ -5,6 +5,7 @@
   flex-direction: column;
 
   .parts-explorer-listing {
+    cursor: pointer;
     display: flex;
     align-items: center;
     height: $button-major-height;

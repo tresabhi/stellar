@@ -23,7 +23,7 @@ export const Container: FC = ({ children }) => {
   );
 };
 
-interface ButtonProps extends InputHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends InputHTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   to?: string;
 }
@@ -37,16 +37,17 @@ export const Button: FC<ButtonProps> = ({
   to,
   ...props
 }) => (
-  //@ts-ignore
-  <button
+  <div
+    {...props}
     onClick={() => {
       if (to) window.open(to);
     }}
-    {...props}
-    className={`context-menu-button ${disabled ? 'disabled' : 'enabled'}`}
+    className={`${props?.className} context-menu-button ${
+      disabled ? 'disabled' : 'enabled'
+    }`}
   >
     <span className="text">{children}</span>
-  </button>
+  </div>
 );
 
 /**
@@ -72,7 +73,7 @@ export const Extension: FC<ExtensionProps> = ({
   extension,
 }) => {
   return (
-    <button
+    <div
       className={`context-menu-extension-button ${
         disabled ? 'disabled' : 'enabled'
       }`}
@@ -86,11 +87,11 @@ export const Extension: FC<ExtensionProps> = ({
           {extension}
         </div>
       ) : undefined}
-    </button>
+    </div>
   );
 };
 
-interface ToggleProps extends InputHTMLAttributes<HTMLButtonElement> {
+interface ToggleProps extends InputHTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   defaultState?: boolean;
 }
@@ -107,8 +108,7 @@ export const Toggle: FC<ToggleProps> = ({
   const [state, setState] = useState(defaultState);
 
   return (
-    //@ts-ignore
-    <button
+    <div
       {...props}
       className={`${props?.className} context-menu-toggle-button ${
         disabled ? 'disabled' : 'enabled'
@@ -124,6 +124,6 @@ export const Toggle: FC<ToggleProps> = ({
           <CheckMarkIcon className="context-menu-button-icon" />
         ) : undefined}
       </div>
-    </button>
+    </div>
   );
 };

@@ -13,6 +13,7 @@
   .context-menu-button,
   .context-menu-extension-button,
   .context-menu-toggle-button {
+    cursor: pointer;
     display: flex;
     align-items: center;
     font-size: $font-size-regular;
