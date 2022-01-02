@@ -10,8 +10,8 @@
     color: white;
     background-color: $black-regular;
     padding: $padding-thick;
-    border-radius: $border-radius-regular $border-radius-regular 0px 0px;
-    margin: 0px $margin-thin 0px $margin-thin;
+    border-radius: $border-radius-regular $border-radius-regular 0 0;
+    margin: 0 $margin-thin 0 $margin-thin;
 
     &:hover {
       background-color: $black-light;
