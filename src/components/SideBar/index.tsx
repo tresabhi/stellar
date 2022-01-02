@@ -5,8 +5,13 @@ import './index.scss';
 /**
  * Holds various components that usually appear on the sides.
  */
-export const Container: FC = ({ children }) => (
-  <div className="side-bar">{children}</div>
+export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
+  children,
+  ...props
+}) => (
+  <div {...props} className={`${props?.className} side-bar`}>
+    {children}
+  </div>
 );
 
 /**

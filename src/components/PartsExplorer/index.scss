@@ -5,55 +5,66 @@
   flex-direction: column;
 
   .parts-explorer-listing {
-    cursor: pointer;
     display: flex;
-    align-items: center;
-    height: $button-major-height;
+    flex-direction: column;
     background-color: $black-regular;
 
-    &:hover {
-      background-color: $black-light;
+    .parts-explorer-listing-button {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      height: $button-major-height;
+      background-color: $black-regular;
+
+      &:hover {
+        background-color: $black-light;
+      }
+
+      .parts-explorer-listing-expand {
+        width: $part-explorer-expand-width;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .parts-explorer-listing-expand-icon {
+          fill: white;
+        }
+      }
+
+      .parts-explorer-listing-icon-holder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: $button-major-height;
+
+        .parts-explorer-listing-icon {
+          width: $icon-size-regular;
+          height: $icon-size-regular;
+          fill: white;
+        }
+      }
+
+      .parts-explorer-listing-label {
+        color: white;
+        flex: 1;
+        text-align: left;
+        cursor: pointer;
+        margin-right: $margin-thick;
+        // text-overflow: ellipsis;
+
+        &:focus {
+          cursor: text;
+        }
+      }
     }
 
-    &:focus-within {
+    &:focus-within > .parts-explorer-listing-button {
       background-color: $black-lighter;
     }
 
-    .parts-explorer-listing-expand {
-      height: 100%;
-      width: $part-explorer-expand-width;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .parts-explorer-listing-expand-icon {
-        fill: white;
-      }
-    }
-
-    .parts-explorer-listing-icon-holder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: $button-major-height;
-
-      .parts-explorer-listing-icon {
-        width: $icon-size-regular;
-        height: $icon-size-regular;
-        fill: white;
-      }
-    }
-
-    .parts-explorer-listing-label {
-      color: white;
-      flex: 1;
-      text-align: left;
-      cursor: pointer;
-
-      &:focus {
-        cursor: text;
-      }
+    .parts-explorer-listing-children-container {
     }
   }
 }

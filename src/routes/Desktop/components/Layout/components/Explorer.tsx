@@ -42,7 +42,11 @@ export default function Explorer() {
       >
         <PartsExplorer.Container>
           {blueprintStore((state) => state.parts).map((part, index) => (
-            <PartsExplorer.Listing key={`part-${index}`} data={part} />
+            <PartsExplorer.Listing
+              key={`part-${index}`}
+              data={part}
+              layer={0}
+            />
           ))}
         </PartsExplorer.Container>
       </SideBar.Scrollable>

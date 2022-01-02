@@ -10,7 +10,7 @@ const typedParts: RootBlueprint.AnyPartTypeArray = [];
 export const data = {
   '.stellar': {
     ...RootPart.data['.stellar'],
-    label: 'Unlabeled Group',
+    label: 'Group',
   },
 
   n: 'Group' as 'Group',
