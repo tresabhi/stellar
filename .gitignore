@@ -13,6 +13,7 @@ firebase-debug.log
 /.codesandbox
 sandbox.config.json
 .replit
+/.gitpod/extensions/vsixs
 
 # production
 /build

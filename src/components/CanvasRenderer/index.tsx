@@ -20,24 +20,27 @@ interface EditingCanvasProps {
 const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
   const partsJsx: JSX.Element[] = [];
 
-  const insertPartComponents = (parts: RootPart.AnyPartType[]) => {
-    parts.forEach((part) => {
+  const insertPartComponents = (
+    parts: RootPart.AnyPartType[],
+    keyDepth: string,
+  ) => {
+    parts.forEach((part, index) => {
       if (part['.stellar'].visible) {
         if (part.n === 'Group') {
-          insertPartComponents(part.parts);
+          insertPartComponents(part.parts, `${keyDepth}-${index}`);
         } else {
           const PartComponent = PartAPI.getPartComponent(part.n);
 
           if (PartComponent)
             partsJsx.push(
-              <PartComponent key={`part-${partsJsx.length}`} data={part} />,
+              <PartComponent key={`part-${keyDepth}-${index}`} data={part} />,
             );
         }
       }
     });
   };
 
-  insertPartComponents(data.parts);
+  insertPartComponents(data.parts, '');
 
   return (
     <Canvas
