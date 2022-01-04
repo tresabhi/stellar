@@ -1,4 +1,6 @@
 import * as RootPart from 'core/API/part/types/root';
+import * as GroupPart from 'core/API/part/types/group';
+import * as RootBlueprint from 'core/API/blueprint/types/root';
 
 export const vanillaData = {
   center: 0,
@@ -28,10 +30,13 @@ export type AnyVanillaPartTypeArray = RootPart.AnyVanillaPartType[];
 export type PartAddress = number[];
 export type PartAddresses = PartAddress[];
 
-/**
- * @deprecated
- * TODO: switch to `efficientSelectionType`.
- */
+export type PartPointer = {
+  parentPointer: RootBlueprint.Type | GroupPart.Type;
+  childPointer: RootPart.AnyPartType;
+  childIndex: number;
+};
+export type PartPointers = PartPointer[];
+
 export type SelectionType = 'single' | 'multi' | 'list' | 'multi_list';
 export type EfficientSelectionType = [
   number,

@@ -6,7 +6,7 @@ import Rendering from './components/Rendering';
 import Simulation from './components/Simulation';
 import Staging from './components/Staging';
 import ToolbarBottom from './components/ToolbarBottom';
-import ToolBarTop from './components/ToolbarTop';
+import ToolbarTop from './components/ToolbarTop';
 import './index.scss';
 
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
@@ -20,21 +20,23 @@ export default function Desktop() {
   const tab = appState((state) => state.tab);
 
   useEffect(() => {
-    const keybind = createKeybind(() => {
-      appState.setState((state) => ({
-        tab:
-          state.tab === tabOrder[tabOrder.length - 1]
-            ? tabOrder[0]
-            : tabOrder[tabOrder.indexOf(state.tab) + 1],
-      }));
-    }, ['Control', 'Tab']);
-
-    document.addEventListener('keypress', keybind);
+    // BIG TODO: make this automated through settings
+    document.addEventListener(
+      'keypress',
+      createKeybind(() => {
+        appState.setState((state) => ({
+          tab:
+            state.tab === tabOrder[tabOrder.length - 1]
+              ? tabOrder[0]
+              : tabOrder[tabOrder.indexOf(state.tab) + 1],
+        }));
+      }, ['Control', 'Tab']),
+    );
   }, []);
 
   return (
     <div className="desktop-container">
-      <ToolBarTop />
+      <ToolbarTop />
       <ToolbarBottom />
 
       <Layout style={{ display: tab === 'layout' ? 'flex' : 'none' }} />

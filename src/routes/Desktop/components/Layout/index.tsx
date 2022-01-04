@@ -15,7 +15,7 @@ const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   const blueprint = blueprintStore((state) => state);
 
   return (
-    <div {...props} className={`${props?.className} layout-tab`}>
+    <div {...props} className={`${props.className || ''} layout-tab`}>
       <Explorer />
       <EditingCanvas data={blueprint} />
     </div>

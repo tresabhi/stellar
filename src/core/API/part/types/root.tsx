@@ -27,10 +27,9 @@ export const data = {
   ...vanillaData,
 
   '.stellar': {
-    label: 'Unkown Part',
+    label: 'Unknown Part',
     visible: true,
     locked: false,
-    selected: false,
   },
 };
 

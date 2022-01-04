@@ -9,7 +9,7 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
 }) => (
-  <div {...props} className={`${props?.className} side-bar`}>
+  <div {...props} className={`${props.className || ''} side-bar`}>
     {children}
   </div>
 );

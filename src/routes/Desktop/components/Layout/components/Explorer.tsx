@@ -5,6 +5,18 @@ import blueprintStore from 'core/stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
 
 export default function Explorer() {
+  const blueprint = blueprintStore((state) => state);
+
+  const PartListings = blueprintStore((state) => state.parts).map(
+    (part, index) => (
+      <PartsExplorer.Listing
+        key={`part-${index}`}
+        address={[index]}
+        indentation={0}
+      />
+    ),
+  );
+
   return (
     <SideBar.Container>
       <Partition.Container>
@@ -40,15 +52,7 @@ export default function Explorer() {
               : 'none',
         }}
       >
-        <PartsExplorer.Container>
-          {blueprintStore((state) => state.parts).map((part, index) => (
-            <PartsExplorer.Listing
-              key={`part-${index}`}
-              data={part}
-              layer={0}
-            />
-          ))}
-        </PartsExplorer.Container>
+        <PartsExplorer.Container>{PartListings}</PartsExplorer.Container>
       </SideBar.Scrollable>
       <SideBar.Scrollable
         style={{

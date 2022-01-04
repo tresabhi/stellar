@@ -3,9 +3,12 @@ import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import { getPartIconComponent } from 'core/API/part';
 import * as RootPart from 'core/API/part/types/root';
+import * as GroupPart from 'core/API/part/types/group';
+import * as RootBlueprint from 'core/API/blueprint/types/root';
 import createKeybind from 'core/functions/createKeybind';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
+import blueprintStore from 'core/stores/blueprint';
 
 /**
  * A container that holds a list of all parts in the blueprint.
@@ -14,31 +17,50 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
 }) => (
-  <div {...props} className={`${props?.className} parts-explorer`}>
+  <div {...props} className={`${props.className || ''} parts-explorer`}>
     {children}
   </div>
 );
 
 interface ListingProps {
-  data: RootPart.AnyPartType;
-  layer: number;
+  indentation: number;
+  address: RootBlueprint.PartAddress;
 }
 /**
  * A component that represents a part and provides a list of its children if
  * it has any. It also provides a buttons for quick basic actions on the part.
  */
-export const Listing: FC<ListingProps> = ({ data, layer }) => {
-  const Icon = getPartIconComponent(data.n);
+export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const [expanded, setExpanded] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const keybind = createKeybind(() => buttonRef.current?.focus(), 'Enter');
 
-  let children;
+  const data = blueprintStore((state) => {
+    let currentParts = state.parts;
+
+    for (let index = 0; index < address.length; index++) {
+      const direction = address[index];
+
+      if (index === address.length - 1) {
+        return currentParts[direction];
+      } else {
+        currentParts = (currentParts[direction] as GroupPart.Type).parts;
+      }
+    }
+  })!;
+
+  const Icon = getPartIconComponent(data.n);
+
+  let childParts: JSX.Element[] | undefined;
 
   if (data.n === 'Group') {
-    children = data.parts.map((data) => (
-      <Listing data={data} layer={layer + 1} />
+    childParts = data.parts.map((data, index) => (
+      <Listing
+        key={`part-${index}`}
+        address={[...address, index]}
+        indentation={indentation + 1}
+      />
     ));
   }
 
@@ -46,7 +68,7 @@ export const Listing: FC<ListingProps> = ({ data, layer }) => {
     <div tabIndex={-1} className="parts-explorer-listing">
       <div
         className="parts-explorer-listing-button"
-        style={{ paddingLeft: `${16 * layer}px` }}
+        style={{ paddingLeft: `${16 * indentation}px` }}
       >
         {/* indentations */}
 
@@ -101,12 +123,12 @@ export const Listing: FC<ListingProps> = ({ data, layer }) => {
         {/* visible */}
         {/* lock */}
       </div>
-      {children ? (
+      {childParts ? (
         <Container
           style={{ display: expanded ? 'flex' : 'none' }}
           className="parts-explorer-listing-children-container"
         >
-          {children}
+          {childParts}
         </Container>
       ) : undefined}
     </div>
