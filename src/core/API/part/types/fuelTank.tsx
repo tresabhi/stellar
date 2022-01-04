@@ -56,7 +56,7 @@ export const Component: FC<ComponentProps> = memo(({ data }) => {
 
   const faceCount = 24;
 
-  const bevelMargin = 0.1;
+  const bevelMargin = 0.05;
 
   const rivetMargin = 0.04;
   const rivetCount = Math.floor(faceCount / 4);

@@ -35,16 +35,18 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const keybind = createKeybind(() => buttonRef.current?.focus(), 'Enter');
 
+  // let parentData: GroupPart.Type | RootBlueprint.Type;
   const data = blueprintStore((state) => {
-    let currentParts = state.parts;
+    let currentParent: GroupPart.Type | RootBlueprint.Type = state;
 
     for (let index = 0; index < address.length; index++) {
       const direction = address[index];
 
       if (index === address.length - 1) {
-        return currentParts[direction];
+        // parentData = currentParent;
+        return currentParent.parts[direction];
       } else {
-        currentParts = (currentParts[direction] as GroupPart.Type).parts;
+        currentParent = currentParent.parts[direction] as GroupPart.Type;
       }
     }
   })!;
@@ -64,10 +66,20 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   }
 
   return (
-    <div tabIndex={-1} className="parts-explorer-listing">
+    <div
+      tabIndex={-1}
+      className={`${
+        data['.stellar'].selected ? 'selected' : 'unselected'
+      } parts-explorer-listing`}
+    >
       <div
         className="parts-explorer-listing-button"
         style={{ paddingLeft: `${16 * indentation}px` }}
+        onClick={() =>
+          blueprintStore.setState((state) => {
+            data['.stellar'].selected = true;
+          })
+        }
       >
         {/* indentations */}
 
