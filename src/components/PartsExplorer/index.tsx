@@ -1,14 +1,13 @@
 import { ReactComponent as ExpandIcon } from 'assets/icons/expand.svg';
 import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import { getPartIconComponent } from 'core/API/part';
-import * as RootPart from 'core/API/part/types/root';
-import * as GroupPart from 'core/API/part/types/group';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
+import { getPartIconComponent } from 'core/API/part';
+import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
+import blueprintStore from 'core/stores/blueprint';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
-import blueprintStore from 'core/stores/blueprint';
 
 /**
  * A container that holds a list of all parts in the blueprint.
@@ -123,6 +122,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
         {/* visible */}
         {/* lock */}
       </div>
+
       {childParts ? (
         <Container
           style={{ display: expanded ? 'flex' : 'none' }}

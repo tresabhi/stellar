@@ -5,8 +5,6 @@ import blueprintStore from 'core/stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
 
 export default function Explorer() {
-  const blueprint = blueprintStore((state) => state);
-
   const PartListings = blueprintStore((state) => state.parts).map(
     (part, index) => (
       <PartsExplorer.Listing
