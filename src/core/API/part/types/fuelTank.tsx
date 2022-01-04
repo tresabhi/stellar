@@ -95,7 +95,10 @@ export const Component: FC<ComponentProps> = memo(({ data }) => {
   switch (data.T.shape_tex) {
     case 'Rivets': {
       const rivets = times(rivetCount, (index) => (
-        <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}>
+        <mesh
+          key={`rivet-${index}`}
+          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
+        >
           <cylinderGeometry
             args={[
               data.N.width_b / 2,
@@ -137,6 +140,7 @@ export const Component: FC<ComponentProps> = memo(({ data }) => {
     case 'Half Rivets': {
       const rivets = times(rivetCount, (index) => (
         <mesh
+          key={`rivet-${index}`}
           rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
           position={[0, data.N.height / -4, 0]}
         >
@@ -218,7 +222,10 @@ export const Component: FC<ComponentProps> = memo(({ data }) => {
 
     case 'Interstage': {
       const rivets = times(rivetCount, (index) => (
-        <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}>
+        <mesh
+          key={`rivet-${index}`}
+          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
+        >
           <cylinderGeometry
             args={[
               data.N.width_b / 2,
@@ -315,7 +322,10 @@ export const Component: FC<ComponentProps> = memo(({ data }) => {
 
     case 'Interstage Full': {
       const rivets = times(rivetCount, (index) => (
-        <mesh rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}>
+        <mesh
+          key={`rivet-${index}`}
+          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
+        >
           <cylinderGeometry
             args={[
               data.N.width_b / 2,
@@ -470,6 +480,7 @@ export const Component: FC<ComponentProps> = memo(({ data }) => {
       const nozzleCount = Math.floor(data.N.height * nozzlesPerMeter);
       const nozzles = times(nozzleCount, (index) => (
         <group
+          key={`nozzle-${index}`}
           position={[
             0,
             (index / nozzleCount) * data.N.height -
