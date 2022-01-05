@@ -1,6 +1,7 @@
-import * as RootPart from 'core/API/part/types/root';
-import * as GroupPart from 'core/API/part/types/group';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
+import * as GroupPart from 'core/API/part/types/group';
+import * as RootPart from 'core/API/part/types/root';
+import { RefObject } from 'react';
 
 export const vanillaData = {
   center: 0,
@@ -33,7 +34,8 @@ export type PartAddresses = PartAddress[];
 export type PartPointer = {
   parentPointer: RootBlueprint.Type | GroupPart.Type;
   childPointer: RootPart.AnyPartType;
-  childIndex: number;
+
+  listingRef: RefObject<HTMLDivElement>;
 };
 export type PartPointers = PartPointer[];
 

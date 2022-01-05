@@ -6,6 +6,8 @@ import { getPartIconComponent } from 'core/API/part';
 import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
 import blueprintStore from 'core/stores/blueprint';
+import selectionStore from 'core/stores/selection';
+import { forEachRight } from 'lodash';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
@@ -31,11 +33,12 @@ interface ListingProps {
  */
 export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const [expanded, setExpanded] = useState(false);
+  const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const keybind = createKeybind(() => buttonRef.current?.focus(), 'Enter');
 
-  // let parentData: GroupPart.Type | RootBlueprint.Type;
+  let parentData: GroupPart.Type | RootBlueprint.Type;
   const data = blueprintStore((state) => {
     let currentParent: GroupPart.Type | RootBlueprint.Type = state;
 
@@ -43,7 +46,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
       const direction = address[index];
 
       if (index === address.length - 1) {
-        // parentData = currentParent;
+        parentData = currentParent;
         return currentParent.parts[direction];
       } else {
         currentParent = currentParent.parts[direction] as GroupPart.Type;
@@ -52,6 +55,11 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   })!;
 
   const Icon = getPartIconComponent(data.n);
+  const selectionPreset = {
+    childPointer: data,
+    parentPointer: parentData!,
+    listingRef,
+  };
 
   let childParts: JSX.Element[] | undefined;
 
@@ -66,20 +74,44 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   }
 
   return (
-    <div
-      tabIndex={-1}
-      className={`${
-        data['.stellar'].selected ? 'selected' : 'unselected'
-      } parts-explorer-listing`}
-    >
+    <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">
       <div
         className="parts-explorer-listing-button"
         style={{ paddingLeft: `${16 * indentation}px` }}
-        onClick={() =>
-          blueprintStore.setState((state) => {
-            data['.stellar'].selected = true;
-          })
-        }
+        onClick={(event) => {
+          if (event.ctrlKey) {
+            if (event.shiftKey) {
+              // ctrl + shift
+            } else {
+              // ctrl
+              if (listingRef.current?.classList.contains('selected')) {
+                listingRef.current.classList.remove('selected');
+                selectionStore.setState((state) => {
+                  const index = state.indexOf(selectionPreset);
+                  let newState = [...state];
+
+                  newState.splice(index, 1);
+
+                  return newState;
+                }, true);
+              } else {
+                listingRef.current?.classList.add('selected');
+                selectionStore.setState(
+                  (state) => [...state, selectionPreset],
+                  true,
+                );
+              }
+            }
+          } else if (event.shiftKey) {
+            // shift
+          } else {
+            forEachRight(selectionStore.getState(), (selection) => {
+              selection.listingRef.current?.classList.remove('selected');
+            });
+            selectionStore.setState([selectionPreset], true);
+            listingRef.current?.classList.add('selected');
+          }
+        }}
       >
         {/* indentations */}
 

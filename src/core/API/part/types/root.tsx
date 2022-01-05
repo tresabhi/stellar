@@ -30,7 +30,6 @@ export const data = {
     label: 'Unknown Part',
     visible: true,
     locked: false,
-    selected: false,
   },
 };
 

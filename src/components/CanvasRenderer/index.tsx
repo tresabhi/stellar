@@ -4,7 +4,7 @@ import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as PartAPI from 'core/API/part/index';
 import * as RootPart from 'core/API/part/types/root';
-import { FC } from 'react';
+import { FC, Ref, useRef } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
 import './index.scss';
 
@@ -18,6 +18,7 @@ interface EditingCanvasProps {
  * Renders the blueprint in a close-to-vanilla fashion.
  */
 const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const partsJsx: JSX.Element[] = [];
 
   const insertPartComponents = (
@@ -44,6 +45,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
 
   return (
     <Canvas
+      ref={canvasRef}
       mode="concurrent"
       frameloop="demand"
       orthographic

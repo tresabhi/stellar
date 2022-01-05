@@ -9,12 +9,6 @@
     flex-direction: column;
     background-color: $black-regular;
 
-    &.selected {
-      .parts-explorer-listing-button {
-        background-color: $black-lighter;
-      }
-    }
-
     .parts-explorer-listing-button {
       display: flex;
       align-items: center;
@@ -63,6 +57,12 @@
         &:focus {
           cursor: text;
         }
+      }
+    }
+
+    &.selected {
+      .parts-explorer-listing-button {
+        background-color: $black-lighter;
       }
     }
 

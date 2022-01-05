@@ -5,7 +5,7 @@ const Mobile = () => (
     <span>Mobile coming soon!</span>
     <span>
       <Link to="/desktop">
-        <button style={{ color: 'white' }}>Desktop version</button>
+        <button style={{ color: 'white' }}>Switch to desktop version</button>
       </Link>
     </span>
   </div>
