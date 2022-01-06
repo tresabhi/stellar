@@ -1,27 +1,27 @@
+import * as RootBlueprint from 'core/API/blueprint/types/root';
+import * as GroupPart from 'core/API/part/types/group';
 import * as RootPart from 'core/API/part/types/root';
 import { cloneDeep, merge } from 'lodash';
 import { FC, SVGProps } from 'react';
 import { Type } from 'typescript';
-import * as FuelTank from './types/fuelTank';
-import * as Group from './types/group';
-import * as Root from './types/root';
+import * as FuelTankPart from './types/fuelTank';
 
 export type PartModule = {
   type: Type;
-  data: Root.Type;
+  data: RootPart.AnyPartType;
   Component: FC;
   icon: FC<SVGProps<SVGSVGElement>>;
 };
 
 export interface RootPartComponentProps {
-  data: Root.Type;
+  data: RootPart.AnyPartType;
 }
 
 // TODO: Fix this `any` type.
 const partComponentNames: { [key: string]: any } = {
-  Root,
-  'Fuel Tank': FuelTank,
-  Group,
+  Root: RootPart,
+  'Fuel Tank': FuelTankPart,
+  Group: GroupPart,
 };
 
 /**
@@ -50,8 +50,13 @@ export const getPartData = (partName: string) => {
 
 export const importifyPartData = (
   partData: RootPart.AnyVanillaPartType | RootPart.AnyPartType,
+  parentPointer: RootBlueprint.Type | GroupPart.Type,
 ): RootPart.AnyPartType => {
-  return merge(cloneDeep(getPartData(partData.n) ?? Root.data), partData);
+  return {
+    ...merge(cloneDeep(getPartData(partData.n) ?? RootPart.data), partData),
+
+    relations: { parentPointer },
+  };
 };
 
 export const getPartIconComponent = (

@@ -7,7 +7,6 @@ import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
-import { forEachRight } from 'lodash';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
@@ -55,9 +54,10 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   })!;
 
   const Icon = getPartIconComponent(data.n);
-  const selectionPreset = {
-    childPointer: data,
+  const selectionPreset: RootBlueprint.PartPointer = {
     parentPointer: parentData!,
+    partPointer: data,
+
     listingRef,
   };
 
@@ -87,28 +87,62 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
               if (listingRef.current?.classList.contains('selected')) {
                 listingRef.current.classList.remove('selected');
                 selectionStore.setState((state) => {
-                  const index = state.indexOf(selectionPreset);
-                  let newState = [...state];
+                  const index = state.selections.indexOf(selectionPreset);
+                  let newState = [...state.selections];
 
                   newState.splice(index, 1);
 
-                  return newState;
-                }, true);
+                  return { selections: newState };
+                });
               } else {
                 listingRef.current?.classList.add('selected');
-                selectionStore.setState(
-                  (state) => [...state, selectionPreset],
-                  true,
-                );
+                selectionStore.setState((state) => ({
+                  selections: [...state.selections, selectionPreset],
+                }));
               }
             }
           } else if (event.shiftKey) {
             // shift
+            const { lastSelection, selections: currentSelections } =
+              selectionStore.getState();
+
+            if (lastSelection) {
+              let newSelections = [] as RootBlueprint.PartPointers;
+
+              for (
+                let index = lastSelection.parentPointer!.parts.indexOf(
+                  lastSelection.partPointer!,
+                );
+                index < lastSelection.parentPointer!.parts.length;
+                index++
+              ) {
+                const part = lastSelection.parentPointer!.parts[index];
+
+                part.relations?.listingRef?.current?.classList.add('selected');
+                if (!currentSelections.includes(part.relations!))
+                  newSelections.push(part.relations!);
+              }
+              selectionStore.setState((state) => ({
+                selections: [...state.selections, ...newSelections],
+              }));
+            } else {
+              selectionStore.getState().selections.forEach((selection) => {
+                selection?.listingRef?.current?.classList.remove('selected');
+              });
+              selectionStore.setState({
+                selections: [selectionPreset],
+                lastSelection: selectionPreset,
+              });
+              listingRef.current?.classList.add('selected');
+            }
           } else {
-            forEachRight(selectionStore.getState(), (selection) => {
-              selection.listingRef.current?.classList.remove('selected');
+            selectionStore.getState().selections.forEach((selection) => {
+              selection?.listingRef?.current?.classList.remove('selected');
             });
-            selectionStore.setState([selectionPreset], true);
+            selectionStore.setState({
+              selections: [selectionPreset],
+              lastSelection: selectionPreset,
+            });
             listingRef.current?.classList.add('selected');
           }
         }}
@@ -158,9 +192,10 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
           }}
           onBlur={() => {
             inputRef.current!.value = inputRef.current!.value.trim();
+            data.identity.label = inputRef.current!.value;
           }}
           className="parts-explorer-listing-label"
-          defaultValue={data['.stellar'].label}
+          defaultValue={data.identity.label}
         />
 
         {/* visible */}

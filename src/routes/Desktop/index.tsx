@@ -1,5 +1,5 @@
 import createKeybind from 'core/functions/createKeybind';
-import appState from 'core/stores/appState';
+import app from 'core/stores/app';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';
@@ -17,14 +17,14 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
 ];
 
 export default function Desktop() {
-  const tab = appState((state) => state.tab);
+  const tab = app((state) => state.tab);
 
   useEffect(() => {
     // BIG TODO: make this automated through settings
     document.addEventListener(
       'keypress',
       createKeybind(() => {
-        appState.setState((state) => ({
+        app.setState((state) => ({
           tab:
             state.tab === tabOrder[tabOrder.length - 1]
               ? tabOrder[0]

@@ -1,3 +1,4 @@
+import { GroupProps, MeshProps } from '@react-three/fiber';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as GroupPart from 'core/API/part/types/group';
 import * as RootPart from 'core/API/part/types/root';
@@ -25,18 +26,19 @@ export const data = {
 export type Type = typeof data;
 export type VanillaType = typeof vanillaData;
 
-export type AnyPartTypeArray = Array<RootPart.AnyPartType>;
+export type AnyPartTypeArray = RootPart.AnyPartType[];
 export type AnyVanillaPartTypeArray = RootPart.AnyVanillaPartType[];
 
 export type PartAddress = number[];
 export type PartAddresses = PartAddress[];
 
-export type PartPointer = {
+export type PartPointer = Partial<{
   parentPointer: RootBlueprint.Type | GroupPart.Type;
-  childPointer: RootPart.AnyPartType;
+  partPointer: RootPart.AnyPartType;
 
   listingRef: RefObject<HTMLDivElement>;
-};
+  threeRef: RefObject<GroupProps | MeshProps>; // TODO: fix ref object type
+}>;
 export type PartPointers = PartPointer[];
 
 export type SelectionType = 'single' | 'multi' | 'list' | 'multi_list';

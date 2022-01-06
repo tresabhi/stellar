@@ -6,10 +6,13 @@ import * as RootPart from './root';
 
 export const icon = GroupIcon;
 
+// is typed first to stop self relations
 const typedParts: RootBlueprint.AnyPartTypeArray = [];
 export const data = {
-  '.stellar': {
-    ...RootPart.data['.stellar'],
+  ...RootPart.data,
+
+  identity: {
+    ...RootPart.data.identity,
     label: 'Group',
   },
 

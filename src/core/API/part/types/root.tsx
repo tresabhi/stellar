@@ -1,5 +1,6 @@
 import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import * as RootBlueprint from 'core/API/blueprint/types/root';
 import DeepPartial from 'core/types/DeepPartial';
 import { memo } from 'react';
 import * as FuelTankPart from './fuelTank';
@@ -21,16 +22,16 @@ export const vanillaData = {
   t: '-Infinity' as '-Infinity',
 };
 
-// TODO: SPLIT ALL PART DATA TO VANILLA AND STELLAR VERSIONS
-
 export const data = {
   ...vanillaData,
 
-  '.stellar': {
+  identity: {
     label: 'Unknown Part',
     visible: true,
     locked: false,
   },
+
+  relations: {} as RootBlueprint.PartPointer | undefined,
 };
 
 export type Type = typeof data;

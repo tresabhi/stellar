@@ -3,7 +3,7 @@ import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useStellarContext from 'core/hooks/useStellarContext';
-import appState from 'core/stores/appState';
+import app from 'core/stores/app';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import './index.scss';
@@ -249,26 +249,26 @@ const ToolBarTop: FC = () => {
 
       <Tabs.Container className="toolbar-tabs">
         <Tabs.Tab
-          onClick={() => appState.setState({ tab: 'layout' })}
-          selected={appState((state) => state.tab) === 'layout'}
+          onClick={() => app.setState({ tab: 'layout' })}
+          selected={app((state) => state.tab) === 'layout'}
         >
           Layout
         </Tabs.Tab>
         <Tabs.Tab
-          onClick={() => appState.setState({ tab: 'staging' })}
-          selected={appState((state) => state.tab) === 'staging'}
+          onClick={() => app.setState({ tab: 'staging' })}
+          selected={app((state) => state.tab) === 'staging'}
         >
           Staging
         </Tabs.Tab>
         <Tabs.Tab
-          onClick={() => appState.setState({ tab: 'simulation' })}
-          selected={appState((state) => state.tab) === 'simulation'}
+          onClick={() => app.setState({ tab: 'simulation' })}
+          selected={app((state) => state.tab) === 'simulation'}
         >
           Simulation
         </Tabs.Tab>
         <Tabs.Tab
-          onClick={() => appState.setState({ tab: 'rendering' })}
-          selected={appState((state) => state.tab) === 'rendering'}
+          onClick={() => app.setState({ tab: 'rendering' })}
+          selected={app((state) => state.tab) === 'rendering'}
         >
           Rendering
         </Tabs.Tab>

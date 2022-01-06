@@ -1,3 +1,4 @@
+import * as RootPart from './types/root';
 import * as PartsAPI from 'core/API/part';
 import * as RootBlueprint from './types/root';
 import * as GroupPart from 'core/API/part/types/group';
@@ -32,7 +33,7 @@ export const importifyBlueprint = (
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {
     ...mergedBlueprint,
-    parts: importifyPartsData(mergedBlueprint.parts),
+    parts: importifyPartsData(mergedBlueprint.parts, mergedBlueprint),
   };
   const latestVersionBlueprint = blueprintToLatestVersion(
     partDataUpdatedBlueprint,
@@ -46,17 +47,19 @@ export const importifyBlueprint = (
  */
 export const importifyPartsData = (
   parts: RootBlueprint.AnyVanillaPartTypeArray | RootBlueprint.AnyPartTypeArray,
+  parentPointer: GroupPart.Type | RootBlueprint.Type,
 ): RootBlueprint.AnyPartTypeArray => {
   let newParts: RootBlueprint.AnyPartTypeArray = [];
 
   parts.forEach((part) => {
     if (part.n === 'Group') {
       newParts.push({
-        ...(PartsAPI.importifyPartData(part) as GroupPart.Type),
-        parts: importifyPartsData(part.parts),
+        ...(PartsAPI.importifyPartData(part, parentPointer) as GroupPart.Type),
+
+        parts: importifyPartsData(part.parts, part),
       });
     } else {
-      newParts.push(PartsAPI.importifyPartData(part));
+      newParts.push(PartsAPI.importifyPartData(part, parentPointer));
     }
   });
 

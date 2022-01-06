@@ -1,6 +1,6 @@
 import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
-import appState from 'core/stores/appState';
+import app from 'core/stores/app';
 import blueprintStore from 'core/stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
 
@@ -19,9 +19,9 @@ export default function Explorer() {
     <SideBar.Container>
       <Partition.Container>
         <Partition.Option
-          selected={appState((state) => state.layout.leftSideBar) === 'parts'}
+          selected={app((state) => state.layout.leftSideBar) === 'parts'}
           onClick={() =>
-            appState.setState((state) => ({
+            app.setState((state) => ({
               layout: { ...state.layout, leftSideBar: 'parts' },
             }))
           }
@@ -30,11 +30,9 @@ export default function Explorer() {
         </Partition.Option>
         <Partition.Separator />
         <Partition.Option
-          selected={
-            appState((state) => state.layout.leftSideBar) === 'snippets'
-          }
+          selected={app((state) => state.layout.leftSideBar) === 'snippets'}
           onClick={() =>
-            appState.setState((state) => ({
+            app.setState((state) => ({
               layout: { ...state.layout, leftSideBar: 'snippets' },
             }))
           }
@@ -45,7 +43,7 @@ export default function Explorer() {
       <SideBar.Scrollable
         style={{
           display:
-            appState((state) => state.layout.leftSideBar) === 'parts'
+            app((state) => state.layout.leftSideBar) === 'parts'
               ? 'unset'
               : 'none',
         }}
@@ -55,7 +53,7 @@ export default function Explorer() {
       <SideBar.Scrollable
         style={{
           display:
-            appState((state) => state.layout.leftSideBar) === 'snippets'
+            app((state) => state.layout.leftSideBar) === 'snippets'
               ? 'unset'
               : 'none',
         }}

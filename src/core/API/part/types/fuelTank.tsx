@@ -36,10 +36,11 @@ export const vanillaData = {
 };
 
 export const data = {
+  ...RootPart.data,
   ...vanillaData,
 
-  '.stellar': {
-    ...RootPart.data['.stellar'],
+  identity: {
+    ...RootPart.data.identity,
 
     label: 'Fuel Tank',
   },
@@ -52,7 +53,7 @@ interface ComponentProps {
   data: Type;
 }
 export const Component: FC<ComponentProps> = memo(({ data }) => {
-  if (!data['.stellar'].visible) return <mesh />;
+  if (!data.identity.visible) return <mesh />;
 
   const faceCount = 24;
 

@@ -4,7 +4,7 @@ import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as PartAPI from 'core/API/part/index';
 import * as RootPart from 'core/API/part/types/root';
-import { FC, Ref, useRef } from 'react';
+import { FC, useRef } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
 import './index.scss';
 
@@ -26,7 +26,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
     keyDepth: string,
   ) => {
     parts.forEach((part, index) => {
-      if (part['.stellar'].visible) {
+      if (part.identity.visible) {
         if (part.n === 'Group') {
           insertPartComponents(part.parts, `${keyDepth}-${index}`);
         } else {
