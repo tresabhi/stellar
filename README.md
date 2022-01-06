@@ -1,7 +1,6 @@
 <p align="center"><img src="./public/mstile-310x150.png" /></p>
 
-![image](https://user-images.githubusercontent.com/43380238/148421540-b2be5ee0-4f8d-4209-abc0-73aad901b40c.png)
-
+![image](https://user-images.githubusercontent.com/43380238/148424321-199a10a1-78ac-41ee-8726-827a1b79d366.png)
 
 ## 🤔 About
 
