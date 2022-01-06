@@ -7,7 +7,8 @@ import app from 'core/stores/app';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import './index.scss';
-import settingsStore from 'core/stores/settings';
+import settingsStore, { SettingsType } from 'core/stores/settings';
+import produce from 'immer';
 
 /**
  * A toolbar containing the control menu buttons, tabs, file name, and window
@@ -229,12 +230,12 @@ const ToolBarTop: FC = () => {
                     settingsStore.getState().debug.loadDummyOnLaunch
                   }
                   onClick={() => {
-                    settingsStore.setState((state) => ({
-                      debug: {
-                        ...state.debug,
-                        loadDummyOnLaunch: !state.debug.loadDummyOnLaunch,
-                      },
-                    }));
+                    settingsStore.setState(
+                      produce((state: SettingsType) => {
+                        state.debug.loadDummyOnLaunch =
+                          !state.debug.loadDummyOnLaunch;
+                      }),
+                    );
                   }}
                 >
                   Load dummy BP on launch

@@ -13,6 +13,6 @@ export const data = {
 };
 
 // TODO: capitalize all types and interfaces
-export type Type = typeof data;
+export type AppType = typeof data;
 
-export default create<Type>(devtools(() => data, { name: 'app_state' }));
+export default create<AppType>(devtools(() => data, { name: 'app_state' }));

@@ -6,9 +6,10 @@ import { getPartIconComponent } from 'core/API/part';
 import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
 import blueprintStore from 'core/stores/blueprint';
-import selectionStore from 'core/stores/selection';
+import selectionStore, { SelectionStoreType } from 'core/stores/selection';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
+import produce from 'immer';
 
 /**
  * A container that holds a list of all parts in the blueprint.
@@ -54,12 +55,6 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   })!;
 
   const Icon = getPartIconComponent(data.n);
-  const selectionPreset: RootBlueprint.PartPointer = {
-    parentPointer: parentData!,
-    partPointer: data,
-
-    listingRef,
-  };
 
   let childParts: JSX.Element[] | undefined;
 
@@ -72,6 +67,13 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
       />
     ));
   }
+
+  data.relations = {
+    parentPointer: parentData!,
+    partPointer: data,
+
+    listingRef,
+  };
 
   return (
     <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">
@@ -86,62 +88,29 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
               // ctrl
               if (listingRef.current?.classList.contains('selected')) {
                 listingRef.current.classList.remove('selected');
-                selectionStore.setState((state) => {
-                  const index = state.selections.indexOf(selectionPreset);
-                  let newState = [...state.selections];
-
-                  newState.splice(index, 1);
-
-                  return { selections: newState };
-                });
+                selectionStore.setState(
+                  produce((state: SelectionStoreType) =>
+                    state.selections.splice(
+                      state.selections.indexOf(data.relations),
+                      1,
+                    ),
+                  ),
+                );
               } else {
                 listingRef.current?.classList.add('selected');
                 selectionStore.setState((state) => ({
-                  selections: [...state.selections, selectionPreset],
+                  selections: [...state.selections, data.relations],
                 }));
               }
             }
           } else if (event.shiftKey) {
-            // shift
-            const { lastSelection, selections: currentSelections } =
-              selectionStore.getState();
-
-            if (lastSelection) {
-              let newSelections = [] as RootBlueprint.PartPointers;
-
-              for (
-                let index = lastSelection.parentPointer!.parts.indexOf(
-                  lastSelection.partPointer!,
-                );
-                index < lastSelection.parentPointer!.parts.length;
-                index++
-              ) {
-                const part = lastSelection.parentPointer!.parts[index];
-
-                part.relations?.listingRef?.current?.classList.add('selected');
-                if (!currentSelections.includes(part.relations!))
-                  newSelections.push(part.relations!);
-              }
-              selectionStore.setState((state) => ({
-                selections: [...state.selections, ...newSelections],
-              }));
-            } else {
-              selectionStore.getState().selections.forEach((selection) => {
-                selection?.listingRef?.current?.classList.remove('selected');
-              });
-              selectionStore.setState({
-                selections: [selectionPreset],
-                lastSelection: selectionPreset,
-              });
-              listingRef.current?.classList.add('selected');
-            }
           } else {
             selectionStore.getState().selections.forEach((selection) => {
               selection?.listingRef?.current?.classList.remove('selected');
             });
             selectionStore.setState({
-              selections: [selectionPreset],
-              lastSelection: selectionPreset,
+              selections: [data.relations],
+              lastSelection: data.relations,
             });
             listingRef.current?.classList.add('selected');
           }

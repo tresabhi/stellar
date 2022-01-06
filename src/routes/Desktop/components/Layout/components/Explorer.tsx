@@ -1,8 +1,9 @@
 import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
-import app from 'core/stores/app';
+import app, { AppType } from 'core/stores/app';
 import blueprintStore from 'core/stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
+import produce from 'immer';
 
 export default function Explorer() {
   const PartListings = blueprintStore((state) => state.parts).map(
@@ -21,9 +22,11 @@ export default function Explorer() {
         <Partition.Option
           selected={app((state) => state.layout.leftSideBar) === 'parts'}
           onClick={() =>
-            app.setState((state) => ({
-              layout: { ...state.layout, leftSideBar: 'parts' },
-            }))
+            app.setState(
+              produce((state: AppType) => {
+                state.layout.leftSideBar = 'parts';
+              }),
+            )
           }
         >
           Parts
@@ -32,9 +35,11 @@ export default function Explorer() {
         <Partition.Option
           selected={app((state) => state.layout.leftSideBar) === 'snippets'}
           onClick={() =>
-            app.setState((state) => ({
-              layout: { ...state.layout, leftSideBar: 'snippets' },
-            }))
+            app.setState(
+              produce((state: AppType) => {
+                state.layout.leftSideBar = 'snippets';
+              }),
+            )
           }
         >
           Snippets

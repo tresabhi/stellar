@@ -8,9 +8,9 @@ const data = {
   },
 };
 
-type Settings = typeof data & {};
+export type SettingsType = typeof data & {};
 
-export default create<Settings>(
+export default create<SettingsType>(
   devtools(
     persist(() => data, {
       name: 'settings',
