@@ -5,7 +5,7 @@ import * as RootBlueprint from 'core/API/blueprint/types/root';
 import { getPartIconComponent } from 'core/API/part';
 import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
-import useBlueprint from 'core/hooks/useBlueprint';
+import useSelection from 'core/hooks/useSelection';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
@@ -37,9 +37,8 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const keybind = createKeybind(() => buttonRef.current?.focus(), 'Enter');
-  const blueprint = useBlueprint();
+  const selection = useSelection();
 
-  let parentData: GroupPart.Type | RootBlueprint.Type;
   const data = blueprintStore((state) => {
     let currentParent: GroupPart.Type | RootBlueprint.Type = state;
 
@@ -48,7 +47,6 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
       const direction = address[index];
 
       if (index === address.length - 1) {
-        parentData = currentParent;
         return currentParent.parts[direction];
       } else {
         currentParent = currentParent.parts[direction] as GroupPart.Type;
@@ -83,18 +81,18 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
               // ctrl + shift
             } else {
               // ctrl
-              blueprint.togglePartSelection(data);
+              selection.togglePartSelection(data);
             }
           } else if (event.shiftKey) {
             // shift
             const lastSelection = selectionStore.getState().lastSelection;
 
             if (lastSelection) {
-              blueprint.selectParts(lastSelection.partPointer, data);
+              selection.selectParts(lastSelection.partPointer, data);
             }
           } else {
             // no modifier
-            blueprint.selectPartOnly(data);
+            selection.selectPartOnly(data);
           }
         }}
       >

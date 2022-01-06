@@ -2,13 +2,14 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
+import useDraft from 'core/hooks/useDraft';
 import useStellarContext from 'core/hooks/useStellarContext';
 import app from 'core/stores/app';
+import settingsStore, { SettingsType } from 'core/stores/settings';
+import produce from 'immer';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import './index.scss';
-import settingsStore, { SettingsType } from 'core/stores/settings';
-import produce from 'immer';
 
 /**
  * A toolbar containing the control menu buttons, tabs, file name, and window
@@ -16,6 +17,7 @@ import produce from 'immer';
  */
 const ToolBarTop: FC = () => {
   const blueprint = useBlueprint();
+  const draft = useDraft();
   const stellarContext = useStellarContext();
   const openInputRef = useRef<HTMLInputElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
@@ -65,9 +67,7 @@ const ToolBarTop: FC = () => {
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Button onClick={blueprint.save}>
-                Save
-              </ContextMenu.Button>
+              <ContextMenu.Button onClick={draft.save}>Save</ContextMenu.Button>
               <ContextMenu.Button
                 onClick={() => importInputRef.current?.click()}
               >
