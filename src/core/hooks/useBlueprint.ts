@@ -1,8 +1,8 @@
-import { saveAs } from 'file-saver';
-import blueprintStore from 'core/stores/blueprint';
-import { cloneDeep, merge } from 'lodash';
-import { importifyBlueprint } from 'core/API/blueprint';
+import { importifyBlueprint, savifyBlueprint } from 'core/API/blueprint';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
+import blueprintStore from 'core/stores/blueprint';
+import { saveAs } from 'file-saver';
+import { cloneDeep, merge } from 'lodash';
 
 /**
  * Hook to manage the blueprint state
@@ -18,9 +18,12 @@ export default function useBlueprint() {
       ),
 
     save: () => {
-      const blob = new Blob([JSON.stringify(blueprintStore.getState())], {
-        type: 'text/plain;charset=utf-8',
-      });
+      const blob = new Blob(
+        [JSON.stringify(savifyBlueprint(blueprintStore.getState()))],
+        {
+          type: 'text/plain;charset=utf-8',
+        },
+      );
       saveAs(blob, 'blueprint.txt');
     },
   };

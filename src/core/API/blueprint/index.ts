@@ -1,7 +1,7 @@
-import * as RootPart from './types/root';
 import * as PartsAPI from 'core/API/part';
-import * as RootBlueprint from './types/root';
 import * as GroupPart from 'core/API/part/types/group';
+import { cloneDeep } from 'lodash';
+import * as RootBlueprint from './types/root';
 
 /**
  * Merges the given blueprint into the default blueprint.
@@ -40,6 +40,19 @@ export const importifyBlueprint = (
   );
 
   return latestVersionBlueprint;
+};
+
+/**
+ * Gets blueprint ready to save locally
+ */
+export const savifyBlueprint = (blueprint: RootBlueprint.Type) => {
+  const newBlueprint = cloneDeep(blueprint);
+
+  newBlueprint.parts.forEach((part, index) => {
+    newBlueprint.parts[index] = PartsAPI.savifyPartData(part);
+  });
+
+  return newBlueprint;
 };
 
 /**

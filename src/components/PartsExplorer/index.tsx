@@ -7,9 +7,9 @@ import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore, { SelectionStoreType } from 'core/stores/selection';
+import produce from 'immer';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
-import produce from 'immer';
 
 /**
  * A container that holds a list of all parts in the blueprint.
@@ -104,6 +104,10 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
               }
             }
           } else if (event.shiftKey) {
+            // shift
+            blueprintStore.getState().parts.forEach((part) => {
+              part.relations?.listingRef?.current?.classList.add('selected');
+            });
           } else {
             selectionStore.getState().selections.forEach((selection) => {
               selection?.listingRef?.current?.classList.remove('selected');

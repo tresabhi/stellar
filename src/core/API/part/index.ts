@@ -59,6 +59,23 @@ export const importifyPartData = (
   };
 };
 
+export const savifyPartData = (
+  partData: RootPart.AnyPartType,
+  clone = true,
+) => {
+  let newPart = clone ? cloneDeep(partData) : partData;
+
+  delete newPart.relations;
+
+  if (newPart.n === 'Group') {
+    newPart.parts.forEach((part, index) => {
+      (newPart as GroupPart.Type).parts[index] = savifyPartData(part, clone);
+    });
+  }
+
+  return newPart;
+};
+
 export const getPartIconComponent = (
   partName: string,
 ): FC<SVGProps<SVGSVGElement>> | undefined => {
