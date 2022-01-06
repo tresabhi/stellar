@@ -52,11 +52,16 @@ export const importifyPartData = (
   partData: RootPart.AnyVanillaPartType | RootPart.AnyPartType,
   parentPointer: RootBlueprint.Type | GroupPart.Type,
 ): RootPart.AnyPartType => {
-  return {
+  let importifiedPartData: RootPart.AnyPartType = {
     ...merge(cloneDeep(getPartData(partData.n) ?? RootPart.data), partData),
 
+    // @ts-ignore the other pieces of data are added elsewhere
     relations: { parentPointer },
   };
+
+  importifiedPartData.relations.partPointer = importifiedPartData;
+
+  return importifiedPartData;
 };
 
 export const savifyPartData = (
@@ -65,7 +70,7 @@ export const savifyPartData = (
 ) => {
   let newPart = clone ? cloneDeep(partData) : partData;
 
-  delete newPart.relations;
+  delete (newPart as RootPart.AnySavedPartType).relations;
 
   if (newPart.n === 'Group') {
     newPart.parts.forEach((part, index) => {

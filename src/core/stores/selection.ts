@@ -2,7 +2,7 @@ import * as RootBlueprint from 'core/API/blueprint/types/root';
 import create from 'zustand';
 
 export type SelectionStoreType = {
-  selections: Partial<RootBlueprint.PartPointers>;
+  selections: RootBlueprint.PartPointers;
   lastSelection?: RootBlueprint.PartPointer;
 };
 

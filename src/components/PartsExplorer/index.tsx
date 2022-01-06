@@ -5,9 +5,9 @@ import * as RootBlueprint from 'core/API/blueprint/types/root';
 import { getPartIconComponent } from 'core/API/part';
 import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
+import useBlueprint from 'core/hooks/useBlueprint';
 import blueprintStore from 'core/stores/blueprint';
-import selectionStore, { SelectionStoreType } from 'core/stores/selection';
-import produce from 'immer';
+import selectionStore from 'core/stores/selection';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
@@ -37,11 +37,13 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const keybind = createKeybind(() => buttonRef.current?.focus(), 'Enter');
+  const blueprint = useBlueprint();
 
   let parentData: GroupPart.Type | RootBlueprint.Type;
   const data = blueprintStore((state) => {
     let currentParent: GroupPart.Type | RootBlueprint.Type = state;
 
+    // TODO: USE PARENT INSTANCE AND INITIAL INDEX TO ACQUIRE PART INSTANCE
     for (let index = 0; index < address.length; index++) {
       const direction = address[index];
 
@@ -68,12 +70,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
     ));
   }
 
-  data.relations = {
-    parentPointer: parentData!,
-    partPointer: data,
-
-    listingRef,
-  };
+  data.relations.listingRef = listingRef;
 
   return (
     <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">
@@ -86,37 +83,18 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
               // ctrl + shift
             } else {
               // ctrl
-              if (listingRef.current?.classList.contains('selected')) {
-                listingRef.current.classList.remove('selected');
-                selectionStore.setState(
-                  produce((state: SelectionStoreType) =>
-                    state.selections.splice(
-                      state.selections.indexOf(data.relations),
-                      1,
-                    ),
-                  ),
-                );
-              } else {
-                listingRef.current?.classList.add('selected');
-                selectionStore.setState((state) => ({
-                  selections: [...state.selections, data.relations],
-                }));
-              }
+              blueprint.togglePartSelection(data);
             }
           } else if (event.shiftKey) {
             // shift
-            blueprintStore.getState().parts.forEach((part) => {
-              part.relations?.listingRef?.current?.classList.add('selected');
-            });
+            const lastSelection = selectionStore.getState().lastSelection;
+
+            if (lastSelection) {
+              blueprint.selectParts(lastSelection.partPointer, data);
+            }
           } else {
-            selectionStore.getState().selections.forEach((selection) => {
-              selection?.listingRef?.current?.classList.remove('selected');
-            });
-            selectionStore.setState({
-              selections: [data.relations],
-              lastSelection: data.relations,
-            });
-            listingRef.current?.classList.add('selected');
+            // no modifier
+            blueprint.selectPartOnly(data);
           }
         }}
       >

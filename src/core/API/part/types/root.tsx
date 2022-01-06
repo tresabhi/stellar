@@ -31,12 +31,13 @@ export const data = {
     locked: false,
   },
 
-  relations: {} as RootBlueprint.PartPointer | undefined,
+  relations: {} as RootBlueprint.PartPointer,
 };
 
 export type Type = typeof data;
 
 export type AnyPartType = FuelTankPart.Type | GroupPart.Type;
+export type AnySavedPartType = AnyPartType & { relations: never };
 export type AnyVanillaPartType = FuelTankPart.VanillaType;
 
 export type AnyPartialPartType = DeepPartial<AnyPartType>;

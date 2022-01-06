@@ -32,13 +32,13 @@ export type AnyVanillaPartTypeArray = RootPart.AnyVanillaPartType[];
 export type PartAddress = number[];
 export type PartAddresses = PartAddress[];
 
-export type PartPointer = Partial<{
+export type PartPointer = {
   parentPointer: RootBlueprint.Type | GroupPart.Type;
   partPointer: RootPart.AnyPartType;
 
   listingRef: RefObject<HTMLDivElement>;
   threeRef: RefObject<GroupProps | MeshProps>; // TODO: fix ref object type
-}>;
+};
 export type PartPointers = PartPointer[];
 
 export type SelectionType = 'single' | 'multi' | 'list' | 'multi_list';
