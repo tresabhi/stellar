@@ -11,7 +11,6 @@ const DOMAIN_ICONS = {
   'stellaredit.web.app': StellarIcon,
 };
 
-
 interface IconProviderProps {
   className: string;
 }

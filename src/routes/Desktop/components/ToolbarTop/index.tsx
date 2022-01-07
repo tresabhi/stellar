@@ -2,7 +2,7 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
-import useDraft from 'core/hooks/useDraft';
+import useFile from 'core/hooks/useFile';
 import useStellarContext from 'core/hooks/useStellarContext';
 import app from 'core/stores/app';
 import settingsStore, { SettingsType } from 'core/stores/settings';
@@ -17,7 +17,7 @@ import './index.scss';
  */
 const ToolBarTop: FC = () => {
   const blueprint = useBlueprint();
-  const draft = useDraft();
+  const draft = useFile();
   const stellarContext = useStellarContext();
   const openInputRef = useRef<HTMLInputElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);

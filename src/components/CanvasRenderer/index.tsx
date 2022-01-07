@@ -49,7 +49,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
       mode="concurrent"
       frameloop="demand"
       orthographic
-      camera={{ zoom: 16, position: [data.center * -1, 0, 100] }}
+      camera={{ zoom: 16, position: [-data.center, 0, 100] }}
       className="editing-canvas"
     >
       <directionalLight position={[-20, 20, 100]} />
@@ -71,7 +71,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
         enableDamping={false}
       />
       <gridHelper
-        position={[data.center, 0, -99]}
+        position={[data.center, 0, -100]}
         args={[1e5, 2, '#9952E0']}
         rotation={[Math.PI / 2, 0, 0]}
       />

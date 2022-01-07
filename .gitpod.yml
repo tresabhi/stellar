@@ -1,7 +1,0 @@
-tasks:
-  - name: Install Extensions
-    init: node .gitpod/extensions/install.js
-
-  - name: Start Dev
-    init: yarn install
-    command: yarn start

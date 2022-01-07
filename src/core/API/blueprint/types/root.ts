@@ -1,5 +1,4 @@
 import { GroupProps, MeshProps } from '@react-three/fiber';
-import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as GroupPart from 'core/API/part/types/group';
 import * as RootPart from 'core/API/part/types/root';
 import { RefObject } from 'react';
@@ -33,7 +32,8 @@ export type PartAddress = number[];
 export type PartAddresses = PartAddress[];
 
 export type PartPointer = {
-  parentPointer: RootBlueprint.Type | GroupPart.Type;
+  // if undefined, the part is in the root
+  parentPointer?: GroupPart.Type;
   partPointer: RootPart.AnyPartType;
 
   listingRef: RefObject<HTMLDivElement>;

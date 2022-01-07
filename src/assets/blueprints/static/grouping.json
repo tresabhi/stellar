@@ -6,6 +6,9 @@
   },
   "parts": [
     {
+      "identity": {
+        "label": "Outer 1"
+      },
       "n": "Group",
       "parts": [
         {
@@ -57,6 +60,9 @@
           }
         },
         {
+          "identity": {
+            "label": "Inner 1"
+          },
           "n": "Group",
           "parts": [
             {
@@ -358,6 +364,9 @@
           }
         },
         {
+          "identity": {
+            "label": "Inner 2"
+          },
           "n": "Group",
           "parts": [
             {

@@ -2,7 +2,7 @@ import { savifyBlueprint } from 'core/API/blueprint';
 import blueprintStore from 'core/stores/blueprint';
 import { saveAs } from 'file-saver';
 
-export default function useDraft() {
+export default function useFile() {
   const hook = {
     save: () => {
       const blob = new Blob(

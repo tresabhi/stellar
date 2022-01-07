@@ -1,7 +1,6 @@
-import * as RootBlueprint from 'core/API/blueprint/types/root';
 import * as GroupPart from 'core/API/part/types/group';
 import * as RootPart from 'core/API/part/types/root';
-import { cloneDeep, merge } from 'lodash';
+import { cloneDeep, merge, mergeWith } from 'lodash';
 import { FC, SVGProps } from 'react';
 import { Type } from 'typescript';
 import * as FuelTankPart from './types/fuelTank';
@@ -50,16 +49,18 @@ export const getPartData = (partName: string) => {
 
 export const importifyPartData = (
   partData: RootPart.AnyVanillaPartType | RootPart.AnyPartType,
-  parentPointer: RootBlueprint.Type | GroupPart.Type,
+  parentPointer?: GroupPart.Type,
 ): RootPart.AnyPartType => {
-  let importifiedPartData: RootPart.AnyPartType = {
-    ...merge(cloneDeep(getPartData(partData.n) ?? RootPart.data), partData),
-
-    // @ts-ignore the other pieces of data are added elsewhere
-    relations: { parentPointer },
-  };
+  let importifiedPartData: RootPart.AnyPartType = merge(
+    partData,
+    merge(
+      cloneDeep(getPartData(partData.n) ?? RootPart.data),
+      cloneDeep(partData),
+    ),
+  );
 
   importifiedPartData.relations.partPointer = importifiedPartData;
+  importifiedPartData.relations.parentPointer = parentPointer;
 
   return importifiedPartData;
 };

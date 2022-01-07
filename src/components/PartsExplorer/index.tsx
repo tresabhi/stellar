@@ -5,6 +5,7 @@ import * as RootBlueprint from 'core/API/blueprint/types/root';
 import { getPartIconComponent } from 'core/API/part';
 import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
+import useBlueprint from 'core/hooks/useBlueprint';
 import useSelection from 'core/hooks/useSelection';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
@@ -38,6 +39,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const keybind = createKeybind(() => buttonRef.current?.focus(), 'Enter');
   const selection = useSelection();
+  const blueprint = useBlueprint();
 
   const data = blueprintStore((state) => {
     let currentParent: GroupPart.Type | RootBlueprint.Type = state;
@@ -85,6 +87,12 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
             }
           } else if (event.shiftKey) {
             // shift
+            try {
+              alert(blueprint.getPartAddress(data).join(', '));
+            } catch (e) {
+              alert(e);
+            }
+
             const lastSelection = selectionStore.getState().lastSelection;
 
             if (lastSelection) {
