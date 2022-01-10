@@ -5,7 +5,8 @@ import useBlueprint from 'core/hooks/useBlueprint';
 import blueprintStore from 'core/stores/blueprint';
 import settingsStore from 'core/stores/settings';
 import { FC, InputHTMLAttributes } from 'react';
-import Explorer from './components/Explorer';
+import LeftSideBar from './components/LeftSideBar';
+import RightSideBar from './components/RightSideBar';
 import './index.scss';
 
 if (settingsStore.getState().debug.loadDummyOnLaunch) {
@@ -21,8 +22,9 @@ const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
 
   return (
     <div {...props} className={`${props.className || ''} layout-tab`}>
-      <Explorer />
+      <LeftSideBar />
       <EditingCanvas data={blueprintState} />
+      <RightSideBar />
     </div>
   );
 };

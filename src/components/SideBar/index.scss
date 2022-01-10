@@ -1,10 +1,17 @@
 @import '../../styles/index.scss';
 
 .side-bar {
-  width: $sidebar-major-width;
   background-color: $black-regular;
   display: flex;
   flex-direction: column;
+
+  &.minor {
+    width: $sidebar-minor-width;
+  }
+
+  &.major {
+    width: $sidebar-major-width;
+  }
 
   .side-bar-scrollable-scroller {
     flex: 1;

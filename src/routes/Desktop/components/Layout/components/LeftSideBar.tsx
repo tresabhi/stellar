@@ -5,7 +5,7 @@ import blueprintStore from 'core/stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
 import produce from 'immer';
 
-export default function Explorer() {
+export default function LeftSideBar() {
   const PartListings = blueprintStore((state) => state.parts).map(
     (part, index) => (
       <PartsExplorer.Listing
@@ -63,7 +63,17 @@ export default function Explorer() {
               : 'none',
         }}
       >
-        Snippets coming soon!
+        <span
+          style={{
+            color: 'white',
+            display: 'block',
+            padding: 'auto',
+            paddingTop: '16px',
+            textAlign: 'center',
+          }}
+        >
+          Snippets coming soon!
+        </span>
       </SideBar.Scrollable>
     </SideBar.Container>
   );

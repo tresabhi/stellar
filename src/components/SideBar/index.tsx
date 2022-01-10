@@ -2,14 +2,18 @@ import Scroller from 'components/ScrollableContainer';
 import { FC, InputHTMLAttributes } from 'react';
 import './index.scss';
 
+interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
+  width?: 'major' | 'minor';
+}
 /**
  * Holds various components that usually appear on the sides.
  */
-export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
+export const Container: FC<ContainerProps> = ({
   children,
+  width = 'major',
   ...props
 }) => (
-  <div {...props} className={`${props.className || ''} side-bar`}>
+  <div {...props} className={`${props.className || ''} side-bar ${width}`}>
     {children}
   </div>
 );
