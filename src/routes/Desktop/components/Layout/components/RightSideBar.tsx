@@ -1,6 +1,6 @@
 import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
-import app, { AppType } from 'core/stores/app';
+import appStore, { AppType } from 'core/stores/app';
 import produce from 'immer';
 
 export default function RightSideBar() {
@@ -8,11 +8,14 @@ export default function RightSideBar() {
     <SideBar.Container width="minor">
       <Partition.Container>
         <Partition.Option
-          selected={app((state) => state.layout.rightSideBar) === 'properties'}
+          selected={
+            appStore((state) => state.layout.rightSideBar.partition) ===
+            'properties'
+          }
           onClick={() =>
-            app.setState(
+            appStore.setState(
               produce((state: AppType) => {
-                state.layout.rightSideBar = 'properties';
+                state.layout.rightSideBar.partition = 'properties';
               }),
             )
           }
@@ -21,11 +24,14 @@ export default function RightSideBar() {
         </Partition.Option>
         <Partition.Separator />
         <Partition.Option
-          selected={app((state) => state.layout.rightSideBar) === 'inspect'}
+          selected={
+            appStore((state) => state.layout.rightSideBar.partition) ===
+            'inspect'
+          }
           onClick={() =>
-            app.setState(
+            appStore.setState(
               produce((state: AppType) => {
-                state.layout.rightSideBar = 'inspect';
+                state.layout.rightSideBar.partition = 'inspect';
               }),
             )
           }
@@ -36,7 +42,8 @@ export default function RightSideBar() {
       <SideBar.Scrollable
         style={{
           display:
-            app((state) => state.layout.rightSideBar) === 'properties'
+            appStore((state) => state.layout.rightSideBar.partition) ===
+            'properties'
               ? 'unset'
               : 'none',
         }}
@@ -56,7 +63,8 @@ export default function RightSideBar() {
       <SideBar.Scrollable
         style={{
           display:
-            app((state) => state.layout.rightSideBar) === 'inspect'
+            appStore((state) => state.layout.rightSideBar.partition) ===
+            'inspect'
               ? 'unset'
               : 'none',
         }}

@@ -4,7 +4,7 @@ import * as Tabs from 'components/Tabs';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useFile from 'core/hooks/useFile';
 import useStellarContext from 'core/hooks/useStellarContext';
-import app from 'core/stores/app';
+import appStore from 'core/stores/app';
 import settingsStore, { SettingsType } from 'core/stores/settings';
 import produce from 'immer';
 import { random } from 'lodash';
@@ -250,26 +250,26 @@ const ToolBarTop: FC = () => {
 
       <Tabs.Container className="toolbar-tabs">
         <Tabs.Tab
-          onClick={() => app.setState({ tab: 'layout' })}
-          selected={app((state) => state.tab) === 'layout'}
+          onClick={() => appStore.setState({ tab: 'layout' })}
+          selected={appStore((state) => state.tab) === 'layout'}
         >
           Layout
         </Tabs.Tab>
         <Tabs.Tab
-          onClick={() => app.setState({ tab: 'staging' })}
-          selected={app((state) => state.tab) === 'staging'}
+          onClick={() => appStore.setState({ tab: 'staging' })}
+          selected={appStore((state) => state.tab) === 'staging'}
         >
           Staging
         </Tabs.Tab>
         <Tabs.Tab
-          onClick={() => app.setState({ tab: 'simulation' })}
-          selected={app((state) => state.tab) === 'simulation'}
+          onClick={() => appStore.setState({ tab: 'simulation' })}
+          selected={appStore((state) => state.tab) === 'simulation'}
         >
           Simulation
         </Tabs.Tab>
         <Tabs.Tab
-          onClick={() => app.setState({ tab: 'rendering' })}
-          selected={app((state) => state.tab) === 'rendering'}
+          onClick={() => appStore.setState({ tab: 'rendering' })}
+          selected={appStore((state) => state.tab) === 'rendering'}
         >
           Rendering
         </Tabs.Tab>

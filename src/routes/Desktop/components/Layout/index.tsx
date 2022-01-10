@@ -8,6 +8,7 @@ import { FC, InputHTMLAttributes } from 'react';
 import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
 import './index.scss';
+import appStore from 'core/stores/app';
 
 if (settingsStore.getState().debug.loadDummyOnLaunch) {
   blueprintStore.setState(importifyBlueprint(devBlueprint));
@@ -22,9 +23,13 @@ const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
 
   return (
     <div {...props} className={`${props.className || ''} layout-tab`}>
-      <LeftSideBar />
+      {appStore((state) => state.layout.leftSideBar.visible) ? (
+        <LeftSideBar />
+      ) : undefined}
       <EditingCanvas data={blueprintState} />
-      <RightSideBar />
+      {appStore((state) => state.layout.rightSideBar.visible) ? (
+        <RightSideBar />
+      ) : undefined}
     </div>
   );
 };

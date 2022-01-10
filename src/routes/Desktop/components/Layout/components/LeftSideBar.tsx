@@ -1,6 +1,6 @@
 import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
-import app, { AppType } from 'core/stores/app';
+import appStore, { AppType } from 'core/stores/app';
 import blueprintStore from 'core/stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
 import produce from 'immer';
@@ -20,11 +20,13 @@ export default function LeftSideBar() {
     <SideBar.Container>
       <Partition.Container>
         <Partition.Option
-          selected={app((state) => state.layout.leftSideBar) === 'parts'}
+          selected={
+            appStore((state) => state.layout.leftSideBar.partition) === 'parts'
+          }
           onClick={() =>
-            app.setState(
+            appStore.setState(
               produce((state: AppType) => {
-                state.layout.leftSideBar = 'parts';
+                state.layout.leftSideBar.partition = 'parts';
               }),
             )
           }
@@ -33,11 +35,14 @@ export default function LeftSideBar() {
         </Partition.Option>
         <Partition.Separator />
         <Partition.Option
-          selected={app((state) => state.layout.leftSideBar) === 'snippets'}
+          selected={
+            appStore((state) => state.layout.leftSideBar.partition) ===
+            'snippets'
+          }
           onClick={() =>
-            app.setState(
+            appStore.setState(
               produce((state: AppType) => {
-                state.layout.leftSideBar = 'snippets';
+                state.layout.leftSideBar.partition = 'snippets';
               }),
             )
           }
@@ -48,7 +53,7 @@ export default function LeftSideBar() {
       <SideBar.Scrollable
         style={{
           display:
-            app((state) => state.layout.leftSideBar) === 'parts'
+            appStore((state) => state.layout.leftSideBar.partition) === 'parts'
               ? 'unset'
               : 'none',
         }}
@@ -58,7 +63,8 @@ export default function LeftSideBar() {
       <SideBar.Scrollable
         style={{
           display:
-            app((state) => state.layout.leftSideBar) === 'snippets'
+            appStore((state) => state.layout.leftSideBar.partition) ===
+            'snippets'
               ? 'unset'
               : 'none',
         }}

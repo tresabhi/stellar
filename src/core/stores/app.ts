@@ -7,8 +7,14 @@ export const data = {
 
   tab: 'layout' as 'layout' | 'staging' | 'simulation' | 'rendering',
   layout: {
-    leftSideBar: 'parts' as 'parts' | 'snippets',
-    rightSideBar: 'properties' as 'properties' | 'inspect',
+    leftSideBar: {
+      partition: 'parts' as 'parts' | 'snippets',
+      visible: true,
+    },
+    rightSideBar: {
+      partition: 'properties' as 'properties' | 'inspect',
+      visible: true,
+    },
   },
 };
 
