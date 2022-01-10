@@ -3,14 +3,16 @@ import IconProvider from 'components/IconProvider';
 import useStellarContext from 'core/hooks/useStellarContext';
 import './index.scss';
 
-const SplashScreen = () => (
+const SplashScreen = () => {
+  const stellarContext = useStellarContext();
+
   <div className="splash-screen">
     <IconProvider className="stellar-icon" />
     <p className="loading-text">
-      {useStellarContext().title}
+      {stellarContext.title}
       <LoadingIcon className="loading-icon" />
     </p>
-  </div>
-);
+  </div>;
+};
 
 export default SplashScreen;

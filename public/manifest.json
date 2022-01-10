@@ -6,10 +6,9 @@
   "scope": "/",
   "display": "fullscreen",
 
-  "theme_color": "#22272e",
-  "background_color": "#22272e",
+  "theme_color": "#14141f",
+  "background_color": "#1f1f2e",
   "orientation": "landscape",
-  "display_override": ["window-controls-overlay"],
 
   "icons": [
     {
