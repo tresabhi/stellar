@@ -6,13 +6,15 @@ import './index.scss';
 const SplashScreen = () => {
   const stellarContext = useStellarContext();
 
-  <div className="splash-screen">
-    <IconProvider className="stellar-icon" />
-    <p className="loading-text">
-      {stellarContext.title}
-      <LoadingIcon className="loading-icon" />
-    </p>
-  </div>;
+  return (
+    <div className="splash-screen">
+      <IconProvider className="stellar-icon" />
+      <p className="loading-text">
+        {stellarContext.title}
+        <LoadingIcon className="loading-icon" />
+      </p>
+    </div>
+  );
 };
 
 export default SplashScreen;
