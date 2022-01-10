@@ -1,6 +1,6 @@
 import * as GroupPart from 'core/API/part/types/group';
 import * as RootPart from 'core/API/part/types/root';
-import { cloneDeep, merge, mergeWith } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 import { FC, SVGProps } from 'react';
 import { Type } from 'typescript';
 import * as FuelTankPart from './types/fuelTank';

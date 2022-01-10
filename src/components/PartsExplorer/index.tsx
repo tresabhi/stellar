@@ -3,11 +3,9 @@ import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import { getPartIconComponent } from 'core/API/part';
-import * as GroupPart from 'core/API/part/types/group';
 import createKeybind from 'core/functions/createKeybind';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useSelection from 'core/hooks/useSelection';
-import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
@@ -41,20 +39,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const selection = useSelection();
   const blueprint = useBlueprint();
 
-  const data = blueprintStore((state) => {
-    let currentParent: GroupPart.Type | RootBlueprint.Type = state;
-
-    // TODO: USE PARENT INSTANCE AND INITIAL INDEX TO ACQUIRE PART INSTANCE
-    for (let index = 0; index < address.length; index++) {
-      const direction = address[index];
-
-      if (index === address.length - 1) {
-        return currentParent.parts[direction];
-      } else {
-        currentParent = currentParent.parts[direction] as GroupPart.Type;
-      }
-    }
-  })!;
+  let data = blueprint.getReactivePartByAddress(address)!;
 
   const Icon = getPartIconComponent(data.n);
 
@@ -87,19 +72,16 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
             }
           } else if (event.shiftKey) {
             // shift
-            try {
-              alert(blueprint.getPartAddress(data).join(', '));
-            } catch (e) {
-              alert(e);
-            }
-
             const lastSelection = selectionStore.getState().lastSelection;
 
             if (lastSelection) {
-              selection.selectParts(lastSelection.partPointer, data);
+              selection.selectParts(lastSelection.relations.partPointer, data);
+            } else {
+              selection.selectPartOnly(data);
             }
           } else {
             // no modifier
+            console.log(blueprint.getPartAddress(data));
             selection.selectPartOnly(data);
           }
         }}

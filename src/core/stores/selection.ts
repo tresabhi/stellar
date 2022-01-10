@@ -1,9 +1,9 @@
-import * as RootBlueprint from 'core/API/blueprint/types/root';
+import * as RootPart from 'core/API/part/types/root';
 import create from 'zustand';
 
 export type SelectionStoreType = {
-  selections: RootBlueprint.PartPointers;
-  lastSelection?: RootBlueprint.PartPointer;
+  selections: RootPart.AnyPartType[];
+  lastSelection?: RootPart.AnyPartType;
 };
 
 export default create<SelectionStoreType>(() => ({

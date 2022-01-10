@@ -1,4 +1,5 @@
 import createKeybind from 'core/functions/createKeybind';
+import useBlueprint from 'core/hooks/useBlueprint';
 import app from 'core/stores/app';
 import { useEffect } from 'react';
 import Layout from './components/Layout';
@@ -18,21 +19,31 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
 
 export default function Desktop() {
   const tab = app((state) => state.tab);
+  const blueprint = useBlueprint();
 
   useEffect(() => {
     // BIG TODO: make this automated through settings
     document.addEventListener(
       'keypress',
-      createKeybind(() => {
-        app.setState((state) => ({
-          tab:
-            state.tab === tabOrder[tabOrder.length - 1]
-              ? tabOrder[0]
-              : tabOrder[tabOrder.indexOf(state.tab) + 1],
-        }));
-      }, ['Control', 'Tab']),
+      createKeybind(
+        () =>
+          app.setState((state) => ({
+            tab:
+              state.tab === tabOrder[tabOrder.length - 1]
+                ? tabOrder[0]
+                : tabOrder[tabOrder.indexOf(state.tab) + 1],
+          })),
+        ['Control', 'Tab'],
+      ),
     );
-  }, []);
+
+    document.addEventListener(
+      'keypress',
+      createKeybind(() => {
+        blueprint.deletePartsBySelection();
+      }, 'Delete'),
+    );
+  }, [blueprint]);
 
   return (
     <div className="desktop-container">

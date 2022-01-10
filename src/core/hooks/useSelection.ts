@@ -7,14 +7,17 @@ export default function useSelection() {
     selectPart: (part: RootPart.AnyPartType) => {
       part.relations.listingRef.current?.classList.add('selected');
       selectionStore.setState((state) => ({
-        selections: [...state.selections, part.relations],
+        selections: [...state.selections, part],
       }));
     },
 
     selectParts: (
       startPart: RootPart.AnyPartType,
       endPart: RootPart.AnyPartType,
-    ) => {},
+    ) => {
+      // const startAddress = blueprint.getPartAddress(startPart);
+      // const endAddress = blueprint.getPartAddress(endPart);
+    },
 
     selectPartsOnly: (
       startPart: RootPart.AnyPartType,
@@ -25,7 +28,7 @@ export default function useSelection() {
       part.relations.listingRef.current?.classList.remove('selected');
       selectionStore.setState(
         produce((state: SelectionStoreType) =>
-          state.selections.splice(state.selections.indexOf(part.relations), 1),
+          state.selections.splice(state.selections.indexOf(part), 1),
         ),
       );
     },
@@ -40,13 +43,20 @@ export default function useSelection() {
 
     selectPartOnly: (part: RootPart.AnyPartType) => {
       selectionStore.getState().selections.forEach((selection) => {
-        selection.listingRef.current?.classList.remove('selected');
+        selection.relations.listingRef.current?.classList.remove('selected');
       });
       selectionStore.setState({
-        selections: [part.relations],
-        lastSelection: part.relations,
+        selections: [part],
+        lastSelection: part,
       });
       part.relations.listingRef?.current?.classList.add('selected');
+    },
+
+    getPartDirection: (
+      startPart: RootPart.AnyPartType,
+      endPart: RootPart.AnyPartType,
+    ): -1 | 0 | 1 => {
+      return 0;
     },
   };
 
