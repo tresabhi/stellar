@@ -2,6 +2,7 @@ import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
 import appStore, { AppType } from 'core/stores/app';
 import produce from 'immer';
+import * as PropertiesExplorer from 'components/PropertiesExplorer';
 
 export default function RightSideBar() {
   return (
@@ -48,17 +49,18 @@ export default function RightSideBar() {
               : 'none',
         }}
       >
-        <span
-          style={{
-            color: 'white',
-            display: 'block',
-            padding: 'auto',
-            paddingTop: '16px',
-            textAlign: 'center',
-          }}
-        >
-          Properties coming soon!
-        </span>
+        <PropertiesExplorer.Container>
+          <PropertiesExplorer.Group>
+            <PropertiesExplorer.Title>Transformations</PropertiesExplorer.Title>
+            <PropertiesExplorer.Row>
+              <PropertiesExplorer.NamedInput
+                title="X"
+                defaultValue={12}
+                suffix="m"
+              />
+            </PropertiesExplorer.Row>
+          </PropertiesExplorer.Group>
+        </PropertiesExplorer.Container>
       </SideBar.Scrollable>
       <SideBar.Scrollable
         style={{
