@@ -26,7 +26,7 @@
     "typescript": "^4.5.4",
     "unzipper": "^0.10.11",
     "yarn": "^1.22.17",
-    "zustand": "^3.6.8"
+    "zustand": "^3.6.9"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.4",
