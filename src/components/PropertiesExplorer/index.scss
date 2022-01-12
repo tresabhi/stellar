@@ -1,2 +1,55 @@
+@import '../../styles/index.scss';
+
 .properties-explorer {
+  padding: 0 $padding-x-thick 0 $padding-x-thick;
+
+  .properties-explorer-group {
+    display: flex;
+    flex-direction: column;
+    padding: $padding-x-thick 0 $padding-x-thick 0;
+
+    .properties-explorer-title {
+      color: white;
+      font-size: $font-size-regular;
+      padding-bottom: $padding-x-thick;
+    }
+
+    .properties-explorer-row {
+      display: flex;
+      justify-content: space-between;
+
+      .properties-explorer-named-input {
+        background-color: $black-light;
+        border-radius: $border-radius-regular;
+
+        &.small {
+          width: $named-input-small-width;
+          height: $named-input-height;
+          display: flex;
+        }
+
+        &.wide {
+          width: 100%;
+        }
+
+        .properties-explorer-named-input-title {
+          font-size: $font-size-regular;
+          padding: 0 $padding-thick 0 $padding-thick;
+          color: $gray-darker;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .properties-explorer-named-input-value {
+          font-size: $font-size-regular;
+          color: white;
+          flex: 1;
+          text-align: center;
+          min-width: 0;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
 }

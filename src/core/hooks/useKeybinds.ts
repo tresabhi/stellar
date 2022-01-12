@@ -1,23 +1,19 @@
-import createKeybind from 'core/functions/createKeybind';
-import appStore, { AppType } from 'core/stores/app';
-import produce from 'immer';
-import { useEffect } from 'react';
-import useBlueprint from './useBlueprint';
-
+/*
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'layout',
   'staging',
   'simulation',
   'rendering',
 ];
+*/
 
 export default function useKeybinds() {
   // BIG TODO: make this automated through settings
-  const blueprint = useBlueprint();
-
+  // const blueprint = useBlueprint();
+  /*
   useEffect(() => {
     // tab switching
-    document.addEventListener(
+    window.addEventListener(
       'keypress',
       createKeybind(
         () =>
@@ -32,7 +28,7 @@ export default function useKeybinds() {
     );
 
     // toggle left side bar
-    document.addEventListener(
+    window.addEventListener(
       'keypress',
       createKeybind(
         () =>
@@ -47,7 +43,7 @@ export default function useKeybinds() {
     );
 
     // toggle right side bar
-    document.addEventListener(
+    window.addEventListener(
       'keypress',
       createKeybind(
         () =>
@@ -62,11 +58,12 @@ export default function useKeybinds() {
     );
 
     // delete parts
-    document.addEventListener(
+    window.addEventListener(
       'keypress',
       createKeybind(() => {
         blueprint.deletePartsBySelection();
       }, 'Delete'),
     );
   }, [blueprint]);
+  */
 }

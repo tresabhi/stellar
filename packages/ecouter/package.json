@@ -1,19 +1,18 @@
 {
-  "name": "zpazio",
-  "version": "0.1-beta.1",
-  "description": "Stellar-flavoured React components to build editor UIs",
-  "main": "index.js",
+  "name": "ecouter",
+  "version": "0.1",
+  "description": "A modern user input management library",
+  "main": "index.ts",
   "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/TresAbhi/Stellar.git",
-    "directory": "packages/zpazio"
+    "directory": "packages/ecouter/"
   },
   "keywords": [
-    "react",
-    "stellar",
-    "component",
-    "editor"
+    "input",
+    "events",
+    "modern"
   ],
   "author": "TrèsAbhi",
   "license": "GPL-3.0",

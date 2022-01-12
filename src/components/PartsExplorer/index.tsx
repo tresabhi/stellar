@@ -35,7 +35,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const keybind = createKeybind(() => buttonRef.current?.focus(), 'Enter');
+  const keybind = createKeybind('Enter', () => buttonRef.current?.focus());
   const selection = useSelection();
   const blueprint = useBlueprint();
 

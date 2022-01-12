@@ -29,8 +29,8 @@ export type Options = Partial<typeof DefaultOptions>;
  * @returns `void`
  */
 export default function createKeybind(
-  callback: Function,
   keybind: Keybind | Keybind[],
+  callback: Function,
   options?: Options,
 ) {
   options = { ...DefaultOptions, ...options };

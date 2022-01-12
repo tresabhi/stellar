@@ -1,8 +1,8 @@
 import * as Partition from 'components/Partitions';
+import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
 import appStore, { AppType } from 'core/stores/app';
 import produce from 'immer';
-import * as PropertiesExplorer from 'components/PropertiesExplorer';
 
 export default function RightSideBar() {
   return (
@@ -55,8 +55,21 @@ export default function RightSideBar() {
             <PropertiesExplorer.Row>
               <PropertiesExplorer.NamedInput
                 title="X"
-                defaultValue={12}
+                initialValue={0}
                 suffix="m"
+              />
+              <PropertiesExplorer.NamedInput
+                title="Y"
+                initialValue={0}
+                suffix="m"
+              />
+              <PropertiesExplorer.NamedInput
+                title="R"
+                initialValue={0}
+                suffix="°"
+                min={0}
+                max={360}
+                mixed
               />
             </PropertiesExplorer.Row>
           </PropertiesExplorer.Group>
