@@ -1,32 +1,18 @@
-/*
+import appStore from 'core/stores/app';
+import { bind } from 'mousetrap';
+
+// TODO: Find a way to make this cleaner
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'layout',
   'staging',
   'simulation',
   'rendering',
 ];
-*/
 
-export default function useKeybinds() {
+export default function manifestKeybinds() {
   // BIG TODO: make this automated through settings
   // const blueprint = useBlueprint();
   /*
-  useEffect(() => {
-    // tab switching
-    window.addEventListener(
-      'keypress',
-      createKeybind(
-        () =>
-          appStore.setState((state) => ({
-            tab:
-              state.tab === tabOrder[tabOrder.length - 1]
-                ? tabOrder[0]
-                : tabOrder[tabOrder.indexOf(state.tab) + 1],
-          })),
-        ['Control', 'Tab'],
-      ),
-    );
-
     // toggle left side bar
     window.addEventListener(
       'keypress',
@@ -66,4 +52,14 @@ export default function useKeybinds() {
     );
   }, [blueprint]);
   */
+
+  // switch to next tab
+  bind('ctrl+tab', (event) => {
+    appStore.setState((state) => ({
+      tab:
+        state.tab === tabOrder[tabOrder.length - 1]
+          ? tabOrder[0]
+          : tabOrder[tabOrder.indexOf(state.tab) + 1],
+    }));
+  });
 }

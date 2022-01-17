@@ -91,6 +91,35 @@ export const NamedInput: FC<NamedInputProps> = ({
   );
 };
 
+export interface ToggleButtonProps
+  extends InputHTMLAttributes<HTMLButtonElement> {
+  initialState?: boolean;
+}
+export const ToggleButton: FC<ToggleButtonProps> = ({
+  children,
+  initialState = false,
+  ...props
+}) => {
+  const [state, setState] = useState(initialState);
+
+  return (
+    //@ts-ignore
+    <button
+      {...props}
+      className={`${props.className || ''} properties-explorer-toggle-button ${
+        state ? 'on' : 'off'
+      }`}
+      onClick={(event) => {
+        setState((state) => !state);
+
+        if (props.onClick) props.onClick(event);
+      }}
+    >
+      {children}
+    </button>
+  );
+};
+
 export interface NamedCheckboxProps
   extends InputHTMLAttributes<HTMLButtonElement> {
   title: string;
@@ -101,7 +130,7 @@ export const NamedCheckbox: FC<NamedCheckboxProps> = ({
   initialValue,
   ...props
 }) => {
-  const [currentValue, setCurrentValue] = useState(initialValue);
+  const [state] = useState(initialValue);
 
   return (
     <div
@@ -110,10 +139,10 @@ export const NamedCheckbox: FC<NamedCheckboxProps> = ({
       <span className="properties-explorer-named-checkbox-title">{title}</span>
       {/* @ts-ignore */}
       <button {...props} className="properties-explorer-named-checkbox-button">
-        {currentValue === 'mixed' ? (
+        {state === 'mixed' ? (
           // TODO: REPLACE THE PLACEHOLDER
           <span>mixed</span>
-        ) : currentValue ? (
+        ) : state ? (
           <span>true</span>
         ) : (
           <span>false</span>

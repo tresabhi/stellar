@@ -17,6 +17,7 @@
     .properties-explorer-row {
       display: flex;
       justify-content: space-between;
+      margin-bottom: $margin-thick;
 
       .properties-explorer-named-input {
         background-color: $black-light;
@@ -48,6 +49,23 @@
           text-align: center;
           min-width: 0;
           text-overflow: ellipsis;
+        }
+      }
+
+      .properties-explorer-toggle-button {
+        background-color: $black-light;
+        border-radius: $border-radius-regular;
+        width: $named-input-small-width;
+        height: $named-input-height;
+        display: flex;
+
+        &:hover {
+          background-color: $black-lighter;
+        }
+
+        &:active,
+        &.on {
+          background-color: $black-x-light;
         }
       }
     }

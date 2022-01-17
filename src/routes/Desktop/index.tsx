@@ -1,5 +1,6 @@
-import useKeybinds from 'core/hooks/useKeybinds';
+import manifestKeybinds from 'core/functions/manifestKeybinds';
 import appStore from 'core/stores/app';
+import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';
 import Simulation from './components/Simulation';
@@ -11,7 +12,7 @@ import './index.scss';
 export default function Desktop() {
   const tab = appStore((state) => state.tab);
 
-  useKeybinds();
+  useEffect(() => manifestKeybinds(), []);
 
   return (
     <div className="desktop-container">

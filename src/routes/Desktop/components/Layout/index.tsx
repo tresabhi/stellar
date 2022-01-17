@@ -18,9 +18,6 @@ const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   const blueprint = useBlueprint();
   const blueprintState = blueprintStore((state) => state);
 
-  //@ts-ignore
-  blueprint.getPartAddress(blueprintState.parts[0].parts[2]);
-
   return (
     <div {...props} className={`${props.className || ''} layout-tab`}>
       {appStore((state) => state.layout.leftSideBar.visible) ? (

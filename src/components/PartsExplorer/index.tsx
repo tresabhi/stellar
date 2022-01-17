@@ -81,7 +81,6 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
             }
           } else {
             // no modifier
-            console.log(blueprint.getPartAddress(data));
             selection.selectPartOnly(data);
           }
         }}

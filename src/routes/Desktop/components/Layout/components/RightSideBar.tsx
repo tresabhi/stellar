@@ -69,8 +69,22 @@ export default function RightSideBar() {
                 suffix="°"
                 min={0}
                 max={360}
-                mixed
               />
+            </PropertiesExplorer.Row>
+            <PropertiesExplorer.Row>
+              <PropertiesExplorer.NamedInput
+                title="W"
+                initialValue={1}
+                suffix="x"
+              />
+              <PropertiesExplorer.NamedInput
+                title="H"
+                initialValue={1}
+                suffix="x"
+              />
+              {/* <PropertiesExplorer.ToggleButton>
+                Deez nuts
+              </PropertiesExplorer.ToggleButton> */}
             </PropertiesExplorer.Row>
           </PropertiesExplorer.Group>
         </PropertiesExplorer.Container>
