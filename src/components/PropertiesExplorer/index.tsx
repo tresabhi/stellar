@@ -1,5 +1,5 @@
-import createKeybind from 'core/functions/createKeybind';
-import { FC, InputHTMLAttributes, useRef, useState } from 'react';
+import Mousetrap from 'mousetrap';
+import { FC, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import './index.scss';
 
 const MIXED_SYMBOL = '~';
@@ -41,14 +41,20 @@ export const NamedInput: FC<NamedInputProps> = ({
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const inputKeybind = createKeybind('Enter', () => inputRef.current?.blur());
   let currentValue = initialValue;
+
+  useEffect(() => {
+    new Mousetrap(inputRef.current!).bind('enter', () =>
+      inputRef.current?.blur(),
+    );
+  }, []);
 
   return (
     <div
       className={`${
         props.className || ''
       } properties-explorer-named-input ${type}`}
+      onClick={() => inputRef.current?.focus()}
     >
       <span className="properties-explorer-named-input-title">{title}</span>
       <input
@@ -85,7 +91,6 @@ export const NamedInput: FC<NamedInputProps> = ({
             inputRef.current!.value = `${currentValue}${suffix}`;
           }
         }}
-        onKeyDown={inputKeybind}
       />
     </div>
   );

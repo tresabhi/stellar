@@ -1,5 +1,5 @@
 import appStore from 'core/stores/app';
-import { bind } from 'mousetrap';
+import Mousetrap from 'mousetrap';
 
 // TODO: Find a way to make this cleaner
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
@@ -54,7 +54,7 @@ export default function manifestKeybinds() {
   */
 
   // switch to next tab
-  bind('ctrl+tab', (event) => {
+  Mousetrap.bind('ctrl+tab', (event) => {
     appStore.setState((state) => ({
       tab:
         state.tab === tabOrder[tabOrder.length - 1]

@@ -3,11 +3,11 @@ import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import { getPartIconComponent } from 'core/API/part';
-import createKeybind from 'core/functions/createKeybind';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useSelection from 'core/hooks/useSelection';
 import selectionStore from 'core/stores/selection';
-import { FC, InputHTMLAttributes, useRef, useState } from 'react';
+import Mousetrap from 'mousetrap';
+import { FC, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
 import './index.scss';
 
 /**
@@ -35,15 +35,17 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const keybind = createKeybind('Enter', () => buttonRef.current?.focus());
   const selection = useSelection();
   const blueprint = useBlueprint();
-
   let data = blueprint.getReactivePartByAddress(address)!;
-
   const Icon = getPartIconComponent(data.n);
-
   let childParts: JSX.Element[] | undefined;
+
+  useEffect(() => {
+    new Mousetrap(inputRef.current!).bind('enter', () =>
+      buttonRef.current?.focus(),
+    );
+  }, []);
 
   if (data.n === 'Group') {
     childParts = data.parts.map((data, index) => (
@@ -119,7 +121,6 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
         </div>
 
         <input
-          onKeyPress={keybind}
           ref={inputRef}
           onMouseDown={(event) => {
             event.preventDefault();
