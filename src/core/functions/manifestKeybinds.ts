@@ -1,4 +1,5 @@
-import appStore from 'core/stores/app';
+import appStore, { AppType } from 'core/stores/app';
+import produce from 'immer';
 import Mousetrap from 'mousetrap';
 
 // TODO: Find a way to make this cleaner
@@ -61,5 +62,23 @@ export default function manifestKeybinds() {
           ? tabOrder[0]
           : tabOrder[tabOrder.indexOf(state.tab) + 1],
     }));
+  });
+
+  // toggle left side bar
+  Mousetrap.bind('alt+1', () => {
+    appStore.setState(
+      produce((state: AppType) => {
+        state.layout.leftSideBar.visible = !state.layout.leftSideBar.visible;
+      }),
+    );
+  });
+
+  // toggle right side bar
+  Mousetrap.bind('alt+2', () => {
+    appStore.setState(
+      produce((state: AppType) => {
+        state.layout.rightSideBar.visible = !state.layout.rightSideBar.visible;
+      }),
+    );
   });
 }
