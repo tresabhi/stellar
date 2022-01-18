@@ -6,15 +6,15 @@ import * as PartsExplorer from 'components/PartsExplorer';
 import produce from 'immer';
 
 export default function LeftSideBar() {
-  const PartListings = blueprintStore((state) => state.parts).map(
-    (part, index) => (
-      <PartsExplorer.Listing
-        key={`part-${index}`}
-        address={[index]}
-        indentation={0}
-      />
-    ),
-  );
+  const reactiveParts = blueprintStore((state) => state.parts);
+
+  const PartListings = reactiveParts.map((part, index) => (
+    <PartsExplorer.Listing
+      key={`part-${index}`}
+      address={[index]}
+      indentation={0}
+    />
+  ));
 
   return (
     <SideBar.Container>

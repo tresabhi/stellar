@@ -1,5 +1,5 @@
-import Mousetrap from 'mousetrap';
-import { FC, InputHTMLAttributes, useEffect, useRef, useState } from 'react';
+import { FC, InputHTMLAttributes, useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import './index.scss';
 
 const MIXED_SYMBOL = '~';
@@ -40,14 +40,10 @@ export const NamedInput: FC<NamedInputProps> = ({
   max,
   ...props
 }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useHotkeys<HTMLInputElement>('enter', () => {
+    inputRef.current?.blur();
+  });
   let currentValue = initialValue;
-
-  useEffect(() => {
-    new Mousetrap(inputRef.current!).bind('enter', () =>
-      inputRef.current?.blur(),
-    );
-  }, []);
 
   return (
     <div

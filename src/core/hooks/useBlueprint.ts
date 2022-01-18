@@ -78,3 +78,6 @@ export default function useBlueprint() {
 
   return hook;
 }
+
+export type BlueprintHook = ReturnType<typeof useBlueprint>;
+export type UseBlueprintHook = typeof useBlueprint;
