@@ -66,8 +66,5 @@
     "zpazio",
     "zustand",
     "हिन्दी"
-  ],
-  "search.exclude": {
-    "**/src/assets/icons": true
-  }
+  ]
 }
