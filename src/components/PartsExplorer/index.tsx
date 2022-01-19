@@ -70,6 +70,8 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
             }
           } else if (event.shiftKey) {
             // shift
+            // TODO: make this actually functional
+            /*
             const lastSelection = selectionStore.getState().lastSelection;
 
             if (lastSelection) {
@@ -77,6 +79,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
             } else {
               selection.selectPartOnly(data);
             }
+            */
           } else {
             // no modifier
             selection.selectPartOnly(data);

@@ -3,11 +3,9 @@ import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
 import lerp from 'core/functions/lerp';
 import { times } from 'lodash';
 import { FC, memo } from 'react';
-import * as RootPart from './root';
+import * as RootPart from './Root';
 
-export const icon = FuelTankIcon;
-
-export const vanillaData = {
+const VANILLA_DATA = {
   ...RootPart.vanillaData,
 
   n: 'Fuel Tank' as 'Fuel Tank',
@@ -34,10 +32,9 @@ export const vanillaData = {
       | 'Flat Smooth',
   },
 };
-
-export const data = {
+const DATA = {
   ...RootPart.data,
-  ...vanillaData,
+  ...VANILLA_DATA,
 
   identity: {
     ...RootPart.data.identity,
@@ -46,15 +43,15 @@ export const data = {
   },
 };
 
-export type Type = typeof data;
-export type VanillaType = typeof vanillaData;
+export type FuelTankVanillaType = typeof VANILLA_DATA;
+export type FuelTankType = typeof DATA;
 
-interface ComponentProps {
-  data: Type;
+const Icon = FuelTankIcon;
+
+interface LayoutComponentProps {
+  data: FuelTankType;
 }
-export const Component: FC<ComponentProps> = memo(({ data }) => {
-  if (!data.identity.visible) return <mesh />;
-
+const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
   const faceCount = 24;
 
   const bevelMargin = 0.05;
@@ -726,3 +723,13 @@ export const Component: FC<ComponentProps> = memo(({ data }) => {
     }
   }
 });
+
+const FuelTank: RootPart.PartModule = {
+  VANILLA_DATA,
+  DATA,
+
+  Icon,
+
+  LayoutComponent,
+};
+export default FuelTank;

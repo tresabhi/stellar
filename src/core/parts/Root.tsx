@@ -2,9 +2,9 @@ import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import DeepPartial from 'core/types/DeepPartial';
-import { memo } from 'react';
-import * as FuelTankPart from './fuelTank';
-import * as GroupPart from './group';
+import { FC, memo } from 'react';
+import { FuelTankType, FuelTankVanillaType } from './FuelTank';
+import { GroupType } from './Group';
 
 export const icon = LockIcon;
 
@@ -36,11 +36,18 @@ export const data = {
 
 export type Type = typeof data;
 
-export type AnyPartType = FuelTankPart.Type | GroupPart.Type;
+export type AnyVanillaPartType = FuelTankVanillaType;
+export type AnyPartType = FuelTankType | GroupType;
 export type AnySavedPartType = AnyPartType & { relations: never };
-export type AnyVanillaPartType = FuelTankPart.VanillaType;
 
 export type AnyPartialPartType = DeepPartial<AnyPartType>;
 export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPartType>;
 
-export const Component = memo(() => <mesh />);
+export type PartModule = {
+  VANILLA_DATA?: AnyVanillaPartType | undefined;
+  DATA: AnyPartType;
+
+  Icon: FC<any>;
+
+  LayoutComponent: FC<any>;
+};
