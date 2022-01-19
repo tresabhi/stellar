@@ -61,10 +61,12 @@
       }
     }
 
-    &.selected {
-      .parts-explorer-listing-button {
-        background-color: $black-lighter;
-      }
+    &.selected .parts-explorer-listing-button {
+      background-color: $black-light;
+    }
+
+    &.selected > .parts-explorer-listing-button {
+      background-color: $black-lighter;
     }
 
     .parts-explorer-listing-children-container {
