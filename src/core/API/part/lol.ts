@@ -1,9 +1,9 @@
-import * as GroupPart from 'core/API/part/types/group';
-import * as RootPart from 'core/API/part/types/root';
+import FuelTankPart from 'core/parts/FuelTank';
+import GroupPart, { GroupType } from 'core/parts/Group';
+import * as RootPart from 'core/parts/Root';
 import { cloneDeep, merge } from 'lodash';
 import { FC, SVGProps } from 'react';
 import { Type } from 'typescript';
-import * as FuelTankPart from './types/fuelTank';
 
 export type PartModule = {
   type: Type;
@@ -18,7 +18,6 @@ export interface RootPartComponentProps {
 
 // TODO: Fix this `any` type.
 const partComponentNames: { [key: string]: any } = {
-  Root: RootPart,
   'Fuel Tank': FuelTankPart,
   Group: GroupPart,
 };
@@ -49,12 +48,12 @@ export const getPartData = (partName: string) => {
 
 export const importifyPartData = (
   partData: RootPart.AnyVanillaPartType | RootPart.AnyPartType,
-  parentPointer?: GroupPart.Type,
+  parentPointer?: GroupType,
 ): RootPart.AnyPartType => {
   let importifiedPartData: RootPart.AnyPartType = merge(
     partData,
     merge(
-      cloneDeep(getPartData(partData.n) ?? RootPart.data),
+      cloneDeep(getPartData(partData.n) ?? RootPart.DEFAULT_DATA),
       cloneDeep(partData),
     ),
   );
@@ -75,7 +74,7 @@ export const savifyPartData = (
 
   if (newPart.n === 'Group') {
     newPart.parts.forEach((part, index) => {
-      (newPart as GroupPart.Type).parts[index] = savifyPartData(part, clone);
+      (newPart as GroupType).parts[index] = savifyPartData(part, clone);
     });
   }
 

@@ -7,10 +7,10 @@ import * as RootPart from './Root';
 // is typed first to stop circular references
 const typedParts: RootBlueprint.AnyPartTypeArray = [];
 const DATA = {
-  ...RootPart.data,
+  ...RootPart.DEFAULT_DATA,
 
   identity: {
-    ...RootPart.data.identity,
+    ...RootPart.DEFAULT_DATA.identity,
     label: 'Group',
   },
 

@@ -22,7 +22,7 @@ export const vanillaData = {
   t: '-Infinity' as '-Infinity',
 };
 
-export const data = {
+export const DEFAULT_DATA = {
   ...vanillaData,
 
   identity: {
@@ -34,7 +34,7 @@ export const data = {
   relations: {} as RootBlueprint.PartPointer,
 };
 
-export type Type = typeof data;
+export type Type = typeof DEFAULT_DATA;
 
 export type AnyVanillaPartType = FuelTankVanillaType;
 export type AnyPartType = FuelTankType | GroupType;
