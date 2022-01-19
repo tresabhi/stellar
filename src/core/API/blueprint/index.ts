@@ -1,5 +1,5 @@
-import * as PartsAPI from 'core/API/part';
-import * as GroupPart from 'core/API/part/types/group';
+import * as PartsAPI from 'core/API/parts';
+import { GroupType } from 'core/parts/Group';
 import { cloneDeep } from 'lodash';
 import * as RootBlueprint from './types/root';
 
@@ -60,7 +60,7 @@ export const savifyBlueprint = (blueprint: RootBlueprint.Type) => {
  */
 export const importifyPartsData = (
   parts: RootBlueprint.AnyVanillaPartTypeArray | RootBlueprint.AnyPartTypeArray,
-  parentPointer?: GroupPart.Type,
+  parentPointer?: GroupType,
 ): RootBlueprint.AnyPartTypeArray => {
   return parts.map((part) => {
     if (part.n === 'Group') {
@@ -69,8 +69,8 @@ export const importifyPartsData = (
         parts: importifyPartsData(part.parts, part),
       };
 
-      newPart.relations.partPointer = newPart;
-      newPart.relations.parentPointer = parentPointer;
+      newPart.relations.self = newPart;
+      newPart.relations.parent = parentPointer;
 
       return newPart;
     } else {

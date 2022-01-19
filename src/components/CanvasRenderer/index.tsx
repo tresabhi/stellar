@@ -2,8 +2,8 @@ import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
-import * as PartAPI from 'core/API/part/index';
-import * as RootPart from 'core/API/part/types/root';
+import getPart from 'core/functions/getPart';
+import * as RootPart from 'core/parts/Root';
 import { FC, useRef } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
 import './index.scss';
@@ -30,7 +30,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
         if (part.n === 'Group') {
           insertPartComponents(part.parts, `${keyDepth}-${index}`);
         } else {
-          const PartComponent = PartAPI.getPartComponent(part.n);
+          const PartComponent = getPart(part.n).LayoutComponent;
 
           if (PartComponent)
             partsJsx.push(

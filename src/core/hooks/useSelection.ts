@@ -1,11 +1,11 @@
-import * as RootPart from 'core/API/part/types/root';
+import * as RootPart from 'core/parts/Root';
 import selectionStore, { SelectionStoreType } from 'core/stores/selection';
 import produce from 'immer';
 
 export default function useSelection() {
   const hook = {
     selectPart: (part: RootPart.AnyPartType) => {
-      part.relations.listingRef.current?.classList.add('selected');
+      part.relations.listing.current?.classList.add('selected');
       selectionStore.setState((state) => ({
         selections: [...state.selections, part],
       }));
@@ -25,7 +25,7 @@ export default function useSelection() {
     ) => {},
 
     deselectPart: (part: RootPart.AnyPartType) => {
-      part.relations.listingRef.current?.classList.remove('selected');
+      part.relations.listing.current?.classList.remove('selected');
       selectionStore.setState(
         produce((state: SelectionStoreType) =>
           state.selections.splice(state.selections.indexOf(part), 1),
@@ -34,7 +34,7 @@ export default function useSelection() {
     },
 
     togglePartSelection: (part: RootPart.AnyPartType) => {
-      if (part.relations.listingRef.current?.classList.contains('selected')) {
+      if (part.relations.listing.current?.classList.contains('selected')) {
         hook.deselectPart(part);
       } else {
         hook.selectPart(part);
@@ -43,13 +43,13 @@ export default function useSelection() {
 
     selectPartOnly: (part: RootPart.AnyPartType) => {
       selectionStore.getState().selections.forEach((selection) => {
-        selection.relations.listingRef.current?.classList.remove('selected');
+        selection.relations.listing.current?.classList.remove('selected');
       });
       selectionStore.setState({
         selections: [part],
         lastSelection: part,
       });
-      part.relations.listingRef?.current?.classList.add('selected');
+      part.relations.listing?.current?.classList.add('selected');
     },
 
     getPartDirection: (

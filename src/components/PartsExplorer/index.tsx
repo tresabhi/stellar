@@ -1,15 +1,13 @@
-import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
+import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
-import { getPartIconComponent } from 'core/API/part';
+import getPart from 'core/functions/getPart';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useSelection from 'core/hooks/useSelection';
-import selectionStore from 'core/stores/selection';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import './index.scss';
-
 /**
  * A container that holds a list of all parts in the blueprint.
  */
@@ -40,7 +38,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const selection = useSelection();
   const blueprint = useBlueprint();
   let data = blueprint.getReactivePartByAddress(address)!;
-  const Icon = getPartIconComponent(data.n);
+  const Icon = getPart(data.n).Icon;
   let childParts: JSX.Element[] | undefined;
 
   if (data.n === 'Group') {
@@ -53,7 +51,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
     ));
   }
 
-  data.relations.listingRef = listingRef;
+  data.relations.listing = listingRef;
 
   return (
     <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">

@@ -1,7 +1,7 @@
 import { importifyBlueprint } from 'core/API/blueprint';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
-import * as GroupPart from 'core/API/part/types/group';
-import * as RootPart from 'core/API/part/types/root';
+import { GroupType } from 'core/parts/Group';
+import * as RootPart from 'core/parts/Root';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
 import produce from 'immer';
@@ -23,7 +23,7 @@ export default function useBlueprint() {
         produce((state: RootBlueprint.Type) => {
           parts.forEach((part) => {
             let mutableParts =
-              part.relations.parentPointer?.parts ?? state.parts;
+              part.relations.parent?.parts ?? state.parts;
 
             mutableParts.splice(mutableParts.indexOf(part));
           });
@@ -38,8 +38,8 @@ export default function useBlueprint() {
       let address: RootBlueprint.PartAddress = [];
       let currentPart: RootPart.AnyPartType = data;
 
-      while (currentPart.relations.parentPointer) {
-        const currentParent = currentPart.relations.parentPointer;
+      while (currentPart.relations.parent) {
+        const currentParent = currentPart.relations.parent;
 
         address = [currentParent.parts.indexOf(currentPart), ...address];
         currentPart = currentParent;
@@ -62,7 +62,7 @@ export default function useBlueprint() {
       address: RootBlueprint.PartAddress,
     ): RootPart.AnyPartType | undefined =>
       blueprintStore((state) => {
-        let currentParent: GroupPart.Type | RootBlueprint.Type = state;
+        let currentParent: GroupType | RootBlueprint.Type = state;
 
         for (let index = 0; index < address.length; index++) {
           const direction = address[index];
@@ -70,7 +70,7 @@ export default function useBlueprint() {
           if (index === address.length - 1) {
             return currentParent.parts[direction];
           } else {
-            currentParent = currentParent.parts[direction] as GroupPart.Type;
+            currentParent = currentParent.parts[direction] as GroupType;
           }
         }
       }),

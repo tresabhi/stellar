@@ -2,7 +2,7 @@ import '@react-three/fiber';
 import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import DeepPartial from 'core/types/DeepPartial';
-import { FC, memo } from 'react';
+import { FC } from 'react';
 import { FuelTankType, FuelTankVanillaType } from './FuelTank';
 import { GroupType } from './Group';
 
@@ -39,6 +39,9 @@ export type Type = typeof DEFAULT_DATA;
 export type AnyVanillaPartType = FuelTankVanillaType;
 export type AnyPartType = FuelTankType | GroupType;
 export type AnySavedPartType = AnyPartType & { relations: never };
+
+export type AnyVanillaPartName = 'Fuel Tank';
+export type AnyPartName = 'Fuel Tank' | 'Group';
 
 export type AnyPartialPartType = DeepPartial<AnyPartType>;
 export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPartType>;

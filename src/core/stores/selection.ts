@@ -1,4 +1,4 @@
-import * as RootPart from 'core/API/part/types/root';
+import * as RootPart from 'core/parts/Root';
 import create from 'zustand';
 
 export type SelectionStoreType = {

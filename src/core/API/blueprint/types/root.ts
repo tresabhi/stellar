@@ -1,6 +1,6 @@
 import { GroupProps, MeshProps } from '@react-three/fiber';
-import * as GroupPart from 'core/API/part/types/group';
-import * as RootPart from 'core/API/part/types/root';
+import { GroupType } from 'core/parts/Group';
+import * as RootPart from 'core/parts/Root';
 import { RefObject } from 'react';
 
 export const vanillaData = {
@@ -33,11 +33,11 @@ export type PartAddresses = PartAddress[];
 
 export type PartPointer = {
   // if undefined, the part is in the root
-  parentPointer?: GroupPart.Type;
-  partPointer: RootPart.AnyPartType;
+  parent?: GroupType;
+  self: RootPart.AnyPartType;
 
-  listingRef: RefObject<HTMLDivElement>;
-  threeRef: RefObject<GroupProps | MeshProps>; // TODO: fix ref object type
+  listing: RefObject<HTMLDivElement>;
+  layoutModel: RefObject<GroupProps | MeshProps>; // TODO: fix ref object type
 };
 export type PartPointers = PartPointer[];
 
