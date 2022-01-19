@@ -1,4 +1,4 @@
-import { ReactComponent as CheckMarkIcon } from 'assets/icons/check-mark.svg';
+import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
@@ -121,7 +121,7 @@ export const Toggle: FC<ToggleProps> = ({
       <span className="context-menu-button-text">{children}</span>
       <div className="context-menu-button-icon-holder">
         {state ? (
-          <CheckMarkIcon className="context-menu-button-icon" />
+          <CheckmarkIcon className="context-menu-button-icon" />
         ) : undefined}
       </div>
     </div>
