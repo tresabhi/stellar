@@ -37,6 +37,7 @@
       background-color: $black-dark;
 
       .context-menu-button-icon-holder .context-menu-button-icon {
+        width: $icon-size-smaller;
         fill: $gray-darker;
       }
     }
