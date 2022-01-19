@@ -30,7 +30,10 @@ jobs:
         run: yarn install
 
       - name: Build static site
-        run: yarn build --alpha -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
+        run: npx react-scripts build
+
+      - name: Post build make-up
+        run: node scripts/postBuild.js --alpha -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
 
       - name: Archive build
         uses: actions/upload-artifact@v2
@@ -40,6 +43,7 @@ jobs:
 
   deploy:
     name: Deploy
+    environment: Alpha
     needs: build
     runs-on: ubuntu-latest
 
