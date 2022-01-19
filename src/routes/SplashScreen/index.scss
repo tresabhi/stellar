@@ -58,9 +58,10 @@
       }
 
       margin-left: $margin-thick;
+      fill: white;
       display: inline-block;
-      width: $icon-size-big;
-      height: $icon-size-big;
+      width: $icon-size-bigger;
+      height: $icon-size-bigger;
       animation-name: bounce;
       animation-duration: 1s;
       animation-iteration-count: infinite;
