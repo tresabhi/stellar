@@ -8,6 +8,7 @@
     "buildalpha",
     "buildbeta",
     "buildrelease",
+    "Deutsch",
     "drei",
     "ecouter",
     "exportify",
@@ -18,11 +19,13 @@
     "fullscreen",
     "fwidth",
     "Fyrestar",
+    "Gaeilge",
     "gitpod",
     "immer",
     "importified",
     "importify",
     "Interstage",
+    "Italiana",
     "keybind",
     "Keybinds",
     "lerp",
@@ -34,6 +37,7 @@
     "precache",
     "precaching",
     "predeploy",
+    "Pyccкий",
     "rerenderer",
     "savify",
     "Scroller",
@@ -52,6 +56,7 @@
     "stellark",
     "stellarnext",
     "subcontainer",
+    "Svenska",
     "titlebar",
     "Unhide",
     "unzipper",
@@ -59,7 +64,8 @@
     "vsixs",
     "wicg",
     "zpazio",
-    "zustand"
+    "zustand",
+    "हिन्दी"
   ],
   "search.exclude": {
     "**/src/assets/icons": true
