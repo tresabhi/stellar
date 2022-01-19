@@ -12,7 +12,7 @@ export const importifyPartData = (
   let importifiedPartData = merge(
     partData,
     merge(
-      cloneDeep(defaultPartData ?? RootPart.DEFAULT_DATA),
+      cloneDeep(defaultPartData ?? RootPart.DATA),
       cloneDeep(partData),
     ),
   );

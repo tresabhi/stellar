@@ -1,15 +1,15 @@
 import '@react-three/fiber';
-import { ReactComponent as LockIcon } from 'assets/icons/lock.svg';
+import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import DeepPartial from 'core/types/DeepPartial';
 import { FC } from 'react';
 import { FuelTankType, FuelTankVanillaType } from './FuelTank';
 import { GroupType } from './Group';
 
-export const icon = LockIcon;
+export const Icon = QuestionMarkIcon;
 
 export const vanillaData = {
-  n: 'Root',
+  n: 'Root' as 'Root',
   p: {
     x: 0,
     y: 0,
@@ -22,7 +22,7 @@ export const vanillaData = {
   t: '-Infinity' as '-Infinity',
 };
 
-export const DEFAULT_DATA = {
+export const DATA = {
   ...vanillaData,
 
   identity: {
@@ -34,14 +34,14 @@ export const DEFAULT_DATA = {
   relations: {} as RootBlueprint.PartPointer,
 };
 
-export type Type = typeof DEFAULT_DATA;
+export type RootType = typeof DATA;
 
 export type AnyVanillaPartType = FuelTankVanillaType;
-export type AnyPartType = FuelTankType | GroupType;
+export type AnyPartType = RootType | FuelTankType | GroupType;
 export type AnySavedPartType = AnyPartType & { relations: never };
 
 export type AnyVanillaPartName = 'Fuel Tank';
-export type AnyPartName = 'Fuel Tank' | 'Group';
+export type AnyPartName = 'Root' | 'Fuel Tank' | 'Group';
 
 export type AnyPartialPartType = DeepPartial<AnyPartType>;
 export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPartType>;
@@ -54,3 +54,14 @@ export type PartModule = {
 
   LayoutComponent: FC<any>;
 };
+
+const LayoutComponent: FC = () => <mesh />;
+
+const Root: PartModule = {
+  DATA,
+
+  Icon,
+
+  LayoutComponent,
+};
+export default Root;

@@ -33,11 +33,11 @@ const VANILLA_DATA = {
   },
 };
 const DATA = {
-  ...RootPart.DEFAULT_DATA,
+  ...RootPart.DATA,
   ...VANILLA_DATA,
 
   identity: {
-    ...RootPart.DEFAULT_DATA.identity,
+    ...RootPart.DATA.identity,
 
     label: 'Fuel Tank',
   },

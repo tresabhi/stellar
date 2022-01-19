@@ -3,7 +3,6 @@ import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import getPart from 'core/functions/getPart';
-import * as RootPart from 'core/parts/Root';
 import { FC, useRef } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
 import './index.scss';
@@ -22,7 +21,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
   const partsJsx: JSX.Element[] = [];
 
   const insertPartComponents = (
-    parts: RootPart.AnyPartType[],
+    parts: RootBlueprint.AnyPartTypeArray,
     keyDepth: string,
   ) => {
     parts.forEach((part, index) => {
