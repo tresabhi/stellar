@@ -1,5 +1,5 @@
 import { ReactComponent as CheckMarkIcon } from 'assets/icons/check-mark.svg';
-import { ReactComponent as ExtendIcon } from 'assets/icons/extend.svg';
+import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
@@ -80,7 +80,7 @@ export const Extension: FC<ExtensionProps> = ({
     >
       <span className="context-menu-button-text">{children}</span>
       <div className="context-menu-button-icon-holder">
-        <ExtendIcon className="context-menu-button-icon" />
+        <ArrowHeadRightIcon className="context-menu-button-icon" />
       </div>
       {extension ? (
         <div className="context-menu-extension-button-extension">

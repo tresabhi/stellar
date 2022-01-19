@@ -1,5 +1,5 @@
-import { ReactComponent as ExpandIcon } from 'assets/icons/expand.svg';
-import { ReactComponent as ExpandedIcon } from 'assets/icons/expanded.svg';
+import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
+import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import * as RootBlueprint from 'core/API/blueprint/types/root';
 import { getPartIconComponent } from 'core/API/part';
@@ -101,9 +101,9 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
         >
           {data.n === 'Group' ? (
             expanded ? (
-              <ExpandedIcon className="parts-explorer-listing-expand-icon" />
+              <ArrowHeadDownIcon className="parts-explorer-listing-expand-icon" />
             ) : (
-              <ExpandIcon className="parts-explorer-listing-expand-icon" />
+              <ArrowHeadRightIcon className="parts-explorer-listing-expand-icon" />
             )
           ) : undefined}
         </button>
