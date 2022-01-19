@@ -1,12 +1,15 @@
+import { ReactComponent as LinkOff } from 'assets/icons/link-off.svg';
+import { ReactComponent as LinkOn } from 'assets/icons/link-on.svg';
 import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
 import appStore, { AppType } from 'core/stores/app';
 import produce from 'immer';
+import './index.scss';
 
 export default function RightSideBar() {
   return (
-    <SideBar.Container width="minor">
+    <SideBar.Container className="right-side-bar" width="minor">
       <Partition.Container>
         <Partition.Option
           selected={
@@ -82,9 +85,24 @@ export default function RightSideBar() {
                 initialValue={1}
                 suffix="x"
               />
-              {/* <PropertiesExplorer.ToggleButton>
-                Deez nuts
-              </PropertiesExplorer.ToggleButton> */}
+              <PropertiesExplorer.ToggleButton
+                onClick={() => {
+                  appStore.setState(
+                    produce((state: AppType) => {
+                      state.layout.rightSideBar.scaleConstrained =
+                        !state.layout.rightSideBar.scaleConstrained;
+                    }),
+                  );
+                }}
+              >
+                {appStore(
+                  (state) => state.layout.rightSideBar.scaleConstrained,
+                ) ? (
+                  <LinkOn className="right-side-bar-constrain-icon" />
+                ) : (
+                  <LinkOff className="right-side-bar-constrain-icon" />
+                )}
+              </PropertiesExplorer.ToggleButton>
             </PropertiesExplorer.Row>
           </PropertiesExplorer.Group>
         </PropertiesExplorer.Container>

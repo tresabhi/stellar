@@ -128,10 +128,10 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
           }}
           onBlur={() => {
             inputRef.current!.value = inputRef.current!.value.trim();
-            data.identity.label = inputRef.current!.value;
+            data.meta.label = inputRef.current!.value;
           }}
           className="parts-explorer-listing-label"
-          defaultValue={data.identity.label}
+          defaultValue={data.meta.label}
         />
 
         {/* visible */}

@@ -10,7 +10,7 @@ const DATA = {
   ...RootPart.DATA,
 
   identity: {
-    ...RootPart.DATA.identity,
+    ...RootPart.DATA.meta,
     label: 'Group',
   },
 

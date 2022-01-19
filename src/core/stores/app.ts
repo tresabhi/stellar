@@ -8,12 +8,14 @@ export const data = {
   tab: 'layout' as 'layout' | 'staging' | 'simulation' | 'rendering',
   layout: {
     leftSideBar: {
+      visible: true,
       partition: 'parts' as 'parts' | 'snippets',
-      visible: true,
     },
+
     rightSideBar: {
-      partition: 'properties' as 'properties' | 'inspect',
       visible: true,
+      partition: 'properties' as 'properties' | 'inspect',
+      scaleConstrained: false,
     },
   },
 };

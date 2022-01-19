@@ -25,7 +25,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
     keyDepth: string,
   ) => {
     parts.forEach((part, index) => {
-      if (part.identity.visible) {
+      if (part.meta.visible) {
         if (part.n === 'Group') {
           insertPartComponents(part.parts, `${keyDepth}-${index}`);
         } else {

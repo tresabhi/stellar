@@ -4,8 +4,13 @@ import './index.scss';
 
 const MIXED_SYMBOL = '~';
 
-export const Container: FC = ({ children }) => (
-  <div className="properties-explorer">{children}</div>
+export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
+  children,
+  ...props
+}) => (
+  <div {...props} className={`${props.className || ''} properties-explorer`}>
+    {children}
+  </div>
 );
 
 export const Group: FC = ({ children }) => (
@@ -101,20 +106,11 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
   initialState = false,
   ...props
 }) => {
-  const [state, setState] = useState(initialState);
-
   return (
     //@ts-ignore
     <button
       {...props}
-      className={`${props.className || ''} properties-explorer-toggle-button ${
-        state ? 'on' : 'off'
-      }`}
-      onClick={(event) => {
-        setState((state) => !state);
-
-        if (props.onClick) props.onClick(event);
-      }}
+      className={`${props.className || ''} properties-explorer-toggle-button`}
     >
       {children}
     </button>

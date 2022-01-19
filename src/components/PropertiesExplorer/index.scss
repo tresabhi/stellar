@@ -58,6 +58,8 @@
         width: $named-input-small-width;
         height: $named-input-height;
         display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover {
           background-color: $black-lighter;

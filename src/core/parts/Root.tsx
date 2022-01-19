@@ -25,7 +25,7 @@ export const vanillaData = {
 export const DATA = {
   ...vanillaData,
 
-  identity: {
+  meta: {
     label: 'Unknown Part',
     visible: true,
     locked: false,
