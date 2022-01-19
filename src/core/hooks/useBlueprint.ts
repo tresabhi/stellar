@@ -22,8 +22,7 @@ export default function useBlueprint() {
       blueprintStore.setState(
         produce((state: RootBlueprint.Type) => {
           parts.forEach((part) => {
-            let mutableParts =
-              part.relations.parent?.parts ?? state.parts;
+            let mutableParts = part.relations.parent?.parts ?? state.parts;
 
             mutableParts.splice(mutableParts.indexOf(part));
           });

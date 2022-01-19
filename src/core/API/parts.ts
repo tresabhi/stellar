@@ -9,12 +9,10 @@ export const importifyPartData = (
 ): RootPart.AnyPartType => {
   const defaultPartData = getPart(partData.n).DATA;
 
+  // don't loose object pointers
   let importifiedPartData = merge(
     partData,
-    merge(
-      cloneDeep(defaultPartData ?? RootPart.DATA),
-      cloneDeep(partData),
-    ),
+    merge(cloneDeep(defaultPartData ?? RootPart.DATA), cloneDeep(partData)),
   );
 
   importifiedPartData.relations.self = importifiedPartData;

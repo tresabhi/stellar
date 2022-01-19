@@ -36,7 +36,7 @@ const DATA = {
   ...RootPart.DATA,
   ...VANILLA_DATA,
 
-  identity: {
+  meta: {
     ...RootPart.DATA.meta,
 
     label: 'Fuel Tank',
