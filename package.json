@@ -10,11 +10,10 @@
     "del": "^6.0.0",
     "depcheck": "^1.4.3",
     "file-saver": "^2.0.5",
-    "global": "^4.4.0",
     "immer": "^9.0.12",
     "lodash": "^4.17.21",
     "node-downloader-helper": "^1.0.19",
-    "node-fetch": "^3.2.0",
+    "node-fetch": "^3.1.1",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-device-detect": "^2.1.2",
@@ -22,10 +21,16 @@
     "react-hotkeys": "^2.0.0",
     "react-router-dom": "^6.2.1",
     "semver": "^7.3.5",
+    "serve": "^13.0.2",
     "simplebar-react": "^2.3.6",
     "three": "0.136.0",
-    "typescript": "^4.5.5",
+    "typescript": "^4.5.4",
     "unzipper": "^0.10.11",
+    "uuid": "^8.3.2",
+    "workbox-cacheable-response": "^6.4.2",
+    "workbox-precaching": "^6.4.2",
+    "workbox-routing": "^6.4.2",
+    "workbox-strategies": "^6.4.2",
     "zustand": "^3.6.9"
   },
   "devDependencies": {
@@ -46,7 +51,9 @@
     "format": "prettier --write \"**/*.@(json|js|jsx|css|scss|sass|md|ts|tsx|html|xml|yml)\"",
     "firebase-tools": "^9.18.0",
     "pseudo": "npm -v",
-    "depcheck": "npx depcheck"
+    "depcheck": "npx depcheck",
+    "serve-build": "serve -s build",
+    "serve-new-build": "react-scripts build && serve -s build"
   },
   "eslintConfig": {
     "extends": [
