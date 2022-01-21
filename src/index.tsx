@@ -1,9 +1,9 @@
-import SplashScreen from 'routes/SplashScreen';
 import { lazy, StrictMode, Suspense } from 'react';
 import { render } from 'react-dom';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import SplashScreen from 'routes/SplashScreen';
+import { primeWorker } from './core/API/serviceWorker';
 
-serviceWorkerRegistration.register();
+primeWorker();
 
 const App = lazy(() => import('App'));
 
