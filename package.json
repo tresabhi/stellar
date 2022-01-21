@@ -14,7 +14,7 @@
     "immer": "^9.0.12",
     "lodash": "^4.17.21",
     "node-downloader-helper": "^1.0.19",
-    "node-fetch": "^3.1.1",
+    "node-fetch": "^3.2.0",
     "prettier": "^2.5.1",
     "react": "^17.0.2",
     "react-device-detect": "^2.1.2",
