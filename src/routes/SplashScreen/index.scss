@@ -27,7 +27,7 @@
     justify-content: center;
 
     .loading-icon {
-      @keyframes bounce {
+      @keyframes rotate {
         0% {
           transform: rotate(0deg);
         }
@@ -62,7 +62,7 @@
       display: inline-block;
       width: $icon-size-bigger;
       height: $icon-size-bigger;
-      animation-name: bounce;
+      animation-name: rotate;
       animation-duration: 1s;
       animation-iteration-count: infinite;
       animation-timing-function: steps(1);

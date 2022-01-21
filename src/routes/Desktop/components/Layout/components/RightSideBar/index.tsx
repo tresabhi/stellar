@@ -1,13 +1,22 @@
+import * as RootBlueprint from 'core/API/blueprint/types/root';
 import { ReactComponent as LinkOff } from 'assets/icons/link-off.svg';
 import { ReactComponent as LinkOn } from 'assets/icons/link-on.svg';
 import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
 import appStore, { AppType } from 'core/stores/app';
+import blueprintStore from 'core/stores/blueprint';
+import selectionStore from 'core/stores/selection';
 import produce from 'immer';
 import './index.scss';
 
 export default function RightSideBar() {
+  // const xRef = useRef<HTMLInputElement>(null);
+
+  selectionStore.subscribe((state) => {
+    // state.selections[0].p.x;
+  });
+
   return (
     <SideBar.Container className="right-side-bar" width="minor">
       <Partition.Container>
@@ -60,6 +69,16 @@ export default function RightSideBar() {
                 title="X"
                 initialValue={0}
                 suffix="m"
+                onValueAccepted={(value) => {
+                  blueprintStore.setState(
+                    produce((state: RootBlueprint.Type) => {
+                      // const selections = selectionStore.getState().selections;
+                      // selections.forEach((part) => {
+                      //   const parent = part.relations.
+                      // });
+                    }),
+                  );
+                }}
               />
               <PropertiesExplorer.NamedInput
                 title="Y"

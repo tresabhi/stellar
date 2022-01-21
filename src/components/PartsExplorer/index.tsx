@@ -6,7 +6,6 @@ import getPart from 'core/functions/getPart';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useSelection from 'core/hooks/useSelection';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
-import { useHotkeys } from 'react-hotkeys-hook';
 import './index.scss';
 /**
  * A container that holds a list of all parts in the blueprint.
@@ -32,9 +31,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const [expanded, setExpanded] = useState(false);
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const inputRef = useHotkeys<HTMLInputElement>('enter', () =>
-    buttonRef.current?.focus(),
-  );
+  const inputRef = useRef<HTMLInputElement>(null);
   const selection = useSelection();
   const blueprint = useBlueprint();
   let data = blueprint.getReactivePartByAddress(address)!;
@@ -129,6 +126,9 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
           onBlur={() => {
             inputRef.current!.value = inputRef.current!.value.trim();
             data.meta.label = inputRef.current!.value;
+          }}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') buttonRef.current?.focus();
           }}
           className="parts-explorer-listing-label"
           defaultValue={data.meta.label}

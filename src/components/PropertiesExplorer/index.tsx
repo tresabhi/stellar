@@ -1,5 +1,4 @@
-import { FC, InputHTMLAttributes, useState } from 'react';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
 const MIXED_SYMBOL = '~';
@@ -25,7 +24,7 @@ export const Row: FC = ({ children }) => (
   <div className="properties-explorer-row">{children}</div>
 );
 
-interface NamedInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface NamedInputProps extends InputHTMLAttributes<HTMLDivElement> {
   title: string;
   initialValue: number | string;
   mixed?: boolean;
@@ -33,6 +32,7 @@ interface NamedInputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: 'small' | 'wide';
   min?: number;
   max?: number;
+  onValueAccepted?: (value: number | string) => any;
 }
 export const NamedInput: FC<NamedInputProps> = ({
   children,
@@ -43,15 +43,16 @@ export const NamedInput: FC<NamedInputProps> = ({
   type = 'small',
   min,
   max,
+  onValueAccepted,
   ...props
 }) => {
-  const inputRef = useHotkeys<HTMLInputElement>('enter', () => {
-    inputRef.current?.blur();
-  });
+  const mode = typeof initialValue as 'number' | 'string';
   let currentValue = initialValue;
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div
+      {...props}
       className={`${
         props.className || ''
       } properties-explorer-named-input ${type}`}
@@ -59,7 +60,6 @@ export const NamedInput: FC<NamedInputProps> = ({
     >
       <span className="properties-explorer-named-input-title">{title}</span>
       <input
-        {...props}
         ref={inputRef}
         className="properties-explorer-named-input-value"
         defaultValue={mixed ? MIXED_SYMBOL : `${currentValue}${suffix}`}
@@ -71,18 +71,18 @@ export const NamedInput: FC<NamedInputProps> = ({
           }
         }}
         onBlur={() => {
-          const isTypeNum = typeof initialValue === 'number';
           const isInputNum = Number(inputRef.current!.value);
 
           // if it's an invalid number input, make it mixed again
-          if (mixed && isTypeNum && !isInputNum) {
+          if (mixed && mode === 'number' && !isInputNum) {
             inputRef.current!.value = MIXED_SYMBOL;
           } else {
             mixed = false;
 
-            currentValue = !isTypeNum
-              ? inputRef.current!.value
-              : isInputNum || initialValue;
+            currentValue =
+              mode !== 'number'
+                ? inputRef.current!.value
+                : isInputNum || initialValue;
 
             if (typeof currentValue === 'number') {
               if (min) currentValue = Math.max(min, currentValue);
@@ -90,7 +90,11 @@ export const NamedInput: FC<NamedInputProps> = ({
             }
 
             inputRef.current!.value = `${currentValue}${suffix}`;
+            if (onValueAccepted) onValueAccepted(currentValue);
           }
+        }}
+        onKeyPress={(event) => {
+          if (event.key === 'Enter') inputRef.current?.blur();
         }}
       />
     </div>

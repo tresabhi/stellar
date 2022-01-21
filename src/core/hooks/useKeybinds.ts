@@ -1,7 +1,7 @@
-import { BlueprintHook } from 'core/hooks/useBlueprint';
+import useBlueprint from 'core/hooks/useBlueprint';
 import appStore, { AppType } from 'core/stores/app';
 import produce from 'immer';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { KeyMap } from 'react-hotkeys';
 
 // TODO: Find a way to make this cleaner
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
@@ -11,45 +11,62 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'rendering',
 ];
 
-export default function useKeybinds(blueprint: BlueprintHook) {
+type Handlers = { [key: string]: (keyEvent?: KeyboardEvent) => void };
+
+export default function useKeybinds() {
   // BIG TODO: make this automated through settings
+  const blueprint = useBlueprint();
 
-  // switch to next tab
-  useHotkeys('ctrl+tab', (event) => {
-    event.preventDefault();
+  const keyMap: KeyMap = {
+    SWITCH_TAB: 'ctrl + tab',
 
-    appStore.setState((state) => ({
-      tab:
-        state.tab === tabOrder[tabOrder.length - 1]
-          ? tabOrder[0]
-          : tabOrder[tabOrder.indexOf(state.tab) + 1],
-    }));
-  });
+    TOGGLE_LEFT_SIDE_BAR: 'alt + 1',
+    TOGGLE_RIGHT_SIDE_BAR: 'alt + 2',
 
-  // toggle left side bar
-  useHotkeys('alt+1', (event) => {
-    event.preventDefault();
+    DELETE_SELECTION: 'del',
 
-    appStore.setState(
-      produce((state: AppType) => {
-        state.layout.leftSideBar.visible = !state.layout.leftSideBar.visible;
-      }),
-    );
-  });
+    PARTY: 'p a r t y',
+  };
+  const handlers: Handlers = {
+    SWITCH_TAB: (event) => {
+      event?.preventDefault();
 
-  // toggle right side bar
-  useHotkeys('alt+2', (event) => {
-    event?.preventDefault();
+      appStore.setState((state) => ({
+        tab:
+          state.tab === tabOrder[tabOrder.length - 1]
+            ? tabOrder[0]
+            : tabOrder[tabOrder.indexOf(state.tab) + 1],
+      }));
+    },
 
-    appStore.setState(
-      produce((state: AppType) => {
-        state.layout.rightSideBar.visible = !state.layout.rightSideBar.visible;
-      }),
-    );
-  });
+    TOGGLE_LEFT_SIDE_BAR: (event) => {
+      event?.preventDefault();
 
-  // delete parts
-  useHotkeys('del', () => {
-    blueprint.deletePartsBySelection();
-  });
+      appStore.setState(
+        produce((state: AppType) => {
+          state.layout.leftSideBar.visible = !state.layout.leftSideBar.visible;
+        }),
+      );
+    },
+    TOGGLE_RIGHT_SIDE_BAR: (event) => {
+      event?.preventDefault();
+
+      appStore.setState(
+        produce((state: AppType) => {
+          state.layout.rightSideBar.visible =
+            !state.layout.rightSideBar.visible;
+        }),
+      );
+    },
+
+    DELETE_SELECTION: () => blueprint.deletePartsBySelection(),
+
+    PARTY: () =>
+      // party mode easter egg
+      document.body.classList[
+        document.body.classList.contains('party') ? 'remove' : 'add'
+      ]('party'),
+  };
+
+  return [keyMap, handlers] as [KeyMap, Handlers];
 }
