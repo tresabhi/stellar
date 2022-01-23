@@ -1,6 +1,6 @@
 import '@react-three/fiber';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import * as RootBlueprint from 'core/API/blueprint/types/root';
+import * as RootBlueprint from 'core/modules/blueprint/types/root';
 import DeepPartial from 'core/types/DeepPartial';
 import { FC } from 'react';
 import { FuelTankType, FuelTankVanillaType } from './FuelTank';

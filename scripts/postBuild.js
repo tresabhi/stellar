@@ -1,5 +1,5 @@
 import argsParser from 'args-parser';
-import { argv, exit } from 'process';
+import { argv } from 'process';
 import generateFavicons from './generateFavicons.js';
 import updateManifestKeys from './updateManifestKeys.js';
 

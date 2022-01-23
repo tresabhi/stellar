@@ -1,5 +1,5 @@
-import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
+import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 

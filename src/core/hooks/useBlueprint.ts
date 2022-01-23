@@ -1,5 +1,5 @@
-import { importifyBlueprint } from 'core/API/blueprint';
-import * as RootBlueprint from 'core/API/blueprint/types/root';
+import { importifyBlueprint } from 'core/modules/blueprint';
+import * as RootBlueprint from 'core/modules/blueprint/types/root';
 import { GroupType } from 'core/parts/Group';
 import * as RootPart from 'core/parts/Root';
 import blueprintStore from 'core/stores/blueprint';

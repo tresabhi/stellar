@@ -6,7 +6,6 @@ import {
   mkdirSync,
   readdirSync,
   readFileSync,
-  renameSync,
   writeFileSync,
 } from 'fs';
 import { DownloaderHelper } from 'node-downloader-helper';

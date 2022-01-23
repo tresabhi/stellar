@@ -1,4 +1,4 @@
-import * as PartsAPI from 'core/API/parts';
+import * as PartsAPI from 'core/modules/parts';
 import { GroupType } from 'core/parts/Group';
 import { cloneDeep } from 'lodash';
 import * as RootBlueprint from './types/root';

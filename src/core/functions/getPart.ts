@@ -1,7 +1,6 @@
-import { AnyPartName, PartModule } from 'core/parts/Root';
 import FuelTankPart from 'core/parts/FuelTank';
 import GroupPart from 'core/parts/Group';
-import RootPart from 'core/parts/Root';
+import RootPart, { AnyPartName, PartModule } from 'core/parts/Root';
 
 const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
   'Fuel Tank': FuelTankPart,

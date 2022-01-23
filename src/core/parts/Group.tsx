@@ -1,6 +1,6 @@
 import '@react-three/fiber';
 import { ReactComponent as GroupIcon } from 'assets/icons/group.svg';
-import * as RootBlueprint from 'core/API/blueprint/types/root';
+import * as RootBlueprint from 'core/modules/blueprint/types/root';
 import { memo } from 'react';
 import * as RootPart from './Root';
 

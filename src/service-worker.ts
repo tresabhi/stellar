@@ -1,7 +1,7 @@
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 const NETWORK_FIRST_PATHS = ['/manifest.json'];
 

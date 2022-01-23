@@ -1,9 +1,9 @@
-import SplashScreen from 'routes/SplashScreen';
 import useStellarContext from 'core/hooks/useStellarContext';
 import { isMobile } from 'react-device-detect';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
 import Mobile from 'routes/Mobile';
+import SplashScreen from 'routes/SplashScreen';
 import 'styles/index.scss'; // layout
 
 const Routed = () => {

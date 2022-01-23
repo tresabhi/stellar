@@ -10,6 +10,6 @@ Maintaining a civil environment generally helps us speed up reviewing issues and
 
 This repository provides a lot of documents to ensure a civil environment. They can be found in the [docs directory](./docs/).
 
-## Behaviour Expectations
+## Behavior Expectations
 
-We expect every person to follow [the code of conduct](./CODE_OF_CONDUCT.md) to maintain the behaviour expectations.
+We expect every person to follow [the code of conduct](./CODE_OF_CONDUCT.md) to maintain the behavior expectations.

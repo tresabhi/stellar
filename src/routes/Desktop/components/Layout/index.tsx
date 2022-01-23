@@ -1,6 +1,6 @@
-import devBlueprint from 'assets/blueprints/static/grouping.json';
+import devBlueprint from 'assets/blueprints/static/one-part.json';
 import EditingCanvas from 'components/CanvasRenderer';
-import { importifyBlueprint } from 'core/API/blueprint';
+import { importifyBlueprint } from 'core/modules/blueprint';
 import appStore from 'core/stores/app';
 import blueprintStore from 'core/stores/blueprint';
 import settingsStore from 'core/stores/settings';
