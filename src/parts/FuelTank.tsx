@@ -1,80 +1,118 @@
 import '@react-three/fiber';
 import { ReactComponent as FuelTankIcon } from 'assets/icons/fuel-tank.svg';
-import lerp from 'core/functions/lerp';
-import { times } from 'lodash';
+import lerp from 'functions/lerp';
+import DeepPartial from 'core/types/DeepPartial';
+import { PartModule } from 'core/types/Parts';
+import { merge, times } from 'lodash';
 import { FC, memo } from 'react';
-import * as RootPart from './Root';
-
-const VANILLA_DATA = {
-  ...RootPart.vanillaData,
-
-  n: 'Fuel Tank' as 'Fuel Tank',
-  N: {
-    width_original: 2,
-    width_a: 2,
-    width_b: 2,
-    height: 2,
-    fuel_percent: 1,
-  },
-  T: {
-    color_tex: '_' as '_',
-    shape_tex: '_' as
-      | '_'
-      | 'Rivets'
-      | 'Half Rivets'
-      | 'Flat'
-      | 'Interstage'
-      | 'Interstage Full'
-      | 'Nozzle_4'
-      | 'Strut'
-      | 'Edges Faces'
-      | 'Edges Smooth'
-      | 'Flat Smooth',
-  },
-};
-const DATA = {
-  ...RootPart.DATA,
-  ...VANILLA_DATA,
-
-  meta: {
-    ...RootPart.DATA.meta,
-
-    label: 'Fuel Tank',
-  },
-};
-
-export type FuelTankVanillaType = typeof VANILLA_DATA;
-export type FuelTankType = typeof DATA;
+import RootPart, { RootType, RootVanillaType } from './Root';
 
 const Icon = FuelTankIcon;
+
+export interface FuelTankVanillaType extends RootVanillaType {
+  n: 'Fuel Tank';
+  N: {
+    width_original: number;
+    width_a: number;
+    width_b: number;
+    height: number;
+    fuel_percent: number;
+  };
+  T: {
+    color_tex:
+      | '_'
+      | 'Color_White'
+      | 'Color_Gray'
+      | 'Color_Black'
+      | 'Color_Orange'
+      | 'Metal'
+      | 'Metal_2'
+      | 'Metal_3'
+      | 'Metal_4'
+      | 'Pattern_Squares'
+      | 'Pattern_Bars_Band'
+      | 'Pattern_Bars'
+      | 'Pattern_Bars_Half'
+      | 'Pattern_Half'
+      | 'Pattern_Cone'
+      | 'SV_S1_USA'
+      | 'SV_S1_Flag'
+      | 'SV_S2'
+      | 'SV_S3'
+      | 'USA_Logo'
+      | 'Gold_Foil'
+      | 'Nozzle_2'
+      | 'Nozzle_3'
+      | 'Array'
+      | 'Arrows'
+      | 'Strut_Gray';
+    shape_tex:
+      | '_'
+      | 'Flat'
+      | 'Flat Smooth'
+      | 'Flat Smooth 4'
+      | 'Flat Faces'
+      | 'Edges Smooth'
+      | 'Edges Faces'
+      | 'Edges Faces Top'
+      | 'Edges Faces Bottom'
+      | 'Rivets'
+      | 'Half Rivets'
+      | 'Interstage'
+      | 'Interstage Full'
+      | 'Fairing'
+      | 'Nozzle_4'
+      | 'Capsule' // Was listed as 'capsue'. Why?
+      | 'Strut';
+  };
+}
+export interface FuelTankType extends RootType, FuelTankVanillaType {}
+
+const VANILLA_DATA = merge<{}, RootVanillaType, Partial<FuelTankVanillaType>>(
+  {},
+  RootPart.VANILLA_DATA!,
+  {
+    n: 'Fuel Tank',
+    N: {
+      width_original: 2,
+      width_a: 2,
+      width_b: 2,
+      height: 2,
+      fuel_percent: 1,
+    },
+    T: { color_tex: '_', shape_tex: '_' },
+  },
+) as FuelTankVanillaType;
+const DATA: FuelTankType = merge<
+  {},
+  RootType,
+  FuelTankVanillaType,
+  DeepPartial<FuelTankType>
+>({}, RootPart.DATA, VANILLA_DATA, {
+  meta: { label: 'Fuel Tank' },
+});
 
 interface LayoutComponentProps {
   data: FuelTankType;
 }
 const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
-  const faceCount = 24;
-
-  const bevelMargin = 0.05;
-
-  const rivetMargin = 0.04;
-  const rivetCount = Math.floor(faceCount / 4);
-
-  const rotation = data.o.z * (Math.PI / 180);
-
-  const rimHeight = 0.1;
-  const rimSlopeHeight = 0.1;
-
-  const nozzlesPerMeter = 3;
-  const nozzleHeight = 0.1;
-  const nozzleOffset = 1 / 6;
-
-  const color = 'white';
+  const FACE_COUNT = 24;
+  const BEVEL_MARGIN = 0.05;
+  const RIVET_MARGIN = 0.04;
+  const RIVET_COUNT = Math.floor(FACE_COUNT / 4);
+  const ROTATION = data.o.z * (Math.PI / 180);
+  const RIM_HEIGHT = 0.1;
+  const RIM_SLOPE_HEIGHT = 0.1;
+  const NOZZLE_HEIGHT = 0.1;
+  const NOZZLE_OFFSET = 1 / 6;
+  const NOZZLES_PER_METER = 3;
+  const COLOR = 'white';
 
   const materials = {
     flat: <meshBasicMaterial />,
     faces: (
       <meshStandardMaterial
-        color={color}
+        color={COLOR}
         roughness={0.8}
         metalness={0.8}
         flatShading={true}
@@ -82,7 +120,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
     ),
     smooth: (
       <meshStandardMaterial
-        color={color}
+        color={COLOR}
         roughness={0.8}
         metalness={0.8}
         flatShading={false}
@@ -92,10 +130,10 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
 
   switch (data.T.shape_tex) {
     case 'Rivets': {
-      const rivets = times(rivetCount, (index) => (
+      const rivets = times(RIVET_COUNT, (index) => (
         <mesh
           key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
+          rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
         >
           <cylinderGeometry
             args={[
@@ -114,16 +152,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
               args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
+                Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
                 data.N.height,
-                faceCount,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -136,10 +174,10 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
     }
 
     case 'Half Rivets': {
-      const rivets = times(rivetCount, (index) => (
+      const rivets = times(RIVET_COUNT, (index) => (
         <mesh
           key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
+          rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
           position={[0, data.N.height / -4, 0]}
         >
           <cylinderGeometry
@@ -159,7 +197,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh position={[0, data.N.height / -4, 0]}>
@@ -167,11 +205,11 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
               args={[
                 Math.max(
                   0,
-                  (data.N.width_b + data.N.width_a) / 4 - rivetMargin,
+                  (data.N.width_b + data.N.width_a) / 4 - RIVET_MARGIN,
                 ),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
+                Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
                 data.N.height / 2,
-                faceCount,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -184,7 +222,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                 data.N.width_b / 2,
                 (data.N.width_b + data.N.width_a) / 4,
                 data.N.height / 2,
-                faceCount,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -200,7 +238,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
       return (
         <mesh
           scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <cylinderGeometry
@@ -219,10 +257,10 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
     }
 
     case 'Interstage': {
-      const rivets = times(rivetCount, (index) => (
+      const rivets = times(RIVET_COUNT, (index) => (
         <mesh
           key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
+          rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
         >
           <cylinderGeometry
             args={[
@@ -241,16 +279,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
               args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
+                Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
                 data.N.height,
-                faceCount,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -260,7 +298,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height, data.N.height - rimHeight) / 2,
+              Math.min(data.N.height, data.N.height - RIM_HEIGHT) / 2,
               0,
             ]}
           >
@@ -270,10 +308,10 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                 lerp(
                   data.N.width_b,
                   data.N.width_a,
-                  rimHeight / data.N.height / 1,
+                  RIM_HEIGHT / data.N.height / 1,
                 ) / 2,
-                Math.min(data.N.height, rimHeight),
-                faceCount,
+                Math.min(data.N.height, RIM_HEIGHT),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -283,8 +321,8 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 -
-                rimHeight,
+              Math.min(data.N.height, data.N.height - RIM_SLOPE_HEIGHT) / 2 -
+                RIM_HEIGHT,
               0,
             ]}
           >
@@ -293,20 +331,20 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                 lerp(
                   data.N.width_b,
                   data.N.width_a,
-                  rimHeight / data.N.height / 1,
+                  RIM_HEIGHT / data.N.height / 1,
                 ) / 2,
                 Math.max(
                   0,
                   lerp(
                     data.N.width_b,
                     data.N.width_a,
-                    (rimHeight + rimSlopeHeight) / data.N.height / 1,
+                    (RIM_HEIGHT + RIM_SLOPE_HEIGHT) / data.N.height / 1,
                   ) /
                     2 -
-                    rivetMargin,
+                    RIVET_MARGIN,
                 ),
-                Math.min(data.N.height, rimSlopeHeight),
-                faceCount,
+                Math.min(data.N.height, RIM_SLOPE_HEIGHT),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -319,10 +357,10 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
     }
 
     case 'Interstage Full': {
-      const rivets = times(rivetCount, (index) => (
+      const rivets = times(RIVET_COUNT, (index) => (
         <mesh
           key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
+          rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
         >
           <cylinderGeometry
             args={[
@@ -341,16 +379,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
               args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
+                Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
                 data.N.height,
-                faceCount,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -360,7 +398,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height, data.N.height - rimHeight) / 2,
+              Math.min(data.N.height, data.N.height - RIM_HEIGHT) / 2,
               0,
             ]}
           >
@@ -370,10 +408,10 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                 lerp(
                   data.N.width_b,
                   data.N.width_a,
-                  rimHeight / data.N.height / 1,
+                  RIM_HEIGHT / data.N.height / 1,
                 ) / 2,
-                Math.min(data.N.height, rimHeight),
-                faceCount,
+                Math.min(data.N.height, RIM_HEIGHT),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -383,8 +421,8 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 -
-                rimHeight,
+              Math.min(data.N.height, data.N.height - RIM_SLOPE_HEIGHT) / 2 -
+                RIM_HEIGHT,
               0,
             ]}
           >
@@ -393,20 +431,20 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                 lerp(
                   data.N.width_b,
                   data.N.width_a,
-                  rimHeight / data.N.height / 1,
+                  RIM_HEIGHT / data.N.height / 1,
                 ) / 2,
                 Math.max(
                   0,
                   lerp(
                     data.N.width_b,
                     data.N.width_a,
-                    (rimHeight + rimSlopeHeight) / data.N.height / 1,
+                    (RIM_HEIGHT + RIM_SLOPE_HEIGHT) / data.N.height / 1,
                   ) /
                     2 -
-                    rivetMargin,
+                    RIVET_MARGIN,
                 ),
-                Math.min(data.N.height, rimSlopeHeight),
-                faceCount,
+                Math.min(data.N.height, RIM_SLOPE_HEIGHT),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -416,7 +454,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height, data.N.height - rimHeight) / -2,
+              Math.min(data.N.height, data.N.height - RIM_HEIGHT) / -2,
               0,
             ]}
           >
@@ -425,11 +463,11 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                 lerp(
                   data.N.width_a,
                   data.N.width_b,
-                  rimHeight / data.N.height / 1,
+                  RIM_HEIGHT / data.N.height / 1,
                 ) / 2,
                 data.N.width_a / 2,
-                Math.min(data.N.height, rimHeight),
-                faceCount,
+                Math.min(data.N.height, RIM_HEIGHT),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -439,8 +477,8 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height, data.N.height - rimSlopeHeight) / -2 +
-                rimHeight,
+              Math.min(data.N.height, data.N.height - RIM_SLOPE_HEIGHT) / -2 +
+                RIM_HEIGHT,
               0,
             ]}
           >
@@ -451,18 +489,18 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                   lerp(
                     data.N.width_a,
                     data.N.width_b,
-                    (rimHeight + rimSlopeHeight) / data.N.height / 1,
+                    (RIM_HEIGHT + RIM_SLOPE_HEIGHT) / data.N.height / 1,
                   ) /
                     2 -
-                    rivetMargin,
+                    RIVET_MARGIN,
                 ),
                 lerp(
                   data.N.width_a,
                   data.N.width_b,
-                  rimHeight / data.N.height / 1,
+                  RIM_HEIGHT / data.N.height / 1,
                 ) / 2,
-                Math.min(data.N.height, rimSlopeHeight),
-                faceCount,
+                Math.min(data.N.height, RIM_SLOPE_HEIGHT),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -475,7 +513,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
     }
 
     case 'Nozzle_4': {
-      const nozzleCount = Math.floor(data.N.height * nozzlesPerMeter);
+      const nozzleCount = Math.floor(data.N.height * NOZZLES_PER_METER);
       const nozzles = times(nozzleCount, (index) => (
         <group
           key={`nozzle-${index}`}
@@ -483,11 +521,11 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
             0,
             (index / nozzleCount) * data.N.height -
               data.N.height / 2 +
-              nozzleOffset,
+              NOZZLE_OFFSET,
             0,
           ]}
         >
-          <mesh position={[0, nozzleHeight / 2, 0]}>
+          <mesh position={[0, NOZZLE_HEIGHT / 2, 0]}>
             <cylinderGeometry
               args={[
                 Math.max(
@@ -496,18 +534,18 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                     data.N.width_a,
                     data.N.width_b,
                     index / nozzleCount +
-                      (nozzleHeight / 2 + nozzleOffset) / data.N.height,
+                      (NOZZLE_HEIGHT / 2 + NOZZLE_OFFSET) / data.N.height,
                   ) /
                     2 -
-                    rivetMargin,
+                    RIVET_MARGIN,
                 ),
                 lerp(
                   data.N.width_a,
                   data.N.width_b,
-                  index / nozzleCount + nozzleOffset / data.N.height,
+                  index / nozzleCount + NOZZLE_OFFSET / data.N.height,
                 ) / 2,
-                nozzleHeight / 2,
-                faceCount,
+                NOZZLE_HEIGHT / 2,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -520,7 +558,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                 lerp(
                   data.N.width_a,
                   data.N.width_b,
-                  index / nozzleCount + nozzleOffset / data.N.height,
+                  index / nozzleCount + NOZZLE_OFFSET / data.N.height,
                 ) / 2,
                 Math.max(
                   0,
@@ -528,13 +566,13 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
                     data.N.width_a,
                     data.N.width_b,
                     index / nozzleCount -
-                      (nozzleHeight / 2 - nozzleOffset) / data.N.height,
+                      (NOZZLE_HEIGHT / 2 - NOZZLE_OFFSET) / data.N.height,
                   ) /
                     2 -
-                    rivetMargin,
+                    RIVET_MARGIN,
                 ),
-                nozzleHeight / 2,
-                faceCount,
+                NOZZLE_HEIGHT / 2,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -547,16 +585,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
       return (
         <group
           scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <mesh>
             <cylinderGeometry
               args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
+                Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
                 data.N.height,
-                faceCount,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -581,15 +619,15 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
         >
           <mesh>
             <cylinderGeometry
               args={[
                 data.N.width_b / 2,
                 data.N.width_a / 2,
-                Math.max(0, data.N.height - bevelMargin * 2),
-                faceCount,
+                Math.max(0, data.N.height - BEVEL_MARGIN * 2),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -599,16 +637,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.max(data.N.height / 4, (data.N.height - bevelMargin) / 2),
+              Math.max(data.N.height / 4, (data.N.height - BEVEL_MARGIN) / 2),
               0,
             ]}
           >
             <cylinderGeometry
               args={[
-                Math.max(0, data.N.width_b / 2 - bevelMargin),
+                Math.max(0, data.N.width_b / 2 - BEVEL_MARGIN),
                 data.N.width_b / 2,
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
+                Math.min(BEVEL_MARGIN, data.N.height / 2),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -618,16 +656,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height / -4, (data.N.height - bevelMargin) / -2),
+              Math.min(data.N.height / -4, (data.N.height - BEVEL_MARGIN) / -2),
               0,
             ]}
           >
             <cylinderGeometry
               args={[
                 data.N.width_a / 2,
-                Math.max(0, data.N.width_a / 2 - bevelMargin),
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
+                Math.max(0, data.N.width_a / 2 - BEVEL_MARGIN),
+                Math.min(BEVEL_MARGIN, data.N.height / 2),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -643,15 +681,15 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
         <group
           scale={[data.o.x, data.o.y, 1]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
         >
           <mesh>
             <cylinderGeometry
               args={[
                 data.N.width_b / 2,
                 data.N.width_a / 2,
-                Math.max(0, data.N.height - bevelMargin * 2),
-                faceCount,
+                Math.max(0, data.N.height - BEVEL_MARGIN * 2),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -661,16 +699,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.max(data.N.height / 4, (data.N.height - bevelMargin) / 2),
+              Math.max(data.N.height / 4, (data.N.height - BEVEL_MARGIN) / 2),
               0,
             ]}
           >
             <cylinderGeometry
               args={[
-                Math.max(0, data.N.width_b / 2 - bevelMargin),
+                Math.max(0, data.N.width_b / 2 - BEVEL_MARGIN),
                 data.N.width_b / 2,
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
+                Math.min(BEVEL_MARGIN, data.N.height / 2),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -680,16 +718,16 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
           <mesh
             position={[
               0,
-              Math.min(data.N.height / -4, (data.N.height - bevelMargin) / -2),
+              Math.min(data.N.height / -4, (data.N.height - BEVEL_MARGIN) / -2),
               0,
             ]}
           >
             <cylinderGeometry
               args={[
                 data.N.width_a / 2,
-                Math.max(0, data.N.width_a / 2 - bevelMargin),
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
+                Math.max(0, data.N.width_a / 2 - BEVEL_MARGIN),
+                Math.min(BEVEL_MARGIN, data.N.height / 2),
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
@@ -704,7 +742,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
       return (
         <mesh
           scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
+          rotation={[0, 0, ROTATION]}
           position={[data.p.x, data.p.y + data.N.height / 2, 0]}
         >
           <cylinderGeometry
@@ -712,7 +750,7 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
               data.N.width_b / 2,
               data.N.width_a / 2,
               data.N.height,
-              faceCount,
+              FACE_COUNT,
               undefined,
               true,
             ]}
@@ -724,12 +762,12 @@ const LayoutComponent: FC<LayoutComponentProps> = memo(({ data }) => {
   }
 });
 
-const FuelTank: RootPart.PartModule = {
+const FuelTankPart: PartModule = {
+  Icon,
   VANILLA_DATA,
   DATA,
-
-  Icon,
-
   LayoutComponent,
+
+  isExportable: true,
 };
-export default FuelTank;
+export default FuelTankPart;

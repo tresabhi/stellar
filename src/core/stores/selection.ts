@@ -1,11 +1,12 @@
-import * as RootPart from 'core/parts/Root';
+import UUID from 'core/types/UUID';
 import create from 'zustand';
 
 export type SelectionStoreType = {
-  selections: RootPart.AnyPartType[];
-  lastSelection?: RootPart.AnyPartType;
+  selections: UUID[];
+  lastSelection?: UUID;
 };
 
-export default create<SelectionStoreType>(() => ({
+const selectionStore = create<SelectionStoreType>(() => ({
   selections: [],
 }));
+export default selectionStore;

@@ -1,4 +1,4 @@
-import * as RootPart from 'core/parts/Root';
+import * as RootPart from 'parts/Root';
 import selectionStore, { SelectionStoreType } from 'core/stores/selection';
 import produce from 'immer';
 

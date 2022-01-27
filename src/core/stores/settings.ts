@@ -10,7 +10,7 @@ const data = {
 
 export type SettingsType = typeof data & {};
 
-export default create<SettingsType>(
+const settingsStore = create<SettingsType>(
   devtools(
     persist(() => data, {
       name: 'settings',
@@ -20,3 +20,4 @@ export default create<SettingsType>(
     { name: 'settings' },
   ),
 );
+export default settingsStore;

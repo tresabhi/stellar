@@ -1,7 +1,7 @@
-import { importifyBlueprint } from 'core/modules/blueprint';
-import * as RootBlueprint from 'core/modules/blueprint/types/root';
-import { GroupType } from 'core/parts/Group';
-import * as RootPart from 'core/parts/Root';
+import { importifyBlueprint } from 'interfaces/blueprint';
+import * as RootBlueprint from 'interfaces/blueprint/root';
+import { GroupType } from 'parts/Group';
+import * as RootPart from 'parts/Root';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
 import produce from 'immer';

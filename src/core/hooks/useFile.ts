@@ -1,4 +1,4 @@
-import { savifyBlueprint } from 'core/modules/blueprint';
+import { savifyBlueprint } from 'interfaces/blueprint';
 import blueprintStore from 'core/stores/blueprint';
 import { saveAs } from 'file-saver';
 

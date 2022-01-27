@@ -1,6 +1,6 @@
 import { GroupProps, MeshProps } from '@react-three/fiber';
-import { GroupType } from 'core/parts/Group';
-import * as RootPart from 'core/parts/Root';
+import { GroupType } from 'parts/Group';
+import * as RootPart from 'parts/Root';
 import { RefObject } from 'react';
 
 export const vanillaData = {

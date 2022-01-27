@@ -1,8 +1,8 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
-import * as RootBlueprint from 'core/modules/blueprint/types/root';
-import getPart from 'core/functions/getPart';
+import * as RootBlueprint from 'interfaces/blueprint/root';
+import getPart from 'functions/getPart';
 import { FC, useRef } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
 import './index.scss';

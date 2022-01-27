@@ -23,4 +23,5 @@ export const data = {
 // TODO: capitalize all types and interfaces
 export type AppType = typeof data;
 
-export default create<AppType>(devtools(() => data, { name: 'app_state' }));
+const appStore = create<AppType>(devtools(() => data, { name: 'app_state' }));
+export default appStore;

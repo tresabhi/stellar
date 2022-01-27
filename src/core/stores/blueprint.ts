@@ -1,7 +1,12 @@
-import * as RootBlueprint from 'core/modules/blueprint/types/root';
+import * as RootBlueprint from 'interfaces/blueprint/root';
+import * as RootPart from 'parts/Root';
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
 
-export default create<RootBlueprint.Type>(
+const blueprintStore = create<RootBlueprint.Type>(
   devtools(() => RootBlueprint.data, { name: 'blueprint' }),
 );
+export default blueprintStore;
+
+// TODO: SEPARATE ROOT PART AND ITS TYPES
+export type ReferencesType = [string, RootPart.AnyPartType][];

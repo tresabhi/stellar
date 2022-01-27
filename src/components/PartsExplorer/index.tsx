@@ -1,10 +1,10 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import * as RootBlueprint from 'core/modules/blueprint/types/root';
-import getPart from 'core/functions/getPart';
+import getPart from 'functions/getPart';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useSelection from 'core/hooks/useSelection';
+import * as RootBlueprint from 'interfaces/blueprint/root';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 /**

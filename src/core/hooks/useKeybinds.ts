@@ -14,7 +14,7 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
 type Handlers = { [key: string]: (keyEvent?: KeyboardEvent) => void };
 
 export default function useKeybinds() {
-  // BIG TODO: make this automated through settings
+  // TODO: BIG MAKE THIS DATE DRIVEN
   const blueprint = useBlueprint();
 
   const keyMap: KeyMap = {
