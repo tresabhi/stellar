@@ -1,6 +1,6 @@
 import { NIL } from 'uuid';
 
-export type DefaultPartData = {
+export interface PartWithMeta {
   meta: {
     ID: string;
     parentID: string;
@@ -9,11 +9,14 @@ export type DefaultPartData = {
     visible: boolean;
     locked: boolean;
   };
+}
 
+export interface DefaultPartData extends PartWithMeta {
+  // `n` is not provided to avoid type overwrites
   p: { x: number; y: number };
   o: { x: number; y: number; z: number };
   t: '-Infinity';
-};
+}
 
 export const DefaultPartData: DefaultPartData = {
   meta: {

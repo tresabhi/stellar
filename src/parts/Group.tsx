@@ -1,34 +1,32 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { AnyPart, PartModule } from 'core/types/Parts';
-import { merge } from 'lodash';
 import { memo } from 'react';
-import { DefaultPartData } from './Default';
+import { DefaultPartData, PartWithMeta } from './Default';
 
-export type GroupData = DefaultPartData & {
+export interface GroupData extends PartWithMeta {
   n: 'Group';
   parts: AnyPart[];
+}
 
-  p: never;
-  o: never;
-  t: never;
+export const GroupData: GroupData = {
+  meta: {
+    ...DefaultPartData.meta,
+
+    label: 'Group',
+  },
+  n: 'Group',
+  parts: [],
 };
 
-export const GroupData = merge<{}, DefaultPartData, Partial<GroupData>>(
-  {},
-  DefaultPartData,
-  {
-    n: 'Group',
-    parts: [],
-  },
-) as GroupData;
+const GroupLayoutComponent = memo(() => <mesh />);
 
-const LayoutComponent = memo(() => <mesh />);
+export const GroupIcon = Icon;
 
 const Group: PartModule = {
   data: GroupData,
 
-  Icon,
-  LayoutComponent,
+  Icon: GroupIcon,
+  LayoutComponent: GroupLayoutComponent,
 
   isExportable: false,
 };
