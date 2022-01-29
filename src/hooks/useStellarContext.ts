@@ -1,5 +1,5 @@
 import { coerce } from 'semver';
-import packageJson from '../../../package.json';
+import packageJson from '../../package.json';
 
 type CodeName = 'next' | 'beta' | 'release' | 'dev';
 

@@ -3,12 +3,12 @@ import { AnyPart, PartModule } from 'core/types/Parts';
 import { memo } from 'react';
 import { DefaultPartData, PartWithMeta } from './Default';
 
-export interface GroupData extends PartWithMeta {
+export interface Group extends PartWithMeta {
   n: 'Group';
   parts: AnyPart[];
 }
 
-export const GroupData: GroupData = {
+export const GroupData: Group = {
   meta: {
     ...DefaultPartData.meta,
 

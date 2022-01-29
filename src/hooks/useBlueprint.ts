@@ -1,11 +1,10 @@
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
+import { Blueprint, PartAddress } from 'core/types/Blueprint';
 import { AnyPart } from 'core/types/Parts';
 import produce from 'immer';
-import { importifyBlueprint } from 'interfaces/blueprint';
-import { PartAddress } from 'interfaces/blueprint/root';
+import { BlueprintData, importifyBlueprint } from 'interfaces/blueprint';
 import { cloneDeep, merge } from 'lodash';
-import { GroupType } from 'parts/Group';
 
 /**
  * Hook to manage the blueprint state
@@ -15,12 +14,12 @@ export default function useBlueprint() {
   const hook = {
     new: (blueprint = {}) =>
       blueprintStore.setState(
-        merge(importifyBlueprint(cloneDeep(blueprint)), RootBlueprint.data),
+        merge(importifyBlueprint(cloneDeep(blueprint)), BlueprintData),
       ),
 
-    deleteParts: (parts: RootBlueprint.AnyPartType[]) =>
+    deleteParts: (parts: AnyPart[]) =>
       blueprintStore.setState(
-        produce((state: RootBlueprint.Type) => {
+        produce((state: Blueprint) => {
           parts.forEach((part) => {
             let mutableParts = part.relations.parent?.parts ?? state.parts;
 

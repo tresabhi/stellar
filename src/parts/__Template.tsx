@@ -1,16 +1,16 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import { PartModule } from 'core/types/Parts';
 import { memo } from 'react';
-import { DefaultPartData } from './Default';
+import { DefaultPart, DefaultPartData } from './Default';
 
 //@ts-ignore
-/* export */ interface TemplateData extends DefaultPartData {
+/* export */ interface Template extends DefaultPart {
   A: { b: number };
   C: boolean;
 }
 
 //@ts-ignore
-/* export */ const TemplateData: TemplateData = {
+/* export */ const TemplateData: Template = {
   ...DefaultPartData,
 
   meta: {

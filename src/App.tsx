@@ -1,4 +1,4 @@
-import useStellarContext from 'core/hooks/useStellarContext';
+import useStellarContext from 'hooks/useStellarContext';
 import { isMobile } from 'react-device-detect';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';

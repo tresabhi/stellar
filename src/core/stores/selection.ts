@@ -1,9 +1,8 @@
-import UUID from 'core/types/UUID';
 import create from 'zustand';
 
 export type SelectionStoreType = {
-  selections: UUID[];
-  lastSelection?: UUID;
+  selections: string[];
+  lastSelection?: string;
 };
 
 const selectionStore = create<SelectionStoreType>(() => ({

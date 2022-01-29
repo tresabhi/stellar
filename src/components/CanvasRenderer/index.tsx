@@ -1,7 +1,8 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
-import * as RootBlueprint from 'interfaces/blueprint/root';
+import { Blueprint } from 'core/types/Blueprint';
+import { AnyPart } from 'core/types/Parts';
 import { getPartModule } from 'interfaces/part';
 import { FC, useRef } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
@@ -11,7 +12,7 @@ import './index.scss';
 // TODO: Allow parts to pull state individually for efficiency
 
 interface EditingCanvasProps {
-  data: RootBlueprint.Type;
+  data: Blueprint;
 }
 /**
  * Renders the blueprint in a close-to-vanilla fashion.
@@ -20,10 +21,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const partsJsx: JSX.Element[] = [];
 
-  const insertPartComponents = (
-    parts: RootBlueprint.AnyPartType[],
-    keyDepth: string,
-  ) => {
+  const insertPartComponents = (parts: AnyPart[], keyDepth: string) => {
     parts.forEach((part, index) => {
       if (part.meta.visible) {
         if (part.n === 'Group') {

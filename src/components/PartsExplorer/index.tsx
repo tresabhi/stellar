@@ -1,9 +1,10 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import useBlueprint from 'core/hooks/useBlueprint';
-import useSelection from 'core/hooks/useSelection';
-import * as RootBlueprint from 'interfaces/blueprint/root';
+import { PartAddress } from 'core/types/Blueprint';
+import useBlueprint from 'hooks/useBlueprint';
+import useSelection from 'hooks/useSelection';
+import { getPartModule } from 'interfaces/part';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 /**
@@ -20,7 +21,7 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
 
 interface ListingProps {
   indentation: number;
-  address: RootBlueprint.PartAddress;
+  address: PartAddress;
 }
 /**
  * A component that represents a part and provides a list of its children if
@@ -34,7 +35,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const selection = useSelection();
   const blueprint = useBlueprint();
   let data = blueprint.getReactivePartByAddress(address)!;
-  const Icon = getPart(data.n).Icon;
+  const Icon = getPartModule(data.n).Icon;
   let childParts: JSX.Element[] | undefined;
 
   if (data.n === 'Group') {
@@ -47,7 +48,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
     ));
   }
 
-  data.relations.listing = listingRef;
+  data.meta.listing = listingRef;
 
   return (
     <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">

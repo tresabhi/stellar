@@ -1,9 +1,9 @@
-import { FuelTankData } from 'parts/FuelTank';
-import { GroupData } from 'parts/Group';
+import { FuelTank } from 'parts/FuelTank';
+import { Group } from 'parts/Group';
 import { FC } from 'react';
 import DeepPartial from './DeepPartial';
 
-export type AnyPart = GroupData | FuelTankData;
+export type AnyPart = Group | FuelTank;
 export type AnyVanillaPart = AnyPart & { meta: never };
 
 export type AnyPartName = 'Group' | 'Fuel Tank';
@@ -29,5 +29,3 @@ export interface PartMeta {
   ID: string;
   parentID: string;
 }
-
-const lol: AnyVanillaPart = {};

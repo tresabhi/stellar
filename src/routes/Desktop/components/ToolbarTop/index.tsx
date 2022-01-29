@@ -1,9 +1,9 @@
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
-import useBlueprint from 'core/hooks/useBlueprint';
-import useFile from 'core/hooks/useFile';
-import useStellarContext from 'core/hooks/useStellarContext';
+import useBlueprint from 'hooks/useBlueprint';
+import useFile from 'hooks/useFile';
+import useStellarContext from 'hooks/useStellarContext';
 import appStore from 'core/stores/app';
 import settingsStore, { SettingsType } from 'core/stores/settings';
 import produce from 'immer';

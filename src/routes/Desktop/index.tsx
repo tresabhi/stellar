@@ -1,4 +1,4 @@
-import useKeybinds from 'core/hooks/useKeybinds';
+import useKeybinds from 'hooks/useKeybinds';
 import appStore from 'core/stores/app';
 import { HotKeys } from 'react-hotkeys';
 import Layout from './components/Layout';

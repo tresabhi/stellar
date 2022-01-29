@@ -3,7 +3,7 @@ import { ReactComponent as LinkOn } from 'assets/icons/link-on.svg';
 import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
-import * as RootBlueprint from 'interfaces/blueprint/root';
+import * as RootBlueprint from 'core/types/Blueprint';
 import appStore, { AppType } from 'core/stores/app';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';

@@ -1,24 +1,28 @@
+import { RefObject } from 'react';
 import { NIL } from 'uuid';
 
 export interface PartWithMeta {
   meta: {
     ID: string;
-    parentID: string;
+    parentID?: string;
 
     label: string;
     visible: boolean;
     locked: boolean;
+
+    // all optional as they will be added later in the lifecycle
+    listing?: RefObject<HTMLDivElement>;
   };
 }
 
-export interface DefaultPartData extends PartWithMeta {
+export interface DefaultPart extends PartWithMeta {
   // `n` is not provided to avoid type overwrites
   p: { x: number; y: number };
   o: { x: number; y: number; z: number };
   t: '-Infinity';
 }
 
-export const DefaultPartData: DefaultPartData = {
+export const DefaultPartData: DefaultPart = {
   meta: {
     ID: NIL,
     parentID: NIL,

@@ -1,4 +1,4 @@
-import useBlueprint from 'core/hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import appStore, { AppType } from 'core/stores/app';
 import produce from 'immer';
 import { KeyMap } from 'react-hotkeys';

@@ -1,9 +1,9 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import { PartModule } from 'core/types/Parts';
 import { memo } from 'react';
-import { DefaultPartData } from './Default';
+import { DefaultPart } from './Default';
 
-export interface FuelTankData extends DefaultPartData {
+export interface FuelTank extends DefaultPart {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -61,7 +61,7 @@ export interface FuelTankData extends DefaultPartData {
   };
 }
 
-export const FuelTankData: FuelTankData = {
+export const FuelTankData: FuelTank = {
   ...DefaultPartData,
 
   meta: {

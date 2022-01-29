@@ -1,6 +1,6 @@
 import { ReactComponent as LoadingIcon } from 'assets/icons/loading.svg';
 import IconProvider from 'components/IconProvider';
-import useStellarContext from 'core/hooks/useStellarContext';
+import useStellarContext from 'hooks/useStellarContext';
 import './index.scss';
 
 const SplashScreen = () => {
