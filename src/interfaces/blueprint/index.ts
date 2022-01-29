@@ -1,6 +1,6 @@
 import * as PartsAPI from 'interfaces/part';
-import { GroupType } from 'parts/Group';
 import { cloneDeep } from 'lodash';
+import { GroupType } from 'parts/Group';
 import * as RootBlueprint from './root';
 
 /**
@@ -52,9 +52,9 @@ export const savifyBlueprint = (blueprint: RootBlueprint.Type) =>
  * Prepares all parts for use in the editor.
  */
 export const importifyPartsData = (
-  parts: RootBlueprint.AnyVanillaPartTypeArray | RootBlueprint.AnyPartTypeArray,
+  parts: RootBlueprint.AnyVanillaPartType[] | RootBlueprint.AnyPartType[],
   parentPointer?: GroupType,
-): RootBlueprint.AnyPartTypeArray => {
+): RootBlueprint.AnyPartType[] => {
   return parts.map((part) => {
     if (part.n === 'Group') {
       let newPart = {

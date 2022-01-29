@@ -9,7 +9,7 @@ export const vanillaData = {
     x: 0,
     y: 0,
   },
-  parts: [] as AnyVanillaPartTypeArray,
+  parts: [] as AnyVanillaPartType[],
   stages: [] as { partIndexes: number[] }[],
 };
 
@@ -19,14 +19,11 @@ export const data = {
   '.stellar': {
     format_version: 1,
   },
-  parts: [] as AnyPartTypeArray,
+  parts: [] as AnyPartType[],
 };
 
 export type Type = typeof data;
 export type VanillaType = typeof vanillaData;
-
-export type AnyPartTypeArray = RootPart.AnyPartType[];
-export type AnyVanillaPartTypeArray = RootPart.AnyVanillaPartType[];
 
 export type PartAddress = number[];
 export type PartAddresses = PartAddress[];

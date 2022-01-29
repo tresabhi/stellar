@@ -1,13 +1,18 @@
-import { AnyPartType, AnyVanillaPartType } from 'core/types/Parts';
+import { AnyPartName, AnyPart, AnyVanillaPart } from 'core/types/Parts';
 import getPart from 'functions/getPart';
 import { cloneDeep, merge } from 'lodash';
 import { GroupType } from 'parts/Group';
 import RootPart from 'parts/Root';
 
+const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
+  'Fuel Tank': FuelTankPart,
+  Group: GroupPart,
+};
+
 export const importifyPartData = (
-  partData: AnyVanillaPartType | AnyPartType,
+  partData: AnyVanillaPart | AnyPart,
   parentPointer?: GroupType,
-): AnyPartType => {
+): AnyPart => {
   const defaultPartData = getPart(partData.n).DATA;
 
   // don't loose object pointers
@@ -23,3 +28,6 @@ export const importifyPartData = (
 };
 
 // export const savifyPartData = (partData: AnyPartType, clone = true) => {};
+
+export const getPartModule = (partName: AnyPartName) =>
+  NAMED_PART_MODULES[partName];

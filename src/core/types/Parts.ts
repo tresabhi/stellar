@@ -1,24 +1,38 @@
-import { FuelTankType, FuelTankVanillaType } from 'parts/FuelTank';
-import { GroupType } from 'parts/Group';
-import { RootType, RootVanillaType } from 'parts/Root';
+import { FuelTankData } from 'parts/FuelTank';
+import { GroupData } from 'parts/Group';
 import { FC } from 'react';
 import DeepPartial from './DeepPartial';
 
-export type AnyVanillaPartType = RootVanillaType | FuelTankVanillaType;
-export type AnyPartType = RootType | GroupType | FuelTankType;
+export type AnyPart = GroupData | FuelTankData;
+export type AnyVanillaPart = AnyPart & { meta: never };
 
 export type AnyVanillaPartName = 'Fuel Tank';
-export type AnyPartName = 'Root' | 'Group' | 'Fuel Tank';
+export type AnyPartName = 'Group' | 'Fuel Tank';
 
-export type AnyPartialPartType = DeepPartial<AnyPartType>;
-export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPartType>;
+export type AnyPartialPartType = DeepPartial<AnyPart>;
+export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPart>;
 
 export interface PartModule {
-  VANILLA_DATA?: AnyVanillaPartType;
-  DATA: AnyPartType;
+  VANILLA_DATA?: AnyVanillaPart;
+  DATA: AnyPart;
 
   Icon: FC<any>;
   LayoutComponent: FC<any>;
 
   isExportable: boolean;
 }
+
+const lol: AnyPart = {
+  n: '',
+};
+
+export interface PartMeta {
+  label: string;
+  visible: boolean;
+  locked: boolean;
+
+  ID: string;
+  parentID: string;
+}
+
+const lol: AnyVanillaPart = {};

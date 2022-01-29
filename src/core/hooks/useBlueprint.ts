@@ -1,11 +1,11 @@
-import { importifyBlueprint } from 'interfaces/blueprint';
-import * as RootBlueprint from 'interfaces/blueprint/root';
-import { GroupType } from 'parts/Group';
-import * as RootPart from 'parts/Root';
 import blueprintStore from 'core/stores/blueprint';
 import selectionStore from 'core/stores/selection';
+import { AnyPart } from 'core/types/Parts';
 import produce from 'immer';
+import { importifyBlueprint } from 'interfaces/blueprint';
+import { PartAddress } from 'interfaces/blueprint/root';
 import { cloneDeep, merge } from 'lodash';
+import { GroupType } from 'parts/Group';
 
 /**
  * Hook to manage the blueprint state
@@ -18,7 +18,7 @@ export default function useBlueprint() {
         merge(importifyBlueprint(cloneDeep(blueprint)), RootBlueprint.data),
       ),
 
-    deleteParts: (parts: RootPart.AnyPartType[]) =>
+    deleteParts: (parts: RootBlueprint.AnyPartType[]) =>
       blueprintStore.setState(
         produce((state: RootBlueprint.Type) => {
           parts.forEach((part) => {
@@ -32,10 +32,10 @@ export default function useBlueprint() {
     deletePartsBySelection: () =>
       hook.deleteParts(selectionStore.getState().selections),
 
-    getPartAddress: (data: RootPart.AnyPartType) => {
+    getPartAddress: (data: AnyPart) => {
       const blueprintState = blueprintStore.getState();
-      let address: RootBlueprint.PartAddress = [];
-      let currentPart: RootPart.AnyPartType = data;
+      let address: PartAddress = [];
+      let currentPart: AnyPart = data;
 
       while (currentPart.relations.parent) {
         const currentParent = currentPart.relations.parent;
@@ -59,7 +59,7 @@ export default function useBlueprint() {
 
     getReactivePartByAddress: (
       address: RootBlueprint.PartAddress,
-    ): RootPart.AnyPartType | undefined =>
+    ): AnyPart | undefined =>
       blueprintStore((state) => {
         let currentParent: GroupType | RootBlueprint.Type = state;
 

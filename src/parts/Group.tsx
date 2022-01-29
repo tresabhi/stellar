@@ -1,28 +1,17 @@
-import '@react-three/fiber';
-import { ReactComponent as Icon } from 'assets/icons/group.svg';
-import { AnyPartTypeArray } from 'interfaces/blueprint/root';
-import { PartModule } from 'core/types/Parts';
+import { AnyPart } from 'core/types/Parts';
 import { merge } from 'lodash';
-import { memo } from 'react';
-import RootPart, { RootType } from './Root';
+import { DefaultPartData } from './Default';
 
-export interface GroupType extends RootType {
+export type GroupData = DefaultPartData & {
   n: 'Group';
-  parts: AnyPartTypeArray;
-}
+  parts: AnyPart[];
 
-const DATA = merge<{}, RootType, Partial<GroupType>>({}, RootPart.DATA, {
+  p: never;
+  o: never;
+  t: never;
+};
+
+export const GroupData = merge({}, DefaultPartData, {
   n: 'Group',
   parts: [],
-}) as GroupType;
-
-const LayoutComponent = memo(() => <mesh />);
-
-const GroupPart: PartModule = {
-  DATA,
-  Icon,
-  LayoutComponent,
-
-  isExportable: false,
-};
-export default GroupPart;
+});
