@@ -1,4 +1,7 @@
+import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import { PartModule } from 'core/types/Parts';
 import { merge } from 'lodash';
+import { memo } from 'react';
 import { DefaultPartData } from './Default';
 
 export type FuelTankData = DefaultPartData & {
@@ -74,4 +77,16 @@ export const FuelTankData = merge({}, DefaultPartData, {
     color_tex: '_',
     shape_tex: '_',
   },
-});
+}) as FuelTankData;
+
+export const LayoutComponent = memo(() => <mesh />);
+
+const FuelTank: PartModule = {
+  data: FuelTankData,
+
+  Icon,
+  LayoutComponent,
+
+  isExportable: true,
+};
+export default FuelTank;

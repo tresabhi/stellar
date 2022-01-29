@@ -3,7 +3,6 @@ import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-ri
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import useBlueprint from 'core/hooks/useBlueprint';
 import useSelection from 'core/hooks/useSelection';
-import getPart from 'functions/getPart';
 import * as RootBlueprint from 'interfaces/blueprint/root';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';

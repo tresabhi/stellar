@@ -1,12 +1,16 @@
-import { AnyPartName, AnyPart, AnyVanillaPart } from 'core/types/Parts';
-import getPart from 'functions/getPart';
+import {
+  AnyPart,
+  AnyPartName,
+  AnyVanillaPart,
+  PartModule,
+} from 'core/types/Parts';
 import { cloneDeep, merge } from 'lodash';
-import { GroupType } from 'parts/Group';
-import RootPart from 'parts/Root';
+import FuelTank from 'parts/FuelTank';
+import Group from 'parts/Group';
 
 const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
-  'Fuel Tank': FuelTankPart,
-  Group: GroupPart,
+  'Fuel Tank': FuelTank,
+  Group: Group,
 };
 
 export const importifyPartData = (

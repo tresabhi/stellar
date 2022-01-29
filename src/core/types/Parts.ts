@@ -6,24 +6,19 @@ import DeepPartial from './DeepPartial';
 export type AnyPart = GroupData | FuelTankData;
 export type AnyVanillaPart = AnyPart & { meta: never };
 
-export type AnyVanillaPartName = 'Fuel Tank';
 export type AnyPartName = 'Group' | 'Fuel Tank';
+export type AnyVanillaPartName = 'Fuel Tank';
 
 export type AnyPartialPartType = DeepPartial<AnyPart>;
 export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPart>;
 
-export interface PartModule {
-  VANILLA_DATA?: AnyVanillaPart;
-  DATA: AnyPart;
+export type PartModule = {
+  data: AnyPart;
 
   Icon: FC<any>;
   LayoutComponent: FC<any>;
 
   isExportable: boolean;
-}
-
-const lol: AnyPart = {
-  n: '',
 };
 
 export interface PartMeta {
