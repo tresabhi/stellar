@@ -21,29 +21,15 @@ export const BlueprintData: Blueprint = {
   },
 };
 
-/**
- * Merges the given blueprint into the default blueprint.
- */
 export const mergeWithDefaultBlueprintGlobals = (
   blueprint: object,
 ): Blueprint => {
   return { ...BlueprintData, ...blueprint };
 };
 
-/**
- * Updates the given blueprint to compensate for changes in the format.
- */
 export const blueprintToLatestVersion = (blueprint: Blueprint): Blueprint =>
   blueprint;
 
-/**
- * Prepares the given blueprint for use in the editor.
- *
- * Procedure:
- * 1. Merge whole blueprint with default data
- * 2. Merge all parts their with default data
- * 3. Use version updaters
- */
 export const importifyBlueprint = (blueprint: object): Blueprint => {
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {
@@ -57,9 +43,6 @@ export const importifyBlueprint = (blueprint: object): Blueprint => {
   return latestVersionBlueprint;
 };
 
-/**
- * Gets blueprint ready to save locally
- */
 export const savifyBlueprint = (blueprint: Blueprint) => cloneDeep(blueprint);
 
 // TODO: remove all JSDoc; nobody's reading it anyway

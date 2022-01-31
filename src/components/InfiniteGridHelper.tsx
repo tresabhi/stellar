@@ -10,7 +10,7 @@ interface InfiniteGridHelperProps extends GroupProps {
   axes?: string;
 }
 /**
- * Thanks Fyrestar for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
+ * Thanks, Fyrestar, for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
  */
 const InfiniteGridHelper: FC<InfiniteGridHelperProps> = ({
   size1 = 10,

@@ -3,9 +3,6 @@ import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
 
-/**
- * A container that holds context menu buttons.
- */
 export const Container: FC = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -27,10 +24,6 @@ interface ButtonProps extends InputHTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   to?: string;
 }
-/**
- * A button that holds text that describes it's action, usually in a context
- * menu.
- */
 export const Button: FC<ButtonProps> = ({
   children,
   disabled = false,
@@ -39,8 +32,10 @@ export const Button: FC<ButtonProps> = ({
 }) => (
   <div
     {...props}
-    onClick={() => {
+    onClick={(event) => {
       if (to) window.open(to);
+
+      if (props.onClick) props.onClick(event);
     }}
     className={`${props.className || ''} context-menu-button ${
       disabled ? 'disabled' : 'enabled'
@@ -50,9 +45,6 @@ export const Button: FC<ButtonProps> = ({
   </div>
 );
 
-/**
- * Used to separate two distinct groups in context menus.
- */
 export const Separator = () => (
   <div className="context-menu-separator">
     <div className="context-menu-separator-line" />
@@ -63,10 +55,6 @@ interface ExtensionProps {
   disabled?: boolean;
   extension: JSX.Element;
 }
-/**
- * A button that reveals a by-default collapsed component, usually in a context
- * menu.
- */
 export const Extension: FC<ExtensionProps> = ({
   children,
   disabled = false,
@@ -95,10 +83,6 @@ interface ToggleProps extends InputHTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   defaultState?: boolean;
 }
-/**
- * A button that displays a boolean state through a check-mark, usually in a
- * context menu.
- */
 export const Toggle: FC<ToggleProps> = ({
   children,
   disabled = false,

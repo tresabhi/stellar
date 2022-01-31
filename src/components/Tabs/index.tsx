@@ -1,9 +1,6 @@
 import { FC, InputHTMLAttributes } from 'react';
 import './index.scss';
 
-/**
- * Holds tabs.
- */
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   className,
@@ -14,9 +11,6 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   </div>
 );
 
-/**
- * A tab that usually gains functioanlity using the `onClick` prop.
- */
 interface TabProps extends InputHTMLAttributes<HTMLButtonElement> {
   selected?: boolean;
 }

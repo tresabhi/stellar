@@ -3,9 +3,6 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import './index.scss';
 
-/**
- * Creates a container with a fancy scrollbar that overlays the content.
- */
 const ScrollableContainer: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props

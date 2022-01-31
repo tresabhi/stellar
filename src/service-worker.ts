@@ -5,7 +5,7 @@ import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 const NETWORK_FIRST_PATHS = ['/manifest.json'];
 
-precacheAndRoute(self.__WB_MANIFEST);
+precacheAndRoute(window.self.__WB_MANIFEST);
 
 // TODO: probably sort strategies based on request types
 

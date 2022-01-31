@@ -1,10 +1,10 @@
-import devBlueprint from 'assets/blueprints/static/one-part.json';
+import devBlueprint from 'assets/blueprints/static/grouping.json';
 import EditingCanvas from 'components/CanvasRenderer';
 import { importifyBlueprint } from 'interfaces/blueprint';
+import { FC, InputHTMLAttributes } from 'react';
 import appStore from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
-import { FC, InputHTMLAttributes } from 'react';
 import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
 import './index.scss';

@@ -7,9 +7,7 @@ import { getPartModule } from 'interfaces/part';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import { PartAddress } from 'types/Blueprint';
 import './index.scss';
-/**
- * A container that holds a list of all parts in the blueprint.
- */
+
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
@@ -23,10 +21,6 @@ interface ListingProps {
   indentation: number;
   address: PartAddress;
 }
-/**
- * A component that represents a part and provides a list of its children if
- * it has any. It also provides a buttons for quick basic actions on the part.
- */
 export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const [expanded, setExpanded] = useState(false);
   const listingRef = useRef<HTMLDivElement>(null);

@@ -1,11 +1,11 @@
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
-import { Blueprint } from 'types/Blueprint';
-import { AnyPart } from 'types/Parts';
 import { getPartModule } from 'interfaces/part';
 import { FC, useRef } from 'react';
 import { Color, MOUSE, TOUCH } from 'three';
+import { Blueprint } from 'types/Blueprint';
+import { AnyPart } from 'types/Parts';
 import './index.scss';
 
 // TODO: Add more renderers for simulation, rendering, debugging, etc.
@@ -14,9 +14,6 @@ import './index.scss';
 interface EditingCanvasProps {
   data: Blueprint;
 }
-/**
- * Renders the blueprint in a close-to-vanilla fashion.
- */
 const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const partsJsx: JSX.Element[] = [];

@@ -5,9 +5,6 @@ import './index.scss';
 interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
   width?: 'major' | 'minor';
 }
-/**
- * Holds various components that usually appear on the sides.
- */
 export const Container: FC<ContainerProps> = ({
   children,
   width = 'major',
@@ -18,9 +15,6 @@ export const Container: FC<ContainerProps> = ({
   </div>
 );
 
-/**
- * Holds components that usually needed to be scrolled through.
- */
 export const Scrollable: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props

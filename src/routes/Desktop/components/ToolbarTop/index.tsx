@@ -1,20 +1,16 @@
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
-import appStore from 'stores/app';
-import settingsStore, { SettingsStore } from 'stores/settings';
 import useFile from 'hooks/useFile';
 import useStellarContext from 'hooks/useStellarContext';
 import produce from 'immer';
 import { newBlueprint } from 'interfaces/blueprint';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
+import appStore from 'stores/app';
+import settingsStore, { SettingsStore } from 'stores/settings';
 import './index.scss';
 
-/**
- * A toolbar containing the control menu buttons, tabs, file name, and window
- * controls
- */
 const ToolBarTop: FC = () => {
   const draft = useFile();
   const stellarContext = useStellarContext();
