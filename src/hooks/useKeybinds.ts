@@ -1,6 +1,6 @@
-import useBlueprint from 'hooks/useBlueprint';
-import appStore, { AppType } from 'core/stores/app';
+import appStore, { AppStore } from 'stores/app';
 import produce from 'immer';
+import { deletePartsBySelection } from 'interfaces/blueprint';
 import { KeyMap } from 'react-hotkeys';
 
 // TODO: Find a way to make this cleaner
@@ -15,7 +15,6 @@ type Handlers = { [key: string]: (keyEvent?: KeyboardEvent) => void };
 
 export default function useKeybinds() {
   // TODO: BIG MAKE THIS DATE DRIVEN
-  const blueprint = useBlueprint();
 
   const keyMap: KeyMap = {
     SWITCH_TAB: 'ctrl + tab',
@@ -43,7 +42,7 @@ export default function useKeybinds() {
       event?.preventDefault();
 
       appStore.setState(
-        produce((state: AppType) => {
+        produce((state: AppStore) => {
           state.layout.leftSideBar.visible = !state.layout.leftSideBar.visible;
         }),
       );
@@ -52,14 +51,14 @@ export default function useKeybinds() {
       event?.preventDefault();
 
       appStore.setState(
-        produce((state: AppType) => {
+        produce((state: AppStore) => {
           state.layout.rightSideBar.visible =
             !state.layout.rightSideBar.visible;
         }),
       );
     },
 
-    DELETE_SELECTION: () => blueprint.deletePartsBySelection(),
+    DELETE_SELECTION: deletePartsBySelection,
 
     PARTY: () =>
       // party mode easter egg

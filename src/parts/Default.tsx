@@ -1,10 +1,10 @@
 import { RefObject } from 'react';
+import { PartAddress } from 'types/Blueprint';
 import { NIL } from 'uuid';
 
 export interface PartWithMeta {
   meta: {
-    ID: string;
-    parentID?: string;
+    parentAddress?: PartAddress;
 
     label: string;
     visible: boolean;

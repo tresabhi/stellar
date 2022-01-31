@@ -1,49 +1,44 @@
-import * as RootPart from 'parts/Root';
-import selectionStore, { SelectionStoreType } from 'core/stores/selection';
+import selectionStore, { SelectionStore } from 'stores/selection';
+import { AnyPart } from 'types/Parts';
 import produce from 'immer';
 
 export default function useSelection() {
   const hook = {
-    selectPart: (part: RootPart.AnyPartType) => {
-      part.relations.listing.current?.classList.add('selected');
+    selectPart: (part: AnyPart) => {
+      part.meta.listing?.current?.classList.add('selected');
       selectionStore.setState((state) => ({
-        selections: [...state.selections, part],
+        selections: [...state.selections, part.meta.ID],
       }));
     },
 
-    selectParts: (
-      startPart: RootPart.AnyPartType,
-      endPart: RootPart.AnyPartType,
-    ) => {
+    selectParts: (startPart: AnyPart, endPart: AnyPart) => {
       // const startAddress = blueprint.getPartAddress(startPart);
       // const endAddress = blueprint.getPartAddress(endPart);
     },
 
-    selectPartsOnly: (
-      startPart: RootPart.AnyPartType,
-      endPart: RootPart.AnyPartType,
-    ) => {},
+    selectPartsOnly: (startPart: AnyPart, endPart: AnyPart) => {},
 
-    deselectPart: (part: RootPart.AnyPartType) => {
-      part.relations.listing.current?.classList.remove('selected');
+    deselectPart: (part: AnyPart) => {
+      part.meta.listing?.current?.classList.remove('selected');
       selectionStore.setState(
-        produce((state: SelectionStoreType) =>
-          state.selections.splice(state.selections.indexOf(part), 1),
+        produce((state: SelectionStore) =>
+          state.selections.splice(state.selections.indexOf(part.meta.ID), 1),
         ),
       );
     },
 
-    togglePartSelection: (part: RootPart.AnyPartType) => {
-      if (part.relations.listing.current?.classList.contains('selected')) {
+    togglePartSelection: (part: AnyPart) => {
+      if (part.meta.listing?.current?.classList.contains('selected')) {
         hook.deselectPart(part);
       } else {
         hook.selectPart(part);
       }
     },
 
-    selectPartOnly: (part: RootPart.AnyPartType) => {
+    selectPartOnly: (part: AnyPart) => {
       selectionStore.getState().selections.forEach((selection) => {
-        selection.relations.listing.current?.classList.remove('selected');
+        const part = getPartByID(selection);
+        part.meta.listing.current?.classList.remove('selected');
       });
       selectionStore.setState({
         selections: [part],
@@ -52,10 +47,7 @@ export default function useSelection() {
       part.relations.listing?.current?.classList.add('selected');
     },
 
-    getPartDirection: (
-      startPart: RootPart.AnyPartType,
-      endPart: RootPart.AnyPartType,
-    ): -1 | 0 | 1 => {
+    getPartDirection: (startPart: AnyPart, endPart: AnyPart): -1 | 0 | 1 => {
       return 0;
     },
   };

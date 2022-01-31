@@ -41,7 +41,7 @@ export type EfficientSelectionType = [
 ][];
 */
 
-import { AnyPart, AnyVanillaPart } from 'core/types/Parts';
+import { AnyPart, AnyVanillaPart } from 'types/Parts';
 
 export interface VanillaBlueprint {
   center: number;

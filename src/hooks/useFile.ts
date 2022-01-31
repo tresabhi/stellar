@@ -1,5 +1,5 @@
 import { savifyBlueprint } from 'interfaces/blueprint';
-import blueprintStore from 'core/stores/blueprint';
+import blueprintStore from 'stores/blueprint';
 import { saveAs } from 'file-saver';
 
 export default function useFile() {

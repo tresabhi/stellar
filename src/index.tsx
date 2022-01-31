@@ -1,5 +1,5 @@
-import { primeWorker } from 'core/modules/serviceWorker';
-import blueprintStore from 'core/stores/blueprint';
+import { primeWorker } from 'utilities/serviceWorker';
+import blueprintStore from 'stores/blueprint';
 import produce from 'immer';
 import { lazy, StrictMode, Suspense } from 'react';
 import { render } from 'react-dom';

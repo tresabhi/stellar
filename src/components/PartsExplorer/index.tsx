@@ -1,9 +1,9 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import { PartAddress } from 'core/types/Blueprint';
-import useBlueprint from 'hooks/useBlueprint';
+import { PartAddress } from 'types/Blueprint';
 import useSelection from 'hooks/useSelection';
+import { getReactivePartByAddress } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
 import './index.scss';
@@ -33,8 +33,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const selection = useSelection();
-  const blueprint = useBlueprint();
-  let data = blueprint.getReactivePartByAddress(address)!;
+  let data = getReactivePartByAddress(address)!;
   const Icon = getPartModule(data.n).Icon;
   let childParts: JSX.Element[] | undefined;
 

@@ -3,7 +3,7 @@ import {
   AnyPartName,
   AnyVanillaPart,
   PartModule,
-} from 'core/types/Parts';
+} from 'types/Parts';
 import { cloneDeep, merge } from 'lodash';
 import FuelTank from 'parts/FuelTank';
 import Group from 'parts/Group';

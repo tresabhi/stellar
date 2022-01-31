@@ -1,5 +1,5 @@
 import useKeybinds from 'hooks/useKeybinds';
-import appStore from 'core/stores/app';
+import appStore from 'stores/app';
 import { HotKeys } from 'react-hotkeys';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';

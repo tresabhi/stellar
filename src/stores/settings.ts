@@ -2,17 +2,21 @@ import { merge } from 'lodash';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
-const data = {
+export interface SettingsStore {
+  debug: {
+    loadDummyOnLaunch: boolean;
+  };
+}
+
+export const SettingsStoreData: SettingsStore = {
   debug: {
     loadDummyOnLaunch: false,
   },
 };
 
-export type SettingsType = typeof data & {};
-
-const settingsStore = create<SettingsType>(
+const settingsStore = create<SettingsStore>(
   devtools(
-    persist(() => data, {
+    persist(() => SettingsStoreData, {
       name: 'settings',
       merge: (persistedState, currentState) =>
         merge(currentState, persistedState),

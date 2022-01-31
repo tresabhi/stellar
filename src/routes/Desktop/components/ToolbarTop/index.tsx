@@ -1,12 +1,12 @@
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
-import useBlueprint from 'hooks/useBlueprint';
+import appStore from 'stores/app';
+import settingsStore, { SettingsStore } from 'stores/settings';
 import useFile from 'hooks/useFile';
 import useStellarContext from 'hooks/useStellarContext';
-import appStore from 'core/stores/app';
-import settingsStore, { SettingsType } from 'core/stores/settings';
 import produce from 'immer';
+import { newBlueprint } from 'interfaces/blueprint';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import './index.scss';
@@ -16,7 +16,6 @@ import './index.scss';
  * controls
  */
 const ToolBarTop: FC = () => {
-  const blueprint = useBlueprint();
   const draft = useFile();
   const stellarContext = useStellarContext();
   const openInputRef = useRef<HTMLInputElement>(null);
@@ -31,7 +30,7 @@ const ToolBarTop: FC = () => {
 
       fileReader.onload = () => {
         if (typeof fileReader.result == 'string')
-          blueprint.new(JSON.parse(fileReader.result));
+          newBlueprint(JSON.parse(fileReader.result));
       };
     }
   };
@@ -58,7 +57,7 @@ const ToolBarTop: FC = () => {
           extension={
             <ContextMenu.Container>
               {/* Pro tip: add "..." only if further interaction is required */}
-              <ContextMenu.Button onClick={() => blueprint.new()}>
+              <ContextMenu.Button onClick={() => newBlueprint()}>
                 New
               </ContextMenu.Button>
               <ContextMenu.Button onClick={() => openInputRef.current?.click()}>
@@ -231,7 +230,7 @@ const ToolBarTop: FC = () => {
                   }
                   onClick={() => {
                     settingsStore.setState(
-                      produce((state: SettingsType) => {
+                      produce((state: SettingsStore) => {
                         state.debug.loadDummyOnLaunch =
                           !state.debug.loadDummyOnLaunch;
                       }),

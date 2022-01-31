@@ -1,5 +1,5 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
-import { AnyPart, PartModule } from 'core/types/Parts';
+import { AnyPart, PartModule } from 'types/Parts';
 import { memo } from 'react';
 import { DefaultPartData, PartWithMeta } from './Default';
 
