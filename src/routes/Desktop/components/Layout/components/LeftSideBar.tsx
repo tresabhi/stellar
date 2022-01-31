@@ -1,9 +1,9 @@
 import * as Partition from 'components/Partitions';
-import * as SideBar from 'components/SideBar';
-import appStore, { AppStoreData } from 'stores/app';
-import blueprintStore from 'stores/blueprint';
 import * as PartsExplorer from 'components/PartsExplorer';
+import * as SideBar from 'components/SideBar';
 import produce from 'immer';
+import appStore, { AppStore } from 'stores/app';
+import blueprintStore from 'stores/blueprint';
 
 export default function LeftSideBar() {
   const reactiveParts = blueprintStore((state) => state.parts);
@@ -25,7 +25,7 @@ export default function LeftSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: App) => {
+              produce((state: AppStore) => {
                 state.layout.leftSideBar.partition = 'parts';
               }),
             )
@@ -41,7 +41,7 @@ export default function LeftSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: App) => {
+              produce((state: AppStore) => {
                 state.layout.leftSideBar.partition = 'snippets';
               }),
             )

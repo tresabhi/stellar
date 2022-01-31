@@ -1,12 +1,9 @@
-import {
-  AnyPart,
-  AnyPartName,
-  AnyVanillaPart,
-  PartModule,
-} from 'types/Parts';
 import { cloneDeep, merge } from 'lodash';
+import { DefaultPartData } from 'parts/Default';
 import FuelTank from 'parts/FuelTank';
 import Group from 'parts/Group';
+import { PartAddress } from 'types/Blueprint';
+import { AnyPart, AnyPartName, AnyVanillaPart, PartModule } from 'types/Parts';
 
 const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
   'Fuel Tank': FuelTank,
@@ -15,18 +12,19 @@ const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
 
 export const importifyPartData = (
   partData: AnyVanillaPart | AnyPart,
-  parentPointer?: GroupType,
+  parentAddress: PartAddress,
+  partRoute: number,
 ): AnyPart => {
-  const defaultPartData = getPart(partData.n).DATA;
+  const plainPartData = getPartModule(partData.n).data;
 
   // don't loose object pointers
   let importifiedPartData = merge(
+    cloneDeep(plainPartData ?? DefaultPartData),
     partData,
-    merge(cloneDeep(defaultPartData ?? RootPart.DATA), cloneDeep(partData)),
   );
 
-  importifiedPartData.relations.self = importifiedPartData;
-  importifiedPartData.relations.parent = parentPointer;
+  importifiedPartData.meta.parentAddress = parentAddress;
+  importifiedPartData.meta.address = [...parentAddress, partRoute];
 
   return importifiedPartData;
 };

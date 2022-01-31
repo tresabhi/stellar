@@ -20,12 +20,3 @@ export type PartModule = {
 
   isExportable: boolean;
 };
-
-export interface PartMeta {
-  label: string;
-  visible: boolean;
-  locked: boolean;
-
-  ID: string;
-  parentID: string;
-}

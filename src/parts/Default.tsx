@@ -1,10 +1,10 @@
 import { RefObject } from 'react';
 import { PartAddress } from 'types/Blueprint';
-import { NIL } from 'uuid';
 
 export interface PartWithMeta {
   meta: {
-    parentAddress?: PartAddress;
+    address: PartAddress;
+    parentAddress: PartAddress;
 
     label: string;
     visible: boolean;
@@ -24,8 +24,8 @@ export interface DefaultPart extends PartWithMeta {
 
 export const DefaultPartData: DefaultPart = {
   meta: {
-    ID: NIL,
-    parentID: NIL,
+    address: [],
+    parentAddress: [],
 
     label: 'Unknown Part',
     visible: true,

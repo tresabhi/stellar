@@ -1,7 +1,7 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import { PartModule } from 'types/Parts';
 import { memo } from 'react';
-import { DefaultPart } from './Default';
+import { PartModule } from 'types/Parts';
+import { DefaultPart, DefaultPartData } from './Default';
 
 export interface FuelTank extends DefaultPart {
   n: 'Fuel Tank';
@@ -87,7 +87,7 @@ export const FuelTankLayoutComponent = memo(() => <mesh />);
 
 export const FuelTankIcon = Icon;
 
-const FuelTank: PartModule = {
+const FuelTankPart: PartModule = {
   data: FuelTankData,
 
   Icon: FuelTankIcon,
@@ -95,4 +95,4 @@ const FuelTank: PartModule = {
 
   isExportable: true,
 };
-export default FuelTank;
+export default FuelTankPart;

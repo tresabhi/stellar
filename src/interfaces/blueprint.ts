@@ -1,16 +1,10 @@
-import blueprintStore from 'stores/blueprint';
-import partsEnumStore, { PartsEnumStore } from 'stores/partsEnum';
-import selectionStore from 'stores/selection';
-import { AnyPart, AnyVanillaPart } from 'types/Parts';
 import * as PartsAPI from 'interfaces/part';
 import { cloneDeep, merge } from 'lodash';
 import { Group } from 'parts/Group';
-import { v4 } from 'uuid';
-import {
-  Blueprint,
-  PartAddress,
-  VanillaBlueprint,
-} from '../types/Blueprint';
+import blueprintStore from 'stores/blueprint';
+import selectionStore from 'stores/selection';
+import { AnyPart, AnyVanillaPart } from 'types/Parts';
+import { Blueprint, PartAddress, VanillaBlueprint } from '../types/Blueprint';
 
 export const VanillaBlueprintData: VanillaBlueprint = {
   center: 0,
@@ -54,7 +48,7 @@ export const importifyBlueprint = (blueprint: object): Blueprint => {
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {
     ...mergedBlueprint,
-    parts: importifyPartsData(mergedBlueprint.parts),
+    parts: importifyPartsData(mergedBlueprint.parts, []),
   };
   const latestVersionBlueprint = blueprintToLatestVersion(
     partDataUpdatedBlueprint,
@@ -68,34 +62,22 @@ export const importifyBlueprint = (blueprint: object): Blueprint => {
  */
 export const savifyBlueprint = (blueprint: Blueprint) => cloneDeep(blueprint);
 
-/**
- * Prepares all parts for use in the editor.
- */
+// TODO: remove all JSDoc; nobody's reading it anyway
 export const importifyPartsData = (
   parts: AnyVanillaPart[] | AnyPart[],
-  parent?: Group,
-): AnyPart[] => {
-  const newPartEnum: PartsEnumStore = new Map();
-  const newParts = parts.map((part) => {
+  parentAddress: PartAddress,
+): AnyPart[] =>
+  parts.map((part, index) => {
     if (part.n === 'Group') {
-      let newPart = {
-        ...PartsAPI.importifyPartData(part, parent),
-        parts: importifyPartsData(part.parts, part),
+      return {
+        ...PartsAPI.importifyPartData(part, parentAddress, index),
+
+        parts: importifyPartsData(part.parts, [...parentAddress, index]),
       };
-
-      newPart.meta.ID = v4();
-      newPart.meta.parentID = parent?.meta.ID;
-      newPartEnum.set(newPart.meta.ID, newPart);
-
-      return newPart;
     } else {
-      return PartsAPI.importifyPartData(part, parent);
+      return PartsAPI.importifyPartData(part, parentAddress, index);
     }
   });
-
-  partsEnumStore.setState(newPartEnum);
-  return newParts;
-};
 
 export const newBlueprint = (blueprint = {}) => {
   blueprintStore.setState(
@@ -109,38 +91,6 @@ export const deletePartsBySelection = () => {
   selections.forEach((selection) => {});
 
   selectionStore.setState({ selections: [] });
-};
-
-export const getPartIndexByID = (
-  ID: string,
-  parent: Group,
-): number | undefined => {
-  let partIndex: number;
-
-  parent.parts.some((part, index) => {
-    if (part.meta.ID === ID) {
-      partIndex = index;
-      return true;
-    }
-  });
-
-  return partIndex!;
-};
-
-export const getAddressByID = (ID: string) => {
-  const partsEnumState = partsEnumStore.getState();
-  let address: PartAddress = [];
-  let currentPart: AnyPart = partsEnumState.get(ID)!;
-  let currentParent: Group;
-
-  while (currentPart.meta.parentID) {
-    currentParent = partsEnumState.get(currentPart.meta.parentID)! as Group;
-    address.unshift(currentParent.parts.indexOf(currentPart));
-
-    currentParent = currentPart as Group;
-  }
-
-  return address;
 };
 
 export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
@@ -161,5 +111,3 @@ export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
 export const getReactivePartByAddress = (address: PartAddress) => {
   return blueprintStore((state) => getPartByAddress(address, state));
 };
-
-export const getPartByID = 

@@ -22,10 +22,6 @@ const ICON_IMG = {
 const BLIND_COPY_EXTENSIONS = ['.png', '.ico', '.svg', '.xml'];
 
 async function generateFavicons(buildType, faviconAPIKey) {
-  /**
-   * 1. add all .png, .svg, .ico, .xml
-   * 2. merge manifest icons
-   */
   console.log(`Generating and fetching new favicons for "${buildType}"`);
   const faviconAPIResult = (
     await (

@@ -10,8 +10,6 @@ interface InfiniteGridHelperProps extends GroupProps {
   axes?: string;
 }
 /**
- * A helper to create a infinite grid.
- *
  * Thanks Fyrestar for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
  */
 const InfiniteGridHelper: FC<InfiniteGridHelperProps> = ({

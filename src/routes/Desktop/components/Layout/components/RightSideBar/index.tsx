@@ -3,11 +3,11 @@ import { ReactComponent as LinkOn } from 'assets/icons/link-on.svg';
 import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
-import * as RootBlueprint from 'types/Blueprint';
-import appStore, { AppStoreData } from 'stores/app';
+import produce from 'immer';
+import appStore, { AppStore } from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
-import produce from 'immer';
+import { Blueprint } from 'types/Blueprint';
 import './index.scss';
 
 export default function RightSideBar() {
@@ -27,7 +27,7 @@ export default function RightSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: App) => {
+              produce((state: AppStore) => {
                 state.layout.rightSideBar.partition = 'properties';
               }),
             )
@@ -43,7 +43,7 @@ export default function RightSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: App) => {
+              produce((state: AppStore) => {
                 state.layout.rightSideBar.partition = 'inspect';
               }),
             )
@@ -71,7 +71,7 @@ export default function RightSideBar() {
                 suffix="m"
                 onValueAccepted={(value) => {
                   blueprintStore.setState(
-                    produce((state: RootBlueprint.Type) => {
+                    produce((state: Blueprint) => {
                       // const selections = selectionStore.getState().selections;
                       // selections.forEach((part) => {
                       //   const parent = part.relations.
@@ -107,7 +107,7 @@ export default function RightSideBar() {
               <PropertiesExplorer.ToggleButton
                 onClick={() => {
                   appStore.setState(
-                    produce((state: App) => {
+                    produce((state: AppStore) => {
                       state.layout.rightSideBar.scaleConstrained =
                         !state.layout.rightSideBar.scaleConstrained;
                     }),

@@ -1,6 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import { PartModule } from 'types/Parts';
 import { memo } from 'react';
+import { PartModule } from 'types/Parts';
 import { DefaultPart, DefaultPartData } from './Default';
 
 //@ts-ignore
@@ -29,7 +29,7 @@ import { DefaultPart, DefaultPartData } from './Default';
 /* export */ const TemplateIcon = Icon;
 
 //@ts-ignore
-const Template: PartModule = {
+const TemplatePart: PartModule = {
   //@ts-ignore
   data: TemplateData,
 

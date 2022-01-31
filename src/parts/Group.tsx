@@ -1,6 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
-import { AnyPart, PartModule } from 'types/Parts';
 import { memo } from 'react';
+import { AnyPart, PartModule } from 'types/Parts';
 import { DefaultPartData, PartWithMeta } from './Default';
 
 export interface Group extends PartWithMeta {
@@ -22,7 +22,7 @@ const GroupLayoutComponent = memo(() => <mesh />);
 
 export const GroupIcon = Icon;
 
-const Group: PartModule = {
+const GroupPart: PartModule = {
   data: GroupData,
 
   Icon: GroupIcon,
@@ -30,4 +30,4 @@ const Group: PartModule = {
 
   isExportable: false,
 };
-export default Group;
+export default GroupPart;

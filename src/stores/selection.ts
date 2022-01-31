@@ -1,8 +1,9 @@
+import { PartAddress } from 'types/Blueprint';
 import create from 'zustand';
 
 export interface SelectionStore {
-  selections: string[];
-  lastSelection?: string;
+  selections: PartAddress[];
+  lastSelection?: PartAddress;
 }
 
 export const SettingsStoreData: SelectionStore = {

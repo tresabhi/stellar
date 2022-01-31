@@ -1,13 +1,15 @@
+import produce from 'immer';
+import { getPartByAddress } from 'interfaces/blueprint';
+import { isEqual } from 'lodash';
 import selectionStore, { SelectionStore } from 'stores/selection';
 import { AnyPart } from 'types/Parts';
-import produce from 'immer';
 
 export default function useSelection() {
   const hook = {
     selectPart: (part: AnyPart) => {
       part.meta.listing?.current?.classList.add('selected');
       selectionStore.setState((state) => ({
-        selections: [...state.selections, part.meta.ID],
+        selections: [...state.selections, part.meta.address],
       }));
     },
 
@@ -20,10 +22,20 @@ export default function useSelection() {
 
     deselectPart: (part: AnyPart) => {
       part.meta.listing?.current?.classList.remove('selected');
+
       selectionStore.setState(
-        produce((state: SelectionStore) =>
-          state.selections.splice(state.selections.indexOf(part.meta.ID), 1),
-        ),
+        produce((state: SelectionStore) => {
+          let selectionIndex: number;
+
+          state.selections.some((selection, index) => {
+            if (isEqual(selection, part.meta.address)) {
+              selectionIndex = index;
+              return true;
+            } else return false;
+          });
+
+          state.selections.splice(selectionIndex!, 1);
+        }),
       );
     },
 
@@ -37,14 +49,15 @@ export default function useSelection() {
 
     selectPartOnly: (part: AnyPart) => {
       selectionStore.getState().selections.forEach((selection) => {
-        const part = getPartByID(selection);
-        part.meta.listing.current?.classList.remove('selected');
+        const part = getPartByAddress(selection);
+        part.meta.listing?.current?.classList.remove('selected');
       });
+
       selectionStore.setState({
-        selections: [part],
-        lastSelection: part,
+        selections: [part.meta.address],
+        lastSelection: part.meta.address,
       });
-      part.relations.listing?.current?.classList.add('selected');
+      part.meta.listing?.current?.classList.add('selected');
     },
 
     getPartDirection: (startPart: AnyPart, endPart: AnyPart): -1 | 0 | 1 => {
