@@ -1,7 +1,7 @@
-import appStore, { AppStore } from 'stores/app';
 import produce from 'immer';
 import { deletePartsBySelection } from 'interfaces/blueprint';
 import { KeyMap } from 'react-hotkeys';
+import appStore, { AppStore } from 'stores/app';
 
 // TODO: Find a way to make this cleaner
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
@@ -42,8 +42,8 @@ export default function useKeybinds() {
       event?.preventDefault();
 
       appStore.setState(
-        produce((state: AppStore) => {
-          state.layout.leftSideBar.visible = !state.layout.leftSideBar.visible;
+        produce((draft: AppStore) => {
+          draft.layout.leftSideBar.visible = !draft.layout.leftSideBar.visible;
         }),
       );
     },
@@ -51,9 +51,9 @@ export default function useKeybinds() {
       event?.preventDefault();
 
       appStore.setState(
-        produce((state: AppStore) => {
-          state.layout.rightSideBar.visible =
-            !state.layout.rightSideBar.visible;
+        produce((draft: AppStore) => {
+          draft.layout.rightSideBar.visible =
+            !draft.layout.rightSideBar.visible;
         }),
       );
     },

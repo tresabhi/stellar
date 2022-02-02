@@ -1,5 +1,5 @@
 import { ReactComponent as Icon } from 'assets/icons/question-mark.svg';
-import { memo, RefObject } from 'react';
+import { memo } from 'react';
 import { PartAddress } from 'types/Blueprint';
 import { AnyPart, PartModule } from 'types/Parts';
 
@@ -10,9 +10,7 @@ export interface PartWithMeta {
     label: string;
     visible: boolean;
     locked: boolean;
-
-    // all optional as they will be added later in the lifecycle
-    listing?: RefObject<HTMLDivElement>;
+    selected: boolean;
   };
 }
 
@@ -30,6 +28,8 @@ export const DefaultPartData: PartWithTranslations = {
     label: 'Unknown Part',
     visible: true,
     locked: true,
+
+    selected: false,
   },
 
   p: { x: 0, y: 0 },

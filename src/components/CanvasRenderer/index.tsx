@@ -1,41 +1,20 @@
-import { OrbitControls } from '@react-three/drei';
+import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import { getPartModule } from 'interfaces/part';
-import { FC, useRef } from 'react';
+import { useRef } from 'react';
+import blueprintStore from 'stores/blueprint';
 import { Color, MOUSE, TOUCH } from 'three';
-import { Blueprint } from 'types/Blueprint';
-import { AnyPart } from 'types/Parts';
 import './index.scss';
 
-// TODO: Add more renderers for simulation, rendering, debugging, etc.
-// TODO: Allow parts to pull state individually for efficiency
-
-interface EditingCanvasProps {
-  data: Blueprint;
-}
-const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
+export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const partsJsx: JSX.Element[] = [];
+  const initialData = blueprintStore.getState();
+  const parts = blueprintStore((state) => state.parts).map((part, index) => {
+    const PartComponent = getPartModule(part.n, true).LayoutComponent;
 
-  const insertPartComponents = (parts: AnyPart[], keyDepth: string) => {
-    parts.forEach((part, index) => {
-      if (part.meta.visible) {
-        if (part.n === 'Group') {
-          insertPartComponents(part.parts, `${keyDepth}-${index}`);
-        } else {
-          const PartComponent = getPartModule(part.n, true).LayoutComponent;
-
-          if (PartComponent)
-            partsJsx.push(
-              <PartComponent key={`part-${keyDepth}-${index}`} data={part} />,
-            );
-        }
-      }
-    });
-  };
-
-  insertPartComponents(data.parts, '');
+    return <PartComponent address={[index]} />;
+  });
 
   return (
     <Canvas
@@ -43,12 +22,14 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
       mode="concurrent"
       frameloop="demand"
       orthographic
-      camera={{ zoom: 16, position: [-data.center, 0, 100] }}
+      camera={{ zoom: 16, position: [-initialData.center, 0, 100] }}
       className="editing-canvas"
+      performance={{ min: 0.75 }}
     >
       <directionalLight position={[-20, 20, 100]} />
       <ambientLight intensity={0.5} />
 
+      <AdaptiveDpr pixelated />
       <OrbitControls
         maxZoom={1024}
         minZoom={2.2}
@@ -63,15 +44,16 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
         }}
         enableRotate={false}
         enableDamping={false}
+        regress
       />
+
       <gridHelper
-        position={[data.center, 0, -100]}
+        position={[initialData.center, 0, -100]}
         args={[1e5, 2, '#9952E0']}
         rotation={[Math.PI / 2, 0, 0]}
       />
-
       <InfiniteGridHelper
-        position={[data.center, 0, -100]}
+        position={[initialData.center, 0, -100]}
         axes="xyz"
         size1={1}
         size2={5}
@@ -79,9 +61,9 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
         color={new Color('#52527A')}
       />
 
-      <group position={[data.offset.x, data.offset.y, 0]}>{partsJsx}</group>
+      <group position={[initialData.offset.x, initialData.offset.y, 0]}>
+        {parts}
+      </group>
     </Canvas>
   );
 };
-
-export default VanillaRenderer;

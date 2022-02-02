@@ -226,9 +226,9 @@ const ToolBarTop: FC = () => {
                   }
                   onClick={() => {
                     settingsStore.setState(
-                      produce((state: SettingsStore) => {
-                        state.debug.loadDummyOnLaunch =
-                          !state.debug.loadDummyOnLaunch;
+                      produce((draft: SettingsStore) => {
+                        draft.debug.loadDummyOnLaunch =
+                          !draft.debug.loadDummyOnLaunch;
                       }),
                     );
                   }}

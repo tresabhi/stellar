@@ -1,5 +1,5 @@
 import devBlueprint from 'assets/blueprints/static/grouping.json';
-import EditingCanvas from 'components/CanvasRenderer';
+import { LayoutRenderer } from 'components/CanvasRenderer';
 import { importifyBlueprint } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';
 import appStore from 'stores/app';
@@ -21,7 +21,7 @@ const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
       {appStore((state) => state.layout.leftSideBar.visible) ? (
         <LeftSideBar />
       ) : undefined}
-      <EditingCanvas data={blueprintState} />
+      <LayoutRenderer />
       {appStore((state) => state.layout.rightSideBar.visible) ? (
         <RightSideBar />
       ) : undefined}

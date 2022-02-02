@@ -1,69 +1,66 @@
 import produce from 'immer';
 import { getPartByAddress } from 'interfaces/blueprint';
-import { isEqual } from 'lodash';
-import selectionStore, { SelectionStore } from 'stores/selection';
-import { AnyPart } from 'types/Parts';
+import blueprintStore from 'stores/blueprint';
+import selectionStore from 'stores/selection';
+import { Blueprint, PartAddress } from 'types/Blueprint';
 
-export default function useSelection() {
-  const hook = {
-    selectPart: (part: AnyPart) => {
-      part.meta.listing?.current?.classList.add('selected');
-      selectionStore.setState((state) => ({
-        selections: [...state.selections, part.meta.address],
-      }));
-    },
+export const selectParts = (addresses: PartAddress[]) => {
+  blueprintStore.setState(
+    produce((draft: Blueprint) => {
+      addresses.forEach((address) => {
+        const part = getPartByAddress(address, draft);
+        part.meta.selected = true;
+      });
+    }),
+  );
+};
 
-    selectParts: (startPart: AnyPart, endPart: AnyPart) => {
-      // const startAddress = blueprint.getPartAddress(startPart);
-      // const endAddress = blueprint.getPartAddress(endPart);
-    },
+export const selectPartsOnly = (addresses: PartAddress[]) => {
+  const currentSelections = selectionStore.getState().selections;
 
-    selectPartsOnly: (startPart: AnyPart, endPart: AnyPart) => {},
+  blueprintStore.setState(
+    produce((draft: Blueprint) => {
+      currentSelections.forEach((selectionAddress) => {
+        const part = getPartByAddress(selectionAddress, draft);
 
-    deselectPart: (part: AnyPart) => {
-      part.meta.listing?.current?.classList.remove('selected');
-
-      selectionStore.setState(
-        produce((state: SelectionStore) => {
-          let selectionIndex: number;
-
-          state.selections.some((selection, index) => {
-            if (isEqual(selection, part.meta.address)) {
-              selectionIndex = index;
-              return true;
-            } else return false;
-          });
-
-          state.selections.splice(selectionIndex!, 1);
-        }),
-      );
-    },
-
-    togglePartSelection: (part: AnyPart) => {
-      if (part.meta.listing?.current?.classList.contains('selected')) {
-        hook.deselectPart(part);
-      } else {
-        hook.selectPart(part);
-      }
-    },
-
-    selectPartOnly: (part: AnyPart) => {
-      selectionStore.getState().selections.forEach((selection) => {
-        const part = getPartByAddress(selection);
-        part.meta.listing?.current?.classList.remove('selected');
+        part.meta.selected = false;
       });
 
-      selectionStore.setState({
-        selections: [part.meta.address],
-        lastSelection: part.meta.address,
+      addresses.forEach((address) => {
+        const part = getPartByAddress(address, draft);
+        part.meta.selected = true;
       });
-      part.meta.listing?.current?.classList.add('selected');
-    },
+    }),
+  );
+};
 
-    getPartDirection: (startPart: AnyPart, endPart: AnyPart): -1 | 0 | 1 => {
-      return 0;
-    },
-  };
+export const deselectParts = (addresses: PartAddress[]) => {
+  blueprintStore.setState(
+    produce((draft: Blueprint) => {
+      addresses.forEach((address) => {
+        const part = getPartByAddress(address, draft);
+        part.meta.selected = false;
+      });
+    }),
+  );
+};
 
-  return hook;
-}
+export const togglePartsSelection = (addresses: PartAddress[]) => {
+  blueprintStore.setState(
+    produce((draft: Blueprint) => {
+      addresses.forEach((address) => {
+        const part = getPartByAddress(address, draft);
+        part.meta.selected = !part.meta.selected;
+      });
+    }),
+  );
+};
+
+export const getPartDirection = (
+  startPart: PartAddress,
+  endPart: PartAddress,
+): -1 | 1 => {
+  return startPart.some((startRoute, index) => endPart[index] > startRoute)
+    ? 1
+    : -1;
+};

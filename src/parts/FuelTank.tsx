@@ -1,9 +1,43 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import { getPartByAddress } from 'interfaces/blueprint';
 import { times } from 'lodash';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
+import blueprintStore from 'stores/blueprint';
+import { Euler, Group, Mesh } from 'three';
 import { lerp } from 'three/src/math/MathUtils';
-import { PartModule } from 'types/Parts';
+import { PartComponentProps, PartModule } from 'types/Parts';
+import compareAddressProps from 'utilities/compareAddressProps';
 import { DefaultPartData, PartWithTranslations } from './Default';
+
+const FACE_COUNT = 24;
+const BEVEL_MARGIN = 0.05;
+const RIVET_MARGIN = 0.04;
+const RIVET_COUNT = Math.floor(FACE_COUNT / 4);
+const RIM_HEIGHT = 0.1;
+const RIM_SLOPE_HEIGHT = 0.1;
+const NOZZLES_PER_METER = 3;
+const NOZZLE_HEIGHT = 0.1;
+const NOZZLE_OFFSET = 1 / 6;
+const COLOR = 'white';
+const MATERIALS = {
+  flat: <meshBasicMaterial />,
+  faces: (
+    <meshStandardMaterial
+      color={COLOR}
+      roughness={0.8}
+      metalness={0.8}
+      flatShading={true}
+    />
+  ),
+  smooth: (
+    <meshStandardMaterial
+      color={COLOR}
+      roughness={0.8}
+      metalness={0.8}
+      flatShading={false}
+    />
+  ),
+};
 
 export interface FuelTank extends PartWithTranslations {
   n: 'Fuel Tank';
@@ -85,678 +119,762 @@ export const FuelTankData: FuelTank = {
   },
 };
 
-export const FuelTankLayoutComponent = memo<{ data: FuelTank }>(({ data }) => {
-  const faceCount = 24;
+export const FuelTankLayoutComponent = memo<PartComponentProps>(
+  ({ address }) => {
+    const initialState = getPartByAddress(
+      address,
+      blueprintStore.getState(),
+    ) as FuelTank;
+    const initialRotation = initialState.o.z * (Math.PI / 180);
+    const meshRef = useRef<Mesh | Group>(null);
 
-  const bevelMargin = 0.05;
+    blueprintStore.subscribe(
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).p.x,
+      (current, previous) => {
+        meshRef.current!.position.x += current - previous;
+      },
+    );
+    blueprintStore.subscribe(
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).p.y,
+      (current, previous) => {
+        meshRef.current!.position.y += current - previous;
+      },
+    );
+    blueprintStore.subscribe(
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.x,
+      (current, previous) => {
+        meshRef.current!.scale.x += current - previous;
+      },
+    );
+    blueprintStore.subscribe(
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.y,
+      (current, previous) => {
+        meshRef.current!.scale.y += current - previous;
+      },
+    );
+    blueprintStore.subscribe(
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.z,
+      (current) => {
+        meshRef.current!.setRotationFromEuler(new Euler(0, 0, current));
+      },
+    );
 
-  const rivetMargin = 0.04;
-  const rivetCount = Math.floor(faceCount / 4);
-
-  const rotation = data.o.z * (Math.PI / 180);
-
-  const rimHeight = 0.1;
-  const rimSlopeHeight = 0.1;
-
-  const nozzlesPerMeter = 3;
-  const nozzleHeight = 0.1;
-  const nozzleOffset = 1 / 6;
-
-  const color = 'white';
-
-  const materials = {
-    flat: <meshBasicMaterial />,
-    faces: (
-      <meshStandardMaterial
-        color={color}
-        roughness={0.8}
-        metalness={0.8}
-        flatShading={true}
-      />
-    ),
-    smooth: (
-      <meshStandardMaterial
-        color={color}
-        roughness={0.8}
-        metalness={0.8}
-        flatShading={false}
-      />
-    ),
-  };
-
-  switch (data.T.shape_tex) {
-    case 'Rivets': {
-      const rivets = times(rivetCount, (index) => (
-        <mesh
-          key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
-        >
-          <cylinderGeometry
-            args={[
-              data.N.width_b / 2,
-              data.N.width_a / 2,
-              data.N.height,
-              4,
-              undefined,
-              true,
-            ]}
-          />
-          {materials.faces}
-        </mesh>
-      ));
-
-      return (
-        <group
-          scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-        >
-          <mesh>
-            <cylinderGeometry
-              args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
-                data.N.height,
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-          {rivets}
-        </group>
-      );
-    }
-
-    case 'Half Rivets': {
-      const rivets = times(rivetCount, (index) => (
-        <mesh
-          key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
-          position={[0, data.N.height / -4, 0]}
-        >
-          <cylinderGeometry
-            args={[
-              (data.N.width_b + data.N.width_a) / 4,
-              data.N.width_a / 2,
-              data.N.height / 2,
-              4,
-              undefined,
-              true,
-            ]}
-          />
-          {materials.faces}
-        </mesh>
-      ));
-
-      return (
-        <group
-          scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-        >
-          <mesh position={[0, data.N.height / -4, 0]}>
-            <cylinderGeometry
-              args={[
-                Math.max(
-                  0,
-                  (data.N.width_b + data.N.width_a) / 4 - rivetMargin,
-                ),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
-                data.N.height / 2,
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-          <mesh position={[0, data.N.height / 4, 0]}>
-            <cylinderGeometry
-              args={[
-                data.N.width_b / 2,
-                (data.N.width_b + data.N.width_a) / 4,
-                data.N.height / 2,
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-          {rivets}
-        </group>
-      );
-    }
-
-    case 'Flat': {
-      return (
-        <mesh
-          scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-        >
-          <cylinderGeometry
-            args={[
-              data.N.width_b / 2,
-              data.N.width_a / 2,
-              data.N.height,
-              4,
-              undefined,
-              true,
-            ]}
-          />
-          {materials.flat}
-        </mesh>
-      );
-    }
-
-    case 'Interstage': {
-      const rivets = times(rivetCount, (index) => (
-        <mesh
-          key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
-        >
-          <cylinderGeometry
-            args={[
-              data.N.width_b / 2,
-              data.N.width_a / 2,
-              data.N.height,
-              4,
-              undefined,
-              true,
-            ]}
-          />
-          {materials.faces}
-        </mesh>
-      ));
-
-      return (
-        <group
-          scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-        >
-          <mesh>
-            <cylinderGeometry
-              args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
-                data.N.height,
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
+    switch (initialState.T.shape_tex) {
+      case 'Rivets': {
+        const rivets = times(RIVET_COUNT, (index) => (
           <mesh
+            ref={meshRef}
+            key={`rivet-${index}`}
+            rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
+          >
+            <cylinderGeometry
+              args={[
+                initialState.N.width_b / 2,
+                initialState.N.width_a / 2,
+                initialState.N.height,
+                4,
+                undefined,
+                true,
+              ]}
+            />
+            {MATERIALS.faces}
+          </mesh>
+        ));
+
+        return (
+          <group
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            rotation={[0, 0, initialRotation]}
             position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
               0,
-              Math.min(data.N.height, data.N.height - rimHeight) / 2,
+            ]}
+          >
+            <mesh>
+              <cylinderGeometry
+                args={[
+                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
+                  initialState.N.height,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            {rivets}
+          </group>
+        );
+      }
+
+      case 'Half Rivets': {
+        const rivets = times(RIVET_COUNT, (index) => (
+          <mesh
+            key={`rivet-${index}`}
+            rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
+            position={[0, initialState.N.height / -4, 0]}
+          >
+            <cylinderGeometry
+              args={[
+                (initialState.N.width_b + initialState.N.width_a) / 4,
+                initialState.N.width_a / 2,
+                initialState.N.height / 2,
+                4,
+                undefined,
+                true,
+              ]}
+            />
+            {MATERIALS.faces}
+          </mesh>
+        ));
+
+        return (
+          <group
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            rotation={[0, 0, initialRotation]}
+            position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
+              0,
+            ]}
+          >
+            <mesh position={[0, initialState.N.height / -4, 0]}>
+              <cylinderGeometry
+                args={[
+                  Math.max(
+                    0,
+                    (initialState.N.width_b + initialState.N.width_a) / 4 -
+                      RIVET_MARGIN,
+                  ),
+                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
+                  initialState.N.height / 2,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh position={[0, initialState.N.height / 4, 0]}>
+              <cylinderGeometry
+                args={[
+                  initialState.N.width_b / 2,
+                  (initialState.N.width_b + initialState.N.width_a) / 4,
+                  initialState.N.height / 2,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            {rivets}
+          </group>
+        );
+      }
+
+      case 'Flat': {
+        return (
+          <mesh
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            rotation={[0, 0, initialRotation]}
+            position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
               0,
             ]}
           >
             <cylinderGeometry
               args={[
-                data.N.width_b / 2,
-                lerp(
-                  data.N.width_b,
-                  data.N.width_a,
-                  rimHeight / data.N.height / 1,
-                ) / 2,
-                Math.min(data.N.height, rimHeight),
-                faceCount,
+                initialState.N.width_b / 2,
+                initialState.N.width_a / 2,
+                initialState.N.height,
+                4,
                 undefined,
                 true,
               ]}
             />
-            {materials.faces}
+            {MATERIALS.flat}
           </mesh>
+        );
+      }
+
+      case 'Interstage': {
+        const rivets = times(RIVET_COUNT, (index) => (
           <mesh
-            position={[
-              0,
-              Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 -
-                rimHeight,
-              0,
-            ]}
+            key={`rivet-${index}`}
+            rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
           >
             <cylinderGeometry
               args={[
-                lerp(
-                  data.N.width_b,
-                  data.N.width_a,
-                  rimHeight / data.N.height / 1,
+                initialState.N.width_b / 2,
+                initialState.N.width_a / 2,
+                initialState.N.height,
+                4,
+                undefined,
+                true,
+              ]}
+            />
+            {MATERIALS.faces}
+          </mesh>
+        ));
+
+        return (
+          <group
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            rotation={[0, 0, initialRotation]}
+            position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
+              0,
+            ]}
+          >
+            <mesh>
+              <cylinderGeometry
+                args={[
+                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
+                  initialState.N.height,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height,
+                  initialState.N.height - RIM_HEIGHT,
                 ) / 2,
-                Math.max(
-                  0,
+                0,
+              ]}
+            >
+              <cylinderGeometry
+                args={[
+                  initialState.N.width_b / 2,
                   lerp(
-                    data.N.width_b,
-                    data.N.width_a,
-                    (rimHeight + rimSlopeHeight) / data.N.height / 1,
-                  ) /
-                    2 -
-                    rivetMargin,
-                ),
-                Math.min(data.N.height, rimSlopeHeight),
-                faceCount,
-                undefined,
-                true,
+                    initialState.N.width_b,
+                    initialState.N.width_a,
+                    RIM_HEIGHT / initialState.N.height / 1,
+                  ) / 2,
+                  Math.min(initialState.N.height, RIM_HEIGHT),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height,
+                  initialState.N.height - RIM_SLOPE_HEIGHT,
+                ) /
+                  2 -
+                  RIM_HEIGHT,
+                0,
               ]}
-            />
-            {materials.faces}
-          </mesh>
-          {rivets}
-        </group>
-      );
-    }
-
-    case 'Interstage Full': {
-      const rivets = times(rivetCount, (index) => (
-        <mesh
-          key={`rivet-${index}`}
-          rotation={[0, (index / rivetCount) * 90 * (Math.PI / 180), 0]}
-        >
-          <cylinderGeometry
-            args={[
-              data.N.width_b / 2,
-              data.N.width_a / 2,
-              data.N.height,
-              4,
-              undefined,
-              true,
-            ]}
-          />
-          {materials.faces}
-        </mesh>
-      ));
-
-      return (
-        <group
-          scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-        >
-          <mesh>
-            <cylinderGeometry
-              args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
-                data.N.height,
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-          <mesh
-            position={[
-              0,
-              Math.min(data.N.height, data.N.height - rimHeight) / 2,
-              0,
-            ]}
-          >
-            <cylinderGeometry
-              args={[
-                data.N.width_b / 2,
-                lerp(
-                  data.N.width_b,
-                  data.N.width_a,
-                  rimHeight / data.N.height / 1,
-                ) / 2,
-                Math.min(data.N.height, rimHeight),
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-          <mesh
-            position={[
-              0,
-              Math.min(data.N.height, data.N.height - rimSlopeHeight) / 2 -
-                rimHeight,
-              0,
-            ]}
-          >
-            <cylinderGeometry
-              args={[
-                lerp(
-                  data.N.width_b,
-                  data.N.width_a,
-                  rimHeight / data.N.height / 1,
-                ) / 2,
-                Math.max(
-                  0,
+            >
+              <cylinderGeometry
+                args={[
                   lerp(
-                    data.N.width_b,
-                    data.N.width_a,
-                    (rimHeight + rimSlopeHeight) / data.N.height / 1,
-                  ) /
-                    2 -
-                    rivetMargin,
-                ),
-                Math.min(data.N.height, rimSlopeHeight),
-                faceCount,
+                    initialState.N.width_b,
+                    initialState.N.width_a,
+                    RIM_HEIGHT / initialState.N.height / 1,
+                  ) / 2,
+                  Math.max(
+                    0,
+                    lerp(
+                      initialState.N.width_b,
+                      initialState.N.width_a,
+                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) /
+                        initialState.N.height /
+                        1,
+                    ) /
+                      2 -
+                      RIVET_MARGIN,
+                  ),
+                  Math.min(initialState.N.height, RIM_SLOPE_HEIGHT),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            {rivets}
+          </group>
+        );
+      }
+
+      case 'Interstage Full': {
+        const rivets = times(RIVET_COUNT, (index) => (
+          <mesh
+            key={`rivet-${index}`}
+            rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
+          >
+            <cylinderGeometry
+              args={[
+                initialState.N.width_b / 2,
+                initialState.N.width_a / 2,
+                initialState.N.height,
+                4,
                 undefined,
                 true,
               ]}
             />
-            {materials.faces}
+            {MATERIALS.faces}
           </mesh>
-          <mesh
+        ));
+
+        return (
+          <group
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            rotation={[0, 0, initialRotation]}
             position={[
-              0,
-              Math.min(data.N.height, data.N.height - rimHeight) / -2,
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
               0,
             ]}
           >
-            <cylinderGeometry
-              args={[
-                lerp(
-                  data.N.width_a,
-                  data.N.width_b,
-                  rimHeight / data.N.height / 1,
+            <mesh>
+              <cylinderGeometry
+                args={[
+                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
+                  initialState.N.height,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height,
+                  initialState.N.height - RIM_HEIGHT,
                 ) / 2,
-                data.N.width_a / 2,
-                Math.min(data.N.height, rimHeight),
-                faceCount,
-                undefined,
-                true,
+                0,
               ]}
-            />
-            {materials.faces}
-          </mesh>
-          <mesh
-            position={[
-              0,
-              Math.min(data.N.height, data.N.height - rimSlopeHeight) / -2 +
-                rimHeight,
-              0,
-            ]}
-          >
-            <cylinderGeometry
-              args={[
-                Math.max(
-                  0,
+            >
+              <cylinderGeometry
+                args={[
+                  initialState.N.width_b / 2,
                   lerp(
-                    data.N.width_a,
-                    data.N.width_b,
-                    (rimHeight + rimSlopeHeight) / data.N.height / 1,
-                  ) /
-                    2 -
-                    rivetMargin,
-                ),
-                lerp(
-                  data.N.width_a,
-                  data.N.width_b,
-                  rimHeight / data.N.height / 1,
-                ) / 2,
-                Math.min(data.N.height, rimSlopeHeight),
-                faceCount,
-                undefined,
-                true,
+                    initialState.N.width_b,
+                    initialState.N.width_a,
+                    RIM_HEIGHT / initialState.N.height / 1,
+                  ) / 2,
+                  Math.min(initialState.N.height, RIM_HEIGHT),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height,
+                  initialState.N.height - RIM_SLOPE_HEIGHT,
+                ) /
+                  2 -
+                  RIM_HEIGHT,
+                0,
               ]}
-            />
-            {materials.faces}
-          </mesh>
-          {rivets}
-        </group>
-      );
-    }
-
-    case 'Nozzle_4': {
-      const nozzleCount = Math.floor(data.N.height * nozzlesPerMeter);
-      const nozzles = times(nozzleCount, (index) => (
-        <group
-          key={`nozzle-${index}`}
-          position={[
-            0,
-            (index / nozzleCount) * data.N.height -
-              data.N.height / 2 +
-              nozzleOffset,
-            0,
-          ]}
-        >
-          <mesh position={[0, nozzleHeight / 2, 0]}>
-            <cylinderGeometry
-              args={[
-                Math.max(
-                  0,
+            >
+              <cylinderGeometry
+                args={[
                   lerp(
-                    data.N.width_a,
-                    data.N.width_b,
-                    index / nozzleCount +
-                      (nozzleHeight / 2 + nozzleOffset) / data.N.height,
-                  ) /
-                    2 -
-                    rivetMargin,
-                ),
-                lerp(
-                  data.N.width_a,
-                  data.N.width_b,
-                  index / nozzleCount + nozzleOffset / data.N.height,
-                ) / 2,
-                nozzleHeight / 2,
-                faceCount,
-                undefined,
-                true,
+                    initialState.N.width_b,
+                    initialState.N.width_a,
+                    RIM_HEIGHT / initialState.N.height / 1,
+                  ) / 2,
+                  Math.max(
+                    0,
+                    lerp(
+                      initialState.N.width_b,
+                      initialState.N.width_a,
+                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) /
+                        initialState.N.height /
+                        1,
+                    ) /
+                      2 -
+                      RIVET_MARGIN,
+                  ),
+                  Math.min(initialState.N.height, RIM_SLOPE_HEIGHT),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height,
+                  initialState.N.height - RIM_HEIGHT,
+                ) / -2,
+                0,
               ]}
-            />
-            {materials.faces}
-          </mesh>
-          <mesh>
-            <cylinderGeometry
-              args={[
-                lerp(
-                  data.N.width_a,
-                  data.N.width_b,
-                  index / nozzleCount + nozzleOffset / data.N.height,
-                ) / 2,
-                Math.max(
-                  0,
+            >
+              <cylinderGeometry
+                args={[
                   lerp(
-                    data.N.width_a,
-                    data.N.width_b,
-                    index / nozzleCount -
-                      (nozzleHeight / 2 - nozzleOffset) / data.N.height,
-                  ) /
-                    2 -
-                    rivetMargin,
+                    initialState.N.width_a,
+                    initialState.N.width_b,
+                    RIM_HEIGHT / initialState.N.height / 1,
+                  ) / 2,
+                  initialState.N.width_a / 2,
+                  Math.min(initialState.N.height, RIM_HEIGHT),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height,
+                  initialState.N.height - RIM_SLOPE_HEIGHT,
+                ) /
+                  -2 +
+                  RIM_HEIGHT,
+                0,
+              ]}
+            >
+              <cylinderGeometry
+                args={[
+                  Math.max(
+                    0,
+                    lerp(
+                      initialState.N.width_a,
+                      initialState.N.width_b,
+                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) /
+                        initialState.N.height /
+                        1,
+                    ) /
+                      2 -
+                      RIVET_MARGIN,
+                  ),
+                  lerp(
+                    initialState.N.width_a,
+                    initialState.N.width_b,
+                    RIM_HEIGHT / initialState.N.height / 1,
+                  ) / 2,
+                  Math.min(initialState.N.height, RIM_SLOPE_HEIGHT),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            {rivets}
+          </group>
+        );
+      }
+
+      case 'Nozzle_4': {
+        const nozzleCount = Math.floor(
+          initialState.N.height * NOZZLES_PER_METER,
+        );
+        const nozzles = times(nozzleCount, (index) => (
+          <group
+            key={`nozzle-${index}`}
+            position={[
+              0,
+              (index / nozzleCount) * initialState.N.height -
+                initialState.N.height / 2 +
+                NOZZLE_OFFSET,
+              0,
+            ]}
+          >
+            <mesh position={[0, NOZZLE_HEIGHT / 2, 0]}>
+              <cylinderGeometry
+                args={[
+                  Math.max(
+                    0,
+                    lerp(
+                      initialState.N.width_a,
+                      initialState.N.width_b,
+                      index / nozzleCount +
+                        (NOZZLE_HEIGHT / 2 + NOZZLE_OFFSET) /
+                          initialState.N.height,
+                    ) /
+                      2 -
+                      RIVET_MARGIN,
+                  ),
+                  lerp(
+                    initialState.N.width_a,
+                    initialState.N.width_b,
+                    index / nozzleCount + NOZZLE_OFFSET / initialState.N.height,
+                  ) / 2,
+                  NOZZLE_HEIGHT / 2,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh>
+              <cylinderGeometry
+                args={[
+                  lerp(
+                    initialState.N.width_a,
+                    initialState.N.width_b,
+                    index / nozzleCount + NOZZLE_OFFSET / initialState.N.height,
+                  ) / 2,
+                  Math.max(
+                    0,
+                    lerp(
+                      initialState.N.width_a,
+                      initialState.N.width_b,
+                      index / nozzleCount -
+                        (NOZZLE_HEIGHT / 2 - NOZZLE_OFFSET) /
+                          initialState.N.height,
+                    ) /
+                      2 -
+                      RIVET_MARGIN,
+                  ),
+                  NOZZLE_HEIGHT / 2,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+          </group>
+        ));
+
+        return (
+          <group
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            rotation={[0, 0, initialRotation]}
+            position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
+              0,
+            ]}
+          >
+            <mesh>
+              <cylinderGeometry
+                args={[
+                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
+                  initialState.N.height,
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            {nozzles}
+          </group>
+        );
+      }
+
+      /**
+       * Strut fuel tanks are not supported yet, I'm going to add them when I
+       * implement low poly parts (which are going to be closer to what's
+       * in-game) and it's going to replace this hi-poly crap
+       */
+      default:
+      case '_':
+      case 'Strut':
+      case 'Edges Faces': {
+        return (
+          <group
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
+              0,
+            ]}
+            rotation={[0, 0, initialRotation]}
+          >
+            <mesh>
+              <cylinderGeometry
+                args={[
+                  initialState.N.width_b / 2,
+                  initialState.N.width_a / 2,
+                  Math.max(0, initialState.N.height - BEVEL_MARGIN * 2),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.max(
+                  initialState.N.height / 4,
+                  (initialState.N.height - BEVEL_MARGIN) / 2,
                 ),
-                nozzleHeight / 2,
-                faceCount,
-                undefined,
-                true,
+                0,
               ]}
-            />
-            {materials.faces}
-          </mesh>
-        </group>
-      ));
+            >
+              <cylinderGeometry
+                args={[
+                  Math.max(0, initialState.N.width_b / 2 - BEVEL_MARGIN),
+                  initialState.N.width_b / 2,
+                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height / -4,
+                  (initialState.N.height - BEVEL_MARGIN) / -2,
+                ),
+                0,
+              ]}
+            >
+              <cylinderGeometry
+                args={[
+                  initialState.N.width_a / 2,
+                  Math.max(0, initialState.N.width_a / 2 - BEVEL_MARGIN),
+                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.faces}
+            </mesh>
+          </group>
+        );
+      }
 
-      return (
-        <group
-          scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-        >
-          <mesh>
-            <cylinderGeometry
-              args={[
-                Math.max(0, data.N.width_b / 2 - rivetMargin),
-                Math.max(0, data.N.width_a / 2 - rivetMargin),
-                data.N.height,
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-          {nozzles}
-        </group>
-      );
-    }
-
-    /**
-     * Strut fuel tanks are not supported yet, I'm going to add them when I
-     * implement low poly parts (which are going to be closer to what's
-     * in-game) and it's going to replace this hi-poly crap
-     */
-    default:
-    case '_':
-    case 'Strut':
-    case 'Edges Faces': {
-      return (
-        <group
-          scale={[data.o.x, data.o.y, 1]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-          rotation={[0, 0, rotation]}
-        >
-          <mesh>
-            <cylinderGeometry
-              args={[
-                data.N.width_b / 2,
-                data.N.width_a / 2,
-                Math.max(0, data.N.height - bevelMargin * 2),
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-          <mesh
+      case 'Edges Smooth': {
+        return (
+          <group
+            scale={[initialState.o.x, initialState.o.y, 1]}
             position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
               0,
-              Math.max(data.N.height / 4, (data.N.height - bevelMargin) / 2),
+            ]}
+            rotation={[0, 0, initialRotation]}
+          >
+            <mesh>
+              <cylinderGeometry
+                args={[
+                  initialState.N.width_b / 2,
+                  initialState.N.width_a / 2,
+                  Math.max(0, initialState.N.height - BEVEL_MARGIN * 2),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.smooth}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.max(
+                  initialState.N.height / 4,
+                  (initialState.N.height - BEVEL_MARGIN) / 2,
+                ),
+                0,
+              ]}
+            >
+              <cylinderGeometry
+                args={[
+                  Math.max(0, initialState.N.width_b / 2 - BEVEL_MARGIN),
+                  initialState.N.width_b / 2,
+                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.smooth}
+            </mesh>
+            <mesh
+              position={[
+                0,
+                Math.min(
+                  initialState.N.height / -4,
+                  (initialState.N.height - BEVEL_MARGIN) / -2,
+                ),
+                0,
+              ]}
+            >
+              <cylinderGeometry
+                args={[
+                  initialState.N.width_a / 2,
+                  Math.max(0, initialState.N.width_a / 2 - BEVEL_MARGIN),
+                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  FACE_COUNT,
+                  undefined,
+                  true,
+                ]}
+              />
+              {MATERIALS.smooth}
+            </mesh>
+          </group>
+        );
+      }
+
+      case 'Flat Smooth': {
+        return (
+          <mesh
+            scale={[initialState.o.x, initialState.o.y, 1]}
+            rotation={[0, 0, initialRotation]}
+            position={[
+              initialState.p.x,
+              initialState.p.y + initialState.N.height / 2,
               0,
             ]}
           >
             <cylinderGeometry
               args={[
-                Math.max(0, data.N.width_b / 2 - bevelMargin),
-                data.N.width_b / 2,
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
+                initialState.N.width_b / 2,
+                initialState.N.width_a / 2,
+                initialState.N.height,
+                FACE_COUNT,
                 undefined,
                 true,
               ]}
             />
-            {materials.faces}
+            {MATERIALS.smooth}
           </mesh>
-          <mesh
-            position={[
-              0,
-              Math.min(data.N.height / -4, (data.N.height - bevelMargin) / -2),
-              0,
-            ]}
-          >
-            <cylinderGeometry
-              args={[
-                data.N.width_a / 2,
-                Math.max(0, data.N.width_a / 2 - bevelMargin),
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.faces}
-          </mesh>
-        </group>
-      );
+        );
+      }
     }
-
-    case 'Edges Smooth': {
-      return (
-        <group
-          scale={[data.o.x, data.o.y, 1]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-          rotation={[0, 0, rotation]}
-        >
-          <mesh>
-            <cylinderGeometry
-              args={[
-                data.N.width_b / 2,
-                data.N.width_a / 2,
-                Math.max(0, data.N.height - bevelMargin * 2),
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.smooth}
-          </mesh>
-          <mesh
-            position={[
-              0,
-              Math.max(data.N.height / 4, (data.N.height - bevelMargin) / 2),
-              0,
-            ]}
-          >
-            <cylinderGeometry
-              args={[
-                Math.max(0, data.N.width_b / 2 - bevelMargin),
-                data.N.width_b / 2,
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.smooth}
-          </mesh>
-          <mesh
-            position={[
-              0,
-              Math.min(data.N.height / -4, (data.N.height - bevelMargin) / -2),
-              0,
-            ]}
-          >
-            <cylinderGeometry
-              args={[
-                data.N.width_a / 2,
-                Math.max(0, data.N.width_a / 2 - bevelMargin),
-                Math.min(bevelMargin, data.N.height / 2),
-                faceCount,
-                undefined,
-                true,
-              ]}
-            />
-            {materials.smooth}
-          </mesh>
-        </group>
-      );
-    }
-
-    case 'Flat Smooth': {
-      return (
-        <mesh
-          scale={[data.o.x, data.o.y, 1]}
-          rotation={[0, 0, rotation]}
-          position={[data.p.x, data.p.y + data.N.height / 2, 0]}
-        >
-          <cylinderGeometry
-            args={[
-              data.N.width_b / 2,
-              data.N.width_a / 2,
-              data.N.height,
-              faceCount,
-              undefined,
-              true,
-            ]}
-          />
-          {materials.smooth}
-        </mesh>
-      );
-    }
-  }
-});
+  },
+  compareAddressProps,
+);
 
 export const FuelTankIcon = Icon;
 

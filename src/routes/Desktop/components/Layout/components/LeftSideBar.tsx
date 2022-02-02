@@ -25,8 +25,8 @@ export default function LeftSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: AppStore) => {
-                state.layout.leftSideBar.partition = 'parts';
+              produce((draft: AppStore) => {
+                draft.layout.leftSideBar.partition = 'parts';
               }),
             )
           }
@@ -41,8 +41,8 @@ export default function LeftSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: AppStore) => {
-                state.layout.leftSideBar.partition = 'snippets';
+              produce((draft: AppStore) => {
+                draft.layout.leftSideBar.partition = 'snippets';
               }),
             )
           }

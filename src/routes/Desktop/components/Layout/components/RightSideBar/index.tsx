@@ -27,8 +27,8 @@ export default function RightSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: AppStore) => {
-                state.layout.rightSideBar.partition = 'properties';
+              produce((draft: AppStore) => {
+                draft.layout.rightSideBar.partition = 'properties';
               }),
             )
           }
@@ -43,8 +43,8 @@ export default function RightSideBar() {
           }
           onClick={() =>
             appStore.setState(
-              produce((state: AppStore) => {
-                state.layout.rightSideBar.partition = 'inspect';
+              produce((draft: AppStore) => {
+                draft.layout.rightSideBar.partition = 'inspect';
               }),
             )
           }
@@ -71,7 +71,7 @@ export default function RightSideBar() {
                 suffix="m"
                 onValueAccepted={(value) => {
                   blueprintStore.setState(
-                    produce((state: Blueprint) => {
+                    produce((draft: Blueprint) => {
                       // const selections = selectionStore.getState().selections;
                       // selections.forEach((part) => {
                       //   const parent = part.relations.
@@ -107,9 +107,9 @@ export default function RightSideBar() {
               <PropertiesExplorer.ToggleButton
                 onClick={() => {
                   appStore.setState(
-                    produce((state: AppStore) => {
-                      state.layout.rightSideBar.scaleConstrained =
-                        !state.layout.rightSideBar.scaleConstrained;
+                    produce((draft: AppStore) => {
+                      draft.layout.rightSideBar.scaleConstrained =
+                        !draft.layout.rightSideBar.scaleConstrained;
                     }),
                   );
                 }}

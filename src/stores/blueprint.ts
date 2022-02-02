@@ -1,9 +1,17 @@
 import { Blueprint } from 'types/Blueprint';
-import create from 'zustand';
-import { devtools } from 'zustand/middleware';
+import create, { GetState, SetState } from 'zustand';
+import {
+  StoreApiWithSubscribeWithSelector,
+  subscribeWithSelector,
+} from 'zustand/middleware';
 
-const blueprintStore = create<Blueprint>(
-  devtools(
+const blueprintStore = create<
+  Blueprint,
+  SetState<Blueprint>,
+  GetState<Blueprint>,
+  StoreApiWithSubscribeWithSelector<Blueprint>
+>(
+  subscribeWithSelector(
     () =>
       ({
         // can't use `import` here because it's run before intialization
@@ -16,7 +24,6 @@ const blueprintStore = create<Blueprint>(
         parts: [],
         stages: [],
       } as Blueprint),
-    { name: 'blueprint' },
   ),
 );
 export default blueprintStore;

@@ -1,7 +1,7 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import useSelection from 'hooks/useSelection';
+import { selectPartsOnly, togglePartsSelection } from 'hooks/useSelection';
 import { getReactivePartByAddress } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
@@ -26,7 +26,6 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const selection = useSelection();
   let data = getReactivePartByAddress(address)!;
   const Icon = getPartModule(data.n, true).Icon;
   let childParts: JSX.Element[] | undefined;
@@ -41,8 +40,6 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
     ));
   }
 
-  data.meta.listing = listingRef;
-
   return (
     <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">
       <div
@@ -54,7 +51,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
               // ctrl + shift
             } else {
               // ctrl
-              selection.togglePartSelection(data);
+              togglePartsSelection([data.meta.address]);
             }
           } else if (event.shiftKey) {
             // shift
@@ -70,7 +67,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
             */
           } else {
             // no modifier
-            selection.selectPartOnly(data);
+            selectPartsOnly([data.meta.address]);
           }
         }}
       >
