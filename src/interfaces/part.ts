@@ -15,8 +15,9 @@ export const importifyPartData = (
   partAddress: PartAddress,
 ): AnyPart => {
   const plainPartData = getPartModule(partData.n)?.data ?? DefaultPart.data;
-
   let importifiedPartData = merge(cloneDeep(plainPartData), partData);
+
+  importifiedPartData.meta.address = partAddress;
 
   return importifiedPartData;
 };

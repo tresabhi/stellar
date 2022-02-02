@@ -129,31 +129,31 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
     const meshRef = useRef<Mesh | Group>(null);
 
     blueprintStore.subscribe(
-      (state) => (getPartByAddress(address, state) as PartWithTranslations).p.x,
+      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).p.x,
       (current, previous) => {
         meshRef.current!.position.x += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (state) => (getPartByAddress(address, state) as PartWithTranslations).p.y,
+      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).p.y,
       (current, previous) => {
         meshRef.current!.position.y += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.x,
+      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.x,
       (current, previous) => {
         meshRef.current!.scale.x += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.y,
+      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.y,
       (current, previous) => {
         meshRef.current!.scale.y += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.z,
+      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.z,
       (current) => {
         meshRef.current!.setRotationFromEuler(new Euler(0, 0, current));
       },

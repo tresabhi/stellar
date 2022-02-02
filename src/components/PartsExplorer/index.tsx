@@ -1,10 +1,14 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import { selectPartsOnly, togglePartsSelection } from 'hooks/useSelection';
-import { getReactivePartByAddress } from 'interfaces/blueprint';
+import {
+  getPartByAddress,
+  getReactivePartByAddress,
+} from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
+import { selectPartsOnly, togglePartsSelection } from 'interfaces/selection';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
+import blueprintStore from 'stores/blueprint';
 import { PartAddress } from 'types/Blueprint';
 import './index.scss';
 
@@ -40,6 +44,11 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
     ));
   }
 
+  blueprintStore.subscribe(
+    (draft) => getPartByAddress(address, draft).meta.selected,
+    (current) => listingRef.current?.classList.toggle('selected', current),
+  );
+
   return (
     <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">
       <div
@@ -55,16 +64,6 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
             }
           } else if (event.shiftKey) {
             // shift
-            // TODO: make this actually functional
-            /*
-            const lastSelection = selectionStore.getState().lastSelection;
-
-            if (lastSelection) {
-              selection.selectParts(lastSelection.relations.partPointer, data);
-            } else {
-              selection.selectPartOnly(data);
-            }
-            */
           } else {
             // no modifier
             selectPartsOnly([data.meta.address]);

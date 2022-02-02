@@ -62,9 +62,7 @@ export default function useKeybinds() {
 
     PARTY: () =>
       // party mode easter egg
-      document.body.classList[
-        document.body.classList.contains('party') ? 'remove' : 'add'
-      ]('party'),
+      document.body.classList.toggle('party'),
   };
 
   return [keyMap, handlers] as [KeyMap, Handlers];
