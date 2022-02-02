@@ -24,7 +24,7 @@ const VanillaRenderer: FC<EditingCanvasProps> = ({ data }) => {
         if (part.n === 'Group') {
           insertPartComponents(part.parts, `${keyDepth}-${index}`);
         } else {
-          const PartComponent = getPartModule(part.n).LayoutComponent;
+          const PartComponent = getPartModule(part.n, true).LayoutComponent;
 
           if (PartComponent)
             partsJsx.push(

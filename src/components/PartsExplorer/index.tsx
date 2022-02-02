@@ -28,7 +28,7 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const selection = useSelection();
   let data = getReactivePartByAddress(address)!;
-  const Icon = getPartModule(data.n).Icon;
+  const Icon = getPartModule(data.n, true).Icon;
   let childParts: JSX.Element[] | undefined;
 
   if (data.n === 'Group') {

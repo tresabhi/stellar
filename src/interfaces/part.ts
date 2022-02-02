@@ -1,5 +1,5 @@
 import { cloneDeep, merge } from 'lodash';
-import { DefaultPartData } from 'parts/Default';
+import DefaultPart from 'parts/Default';
 import FuelTank from 'parts/FuelTank';
 import Group from 'parts/Group';
 import { PartAddress } from 'types/Blueprint';
@@ -12,24 +12,24 @@ const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
 
 export const importifyPartData = (
   partData: AnyVanillaPart | AnyPart,
-  parentAddress: PartAddress,
-  partRoute: number,
+  partAddress: PartAddress,
 ): AnyPart => {
-  const plainPartData = getPartModule(partData.n).data;
+  const plainPartData = getPartModule(partData.n)?.data ?? DefaultPart.data;
 
-  // don't loose object pointers
-  let importifiedPartData = merge(
-    cloneDeep(plainPartData ?? DefaultPartData),
-    partData,
-  );
-
-  importifiedPartData.meta.parentAddress = parentAddress;
-  importifiedPartData.meta.address = [...parentAddress, partRoute];
+  let importifiedPartData = merge(cloneDeep(plainPartData), partData);
 
   return importifiedPartData;
 };
 
 // export const savifyPartData = (partData: AnyPartType, clone = true) => {};
 
-export const getPartModule = (partName: AnyPartName) =>
-  NAMED_PART_MODULES[partName];
+export function getPartModule<D extends boolean>(
+  partName: string,
+  useDefault?: D,
+): D extends true ? PartModule : PartModule | undefined {
+  const module: PartModule | undefined = (NAMED_PART_MODULES as any)[partName];
+
+  if (useDefault) {
+    return module ?? DefaultPart;
+  } else return module!;
+}

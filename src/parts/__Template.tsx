@@ -1,10 +1,10 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import { memo } from 'react';
 import { PartModule } from 'types/Parts';
-import { DefaultPart, DefaultPartData } from './Default';
+import { PartWithTranslations, DefaultPartData } from './Default';
 
 //@ts-ignore
-/* export */ interface Template extends DefaultPart {
+/* export */ interface Template extends PartWithTranslations {
   A: { b: number };
   C: boolean;
 }

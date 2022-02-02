@@ -45,20 +45,20 @@ export const importifyBlueprint = (blueprint: object): Blueprint => {
 
 export const savifyBlueprint = (blueprint: Blueprint) => cloneDeep(blueprint);
 
-// TODO: remove all JSDoc; nobody's reading it anyway
 export const importifyPartsData = (
   parts: AnyVanillaPart[] | AnyPart[],
   parentAddress: PartAddress,
 ): AnyPart[] =>
   parts.map((part, index) => {
+    const currentPartAddress = [...parentAddress, index];
+
     if (part.n === 'Group') {
       return {
-        ...PartsAPI.importifyPartData(part, parentAddress, index),
-
-        parts: importifyPartsData(part.parts, [...parentAddress, index]),
+        ...PartsAPI.importifyPartData(part, currentPartAddress),
+        parts: importifyPartsData(part.parts, currentPartAddress),
       };
     } else {
-      return PartsAPI.importifyPartData(part, parentAddress, index);
+      return PartsAPI.importifyPartData(part, currentPartAddress);
     }
   });
 
