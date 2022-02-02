@@ -12,8 +12,9 @@ export const LayoutRenderer = () => {
   const initialData = blueprintStore.getState();
   const parts = blueprintStore((state) => state.parts).map((part, index) => {
     const PartComponent = getPartModule(part.n, true).LayoutComponent;
+    const address = [index];
 
-    return <PartComponent address={[index]} />;
+    return <PartComponent key={address.join('-')} address={address} />;
   });
 
   return (

@@ -1,5 +1,5 @@
 import devBlueprint from 'assets/blueprints/static/grouping.json';
-import { LayoutRenderer } from 'components/CanvasRenderer';
+import { LayoutRenderer } from 'components/Canvas';
 import { importifyBlueprint } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';
 import appStore from 'stores/app';
