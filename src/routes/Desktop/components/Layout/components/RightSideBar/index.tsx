@@ -3,19 +3,22 @@ import { ReactComponent as LinkOn } from 'assets/icons/link-on.svg';
 import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
+import useUnitInputController from 'hooks/useUnitInputController';
 import produce from 'immer';
 import appStore, { AppStore } from 'stores/app';
-import blueprintStore from 'stores/blueprint';
-import selectionStore from 'stores/selection';
-import { Blueprint } from 'types/Blueprint';
 import './index.scss';
 
 export default function RightSideBar() {
-  // const xRef = useRef<HTMLInputElement>(null);
-
-  selectionStore.subscribe((state) => {
-    // state.selections[0].p.x;
+  const xController = useUnitInputController(0, { suffix: 'm' });
+  const yController = useUnitInputController(0, { suffix: 'm' });
+  const rController = useUnitInputController(0, {
+    suffix: '°',
+    max: 360,
+    modOnClamp: true,
   });
+  // TODO: find out where the game supports negative sizes
+  const wController = useUnitInputController(0, { suffix: 'x', min: 0 });
+  const hController = useUnitInputController(0, { suffix: 'x', min: 0 });
 
   return (
     <SideBar.Container className="right-side-bar" width="minor">
@@ -65,45 +68,13 @@ export default function RightSideBar() {
           <PropertiesExplorer.Group>
             <PropertiesExplorer.Title>Transformations</PropertiesExplorer.Title>
             <PropertiesExplorer.Row>
-              <PropertiesExplorer.NamedInput
-                title="X"
-                initialValue={0}
-                suffix="m"
-                onValueAccepted={(value) => {
-                  blueprintStore.setState(
-                    produce((draft: Blueprint) => {
-                      // const selections = selectionStore.getState().selections;
-                      // selections.forEach((part) => {
-                      //   const parent = part.relations.
-                      // });
-                    }),
-                  );
-                }}
-              />
-              <PropertiesExplorer.NamedInput
-                title="Y"
-                initialValue={0}
-                suffix="m"
-              />
-              <PropertiesExplorer.NamedInput
-                title="R"
-                initialValue={0}
-                suffix="°"
-                min={0}
-                max={360}
-              />
+              <PropertiesExplorer.NamedInput label="X" ref={xController.ref} />
+              <PropertiesExplorer.NamedInput label="Y" ref={yController.ref} />
+              <PropertiesExplorer.NamedInput label="R" ref={rController.ref} />
             </PropertiesExplorer.Row>
             <PropertiesExplorer.Row>
-              <PropertiesExplorer.NamedInput
-                title="W"
-                initialValue={1}
-                suffix="x"
-              />
-              <PropertiesExplorer.NamedInput
-                title="H"
-                initialValue={1}
-                suffix="x"
-              />
+              <PropertiesExplorer.NamedInput label="W" ref={wController.ref} />
+              <PropertiesExplorer.NamedInput label="H" ref={hController.ref} />
               <PropertiesExplorer.ToggleButton
                 onClick={() => {
                   appStore.setState(

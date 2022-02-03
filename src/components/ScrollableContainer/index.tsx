@@ -9,7 +9,7 @@ const ScrollableContainer: FC<InputHTMLAttributes<HTMLDivElement>> = ({
 }) => (
   <SimpleBar
     {...props}
-    className={`${props.className || ''} scrollable-container`}
+    className={`${props.className ?? ''} scrollable-container`}
   >
     {children}
   </SimpleBar>

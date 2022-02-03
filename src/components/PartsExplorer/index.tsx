@@ -3,7 +3,7 @@ import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-ri
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import {
   getPartByAddress,
-  getReactivePartByAddress,
+  getReactivePartByAddress
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { selectPartsOnly, togglePartsSelection } from 'interfaces/selection';
@@ -16,7 +16,7 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
 }) => (
-  <div {...props} className={`${props.className || ''} parts-explorer`}>
+  <div {...props} className={`${props.className ?? ''} parts-explorer`}>
     {children}
   </div>
 );

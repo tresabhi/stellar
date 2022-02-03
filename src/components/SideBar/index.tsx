@@ -10,7 +10,7 @@ export const Container: FC<ContainerProps> = ({
   width = 'major',
   ...props
 }) => (
-  <div {...props} className={`${props.className || ''} side-bar ${width}`}>
+  <div {...props} className={`${props.className ?? ''} side-bar ${width}`}>
     {children}
   </div>
 );

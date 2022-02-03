@@ -37,7 +37,7 @@ export const Button: FC<ButtonProps> = ({
 
       if (props.onClick) props.onClick(event);
     }}
-    className={`${props.className || ''} context-menu-button ${
+    className={`${props.className ?? ''} context-menu-button ${
       disabled ? 'disabled' : 'enabled'
     }`}
   >
@@ -94,7 +94,7 @@ export const Toggle: FC<ToggleProps> = ({
   return (
     <div
       {...props}
-      className={`${props.className || ''} context-menu-toggle-button ${
+      className={`${props.className ?? ''} context-menu-toggle-button ${
         disabled ? 'disabled' : 'enabled'
       }`}
       onClick={(event) => {

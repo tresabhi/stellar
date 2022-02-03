@@ -14,10 +14,8 @@ if (settingsStore.getState().debug.loadDummyOnLaunch) {
 }
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
-  const blueprintState = blueprintStore((state) => state);
-
   return (
-    <div {...props} className={`${props.className || ''} layout-tab`}>
+    <div {...props} className={`${props.className ?? ''} layout-tab`}>
       {appStore((state) => state.layout.leftSideBar.visible) ? (
         <LeftSideBar />
       ) : undefined}
