@@ -1,9 +1,10 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import useSubscribedTranslations from 'hooks/useSubscribedTranslations';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { times } from 'lodash';
 import { memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { Euler, Group, Mesh } from 'three';
+import { Group, Mesh } from 'three';
 import { lerp } from 'three/src/math/MathUtils';
 import { PartComponentProps, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
@@ -119,59 +120,33 @@ export const FuelTankData: FuelTank = {
   },
 };
 
+// TODO: Reorder these to match typing above
 export const FuelTankLayoutComponent = memo<PartComponentProps>(
   ({ address }) => {
-    const initialState = getPartByAddress(
+    const data = blueprintStore((state) =>
+      getPartByAddress(address, state),
+    ) as FuelTank;
+    const initialData = getPartByAddress(
       address,
       blueprintStore.getState(),
     ) as FuelTank;
-    const initialRotation = initialState.o.z * (Math.PI / 180);
+    const initialRotation = data.o.z * (Math.PI / 180);
     const meshRef = useRef<Mesh | Group>(null);
 
-    blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).p.x,
-      (current, previous) => {
-        meshRef.current!.position.x += current - previous;
-      },
-    );
-    blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).p.y,
-      (current, previous) => {
-        meshRef.current!.position.y += current - previous;
-      },
-    );
-    blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.x,
-      (current, previous) => {
-        meshRef.current!.scale.x += current - previous;
-      },
-    );
-    blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.y,
-      (current, previous) => {
-        meshRef.current!.scale.y += current - previous;
-      },
-    );
-    blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.z,
-      (current) => {
-        meshRef.current!.setRotationFromEuler(new Euler(0, 0, current));
-      },
-    );
+    useSubscribedTranslations(address, meshRef);
 
-    switch (initialState.T.shape_tex) {
+    switch (data.T.shape_tex) {
       case 'Rivets': {
         const rivets = times(RIVET_COUNT, (index) => (
           <mesh
-            ref={meshRef}
             key={`rivet-${index}`}
             rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
           >
             <cylinderGeometry
               args={[
-                initialState.N.width_b / 2,
-                initialState.N.width_a / 2,
-                initialState.N.height,
+                data.N.width_b / 2,
+                data.N.width_a / 2,
+                data.N.height,
                 4,
                 undefined,
                 true,
@@ -183,20 +158,21 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
 
         return (
           <group
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             rotation={[0, 0, initialRotation]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
           >
             <mesh>
               <cylinderGeometry
                 args={[
-                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
-                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
-                  initialState.N.height,
+                  Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
+                  data.N.height,
                   FACE_COUNT,
                   undefined,
                   true,
@@ -214,13 +190,13 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
           <mesh
             key={`rivet-${index}`}
             rotation={[0, (index / RIVET_COUNT) * 90 * (Math.PI / 180), 0]}
-            position={[0, initialState.N.height / -4, 0]}
+            position={[0, data.N.height / -4, 0]}
           >
             <cylinderGeometry
               args={[
-                (initialState.N.width_b + initialState.N.width_a) / 4,
-                initialState.N.width_a / 2,
-                initialState.N.height / 2,
+                (data.N.width_b + data.N.width_a) / 4,
+                data.N.width_a / 2,
+                data.N.height / 2,
                 4,
                 undefined,
                 true,
@@ -232,24 +208,24 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
 
         return (
           <group
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             rotation={[0, 0, initialRotation]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
           >
-            <mesh position={[0, initialState.N.height / -4, 0]}>
+            <mesh position={[0, data.N.height / -4, 0]}>
               <cylinderGeometry
                 args={[
                   Math.max(
                     0,
-                    (initialState.N.width_b + initialState.N.width_a) / 4 -
-                      RIVET_MARGIN,
+                    (data.N.width_b + data.N.width_a) / 4 - RIVET_MARGIN,
                   ),
-                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
-                  initialState.N.height / 2,
+                  Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
+                  data.N.height / 2,
                   FACE_COUNT,
                   undefined,
                   true,
@@ -257,12 +233,12 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
               />
               {MATERIALS.faces}
             </mesh>
-            <mesh position={[0, initialState.N.height / 4, 0]}>
+            <mesh position={[0, data.N.height / 4, 0]}>
               <cylinderGeometry
                 args={[
-                  initialState.N.width_b / 2,
-                  (initialState.N.width_b + initialState.N.width_a) / 4,
-                  initialState.N.height / 2,
+                  data.N.width_b / 2,
+                  (data.N.width_b + data.N.width_a) / 4,
+                  data.N.height / 2,
                   FACE_COUNT,
                   undefined,
                   true,
@@ -278,19 +254,20 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       case 'Flat': {
         return (
           <mesh
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             rotation={[0, 0, initialRotation]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
           >
             <cylinderGeometry
               args={[
-                initialState.N.width_b / 2,
-                initialState.N.width_a / 2,
-                initialState.N.height,
+                data.N.width_b / 2,
+                data.N.width_a / 2,
+                data.N.height,
                 4,
                 undefined,
                 true,
@@ -309,9 +286,9 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
           >
             <cylinderGeometry
               args={[
-                initialState.N.width_b / 2,
-                initialState.N.width_a / 2,
-                initialState.N.height,
+                data.N.width_b / 2,
+                data.N.width_a / 2,
+                data.N.height,
                 4,
                 undefined,
                 true,
@@ -323,20 +300,21 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
 
         return (
           <group
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             rotation={[0, 0, initialRotation]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
           >
             <mesh>
               <cylinderGeometry
                 args={[
-                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
-                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
-                  initialState.N.height,
+                  Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
+                  data.N.height,
                   FACE_COUNT,
                   undefined,
                   true,
@@ -347,22 +325,19 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.min(
-                  initialState.N.height,
-                  initialState.N.height - RIM_HEIGHT,
-                ) / 2,
+                Math.min(data.N.height, data.N.height - RIM_HEIGHT) / 2,
                 0,
               ]}
             >
               <cylinderGeometry
                 args={[
-                  initialState.N.width_b / 2,
+                  data.N.width_b / 2,
                   lerp(
-                    initialState.N.width_b,
-                    initialState.N.width_a,
-                    RIM_HEIGHT / initialState.N.height / 1,
+                    data.N.width_b,
+                    data.N.width_a,
+                    RIM_HEIGHT / data.N.height / 1,
                   ) / 2,
-                  Math.min(initialState.N.height, RIM_HEIGHT),
+                  Math.min(data.N.height, RIM_HEIGHT),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -373,11 +348,7 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.min(
-                  initialState.N.height,
-                  initialState.N.height - RIM_SLOPE_HEIGHT,
-                ) /
-                  2 -
+                Math.min(data.N.height, data.N.height - RIM_SLOPE_HEIGHT) / 2 -
                   RIM_HEIGHT,
                 0,
               ]}
@@ -385,23 +356,21 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
               <cylinderGeometry
                 args={[
                   lerp(
-                    initialState.N.width_b,
-                    initialState.N.width_a,
-                    RIM_HEIGHT / initialState.N.height / 1,
+                    data.N.width_b,
+                    data.N.width_a,
+                    RIM_HEIGHT / data.N.height / 1,
                   ) / 2,
                   Math.max(
                     0,
                     lerp(
-                      initialState.N.width_b,
-                      initialState.N.width_a,
-                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) /
-                        initialState.N.height /
-                        1,
+                      data.N.width_b,
+                      data.N.width_a,
+                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) / data.N.height / 1,
                     ) /
                       2 -
                       RIVET_MARGIN,
                   ),
-                  Math.min(initialState.N.height, RIM_SLOPE_HEIGHT),
+                  Math.min(data.N.height, RIM_SLOPE_HEIGHT),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -422,9 +391,9 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
           >
             <cylinderGeometry
               args={[
-                initialState.N.width_b / 2,
-                initialState.N.width_a / 2,
-                initialState.N.height,
+                data.N.width_b / 2,
+                data.N.width_a / 2,
+                data.N.height,
                 4,
                 undefined,
                 true,
@@ -436,20 +405,21 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
 
         return (
           <group
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             rotation={[0, 0, initialRotation]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
           >
             <mesh>
               <cylinderGeometry
                 args={[
-                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
-                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
-                  initialState.N.height,
+                  Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
+                  data.N.height,
                   FACE_COUNT,
                   undefined,
                   true,
@@ -460,22 +430,19 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.min(
-                  initialState.N.height,
-                  initialState.N.height - RIM_HEIGHT,
-                ) / 2,
+                Math.min(data.N.height, data.N.height - RIM_HEIGHT) / 2,
                 0,
               ]}
             >
               <cylinderGeometry
                 args={[
-                  initialState.N.width_b / 2,
+                  data.N.width_b / 2,
                   lerp(
-                    initialState.N.width_b,
-                    initialState.N.width_a,
-                    RIM_HEIGHT / initialState.N.height / 1,
+                    data.N.width_b,
+                    data.N.width_a,
+                    RIM_HEIGHT / data.N.height / 1,
                   ) / 2,
-                  Math.min(initialState.N.height, RIM_HEIGHT),
+                  Math.min(data.N.height, RIM_HEIGHT),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -486,11 +453,7 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.min(
-                  initialState.N.height,
-                  initialState.N.height - RIM_SLOPE_HEIGHT,
-                ) /
-                  2 -
+                Math.min(data.N.height, data.N.height - RIM_SLOPE_HEIGHT) / 2 -
                   RIM_HEIGHT,
                 0,
               ]}
@@ -498,23 +461,21 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
               <cylinderGeometry
                 args={[
                   lerp(
-                    initialState.N.width_b,
-                    initialState.N.width_a,
-                    RIM_HEIGHT / initialState.N.height / 1,
+                    data.N.width_b,
+                    data.N.width_a,
+                    RIM_HEIGHT / data.N.height / 1,
                   ) / 2,
                   Math.max(
                     0,
                     lerp(
-                      initialState.N.width_b,
-                      initialState.N.width_a,
-                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) /
-                        initialState.N.height /
-                        1,
+                      data.N.width_b,
+                      data.N.width_a,
+                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) / data.N.height / 1,
                     ) /
                       2 -
                       RIVET_MARGIN,
                   ),
-                  Math.min(initialState.N.height, RIM_SLOPE_HEIGHT),
+                  Math.min(data.N.height, RIM_SLOPE_HEIGHT),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -525,22 +486,19 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.min(
-                  initialState.N.height,
-                  initialState.N.height - RIM_HEIGHT,
-                ) / -2,
+                Math.min(data.N.height, data.N.height - RIM_HEIGHT) / -2,
                 0,
               ]}
             >
               <cylinderGeometry
                 args={[
                   lerp(
-                    initialState.N.width_a,
-                    initialState.N.width_b,
-                    RIM_HEIGHT / initialState.N.height / 1,
+                    data.N.width_a,
+                    data.N.width_b,
+                    RIM_HEIGHT / data.N.height / 1,
                   ) / 2,
-                  initialState.N.width_a / 2,
-                  Math.min(initialState.N.height, RIM_HEIGHT),
+                  data.N.width_a / 2,
+                  Math.min(data.N.height, RIM_HEIGHT),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -551,11 +509,7 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.min(
-                  initialState.N.height,
-                  initialState.N.height - RIM_SLOPE_HEIGHT,
-                ) /
-                  -2 +
+                Math.min(data.N.height, data.N.height - RIM_SLOPE_HEIGHT) / -2 +
                   RIM_HEIGHT,
                 0,
               ]}
@@ -565,21 +519,19 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
                   Math.max(
                     0,
                     lerp(
-                      initialState.N.width_a,
-                      initialState.N.width_b,
-                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) /
-                        initialState.N.height /
-                        1,
+                      data.N.width_a,
+                      data.N.width_b,
+                      (RIM_HEIGHT + RIM_SLOPE_HEIGHT) / data.N.height / 1,
                     ) /
                       2 -
                       RIVET_MARGIN,
                   ),
                   lerp(
-                    initialState.N.width_a,
-                    initialState.N.width_b,
-                    RIM_HEIGHT / initialState.N.height / 1,
+                    data.N.width_a,
+                    data.N.width_b,
+                    RIM_HEIGHT / data.N.height / 1,
                   ) / 2,
-                  Math.min(initialState.N.height, RIM_SLOPE_HEIGHT),
+                  Math.min(data.N.height, RIM_SLOPE_HEIGHT),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -593,16 +545,14 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       }
 
       case 'Nozzle_4': {
-        const nozzleCount = Math.floor(
-          initialState.N.height * NOZZLES_PER_METER,
-        );
+        const nozzleCount = Math.floor(data.N.height * NOZZLES_PER_METER);
         const nozzles = times(nozzleCount, (index) => (
           <group
             key={`nozzle-${index}`}
             position={[
               0,
-              (index / nozzleCount) * initialState.N.height -
-                initialState.N.height / 2 +
+              (index / nozzleCount) * data.N.height -
+                data.N.height / 2 +
                 NOZZLE_OFFSET,
               0,
             ]}
@@ -613,19 +563,18 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
                   Math.max(
                     0,
                     lerp(
-                      initialState.N.width_a,
-                      initialState.N.width_b,
+                      data.N.width_a,
+                      data.N.width_b,
                       index / nozzleCount +
-                        (NOZZLE_HEIGHT / 2 + NOZZLE_OFFSET) /
-                          initialState.N.height,
+                        (NOZZLE_HEIGHT / 2 + NOZZLE_OFFSET) / data.N.height,
                     ) /
                       2 -
                       RIVET_MARGIN,
                   ),
                   lerp(
-                    initialState.N.width_a,
-                    initialState.N.width_b,
-                    index / nozzleCount + NOZZLE_OFFSET / initialState.N.height,
+                    data.N.width_a,
+                    data.N.width_b,
+                    index / nozzleCount + NOZZLE_OFFSET / data.N.height,
                   ) / 2,
                   NOZZLE_HEIGHT / 2,
                   FACE_COUNT,
@@ -639,18 +588,17 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
               <cylinderGeometry
                 args={[
                   lerp(
-                    initialState.N.width_a,
-                    initialState.N.width_b,
-                    index / nozzleCount + NOZZLE_OFFSET / initialState.N.height,
+                    data.N.width_a,
+                    data.N.width_b,
+                    index / nozzleCount + NOZZLE_OFFSET / data.N.height,
                   ) / 2,
                   Math.max(
                     0,
                     lerp(
-                      initialState.N.width_a,
-                      initialState.N.width_b,
+                      data.N.width_a,
+                      data.N.width_b,
                       index / nozzleCount -
-                        (NOZZLE_HEIGHT / 2 - NOZZLE_OFFSET) /
-                          initialState.N.height,
+                        (NOZZLE_HEIGHT / 2 - NOZZLE_OFFSET) / data.N.height,
                     ) /
                       2 -
                       RIVET_MARGIN,
@@ -668,20 +616,21 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
 
         return (
           <group
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             rotation={[0, 0, initialRotation]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
           >
             <mesh>
               <cylinderGeometry
                 args={[
-                  Math.max(0, initialState.N.width_b / 2 - RIVET_MARGIN),
-                  Math.max(0, initialState.N.width_a / 2 - RIVET_MARGIN),
-                  initialState.N.height,
+                  Math.max(0, data.N.width_b / 2 - RIVET_MARGIN),
+                  Math.max(0, data.N.width_a / 2 - RIVET_MARGIN),
+                  data.N.height,
                   FACE_COUNT,
                   undefined,
                   true,
@@ -696,8 +645,7 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
 
       /**
        * Strut fuel tanks are not supported yet, I'm going to add them when I
-       * implement low poly parts (which are going to be closer to what's
-       * in-game) and it's going to replace this hi-poly crap
+       * reach parity in the way the game renders these parts
        */
       default:
       case '_':
@@ -705,10 +653,11 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       case 'Edges Faces': {
         return (
           <group
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
             rotation={[0, 0, initialRotation]}
@@ -716,9 +665,9 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh>
               <cylinderGeometry
                 args={[
-                  initialState.N.width_b / 2,
-                  initialState.N.width_a / 2,
-                  Math.max(0, initialState.N.height - BEVEL_MARGIN * 2),
+                  data.N.width_b / 2,
+                  data.N.width_a / 2,
+                  Math.max(0, data.N.height - BEVEL_MARGIN * 2),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -729,18 +678,15 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.max(
-                  initialState.N.height / 4,
-                  (initialState.N.height - BEVEL_MARGIN) / 2,
-                ),
+                Math.max(data.N.height / 4, (data.N.height - BEVEL_MARGIN) / 2),
                 0,
               ]}
             >
               <cylinderGeometry
                 args={[
-                  Math.max(0, initialState.N.width_b / 2 - BEVEL_MARGIN),
-                  initialState.N.width_b / 2,
-                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  Math.max(0, data.N.width_b / 2 - BEVEL_MARGIN),
+                  data.N.width_b / 2,
+                  Math.min(BEVEL_MARGIN, data.N.height / 2),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -752,17 +698,17 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
               position={[
                 0,
                 Math.min(
-                  initialState.N.height / -4,
-                  (initialState.N.height - BEVEL_MARGIN) / -2,
+                  data.N.height / -4,
+                  (data.N.height - BEVEL_MARGIN) / -2,
                 ),
                 0,
               ]}
             >
               <cylinderGeometry
                 args={[
-                  initialState.N.width_a / 2,
-                  Math.max(0, initialState.N.width_a / 2 - BEVEL_MARGIN),
-                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  data.N.width_a / 2,
+                  Math.max(0, data.N.width_a / 2 - BEVEL_MARGIN),
+                  Math.min(BEVEL_MARGIN, data.N.height / 2),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -777,10 +723,11 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       case 'Edges Smooth': {
         return (
           <group
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
             rotation={[0, 0, initialRotation]}
@@ -788,9 +735,9 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh>
               <cylinderGeometry
                 args={[
-                  initialState.N.width_b / 2,
-                  initialState.N.width_a / 2,
-                  Math.max(0, initialState.N.height - BEVEL_MARGIN * 2),
+                  data.N.width_b / 2,
+                  data.N.width_a / 2,
+                  Math.max(0, data.N.height - BEVEL_MARGIN * 2),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -801,18 +748,15 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
             <mesh
               position={[
                 0,
-                Math.max(
-                  initialState.N.height / 4,
-                  (initialState.N.height - BEVEL_MARGIN) / 2,
-                ),
+                Math.max(data.N.height / 4, (data.N.height - BEVEL_MARGIN) / 2),
                 0,
               ]}
             >
               <cylinderGeometry
                 args={[
-                  Math.max(0, initialState.N.width_b / 2 - BEVEL_MARGIN),
-                  initialState.N.width_b / 2,
-                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  Math.max(0, data.N.width_b / 2 - BEVEL_MARGIN),
+                  data.N.width_b / 2,
+                  Math.min(BEVEL_MARGIN, data.N.height / 2),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -824,17 +768,17 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
               position={[
                 0,
                 Math.min(
-                  initialState.N.height / -4,
-                  (initialState.N.height - BEVEL_MARGIN) / -2,
+                  data.N.height / -4,
+                  (data.N.height - BEVEL_MARGIN) / -2,
                 ),
                 0,
               ]}
             >
               <cylinderGeometry
                 args={[
-                  initialState.N.width_a / 2,
-                  Math.max(0, initialState.N.width_a / 2 - BEVEL_MARGIN),
-                  Math.min(BEVEL_MARGIN, initialState.N.height / 2),
+                  data.N.width_a / 2,
+                  Math.max(0, data.N.width_a / 2 - BEVEL_MARGIN),
+                  Math.min(BEVEL_MARGIN, data.N.height / 2),
                   FACE_COUNT,
                   undefined,
                   true,
@@ -849,19 +793,20 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       case 'Flat Smooth': {
         return (
           <mesh
-            scale={[initialState.o.x, initialState.o.y, 1]}
+            ref={meshRef}
+            scale={[initialData.o.x, initialData.o.y, 1]}
             rotation={[0, 0, initialRotation]}
             position={[
-              initialState.p.x,
-              initialState.p.y + initialState.N.height / 2,
+              initialData.p.x,
+              initialData.p.y + initialData.N.height / 2,
               0,
             ]}
           >
             <cylinderGeometry
               args={[
-                initialState.N.width_b / 2,
-                initialState.N.width_a / 2,
-                initialState.N.height,
+                data.N.width_b / 2,
+                data.N.width_a / 2,
+                data.N.height,
                 FACE_COUNT,
                 undefined,
                 true,
