@@ -1,5 +1,5 @@
 import { coerce } from 'semver';
-import packageJson from '../../package.json';
+import packageJSON from '../../package.json';
 
 type CodeName = 'next' | 'beta' | 'release' | 'dev';
 
@@ -31,7 +31,7 @@ export default function useStellarContext() {
 
   return {
     title,
-    version: coerce(packageJson.version)?.version,
+    version: coerce(packageJSON.version)?.version,
     codeName,
   };
 }

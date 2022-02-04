@@ -3,13 +3,14 @@ import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-ri
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import {
   getPartByAddress,
-  getReactivePartByAddress
+  getReactivePartByAddress,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { selectPartsOnly, togglePartsSelection } from 'interfaces/selection';
-import { FC, InputHTMLAttributes, useRef, useState } from 'react';
+import { FC, InputHTMLAttributes, memo, useRef, useState } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { PartAddress } from 'types/Blueprint';
+import compareAddressProps from 'utilities/compareAddressProps';
 import './index.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
@@ -25,7 +26,7 @@ interface ListingProps {
   indentation: number;
   address: PartAddress;
 }
-export const Listing: FC<ListingProps> = ({ indentation, address }) => {
+export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const [expanded, setExpanded] = useState(false);
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -137,4 +138,4 @@ export const Listing: FC<ListingProps> = ({ indentation, address }) => {
       ) : undefined}
     </div>
   );
-};
+}, compareAddressProps);
