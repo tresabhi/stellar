@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { uuidv5 } from 'uuid';
+import { v4 as UUIDV4 } from 'uuid';
 
 const BUILD_NAMES = {
   alpha: 'Alpha',
@@ -10,14 +10,14 @@ const BUILD_NAMES = {
 export default function renameBuild(buildType, appName) {
   console.log(`Updating manifest.json keys for "${buildType}"`);
 
-  const manifest = JSON.parse(readFileSync('build/manifest.json'));
+  const manifest = readFileSync('build/manifest.json').toJSON();
   const newName = `${appName} ${BUILD_NAMES[buildType] ?? ''}`.trim();
   writeFileSync(
     'build/manifest.json',
     JSON.stringify({
       ...manifest,
 
-      PWA_UUID: uuidv5(),
+      PWA_UUID: UUIDV4(),
 
       name: newName,
       short_name: newName,
