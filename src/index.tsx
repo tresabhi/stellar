@@ -1,11 +1,10 @@
+import getStellarContext from 'hooks/useStellarContext';
 import { lazy, StrictMode, Suspense } from 'react';
 import { render } from 'react-dom';
 import SplashScreen from 'routes/SplashScreen';
 import { primeWorker } from 'utilities/serviceWorker';
 
-const LOCAL_HOST_NAMES = ['localhost', '127.0.0.1'];
-
-if (!LOCAL_HOST_NAMES.includes(window.location.hostname)) primeWorker();
+if (getStellarContext().codeName !== 'alpha') primeWorker();
 
 const App = lazy(() => import('App'));
 
