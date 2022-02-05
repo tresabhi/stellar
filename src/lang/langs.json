@@ -7,12 +7,12 @@
   {
     "id": "en-GB",
     "name": "English (UK)",
-    "dev_name": "english-uk"
+    "dev_name": "english_uk"
   },
   {
     "id": "en-US",
     "name": "English (US)",
-    "dev_name": "english-us"
+    "dev_name": "english_us"
   },
   {
     "id": "en-ES",
@@ -62,11 +62,11 @@
   {
     "id": "zh-CN",
     "name": "简体中文",
-    "dev_name": "chinese-simplified"
+    "dev_name": "chinese_simplified"
   },
   {
     "id": "zh-TW",
     "name": "中國傳統的",
-    "dev_name": "chinese-traditional"
+    "dev_name": "chinese_traditional"
   }
 ]

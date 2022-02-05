@@ -9,7 +9,7 @@ import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
 import './index.scss';
 
-if (settingsStore.getState().debug.loadDummyOnLaunch) {
+if (settingsStore.getState().debug.load_dummy_on_Launch) {
   blueprintStore.setState(importifyBlueprint(devBlueprint));
 }
 

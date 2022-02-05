@@ -216,19 +216,19 @@ const ToolBarTop: FC = () => {
           Help
         </ControlMenu.Button>
         {stellarContext.codeName === 'dev' ||
-        stellarContext.codeName === 'next' ? (
+        stellarContext.codeName === 'alpha' ? (
           <ControlMenu.Button
             extension={
               <ContextMenu.Container>
                 <ContextMenu.Toggle
                   defaultState={
-                    settingsStore.getState().debug.loadDummyOnLaunch
+                    settingsStore.getState().debug.load_dummy_on_Launch
                   }
                   onClick={() => {
                     settingsStore.setState(
                       produce((draft: SettingsStore) => {
-                        draft.debug.loadDummyOnLaunch =
-                          !draft.debug.loadDummyOnLaunch;
+                        draft.debug.load_dummy_on_Launch =
+                          !draft.debug.load_dummy_on_Launch;
                       }),
                     );
                   }}

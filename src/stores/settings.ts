@@ -1,17 +1,20 @@
+import { Languages } from 'hooks/useTranslations';
 import { merge } from 'lodash';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
 export interface SettingsStore {
   debug: {
-    loadDummyOnLaunch: boolean;
+    load_dummy_on_Launch: boolean;
   };
+  language: Languages;
 }
 
 export const SettingsStoreData: SettingsStore = {
   debug: {
-    loadDummyOnLaunch: false,
+    load_dummy_on_Launch: false,
   },
+  language: 'english_us',
 };
 
 const settingsStore = create<SettingsStore>(
