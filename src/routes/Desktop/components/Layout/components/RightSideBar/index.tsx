@@ -6,9 +6,11 @@ import * as SideBar from 'components/SideBar';
 import useUnitInputController from 'hooks/useUnitInputController';
 import produce from 'immer';
 import appStore, { AppStore } from 'stores/app';
+import selectionStore from 'stores/selection';
 import './index.scss';
 
-export default function RightSideBar() {
+const RightSideBar = () => {
+  const hasSelections = selectionStore((state) => state.selections.length) > 0;
   const xController = useUnitInputController(0, { suffix: 'm' });
   const yController = useUnitInputController(0, { suffix: 'm' });
   const rController = useUnitInputController(0, {
@@ -64,7 +66,9 @@ export default function RightSideBar() {
               : 'none',
         }}
       >
-        <PropertiesExplorer.Container>
+        <PropertiesExplorer.Container
+          style={{ display: hasSelections ? undefined : 'none' }}
+        >
           <PropertiesExplorer.Group>
             <PropertiesExplorer.Title>Transformations</PropertiesExplorer.Title>
             <PropertiesExplorer.Row>
@@ -120,4 +124,5 @@ export default function RightSideBar() {
       </SideBar.Scrollable>
     </SideBar.Container>
   );
-}
+};
+export default RightSideBar;

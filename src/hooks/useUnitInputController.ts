@@ -28,9 +28,7 @@ export default function useUnitInputController(
   onValueAccepted?: (newValue: number, oldValue: number) => void,
 ) {
   const mergedOptions = merge(UseUnitInputControllerDefaultOptions, options);
-
   const inputRef = useRef<HTMLInputElement>(null);
-
   let value = useRef(initialValue);
   let isMixed = useRef(options?.mixed ?? false);
 

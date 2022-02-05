@@ -5,7 +5,7 @@ import blueprintStore from 'stores/blueprint';
 import { Euler, Group, Mesh } from 'three';
 import { PartAddress } from 'types/Blueprint';
 
-const useSubscribedTranslations = (
+const usePartTranslations = (
   address: PartAddress,
   meshRef: RefObject<Mesh | Group>,
 ) => {
@@ -43,4 +43,4 @@ const useSubscribedTranslations = (
   });
 };
 
-export default useSubscribedTranslations;
+export default usePartTranslations;

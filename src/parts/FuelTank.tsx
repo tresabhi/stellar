@@ -1,5 +1,5 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import useSubscribedTranslations from 'hooks/useSubscribedTranslations';
+import usePartTranslations from 'hooks/usePartTranslations';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { times } from 'lodash';
 import { memo, useRef } from 'react';
@@ -133,7 +133,7 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
     const initialRotation = data.o.z * (Math.PI / 180);
     const meshRef = useRef<Mesh | Group>(null);
 
-    useSubscribedTranslations(address, meshRef);
+    usePartTranslations(address, meshRef);
 
     switch (data.T.shape_tex) {
       case 'Rivets': {

@@ -1,6 +1,6 @@
 import useKeybinds from 'hooks/useKeybinds';
-import appStore from 'stores/app';
 import { HotKeys } from 'react-hotkeys';
+import appStore from 'stores/app';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';
 import Simulation from './components/Simulation';
@@ -19,12 +19,14 @@ export default function Desktop() {
         <ToolbarTop />
         <ToolbarBottom />
 
-        <Layout style={{ display: tab === 'layout' ? 'flex' : 'none' }} />
-        <Staging style={{ display: tab === 'staging' ? 'flex' : 'none' }} />
+        <Layout style={{ display: tab === 'layout' ? undefined : 'none' }} />
+        <Staging style={{ display: tab === 'staging' ? undefined : 'none' }} />
         <Simulation
-          style={{ display: tab === 'simulation' ? 'flex' : 'none' }}
+          style={{ display: tab === 'simulation' ? undefined : 'none' }}
         />
-        <Rendering style={{ display: tab === 'rendering' ? 'flex' : 'none' }} />
+        <Rendering
+          style={{ display: tab === 'rendering' ? undefined : 'none' }}
+        />
       </div>
     </HotKeys>
   );
