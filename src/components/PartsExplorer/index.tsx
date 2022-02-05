@@ -11,13 +11,16 @@ import { FC, InputHTMLAttributes, memo, useRef, useState } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { PartAddress } from 'types/Blueprint';
 import compareAddressProps from 'utilities/compareAddressProps';
-import './index.scss';
+import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
 }) => (
-  <div {...props} className={`${props.className ?? ''} parts-explorer`}>
+  <div
+    {...props}
+    className={`${props.className ?? ''} ${styles['parts-explorer']}`}
+  >
     {children}
   </div>
 );
@@ -51,9 +54,9 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   );
 
   return (
-    <div ref={listingRef} tabIndex={-1} className="parts-explorer-listing">
+    <div ref={listingRef} tabIndex={-1} className={styles.listing}>
       <div
-        className="parts-explorer-listing-button"
+        className={styles.button}
         style={{ paddingLeft: `${16 * indentation}px` }}
         onClick={(event) => {
           if (event.ctrlKey) {
@@ -85,22 +88,22 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
             // stop transfer of focus if it's a dropdown
             if (data.n === 'Group') event.preventDefault();
           }}
-          className="parts-explorer-listing-expand"
+          className={styles.expand}
         >
           {data.n === 'Group' ? (
             expanded ? (
-              <ArrowHeadDownIcon className="parts-explorer-listing-expand-icon" />
+              <ArrowHeadDownIcon className={styles['expand-icon']} />
             ) : (
-              <ArrowHeadRightIcon className="parts-explorer-listing-expand-icon" />
+              <ArrowHeadRightIcon className={styles['expand-icon']} />
             )
           ) : undefined}
         </button>
 
-        <div className="parts-explorer-listing-icon-holder">
+        <div className={styles['icon-holder']}>
           {Icon ? (
-            <Icon className="parts-explorer-listing-icon" />
+            <Icon className={styles.icon} />
           ) : (
-            <QuestionMarkIcon className="parts-explorer-listing-icon" />
+            <QuestionMarkIcon className={styles.icon} />
           )}
         </div>
 
@@ -120,7 +123,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
           onKeyPress={(event) => {
             if (event.key === 'Enter') buttonRef.current?.focus();
           }}
-          className="parts-explorer-listing-label"
+          className={styles.label}
           defaultValue={data.meta.label}
         />
 
@@ -129,10 +132,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
       </div>
 
       {childParts ? (
-        <Container
-          style={{ display: expanded ? 'flex' : 'none' }}
-          className="parts-explorer-listing-children-container"
-        >
+        <Container style={{ display: expanded ? 'flex' : 'none' }}>
           {childParts}
         </Container>
       ) : undefined}

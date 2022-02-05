@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import './index.scss';
+import styles from './index.module.scss';
 
 export const Container: FC = ({ children }) => (
-  <div className="control-menu">{children}</div>
+  <div className={styles['control-menu']}>{children}</div>
 );
 
 interface ButtonProps {
@@ -10,10 +10,10 @@ interface ButtonProps {
 }
 export const Button: FC<ButtonProps> = ({ children, extension }) => {
   return (
-    <button className="control-menu-button">
+    <button className={styles.button}>
       {children}
       {extension ? (
-        <div className="control-menu-button-extension">{extension}</div>
+        <div className={styles.extension}>{extension}</div>
       ) : undefined}
     </button>
   );

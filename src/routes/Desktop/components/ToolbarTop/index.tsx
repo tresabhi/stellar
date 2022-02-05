@@ -9,7 +9,7 @@ import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import appStore from 'stores/app';
 import settingsStore, { SettingsStore } from 'stores/settings';
-import './index.scss';
+import styles from './index.module.scss';
 
 const ToolBarTop: FC = () => {
   const draft = useFile();
@@ -32,16 +32,16 @@ const ToolBarTop: FC = () => {
   };
 
   return (
-    <div className="toolbar-top">
+    <div className={styles['toolbar-top']}>
       <input
-        className="open-input"
+        className={styles['file-input']}
         accept=".stbp"
         ref={openInputRef}
         type="file"
         onChange={() => handleInputClick(openInputRef)}
       />
       <input
-        className="open-input"
+        className={styles['file-input']}
         accept=".json, .txt"
         ref={importInputRef}
         type="file"
@@ -243,7 +243,7 @@ const ToolBarTop: FC = () => {
         ) : undefined}
       </ControlMenu.Container>
 
-      <Tabs.Container className="toolbar-tabs">
+      <Tabs.Container className={styles['toolbar-tabs']}>
         <Tabs.Tab
           onClick={() => appStore.setState({ tab: 'layout' })}
           selected={appStore((state) => state.tab) === 'layout'}

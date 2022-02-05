@@ -7,7 +7,7 @@ import useUnitInputController from 'hooks/useUnitInputController';
 import produce from 'immer';
 import appStore, { AppStore } from 'stores/app';
 import selectionStore from 'stores/selection';
-import './index.scss';
+import styles from './index.module.scss';
 
 const RightSideBar = () => {
   const hasSelections = selectionStore((state) => state.selections.length) > 0;
@@ -23,7 +23,7 @@ const RightSideBar = () => {
   const hController = useUnitInputController(0, { suffix: 'x', min: 0 });
 
   return (
-    <SideBar.Container className="right-side-bar" width="minor">
+    <SideBar.Container className={styles['right-side-bar']} width="minor">
       <Partition.Container>
         <Partition.Option
           selected={
@@ -92,9 +92,9 @@ const RightSideBar = () => {
                 {appStore(
                   (state) => state.layout.rightSideBar.scaleConstrained,
                 ) ? (
-                  <LinkOn className="right-side-bar-constrain-icon" />
+                  <LinkOn className={styles['constrain-icon']} />
                 ) : (
-                  <LinkOff className="right-side-bar-constrain-icon" />
+                  <LinkOff className={styles['constrain-icon']} />
                 )}
               </PropertiesExplorer.ToggleButton>
             </PropertiesExplorer.Row>

@@ -1,10 +1,13 @@
 import { FC, InputHTMLAttributes } from 'react';
-import './index.scss';
+import styles from './index.module.scss';
 
 const Simulation: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   return (
-    <div {...props} className={`${props.className ?? ''} simulation-tab`}>
-      <h1 className="title">Simulation Coming Soon!</h1>
+    <div
+      {...props}
+      className={`${props.className ?? ''} ${styles['simulation-tab']}`}
+    >
+      <h1 className={styles.title}>Simulation Coming Soon!</h1>
     </div>
   );
 };

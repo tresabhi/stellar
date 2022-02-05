@@ -10,7 +10,7 @@
   box-shadow: 0 0 $drop-shadow-blur-big $shadow-dark;
   z-index: 1;
 
-  .partition-option {
+  .option {
     color: $gray-darker;
     flex: 1;
     text-align: center;
@@ -24,7 +24,7 @@
     }
   }
 
-  .partition-separator {
+  .separator {
     width: $separator-thickness;
     border-radius: $border-radius-sharp;
     height: calc(100% - $margin-thick * 2);

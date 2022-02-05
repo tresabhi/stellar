@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import useStellarContext from 'hooks/useStellarContext';
 import { BarLoader } from 'react-spinners';
-import './index.scss';
+import styles from './index.module.scss';
 
 const asdf = css`
   border-radius: 4px;
@@ -12,8 +12,8 @@ const SplashScreen = () => {
   const stellarContext = useStellarContext();
 
   return (
-    <div className="splash-screen">
-      <stellarContext.Icon className="stellar-icon" />
+    <div className={styles['splash-screen']}>
+      <stellarContext.Icon className={styles.icon} />
       <BarLoader
         speedMultiplier={1.5}
         width={112}

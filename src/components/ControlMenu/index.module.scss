@@ -3,14 +3,14 @@
 .control-menu {
   display: flex;
 
-  .control-menu-button {
+  .button {
     display: relative;
     font-size: $font-size-regular;
     padding: $padding-thick;
     color: white;
     background-color: $black-darker;
 
-    .control-menu-button-extension {
+    .extension {
       position: absolute;
       display: none;
       cursor: default;
@@ -27,17 +27,17 @@
     &:focus-within + &:hover {
       background-color: $black-regular;
 
-      .control-menu-button-extension {
+      .extension {
         display: block;
       }
     }
   }
 
   &:focus-within {
-    .control-menu-button:hover {
+    .button:hover {
       background-color: $black-regular;
 
-      .control-menu-button-extension {
+      .extension {
         display: block;
       }
     }

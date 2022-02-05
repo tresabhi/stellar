@@ -6,13 +6,6 @@ import './index.scss';
 const ScrollableContainer: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
-}) => (
-  <SimpleBar
-    {...props}
-    className={`${props.className ?? ''} scrollable-container`}
-  >
-    {children}
-  </SimpleBar>
-);
+}) => <SimpleBar {...props}>{children}</SimpleBar>;
 
 export default ScrollableContainer;

@@ -5,7 +5,7 @@ import { getPartModule } from 'interfaces/part';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Color, MOUSE, TOUCH } from 'three';
-import './index.scss';
+import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,7 +23,7 @@ export const LayoutRenderer = () => {
       frameloop="demand"
       orthographic
       camera={{ zoom: 16, position: [-initialData.center, 0, 100] }}
-      className="editing-canvas"
+      className={styles['editing-canvas']}
       performance={{ min: 0.75 }}
     >
       <directionalLight position={[-20, 20, 100]} />

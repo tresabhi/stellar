@@ -4,12 +4,12 @@
   display: flex;
   flex-direction: column;
 
-  .parts-explorer-listing {
+  .listing {
     display: flex;
     flex-direction: column;
     background-color: $black-regular;
 
-    .parts-explorer-listing-button {
+    .button {
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -20,35 +20,35 @@
         background-color: $black-light;
       }
 
-      .parts-explorer-listing-expand {
+      .expand {
         width: $part-explorer-expand-width;
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
 
-        .parts-explorer-listing-expand-icon {
+        .expand-icon {
           width: $icon-size-xx-small;
           height: $icon-size-xx-small;
           fill: white;
         }
       }
 
-      .parts-explorer-listing-icon-holder {
+      .icon-holder {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
         width: $button-major-height;
 
-        .parts-explorer-listing-icon {
+        .icon {
           width: $icon-size-regular;
           height: $icon-size-regular;
           fill: white;
         }
       }
 
-      .parts-explorer-listing-label {
+      .label {
         color: white;
         flex: 1;
         text-align: left;
@@ -62,15 +62,12 @@
       }
     }
 
-    &.selected .parts-explorer-listing-button {
+    &.selected .button {
       background-color: $black-light;
     }
 
-    &.selected > .parts-explorer-listing-button {
+    &.selected > .button {
       background-color: $black-lighter;
-    }
-
-    .parts-explorer-listing-children-container {
     }
   }
 }

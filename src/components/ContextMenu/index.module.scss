@@ -5,14 +5,14 @@
   border-radius: $border-radius-regular;
   min-width: $context-menu-min-width;
   max-width: $context-menu-max-width;
-  padding: $padding-thick 0 $padding-thick 0;
+  padding: $padding-thicker 0 $padding-thicker 0;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 $drop-shadow-blur-big $shadow-dark;
 
-  .context-menu-button,
-  .context-menu-extension-button,
-  .context-menu-toggle-button {
+  .button,
+  .extension-button,
+  .toggle {
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -36,33 +36,36 @@
       color: $gray-darker;
       background-color: $black-dark;
 
-      .context-menu-button-icon-holder .context-menu-button-icon {
-        width: $icon-size-smaller;
-        height: $icon-size-smaller;
+      .icon-holder .icon {
         fill: $gray-darker;
       }
     }
 
-    .context-menu-button-icon-holder {
+    .icon-holder {
       fill: white;
       width: $button-major-height;
       display: flex;
       align-items: center;
       justify-content: center;
+
+      .icon {
+        width: $icon-size-x-small;
+        height: $icon-size-x-small;
+      }
     }
 
-    .context-menu-button-text {
+    .text {
       flex: 1;
     }
   }
 
-  .context-menu-separator {
+  .separator {
     height: calc($button-major-height / 2);
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .context-menu-separator-line {
+    .line {
       height: $separator-thickness;
       width: calc(100% - $padding-thick * 2);
       border-radius: $border-radius-sharper;
@@ -70,10 +73,10 @@
     }
   }
 
-  .context-menu-extension-button {
+  .extension-button {
     position: relative;
 
-    .context-menu-extension-button-extension {
+    .extension {
       position: absolute;
       display: none;
       cursor: default;
@@ -86,7 +89,7 @@
     &:not(.disabled) {
       &:hover,
       &:focus-within {
-        .context-menu-extension-button-extension {
+        .extension {
           display: block;
         }
       }

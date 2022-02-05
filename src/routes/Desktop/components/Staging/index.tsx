@@ -1,10 +1,13 @@
 import { FC, InputHTMLAttributes } from 'react';
-import './index.scss';
+import styles from './index.module.scss';
 
 const Staging: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   return (
-    <div {...props} className={`${props.className ?? ''} staging-tab`}>
-      <h1 className="title">Staging Coming Soon!</h1>
+    <div
+      {...props}
+      className={`${props.className ?? ''} ${styles['staging-tab']}`}
+    >
+      <h1 className={styles.title}>Staging Coming Soon!</h1>
     </div>
   );
 };

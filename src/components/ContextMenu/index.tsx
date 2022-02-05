@@ -1,7 +1,7 @@
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
 import { FC, InputHTMLAttributes, useRef, useState } from 'react';
-import './index.scss';
+import styles from './index.module.scss';
 
 export const Container: FC = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -13,7 +13,7 @@ export const Container: FC = ({ children }) => {
         if (document.activeElement?.blur) document.activeElement?.blur();
       }}
       ref={containerRef}
-      className="context-menu"
+      className={styles['context-menu']}
     >
       {children}
     </div>
@@ -37,17 +37,17 @@ export const Button: FC<ButtonProps> = ({
 
       if (props.onClick) props.onClick(event);
     }}
-    className={`${props.className ?? ''} context-menu-button ${
-      disabled ? 'disabled' : 'enabled'
+    className={`${props.className ?? ''} ${styles.button} ${
+      disabled ? styles.disabled : styles.enabled
     }`}
   >
-    <span className="text">{children}</span>
+    <span className={styles.text}>{children}</span>
   </div>
 );
 
 export const Separator = () => (
-  <div className="context-menu-separator">
-    <div className="context-menu-separator-line" />
+  <div className={styles.separator}>
+    <div className={styles.line} />
   </div>
 );
 
@@ -62,18 +62,16 @@ export const Extension: FC<ExtensionProps> = ({
 }) => {
   return (
     <div
-      className={`context-menu-extension-button ${
-        disabled ? 'disabled' : 'enabled'
+      className={`${styles['extension-button']} ${
+        disabled ? styles.disabled : styles.enabled
       }`}
     >
-      <span className="context-menu-button-text">{children}</span>
-      <div className="context-menu-button-icon-holder">
-        <ArrowHeadRightIcon className="context-menu-button-icon" />
+      <span className={styles.text}>{children}</span>
+      <div className={styles['icon-holder']}>
+        <ArrowHeadRightIcon className={styles.icon} />
       </div>
       {extension ? (
-        <div className="context-menu-extension-button-extension">
-          {extension}
-        </div>
+        <div className={styles.extension}>{extension}</div>
       ) : undefined}
     </div>
   );
@@ -94,19 +92,17 @@ export const Toggle: FC<ToggleProps> = ({
   return (
     <div
       {...props}
-      className={`${props.className ?? ''} context-menu-toggle-button ${
-        disabled ? 'disabled' : 'enabled'
+      className={`${props.className ?? ''} ${styles['toggle']} ${
+        disabled ? styles.disabled : styles.enabled
       }`}
       onClick={(event) => {
         setState((state) => !state);
         if (props.onClick) props.onClick(event);
       }}
     >
-      <span className="context-menu-button-text">{children}</span>
-      <div className="context-menu-button-icon-holder">
-        {state ? (
-          <CheckmarkIcon className="context-menu-button-icon" />
-        ) : undefined}
+      <span className={styles.text}>{children}</span>
+      <div className={styles['icon-holder']}>
+        {state ? <CheckmarkIcon className={styles.icon} /> : undefined}
       </div>
     </div>
   );

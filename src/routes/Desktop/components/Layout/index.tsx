@@ -7,7 +7,7 @@ import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
-import './index.scss';
+import styles from './index.module.scss';
 
 if (settingsStore.getState().debug.load_dummy_on_Launch) {
   blueprintStore.setState(importifyBlueprint(devBlueprint));
@@ -15,7 +15,10 @@ if (settingsStore.getState().debug.load_dummy_on_Launch) {
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   return (
-    <div {...props} className={`${props.className ?? ''} layout-tab`}>
+    <div
+      {...props}
+      className={`${props.className ?? ''} ${styles['layout-tab']}`}
+    >
       {appStore((state) => state.layout.leftSideBar.visible) ? (
         <LeftSideBar />
       ) : undefined}

@@ -7,7 +7,7 @@ import Simulation from './components/Simulation';
 import Staging from './components/Staging';
 import ToolbarBottom from './components/ToolbarBottom';
 import ToolbarTop from './components/ToolbarTop';
-import './index.scss';
+import styles from './index.module.scss';
 
 export default function Desktop() {
   const tab = appStore((state) => state.tab);
@@ -15,7 +15,7 @@ export default function Desktop() {
 
   return (
     <HotKeys keyMap={keyMap} handlers={handlers}>
-      <div className="desktop-container">
+      <div className={styles['desktop-container']}>
         <ToolbarTop />
         <ToolbarBottom />
 

@@ -3,23 +3,23 @@
 .properties-explorer {
   padding: 0 $padding-x-thick 0 $padding-x-thick;
 
-  .properties-explorer-group {
+  .group {
     display: flex;
     flex-direction: column;
     padding: $padding-x-thick 0 $padding-x-thick 0;
 
-    .properties-explorer-title {
+    .title {
       color: white;
       font-size: $font-size-regular;
       padding-bottom: $padding-x-thick;
     }
 
-    .properties-explorer-row {
+    .row {
       display: flex;
       justify-content: space-between;
       margin-bottom: $margin-thick;
 
-      .properties-explorer-named-input {
+      .input {
         background-color: $black-light;
         border-radius: $border-radius-regular;
 
@@ -33,7 +33,7 @@
           width: 100%;
         }
 
-        .properties-explorer-named-input-title {
+        .label {
           font-size: $font-size-regular;
           padding: 0 $padding-thick 0 $padding-thick;
           color: $gray-darker;
@@ -42,7 +42,7 @@
           justify-content: center;
         }
 
-        .properties-explorer-named-input-value {
+        .value {
           font-size: $font-size-regular;
           color: white;
           flex: 1;
@@ -52,7 +52,7 @@
         }
       }
 
-      .properties-explorer-toggle-button {
+      .toggle {
         background-color: $black-light;
         border-radius: $border-radius-regular;
         width: $named-input-small-width;

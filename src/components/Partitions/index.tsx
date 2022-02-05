@@ -1,8 +1,8 @@
 import { FC, InputHTMLAttributes } from 'react';
-import './index.scss';
+import styles from './index.module.scss';
 
 export const Container: FC = ({ children }) => (
-  <div className="partition">{children}</div>
+  <div className={styles.partition}>{children}</div>
 );
 
 interface OptionProps extends InputHTMLAttributes<HTMLButtonElement> {
@@ -15,11 +15,11 @@ export const Option: FC<OptionProps> = ({
 }) => (
   //@ts-ignore
   <button
-    className={`partition-option ${selected ? 'selected' : ''}`}
+    className={`${styles.option} ${selected ? styles.selected : ''}`}
     {...props}
   >
     {children}
   </button>
 );
 
-export const Separator: FC = () => <div className="partition-separator" />;
+export const Separator: FC = () => <div className={styles.separator} />;
