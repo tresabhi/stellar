@@ -12,7 +12,14 @@ import {
   selectPartsOnly,
   togglePartsSelection,
 } from 'interfaces/selection';
-import { FC, InputHTMLAttributes, memo, useRef, useState } from 'react';
+import {
+  FC,
+  InputHTMLAttributes,
+  memo,
+  MouseEvent,
+  useRef,
+  useState,
+} from 'react';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
 import { Blueprint, PartAddress } from 'types/Blueprint';
@@ -43,6 +50,28 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   let data = getReactivePartByAddress(address)!;
   const Icon = getPartModule(data.n, true).Icon;
   let childParts: JSX.Element[] | undefined;
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.ctrlKey) {
+      if (event.shiftKey) {
+        // ctrl + shift
+      } else {
+        // ctrl
+        togglePartsSelection([data.meta.address]);
+      }
+    } else if (event.shiftKey) {
+      // shift
+      const selectionState = selectionStore.getState();
+
+      if (selectionState.lastSelection) {
+        selectPartsFromOnly(selectionState.lastSelection, address);
+      } else {
+        selectPartsOnly([address]);
+      }
+    } else {
+      // no modifier
+      selectPartsOnly([data.meta.address]);
+    }
+  };
 
   if (data.n === 'Group') {
     childParts = data.parts.map((data, index) => (
@@ -54,37 +83,18 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
     ));
   }
 
-  blueprintStore.subscribe(
-    (state) => getPartByAddress(address, state).meta.selected,
-    (current) => listingRef.current?.classList.toggle(styles.selected, current),
-  );
-
   return (
-    <div ref={listingRef} tabIndex={-1} className={styles.listing}>
+    <div
+      ref={listingRef}
+      tabIndex={-1}
+      className={`${styles.listing} ${
+        data.meta.selected ? styles.selected : ''
+      }`}
+    >
       <div
         className={styles.button}
         style={{ paddingLeft: `${16 * indentation}px` }}
-        onClick={(event) => {
-          if (event.ctrlKey) {
-            if (event.shiftKey) {
-              // ctrl + shift
-            } else {
-              // ctrl
-              togglePartsSelection([data.meta.address]);
-            }
-          } else if (event.shiftKey) {
-            const selectionState = selectionStore.getState();
-
-            if (selectionState.lastSelection) {
-              selectPartsFromOnly(selectionState.lastSelection, address);
-            } else {
-              selectPartsOnly([address]);
-            }
-          } else {
-            // no modifier
-            selectPartsOnly([data.meta.address]);
-          }
-        }}
+        onClick={handleClick}
       >
         {/* indentations */}
 

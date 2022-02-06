@@ -10,7 +10,6 @@ import selectionStore from 'stores/selection';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
-  const hasSelections = selectionStore((state) => state.selections.length) > 0;
   const xController = useUnitInputController(0, { suffix: 'm' });
   const yController = useUnitInputController(0, { suffix: 'm' });
   const rController = useUnitInputController(0, {
@@ -67,7 +66,12 @@ const RightSideBar = () => {
         }}
       >
         <PropertiesExplorer.Container
-          style={{ display: hasSelections ? undefined : 'none' }}
+          style={{
+            display:
+              selectionStore((state) => state.selections.length) > 0
+                ? undefined
+                : 'none',
+          }}
         >
           <PropertiesExplorer.Group>
             <PropertiesExplorer.Title>Transformations</PropertiesExplorer.Title>

@@ -7,6 +7,9 @@ import { BoxHelper, Group, Mesh } from 'three';
 import { PartAddress } from 'types/Blueprint';
 import { UseUndefinedRefObject } from './useUndefinedRef';
 
+/**
+ * @deprecated
+ */
 const usePartDecorations = (
   address: PartAddress,
   meshRef: UseUndefinedRefObject<Mesh | Group>,
@@ -18,16 +21,15 @@ const usePartDecorations = (
     'red',
   );
 
+  blueprintStore.subscribe(
+    (state) => (getPartByAddress(address, state) as PartWithMeta).meta.selected,
+    (current) => {
+      outlineHelper.current!.visible = current;
+    },
+  );
+
   useEffect(() => {
     outlineHelper.current!.visible = false;
-
-    blueprintStore.subscribe(
-      (state) =>
-        (getPartByAddress(address, state) as PartWithMeta).meta.selected,
-      (current) => {
-        outlineHelper.current!.visible = current;
-      },
-    );
   });
 };
 

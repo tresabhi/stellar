@@ -71,5 +71,6 @@
     "zustand",
     "हिन्दी"
   ],
-  "docwriter.style": "JSDoc"
+  "docwriter.style": "JSDoc",
+  "css.lint.unknownAtRules": "ignore"
 }

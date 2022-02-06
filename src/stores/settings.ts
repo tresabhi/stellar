@@ -7,12 +7,18 @@ export interface SettingsStore {
   debug: {
     load_dummy_on_Launch: boolean;
   };
+  performance: {
+    regress_amount: number;
+  };
   language: Languages;
 }
 
 export const SettingsStoreData: SettingsStore = {
   debug: {
     load_dummy_on_Launch: false,
+  },
+  performance: {
+    regress_amount: 1,
   },
   language: 'english_us',
 };

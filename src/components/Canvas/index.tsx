@@ -3,14 +3,17 @@ import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import { getPartModule } from 'interfaces/part';
 import { useRef } from 'react';
-import appStore from 'stores/app';
 import blueprintStore from 'stores/blueprint';
+import settingsStore from 'stores/settings';
 import { Color, Group, MOUSE, TOUCH } from 'three';
 import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const transformationMode = appStore((state) => state.transformationMode);
+  // const transformationMode = appStore((state) => state.transformationMode);
+  const regressAmount = settingsStore(
+    (state) => state.performance.regress_amount,
+  );
   const initialData = blueprintStore.getState();
   const parts = blueprintStore((state) => state.parts).map((part, index) => {
     const PartComponent = getPartModule(part.n, true).LayoutComponent;
@@ -18,6 +21,8 @@ export const LayoutRenderer = () => {
     return <PartComponent key={`part-${index}`} address={[index]} />;
   });
   const tempRef = useRef<Group>(null);
+
+  // TODO: isolate JSX JSs with stores
 
   return (
     <Canvas
@@ -27,9 +32,9 @@ export const LayoutRenderer = () => {
       orthographic
       camera={{ zoom: 16, position: [-initialData.center, 0, 100] }}
       className={styles['editing-canvas']}
-      performance={{ min: 0.75 }}
+      performance={{ min: regressAmount }}
     >
-      <AdaptiveDpr pixelated />
+      {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
       <directionalLight position={[-20, 20, 100]} />
       <ambientLight intensity={0.5} />
 
@@ -47,7 +52,7 @@ export const LayoutRenderer = () => {
         }}
         enableRotate={false}
         enableDamping={false}
-        regress
+        regress={regressAmount > 0}
         makeDefault
       />
 

@@ -25,7 +25,7 @@ const ToolBarTop: FC = () => {
       fileReader.readAsText(file);
 
       fileReader.onload = () => {
-        if (typeof fileReader.result == 'string')
+        if (typeof fileReader.result === 'string')
           newBlueprint(JSON.parse(fileReader.result));
       };
     }
@@ -254,7 +254,7 @@ const ToolBarTop: FC = () => {
           onClick={() => appStore.setState({ tab: 'staging' })}
           selected={appStore((state) => state.tab) === 'staging'}
         >
-          Staging
+          Staging poop
         </Tabs.Tab>
         <Tabs.Tab
           onClick={() => appStore.setState({ tab: 'simulation' })}

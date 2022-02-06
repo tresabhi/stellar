@@ -1,17 +1,18 @@
 import { FC, forwardRef, InputHTMLAttributes } from 'react';
 import styles from './index.module.scss';
 
-export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
-  children,
-  ...props
-}) => (
+export const Container = forwardRef<
+  HTMLDivElement,
+  InputHTMLAttributes<HTMLDivElement>
+>(({ children, ...props }, ref) => (
   <div
+    ref={ref}
     {...props}
     className={`${props.className ?? ''} ${styles['properties-explorer']}`}
   >
     {children}
   </div>
-);
+));
 
 export const Group: FC = ({ children }) => (
   <div className={styles.group}>{children}</div>

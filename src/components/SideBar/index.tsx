@@ -13,7 +13,7 @@ export const Container: FC<ContainerProps> = ({
   <div
     {...props}
     className={`${props.className ?? ''} ${styles['side-bar']} ${
-      width == 'major' ? styles.major : styles.minor
+      width === 'major' ? styles.major : styles.minor
     }`}
   >
     {children}
