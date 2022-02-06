@@ -3,7 +3,7 @@ import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-ri
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import {
   getPartByAddress,
-  getReactivePartByAddress,
+  getReactivePartByAddress
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { selectPartsOnly, togglePartsSelection } from 'interfaces/selection';
@@ -49,8 +49,8 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   }
 
   blueprintStore.subscribe(
-    (draft) => getPartByAddress(address, draft).meta.selected,
-    (current) => listingRef.current?.classList.toggle('selected', current),
+    (state) => getPartByAddress(address, state).meta.selected,
+    (current) => listingRef.current?.classList.toggle(styles.selected, current),
   );
 
   return (

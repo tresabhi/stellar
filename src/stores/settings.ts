@@ -1,4 +1,4 @@
-import { Languages } from 'hooks/useTranslations';
+import { Languages } from 'hooks/useTransformations';
 import { merge } from 'lodash';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';

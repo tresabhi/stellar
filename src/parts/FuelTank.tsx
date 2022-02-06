@@ -1,10 +1,12 @@
+import { useHelper } from '@react-three/drei';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import usePartTranslations from 'hooks/usePartTranslations';
+import useStellarContext from 'hooks/useStellarContext';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { times } from 'lodash';
 import { memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { Group, Mesh } from 'three';
+import { BoxHelper, Group, Mesh } from 'three';
 import { lerp } from 'three/src/math/MathUtils';
 import { PartComponentProps, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
@@ -123,6 +125,7 @@ export const FuelTankData: FuelTank = {
 // TODO: Reorder these to match typing above
 export const FuelTankLayoutComponent = memo<PartComponentProps>(
   ({ address }) => {
+    const stellarContext = useStellarContext();
     const data = blueprintStore((state) =>
       getPartByAddress(address, state),
     ) as FuelTank;
@@ -131,7 +134,12 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       blueprintStore.getState(),
     ) as FuelTank;
     const initialRotation = data.o.z * (Math.PI / 180);
-    const meshRef = useRef<Mesh | Group>(null);
+    const meshRef = useRef<Mesh | Group>();
+    const outlineHelper = useHelper(
+      meshRef,
+      data.meta.selected ? BoxHelper : undefined,
+      stellarContext.accentRegular,
+    );
 
     usePartTranslations(address, meshRef);
 

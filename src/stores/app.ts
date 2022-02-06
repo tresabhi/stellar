@@ -18,6 +18,8 @@ export interface AppStore {
       scaleConstrained: boolean;
     };
   };
+
+  transformationMode: 'translate' | 'rotate' | 'scale';
 }
 
 export const AppStoreData: AppStore = {
@@ -37,6 +39,8 @@ export const AppStoreData: AppStore = {
       scaleConstrained: false,
     },
   },
+
+  transformationMode: 'rotate',
 };
 
 const appStore = create<AppStore>(

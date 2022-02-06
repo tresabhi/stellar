@@ -17,7 +17,7 @@ export type Languages =
   | 'chinese_simplified'
   | 'chinese_traditional';
 
-const useTranslations = () => {
+const useTransformations = () => {
   const hook = {
     translate: (key: string) => {
       return 'test';
@@ -35,4 +35,4 @@ const useTranslations = () => {
 
   return hook;
 };
-export default useTranslations;
+export default useTransformations;

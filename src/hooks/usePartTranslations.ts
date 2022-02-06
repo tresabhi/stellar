@@ -7,7 +7,7 @@ import { PartAddress } from 'types/Blueprint';
 
 const usePartTranslations = (
   address: PartAddress,
-  meshRef: RefObject<Mesh | Group>,
+  meshRef: RefObject<Mesh | Group | undefined>,
 ) => {
   useLayoutEffect(() => {
     blueprintStore.subscribe(

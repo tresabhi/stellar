@@ -3,18 +3,21 @@ import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import { getPartModule } from 'interfaces/part';
 import { useRef } from 'react';
+import appStore from 'stores/app';
 import blueprintStore from 'stores/blueprint';
-import { Color, MOUSE, TOUCH } from 'three';
+import { Color, Group, MOUSE, TOUCH } from 'three';
 import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const transformationMode = appStore((state) => state.transformationMode);
   const initialData = blueprintStore.getState();
   const parts = blueprintStore((state) => state.parts).map((part, index) => {
     const PartComponent = getPartModule(part.n, true).LayoutComponent;
 
     return <PartComponent key={`part-${index}`} address={[index]} />;
   });
+  const tempRef = useRef<Group>(null);
 
   return (
     <Canvas
@@ -26,10 +29,10 @@ export const LayoutRenderer = () => {
       className={styles['editing-canvas']}
       performance={{ min: 0.75 }}
     >
+      <AdaptiveDpr pixelated />
       <directionalLight position={[-20, 20, 100]} />
       <ambientLight intensity={0.5} />
 
-      <AdaptiveDpr pixelated />
       <OrbitControls
         maxZoom={1024}
         minZoom={2.2}
@@ -45,6 +48,7 @@ export const LayoutRenderer = () => {
         enableRotate={false}
         enableDamping={false}
         regress
+        makeDefault
       />
 
       <gridHelper
@@ -61,7 +65,26 @@ export const LayoutRenderer = () => {
         color={new Color('#52527A')}
       />
 
-      <group position={[initialData.offset.x, initialData.offset.y, 0]}>
+      {/* <TransformControls
+        mode={transformationMode}
+        space="local"
+        showX={
+          transformationMode === 'translate' || transformationMode === 'scale'
+        }
+        showY={
+          transformationMode === 'translate' || transformationMode === 'scale'
+        }
+        showZ={
+          transformationMode !== 'translate' && transformationMode !== 'scale'
+        }
+        translationSnap={1}
+        rotationSnap={10 * (Math.PI / 180)}
+        scaleSnap={1 / 8}
+      /> */}
+      <group
+        ref={tempRef}
+        position={[initialData.offset.x, initialData.offset.y, 0]}
+      >
         {parts}
       </group>
     </Canvas>
