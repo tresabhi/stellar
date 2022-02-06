@@ -14,18 +14,21 @@ if (settingsStore.getState().debug.load_dummy_on_Launch) {
 }
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
+  const isLeftSideBarVisible = appStore(
+    (state) => state.layout.leftSideBar.visible,
+  );
+  const isRightSideBarVisible = appStore(
+    (state) => state.layout.rightSideBar.visible,
+  );
+
   return (
     <div
       {...props}
       className={`${props.className ?? ''} ${styles['layout-tab']}`}
     >
-      {appStore((state) => state.layout.leftSideBar.visible) ? (
-        <LeftSideBar />
-      ) : undefined}
+      {isLeftSideBarVisible ? <LeftSideBar /> : undefined}
       <LayoutRenderer />
-      {appStore((state) => state.layout.rightSideBar.visible) ? (
-        <RightSideBar />
-      ) : undefined}
+      {isRightSideBarVisible ? <RightSideBar /> : undefined}
     </div>
   );
 };

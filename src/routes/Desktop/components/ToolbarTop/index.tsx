@@ -17,7 +17,7 @@ const ToolBarTop: FC = () => {
   const openInputRef = useRef<HTMLInputElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
 
-  const handleInputClick = (ref: RefObject<HTMLInputElement>) => {
+  const handleCommonInputChange = (ref: RefObject<HTMLInputElement>) => {
     if (ref.current?.files) {
       const fileReader = new FileReader();
       const file = ref.current.files[0];
@@ -30,6 +30,27 @@ const ToolBarTop: FC = () => {
       };
     }
   };
+  const handleOpenFileInputChange = () => handleCommonInputChange(openInputRef);
+  const handleImportFileInputChange = () =>
+    handleCommonInputChange(importInputRef);
+  const handleOpenClick = openInputRef.current?.click;
+  const handleImportClick = importInputRef.current?.click;
+  const handleLoadDummyOnLaunchClick = () =>
+    settingsStore.setState(
+      produce((draft: SettingsStore) => {
+        draft.debug.load_dummy_on_Launch = !draft.debug.load_dummy_on_Launch;
+      }),
+    );
+  const handleLayoutTabClick = () => appStore.setState({ tab: 'layout' });
+  const handleStagingTabClick = () => appStore.setState({ tab: 'staging' });
+  const handleSimulationTabClick = () =>
+    appStore.setState({ tab: 'simulation' });
+  const handleRenderingTabClick = () => appStore.setState({ tab: 'rendering' });
+  const tab = appStore((state) => state.tab);
+  const isTabLayout = tab === 'layout';
+  const isTabStaging = tab === 'staging';
+  const isTabSimulation = tab === 'simulation';
+  const isTabRendering = tab === 'rendering';
 
   return (
     <div className={styles['toolbar-top']}>
@@ -38,14 +59,14 @@ const ToolBarTop: FC = () => {
         accept=".stbp"
         ref={openInputRef}
         type="file"
-        onChange={() => handleInputClick(openInputRef)}
+        onChange={handleOpenFileInputChange}
       />
       <input
         className={styles['file-input']}
         accept=".json, .txt"
         ref={importInputRef}
         type="file"
-        onChange={() => handleInputClick(importInputRef)}
+        onChange={handleImportFileInputChange}
       />
 
       <ControlMenu.Container>
@@ -53,19 +74,17 @@ const ToolBarTop: FC = () => {
           extension={
             <ContextMenu.Container>
               {/* Pro tip: add "..." only if further interaction is required */}
-              <ContextMenu.Button onClick={() => newBlueprint()}>
+              <ContextMenu.Button onClick={newBlueprint}>
                 New
               </ContextMenu.Button>
-              <ContextMenu.Button onClick={() => openInputRef.current?.click()}>
+              <ContextMenu.Button onClick={handleOpenClick}>
                 Open...
               </ContextMenu.Button>
 
               <ContextMenu.Separator />
 
               <ContextMenu.Button onClick={draft.save}>Save</ContextMenu.Button>
-              <ContextMenu.Button
-                onClick={() => importInputRef.current?.click()}
-              >
+              <ContextMenu.Button onClick={handleImportClick}>
                 Import...
               </ContextMenu.Button>
               <ContextMenu.Button disabled>Export...</ContextMenu.Button>
@@ -224,14 +243,7 @@ const ToolBarTop: FC = () => {
                   defaultState={
                     settingsStore.getState().debug.load_dummy_on_Launch
                   }
-                  onClick={() => {
-                    settingsStore.setState(
-                      produce((draft: SettingsStore) => {
-                        draft.debug.load_dummy_on_Launch =
-                          !draft.debug.load_dummy_on_Launch;
-                      }),
-                    );
-                  }}
+                  onClick={handleLoadDummyOnLaunchClick}
                 >
                   Load dummy BP on launch
                 </ContextMenu.Toggle>
@@ -244,28 +256,16 @@ const ToolBarTop: FC = () => {
       </ControlMenu.Container>
 
       <Tabs.Container className={styles['toolbar-tabs']}>
-        <Tabs.Tab
-          onClick={() => appStore.setState({ tab: 'layout' })}
-          selected={appStore((state) => state.tab) === 'layout'}
-        >
+        <Tabs.Tab onClick={handleLayoutTabClick} selected={isTabLayout}>
           Layout
         </Tabs.Tab>
-        <Tabs.Tab
-          onClick={() => appStore.setState({ tab: 'staging' })}
-          selected={appStore((state) => state.tab) === 'staging'}
-        >
-          Staging poop
+        <Tabs.Tab onClick={handleStagingTabClick} selected={isTabStaging}>
+          Staging
         </Tabs.Tab>
-        <Tabs.Tab
-          onClick={() => appStore.setState({ tab: 'simulation' })}
-          selected={appStore((state) => state.tab) === 'simulation'}
-        >
+        <Tabs.Tab onClick={handleSimulationTabClick} selected={isTabSimulation}>
           Simulation
         </Tabs.Tab>
-        <Tabs.Tab
-          onClick={() => appStore.setState({ tab: 'rendering' })}
-          selected={appStore((state) => state.tab) === 'rendering'}
-        >
+        <Tabs.Tab onClick={handleRenderingTabClick} selected={isTabRendering}>
           Rendering
         </Tabs.Tab>
       </Tabs.Container>

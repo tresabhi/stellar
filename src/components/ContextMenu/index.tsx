@@ -1,17 +1,19 @@
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
-import { FC, InputHTMLAttributes, useRef, useState } from 'react';
+import { FC, InputHTMLAttributes, MouseEvent, useRef, useState } from 'react';
 import styles from './index.module.scss';
 
 export const Container: FC = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const handleClick = () => {
+    //@ts-ignore
+    if (document.activeElement?.blur) document.activeElement?.blur();
+  };
+
   return (
     <div
-      onClick={() => {
-        //@ts-ignore
-        if (document.activeElement?.blur) document.activeElement?.blur();
-      }}
+      onClick={handleClick}
       ref={containerRef}
       className={styles['context-menu']}
     >
@@ -29,21 +31,24 @@ export const Button: FC<ButtonProps> = ({
   disabled = false,
   to,
   ...props
-}) => (
-  <div
-    {...props}
-    onClick={(event) => {
-      if (to) window.open(to);
+}) => {
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (to) window.open(to);
+    if (props.onClick) props.onClick(event);
+  };
 
-      if (props.onClick) props.onClick(event);
-    }}
-    className={`${props.className ?? ''} ${styles.button} ${
-      disabled ? styles.disabled : styles.enabled
-    }`}
-  >
-    <span className={styles.text}>{children}</span>
-  </div>
-);
+  return (
+    <div
+      {...props}
+      onClick={handleClick}
+      className={`${props.className ?? ''} ${styles.button} ${
+        disabled ? styles.disabled : styles.enabled
+      }`}
+    >
+      <span className={styles.text}>{children}</span>
+    </div>
+  );
+};
 
 export const Separator = () => (
   <div className={styles.separator}>
@@ -89,16 +94,18 @@ export const Toggle: FC<ToggleProps> = ({
 }) => {
   const [state, setState] = useState(defaultState);
 
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    setState((state) => !state);
+    if (props.onClick) props.onClick(event);
+  };
+
   return (
     <div
       {...props}
       className={`${props.className ?? ''} ${styles['toggle']} ${
         disabled ? styles.disabled : styles.enabled
       }`}
-      onClick={(event) => {
-        setState((state) => !state);
-        if (props.onClick) props.onClick(event);
-      }}
+      onClick={handleClick}
     >
       <span className={styles.text}>{children}</span>
       <div className={styles['icon-holder']}>

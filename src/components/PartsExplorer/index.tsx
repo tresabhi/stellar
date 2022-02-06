@@ -4,21 +4,22 @@ import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.s
 import produce from 'immer';
 import {
   getPartByAddress,
-  getReactivePartByAddress,
+  getReactivePartByAddress
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import {
   selectPartsFromOnly,
   selectPartsOnly,
-  togglePartsSelection,
+  togglePartsSelection
 } from 'interfaces/selection';
 import {
   FC,
   InputHTMLAttributes,
+  KeyboardEvent,
   memo,
   MouseEvent,
   useRef,
-  useState,
+  useState
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
@@ -50,7 +51,8 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   let data = getReactivePartByAddress(address)!;
   const Icon = getPartModule(data.n, true).Icon;
   let childParts: JSX.Element[] | undefined;
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+
+  const handleButtonClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.ctrlKey) {
       if (event.shiftKey) {
         // ctrl + shift
@@ -71,6 +73,30 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
       // no modifier
       selectPartsOnly([data.meta.address]);
     }
+  };
+  const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setExpanded((state) => !state);
+  };
+  const handleExpandMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
+    if (data.n === 'Group') event.preventDefault();
+  };
+  const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    buttonRef.current?.focus();
+  };
+  const handleLabelDoubleClick = () => inputRef.current?.focus();
+  const handleLabelBlur = () => {
+    inputRef.current!.value = inputRef.current!.value.trim();
+    blueprintStore.setState(
+      produce((draft: Blueprint) => {
+        let part = getPartByAddress(address, draft);
+        part.meta.label = inputRef.current!.value;
+      }),
+    );
+  };
+  const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') buttonRef.current?.focus();
   };
 
   if (data.n === 'Group') {
@@ -94,22 +120,15 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
       <div
         className={styles.button}
         style={{ paddingLeft: `${16 * indentation}px` }}
-        onClick={handleClick}
+        onClick={handleButtonClick}
       >
         {/* indentations */}
 
         {/* expand/collapse and/or dependency graphs */}
         <button
           ref={buttonRef}
-          onClick={(event) => {
-            // stop parent from being clicked
-            event.stopPropagation();
-            setExpanded((state) => !state);
-          }}
-          onMouseDown={(event) => {
-            // stop transfer of focus if it's a dropdown
-            if (data.n === 'Group') event.preventDefault();
-          }}
+          onClick={handleExpandClick}
+          onMouseDown={handleExpandMouseDown}
           className={styles.expand}
         >
           {data.n === 'Group' ? (
@@ -131,25 +150,10 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
 
         <input
           ref={inputRef}
-          onMouseDown={(event) => {
-            event.preventDefault();
-            buttonRef.current?.focus();
-          }}
-          onDoubleClick={() => {
-            inputRef.current?.focus();
-          }}
-          onBlur={() => {
-            inputRef.current!.value = inputRef.current!.value.trim();
-            blueprintStore.setState(
-              produce((draft: Blueprint) => {
-                let part = getPartByAddress(address, draft);
-                part.meta.label = inputRef.current!.value;
-              }),
-            );
-          }}
-          onKeyPress={(event) => {
-            if (event.key === 'Enter') buttonRef.current?.focus();
-          }}
+          onMouseDown={handleLabelMouseDown}
+          onDoubleClick={handleLabelDoubleClick}
+          onBlur={handleLabelBlur}
+          onKeyPress={handleLabelKeyPress}
           className={styles.label}
           defaultValue={data.meta.label}
         />

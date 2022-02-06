@@ -10,6 +10,13 @@ import selectionStore from 'stores/selection';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
+  const isScaleConstrained = appStore(
+    (state) => state.layout.rightSideBar.scaleConstrained,
+  );
+  const selectionsLength = selectionStore((state) => state.selections.length);
+  const partition = appStore((state) => state.layout.rightSideBar.partition);
+  const isPartitionProperties = partition === 'properties';
+  const isPartitionInspect = partition === 'inspect';
   const xController = useUnitInputController(0, { suffix: 'm' });
   const yController = useUnitInputController(0, { suffix: 'm' });
   const rController = useUnitInputController(0, {
@@ -21,56 +28,51 @@ const RightSideBar = () => {
   const wController = useUnitInputController(0, { suffix: 'x', min: 0 });
   const hController = useUnitInputController(0, { suffix: 'x', min: 0 });
 
+  const handlePropertiesClick = () =>
+    appStore.setState(
+      produce((draft: AppStore) => {
+        draft.layout.rightSideBar.partition = 'properties';
+      }),
+    );
+  const handleInspectClick = () =>
+    appStore.setState(
+      produce((draft: AppStore) => {
+        draft.layout.rightSideBar.partition = 'inspect';
+      }),
+    );
+  const handleConstrainClick = () =>
+    appStore.setState(
+      produce((draft: AppStore) => {
+        draft.layout.rightSideBar.scaleConstrained =
+          !draft.layout.rightSideBar.scaleConstrained;
+      }),
+    );
+
   return (
     <SideBar.Container className={styles['right-side-bar']} width="minor">
       <Partition.Container>
         <Partition.Option
-          selected={
-            appStore((state) => state.layout.rightSideBar.partition) ===
-            'properties'
-          }
-          onClick={() =>
-            appStore.setState(
-              produce((draft: AppStore) => {
-                draft.layout.rightSideBar.partition = 'properties';
-              }),
-            )
-          }
+          selected={isPartitionProperties}
+          onClick={handlePropertiesClick}
         >
           Properties
         </Partition.Option>
         <Partition.Separator />
         <Partition.Option
-          selected={
-            appStore((state) => state.layout.rightSideBar.partition) ===
-            'inspect'
-          }
-          onClick={() =>
-            appStore.setState(
-              produce((draft: AppStore) => {
-                draft.layout.rightSideBar.partition = 'inspect';
-              }),
-            )
-          }
+          selected={isPartitionInspect}
+          onClick={handleInspectClick}
         >
           Inspect
         </Partition.Option>
       </Partition.Container>
       <SideBar.Scrollable
         style={{
-          display:
-            appStore((state) => state.layout.rightSideBar.partition) ===
-            'properties'
-              ? 'unset'
-              : 'none',
+          display: isPartitionProperties ? undefined : 'none',
         }}
       >
         <PropertiesExplorer.Container
           style={{
-            display:
-              selectionStore((state) => state.selections.length) > 0
-                ? undefined
-                : 'none',
+            display: selectionsLength > 0 ? undefined : 'none',
           }}
         >
           <PropertiesExplorer.Group>
@@ -83,19 +85,8 @@ const RightSideBar = () => {
             <PropertiesExplorer.Row>
               <PropertiesExplorer.NamedInput label="W" ref={wController.ref} />
               <PropertiesExplorer.NamedInput label="H" ref={hController.ref} />
-              <PropertiesExplorer.ToggleButton
-                onClick={() => {
-                  appStore.setState(
-                    produce((draft: AppStore) => {
-                      draft.layout.rightSideBar.scaleConstrained =
-                        !draft.layout.rightSideBar.scaleConstrained;
-                    }),
-                  );
-                }}
-              >
-                {appStore(
-                  (state) => state.layout.rightSideBar.scaleConstrained,
-                ) ? (
+              <PropertiesExplorer.ToggleButton onClick={handleConstrainClick}>
+                {isScaleConstrained ? (
                   <LinkOn className={styles['constrain-icon']} />
                 ) : (
                   <LinkOff className={styles['constrain-icon']} />
@@ -107,11 +98,7 @@ const RightSideBar = () => {
       </SideBar.Scrollable>
       <SideBar.Scrollable
         style={{
-          display:
-            appStore((state) => state.layout.rightSideBar.partition) ===
-            'inspect'
-              ? 'unset'
-              : 'none',
+          display: isPartitionInspect ? undefined : 'none',
         }}
       >
         <span
