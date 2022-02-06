@@ -1,5 +1,4 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import usePartDecorations from 'hooks/usePartDecorations';
 import useUndefinedRef from 'hooks/useUndefinedRef';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { memo } from 'react';
