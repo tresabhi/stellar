@@ -11,31 +11,31 @@ const usePartTranslations = (
 ) => {
   useLayoutEffect(() => {
     blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).p.x,
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).p.x,
       (current, previous) => {
         meshRef.current!.position.x += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).p.y,
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).p.y,
       (current, previous) => {
         meshRef.current!.position.y += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.x,
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.x,
       (current, previous) => {
         meshRef.current!.scale.x += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.y,
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.y,
       (current, previous) => {
         meshRef.current!.scale.y += current - previous;
       },
     );
     blueprintStore.subscribe(
-      (draft) => (getPartByAddress(address, draft) as PartWithTranslations).o.z,
+      (state) => (getPartByAddress(address, state) as PartWithTranslations).o.z,
       (current) => {
         meshRef.current!.setRotationFromEuler(new Euler(0, 0, current));
       },

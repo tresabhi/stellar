@@ -1,12 +1,13 @@
-import { useHelper } from '@react-three/drei';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import usePartDecorations from 'hooks/usePartDecorations';
 import usePartTranslations from 'hooks/usePartTranslations';
 import useStellarContext from 'hooks/useStellarContext';
+import useUndefinedRef from 'hooks/useUndefinedRef';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { times } from 'lodash';
-import { memo, useRef } from 'react';
+import { memo } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { BoxHelper, Group, Mesh } from 'three';
+import { Group, Mesh } from 'three';
 import { lerp } from 'three/src/math/MathUtils';
 import { PartComponentProps, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
@@ -134,14 +135,10 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       blueprintStore.getState(),
     ) as FuelTank;
     const initialRotation = data.o.z * (Math.PI / 180);
-    const meshRef = useRef<Mesh | Group>();
-    const outlineHelper = useHelper(
-      meshRef,
-      data.meta.selected ? BoxHelper : undefined,
-      stellarContext.accentRegular,
-    );
+    const meshRef = useUndefinedRef<Mesh | Group>();
 
     usePartTranslations(address, meshRef);
+    usePartDecorations(address, meshRef);
 
     switch (data.T.shape_tex) {
       case 'Rivets': {

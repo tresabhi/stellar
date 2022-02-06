@@ -32,5 +32,7 @@ export function getPartModule<D extends boolean>(
 
   if (useDefault) {
     return module ?? DefaultPart;
-  } else return module!;
+  } else {
+    return module!;
+  }
 }

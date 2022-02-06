@@ -46,6 +46,19 @@ export const selectPartsOnly = (addresses: PartAddress[]) => {
   selectionStore.setState({ selections: addresses });
 };
 
+export const selectPartsFromOnly = (
+  startAddress: PartAddress,
+  endAddress: PartAddress,
+) => {
+  // it's backwards, so why not select backwards
+  const direction = getPartDirection(startAddress, endAddress);
+  if (direction === -1) [startAddress, endAddress] = [endAddress, startAddress];
+
+  /**
+   *
+   */
+};
+
 export const deselectParts = (addresses: PartAddress[]) => {
   blueprintStore.setState(
     produce((draft: Blueprint) => {

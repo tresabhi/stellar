@@ -1,15 +1,21 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
+import produce from 'immer';
 import {
   getPartByAddress,
-  getReactivePartByAddress
+  getReactivePartByAddress,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
-import { selectPartsOnly, togglePartsSelection } from 'interfaces/selection';
+import {
+  selectPartsFromOnly,
+  selectPartsOnly,
+  togglePartsSelection,
+} from 'interfaces/selection';
 import { FC, InputHTMLAttributes, memo, useRef, useState } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { PartAddress } from 'types/Blueprint';
+import selectionStore from 'stores/selection';
+import { Blueprint, PartAddress } from 'types/Blueprint';
 import compareAddressProps from 'utilities/compareAddressProps';
 import styles from './index.module.scss';
 
@@ -67,7 +73,13 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
               togglePartsSelection([data.meta.address]);
             }
           } else if (event.shiftKey) {
-            // shift
+            const selectionState = selectionStore.getState();
+
+            if (selectionState.lastSelection) {
+              selectPartsFromOnly(selectionState.lastSelection, address);
+            } else {
+              selectPartsOnly([address]);
+            }
           } else {
             // no modifier
             selectPartsOnly([data.meta.address]);
@@ -118,7 +130,12 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
           }}
           onBlur={() => {
             inputRef.current!.value = inputRef.current!.value.trim();
-            data.meta.label = inputRef.current!.value;
+            blueprintStore.setState(
+              produce((draft: Blueprint) => {
+                let part = getPartByAddress(address, draft);
+                part.meta.label = inputRef.current!.value;
+              }),
+            );
           }}
           onKeyPress={(event) => {
             if (event.key === 'Enter') buttonRef.current?.focus();
