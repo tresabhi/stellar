@@ -38,7 +38,10 @@ export const DefaultPartData: PartWithTranslations = {
   t: '-Infinity',
 };
 
-export const DefaultPartLayoutComponent = memo(() => <mesh />,compareAddressProps);
+export const DefaultPartLayoutComponent = memo(
+  () => <mesh />,
+  compareAddressProps,
+);
 
 export const DefaultPartIcon = Icon;
 

@@ -23,6 +23,7 @@ export const selectParts = (addresses: PartAddress[]) => {
 
   selectionStore.setState((draft) => ({
     selections: [...draft.selections, ...newSelections],
+    lastSelection: addresses[addresses.length - 1],
   }));
 };
 
@@ -43,7 +44,10 @@ export const selectPartsOnly = (addresses: PartAddress[]) => {
     }),
   );
 
-  selectionStore.setState({ selections: addresses });
+  selectionStore.setState({
+    selections: addresses,
+    lastSelection: addresses[addresses.length - 1],
+  });
 };
 
 export const selectPartsFromOnly = (
@@ -59,7 +63,7 @@ export const selectPartsFromOnly = (
    */
 };
 
-export const deselectParts = (addresses: PartAddress[]) => {
+export const unselectParts = (addresses: PartAddress[]) => {
   blueprintStore.setState(
     produce((draft: Blueprint) => {
       addresses.forEach((address) => {
@@ -80,7 +84,20 @@ export const deselectParts = (addresses: PartAddress[]) => {
   );
 };
 
-export const deselectAllParts = () => {};
+export const unselectAllParts = () => {
+  blueprintStore.setState(
+    produce((draft: Blueprint) => {
+      const selections = selectionStore.getState().selections;
+
+      selections.forEach((selection) => {
+        let part = getPartByAddress(selection, draft);
+        part.meta.selected = false;
+      });
+    }),
+  );
+
+  selectionStore.setState({ selections: [], lastSelection: undefined });
+};
 
 export const togglePartsSelection = (addresses: PartAddress[]) => {
   let spliceAddresses: PartAddress[] = [];
@@ -123,3 +140,6 @@ export const getPartDirection = (
     ? 1
     : -1;
 };
+
+//@ts-ignore
+window.q = unselectAllParts;

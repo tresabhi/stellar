@@ -4,13 +4,13 @@ import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.s
 import produce from 'immer';
 import {
   getPartByAddress,
-  getReactivePartByAddress
+  getReactivePartByAddress,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import {
   selectPartsFromOnly,
   selectPartsOnly,
-  togglePartsSelection
+  togglePartsSelection,
 } from 'interfaces/selection';
 import {
   FC,
@@ -19,7 +19,7 @@ import {
   memo,
   MouseEvent,
   useRef,
-  useState
+  useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';

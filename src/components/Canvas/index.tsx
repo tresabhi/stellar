@@ -22,13 +22,10 @@ export const LayoutRenderer = () => {
   });
   const tempRef = useRef<Group>(null);
 
-  // TODO: isolate JSX JSs with stores
-
   return (
     <Canvas
       ref={canvasRef}
       mode="concurrent"
-      frameloop="demand"
       orthographic
       camera={{ zoom: 16, position: [-initialData.center, 0, 100] }}
       className={styles['editing-canvas']}

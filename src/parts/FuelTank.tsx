@@ -1,42 +1,12 @@
+import { useHelper } from '@react-three/drei';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import useUndefinedRef from 'hooks/useUndefinedRef';
 import { getPartByAddress } from 'interfaces/blueprint';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { Group, Mesh } from 'three';
+import { BoxHelper, Mesh } from 'three';
 import { PartComponentProps, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 import { DefaultPartData, PartWithTranslations } from './Default';
-
-const FACE_COUNT = 24;
-// const BEVEL_MARGIN = 0.05;
-// const RIVET_MARGIN = 0.04;
-// const RIVET_COUNT = Math.floor(FACE_COUNT / 4);
-// const RIM_HEIGHT = 0.1;
-// const RIM_SLOPE_HEIGHT = 0.1;
-// const NOZZLES_PER_METER = 3;
-// const NOZZLE_HEIGHT = 0.1;
-// const NOZZLE_OFFSET = 1 / 6;
-const COLOR = 'white';
-const MATERIALS = {
-  flat: <meshBasicMaterial />,
-  faces: (
-    <meshStandardMaterial
-      color={COLOR}
-      roughness={0.8}
-      metalness={0.8}
-      flatShading={true}
-    />
-  ),
-  smooth: (
-    <meshStandardMaterial
-      color={COLOR}
-      roughness={0.8}
-      metalness={0.8}
-      flatShading={false}
-    />
-  ),
-};
 
 export interface FuelTank extends PartWithTranslations {
   n: 'Fuel Tank';
@@ -118,7 +88,6 @@ export const FuelTankData: FuelTank = {
   },
 };
 
-// TODO: Reorder these to match typing above
 export const FuelTankLayoutComponent = memo<PartComponentProps>(
   ({ address }) => {
     const data = blueprintStore((state) =>
@@ -129,7 +98,9 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
       blueprintStore.getState(),
     ) as FuelTank;
     const initialRotation = data.o.z * (Math.PI / 180);
-    const meshRef = useUndefinedRef<Mesh | Group>();
+    const meshRef = useRef<Mesh>();
+
+    useHelper(meshRef, data.meta.selected ? BoxHelper : undefined, 'red');
 
     return (
       <mesh
@@ -143,16 +114,23 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
         ]}
       >
         <cylinderGeometry
+          ref={meshRef}
           args={[
             data.N.width_b / 2,
             data.N.width_a / 2,
             data.N.height,
-            FACE_COUNT,
+            24,
             undefined,
             true,
           ]}
         />
-        {MATERIALS.faces}
+        <meshStandardMaterial
+          color="white"
+          roughness={0.8}
+          metalness={0.8}
+          flatShading={true}
+        />
+        {data.meta.selected}
       </mesh>
     );
   },
