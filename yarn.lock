@@ -6447,10 +6447,10 @@ node-domexception@^1.0.0:
   resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
   integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
 
-node-downloader-helper@^1.0.19:
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/node-downloader-helper/-/node-downloader-helper-1.0.19.tgz#f3313543dfaf6fabc58361886f14dca790f0fb6c"
-  integrity sha512-Bwp8WWDDP5ftg+FmAKU08a9+oiUTPoYzMvXgUqZZPQ7VMo1qKBzW3XdTXHeYnqjGLfkTZ2GPibgAWpApfpeS2g==
+node-downloader-helper@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/node-downloader-helper/-/node-downloader-helper-2.0.1.tgz#a40a66f2c3cfc0bc01a63eaf2d11c0adc2eb0443"
+  integrity sha512-qfLACEZl6WnhNrO9agUL5JITtgI5Zk1iXJ19sMh7VUNj+LgnhWnVZcMMXoGv1d/yiNuPDGF2tOSkizVBOgxpyw==
 
 node-fetch@^3.1.1:
   version "3.2.0"
