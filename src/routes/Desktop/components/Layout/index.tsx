@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/benchmark/fuelTank';
+import devBlueprint from 'assets/blueprints/static/grouping.json';
 import { LayoutRenderer } from 'components/Canvas';
 import { importifyBlueprint } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';

@@ -1,8 +1,10 @@
+import produce from 'immer';
 import * as PartsAPI from 'interfaces/part';
 import { cloneDeep, merge } from 'lodash';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
+import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyVanillaPart } from 'types/Parts';
 import { Blueprint, PartAddress, VanillaBlueprint } from '../types/Blueprint';
 
@@ -89,6 +91,23 @@ export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
   });
 
   return currentPart;
+};
+
+export const setPartByAddress = (
+  address: PartAddress,
+  data: DeepPartial<AnyPart>,
+  state?: Blueprint,
+) => {
+  if (state) {
+    let part = getPartByAddress(address, state);
+    merge(part, data);
+  } else {
+    blueprintStore.setState(
+      produce((draft: Blueprint) => {
+        setPartByAddress(address, data, draft);
+      }),
+    );
+  }
 };
 
 export const getReactivePartByAddress = (address: PartAddress) => {

@@ -5,6 +5,8 @@ import blueprintStore from 'stores/blueprint';
 import selectionStore, { SelectionStore } from 'stores/selection';
 import { Blueprint, PartAddress } from 'types/Blueprint';
 
+export const selectPart = (address: PartAddress) => selectParts([address]);
+
 export const selectParts = (addresses: PartAddress[]) => {
   let newSelections: PartAddress[] = [];
 
@@ -26,6 +28,9 @@ export const selectParts = (addresses: PartAddress[]) => {
     lastSelection: addresses[addresses.length - 1],
   }));
 };
+
+export const selectPartOnly = (address: PartAddress) =>
+  selectPartsOnly([address]);
 
 export const selectPartsOnly = (addresses: PartAddress[]) => {
   const currentSelections = selectionStore.getState().selections;
@@ -50,6 +55,11 @@ export const selectPartsOnly = (addresses: PartAddress[]) => {
   });
 };
 
+export const selectPartsFrom = (
+  startAddress: PartAddress,
+  endAddress: PartAddress,
+) => {};
+
 export const selectPartsFromOnly = (
   startAddress: PartAddress,
   endAddress: PartAddress,
@@ -62,6 +72,8 @@ export const selectPartsFromOnly = (
    *
    */
 };
+
+export const unselectPart = (address: PartAddress) => unselectParts([address]);
 
 export const unselectParts = (addresses: PartAddress[]) => {
   blueprintStore.setState(
@@ -98,6 +110,9 @@ export const unselectAllParts = () => {
 
   selectionStore.setState({ selections: [], lastSelection: undefined });
 };
+
+export const togglePartSelection = (address: PartAddress) =>
+  togglePartsSelection([address]);
 
 export const togglePartsSelection = (addresses: PartAddress[]) => {
   let spliceAddresses: PartAddress[] = [];
@@ -140,6 +155,3 @@ export const getPartDirection = (
     ? 1
     : -1;
 };
-
-//@ts-ignore
-window.q = unselectAllParts;

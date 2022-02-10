@@ -1,9 +1,13 @@
-import { useHelper } from '@react-three/drei';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import { getPartByAddress } from 'interfaces/blueprint';
+import usePartDecorations from 'hooks/usePartDecorations';
+import useSelectionHandler from 'hooks/useSelectionHandler';
+import {
+  getPartByAddress,
+  getReactivePartByAddress,
+} from 'interfaces/blueprint';
 import { memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { BoxHelper, Mesh } from 'three';
+import { Mesh } from 'three';
 import { PartComponentProps, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 import { DefaultPartData, PartWithTranslations } from './Default';
@@ -90,17 +94,16 @@ export const FuelTankData: FuelTank = {
 
 export const FuelTankLayoutComponent = memo<PartComponentProps>(
   ({ address }) => {
-    const data = blueprintStore((state) =>
-      getPartByAddress(address, state),
-    ) as FuelTank;
+    const data = getReactivePartByAddress(address) as FuelTank;
     const initialData = getPartByAddress(
       address,
       blueprintStore.getState(),
     ) as FuelTank;
     const initialRotation = data.o.z * (Math.PI / 180);
     const meshRef = useRef<Mesh>();
+    const selectionHandler = useSelectionHandler(address);
 
-    useHelper(meshRef, data.meta.selected ? BoxHelper : undefined, 'red');
+    usePartDecorations(data, meshRef);
 
     return (
       <mesh
@@ -112,6 +115,7 @@ export const FuelTankLayoutComponent = memo<PartComponentProps>(
           initialData.p.y + initialData.N.height / 2,
           0,
         ]}
+        onClick={selectionHandler}
       >
         <cylinderGeometry
           ref={meshRef}

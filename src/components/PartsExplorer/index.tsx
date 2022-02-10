@@ -1,17 +1,13 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
+import useSelectionHandler from 'hooks/useSelectionHandler';
 import produce from 'immer';
 import {
   getPartByAddress,
   getReactivePartByAddress,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
-import {
-  selectPartsFromOnly,
-  selectPartsOnly,
-  togglePartsSelection,
-} from 'interfaces/selection';
 import {
   FC,
   InputHTMLAttributes,
@@ -22,7 +18,6 @@ import {
   useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
-import selectionStore from 'stores/selection';
 import { Blueprint, PartAddress } from 'types/Blueprint';
 import compareAddressProps from 'utilities/compareAddressProps';
 import styles from './index.module.scss';
@@ -51,29 +46,8 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   let data = getReactivePartByAddress(address)!;
   const Icon = getPartModule(data.n, true).Icon;
   let childParts: JSX.Element[] | undefined;
+  const selectionHandler = useSelectionHandler(address);
 
-  const handleButtonClick = (event: MouseEvent<HTMLDivElement>) => {
-    if (event.ctrlKey) {
-      if (event.shiftKey) {
-        // ctrl + shift
-      } else {
-        // ctrl
-        togglePartsSelection([data.meta.address]);
-      }
-    } else if (event.shiftKey) {
-      // shift
-      const selectionState = selectionStore.getState();
-
-      if (selectionState.lastSelection) {
-        selectPartsFromOnly(selectionState.lastSelection, address);
-      } else {
-        selectPartsOnly([address]);
-      }
-    } else {
-      // no modifier
-      selectPartsOnly([data.meta.address]);
-    }
-  };
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setExpanded((state) => !state);
@@ -120,7 +94,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
       <div
         className={styles.button}
         style={{ paddingLeft: `${16 * indentation}px` }}
-        onClick={handleButtonClick}
+        onClick={selectionHandler}
       >
         {/* indentations */}
 

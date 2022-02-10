@@ -2,10 +2,11 @@ import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import { getPartModule } from 'interfaces/part';
+import { unselectAllParts } from 'interfaces/selection';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
-import { Color, Group, MOUSE, TOUCH } from 'three';
+import { Color, Group } from 'three';
 import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
@@ -30,6 +31,7 @@ export const LayoutRenderer = () => {
       camera={{ zoom: 16, position: [-initialData.center, 0, 100] }}
       className={styles['editing-canvas']}
       performance={{ min: regressAmount }}
+      onPointerMissed={unselectAllParts}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
       <directionalLight position={[-20, 20, 100]} />
@@ -38,16 +40,16 @@ export const LayoutRenderer = () => {
       <OrbitControls
         maxZoom={1024}
         minZoom={2.2}
-        mouseButtons={{
-          LEFT: MOUSE.RIGHT,
-          MIDDLE: MOUSE.MIDDLE,
-          RIGHT: MOUSE.LEFT,
-        }}
-        touches={{
-          ONE: TOUCH.PAN,
-          TWO: TOUCH.DOLLY_PAN,
-        }}
-        enableRotate={false}
+        // mouseButtons={{
+        //   LEFT: MOUSE.RIGHT,
+        //   MIDDLE: MOUSE.MIDDLE,
+        //   RIGHT: MOUSE.LEFT,
+        // }}
+        // touches={{
+        //   ONE: TOUCH.PAN,
+        //   TWO: TOUCH.DOLLY_PAN,
+        // }}
+        // enableRotate={false}
         enableDamping={false}
         regress={regressAmount > 0}
         makeDefault
