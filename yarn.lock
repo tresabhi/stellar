@@ -2123,12 +2123,24 @@
   resolved "https://registry.yarnpkg.com/@use-gesture/core/-/core-10.2.4.tgz#139370223174b0589bd4b4f8ac7c0beb6ba64ba2"
   integrity sha512-fk1LjCBj43BKb8NE05qkdtPOR0ngA7PwgvEqfFap/h+s7QHi+JTv4/mtDQ4wI9zzem+Ry5EKrHS/cVdBehI4wA==
 
+"@use-gesture/core@10.2.5":
+  version "10.2.5"
+  resolved "https://registry.yarnpkg.com/@use-gesture/core/-/core-10.2.5.tgz#f7df136a759059f58b524b8c7cca20c06b015724"
+  integrity sha512-Pggq5qLipJNYjMq6R7p7Y5h1juUlTkrhi9KqFJH6PcRFCNn+evjbOvpX7JEFehrx4Ik9UZcQpkmR+E0s7a5Lbg==
+
 "@use-gesture/react@^10.2.0":
   version "10.2.4"
   resolved "https://registry.yarnpkg.com/@use-gesture/react/-/react-10.2.4.tgz#b333e91b00670785ee32e8f4f1530ac6b8894bbc"
   integrity sha512-CbqyRj+qNbRBOGmS8OWtaOa29fxEr7bKTYHvPuMQ1wsgQDh2/DqQxbp7cFxAg6WZ8oZjppDj/EkWnw22WpIIWQ==
   dependencies:
     "@use-gesture/core" "10.2.4"
+
+"@use-gesture/react@^10.2.5":
+  version "10.2.5"
+  resolved "https://registry.yarnpkg.com/@use-gesture/react/-/react-10.2.5.tgz#51dd1a7dfc8e7dac53c4a07e898629c1474a5a36"
+  integrity sha512-AEVi2BBKOms7UNoRzthxwe4t3UVe/S1Vm4K2Vitbup3TkbhF3x70/ZbgE/TxhucYFcOPUcrQ89squEs/liQezg==
+  dependencies:
+    "@use-gesture/core" "10.2.5"
 
 "@vue/compiler-core@3.2.29":
   version "3.2.29"

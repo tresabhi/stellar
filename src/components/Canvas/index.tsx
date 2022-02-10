@@ -1,5 +1,6 @@
-import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
+import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import CanvasControls from 'components/CanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import { getPartModule } from 'interfaces/part';
 import { unselectAllParts } from 'interfaces/selection';
@@ -37,7 +38,8 @@ export const LayoutRenderer = () => {
       <directionalLight position={[-20, 20, 100]} />
       <ambientLight intensity={0.5} />
 
-      <OrbitControls
+      <CanvasControls />
+      {/* <OrbitControls
         maxZoom={1024}
         minZoom={2.2}
         // mouseButtons={{
@@ -49,11 +51,11 @@ export const LayoutRenderer = () => {
         //   ONE: TOUCH.PAN,
         //   TWO: TOUCH.DOLLY_PAN,
         // }}
-        // enableRotate={false}
+        enableRotate={false}
         enableDamping={false}
         regress={regressAmount > 0}
         makeDefault
-      />
+      /> */}
 
       <gridHelper
         position={[initialData.center, 0, -100]}
