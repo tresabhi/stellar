@@ -59,7 +59,7 @@ export const LayoutRenderer = () => {
 
       <gridHelper
         position={[initialData.center, 0, -100]}
-        args={[1e5, 2, '#9952E0']}
+        args={[1e4, 2, '#9952E0']}
         rotation={[Math.PI / 2, 0, 0]}
       />
       <InfiniteGridHelper
