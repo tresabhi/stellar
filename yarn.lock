@@ -1474,10 +1474,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.2.tgz#f0518f6d23a0b0f699a71976483323ac84bc4ace"
   integrity sha512-GGiIscTM+CEUNV52anj3g5FqAZKL2+eRKtvBOAlC99qGBbvJ3qTLImrUR/I3lXY7PRuLgzI6kh34quA1oUxWYQ==
 
-"@react-three/drei@^8.8.3":
-  version "8.8.3"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.8.3.tgz#a4c3ad678a42e9300c739a578d0591f33fc5e22f"
-  integrity sha512-vXRnUFZUTSqJzegTAxYfH+I6UoV6Ek6m26gU7w+/D1TabeKdMLRxcByBvi293jsBbb220mVFgqAafUXpa/Ql4w==
+"@react-three/drei@^8.8.4":
+  version "8.8.4"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.8.4.tgz#28f56c17d23265685cd0d4cdb1627ce05a488ef2"
+  integrity sha512-DvptFTpDODbeRbIA6miMEmIQSv7R+MTPliw92NIU/wwg+IvSNTTZSi8DBYR7qDQosAl73Cdj1E9qDfkv7+p5Gg==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -2118,24 +2118,12 @@
     "@typescript-eslint/types" "5.10.1"
     eslint-visitor-keys "^3.0.0"
 
-"@use-gesture/core@10.2.4":
-  version "10.2.4"
-  resolved "https://registry.yarnpkg.com/@use-gesture/core/-/core-10.2.4.tgz#139370223174b0589bd4b4f8ac7c0beb6ba64ba2"
-  integrity sha512-fk1LjCBj43BKb8NE05qkdtPOR0ngA7PwgvEqfFap/h+s7QHi+JTv4/mtDQ4wI9zzem+Ry5EKrHS/cVdBehI4wA==
-
 "@use-gesture/core@10.2.5":
   version "10.2.5"
   resolved "https://registry.yarnpkg.com/@use-gesture/core/-/core-10.2.5.tgz#f7df136a759059f58b524b8c7cca20c06b015724"
   integrity sha512-Pggq5qLipJNYjMq6R7p7Y5h1juUlTkrhi9KqFJH6PcRFCNn+evjbOvpX7JEFehrx4Ik9UZcQpkmR+E0s7a5Lbg==
 
-"@use-gesture/react@^10.2.0":
-  version "10.2.4"
-  resolved "https://registry.yarnpkg.com/@use-gesture/react/-/react-10.2.4.tgz#b333e91b00670785ee32e8f4f1530ac6b8894bbc"
-  integrity sha512-CbqyRj+qNbRBOGmS8OWtaOa29fxEr7bKTYHvPuMQ1wsgQDh2/DqQxbp7cFxAg6WZ8oZjppDj/EkWnw22WpIIWQ==
-  dependencies:
-    "@use-gesture/core" "10.2.4"
-
-"@use-gesture/react@^10.2.5":
+"@use-gesture/react@^10.2.0", "@use-gesture/react@^10.2.5":
   version "10.2.5"
   resolved "https://registry.yarnpkg.com/@use-gesture/react/-/react-10.2.5.tgz#51dd1a7dfc8e7dac53c4a07e898629c1474a5a36"
   integrity sha512-AEVi2BBKOms7UNoRzthxwe4t3UVe/S1Vm4K2Vitbup3TkbhF3x70/ZbgE/TxhucYFcOPUcrQ89squEs/liQezg==
@@ -6447,10 +6435,10 @@ node-domexception@^1.0.0:
   resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
   integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
 
-node-downloader-helper@^1.0.19:
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/node-downloader-helper/-/node-downloader-helper-1.0.19.tgz#f3313543dfaf6fabc58361886f14dca790f0fb6c"
-  integrity sha512-Bwp8WWDDP5ftg+FmAKU08a9+oiUTPoYzMvXgUqZZPQ7VMo1qKBzW3XdTXHeYnqjGLfkTZ2GPibgAWpApfpeS2g==
+node-downloader-helper@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/node-downloader-helper/-/node-downloader-helper-2.0.1.tgz#a40a66f2c3cfc0bc01a63eaf2d11c0adc2eb0443"
+  integrity sha512-qfLACEZl6WnhNrO9agUL5JITtgI5Zk1iXJ19sMh7VUNj+LgnhWnVZcMMXoGv1d/yiNuPDGF2tOSkizVBOgxpyw==
 
 node-fetch@^3.1.1:
   version "3.2.0"
