@@ -27,7 +27,7 @@
     "workbox-precaching": "^6.4.2",
     "workbox-routing": "^6.4.2",
     "workbox-strategies": "^6.4.2",
-    "zustand": "^3.6.9"
+    "zustand": "^3.7.0"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
