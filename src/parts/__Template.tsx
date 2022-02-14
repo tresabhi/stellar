@@ -1,15 +1,14 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { memo } from 'react';
 import { PartModule } from 'types/Parts';
-import { PartWithTranslations, DefaultPartData } from './Default';
+import { DefaultPartData, PartWithTranslations } from './Default';
 
-//@ts-ignore
 /* export */ interface Template extends PartWithTranslations {
   A: { b: number };
   C: boolean;
 }
 
-//@ts-ignore
 /* export */ const TemplateData: Template = {
   ...DefaultPartData,
 
@@ -22,20 +21,33 @@ import { PartWithTranslations, DefaultPartData } from './Default';
   C: true,
 };
 
-//@ts-ignore
 /* export */ const TemplateLayoutComponent = memo(() => <mesh />);
 
-//@ts-ignore
 /* export */ const TemplateIcon = Icon;
+
+/* export */ const TemplatePropertyComponent = () => (
+  <PropertiesExplorer.Group>
+    <PropertiesExplorer.Title>Template</PropertiesExplorer.Title>
+    <PropertiesExplorer.Row>
+      <PropertiesExplorer.NamedInput
+        label="Name"
+        type="wide"
+        defaultValue="Template"
+      ></PropertiesExplorer.NamedInput>
+    </PropertiesExplorer.Row>
+  </PropertiesExplorer.Group>
+);
 
 //@ts-ignore
 const TemplatePart: PartModule = {
-  //@ts-ignore
-  data: TemplateData,
+  isExportable: false,
 
   Icon: TemplateIcon,
+
+  PropertyComponent: TemplatePropertyComponent,
   LayoutComponent: TemplateLayoutComponent,
 
-  isExportable: false,
+  //@ts-ignore
+  data: TemplateData,
 };
 /* export default Template */

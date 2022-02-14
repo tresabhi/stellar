@@ -2,6 +2,8 @@
 
 .properties-explorer {
   padding: 0 $padding-x-thick 0 $padding-x-thick;
+  display: flex;
+  justify-content: center;
 
   .group {
     display: flex;

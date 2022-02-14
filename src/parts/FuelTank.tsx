@@ -8,7 +8,7 @@ import {
 import { memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Mesh } from 'three';
-import { PartComponentProps, PartModule } from 'types/Parts';
+import { ReactivePartComponentProps, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 import { DefaultPartData, PartWithTranslations } from './Default';
 
@@ -92,7 +92,7 @@ export const FuelTankData: FuelTank = {
   },
 };
 
-export const FuelTankLayoutComponent = memo<PartComponentProps>(
+export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
   ({ address }) => {
     const data = getReactivePartByAddress(address) as FuelTank;
     const initialData = getPartByAddress(

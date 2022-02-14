@@ -1,32 +1,19 @@
-import { ReactComponent as LinkOff } from 'assets/icons/link-off.svg';
-import { ReactComponent as LinkOn } from 'assets/icons/link-on.svg';
 import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
-import useUnitInputController from 'hooks/useUnitInputController';
 import produce from 'immer';
+import { getPartByAddress } from 'interfaces/blueprint';
+import { getPartModule } from 'interfaces/part';
 import appStore, { AppStore } from 'stores/app';
 import selectionStore from 'stores/selection';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
-  const isScaleConstrained = appStore(
-    (state) => state.layout.rightSideBar.scaleConstrained,
-  );
-  const selectionsLength = selectionStore((state) => state.selections.length);
   const partition = appStore((state) => state.layout.rightSideBar.partition);
+  const selections = selectionStore((state) => state.selections);
+  const selectionsLength = selectionStore((state) => state.selections.length);
   const isPartitionProperties = partition === 'properties';
   const isPartitionInspect = partition === 'inspect';
-  const xController = useUnitInputController(0, { suffix: 'm' });
-  const yController = useUnitInputController(0, { suffix: 'm' });
-  const rController = useUnitInputController(0, {
-    suffix: '°',
-    max: 360,
-    modOnClamp: true,
-  });
-  // TODO: find out where the game supports negative sizes
-  const wController = useUnitInputController(0, { suffix: 'x', min: 0 });
-  const hController = useUnitInputController(0, { suffix: 'x', min: 0 });
 
   const handlePropertiesClick = () =>
     appStore.setState(
@@ -40,13 +27,13 @@ const RightSideBar = () => {
         draft.layout.rightSideBar.partition = 'inspect';
       }),
     );
-  const handleConstrainClick = () =>
-    appStore.setState(
-      produce((draft: AppStore) => {
-        draft.layout.rightSideBar.scaleConstrained =
-          !draft.layout.rightSideBar.scaleConstrained;
-      }),
-    );
+
+  const properties = selections.map((selection) => {
+    const part = getPartByAddress(selection);
+    const PropertyComponent = getPartModule(part.n)?.PropertyComponent;
+
+    return PropertyComponent ? <PropertyComponent data={part} /> : undefined;
+  });
 
   return (
     <SideBar.Container className={styles['right-side-bar']} width="minor">
@@ -70,30 +57,12 @@ const RightSideBar = () => {
           display: isPartitionProperties ? undefined : 'none',
         }}
       >
-        <PropertiesExplorer.Container
-          style={{
-            display: selectionsLength > 0 ? undefined : 'none',
-          }}
-        >
-          <PropertiesExplorer.Group>
-            <PropertiesExplorer.Title>Transformations</PropertiesExplorer.Title>
-            <PropertiesExplorer.Row>
-              <PropertiesExplorer.NamedInput label="X" ref={xController.ref} />
-              <PropertiesExplorer.NamedInput label="Y" ref={yController.ref} />
-              <PropertiesExplorer.NamedInput label="R" ref={rController.ref} />
-            </PropertiesExplorer.Row>
-            <PropertiesExplorer.Row>
-              <PropertiesExplorer.NamedInput label="W" ref={wController.ref} />
-              <PropertiesExplorer.NamedInput label="H" ref={hController.ref} />
-              <PropertiesExplorer.ToggleButton onClick={handleConstrainClick}>
-                {isScaleConstrained ? (
-                  <LinkOn className={styles['constrain-icon']} />
-                ) : (
-                  <LinkOff className={styles['constrain-icon']} />
-                )}
-              </PropertiesExplorer.ToggleButton>
-            </PropertiesExplorer.Row>
-          </PropertiesExplorer.Group>
+        <PropertiesExplorer.Container>
+          {selectionsLength > 0 ? (
+            properties
+          ) : (
+            <span className={styles['nothing-selected']}>Nothing Selected</span>
+          )}
         </PropertiesExplorer.Container>
       </SideBar.Scrollable>
       <SideBar.Scrollable

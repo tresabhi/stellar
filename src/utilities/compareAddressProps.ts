@@ -1,9 +1,9 @@
 import { isEqual } from 'lodash';
-import { PartComponentProps } from 'types/Parts';
+import { ReactivePartComponentProps } from 'types/Parts';
 
 export default function compareAddressProps(
-  prevProps: PartComponentProps,
-  nextProps: PartComponentProps,
+  prevProps: ReactivePartComponentProps,
+  nextProps: ReactivePartComponentProps,
 ) {
   return isEqual(prevProps, nextProps);
 }

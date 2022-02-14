@@ -1,6 +1,6 @@
 import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import CanvasControls from 'components/CanvasControls';
+import DesktopCanvasControls from 'components/DesktopCanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import { getPartModule } from 'interfaces/part';
 import { unselectAllParts } from 'interfaces/selection';
@@ -38,7 +38,7 @@ export const LayoutRenderer = () => {
       <directionalLight position={[-20, 20, 100]} />
       <ambientLight intensity={0.5} />
 
-      <CanvasControls />
+      <DesktopCanvasControls />
 
       <gridHelper
         position={[initialData.center, 0, -99]}

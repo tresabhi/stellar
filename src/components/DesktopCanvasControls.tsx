@@ -6,7 +6,7 @@ const MIN_ZOOM = 2.2;
 
 // BUG: pressing shift and selecting parts causes the sensitivity to go up
 
-const CanvasControls = () => {
+const DesktopCanvasControls = () => {
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera) as OrthographicCamera;
   const viewport = useThree((state) => state.viewport);
@@ -37,4 +37,4 @@ const CanvasControls = () => {
   return null;
 };
 
-export default CanvasControls;
+export default DesktopCanvasControls;

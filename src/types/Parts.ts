@@ -14,14 +14,23 @@ export type AnyPartialPartType = DeepPartial<AnyPart>;
 export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPart>;
 
 export interface PartComponentProps {
+  data: AnyPart;
+}
+export interface ReactivePartComponentProps {
   address: PartAddress;
 }
 
 export type PartModule = {
-  data: AnyPart;
-
-  Icon: FC<any>;
-  LayoutComponent: FC<PartComponentProps>;
-
+  // meta
   isExportable: boolean;
+
+  // UI
+  Icon: FC<any>;
+  PropertyComponent?: FC<PartComponentProps>;
+
+  // render
+  LayoutComponent: FC<ReactivePartComponentProps>;
+
+  // miscellaneous
+  data: AnyPart;
 };

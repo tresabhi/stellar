@@ -6,4 +6,10 @@
     width: $icon-size-bigger;
     height: $icon-size-big;
   }
+
+  .nothing-selected {
+    color: $gray-regular;
+    font-size: $font-size-regular;
+    margin-top: $margin-x-thick;
+  }
 }
