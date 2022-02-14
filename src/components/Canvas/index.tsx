@@ -39,26 +39,9 @@ export const LayoutRenderer = () => {
       <ambientLight intensity={0.5} />
 
       <CanvasControls />
-      {/* <OrbitControls
-        maxZoom={1024}
-        minZoom={2.2}
-        // mouseButtons={{
-        //   LEFT: MOUSE.RIGHT,
-        //   MIDDLE: MOUSE.MIDDLE,
-        //   RIGHT: MOUSE.LEFT,
-        // }}
-        // touches={{
-        //   ONE: TOUCH.PAN,
-        //   TWO: TOUCH.DOLLY_PAN,
-        // }}
-        enableRotate={false}
-        enableDamping={false}
-        regress={regressAmount > 0}
-        makeDefault
-      /> */}
 
       <gridHelper
-        position={[initialData.center, 0, -100]}
+        position={[initialData.center, 0, -99]}
         args={[1e4, 2, '#9952E0']}
         rotation={[Math.PI / 2, 0, 0]}
       />

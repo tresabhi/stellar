@@ -1,27 +1,36 @@
 import { useThree } from '@react-three/fiber';
-import lerpInverse from 'utilities/lerpInverse';
+import { OrthographicCamera } from 'three';
+import inverseLerp from 'utilities/inverseLerp';
 
-const SCROLL_SENSITIVITY = 0.25;
 const MIN_ZOOM = 2.2;
-const MAX_ZOOM = 1024;
+
+// BUG: pressing shift and selecting parts causes the sensitivity to go up
 
 const CanvasControls = () => {
-  const camera = useThree(({ camera }) => camera);
-  const canvas = useThree(({ gl }) => gl.domElement);
+  const canvas = useThree((state) => state.gl.domElement);
+  const camera = useThree((state) => state.camera) as OrthographicCamera;
+  const viewport = useThree((state) => state.viewport);
 
   canvas.addEventListener('wheel', (event) => {
     if (event.ctrlKey) {
-      camera.zoom = Math.max(
+      event.preventDefault();
+
+      const maxZoom = camera.right - camera.left;
+      const zoomCompensatedDeltaY =
+        event.deltaY * inverseLerp(0, maxZoom, camera.zoom);
+      const zoom = Math.max(
         MIN_ZOOM,
-        Math.min(
-          MAX_ZOOM,
-          camera.zoom - event.deltaY * lerpInverse(0, MAX_ZOOM, camera.zoom),
-        ),
+        Math.min(maxZoom, camera.zoom - zoomCompensatedDeltaY),
       );
+
+      camera.zoom = zoom;
       camera.updateProjectionMatrix();
     } else {
-      camera.position.x += (event.deltaX * SCROLL_SENSITIVITY) / camera.zoom;
-      camera.position.y -= (event.deltaY * SCROLL_SENSITIVITY) / camera.zoom;
+      const pixelToWorldUnitRatio =
+        viewport.width / canvas.getBoundingClientRect().width;
+
+      camera.position.x += (event.deltaX * pixelToWorldUnitRatio) / camera.zoom;
+      camera.position.y -= (event.deltaY * pixelToWorldUnitRatio) / camera.zoom;
     }
   });
 
