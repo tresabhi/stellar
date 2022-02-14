@@ -1474,10 +1474,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.2.tgz#f0518f6d23a0b0f699a71976483323ac84bc4ace"
   integrity sha512-GGiIscTM+CEUNV52anj3g5FqAZKL2+eRKtvBOAlC99qGBbvJ3qTLImrUR/I3lXY7PRuLgzI6kh34quA1oUxWYQ==
 
-"@react-three/drei@^8.8.4":
-  version "8.8.4"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.8.4.tgz#28f56c17d23265685cd0d4cdb1627ce05a488ef2"
-  integrity sha512-DvptFTpDODbeRbIA6miMEmIQSv7R+MTPliw92NIU/wwg+IvSNTTZSi8DBYR7qDQosAl73Cdj1E9qDfkv7+p5Gg==
+"@react-three/drei@^8.9.0":
+  version "8.9.0"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.9.0.tgz#6a253b1ad8d4344ead111ad017428625c9ef7345"
+  integrity sha512-AumQ+8VksiL8LkiTvKEBAJGq5CPl4gzFiBmqBOoVFvw9kcKthTWNbVJs3/QkchYM1V5gipYCZ5M3DqLsbaYE1Q==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -4631,9 +4631,9 @@ flatted@^3.1.0:
   integrity sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==
 
 follow-redirects@^1.0.0:
-  version "1.14.7"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.7.tgz#2004c02eb9436eee9a21446a6477debf17e81685"
-  integrity sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==
+  version "1.14.8"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
+  integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
 
 fork-ts-checker-webpack-plugin@^6.5.0:
   version "6.5.0"
