@@ -2118,17 +2118,17 @@
     "@typescript-eslint/types" "5.10.1"
     eslint-visitor-keys "^3.0.0"
 
-"@use-gesture/core@10.2.5":
-  version "10.2.5"
-  resolved "https://registry.yarnpkg.com/@use-gesture/core/-/core-10.2.5.tgz#f7df136a759059f58b524b8c7cca20c06b015724"
-  integrity sha512-Pggq5qLipJNYjMq6R7p7Y5h1juUlTkrhi9KqFJH6PcRFCNn+evjbOvpX7JEFehrx4Ik9UZcQpkmR+E0s7a5Lbg==
+"@use-gesture/core@10.2.6":
+  version "10.2.6"
+  resolved "https://registry.yarnpkg.com/@use-gesture/core/-/core-10.2.6.tgz#12bdab107501798334ae28a6d193ef6ccd7a8930"
+  integrity sha512-+GpVSEoCLv1OeZ+qgAV+tLUKit1LKgKO3PgIiEVZqNr4A/YTXzbC1unlThpfzwyj5Dx22UxHDh0UfgRrQ9Lb1w==
 
-"@use-gesture/react@^10.2.0", "@use-gesture/react@^10.2.5":
-  version "10.2.5"
-  resolved "https://registry.yarnpkg.com/@use-gesture/react/-/react-10.2.5.tgz#51dd1a7dfc8e7dac53c4a07e898629c1474a5a36"
-  integrity sha512-AEVi2BBKOms7UNoRzthxwe4t3UVe/S1Vm4K2Vitbup3TkbhF3x70/ZbgE/TxhucYFcOPUcrQ89squEs/liQezg==
+"@use-gesture/react@^10.2.0", "@use-gesture/react@^10.2.6":
+  version "10.2.6"
+  resolved "https://registry.yarnpkg.com/@use-gesture/react/-/react-10.2.6.tgz#9ff0bdc2675d8a1520189e62b232800f852150ed"
+  integrity sha512-s/QDhKvsQVaSNq1ljRBMR2PWRkOp9BmoI+kgZR1DsHUSp5XDORtU33D5TZfJoWnD5X3E9SmePikPl66dDaEeDA==
   dependencies:
-    "@use-gesture/core" "10.2.5"
+    "@use-gesture/core" "10.2.6"
 
 "@vue/compiler-core@3.2.29":
   version "3.2.29"
