@@ -2,8 +2,6 @@
 
 .properties-explorer {
   padding: 0 $padding-x-thick 0 $padding-x-thick;
-  display: flex;
-  justify-content: center;
 
   .group {
     display: flex;
@@ -18,17 +16,20 @@
 
     .row {
       display: flex;
-      justify-content: space-between;
       margin-bottom: $margin-thick;
 
       .input {
         background-color: $black-light;
         border-radius: $border-radius-regular;
+        padding-left: $padding-thick;
+        margin-right: $margin-x-thick;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $named-input-height;
 
         &.small {
           width: $named-input-small-width;
-          height: $named-input-height;
-          display: flex;
         }
 
         &.wide {
@@ -36,21 +37,23 @@
         }
 
         .label {
-          font-size: $font-size-regular;
-          padding: 0 $padding-thick 0 $padding-thick;
+          font-size: $font-size-small;
+          margin-right: $margin-thick;
           color: $gray-darker;
           display: flex;
           align-items: center;
           justify-content: center;
+          // background-color: green;
         }
 
         .value {
-          font-size: $font-size-regular;
+          font-size: $font-size-small;
           color: white;
           flex: 1;
           text-align: center;
           min-width: 0;
           text-overflow: ellipsis;
+          // background-color: blue;
         }
       }
 

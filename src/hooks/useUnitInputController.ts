@@ -29,6 +29,7 @@ export default function useUnitInputController(
 ) {
   const mergedOptions = merge(UseUnitInputControllerDefaultOptions, options);
   const inputRef = useRef<HTMLInputElement>(null);
+  let parent: HTMLDivElement;
   let value = useRef(initialValue);
   let isMixed = useRef(options?.mixed ?? false);
 
@@ -44,8 +45,9 @@ export default function useUnitInputController(
 
   useLayoutEffect(() => {
     hook.write();
+    parent = inputRef.current!.parentNode as HTMLDivElement;
 
-    inputRef.current?.addEventListener('focus', () => {
+    parent.addEventListener('click', () => {
       inputRef.current!.value = isMixed.current ? '' : `${value.current}`;
       inputRef.current?.select();
     });

@@ -1,14 +1,19 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePartDecorations from 'hooks/usePartDecorations';
 import useSelectionHandler from 'hooks/useSelectionHandler';
 import {
   getPartByAddress,
   getReactivePartByAddress,
 } from 'interfaces/blueprint';
-import { memo, useRef } from 'react';
+import { FC, memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Mesh } from 'three';
-import { ReactivePartComponentProps, PartModule } from 'types/Parts';
+import {
+  PartComponentProps,
+  PartModule,
+  ReactivePartComponentProps,
+} from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 import { DefaultPartData, PartWithTranslations } from './Default';
 
@@ -143,12 +148,36 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
 
 export const FuelTankIcon = Icon;
 
+export const FuelTankPropertyComponent: FC<PartComponentProps> = ({
+  data: initialData,
+}) => {
+  const data = initialData as FuelTank;
+
+  return (
+    <PropertiesExplorer.Group>
+      <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
+      <PropertiesExplorer.Row>
+        <PropertiesExplorer.NamedInput
+          label="Width"
+          defaultValue={data.N.width_original}
+        />
+        <PropertiesExplorer.NamedInput
+          label="Height"
+          defaultValue={data.N.height}
+        />
+      </PropertiesExplorer.Row>
+    </PropertiesExplorer.Group>
+  );
+};
+
 const FuelTankPart: PartModule = {
-  data: FuelTankData,
+  isExportable: true,
 
   Icon: FuelTankIcon,
+  PropertyComponent: FuelTankPropertyComponent,
+
   LayoutComponent: FuelTankLayoutComponent,
 
-  isExportable: true,
+  data: FuelTankData,
 };
 export default FuelTankPart;

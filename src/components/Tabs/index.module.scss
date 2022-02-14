@@ -22,5 +22,9 @@
       background-color: $black-lighter;
       cursor: default;
     }
+
+    &.selected {
+      font-weight: bold;
+    }
   }
 }

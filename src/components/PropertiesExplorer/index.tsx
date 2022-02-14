@@ -35,7 +35,7 @@ export const NamedInput = forwardRef<HTMLInputElement, NamedInputProps>(
     return (
       <div
         className={`${styles['input']} ${
-          type === 'small' ? styles.small : styles.wide
+          type === 'wide' ? styles.wide : styles.small
         }`}
       >
         <span className={styles.label}>{label}</span>
