@@ -16,7 +16,7 @@ import {
   PartModule,
   ReactivePartComponentProps,
 } from 'types/Parts';
-import compareAddressProps from 'utilities/compareAddressProps';
+import compareAddressesProps from 'utilities/compareAddressesProps';
 import { DefaultPartData, PartWithTranslations } from './Default';
 
 export interface FuelTank extends PartWithTranslations {
@@ -148,7 +148,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       </mesh>
     );
   },
-  compareAddressProps,
+  compareAddressesProps,
 );
 
 export const FuelTankIcon = Icon;

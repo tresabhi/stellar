@@ -2,7 +2,7 @@ import { ReactComponent as Icon } from 'assets/icons/question-mark.svg';
 import { memo } from 'react';
 import { PartAddress } from 'types/Blueprint';
 import { AnyPart, PartModule } from 'types/Parts';
-import compareAddressProps from 'utilities/compareAddressProps';
+import compareAddressesProps from 'utilities/compareAddressesProps';
 
 export interface PartWithMeta {
   meta: {
@@ -40,7 +40,7 @@ export const DefaultPartData: PartWithTranslations = {
 
 export const DefaultPartLayoutComponent = memo(
   () => <mesh />,
-  compareAddressProps,
+  compareAddressesProps,
 );
 
 export const DefaultPartIcon = Icon;

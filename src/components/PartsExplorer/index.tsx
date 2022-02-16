@@ -21,7 +21,7 @@ import {
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Blueprint, PartAddress } from 'types/Blueprint';
-import compareAddressProps from 'utilities/compareAddressProps';
+import compareAddressesProps from 'utilities/compareAddressesProps';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
@@ -148,4 +148,4 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
       ) : undefined}
     </div>
   );
-}, compareAddressProps);
+}, compareAddressesProps);

@@ -4,6 +4,7 @@ import * as SideBar from 'components/SideBar';
 import produce from 'immer';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
+import { memo } from 'react';
 import appStore, { AppStore } from 'stores/app';
 import selectionStore from 'stores/selection';
 import styles from './index.module.scss';
@@ -30,9 +31,14 @@ const RightSideBar = () => {
 
   const properties = selections.map((selection) => {
     const part = getPartByAddress(selection);
-    const PropertyComponent = getPartModule(part.n)?.PropertyComponent;
+    let PropertyComponent = getPartModule(part.n)?.PropertyComponent;
 
-    return PropertyComponent ? <PropertyComponent data={part} /> : undefined;
+    if (PropertyComponent) {
+      PropertyComponent = memo(PropertyComponent);
+      return <PropertyComponent data={part} />;
+    } else {
+      return undefined;
+    }
   });
 
   return (
