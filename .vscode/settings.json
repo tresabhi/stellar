@@ -72,5 +72,8 @@
     "हिन्दी"
   ],
   "docwriter.style": "JSDoc",
-  "css.lint.unknownAtRules": "ignore"
+  "css.lint.unknownAtRules": "ignore",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-issue-config.json": "file:///workspace/Stellar/.github/ISSUE_TEMPLATE/config.yml"
+  }
 }
