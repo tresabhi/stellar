@@ -46,6 +46,7 @@ jobs:
     environment: Alpha
     needs: build
     runs-on: ubuntu-latest
+    if: github.repository == 'TresAbhi/Stellar'
 
     steps:
       - name: Get code
