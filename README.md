@@ -1,4 +1,8 @@
-# Stellar [<img src="https://user-images.githubusercontent.com/43380238/148424581-843be3a2-10a4-4503-a2d4-099a987c5ff4.png" alt="PostCSS Logo" width="90" height="90" align="right">][postcss]
+# Stellar [<img src="https://user-images.githubusercontent.com/43380238/148424581-843be3a2-10a4-4503-a2d4-099a987c5ff4.png" alt="PostCSS Logo" width="90" height="90" align="right">](https://github.com/TresAbhi/Stellar)
+
+[![NPM Version][npm-img]][npm-url]
+[![Build Status][cli-img]][cli-url]
+[![Support Chat][git-img]][git-url]
 
 ![image](https://user-images.githubusercontent.com/43380238/148424321-199a10a1-78ac-41ee-8726-827a1b79d366.png)
 
