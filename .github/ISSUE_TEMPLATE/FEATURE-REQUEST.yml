@@ -1,0 +1,13 @@
+name: Feature Request
+description: Something that you would like to see in Stellar
+title: '[Feature]: '
+labels: ['enhancement']
+
+body:
+  - type: textarea
+    id: about
+    attributes:
+      label: About
+      description: Describe your idea; include images if possible
+    validations:
+      required: true
