@@ -29,6 +29,7 @@
         height: $named-input-height;
 
         &.small {
+          max-width: $named-input-small-width;
           width: $named-input-small-width;
         }
 
@@ -40,10 +41,12 @@
           font-size: $font-size-small;
           margin-right: $margin-thick;
           color: $gray-darker;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          // background-color: green;
+          max-width: 60%;
+          white-space: nowrap;
+          overflow: hidden;
+          display: block;
+          text-overflow: ellipsis;
+          user-select: none;
         }
 
         .value {
@@ -53,7 +56,6 @@
           text-align: center;
           min-width: 0;
           text-overflow: ellipsis;
-          // background-color: blue;
         }
       }
 

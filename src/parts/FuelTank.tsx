@@ -165,6 +165,10 @@ export const FuelTankPropertyComponent: FC<PartComponentProps> = ({
           label="Height"
           defaultValue={data.N.height}
         />
+        <PropertiesExplorer.NamedInput
+          label="Fuel"
+          defaultValue={data.N.fuel_percent}
+        />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );
