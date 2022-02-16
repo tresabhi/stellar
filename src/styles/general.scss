@@ -6,7 +6,7 @@ body {
   width: 100vw;
   overflow-x: hidden;
   overflow-y: hidden;
-
+  user-select: none;
   background-color: $black-x-dark;
 
   &.party {

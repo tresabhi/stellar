@@ -1,8 +1,9 @@
 import produce from 'immer';
 import { deletePartsBySelection } from 'interfaces/blueprint';
-import { unselectAllParts } from 'interfaces/selection';
+import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { KeyMap } from 'react-hotkeys';
 import appStore, { AppStore } from 'stores/app';
+import blueprintStore from 'stores/blueprint';
 
 // TODO: Find a way to make this cleaner
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
@@ -24,6 +25,7 @@ export default function useKeybinds() {
     TOGGLE_RIGHT_SIDE_BAR: 'alt + 2',
 
     DELETE_SELECTION: 'del',
+    SELECT_ALL: 'ctrl + a',
     UNSELECT_ALL: 'escape',
 
     PARTY: 'p a r t y',
@@ -49,6 +51,7 @@ export default function useKeybinds() {
         }),
       );
     },
+
     TOGGLE_RIGHT_SIDE_BAR: (event) => {
       event?.preventDefault();
 
@@ -67,6 +70,15 @@ export default function useKeybinds() {
       document.body.classList.toggle('party'),
 
     UNSELECT_ALL: unselectAllParts,
+
+    SELECT_ALL: (event) => {
+      event?.preventDefault();
+
+      // TODO: in the future, use selectPartsOnlyFrom([0], [length - 1]);
+      selectPartsOnly(
+        blueprintStore.getState().parts.map((part, index) => [index]),
+      );
+    },
   };
 
   return [keyMap, handlers] as [KeyMap, Handlers];

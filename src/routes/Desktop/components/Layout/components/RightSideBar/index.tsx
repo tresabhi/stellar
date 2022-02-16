@@ -61,7 +61,11 @@ const RightSideBar = () => {
           {selectionsLength > 0 ? (
             properties
           ) : (
-            <span className={styles['nothing-selected']}>Nothing Selected</span>
+            <PropertiesExplorer.Group>
+              <PropertiesExplorer.Title>
+                Nothing Selected
+              </PropertiesExplorer.Title>
+            </PropertiesExplorer.Group>
           )}
         </PropertiesExplorer.Container>
       </SideBar.Scrollable>
