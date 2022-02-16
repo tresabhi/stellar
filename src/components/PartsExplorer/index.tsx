@@ -3,7 +3,7 @@ import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-ri
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import useSelectionHandler, {
   UseSelectionHandlerListing,
-} from 'hooks/useSelectionHandler';
+} from 'hooks/useDesktopSelection';
 import produce from 'immer';
 import {
   getPartByAddress,
@@ -68,6 +68,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const handleLabelBlur = () => {
     inputRef.current!.value = inputRef.current!.value.trim();
     blueprintStore.setState(
+      // TODO: ISOLATE THIS INTO A FUNCTION AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       produce((draft: Blueprint) => {
         let part = getPartByAddress(address, draft);
         part.meta.label = inputRef.current!.value;

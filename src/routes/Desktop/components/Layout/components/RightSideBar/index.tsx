@@ -4,9 +4,9 @@ import * as SideBar from 'components/SideBar';
 import produce from 'immer';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
-import { memo } from 'react';
 import appStore, { AppStore } from 'stores/app';
 import selectionStore from 'stores/selection';
+import { AnyPart, AnyPartName } from 'types/Parts';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
@@ -29,15 +29,23 @@ const RightSideBar = () => {
       }),
     );
 
-  const properties = selections.map((selection) => {
+  let sortedSelections: Map<AnyPartName, AnyPart[]> = new Map();
+  selections.forEach((selection) => {
     const part = getPartByAddress(selection);
-    let PropertyComponent = getPartModule(part.n)?.PropertyComponent;
+
+    if (sortedSelections.has(part.n)) {
+      sortedSelections.get(part.n)?.push(part);
+    } else {
+      sortedSelections.set(part.n, [part]);
+    }
+  });
+  const properties = Array.from(sortedSelections, ([key, value]) => {
+    const PropertyComponent = getPartModule(key)?.PropertyComponent;
 
     if (PropertyComponent) {
-      PropertyComponent = memo(PropertyComponent);
-      return <PropertyComponent data={part} />;
+      return <PropertyComponent parts={value} />;
     } else {
-      return undefined;
+      return null;
     }
   });
 

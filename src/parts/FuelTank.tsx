@@ -1,9 +1,9 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import usePartDecorations from 'hooks/usePartDecorations';
 import useSelectionHandler, {
   UseSelectionHandlerMesh,
-} from 'hooks/useSelectionHandler';
+} from 'hooks/useDesktopSelection';
+import usePartDecorations from 'hooks/usePartDecorations';
 import {
   getPartByAddress,
   getReactivePartByAddress,
@@ -12,11 +12,12 @@ import { FC, memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Mesh } from 'three';
 import {
-  PartComponentProps,
   PartModule,
+  PropertyComponentProps,
   ReactivePartComponentProps,
 } from 'types/Parts';
 import compareAddressesProps from 'utilities/compareAddressesProps';
+import getOnlyMutualSlice from 'utilities/getOnlyMutualSlice';
 import { DefaultPartData, PartWithTranslations } from './Default';
 
 export interface FuelTank extends PartWithTranslations {
@@ -153,27 +154,25 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
 
 export const FuelTankIcon = Icon;
 
-export const FuelTankPropertyComponent: FC<PartComponentProps> = ({
-  data: initialData,
+export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
+  parts,
 }) => {
-  const data = initialData as FuelTank;
+  const { width, height, fuel } = getOnlyMutualSlice(
+    (data) => ({
+      width: data.N.width_original,
+      height: data.N.height,
+      fuel: data.N.fuel_percent,
+    }),
+    parts as FuelTank[],
+  );
 
   return (
     <PropertiesExplorer.Group>
       <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput
-          label="Width"
-          defaultValue={data.N.width_original}
-        />
-        <PropertiesExplorer.NamedInput
-          label="Height"
-          defaultValue={data.N.height}
-        />
-        <PropertiesExplorer.NamedInput
-          label="Fuel"
-          defaultValue={data.N.fuel_percent}
-        />
+        <PropertiesExplorer.NamedInput label="Width" value={width ?? '~'} />
+        <PropertiesExplorer.NamedInput label="Height" value={height ?? '~'} />
+        <PropertiesExplorer.NamedInput label="Fuel" value={fuel ?? '~'} />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );
