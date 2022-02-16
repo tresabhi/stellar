@@ -1,7 +1,9 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePartDecorations from 'hooks/usePartDecorations';
-import useSelectionHandler from 'hooks/useSelectionHandler';
+import useSelectionHandler, {
+  UseSelectionHandlerMesh,
+} from 'hooks/useSelectionHandler';
 import {
   getPartByAddress,
   getReactivePartByAddress,
@@ -106,7 +108,10 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
     ) as FuelTank;
     const initialRotation = data.o.z * (Math.PI / 180);
     const meshRef = useRef<Mesh>();
-    const selectionHandler = useSelectionHandler(address);
+    const selectionHandler = useSelectionHandler(
+      address,
+      'mesh',
+    ) as UseSelectionHandlerMesh;
 
     usePartDecorations(data, meshRef);
 

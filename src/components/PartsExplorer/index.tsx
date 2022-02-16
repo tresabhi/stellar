@@ -1,7 +1,9 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import useSelectionHandler from 'hooks/useSelectionHandler';
+import useSelectionHandler, {
+  UseSelectionHandlerListing,
+} from 'hooks/useSelectionHandler';
 import produce from 'immer';
 import {
   getPartByAddress,
@@ -46,7 +48,10 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   let data = getReactivePartByAddress(address)!;
   const Icon = getPartModule(data.n, true).Icon;
   let childParts: JSX.Element[] | undefined;
-  const selectionHandler = useSelectionHandler(address);
+  const selectionHandler = useSelectionHandler(
+    address,
+    'listing',
+  ) as UseSelectionHandlerListing;
 
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
