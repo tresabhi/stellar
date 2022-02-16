@@ -4,6 +4,8 @@
 [![version](https://img.shields.io/github/package-json/v/TresAbhi/Stellar)](https://github.com/TresAbhi/Stellar/blob/main/package.json)
 [![issues](https://img.shields.io/github/issues-raw/TresAbhi/Stellar)](https://github.com/TresAbhi/Stellar/issues)
 
+<br><br>
+
 ![image](https://user-images.githubusercontent.com/43380238/148424321-199a10a1-78ac-41ee-8726-827a1b79d366.png)
 
 ## 🤔 About
