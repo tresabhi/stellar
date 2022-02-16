@@ -1474,10 +1474,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.2.tgz#f0518f6d23a0b0f699a71976483323ac84bc4ace"
   integrity sha512-GGiIscTM+CEUNV52anj3g5FqAZKL2+eRKtvBOAlC99qGBbvJ3qTLImrUR/I3lXY7PRuLgzI6kh34quA1oUxWYQ==
 
-"@react-three/drei@^8.9.0":
-  version "8.9.0"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.9.0.tgz#6a253b1ad8d4344ead111ad017428625c9ef7345"
-  integrity sha512-AumQ+8VksiL8LkiTvKEBAJGq5CPl4gzFiBmqBOoVFvw9kcKthTWNbVJs3/QkchYM1V5gipYCZ5M3DqLsbaYE1Q==
+"@react-three/drei@^8.10.0":
+  version "8.10.0"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.10.0.tgz#a85a038ce0732618407242db9aaa4dcb13a2a68c"
+  integrity sha512-KrU7f3Nq9dTk4FWfwjBLguTNHNfkgIJkbwbTJiOleGnFOo64HaLdHip5OhaZGETafX8+4frT5ntvDy85AxJ8ow==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -1491,7 +1491,7 @@
     stats.js "^0.17.0"
     three-mesh-bvh "^0.5.4"
     three-stdlib "^2.8.6"
-    troika-three-text "^0.44.0"
+    troika-three-text "^0.45.0"
     use-asset "^1.0.4"
     utility-types "^3.10.0"
     zustand "^3.5.13"
@@ -8915,24 +8915,24 @@ tr46@^2.1.0:
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.3.9.tgz#717b8f220cc0bb7b44e40514c22b2e8bbc70d8b9"
   integrity sha1-cXuPIgzAu3tE5AUUwisui7xw2Lk=
 
-troika-three-text@^0.44.0:
-  version "0.44.0"
-  resolved "https://registry.yarnpkg.com/troika-three-text/-/troika-three-text-0.44.0.tgz#7c1a785c1aea9acc7631651acac97f2dbed2f26f"
-  integrity sha512-YwqXczjXQ4yq2a2ufO9icOIjeJutE/ODS8PHmmt/WAzVFqoiqeemclp/Ewiqm0+sdI1KnWRm6lj8df/zmhU3Og==
+troika-three-text@^0.45.0:
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/troika-three-text/-/troika-three-text-0.45.0.tgz#d3e4f1f0637d3dea5735e9887a77d9a010b1c041"
+  integrity sha512-s/MhDYJm0+aiQU8fjO1TXl1UZESY52GMJgzyMB0HHnh2iADy+WY00oVgNsW6lU7XmC2g8MU81nV5egCDAS4/Pg==
   dependencies:
     bidi-js "^1.0.2"
-    troika-three-utils "^0.44.0"
-    troika-worker-utils "^0.44.0"
+    troika-three-utils "^0.45.0"
+    troika-worker-utils "^0.45.0"
 
-troika-three-utils@^0.44.0:
-  version "0.44.0"
-  resolved "https://registry.yarnpkg.com/troika-three-utils/-/troika-three-utils-0.44.0.tgz#c19bcbedb08bff96b8a38cf8b4a60da3b12bb44b"
-  integrity sha512-gaEpqrlWnkrVU5UgUx+YZTC8NrhsA2Tt6zEIbn3WNuom7pLtrgjuHpAM72gif7DoYdOWEyFco3Zb6rpJh9Fodg==
+troika-three-utils@^0.45.0:
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/troika-three-utils/-/troika-three-utils-0.45.0.tgz#d624e4d2427275fd2750d542766635be37042920"
+  integrity sha512-VJqEx8aww2El/zSbbnmjdhaAOQ4LM0CVJmKh385Vi/CzruhMmWEaunMRI/J1vh4MbbGo+dREu73FkMkr/PXypA==
 
-troika-worker-utils@^0.44.0:
-  version "0.44.0"
-  resolved "https://registry.yarnpkg.com/troika-worker-utils/-/troika-worker-utils-0.44.0.tgz#a236dc004b7a3c187ae8f14a6b497e54661e12c8"
-  integrity sha512-/ETcH1rUoO9hVBL6Ifea2WOoGPw90ncrk8b8SJKTLtzcQvEWRIZ4eUxlVCtU93fLechCV+DWPs1y8+Bjh1WaJg==
+troika-worker-utils@^0.45.0:
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/troika-worker-utils/-/troika-worker-utils-0.45.0.tgz#94a7b5c7f6f54c81f229eafae2224259e182c010"
+  integrity sha512-pEO8u7+29dG5SbmGUg0wqXPEe+r+Hd0ibKf75tjH2aoR7ZPlRwUzRTvPURDlDNFF4KysDLvMCdHnyslG9IG5Hw==
 
 tryer@^1.0.1:
   version "1.0.1"
