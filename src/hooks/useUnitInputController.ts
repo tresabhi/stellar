@@ -1,8 +1,8 @@
 import { merge } from 'lodash';
 import { simplify } from 'mathjs';
-import { useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const MIXED_SYMBOL = '~';
+export const MIXED_SYMBOL = '~';
 
 interface UseUnitInputControllerOptions {
   mixed: boolean;
@@ -41,9 +41,15 @@ export default function useUnitInputController(
         ? MIXED_SYMBOL
         : `${options?.prefix ?? ''}${value.current}${options?.suffix ?? ''}`;
     },
+
+    set: (newValue: number | undefined, write = true) => {
+      value.current = newValue ?? 0;
+      isMixed.current = newValue === undefined;
+      if (write) hook.write();
+    },
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     hook.write();
     parent.current = inputRef.current!.parentNode as HTMLDivElement;
 

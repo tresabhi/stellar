@@ -9,7 +9,7 @@ import {
   getPartByAddress,
   getReactivePartByAddress,
 } from 'interfaces/blueprint';
-import { FC, memo, useRef } from 'react';
+import { FC, memo, useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Mesh } from 'three';
 import {
@@ -166,21 +166,35 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
     }),
     parts as FuelTank[],
   );
-  const widthController = useUnitInputController(width ?? 0, {
+
+  const widthController = useUnitInputController(width ?? 2, {
     mixed: width === undefined,
     suffix: 'm',
+  });
+  const heightController = useUnitInputController(height ?? 2, {
+    mixed: height === undefined,
+    suffix: 'm',
+  });
+  const fuelController = useUnitInputController((fuel ?? 1) * 100, {
+    mixed: fuel === undefined,
+    suffix: '%',
+    min: 0,
+    max: 100, // TODO: remove this limit?
+  });
+
+  useEffect(() => {
+    widthController.set(width);
+    heightController.set(height);
+    fuelController.set(fuel);
   });
 
   return (
     <PropertiesExplorer.Group>
       <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput
-          ref={widthController.ref}
-          label="Width"
-        />
-        <PropertiesExplorer.NamedInput label="Height" value={height ?? '~'} />
-        <PropertiesExplorer.NamedInput label="Fuel" value={fuel ?? '~'} />
+        <PropertiesExplorer.NamedInput ref={widthController.ref} label="W" />
+        <PropertiesExplorer.NamedInput ref={heightController.ref} label="H" />
+        <PropertiesExplorer.NamedInput ref={fuelController.ref} label="F" />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );
