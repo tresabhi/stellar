@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import nerdamer from 'nerdamer';
+import { simplify } from 'mathjs';
 import { useLayoutEffect, useRef } from 'react';
 
 const MIXED_SYMBOL = '~';
@@ -29,7 +29,7 @@ export default function useUnitInputController(
 ) {
   const mergedOptions = merge(UseUnitInputControllerDefaultOptions, options);
   const inputRef = useRef<HTMLInputElement>(null);
-  let parent: HTMLDivElement;
+  let parent = useRef<HTMLDivElement>();
   let value = useRef(initialValue);
   let isMixed = useRef(options?.mixed ?? false);
 
@@ -45,31 +45,31 @@ export default function useUnitInputController(
 
   useLayoutEffect(() => {
     hook.write();
-    parent = inputRef.current!.parentNode as HTMLDivElement;
+    parent.current = inputRef.current!.parentNode as HTMLDivElement;
 
-    parent.addEventListener('click', () => {
+    parent.current.addEventListener('click', () => {
       inputRef.current!.value = isMixed.current ? '' : `${value.current}`;
       inputRef.current?.select();
     });
 
     inputRef.current?.addEventListener('blur', () => {
-      let newValue = Number(
-        nerdamer(inputRef.current!.value).evaluate().toString(),
-      );
+      try {
+        let newValue = simplify(inputRef.current!.value).evaluate();
 
-      if (typeof newValue === 'number' && value.current !== newValue) {
-        if (mergedOptions.min !== undefined)
-          newValue = Math.max(mergedOptions.min, newValue);
-        if (mergedOptions.modOnClamp) {
-          newValue = newValue % mergedOptions.max;
-        } else {
-          newValue = Math.min(mergedOptions.max, newValue);
+        if (newValue !== Infinity && !isNaN(newValue)) {
+          if (mergedOptions.min !== undefined)
+            newValue = Math.max(mergedOptions.min, newValue);
+          if (mergedOptions.modOnClamp) {
+            newValue = newValue % mergedOptions.max;
+          } else {
+            newValue = Math.min(mergedOptions.max, newValue);
+          }
+
+          if (onValueAccepted) onValueAccepted(newValue, value.current);
+          value.current = newValue;
+          isMixed.current = false;
         }
-
-        if (onValueAccepted) onValueAccepted(newValue, value.current);
-        value.current = newValue;
-        isMixed.current = false;
-      }
+      } catch {}
 
       hook.write();
     });

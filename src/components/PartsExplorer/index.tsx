@@ -64,7 +64,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
     event.preventDefault();
     buttonRef.current?.focus();
   };
-  const handleLabelDoubleClick = () => inputRef.current?.focus();
+  const handleLabelDoubleClick = () => inputRef.current!.focus();
   const handleLabelBlur = () => {
     inputRef.current!.value = inputRef.current!.value.trim();
     blueprintStore.setState(

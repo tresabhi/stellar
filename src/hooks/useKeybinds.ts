@@ -71,9 +71,7 @@ export default function useKeybinds() {
 
     UNSELECT_ALL: unselectAllParts,
 
-    SELECT_ALL: (event) => {
-      event?.preventDefault();
-
+    SELECT_ALL: () => {
       // TODO: in the future, use selectPartsOnlyFrom([0], [length - 1]);
       selectPartsOnly(
         blueprintStore.getState().parts.map((part, index) => [index]),

@@ -3,7 +3,7 @@ import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'interfaces/selection';
 import { MouseEvent as ReactMouseEvent } from 'react';
 import selectionStore from 'stores/selection';
@@ -22,7 +22,7 @@ function useSelectionHandler(
 ) {
   const toggle = () => togglePartSelection(address);
   const only = () => selectPartOnly(address);
-  const fromLast = () => () => {
+  const fromLast = () => {
     const selectionState = selectionStore.getState();
 
     if (selectionState.lastSelection) {

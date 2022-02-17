@@ -4,6 +4,7 @@ import useSelectionHandler, {
   UseSelectionHandlerMesh,
 } from 'hooks/useDesktopSelection';
 import usePartDecorations from 'hooks/usePartDecorations';
+import useUnitInputController from 'hooks/useUnitInputController';
 import {
   getPartByAddress,
   getReactivePartByAddress,
@@ -165,12 +166,19 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
     }),
     parts as FuelTank[],
   );
+  const widthController = useUnitInputController(width ?? 0, {
+    mixed: width === undefined,
+    suffix: 'm',
+  });
 
   return (
     <PropertiesExplorer.Group>
       <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput label="Width" value={width ?? '~'} />
+        <PropertiesExplorer.NamedInput
+          ref={widthController.ref}
+          label="Width"
+        />
         <PropertiesExplorer.NamedInput label="Height" value={height ?? '~'} />
         <PropertiesExplorer.NamedInput label="Fuel" value={fuel ?? '~'} />
       </PropertiesExplorer.Row>
