@@ -9,7 +9,7 @@ import {
   getPartByAddress,
   getReactivePartByAddress,
 } from 'interfaces/blueprint';
-import { FC, memo, useEffect, useRef } from 'react';
+import { FC, memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Mesh } from 'three';
 import {
@@ -158,6 +158,10 @@ export const FuelTankIcon = Icon;
 export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
   parts,
 }) => {
+  const widthRef = useRef<HTMLInputElement>(null);
+  const heightRef = useRef<HTMLInputElement>(null);
+  const fuelRef = useRef<HTMLInputElement>(null);
+
   const { width, height, fuel } = getOnlyMutualSlice(
     (data) => ({
       width: data.N.width_original,
@@ -167,34 +171,24 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
     parts as FuelTank[],
   );
 
-  const widthController = useUnitInputController(width ?? 2, {
-    mixed: width === undefined,
-    suffix: 'm',
-  });
-  const heightController = useUnitInputController(height ?? 2, {
-    mixed: height === undefined,
-    suffix: 'm',
-  });
-  const fuelController = useUnitInputController((fuel ?? 1) * 100, {
-    mixed: fuel === undefined,
-    suffix: '%',
+  useUnitInputController(widthRef, width, {
     min: 0,
-    max: 100, // TODO: remove this limit?
+    suffix: 'm',
   });
-
-  useEffect(() => {
-    widthController.set(width);
-    heightController.set(height);
-    fuelController.set(fuel);
+  useUnitInputController(heightRef, height, { min: 0, suffix: 'm' });
+  useUnitInputController(fuelRef, (fuel ?? 1) * 100, {
+    min: 0,
+    max: 100, // remove max?
+    suffix: '%',
   });
 
   return (
     <PropertiesExplorer.Group>
       <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput ref={widthController.ref} label="W" />
-        <PropertiesExplorer.NamedInput ref={heightController.ref} label="H" />
-        <PropertiesExplorer.NamedInput ref={fuelController.ref} label="F" />
+        <PropertiesExplorer.NamedInput ref={widthRef} label="W" />
+        <PropertiesExplorer.NamedInput ref={heightRef} label="H" />
+        <PropertiesExplorer.NamedInput ref={fuelRef} label="F" />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );

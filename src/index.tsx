@@ -8,7 +8,6 @@ if (getStellarContext().codeName !== 'alpha') primeWorker();
 
 const App = lazy(() => import('App'));
 
-
 render(
   <StrictMode>
     <Suspense fallback={<SplashScreen />}>
