@@ -6,7 +6,8 @@ import { getPartByAddress } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import appStore, { AppStore } from 'stores/app';
 import selectionStore from 'stores/selection';
-import { AnyPart, AnyPartName } from 'types/Parts';
+import { PartAddress } from 'types/Blueprint';
+import { AnyPartName } from 'types/Parts';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
@@ -29,21 +30,21 @@ const RightSideBar = () => {
       }),
     );
 
-  let sortedSelections: Map<AnyPartName, AnyPart[]> = new Map();
+  let sortedSelections: Map<AnyPartName, PartAddress[]> = new Map();
   selections.forEach((selection) => {
     const part = getPartByAddress(selection);
 
     if (sortedSelections.has(part.n)) {
-      sortedSelections.get(part.n)?.push(part);
+      sortedSelections.get(part.n)?.push(selection);
     } else {
-      sortedSelections.set(part.n, [part]);
+      sortedSelections.set(part.n, [selection]);
     }
   });
   const properties = Array.from(sortedSelections, ([key, value]) => {
     const PropertyComponent = getPartModule(key)?.PropertyComponent;
 
     if (PropertyComponent) {
-      return <PropertyComponent parts={value} />;
+      return <PropertyComponent addresses={value} />;
     } else {
       return null;
     }

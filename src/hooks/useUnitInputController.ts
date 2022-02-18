@@ -71,8 +71,6 @@ const useUnitInputController = (
           Math.min(mergedOptions!.max!, newValue),
         );
         mergedOptions!.onChange!(newValue, value);
-        console.log('old', value);
-        console.log('new', newValue);
         value = newValue;
 
         render();

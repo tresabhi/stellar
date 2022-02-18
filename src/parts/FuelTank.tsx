@@ -8,6 +8,7 @@ import useUnitInputController from 'hooks/useUnitInputController';
 import {
   getPartByAddress,
   getReactivePartByAddress,
+  setPartsByAddresses,
 } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
@@ -18,7 +19,7 @@ import {
   ReactivePartComponentProps,
 } from 'types/Parts';
 import compareAddressesProps from 'utilities/compareAddressesProps';
-import getOnlyMutualSlice from 'utilities/getOnlyMutualSlice';
+import getMutualSlice from 'utilities/getMutualSlice';
 import { DefaultPartData, PartWithTranslations } from './Default';
 
 export interface FuelTank extends PartWithTranslations {
@@ -156,30 +157,39 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
 export const FuelTankIcon = Icon;
 
 export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
-  parts,
+  addresses,
 }) => {
   const widthRef = useRef<HTMLInputElement>(null);
   const heightRef = useRef<HTMLInputElement>(null);
   const fuelRef = useRef<HTMLInputElement>(null);
 
-  const { width, height, fuel } = getOnlyMutualSlice(
+  const { width, height, fuel } = getMutualSlice(
     (data) => ({
       width: data.N.width_original,
       height: data.N.height,
       fuel: data.N.fuel_percent,
     }),
-    parts as FuelTank[],
+    addresses.map((address) => getPartByAddress(address) as FuelTank),
   );
 
   useUnitInputController(widthRef, width, {
     min: 0,
     suffix: 'm',
+    onChange: (value) =>
+      setPartsByAddresses(addresses, { N: { width_original: value } }),
   });
-  useUnitInputController(heightRef, height, { min: 0, suffix: 'm' });
+  useUnitInputController(heightRef, height, {
+    min: 0,
+    suffix: 'm',
+    onChange: (value) =>
+      setPartsByAddresses(addresses, { N: { height: value } }),
+  });
   useUnitInputController(fuelRef, (fuel ?? 1) * 100, {
     min: 0,
     max: 100, // remove max?
     suffix: '%',
+    onChange: (value) =>
+      setPartsByAddresses(addresses, { N: { fuel_percent: value / 100 } }),
   });
 
   return (

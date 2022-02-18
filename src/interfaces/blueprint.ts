@@ -97,14 +97,22 @@ export const setPartByAddress = (
   address: PartAddress,
   data: DeepPartial<AnyPart>,
   state?: Blueprint,
+) => setPartsByAddresses([address], data, state);
+
+export const setPartsByAddresses = (
+  addresses: PartAddress[],
+  data: DeepPartial<AnyPart>,
+  state?: Blueprint,
 ) => {
   if (state) {
-    let part = getPartByAddress(address, state);
-    merge(part, data);
+    addresses.forEach((address) => {
+      let part = getPartByAddress(address, state);
+      merge(part, data);
+    });
   } else {
     blueprintStore.setState(
       produce((draft: Blueprint) => {
-        setPartByAddress(address, data, draft);
+        setPartsByAddresses(addresses, data, draft);
       }),
     );
   }

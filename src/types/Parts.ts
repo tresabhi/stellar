@@ -17,7 +17,7 @@ export interface PartComponentProps {
   part: AnyPart;
 }
 export interface PropertyComponentProps {
-  parts: AnyPart[];
+  addresses: PartAddress[];
 }
 export interface ReactivePartComponentProps {
   address: PartAddress;
