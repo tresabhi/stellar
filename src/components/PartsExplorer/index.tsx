@@ -2,12 +2,11 @@ import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-dow
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import useSelectionHandler, {
-  UseSelectionHandlerListing,
+  UseListingSelectionHandler,
 } from 'hooks/useDesktopSelection';
-import produce from 'immer';
 import {
-  getPartByAddress,
   getReactivePartByAddress,
+  setPartByAddress,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import {
@@ -19,8 +18,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import blueprintStore from 'stores/blueprint';
-import { Blueprint, PartAddress } from 'types/Blueprint';
+import { PartAddress } from 'types/Blueprint';
 import compareAddressesProps from 'utilities/compareAddressesProps';
 import styles from './index.module.scss';
 
@@ -51,7 +49,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const selectionHandler = useSelectionHandler(
     address,
     'listing',
-  ) as UseSelectionHandlerListing;
+  ) as UseListingSelectionHandler;
 
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -67,13 +65,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const handleLabelDoubleClick = () => inputRef.current!.focus();
   const handleLabelBlur = () => {
     inputRef.current!.value = inputRef.current!.value.trim();
-    blueprintStore.setState(
-      // TODO: ISOLATE THIS INTO A FUNCTION AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      produce((draft: Blueprint) => {
-        let part = getPartByAddress(address, draft);
-        part.meta.label = inputRef.current!.value;
-      }),
-    );
+    setPartByAddress(address, { meta: { label: inputRef.current!.value } });
   };
   const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') buttonRef.current?.focus();

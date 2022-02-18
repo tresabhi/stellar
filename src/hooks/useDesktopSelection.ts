@@ -11,10 +11,12 @@ import { PartAddress } from 'types/Blueprint';
 
 export type UseSelectionHandlerType = 'listing' | 'mesh';
 
-export type UseSelectionHandlerListing = (
+export type UseListingSelectionHandler = (
   event: ReactMouseEvent<HTMLDivElement>,
 ) => void;
-export type UseSelectionHandlerMesh = (event: ThreeEvent<MouseEvent>) => void;
+export type UseMeshSelectionHandler = (
+  event: ThreeEvent<MouseEvent>,
+) => void;
 
 function useSelectionHandler(
   address: PartAddress,

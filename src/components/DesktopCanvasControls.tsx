@@ -17,7 +17,7 @@ const DesktopCanvasControls = () => {
 
       const maxZoom = camera.right - camera.left;
       const zoomCompensatedDeltaY =
-        event.deltaY * inverseLerp(0, maxZoom, camera.zoom) * 1.5;
+        event.deltaY * inverseLerp(0, maxZoom, camera.zoom);
       const zoom = Math.max(
         MIN_ZOOM,
         Math.min(maxZoom, camera.zoom - zoomCompensatedDeltaY),
@@ -29,10 +29,16 @@ const DesktopCanvasControls = () => {
       const pixelToWorldUnitRatio =
         viewport.width / canvas.getBoundingClientRect().width;
 
-      camera.position.x +=
-        (event.deltaX * pixelToWorldUnitRatio * 1.5) / camera.zoom;
-      camera.position.y -=
-        (event.deltaY * pixelToWorldUnitRatio * 1.5) / camera.zoom;
+      const moveX = (event.deltaX * pixelToWorldUnitRatio * 1.5) / camera.zoom;
+      const moveY = (event.deltaY * pixelToWorldUnitRatio * 1.5) / camera.zoom;
+
+      if (event.shiftKey) {
+        camera.position.x += moveY;
+        camera.position.y -= moveX;
+      } else {
+        camera.position.x += moveX;
+        camera.position.y -= moveY;
+      }
     }
   });
 

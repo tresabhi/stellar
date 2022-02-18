@@ -1,5 +1,5 @@
 import produce from 'immer';
-import { getPartByAddress } from 'interfaces/blueprint';
+import { getPartByAddress, setPartsByAddresses } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import selectionStore, { SelectionStore } from 'stores/selection';
@@ -37,15 +37,12 @@ export const selectPartsOnly = (addresses: PartAddress[]) => {
 
   blueprintStore.setState(
     produce((draft: Blueprint) => {
-      currentSelections.forEach((selectionAddress) => {
-        const part = getPartByAddress(selectionAddress, draft);
-        part.meta.selected = false;
-      });
-
-      addresses.forEach((address) => {
-        const part = getPartByAddress(address, draft);
-        part.meta.selected = true;
-      });
+      setPartsByAddresses(
+        currentSelections,
+        { meta: { selected: false } },
+        draft,
+      );
+      setPartsByAddresses(addresses, { meta: { selected: true } }, draft);
     }),
   );
 
@@ -97,16 +94,8 @@ export const unselectParts = (addresses: PartAddress[]) => {
 };
 
 export const unselectAllParts = () => {
-  blueprintStore.setState(
-    produce((draft: Blueprint) => {
-      const selections = selectionStore.getState().selections;
-
-      selections.forEach((selection) => {
-        let part = getPartByAddress(selection, draft);
-        part.meta.selected = false;
-      });
-    }),
-  );
+  const selections = selectionStore.getState().selections;
+  setPartsByAddresses(selections, { meta: { selected: false } });
 
   selectionStore.setState({ selections: [], lastSelection: undefined });
 };
