@@ -40,11 +40,11 @@ const RightSideBar = () => {
       sortedSelections.set(part.n, [selection]);
     }
   });
-  const properties = Array.from(sortedSelections, ([key, value]) => {
+  const properties = Array.from(sortedSelections, ([key, value], index) => {
     const PropertyComponent = getPartModule(key)?.PropertyComponent;
 
     if (PropertyComponent) {
-      return <PropertyComponent addresses={value} />;
+      return <PropertyComponent key={`property-${index}`} addresses={value} />;
     } else {
       return null;
     }
