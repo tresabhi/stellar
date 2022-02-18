@@ -104,7 +104,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
     const initialState = getPartByAddress(address) as FuelTank;
     const meshRef = useRef<Mesh>();
     const meshStandardMaterialRef = useRef<MeshStandardMaterial>(null);
-    const helper = useHelper(meshRef, BoxHelper, 'red');
+    const helper = useHelper(meshRef, BoxHelper, 'rgb(150, 0, 255)');
     const selectionHandler = useSelectionHandler(
       address,
       'mesh',
