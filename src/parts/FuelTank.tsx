@@ -196,7 +196,10 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
     min: 0,
     suffix: 'm',
     onChange: (value) =>
-      setPartsByAddresses(addresses, { N: { width_original: value } }),
+      // TODO: separate these
+      setPartsByAddresses(addresses, {
+        N: { width_original: value, width_a: value, width_b: value },
+      }),
   });
   useUnitInputController(heightRef, height, {
     min: 0,
