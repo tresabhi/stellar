@@ -110,33 +110,33 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       'mesh',
     ) as UseMeshSelectionHandler;
 
-    const changeState = (state: FuelTank) => {
-      meshRef.current!.geometry = new CylinderGeometry(
-        state.N.width_b / 2,
-        state.N.width_a / 2,
-        state.N.height,
-        24,
-        undefined,
-        true,
-      );
-      meshRef.current?.scale.set(state.o.x, state.o.y, 1);
-      meshRef.current?.rotation.set(0, 0, degToRad(state.o.z));
-      meshRef.current?.position.set(
-        state.p.x,
-        state.p.y + state.N.height / 2,
-        0,
-      );
-      helper.current!.visible = state.meta.selected;
-    };
-
     useEffect(() => {
+      const changeState = (state: FuelTank) => {
+        meshRef.current!.geometry = new CylinderGeometry(
+          state.N.width_b / 2,
+          state.N.width_a / 2,
+          state.N.height,
+          24,
+          undefined,
+          true,
+        );
+        meshRef.current?.scale.set(state.o.x, state.o.y, 1);
+        meshRef.current?.rotation.set(0, 0, degToRad(state.o.z));
+        meshRef.current?.position.set(
+          state.p.x,
+          state.p.y + state.N.height / 2,
+          0,
+        );
+        helper.current!.visible = state.meta.selected;
+      };
+
       changeState(initialState);
 
       blueprintStore.subscribe(
         (state) => getPartByAddress(address, state) as FuelTank,
         changeState,
       );
-    }, []);
+    }, [address, initialState, helper]);
 
     return (
       <mesh
