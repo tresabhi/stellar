@@ -28,13 +28,8 @@ const DesktopCanvasControls = () => {
         camera.zoom = zoom;
         camera.updateProjectionMatrix();
       } else {
-        const pixelToWorldUnitRatio =
-          viewport.width / canvas.getBoundingClientRect().width;
-
-        const moveX =
-          (event.deltaX * pixelToWorldUnitRatio * 1.5) / camera.zoom;
-        const moveY =
-          (event.deltaY * pixelToWorldUnitRatio * 1.5) / camera.zoom;
+        const moveX = event.deltaX / camera.zoom;
+        const moveY = event.deltaY / camera.zoom;
 
         if (event.shiftKey) {
           camera.position.x += moveY;
