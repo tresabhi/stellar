@@ -5,7 +5,7 @@ import { devtools, persist } from 'zustand/middleware';
 
 export interface SettingsStore {
   debug: {
-    load_dummy_on_Launch: boolean;
+    load_dummy_on_launch: boolean;
   };
   performance: {
     regress_amount: number;
@@ -15,7 +15,7 @@ export interface SettingsStore {
 
 export const SettingsStoreData: SettingsStore = {
   debug: {
-    load_dummy_on_Launch: false,
+    load_dummy_on_launch: false,
   },
   performance: {
     regress_amount: 1,

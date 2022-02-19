@@ -13,7 +13,7 @@ export default function useStellarContext() {
 
   switch (window.location.hostname) {
     case 'stellaralpha.web.app':
-      title = 'Stellar Next';
+      title = 'Stellar Alpha';
       codeName = 'alpha';
       // TODO: verify this color
       accentRegular = 'hsl(15, 70%, 90%)';

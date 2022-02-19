@@ -38,7 +38,7 @@ const ToolBarTop: FC = () => {
   const handleLoadDummyOnLaunchClick = () =>
     settingsStore.setState(
       produce((draft: SettingsStore) => {
-        draft.debug.load_dummy_on_Launch = !draft.debug.load_dummy_on_Launch;
+        draft.debug.load_dummy_on_launch = !draft.debug.load_dummy_on_launch;
       }),
     );
   const handleLayoutTabClick = () => appStore.setState({ tab: 'layout' });
@@ -241,7 +241,7 @@ const ToolBarTop: FC = () => {
               <ContextMenu.Container>
                 <ContextMenu.Toggle
                   defaultState={
-                    settingsStore.getState().debug.load_dummy_on_Launch
+                    settingsStore.getState().debug.load_dummy_on_launch
                   }
                   onClick={handleLoadDummyOnLaunchClick}
                 >

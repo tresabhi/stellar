@@ -19,13 +19,13 @@ export default function useKeybinds() {
   // TODO: BIG MAKE THIS DATE DRIVEN
 
   const keyMap: KeyMap = {
-    SWITCH_TAB: 'ctrl + tab',
+    SWITCH_TAB: 'ctrl+tab',
 
-    TOGGLE_LEFT_SIDE_BAR: 'alt + 1',
-    TOGGLE_RIGHT_SIDE_BAR: 'alt + 2',
+    TOGGLE_LEFT_SIDE_BAR: 'alt+1',
+    TOGGLE_RIGHT_SIDE_BAR: 'alt+2',
 
     DELETE_SELECTION: 'del',
-    SELECT_ALL: 'ctrl + a',
+    SELECT_ALL: 'ctrl+a',
     UNSELECT_ALL: 'escape',
 
     PARTY: 'p a r t y',
@@ -53,6 +53,7 @@ export default function useKeybinds() {
     },
 
     TOGGLE_RIGHT_SIDE_BAR: (event) => {
+      alert('nice');
       event?.preventDefault();
 
       appStore.setState(
@@ -69,7 +70,10 @@ export default function useKeybinds() {
       // party mode easter egg
       document.body.classList.toggle('party'),
 
-    UNSELECT_ALL: unselectAllParts,
+    UNSELECT_ALL: () => {
+      unselectAllParts();
+      console.log('unselect all');
+    },
 
     SELECT_ALL: () => {
       // TODO: in the future, use selectPartsOnlyFrom([0], [length - 1]);
