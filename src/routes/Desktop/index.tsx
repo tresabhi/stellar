@@ -1,5 +1,4 @@
 import useKeybinds from 'hooks/useKeybinds';
-import { HotKeys } from 'react-hotkeys';
 import appStore from 'stores/app';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';
@@ -11,23 +10,22 @@ import styles from './index.module.scss';
 
 export default function Desktop() {
   const tab = appStore((state) => state.tab);
-  const [keyMap, handlers] = useKeybinds();
+
+  useKeybinds();
 
   return (
-    <HotKeys keyMap={keyMap} handlers={handlers}>
-      <div className={styles['desktop-container']}>
-        <ToolbarTop />
-        <ToolbarBottom />
+    <div className={styles['desktop-container']}>
+      <ToolbarTop />
+      <ToolbarBottom />
 
-        <Layout style={{ display: tab === 'layout' ? undefined : 'none' }} />
-        <Staging style={{ display: tab === 'staging' ? undefined : 'none' }} />
-        <Simulation
-          style={{ display: tab === 'simulation' ? undefined : 'none' }}
-        />
-        <Rendering
-          style={{ display: tab === 'rendering' ? undefined : 'none' }}
-        />
-      </div>
-    </HotKeys>
+      <Layout style={{ display: tab === 'layout' ? undefined : 'none' }} />
+      <Staging style={{ display: tab === 'staging' ? undefined : 'none' }} />
+      <Simulation
+        style={{ display: tab === 'simulation' ? undefined : 'none' }}
+      />
+      <Rendering
+        style={{ display: tab === 'rendering' ? undefined : 'none' }}
+      />
+    </div>
   );
 }

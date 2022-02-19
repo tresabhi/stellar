@@ -10,7 +10,6 @@ const MIN_ZOOM = 2.2;
 const DesktopCanvasControls = () => {
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
-  const viewport = useThree((state) => state.viewport);
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {

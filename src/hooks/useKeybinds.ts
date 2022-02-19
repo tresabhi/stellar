@@ -1,11 +1,10 @@
 import produce from 'immer';
-import { deletePartsBySelection } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
-import { KeyMap } from 'react-hotkeys';
+import { bind } from 'mousetrap';
+import { useEffect } from 'react';
 import appStore, { AppStore } from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 
-// TODO: Find a way to make this cleaner
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'layout',
   'staging',
@@ -13,36 +12,31 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'rendering',
 ];
 
-type Handlers = { [key: string]: (keyEvent?: KeyboardEvent) => void };
+const useKeybinds = () => {
+  // BIG TODO: Make this date driven
 
-export default function useKeybinds() {
-  // TODO: BIG MAKE THIS DATE DRIVEN
+  useEffect(() => {
+    bind('ctrl+a', () => {
+      selectPartsOnly(
+        blueprintStore.getState().parts.map((part, index) => [index]),
+      );
+    });
 
-  const keyMap: KeyMap = {
-    SWITCH_TAB: 'ctrl+tab',
+    bind('esc', () => {
+      unselectAllParts();
+    });
 
-    TOGGLE_LEFT_SIDE_BAR: 'alt+1',
-    TOGGLE_RIGHT_SIDE_BAR: 'alt+2',
+    bind('p a r t y', () => {
+      // party mode easter egg
+      document.body.classList.toggle('party');
+    });
 
-    DELETE_SELECTION: 'del',
-    SELECT_ALL: 'ctrl+a',
-    UNSELECT_ALL: 'escape',
+    bind('del', () => {
+      // TODO: make parts explorer rerender when this happens
+      // deletePartsBySelection();
+    });
 
-    PARTY: 'p a r t y',
-  };
-  const handlers: Handlers = {
-    SWITCH_TAB: (event) => {
-      event?.preventDefault();
-
-      appStore.setState((state) => ({
-        tab:
-          state.tab === tabOrder[tabOrder.length - 1]
-            ? tabOrder[0]
-            : tabOrder[tabOrder.indexOf(state.tab) + 1],
-      }));
-    },
-
-    TOGGLE_LEFT_SIDE_BAR: (event) => {
+    bind('alt+1', (event) => {
       event?.preventDefault();
 
       appStore.setState(
@@ -50,10 +44,9 @@ export default function useKeybinds() {
           draft.layout.leftSideBar.visible = !draft.layout.leftSideBar.visible;
         }),
       );
-    },
+    });
 
-    TOGGLE_RIGHT_SIDE_BAR: (event) => {
-      alert('nice');
+    bind('alt+2', (event) => {
       event?.preventDefault();
 
       appStore.setState(
@@ -62,26 +55,16 @@ export default function useKeybinds() {
             !draft.layout.rightSideBar.visible;
         }),
       );
-    },
+    });
 
-    DELETE_SELECTION: deletePartsBySelection,
-
-    PARTY: () =>
-      // party mode easter egg
-      document.body.classList.toggle('party'),
-
-    UNSELECT_ALL: () => {
-      unselectAllParts();
-      console.log('unselect all');
-    },
-
-    SELECT_ALL: () => {
-      // TODO: in the future, use selectPartsOnlyFrom([0], [length - 1]);
-      selectPartsOnly(
-        blueprintStore.getState().parts.map((part, index) => [index]),
-      );
-    },
-  };
-
-  return [keyMap, handlers] as [KeyMap, Handlers];
-}
+    bind('ctrl+tab', (event) => {
+      appStore.setState((state) => ({
+        tab:
+          state.tab === tabOrder[tabOrder.length - 1]
+            ? tabOrder[0]
+            : tabOrder[tabOrder.indexOf(state.tab) + 1],
+      }));
+    });
+  }, []);
+};
+export default useKeybinds;
