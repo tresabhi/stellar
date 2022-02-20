@@ -44,7 +44,15 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   let data = getReactivePartByAddress(address)!;
-  const Icon = getPartModule(data.n, true).Icon;
+
+  let Icon;
+
+  try {
+    Icon = getPartModule(data.n, true).Icon;
+  } catch {
+    console.log(address);
+  }
+
   let childParts: JSX.Element[] | undefined;
   const selectionHandler = useSelectionHandler(
     address,
@@ -72,10 +80,10 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   };
 
   if (data.n === 'Group') {
-    childParts = data.parts.map((data, index) => (
+    childParts = Array.from(data.parts, ([id, data]) => (
       <Listing
-        key={`part-${index}`}
-        address={[...address, index]}
+        key={`part-${id}`}
+        address={[...address, id]}
         indentation={indentation + 1}
       />
     ));

@@ -4,10 +4,12 @@ import { FC } from 'react';
 import { PartAddress } from './Blueprint';
 import DeepPartial from './DeepPartial';
 
+export type UUID = string;
+
 export type AnyPart = Group | FuelTank;
 export type AnyVanillaPart = AnyPart & { meta: never };
 
-export type AnyPartName = 'Group' | 'Fuel Tank';
+export type AnyPartName = AnyVanillaPartName | 'Group';
 export type AnyVanillaPartName = 'Fuel Tank';
 
 export type AnyPartialPartType = DeepPartial<AnyPart>;

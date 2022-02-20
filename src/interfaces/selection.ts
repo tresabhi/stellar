@@ -15,7 +15,7 @@ export const selectParts = (addresses: PartAddress[]) => {
       addresses.forEach((address) => {
         const part = getPartByAddress(address, draft);
 
-        if (!part.meta.selected) {
+        if (part && !part.meta.selected) {
           part.meta.selected = true;
           newSelections.push(address);
         }
@@ -77,7 +77,7 @@ export const unselectParts = (addresses: PartAddress[]) => {
     produce((draft: Blueprint) => {
       addresses.forEach((address) => {
         const part = getPartByAddress(address, draft);
-        part.meta.selected = false;
+        if (part) part.meta.selected = false;
       });
     }),
   );
@@ -112,13 +112,15 @@ export const togglePartsSelection = (addresses: PartAddress[]) => {
       addresses.forEach((address) => {
         const part = getPartByAddress(address, draft);
 
-        if (part.meta.selected) {
-          spliceAddresses.push(address);
-        } else {
-          insertAddresses.push(address);
-        }
+        if (part) {
+          if (part.meta.selected) {
+            spliceAddresses.push(address);
+          } else {
+            insertAddresses.push(address);
+          }
 
-        part.meta.selected = !part.meta.selected;
+          part.meta.selected = !part.meta.selected;
+        }
       });
     }),
   );

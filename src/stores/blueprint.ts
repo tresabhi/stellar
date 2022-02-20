@@ -1,15 +1,12 @@
 import { Blueprint } from 'types/Blueprint';
-import create, { GetState, SetState } from 'zustand';
-import {
-  StoreApiWithSubscribeWithSelector,
-  subscribeWithSelector,
-} from 'zustand/middleware';
+import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
+import { subscribeWithSelector } from 'zustand/middleware';
 
 const blueprintStore = create<
   Blueprint,
   SetState<Blueprint>,
   GetState<Blueprint>,
-  StoreApiWithSubscribeWithSelector<Blueprint>
+  Mutate<StoreApi<Blueprint>, [['zustand/subscribeWithSelector', never]]>
 >(
   subscribeWithSelector(
     () =>
@@ -21,7 +18,7 @@ const blueprintStore = create<
 
         center: 0,
         offset: { x: 0, y: 0 },
-        parts: [],
+        parts: new Map(),
         stages: [],
       } as Blueprint),
   ),

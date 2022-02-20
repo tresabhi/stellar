@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { deletePartsBySelection } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
@@ -17,9 +18,7 @@ const useKeybinds = () => {
 
   useEffect(() => {
     bind('ctrl+a', () => {
-      selectPartsOnly(
-        blueprintStore.getState().parts.map((part, index) => [index]),
-      );
+      selectPartsOnly([Array.from(blueprintStore.getState().parts.keys())]);
     });
 
     bind('esc', () => {
@@ -31,10 +30,8 @@ const useKeybinds = () => {
       document.body.classList.toggle('party');
     });
 
-    bind('del', () => {
-      // TODO: make parts explorer rerender when this happens
-      // deletePartsBySelection();
-    });
+    // TODO: make parts explorer rerender when this happens
+    bind('del', deletePartsBySelection);
 
     bind('alt+1', (event) => {
       event?.preventDefault();

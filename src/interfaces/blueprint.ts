@@ -1,12 +1,18 @@
 import produce from 'immer';
-import * as PartsAPI from 'interfaces/part';
-import { cloneDeep, merge } from 'lodash';
+import { cloneDeep, isMap, merge } from 'lodash';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyVanillaPart } from 'types/Parts';
-import { Blueprint, PartAddress, VanillaBlueprint } from '../types/Blueprint';
+import { v4 as UUIDV4 } from 'uuid';
+import {
+  Blueprint,
+  PartAddress,
+  PartsMap as AnyPartMap,
+  VanillaBlueprint,
+} from '../types/Blueprint';
+import { importifyPartData } from './part';
 
 export const VanillaBlueprintData: VanillaBlueprint = {
   center: 0,
@@ -21,6 +27,8 @@ export const BlueprintData: Blueprint = {
   meta: {
     format_version: 1,
   },
+
+  parts: new Map(),
 };
 
 export const mergeWithDefaultBlueprintGlobals = (
@@ -48,21 +56,41 @@ export const importifyBlueprint = (blueprint: object): Blueprint => {
 export const savifyBlueprint = (blueprint: Blueprint) => cloneDeep(blueprint);
 
 export const importifyPartsData = (
-  parts: AnyVanillaPart[] | AnyPart[],
+  parts: AnyVanillaPart[] | AnyPartMap,
   parentAddress: PartAddress,
-): AnyPart[] =>
-  parts.map((part, index) => {
-    const currentPartAddress = [...parentAddress, index];
+) => {
+  if (isMap(parts)) {
+    let newParts = cloneDeep(parts);
 
-    if (part.n === 'Group') {
-      return {
-        ...PartsAPI.importifyPartData(part, currentPartAddress),
-        parts: importifyPartsData(part.parts, currentPartAddress),
-      };
-    } else {
-      return PartsAPI.importifyPartData(part, currentPartAddress);
-    }
-  });
+    newParts.forEach((part, address) => {
+      if (part.n === 'Group') {
+        newParts.set(
+          address,
+          merge(
+            importifyPartData(part, parentAddress),
+            {
+              parts: importifyPartsData(part.parts, [
+                ...parentAddress,
+                address,
+              ]),
+            },
+            { meta: { address: [...parentAddress, address] } },
+          ),
+        );
+      } else {
+        newParts.set(address, importifyPartData(part, parentAddress));
+      }
+    });
+
+    return newParts;
+  } else {
+    const newParts = new Map(
+      parts.map((part) => [UUIDV4(), importifyPartData(part, parentAddress)]),
+    );
+
+    return newParts;
+  }
+};
 
 export const newBlueprint = (blueprint = {}) => {
   blueprintStore.setState(
@@ -73,20 +101,31 @@ export const newBlueprint = (blueprint = {}) => {
 export const deletePartsBySelection = () => {
   const selections = selectionStore.getState().selections;
 
-  selections.forEach((selection) => {});
+  blueprintStore.setState(
+    produce((draft: Blueprint) => {
+      selections.forEach((selection) => {
+        const index = selection[selection.length - 1];
+        let parentAddress = selection.splice(0, selection.length - 1);
+        let parent: Group | Blueprint =
+          (getPartByAddress(parentAddress, draft) as Group) ?? draft;
+
+        parent.parts.delete(index);
+      });
+    }),
+  );
 
   selectionStore.setState({ selections: [] });
 };
 
 export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
-  let currentPart: AnyPart = blueprintState.parts[address[0]];
+  let currentPart = blueprintState.parts.get(address[0]);
 
   address.forEach((route, index) => {
     if (index === 0) {
       return;
     } else {
-      currentPart = (currentPart as Group).parts[route];
+      currentPart = (currentPart as Group).parts.get(route);
     }
   });
 

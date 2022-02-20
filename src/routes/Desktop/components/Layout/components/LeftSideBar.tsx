@@ -6,17 +6,14 @@ import appStore, { AppStore } from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 
 export default function LeftSideBar() {
-  const reactiveParts = blueprintStore((state) => state.parts);
   const partition = appStore((state) => state.layout.leftSideBar.partition);
   const isPartitionParts = partition === 'parts';
   const isPartitionSnippets = partition === 'snippets';
-  const PartListings = reactiveParts.map((part, index) => (
-    <PartsExplorer.Listing
-      key={`part-${index}`}
-      address={[index]}
-      indentation={0}
-    />
-  ));
+  const parts = blueprintStore((state) => state.parts);
+
+  const partListings = Array.from(parts, ([id]) => {
+    <PartsExplorer.Listing key={`part-${id}`} address={[id]} indentation={0} />;
+  });
 
   const handlePartsClick = () =>
     appStore.setState(
@@ -53,7 +50,7 @@ export default function LeftSideBar() {
           display: isPartitionParts ? undefined : 'none',
         }}
       >
-        <PartsExplorer.Container>{PartListings}</PartsExplorer.Container>
+        <PartsExplorer.Container>{partListings}</PartsExplorer.Container>
       </SideBar.Scrollable>
       <SideBar.Scrollable
         style={{

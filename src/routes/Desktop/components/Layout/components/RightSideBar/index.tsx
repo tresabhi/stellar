@@ -34,10 +34,12 @@ const RightSideBar = () => {
   selections.forEach((selection) => {
     const part = getPartByAddress(selection);
 
-    if (sortedSelections.has(part.n)) {
-      sortedSelections.get(part.n)?.push(selection);
-    } else {
-      sortedSelections.set(part.n, [selection]);
+    if (part) {
+      if (sortedSelections.has(part.n)) {
+        sortedSelections.get(part.n)?.push(selection);
+      } else {
+        sortedSelections.set(part.n, [selection]);
+      }
     }
   });
   const properties = Array.from(sortedSelections, ([key, value], index) => {

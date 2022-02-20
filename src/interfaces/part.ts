@@ -25,7 +25,7 @@ export const importifyPartData = (
 // export const savifyPartData = (partData: AnyPartType, clone = true) => {};
 
 export function getPartModule<D extends boolean>(
-  partName: string,
+  partName: AnyPartName,
   useDefault?: D,
 ): D extends true ? PartModule : PartModule | undefined {
   const module: PartModule | undefined = (NAMED_PART_MODULES as any)[partName];

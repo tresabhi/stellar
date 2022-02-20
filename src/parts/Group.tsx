@@ -1,12 +1,13 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { memo } from 'react';
-import { AnyPart, PartModule } from 'types/Parts';
+import { PartsMap } from 'types/Blueprint';
+import { PartModule } from 'types/Parts';
 import compareAddressesProps from 'utilities/compareAddressesProps';
 import { DefaultPartData, PartWithMeta } from './Default';
 
 export interface Group extends PartWithMeta {
   n: 'Group';
-  parts: AnyPart[];
+  parts: PartsMap;
 }
 
 export const GroupData: Group = {
@@ -16,7 +17,7 @@ export const GroupData: Group = {
     label: 'Group',
   },
   n: 'Group',
-  parts: [],
+  parts: new Map(),
 };
 
 const GroupLayoutComponent = memo(() => <mesh />, compareAddressesProps);

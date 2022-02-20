@@ -16,7 +16,7 @@ export default function useStellarContext() {
       title = 'Stellar Alpha';
       codeName = 'alpha';
       // TODO: verify this color
-      accentRegular = 'hsl(15, 70%, 90%)';
+      accentRegular = 'hsl(15, 70%, 45%)';
       Icon = StellarAlphaIcon;
       break;
 

@@ -17,12 +17,24 @@ export const LayoutRenderer = () => {
     (state) => state.performance.regress_amount,
   );
   const initialData = blueprintStore.getState();
-  const parts = blueprintStore((state) => state.parts).map((part, index) => {
-    const PartComponent = getPartModule(part.n, true).LayoutComponent;
-
-    return <PartComponent key={`part-${index}`} address={[index]} />;
-  });
+  const parts = blueprintStore((state) => state.parts);
   const tempRef = useRef<Group>(null);
+
+  const partMeshes = Array.from(parts, ([id, data]) => {
+    const PartComponent = getPartModule(data.n)?.LayoutComponent;
+
+    if (PartComponent) {
+      return <PartComponent key={`part-${id}`} address={[id]} />;
+    } else {
+      return null;
+    }
+  });
+
+  // .map((part, index) => {
+  //   const PartComponent = getPartModule(part.n, true).LayoutComponent;
+
+  //   return <PartComponent key={`part-${index}`} address={[index]} />;
+  // });
 
   return (
     <Canvas
@@ -74,7 +86,7 @@ export const LayoutRenderer = () => {
         ref={tempRef}
         position={[initialData.offset.x, initialData.offset.y, 0]}
       >
-        {parts}
+        {partMeshes}
       </group>
     </Canvas>
   );
