@@ -9,6 +9,7 @@ import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import appStore from 'stores/app';
 import settingsStore, { SettingsStore } from 'stores/settings';
+import reviver from 'utilities/reviver';
 import styles from './index.module.scss';
 
 const ToolBarTop: FC = () => {
@@ -26,7 +27,7 @@ const ToolBarTop: FC = () => {
 
       fileReader.onload = () => {
         if (typeof fileReader.result === 'string')
-          newBlueprint(JSON.parse(fileReader.result));
+          newBlueprint(JSON.parse(fileReader.result, reviver));
       };
     }
   };

@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/static/grouping.json';
+import devBlueprint from 'assets/blueprints/static/saturn-v.json';
 import { LayoutRenderer } from 'components/Canvas';
 import { importifyBlueprint } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';

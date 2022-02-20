@@ -1,13 +1,13 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { memo } from 'react';
-import { PartsMap } from 'types/Blueprint';
+import { AnyPartMap } from 'types/Blueprint';
 import { PartModule } from 'types/Parts';
 import compareAddressesProps from 'utilities/compareAddressesProps';
 import { DefaultPartData, PartWithMeta } from './Default';
 
 export interface Group extends PartWithMeta {
   n: 'Group';
-  parts: PartsMap;
+  parts: AnyPartMap;
 }
 
 export const GroupData: Group = {

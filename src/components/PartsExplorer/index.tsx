@@ -80,6 +80,8 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   };
 
   if (data.n === 'Group') {
+    console.log(data.parts);
+
     childParts = Array.from(data.parts, ([id, data]) => (
       <Listing
         key={`part-${id}`}

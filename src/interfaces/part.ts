@@ -1,9 +1,10 @@
-import { cloneDeep, merge } from 'lodash';
+import { cloneDeep, isArray, merge } from 'lodash';
 import DefaultPart from 'parts/Default';
 import FuelTank from 'parts/FuelTank';
 import Group from 'parts/Group';
-import { PartAddress } from 'types/Blueprint';
+import { AnyPartMap, PartAddress } from 'types/Blueprint';
 import { AnyPart, AnyPartName, AnyVanillaPart, PartModule } from 'types/Parts';
+import { v4 as UUIDV4 } from 'uuid';
 
 const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
   'Fuel Tank': FuelTank,
@@ -14,12 +15,33 @@ export const importifyPartData = (
   partData: AnyVanillaPart | AnyPart,
   partAddress: PartAddress,
 ): AnyPart => {
-  const plainPartData = getPartModule(partData.n)?.data ?? DefaultPart.data;
-  let importifiedPartData = merge(cloneDeep(plainPartData), partData);
+  const defaultData = getPartModule(partData.n, true).data;
+  let newPart = merge({}, defaultData, partData);
 
-  importifiedPartData.meta.address = partAddress;
+  newPart.meta.address = partAddress;
 
-  return importifiedPartData;
+  return newPart;
+};
+
+export const importifyPartsData = (
+  parts: AnyVanillaPart[] | AnyPartMap,
+  parentAddress: PartAddress,
+): AnyPartMap => {
+  if (isArray(parts)) {
+    return new Map(
+      parts.map((part) => {
+        return [UUIDV4(), importifyPartData(cloneDeep(part), parentAddress)];
+      }),
+    );
+  } else {
+    let newParts = cloneDeep(parts);
+
+    newParts.forEach((part, id) => {
+      newParts.set(id, importifyPartData(part, [...parentAddress, id]));
+    });
+
+    return newParts;
+  }
 };
 
 // export const savifyPartData = (partData: AnyPartType, clone = true) => {};

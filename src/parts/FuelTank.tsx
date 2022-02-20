@@ -17,9 +17,9 @@ import {
 } from 'types/Parts';
 import compareAddressesProps from 'utilities/compareAddressesProps';
 import getMutualSlice from 'utilities/getMutualSlice';
-import { DefaultPartData, PartWithTranslations } from './Default';
+import { DefaultPartData, PartWithMeta, PartWithTranslations } from './Default';
 
-export interface FuelTank extends PartWithTranslations {
+export interface VanillaFuelTank extends PartWithTranslations {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -76,6 +76,8 @@ export interface FuelTank extends PartWithTranslations {
       | 'Strut';
   };
 }
+
+export interface FuelTank extends VanillaFuelTank, PartWithMeta {}
 
 export const FuelTankData: FuelTank = {
   ...DefaultPartData,

@@ -1,18 +1,12 @@
 import produce from 'immer';
-import { cloneDeep, isMap, merge } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
 import DeepPartial from 'types/DeepPartial';
-import { AnyPart, AnyVanillaPart } from 'types/Parts';
-import { v4 as UUIDV4 } from 'uuid';
-import {
-  Blueprint,
-  PartAddress,
-  PartsMap as AnyPartMap,
-  VanillaBlueprint,
-} from '../types/Blueprint';
-import { importifyPartData } from './part';
+import { AnyPart } from 'types/Parts';
+import { Blueprint, PartAddress, VanillaBlueprint } from '../types/Blueprint';
+import { importifyPartsData } from './part';
 
 export const VanillaBlueprintData: VanillaBlueprint = {
   center: 0,
@@ -54,43 +48,6 @@ export const importifyBlueprint = (blueprint: object): Blueprint => {
 };
 
 export const savifyBlueprint = (blueprint: Blueprint) => cloneDeep(blueprint);
-
-export const importifyPartsData = (
-  parts: AnyVanillaPart[] | AnyPartMap,
-  parentAddress: PartAddress,
-) => {
-  if (isMap(parts)) {
-    let newParts = cloneDeep(parts);
-
-    newParts.forEach((part, address) => {
-      if (part.n === 'Group') {
-        newParts.set(
-          address,
-          merge(
-            importifyPartData(part, parentAddress),
-            {
-              parts: importifyPartsData(part.parts, [
-                ...parentAddress,
-                address,
-              ]),
-            },
-            { meta: { address: [...parentAddress, address] } },
-          ),
-        );
-      } else {
-        newParts.set(address, importifyPartData(part, parentAddress));
-      }
-    });
-
-    return newParts;
-  } else {
-    const newParts = new Map(
-      parts.map((part) => [UUIDV4(), importifyPartData(part, parentAddress)]),
-    );
-
-    return newParts;
-  }
-};
 
 export const newBlueprint = (blueprint = {}) => {
   blueprintStore.setState(

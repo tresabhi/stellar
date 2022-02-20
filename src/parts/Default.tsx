@@ -15,14 +15,17 @@ export interface PartWithMeta {
   };
 }
 
-export interface PartWithTranslations extends PartWithMeta {
-  // `n` is not provided to avoid type overwrites
+export interface PartWithTranslations {
   p: { x: number; y: number };
   o: { x: number; y: number; z: number };
   t: '-Infinity';
 }
 
-export const DefaultPartData: PartWithTranslations = {
+export interface PhysicalStellarPart
+  extends PartWithMeta,
+    PartWithTranslations {}
+
+export const DefaultPartData: PhysicalStellarPart = {
   meta: {
     address: [],
 
