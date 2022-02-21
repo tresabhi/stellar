@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@emotion/react": "^11.7.1",
+    "@emotion/react": "^11.8.1",
     "@react-three/drei": "^8.10.1",
     "@react-three/fiber": "^7.0.26",
     "@types/mousetrap": "^1.6.9",
