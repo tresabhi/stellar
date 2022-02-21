@@ -60,17 +60,9 @@ export const deletePartsBySelection = () => {
 
   blueprintStore.setState(
     produce((draft: Blueprint) => {
-      // selections.forEach((selection) => {
-      //   const index = selection[selection.length - 1];
-      //   let parentAddress = selection.splice(0, selection.length - 1);
-      //   let parent: Group | Blueprint =
-      //     (getPartByAddress(parentAddress, draft) as Group) ?? draft;
-
-      //   parent.parts.delete(index);
-      // });
       selections.forEach((selection) => {
         const partId = selection[selection.length - 1];
-        const parentAddress = selection.splice(0, selection.length - 1);
+        const parentAddress = [...selection].splice(0, selection.length - 1);
         let parent: Group | Blueprint =
           (getPartByAddress(parentAddress, draft) as Group) ?? draft;
 
@@ -90,7 +82,7 @@ export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
     if (index === 0) {
       return;
     } else {
-      currentPart = (currentPart as Group).parts.get(route);
+      currentPart = (currentPart as Group)?.parts.get(route);
     }
   });
 
