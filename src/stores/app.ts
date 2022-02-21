@@ -1,5 +1,5 @@
-import create from 'zustand';
-import { devtools } from 'zustand/middleware';
+import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
+import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface AppStore {
   name: string;
@@ -43,7 +43,10 @@ export const AppStoreData: AppStore = {
   transformationMode: 'rotate',
 };
 
-const appStore = create<AppStore>(
-  devtools(() => AppStoreData, { name: 'app_state' }),
-);
+const appStore = create<
+  AppStore,
+  SetState<AppStore>,
+  GetState<AppStore>,
+  Mutate<StoreApi<AppStore>, [['zustand/subscribeWithSelector', never]]>
+>(subscribeWithSelector(() => AppStoreData));
 export default appStore;

@@ -11,7 +11,7 @@ const blueprintStore = create<
   subscribeWithSelector(
     () =>
       ({
-        // can't use `import` here because it's run before intialization
+        // can't use `import` here because it's run before initialization
         meta: {
           format_version: 1,
         },

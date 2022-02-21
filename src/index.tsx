@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import SplashScreen from 'routes/SplashScreen';
 import { primeWorker } from 'utilities/serviceWorker';
 
-if (getStellarContext().codeName !== 'alpha') primeWorker();
+if (getStellarContext().codeName !== 'dev') primeWorker();
 enableMapSet();
 
 const App = lazy(() => import('App'));

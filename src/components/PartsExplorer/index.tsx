@@ -45,13 +45,9 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   let data = getReactivePartByAddress(address)!;
 
-  let Icon;
+  // console.log(data);
 
-  try {
-    Icon = getPartModule(data.n, true).Icon;
-  } catch {
-    console.log(address);
-  }
+  let Icon = getPartModule(data.n, true).Icon;
 
   let childParts: JSX.Element[] | undefined;
   const selectionHandler = useSelectionHandler(
@@ -80,8 +76,6 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   };
 
   if (data.n === 'Group') {
-    console.log(data.parts);
-
     childParts = Array.from(data.parts, ([id, data]) => (
       <Listing
         key={`part-${id}`}

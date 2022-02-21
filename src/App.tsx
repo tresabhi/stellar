@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
 import Mobile from 'routes/Mobile';
 import SplashScreen from 'routes/SplashScreen';
+import appStore from 'stores/app';
 import 'styles/index.scss';
 
 const App = () => {
@@ -33,7 +34,17 @@ const App = () => {
   if (window.location.pathname === '/')
     window.location.pathname = isMobile ? '/mobile' : '/desktop';
 
-  document.title = `${stellarContext.title} v${stellarContext.version}`;
+  const version = stellarContext.version.split('.');
+  document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
+
+  appStore.subscribe(
+    (state) => state.hasUnsavedChanges,
+    (hasUnsavedChanges) => {
+      document.title = `${stellarContext.title} ${version[0]}.${version[1]}${
+        hasUnsavedChanges ? '*' : ''
+      }`;
+    },
+  );
 
   return (
     <BrowserRouter>
