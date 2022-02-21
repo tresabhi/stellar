@@ -19,7 +19,6 @@ import {
   useState,
 } from 'react';
 import { PartAddress } from 'types/Blueprint';
-import compareAddressesProps from 'utilities/compareAddressesProps';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
@@ -44,10 +43,6 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   let data = getReactivePartByAddress(address)!;
-
-  // console.log(data);
-
-  let Icon = getPartModule(data.n, true).Icon;
 
   let childParts: JSX.Element[] | undefined;
   const selectionHandler = useSelectionHandler(
@@ -74,6 +69,11 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') buttonRef.current?.focus();
   };
+
+  // just in case the part was deleted
+  if (data === undefined) return null;
+
+  let Icon = getPartModule(data.n, true).Icon;
 
   if (data.n === 'Group') {
     childParts = Array.from(data.parts, ([id, data]) => (
@@ -145,4 +145,4 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
       ) : undefined}
     </div>
   );
-}, compareAddressesProps);
+});

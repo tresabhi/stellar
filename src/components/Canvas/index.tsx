@@ -12,7 +12,6 @@ import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  // const transformationMode = appStore((state) => state.transformationMode);
   const regressAmount = settingsStore(
     (state) => state.performance.regress_amount,
   );
@@ -20,7 +19,7 @@ export const LayoutRenderer = () => {
   const parts = blueprintStore((state) => state.parts);
   const tempRef = useRef<Group>(null);
 
-  const partMeshes = Array.from(parts, ([id, data]) => {
+  const partMeshes = Array.from(parts, ([id, data], index) => {
     const PartComponent = getPartModule(data.n)?.LayoutComponent;
 
     if (PartComponent) {
@@ -29,12 +28,6 @@ export const LayoutRenderer = () => {
       return null;
     }
   });
-
-  // .map((part, index) => {
-  //   const PartComponent = getPartModule(part.n, true).LayoutComponent;
-
-  //   return <PartComponent key={`part-${index}`} address={[index]} />;
-  // });
 
   return (
     <Canvas
@@ -66,22 +59,6 @@ export const LayoutRenderer = () => {
         color={new Color('#52527A')}
       />
 
-      {/* <TransformControls
-        mode={transformationMode}
-        space="local"
-        showX={
-          transformationMode === 'translate' || transformationMode === 'scale'
-        }
-        showY={
-          transformationMode === 'translate' || transformationMode === 'scale'
-        }
-        showZ={
-          transformationMode !== 'translate' && transformationMode !== 'scale'
-        }
-        translationSnap={1}
-        rotationSnap={10 * (Math.PI / 180)}
-        scaleSnap={1 / 8}
-      /> */}
       <group
         ref={tempRef}
         position={[initialData.offset.x, initialData.offset.y, 0]}

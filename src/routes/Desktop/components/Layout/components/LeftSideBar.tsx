@@ -9,11 +9,18 @@ export default function LeftSideBar() {
   const partition = appStore((state) => state.layout.leftSideBar.partition);
   const isPartitionParts = partition === 'parts';
   const isPartitionSnippets = partition === 'snippets';
-  const parts = blueprintStore((state) => state.parts);
 
-  const partListings = Array.from(parts, ([id]) => (
-    <PartsExplorer.Listing key={`part-${id}`} address={[id]} indentation={0} />
-  ));
+  const partListings = blueprintStore((state) =>
+    Array.from(state.parts, ([id, data]) => {
+      return (
+        <PartsExplorer.Listing
+          key={`part-${id}`}
+          address={[id]}
+          indentation={0}
+        />
+      );
+    }),
+  );
 
   const handlePartsClick = () =>
     appStore.setState(
