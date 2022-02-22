@@ -2,7 +2,6 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useFile from 'hooks/useFile';
-import useStellarContext from 'hooks/useStellarContext';
 import produce from 'immer';
 import { newBlueprint } from 'interfaces/blueprint';
 import { random } from 'lodash';
@@ -14,7 +13,6 @@ import styles from './index.module.scss';
 
 const ToolBarTop: FC = () => {
   const draft = useFile();
-  const stellarContext = useStellarContext();
   const openInputRef = useRef<HTMLInputElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
 
@@ -235,8 +233,7 @@ const ToolBarTop: FC = () => {
         >
           Help
         </ControlMenu.Button>
-        {stellarContext.codeName === 'dev' ||
-        stellarContext.codeName === 'alpha' ? (
+        {true ? (
           <ControlMenu.Button
             extension={
               <ContextMenu.Container>
