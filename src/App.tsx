@@ -6,9 +6,19 @@ import Mobile from 'routes/Mobile';
 import SplashScreen from 'routes/SplashScreen';
 import appStore from 'stores/app';
 import 'styles/index.scss';
+import { BufferGeometry, Mesh } from 'three';
+import {
+  acceleratedRaycast,
+  computeBoundsTree,
+  disposeBoundsTree,
+} from 'three-mesh-bvh';
 
 const App = () => {
   const stellarContext = useStellarContext();
+
+  BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
+  BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;
+  Mesh.prototype.raycast = acceleratedRaycast;
 
   if (stellarContext.codeName !== 'dev') {
     console.log(

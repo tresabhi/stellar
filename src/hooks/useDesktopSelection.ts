@@ -3,7 +3,7 @@ import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection
+  togglePartSelection,
 } from 'interfaces/selection';
 import { MouseEvent as ReactMouseEvent } from 'react';
 import selectionStore from 'stores/selection';
@@ -14,9 +14,7 @@ export type UseSelectionHandlerType = 'listing' | 'mesh';
 export type UseListingSelectionHandler = (
   event: ReactMouseEvent<HTMLDivElement>,
 ) => void;
-export type UseMeshSelectionHandler = (
-  event: ThreeEvent<MouseEvent>,
-) => void;
+export type UseMeshSelectionHandler = (event: ThreeEvent<MouseEvent>) => void;
 
 function useSelectionHandler(
   address: PartAddress,
@@ -61,6 +59,8 @@ function useSelectionHandler(
     };
   } else if (type === 'mesh') {
     return (event: ThreeEvent<MouseEvent>) => {
+      event.stopPropagation();
+
       if (event.nativeEvent.shiftKey) {
         toggle();
       } else {
