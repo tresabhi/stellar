@@ -18,7 +18,7 @@ const DesktopCanvasControls = () => {
 
         const maxZoom = camera.right - camera.left;
         const zoomCompensatedDeltaY =
-          event.deltaY * inverseLerp(0, maxZoom, camera.zoom);
+          event.deltaY * 4 * inverseLerp(0, maxZoom, camera.zoom);
         const zoom = Math.max(
           MIN_ZOOM,
           Math.min(maxZoom, camera.zoom - zoomCompensatedDeltaY),

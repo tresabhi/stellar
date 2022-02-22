@@ -82,7 +82,7 @@ export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
     if (index === 0) {
       return;
     } else {
-      currentPart = (currentPart as Group)?.parts.get(route);
+      currentPart = (currentPart as Group | undefined)?.parts?.get(route);
     }
   });
 
