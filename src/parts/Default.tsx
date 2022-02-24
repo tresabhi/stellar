@@ -31,7 +31,7 @@ export const DefaultPartData: PhysicalStellarPart = {
 
     label: 'Unknown Part',
     visible: true,
-    locked: true,
+    locked: false,
 
     selected: false,
   },

@@ -10,16 +10,11 @@ const usePartMeta = (
   initialState: PartWithMeta,
   mesh: MutableRefObject<Mesh | Group>,
 ) => {
-  const helper = useHelper(mesh, BoxHelper, 'rgb(150, 0, 255)');
+  const helper = useHelper(mesh, BoxHelper, 'dodgerblue');
 
   usePartUpdate(address, initialState, (state) => {
     mesh.current.visible = state.meta.visible;
-
-    if (state.meta.locked) {
-      helper.current!.visible = false;
-    } else {
-      helper.current!.visible = state.meta.selected;
-    }
+    helper.current!.visible = state.meta.selected;
   });
 };
 export default usePartMeta;
