@@ -8,6 +8,7 @@ import appStore, { AppStore } from 'stores/app';
 import selectionStore from 'stores/selection';
 import { PartAddress } from 'types/Blueprint';
 import { AnyPartName } from 'types/Parts';
+import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
@@ -42,7 +43,7 @@ const RightSideBar = () => {
       }
     }
   });
-  let hasListedTransformations = false;
+  let partsWithTransformations: PartAddress[] = [];
   let selectedPartNames: AnyPartName[] = Array.from(
     selectionsByPartNames.keys(),
   ).sort();
@@ -51,22 +52,30 @@ const RightSideBar = () => {
     const partModule = getPartModule(partName);
     const addresses = selectionsByPartNames.get(partName)!;
 
-    if (!hasListedTransformations && partModule?.hasTransformations) {
-      hasListedTransformations = true;
-
-      // placeholder for transformation properties
-      propertyItems.unshift(<span key="key-transformations" />);
+    if (partModule?.hasTransformations) {
+      partsWithTransformations.push(...addresses);
     }
 
     if (partModule?.PropertyComponent) {
       propertyItems.push(
         <partModule.PropertyComponent
-          key={`key-${partName}`}
+          key={`type-${partName}`}
           addresses={addresses}
         />,
       );
     }
   });
+
+  // TODO: clean up this mess lmao
+
+  if (partsWithTransformations.length > 0) {
+    propertyItems.unshift(
+      <TransformationProperties
+        key="type-transformations"
+        addresses={partsWithTransformations}
+      />,
+    );
+  }
 
   return (
     <SideBar.Container className={styles['right-side-bar']} width="minor">
