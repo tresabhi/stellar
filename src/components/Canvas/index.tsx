@@ -1,4 +1,4 @@
-import { AdaptiveDpr } from '@react-three/drei';
+import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import DesktopCanvasControls from 'components/DesktopCanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
@@ -14,6 +14,9 @@ export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const regressAmount = settingsStore(
     (state) => state.performance.regress_amount,
+  );
+  const allAxisControls = settingsStore(
+    (state) => state.debug.enabled_orbit_controls,
   );
   const initialData = blueprintStore.getState();
   const parts = blueprintStore((state) => state.parts);
@@ -40,10 +43,10 @@ export const LayoutRenderer = () => {
       onPointerMissed={unselectAllParts}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
-      <directionalLight position={[-20, 20, 100]} />
+      <directionalLight position={[0, 0, 100]} />
       <ambientLight intensity={0.5} />
 
-      <DesktopCanvasControls />
+      {allAxisControls ? <OrbitControls /> : <DesktopCanvasControls />}
 
       <gridHelper
         position={[initialData.center, 0, -99]}

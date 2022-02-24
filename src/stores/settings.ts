@@ -5,7 +5,8 @@ import { devtools, persist } from 'zustand/middleware';
 
 export interface SettingsStore {
   debug: {
-    load_dummy_on_launch: boolean;
+    load_dev_blueprint_on_launch: boolean;
+    enabled_orbit_controls: boolean;
   };
   performance: {
     regress_amount: number;
@@ -15,7 +16,8 @@ export interface SettingsStore {
 
 export const SettingsStoreData: SettingsStore = {
   debug: {
-    load_dummy_on_launch: false,
+    load_dev_blueprint_on_launch: false,
+    enabled_orbit_controls: false,
   },
   performance: {
     regress_amount: 1,

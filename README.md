@@ -2,7 +2,6 @@
 
 [![build](https://img.shields.io/github/workflow/status/TresAbhi/Stellar/Alpha%20CD)](https://github.com/TresAbhi/Stellar/actions/workflows/alpha-cd.yml)
 [![version](https://img.shields.io/github/package-json/v/TresAbhi/Stellar)](https://github.com/TresAbhi/Stellar/blob/main/package.json)
-[![issues](https://img.shields.io/github/issues-raw/TresAbhi/Stellar)](https://github.com/TresAbhi/Stellar/issues)
 
 <br>
 
@@ -14,16 +13,32 @@ Stellar allows anyone to make custom blueprints with extensive customization wit
 
 Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](https://store.steampowered.com/app/1718870/), [Play Store](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator), and [App Store](https://apps.apple.com/us/app/id1308057272).
 
-## 👨‍💻 Tech Inside
+## 🛣️ Road Map
 
-- **Framework**: [React](https://reactjs.org/) ([create-react-app](https://create-react-app.dev/))
-- **Languages:**
-  - Functionality: [Typescript](https://www.typescriptlang.org/) ([XML](https://www.typescriptlang.org/docs/handbook/jsx.html))
-  - Styling: [SASS](https://sass-lang.com/) ([scss](https://sass-lang.com/documentation/syntax#scss))
+_❕ Road maps are removed once completed; there is no backlog._
+
+_❕ Higher the index of the road map, the lesser detailed it is._
+
+### Upcoming
+
+1. Property editing
+   1. [x] Basic part based property editing
+   2. [ ] Part with transformations editing
+   3. [ ] Part translations through canvas
+   4. [ ] Missing property type UIs
+   5. [ ] Number value input box redo
+   6. [ ] Part-type specific canvas editing
+2. Explorer quick actions
+   1. [ ] Visibility
+   2. [ ] Deletion
+3. Part rendering tech
+   1. [ ] Shape and color texture layering
+   2. [ ] Height independent texture slicing
+4. Canvas part selection optimizations
 
 ## 🔌 Compatibility
 
-- **👍 Rule of thumb:** if it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it runs Stellar
+_❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it runs Stellar._
 
 ### 🕹️ Minimum Operating System
 
@@ -42,7 +57,14 @@ Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](
 
 - CPU: Intel Pentium 4+
 - RAM: 1GB+
-- Storage: 50MB+
+- Storage: 25MB+
+
+## 👨‍💻 Tech Inside
+
+- **Framework**: [React](https://reactjs.org/) ([create-react-app](https://create-react-app.dev/))
+- **Languages:**
+  - Functionality: [Typescript](https://www.typescriptlang.org/) ([XML](https://www.typescriptlang.org/docs/handbook/jsx.html))
+  - Styling: [SASS](https://sass-lang.com/) ([scss](https://sass-lang.com/documentation/syntax#scss))
 
 ## 🐒 Major Dependencies
 

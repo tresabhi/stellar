@@ -34,10 +34,18 @@ const ToolBarTop: FC = () => {
     handleCommonInputChange(importInputRef);
   const handleOpenClick = openInputRef.current?.click;
   const handleImportClick = importInputRef.current?.click;
-  const handleLoadDummyOnLaunchClick = () =>
+  const handleLoadDevBlueprintOnLaunchClick = () =>
     settingsStore.setState(
       produce((draft: SettingsStore) => {
-        draft.debug.load_dummy_on_launch = !draft.debug.load_dummy_on_launch;
+        draft.debug.load_dev_blueprint_on_launch =
+          !draft.debug.load_dev_blueprint_on_launch;
+      }),
+    );
+  const handleOrbitControlsClick = () =>
+    settingsStore.setState(
+      produce((draft: SettingsStore) => {
+        draft.debug.enabled_orbit_controls =
+          !draft.debug.enabled_orbit_controls;
       }),
     );
   const handleLayoutTabClick = () => appStore.setState({ tab: 'layout' });
@@ -239,11 +247,19 @@ const ToolBarTop: FC = () => {
               <ContextMenu.Container>
                 <ContextMenu.Toggle
                   defaultState={
-                    settingsStore.getState().debug.load_dummy_on_launch
+                    settingsStore.getState().debug.load_dev_blueprint_on_launch
                   }
-                  onClick={handleLoadDummyOnLaunchClick}
+                  onClick={handleLoadDevBlueprintOnLaunchClick}
                 >
-                  Load dummy BP on launch
+                  Load dev. blueprint on launch
+                </ContextMenu.Toggle>
+                <ContextMenu.Toggle
+                  defaultState={
+                    settingsStore.getState().debug.enabled_orbit_controls
+                  }
+                  onClick={handleOrbitControlsClick}
+                >
+                  Enabled orbit controls
                 </ContextMenu.Toggle>
               </ContextMenu.Container>
             }

@@ -1,15 +1,14 @@
-import { useHelper } from '@react-three/drei';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import useSelectionHandler, {
   UseMeshSelectionHandler,
 } from 'hooks/useDesktopSelection';
+import usePartMeta from 'hooks/usePartMeta';
+import usePartUpdate from 'hooks/usePartUpdate';
 import useUnitInputController from 'hooks/useUnitInputController';
 import { getPartByAddress, setPartsByAddresses } from 'interfaces/blueprint';
-import { FC, memo, useEffect, useRef } from 'react';
-import blueprintStore from 'stores/blueprint';
-import { BoxHelper, CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
-import { degToRad } from 'three/src/math/MathUtils';
+import { FC, memo, useRef } from 'react';
+import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
 import {
   PartModule,
   PropertyComponentProps,
@@ -17,9 +16,14 @@ import {
 } from 'types/Parts';
 import compareAddressesProps from 'utilities/compareAddressesProps';
 import getMutualSlice from 'utilities/getMutualSlice';
-import { DefaultPartData, PartWithMeta, PartWithTranslations } from './Default';
+import usePartTransformations from 'utilities/usePartTransformations';
+import {
+  DefaultPartData,
+  PartWithMeta,
+  PartWithTransformations,
+} from './Default';
 
-export interface VanillaFuelTank extends PartWithTranslations {
+export interface VanillaFuelTank extends PartWithTransformations {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -101,79 +105,46 @@ export const FuelTankData: FuelTank = {
   },
 };
 
+const temp_material = new MeshStandardMaterial({
+  color: 'white',
+  roughness: 0.8,
+  metalness: 0.8,
+  flatShading: true,
+});
+
 export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
   ({ address }) => {
     const initialState = getPartByAddress(address) as FuelTank;
-    const meshRef = useRef<Mesh>();
-    const meshStandardMaterialRef = useRef<MeshStandardMaterial>(null);
-    const helper = useHelper(meshRef, BoxHelper, 'rgb(150, 0, 255)');
+    const mesh = useRef<Mesh>(null!);
     const selectionHandler = useSelectionHandler(
       address,
       'mesh',
     ) as UseMeshSelectionHandler;
 
-    useEffect(() => {
-      const changeState = (state?: FuelTank) => {
-        // just in case part is deleted
-        if (state) {
-          meshRef.current!.geometry = new CylinderGeometry(
-            state.N.width_b / 2,
-            state.N.width_a / 2,
-            state.N.height,
-            24,
-            undefined,
-            true,
-          );
-          meshRef.current?.scale.set(state.o.x, state.o.y, 1);
-          meshRef.current?.rotation.set(0, 0, degToRad(state.o.z));
-          meshRef.current?.position.set(
-            state.p.x,
-            state.p.y + state.N.height / 2,
-            0,
-          );
-          helper.current!.visible = state.meta.selected;
-        }
-      };
-
-      changeState(initialState);
-
-      blueprintStore.subscribe(
-        (state) => getPartByAddress(address, state) as FuelTank,
-        changeState,
+    usePartUpdate(address, initialState, (state) => {
+      mesh.current!.geometry = new CylinderGeometry(
+        state.N.width_b / 2,
+        state.N.width_a / 2,
+        state.N.height,
+        12,
+        1,
+        true,
+        Math.PI / -2,
+        Math.PI,
       );
-    }, [address, initialState, helper]);
+    });
+    usePartTransformations(address, initialState, mesh, (state) => {
+      return (state as FuelTank).N.height / 2;
+    });
+    usePartMeta(address, initialState, mesh);
 
     return (
       <mesh
-        ref={meshRef}
-        scale={[initialState.o.x, initialState.o.y, 1]}
-        rotation={[0, 0, degToRad(initialState.o.z)]}
-        position={[
-          initialState.p.x,
-          initialState.p.y + initialState.N.height / 2,
-          0,
-        ]}
+        ref={mesh}
+        material={temp_material}
+        position={[0, initialState.N.height / 2, 0]}
         onClick={selectionHandler}
-      >
-        <cylinderGeometry
-          args={[
-            initialState.N.width_b / 2,
-            initialState.N.width_a / 2,
-            initialState.N.height,
-            24,
-            undefined,
-            true,
-          ]}
-        />
-        <meshStandardMaterial
-          ref={meshStandardMaterialRef}
-          color="white"
-          roughness={0.8}
-          metalness={0.8}
-          flatShading={true}
-        />
-        {initialState.meta.selected}
-      </mesh>
+      />
     );
   },
   compareAddressesProps,

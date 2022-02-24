@@ -1,4 +1,4 @@
-import devBlueprint from 'assets/blueprints/static/saturn-v.json';
+import devBlueprint from 'assets/blueprints/benchmark/fuelTank';
 import { LayoutRenderer } from 'components/Canvas';
 import { importifyBlueprint } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';
@@ -9,7 +9,7 @@ import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
 import styles from './index.module.scss';
 
-if (settingsStore.getState().debug.load_dummy_on_launch) {
+if (settingsStore.getState().debug.load_dev_blueprint_on_launch) {
   blueprintStore.setState(importifyBlueprint(devBlueprint));
 }
 

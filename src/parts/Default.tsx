@@ -15,7 +15,7 @@ export interface PartWithMeta {
   };
 }
 
-export interface PartWithTranslations {
+export interface PartWithTransformations {
   p: { x: number; y: number };
   o: { x: number; y: number; z: number };
   t: '-Infinity';
@@ -23,7 +23,7 @@ export interface PartWithTranslations {
 
 export interface PhysicalStellarPart
   extends PartWithMeta,
-    PartWithTranslations {}
+    PartWithTransformations {}
 
 export const DefaultPartData: PhysicalStellarPart = {
   meta: {
