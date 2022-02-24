@@ -9,17 +9,10 @@ import { MouseEvent as ReactMouseEvent } from 'react';
 import selectionStore from 'stores/selection';
 import { PartAddress } from 'types/Blueprint';
 
-export type UseSelectionHandlerType = 'listing' | 'mesh';
+type ListingEvent = ReactMouseEvent<HTMLDivElement>;
+type MeshEvent = ThreeEvent<MouseEvent>;
 
-export type UseListingSelectionHandler = (
-  event: ReactMouseEvent<HTMLDivElement>,
-) => void;
-export type UseMeshSelectionHandler = (event: ThreeEvent<MouseEvent>) => void;
-
-function useSelectionHandler(
-  address: PartAddress,
-  type: UseSelectionHandlerType,
-) {
+function useSelectionHandler(address: PartAddress) {
   const toggle = () => togglePartSelection(address);
   const only = () => selectPartOnly(address);
   const fromLast = () => {
@@ -41,33 +34,33 @@ function useSelectionHandler(
     }
   };
 
-  if (type === 'listing') {
-    return (event: ReactMouseEvent<HTMLDivElement>) => {
-      if (event.ctrlKey) {
-        if (event.shiftKey) {
-          fromLast();
-        } else {
-          toggle();
-        }
-      } else {
-        if (event.shiftKey) {
-          fromLastOnly();
-        } else {
-          only();
-        }
-      }
-    };
-  } else if (type === 'mesh') {
-    return (event: ThreeEvent<MouseEvent>) => {
-      event.stopPropagation();
+  return (event: ListingEvent | MeshEvent) => {
+    if (event.nativeEvent) {
+      // mesh
 
       if (event.nativeEvent.shiftKey) {
         toggle();
       } else {
         only();
       }
-    };
-  }
+    } else {
+      // listing
+
+      if ((event as ListingEvent).ctrlKey) {
+        if ((event as ListingEvent).shiftKey) {
+          fromLast();
+        } else {
+          toggle();
+        }
+      } else {
+        if ((event as ListingEvent).shiftKey) {
+          fromLastOnly();
+        } else {
+          only();
+        }
+      }
+    }
+  };
 }
 
 export default useSelectionHandler;

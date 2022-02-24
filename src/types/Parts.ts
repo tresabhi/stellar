@@ -28,7 +28,8 @@ export interface ReactivePartComponentProps {
 
 export type PartModule = {
   // meta
-  isExportable: boolean;
+  isExportable?: boolean;
+  hasTransformations?: boolean;
 
   // UI
   Icon: FC<any>;

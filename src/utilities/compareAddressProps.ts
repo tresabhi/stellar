@@ -1,6 +1,6 @@
 import { ReactivePartComponentProps } from 'types/Parts';
 
-const compareAddressesProps = (
+const compareAddressProps = (
   prevProps: ReactivePartComponentProps,
   nextProps: ReactivePartComponentProps,
 ) => {
@@ -9,4 +9,4 @@ const compareAddressesProps = (
     nextProps.address[nextProps.address.length - 1]
   );
 };
-export default compareAddressesProps;
+export default compareAddressProps;

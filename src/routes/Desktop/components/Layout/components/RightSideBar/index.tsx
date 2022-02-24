@@ -30,25 +30,39 @@ const RightSideBar = () => {
       }),
     );
 
-  let sortedSelections: Map<AnyPartName, PartAddress[]> = new Map();
+  let selectionsByPartNames: Map<AnyPartName, PartAddress[]> = new Map();
   selections.forEach((selection) => {
     const part = getPartByAddress(selection);
 
     if (part) {
-      if (sortedSelections.has(part.n)) {
-        sortedSelections.get(part.n)?.push(selection);
+      if (selectionsByPartNames.has(part.n)) {
+        selectionsByPartNames.get(part.n)?.push(selection);
       } else {
-        sortedSelections.set(part.n, [selection]);
+        selectionsByPartNames.set(part.n, [selection]);
       }
     }
   });
-  const properties = Array.from(sortedSelections, ([key, value], index) => {
-    const PropertyComponent = getPartModule(key)?.PropertyComponent;
+  let hasListedTransformations = false;
+  let selectedPartNames: AnyPartName[] = Array.from(
+    selectionsByPartNames.keys(),
+  ).sort();
+  let propertyItems: JSX.Element[] = [];
+  selectedPartNames.forEach((partName) => {
+    const partModule = getPartModule(partName);
+    const addresses = selectionsByPartNames.get(partName)!;
 
-    if (PropertyComponent) {
-      return <PropertyComponent key={`property-${index}`} addresses={value} />;
-    } else {
-      return null;
+    if (!hasListedTransformations && partModule?.hasTransformations) {
+      hasListedTransformations = true;
+      propertyItems.unshift(<h1>Amongos</h1>);
+    }
+
+    if (partModule?.PropertyComponent) {
+      propertyItems.push(
+        <partModule.PropertyComponent
+          key={`key-${partName}`}
+          addresses={addresses}
+        />,
+      );
     }
   });
 
@@ -76,7 +90,7 @@ const RightSideBar = () => {
       >
         <PropertiesExplorer.Container>
           {selectionsLength > 0 ? (
-            properties
+            propertyItems
           ) : (
             <PropertiesExplorer.Group>
               <PropertiesExplorer.Title>

@@ -1,8 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import useSelectionHandler, {
-  UseMeshSelectionHandler,
-} from 'hooks/useDesktopSelection';
+import useSelectionHandler from 'hooks/useDesktopSelection';
 import usePartMeta from 'hooks/usePartMeta';
 import usePartUpdate from 'hooks/usePartUpdate';
 import useUnitInputController from 'hooks/useUnitInputController';
@@ -14,7 +12,7 @@ import {
   PropertyComponentProps,
   ReactivePartComponentProps,
 } from 'types/Parts';
-import compareAddressesProps from 'utilities/compareAddressesProps';
+import compareAddressProps from 'utilities/compareAddressProps';
 import getMutualSlice from 'utilities/getMutualSlice';
 import usePartTransformations from 'utilities/usePartTransformations';
 import {
@@ -116,10 +114,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
   ({ address }) => {
     const initialState = getPartByAddress(address) as FuelTank;
     const mesh = useRef<Mesh>(null!);
-    const selectionHandler = useSelectionHandler(
-      address,
-      'mesh',
-    ) as UseMeshSelectionHandler;
+    const selectionHandler = useSelectionHandler(address);
 
     usePartUpdate(address, initialState, (state) => {
       mesh.current.geometry = new CylinderGeometry(
@@ -147,7 +142,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       />
     );
   },
-  compareAddressesProps,
+  compareAddressProps,
 );
 
 export const FuelTankIcon = Icon;
@@ -204,13 +199,11 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
 };
 
 const FuelTankPart: PartModule = {
+  hasTransformations: true,
   isExportable: true,
-
+  data: FuelTankData,
   Icon: FuelTankIcon,
   PropertyComponent: FuelTankPropertyComponent,
-
   LayoutComponent: FuelTankLayoutComponent,
-
-  data: FuelTankData,
 };
 export default FuelTankPart;
