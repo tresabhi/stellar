@@ -19,8 +19,6 @@ _❕ Road maps are removed once completed; there is no backlog._
 
 _❕ Higher the index of the road map, the lesser detailed it is._
 
-### Upcoming
-
 1. Property editing
    1. [x] Basic part based property editing
    2. [ ] Part with transformations editing
