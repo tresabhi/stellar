@@ -1,9 +1,11 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import useSelectionHandler from 'hooks/useDesktopSelection';
 import usePartMeta from 'hooks/usePartMeta';
 import usePartUpdate from 'hooks/usePartUpdate';
 import usePropertyController from 'hooks/usePropertyController';
+import useSelectionHandler, {
+  UseMeshSelectionHandler,
+} from 'hooks/useSelectionHandler';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
@@ -113,7 +115,10 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
   ({ address }) => {
     const initialState = getPartByAddress(address) as FuelTank;
     const mesh = useRef<Mesh>(null!);
-    const selectionHandler = useSelectionHandler(address);
+    const selectionHandler = useSelectionHandler(
+      address,
+      'mesh',
+    ) as UseMeshSelectionHandler;
 
     usePartUpdate(address, initialState, (state) => {
       mesh.current.geometry = new CylinderGeometry(

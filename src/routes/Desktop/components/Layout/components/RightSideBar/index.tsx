@@ -55,7 +55,7 @@ const RightSideBar = () => {
       hasListedTransformations = true;
 
       // placeholder for transformation properties
-      propertyItems.unshift(<span />);
+      propertyItems.unshift(<span key="key-transformations" />);
     }
 
     if (partModule?.PropertyComponent) {
