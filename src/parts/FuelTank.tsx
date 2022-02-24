@@ -122,7 +122,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
     ) as UseMeshSelectionHandler;
 
     usePartUpdate(address, initialState, (state) => {
-      mesh.current!.geometry = new CylinderGeometry(
+      mesh.current.geometry = new CylinderGeometry(
         state.N.width_b / 2,
         state.N.width_a / 2,
         state.N.height,

@@ -9,15 +9,16 @@ const usePartUpdate = <T>(
   ...handlers: ((state: T) => void)[]
 ) => {
   useEffect(() => {
-    if (initialState)
-      blueprintStore.subscribe(
-        (state) => getPartByAddress(address, state) as T | undefined,
-        (state) => {
-          if (state) {
-            handlers.forEach((handler) => handler(state));
-          }
-        },
-      );
-  });
+    const handle = (state: T) => handlers.forEach((handler) => handler(state));
+
+    handle(initialState);
+
+    blueprintStore.subscribe(
+      (state) => getPartByAddress(address, state) as T | undefined,
+      (state) => {
+        if (state) handle(state);
+      },
+    );
+  }, [address, handlers, initialState]);
 };
 export default usePartUpdate;
