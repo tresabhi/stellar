@@ -53,7 +53,9 @@ const RightSideBar = () => {
 
     if (!hasListedTransformations && partModule?.hasTransformations) {
       hasListedTransformations = true;
-      propertyItems.unshift(<h1>Amongos</h1>);
+
+      // placeholder for transformation properties
+      propertyItems.unshift(<span />);
     }
 
     if (partModule?.PropertyComponent) {

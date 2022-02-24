@@ -4,7 +4,7 @@ import { RefObject, useEffect, useRef } from 'react';
 
 export const MIXED_SYMBOL = '~';
 
-interface UseUnitInputControllerOptions {
+export interface UseUnitInputControllerOptions {
   prefix: string;
   suffix: string;
   min: number;
@@ -13,14 +13,15 @@ interface UseUnitInputControllerOptions {
   onChange: (nextValue: number, prevValue?: number) => void;
 }
 
-const useUnitInputControllerDefaultOptions: UseUnitInputControllerOptions = {
-  prefix: '',
-  suffix: '',
-  min: -Infinity,
-  max: Infinity,
-  modOnClamp: false,
-  onChange: () => {},
-};
+export const useUnitInputControllerDefaultOptions: UseUnitInputControllerOptions =
+  {
+    prefix: '',
+    suffix: '',
+    min: -Infinity,
+    max: Infinity,
+    modOnClamp: false,
+    onChange: () => {},
+  };
 
 const useUnitInputController = (
   input: RefObject<HTMLInputElement>,

@@ -3,8 +3,8 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import useSelectionHandler from 'hooks/useDesktopSelection';
 import usePartMeta from 'hooks/usePartMeta';
 import usePartUpdate from 'hooks/usePartUpdate';
-import useUnitInputController from 'hooks/useUnitInputController';
-import { getPartByAddress, setPartsByAddresses } from 'interfaces/blueprint';
+import usePropertyController from 'hooks/usePropertyController';
+import { getPartByAddress } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
 import {
@@ -13,7 +13,6 @@ import {
   ReactivePartComponentProps,
 } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
-import getMutualSlice from 'utilities/getMutualSlice';
 import usePartTransformations from 'utilities/usePartTransformations';
 import {
   DefaultPartData,
@@ -150,49 +149,34 @@ export const FuelTankIcon = Icon;
 export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
   addresses,
 }) => {
-  const widthRef = useRef<HTMLInputElement>(null);
-  const heightRef = useRef<HTMLInputElement>(null);
-  const fuelRef = useRef<HTMLInputElement>(null);
-
-  const { width, height, fuel } = getMutualSlice(
-    (data) => ({
-      width: data.N.width_original,
-      height: data.N.height,
-      fuel: data.N.fuel_percent,
+  const width = usePropertyController<FuelTank>(
+    addresses,
+    (state) => state.N.width_original,
+    (value) => ({
+      N: { width_original: value, width_a: value, width_b: value },
     }),
-    addresses.map((address) => getPartByAddress(address) as FuelTank),
+    { min: 0, suffix: 'm' },
   );
-
-  useUnitInputController(widthRef, width, {
-    min: 0,
-    suffix: 'm',
-    onChange: (value) =>
-      // TODO: separate these
-      setPartsByAddresses(addresses, {
-        N: { width_original: value, width_a: value, width_b: value },
-      }),
-  });
-  useUnitInputController(heightRef, height, {
-    min: 0,
-    suffix: 'm',
-    onChange: (value) =>
-      setPartsByAddresses(addresses, { N: { height: value } }),
-  });
-  useUnitInputController(fuelRef, (fuel ?? 1) * 100, {
-    min: 0,
-    max: 100, // remove max?
-    suffix: '%',
-    onChange: (value) =>
-      setPartsByAddresses(addresses, { N: { fuel_percent: value / 100 } }),
-  });
+  const height = usePropertyController<FuelTank>(
+    addresses,
+    (state) => state.N.height,
+    (value) => ({ N: { height: value } }),
+    { min: 0, suffix: 'm' },
+  );
+  const fuel = usePropertyController<FuelTank>(
+    addresses,
+    (state) => state.N.fuel_percent,
+    (value) => ({ N: { fuel_percent: value / 100 } }),
+    { min: 0, max: 100, suffix: '%' },
+  );
 
   return (
     <PropertiesExplorer.Group>
       <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput ref={widthRef} label="W" />
-        <PropertiesExplorer.NamedInput ref={heightRef} label="H" />
-        <PropertiesExplorer.NamedInput ref={fuelRef} label="F" />
+        <PropertiesExplorer.NamedInput ref={width} label="W" />
+        <PropertiesExplorer.NamedInput ref={height} label="H" />
+        <PropertiesExplorer.NamedInput ref={fuel} label="F" />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );
