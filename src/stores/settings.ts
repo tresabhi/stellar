@@ -1,7 +1,7 @@
 import { Languages } from 'hooks/useTranslations';
 import { merge } from 'lodash';
 import create from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { persist } from 'zustand/middleware';
 
 export interface SettingsStore {
   debug: {
@@ -26,13 +26,10 @@ export const SettingsStoreData: SettingsStore = {
 };
 
 const settingsStore = create<SettingsStore>(
-  devtools(
-    persist(() => SettingsStoreData, {
-      name: 'settings',
-      merge: (persistedState, currentState) =>
-        merge(currentState, persistedState),
-    }),
-    { name: 'settings' },
-  ),
+  persist(() => SettingsStoreData, {
+    name: 'settings',
+    merge: (persistedState, currentState) =>
+      merge(currentState, persistedState),
+  }),
 );
 export default settingsStore;
