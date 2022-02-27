@@ -5,20 +5,25 @@ import useSelectionHandler, {
   UseListingSelectionHandler,
 } from 'hooks/useSelectionHandler';
 import {
+  getPartByAddress,
   getReactivePartByAddress,
   setPartByAddress,
+  subscribeToPart,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
+import { PartWithMeta } from 'parts/Default';
+import { Group } from 'parts/Group';
 import {
   FC,
   InputHTMLAttributes,
   KeyboardEvent,
   memo,
   MouseEvent,
+  useEffect,
   useRef,
   useState,
 } from 'react';
-import { PartAddress } from 'types/Blueprint';
+import { AnyPartMap, PartAddress } from 'types/Blueprint';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
@@ -42,7 +47,8 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  let data = getReactivePartByAddress(address)!;
+  // let data = getReactivePartByAddress(address)!;
+  const initialData = getPartByAddress(address)!;
 
   let childParts: JSX.Element[] | undefined;
   const selectionHandler = useSelectionHandler(
@@ -55,7 +61,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
     setExpanded((state) => !state);
   };
   const handleExpandMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
-    if (data.n === 'Group') event.preventDefault();
+    if (initialData.n === 'Group') event.preventDefault();
   };
   const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -70,44 +76,52 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
     if (event.key === 'Enter') buttonRef.current?.focus();
   };
 
-  // just in case the part was deleted
-  if (data === undefined) return null;
+  let Icon = getPartModule(initialData.n, true).Icon;
 
-  let Icon = getPartModule(data.n, true).Icon;
-
-  if (data.n === 'Group') {
-    childParts = Array.from(data.parts, ([id, data]) => (
-      <Listing
-        key={`part-${id}`}
-        address={[...address, id]}
-        indentation={indentation + 1}
-      />
-    ));
+  if (initialData.n === 'Group') {
+    childParts = Array.from(
+      getReactivePartByAddress(
+        address,
+        (state: Group) => state.parts,
+      ) as AnyPartMap,
+      ([id]) => (
+        <Listing
+          key={`part-${id}`}
+          address={[...address, id]}
+          indentation={indentation + 1}
+        />
+      ),
+    );
   }
 
+  useEffect(() => {
+    subscribeToPart(
+      address,
+      (selected) => {
+        if (selected) {
+          listingRef.current?.classList.add(styles.selected);
+        } else {
+          listingRef.current?.classList.remove(styles.selected);
+        }
+      },
+      (state: PartWithMeta) => state.meta.selected,
+    );
+  }, [address]);
+
   return (
-    <div
-      ref={listingRef}
-      tabIndex={-1}
-      className={`${styles.listing} ${
-        data.meta.selected ? styles.selected : ''
-      }`}
-    >
+    <div ref={listingRef} tabIndex={-1} className={styles.listing}>
       <div
         className={styles.button}
         style={{ paddingLeft: `${16 * indentation}px` }}
         onClick={selectionHandler}
       >
-        {/* indentations */}
-
-        {/* expand/collapse and/or dependency graphs */}
         <button
           ref={buttonRef}
           onClick={handleExpandClick}
           onMouseDown={handleExpandMouseDown}
           className={styles.expand}
         >
-          {data.n === 'Group' ? (
+          {initialData.n === 'Group' ? (
             expanded ? (
               <ArrowHeadDownIcon className={styles['expand-icon']} />
             ) : (
@@ -131,7 +145,7 @@ export const Listing = memo<ListingProps>(({ indentation, address }) => {
           onBlur={handleLabelBlur}
           onKeyPress={handleLabelKeyPress}
           className={styles.label}
-          defaultValue={data.meta.label}
+          defaultValue={initialData.meta.label}
         />
 
         {/* visible */}

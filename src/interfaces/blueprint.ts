@@ -1,5 +1,6 @@
 import produce from 'immer';
-import { cloneDeep, merge } from 'lodash';
+import { cloneDeep, isUndefined, merge } from 'lodash';
+import { PartWithTransformations } from 'parts/Default';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
@@ -114,6 +115,70 @@ export const setPartsByAddresses = (
   }
 };
 
-export const getReactivePartByAddress = (address: PartAddress) => {
-  return blueprintStore((state) => getPartByAddress(address, state));
+export const getReactivePartByAddress = <T, S>(
+  address: PartAddress,
+  slicer?: (state: T) => S,
+) => {
+  return blueprintStore((state) =>
+    slicer
+      ? slicer(getPartByAddress(address, state) as unknown as T)
+      : getPartByAddress(address, state),
+  );
+};
+
+export const translatePartsBySelection = (x: number, y: number) => {
+  const selections = selectionStore.getState().selections;
+
+  blueprintStore.setState(
+    produce((draft: Blueprint) => {
+      selections.forEach((selection) => {
+        let part = getPartByAddress(
+          selection,
+          draft,
+        ) as PartWithTransformations;
+
+        part.p.x += x;
+        part.p.y += y;
+      });
+    }),
+  );
+};
+
+export const subscribeToPart = <T, S>(
+  address: PartAddress,
+  handler: (slice: S) => void,
+  slicer?: (state: T) => S,
+  fireInitially = false,
+) => {
+  const compoundHandler = (slice: S) => {
+    if (!isUndefined(slice)) handler(slice);
+  };
+
+  blueprintStore.subscribe(
+    (state) => {
+      const part = getPartByAddress(address, state) as unknown as T;
+
+      if (slicer) {
+        return slicer(part);
+      } else {
+        return part as unknown as S;
+      }
+    },
+    compoundHandler,
+    { fireImmediately: true },
+  );
+
+  if (fireInitially) {
+    if (slicer) {
+      compoundHandler(
+        slicer(
+          getPartByAddress(address, blueprintStore.getState()) as unknown as T,
+        ),
+      );
+    } else {
+      compoundHandler(
+        getPartByAddress(address, blueprintStore.getState()) as unknown as S,
+      );
+    }
+  }
 };

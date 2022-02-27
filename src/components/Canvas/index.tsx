@@ -22,6 +22,9 @@ export const LayoutRenderer = () => {
   const parts = blueprintStore((state) => state.parts);
   const tempRef = useRef<Group>(null);
 
+  // let posX = 0;
+  // let posY = 0;
+
   const partMeshes = Array.from(parts, ([id, data], index) => {
     const PartComponent = getPartModule(data.n)?.LayoutComponent;
 
@@ -61,6 +64,25 @@ export const LayoutRenderer = () => {
         distance={1e3}
         color={new Color('#52527A')}
       />
+
+      {/* <TransformControls
+        showZ={false}
+        translationSnap={1}
+        onObjectChange={(event) => {
+          if (
+            event?.target.object.position.x !== posX ||
+            event?.target.object.position.y !== posY
+          ) {
+            const diffX = event?.target.object.position.x - (posX ?? 0);
+            const diffY = event?.target.object.position.y - (posY ?? 0);
+
+            translatePartsBySelection(diffX, diffY);
+
+            posX = event?.target.object.position.x;
+            posY = event?.target.object.position.y;
+          }
+        }}
+      /> */}
 
       <group
         ref={tempRef}

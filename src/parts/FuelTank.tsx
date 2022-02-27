@@ -1,13 +1,13 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePartMeta from 'hooks/usePartMeta';
-import usePartUpdate from 'hooks/usePartUpdate';
+import usePartTransformations from 'hooks/usePartTransformations';
 import usePropertyController from 'hooks/usePropertyController';
 import useSelectionHandler, {
   UseMeshSelectionHandler,
 } from 'hooks/useSelectionHandler';
-import { getPartByAddress } from 'interfaces/blueprint';
-import { FC, memo, useRef } from 'react';
+import { getPartByAddress, subscribeToPart } from 'interfaces/blueprint';
+import { FC, memo, useEffect, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
 import {
   PartModule,
@@ -15,7 +15,6 @@ import {
   ReactivePartComponentProps,
 } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
-import usePartTransformations from 'utilities/usePartTransformations';
 import {
   DefaultPartData,
   PartWithMeta,
@@ -120,22 +119,30 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       'mesh',
     ) as UseMeshSelectionHandler;
 
-    usePartUpdate(address, initialState, (state) => {
-      mesh.current.geometry = new CylinderGeometry(
-        state.N.width_b / 2,
-        state.N.width_a / 2,
-        state.N.height,
-        12,
-        1,
-        true,
-        Math.PI / -2,
-        Math.PI,
-      );
-    });
-    usePartTransformations(address, initialState, mesh, (state) => {
+    usePartTransformations(address, mesh, (state) => {
       return (state as FuelTank).N.height / 2;
     });
-    usePartMeta(address, initialState, mesh);
+    usePartMeta(address, mesh);
+
+    useEffect(() => {
+      subscribeToPart(
+        address,
+        (N) => {
+          mesh.current.geometry = new CylinderGeometry(
+            N.width_b / 2,
+            N.width_a / 2,
+            N.height,
+            12,
+            1,
+            true,
+            Math.PI / -2,
+            Math.PI,
+          );
+        },
+        (state: FuelTank) => state.N,
+        true,
+      );
+    }, [address]);
 
     return (
       <mesh

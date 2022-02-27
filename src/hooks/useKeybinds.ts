@@ -1,5 +1,8 @@
 import produce from 'immer';
-import { deletePartsBySelection } from 'interfaces/blueprint';
+import {
+  deletePartsBySelection,
+  translatePartsBySelection,
+} from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
@@ -63,6 +66,20 @@ const useKeybinds = () => {
             ? tabOrder[0]
             : tabOrder[tabOrder.indexOf(state.tab) + 1],
       }));
+    });
+
+    bind('up', (event) => {
+      // TODO: remove these `event.repeats`?
+      if (!event.repeat) translatePartsBySelection(0, 1);
+    });
+    bind('down', (event) => {
+      if (!event.repeat) translatePartsBySelection(0, -1);
+    });
+    bind('left', (event) => {
+      if (!event.repeat) translatePartsBySelection(-1, 0);
+    });
+    bind('right', (event) => {
+      if (!event.repeat) translatePartsBySelection(1, 0);
     });
   }, []);
 };
