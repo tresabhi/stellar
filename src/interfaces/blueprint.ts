@@ -1,6 +1,6 @@
 import produce from 'immer';
 import { cloneDeep, isUndefined, merge } from 'lodash';
-import { PartWithTransformations } from 'parts/Default';
+import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import selectionStore from 'stores/selection';
@@ -135,7 +135,7 @@ export const translatePartsBySelection = (x: number, y: number) => {
         let part = getPartByAddress(
           selection,
           draft,
-        ) as PartWithTransformations;
+        ) as PartWithTransformations & PartWithMeta;
 
         part.p.x += x;
         part.p.y += y;

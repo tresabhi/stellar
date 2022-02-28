@@ -25,7 +25,7 @@ export const LayoutRenderer = () => {
   // let posX = 0;
   // let posY = 0;
 
-  const partMeshes = Array.from(parts, ([id, data], index) => {
+  const partMeshes = Array.from(parts, ([id, data]) => {
     const PartComponent = getPartModule(data.n)?.LayoutComponent;
 
     if (PartComponent) {

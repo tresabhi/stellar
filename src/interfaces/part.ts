@@ -14,13 +14,16 @@ const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
 export const importifyPartData = (
   partData: AnyVanillaPart | AnyPart,
   partAddress: PartAddress,
-): AnyPart => {
-  const defaultData = getPartModule(partData.n, true).data;
-  let newPart = merge({}, defaultData, partData);
+): AnyPart | undefined => {
+  const partModule = getPartModule(partData.n);
 
-  newPart.meta.address = partAddress;
+  if (partModule) {
+    let newPart = merge({}, partModule.data, partData);
 
-  return newPart;
+    newPart.meta.address = partAddress;
+
+    return newPart;
+  }
 };
 
 export const importifyPartsData = (
@@ -28,16 +31,25 @@ export const importifyPartsData = (
   parentAddress: PartAddress,
 ): AnyPartMap => {
   if (isArray(parts)) {
-    return new Map(
-      parts.map((part) => {
-        return [UUIDV4(), importifyPartData(cloneDeep(part), parentAddress)];
-      }),
-    );
+    // return new Map(
+    //   parts.map((part) => {
+    //     return [UUIDV4(), importifyPartData(cloneDeep(part), parentAddress)];
+    //   }),
+    // );
+    let newPartsMap: AnyPartMap = new Map();
+
+    parts.forEach((part) => {
+      const importifiedPart = importifyPartData(cloneDeep(part), parentAddress);
+      if (importifiedPart) newPartsMap.set(UUIDV4(), importifiedPart);
+    });
+
+    return newPartsMap;
   } else {
     let newParts = cloneDeep(parts);
 
     newParts.forEach((part, id) => {
-      newParts.set(id, importifyPartData(part, [...parentAddress, id]));
+      const importifiedPart = importifyPartData(part, [...parentAddress, id]);
+      if (importifiedPart) newParts.set(id, importifiedPart);
     });
 
     return newParts;
