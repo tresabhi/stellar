@@ -81,17 +81,19 @@ const ToolBarTop: FC = () => {
           extension={
             <ContextMenu.Container>
               {/* Pro tip: add "..." only if further interaction is required */}
-              <ContextMenu.Button onClick={newBlueprint}>
+              <ContextMenu.Button disabled onClick={newBlueprint}>
                 New
               </ContextMenu.Button>
-              <ContextMenu.Button onClick={handleOpenClick}>
+              <ContextMenu.Button disabled onClick={handleOpenClick}>
                 Open...
               </ContextMenu.Button>
 
               <ContextMenu.Separator />
 
-              <ContextMenu.Button onClick={draft.save}>Save</ContextMenu.Button>
-              <ContextMenu.Button onClick={handleImportClick}>
+              <ContextMenu.Button disabled onClick={draft.save}>
+                Save
+              </ContextMenu.Button>
+              <ContextMenu.Button disabled onClick={handleImportClick}>
                 Import...
               </ContextMenu.Button>
               <ContextMenu.Button disabled>Export...</ContextMenu.Button>
