@@ -119,9 +119,9 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       'mesh',
     ) as UseMeshSelectionHandler;
 
-    usePartTransformations(address, mesh, (state) => {
-      return (state as FuelTank).N.height / 2;
-    });
+    usePartTransformations(address, mesh, (state) => ({
+      p: { y: state.p.y + (state as FuelTank).N.height / 2 },
+    }));
     usePartMeta(address, mesh);
 
     useEffect(() => {
