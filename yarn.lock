@@ -1551,10 +1551,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.3.tgz#8926d7a09812374127b1f8a904a755c7579124e6"
   integrity sha512-dzJrPvUc42K2un9y6D1IsrPQO5tKsbWwUo+wsATnXjG3ePWyuDBIOMJuPe605NhIXUmPH+Vik2wMoZz06hD1uA==
 
-"@react-three/drei@^8.10.6":
-  version "8.10.6"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.10.6.tgz#a44382c60e60e59e6d21c17c6403a00e015e9121"
-  integrity sha512-G4RsL0W0CskcMTMYg8erZ/kJ31nFE/m2SA40SX5Ew33pqDDGMBK+ML0dnKiQMj8uD9bjka7TzmwEuT/n814hlQ==
+"@react-three/drei@^8.11.0":
+  version "8.11.0"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.11.0.tgz#aed175b670e02091d35e19d46338de0b538087da"
+  integrity sha512-/17cr7qkfCgDyA5fcscKEch5XjMw8JMyngzLhXzCYyiTeCOteXGkJSrS0RHemuRAof/8rNBcC9z2OYJQroVSnw==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -1942,10 +1942,10 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/lodash@^4.14.178":
-  version "4.14.178"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.178.tgz#341f6d2247db528d4a13ddbb374bcdc80406f4f8"
-  integrity sha512-0d5Wd09ItQWH1qFbEyQ7oTQ3GZrMfth5JkbN3EvTKLXcHLRDSXeLnlvlOn0wvxVIwK5o2M8JzP/OWz7T3NRsbw==
+"@types/lodash@^4.14.179":
+  version "4.14.179"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.179.tgz#490ec3288088c91295780237d2497a3aa9dfb5c5"
+  integrity sha512-uwc1x90yCKqGcIOAT6DwOSuxnrAbpkdPsUOZtwrXb4D/6wZs+6qG7QnIawDuZWg0sWpxl+ltIKCaLoMlna678w==
 
 "@types/mime@^1":
   version "1.3.2"
@@ -9892,7 +9892,7 @@ zstddec@^0.0.2:
   resolved "https://registry.yarnpkg.com/zstddec/-/zstddec-0.0.2.tgz#57e2f28dd1ff56b750e07d158a43f0611ad9eeb4"
   integrity sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==
 
-zustand@^3.5.1, zustand@^3.5.13, zustand@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.7.0.tgz#a5c68fb06bdee9c63ad829de2432635be6d0ce69"
-  integrity sha512-USzVzLGrvZ8VK1/sEsOAmeqa8N7D3OBdZskVaL7DL89Q4QLTYD053iIlZ5KDidyZ+Od80Dttin/f8ZulOLFFDQ==
+zustand@^3.5.1, zustand@^3.5.13, zustand@^3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.7.1.tgz#7388f0a7175a6c2fd9a2880b383a4bf6cdf6b7c6"
+  integrity sha512-wHBCZlKj+bg03/hP+Tzv24YhnqqP8MCeN9ECPDXoF01062SIbnfl3j9O0znkDw1lNTY0a8WN3F///a0UhhaEqg==
