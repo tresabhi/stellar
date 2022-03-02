@@ -10,6 +10,9 @@ const blueprint = {
   },
   parts: [
     {
+      meta: {
+        label: 'Fuel Tank 1',
+      },
       n: 'Fuel Tank',
       p: {
         x: 1,
@@ -34,6 +37,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 2',
+      },
       n: 'Fuel Tank',
       p: {
         x: 4,
@@ -58,6 +64,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 3',
+      },
       n: 'Fuel Tank',
       p: {
         x: 0,
@@ -82,6 +91,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 4',
+      },
       n: 'Fuel Tank',
       p: {
         x: -3,
@@ -106,6 +118,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 5',
+      },
       n: 'Fuel Tank',
       p: {
         x: 0,
@@ -130,6 +145,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 6',
+      },
       n: 'Fuel Tank',
       p: {
         x: 4,
@@ -154,6 +172,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 7',
+      },
       n: 'Fuel Tank',
       p: {
         x: -3.5,
@@ -178,6 +199,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 8',
+      },
       n: 'Fuel Tank',
       p: {
         x: -5.5,
@@ -202,6 +226,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 9',
+      },
       n: 'Fuel Tank',
       p: {
         x: -6,
@@ -226,6 +253,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 10',
+      },
       n: 'Fuel Tank',
       p: {
         x: -5,
@@ -250,6 +280,9 @@ const blueprint = {
       },
     },
     {
+      meta: {
+        label: 'Fuel Tank 11',
+      },
       n: 'Fuel Tank',
       p: {
         x: -3,

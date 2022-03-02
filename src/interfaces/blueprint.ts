@@ -150,23 +150,21 @@ export const subscribeToPart = <T, S>(
   slicer?: (state: T) => S,
   fireInitially = false,
 ) => {
-  const compoundHandler = (slice: S) => {
+  const compoundHandler = (slice?: S) => {
     if (!isUndefined(slice)) handler(slice);
   };
 
-  blueprintStore.subscribe(
-    (state) => {
-      const part = getPartByAddress(address, state) as unknown as T;
+  blueprintStore.subscribe((state) => {
+    const part = getPartByAddress(address, state);
 
+    if (part) {
       if (slicer) {
-        return slicer(part);
+        return slicer(part as unknown as T);
       } else {
         return part as unknown as S;
       }
-    },
-    compoundHandler,
-    { fireImmediately: true },
-  );
+    }
+  }, compoundHandler);
 
   if (fireInitially) {
     if (slicer) {

@@ -3,27 +3,11 @@ import * as PartsExplorer from 'components/PartsExplorer';
 import * as SideBar from 'components/SideBar';
 import produce from 'immer';
 import appStore, { AppStore } from 'stores/app';
-import blueprintStore from 'stores/blueprint';
 
 export default function LeftSideBar() {
   const partition = appStore((state) => state.layout.leftSideBar.partition);
   const isPartitionParts = partition === 'parts';
   const isPartitionSnippets = partition === 'snippets';
-  const state = blueprintStore(
-    (state) => state.parts,
-    (prevState, nextState) => {
-      return false;
-    },
-  );
-
-  const partListings = Array.from(state, ([id, data]) => (
-    <PartsExplorer.Listing
-      key={`part-${id}`}
-      initialState={data}
-      address={[id]}
-      indentation={0}
-    />
-  ));
 
   const handlePartsClick = () =>
     appStore.setState(
@@ -60,7 +44,7 @@ export default function LeftSideBar() {
           display: isPartitionParts ? undefined : 'none',
         }}
       >
-        <PartsExplorer.Container>{partListings}</PartsExplorer.Container>
+        <PartsExplorer.Container />
       </SideBar.Scrollable>
       <SideBar.Scrollable
         style={{

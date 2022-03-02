@@ -1,7 +1,10 @@
 @import '../../styles/index.scss';
 
 .properties-explorer {
-  padding: 0 $padding-x-thick 0 $padding-x-thick;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   .group {
     display: flex;
@@ -22,15 +25,18 @@
         background-color: $black-light;
         border-radius: $border-radius-regular;
         padding-left: $padding-thick;
-        margin-right: $margin-x-thick;
         display: flex;
         align-items: center;
         justify-content: center;
         height: $named-input-height;
 
+        & + .input {
+          margin-left: $margin-x-thick;
+        }
+
         &.small {
-          max-width: $named-input-small-width;
-          width: $named-input-small-width;
+          max-width: calc($named-input-small-width - $padding-thick);
+          width: calc($named-input-small-width - $padding-thick);
         }
 
         &.wide {

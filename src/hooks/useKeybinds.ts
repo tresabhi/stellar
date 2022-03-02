@@ -1,6 +1,7 @@
 import produce from 'immer';
 import {
-  translatePartsBySelection
+  deletePartsBySelection,
+  translatePartsBySelection,
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
@@ -35,7 +36,7 @@ const useKeybinds = () => {
     });
 
     // TODO: make parts explorer rerender when this happens
-    // bind('del', deletePartsBySelection);
+    bind('del', deletePartsBySelection);
 
     bind('alt+1', (event) => {
       event?.preventDefault();

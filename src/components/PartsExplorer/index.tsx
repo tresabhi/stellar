@@ -2,12 +2,12 @@ import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-dow
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import useSelectionHandler, {
-  UseListingSelectionHandler,
+  UseListingSelectionHandler
 } from 'hooks/useSelectionHandler';
 import {
   getReactivePartByAddress,
   setPartByAddress,
-  subscribeToPart,
+  subscribeToPart
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { PartWithMeta } from 'parts/Default';
@@ -20,23 +20,59 @@ import {
   MouseEvent,
   useEffect,
   useRef,
-  useState,
+  useState
 } from 'react';
+import blueprintStore from 'stores/blueprint';
 import { AnyPartMap, PartAddress } from 'types/Blueprint';
 import { AnyPart } from 'types/Parts';
+import compareAddressProps from 'utilities/compareAddressProps';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
-  children,
   ...props
-}) => (
-  <div
-    {...props}
-    className={`${props.className ?? ''} ${styles['parts-explorer']}`}
-  >
-    {children}
-  </div>
-);
+}) => {
+  const state = blueprintStore(
+    (state) => state.parts,
+    (prevState, nextState) => {
+      const prevKeys = prevState.keys();
+      const nextKeys = nextState.keys();
+
+      let isPrevKeyDone = false;
+      let isNextKeyDone = false;
+
+      while (!isPrevKeyDone || !isNextKeyDone) {
+        const prevKey = prevKeys.next();
+        const nextKey = nextKeys.next();
+
+        isPrevKeyDone = prevKey.done!;
+        isNextKeyDone = nextKey.done!;
+
+        if (prevKey.done !== nextKey.done) return false;
+        if (prevKey.value !== nextKey.value) return false;
+      }
+
+      return true;
+    },
+  );
+
+  const partListings = Array.from(state, ([id, data]) => (
+    <Listing
+      key={`part-${id}`}
+      initialState={data}
+      address={[id]}
+      indentation={0}
+    />
+  ));
+
+  return (
+    <div
+      {...props}
+      className={`${props.className ?? ''} ${styles['parts-explorer']}`}
+    >
+      {partListings}
+    </div>
+  );
+};
 
 interface ListingProps {
   indentation: number;
@@ -46,9 +82,9 @@ interface ListingProps {
 export const Listing = memo<ListingProps>(
   ({ indentation, address, initialState }) => {
     const [expanded, setExpanded] = useState(false);
-    const listingRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const listingRef = useRef<HTMLDivElement>(null!);
+    const buttonRef = useRef<HTMLButtonElement>(null!);
+    const inputRef = useRef<HTMLInputElement>(null!);
 
     let childParts: JSX.Element[] | undefined;
     const selectionHandler = useSelectionHandler(
@@ -65,15 +101,18 @@ export const Listing = memo<ListingProps>(
     };
     const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
       event.preventDefault();
-      buttonRef.current?.focus();
+      buttonRef.current.focus();
     };
-    const handleLabelDoubleClick = () => inputRef.current!.focus();
+    const handleLabelDoubleClick = () => {
+      inputRef.current.focus();
+      inputRef.current.select();
+    };
     const handleLabelBlur = () => {
-      inputRef.current!.value = inputRef.current!.value.trim();
-      setPartByAddress(address, { meta: { label: inputRef.current!.value } });
+      inputRef.current.value = inputRef.current.value.trim();
+      setPartByAddress(address, { meta: { label: inputRef.current.value } });
     };
     const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter') buttonRef.current?.focus();
+      if (event.key === 'Enter') buttonRef.current.focus();
     };
 
     let Icon = getPartModule(initialState.n, true).Icon;
@@ -100,9 +139,9 @@ export const Listing = memo<ListingProps>(
         address,
         (selected) => {
           if (selected) {
-            listingRef.current?.classList.add(styles.selected);
+            listingRef.current.classList.add(styles.selected);
           } else {
-            listingRef.current?.classList.remove(styles.selected);
+            listingRef.current.classList.remove(styles.selected);
           }
         },
         (state: PartWithMeta) => state.meta.selected,
@@ -161,4 +200,5 @@ export const Listing = memo<ListingProps>(
       </div>
     );
   },
+  compareAddressProps,
 );
