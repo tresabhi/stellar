@@ -1551,10 +1551,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.3.tgz#8926d7a09812374127b1f8a904a755c7579124e6"
   integrity sha512-dzJrPvUc42K2un9y6D1IsrPQO5tKsbWwUo+wsATnXjG3ePWyuDBIOMJuPe605NhIXUmPH+Vik2wMoZz06hD1uA==
 
-"@react-three/drei@^8.11.0":
-  version "8.11.0"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.11.0.tgz#aed175b670e02091d35e19d46338de0b538087da"
-  integrity sha512-/17cr7qkfCgDyA5fcscKEch5XjMw8JMyngzLhXzCYyiTeCOteXGkJSrS0RHemuRAof/8rNBcC9z2OYJQroVSnw==
+"@react-three/drei@^8.11.1":
+  version "8.11.1"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.11.1.tgz#59a5c3de9746e92f13c51816c93ead41a21f9401"
+  integrity sha512-V3hsFZFAcd7uPW5M3yFPdt+9f9PM7sBUkpAvl6PAjvoz4RpzPlA680XxPpPeTFLYSuFAZ/zhkMupXnaynnspdw==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
