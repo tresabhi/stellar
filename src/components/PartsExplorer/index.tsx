@@ -26,34 +26,13 @@ import blueprintStore from 'stores/blueprint';
 import { AnyPartMap, PartAddress } from 'types/Blueprint';
 import { AnyPart } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
+import comparePartsMap from 'utilities/comparePartsMap';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   ...props
 }) => {
-  const state = blueprintStore(
-    (state) => state.parts,
-    (prevState, nextState) => {
-      const prevKeys = prevState.keys();
-      const nextKeys = nextState.keys();
-
-      let isPrevKeyDone = false;
-      let isNextKeyDone = false;
-
-      while (!isPrevKeyDone || !isNextKeyDone) {
-        const prevKey = prevKeys.next();
-        const nextKey = nextKeys.next();
-
-        isPrevKeyDone = prevKey.done!;
-        isNextKeyDone = nextKey.done!;
-
-        if (prevKey.done !== nextKey.done) return false;
-        if (prevKey.value !== nextKey.value) return false;
-      }
-
-      return true;
-    },
-  );
+  const state = blueprintStore((state) => state.parts, comparePartsMap);
 
   const partListings = Array.from(state, ([id, data]) => (
     <Listing

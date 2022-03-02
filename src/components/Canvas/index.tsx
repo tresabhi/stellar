@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import { Color, Group } from 'three';
+import comparePartsMap from 'utilities/comparePartsMap';
 import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
@@ -19,8 +20,8 @@ export const LayoutRenderer = () => {
     (state) => state.debug.enabled_orbit_controls,
   );
   const initialData = blueprintStore.getState();
-  const parts = blueprintStore((state) => state.parts);
   const tempRef = useRef<Group>(null);
+  const parts = blueprintStore((state) => state.parts, comparePartsMap);
 
   const partMeshes = Array.from(parts, ([id, data]) => {
     const PartComponent = getPartModule(data.n)?.LayoutComponent;
