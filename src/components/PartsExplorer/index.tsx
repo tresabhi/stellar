@@ -26,13 +26,13 @@ import blueprintStore from 'stores/blueprint';
 import { AnyPartMap, PartAddress } from 'types/Blueprint';
 import { AnyPart } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
-import comparePartsMap from 'utilities/comparePartsMap';
+import comparePartsMaps from 'utilities/comparePartsMaps';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   ...props
 }) => {
-  const state = blueprintStore((state) => state.parts, comparePartsMap);
+  const state = blueprintStore((state) => state.parts, comparePartsMaps);
 
   const partListings = Array.from(state, ([id, data]) => (
     <Listing

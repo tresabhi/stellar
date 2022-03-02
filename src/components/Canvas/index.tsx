@@ -8,7 +8,7 @@ import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import { Color, Group } from 'three';
-import comparePartsMap from 'utilities/comparePartsMap';
+import comparePartsMaps from 'utilities/comparePartsMaps';
 import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
@@ -21,7 +21,7 @@ export const LayoutRenderer = () => {
   );
   const initialData = blueprintStore.getState();
   const tempRef = useRef<Group>(null);
-  const parts = blueprintStore((state) => state.parts, comparePartsMap);
+  const parts = blueprintStore((state) => state.parts, comparePartsMaps);
 
   const partMeshes = Array.from(parts, ([id, data]) => {
     const PartComponent = getPartModule(data.n)?.LayoutComponent;

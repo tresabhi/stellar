@@ -8,12 +8,16 @@ import appStore, { AppStore } from 'stores/app';
 import selectionStore from 'stores/selection';
 import { PartAddress } from 'types/Blueprint';
 import { AnyPartName } from 'types/Parts';
+import compareAddressArrays from 'utilities/compareAddressArrays';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
   const partition = appStore((state) => state.layout.rightSideBar.partition);
-  const selections = selectionStore((state) => state.selections);
+  const selections = selectionStore(
+    (state) => state.selections,
+    compareAddressArrays,
+  );
   const selectionsLength = selectionStore((state) => state.selections.length);
   const isPartitionProperties = partition === 'properties';
   const isPartitionInspect = partition === 'inspect';
