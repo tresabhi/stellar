@@ -1,9 +1,8 @@
 import { Blueprint } from 'types/Blueprint';
-import { undoMiddleware, UndoState } from 'zundo';
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-interface BlueprintStoreState extends UndoState, Blueprint {}
+interface BlueprintStoreState extends Blueprint {}
 
 const blueprintStore = create<
   BlueprintStoreState,
@@ -14,18 +13,16 @@ const blueprintStore = create<
     [['zustand/subscribeWithSelector', never]]
   >
 >(
-  subscribeWithSelector<BlueprintStoreState>(
-    undoMiddleware<BlueprintStoreState>(() => ({
-      meta: {
-        format_version: 1,
-      },
+  subscribeWithSelector<Blueprint>(() => ({
+    meta: {
+      format_version: 1,
+    },
 
-      center: 0,
-      offset: { x: 0, y: 0 },
+    center: 0,
+    offset: { x: 0, y: 0 },
 
-      parts: new Map(),
-      stages: [],
-    })),
-  ),
+    parts: new Map(),
+    stages: [],
+  })),
 );
 export default blueprintStore;

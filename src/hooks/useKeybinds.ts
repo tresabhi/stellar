@@ -2,6 +2,7 @@ import produce from 'immer';
 import {
   deletePartsBySelection,
   translatePartsBySelection,
+  undo,
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
@@ -68,19 +69,13 @@ const useKeybinds = () => {
       }));
     });
 
-    bind('up', (event) => {
-      // TODO: remove these `event.repeats`?
-      if (true && true) translatePartsBySelection(0, 1);
-    });
-    bind('down', (event) => {
-      if (true && true) translatePartsBySelection(0, -1);
-    });
-    bind('left', (event) => {
-      if (true && true) translatePartsBySelection(-1, 0);
-    });
-    bind('right', (event) => {
-      if (true && true) translatePartsBySelection(1, 0);
-    });
+    bind('up', (event) => translatePartsBySelection(0, 1));
+    bind('down', (event) => translatePartsBySelection(0, -1));
+    bind('left', (event) => translatePartsBySelection(-1, 0));
+    bind('right', (event) => translatePartsBySelection(1, 0));
+
+    bind('ctrl+z', undo);
+    // bind('ctrl+shift+z', redo);
   }, []);
 };
 export default useKeybinds;

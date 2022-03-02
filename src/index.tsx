@@ -1,12 +1,14 @@
 import getStellarContext from 'hooks/useStellarContext';
-import { enableMapSet } from 'immer';
+import { enableMapSet, enablePatches } from 'immer';
 import { lazy, StrictMode, Suspense } from 'react';
 import { render } from 'react-dom';
 import SplashScreen from 'routes/SplashScreen';
 import { primeWorker } from 'utilities/serviceWorker';
 
 if (getStellarContext().codeName !== 'dev') primeWorker();
+
 enableMapSet();
+enablePatches();
 
 const App = lazy(() => import('App'));
 

@@ -1,8 +1,11 @@
-import produce from 'immer';
+import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isUndefined, merge } from 'lodash';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
+import blueprintPatchHistoryStore, {
+  BlueprintPatchHistoryStore,
+} from 'stores/blueprintPatchHistory';
 import selectionStore from 'stores/selection';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart } from 'types/Parts';
@@ -59,18 +62,16 @@ export const newBlueprint = (blueprint = {}) => {
 export const deletePartsBySelection = () => {
   const selections = selectionStore.getState().selections;
 
-  blueprintStore.setState(
-    produce((draft: Blueprint) => {
-      selections.forEach((selection) => {
-        const partId = selection[selection.length - 1];
-        const parentAddress = [...selection].splice(0, selection.length - 1);
-        let parent: Group | Blueprint =
-          (getPartByAddress(parentAddress, draft) as Group) ?? draft;
+  mutateBlueprint((draft) => {
+    selections.forEach((selection) => {
+      const partId = selection[selection.length - 1];
+      const parentAddress = [...selection].splice(0, selection.length - 1);
+      let parent: Group | Blueprint =
+        (getPartByAddress(parentAddress, draft) as Group) ?? draft;
 
-        parent.parts.delete(partId);
-      });
-    }),
-  );
+      parent.parts.delete(partId);
+    });
+  });
 
   selectionStore.setState({ selections: [] });
 };
@@ -107,11 +108,9 @@ export const setPartsByAddresses = (
       merge(part, newState);
     });
   } else {
-    blueprintStore.setState(
-      produce((draft: Blueprint) => {
-        setPartsByAddresses(addresses, newState, draft);
-      }),
-    );
+    mutateBlueprint((draft) => {
+      setPartsByAddresses(addresses, newState, draft);
+    });
   }
 };
 
@@ -129,19 +128,15 @@ export const getReactivePartByAddress = <T, S>(
 export const translatePartsBySelection = (x: number, y: number) => {
   const selections = selectionStore.getState().selections;
 
-  blueprintStore.setState(
-    produce((draft: Blueprint) => {
-      selections.forEach((selection) => {
-        let part = getPartByAddress(
-          selection,
-          draft,
-        ) as PartWithTransformations & PartWithMeta;
+  mutateBlueprint((draft) => {
+    selections.forEach((selection) => {
+      let part = getPartByAddress(selection, draft) as PartWithTransformations &
+        PartWithMeta;
 
-        part.p.x += x;
-        part.p.y += y;
-      });
-    }),
-  );
+      part.p.x += x;
+      part.p.y += y;
+    });
+  });
 };
 
 export const subscribeToPart = <T, S>(
@@ -179,4 +174,44 @@ export const subscribeToPart = <T, S>(
       );
     }
   }
+};
+
+export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
+  const [nextState, patches, inversePatches] = produceWithPatches(
+    blueprintStore.getState(),
+    producer,
+  );
+
+  blueprintPatchHistoryStore.setState(
+    produce((draft: BlueprintPatchHistoryStore) => {
+      draft.patches.splice(
+        draft.index + 1,
+        draft.patches.length - draft.index - 1,
+      );
+
+      draft.patches.push({
+        undo: inversePatches,
+        redo: patches,
+      });
+
+      draft.index++;
+    }),
+  );
+  blueprintStore.setState(nextState);
+};
+
+export const undo = () => {
+  blueprintPatchHistoryStore.setState(
+    produce((draft: BlueprintPatchHistoryStore) => {
+      const undoPatch = draft.patches[draft.index]?.undo;
+
+      if (undoPatch) {
+        blueprintStore.setState(
+          applyPatches(blueprintStore.getState(), undoPatch),
+        );
+      }
+
+      draft.index = Math.max(-1, draft.index - 1);
+    }),
+  );
 };
