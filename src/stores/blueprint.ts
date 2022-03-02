@@ -1,26 +1,31 @@
 import { Blueprint } from 'types/Blueprint';
+import { undoMiddleware, UndoState } from 'zundo';
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-const blueprintStore = create<
-  Blueprint,
-  SetState<Blueprint>,
-  GetState<Blueprint>,
-  Mutate<StoreApi<Blueprint>, [['zustand/subscribeWithSelector', never]]>
->(
-  subscribeWithSelector(
-    () =>
-      ({
-        // can't use `import` here because it's run before initialization
-        meta: {
-          format_version: 1,
-        },
+interface BlueprintStoreState extends UndoState, Blueprint {}
 
-        center: 0,
-        offset: { x: 0, y: 0 },
-        parts: new Map(),
-        stages: [],
-      } as Blueprint),
+const blueprintStore = create<
+  BlueprintStoreState,
+  SetState<BlueprintStoreState>,
+  GetState<BlueprintStoreState>,
+  Mutate<
+    StoreApi<BlueprintStoreState>,
+    [['zustand/subscribeWithSelector', never]]
+  >
+>(
+  subscribeWithSelector<BlueprintStoreState>(
+    undoMiddleware<BlueprintStoreState>(() => ({
+      meta: {
+        format_version: 1,
+      },
+
+      center: 0,
+      offset: { x: 0, y: 0 },
+
+      parts: new Map(),
+      stages: [],
+    })),
   ),
 );
 export default blueprintStore;

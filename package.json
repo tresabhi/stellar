@@ -28,6 +28,7 @@
     "workbox-precaching": "^6.5.0",
     "workbox-routing": "^6.5.0",
     "workbox-strategies": "^6.4.2",
+    "zundo": "^1.5.9",
     "zustand": "^3.7.1"
   },
   "devDependencies": {
