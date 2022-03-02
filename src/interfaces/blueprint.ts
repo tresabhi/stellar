@@ -215,3 +215,19 @@ export const undo = () => {
     }),
   );
 };
+
+export const redo = () => {
+  blueprintPatchHistoryStore.setState(
+    produce((draft: BlueprintPatchHistoryStore) => {
+      const redoPatch = draft.patches[draft.index]?.redo;
+
+      if (redoPatch) {
+        blueprintStore.setState(
+          applyPatches(blueprintStore.getState(), redoPatch),
+        );
+      }
+
+      draft.index = Math.min(draft.patches.length - 1, draft.index + 1);
+    }),
+  );
+};

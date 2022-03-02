@@ -1,6 +1,7 @@
 import produce from 'immer';
 import {
   deletePartsBySelection,
+  redo,
   translatePartsBySelection,
   undo,
 } from 'interfaces/blueprint';
@@ -75,7 +76,7 @@ const useKeybinds = () => {
     bind('right', (event) => translatePartsBySelection(1, 0));
 
     bind('ctrl+z', undo);
-    // bind('ctrl+shift+z', redo);
+    bind('ctrl+shift+z', redo);
   }, []);
 };
 export default useKeybinds;
