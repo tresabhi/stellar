@@ -13,9 +13,8 @@ const DesktopCanvasControls = () => {
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
       if (event.ctrlKey) {
-        event.preventDefault();
-
         const maxZoom = camera.right - camera.left;
         const zoomCompensatedDeltaY =
           event.deltaY * 4 * inverseLerp(0, maxZoom, camera.zoom);
