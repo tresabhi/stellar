@@ -177,7 +177,7 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
   );
   const fuel = usePropertyController<FuelTank>(
     addresses,
-    (state) => state.N.fuel_percent,
+    (state) => state.N.fuel_percent * 100,
     (value) => ({ N: { fuel_percent: value / 100 } }),
     { min: 0, max: 100, suffix: '%' },
   );

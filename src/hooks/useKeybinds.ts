@@ -1,7 +1,6 @@
 import produce from 'immer';
 import {
-  deletePartsBySelection,
-  translatePartsBySelection,
+  translatePartsBySelection
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
@@ -36,7 +35,7 @@ const useKeybinds = () => {
     });
 
     // TODO: make parts explorer rerender when this happens
-    bind('del', deletePartsBySelection);
+    // bind('del', deletePartsBySelection);
 
     bind('alt+1', (event) => {
       event?.preventDefault();
@@ -70,16 +69,16 @@ const useKeybinds = () => {
 
     bind('up', (event) => {
       // TODO: remove these `event.repeats`?
-      if (!event.repeat) translatePartsBySelection(0, 1);
+      if (true && true) translatePartsBySelection(0, 1);
     });
     bind('down', (event) => {
-      if (!event.repeat) translatePartsBySelection(0, -1);
+      if (true && true) translatePartsBySelection(0, -1);
     });
     bind('left', (event) => {
-      if (!event.repeat) translatePartsBySelection(-1, 0);
+      if (true && true) translatePartsBySelection(-1, 0);
     });
     bind('right', (event) => {
-      if (!event.repeat) translatePartsBySelection(1, 0);
+      if (true && true) translatePartsBySelection(1, 0);
     });
   }, []);
 };

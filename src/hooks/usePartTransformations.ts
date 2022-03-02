@@ -51,6 +51,6 @@ const usePartTransformations = (
         overrides ? overrides(state).o?.y ?? state.o.y : state.o.y,
       true,
     );
-  }, [address, mesh]);
+  }, [address, mesh, overrides]);
 };
 export default usePartTransformations;

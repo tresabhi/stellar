@@ -5,7 +5,6 @@ import useSelectionHandler, {
   UseListingSelectionHandler,
 } from 'hooks/useSelectionHandler';
 import {
-  getPartByAddress,
   getReactivePartByAddress,
   setPartByAddress,
   subscribeToPart,
@@ -24,6 +23,7 @@ import {
   useState,
 } from 'react';
 import { AnyPartMap, PartAddress } from 'types/Blueprint';
+import { AnyPart } from 'types/Parts';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
@@ -41,122 +41,124 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
 interface ListingProps {
   indentation: number;
   address: PartAddress;
+  initialState: AnyPart;
 }
-export const Listing = memo<ListingProps>(({ indentation, address }) => {
-  const [expanded, setExpanded] = useState(false);
-  const listingRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  // let data = getReactivePartByAddress(address)!;
-  const initialData = getPartByAddress(address)!;
+export const Listing = memo<ListingProps>(
+  ({ indentation, address, initialState }) => {
+    const [expanded, setExpanded] = useState(false);
+    const listingRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-  let childParts: JSX.Element[] | undefined;
-  const selectionHandler = useSelectionHandler(
-    address,
-    'listing',
-  ) as UseListingSelectionHandler;
-
-  const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setExpanded((state) => !state);
-  };
-  const handleExpandMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
-    if (initialData.n === 'Group') event.preventDefault();
-  };
-  const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    buttonRef.current?.focus();
-  };
-  const handleLabelDoubleClick = () => inputRef.current!.focus();
-  const handleLabelBlur = () => {
-    inputRef.current!.value = inputRef.current!.value.trim();
-    setPartByAddress(address, { meta: { label: inputRef.current!.value } });
-  };
-  const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') buttonRef.current?.focus();
-  };
-
-  let Icon = getPartModule(initialData.n, true).Icon;
-
-  if (initialData.n === 'Group') {
-    childParts = Array.from(
-      getReactivePartByAddress(
-        address,
-        (state: Group) => state.parts,
-      ) as AnyPartMap,
-      ([id]) => (
-        <Listing
-          key={`part-${id}`}
-          address={[...address, id]}
-          indentation={indentation + 1}
-        />
-      ),
-    );
-  }
-
-  useEffect(() => {
-    subscribeToPart(
+    let childParts: JSX.Element[] | undefined;
+    const selectionHandler = useSelectionHandler(
       address,
-      (selected) => {
-        if (selected) {
-          listingRef.current?.classList.add(styles.selected);
-        } else {
-          listingRef.current?.classList.remove(styles.selected);
-        }
-      },
-      (state: PartWithMeta) => state.meta.selected,
-    );
-  }, [address]);
+      'listing',
+    ) as UseListingSelectionHandler;
 
-  return (
-    <div ref={listingRef} tabIndex={-1} className={styles.listing}>
-      <div
-        className={styles.button}
-        style={{ paddingLeft: `${16 * indentation}px` }}
-        onClick={selectionHandler}
-      >
-        <button
-          ref={buttonRef}
-          onClick={handleExpandClick}
-          onMouseDown={handleExpandMouseDown}
-          className={styles.expand}
+    const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+      setExpanded((state) => !state);
+    };
+    const handleExpandMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
+      if (initialState.n === 'Group') event.preventDefault();
+    };
+    const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      buttonRef.current?.focus();
+    };
+    const handleLabelDoubleClick = () => inputRef.current!.focus();
+    const handleLabelBlur = () => {
+      inputRef.current!.value = inputRef.current!.value.trim();
+      setPartByAddress(address, { meta: { label: inputRef.current!.value } });
+    };
+    const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') buttonRef.current?.focus();
+    };
+
+    let Icon = getPartModule(initialState.n, true).Icon;
+
+    if (initialState.n === 'Group') {
+      childParts = Array.from(
+        getReactivePartByAddress(
+          address,
+          (state: Group) => state.parts,
+        ) as AnyPartMap,
+        ([id, state]) => (
+          <Listing
+            key={`part-${id}`}
+            initialState={state}
+            address={[...address, id]}
+            indentation={indentation + 1}
+          />
+        ),
+      );
+    }
+
+    useEffect(() => {
+      subscribeToPart(
+        address,
+        (selected) => {
+          if (selected) {
+            listingRef.current?.classList.add(styles.selected);
+          } else {
+            listingRef.current?.classList.remove(styles.selected);
+          }
+        },
+        (state: PartWithMeta) => state.meta.selected,
+      );
+    }, [address]);
+
+    return (
+      <div ref={listingRef} tabIndex={-1} className={styles.listing}>
+        <div
+          className={styles.button}
+          style={{ paddingLeft: `${16 * indentation}px` }}
+          onClick={selectionHandler}
         >
-          {initialData.n === 'Group' ? (
-            expanded ? (
-              <ArrowHeadDownIcon className={styles['expand-icon']} />
-            ) : (
-              <ArrowHeadRightIcon className={styles['expand-icon']} />
-            )
-          ) : undefined}
-        </button>
+          <button
+            ref={buttonRef}
+            onClick={handleExpandClick}
+            onMouseDown={handleExpandMouseDown}
+            className={styles.expand}
+          >
+            {initialState.n === 'Group' ? (
+              expanded ? (
+                <ArrowHeadDownIcon className={styles['expand-icon']} />
+              ) : (
+                <ArrowHeadRightIcon className={styles['expand-icon']} />
+              )
+            ) : undefined}
+          </button>
 
-        <div className={styles['icon-holder']}>
-          {Icon ? (
-            <Icon className={styles.icon} />
-          ) : (
-            <QuestionMarkIcon className={styles.icon} />
-          )}
+          <div className={styles['icon-holder']}>
+            {Icon ? (
+              <Icon className={styles.icon} />
+            ) : (
+              <QuestionMarkIcon className={styles.icon} />
+            )}
+          </div>
+
+          <input
+            ref={inputRef}
+            onMouseDown={handleLabelMouseDown}
+            onDoubleClick={handleLabelDoubleClick}
+            onBlur={handleLabelBlur}
+            onKeyPress={handleLabelKeyPress}
+            className={styles.label}
+            defaultValue={initialState.meta.label}
+          />
+
+          {/* visible */}
+          {/* lock */}
         </div>
 
-        <input
-          ref={inputRef}
-          onMouseDown={handleLabelMouseDown}
-          onDoubleClick={handleLabelDoubleClick}
-          onBlur={handleLabelBlur}
-          onKeyPress={handleLabelKeyPress}
-          className={styles.label}
-          defaultValue={initialData.meta.label}
-        />
-
-        {/* visible */}
-        {/* lock */}
+        {childParts ? (
+          <Container style={{ display: expanded ? 'flex' : 'none' }}>
+            {childParts}
+          </Container>
+        ) : undefined}
       </div>
-
-      {childParts ? (
-        <Container style={{ display: expanded ? 'flex' : 'none' }}>
-          {childParts}
-        </Container>
-      ) : undefined}
-    </div>
-  );
-});
+    );
+  },
+);
