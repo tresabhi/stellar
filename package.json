@@ -42,7 +42,7 @@
     "depcheck": "^1.4.3",
     "file-saver": "^2.0.5",
     "node-downloader-helper": "^2.0.1",
-    "node-fetch": "^3.1.1",
+    "node-fetch": "^3.2.1",
     "prettier": "^2.5.1",
     "react-scripts": "5.0.0",
     "serve": "^13.0.2",
