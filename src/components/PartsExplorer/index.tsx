@@ -2,12 +2,12 @@ import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-dow
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import useSelectionHandler, {
-  UseListingSelectionHandler
+  UseListingSelectionHandler,
 } from 'hooks/useSelectionHandler';
 import {
   getReactivePartByAddress,
   setPartByAddress,
-  subscribeToPart
+  subscribeToPart,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { PartWithMeta } from 'parts/Default';
@@ -20,7 +20,7 @@ import {
   MouseEvent,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { AnyPartMap, PartAddress } from 'types/Blueprint';
