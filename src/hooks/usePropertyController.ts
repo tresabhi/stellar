@@ -1,7 +1,7 @@
 import { getPartByAddress, setPartsByAddresses } from 'interfaces/blueprint';
 import { useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
-import { UUID } from 'types/Parts';
+import { PartIDs } from 'types/Parts';
 import getMutualSlice from 'utilities/getMutualSlice';
 import useUnitInputController, {
   useUnitInputControllerDefaultOptions,
@@ -9,7 +9,7 @@ import useUnitInputController, {
 } from './useUnitInputController';
 
 const usePropertyController = <S>(
-  IDs: UUID[],
+  IDs: PartIDs,
   get: (state: S) => number,
   set: (value: number) => DeepPartial<S>,
   controllerOptions?: Partial<UseUnitInputControllerOptions>,

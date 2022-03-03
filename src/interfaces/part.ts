@@ -7,8 +7,8 @@ import {
   AnyPart,
   AnyPartName,
   AnyVanillaPart,
+  PartID,
   PartModule,
-  UUID,
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
 
@@ -19,7 +19,7 @@ const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
 
 export const importifyPart = (
   partData: AnyVanillaPart | AnyPart,
-  parentID?: UUID,
+  parentID?: PartID,
 ): AnyPart | undefined => {
   const partModule = getPartModule(partData.n);
 
@@ -33,7 +33,7 @@ export const importifyPart = (
 
 export const importifyParts = (
   parts: AnyVanillaPart[] | AnyPartMap | SavifiedPartMap,
-  parentID?: UUID,
+  parentID?: PartID,
 ): AnyPartMap => {
   let newPartsMap: AnyPartMap = new Map();
 

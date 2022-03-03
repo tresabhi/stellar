@@ -1,11 +1,11 @@
 import { ReactComponent as Icon } from 'assets/icons/question-mark.svg';
 import { memo } from 'react';
-import { AnyPart, PartModule, UUID } from 'types/Parts';
+import { AnyPart, PartID, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 
 export interface PartWithMeta {
   meta: {
-    parent?: UUID;
+    parent?: PartID;
 
     label: string;
     visible: boolean;

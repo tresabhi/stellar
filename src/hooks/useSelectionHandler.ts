@@ -7,7 +7,7 @@ import {
 } from 'interfaces/selection';
 import { MouseEvent as ReactMouseEvent } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { UUID } from 'types/Parts';
+import { PartID } from 'types/Parts';
 
 export type UseSelectionHandlerType = 'listing' | 'mesh';
 
@@ -17,7 +17,7 @@ export type UseListingSelectionHandler = (
 export type UseMeshSelectionHandler = (event: ThreeEvent<MouseEvent>) => void;
 
 // TODO: base return type on type of selection handler
-const useSelectionHandler = (ID: UUID, type: UseSelectionHandlerType) => {
+const useSelectionHandler = (ID: PartID, type: UseSelectionHandlerType) => {
   const toggle = () => togglePartSelection(ID);
   const only = () => selectPartOnly(ID);
   const fromLast = () => {

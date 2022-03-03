@@ -4,10 +4,10 @@ import { MutableRefObject, useEffect } from 'react';
 import { Group, Mesh } from 'three';
 import { degToRad } from 'three/src/math/MathUtils';
 import DeepPartial from 'types/DeepPartial';
-import { UUID } from 'types/Parts';
+import { PartID } from 'types/Parts';
 
 const usePartTransformations = (
-  ID: UUID,
+  ID: PartID,
   mesh: MutableRefObject<Mesh | Group>,
   overrides?: (
     state: PartWithTransformations,

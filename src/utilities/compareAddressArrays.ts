@@ -1,6 +1,6 @@
-import { UUID } from 'types/Parts';
+import { PartIDs } from 'types/Parts';
 
-const compareAddressArrays = (prevIDs: UUID[], nextIDs: UUID[]) => {
+const compareAddressArrays = (prevIDs: PartIDs, nextIDs: PartIDs) => {
   if (prevIDs.length !== nextIDs.length) {
     return false;
   } else {

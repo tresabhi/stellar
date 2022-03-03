@@ -6,7 +6,7 @@ import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
-import { AnyPart, UUID } from 'types/Parts';
+import { AnyPart, PartID, PartIDs } from 'types/Parts';
 import { Blueprint, VanillaBlueprint } from '../types/Blueprint';
 import { importifyParts } from './part';
 
@@ -75,19 +75,19 @@ export const deletePartsBySelection = () => {
   });
 };
 
-export const getPartByAddress = (ID: UUID, state?: Blueprint) => {
+export const getPartByAddress = (ID: PartID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
   return blueprintState.parts.get(ID);
 };
 
 export const setPartByAddress = (
-  ID: UUID,
+  ID: PartID,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
 ) => setPartsByAddresses([ID], newState, state);
 
 export const setPartsByAddresses = (
-  IDs: UUID[],
+  IDs: PartIDs,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
 ) => {
@@ -104,7 +104,7 @@ export const setPartsByAddresses = (
 };
 
 export const getReactivePartByID = <T extends AnyPart, S>(
-  ID: UUID,
+  ID: PartID,
   slicer?: (state: T) => S,
 ) => {
   return blueprintStore((state) =>
@@ -135,7 +135,7 @@ const subscribeToPartDefaultOptions = {
   unsubscribeOnUnmount: false,
 };
 export const subscribeToPart = <T, S>(
-  ID: UUID,
+  ID: PartID,
   handler: (slice: S) => void,
   slicer?: (state: T) => S,
   options?: Partial<SubscribeToPartOptions>,

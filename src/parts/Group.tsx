@@ -1,12 +1,12 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { memo } from 'react';
-import { PartModule, UUID } from 'types/Parts';
+import { PartIDs, PartModule } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 import { DefaultPartData, PartWithMeta } from './Default';
 
 export interface Group extends PartWithMeta {
   n: 'Group';
-  parts: UUID[];
+  parts: PartIDs;
 }
 
 export const GroupData: Group = {

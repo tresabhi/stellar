@@ -3,9 +3,9 @@ import { subscribeToPart } from 'interfaces/blueprint';
 import { PartWithMeta } from 'parts/Default';
 import { MutableRefObject, useEffect } from 'react';
 import { BoxHelper, Group, Mesh } from 'three';
-import { UUID } from 'types/Parts';
+import { PartID } from 'types/Parts';
 
-const usePartMeta = (ID: UUID, mesh: MutableRefObject<Mesh | Group>) => {
+const usePartMeta = (ID: PartID, mesh: MutableRefObject<Mesh | Group>) => {
   const helper = useHelper(mesh, BoxHelper, 'dodgerblue');
 
   useEffect(() => {

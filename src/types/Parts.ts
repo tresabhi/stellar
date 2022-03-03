@@ -5,6 +5,9 @@ import DeepPartial from './DeepPartial';
 
 export type UUID = string;
 
+export type PartID = UUID;
+export type PartIDs = PartID[];
+
 // BIG TODO: Add vanilla part types
 export type AnyPart = FuelTank | Group;
 export type AnyVanillaPart = VanillaFuelTank;

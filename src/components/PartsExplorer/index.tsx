@@ -22,7 +22,7 @@ import {
   useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { AnyPart, UUID } from 'types/Parts';
+import { AnyPart, PartID } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 import comparePartsMaps from 'utilities/comparePartsMaps';
 import styles from './index.module.scss';
@@ -48,7 +48,7 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
 
 interface ListingProps {
   indentation: number;
-  ID: UUID;
+  ID: PartID;
   initialState: AnyPart;
 }
 export const Listing = memo<ListingProps>(
