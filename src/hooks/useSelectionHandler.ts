@@ -6,7 +6,7 @@ import {
   togglePartSelection,
 } from 'interfaces/selection';
 import { MouseEvent as ReactMouseEvent } from 'react';
-import selectionStore from 'stores/selection';
+import blueprintStore from 'stores/blueprint';
 import { PartAddress } from 'types/Blueprint';
 
 export type UseSelectionHandlerType = 'listing' | 'mesh';
@@ -24,19 +24,19 @@ const useSelectionHandler = (
   const toggle = () => togglePartSelection(address);
   const only = () => selectPartOnly(address);
   const fromLast = () => {
-    const selectionState = selectionStore.getState();
+    const selectionState = blueprintStore.getState().selections;
 
-    if (selectionState.lastSelection) {
-      selectPartsFrom(selectionState.lastSelection, address);
+    if (selectionState.last) {
+      selectPartsFrom(selectionState.last, address);
     } else {
       only();
     }
   };
   const fromLastOnly = () => {
-    const selectionState = selectionStore.getState();
+    const selectionState = blueprintStore.getState().selections;
 
-    if (selectionState.lastSelection) {
-      selectPartsFromOnly(selectionState.lastSelection, address);
+    if (selectionState.last) {
+      selectPartsFromOnly(selectionState.last, address);
     } else {
       only();
     }

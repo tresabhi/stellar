@@ -6,7 +6,6 @@ import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
-import selectionStore from 'stores/selection';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart } from 'types/Parts';
 import { Blueprint, PartAddress, VanillaBlueprint } from '../types/Blueprint';
@@ -25,7 +24,9 @@ export const BlueprintData: Blueprint = {
   meta: {
     format_version: 1,
   },
-
+  selections: {
+    current: [],
+  },
   parts: new Map(),
 };
 
@@ -60,10 +61,8 @@ export const newBlueprint = (blueprint = {}) => {
 };
 
 export const deletePartsBySelection = () => {
-  const selections = selectionStore.getState().selections;
-
   mutateBlueprint((draft) => {
-    selections.forEach((selection) => {
+    draft.selections.current.forEach((selection) => {
       const partId = selection[selection.length - 1];
       const parentAddress = [...selection].splice(0, selection.length - 1);
       let parent: Group | Blueprint =
@@ -71,9 +70,9 @@ export const deletePartsBySelection = () => {
 
       parent.parts.delete(partId);
     });
-  });
 
-  selectionStore.setState({ selections: [] });
+    draft.selections.current = [];
+  });
 };
 
 export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
@@ -126,10 +125,8 @@ export const getReactivePartByAddress = <T, S>(
 };
 
 export const translatePartsBySelection = (x: number, y: number) => {
-  const selections = selectionStore.getState().selections;
-
   mutateBlueprint((draft) => {
-    selections.forEach((selection) => {
+    draft.selections.current.forEach((selection) => {
       let part = getPartByAddress(selection, draft) as PartWithTransformations &
         PartWithMeta;
 

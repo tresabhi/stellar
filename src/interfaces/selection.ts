@@ -1,11 +1,9 @@
-import produce from 'immer';
 import {
   getPartByAddress,
   mutateBlueprint,
   setPartsByAddresses,
 } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
-import selectionStore, { SelectionStore } from 'stores/selection';
 import { PartAddress } from 'types/Blueprint';
 
 export const selectPart = (address: PartAddress) => selectParts([address]);
@@ -22,32 +20,26 @@ export const selectParts = (addresses: PartAddress[]) => {
         newSelections.push(address);
       }
     });
-  });
 
-  selectionStore.setState((draft) => ({
-    selections: [...draft.selections, ...newSelections],
-    lastSelection: addresses[addresses.length - 1],
-  }));
+    draft.selections.current = [...draft.selections.current, ...newSelections];
+    draft.selections.last = addresses[addresses.length - 1];
+  });
 };
 
 export const selectPartOnly = (address: PartAddress) =>
   selectPartsOnly([address]);
 
 export const selectPartsOnly = (addresses: PartAddress[]) => {
-  const currentSelections = selectionStore.getState().selections;
-
   mutateBlueprint((draft) => {
     setPartsByAddresses(
-      currentSelections,
+      draft.selections.current,
       { meta: { selected: false } },
       draft,
     );
     setPartsByAddresses(addresses, { meta: { selected: true } }, draft);
-  });
 
-  selectionStore.setState({
-    selections: addresses,
-    lastSelection: addresses[addresses.length - 1],
+    draft.selections.current = addresses;
+    draft.selections.last = addresses[addresses.length - 1];
   });
 };
 
@@ -77,24 +69,25 @@ export const unselectParts = (addresses: PartAddress[]) => {
       const part = getPartByAddress(address, draft);
       if (part) part.meta.selected = false;
     });
-  });
 
-  selectionStore.setState(
-    produce((draft: SelectionStore) => {
-      addresses.forEach((address) => {
-        forEachRight(draft.selections, (selection, index) => {
-          if (isEqual(address, selection)) draft.selections.splice(index, 1);
-        });
+    addresses.forEach((address) => {
+      forEachRight(draft.selections.current, (selection, index) => {
+        if (isEqual(address, selection))
+          draft.selections.current.splice(index, 1);
       });
-    }),
-  );
+    });
+  });
 };
 
 export const unselectAllParts = () => {
-  const selections = selectionStore.getState().selections;
-  setPartsByAddresses(selections, { meta: { selected: false } });
-
-  selectionStore.setState({ selections: [], lastSelection: undefined });
+  mutateBlueprint((draft) => {
+    setPartsByAddresses(
+      draft.selections.current,
+      { meta: { selected: false } },
+      draft,
+    );
+    draft.selections.current = [];
+  });
 };
 
 export const togglePartSelection = (address: PartAddress) =>
@@ -118,19 +111,16 @@ export const togglePartsSelection = (addresses: PartAddress[]) => {
         part.meta.selected = !part.meta.selected;
       }
     });
-  });
 
-  selectionStore.setState(
-    produce((draft: SelectionStore) => {
-      spliceAddresses.forEach((address) => {
-        forEachRight(draft.selections, (selection, index) => {
-          if (isEqual(address, selection)) draft.selections.splice(index, 1);
-        });
+    spliceAddresses.forEach((address) => {
+      forEachRight(draft.selections.current, (selection, index) => {
+        if (isEqual(address, selection))
+          draft.selections.current.splice(index, 1);
       });
+    });
 
-      draft.selections.push(...insertAddresses);
-    }),
-  );
+    draft.selections.current.push(...insertAddresses);
+  });
 };
 
 export const getPartDirection = (

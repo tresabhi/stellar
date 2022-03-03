@@ -5,7 +5,7 @@ import produce from 'immer';
 import { getPartByAddress } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import appStore, { AppStore } from 'stores/app';
-import selectionStore from 'stores/selection';
+import blueprintStore from 'stores/blueprint';
 import { PartAddress } from 'types/Blueprint';
 import { AnyPartName } from 'types/Parts';
 import compareAddressArrays from 'utilities/compareAddressArrays';
@@ -14,11 +14,13 @@ import styles from './index.module.scss';
 
 const RightSideBar = () => {
   const partition = appStore((state) => state.layout.rightSideBar.partition);
-  const selections = selectionStore(
-    (state) => state.selections,
+  const selections = blueprintStore(
+    (state) => state.selections.current,
     compareAddressArrays,
   );
-  const selectionsLength = selectionStore((state) => state.selections.length);
+  const selectionsLength = blueprintStore(
+    (state) => state.selections.current.length,
+  );
   const isPartitionProperties = partition === 'properties';
   const isPartitionInspect = partition === 'inspect';
 
