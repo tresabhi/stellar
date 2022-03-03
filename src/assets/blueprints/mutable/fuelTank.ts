@@ -11,7 +11,7 @@ const blueprint = {
   parts: [
     {
       meta: {
-        label: 'Fuel Tank 1',
+        label: 'box',
       },
       n: 'Fuel Tank',
       p: {
@@ -38,7 +38,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 2',
+        label: 'tall',
       },
       n: 'Fuel Tank',
       p: {
@@ -65,7 +65,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 3',
+        label: 'wide',
       },
       n: 'Fuel Tank',
       p: {
@@ -92,7 +92,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 4',
+        label: 'upright cone',
       },
       n: 'Fuel Tank',
       p: {
@@ -119,7 +119,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 5',
+        label: 'upside down cone',
       },
       n: 'Fuel Tank',
       p: {
@@ -146,7 +146,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 6',
+        label: 'titled box',
       },
       n: 'Fuel Tank',
       p: {
@@ -173,7 +173,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 7',
+        label: '0 width tall',
       },
       n: 'Fuel Tank',
       p: {
@@ -200,7 +200,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 8',
+        label: '0 width skinny',
       },
       n: 'Fuel Tank',
       p: {
@@ -227,7 +227,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 9',
+        label: '0 width even skinnier',
       },
       n: 'Fuel Tank',
       p: {
@@ -254,7 +254,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 10',
+        label: '0 width omega skinnier',
       },
       n: 'Fuel Tank',
       p: {
@@ -281,7 +281,7 @@ const blueprint = {
     },
     {
       meta: {
-        label: 'Fuel Tank 11',
+        label: 'both 0 widths',
       },
       n: 'Fuel Tank',
       p: {
