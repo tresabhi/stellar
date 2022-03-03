@@ -18,6 +18,10 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'rendering',
 ];
 
+// todo: make this date driven
+const TRANSLATE_BY = 1;
+const SHIFT_TRANSLATE_BY = 5;
+
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
 
@@ -70,10 +74,14 @@ const useKeybinds = () => {
       }));
     });
 
-    bind('up', (event) => translatePartsBySelection(0, 1));
-    bind('down', (event) => translatePartsBySelection(0, -1));
-    bind('left', (event) => translatePartsBySelection(-1, 0));
-    bind('right', (event) => translatePartsBySelection(1, 0));
+    bind('up', () => translatePartsBySelection(0, TRANSLATE_BY));
+    bind('down', () => translatePartsBySelection(0, -TRANSLATE_BY));
+    bind('left', () => translatePartsBySelection(-TRANSLATE_BY, 0));
+    bind('right', () => translatePartsBySelection(TRANSLATE_BY, 0));
+    bind('shift+up', () => translatePartsBySelection(0, SHIFT_TRANSLATE_BY));
+    bind('shift+down', () => translatePartsBySelection(0, -SHIFT_TRANSLATE_BY));
+    bind('shift+left', () => translatePartsBySelection(-SHIFT_TRANSLATE_BY, 0));
+    bind('shift+right', () => translatePartsBySelection(SHIFT_TRANSLATE_BY, 0));
 
     bind('ctrl+z', undo);
     bind('ctrl+shift+z', redo);
