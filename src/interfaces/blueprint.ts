@@ -11,6 +11,10 @@ import { AnyPart } from 'types/Parts';
 import { Blueprint, PartAddress, VanillaBlueprint } from '../types/Blueprint';
 import { importifyPartsData } from './part';
 
+// todo: make this data driven
+// 0 is infinite undo/redo limit
+let UNDO_LIMIT = 512;
+
 export const VanillaBlueprintData: VanillaBlueprint = {
   center: 0,
   offset: { x: 0, y: 0 },
@@ -191,7 +195,15 @@ export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
         redo: patches,
       });
 
-      draft.index++;
+      if (UNDO_LIMIT === 0) {
+        draft.index++;
+      } else {
+        if (draft.patches.length > UNDO_LIMIT) {
+          draft.patches.shift();
+        } else {
+          draft.index++;
+        }
+      }
     }),
   );
   blueprintStore.setState(nextState);
