@@ -7,7 +7,7 @@ import { getPartModule } from 'interfaces/part';
 import appStore, { AppStore } from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 import { AnyPartName, PartIDs } from 'types/Parts';
-import compareIDs from 'utilities/compareIDs';
+import compareIDArrays from 'utilities/compareIDArrays';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
 
@@ -15,7 +15,7 @@ const RightSideBar = () => {
   const partition = appStore((state) => state.layout.rightSideBar.partition);
   const selections = blueprintStore(
     (state) => state.selections.current,
-    compareIDs,
+    compareIDArrays,
   );
   const selectionsLength = blueprintStore(
     (state) => state.selections.current.length,

@@ -1,7 +1,8 @@
 import { ReactivePartComponentProps } from 'types/Parts';
+import compareIDs from './compareIDs';
 
-const compareAddressProps = (
+const compareIDProps = (
   prevProps: ReactivePartComponentProps,
   nextProps: ReactivePartComponentProps,
-) => prevProps.ID === nextProps.ID;
-export default compareAddressProps;
+) => compareIDs(prevProps.ID, nextProps.ID);
+export default compareIDProps;
