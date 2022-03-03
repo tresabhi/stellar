@@ -1,15 +1,14 @@
 import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isUndefined, merge } from 'lodash';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
-import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
-import { AnyPart } from 'types/Parts';
-import { Blueprint, PartAddress, VanillaBlueprint } from '../types/Blueprint';
-import { importifyPartsData } from './part';
+import { AnyPart, UUID } from 'types/Parts';
+import { Blueprint, VanillaBlueprint } from '../types/Blueprint';
+import { importifyParts } from './part';
 
 // todo: make this data driven
 // 0 is infinite undo/redo limit
@@ -32,6 +31,7 @@ export const BlueprintData: Blueprint = {
     current: [],
   },
   parts: new Map(),
+  partOrder: [],
 };
 
 export const mergeWithDefaultBlueprintGlobals = (
@@ -47,7 +47,7 @@ export const importifyBlueprint = (blueprint: object): Blueprint => {
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
   const partDataUpdatedBlueprint = {
     ...mergedBlueprint,
-    parts: importifyPartsData(mergedBlueprint.parts, []),
+    parts: importifyParts(mergedBlueprint.parts),
   };
   const latestVersionBlueprint = blueprintToLatestVersion(
     partDataUpdatedBlueprint,
@@ -67,64 +67,50 @@ export const newBlueprint = (blueprint = {}) => {
 export const deletePartsBySelection = () => {
   mutateBlueprint((draft) => {
     draft.selections.current.forEach((selection) => {
-      const partId = selection[selection.length - 1];
-      const parentAddress = [...selection].splice(0, selection.length - 1);
-      let parent: Group | Blueprint =
-        (getPartByAddress(parentAddress, draft) as Group) ?? draft;
-
-      parent.parts.delete(partId);
+      draft.parts.delete(selection);
+      draft.partOrder.splice(draft.partOrder.indexOf(selection), 1);
+      draft.selections.current = [];
+      draft.selections.last = undefined;
     });
-
-    draft.selections.current = [];
   });
 };
 
-export const getPartByAddress = (address: PartAddress, state?: Blueprint) => {
+export const getPartByAddress = (ID: UUID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
-  let currentPart = blueprintState.parts.get(address[0]);
-
-  address.forEach((route, index) => {
-    if (index === 0) {
-      return;
-    } else {
-      currentPart = (currentPart as Group | undefined)?.parts?.get(route);
-    }
-  });
-
-  return currentPart;
+  return blueprintState.parts.get(ID);
 };
 
 export const setPartByAddress = (
-  address: PartAddress,
+  ID: UUID,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
-) => setPartsByAddresses([address], newState, state);
+) => setPartsByAddresses([ID], newState, state);
 
 export const setPartsByAddresses = (
-  addresses: PartAddress[],
+  IDs: UUID[],
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
 ) => {
   if (state) {
-    addresses.forEach((address) => {
+    IDs.forEach((address) => {
       let part = getPartByAddress(address, state);
       merge(part, newState);
     });
   } else {
     mutateBlueprint((draft) => {
-      setPartsByAddresses(addresses, newState, draft);
+      setPartsByAddresses(IDs, newState, draft);
     });
   }
 };
 
-export const getReactivePartByAddress = <T, S>(
-  address: PartAddress,
+export const getReactivePartByID = <T extends AnyPart, S>(
+  ID: UUID,
   slicer?: (state: T) => S,
 ) => {
   return blueprintStore((state) =>
     slicer
-      ? slicer(getPartByAddress(address, state) as unknown as T)
-      : getPartByAddress(address, state),
+      ? slicer(getPartByAddress(ID, state) as T)
+      : getPartByAddress(ID, state),
   );
 };
 
@@ -149,7 +135,7 @@ const subscribeToPartDefaultOptions = {
   unsubscribeOnUnmount: false,
 };
 export const subscribeToPart = <T, S>(
-  address: PartAddress,
+  ID: UUID,
   handler: (slice: S) => void,
   slicer?: (state: T) => S,
   options?: Partial<SubscribeToPartOptions>,
@@ -165,7 +151,7 @@ export const subscribeToPart = <T, S>(
   };
 
   const unsubscribe = blueprintStore.subscribe((state) => {
-    const part = getPartByAddress(address, state);
+    const part = getPartByAddress(ID, state);
 
     if (part) {
       if (slicer) {
@@ -179,13 +165,11 @@ export const subscribeToPart = <T, S>(
   if (mergedOptions.fireInitially) {
     if (slicer) {
       compoundHandler(
-        slicer(
-          getPartByAddress(address, blueprintStore.getState()) as unknown as T,
-        ),
+        slicer(getPartByAddress(ID, blueprintStore.getState()) as unknown as T),
       );
     } else {
       compoundHandler(
-        getPartByAddress(address, blueprintStore.getState()) as unknown as S,
+        getPartByAddress(ID, blueprintStore.getState()) as unknown as S,
       );
     }
   }

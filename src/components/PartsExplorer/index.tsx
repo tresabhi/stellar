@@ -5,13 +5,12 @@ import useSelectionHandler, {
   UseListingSelectionHandler,
 } from 'hooks/useSelectionHandler';
 import {
-  getReactivePartByAddress,
+  getPartByAddress as getPartByID,
   setPartByAddress,
   subscribeToPart,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { PartWithMeta } from 'parts/Default';
-import { Group } from 'parts/Group';
 import {
   FC,
   InputHTMLAttributes,
@@ -23,8 +22,7 @@ import {
   useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { AnyPartMap, PartAddress } from 'types/Blueprint';
-import { AnyPart } from 'types/Parts';
+import { AnyPart, UUID } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 import comparePartsMaps from 'utilities/comparePartsMaps';
 import styles from './index.module.scss';
@@ -34,13 +32,8 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
 }) => {
   const state = blueprintStore((state) => state.parts, comparePartsMaps);
 
-  const partListings = Array.from(state, ([id, data]) => (
-    <Listing
-      key={`part-${id}`}
-      initialState={data}
-      address={[id]}
-      indentation={0}
-    />
+  const partListings = Array.from(state, ([ID, data]) => (
+    <Listing key={`part-${ID}`} initialState={data} ID={ID} indentation={0} />
   ));
 
   return (
@@ -55,11 +48,11 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
 
 interface ListingProps {
   indentation: number;
-  address: PartAddress;
+  ID: UUID;
   initialState: AnyPart;
 }
 export const Listing = memo<ListingProps>(
-  ({ indentation, address, initialState }) => {
+  ({ indentation, ID, initialState }) => {
     const [expanded, setExpanded] = useState(false);
     const listingRef = useRef<HTMLDivElement>(null!);
     const buttonRef = useRef<HTMLButtonElement>(null!);
@@ -67,7 +60,7 @@ export const Listing = memo<ListingProps>(
 
     let childParts: JSX.Element[] | undefined;
     const selectionHandler = useSelectionHandler(
-      address,
+      ID,
       'listing',
     ) as UseListingSelectionHandler;
 
@@ -88,7 +81,7 @@ export const Listing = memo<ListingProps>(
     };
     const handleLabelBlur = () => {
       inputRef.current.value = inputRef.current.value.trim();
-      setPartByAddress(address, { meta: { label: inputRef.current.value } });
+      setPartByAddress(ID, { meta: { label: inputRef.current.value } });
     };
     const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') buttonRef.current.focus();
@@ -97,25 +90,23 @@ export const Listing = memo<ListingProps>(
     let Icon = getPartModule(initialState.n, true).Icon;
 
     if (initialState.n === 'Group') {
-      childParts = Array.from(
-        getReactivePartByAddress(
-          address,
-          (state: Group) => state.parts,
-        ) as AnyPartMap,
-        ([id, state]) => (
+      childParts = initialState.parts.map((part) => {
+        const initialState = getPartByID(part)!;
+
+        return (
           <Listing
-            key={`part-${id}`}
-            initialState={state}
-            address={[...address, id]}
+            key={`part-${ID}`}
+            initialState={initialState}
+            ID={ID}
             indentation={indentation + 1}
           />
-        ),
-      );
+        );
+      });
     }
 
     useEffect(() => {
       subscribeToPart(
-        address,
+        ID,
         (selected) => {
           if (selected) {
             listingRef.current.classList.add(styles.selected);
@@ -126,7 +117,7 @@ export const Listing = memo<ListingProps>(
         (state: PartWithMeta) => state.meta.selected,
         { unsubscribeOnUnmount: true },
       );
-    }, [address]);
+    }, [ID]);
 
     return (
       <div ref={listingRef} tabIndex={-1} className={styles.listing}>

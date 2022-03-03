@@ -23,11 +23,11 @@ export const LayoutRenderer = () => {
   const tempRef = useRef<Group>(null);
   const parts = blueprintStore((state) => state.parts, comparePartsMaps);
 
-  const partMeshes = Array.from(parts, ([id, data]) => {
+  const partMeshes = Array.from(parts, ([ID, data]) => {
     const PartComponent = getPartModule(data.n)?.LayoutComponent;
 
     if (PartComponent) {
-      return <PartComponent key={`part-${id}`} address={[id]} />;
+      return <PartComponent key={`part-${ID}`} ID={ID} />;
     } else {
       return null;
     }

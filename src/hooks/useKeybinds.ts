@@ -27,9 +27,7 @@ const useKeybinds = () => {
 
   useEffect(() => {
     bind('ctrl+a', () => {
-      selectPartsOnly(
-        Array.from(blueprintStore.getState().parts.keys(), (id) => [id]),
-      );
+      selectPartsOnly(blueprintStore.getState().partOrder);
     });
 
     bind('esc', () => {

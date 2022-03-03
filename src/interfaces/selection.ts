@@ -4,15 +4,15 @@ import {
   setPartsByAddresses,
 } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
-import { PartAddress } from 'types/Blueprint';
+import { UUID } from 'types/Parts';
 
-export const selectPart = (address: PartAddress) => selectParts([address]);
+export const selectPart = (ID: UUID) => selectParts([ID]);
 
-export const selectParts = (addresses: PartAddress[]) => {
-  let newSelections: PartAddress[] = [];
+export const selectParts = (IDs: UUID[]) => {
+  let newSelections: UUID[] = [];
 
   mutateBlueprint((draft) => {
-    addresses.forEach((address) => {
+    IDs.forEach((address) => {
       const part = getPartByAddress(address, draft);
 
       if (part && !part.meta.selected) {
@@ -22,55 +22,48 @@ export const selectParts = (addresses: PartAddress[]) => {
     });
 
     draft.selections.current = [...draft.selections.current, ...newSelections];
-    draft.selections.last = addresses[addresses.length - 1];
+    draft.selections.last = IDs[IDs.length - 1];
   });
 };
 
-export const selectPartOnly = (address: PartAddress) =>
-  selectPartsOnly([address]);
+export const selectPartOnly = (ID: UUID) => selectPartsOnly([ID]);
 
-export const selectPartsOnly = (addresses: PartAddress[]) => {
+export const selectPartsOnly = (IDs: UUID[]) => {
   mutateBlueprint((draft) => {
     setPartsByAddresses(
       draft.selections.current,
       { meta: { selected: false } },
       draft,
     );
-    setPartsByAddresses(addresses, { meta: { selected: true } }, draft);
+    setPartsByAddresses(IDs, { meta: { selected: true } }, draft);
 
-    draft.selections.current = addresses;
-    draft.selections.last = addresses[addresses.length - 1];
+    draft.selections.current = IDs;
+    draft.selections.last = IDs[IDs.length - 1];
   });
 };
 
-export const selectPartsFrom = (
-  startAddress: PartAddress,
-  endAddress: PartAddress,
-) => {};
+export const selectPartsFrom = (startID: UUID, endID: UUID) => {};
 
-export const selectPartsFromOnly = (
-  startAddress: PartAddress,
-  endAddress: PartAddress,
-) => {
+export const selectPartsFromOnly = (startID: UUID, endID: UUID) => {
   // it's backwards, so why not select backwards
-  const direction = getPartDirection(startAddress, endAddress);
-  if (direction === -1) [startAddress, endAddress] = [endAddress, startAddress];
+  const direction = getPartDirection(startID, endID);
+  if (direction === -1) [startID, endID] = [endID, startID];
 
   /**
    *
    */
 };
 
-export const unselectPart = (address: PartAddress) => unselectParts([address]);
+export const unselectPart = (ID: UUID) => unselectParts([ID]);
 
-export const unselectParts = (addresses: PartAddress[]) => {
+export const unselectParts = (IDs: UUID[]) => {
   mutateBlueprint((draft) => {
-    addresses.forEach((address) => {
+    IDs.forEach((address) => {
       const part = getPartByAddress(address, draft);
       if (part) part.meta.selected = false;
     });
 
-    addresses.forEach((address) => {
+    IDs.forEach((address) => {
       forEachRight(draft.selections.current, (selection, index) => {
         if (isEqual(address, selection))
           draft.selections.current.splice(index, 1);
@@ -90,15 +83,14 @@ export const unselectAllParts = () => {
   });
 };
 
-export const togglePartSelection = (address: PartAddress) =>
-  togglePartsSelection([address]);
+export const togglePartSelection = (ID: UUID) => togglePartsSelection([ID]);
 
-export const togglePartsSelection = (addresses: PartAddress[]) => {
-  let spliceAddresses: PartAddress[] = [];
-  let insertAddresses: PartAddress[] = [];
+export const togglePartsSelection = (IDs: UUID[]) => {
+  let spliceAddresses: UUID[] = [];
+  let insertAddresses: UUID[] = [];
 
   mutateBlueprint((draft) => {
-    addresses.forEach((address) => {
+    IDs.forEach((address) => {
       const part = getPartByAddress(address, draft);
 
       if (part) {
@@ -123,11 +115,12 @@ export const togglePartsSelection = (addresses: PartAddress[]) => {
   });
 };
 
-export const getPartDirection = (
-  startPart: PartAddress,
-  endPart: PartAddress,
-): -1 | 1 => {
-  return startPart.some((startRoute, index) => endPart[index] > startRoute)
-    ? 1
-    : -1;
+export const getPartDirection = (startID: UUID, endID: UUID): -1 | 1 => {
+  // return startID.some((startRoute, index) => endID[index] > startRoute)
+  //   ? 1
+  //   : -1;
+
+  // TODO: make this functional
+
+  return 1;
 };

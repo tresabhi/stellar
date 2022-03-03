@@ -1,14 +1,11 @@
-import { PartAddress } from 'types/Blueprint';
+import { UUID } from 'types/Parts';
 
-const compareAddressArrays = (
-  prevProps: PartAddress[],
-  nextProps: PartAddress[],
-) => {
-  if (prevProps.length !== nextProps.length) {
+const compareAddressArrays = (prevIDs: UUID[], nextIDs: UUID[]) => {
+  if (prevIDs.length !== nextIDs.length) {
     return false;
   } else {
-    return !prevProps.some((prevAddress, index) => {
-      const nextAddress = nextProps?.[index];
+    return !prevIDs.some((prevAddress, index) => {
+      const nextAddress = nextIDs?.[index];
 
       return (
         prevAddress[prevAddress.length - 1] !==

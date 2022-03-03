@@ -4,6 +4,6 @@ const compareAddressProps = (
   prevProps: ReactivePartComponentProps,
   nextProps: ReactivePartComponentProps,
 ) =>
-  prevProps.address[prevProps.address.length - 1] ===
-  nextProps.address[nextProps.address.length - 1];
+  prevProps.ID[prevProps.ID.length - 1] ===
+  nextProps.ID[nextProps.ID.length - 1];
 export default compareAddressProps;

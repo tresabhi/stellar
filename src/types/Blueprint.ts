@@ -12,12 +12,12 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
     format_version: number;
   };
   selections: {
-    last?: PartAddress;
-    current: PartAddress[];
+    last?: UUID;
+    current: UUID[];
   };
   parts: AnyPartMap;
+  partOrder: UUID[];
 }
 
-export type PartAddress = UUID[];
-
 export type AnyPartMap = Map<UUID, AnyPart>;
+export type SavifiedPartMap = [UUID, AnyPart][];

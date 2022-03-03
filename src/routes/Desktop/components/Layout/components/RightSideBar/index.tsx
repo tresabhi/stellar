@@ -6,8 +6,7 @@ import { getPartByAddress } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import appStore, { AppStore } from 'stores/app';
 import blueprintStore from 'stores/blueprint';
-import { PartAddress } from 'types/Blueprint';
-import { AnyPartName } from 'types/Parts';
+import { AnyPartName, UUID } from 'types/Parts';
 import compareAddressArrays from 'utilities/compareAddressArrays';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
@@ -37,7 +36,7 @@ const RightSideBar = () => {
       }),
     );
 
-  let selectionsByPartNames: Map<AnyPartName, PartAddress[]> = new Map();
+  let selectionsByPartNames: Map<AnyPartName, UUID[]> = new Map();
   selections.forEach((selection) => {
     const part = getPartByAddress(selection);
 
@@ -49,7 +48,7 @@ const RightSideBar = () => {
       }
     }
   });
-  let partsWithTransformations: PartAddress[] = [];
+  let partsWithTransformations: UUID[] = [];
   let selectedPartNames: AnyPartName[] = Array.from(
     selectionsByPartNames.keys(),
   ).sort();
@@ -66,7 +65,7 @@ const RightSideBar = () => {
       propertyItems.push(
         <partModule.PropertyComponent
           key={`type-${partName}`}
-          addresses={addresses}
+          IDs={addresses}
         />,
       );
     }
@@ -78,7 +77,7 @@ const RightSideBar = () => {
     propertyItems.unshift(
       <TransformationProperties
         key="type-transformations"
-        addresses={partsWithTransformations}
+        IDs={partsWithTransformations}
       />,
     );
   }

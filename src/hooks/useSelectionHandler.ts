@@ -7,7 +7,7 @@ import {
 } from 'interfaces/selection';
 import { MouseEvent as ReactMouseEvent } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { PartAddress } from 'types/Blueprint';
+import { UUID } from 'types/Parts';
 
 export type UseSelectionHandlerType = 'listing' | 'mesh';
 
@@ -17,17 +17,14 @@ export type UseListingSelectionHandler = (
 export type UseMeshSelectionHandler = (event: ThreeEvent<MouseEvent>) => void;
 
 // TODO: base return type on type of selection handler
-const useSelectionHandler = (
-  address: PartAddress,
-  type: UseSelectionHandlerType,
-) => {
-  const toggle = () => togglePartSelection(address);
-  const only = () => selectPartOnly(address);
+const useSelectionHandler = (ID: UUID, type: UseSelectionHandlerType) => {
+  const toggle = () => togglePartSelection(ID);
+  const only = () => selectPartOnly(ID);
   const fromLast = () => {
     const selectionState = blueprintStore.getState().selections;
 
     if (selectionState.last) {
-      selectPartsFrom(selectionState.last, address);
+      selectPartsFrom(selectionState.last, ID);
     } else {
       only();
     }
@@ -36,7 +33,7 @@ const useSelectionHandler = (
     const selectionState = blueprintStore.getState().selections;
 
     if (selectionState.last) {
-      selectPartsFromOnly(selectionState.last, address);
+      selectPartsFromOnly(selectionState.last, ID);
     } else {
       only();
     }

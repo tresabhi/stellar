@@ -23,6 +23,7 @@ const blueprintStore = create<
     center: 0,
     offset: { x: 0, y: 0 },
     parts: new Map(),
+    partOrder: [],
     stages: [],
   })),
 );

@@ -1,7 +1,6 @@
 import { FuelTank, VanillaFuelTank } from 'parts/FuelTank';
 import { Group } from 'parts/Group';
 import { FC } from 'react';
-import { PartAddress } from './Blueprint';
 import DeepPartial from './DeepPartial';
 
 export type UUID = string;
@@ -20,10 +19,10 @@ export interface PartComponentProps {
   part: AnyPart;
 }
 export interface PropertyComponentProps {
-  addresses: PartAddress[];
+  IDs: UUID[];
 }
 export interface ReactivePartComponentProps {
-  address: PartAddress;
+  ID: UUID;
 }
 
 export type PartModule = {

@@ -1,12 +1,11 @@
 import { ReactComponent as Icon } from 'assets/icons/question-mark.svg';
 import { memo } from 'react';
-import { PartAddress } from 'types/Blueprint';
-import { AnyPart, PartModule } from 'types/Parts';
+import { AnyPart, PartModule, UUID } from 'types/Parts';
 import compareAddressProps from 'utilities/compareAddressProps';
 
 export interface PartWithMeta {
   meta: {
-    address: PartAddress;
+    parent?: UUID;
 
     label: string;
     visible: boolean;
@@ -27,8 +26,6 @@ export interface PhysicalStellarPart
 
 export const DefaultPartData: PhysicalStellarPart = {
   meta: {
-    address: [],
-
     label: 'Unknown Part',
     visible: true,
     locked: false,

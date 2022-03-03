@@ -111,7 +111,7 @@ const temp_material = new MeshStandardMaterial({
 });
 
 export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
-  ({ address }) => {
+  ({ ID: address }) => {
     const initialState = getPartByAddress(address) as FuelTank;
     const mesh = useRef<Mesh>(null!);
     const selectionHandler = useSelectionHandler(
@@ -159,7 +159,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
 export const FuelTankIcon = Icon;
 
 export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
-  addresses,
+  IDs: addresses,
 }) => {
   const width = usePropertyController<FuelTank>(
     addresses,

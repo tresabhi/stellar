@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { PropertyComponentProps } from 'types/Parts';
 
 const TransformationProperties: FC<PropertyComponentProps> = ({
-  addresses,
+  IDs: addresses,
 }) => {
   const xPos = usePropertyController<PartWithTransformations>(
     addresses,
