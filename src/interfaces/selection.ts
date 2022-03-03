@@ -1,7 +1,7 @@
 import {
-  getPartByAddress,
+  getPartByID,
   mutateBlueprint,
-  setPartsByAddresses,
+  setPartsByIDs,
 } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
 import { PartID, PartIDs } from 'types/Parts';
@@ -12,12 +12,12 @@ export const selectParts = (IDs: PartIDs) => {
   let newSelections: PartIDs = [];
 
   mutateBlueprint((draft) => {
-    IDs.forEach((address) => {
-      const part = getPartByAddress(address, draft);
+    IDs.forEach((ID) => {
+      const part = getPartByID(ID, draft);
 
       if (part && !part.meta.selected) {
         part.meta.selected = true;
-        newSelections.push(address);
+        newSelections.push(ID);
       }
     });
 
@@ -30,12 +30,12 @@ export const selectPartOnly = (ID: PartID) => selectPartsOnly([ID]);
 
 export const selectPartsOnly = (IDs: PartIDs) => {
   mutateBlueprint((draft) => {
-    setPartsByAddresses(
+    setPartsByIDs(
       draft.selections.current,
       { meta: { selected: false } },
       draft,
     );
-    setPartsByAddresses(IDs, { meta: { selected: true } }, draft);
+    setPartsByIDs(IDs, { meta: { selected: true } }, draft);
 
     draft.selections.current = IDs;
     draft.selections.last = IDs[IDs.length - 1];
@@ -58,15 +58,14 @@ export const unselectPart = (ID: PartID) => unselectParts([ID]);
 
 export const unselectParts = (IDs: PartIDs) => {
   mutateBlueprint((draft) => {
-    IDs.forEach((address) => {
-      const part = getPartByAddress(address, draft);
+    IDs.forEach((ID) => {
+      const part = getPartByID(ID, draft);
       if (part) part.meta.selected = false;
     });
 
-    IDs.forEach((address) => {
+    IDs.forEach((ID) => {
       forEachRight(draft.selections.current, (selection, index) => {
-        if (isEqual(address, selection))
-          draft.selections.current.splice(index, 1);
+        if (isEqual(ID, selection)) draft.selections.current.splice(index, 1);
       });
     });
   });
@@ -74,7 +73,7 @@ export const unselectParts = (IDs: PartIDs) => {
 
 export const unselectAllParts = () => {
   mutateBlueprint((draft) => {
-    setPartsByAddresses(
+    setPartsByIDs(
       draft.selections.current,
       { meta: { selected: false } },
       draft,
@@ -86,32 +85,31 @@ export const unselectAllParts = () => {
 export const togglePartSelection = (ID: PartID) => togglePartsSelection([ID]);
 
 export const togglePartsSelection = (IDs: PartIDs) => {
-  let spliceAddresses: PartIDs = [];
-  let insertAddresses: PartIDs = [];
+  let spliceIDs: PartIDs = [];
+  let insertIDs: PartIDs = [];
 
   mutateBlueprint((draft) => {
-    IDs.forEach((address) => {
-      const part = getPartByAddress(address, draft);
+    IDs.forEach((ID) => {
+      const part = getPartByID(ID, draft);
 
       if (part) {
         if (part.meta.selected) {
-          spliceAddresses.push(address);
+          spliceIDs.push(ID);
         } else {
-          insertAddresses.push(address);
+          insertIDs.push(ID);
         }
 
         part.meta.selected = !part.meta.selected;
       }
     });
 
-    spliceAddresses.forEach((address) => {
+    spliceIDs.forEach((ID) => {
       forEachRight(draft.selections.current, (selection, index) => {
-        if (isEqual(address, selection))
-          draft.selections.current.splice(index, 1);
+        if (isEqual(ID, selection)) draft.selections.current.splice(index, 1);
       });
     });
 
-    draft.selections.current.push(...insertAddresses);
+    draft.selections.current.push(...insertIDs);
   });
 };
 

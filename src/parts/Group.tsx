@@ -1,7 +1,7 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { memo } from 'react';
 import { PartIDs, PartModule } from 'types/Parts';
-import compareAddressProps from 'utilities/compareAddressProps';
+import compareIDProps from 'utilities/compareIDProps';
 import { DefaultPartData, PartWithMeta } from './Default';
 
 export interface Group extends PartWithMeta {
@@ -19,7 +19,7 @@ export const GroupData: Group = {
   parts: [],
 };
 
-const GroupLayoutComponent = memo(() => <mesh />, compareAddressProps);
+const GroupLayoutComponent = memo(() => <mesh />, compareIDProps);
 
 export const GroupIcon = Icon;
 

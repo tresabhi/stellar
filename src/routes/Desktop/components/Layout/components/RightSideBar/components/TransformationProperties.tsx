@@ -4,35 +4,33 @@ import { PartWithTransformations } from 'parts/Default';
 import { FC } from 'react';
 import { PropertyComponentProps } from 'types/Parts';
 
-const TransformationProperties: FC<PropertyComponentProps> = ({
-  IDs: addresses,
-}) => {
+const TransformationProperties: FC<PropertyComponentProps> = ({ IDs }) => {
   const xPos = usePropertyController<PartWithTransformations>(
-    addresses,
+    IDs,
     (state) => state.p.x,
     (value) => ({ p: { x: value } }),
     { suffix: 'm' },
   );
   const yPos = usePropertyController<PartWithTransformations>(
-    addresses,
+    IDs,
     (state) => state.p.y,
     (value) => ({ p: { y: value } }),
     { suffix: 'm' },
   );
   const rot = usePropertyController<PartWithTransformations>(
-    addresses,
+    IDs,
     (state) => state.o.z,
     (value) => ({ o: { z: value } }),
     { modOnClamp: true, max: 360, suffix: '°' },
   );
   const xScale = usePropertyController<PartWithTransformations>(
-    addresses,
+    IDs,
     (state) => state.o.x,
     (value) => ({ o: { x: value } }),
     { min: 0, suffix: 'x' },
   );
   const yScale = usePropertyController<PartWithTransformations>(
-    addresses,
+    IDs,
     (state) => state.o.y,
     (value) => ({ o: { y: value } }),
     { min: 0, suffix: 'x' },

@@ -6,7 +6,7 @@ import usePropertyController from 'hooks/usePropertyController';
 import useSelectionHandler, {
   UseMeshSelectionHandler,
 } from 'hooks/useSelectionHandler';
-import { getPartByAddress, subscribeToPart } from 'interfaces/blueprint';
+import { getPartByID, subscribeToPart } from 'interfaces/blueprint';
 import { FC, memo, useEffect, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
 import {
@@ -14,7 +14,7 @@ import {
   PropertyComponentProps,
   ReactivePartComponentProps,
 } from 'types/Parts';
-import compareAddressProps from 'utilities/compareAddressProps';
+import compareIDProps from 'utilities/compareIDProps';
 import {
   DefaultPartData,
   PartWithMeta,
@@ -111,22 +111,22 @@ const temp_material = new MeshStandardMaterial({
 });
 
 export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
-  ({ ID: address }) => {
-    const initialState = getPartByAddress(address) as FuelTank;
+  ({ ID }) => {
+    const initialState = getPartByID(ID) as FuelTank;
     const mesh = useRef<Mesh>(null!);
     const selectionHandler = useSelectionHandler(
-      address,
+      ID,
       'mesh',
     ) as UseMeshSelectionHandler;
 
-    usePartTransformations(address, mesh, (state) => ({
+    usePartTransformations(ID, mesh, (state) => ({
       p: { y: state.p.y + (state as FuelTank).N.height / 2 },
     }));
-    usePartMeta(address, mesh);
+    usePartMeta(ID, mesh);
 
     useEffect(() => {
       subscribeToPart(
-        address,
+        ID,
         (N) => {
           mesh.current.geometry = new CylinderGeometry(
             N.width_b / 2,
@@ -142,7 +142,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
         (state: FuelTank) => state.N,
         { fireInitially: true, unsubscribeOnUnmount: true },
       );
-    }, [address]);
+    }, [ID]);
 
     return (
       <mesh
@@ -153,16 +153,16 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       />
     );
   },
-  compareAddressProps,
+  compareIDProps,
 );
 
 export const FuelTankIcon = Icon;
 
 export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
-  IDs: addresses,
+  IDs,
 }) => {
   const width = usePropertyController<FuelTank>(
-    addresses,
+    IDs,
     (state) => state.N.width_original,
     (value) => ({
       N: { width_original: value, width_a: value, width_b: value },
@@ -170,13 +170,13 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
     { min: 0, suffix: 'm' },
   );
   const height = usePropertyController<FuelTank>(
-    addresses,
+    IDs,
     (state) => state.N.height,
     (value) => ({ N: { height: value } }),
     { min: 0, suffix: 'm' },
   );
   const fuel = usePropertyController<FuelTank>(
-    addresses,
+    IDs,
     (state) => state.N.fuel_percent * 100,
     (value) => ({ N: { fuel_percent: value / 100 } }),
     { min: 0, max: 100, suffix: '%' },

@@ -2,12 +2,12 @@ import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
 import produce from 'immer';
-import { getPartByAddress } from 'interfaces/blueprint';
+import { getPartByID } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import appStore, { AppStore } from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 import { AnyPartName, PartIDs } from 'types/Parts';
-import compareAddressArrays from 'utilities/compareAddressArrays';
+import compareIDs from 'utilities/compareIDs';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
 
@@ -15,7 +15,7 @@ const RightSideBar = () => {
   const partition = appStore((state) => state.layout.rightSideBar.partition);
   const selections = blueprintStore(
     (state) => state.selections.current,
-    compareAddressArrays,
+    compareIDs,
   );
   const selectionsLength = blueprintStore(
     (state) => state.selections.current.length,
@@ -38,7 +38,7 @@ const RightSideBar = () => {
 
   let selectionsByPartNames: Map<AnyPartName, PartIDs> = new Map();
   selections.forEach((selection) => {
-    const part = getPartByAddress(selection);
+    const part = getPartByID(selection);
 
     if (part) {
       if (selectionsByPartNames.has(part.n)) {
@@ -55,18 +55,15 @@ const RightSideBar = () => {
   let propertyItems: JSX.Element[] = [];
   selectedPartNames.forEach((partName) => {
     const partModule = getPartModule(partName);
-    const addresses = selectionsByPartNames.get(partName)!;
+    const IDs = selectionsByPartNames.get(partName)!;
 
     if (partModule?.hasTransformations) {
-      partsWithTransformations.push(...addresses);
+      partsWithTransformations.push(...IDs);
     }
 
     if (partModule?.PropertyComponent) {
       propertyItems.push(
-        <partModule.PropertyComponent
-          key={`type-${partName}`}
-          IDs={addresses}
-        />,
+        <partModule.PropertyComponent key={`type-${partName}`} IDs={IDs} />,
       );
     }
   });

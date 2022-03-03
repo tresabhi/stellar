@@ -1,7 +1,7 @@
 import { ReactComponent as Icon } from 'assets/icons/question-mark.svg';
 import { memo } from 'react';
 import { AnyPart, PartID, PartModule } from 'types/Parts';
-import compareAddressProps from 'utilities/compareAddressProps';
+import compareIDProps from 'utilities/compareIDProps';
 
 export interface PartWithMeta {
   meta: {
@@ -38,10 +38,7 @@ export const DefaultPartData: PhysicalStellarPart = {
   t: '-Infinity',
 };
 
-export const DefaultPartLayoutComponent = memo(
-  () => <mesh />,
-  compareAddressProps,
-);
+export const DefaultPartLayoutComponent = memo(() => <mesh />, compareIDProps);
 
 export const DefaultPartIcon = Icon;
 

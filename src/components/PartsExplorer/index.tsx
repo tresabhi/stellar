@@ -5,8 +5,8 @@ import useSelectionHandler, {
   UseListingSelectionHandler,
 } from 'hooks/useSelectionHandler';
 import {
-  getPartByAddress as getPartByID,
-  setPartByAddress,
+  getPartByID,
+  setPartByID,
   subscribeToPart,
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
@@ -23,7 +23,7 @@ import {
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { AnyPart, PartID } from 'types/Parts';
-import compareAddressProps from 'utilities/compareAddressProps';
+import compareIDProps from 'utilities/compareIDProps';
 import comparePartsMaps from 'utilities/comparePartsMaps';
 import styles from './index.module.scss';
 
@@ -81,7 +81,7 @@ export const Listing = memo<ListingProps>(
     };
     const handleLabelBlur = () => {
       inputRef.current.value = inputRef.current.value.trim();
-      setPartByAddress(ID, { meta: { label: inputRef.current.value } });
+      setPartByID(ID, { meta: { label: inputRef.current.value } });
     };
     const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
       if (event.key === 'Enter') buttonRef.current.focus();
@@ -171,5 +171,5 @@ export const Listing = memo<ListingProps>(
       </div>
     );
   },
-  compareAddressProps,
+  compareIDProps,
 );

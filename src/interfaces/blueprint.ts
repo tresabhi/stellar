@@ -75,30 +75,30 @@ export const deletePartsBySelection = () => {
   });
 };
 
-export const getPartByAddress = (ID: PartID, state?: Blueprint) => {
+export const getPartByID = (ID: PartID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
   return blueprintState.parts.get(ID);
 };
 
-export const setPartByAddress = (
+export const setPartByID = (
   ID: PartID,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
-) => setPartsByAddresses([ID], newState, state);
+) => setPartsByIDs([ID], newState, state);
 
-export const setPartsByAddresses = (
+export const setPartsByIDs = (
   IDs: PartIDs,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
 ) => {
   if (state) {
-    IDs.forEach((address) => {
-      let part = getPartByAddress(address, state);
+    IDs.forEach((ID) => {
+      let part = getPartByID(ID, state);
       merge(part, newState);
     });
   } else {
     mutateBlueprint((draft) => {
-      setPartsByAddresses(IDs, newState, draft);
+      setPartsByIDs(IDs, newState, draft);
     });
   }
 };
@@ -108,16 +108,14 @@ export const getReactivePartByID = <T extends AnyPart, S>(
   slicer?: (state: T) => S,
 ) => {
   return blueprintStore((state) =>
-    slicer
-      ? slicer(getPartByAddress(ID, state) as T)
-      : getPartByAddress(ID, state),
+    slicer ? slicer(getPartByID(ID, state) as T) : getPartByID(ID, state),
   );
 };
 
 export const translatePartsBySelection = (x: number, y: number) => {
   mutateBlueprint((draft) => {
     draft.selections.current.forEach((selection) => {
-      let part = getPartByAddress(selection, draft) as PartWithTransformations &
+      let part = getPartByID(selection, draft) as PartWithTransformations &
         PartWithMeta;
 
       part.p.x += x;
@@ -151,7 +149,7 @@ export const subscribeToPart = <T, S>(
   };
 
   const unsubscribe = blueprintStore.subscribe((state) => {
-    const part = getPartByAddress(ID, state);
+    const part = getPartByID(ID, state);
 
     if (part) {
       if (slicer) {
@@ -165,11 +163,11 @@ export const subscribeToPart = <T, S>(
   if (mergedOptions.fireInitially) {
     if (slicer) {
       compoundHandler(
-        slicer(getPartByAddress(ID, blueprintStore.getState()) as unknown as T),
+        slicer(getPartByID(ID, blueprintStore.getState()) as unknown as T),
       );
     } else {
       compoundHandler(
-        getPartByAddress(ID, blueprintStore.getState()) as unknown as S,
+        getPartByID(ID, blueprintStore.getState()) as unknown as S,
       );
     }
   }

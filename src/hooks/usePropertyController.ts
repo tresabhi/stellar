@@ -1,4 +1,4 @@
-import { getPartByAddress, setPartsByAddresses } from 'interfaces/blueprint';
+import { getPartByID, setPartsByIDs } from 'interfaces/blueprint';
 import { useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
 import { PartIDs } from 'types/Parts';
@@ -26,13 +26,13 @@ const usePropertyController = <S>(
         property: get(data),
       };
     },
-    IDs.map((address) => getPartByAddress(address) as unknown as S),
+    IDs.map((ID) => getPartByID(ID) as unknown as S),
   );
 
   useUnitInputController(inputRef, property, {
     ...controllerOptions,
     onChange: (value) => {
-      setPartsByAddresses(IDs, set(value));
+      setPartsByIDs(IDs, set(value));
       mergedControllerOptions.onChange(value);
     },
   });

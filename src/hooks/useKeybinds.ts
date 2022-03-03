@@ -26,20 +26,14 @@ const useKeybinds = () => {
   // BIG TODO: Make this date driven
 
   useEffect(() => {
-    bind('ctrl+a', () => {
-      selectPartsOnly(blueprintStore.getState().partOrder);
-    });
-
-    bind('esc', () => {
-      unselectAllParts();
-    });
+    bind('ctrl+a', () => selectPartsOnly(blueprintStore.getState().partOrder));
+    bind('esc', unselectAllParts);
 
     bind('p a r t y', () => {
       // party mode easter egg
       document.body.classList.toggle('party');
     });
 
-    // TODO: make parts explorer rerender when this happens
     bind('del', deletePartsBySelection);
 
     bind('alt+1', (event) => {

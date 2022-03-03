@@ -1,6 +1,6 @@
 import { PartIDs } from 'types/Parts';
 
-const compareAddressArrays = (prevIDs: PartIDs, nextIDs: PartIDs) => {
+const compareIDs = (prevIDs: PartIDs, nextIDs: PartIDs) => {
   if (prevIDs.length !== nextIDs.length) {
     return false;
   } else {
@@ -15,4 +15,4 @@ const compareAddressArrays = (prevIDs: PartIDs, nextIDs: PartIDs) => {
   }
 };
 
-export default compareAddressArrays;
+export default compareIDs;
