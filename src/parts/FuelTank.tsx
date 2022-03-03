@@ -140,7 +140,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
           );
         },
         (state: FuelTank) => state.N,
-        true,
+        { fireInitially: true, unsubscribeOnUnmount: true },
       );
     }, [address]);
 

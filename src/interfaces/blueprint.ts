@@ -140,17 +140,31 @@ export const translatePartsBySelection = (x: number, y: number) => {
   });
 };
 
+interface SubscribeToPartOptions {
+  fireInitially: boolean;
+  unsubscribeOnUnmount: boolean;
+}
+const subscribeToPartDefaultOptions = {
+  fireInitially: false,
+  unsubscribeOnUnmount: false,
+};
 export const subscribeToPart = <T, S>(
   address: PartAddress,
   handler: (slice: S) => void,
   slicer?: (state: T) => S,
-  fireInitially = false,
+  options?: Partial<SubscribeToPartOptions>,
 ) => {
+  const mergedOptions = { ...subscribeToPartDefaultOptions, ...options };
+
   const compoundHandler = (slice?: S) => {
-    if (!isUndefined(slice)) handler(slice);
+    if (isUndefined(slice)) {
+      if (mergedOptions.unsubscribeOnUnmount) unsubscribe();
+    } else {
+      handler(slice);
+    }
   };
 
-  blueprintStore.subscribe((state) => {
+  const unsubscribe = blueprintStore.subscribe((state) => {
     const part = getPartByAddress(address, state);
 
     if (part) {
@@ -162,7 +176,7 @@ export const subscribeToPart = <T, S>(
     }
   }, compoundHandler);
 
-  if (fireInitially) {
+  if (mergedOptions.fireInitially) {
     if (slicer) {
       compoundHandler(
         slicer(

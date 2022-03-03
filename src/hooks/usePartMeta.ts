@@ -18,7 +18,7 @@ const usePartMeta = (
         mesh.current.visible = visible;
       },
       (state: PartWithMeta) => state.meta.visible,
-      true,
+      { fireInitially: true, unsubscribeOnUnmount: true },
     );
     subscribeToPart(
       address,
@@ -26,7 +26,7 @@ const usePartMeta = (
         helper.current!.visible = selected;
       },
       (state: PartWithMeta) => state.meta.selected,
-      true,
+      { fireInitially: true, unsubscribeOnUnmount: true },
     );
   }, [address, helper, mesh]);
 };

@@ -124,6 +124,7 @@ export const Listing = memo<ListingProps>(
           }
         },
         (state: PartWithMeta) => state.meta.selected,
+        { unsubscribeOnUnmount: true },
       );
     }, [address]);
 

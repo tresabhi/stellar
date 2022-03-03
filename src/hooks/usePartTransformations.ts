@@ -19,14 +19,14 @@ const usePartTransformations = (
       (x) => (mesh.current.position.x = x),
       (state: PartWithTransformations) =>
         overrides ? overrides(state).p?.x ?? state.p.x : state.p.x,
-      true,
+      { fireInitially: true, unsubscribeOnUnmount: true },
     );
     subscribeToPart(
       address,
       (y) => (mesh.current.position.y = y),
       (state: PartWithTransformations) =>
         overrides ? overrides(state).p?.y ?? state.p.y : state.p.y,
-      true,
+      { fireInitially: true, unsubscribeOnUnmount: true },
     );
 
     subscribeToPart(
@@ -34,7 +34,7 @@ const usePartTransformations = (
       (z) => (mesh.current.rotation.z = z),
       (state: PartWithTransformations) =>
         degToRad(overrides ? overrides(state).o?.z ?? state.o.z : state.o.z),
-      true,
+      { fireInitially: true, unsubscribeOnUnmount: true },
     );
 
     subscribeToPart(
@@ -42,14 +42,14 @@ const usePartTransformations = (
       (x) => (mesh.current.scale.x = x),
       (state: PartWithTransformations) =>
         overrides ? overrides(state).o?.x ?? state.o.x : state.o.x,
-      true,
+      { fireInitially: true, unsubscribeOnUnmount: true },
     );
     subscribeToPart(
       address,
       (y) => (mesh.current.scale.y = y),
       (state: PartWithTransformations) =>
         overrides ? overrides(state).o?.y ?? state.o.y : state.o.y,
-      true,
+      { fireInitially: true, unsubscribeOnUnmount: true },
     );
   }, [address, mesh, overrides]);
 };
