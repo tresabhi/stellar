@@ -25,7 +25,7 @@
     "three-mesh-bvh": "^0.5.5",
     "uuid": "^8.3.2",
     "workbox-cacheable-response": "^6.5.0",
-    "workbox-precaching": "^6.5.0",
+    "workbox-precaching": "^6.5.1",
     "workbox-routing": "^6.5.0",
     "workbox-strategies": "^6.5.1",
     "zundo": "^1.5.9",
