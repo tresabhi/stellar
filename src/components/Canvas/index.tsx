@@ -18,7 +18,7 @@ export const LayoutRenderer = () => {
     (state) => state.performance.regress_amount,
   );
   const allAxisControls = settingsStore(
-    (state) => state.debug.enabled_orbit_controls,
+    (state) => state.debug.orbit_controls,
   );
   const initialData = blueprintStore.getState();
   const tempRef = useRef<Group>(null);

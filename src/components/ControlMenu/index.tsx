@@ -6,14 +6,14 @@ export const Container: FC = ({ children }) => (
 );
 
 interface ButtonProps {
-  extension: JSX.Element;
+  label: string;
 }
-export const Button: FC<ButtonProps> = ({ children, extension }) => {
+export const Button: FC<ButtonProps> = ({ children, label: title }) => {
   return (
     <button className={styles.button}>
-      {children}
-      {extension ? (
-        <div className={styles.extension}>{extension}</div>
+      {title}
+      {children ? (
+        <div className={styles.extension}>{children}</div>
       ) : undefined}
     </button>
   );

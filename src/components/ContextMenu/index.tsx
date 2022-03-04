@@ -58,12 +58,12 @@ export const Separator = () => (
 
 interface ExtensionProps {
   disabled?: boolean;
-  extension: JSX.Element;
+  label: string;
 }
 export const Extension: FC<ExtensionProps> = ({
   children,
   disabled = false,
-  extension,
+  label: title,
 }) => {
   return (
     <div
@@ -71,12 +71,12 @@ export const Extension: FC<ExtensionProps> = ({
         disabled ? styles.disabled : styles.enabled
       }`}
     >
-      <span className={styles.text}>{children}</span>
+      <span className={styles.text}>{title}</span>
       <div className={styles['icon-holder']}>
         <ArrowHeadRightIcon className={styles.icon} />
       </div>
-      {extension ? (
-        <div className={styles.extension}>{extension}</div>
+      {children ? (
+        <div className={styles.extension}>{children}</div>
       ) : undefined}
     </div>
   );
