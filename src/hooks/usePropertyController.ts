@@ -1,4 +1,4 @@
-import { getPartByID, setPartsByIDs } from 'interfaces/blueprint';
+import { getPartByID, mutatePartsByIDs } from 'interfaces/blueprint';
 import { useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
 import { PartIDs } from 'types/Parts';
@@ -32,7 +32,7 @@ const usePropertyController = <S>(
   useUnitInputController(inputRef, property, {
     ...controllerOptions,
     onChange: (value) => {
-      setPartsByIDs(IDs, set(value));
+      mutatePartsByIDs(IDs, set(value));
       mergedControllerOptions.onChange(value);
     },
   });

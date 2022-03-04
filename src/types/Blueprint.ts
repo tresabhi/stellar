@@ -19,5 +19,9 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   partOrder: PartIDs;
 }
 
+export interface SavifiedBlueprint extends Omit<Blueprint, 'parts'> {
+  parts: SavifiedPartMap;
+}
+
 export type AnyPartMap = Map<PartID, AnyPart>;
 export type SavifiedPartMap = [PartID, AnyPart][];

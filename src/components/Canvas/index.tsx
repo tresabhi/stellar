@@ -2,13 +2,14 @@ import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import DesktopCanvasControls from 'components/DesktopCanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
+import { getPartByID } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { unselectAllParts } from 'interfaces/selection';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import { Color, Group } from 'three';
-import comparePartsMaps from 'utilities/comparePartsMaps';
+import compareIDArrays from 'utilities/compareIDArrays';
 import styles from './index.module.scss';
 
 export const LayoutRenderer = () => {
@@ -21,15 +22,18 @@ export const LayoutRenderer = () => {
   );
   const initialData = blueprintStore.getState();
   const tempRef = useRef<Group>(null);
-  const parts = blueprintStore((state) => state.parts, comparePartsMaps);
+  const state = blueprintStore((state) => state.partOrder, compareIDArrays);
+  let partMeshes: JSX.Element[] = [];
 
-  const partMeshes = Array.from(parts, ([ID, data]) => {
-    const PartComponent = getPartModule(data.n)?.LayoutComponent;
-
-    if (PartComponent) {
-      return <PartComponent key={`part-${ID}`} ID={ID} />;
-    } else {
-      return null;
+  state.forEach((ID) => {
+    const part = getPartByID(ID);
+    if (part) {
+      const partModule = getPartModule(part.n);
+      if (partModule) {
+        partMeshes.push(
+          <partModule.LayoutComponent key={`part-${ID}`} ID={ID} />,
+        );
+      }
     }
   });
 

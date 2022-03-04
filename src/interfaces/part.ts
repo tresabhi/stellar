@@ -2,13 +2,19 @@ import { cloneDeep, isArray, isMap, merge } from 'lodash';
 import DefaultPart from 'parts/Default';
 import FuelTank from 'parts/FuelTank';
 import Group from 'parts/Group';
-import { AnyPartMap, SavifiedPartMap } from 'types/Blueprint';
+import {
+  AnyPartMap,
+  Blueprint,
+  SavifiedBlueprint,
+  VanillaBlueprint
+} from 'types/Blueprint';
 import {
   AnyPart,
   AnyPartName,
   AnyVanillaPart,
   PartID,
-  PartModule,
+  PartIDs,
+  PartModule
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
 
@@ -32,34 +38,46 @@ export const importifyPart = (
 };
 
 export const importifyParts = (
-  parts: AnyVanillaPart[] | AnyPartMap | SavifiedPartMap,
+  blueprint: VanillaBlueprint | SavifiedBlueprint | Blueprint,
   parentID?: PartID,
-): AnyPartMap => {
+): [AnyPartMap, PartIDs] => {
   let newPartsMap: AnyPartMap = new Map();
+  const clonedBlueprint = cloneDeep(blueprint);
 
-  if (isMap(parts)) {
-    parts.forEach((part, ID) => {
+  if (isMap(clonedBlueprint.parts)) {
+    // normal blueprint, probably never gonna use this
+    (clonedBlueprint as Blueprint).parts.forEach((part, ID) => {
       const importifiedPart = importifyPart(cloneDeep(part), parentID);
       if (importifiedPart) newPartsMap.set(ID, importifiedPart);
     });
 
-    return newPartsMap;
-  } else if (parts.length === 0) {
-    return newPartsMap;
-  } else if (isArray(parts[0])) {
-    (parts as SavifiedPartMap).forEach(([ID, part]) => {
+    return [newPartsMap, (clonedBlueprint as Blueprint).partOrder];
+  } else if (clonedBlueprint.parts.length === 0) {
+    // not parts to convert
+    return [newPartsMap, []];
+  } else if (isArray(clonedBlueprint.parts[0])) {
+    // saved version of the blueprint
+    (clonedBlueprint as SavifiedBlueprint).parts.forEach(([ID, part]) => {
       const importifiedPart = importifyPart(cloneDeep(part), parentID);
       if (importifiedPart) newPartsMap.set(ID, importifiedPart);
     });
 
-    return newPartsMap;
+    return [newPartsMap, (clonedBlueprint as Blueprint).partOrder];
   } else {
-    (parts as AnyVanillaPart[]).forEach((part) => {
+    // vanilla blueprint, straight from the game
+    let newPartOrder: PartIDs = [];
+
+    (clonedBlueprint as Blueprint).partOrder = [];
+    (clonedBlueprint as VanillaBlueprint).parts.forEach((part) => {
+      const ID = UUIDV4();
       const importifiedPart = importifyPart(cloneDeep(part), parentID);
-      if (importifiedPart) newPartsMap.set(UUIDV4(), importifiedPart);
+      if (importifiedPart) {
+        newPartsMap.set(ID, importifiedPart);
+        newPartOrder.push(ID);
+      }
     });
 
-    return newPartsMap;
+    return [newPartsMap, newPartOrder];
   }
 };
 

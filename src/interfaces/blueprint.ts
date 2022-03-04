@@ -45,9 +45,11 @@ export const blueprintToLatestVersion = (blueprint: Blueprint): Blueprint =>
 
 export const importifyBlueprint = (blueprint: object): Blueprint => {
   const mergedBlueprint = mergeWithDefaultBlueprintGlobals(blueprint);
+  const [parts, partOrder] = importifyParts(mergedBlueprint);
   const partDataUpdatedBlueprint = {
     ...mergedBlueprint,
-    parts: importifyParts(mergedBlueprint.parts),
+    parts,
+    partOrder,
   };
   const latestVersionBlueprint = blueprintToLatestVersion(
     partDataUpdatedBlueprint,
@@ -80,13 +82,13 @@ export const getPartByID = (ID: PartID, state?: Blueprint) => {
   return blueprintState.parts.get(ID);
 };
 
-export const setPartByID = (
+export const mutatePartByID = (
   ID: PartID,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
-) => setPartsByIDs([ID], newState, state);
+) => mutatePartsByIDs([ID], newState, state);
 
-export const setPartsByIDs = (
+export const mutatePartsByIDs = (
   IDs: PartIDs,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
@@ -98,7 +100,7 @@ export const setPartsByIDs = (
     });
   } else {
     mutateBlueprint((draft) => {
-      setPartsByIDs(IDs, newState, draft);
+      mutatePartsByIDs(IDs, newState, draft);
     });
   }
 };

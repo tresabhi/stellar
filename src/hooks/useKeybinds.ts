@@ -3,7 +3,7 @@ import {
   deletePartsBySelection,
   redo,
   translatePartsBySelection,
-  undo,
+  undo
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';

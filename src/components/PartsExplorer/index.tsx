@@ -2,12 +2,12 @@ import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-dow
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import useSelectionHandler, {
-  UseListingSelectionHandler,
+  UseListingSelectionHandler
 } from 'hooks/useSelectionHandler';
 import {
   getPartByID,
-  setPartByID,
-  subscribeToPart,
+  mutatePartByID,
+  subscribeToPart
 } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { PartWithMeta } from 'parts/Default';
@@ -19,21 +19,21 @@ import {
   MouseEvent,
   useEffect,
   useRef,
-  useState,
+  useState
 } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { AnyPart, PartID } from 'types/Parts';
+import { PartID } from 'types/Parts';
+import compareIDArrays from 'utilities/compareIDArrays';
 import compareIDProps from 'utilities/compareIDProps';
-import comparePartsMaps from 'utilities/comparePartsMaps';
 import styles from './index.module.scss';
 
 export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   ...props
 }) => {
-  const state = blueprintStore((state) => state.parts, comparePartsMaps);
+  const state = blueprintStore((state) => state.partOrder, compareIDArrays);
 
-  const partListings = Array.from(state, ([ID, data]) => (
-    <Listing key={`part-${ID}`} initialState={data} ID={ID} indentation={0} />
+  const partListings = state.map((ID) => (
+    <Listing key={`part-${ID}`} ID={ID} indentation={0} />
   ));
 
   return (
@@ -49,127 +49,120 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
 interface ListingProps {
   indentation: number;
   ID: PartID;
-  initialState: AnyPart;
 }
-export const Listing = memo<ListingProps>(
-  ({ indentation, ID, initialState }) => {
-    const [expanded, setExpanded] = useState(false);
-    const listingRef = useRef<HTMLDivElement>(null!);
-    const buttonRef = useRef<HTMLButtonElement>(null!);
-    const inputRef = useRef<HTMLInputElement>(null!);
+export const Listing = memo<ListingProps>(({ indentation, ID }) => {
+  const [expanded, setExpanded] = useState(false);
+  const listingRef = useRef<HTMLDivElement>(null!);
+  const buttonRef = useRef<HTMLButtonElement>(null!);
+  const inputRef = useRef<HTMLInputElement>(null!);
+  const initialState = getPartByID(ID);
 
-    let childParts: JSX.Element[] | undefined;
-    const selectionHandler = useSelectionHandler(
+  useEffect(() => {
+    subscribeToPart(
       ID,
-      'listing',
-    ) as UseListingSelectionHandler;
+      (selected) => {
+        if (selected) {
+          listingRef.current.classList.add(styles.selected);
+        } else {
+          listingRef.current.classList.remove(styles.selected);
+        }
+      },
+      (state: PartWithMeta) => state.meta.selected,
+      { unsubscribeOnUnmount: true },
+    );
+  }, [ID]);
 
-    const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      setExpanded((state) => !state);
-    };
-    const handleExpandMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
-      if (initialState.n === 'Group') event.preventDefault();
-    };
-    const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      buttonRef.current.focus();
-    };
-    const handleLabelDoubleClick = () => {
-      inputRef.current.focus();
-      inputRef.current.select();
-    };
-    const handleLabelBlur = () => {
-      inputRef.current.value = inputRef.current.value.trim();
-      setPartByID(ID, { meta: { label: inputRef.current.value } });
-    };
-    const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter') buttonRef.current.focus();
-    };
+  const selectionHandler = useSelectionHandler(
+    ID,
+    'listing',
+  ) as UseListingSelectionHandler;
 
-    let Icon = getPartModule(initialState.n, true).Icon;
+  // part was deleted
+  if (!initialState) return null;
 
-    if (initialState.n === 'Group') {
-      childParts = initialState.parts.map((part) => {
-        const initialState = getPartByID(part)!;
+  let childParts: JSX.Element[] | undefined;
+  const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setExpanded((state) => !state);
+  };
+  const handleExpandMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
+    if (initialState.n === 'Group') event.preventDefault();
+  };
+  const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    buttonRef.current.focus();
+  };
+  const handleLabelDoubleClick = () => {
+    inputRef.current.focus();
+    inputRef.current.select();
+  };
+  const handleLabelBlur = () => {
+    inputRef.current.value = inputRef.current.value.trim();
+    mutatePartByID(ID, { meta: { label: inputRef.current.value } });
+  };
+  const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') buttonRef.current.focus();
+  };
 
-        return (
-          <Listing
-            key={`part-${ID}`}
-            initialState={initialState}
-            ID={ID}
-            indentation={indentation + 1}
-          />
-        );
-      });
-    }
+  let Icon = getPartModule(initialState.n, true).Icon;
 
-    useEffect(() => {
-      subscribeToPart(
-        ID,
-        (selected) => {
-          if (selected) {
-            listingRef.current.classList.add(styles.selected);
-          } else {
-            listingRef.current.classList.remove(styles.selected);
-          }
-        },
-        (state: PartWithMeta) => state.meta.selected,
-        { unsubscribeOnUnmount: true },
+  if (initialState.n === 'Group') {
+    childParts = initialState.parts.map((part) => {
+      return (
+        <Listing key={`part-${ID}`} ID={ID} indentation={indentation + 1} />
       );
-    }, [ID]);
+    });
+  }
 
-    return (
-      <div ref={listingRef} tabIndex={-1} className={styles.listing}>
-        <div
-          className={styles.button}
-          style={{ paddingLeft: `${16 * indentation}px` }}
-          onClick={selectionHandler}
+  return (
+    <div ref={listingRef} tabIndex={-1} className={styles.listing}>
+      <div
+        className={styles.button}
+        style={{ paddingLeft: `${16 * indentation}px` }}
+        onClick={selectionHandler}
+      >
+        <button
+          ref={buttonRef}
+          onClick={handleExpandClick}
+          onMouseDown={handleExpandMouseDown}
+          className={styles.expand}
         >
-          <button
-            ref={buttonRef}
-            onClick={handleExpandClick}
-            onMouseDown={handleExpandMouseDown}
-            className={styles.expand}
-          >
-            {initialState.n === 'Group' ? (
-              expanded ? (
-                <ArrowHeadDownIcon className={styles['expand-icon']} />
-              ) : (
-                <ArrowHeadRightIcon className={styles['expand-icon']} />
-              )
-            ) : undefined}
-          </button>
-
-          <div className={styles['icon-holder']}>
-            {Icon ? (
-              <Icon className={styles.icon} />
+          {initialState.n === 'Group' ? (
+            expanded ? (
+              <ArrowHeadDownIcon className={styles['expand-icon']} />
             ) : (
-              <QuestionMarkIcon className={styles.icon} />
-            )}
-          </div>
+              <ArrowHeadRightIcon className={styles['expand-icon']} />
+            )
+          ) : undefined}
+        </button>
 
-          <input
-            ref={inputRef}
-            onMouseDown={handleLabelMouseDown}
-            onDoubleClick={handleLabelDoubleClick}
-            onBlur={handleLabelBlur}
-            onKeyPress={handleLabelKeyPress}
-            className={styles.label}
-            defaultValue={initialState.meta.label}
-          />
-
-          {/* visible */}
-          {/* lock */}
+        <div className={styles['icon-holder']}>
+          {Icon ? (
+            <Icon className={styles.icon} />
+          ) : (
+            <QuestionMarkIcon className={styles.icon} />
+          )}
         </div>
 
-        {childParts ? (
-          <Container style={{ display: expanded ? 'flex' : 'none' }}>
-            {childParts}
-          </Container>
-        ) : undefined}
+        <input
+          ref={inputRef}
+          onMouseDown={handleLabelMouseDown}
+          onDoubleClick={handleLabelDoubleClick}
+          onBlur={handleLabelBlur}
+          onKeyPress={handleLabelKeyPress}
+          className={styles.label}
+          defaultValue={initialState.meta.label}
+        />
+
+        {/* visible */}
+        {/* lock */}
       </div>
-    );
-  },
-  compareIDProps,
-);
+
+      {childParts ? (
+        <Container style={{ display: expanded ? 'flex' : 'none' }}>
+          {childParts}
+        </Container>
+      ) : undefined}
+    </div>
+  );
+}, compareIDProps);
