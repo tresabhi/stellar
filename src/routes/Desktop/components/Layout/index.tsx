@@ -2,7 +2,6 @@ import devBlueprint from 'assets/blueprints/static/saturn-v.json';
 import { LayoutRenderer } from 'components/Canvas';
 import { importifyBlueprint } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';
-import appStore from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import LeftSideBar from './components/LeftSideBar';
@@ -14,10 +13,10 @@ if (settingsStore.getState().debug.dev_blueprint) {
 }
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
-  const isLeftSideBarVisible = appStore(
+  const isLeftSideBarVisible = settingsStore(
     (state) => state.layout.leftSideBar.visible,
   );
-  const isRightSideBarVisible = appStore(
+  const isRightSideBarVisible = settingsStore(
     (state) => state.layout.rightSideBar.visible,
   );
 

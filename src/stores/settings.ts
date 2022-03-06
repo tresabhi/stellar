@@ -8,10 +8,25 @@ export interface SettingsStore {
     dev_blueprint: boolean;
     orbit_controls: boolean;
   };
+
   performance: {
     regress_amount: number;
   };
+
   language: Languages;
+
+  layout: {
+    leftSideBar: {
+      visible: boolean;
+      partition: 'parts' | 'snippets';
+    };
+
+    rightSideBar: {
+      visible: boolean;
+      partition: 'properties' | 'inspect';
+      scaleConstrained: boolean;
+    };
+  };
 }
 
 export const SettingsStoreData: SettingsStore = {
@@ -19,10 +34,25 @@ export const SettingsStoreData: SettingsStore = {
     dev_blueprint: false,
     orbit_controls: false,
   },
+
   performance: {
     regress_amount: 1,
   },
+
   language: 'english_us',
+
+  layout: {
+    leftSideBar: {
+      visible: true,
+      partition: 'parts',
+    },
+
+    rightSideBar: {
+      visible: true,
+      partition: 'properties',
+      scaleConstrained: false,
+    },
+  },
 };
 
 const settingsStore = create<SettingsStore>(

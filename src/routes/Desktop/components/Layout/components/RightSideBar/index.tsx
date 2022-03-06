@@ -4,15 +4,17 @@ import * as SideBar from 'components/SideBar';
 import produce from 'immer';
 import { getPartByID } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
-import appStore, { AppStore } from 'stores/app';
 import blueprintStore from 'stores/blueprint';
+import settingsStore, { SettingsStore } from 'stores/settings';
 import { AnyPartName, PartIDs } from 'types/Parts';
 import compareIDArrays from 'utilities/compareIDArrays';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
-  const partition = appStore((state) => state.layout.rightSideBar.partition);
+  const partition = settingsStore(
+    (state) => state.layout.rightSideBar.partition,
+  );
   const selections = blueprintStore(
     (state) => state.selections.current,
     compareIDArrays,
@@ -24,14 +26,14 @@ const RightSideBar = () => {
   const isPartitionInspect = partition === 'inspect';
 
   const handlePropertiesClick = () =>
-    appStore.setState(
-      produce((draft: AppStore) => {
+    settingsStore.setState(
+      produce((draft: SettingsStore) => {
         draft.layout.rightSideBar.partition = 'properties';
       }),
     );
   const handleInspectClick = () =>
-    appStore.setState(
-      produce((draft: AppStore) => {
+    settingsStore.setState(
+      produce((draft: SettingsStore) => {
         draft.layout.rightSideBar.partition = 'inspect';
       }),
     );

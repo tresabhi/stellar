@@ -1,7 +1,7 @@
 import {
   getPartByID,
   mutateBlueprint,
-  mutatePartsByIDs
+  mutatePartsByIDs,
 } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
 import { PartID, PartIDs } from 'types/Parts';
@@ -45,9 +45,7 @@ export const selectPartsOnly = (IDs: PartIDs) => {
 export const selectPartsFrom = (startID: PartID, endID: PartID) => {};
 
 export const selectPartsFromOnly = (startID: PartID, endID: PartID) => {
-  // it's backwards, so why not select backwards
-  const direction = getPartDirection(startID, endID);
-  if (direction === -1) [startID, endID] = [endID, startID];
+  // TODO: make this functional
 };
 
 export const unselectPart = (ID: PartID) => unselectParts([ID]);
@@ -59,11 +57,9 @@ export const unselectParts = (IDs: PartIDs) => {
       if (part) part.meta.selected = false;
     });
 
-    IDs.forEach((ID) => {
-      forEachRight(draft.selections.current, (selection, index) => {
-        if (isEqual(ID, selection)) draft.selections.current.splice(index, 1);
-      });
-    });
+    draft.selections.current = draft.selections.current.filter(
+      (selection) => !IDs.includes(selection),
+    );
   });
 };
 
@@ -106,6 +102,7 @@ export const togglePartsSelection = (IDs: PartIDs) => {
     });
 
     draft.selections.current.push(...insertIDs);
+    draft.selections.last = IDs[IDs.length - 1];
   });
 };
 

@@ -2,22 +2,24 @@ import * as Partition from 'components/Partitions';
 import * as PartsExplorer from 'components/PartsExplorer';
 import * as SideBar from 'components/SideBar';
 import produce from 'immer';
-import appStore, { AppStore } from 'stores/app';
+import settingsStore, { SettingsStore } from 'stores/settings';
 
 export default function LeftSideBar() {
-  const partition = appStore((state) => state.layout.leftSideBar.partition);
+  const partition = settingsStore(
+    (state) => state.layout.leftSideBar.partition,
+  );
   const isPartitionParts = partition === 'parts';
   const isPartitionSnippets = partition === 'snippets';
 
   const handlePartsClick = () =>
-    appStore.setState(
-      produce((draft: AppStore) => {
+    settingsStore.setState(
+      produce((draft: SettingsStore) => {
         draft.layout.leftSideBar.partition = 'parts';
       }),
     );
   const handleSnippetsClick = () =>
-    appStore.setState(
-      produce((draft: AppStore) => {
+    settingsStore.setState(
+      produce((draft: SettingsStore) => {
         draft.layout.leftSideBar.partition = 'snippets';
       }),
     );

@@ -6,18 +6,6 @@ export interface AppStore {
   hasUnsavedChanges: boolean;
 
   tab: 'layout' | 'staging' | 'simulation' | 'rendering';
-  layout: {
-    leftSideBar: {
-      visible: boolean;
-      partition: 'parts' | 'snippets';
-    };
-
-    rightSideBar: {
-      visible: boolean;
-      partition: 'properties' | 'inspect';
-      scaleConstrained: boolean;
-    };
-  };
 
   transformationMode: 'translate' | 'rotate' | 'scale';
 }
@@ -27,18 +15,6 @@ export const AppStoreData: AppStore = {
   hasUnsavedChanges: false,
 
   tab: 'layout',
-  layout: {
-    leftSideBar: {
-      visible: true,
-      partition: 'parts',
-    },
-
-    rightSideBar: {
-      visible: true,
-      partition: 'properties',
-      scaleConstrained: false,
-    },
-  },
 
   transformationMode: 'rotate',
 };

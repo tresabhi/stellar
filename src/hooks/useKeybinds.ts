@@ -3,13 +3,14 @@ import {
   deletePartsBySelection,
   redo,
   translatePartsBySelection,
-  undo
+  undo,
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
-import appStore, { AppStore } from 'stores/app';
+import appStore from 'stores/app';
 import blueprintStore from 'stores/blueprint';
+import settingsStore, { SettingsStore } from 'stores/settings';
 
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'layout',
@@ -39,8 +40,8 @@ const useKeybinds = () => {
     bind('alt+1', (event) => {
       event?.preventDefault();
 
-      appStore.setState(
-        produce((draft: AppStore) => {
+      settingsStore.setState(
+        produce((draft: SettingsStore) => {
           draft.layout.leftSideBar.visible = !draft.layout.leftSideBar.visible;
         }),
       );
@@ -49,8 +50,8 @@ const useKeybinds = () => {
     bind('alt+2', (event) => {
       event?.preventDefault();
 
-      appStore.setState(
-        produce((draft: AppStore) => {
+      settingsStore.setState(
+        produce((draft: SettingsStore) => {
           draft.layout.rightSideBar.visible =
             !draft.layout.rightSideBar.visible;
         }),
