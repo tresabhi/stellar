@@ -1,7 +1,7 @@
 import {
   getPartByID,
   mutateBlueprint,
-  mutatePartsByIDs,
+  mutatePartsByIDs
 } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
 import { PartID, PartIDs } from 'types/Parts';
@@ -110,10 +110,6 @@ export const togglePartsSelection = (IDs: PartIDs) => {
 };
 
 export const getPartDirection = (startID: PartID, endID: PartID): -1 | 1 => {
-  // return startID.some((startRoute, index) => endID[index] > startRoute)
-  //   ? 1
-  //   : -1;
-
   // TODO: make this functional
 
   return 1;

@@ -6,7 +6,7 @@ import { DefaultPartData, PartWithMeta } from './Default';
 
 export interface Group extends PartWithMeta {
   n: 'Group';
-  parts: PartIDs;
+  partOrder: PartIDs;
 }
 
 export const GroupData: Group = {
@@ -16,7 +16,7 @@ export const GroupData: Group = {
     label: 'Group',
   },
   n: 'Group',
-  parts: [],
+  partOrder: [],
 };
 
 const GroupLayoutComponent = memo(() => <mesh />, compareIDProps);

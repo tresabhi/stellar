@@ -107,7 +107,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   let Icon = getPartModule(initialState.n, true).Icon;
 
   if (initialState.n === 'Group') {
-    childParts = initialState.parts.map((part) => {
+    childParts = initialState.partOrder.map((part) => {
       return (
         <Listing key={`part-${ID}`} ID={ID} indentation={indentation + 1} />
       );

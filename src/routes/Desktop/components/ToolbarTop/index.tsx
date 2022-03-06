@@ -3,11 +3,12 @@ import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useFile from 'hooks/useFile';
 import produce from 'immer';
-import { newBlueprint } from 'interfaces/blueprint';
+import { insertPart, newBlueprint } from 'interfaces/blueprint';
 import { random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import appStore from 'stores/app';
 import settingsStore, { SettingsStore } from 'stores/settings';
+import { AnyPartName } from 'types/Parts';
 import reviver from 'utilities/reviver';
 import styles from './index.module.scss';
 
@@ -56,6 +57,13 @@ const ToolBarTop: FC = () => {
   const isTabStaging = tab === 'staging';
   const isTabSimulation = tab === 'simulation';
   const isTabRendering = tab === 'rendering';
+
+  const adder = (name: AnyPartName) => {
+    return () => insertPart(name);
+  };
+
+  // wonderful grown-up easter egg
+  const wonderfulGrownUp = random(0, 999, false) === 0;
 
   return (
     <div className={styles['toolbar-top']}>
@@ -127,10 +135,14 @@ const ToolBarTop: FC = () => {
         </ControlMenu.Button>
         <ControlMenu.Button label="Add">
           <ContextMenu.Container>
-            <ContextMenu.Extension disabled label="Structural">
+            <ContextMenu.Extension label="Structural">
               <ContextMenu.Container>
-                <ContextMenu.Button>Fuel Tank</ContextMenu.Button>
-                <ContextMenu.Button>Structural Part</ContextMenu.Button>
+                <ContextMenu.Button onClick={adder('Fuel Tank')}>
+                  Fuel Tank
+                </ContextMenu.Button>
+                <ContextMenu.Button disabled>
+                  Structural Part
+                </ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
             <ContextMenu.Extension disabled label="Propulsion">
@@ -189,14 +201,11 @@ const ToolBarTop: FC = () => {
             <ContextMenu.Button to="https://discord.gg/nDt7AjGJQH/">
               Discord
             </ContextMenu.Button>
-            {
-              // wonderful grown-up easter egg
-              random(0, 999, false) === 0 ? (
-                <ContextMenu.Button disabled>
-                  "You'll make a wonderful grown-up!"
-                </ContextMenu.Button>
-              ) : undefined
-            }
+            {wonderfulGrownUp ? (
+              <ContextMenu.Button disabled>
+                "You'll make a wonderful grown-up!"
+              </ContextMenu.Button>
+            ) : null}
           </ContextMenu.Container>
         </ControlMenu.Button>
       </ControlMenu.Container>

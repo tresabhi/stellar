@@ -1,14 +1,16 @@
 import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isUndefined, merge } from 'lodash';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
+import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
-import { AnyPart, PartID, PartIDs } from 'types/Parts';
+import { AnyPart, AnyPartName, PartID, PartIDs } from 'types/Parts';
+import { v4 as UUIDV4 } from 'uuid';
 import { Blueprint, VanillaBlueprint } from '../types/Blueprint';
-import { importifyParts } from './part';
+import { getPartModule, importifyParts } from './part';
 
 // todo: make this data driven
 // 0 is infinite undo/redo limit
@@ -237,4 +239,40 @@ export const redo = () => {
       draft.index = Math.min(draft.patches.length - 1, draft.index + 1);
     }),
   );
+};
+
+const createNewPart = (partName: AnyPartName) => {
+  const partModule = getPartModule(partName);
+
+  if (partModule) {
+    let newPart = cloneDeep(partModule.data);
+    return newPart;
+  }
+};
+
+export const insertPart = (
+  partName: AnyPartName,
+  parentID?: PartID,
+  index = 0,
+) => {
+  mutateBlueprint((draft) => {
+    const partModule = getPartModule(partName);
+
+    if (partModule) {
+      const partID = UUIDV4();
+      const newPart = createNewPart(partName)!;
+
+      if (parentID) {
+        const parentPart = getPartByID(parentID, draft) as Group;
+
+        if (parentPart) {
+          parentPart.partOrder.splice(index, 0, partID);
+          draft.parts.set(partID, newPart);
+        }
+      } else {
+        draft.partOrder.splice(index, 0, partID);
+        draft.parts.set(partID, newPart);
+      }
+    }
+  });
 };
