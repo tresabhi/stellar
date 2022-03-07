@@ -64,27 +64,14 @@ _❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it
   - Functionality: [Typescript](https://www.typescriptlang.org/) ([XML](https://www.typescriptlang.org/docs/handbook/jsx.html))
   - Styling: [SASS](https://sass-lang.com/) ([scss](https://sass-lang.com/documentation/syntax#scss))
 
-## 🐒 Major Dependencies
-
-| Name                                                          | Usage                                                                   |
-| ------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [React Three Fiber](https://npmjs.org/@react-three/fiber/)    | ThreeJS based declarative 3D renderer                                   |
-| [Drei](https://npmjs.org/@react-three/drei)                   | React Three Fiber helper tools                                          |
-| [Lodash](https://npmjs.org/lodash/)                           | Useful Javascript methods                                               |
-| [Node Sass](https://npmjs.org/node-sass/)                     | Sass compiler for Node dev. environment                                 |
-| [React](https://npmjs.org/react/)                             | Main framework/library                                                  |
-| [React Device Detect](https://npmjs.org/react-device-detect/) | Detects type of device                                                  |
-| [React DOM](https://npmjs.org/react-dom/)                     | Helps access the vanilla HTML DOM                                       |
-| [React Router DOM](https://npmjs.org/react-router-dom/)       | Routes URLs to different pages                                          |
-| [React Scripts](https://npmjs.org/react-scripts/)             | Provides scripts for testing, compiling, etc. for the React environment |
-| [Three](https://npmjs.org/three/)                             | WebGL rendering library                                                 |
-| [Typescript](https://npmjs.org/typescript/)                   | Typescript language compiler for Nod dev. environment                   |
-
 ## 👉 Main Built-in commands
 
-| Command           | Use                                            |
-| ----------------- | ---------------------------------------------- |
-| `yarn run start`  | Start hosting dev. build on local host         |
-| `yarn run build`  | Compiles code into optimized development build |
-| `yarn run test`   | Runs all `*.test.ts` / `*.test.tsx` files      |
-| `yarn run format` | Beautifies all intended files in workspace     |
+| Command         | Use                                            |
+| --------------- | ---------------------------------------------- |
+| `yarn start`    | Start hosting dev. build on local host         |
+| `yarn build`    | Compiles code into optimized development build |
+| `yarn test`     | Runs all `*.test.ts` / `*.test.tsx` files      |
+| `yarn format`   | Beautifies all intended files in workspace     |
+| `yarn depcheck` | Finds all unused dependencies                  |
+| `yarn host`     | Hosts the production build                     |
+| `yarn host:new` | Hosts a new compiled production build          |

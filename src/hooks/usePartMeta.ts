@@ -6,7 +6,7 @@ import { BoxHelper, Group, Mesh } from 'three';
 import { PartID } from 'types/Parts';
 
 const usePartMeta = (ID: PartID, mesh: MutableRefObject<Mesh | Group>) => {
-  const helper = useHelper(mesh, BoxHelper, 'dodgerblue');
+  const helper = useHelper(mesh, BoxHelper, 'purple');
 
   useEffect(() => {
     subscribeToPart(

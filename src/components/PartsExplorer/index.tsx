@@ -48,9 +48,9 @@ interface ListingProps {
 }
 export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const [expanded, setExpanded] = useState(false);
-  const listingRef = useRef<HTMLDivElement>(null!);
-  const buttonRef = useRef<HTMLButtonElement>(null!);
-  const inputRef = useRef<HTMLInputElement>(null!);
+  const listingRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const initialState = getPart(ID);
 
   useEffect(() => {
@@ -58,9 +58,9 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       ID,
       (selected) => {
         if (selected) {
-          listingRef.current.classList.add(styles.selected);
+          listingRef.current?.classList.add(styles.selected);
         } else {
-          listingRef.current.classList.remove(styles.selected);
+          listingRef.current?.classList.remove(styles.selected);
         }
       },
       (state: PartWithMeta) => state.meta.selected,
@@ -86,18 +86,19 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   };
   const handleLabelMouseDown = (event: MouseEvent<HTMLInputElement>) => {
     event.preventDefault();
-    buttonRef.current.focus();
+    buttonRef.current?.focus();
   };
   const handleLabelDoubleClick = () => {
-    inputRef.current.focus();
-    inputRef.current.select();
+    inputRef.current?.focus();
+    inputRef.current?.select();
   };
   const handleLabelBlur = () => {
-    inputRef.current.value = inputRef.current.value.trim();
-    mutatePart(ID, { meta: { label: inputRef.current.value } });
+    if (inputRef.current)
+      inputRef.current.value = inputRef.current.value.trim();
+    mutatePart(ID, { meta: { label: inputRef.current?.value } });
   };
   const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') buttonRef.current.focus();
+    if (event.key === 'Enter') buttonRef.current?.focus();
   };
 
   let Icon = getPartModule(initialState.n, true).Icon;

@@ -1,9 +1,11 @@
 import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
+import useUnitInputController from 'hooks/useUnitInputController';
 import produce from 'immer';
-import { getPart } from 'interfaces/blueprint';
+import { getPart, mutateBlueprint } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
+import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
 import { AnyPartName, PartIDs } from 'types/Parts';
@@ -12,6 +14,7 @@ import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
+  const initialBlueprintStore = blueprintStore.getState();
   const partition = settingsStore(
     (state) => state.layout.rightSideBar.partition,
   );
@@ -24,6 +27,16 @@ const RightSideBar = () => {
   );
   const isPartitionProperties = partition === 'properties';
   const isPartitionInspect = partition === 'inspect';
+  const centerInputRef = useRef<HTMLInputElement>(null);
+
+  useUnitInputController(centerInputRef, initialBlueprintStore.center, {
+    onChange: (value) => {
+      mutateBlueprint((draft) => {
+        draft.center = value;
+      });
+    },
+    focusOnParentClick: true,
+  });
 
   const handlePropertiesClick = () =>
     settingsStore.setState(
@@ -108,9 +121,12 @@ const RightSideBar = () => {
             propertyItems
           ) : (
             <PropertiesExplorer.Group>
-              <PropertiesExplorer.Title>
-                Nothing Selected
-              </PropertiesExplorer.Title>
+              <PropertiesExplorer.Title>Canvas</PropertiesExplorer.Title>
+              <PropertiesExplorer.Row>
+                <PropertiesExplorer.NamedInput ref={centerInputRef} label="C" />
+                <PropertiesExplorer.NamedInput label="X" />
+                <PropertiesExplorer.NamedInput label="Y" />
+              </PropertiesExplorer.Row>
             </PropertiesExplorer.Group>
           )}
         </PropertiesExplorer.Container>

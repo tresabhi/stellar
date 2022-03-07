@@ -35,6 +35,7 @@ const usePropertyController = <S>(
       mutateParts(IDs, set(value));
       mergedControllerOptions.onChange(value);
     },
+    focusOnParentClick: true,
   });
 
   return inputRef;

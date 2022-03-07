@@ -1,6 +1,6 @@
 import { GroupProps } from '@react-three/fiber';
-import { FC } from 'react';
-import { Color, DoubleSide } from 'three';
+import { forwardRef } from 'react';
+import { Color, DoubleSide, Mesh } from 'three';
 
 interface InfiniteGridHelperProps extends GroupProps {
   size1?: number;
@@ -12,45 +12,48 @@ interface InfiniteGridHelperProps extends GroupProps {
 /**
  * Thanks, Fyrestar, for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
  */
-const InfiniteGridHelper: FC<InfiniteGridHelperProps> = ({
-  size1 = 10,
-  size2 = 100,
-  color = new Color('white'),
-  distance = 8000,
-  axes = 'xzy',
-  ...props
-}) => {
-  const planeAxes = axes.slice(0, 2);
+const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
+  (
+    {
+      size1 = 10,
+      size2 = 100,
+      color = new Color('white'),
+      axes = 'xzy',
+      ...props
+    },
+    ref,
+  ) => {
+    const planeAxes = axes.slice(0, 2);
 
-  return (
-    // @ts-ignore
-    <mesh {...props} frustumCulled={false}>
-      <shaderMaterial
-        args={[
-          {
-            side: DoubleSide,
-            uniforms: {
-              uSize1: { value: size1 },
-              uSize2: { value: size2 },
-              uColor: { value: color },
-              uDistance: { value: distance },
-            },
-            extensions: { derivatives: true },
-            transparent: true,
+    return (
+      // @ts-ignore
+      <mesh {...props} ref={ref} frustumCulled={false}>
+        <shaderMaterial
+          args={[
+            {
+              side: DoubleSide,
+              uniforms: {
+                uSize1: { value: size1 },
+                uSize2: { value: size2 },
+                uColor: { value: color },
+                uDistance: { value: 1e4 },
+              },
+              extensions: { derivatives: true },
+              transparent: true,
 
-            vertexShader: `
+              vertexShader: `
               varying vec3 worldPosition;
               uniform float uDistance;
 
               void main() {
-                vec3 pos = position.${axes} * uDistance * 1.5;
+                vec3 pos = position.${axes} * uDistance;
                 pos.${planeAxes} += cameraPosition.${planeAxes};
                 worldPosition = pos;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
               }
             `,
 
-            fragmentShader: `
+              fragmentShader: `
               varying vec3 worldPosition;
               uniform float uSize1;
               uniform float uSize2;
@@ -66,22 +69,23 @@ const InfiniteGridHelper: FC<InfiniteGridHelperProps> = ({
               }
 
               void main() {
-                float d = 1.0 - min(distance(cameraPosition.${planeAxes}, worldPosition.${planeAxes}) / uDistance, 1.0);
+                float d = 1.0;
                 float g1 = getGrid(uSize1);
                 float g2 = getGrid(uSize2);
 
-                gl_FragColor = vec4(uColor.rgb, mix(g2, g1, g1) * pow(d, 3.0));
+                gl_FragColor = vec4(uColor.rgb, mix(g2, g1, g1));
                 gl_FragColor.a = mix(0.5 * gl_FragColor.a, gl_FragColor.a, g2);
 
                 if ( gl_FragColor.a <= 0.0 ) discard;
               }
             `,
-          },
-        ]}
-      />
-      <planeBufferGeometry />
-    </mesh>
-  );
-};
+            },
+          ]}
+        />
+        <planeBufferGeometry />
+      </mesh>
+    );
+  },
+);
 
 export default InfiniteGridHelper;
