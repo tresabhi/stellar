@@ -79,47 +79,59 @@ export const deletePartsBySelection = () => {
   });
 };
 
-export const getPartByID = (ID: PartID, state?: Blueprint) => {
+export const getPart = (ID: PartID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
   return blueprintState.parts.get(ID);
 };
 
-export const mutatePartByID = (
+export const getParentID = (ID: PartID, state?: Blueprint) => {
+  const blueprintState = state ?? blueprintStore.getState();
+  const part = getPart(ID, blueprintState);
+
+  if (part) return part.meta.parent;
+};
+
+export const getParent = (ID: PartID, state?: Blueprint) => {
+  const parentID = getParentID(ID);
+  if (parentID) return getPart(parentID, state);
+};
+
+export const mutatePart = (
   ID: PartID,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
-) => mutatePartsByIDs([ID], newState, state);
+) => mutateParts([ID], newState, state);
 
-export const mutatePartsByIDs = (
+export const mutateParts = (
   IDs: PartIDs,
   newState: DeepPartial<AnyPart>,
   state?: Blueprint,
 ) => {
   if (state) {
     IDs.forEach((ID) => {
-      let part = getPartByID(ID, state);
+      let part = getPart(ID, state);
       merge(part, newState);
     });
   } else {
     mutateBlueprint((draft) => {
-      mutatePartsByIDs(IDs, newState, draft);
+      mutateParts(IDs, newState, draft);
     });
   }
 };
 
-export const getReactivePartByID = <T extends AnyPart, S>(
+export const getReactivePart = <T extends AnyPart, S>(
   ID: PartID,
   slicer?: (state: T) => S,
 ) => {
   return blueprintStore((state) =>
-    slicer ? slicer(getPartByID(ID, state) as T) : getPartByID(ID, state),
+    slicer ? slicer(getPart(ID, state) as T) : getPart(ID, state),
   );
 };
 
-export const translatePartsBySelection = (x: number, y: number) => {
+export const translateParts = (IDs: PartIDs, x: number, y: number) => {
   mutateBlueprint((draft) => {
-    draft.selections.current.forEach((selection) => {
-      let part = getPartByID(selection, draft) as PartWithTransformations &
+    IDs.forEach((selection) => {
+      let part = getPart(selection, draft) as PartWithTransformations &
         PartWithMeta;
 
       part.p.x += x;
@@ -127,6 +139,9 @@ export const translatePartsBySelection = (x: number, y: number) => {
     });
   });
 };
+
+export const translatePartsBySelection = (x: number, y: number) =>
+  translateParts(blueprintStore.getState().selections.current, x, y);
 
 interface SubscribeToPartOptions {
   fireInitially: boolean;
@@ -153,7 +168,7 @@ export const subscribeToPart = <T, S>(
   };
 
   const unsubscribe = blueprintStore.subscribe((state) => {
-    const part = getPartByID(ID, state);
+    const part = getPart(ID, state);
 
     if (part) {
       if (slicer) {
@@ -167,12 +182,10 @@ export const subscribeToPart = <T, S>(
   if (mergedOptions.fireInitially) {
     if (slicer) {
       compoundHandler(
-        slicer(getPartByID(ID, blueprintStore.getState()) as unknown as T),
+        slicer(getPart(ID, blueprintStore.getState()) as unknown as T),
       );
     } else {
-      compoundHandler(
-        getPartByID(ID, blueprintStore.getState()) as unknown as S,
-      );
+      compoundHandler(getPart(ID, blueprintStore.getState()) as unknown as S);
     }
   }
 };
@@ -263,7 +276,7 @@ export const insertPart = (
       const newPart = createNewPart(partName)!;
 
       if (parentID) {
-        const parentPart = getPartByID(parentID, draft) as Group;
+        const parentPart = getPart(parentID, draft) as Group;
 
         if (parentPart) {
           parentPart.partOrder.splice(index, 0, partID);
@@ -275,4 +288,18 @@ export const insertPart = (
       }
     }
   });
+};
+
+export const getPartIndex = (
+  partID: PartID,
+  parentID?: PartID,
+  state?: Blueprint,
+) => {
+  const parent = parentID
+    ? getPart(parentID)
+    : state ?? blueprintStore.getState();
+
+  if (parentID ? parent && (parent as AnyPart).n === 'Group' : true) {
+    return (parent as Group | Blueprint).partOrder.indexOf(partID);
+  }
 };

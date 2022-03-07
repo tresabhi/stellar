@@ -1,28 +1,38 @@
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
+import { clientsClaim } from 'workbox-core';
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
-const NETWORK_FIRST_PATHS = ['/manifest.json'];
-
+clientsClaim();
 precacheAndRoute(window.self.__WB_MANIFEST);
 
-// TODO: probably sort strategies based on request types
+const NETWORK_FIRST_PATHS = ['/manifest.json', '/service-worker.js'];
+const responsePlugin = new CacheableResponsePlugin({ statuses: [200] });
 
-// The latest files if possible
 registerRoute(
   ({ url }) => NETWORK_FIRST_PATHS.includes(url.pathname),
   new NetworkFirst({
-    cacheName: 'network-first',
-    plugins: [new CacheableResponsePlugin({ statuses: [200] })],
+    cacheName: 'network-only',
+    plugins: [responsePlugin],
   }),
 );
 
-// Use cached, but update to latest is possible
-registerRoute(
-  ({ url }) => !NETWORK_FIRST_PATHS.includes(url.pathname),
-  new StaleWhileRevalidate({
-    cacheName: 'stale',
-    plugins: [new CacheableResponsePlugin({ statuses: [200] })],
-  }),
-);
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('update')) {
+  registerRoute(
+    () => true,
+    new NetworkFirst({
+      cacheName: 'update',
+      plugins: [responsePlugin],
+    }),
+  );
+} else {
+  registerRoute(
+    ({ url }) => !NETWORK_FIRST_PATHS.includes(url.pathname),
+    new StaleWhileRevalidate({
+      cacheName: 'stale',
+      plugins: [responsePlugin],
+    }),
+  );
+}

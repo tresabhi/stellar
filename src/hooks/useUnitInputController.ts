@@ -2,7 +2,7 @@ import { merge } from 'lodash';
 import { simplify } from 'mathjs';
 import { RefObject, useEffect, useRef } from 'react';
 
-export const MIXED_SYMBOL = '~';
+const MIXED_SYMBOL = '~';
 
 export interface UseUnitInputControllerOptions {
   prefix: string;

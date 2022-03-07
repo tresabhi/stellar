@@ -1,8 +1,4 @@
-import {
-  getPartByID,
-  mutateBlueprint,
-  mutatePartsByIDs,
-} from 'interfaces/blueprint';
+import { getPart, mutateBlueprint, mutateParts } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
 import { PartID, PartIDs } from 'types/Parts';
 
@@ -13,7 +9,7 @@ export const selectParts = (IDs: PartIDs) => {
 
   mutateBlueprint((draft) => {
     IDs.forEach((ID) => {
-      const part = getPartByID(ID, draft);
+      const part = getPart(ID, draft);
 
       if (part && !part.meta.selected) {
         part.meta.selected = true;
@@ -30,12 +26,8 @@ export const selectPartOnly = (ID: PartID) => selectPartsOnly([ID]);
 
 export const selectPartsOnly = (IDs: PartIDs) => {
   mutateBlueprint((draft) => {
-    mutatePartsByIDs(
-      draft.selections.current,
-      { meta: { selected: false } },
-      draft,
-    );
-    mutatePartsByIDs(IDs, { meta: { selected: true } }, draft);
+    mutateParts(draft.selections.current, { meta: { selected: false } }, draft);
+    mutateParts(IDs, { meta: { selected: true } }, draft);
 
     draft.selections.current = IDs;
     draft.selections.last = IDs[IDs.length - 1];
@@ -53,7 +45,7 @@ export const unselectPart = (ID: PartID) => unselectParts([ID]);
 export const unselectParts = (IDs: PartIDs) => {
   mutateBlueprint((draft) => {
     IDs.forEach((ID) => {
-      const part = getPartByID(ID, draft);
+      const part = getPart(ID, draft);
       if (part) part.meta.selected = false;
     });
 
@@ -65,11 +57,7 @@ export const unselectParts = (IDs: PartIDs) => {
 
 export const unselectAllParts = () => {
   mutateBlueprint((draft) => {
-    mutatePartsByIDs(
-      draft.selections.current,
-      { meta: { selected: false } },
-      draft,
-    );
+    mutateParts(draft.selections.current, { meta: { selected: false } }, draft);
     draft.selections.current = [];
   });
 };
@@ -82,7 +70,7 @@ export const togglePartsSelection = (IDs: PartIDs) => {
 
   mutateBlueprint((draft) => {
     IDs.forEach((ID) => {
-      const part = getPartByID(ID, draft);
+      const part = getPart(ID, draft);
 
       if (part) {
         if (part.meta.selected) {

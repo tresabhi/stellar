@@ -2,13 +2,9 @@ import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-dow
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import useSelectionHandler, {
-  UseListingSelectionHandler
+  UseListingSelectionHandler,
 } from 'hooks/useSelectionHandler';
-import {
-  getPartByID,
-  mutatePartByID,
-  subscribeToPart
-} from 'interfaces/blueprint';
+import { getPart, mutatePart, subscribeToPart } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { PartWithMeta } from 'parts/Default';
 import {
@@ -19,7 +15,7 @@ import {
   MouseEvent,
   useEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
@@ -55,7 +51,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const listingRef = useRef<HTMLDivElement>(null!);
   const buttonRef = useRef<HTMLButtonElement>(null!);
   const inputRef = useRef<HTMLInputElement>(null!);
-  const initialState = getPartByID(ID);
+  const initialState = getPart(ID);
 
   useEffect(() => {
     subscribeToPart(
@@ -98,7 +94,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   };
   const handleLabelBlur = () => {
     inputRef.current.value = inputRef.current.value.trim();
-    mutatePartByID(ID, { meta: { label: inputRef.current.value } });
+    mutatePart(ID, { meta: { label: inputRef.current.value } });
   };
   const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') buttonRef.current.focus();

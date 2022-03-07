@@ -2,7 +2,7 @@ import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import DesktopCanvasControls from 'components/DesktopCanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
-import { getPartByID } from 'interfaces/blueprint';
+import { getPart } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import { unselectAllParts } from 'interfaces/selection';
 import { useRef } from 'react';
@@ -17,16 +17,14 @@ export const LayoutRenderer = () => {
   const regressAmount = settingsStore(
     (state) => state.performance.regress_amount,
   );
-  const allAxisControls = settingsStore(
-    (state) => state.debug.orbit_controls,
-  );
+  const allAxisControls = settingsStore((state) => state.debug.orbit_controls);
   const initialData = blueprintStore.getState();
   const tempRef = useRef<Group>(null);
   const state = blueprintStore((state) => state.partOrder, compareIDArrays);
   let partMeshes: JSX.Element[] = [];
 
   state.forEach((ID) => {
-    const part = getPartByID(ID);
+    const part = getPart(ID);
     if (part) {
       const partModule = getPartModule(part.n);
       if (partModule) {

@@ -6,7 +6,7 @@ import {
   AnyPartMap,
   Blueprint,
   SavifiedBlueprint,
-  VanillaBlueprint
+  VanillaBlueprint,
 } from 'types/Blueprint';
 import {
   AnyPart,
@@ -14,7 +14,7 @@ import {
   AnyVanillaPart,
   PartID,
   PartIDs,
-  PartModule
+  PartModule,
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
 
@@ -83,10 +83,10 @@ export const importifyParts = (
 
 // export const savifyPartData = (partData: AnyPartType, clone = true) => {};
 
-export function getPartModule<D extends boolean>(
+export const getPartModule = <D extends boolean>(
   partName: AnyPartName,
   useDefault?: D,
-): D extends true ? PartModule : PartModule | undefined {
+): D extends true ? PartModule : PartModule | undefined => {
   const module: PartModule | undefined = (NAMED_PART_MODULES as any)[partName];
 
   if (useDefault) {
@@ -94,4 +94,4 @@ export function getPartModule<D extends boolean>(
   } else {
     return module!;
   }
-}
+};

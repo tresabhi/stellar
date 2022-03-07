@@ -6,7 +6,7 @@ import usePropertyController from 'hooks/usePropertyController';
 import useSelectionHandler, {
   UseMeshSelectionHandler,
 } from 'hooks/useSelectionHandler';
-import { getPartByID, subscribeToPart } from 'interfaces/blueprint';
+import { getPart, subscribeToPart } from 'interfaces/blueprint';
 import { FC, memo, useEffect, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
 import {
@@ -112,7 +112,7 @@ const temp_material = new MeshStandardMaterial({
 
 export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
   ({ ID }) => {
-    const initialState = getPartByID(ID) as FuelTank;
+    const initialState = getPart(ID) as FuelTank;
     const mesh = useRef<Mesh>(null!);
     const selectionHandler = useSelectionHandler(
       ID,

@@ -2,7 +2,7 @@ import * as Partition from 'components/Partitions';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import * as SideBar from 'components/SideBar';
 import produce from 'immer';
-import { getPartByID } from 'interfaces/blueprint';
+import { getPart } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
@@ -40,7 +40,7 @@ const RightSideBar = () => {
 
   let selectionsByPartNames: Map<AnyPartName, PartIDs> = new Map();
   selections.forEach((selection) => {
-    const part = getPartByID(selection);
+    const part = getPart(selection);
 
     if (part) {
       if (selectionsByPartNames.has(part.n)) {

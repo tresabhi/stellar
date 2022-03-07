@@ -3,10 +3,16 @@ import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import useFile from 'hooks/useFile';
 import produce from 'immer';
-import { insertPart, newBlueprint } from 'interfaces/blueprint';
-import { random } from 'lodash';
+import {
+  getParentID,
+  getPartIndex,
+  insertPart,
+  newBlueprint,
+} from 'interfaces/blueprint';
+import { isUndefined, random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import appStore from 'stores/app';
+import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
 import { AnyPartName } from 'types/Parts';
 import reviver from 'utilities/reviver';
@@ -59,7 +65,14 @@ const ToolBarTop: FC = () => {
   const isTabRendering = tab === 'rendering';
 
   const adder = (name: AnyPartName) => {
-    return () => insertPart(name);
+    return () => {
+      const lastPartID = blueprintStore.getState().selections.last;
+      if (lastPartID) {
+        const parentID = getParentID(lastPartID);
+        const index = getPartIndex(lastPartID, parentID);
+        insertPart(name, parentID, isUndefined(index) ? 0 : index + 1);
+      }
+    };
   };
 
   // wonderful grown-up easter egg
