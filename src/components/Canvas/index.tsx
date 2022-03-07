@@ -40,7 +40,11 @@ export const LayoutRenderer = () => {
       ref={canvasRef}
       mode="concurrent"
       orthographic
-      camera={{ zoom: 16, position: [-initialData.center, 0, 100] }}
+      camera={{
+        zoom: 16,
+        position: [-initialData.center, 0, 100],
+        rotation: [0, 0, 0],
+      }}
       className={styles['editing-canvas']}
       performance={{ min: regressAmount }}
       onPointerMissed={unselectAllParts}
