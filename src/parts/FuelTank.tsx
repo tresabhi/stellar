@@ -1,13 +1,14 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePartMeta from 'hooks/usePartMeta';
+import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
 import usePropertyController from 'hooks/usePropertyController';
 import useSelectionHandler, {
   UseMeshSelectionHandler,
 } from 'hooks/useSelectionHandler';
-import { getPart, subscribeToPart } from 'interfaces/blueprint';
-import { FC, memo, useEffect, useRef } from 'react';
+import { getPart } from 'interfaces/blueprint';
+import { FC, memo, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
 import {
   PartModule,
@@ -123,26 +124,22 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       p: { y: state.p.y + (state as FuelTank).N.height / 2 },
     }));
     usePartMeta(ID, mesh);
-
-    useEffect(() => {
-      subscribeToPart(
-        ID,
-        (N) => {
-          mesh.current.geometry = new CylinderGeometry(
-            N.width_b / 2,
-            N.width_a / 2,
-            N.height,
-            12,
-            1,
-            true,
-            Math.PI / -2,
-            Math.PI,
-          );
-        },
-        (state: FuelTank) => state.N,
-        { fireInitially: true, unsubscribeOnUnmount: true },
-      );
-    }, [ID]);
+    usePartProperty(
+      ID,
+      (state: FuelTank) => state.N,
+      (N) => {
+        mesh.current.geometry = new CylinderGeometry(
+          N.width_b / 2,
+          N.width_a / 2,
+          N.height,
+          12,
+          1,
+          true,
+          Math.PI / -2,
+          Math.PI,
+        );
+      },
+    );
 
     return (
       <mesh
