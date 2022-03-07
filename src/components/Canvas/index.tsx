@@ -18,12 +18,12 @@ export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
   const infiniteGridRef = useRef<Mesh>(null!);
   const gridRef = useRef<GridHelper>(null!);
+  const meshRef = useRef<Group>(null!);
   const regressAmount = settingsStore(
     (state) => state.performance.regress_amount,
   );
   const allAxisControls = settingsStore((state) => state.debug.orbit_controls);
   const initialState = blueprintStore.getState();
-  const tempRef = useRef<Group>(null);
   const state = blueprintStore((state) => state.partOrder, compareIDArrays);
   let partMeshes: JSX.Element[] = [];
 
@@ -46,6 +46,14 @@ export const LayoutRenderer = () => {
         gridRef.current.position.setX(value);
         infiniteGridRef.current.position.setX(value % MAJOR_MARK);
       },
+    );
+    blueprintStore.subscribe(
+      (state) => state.offset.x,
+      (value) => meshRef.current.position.setX(value),
+    );
+    blueprintStore.subscribe(
+      (state) => state.offset.y,
+      (value) => meshRef.current.position.setY(value),
     );
   }, []);
 
@@ -86,7 +94,7 @@ export const LayoutRenderer = () => {
       />
 
       <group
-        ref={tempRef}
+        ref={meshRef}
         position={[initialState.offset.x, initialState.offset.y, 0]}
       >
         {partMeshes}

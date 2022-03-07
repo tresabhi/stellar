@@ -28,11 +28,29 @@ const RightSideBar = () => {
   const isPartitionProperties = partition === 'properties';
   const isPartitionInspect = partition === 'inspect';
   const centerInputRef = useRef<HTMLInputElement>(null);
+  const offsetXInputRef = useRef<HTMLInputElement>(null);
+  const offsetYInputRef = useRef<HTMLInputElement>(null);
 
   useUnitInputController(centerInputRef, initialBlueprintStore.center, {
     onChange: (value) => {
       mutateBlueprint((draft) => {
         draft.center = value;
+      });
+    },
+    focusOnParentClick: true,
+  });
+  useUnitInputController(offsetXInputRef, initialBlueprintStore.offset.x, {
+    onChange: (value) => {
+      mutateBlueprint((draft) => {
+        draft.offset.x = value;
+      });
+    },
+    focusOnParentClick: true,
+  });
+  useUnitInputController(offsetYInputRef, initialBlueprintStore.offset.y, {
+    onChange: (value) => {
+      mutateBlueprint((draft) => {
+        draft.offset.y = value;
       });
     },
     focusOnParentClick: true,
@@ -124,8 +142,14 @@ const RightSideBar = () => {
               <PropertiesExplorer.Title>Canvas</PropertiesExplorer.Title>
               <PropertiesExplorer.Row>
                 <PropertiesExplorer.NamedInput ref={centerInputRef} label="C" />
-                <PropertiesExplorer.NamedInput label="X" />
-                <PropertiesExplorer.NamedInput label="Y" />
+                <PropertiesExplorer.NamedInput
+                  ref={offsetXInputRef}
+                  label="X"
+                />
+                <PropertiesExplorer.NamedInput
+                  ref={offsetYInputRef}
+                  label="Y"
+                />
               </PropertiesExplorer.Row>
             </PropertiesExplorer.Group>
           )}
