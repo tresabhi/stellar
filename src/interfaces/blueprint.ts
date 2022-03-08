@@ -4,7 +4,7 @@ import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore,
+  BlueprintPatchHistoryStore
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartName, PartID, PartIDs } from 'types/Parts';
@@ -119,6 +119,29 @@ export const mutateParts = (
   }
 };
 
+export const mutatePartWithoutHistory = (
+  ID: PartID,
+  newState: DeepPartial<AnyPart>,
+  state?: Blueprint,
+) => mutatePartsWithoutHistory([ID], newState, state);
+
+export const mutatePartsWithoutHistory = (
+  IDs: PartIDs,
+  newState: DeepPartial<AnyPart>,
+  state?: Blueprint,
+) => {
+  if (state) {
+    IDs.forEach((ID) => {
+      let part = getPart(ID, state);
+      merge(part, newState);
+    });
+  } else {
+    mutateBlueprintWithoutHistory((draft) => {
+      mutateParts(IDs, newState, draft);
+    });
+  }
+};
+
 export const getReactivePart = <T extends AnyPart, S>(
   ID: PartID,
   slicer?: (state: T) => S,
@@ -190,9 +213,14 @@ export const subscribeToPart = <T, S>(
   }
 };
 
-export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
+export const mutateBlueprint = (
+  producer: (state: Blueprint) => void,
+  lastStateLie?: DeepPartial<Blueprint>,
+) => {
   const [nextState, patches, inversePatches] = produceWithPatches(
-    blueprintStore.getState(),
+    lastStateLie
+      ? merge(blueprintStore.getState(), lastStateLie)
+      : blueprintStore.getState(),
     producer,
   );
 
@@ -219,6 +247,13 @@ export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
       }
     }),
   );
+  blueprintStore.setState(nextState);
+};
+
+export const mutateBlueprintWithoutHistory = (
+  producer: (state: Blueprint) => void,
+) => {
+  const nextState = produce(blueprintStore.getState(), producer);
   blueprintStore.setState(nextState);
 };
 

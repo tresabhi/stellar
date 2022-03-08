@@ -3,6 +3,7 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePartMeta from 'hooks/usePartMeta';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
+import usePartTranslationControls from 'hooks/usePartTranslationControls';
 import usePropertyController from 'hooks/usePropertyController';
 import useSelectionHandler, {
   UseMeshSelectionHandler,
@@ -140,6 +141,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
         );
       },
     );
+    const partTranslationControls = usePartTranslationControls(ID, mesh);
 
     return (
       <mesh
@@ -147,6 +149,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
         material={temp_material}
         position={[0, initialState.N.height / 2, 0]}
         onClick={selectionHandler}
+        {...partTranslationControls}
       />
     );
   },
