@@ -1,4 +1,9 @@
-import { getPart, mutateBlueprint, mutateParts } from 'interfaces/blueprint';
+import {
+  getPart,
+  mutateBlueprint,
+  mutateBlueprintWithoutHistory,
+  mutateParts,
+} from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
 import { Blueprint } from 'types/Blueprint';
 import { PartID, PartIDs } from 'types/Parts';
@@ -34,8 +39,7 @@ export const selectPartsOnly = (IDs: PartIDs, state?: Blueprint) => {
     state.selections.current = IDs;
     state.selections.last = IDs[IDs.length - 1];
   } else {
-    mutateBlueprint((draft) => {
-      // TODO: mutate without history
+    mutateBlueprintWithoutHistory((draft) => {
       selectPartsOnly(IDs, draft);
     });
   }
@@ -69,15 +73,16 @@ export const unselectAllParts = () => {
   });
 };
 
-export const togglePartSelection = (ID: PartID) => togglePartsSelection([ID]);
+export const togglePartSelection = (ID: PartID, state?: Blueprint) =>
+  togglePartsSelection([ID], state);
 
-export const togglePartsSelection = (IDs: PartIDs) => {
+export const togglePartsSelection = (IDs: PartIDs, state?: Blueprint) => {
   let spliceIDs: PartIDs = [];
   let insertIDs: PartIDs = [];
 
-  mutateBlueprint((draft) => {
+  if (state) {
     IDs.forEach((ID) => {
-      const part = getPart(ID, draft);
+      const part = getPart(ID, state);
 
       if (part) {
         if (part.meta.selected) {
@@ -91,14 +96,18 @@ export const togglePartsSelection = (IDs: PartIDs) => {
     });
 
     spliceIDs.forEach((ID) => {
-      forEachRight(draft.selections.current, (selection, index) => {
-        if (isEqual(ID, selection)) draft.selections.current.splice(index, 1);
+      forEachRight(state.selections.current, (selection, index) => {
+        if (isEqual(ID, selection)) state.selections.current.splice(index, 1);
       });
     });
 
-    draft.selections.current.push(...insertIDs);
-    draft.selections.last = IDs[IDs.length - 1];
-  });
+    state.selections.current.push(...insertIDs);
+    state.selections.last = IDs[IDs.length - 1];
+  } else {
+    mutateBlueprintWithoutHistory((draft) => {
+      togglePartsSelection(IDs, draft);
+    });
+  }
 };
 
 export const getPartDirection = (startID: PartID, endID: PartID): -1 | 1 => {

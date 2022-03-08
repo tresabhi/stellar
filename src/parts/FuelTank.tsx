@@ -5,9 +5,6 @@ import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
 import usePartTranslationControls from 'hooks/usePartTranslationControls';
 import usePropertyController from 'hooks/usePropertyController';
-import useSelectionHandler, {
-  UseMeshSelectionHandler,
-} from 'hooks/useSelectionHandler';
 import { getPart } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
@@ -116,10 +113,6 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
   ({ ID }) => {
     const initialState = getPart(ID) as FuelTank;
     const mesh = useRef<Mesh>(null!);
-    const selectionHandler = useSelectionHandler(
-      ID,
-      'mesh',
-    ) as UseMeshSelectionHandler;
 
     usePartTransformations(ID, mesh, (state) => ({
       p: { y: state.p.y + (state as FuelTank).N.height / 2 },
@@ -148,7 +141,6 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
         ref={mesh}
         material={temp_material}
         position={[0, initialState.N.height / 2, 0]}
-        onClick={selectionHandler}
         onPointerDown={onPointerDown}
       />
     );

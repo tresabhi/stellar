@@ -16,7 +16,7 @@ export type UseListingSelectionHandler = (
 ) => void;
 export type UseMeshSelectionHandler = (event: ThreeEvent<MouseEvent>) => void;
 
-// TODO: base return type on type of selection handler
+// TODO: move this into the only component that uses it
 const useSelectionHandler = (ID: PartID, type: UseSelectionHandlerType) => {
   const toggle = () => togglePartSelection(ID);
   const only = () => selectPartOnly(ID);
