@@ -141,7 +141,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
         );
       },
     );
-    const partTranslationControls = usePartTranslationControls(ID, mesh);
+    const onPointerDown = usePartTranslationControls(ID);
 
     return (
       <mesh
@@ -149,7 +149,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
         material={temp_material}
         position={[0, initialState.N.height / 2, 0]}
         onClick={selectionHandler}
-        {...partTranslationControls}
+        onPointerDown={onPointerDown}
       />
     );
   },

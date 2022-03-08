@@ -4,7 +4,7 @@ import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore
+  BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartName, PartID, PartIDs } from 'types/Parts';
@@ -98,46 +98,32 @@ export const getParent = (ID: PartID, state?: Blueprint) => {
 
 export const mutatePart = (
   ID: PartID,
-  newState: DeepPartial<AnyPart>,
+  newState:
+    | DeepPartial<AnyPart>
+    | ((prevState: AnyPart) => DeepPartial<AnyPart>),
   state?: Blueprint,
 ) => mutateParts([ID], newState, state);
 
 export const mutateParts = (
   IDs: PartIDs,
-  newState: DeepPartial<AnyPart>,
+  nextState:
+    | DeepPartial<AnyPart>
+    | ((prevState: AnyPart) => DeepPartial<AnyPart>),
   state?: Blueprint,
 ) => {
   if (state) {
     IDs.forEach((ID) => {
       let part = getPart(ID, state);
-      merge(part, newState);
+
+      if (part)
+        merge(
+          part,
+          typeof nextState === 'function' ? nextState(part) : nextState,
+        );
     });
   } else {
     mutateBlueprint((draft) => {
-      mutateParts(IDs, newState, draft);
-    });
-  }
-};
-
-export const mutatePartWithoutHistory = (
-  ID: PartID,
-  newState: DeepPartial<AnyPart>,
-  state?: Blueprint,
-) => mutatePartsWithoutHistory([ID], newState, state);
-
-export const mutatePartsWithoutHistory = (
-  IDs: PartIDs,
-  newState: DeepPartial<AnyPart>,
-  state?: Blueprint,
-) => {
-  if (state) {
-    IDs.forEach((ID) => {
-      let part = getPart(ID, state);
-      merge(part, newState);
-    });
-  } else {
-    mutateBlueprintWithoutHistory((draft) => {
-      mutateParts(IDs, newState, draft);
+      mutateParts(IDs, nextState, draft);
     });
   }
 };
@@ -268,7 +254,7 @@ export const undo = () => {
         );
       }
 
-      draft.index = Math.max(-1, draft.index - 1);
+      draft.index = Math.max(0, draft.index - 1);
     }),
   );
 };

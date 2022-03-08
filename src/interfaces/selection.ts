@@ -1,5 +1,6 @@
 import { getPart, mutateBlueprint, mutateParts } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
+import { Blueprint } from 'types/Blueprint';
 import { PartID, PartIDs } from 'types/Parts';
 
 export const selectPart = (ID: PartID) => selectParts([ID]);
@@ -22,16 +23,22 @@ export const selectParts = (IDs: PartIDs) => {
   });
 };
 
-export const selectPartOnly = (ID: PartID) => selectPartsOnly([ID]);
+export const selectPartOnly = (ID: PartID, state?: Blueprint) =>
+  selectPartsOnly([ID], state);
 
-export const selectPartsOnly = (IDs: PartIDs) => {
-  mutateBlueprint((draft) => {
-    mutateParts(draft.selections.current, { meta: { selected: false } }, draft);
-    mutateParts(IDs, { meta: { selected: true } }, draft);
+export const selectPartsOnly = (IDs: PartIDs, state?: Blueprint) => {
+  if (state) {
+    mutateParts(state.selections.current, { meta: { selected: false } }, state);
+    mutateParts(IDs, { meta: { selected: true } }, state);
 
-    draft.selections.current = IDs;
-    draft.selections.last = IDs[IDs.length - 1];
-  });
+    state.selections.current = IDs;
+    state.selections.last = IDs[IDs.length - 1];
+  } else {
+    mutateBlueprint((draft) => {
+      // TODO: mutate without history
+      selectPartsOnly(IDs, draft);
+    });
+  }
 };
 
 export const selectPartsFrom = (startID: PartID, endID: PartID) => {};

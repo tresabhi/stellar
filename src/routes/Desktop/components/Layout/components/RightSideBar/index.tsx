@@ -38,6 +38,7 @@ const RightSideBar = () => {
       });
     },
     focusOnParentClick: true,
+    suffix: 'm',
   });
   useUnitInputController(offsetXInputRef, initialBlueprintStore.offset.x, {
     onChange: (value) => {
@@ -46,6 +47,7 @@ const RightSideBar = () => {
       });
     },
     focusOnParentClick: true,
+    suffix: 'm',
   });
   useUnitInputController(offsetYInputRef, initialBlueprintStore.offset.y, {
     onChange: (value) => {
@@ -54,6 +56,7 @@ const RightSideBar = () => {
       });
     },
     focusOnParentClick: true,
+    suffix: 'm',
   });
 
   const handlePropertiesClick = () =>

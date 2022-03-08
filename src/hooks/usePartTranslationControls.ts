@@ -3,110 +3,94 @@ import {
   getPart,
   mutateBlueprint,
   mutateBlueprintWithoutHistory,
-  mutatePartWithoutHistory
+  mutateParts,
 } from 'interfaces/blueprint';
+import { selectPartOnly } from 'interfaces/selection';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
-import { MutableRefObject } from 'react';
-import { Group, Mesh } from 'three';
+import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
-const usePartTranslationControls = (
+const usePartTranslationControls = <
+  T extends PartWithTransformations & PartWithMeta,
+>(
   ID: PartID,
-  mesh: MutableRefObject<Mesh | Group>,
 ) => {
   const canvas = useThree((state) => state.gl.domElement);
   const getMousePos = useMousePos();
 
-  let startMouseX = 0;
-  let startMouseY = 0;
+  let initialMouseX: number;
+  let initialMouseY: number;
   let deltaX = 0;
   let deltaY = 0;
-  let initialPartX = 0;
-  let initialPartY = 0;
-  let selectedInitially = false;
 
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
+  const onPointerUp = (event: PointerEvent) => {
+    event.stopImmediatePropagation();
 
-    canvas.addEventListener('pointerup', handlePointerUp);
-    canvas.addEventListener('pointermove', handlePointerMove);
+    canvas.removeEventListener('pointerup', onPointerUp);
+    canvas.removeEventListener('pointermove', onPointerMove);
 
-    const part = getPart(ID) as PartWithTransformations & PartWithMeta;
-
-    initialPartX = part.p.x;
-    initialPartY = part.p.y;
-    [startMouseX, startMouseY] = getMousePos();
-    selectedInitially = part.meta.selected; // if selected already, move everything
-
-    if (!selectedInitially) {
-      mutatePartWithoutHistory(ID, { meta: { selected: true } });
-    }
-
-    deltaX = 0;
-    deltaY = 0;
+    // undo changes
+    mutateBlueprintWithoutHistory((draft) => {
+      mutateParts(draft.selections.current, (state) => ({
+        p: {
+          x: (state as PartWithTransformations).p.x - deltaX,
+          y: (state as PartWithTransformations).p.y - deltaY,
+        },
+      }));
+    });
+    // apply them again with history
+    mutateBlueprint((draft) => {
+      mutateParts(draft.selections.current, (state) => ({
+        p: {
+          x: (state as PartWithTransformations).p.x + deltaX,
+          y: (state as PartWithTransformations).p.y + deltaY,
+        },
+      }));
+    });
   };
-  const handlePointerMove = () => {
+  const onPointerMove = () => {
     const [mouseX, mouseY] = getMousePos();
-
-    const newDeltaX = snap(mouseX - startMouseX, 1);
-    const newDeltaY = snap(mouseY - startMouseY, 1);
+    const newDeltaX = snap(mouseX - initialMouseX, 1);
+    const newDeltaY = snap(mouseY - initialMouseY, 1);
 
     mutateBlueprintWithoutHistory((draft) => {
-      const part = getPart(ID, draft) as PartWithTransformations | undefined;
-
-      if (part) {
-        part.p.x = part.p.x - deltaX + newDeltaX;
-        part.p.y = part.p.y - deltaY + newDeltaY;
-      }
+      mutateParts(
+        blueprintStore.getState().selections.current,
+        (state) => ({
+          p: {
+            x: (state as PartWithTransformations).p.x - deltaX + newDeltaX,
+            y: (state as PartWithTransformations).p.y - deltaY + newDeltaY,
+          },
+        }),
+        draft,
+      );
     });
 
     deltaX = newDeltaX;
     deltaY = newDeltaY;
   };
-  const handlePointerUp = (event: PointerEvent) => {
-    event.stopPropagation();
-    canvas.removeEventListener('pointerup', handlePointerUp);
-    canvas.removeEventListener('pointermove', handlePointerMove);
+  const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
+    const part = getPart(ID) as T | undefined;
 
-    // TODO: find a way to optimize this?
+    if (part) {
+      event.stopPropagation();
+      canvas.addEventListener('pointerup', onPointerUp);
+      canvas.addEventListener('pointermove', onPointerMove);
 
-    // revert to original state
-    mutateBlueprintWithoutHistory((draft) => {
-      const part = getPart(ID, draft) as
-        | (PartWithTransformations & PartWithMeta)
-        | undefined;
+      [initialMouseX, initialMouseY] = getMousePos();
+      deltaX = 0;
+      deltaY = 0;
 
-      if (part) {
-        part.p.x = initialPartX;
-        part.p.y = initialPartY;
-
-        if (!selectedInitially) {
-          part.meta.selected = false;
-        }
+      if (!part.meta.selected) {
+        mutateBlueprintWithoutHistory((draft) => {
+          selectPartOnly(ID, draft);
+        });
       }
-    });
-
-    // create the new state
-    mutateBlueprint((draft) => {
-      const part = getPart(ID, draft) as
-        | (PartWithTransformations & PartWithMeta)
-        | undefined;
-
-      if (part) {
-        part.p.x = part.p.x + deltaX;
-        part.p.y = part.p.y + deltaY;
-
-        if (!selectedInitially) {
-          part.meta.selected = true;
-        }
-      }
-    });
+    }
   };
 
-  return {
-    onPointerDown: handlePointerDown,
-  };
+  return onPointerDown;
 };
 export default usePartTranslationControls;
