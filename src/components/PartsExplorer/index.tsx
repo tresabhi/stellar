@@ -1,11 +1,14 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import useSelectionHandler, {
-  UseListingSelectionHandler,
-} from 'hooks/useSelectionHandler';
 import { getPart, mutatePart, subscribeToPart } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
+import {
+  selectPartOnly,
+  selectPartsFrom,
+  selectPartsFromOnly,
+  togglePartSelection,
+} from 'interfaces/selection';
 import { PartWithMeta } from 'parts/Default';
 import {
   FC,
@@ -68,11 +71,6 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     );
   }, [ID]);
 
-  const selectionHandler = useSelectionHandler(
-    ID,
-    'listing',
-  ) as UseListingSelectionHandler;
-
   // part was deleted
   if (!initialState) return null;
 
@@ -100,6 +98,33 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') buttonRef.current?.focus();
   };
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (event.ctrlKey) {
+      if (event.shiftKey) {
+        const selectionState = blueprintStore.getState().selections;
+
+        if (selectionState.last) {
+          selectPartsFrom(selectionState.last, ID);
+        } else {
+          selectPartOnly(ID);
+        }
+      } else {
+        togglePartSelection(ID);
+      }
+    } else {
+      if (event.shiftKey) {
+        const selectionState = blueprintStore.getState().selections;
+
+        if (selectionState.last) {
+          selectPartsFromOnly(selectionState.last, ID);
+        } else {
+          selectPartOnly(ID);
+        }
+      } else {
+        selectPartOnly(ID);
+      }
+    }
+  };
 
   let Icon = getPartModule(initialState.n, true).Icon;
 
@@ -116,7 +141,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       <div
         className={styles.button}
         style={{ paddingLeft: `${16 * indentation}px` }}
-        onClick={selectionHandler}
+        onClick={handleClick}
       >
         <button
           ref={buttonRef}
