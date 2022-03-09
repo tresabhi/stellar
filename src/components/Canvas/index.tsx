@@ -4,7 +4,7 @@ import DesktopCanvasControls from 'components/DesktopCanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import { getPart } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
-import { unselectAllParts } from 'interfaces/selection';
+import { unSelectAllParts } from 'interfaces/selection';
 import { useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
@@ -69,7 +69,7 @@ export const LayoutRenderer = () => {
       }}
       className={styles['editing-canvas']}
       performance={{ min: regressAmount }}
-      onPointerMissed={unselectAllParts}
+      onPointerMissed={unSelectAllParts}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
       <directionalLight position={[0, 0, 100]} />

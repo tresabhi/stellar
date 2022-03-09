@@ -13,7 +13,7 @@ export const selectPart = (ID: PartID) => selectParts([ID]);
 export const selectParts = (IDs: PartIDs) => {
   let newSelections: PartIDs = [];
 
-  mutateBlueprint((draft) => {
+  mutateBlueprintWithoutHistory((draft) => {
     IDs.forEach((ID) => {
       const part = getPart(ID, draft);
 
@@ -54,7 +54,7 @@ export const selectPartsFromOnly = (startID: PartID, endID: PartID) => {
 export const unselectPart = (ID: PartID) => unSelectParts([ID]);
 
 export const unSelectParts = (IDs: PartIDs) => {
-  mutateBlueprint((draft) => {
+  mutateBlueprintWithoutHistory((draft) => {
     IDs.forEach((ID) => {
       const part = getPart(ID, draft);
       if (part) part.meta.selected = false;
@@ -66,7 +66,7 @@ export const unSelectParts = (IDs: PartIDs) => {
   });
 };
 
-export const unselectAllParts = () => {
+export const unSelectAllParts = () => {
   mutateBlueprint((draft) => {
     mutateParts(draft.selections.current, { meta: { selected: false } }, draft);
     draft.selections.current = [];

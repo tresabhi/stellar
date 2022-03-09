@@ -5,7 +5,7 @@ import {
   translatePartsBySelection,
   undo,
 } from 'interfaces/blueprint';
-import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
+import { selectPartsOnly, unSelectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
 import appStore from 'stores/app';
@@ -28,7 +28,7 @@ const useKeybinds = () => {
 
   useEffect(() => {
     bind('ctrl+a', () => selectPartsOnly(blueprintStore.getState().partOrder));
-    bind('esc', unselectAllParts);
+    bind('esc', unSelectAllParts);
 
     bind('p a r t y', () => {
       // party mode easter egg
