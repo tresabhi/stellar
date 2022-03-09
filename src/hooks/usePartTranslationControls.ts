@@ -4,7 +4,11 @@ import {
   mutateBlueprintWithoutHistory,
   mutateParts,
 } from 'interfaces/blueprint';
-import { selectPartOnly, togglePartSelection } from 'interfaces/selection';
+import {
+  selectPartOnly,
+  togglePartSelection,
+  unselectPart as unSelectPart,
+} from 'interfaces/selection';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
@@ -23,14 +27,19 @@ const usePartTranslationControls = <
   let initialMouseY: number;
   let deltaX = 0;
   let deltaY = 0;
+  let wasSelectedNow = false;
 
   const onPointerUp = (event: PointerEvent) => {
     event.stopImmediatePropagation();
 
-    canvas.removeEventListener('pointerup', onPointerUp);
-    canvas.removeEventListener('pointermove', onPointerMove);
+    window.removeEventListener('pointerup', onPointerUp);
+    window.removeEventListener('pointermove', onPointerMove);
 
-    if (deltaX !== 0) {
+    if (deltaX === 0 && deltaY === 0) {
+      if (event.shiftKey && wasSelectedNow) {
+        unSelectPart(ID);
+      }
+    } else {
       // undo changes
       mutateBlueprintWithoutHistory((draft) => {
         mutateParts(
@@ -81,21 +90,20 @@ const usePartTranslationControls = <
 
     if (part) {
       event.stopPropagation();
-      canvas.addEventListener('pointerup', onPointerUp);
-      canvas.addEventListener('pointermove', onPointerMove);
 
       [initialMouseX, initialMouseY] = getMousePos();
       deltaX = 0;
       deltaY = 0;
 
-      if (!part.meta.selected) {
-        mutateBlueprintWithoutHistory((draft) => {
-          if (event.nativeEvent.shiftKey) {
-            togglePartSelection(ID, draft);
-          } else {
-            selectPartOnly(ID, draft);
-          }
-        });
+      window.addEventListener('pointerup', onPointerUp);
+      window.addEventListener('pointermove', onPointerMove);
+
+      if (event.nativeEvent.shiftKey) {
+        togglePartSelection(ID);
+      } else {
+        if (!part.meta.selected) {
+          selectPartOnly(ID);
+        }
       }
     }
   };
