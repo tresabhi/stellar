@@ -5,9 +5,9 @@ import {
   mutateParts,
 } from 'interfaces/blueprint';
 import {
+  selectPart,
   selectPartOnly,
   togglePartSelection,
-  unselectPart as unSelectPart,
 } from 'interfaces/selection';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import blueprintStore from 'stores/blueprint';
@@ -26,7 +26,8 @@ const usePartTranslationControls = <
   let initialMouseY: number;
   let deltaX = 0;
   let deltaY = 0;
-  let wasSelectedNow = false;
+  let movedAtAll = false;
+  let wasSelectedInitially = false;
 
   const onPointerUp = (event: PointerEvent) => {
     event.stopImmediatePropagation();
@@ -35,8 +36,12 @@ const usePartTranslationControls = <
     window.removeEventListener('pointermove', onPointerMove);
 
     if (deltaX === 0 && deltaY === 0) {
-      if (event.shiftKey && wasSelectedNow) {
-        unSelectPart(ID);
+      if (!movedAtAll && !wasSelectedInitially) {
+        if (event.shiftKey) {
+          togglePartSelection(ID);
+        } else {
+          selectPartOnly(ID);
+        }
       }
     } else {
       // undo changes
@@ -65,6 +70,7 @@ const usePartTranslationControls = <
     const [mouseX, mouseY] = getMousePos();
     const newDeltaX = snap(mouseX - initialMouseX, 1);
     const newDeltaY = snap(mouseY - initialMouseY, 1);
+    movedAtAll = true;
 
     if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
       mutateBlueprintWithoutHistory((draft) => {
@@ -86,6 +92,7 @@ const usePartTranslationControls = <
   };
   const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(ID) as T | undefined;
+    movedAtAll = false;
 
     if (part) {
       event.stopPropagation();
@@ -97,10 +104,12 @@ const usePartTranslationControls = <
       window.addEventListener('pointerup', onPointerUp);
       window.addEventListener('pointermove', onPointerMove);
 
-      if (event.nativeEvent.shiftKey) {
-        togglePartSelection(ID);
-      } else {
-        if (!part.meta.selected) {
+      if (!part.meta.selected) {
+        wasSelectedInitially = true;
+
+        if (event.nativeEvent.shiftKey) {
+          selectPart(ID);
+        } else {
           selectPartOnly(ID);
         }
       }
