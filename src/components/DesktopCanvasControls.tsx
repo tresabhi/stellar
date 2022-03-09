@@ -2,9 +2,10 @@ import { useThree } from '@react-three/fiber';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import { OrthographicCamera } from 'three';
-import inverseLerp from 'utilities/inverseLerp';
+import { inverseLerp } from 'three/src/math/MathUtils';
 
 const MIN_ZOOM = 2.2;
+const MAX_ZOOM = 800;
 
 // BUG: pressing shift and selecting parts causes the sensitivity to go up
 
@@ -20,12 +21,11 @@ const DesktopCanvasControls = () => {
       if (event.ctrlKey) {
         const [initialX, initialY] = getMousePos();
 
-        const maxZoom = camera.right - camera.left;
         const zoomCompensatedDeltaY =
-          event.deltaY * 4 * inverseLerp(0, maxZoom, camera.zoom);
+          event.deltaY * 4 * inverseLerp(0, MAX_ZOOM, camera.zoom);
         const zoom = Math.max(
           MIN_ZOOM,
-          Math.min(maxZoom, camera.zoom - zoomCompensatedDeltaY),
+          Math.min(MAX_ZOOM, camera.zoom - zoomCompensatedDeltaY),
         );
 
         camera.zoom = zoom;
