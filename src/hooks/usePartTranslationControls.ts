@@ -1,4 +1,4 @@
-import { ThreeEvent, useThree } from '@react-three/fiber';
+import { ThreeEvent } from '@react-three/fiber';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
@@ -20,7 +20,6 @@ const usePartTranslationControls = <
 >(
   ID: PartID,
 ) => {
-  const canvas = useThree((state) => state.gl.domElement);
   const getMousePos = useMousePos();
 
   let initialMouseX: number;
