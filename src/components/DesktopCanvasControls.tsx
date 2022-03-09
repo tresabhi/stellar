@@ -1,4 +1,5 @@
 import { useThree } from '@react-three/fiber';
+import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import { OrthographicCamera } from 'three';
 import inverseLerp from 'utilities/inverseLerp';
@@ -10,11 +11,15 @@ const MIN_ZOOM = 2.2;
 const DesktopCanvasControls = () => {
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
+  const getMousePos = useMousePos();
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
+
       if (event.ctrlKey) {
+        const [initialX, initialY] = getMousePos();
+
         const maxZoom = camera.right - camera.left;
         const zoomCompensatedDeltaY =
           event.deltaY * 4 * inverseLerp(0, maxZoom, camera.zoom);
@@ -25,6 +30,12 @@ const DesktopCanvasControls = () => {
 
         camera.zoom = zoom;
         camera.updateProjectionMatrix();
+
+        const [newX, newY] = getMousePos();
+        const [deltaX, deltaY] = [newX - initialX, newY - initialY];
+
+        camera.translateX(-deltaX);
+        camera.translateY(-deltaY);
       } else {
         const moveX = event.deltaX / camera.zoom;
         const moveY = event.deltaY / camera.zoom;
