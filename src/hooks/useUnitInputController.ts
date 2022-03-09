@@ -1,6 +1,6 @@
-import { merge } from 'lodash';
+import { isUndefined, merge } from 'lodash';
 import { simplify } from 'mathjs';
-import { RefObject, useEffect, useRef } from 'react';
+import { RefObject, useEffect } from 'react';
 
 const MIXED_SYMBOL = '~';
 
@@ -30,86 +30,81 @@ const useUnitInputController = (
   initialValue?: number,
   options?: Partial<UseUnitInputControllerOptions>,
 ) => {
-  let parent = useRef<HTMLDivElement>();
+  const mergedOptions = merge(
+    {},
+    useUnitInputControllerDefaultOptions,
+    options,
+  );
+
+  const rerender = () => {
+    if (input.current) {
+      if (hook.value === undefined) {
+        input.current.value = MIXED_SYMBOL;
+      } else {
+        input.current.value = `${mergedOptions?.prefix}${hook.value}${mergedOptions?.suffix}`;
+      }
+    }
+  };
+  const handleClick = () => {
+    input.current?.focus();
+    input.current?.select();
+  };
+  const handleFocus = () => {
+    input.current!.value = isUndefined(hook.value) ? '' : `${hook.value}`;
+  };
+  const handleBlur = () => {
+    let newValue: number;
+
+    try {
+      newValue = simplify(input.current!.value).evaluate();
+    } catch {}
+
+    if (
+      typeof newValue! === 'number' &&
+      newValue! !== Infinity &&
+      newValue! !== -Infinity &&
+      !isNaN(newValue)
+    ) {
+      newValue = Math.max(
+        mergedOptions!.min!,
+        Math.min(mergedOptions!.max!, newValue),
+      );
+      mergedOptions!.onChange!(newValue, hook.value);
+      hook.value = newValue;
+
+      rerender();
+    } else {
+      rerender();
+    }
+  };
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === 'Escape') {
+      input.current?.blur();
+    }
+  };
+
+  const hook = {
+    rerender,
+    value: initialValue,
+  };
 
   useEffect(() => {
-    const inputRef = input;
-    const mergedOptions = merge(
-      {},
-      useUnitInputControllerDefaultOptions,
-      options,
-    );
-    let value = initialValue;
+    const currentInput = input.current;
+    rerender();
 
-    const render = () => {
-      if (inputRef.current) {
-        if (value === undefined) {
-          inputRef.current.value = MIXED_SYMBOL;
-        } else {
-          inputRef.current.value = `${mergedOptions?.prefix}${value}${mergedOptions?.suffix}`;
-        }
-      }
-    };
-
-    const handleParentClick = () => {
-      inputRef.current?.focus();
-      inputRef.current?.select();
-    };
-    const handleFocus = () => {
-      inputRef.current!.value = value === undefined ? '' : `${value}`;
-    };
-    const handleBlur = () => {
-      let newValue: number;
-
-      try {
-        newValue = simplify(inputRef.current!.value).evaluate();
-      } catch {}
-
-      if (
-        typeof newValue! === 'number' &&
-        newValue! !== Infinity &&
-        newValue! !== -Infinity &&
-        !isNaN(newValue)
-      ) {
-        newValue = Math.max(
-          mergedOptions!.min!,
-          Math.min(mergedOptions!.max!, newValue),
-        );
-        mergedOptions!.onChange!(newValue, value);
-        value = newValue;
-
-        render();
-      } else {
-        render();
-      }
-    };
-    const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === 'Enter' || event.key === 'Escape') {
-        inputRef.current?.blur();
-      }
-    };
-
-    parent.current = inputRef.current?.parentNode as HTMLDivElement;
-
-    (mergedOptions.focusOnParentClick
-      ? parent
-      : input
-    ).current?.addEventListener('click', handleParentClick);
-    inputRef.current?.addEventListener('focus', handleFocus);
-    inputRef.current?.addEventListener('blur', handleBlur);
-    inputRef.current?.addEventListener('keypress', handleKeyPress);
-
-    render();
+    currentInput?.addEventListener('click', handleClick);
+    currentInput?.addEventListener('focus', handleFocus);
+    currentInput?.addEventListener('blur', handleBlur);
+    currentInput?.addEventListener('keypress', handleKeyPress);
 
     return () => {
-      (mergedOptions.focusOnParentClick
-        ? parent
-        : input
-      ).current?.removeEventListener('click', handleParentClick);
-      inputRef.current?.removeEventListener('focus', handleFocus);
-      inputRef.current?.removeEventListener('blur', handleBlur);
-      inputRef.current?.removeEventListener('keypress', handleKeyPress);
+      currentInput?.removeEventListener('click', handleClick);
+      currentInput?.removeEventListener('focus', handleFocus);
+      currentInput?.removeEventListener('blur', handleBlur);
+      currentInput?.removeEventListener('keypress', handleKeyPress);
     };
-  }, [initialValue, input, options]);
+  });
+
+  return hook;
 };
 export default useUnitInputController;

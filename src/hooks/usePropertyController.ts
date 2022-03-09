@@ -29,7 +29,7 @@ const usePropertyController = <S>(
     IDs.map((ID) => getPart(ID) as unknown as S),
   );
 
-  useUnitInputController(inputRef, property, {
+  const inputController = useUnitInputController(inputRef, property, {
     ...controllerOptions,
     onChange: (value) => {
       mutateParts(IDs, set(value));
