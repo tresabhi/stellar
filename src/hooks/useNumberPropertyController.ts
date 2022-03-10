@@ -1,4 +1,4 @@
-import { getPart, subscribeToPart } from 'interfaces/blueprint';
+import { getPart, mutateParts, subscribeToPart } from 'interfaces/blueprint';
 import { useEffect, useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
 import { PartID, PartIDs } from 'types/Parts';
@@ -15,7 +15,8 @@ const usePropertyController = <T>(
   const mergedControllerOptions = {
     ...useUnitInputController,
     ...controllerOptions,
-  };
+    onChange: (value) => mutateParts(IDs, set(value)),
+  } as UseUnitInputControllerOptions;
   const inputRef = useRef<HTMLInputElement>(null!);
   const inputController = useUnitInputController(
     inputRef,

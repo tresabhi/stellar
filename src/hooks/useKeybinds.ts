@@ -76,8 +76,14 @@ const useKeybinds = () => {
     bind('shift+left', () => translatePartsBySelection(-SHIFT_TRANSLATE_BY, 0));
     bind('shift+right', () => translatePartsBySelection(SHIFT_TRANSLATE_BY, 0));
 
-    bind('ctrl+z', undo);
-    bind('ctrl+shift+z', redo);
+    bind('ctrl+z', (event) => {
+      event.preventDefault();
+      undo();
+    });
+    bind('ctrl+shift+z', (event) => {
+      event.preventDefault();
+      redo();
+    });
   }, []);
 };
 export default useKeybinds;
