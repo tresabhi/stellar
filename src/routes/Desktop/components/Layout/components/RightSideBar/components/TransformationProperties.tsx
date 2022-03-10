@@ -1,5 +1,5 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import usePropertyController from 'hooks/usePropertyController';
+import usePropertyController from 'hooks/useNumberPropertyController';
 import { PartWithTransformations } from 'parts/Default';
 import { FC } from 'react';
 import { PropertyComponentProps } from 'types/Parts';

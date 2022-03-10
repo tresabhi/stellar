@@ -4,7 +4,7 @@ import usePartMeta from 'hooks/usePartMeta';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
 import usePartTranslationControls from 'hooks/usePartTranslationControls';
-import usePropertyController from 'hooks/usePropertyController';
+import usePropertyController from 'hooks/useNumberPropertyController';
 import { getPart } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';

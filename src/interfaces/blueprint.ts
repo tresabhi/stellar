@@ -4,7 +4,7 @@ import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import { Group } from 'parts/Group';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore
+  BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartName, PartID, PartIDs } from 'types/Parts';
@@ -197,6 +197,8 @@ export const subscribeToPart = <T, S>(
       compoundHandler(getPart(ID, blueprintStore.getState()) as unknown as S);
     }
   }
+
+  return unsubscribe;
 };
 
 export const mutateBlueprint = (
