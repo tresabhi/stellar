@@ -1,9 +1,10 @@
 import produce from 'immer';
 import {
   deletePartsBySelection,
+  groupPartsBySelection,
   redo,
   translatePartsBySelection,
-  undo,
+  undo
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
@@ -83,6 +84,11 @@ const useKeybinds = () => {
     bind('ctrl+shift+z', (event) => {
       event.preventDefault();
       redo();
+    });
+
+    bind('ctrl+g', (event) => {
+      event.preventDefault();
+      groupPartsBySelection();
     });
   }, []);
 };

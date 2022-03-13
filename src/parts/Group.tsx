@@ -6,6 +6,7 @@ import { DefaultPartData, PartWithMeta } from './Default';
 
 export interface Group extends PartWithMeta {
   n: 'Group';
+  expanded: boolean;
   partOrder: PartIDs;
 }
 
@@ -16,6 +17,7 @@ export const GroupData: Group = {
     label: 'Group',
   },
   n: 'Group',
+  expanded: false,
   partOrder: [],
 };
 

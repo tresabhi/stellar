@@ -84,6 +84,10 @@ export const getPart = (ID: PartID, state?: Blueprint) => {
   return blueprintState.parts.get(ID);
 };
 
+export const getParts = (IDs: PartIDs, state?: Blueprint) => {
+  return IDs.map((ID) => getPart(ID, state));
+};
+
 export const getParentID = (ID: PartID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
   const part = getPart(ID, blueprintState);
@@ -235,6 +239,7 @@ export const mutateBlueprint = (
       }
     }),
   );
+
   blueprintStore.setState(nextState);
 };
 
@@ -325,4 +330,32 @@ export const getPartIndex = (
   if (parentID ? parent && (parent as AnyPart).n === 'Group' : true) {
     return (parent as Group | Blueprint).partOrder.indexOf(partID);
   }
+};
+
+export const groupParts = (IDs: PartIDs, groupReplaces: PartID) => {
+  mutateBlueprint((draft) => {
+    const group = createNewPart('Group') as Group;
+    const groupID = UUIDV4();
+    const groupParent =
+      (getParent(groupReplaces, draft) as Group | undefined) ?? draft;
+
+    draft.parts.set(groupID, group);
+    groupParent.partOrder[groupParent.partOrder.indexOf(groupReplaces)] =
+      groupID;
+    group.partOrder = IDs;
+
+    IDs.forEach((ID) => {
+      let currentParent = (getParent(ID, draft) as Group | undefined) ?? draft;
+      currentParent.partOrder.splice(currentParent.partOrder.indexOf(ID), 1);
+    });
+  });
+};
+
+export const groupPartsBySelection = () => {
+  const blueprintState = blueprintStore.getState();
+
+  groupParts(
+    blueprintState.selections.current,
+    blueprintState.selections.last ?? blueprintState.selections.current[0],
+  );
 };

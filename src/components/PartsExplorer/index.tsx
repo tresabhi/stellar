@@ -1,7 +1,8 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import { getPart, mutatePart, subscribeToPart } from 'interfaces/blueprint';
+import usePartProperty from 'hooks/usePartProperty';
+import { getPart, mutatePart } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import {
   selectPartOnly,
@@ -10,29 +11,33 @@ import {
   togglePartSelection,
 } from 'interfaces/selection';
 import { PartWithMeta } from 'parts/Default';
+import { Group } from 'parts/Group';
 import {
   FC,
   InputHTMLAttributes,
   KeyboardEvent,
   memo,
   MouseEvent,
-  useEffect,
   useRef,
   useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { PartID } from 'types/Parts';
+import { PartID, PartIDs } from 'types/Parts';
 import compareIDArrays from 'utilities/compareIDArrays';
 import compareIDProps from 'utilities/compareIDProps';
 import styles from './index.module.scss';
 
-export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
+interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
+  IDs: PartIDs;
+  indentation: number;
+}
+export const Container: FC<ContainerProps> = ({
+  IDs,
+  indentation,
   ...props
 }) => {
-  const state = blueprintStore((state) => state.partOrder, compareIDArrays);
-
-  const partListings = state.map((ID) => (
-    <Listing key={`part-${ID}`} ID={ID} indentation={0} />
+  const partListings = IDs.map((ID) => (
+    <Listing key={`part-${ID}`} ID={ID} indentation={indentation} />
   ));
 
   return (
@@ -45,6 +50,12 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   );
 };
 
+export const ReactiveRootContainer = () => {
+  const state = blueprintStore((state) => state.partOrder, compareIDArrays);
+
+  return <Container indentation={0} IDs={state} />;
+};
+
 interface ListingProps {
   indentation: number;
   ID: PartID;
@@ -54,25 +65,20 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const initialState = getPart(ID);
+  const initialState = getPart(ID)!;
+  const isGroup = initialState.n === 'Group';
 
-  useEffect(() => {
-    subscribeToPart(
-      ID,
-      (selected) => {
-        if (selected) {
-          listingRef.current?.classList.add(styles.selected);
-        } else {
-          listingRef.current?.classList.remove(styles.selected);
-        }
-      },
-      (state: PartWithMeta) => state.meta.selected,
-      { unsubscribeOnUnmount: true },
-    );
-  }, [ID]);
-
-  // part was deleted
-  if (!initialState) return null;
+  usePartProperty(
+    ID,
+    (state: PartWithMeta) => state.meta,
+    (meta) => {
+      if (meta.selected) {
+        listingRef.current?.classList.add(styles.selected);
+      } else {
+        listingRef.current?.classList.remove(styles.selected);
+      }
+    },
+  );
 
   let childParts: JSX.Element[] | undefined;
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -175,13 +181,14 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
           className={styles.label}
           defaultValue={initialState.meta.label}
         />
-
-        {/* visible */}
-        {/* lock */}
       </div>
 
-      {childParts ? (
-        <Container style={{ display: expanded ? 'flex' : 'none' }}>
+      {isGroup ? (
+        <Container
+          indentation={indentation + 1}
+          IDs={(initialState as Group).partOrder}
+          style={{ display: expanded ? undefined : 'none' }}
+        >
           {childParts}
         </Container>
       ) : undefined}
