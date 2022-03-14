@@ -29,9 +29,7 @@ export const BlueprintData: Blueprint = {
   meta: {
     format_version: 1,
   },
-  selections: {
-    current: [],
-  },
+  selections: [],
   parts: new Map(),
   partOrder: [],
 };
@@ -70,13 +68,12 @@ export const newBlueprint = (blueprint = {}) => {
 
 export const deletePartsBySelection = () => {
   mutateBlueprint((draft) => {
-    draft.selections.current.forEach((selection) => {
+    draft.selections.forEach((selection) => {
       draft.parts.delete(selection);
       draft.partOrder.splice(draft.partOrder.indexOf(selection), 1);
     });
 
-    draft.selections.current = [];
-    delete draft.selections.last;
+    draft.selections = [];
   });
 };
 
@@ -155,7 +152,7 @@ export const translateParts = (IDs: PartIDs, x: number, y: number) => {
 };
 
 export const translatePartsBySelection = (x: number, y: number) =>
-  translateParts(blueprintStore.getState().selections.current, x, y);
+  translateParts(blueprintStore.getState().selections, x, y);
 
 interface SubscribeToPartOptions {
   fireInitially: boolean;
@@ -359,8 +356,8 @@ export const groupPartsBySelection = () => {
   const blueprintState = blueprintStore.getState();
 
   groupParts(
-    blueprintState.selections.current,
-    blueprintState.selections.current[0],
+    blueprintState.selections,
+    blueprintState.selections[blueprintState.selections.length - 1],
   );
 };
 

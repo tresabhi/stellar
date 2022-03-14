@@ -17,9 +17,7 @@ const blueprintStore = create<
     meta: {
       format_version: 1,
     },
-    selections: {
-      current: [],
-    },
+    selections: [],
     center: 0,
     offset: { x: 0, y: 0 },
     parts: new Map(),

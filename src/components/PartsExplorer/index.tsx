@@ -8,7 +8,7 @@ import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection
+  togglePartSelection,
 } from 'interfaces/selection';
 import { PartWithMeta } from 'parts/Default';
 import { Group } from 'parts/Group';
@@ -19,7 +19,7 @@ import {
   memo,
   MouseEvent,
   useRef,
-  useState
+  useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
@@ -111,9 +111,10 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     if (event.ctrlKey) {
       if (event.shiftKey) {
         const selectionState = blueprintStore.getState().selections;
+        const lastSelection = selectionState[selectionState.length - 1];
 
-        if (selectionState.last) {
-          selectPartsFrom(selectionState.last, ID);
+        if (lastSelection) {
+          selectPartsFrom(lastSelection, ID);
         } else {
           selectPartOnly(ID);
         }
@@ -122,9 +123,10 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       }
     } else if (event.shiftKey) {
       const selectionState = blueprintStore.getState().selections;
+      const lastSelection = selectionState[selectionState.length - 1];
 
-      if (selectionState.last) {
-        selectPartsFromOnly(selectionState.last, ID);
+      if (lastSelection) {
+        selectPartsFromOnly(lastSelection, ID);
       } else {
         selectPartOnly(ID);
       }

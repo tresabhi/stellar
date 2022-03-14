@@ -23,8 +23,7 @@ export const selectParts = (IDs: PartIDs) => {
       }
     });
 
-    draft.selections.current = [...draft.selections.current, ...newSelections];
-    draft.selections.last = IDs[IDs.length - 1];
+    draft.selections = [...draft.selections, ...newSelections];
   });
 };
 
@@ -33,11 +32,10 @@ export const selectPartOnly = (ID: PartID, state?: Blueprint) =>
 
 export const selectPartsOnly = (IDs: PartIDs, state?: Blueprint) => {
   if (state) {
-    mutateParts(state.selections.current, { meta: { selected: false } }, state);
+    mutateParts(state.selections, { meta: { selected: false } }, state);
     mutateParts(IDs, { meta: { selected: true } }, state);
 
-    state.selections.current = IDs;
-    state.selections.last = IDs[IDs.length - 1];
+    state.selections = IDs;
   } else {
     mutateBlueprintWithoutHistory((draft) => {
       selectPartsOnly(IDs, draft);
@@ -60,7 +58,7 @@ export const unselectParts = (IDs: PartIDs) => {
       if (part) part.meta.selected = false;
     });
 
-    draft.selections.current = draft.selections.current.filter(
+    draft.selections = draft.selections.filter(
       (selection) => !IDs.includes(selection),
     );
   });
@@ -68,8 +66,8 @@ export const unselectParts = (IDs: PartIDs) => {
 
 export const unselectAllParts = () => {
   mutateBlueprint((draft) => {
-    mutateParts(draft.selections.current, { meta: { selected: false } }, draft);
-    draft.selections.current = [];
+    mutateParts(draft.selections, { meta: { selected: false } }, draft);
+    draft.selections = [];
   });
 };
 
@@ -96,13 +94,12 @@ export const togglePartsSelection = (IDs: PartIDs, state?: Blueprint) => {
     });
 
     spliceIDs.forEach((ID) => {
-      forEachRight(state.selections.current, (selection, index) => {
-        if (isEqual(ID, selection)) state.selections.current.splice(index, 1);
+      forEachRight(state.selections, (selection, index) => {
+        if (isEqual(ID, selection)) state.selections.splice(index, 1);
       });
     });
 
-    state.selections.current.push(...insertIDs);
-    state.selections.last = IDs[IDs.length - 1];
+    state.selections.push(...insertIDs);
   } else {
     mutateBlueprintWithoutHistory((draft) => {
       togglePartsSelection(IDs, draft);

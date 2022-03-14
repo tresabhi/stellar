@@ -19,12 +19,10 @@ const RightSideBar = () => {
     (state) => state.layout.rightSideBar.partition,
   );
   const selections = blueprintStore(
-    (state) => state.selections.current,
+    (state) => state.selections,
     comparePartOrders,
   );
-  const selectionsLength = blueprintStore(
-    (state) => state.selections.current.length,
-  );
+  const selectionsLength = blueprintStore((state) => state.selections.length);
   const isPartitionProperties = partition === 'properties';
   const isPartitionInspect = partition === 'inspect';
   const centerInputRef = useRef<HTMLInputElement>(null);

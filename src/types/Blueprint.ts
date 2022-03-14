@@ -11,10 +11,7 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   meta: {
     format_version: number;
   };
-  selections: {
-    last?: PartID;
-    current: PartIDs;
-  };
+  selections: PartIDs;
   parts: AnyPartMap;
   partOrder: PartIDs;
 }

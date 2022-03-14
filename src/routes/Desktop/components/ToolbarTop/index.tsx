@@ -7,7 +7,7 @@ import {
   getParentID,
   getPartIndex,
   insertPart,
-  newBlueprint,
+  newBlueprint
 } from 'interfaces/blueprint';
 import { isUndefined, random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
@@ -66,7 +66,8 @@ const ToolBarTop: FC = () => {
 
   const adder = (name: AnyPartName) => {
     return () => {
-      const lastPartID = blueprintStore.getState().selections.last;
+      const selections = blueprintStore.getState().selections;
+      const lastPartID = selections[selections.length - 1];
       if (lastPartID) {
         const parentID = getParentID(lastPartID);
         const index = getPartIndex(lastPartID, parentID);

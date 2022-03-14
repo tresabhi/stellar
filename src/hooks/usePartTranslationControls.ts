@@ -47,7 +47,7 @@ const usePartTranslationControls = <
       // undo changes
       mutateBlueprintWithoutHistory((draft) => {
         mutateParts(
-          draft.selections.current,
+          draft.selections,
           (state) => ({
             p: {
               x: (state as PartWithTransformations).p.x - deltaX,
@@ -58,7 +58,7 @@ const usePartTranslationControls = <
         );
       });
       // apply them again with history
-      mutateParts(blueprintStore.getState().selections.current, (state) => ({
+      mutateParts(blueprintStore.getState().selections, (state) => ({
         p: {
           x: (state as PartWithTransformations).p.x + deltaX,
           y: (state as PartWithTransformations).p.y + deltaY,
@@ -75,7 +75,7 @@ const usePartTranslationControls = <
     if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
       mutateBlueprintWithoutHistory((draft) => {
         mutateParts(
-          blueprintStore.getState().selections.current,
+          blueprintStore.getState().selections,
           (state) => ({
             p: {
               x: (state as PartWithTransformations).p.x - deltaX + newDeltaX,
