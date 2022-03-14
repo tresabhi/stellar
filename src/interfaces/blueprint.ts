@@ -96,7 +96,7 @@ export const getParentID = (ID: PartID, state?: Blueprint) => {
   if (part) return part.meta.parent;
 };
 
-export const getParent = (ID: PartID, state?: Blueprint) => {
+export const getParent = (ID: PartID, state?: Blueprint): Group | undefined => {
   const parentID = getParentID(ID);
   if (parentID) return getPart(parentID, state);
 };
@@ -337,8 +337,7 @@ export const groupParts = (IDs: PartIDs, replaceID: PartID) => {
   mutateBlueprint((draft) => {
     const newGroupData = createNewPart('Group') as Group;
     const newGroupID = UUIDV4();
-    const newGroupParent =
-      (getParent(replaceID, draft) as Group | undefined) ?? draft;
+    const newGroupParent = getParent(replaceID, draft) ?? draft;
 
     draft.parts.set(newGroupID, newGroupData);
     newGroupParent.partOrder[newGroupParent.partOrder.indexOf(replaceID)] =
@@ -346,8 +345,12 @@ export const groupParts = (IDs: PartIDs, replaceID: PartID) => {
     newGroupData.partOrder = IDs;
 
     IDs.forEach((ID) => {
-      let currentParent = (getParent(ID, draft) as Group | undefined) ?? draft;
-      currentParent.partOrder.splice(currentParent.partOrder.indexOf(ID), 1);
+      const currentParent = getParent(ID, draft) ?? draft;
+      const currentPart = getPart(ID, draft);
+      const spliceIndex = currentParent.partOrder.indexOf(ID);
+
+      if (currentPart) currentPart.meta.parent = newGroupID;
+      if (spliceIndex !== -1) currentParent.partOrder.splice(spliceIndex, 1);
     });
   });
 };
