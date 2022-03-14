@@ -1,6 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { memo } from 'react';
-import { PartIDs, PartModule } from 'types/Parts';
+import { PartIDs, PartModule, ReactivePartComponentProps } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
 import { DefaultPartData, PartWithMeta } from './Default';
 
@@ -21,7 +21,9 @@ export const GroupData: Group = {
   partOrder: [],
 };
 
-const GroupLayoutComponent = memo(() => <mesh />, compareIDProps);
+const GroupLayoutComponent = memo<ReactivePartComponentProps>(({ ID }) => {
+  return <group></group>;
+}, compareIDProps);
 
 export const GroupIcon = Icon;
 

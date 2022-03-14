@@ -1,6 +1,6 @@
 import { PartIDs } from 'types/Parts';
 
-const compareIDArrays = (prevIDs: PartIDs, nextIDs: PartIDs) => {
+const comparePartOrders = (prevIDs: PartIDs, nextIDs: PartIDs) => {
   if (prevIDs.length !== nextIDs.length) {
     return false;
   } else {
@@ -11,4 +11,4 @@ const compareIDArrays = (prevIDs: PartIDs, nextIDs: PartIDs) => {
   }
 };
 
-export default compareIDArrays;
+export default comparePartOrders;

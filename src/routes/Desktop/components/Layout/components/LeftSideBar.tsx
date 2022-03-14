@@ -46,7 +46,7 @@ export default function LeftSideBar() {
           display: isPartitionParts ? undefined : 'none',
         }}
       >
-        <PartsExplorer.ReactiveRootContainer />
+        <PartsExplorer.Container indentation={0} />
       </SideBar.Scrollable>
       <SideBar.Scrollable
         style={{

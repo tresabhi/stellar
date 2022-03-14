@@ -1,10 +1,10 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import usePropertyController from 'hooks/useNumberPropertyController';
 import usePartMeta from 'hooks/usePartMeta';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
 import usePartTranslationControls from 'hooks/usePartTranslationControls';
-import usePropertyController from 'hooks/useNumberPropertyController';
 import { getPart } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
@@ -111,7 +111,7 @@ const temp_material = new MeshStandardMaterial({
 
 export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
   ({ ID }) => {
-    const initialState = getPart(ID) as FuelTank;
+    const initialState = getPart<FuelTank>(ID)!;
     const mesh = useRef<Mesh>(null!);
 
     usePartTransformations(ID, mesh, (state) => ({
@@ -159,13 +159,13 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
     (value) => ({
       N: { width_original: value, width_a: value, width_b: value },
     }),
-    { min: 0, suffix: 'm' },
+    { suffix: 'm' },
   );
   const height = usePropertyController<FuelTank>(
     IDs,
     (state) => state.N.height,
     (value) => ({ N: { height: value } }),
-    { min: 0, suffix: 'm' },
+    { suffix: 'm' },
   );
   const fuel = usePropertyController<FuelTank>(
     IDs,

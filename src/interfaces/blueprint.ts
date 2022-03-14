@@ -73,15 +73,16 @@ export const deletePartsBySelection = () => {
     draft.selections.current.forEach((selection) => {
       draft.parts.delete(selection);
       draft.partOrder.splice(draft.partOrder.indexOf(selection), 1);
-      draft.selections.current = [];
-      draft.selections.last = undefined;
     });
+
+    draft.selections.current = [];
+    delete draft.selections.last;
   });
 };
 
-export const getPart = (ID: PartID, state?: Blueprint) => {
+export const getPart = <T extends AnyPart>(ID: PartID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
-  return blueprintState.parts.get(ID);
+  return blueprintState.parts.get(ID) as T | undefined;
 };
 
 export const getParts = (IDs: PartIDs, state?: Blueprint) => {
@@ -332,17 +333,17 @@ export const getPartIndex = (
   }
 };
 
-export const groupParts = (IDs: PartIDs, groupReplaces: PartID) => {
+export const groupParts = (IDs: PartIDs, replaceID: PartID) => {
   mutateBlueprint((draft) => {
-    const group = createNewPart('Group') as Group;
-    const groupID = UUIDV4();
-    const groupParent =
-      (getParent(groupReplaces, draft) as Group | undefined) ?? draft;
+    const newGroupData = createNewPart('Group') as Group;
+    const newGroupID = UUIDV4();
+    const newGroupParent =
+      (getParent(replaceID, draft) as Group | undefined) ?? draft;
 
-    draft.parts.set(groupID, group);
-    groupParent.partOrder[groupParent.partOrder.indexOf(groupReplaces)] =
-      groupID;
-    group.partOrder = IDs;
+    draft.parts.set(newGroupID, newGroupData);
+    newGroupParent.partOrder[newGroupParent.partOrder.indexOf(replaceID)] =
+      newGroupID;
+    newGroupData.partOrder = IDs;
 
     IDs.forEach((ID) => {
       let currentParent = (getParent(ID, draft) as Group | undefined) ?? draft;
@@ -356,6 +357,9 @@ export const groupPartsBySelection = () => {
 
   groupParts(
     blueprintState.selections.current,
-    blueprintState.selections.last ?? blueprintState.selections.current[0],
+    blueprintState.selections.current[0],
   );
 };
+
+//@ts-ignore
+window.lol = groupPartsBySelection;

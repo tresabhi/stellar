@@ -47,15 +47,16 @@ const useUnitInputController = (
   };
   const handleClick = () => {
     input.current?.focus();
-    input.current?.select();
   };
   const handleFocus = () => {
     input.current!.value = isUndefined(hook.value) ? '' : `${hook.value}`;
+    input.current?.select();
   };
   const handleBlur = () => {
     let newValue: number;
 
     try {
+      // in try-catch because mathjs loves throwing errors for user mistakes
       newValue = simplify(input.current!.value).evaluate();
     } catch {}
 

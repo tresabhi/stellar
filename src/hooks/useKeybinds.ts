@@ -4,7 +4,7 @@ import {
   groupPartsBySelection,
   redo,
   translatePartsBySelection,
-  undo
+  undo,
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
 import { bind } from 'mousetrap';
@@ -37,6 +37,7 @@ const useKeybinds = () => {
     });
 
     bind('del', deletePartsBySelection);
+    bind('backspace', deletePartsBySelection);
 
     bind('alt+1', (event) => {
       event?.preventDefault();

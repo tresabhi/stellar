@@ -8,7 +8,7 @@ import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'interfaces/selection';
 import { PartWithMeta } from 'parts/Default';
 import { Group } from 'parts/Group';
@@ -19,24 +19,28 @@ import {
   memo,
   MouseEvent,
   useRef,
-  useState,
+  useState
 } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { PartID, PartIDs } from 'types/Parts';
-import compareIDArrays from 'utilities/compareIDArrays';
+import { PartID } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
+import comparePartOrders from 'utilities/comparePartOrders';
 import styles from './index.module.scss';
 
 interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
-  IDs: PartIDs;
+  parent?: PartID;
   indentation: number;
 }
 export const Container: FC<ContainerProps> = ({
-  IDs,
+  parent,
   indentation,
   ...props
 }) => {
-  const partListings = IDs.map((ID) => (
+  const state = blueprintStore(
+    (state) => (parent ? (getPart(parent, state) as Group) : state).partOrder,
+    comparePartOrders, // TODO: do we event need to compare if it fires only on mutation?
+  );
+  const partListings = state.map((ID) => (
     <Listing key={`part-${ID}`} ID={ID} indentation={indentation} />
   ));
 
@@ -50,12 +54,6 @@ export const Container: FC<ContainerProps> = ({
   );
 };
 
-export const ReactiveRootContainer = () => {
-  const state = blueprintStore((state) => state.partOrder, compareIDArrays);
-
-  return <Container indentation={0} IDs={state} />;
-};
-
 interface ListingProps {
   indentation: number;
   ID: PartID;
@@ -67,6 +65,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const initialState = getPart(ID)!;
   const isGroup = initialState.n === 'Group';
+  let lastLabel = initialState.meta.label;
 
   usePartProperty(
     ID,
@@ -92,14 +91,18 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     event.preventDefault();
     buttonRef.current?.focus();
   };
-  const handleLabelDoubleClick = () => {
-    inputRef.current?.focus();
-    inputRef.current?.select();
-  };
+  const handleLabelDoubleClick = () => inputRef.current?.focus();
+  const handleLabelFocus = () => inputRef.current?.select();
   const handleLabelBlur = () => {
-    if (inputRef.current)
-      inputRef.current.value = inputRef.current.value.trim();
-    mutatePart(ID, { meta: { label: inputRef.current?.value } });
+    const newLabel = inputRef.current!.value.trim();
+
+    if (newLabel.length > 0 && newLabel !== lastLabel) {
+      inputRef.current!.value = newLabel;
+      mutatePart(ID, { meta: { label: newLabel } });
+      lastLabel = newLabel;
+    } else {
+      inputRef.current!.value = lastLabel;
+    }
   };
   const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') buttonRef.current?.focus();
@@ -117,18 +120,17 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       } else {
         togglePartSelection(ID);
       }
-    } else {
-      if (event.shiftKey) {
-        const selectionState = blueprintStore.getState().selections;
+    } else if (event.shiftKey) {
+      const selectionState = blueprintStore.getState().selections;
 
-        if (selectionState.last) {
-          selectPartsFromOnly(selectionState.last, ID);
-        } else {
-          selectPartOnly(ID);
-        }
+      if (selectionState.last) {
+        selectPartsFromOnly(selectionState.last, ID);
       } else {
         selectPartOnly(ID);
       }
+    } else {
+      setExpanded((state) => !state);
+      selectPartOnly(ID);
     }
   };
 
@@ -176,6 +178,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
           ref={inputRef}
           onMouseDown={handleLabelMouseDown}
           onDoubleClick={handleLabelDoubleClick}
+          onFocus={handleLabelFocus}
           onBlur={handleLabelBlur}
           onKeyPress={handleLabelKeyPress}
           className={styles.label}
@@ -186,7 +189,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       {isGroup ? (
         <Container
           indentation={indentation + 1}
-          IDs={(initialState as Group).partOrder}
+          parent={ID}
           style={{ display: expanded ? undefined : 'none' }}
         >
           {childParts}

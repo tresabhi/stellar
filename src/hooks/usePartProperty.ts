@@ -8,7 +8,7 @@ const usePartProperty = <T extends AnyPart, S extends any>(
   handler: (slice: S) => void,
 ) => {
   useEffect(() => {
-    subscribeToPart(ID, handler, slicer, {
+    subscribeToPart(ID, (slice) => handler(slice), slicer, {
       fireInitially: true,
       unsubscribeOnUnmount: true,
     });
