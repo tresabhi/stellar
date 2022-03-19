@@ -1567,10 +1567,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.4.tgz#97c69881788e624d7cc68d4385fdaa9b5fd20642"
   integrity sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==
 
-"@react-three/drei@^8.16.5":
-  version "8.18.1"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.18.1.tgz#677b6593547f5438745d1a0c02c70ae1a5a30ba5"
-  integrity sha512-XgwaKf+opNnh/o13aPC83ZueDqFIBPVeXm8vig/zkoP/6QLSOct3Fz2kpDKidyNchtcCqxKoYJ7Do2lnhXZdyg==
+"@react-three/drei@^8.16.7":
+  version "8.16.7"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.16.7.tgz#82a0b4f021a9f562a8c16adc5a440aee2c46fcf2"
+  integrity sha512-EMkm4Te7PoBwjai/helZVQu+0Gx7oEyyGIvRW/mY3Hs0FaXPGlCGhyX9QNFw54nDRpDJMKkZMAQW3KFrjtByqw==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -1959,7 +1959,7 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/lodash@^4.14.179":
+"@types/lodash@^4.14.180":
   version "4.14.180"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.180.tgz#4ab7c9ddfc92ec4a887886483bc14c79fb380670"
   integrity sha512-XOKXa1KIxtNXgASAnwj7cnttJxS4fksBRywK/9LzRV5YxrF80BXZIGeQSuoESQ/VkUj30Ae0+YcuHc15wJCB2g==
@@ -6604,7 +6604,7 @@ node-domexception@^1.0.0:
   resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
   integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
 
-node-downloader-helper@^2.0.1:
+node-downloader-helper@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/node-downloader-helper/-/node-downloader-helper-2.1.0.tgz#f472bc06cd508ea4765ffd70db93f9ae97d7c1bd"
   integrity sha512-MIUI6kEpSzujmys7AkUK+GzfPywrIeNhQIPe1pQgRxM7RYi4/31KZgC7NQOIjXPVQSXM1mVHcY9psvSQVRt1Kg==
@@ -7600,7 +7600,7 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-prettier@^2.5.1:
+prettier@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.0.tgz#12f8f504c4d8ddb76475f441337542fa799207d4"
   integrity sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==
@@ -8987,7 +8987,7 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-three-mesh-bvh@^0.5.4, three-mesh-bvh@^0.5.5:
+three-mesh-bvh@^0.5.4, three-mesh-bvh@^0.5.6:
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.6.tgz#4e5f8316ecfc669c7f97478a359eb6b59e72af02"
   integrity sha512-vxY5amYZLwhsd2X5BtHNXXG0P4XKuIu03q57IynGrHOKXHrnfYLOSOtyi23rnlf8FoZcdlj2fe+bFgIrDxyrmw==
