@@ -7,7 +7,7 @@ import {
   getParentID,
   getPartIndex,
   insertPart,
-  newBlueprint
+  newBlueprint,
 } from 'interfaces/blueprint';
 import { isUndefined, random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
@@ -72,6 +72,8 @@ const ToolBarTop: FC = () => {
         const parentID = getParentID(lastPartID);
         const index = getPartIndex(lastPartID, parentID);
         insertPart(name, parentID, isUndefined(index) ? 0 : index + 1);
+      } else {
+        insertPart(name);
       }
     };
   };
