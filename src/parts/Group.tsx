@@ -1,4 +1,5 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
+import PartCluster from 'components/PartCluster';
 import { memo } from 'react';
 import { PartIDs, PartModule, ReactivePartComponentProps } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
@@ -22,7 +23,7 @@ export const GroupData: Group = {
 };
 
 const GroupLayoutComponent = memo<ReactivePartComponentProps>(({ ID }) => {
-  return <group></group>;
+  return <PartCluster parentID={ID} />;
 }, compareIDProps);
 
 export const GroupIcon = Icon;
