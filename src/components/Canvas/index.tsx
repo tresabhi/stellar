@@ -2,6 +2,7 @@ import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import DesktopCanvasControls from 'components/DesktopCanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
+import PartCluster from 'components/PartCluster';
 import { unselectAllParts } from 'interfaces/selection';
 import { useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
@@ -76,10 +77,10 @@ export const LayoutRenderer = () => {
         color={new Color('#52527A')}
       />
 
-      <group
-        ref={meshRef}
+      <PartCluster
         position={[initialState.offset.x, initialState.offset.y, 0]}
-      ></group>
+        ref={meshRef}
+      />
     </Canvas>
   );
 };

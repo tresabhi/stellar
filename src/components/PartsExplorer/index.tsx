@@ -8,7 +8,7 @@ import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'interfaces/selection';
 import { PartWithMeta } from 'parts/Default';
 import { Group } from 'parts/Group';
@@ -19,7 +19,7 @@ import {
   memo,
   MouseEvent,
   useRef,
-  useState,
+  useState
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
@@ -40,7 +40,7 @@ export const Container: FC<ContainerProps> = ({
     (state) => (parent ? (getPart(parent, state) as Group) : state).partOrder,
     comparePartOrders, // TODO: do we event need to compare if it fires only on mutation?
   );
-  const partListings = state.map((ID) => (
+  const partListing = state.map((ID) => (
     <Listing key={`part-${ID}`} ID={ID} indentation={indentation} />
   ));
 
@@ -49,7 +49,7 @@ export const Container: FC<ContainerProps> = ({
       {...props}
       className={`${props.className ?? ''} ${styles['parts-explorer']}`}
     >
-      {partListings}
+      {partListing}
     </div>
   );
 };

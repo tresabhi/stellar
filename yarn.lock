@@ -1568,9 +1568,9 @@
   integrity sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==
 
 "@react-three/drei@^8.16.7":
-  version "8.16.7"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.16.7.tgz#82a0b4f021a9f562a8c16adc5a440aee2c46fcf2"
-  integrity sha512-EMkm4Te7PoBwjai/helZVQu+0Gx7oEyyGIvRW/mY3Hs0FaXPGlCGhyX9QNFw54nDRpDJMKkZMAQW3KFrjtByqw==
+  version "8.18.1"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.18.1.tgz#677b6593547f5438745d1a0c02c70ae1a5a30ba5"
+  integrity sha512-XgwaKf+opNnh/o13aPC83ZueDqFIBPVeXm8vig/zkoP/6QLSOct3Fz2kpDKidyNchtcCqxKoYJ7Do2lnhXZdyg==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -1973,11 +1973,6 @@
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.5.tgz#1001cc5e6a3704b83c236027e77f2f58ea010f40"
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
-
-"@types/mousetrap@^1.6.9":
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/@types/mousetrap/-/mousetrap-1.6.9.tgz#f1ef9adbd1eac3466f21b6988b1c82c633a45340"
-  integrity sha512-HUAiN65VsRXyFCTicolwb5+I7FM6f72zjMWr+ajGk+YTvzBgXqa2A5U7d+rtsouAkunJ5U4Sb5lNJjo9w+nmXg==
 
 "@types/node@*":
   version "17.0.21"
