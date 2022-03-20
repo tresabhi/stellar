@@ -4,11 +4,7 @@ import {
   mutateBlueprintWithoutHistory,
   mutateParts,
 } from 'interfaces/blueprint';
-import {
-  selectPart,
-  selectPartOnly,
-  togglePartSelection,
-} from 'interfaces/selection';
+import { selectPartOnly } from 'interfaces/selection';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
@@ -22,29 +18,20 @@ const usePartTranslationControls = <
 ) => {
   const getMousePos = useMousePos();
 
+  let selectedInitially = false;
   let initialMouseX: number;
   let initialMouseY: number;
   let deltaX = 0;
   let deltaY = 0;
-  let movedAtAll = false;
-  let wasSelectedInitially = false;
 
   const onPointerUp = (event: PointerEvent) => {
-    event.stopImmediatePropagation();
+    event.stopPropagation();
 
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
 
-    if (deltaX === 0 && deltaY === 0) {
-      if (!movedAtAll && !wasSelectedInitially) {
-        if (event.shiftKey) {
-          togglePartSelection(ID);
-        } else {
-          selectPartOnly(ID);
-        }
-      }
-    } else {
-      // undo changes
+    if (deltaX > 0 || deltaY > 0) {
+      // revert to original offset
       mutateBlueprintWithoutHistory((draft) => {
         mutateParts(
           draft.selections,
@@ -70,7 +57,11 @@ const usePartTranslationControls = <
     const [mouseX, mouseY] = getMousePos();
     const newDeltaX = snap(mouseX - initialMouseX, 1);
     const newDeltaY = snap(mouseY - initialMouseY, 1);
-    movedAtAll = true;
+
+    if (!selectedInitially) {
+      selectPartOnly(ID);
+      selectedInitially = true;
+    }
 
     if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
       mutateBlueprintWithoutHistory((draft) => {
@@ -92,7 +83,6 @@ const usePartTranslationControls = <
   };
   const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(ID) as T | undefined;
-    movedAtAll = false;
 
     if (part) {
       event.stopPropagation();
@@ -104,15 +94,7 @@ const usePartTranslationControls = <
       window.addEventListener('pointerup', onPointerUp);
       window.addEventListener('pointermove', onPointerMove);
 
-      if (!part.meta.selected) {
-        wasSelectedInitially = true;
-
-        if (event.nativeEvent.shiftKey) {
-          selectPart(ID);
-        } else {
-          selectPartOnly(ID);
-        }
-      }
+      selectedInitially = part.meta.selected;
     }
   };
 

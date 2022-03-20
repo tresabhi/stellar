@@ -1,6 +1,8 @@
+import { useHelper } from '@react-three/drei';
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import PartCluster from 'components/PartCluster';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
+import { BoxHelper, Group as ThreeGroup } from 'three';
 import { PartIDs, PartModule, ReactivePartComponentProps } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
 import { DefaultPartData, PartWithMeta } from './Default';
@@ -23,6 +25,11 @@ export const GroupData: Group = {
 };
 
 const GroupLayoutComponent = memo<ReactivePartComponentProps>(({ ID }) => {
+  const mesh = useRef<ThreeGroup>(null!);
+  // const initialState = getPart(ID);
+
+  useHelper(mesh, BoxHelper, 'purple');
+
   return <PartCluster parentID={ID} />;
 }, compareIDProps);
 
