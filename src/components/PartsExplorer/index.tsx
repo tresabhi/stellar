@@ -95,7 +95,13 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   let childParts: JSX.Element[] | undefined;
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    setExpanded((state) => !state);
+    mutateBlueprintWithoutHistory((draft) => {
+      const part = getPart(ID, draft) as Group | undefined;
+
+      if (part) {
+        part.expanded = !part.expanded;
+      }
+    });
   };
   const handleExpandMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
     if (initialState.n === 'Group') event.preventDefault();
@@ -144,13 +150,6 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         selectPartOnly(ID);
       }
     } else {
-      mutateBlueprintWithoutHistory((draft) => {
-        const part = getPart(ID, draft) as Group | undefined;
-
-        if (part) {
-          part.expanded = !part.expanded;
-        }
-      });
       selectPartOnly(ID);
     }
   };
