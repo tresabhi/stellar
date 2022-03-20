@@ -1,10 +1,11 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
+import usePartCanvasSelectionControls from 'hooks/usePartCanvasSelectionControls';
+import usePartTranslationControls from 'hooks/usePartCanvasTranslationControls';
 import usePartMeta from 'hooks/usePartMeta';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
-import usePartTranslationControls from 'hooks/usePartTranslationControls';
 import { getPart } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
 import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
@@ -134,14 +135,16 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
         );
       },
     );
-    const onPointerDown = usePartTranslationControls(ID);
+    const handleClick = usePartCanvasSelectionControls(ID);
+    const handlePointerDown = usePartTranslationControls(ID);
 
     return (
       <mesh
         ref={mesh}
         material={temp_material}
         position={[0, initialState.N.height / 2, 0]}
-        onPointerDown={onPointerDown}
+        onPointerDown={handlePointerDown}
+        onClick={handleClick}
       />
     );
   },

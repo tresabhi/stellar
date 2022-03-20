@@ -2,7 +2,7 @@ import { ThreeEvent } from '@react-three/fiber';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
-  mutateParts,
+  mutateParts
 } from 'interfaces/blueprint';
 import { selectPartOnly } from 'interfaces/selection';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
@@ -11,7 +11,7 @@ import { PartID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
-const usePartTranslationControls = <
+const usePartCanvasTranslationControls = <
   T extends PartWithTransformations & PartWithMeta,
 >(
   ID: PartID,
@@ -24,9 +24,7 @@ const usePartTranslationControls = <
   let deltaX = 0;
   let deltaY = 0;
 
-  const onPointerUp = (event: PointerEvent) => {
-    event.stopPropagation();
-
+  const onPointerUp = () => {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
 
@@ -100,4 +98,4 @@ const usePartTranslationControls = <
 
   return onPointerDown;
 };
-export default usePartTranslationControls;
+export default usePartCanvasTranslationControls;

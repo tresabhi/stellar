@@ -8,7 +8,7 @@ import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection
+  togglePartSelection,
 } from 'interfaces/selection';
 import { PartWithMeta } from 'parts/Default';
 import { Group } from 'parts/Group';
@@ -19,7 +19,7 @@ import {
   memo,
   MouseEvent,
   useRef,
-  useState
+  useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
