@@ -2,7 +2,11 @@ import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-dow
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import usePartProperty from 'hooks/usePartProperty';
-import { getPart, mutatePart } from 'interfaces/blueprint';
+import {
+  getPart,
+  mutateBlueprintWithoutHistory,
+  mutatePart,
+} from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
 import {
   selectPartOnly,
@@ -59,12 +63,14 @@ interface ListingProps {
   ID: PartID;
 }
 export const Listing = memo<ListingProps>(({ indentation, ID }) => {
-  const [expanded, setExpanded] = useState(false);
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const initialState = getPart(ID)!;
   const isGroup = initialState.n === 'Group';
+  const [expanded, setExpanded] = useState(
+    isGroup ? initialState.expanded : false,
+  );
   let lastLabel = initialState.meta.label;
 
   usePartProperty(
@@ -76,6 +82,13 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       } else {
         listingRef.current?.classList.remove(styles.selected);
       }
+    },
+  );
+  usePartProperty(
+    ID,
+    (state: Group) => (isGroup ? state.expanded : false),
+    (expanded) => {
+      setExpanded(expanded);
     },
   );
 
@@ -131,7 +144,13 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         selectPartOnly(ID);
       }
     } else {
-      setExpanded((state) => !state);
+      mutateBlueprintWithoutHistory((draft) => {
+        const part = getPart(ID, draft) as Group | undefined;
+
+        if (part) {
+          part.expanded = !part.expanded;
+        }
+      });
       selectPartOnly(ID);
     }
   };
