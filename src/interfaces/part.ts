@@ -1,5 +1,4 @@
 import { cloneDeep, isArray, isMap, merge } from 'lodash';
-import DefaultPart from 'parts/Default';
 import FuelTank from 'parts/FuelTank';
 import Group from 'parts/Group';
 import {
@@ -17,11 +16,12 @@ import {
   PartModule,
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
+import { getPart } from './blueprint';
 
-const NAMED_PART_MODULES: Record<AnyPartName, PartModule> = {
-  'Fuel Tank': FuelTank,
-  Group: Group,
-};
+const partModules = new Map<AnyPartName, PartModule>([
+  ['Fuel Tank', FuelTank],
+  ['Group', Group],
+]);
 
 export const importifyPart = (
   partData: AnyVanillaPart | AnyPart,
@@ -29,12 +29,10 @@ export const importifyPart = (
 ): AnyPart | undefined => {
   const partModule = getPartModule(partData.n);
 
-  if (partModule) {
-    let newPart = merge(cloneDeep(partModule.data), partData);
-    newPart.meta.parent = parentID;
+  let newPart = merge(cloneDeep(partModule.data), partData);
+  newPart.meta.parent = parentID;
 
-    return newPart;
-  }
+  return newPart;
 };
 
 export const importifyParts = (
@@ -81,17 +79,10 @@ export const importifyParts = (
   }
 };
 
-// export const savifyPartData = (partData: AnyPartType, clone = true) => {};
+export const getPartModule = (partName: AnyPartName) =>
+  partModules.get(partName)!;
 
-export const getPartModule = <D extends boolean>(
-  partName: AnyPartName,
-  useDefault?: D,
-): D extends true ? PartModule : PartModule | undefined => {
-  const module: PartModule | undefined = (NAMED_PART_MODULES as any)[partName];
-
-  if (useDefault) {
-    return module ?? DefaultPart;
-  } else {
-    return module!;
-  }
+export const getPartModuleByID = (ID: PartID, state?: Blueprint) => {
+  const part = getPart(ID, state);
+  if (part) return getPartModule(part.n);
 };

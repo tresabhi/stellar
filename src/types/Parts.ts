@@ -1,6 +1,8 @@
 import { FuelTank, VanillaFuelTank } from 'parts/FuelTank';
 import { Group } from 'parts/Group';
 import { FC } from 'react';
+import { Box2 } from 'three';
+import { Blueprint } from './Blueprint';
 import DeepPartial from './DeepPartial';
 
 export type UUID = string;
@@ -32,6 +34,9 @@ export type PartModule = {
   // meta
   isExportable?: boolean;
   hasTransformations?: boolean;
+
+  // reactive meta
+  getBoundingBox: (ID: PartID, state?: Blueprint) => Box2;
 
   // UI
   Icon: FC<any>;

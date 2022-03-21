@@ -91,15 +91,12 @@ const RightSideBar = () => {
     const partModule = getPartModule(partName);
     const IDs = selectionsByPartNames.get(partName)!;
 
-    if (partModule?.hasTransformations) {
-      partsWithTransformations.push(...IDs);
-    }
+    if (partModule.hasTransformations) partsWithTransformations.push(...IDs);
 
-    if (partModule?.PropertyComponent) {
+    if (partModule.PropertyComponent)
       propertyItems.push(
         <partModule.PropertyComponent key={`type-${partName}`} IDs={IDs} />,
       );
-    }
   });
 
   // TODO: clean up this mess lmao

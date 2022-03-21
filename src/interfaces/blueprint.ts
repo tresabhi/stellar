@@ -282,11 +282,9 @@ export const redo = () => {
 
 const createNewPart = (partName: AnyPartName) => {
   const partModule = getPartModule(partName);
+  let newPart = cloneDeep(partModule.data);
 
-  if (partModule) {
-    let newPart = cloneDeep(partModule.data);
-    return newPart;
-  }
+  return newPart;
 };
 
 export const insertPart = (
@@ -295,23 +293,19 @@ export const insertPart = (
   index = 0,
 ) => {
   mutateBlueprint((draft) => {
-    const partModule = getPartModule(partName);
+    const partID = UUIDV4();
+    const newPart = createNewPart(partName);
 
-    if (partModule) {
-      const partID = UUIDV4();
-      const newPart = createNewPart(partName)!;
+    if (parentID) {
+      const parentPart = getPart(parentID, draft) as Group;
 
-      if (parentID) {
-        const parentPart = getPart(parentID, draft) as Group;
-
-        if (parentPart) {
-          parentPart.partOrder.splice(index, 0, partID);
-          draft.parts.set(partID, newPart);
-        }
-      } else {
-        draft.partOrder.splice(index, 0, partID);
+      if (parentPart) {
+        parentPart.partOrder.splice(index, 0, partID);
         draft.parts.set(partID, newPart);
       }
+    } else {
+      draft.partOrder.splice(index, 0, partID);
+      draft.parts.set(partID, newPart);
     }
   });
 };

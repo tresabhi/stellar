@@ -154,7 +154,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     }
   };
 
-  let Icon = getPartModule(initialState.n, true).Icon;
+  let Icon = getPartModule(initialState.n).Icon;
 
   if (initialState.n === 'Group') {
     childParts = initialState.partOrder.map((part) => {

@@ -24,11 +24,9 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
       const part = getPart(ID);
       if (part) {
         const partModule = getPartModule(part.n);
-        if (partModule) {
-          partListing.push(
-            <partModule.LayoutComponent ID={ID} key={`part-${ID}`} />,
-          );
-        }
+        partListing.push(
+          <partModule.LayoutComponent ID={ID} key={`part-${ID}`} />,
+        );
       }
     });
 

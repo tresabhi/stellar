@@ -8,8 +8,16 @@ import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
 import { getPart } from 'interfaces/blueprint';
 import { FC, memo, useRef } from 'react';
-import { CylinderGeometry, Mesh, MeshStandardMaterial } from 'three';
 import {
+  Box2,
+  CylinderGeometry,
+  Mesh,
+  MeshStandardMaterial,
+  Vector2,
+} from 'three';
+import { Blueprint } from 'types/Blueprint';
+import {
+  PartID,
   PartModule,
   PropertyComponentProps,
   ReactivePartComponentProps,
@@ -189,9 +197,21 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
   );
 };
 
+const getFuelTankBoundingBox = (ID: PartID, state?: Blueprint) => {
+  const part = getPart(ID, state) as FuelTank;
+  return new Box2(
+    new Vector2(part.p.x - (part.N.width_b / 2) * part.o.x, part.p.y),
+    new Vector2(
+      part.p.x + (part.N.width_a / 2) * part.o.y,
+      part.p.y + part.N.height * part.o.y,
+    ),
+  );
+};
+
 const FuelTankPart: PartModule = {
   hasTransformations: true,
   isExportable: true,
+  getBoundingBox: getFuelTankBoundingBox,
   data: FuelTankData,
   Icon: FuelTankIcon,
   PropertyComponent: FuelTankPropertyComponent,

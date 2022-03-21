@@ -1,5 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/question-mark.svg';
 import { memo } from 'react';
+import { Box2 } from 'three';
 import { AnyPart, PartID, PartModule } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
 
@@ -44,6 +45,8 @@ export const DefaultPartIcon = Icon;
 
 const DefaultPart: PartModule = {
   data: DefaultPartData as AnyPart,
+
+  getBoundingBox: () => new Box2(),
 
   Icon: DefaultPartIcon,
   LayoutComponent: DefaultPartLayoutComponent,
