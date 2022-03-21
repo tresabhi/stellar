@@ -30,13 +30,15 @@ export interface ReactivePartComponentProps {
   ID: UUID;
 }
 
+export type BoundingBoxComputer = (state: any, blueprint: Blueprint) => Box2;
+
 export type PartModule = {
   // meta
   isExportable?: boolean;
   hasTransformations?: boolean;
 
   // reactive meta
-  getBoundingBox: (ID: PartID, state?: Blueprint) => Box2;
+  getBoundingBox: BoundingBoxComputer;
 
   // UI
   Icon: FC<any>;

@@ -5,6 +5,7 @@ import PartCluster from 'components/PartCluster';
 import { getPart } from 'interfaces/blueprint';
 import { getPartModuleByID } from 'interfaces/part';
 import { memo, useRef } from 'react';
+import blueprintStore from 'stores/blueprint';
 import { Box2, BoxHelper, Group as ThreeGroup } from 'three';
 import { Blueprint } from 'types/Blueprint';
 import {
@@ -54,7 +55,9 @@ export const getGroupBoundingBox = (ID: PartID, state?: Blueprint) => {
     const partModule = getPartModuleByID(partID);
 
     if (partModule) {
-      groupBoundingBox.union(partModule.getBoundingBox(partID, state));
+      groupBoundingBox.union(
+        partModule.getBoundingBox(partID, state ?? blueprintStore.getState()),
+      );
     }
   });
 

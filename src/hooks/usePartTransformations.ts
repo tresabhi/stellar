@@ -12,18 +12,25 @@ const usePartTransformations = (
   overrides?: (
     state: PartWithTransformations,
   ) => DeepPartial<PartWithTransformations>,
+  callback?: () => void,
 ) => {
   useEffect(() => {
     subscribeToPart(
       ID,
-      (x) => (mesh.current.position.x = x),
+      (x) => {
+        mesh.current.position.x = x;
+        callback?.();
+      },
       (state: PartWithTransformations) =>
         overrides ? overrides(state).p?.x ?? state.p.x : state.p.x,
       { fireInitially: true, unsubscribeOnUnmount: true },
     );
     subscribeToPart(
       ID,
-      (y) => (mesh.current.position.y = y),
+      (y) => {
+        mesh.current.position.y = y;
+        callback?.();
+      },
       (state: PartWithTransformations) =>
         overrides ? overrides(state).p?.y ?? state.p.y : state.p.y,
       { fireInitially: true, unsubscribeOnUnmount: true },
@@ -31,7 +38,10 @@ const usePartTransformations = (
 
     subscribeToPart(
       ID,
-      (z) => (mesh.current.rotation.z = z),
+      (z) => {
+        mesh.current.rotation.z = z;
+        callback?.();
+      },
       (state: PartWithTransformations) =>
         degToRad(overrides ? overrides(state).o?.z ?? state.o.z : state.o.z),
       { fireInitially: true, unsubscribeOnUnmount: true },
@@ -39,14 +49,20 @@ const usePartTransformations = (
 
     subscribeToPart(
       ID,
-      (x) => (mesh.current.scale.x = x),
+      (x) => {
+        mesh.current.scale.x = x;
+        callback?.();
+      },
       (state: PartWithTransformations) =>
         overrides ? overrides(state).o?.x ?? state.o.x : state.o.x,
       { fireInitially: true, unsubscribeOnUnmount: true },
     );
     subscribeToPart(
       ID,
-      (y) => (mesh.current.scale.y = y),
+      (y) => {
+        mesh.current.scale.y = y;
+        callback?.();
+      },
       (state: PartWithTransformations) =>
         overrides ? overrides(state).o?.y ?? state.o.y : state.o.y,
       { fireInitially: true, unsubscribeOnUnmount: true },

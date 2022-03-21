@@ -3,7 +3,7 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
 import usePartCanvasSelectionControls from 'hooks/usePartCanvasSelectionControls';
 import usePartTranslationControls from 'hooks/usePartCanvasTranslationControls';
-import usePartMeta from 'hooks/usePartMeta';
+import usePartOutline from 'hooks/usePartOutline';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
 import { getPart } from 'interfaces/blueprint';
@@ -15,9 +15,7 @@ import {
   MeshStandardMaterial,
   Vector2,
 } from 'three';
-import { Blueprint } from 'types/Blueprint';
 import {
-  PartID,
   PartModule,
   PropertyComponentProps,
   ReactivePartComponentProps,
@@ -123,10 +121,16 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
     const initialState = getPart<FuelTank>(ID)!;
     const mesh = useRef<Mesh>(null!);
 
-    usePartTransformations(ID, mesh, (state) => ({
-      p: { y: state.p.y + (state as FuelTank).N.height / 2 },
-    }));
-    usePartMeta(ID, mesh);
+    const partOutline = usePartOutline(ID, getFuelTankBoundingBox);
+    usePartTransformations(
+      ID,
+      mesh,
+      (state) => ({
+        p: { y: state.p.y + (state as FuelTank).N.height / 2 },
+      }),
+      partOutline.recompute,
+    );
+    // usePartMeta(ID, mesh);
     usePartProperty(
       ID,
       (state: FuelTank) => state.N,
@@ -141,19 +145,23 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
           Math.PI / -2,
           Math.PI,
         );
+        partOutline.recompute();
       },
     );
     const handleClick = usePartCanvasSelectionControls(ID);
     const handlePointerDown = usePartTranslationControls(ID);
 
     return (
-      <mesh
-        ref={mesh}
-        material={temp_material}
-        position={[0, initialState.N.height / 2, 0]}
-        onPointerDown={handlePointerDown}
-        onClick={handleClick}
-      />
+      <>
+        <mesh
+          ref={mesh}
+          material={temp_material}
+          position={[0, initialState.N.height / 2, 0]}
+          onPointerDown={handlePointerDown}
+          onClick={handleClick}
+        />
+        <partOutline.Component />
+      </>
     );
   },
   compareIDProps,
@@ -197,16 +205,17 @@ export const FuelTankPropertyComponent: FC<PropertyComponentProps> = ({
   );
 };
 
-const getFuelTankBoundingBox = (ID: PartID, state?: Blueprint) => {
-  const part = getPart(ID, state) as FuelTank;
-  return new Box2(
-    new Vector2(part.p.x - (part.N.width_b / 2) * part.o.x, part.p.y),
+const getFuelTankBoundingBox = (state: FuelTank) =>
+  new Box2(
     new Vector2(
-      part.p.x + (part.N.width_a / 2) * part.o.y,
-      part.p.y + part.N.height * part.o.y,
+      state.p.x - (Math.max(state.N.width_a, state.N.width_b) / 2) * state.o.x,
+      state.p.y,
+    ),
+    new Vector2(
+      state.p.x + (Math.max(state.N.width_a, state.N.width_b) / 2) * state.o.y,
+      state.p.y + state.N.height * state.o.y,
     ),
   );
-};
 
 const FuelTankPart: PartModule = {
   hasTransformations: true,

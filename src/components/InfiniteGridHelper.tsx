@@ -27,7 +27,7 @@ const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
 
     return (
       // @ts-ignore
-      <mesh {...props} ref={ref} frustumCulled={false}>
+      <mesh ref={ref} frustumCulled={false} {...props}>
         <shaderMaterial
           args={[
             {
