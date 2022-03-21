@@ -3,6 +3,7 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
 import usePartCanvasSelectionControls from 'hooks/usePartCanvasSelectionControls';
 import usePartTranslationControls from 'hooks/usePartCanvasTranslationControls';
+import usePartMeta from 'hooks/usePartMeta';
 import usePartOutline from 'hooks/usePartOutline';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
@@ -130,7 +131,7 @@ export const FuelTankLayoutComponent = memo<ReactivePartComponentProps>(
       }),
       partOutline.recompute,
     );
-    // usePartMeta(ID, mesh);
+    usePartMeta(ID, partOutline.recompute);
     usePartProperty(
       ID,
       (state: FuelTank) => state.N,

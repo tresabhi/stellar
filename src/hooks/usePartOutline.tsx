@@ -12,16 +12,21 @@ const usePartOutline = <T extends AnyPart>(
   const recompute = () => {
     const state = getPart<T>(ID);
     if (state) {
-      const newBoundingBox = computer(state);
-      const geometry = new BufferGeometry().setFromPoints([
-        new Vector2(newBoundingBox.min.x, newBoundingBox.min.y),
-        new Vector2(newBoundingBox.min.x, newBoundingBox.max.y),
-        new Vector2(newBoundingBox.max.x, newBoundingBox.max.y),
-        new Vector2(newBoundingBox.max.x, newBoundingBox.min.y),
-        new Vector2(newBoundingBox.min.x, newBoundingBox.min.y),
-      ]);
-      //@ts-ignore
-      partOutlineRef.current.geometry = geometry;
+      if (state.meta.selected) {
+        const newBoundingBox = computer(state);
+        const geometry = new BufferGeometry().setFromPoints([
+          new Vector2(newBoundingBox.min.x, newBoundingBox.min.y),
+          new Vector2(newBoundingBox.min.x, newBoundingBox.max.y),
+          new Vector2(newBoundingBox.max.x, newBoundingBox.max.y),
+          new Vector2(newBoundingBox.max.x, newBoundingBox.min.y),
+          new Vector2(newBoundingBox.min.x, newBoundingBox.min.y),
+        ]);
+        //@ts-ignore
+        partOutlineRef.current.geometry = geometry;
+      } else {
+        //@ts-ignore
+        partOutlineRef.current.geometry = new BufferGeometry();
+      }
     }
   };
 

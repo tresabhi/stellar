@@ -12,6 +12,15 @@ import styles from './index.module.scss';
 
 const MAJOR_MARK = 5;
 
+/**
+ * ### Layers breakdown
+ *
+ * - 0: Infinite grid helper, axis lines
+ * - 1: Reference images
+ * - 2: Generic parts
+ * - 3: Always on top parts
+ * - 4: Selection outline, tools, etc.
+ */
 export const LayoutRenderer = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
   const infiniteGridRef = useRef<Mesh>(null!);

@@ -67,6 +67,6 @@ const usePartTransformations = (
         overrides ? overrides(state).o?.y ?? state.o.y : state.o.y,
       { fireInitially: true, unsubscribeOnUnmount: true },
     );
-  }, [ID, mesh, overrides]);
+  }, [ID, mesh, overrides, callback]);
 };
 export default usePartTransformations;
