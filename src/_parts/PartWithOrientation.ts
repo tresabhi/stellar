@@ -1,16 +1,9 @@
-import Part, { ExportedPart, SavedPart } from './Part';
-
-export interface ExportedPartWithOrientation extends ExportedPart {
+export interface ExportedPartWithOrientation {
   o: { z: number };
 }
-export interface SavedPartWithOrientation
-  extends SavedPart,
-    ExportedPartWithOrientation {}
+export interface SavedPartWithOrientation extends ExportedPartWithOrientation {}
 
-abstract class PartWithOrientation extends Part<
-  ExportedPartWithOrientation,
-  SavedPartWithOrientation
-> {
+abstract class PartWithOrientation {
   o = { z: 0 };
 }
 export default PartWithOrientation;

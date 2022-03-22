@@ -1,14 +1,9 @@
-import Part, { ExportedPart, SavedPart } from './Part';
-
-export interface ExportedPartWithScale extends ExportedPart {
+export interface ExportedPartWithScale {
   o: { x: number; y: number };
 }
-export interface SavedPartWithScale extends SavedPart, ExportedPartWithScale {}
+export interface SavedPartWithScale extends ExportedPartWithScale {}
 
-abstract class PartWithScale extends Part<
-  ExportedPartWithScale,
-  SavedPartWithScale
-> {
-  o: { x: 0; y: 0 };
+abstract class PartWithScale {
+  o = { x: 0, y: 0 };
 }
 export default PartWithScale;

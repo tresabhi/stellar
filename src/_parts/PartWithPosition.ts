@@ -1,16 +1,9 @@
-import Part, { ExportedPart, SavedPart } from './Part';
-
-export interface ExportedPartWithPosition extends ExportedPart {
+export interface ExportedPartWithPosition {
   p: { x: number; y: number };
 }
-export interface SavedPartWithPosition
-  extends SavedPart,
-    ExportedPartWithPosition {}
+export interface SavedPartWithPosition extends ExportedPartWithPosition {}
 
-abstract class PartWithPosition extends Part<
-  ExportedPartWithPosition,
-  SavedPartWithPosition
-> {
-  p: { x: 0; y: 0 };
+abstract class PartWithPosition {
+  p = { x: 0, y: 0 };
 }
 export default PartWithPosition;

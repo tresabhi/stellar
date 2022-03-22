@@ -1,3 +1,5 @@
+import { mix } from 'ts-mixer';
+import Part, { ExportedPart, SavedPart } from './Part';
 import PartPhysical, {
   ExportedPartPhysical,
   SavedPartPhysical,
@@ -49,7 +51,7 @@ type ShapeTexture =
   | 'Capsule'
   | 'Strut';
 
-export interface ExportedFuelTank extends ExportedPartPhysical {
+export interface ExportedFuelTank extends ExportedPart, ExportedPartPhysical {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -64,10 +66,15 @@ export interface ExportedFuelTank extends ExportedPartPhysical {
   };
 }
 export interface SavedFuelTank
-  extends Omit<SavedPartPhysical, 'n'>,
-    ExportedFuelTank {}
+  extends ExportedFuelTank,
+    Omit<SavedPart, 'n'>,
+    SavedPartPhysical {}
 
-class FuelTank extends PartPhysical {
+interface FuelTank
+  extends Part<ExportedFuelTank, SavedFuelTank>,
+    PartPhysical {}
+@mix(Part, PartPhysical)
+class FuelTank {
   n = 'Fuel Tank';
   N = {
     width_original: 1,
@@ -81,8 +88,6 @@ class FuelTank extends PartPhysical {
     shape_tex: '_' as ShapeTexture,
   };
 
-  constructor() {
-    super();
-  }
+  constructor() {}
 }
 export default FuelTank;

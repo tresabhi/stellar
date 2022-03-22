@@ -2,12 +2,12 @@ import { Mixin } from 'ts-mixer';
 import PartWithOrientation from './PartWithOrientation';
 import PartWithPosition, {
   ExportedPartWithPosition,
-  SavedPartWithPosition,
+  SavedPartWithPosition
 } from './PartWithPosition';
 import PartWithScale from './PartWithScale';
 import PartWithTemperature, {
   ExportedPartWithTemperature,
-  SavedPartWithTemperature,
+  SavedPartWithTemperature
 } from './PartWithTemperature';
 
 export interface ExportedPartPhysical
@@ -23,14 +23,10 @@ export interface SavedPartPhysical
   // conflict between SavedPartWithOrientation and SavedPartWithScale
 }
 
-abstract class PartPhysical extends Mixin(
+class PartPhysical extends Mixin(
   PartWithPosition,
   PartWithOrientation,
   PartWithScale,
   PartWithTemperature,
-) {
-  constructor() {
-    super();
-  }
-}
+) {}
 export default PartPhysical;
