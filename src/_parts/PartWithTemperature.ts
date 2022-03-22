@@ -3,14 +3,14 @@ import Part, { ExportedPart, SavedPart } from './Part';
 export interface ExportedPartWithTemperature extends ExportedPart {
   t: '-Infinity';
 }
-export interface SavedPartWithTemperature extends SavedPart {
-  temperature: '-Infinity';
-}
+export interface SavedPartWithTemperature
+  extends SavedPart,
+    ExportedPartWithTemperature {}
 
 abstract class PartWithTemperature extends Part<
   ExportedPartWithTemperature,
   SavedPartWithTemperature
 > {
-  readonly temperature = '-Infinity';
+  readonly t = '-Infinity';
 }
 export default PartWithTemperature;

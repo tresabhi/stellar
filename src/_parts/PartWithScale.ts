@@ -1,17 +1,14 @@
-import { Vector2 } from 'three';
 import Part, { ExportedPart, SavedPart } from './Part';
 
 export interface ExportedPartWithScale extends ExportedPart {
   o: { x: number; y: number };
 }
-export interface SavedPartWithScale extends SavedPart {
-  scale: { x: number; y: number };
-}
+export interface SavedPartWithScale extends SavedPart, ExportedPartWithScale {}
 
 abstract class PartWithScale extends Part<
   ExportedPartWithScale,
   SavedPartWithScale
 > {
-  scale = new Vector2(1, 1);
+  o: { x: 0; y: 0 };
 }
 export default PartWithScale;
