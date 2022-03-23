@@ -1567,10 +1567,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.4.tgz#97c69881788e624d7cc68d4385fdaa9b5fd20642"
   integrity sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==
 
-"@react-three/drei@^8.18.6":
-  version "8.18.6"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.18.6.tgz#35cebce8b298773acdfb9f261570ec5a68e6807c"
-  integrity sha512-MXkqaQQ456a0Mss93blUs+J+Obd3GVFwJiYPmbYOktxzMgRS7U078IhnCdFXElL8LRxpySF/zoIJFknmkGzSbg==
+"@react-three/drei@^8.18.10":
+  version "8.18.10"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.18.10.tgz#fd4b15c149c3c6ec4bf418cf20b55aa1efdbae28"
+  integrity sha512-frlJ6JEERIxj5NftUEbIHuerXUHvBXi34dF/MT4tfDUSOkNnfQr5eZyA72+Kbow75Lluq3jL65unyIxV+pJeFw==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -2038,10 +2038,10 @@
     "@types/history" "^4.7.11"
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.41":
-  version "17.0.41"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.41.tgz#6e179590d276394de1e357b3f89d05d7d3da8b85"
-  integrity sha512-chYZ9ogWUodyC7VUTRBfblysKLjnohhFY9bGLwvnUFFy48+vB9DikmB3lW0qTFmBcKSzmdglcvkHK71IioOlDA==
+"@types/react@*", "@types/react@^17.0.42":
+  version "17.0.42"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.42.tgz#8242b9219bf8a911c47f248e327206fea3f4ee5a"
+  integrity sha512-nuab3x3CpJ7VFeNA+3HTUuEkvClYHXqWtWd7Ud6AZYW7Z3NH9WKtgU+tFB0ZLcHq+niB/HnzLcaZPqMJ95+k5Q==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -8987,10 +8987,10 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-three-mesh-bvh@^0.5.4, three-mesh-bvh@^0.5.6:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.6.tgz#4e5f8316ecfc669c7f97478a359eb6b59e72af02"
-  integrity sha512-vxY5amYZLwhsd2X5BtHNXXG0P4XKuIu03q57IynGrHOKXHrnfYLOSOtyi23rnlf8FoZcdlj2fe+bFgIrDxyrmw==
+three-mesh-bvh@^0.5.4, three-mesh-bvh@^0.5.7:
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.7.tgz#bb5620dc4cf213f0ea29c8638347312c81dbfb2b"
+  integrity sha512-CASFj3/3WKQ68S6E3vUNVTPyz9qHPJIDYvO4pEYMTUY0NOGCunz/mMnn71S3TKlDKamYPZO4PMv9SDN8SVBIEA==
 
 three-stdlib@^2.8.7:
   version "2.8.8"
