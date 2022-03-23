@@ -7,6 +7,7 @@ import {
   SavifiedBlueprint,
   VanillaBlueprint,
 } from 'types/Blueprint';
+import DeepPartial from 'types/DeepPartial';
 import {
   AnyPart,
   AnyPartName,
@@ -16,7 +17,7 @@ import {
   PartModule,
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
-import { getPart } from './blueprint';
+import Part, { PartExport } from '_parts/Part';
 
 const partModules = new Map<AnyPartName, PartModule>([
   ['Fuel Tank', FuelTank],
@@ -79,10 +80,46 @@ export const importifyParts = (
   }
 };
 
-export const getPartModule = (partName: AnyPartName) =>
-  partModules.get(partName)!;
+//@ts-ignore
+const nonExportableKeys = Object.keys(new Part());
+nonExportableKeys.splice(nonExportableKeys.indexOf('n'), 1);
+export const basicExport = <T extends PartExport>(
+  part: Part<T>,
+  otherNonExportableKeys: string[] = [],
+) => {
+  const DONT_EXPORT = [...otherNonExportableKeys, ...nonExportableKeys];
+  const clonedPart = cloneDeep(part);
+  let exportObj: Partial<T> = {};
 
-export const getPartModuleByID = (ID: PartID, state?: Blueprint) => {
-  const part = getPart(ID, state);
-  if (part) return getPartModule(part.n);
+  Object.keys(clonedPart).forEach((key) => {
+    const value = (clonedPart as any)[key];
+
+    if (typeof value !== 'function' && !DONT_EXPORT.includes(key)) {
+      (exportObj as any)[key] = value;
+    }
+  });
+
+  return exportObj as T;
+};
+
+export const basicImport = <T extends PartExport>(
+  part: Part<T>,
+  data: DeepPartial<T>,
+) => {
+  merge(part, data);
+};
+
+export const basicSave = <T extends PartExport>(part: Part<T>) => {
+  const clonedPart = cloneDeep(part);
+  let exportObj: Partial<T> = {};
+
+  Object.keys(clonedPart).forEach((key) => {
+    const value = (clonedPart as any)[key];
+
+    if (typeof value !== 'function') {
+      (exportObj as any)[key] = value;
+    }
+  });
+
+  return exportObj as T;
 };

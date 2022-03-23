@@ -1,9 +1,11 @@
-import { mix } from 'ts-mixer';
-import Part, { ExportedPart, SavedPart } from './Part';
-import PartPhysical, {
-  ExportedPartPhysical,
-  SavedPartPhysical,
-} from './PartPhysical';
+import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import { FC } from 'react';
+import { Box2, Vector2 } from 'three';
+import {
+  PropertyComponentProps,
+  ReactivePartComponentProps,
+} from 'types/Parts';
+import PartWithTransformations from './PartWithTransformations';
 
 type ColorTexture =
   | '_'
@@ -32,6 +34,7 @@ type ColorTexture =
   | 'Array'
   | 'Arrows'
   | 'Strut_Gray';
+
 type ShapeTexture =
   | '_'
   | 'Flat'
@@ -51,7 +54,7 @@ type ShapeTexture =
   | 'Capsule'
   | 'Strut';
 
-export interface ExportedFuelTank extends ExportedPart, ExportedPartPhysical {
+export interface FuelTankData {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -65,17 +68,12 @@ export interface ExportedFuelTank extends ExportedPart, ExportedPartPhysical {
     shape_tex: ShapeTexture;
   };
 }
-export interface SavedFuelTank
-  extends ExportedFuelTank,
-    Omit<SavedPart, 'n'>,
-    SavedPartPhysical {}
 
-interface FuelTank
-  extends Part<ExportedFuelTank, SavedFuelTank>,
-    PartPhysical {}
-@mix(Part, PartPhysical)
-class FuelTank {
-  n = 'Fuel Tank';
+class FuelTank
+  extends PartWithTransformations<FuelTankData>
+  implements FuelTankData
+{
+  readonly n = 'Fuel Tank';
   N = {
     width_original: 1,
     width_a: 1,
@@ -88,6 +86,27 @@ class FuelTank {
     shape_tex: '_' as ShapeTexture,
   };
 
-  constructor() {}
+  Icon = Icon;
+
+  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
+  PropertyComponent: FC<PropertyComponentProps> = () => null;
+
+  updateBoundingBox() {
+    this.boundingBox = new Box2(
+      new Vector2(
+        this.p.x - (Math.max(this.N.width_a, this.N.width_b) / 2) * this.o.x,
+        this.p.y,
+      ),
+      new Vector2(
+        this.p.x + (Math.max(this.N.width_a, this.N.width_b) / 2) * this.o.y,
+        this.p.y + this.N.height * this.o.y,
+      ),
+    );
+  }
+
+  constructor() {
+    super();
+    this.updateBoundingBox();
+  }
 }
 export default FuelTank;

@@ -22,7 +22,7 @@ _❕ Higher the index of the road map, the lesser detailed it is._
 1. Property editing
    1. [x] Basic part based property editing
    2. [x] Part with transformations editing
-   3. [ ] Part translations through canvas
+   3. [x] Part translations through canvas
    4. [ ] Missing property type UIs
    5. [ ] Number value input box redo
    6. [ ] Part-type specific canvas editing

@@ -1,7 +1,8 @@
-import { FuelTank, VanillaFuelTank } from 'parts/FuelTank';
-import { Group } from 'parts/Group';
+import { VanillaFuelTank } from 'parts/FuelTank';
 import { FC } from 'react';
 import { Box2 } from 'three';
+import FuelTank from '_parts/FuelTank';
+import Group from '_parts/Group';
 import { Blueprint } from './Blueprint';
 import DeepPartial from './DeepPartial';
 
