@@ -86,10 +86,7 @@ class FuelTank
     shape_tex: '_' as ShapeTexture,
   };
 
-  Icon = Icon;
-
-  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
-  PropertyComponent: FC<PropertyComponentProps> = () => null;
+  exportable = true;
 
   updateBoundingBox() {
     this.boundingBox = new Box2(
@@ -108,5 +105,9 @@ class FuelTank
     super();
     this.updateBoundingBox();
   }
+
+  Icon = Icon;
+  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
+  PropertyComponent: FC<PropertyComponentProps> = () => null;
 }
 export default FuelTank;

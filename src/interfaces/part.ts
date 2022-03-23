@@ -1,6 +1,6 @@
 import { cloneDeep, isArray, isMap, merge } from 'lodash';
-import FuelTank from 'parts/FuelTank';
-import Group from 'parts/Group';
+import FuelTank from 'classes/Blueprint/parts/FuelTank';
+import Group from 'classes/Blueprint/parts/Group';
 import {
   AnyPartMap,
   Blueprint,
@@ -17,7 +17,7 @@ import {
   PartModule,
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
-import Part, { PartExport } from '_parts/Part';
+import Part, { PartExport } from 'classes/Blueprint/parts/Part';
 
 const partModules = new Map<AnyPartName, PartModule>([
   ['Fuel Tank', FuelTank],

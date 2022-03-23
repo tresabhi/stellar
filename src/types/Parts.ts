@@ -1,8 +1,7 @@
-import { VanillaFuelTank } from 'parts/FuelTank';
 import { FC } from 'react';
 import { Box2 } from 'three';
-import FuelTank from '_parts/FuelTank';
-import Group from '_parts/Group';
+import FuelTank, { FuelTankData } from 'classes/Blueprint/parts/FuelTank';
+import Group from 'classes/Blueprint/parts/Group';
 import { Blueprint } from './Blueprint';
 import DeepPartial from './DeepPartial';
 
@@ -11,15 +10,12 @@ export type UUID = string;
 export type PartID = UUID;
 export type PartIDs = PartID[];
 
-// BIG TODO: Add vanilla part types
 export type AnyPart = FuelTank | Group;
-export type AnyVanillaPart = VanillaFuelTank;
+export type AnyVanillaPart = FuelTankData;
 
-export type AnyPartName = AnyVanillaPartName | 'Group';
-export type AnyVanillaPartName = 'Fuel Tank';
+export type AnyPartName = 'Fuel Tank' | 'Group';
 
 export type AnyPartialPartType = DeepPartial<AnyPart>;
-export type AnyPartialVanillaPartType = DeepPartial<AnyVanillaPart>;
 
 export interface PartComponentProps {
   part: AnyPart;

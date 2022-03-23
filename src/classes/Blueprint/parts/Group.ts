@@ -13,9 +13,7 @@ class Group extends Part<null> implements GroupData {
   readonly n = 'Group';
   partOrder: PartIDs = [];
 
-  Icon = Icon;
-
-  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
+  exportable = true;
 
   updateBoundingBox = () => {
     let newBoundingBox = new Box2(new Vector2(0, 0), new Vector2(0, 0));
@@ -26,5 +24,8 @@ class Group extends Part<null> implements GroupData {
 
     return newBoundingBox;
   };
+
+  Icon = Icon;
+  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
 }
 export default Group;

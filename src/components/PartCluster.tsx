@@ -1,7 +1,7 @@
 import { GroupProps } from '@react-three/fiber';
 import { getPart } from 'interfaces/blueprint';
 import { getPartModule } from 'interfaces/part';
-import { Group as GroupPart } from 'parts/Group';
+import { Group as GroupPart } from 'classes/Blueprint/parts/Group';
 import { forwardRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';

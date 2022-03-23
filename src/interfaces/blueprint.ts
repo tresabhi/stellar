@@ -1,7 +1,7 @@
 import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isUndefined, merge } from 'lodash';
 import { PartWithMeta, PartWithTransformations } from 'parts/Default';
-import { Group } from 'parts/Group';
+import { Group } from 'classes/Blueprint/parts/Group';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,

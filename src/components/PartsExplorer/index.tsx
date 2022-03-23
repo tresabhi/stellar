@@ -15,7 +15,7 @@ import {
   togglePartSelection,
 } from 'interfaces/selection';
 import { PartWithMeta } from 'parts/Default';
-import { Group } from 'parts/Group';
+import { Group } from 'classes/Blueprint/parts/Group';
 import {
   FC,
   InputHTMLAttributes,

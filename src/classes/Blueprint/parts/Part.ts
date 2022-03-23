@@ -28,12 +28,9 @@ abstract class Part<T extends PartExport> implements PartData {
   hidden = false;
   locked = false;
 
-  abstract Icon: FC;
-
-  abstract LayoutComponent: FC<ReactivePartComponentProps>;
-  PropertyComponent?: FC<PropertyComponentProps>;
-
   boundingBox = new Box2();
+  abstract exportable: boolean;
+
   abstract updateBoundingBox(): void;
 
   import(data: DeepPartial<T & PartData>) {
@@ -48,6 +45,10 @@ abstract class Part<T extends PartExport> implements PartData {
   save() {
     return basicSave<T>(this);
   }
+
+  abstract Icon: FC;
+  abstract LayoutComponent: FC<ReactivePartComponentProps>;
+  PropertyComponent?: FC<PropertyComponentProps>;
 
   constructor() {
     this.ID = UUIDV4();
