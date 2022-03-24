@@ -3,17 +3,20 @@ import { getPart } from 'interfaces/blueprint';
 import { FC } from 'react';
 import { Box2, Vector2 } from 'three';
 import { PartIDs, ReactivePartComponentProps } from 'types/Parts';
-import Part, { PartData } from './Part';
+import Part, { SavedPart } from './Part';
 
-export interface GroupData extends PartData {
+export interface GroupData extends SavedPart {
+  n: 'Group';
+  expanded: boolean;
   partOrder: PartIDs;
 }
 
-class Group extends Part<null> implements GroupData {
+class Group extends Part<GroupData> implements GroupData {
   readonly n = 'Group';
+  expanded = false;
   partOrder: PartIDs = [];
 
-  exportable = true;
+  hasTransformations = false;
 
   updateBoundingBox = () => {
     let newBoundingBox = new Box2(new Vector2(0, 0), new Vector2(0, 0));
@@ -25,7 +28,10 @@ class Group extends Part<null> implements GroupData {
     return newBoundingBox;
   };
 
-  Icon = Icon;
-  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
+  static IconComponent = Icon;
+  static LayoutComponent: FC<ReactivePartComponentProps> = () => null;
 }
 export default Group;
+
+const test = new Group();
+test.export();

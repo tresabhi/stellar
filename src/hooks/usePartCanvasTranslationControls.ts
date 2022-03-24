@@ -1,19 +1,17 @@
 import { ThreeEvent } from '@react-three/fiber';
+import PartWithTransformations from 'classes/Blueprint/parts/PartWithTransformations';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
-  mutateParts
+  mutateParts,
 } from 'interfaces/blueprint';
 import { selectPartOnly } from 'interfaces/selection';
-import { PartWithMeta, PartWithTransformations } from 'parts/Default';
 import blueprintStore from 'stores/blueprint';
 import { PartID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
-const usePartCanvasTranslationControls = <
-  T extends PartWithTransformations & PartWithMeta,
->(
+const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
   ID: PartID,
 ) => {
   const getMousePos = useMousePos();
@@ -31,24 +29,20 @@ const usePartCanvasTranslationControls = <
     if (deltaX > 0 || deltaY > 0) {
       // revert to original offset
       mutateBlueprintWithoutHistory((draft) => {
-        mutateParts(
+        mutateParts<Type>(
           draft.selections,
-          (state) => ({
-            p: {
-              x: (state as PartWithTransformations).p.x - deltaX,
-              y: (state as PartWithTransformations).p.y - deltaY,
-            },
-          }),
+          (state) => {
+            state.p.x -= deltaX;
+            state.p.y -= deltaY;
+          },
           draft,
         );
       });
       // apply them again with history
-      mutateParts(blueprintStore.getState().selections, (state) => ({
-        p: {
-          x: (state as PartWithTransformations).p.x + deltaX,
-          y: (state as PartWithTransformations).p.y + deltaY,
-        },
-      }));
+      mutateParts<Type>(blueprintStore.getState().selections, (state) => {
+        state.p.x += deltaX;
+        state.p.y += deltaY;
+      });
     }
   };
   const onPointerMove = () => {
@@ -63,14 +57,12 @@ const usePartCanvasTranslationControls = <
 
     if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
       mutateBlueprintWithoutHistory((draft) => {
-        mutateParts(
+        mutateParts<Type>(
           blueprintStore.getState().selections,
-          (state) => ({
-            p: {
-              x: (state as PartWithTransformations).p.x - deltaX + newDeltaX,
-              y: (state as PartWithTransformations).p.y - deltaY + newDeltaY,
-            },
-          }),
+          (state) => {
+            state.p.x += newDeltaX - deltaX;
+            state.p.y += newDeltaY - deltaY;
+          },
           draft,
         );
       });
@@ -80,7 +72,7 @@ const usePartCanvasTranslationControls = <
     deltaY = newDeltaY;
   };
   const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
-    const part = getPart(ID) as T | undefined;
+    const part = getPart(ID) as Type | undefined;
 
     if (part) {
       event.stopPropagation();
@@ -92,7 +84,7 @@ const usePartCanvasTranslationControls = <
       window.addEventListener('pointerup', onPointerUp);
       window.addEventListener('pointermove', onPointerMove);
 
-      selectedInitially = part.meta.selected;
+      selectedInitially = part.selected;
     }
   };
 

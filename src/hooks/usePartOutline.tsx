@@ -12,7 +12,7 @@ const usePartOutline = <T extends AnyPart>(
   const recompute = () => {
     const state = getPart<T>(ID);
     if (state) {
-      if (state.meta.selected) {
+      if (state.selected) {
         const newBoundingBox = computer(state);
         const geometry = new BufferGeometry().setFromPoints([
           new Vector2(newBoundingBox.min.x, newBoundingBox.min.y),

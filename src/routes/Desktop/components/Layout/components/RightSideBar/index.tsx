@@ -4,7 +4,7 @@ import * as SideBar from 'components/SideBar';
 import useUnitInputController from 'hooks/useUnitInputController';
 import produce from 'immer';
 import { getPart, mutateBlueprint } from 'interfaces/blueprint';
-import { getPartModule } from 'interfaces/part';
+import { getPartClass } from 'interfaces/part';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
@@ -70,7 +70,7 @@ const RightSideBar = () => {
       }),
     );
 
-  let selectionsByPartNames: Map<AnyPartName, PartIDs> = new Map();
+  const selectionsByPartNames: Map<AnyPartName, PartIDs> = new Map();
   selections.forEach((selection) => {
     const part = getPart(selection);
 
@@ -88,18 +88,16 @@ const RightSideBar = () => {
   ).sort();
   let propertyItems: JSX.Element[] = [];
   selectedPartNames.forEach((partName) => {
-    const partModule = getPartModule(partName);
     const IDs = selectionsByPartNames.get(partName)!;
+    const partClass = getPartClass(partName);
 
-    if (partModule.hasTransformations) partsWithTransformations.push(...IDs);
+    if (partClass.hasTransformations) partsWithTransformations.push(...IDs);
 
-    if (partModule.PropertyComponent)
+    if (partClass.PropertyComponent)
       propertyItems.push(
-        <partModule.PropertyComponent key={`type-${partName}`} IDs={IDs} />,
+        <partClass.PropertyComponent key={`type-${partName}`} IDs={IDs} />,
       );
   });
-
-  // TODO: clean up this mess lmao
 
   if (partsWithTransformations.length > 0) {
     propertyItems.unshift(

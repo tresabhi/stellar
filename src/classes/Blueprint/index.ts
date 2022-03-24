@@ -21,13 +21,13 @@ class Blueprint {
     let exportedParts: AnyVanillaPart[] = [];
 
     this.partOrder.forEach((partID) => {
-      const currentExport = this.parts.get(partID)!.export();
+      const currentExport = this.parts.get(partID)?.export();
 
       if (currentExport) {
         if (isArray(currentExport)) {
           exportedParts.push(...currentExport);
         } else {
-          exportedParts.push(currentExport);
+          exportedParts.push(currentExport as AnyVanillaPart);
         }
       }
     });

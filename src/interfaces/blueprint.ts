@@ -1,16 +1,17 @@
+import Group from 'classes/Blueprint/parts/Group';
+import Part from 'classes/Blueprint/parts/Part';
+import PartWithTransformations from 'classes/Blueprint/parts/PartWithTransformations';
 import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isUndefined, merge } from 'lodash';
-import { PartWithMeta, PartWithTransformations } from 'parts/Default';
-import { Group } from 'classes/Blueprint/parts/Group';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore,
+  BlueprintPatchHistoryStore
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartName, PartID, PartIDs } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
 import { Blueprint, VanillaBlueprint } from '../types/Blueprint';
-import { getPartModule, importifyParts } from './part';
+import { getPartClass, importifyParts } from './part';
 
 // todo: make this data driven
 // 0 is infinite undo/redo limit
@@ -90,7 +91,7 @@ export const getParentID = (ID: PartID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
   const part = getPart(ID, blueprintState);
 
-  if (part) return part.meta.parent;
+  if (part) return part.parentID;
 };
 
 export const getParent = (ID: PartID, state?: Blueprint): Group | undefined => {
@@ -98,34 +99,27 @@ export const getParent = (ID: PartID, state?: Blueprint): Group | undefined => {
   if (parentID) return getPart(parentID, state);
 };
 
-export const mutatePart = (
+export const mutatePart = <T extends Part>(
   ID: PartID,
-  newState:
-    | DeepPartial<AnyPart>
-    | ((prevState: AnyPart) => DeepPartial<AnyPart>),
+  mutator: (draft: T) => void,
   state?: Blueprint,
-) => mutateParts([ID], newState, state);
+) => {
+  mutateParts([ID], mutator, state);
+};
 
-export const mutateParts = (
+export const mutateParts = <T extends Part>(
   IDs: PartIDs,
-  nextState:
-    | DeepPartial<AnyPart>
-    | ((prevState: AnyPart) => DeepPartial<AnyPart>),
+  mutator: (draft: T) => void,
   state?: Blueprint,
 ) => {
   if (state) {
     IDs.forEach((ID) => {
-      let part = getPart(ID, state);
-
-      if (part)
-        merge(
-          part,
-          typeof nextState === 'function' ? nextState(part) : nextState,
-        );
+      let part = getPart(ID, state) as T | undefined;
+      if (part) mutator(part);
     });
   } else {
     mutateBlueprint((draft) => {
-      mutateParts(IDs, nextState, draft);
+      mutateParts(IDs, mutator, draft);
     });
   }
 };
@@ -142,8 +136,7 @@ export const getReactivePart = <T extends AnyPart, S>(
 export const translateParts = (IDs: PartIDs, x: number, y: number) => {
   mutateBlueprint((draft) => {
     IDs.forEach((selection) => {
-      let part = getPart(selection, draft) as PartWithTransformations &
-        PartWithMeta;
+      let part = getPart(selection, draft) as PartWithTransformations;
 
       part.p.x += x;
       part.p.y += y;
@@ -281,8 +274,8 @@ export const redo = () => {
 };
 
 const createNewPart = (partName: AnyPartName) => {
-  const partModule = getPartModule(partName);
-  let newPart = cloneDeep(partModule.data);
+  const PartClass = getPartClass(partName);
+  let newPart = new PartClass();
 
   return newPart;
 };
@@ -340,7 +333,7 @@ export const groupParts = (IDs: PartIDs, replaceID: PartID) => {
       const currentPart = getPart(ID, draft);
       const spliceIndex = currentParent.partOrder.indexOf(ID);
 
-      if (currentPart) currentPart.meta.parent = newGroupID;
+      if (currentPart) currentPart.parentID = newGroupID;
       if (spliceIndex !== -1) currentParent.partOrder.splice(spliceIndex, 1);
     });
   });
@@ -354,6 +347,3 @@ export const groupPartsBySelection = () => {
     blueprintState.selections[blueprintState.selections.length - 1],
   );
 };
-
-//@ts-ignore
-window.lol = groupPartsBySelection;

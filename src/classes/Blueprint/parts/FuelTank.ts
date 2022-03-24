@@ -5,7 +5,9 @@ import {
   PropertyComponentProps,
   ReactivePartComponentProps,
 } from 'types/Parts';
-import PartWithTransformations from './PartWithTransformations';
+import PartWithTransformations, {
+  ExportedPartWithTransformations,
+} from './PartWithTransformations';
 
 type ColorTexture =
   | '_'
@@ -54,7 +56,7 @@ type ShapeTexture =
   | 'Capsule'
   | 'Strut';
 
-export interface FuelTankData {
+export interface FuelTankData extends ExportedPartWithTransformations {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -86,8 +88,6 @@ class FuelTank
     shape_tex: '_' as ShapeTexture,
   };
 
-  exportable = true;
-
   updateBoundingBox() {
     this.boundingBox = new Box2(
       new Vector2(
@@ -106,8 +106,8 @@ class FuelTank
     this.updateBoundingBox();
   }
 
-  Icon = Icon;
-  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
-  PropertyComponent: FC<PropertyComponentProps> = () => null;
+  static IconComponent = Icon;
+  static LayoutComponent: FC<ReactivePartComponentProps> = () => null;
+  static PropertyComponent: FC<PropertyComponentProps> = () => null;
 }
 export default FuelTank;

@@ -4,8 +4,8 @@ type NullIfSame = <T1, T2>(source1: T1, source2: T2) => DeepPartial<T1>;
 
 const nullIfSame: NullIfSame = (source1, source2) => {
   const keys = Object.keys(source1);
-  let obj1 = source1 as any;
-  let obj2 = source2 as any;
+  const obj1 = source1 as any;
+  const obj2 = source2 as any;
 
   keys.forEach((key) => {
     if (typeof obj1[key] === 'object') {

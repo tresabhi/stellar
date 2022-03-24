@@ -1,37 +1,37 @@
-import { cloneDeep, isArray, isMap, merge } from 'lodash';
 import FuelTank from 'classes/Blueprint/parts/FuelTank';
 import Group from 'classes/Blueprint/parts/Group';
+import { cloneDeep, isArray, isMap } from 'lodash';
 import {
   AnyPartMap,
   Blueprint,
   SavifiedBlueprint,
   VanillaBlueprint,
 } from 'types/Blueprint';
-import DeepPartial from 'types/DeepPartial';
 import {
   AnyPart,
+  AnyPartClass,
   AnyPartName,
-  AnyVanillaPart,
+  AnySavedPart,
   PartID,
   PartIDs,
-  PartModule,
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
-import Part, { PartExport } from 'classes/Blueprint/parts/Part';
 
-const partModules = new Map<AnyPartName, PartModule>([
+const PartClasses = new Map<AnyPartName, AnyPartClass>([
   ['Fuel Tank', FuelTank],
   ['Group', Group],
 ]);
 
-export const importifyPart = (
-  partData: AnyVanillaPart | AnyPart,
+export const importifyPart = <Type extends AnySavedPart>(
+  partData: Type,
   parentID?: PartID,
 ): AnyPart | undefined => {
-  const partModule = getPartModule(partData.n);
+  const PartClass = getPartClass(partData.n);
+  let newPart = new PartClass();
 
-  let newPart = merge(cloneDeep(partModule.data), partData);
-  newPart.meta.parent = parentID;
+  // TODO: find a way to remove this any
+  newPart.import(partData as any);
+  newPart.parentID = parentID;
 
   return newPart;
 };
@@ -80,46 +80,4 @@ export const importifyParts = (
   }
 };
 
-//@ts-ignore
-const nonExportableKeys = Object.keys(new Part());
-nonExportableKeys.splice(nonExportableKeys.indexOf('n'), 1);
-export const basicExport = <T extends PartExport>(
-  part: Part<T>,
-  otherNonExportableKeys: string[] = [],
-) => {
-  const DONT_EXPORT = [...otherNonExportableKeys, ...nonExportableKeys];
-  const clonedPart = cloneDeep(part);
-  let exportObj: Partial<T> = {};
-
-  Object.keys(clonedPart).forEach((key) => {
-    const value = (clonedPart as any)[key];
-
-    if (typeof value !== 'function' && !DONT_EXPORT.includes(key)) {
-      (exportObj as any)[key] = value;
-    }
-  });
-
-  return exportObj as T;
-};
-
-export const basicImport = <T extends PartExport>(
-  part: Part<T>,
-  data: DeepPartial<T>,
-) => {
-  merge(part, data);
-};
-
-export const basicSave = <T extends PartExport>(part: Part<T>) => {
-  const clonedPart = cloneDeep(part);
-  let exportObj: Partial<T> = {};
-
-  Object.keys(clonedPart).forEach((key) => {
-    const value = (clonedPart as any)[key];
-
-    if (typeof value !== 'function') {
-      (exportObj as any)[key] = value;
-    }
-  });
-
-  return exportObj as T;
-};
+export const getPartClass = (name: AnyPartName) => PartClasses.get(name)!;

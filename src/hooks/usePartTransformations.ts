@@ -1,5 +1,5 @@
+import PartWithTransformations from 'classes/Blueprint/parts/PartWithTransformations';
 import { subscribeToPart } from 'interfaces/blueprint';
-import { PartWithTransformations } from 'parts/Default';
 import { MutableRefObject, useEffect } from 'react';
 import { Group, Mesh } from 'three';
 import { degToRad } from 'three/src/math/MathUtils';

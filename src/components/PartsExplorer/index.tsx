@@ -1,21 +1,21 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
+import Group from 'classes/Blueprint/parts/Group';
+import Part from 'classes/Blueprint/parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
   mutatePart,
 } from 'interfaces/blueprint';
-import { getPartModule } from 'interfaces/part';
+import { getPartClass } from 'interfaces/part';
 import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
   togglePartSelection,
 } from 'interfaces/selection';
-import { PartWithMeta } from 'parts/Default';
-import { Group } from 'classes/Blueprint/parts/Group';
 import {
   FC,
   InputHTMLAttributes,
@@ -71,13 +71,13 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const [expanded, setExpanded] = useState(
     isGroup ? initialState.expanded : false,
   );
-  let lastLabel = initialState.meta.label;
+  let lastLabel = initialState.label;
 
   usePartProperty(
     ID,
-    (state: PartWithMeta) => state.meta,
-    (meta) => {
-      if (meta.selected) {
+    (state: Part) => state.selected,
+    (selected) => {
+      if (selected) {
         listingRef.current?.classList.add(styles.selected);
       } else {
         listingRef.current?.classList.remove(styles.selected);
@@ -117,7 +117,9 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
 
     if (newLabel.length > 0 && newLabel !== lastLabel) {
       inputRef.current!.value = newLabel;
-      mutatePart(ID, { meta: { label: newLabel } });
+      mutatePart(ID, (draft) => {
+        draft.label = newLabel;
+      });
       lastLabel = newLabel;
     } else {
       inputRef.current!.value = lastLabel;
@@ -154,7 +156,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     }
   };
 
-  let Icon = getPartModule(initialState.n).Icon;
+  let Icon = getPartClass(initialState.n).IconComponent;
 
   if (initialState.n === 'Group') {
     childParts = initialState.partOrder.map((part) => {
@@ -202,7 +204,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
           onBlur={handleLabelBlur}
           onKeyPress={handleLabelKeyPress}
           className={styles.label}
-          defaultValue={initialState.meta.label}
+          defaultValue={initialState.label}
         />
       </div>
 

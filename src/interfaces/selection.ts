@@ -17,8 +17,8 @@ export const selectParts = (IDs: PartIDs) => {
     IDs.forEach((ID) => {
       const part = getPart(ID, draft);
 
-      if (part && !part.meta.selected) {
-        part.meta.selected = true;
+      if (part && !part.selected) {
+        part.selected = true;
         newSelections.push(ID);
       }
     });
@@ -30,12 +30,24 @@ export const selectParts = (IDs: PartIDs) => {
 export const selectPartOnly = (ID: PartID, state?: Blueprint) =>
   selectPartsOnly([ID], state);
 
-export const selectPartsOnly = (IDs: PartIDs, state?: Blueprint) => {
-  if (state) {
-    mutateParts(state.selections, { meta: { selected: false } }, state);
-    mutateParts(IDs, { meta: { selected: true } }, state);
+export const selectPartsOnly = (IDs: PartIDs, draft?: Blueprint) => {
+  if (draft) {
+    mutateParts(
+      draft.selections,
+      (state) => {
+        state.selected = false;
+      },
+      draft,
+    );
+    mutateParts(
+      IDs,
+      (draft) => {
+        draft.selected = true;
+      },
+      draft,
+    );
 
-    state.selections = IDs;
+    draft.selections = IDs;
   } else {
     mutateBlueprintWithoutHistory((draft) => {
       selectPartsOnly(IDs, draft);
@@ -55,7 +67,7 @@ export const unselectParts = (IDs: PartIDs) => {
   mutateBlueprintWithoutHistory((draft) => {
     IDs.forEach((ID) => {
       const part = getPart(ID, draft);
-      if (part) part.meta.selected = false;
+      if (part) part.selected = false;
     });
 
     draft.selections = draft.selections.filter(
@@ -66,7 +78,13 @@ export const unselectParts = (IDs: PartIDs) => {
 
 export const unselectAllParts = () => {
   mutateBlueprint((draft) => {
-    mutateParts(draft.selections, { meta: { selected: false } }, draft);
+    mutateParts(
+      draft.selections,
+      (draft) => {
+        draft.selected = false;
+      },
+      draft,
+    );
     draft.selections = [];
   });
 };
@@ -83,13 +101,13 @@ export const togglePartsSelection = (IDs: PartIDs, state?: Blueprint) => {
       const part = getPart(ID, state);
 
       if (part) {
-        if (part.meta.selected) {
+        if (part.selected) {
           spliceIDs.push(ID);
         } else {
           insertIDs.push(ID);
         }
 
-        part.meta.selected = !part.meta.selected;
+        part.selected = !part.selected;
       }
     });
 

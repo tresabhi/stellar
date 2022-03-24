@@ -1,35 +1,35 @@
+import { ExportedPartWithTransformations } from 'classes/Blueprint/parts/PartWithTransformations';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
-import { PartWithTransformations } from 'parts/Default';
 import { FC } from 'react';
 import { PropertyComponentProps } from 'types/Parts';
 
 const TransformationProperties: FC<PropertyComponentProps> = ({ IDs }) => {
-  const xPos = usePropertyController<PartWithTransformations>(
+  const xPos = usePropertyController<ExportedPartWithTransformations>(
     IDs,
     (state) => state.p.x,
     (value) => ({ p: { x: value } }),
     { suffix: 'm' },
   );
-  const yPos = usePropertyController<PartWithTransformations>(
+  const yPos = usePropertyController<ExportedPartWithTransformations>(
     IDs,
     (state) => state.p.y,
     (value) => ({ p: { y: value } }),
     { suffix: 'm' },
   );
-  const rot = usePropertyController<PartWithTransformations>(
+  const rot = usePropertyController<ExportedPartWithTransformations>(
     IDs,
     (state) => state.o.z,
     (value) => ({ o: { z: value } }),
     { modOnClamp: true, max: 360, suffix: '°' },
   );
-  const xScale = usePropertyController<PartWithTransformations>(
+  const xScale = usePropertyController<ExportedPartWithTransformations>(
     IDs,
     (state) => state.o.x,
     (value) => ({ o: { x: value } }),
     { min: 0, suffix: 'x' },
   );
-  const yScale = usePropertyController<PartWithTransformations>(
+  const yScale = usePropertyController<ExportedPartWithTransformations>(
     IDs,
     (state) => state.o.y,
     (value) => ({ o: { y: value } }),
