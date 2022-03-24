@@ -15,6 +15,7 @@ class Group extends Part<GroupData> implements GroupData {
   readonly n = 'Group';
   expanded = false;
   partOrder: PartIDs = [];
+  label = this.n;
 
   hasTransformations = false;
 

@@ -87,6 +87,7 @@ class FuelTank
     color_tex: '_' as ColorTexture,
     shape_tex: '_' as ShapeTexture,
   };
+  label = this.n;
 
   updateBoundingBox() {
     this.boundingBox = new Box2(
