@@ -1029,7 +1029,7 @@
     core-js-pure "^3.20.2"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.7", "@babel/runtime@^7.17.2", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
+"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.13.10", "@babel/runtime@^7.16.3", "@babel/runtime@^7.16.7", "@babel/runtime@^7.17.8", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.6", "@babel/runtime@^7.8.4":
   version "7.17.8"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.8.tgz#3e56e4aff81befa55ac3ac6a0967349fd1c5bca2"
   integrity sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA==
@@ -6375,12 +6375,12 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mathjs@^10.4.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.0.tgz#7fa5d352c496cfd4ba1324b564b1948d49d6e10d"
-  integrity sha512-2zVrKvORwxeWbewweD5NDxkTgAMvqkwmMljHUPhDPJtX4sGJEL6ugFXQN597rhH9RGtnMxNzz/+hPGIr9UEWrg==
+mathjs@^10.4.1:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.1.tgz#d0bfc49f7af080d082ef3219a7d1560757c43e6e"
+  integrity sha512-l/ONB3f2N9MMy/Gx3YPdKXjmV0LKN1Ew2fqcz3tzKlAIcPCFuLlup5KHm9cmKTKMHn7MVJZWegqCQhCDEpYyNQ==
   dependencies:
-    "@babel/runtime" "^7.17.2"
+    "@babel/runtime" "^7.17.8"
     complex.js "^2.0.15"
     decimal.js "^10.3.1"
     escape-latex "^1.2.0"
@@ -6388,7 +6388,7 @@ mathjs@^10.4.0:
     javascript-natural-sort "^0.7.1"
     seedrandom "^3.0.5"
     tiny-emitter "^2.1.0"
-    typed-function "^2.0.0"
+    typed-function "^2.1.0"
 
 mdn-data@2.0.14:
   version "2.0.14"
@@ -9195,7 +9195,7 @@ type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typed-function@^2.0.0:
+typed-function@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-2.1.0.tgz#ded6f8a442ba8749ff3fe75bc41419c8d46ccc3f"
   integrity sha512-bctQIOqx2iVbWGDGPWwIm18QScpu2XRmkC19D8rQGFsjKSgteq/o1hTZvIG/wuDq8fanpBDrLkLq+aEN/6y5XQ==
