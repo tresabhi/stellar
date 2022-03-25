@@ -17,9 +17,7 @@ class Group extends Part<GroupData> implements GroupData {
   partOrder: PartIDs = [];
   label = this.n;
 
-  hasTransformations = false;
-
-  updateBoundingBox = () => {
+  updateBoundingBox() {
     let newBoundingBox = new Box2(new Vector2(0, 0), new Vector2(0, 0));
     this.partOrder.forEach((partID) => {
       const part = getPart(partID);
@@ -33,6 +31,3 @@ class Group extends Part<GroupData> implements GroupData {
   static LayoutComponent: FC<ReactivePartComponentProps> = () => null;
 }
 export default Group;
-
-const test = new Group();
-test.export();
