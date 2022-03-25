@@ -9690,12 +9690,19 @@ workbox-build@6.5.1:
     workbox-sw "6.5.1"
     workbox-window "6.5.1"
 
-workbox-cacheable-response@6.5.1, workbox-cacheable-response@^6.5.1:
+workbox-cacheable-response@6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/workbox-cacheable-response/-/workbox-cacheable-response-6.5.1.tgz#f71d0a75b3d6846e39594955e99ac42fd26f8693"
   integrity sha512-3TdtH/luDiytmM+Cn72HCBLZXmbeRNJqZx2yaVOfUZhj0IVwZqQXhNarlGE9/k6U5Jelb+TtpH2mLVhnzfiSMg==
   dependencies:
     workbox-core "6.5.1"
+
+workbox-cacheable-response@^6.5.2:
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/workbox-cacheable-response/-/workbox-cacheable-response-6.5.2.tgz#d9252eb99f0d0fceb70f63866172f4eaac56a3e8"
+  integrity sha512-UnHGih6xqloV808T7ve1iNKZMbpML0jGLqkkmyXkJbZc5j16+HRSV61Qrh+tiq3E3yLvFMGJ3AUBODOPNLWpTg==
+  dependencies:
+    workbox-core "6.5.2"
 
 workbox-core@6.5.1:
   version "6.5.1"
