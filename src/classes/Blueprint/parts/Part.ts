@@ -1,6 +1,6 @@
 import { cloneDeep, mergeWith } from 'lodash';
-import { FC } from 'react';
-import { Box2 } from 'three';
+import { createRef, FC } from 'react';
+import { Box2, Group, Mesh } from 'three';
 import DeepPartial from 'types/DeepPartial';
 import {
   AnyVanillaPart,
@@ -34,6 +34,7 @@ abstract class Part<
   locked = false;
 
   boundingBox = new Box2();
+  meshRef = createRef<Mesh | Group>();
 
   static isExportable = true;
   static hasTransformations = false;
@@ -88,7 +89,7 @@ abstract class Part<
   }
 
   static IconComponent: FC;
-  static LayoutComponent: FC<ReactivePartComponentProps>;
+  abstract LayoutComponent: FC<ReactivePartComponentProps>;
   static PropertyComponent?: FC<PropertyComponentProps>;
 
   constructor() {

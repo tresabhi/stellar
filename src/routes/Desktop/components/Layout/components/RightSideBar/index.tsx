@@ -70,33 +70,46 @@ const RightSideBar = () => {
       }),
     );
 
-  const selectionsByPartNames: Map<AnyPartName, PartIDs> = new Map();
+  const sortedSelections: Map<AnyPartName, PartIDs> = new Map();
+  const propertyItems: JSX.Element[] = [];
+  const orderedSelections: AnyPartName[] = [];
+  let partsWithTransformations: PartIDs = [];
+
+  // sort selections by class name and look for common properties
   selections.forEach((selection) => {
     const part = getPart(selection);
-
     if (part) {
-      if (selectionsByPartNames.has(part.n)) {
-        selectionsByPartNames.get(part.n)?.push(selection);
+      const partClass = getPartClass(part.n);
+
+      if (partClass.hasTransformations)
+        partsWithTransformations.push(selection);
+
+      if (sortedSelections.has(part.n)) {
+        sortedSelections.set(part.n, [
+          ...sortedSelections.get(part.n)!,
+          selection,
+        ]);
       } else {
-        selectionsByPartNames.set(part.n, [selection]);
+        sortedSelections.set(part.n, []);
+        orderedSelections.push(part.n);
       }
     }
   });
-  let partsWithTransformations: PartIDs = [];
-  let selectedPartNames: AnyPartName[] = Array.from(
-    selectionsByPartNames.keys(),
-  ).sort();
-  let propertyItems: JSX.Element[] = [];
-  selectedPartNames.forEach((partName) => {
-    const IDs = selectionsByPartNames.get(partName)!;
+
+  // alphabetize selections
+  orderedSelections.sort();
+
+  orderedSelections.forEach((partName) => {
+    const IDs = sortedSelections.get(partName)!;
     const partClass = getPartClass(partName);
 
-    if (partClass.hasTransformations) partsWithTransformations.push(...IDs);
-
-    if (partClass.PropertyComponent)
+    if (partClass.PropertyComponent) {
       propertyItems.push(
-        <partClass.PropertyComponent key={`type-${partName}`} IDs={IDs} />,
+        <partClass.PropertyComponent key={`property-${partName}`} IDs={IDs} />,
       );
+    } else {
+      console.log(`No property component for ${partName}`);
+    }
   });
 
   if (partsWithTransformations.length > 0) {

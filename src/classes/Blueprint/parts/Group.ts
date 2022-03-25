@@ -25,9 +25,9 @@ class Group extends Part<GroupData> implements GroupData {
     });
 
     return newBoundingBox;
-  };
+  }
 
   static IconComponent = Icon;
-  static LayoutComponent: FC<ReactivePartComponentProps> = () => null;
+  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
 }
 export default Group;
