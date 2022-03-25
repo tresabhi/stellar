@@ -5,13 +5,13 @@ import { Box2, Vector2 } from 'three';
 import { PartIDs, ReactivePartComponentProps } from 'types/Parts';
 import Part, { SavedPart } from './Part';
 
-export interface GroupData extends SavedPart {
+export interface SavedGroup extends SavedPart {
   n: 'Group';
   expanded: boolean;
   partOrder: PartIDs;
 }
 
-class Group extends Part<GroupData> implements GroupData {
+class Group extends Part<{}, SavedGroup> implements SavedGroup {
   readonly n = 'Group';
   expanded = false;
   partOrder: PartIDs = [];

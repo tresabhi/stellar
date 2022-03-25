@@ -12,7 +12,7 @@ import { NIL, v4 as UUIDV4 } from 'uuid';
 
 export type ExportedPart = {};
 
-export interface SavedPart {
+export interface SavedPart extends ExportedPart {
   ID: PartID;
   parentID?: PartID;
   label: string;
@@ -22,7 +22,7 @@ export interface SavedPart {
 
 abstract class Part<
   Exported extends ExportedPart = ExportedPart,
-  Saved extends Exported & SavedPart = Exported & SavedPart,
+  Saved extends SavedPart = Exported & SavedPart,
 > implements SavedPart
 {
   abstract readonly n: string;

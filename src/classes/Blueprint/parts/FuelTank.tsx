@@ -62,7 +62,7 @@ type ShapeTexture =
   | 'Capsule'
   | 'Strut';
 
-export interface FuelTankData extends ExportedPartWithTransformations {
+export interface ExportedFuelTank extends ExportedPartWithTransformations {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -89,8 +89,8 @@ const temp_material = new MeshStandardMaterial({
 });
 
 class FuelTank
-  extends PartWithTransformations<FuelTankData>
-  implements FuelTankData
+  extends PartWithTransformations<ExportedFuelTank>
+  implements ExportedFuelTank
 {
   readonly n = 'Fuel Tank';
   N = {

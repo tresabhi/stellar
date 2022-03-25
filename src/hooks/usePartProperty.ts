@@ -9,8 +9,7 @@ const usePartProperty = <T extends AnyPart, S extends any>(
 ) => {
   useEffect(() => {
     subscribeToPart(ID, handler, slicer, {
-      fireInitially: false,
-      unsubscribeOnUnmount: true,
+      fireInitially: true,
     });
   }, [ID, handler, slicer]);
 };

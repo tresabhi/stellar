@@ -24,29 +24,37 @@ const PartClasses = new Map<AnyPartName, AnyPartClass>([
 
 export const importifyPart = <Type extends AnySavedPart>(
   partData: Type,
+  ID: PartID,
   parentID?: PartID,
 ): AnyPart | undefined => {
   const PartClass = getPartClass(partData.n);
-  let newPart = new PartClass();
 
-  // TODO: find a way to remove this any
-  newPart.import(partData as any);
-  newPart.parentID = parentID;
+  if (PartClass) {
+    let newPart = new PartClass();
 
-  return newPart;
+    // TODO: find a way to remove this any
+    newPart.import({
+      ...(partData as any),
+
+      ID,
+      parentID,
+    });
+
+    return newPart;
+  }
 };
 
 export const importifyParts = (
   blueprint: VanillaBlueprint | SavifiedBlueprint | Blueprint,
   parentID?: PartID,
 ): [AnyPartMap, PartIDs] => {
-  let newPartsMap: AnyPartMap = new Map();
+  const newPartsMap: AnyPartMap = new Map();
   const clonedBlueprint = cloneDeep(blueprint);
 
   if (isMap(clonedBlueprint.parts)) {
     // normal blueprint, probably never gonna use this
     (clonedBlueprint as Blueprint).parts.forEach((part, ID) => {
-      const importifiedPart = importifyPart(cloneDeep(part), parentID);
+      const importifiedPart = importifyPart(cloneDeep(part), ID, parentID);
       if (importifiedPart) newPartsMap.set(ID, importifiedPart);
     });
 
@@ -57,7 +65,7 @@ export const importifyParts = (
   } else if (isArray(clonedBlueprint.parts[0])) {
     // saved version of the blueprint
     (clonedBlueprint as SavifiedBlueprint).parts.forEach(([ID, part]) => {
-      const importifiedPart = importifyPart(cloneDeep(part), parentID);
+      const importifiedPart = importifyPart(cloneDeep(part), ID, parentID);
       if (importifiedPart) newPartsMap.set(ID, importifiedPart);
     });
 
@@ -69,7 +77,7 @@ export const importifyParts = (
     (clonedBlueprint as Blueprint).partOrder = [];
     (clonedBlueprint as VanillaBlueprint).parts.forEach((part) => {
       const ID = UUIDV4();
-      const importifiedPart = importifyPart(cloneDeep(part), parentID);
+      const importifiedPart = importifyPart(cloneDeep(part), ID, parentID);
       if (importifiedPart) {
         newPartsMap.set(ID, importifiedPart);
         newPartOrder.push(ID);

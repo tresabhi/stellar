@@ -4,10 +4,13 @@ export interface ExportedPartWithTransformations extends ExportedPart {
   p: { x: number; y: number };
   o: { x: number; y: number; z: number };
 }
+export interface SavedPartWithTransformations
+  extends SavedPart,
+    ExportedPartWithTransformations {}
 
 abstract class PartWithTransformations<
     Exported extends ExportedPartWithTransformations = ExportedPartWithTransformations,
-    Saved extends Exported & SavedPart = Exported & SavedPart,
+    Saved extends SavedPartWithTransformations = SavedPartWithTransformations,
   >
   extends Part<Exported, Saved>
   implements ExportedPartWithTransformations

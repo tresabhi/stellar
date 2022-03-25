@@ -1,3 +1,4 @@
+import Part from 'classes/Blueprint/parts/Part';
 import { getPart, mutateParts, subscribeToPart } from 'interfaces/blueprint';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
@@ -7,10 +8,10 @@ import useUnitInputController, {
   UseUnitInputControllerOptions,
 } from './useUnitInputController';
 
-const usePropertyController = <T>(
+const usePropertyController = <Type extends Part>(
   IDs: PartIDs,
-  get: (state: T) => number,
-  set: (value: number) => DeepPartial<T>,
+  get: (state: Type) => number,
+  set: (value: number) => DeepPartial<Type>,
   controllerOptions?: Partial<UseUnitInputControllerOptions>,
 ) => {
   const mergedControllerOptions = {
@@ -35,7 +36,7 @@ const usePropertyController = <T>(
       const part = getPart(ID);
 
       if (part) {
-        const property = get(part as unknown as T);
+        const property = get(part as unknown as Type);
         values.set(ID, property);
 
         const unsubscribe = subscribeToPart(

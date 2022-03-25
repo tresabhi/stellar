@@ -107,8 +107,6 @@ const RightSideBar = () => {
       propertyItems.push(
         <partClass.PropertyComponent key={`property-${partName}`} IDs={IDs} />,
       );
-    } else {
-      console.log(`No property component for ${partName}`);
     }
   });
 

@@ -2,10 +2,10 @@ import Group from 'classes/Blueprint/parts/Group';
 import Part from 'classes/Blueprint/parts/Part';
 import PartWithTransformations from 'classes/Blueprint/parts/PartWithTransformations';
 import produce, { applyPatches, produceWithPatches } from 'immer';
-import { cloneDeep, isUndefined, merge } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore
+  BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartName, PartID, PartIDs } from 'types/Parts';
@@ -149,47 +149,51 @@ export const translatePartsBySelection = (x: number, y: number) =>
 
 interface SubscribeToPartOptions {
   fireInitially: boolean;
-  unsubscribeOnUnmount: boolean;
 }
 const subscribeToPartDefaultOptions = {
   fireInitially: false,
-  unsubscribeOnUnmount: false,
 };
-export const subscribeToPart = <T, S>(
+export const subscribeToPart = <Type extends Part, Slice extends any>(
   ID: PartID,
-  handler: (slice: S) => void,
-  slicer?: (state: T) => S,
+  handler: (slice: Slice) => void,
+  slicer?: (part: Type) => Slice,
   options?: Partial<SubscribeToPartOptions>,
 ) => {
-  const mergedOptions = { ...subscribeToPartDefaultOptions, ...options };
-
-  const compoundHandler = (slice?: S) => {
-    if (isUndefined(slice)) {
-      if (mergedOptions.unsubscribeOnUnmount) unsubscribe();
-    } else {
-      handler(slice);
-    }
+  const mergedOptions = {
+    ...subscribeToPartDefaultOptions,
+    ...(options ?? {}),
   };
+  let avoidThisEvent = false;
 
-  const unsubscribe = blueprintStore.subscribe((state) => {
-    const part = getPart(ID, state);
+  const unsubscribe = blueprintStore.subscribe(
+    (state) => {
+      const part = getPart(ID, state);
+
+      if (part) {
+        if (slicer) {
+          return slicer(part as unknown as Type);
+        } else {
+          return part as Slice;
+        }
+      } else {
+        avoidThisEvent = true;
+        unsubscribe();
+      }
+    },
+    (slice) => {
+      if (!avoidThisEvent) handler(slice!);
+    },
+  );
+
+  if (mergedOptions.fireInitially) {
+    const part = getPart(ID);
 
     if (part) {
       if (slicer) {
-        return slicer(part as unknown as T);
+        handler(slicer(part as unknown as Type));
       } else {
-        return part as unknown as S;
+        handler(part as Slice);
       }
-    }
-  }, compoundHandler);
-
-  if (mergedOptions.fireInitially) {
-    if (slicer) {
-      compoundHandler(
-        slicer(getPart(ID, blueprintStore.getState()) as unknown as T),
-      );
-    } else {
-      compoundHandler(getPart(ID, blueprintStore.getState()) as unknown as S);
     }
   }
 

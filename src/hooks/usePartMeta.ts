@@ -9,13 +9,13 @@ const usePartMeta = (ID: PartID, callback: () => void) => {
       ID,
       () => callback(),
       (state: Part) => state.hidden,
-      { fireInitially: true, unsubscribeOnUnmount: true },
+      { fireInitially: true },
     );
     subscribeToPart(
       ID,
       () => callback(),
       (state: Part) => state.selected,
-      { fireInitially: true, unsubscribeOnUnmount: true },
+      { fireInitially: true },
     );
   });
 };

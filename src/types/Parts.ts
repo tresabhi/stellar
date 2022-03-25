@@ -1,5 +1,5 @@
-import FuelTank, { FuelTankData } from 'classes/Blueprint/parts/FuelTank';
-import Group, { GroupData } from 'classes/Blueprint/parts/Group';
+import FuelTank, { ExportedFuelTank } from 'classes/Blueprint/parts/FuelTank';
+import Group, { SavedGroup } from 'classes/Blueprint/parts/Group';
 import { FC } from 'react';
 import { Box2 } from 'three';
 import { Blueprint } from './Blueprint';
@@ -12,8 +12,8 @@ export type PartIDs = PartID[];
 
 export type AnyPart = FuelTank | Group;
 export type AnyPartClass = typeof FuelTank | typeof Group;
-export type AnySavedPart = FuelTankData | GroupData;
-export type AnyVanillaPart = FuelTankData;
+export type AnySavedPart = ExportedFuelTank | SavedGroup;
+export type AnyVanillaPart = ExportedFuelTank;
 
 export type AnyPartName = 'Fuel Tank' | 'Group';
 
