@@ -16,6 +16,7 @@ import {
   PartIDs,
 } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
+import { createNewPart } from './blueprint';
 
 const PartClasses = new Map<AnyPartName, AnyPartClass>([
   ['Fuel Tank', FuelTank],
@@ -27,15 +28,11 @@ export const importifyPart = <Type extends AnySavedPart>(
   ID: PartID,
   parentID?: PartID,
 ) => {
-  const PartClass = getPartClass(partData.n);
+  const part = createNewPart(partData.n, ID, parentID);
 
-  if (PartClass) {
-    let newPart = new PartClass(ID, parentID);
+  part.import(partData as ExportedPart);
 
-    newPart.import(partData as ExportedPart);
-
-    return newPart;
-  }
+  return part;
 };
 
 export const importifyParts = (

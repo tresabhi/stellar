@@ -79,10 +79,9 @@ const RightSideBar = () => {
   selections.forEach((selection) => {
     const part = getPart(selection);
     if (part) {
-      const partClass = getPartClass(part.n);
+      const { hasTransformations } = getPartClass(part.n);
 
-      if (partClass.hasTransformations)
-        partsWithTransformations.push(selection);
+      if (hasTransformations) partsWithTransformations.push(selection);
 
       if (sortedSelections.has(part.n)) {
         sortedSelections.set(part.n, [
@@ -101,11 +100,11 @@ const RightSideBar = () => {
 
   orderedSelections.forEach((partName) => {
     const IDs = sortedSelections.get(partName)!;
-    const partClass = getPartClass(partName);
+    const { PropertyComponent } = getPartClass(partName);
 
-    if (partClass.PropertyComponent) {
+    if (PropertyComponent) {
       propertyItems.push(
-        <partClass.PropertyComponent key={`property-${partName}`} IDs={IDs} />,
+        <PropertyComponent key={`property-${partName}`} IDs={IDs} />,
       );
     }
   });

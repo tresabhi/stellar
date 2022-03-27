@@ -276,7 +276,7 @@ export const redo = () => {
   );
 };
 
-const createNewPart = (
+export const createNewPart = (
   partName: AnyPartName,
   ID?: PartID,
   parentID?: PartID,

@@ -10,7 +10,7 @@ import {
   MeshStandardMaterial,
   Vector2,
 } from 'three';
-import { PropertyComponentProps } from 'types/Parts';
+import { PartID, PropertyComponentProps } from 'types/Parts';
 import PartWithTransformations, {
   ExportedPartWithTransformations,
 } from './PartWithTransformations';
@@ -121,15 +121,8 @@ class FuelTank
     );
   }
 
-  constructor() {
-    super();
-    this.updateBoundingBox();
-  }
-
   static IconComponent = Icon;
   LayoutComponent = () => {
-    console.log(this.ID);
-
     usePartProperty(
       this.ID,
       (state: FuelTank) => state.N,
@@ -188,10 +181,11 @@ class FuelTank
       </PropertiesExplorer.Group>
     );
   };
+
+  constructor(ID?: PartID, parentID?: PartID) {
+    super(ID, parentID);
+
+    this.updateBoundingBox();
+  }
 }
 export default FuelTank;
-
-//@ts-ignore
-window.lol = FuelTank;
-//@ts-ignore
-window.part = new lol();

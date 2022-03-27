@@ -97,6 +97,7 @@ abstract class Part<
   constructor(ID?: PartID, parentID?: PartID) {
     this.ID = ID ?? UUIDV4();
     this.parentID = parentID;
+
     this.nonExportableKeys.push(...Object.getOwnPropertyNames(this));
     this.nonExportableKeys.splice(this.nonExportableKeys.indexOf('n'), 1);
   }
