@@ -1,6 +1,8 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
+import usePartCanvasSelectionControls from 'hooks/usePartCanvasSelectionControls';
+import usePartCanvasTranslationControls from 'hooks/usePartCanvasTranslationControls';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
 import { createRef, FC } from 'react';
@@ -143,12 +145,16 @@ class FuelTank
     usePartTransformations<FuelTank>(this.ID, this.meshRef, (state) => ({
       p: { y: state.p.y + state.N.height / 2 },
     }));
+    const handleClick = usePartCanvasSelectionControls(this.ID);
+    const handlePointerDown = usePartCanvasTranslationControls(this.ID);
 
     return (
       <mesh
         ref={this.meshRef}
         material={temp_material}
         position={[0, this.N.height / 2, 0]}
+        onClick={handleClick}
+        onPointerDown={handlePointerDown}
       />
     );
   };

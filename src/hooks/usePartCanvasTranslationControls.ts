@@ -3,7 +3,7 @@ import PartWithTransformations from 'classes/Blueprint/parts/PartWithTransformat
 import {
   getPart,
   mutateBlueprintWithoutHistory,
-  mutateParts,
+  mutateParts
 } from 'interfaces/blueprint';
 import { selectPartOnly } from 'interfaces/selection';
 import blueprintStore from 'stores/blueprint';
@@ -71,7 +71,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
     deltaX = newDeltaX;
     deltaY = newDeltaY;
   };
-  const onPointerDown = (event: ThreeEvent<PointerEvent>) => {
+  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(ID) as Type | undefined;
 
     if (part) {
@@ -88,6 +88,6 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
     }
   };
 
-  return onPointerDown;
+  return handlePointerDown;
 };
 export default usePartCanvasTranslationControls;
