@@ -2,6 +2,7 @@ import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
 import usePartProperty from 'hooks/usePartProperty';
+import usePartTransformations from 'hooks/usePartTransformations';
 import { createRef, FC } from 'react';
 import {
   Box2,
@@ -139,6 +140,9 @@ class FuelTank
         );
       },
     );
+    usePartTransformations<FuelTank>(this.ID, this.meshRef, (state) => ({
+      p: { y: state.p.y + state.N.height / 2 },
+    }));
 
     return (
       <mesh
