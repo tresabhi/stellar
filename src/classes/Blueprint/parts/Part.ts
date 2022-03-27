@@ -1,4 +1,4 @@
-import { cloneDeep, mergeWith } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { createRef, FC } from 'react';
 import { Box2, Group, Mesh } from 'three';
 import DeepPartial from 'types/DeepPartial';
@@ -8,6 +8,7 @@ import {
   PropertyComponentProps,
   ReactivePartComponentProps,
 } from 'types/Parts';
+import safeClassMerge from 'utilities/safeClassMerge';
 import { NIL, v4 as UUIDV4 } from 'uuid';
 
 export type ExportedPart = {};
@@ -43,17 +44,7 @@ abstract class Part<
   abstract updateBoundingBox(): void;
 
   import(data: DeepPartial<Saved>) {
-    mergeWith(this, data, (objValue, srcValue) => {
-      if (
-        typeof srcValue === 'function' ||
-        typeof objValue === 'function' ||
-        srcValue === undefined
-      ) {
-        return srcValue;
-      } else {
-        return objValue;
-      }
-    });
+    safeClassMerge(this, data);
   }
   /**
    * _❕ Parts like `Group` can export multiple parts_
