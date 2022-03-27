@@ -36,7 +36,16 @@ abstract class Part<
 
   boundingBox = new Box2();
   meshRef = createRef<Mesh | Group>();
-  private nonexportable: string[];
+  private nonExportableKeys: string[] = [];
+  private savableKeys = [
+    'n',
+    'ID',
+    'parentID',
+    'label',
+    'selected',
+    'hidden',
+    'locked',
+  ];
 
   static isExportable = true;
   static hasTransformations = false;
@@ -56,7 +65,7 @@ abstract class Part<
     Object.keys(clonedThis).forEach((key) => {
       const value = (clonedThis as any)[key];
 
-      if (typeof value !== 'function' && !this.nonexportable.includes(key)) {
+      if (!this.nonExportableKeys.includes(key)) {
         (exportable as any)[key] = value;
       }
     });
@@ -65,17 +74,20 @@ abstract class Part<
   }
   save(): Saved {
     const clonedThis = cloneDeep(this);
-    const savable: Partial<Saved> = {};
+    const saved: Partial<Saved> = {};
 
     Object.keys(clonedThis).forEach((key) => {
       const value = (clonedThis as any)[key];
 
-      if (typeof value !== 'function') {
-        (savable as any)[key] = value;
+      if (
+        !this.nonExportableKeys.includes(key) ||
+        this.savableKeys.includes(key)
+      ) {
+        (saved as any)[key] = value;
       }
     });
 
-    return savable as Saved;
+    return saved as Saved;
   }
 
   static IconComponent: FC;
@@ -85,8 +97,8 @@ abstract class Part<
   constructor(ID?: PartID, parentID?: PartID) {
     this.ID = ID ?? UUIDV4();
     this.parentID = parentID;
-    this.nonexportable = Object.getOwnPropertyNames(this);
-    this.nonexportable.splice(this.nonexportable.indexOf('n'), 1);
+    this.nonExportableKeys.push(...Object.getOwnPropertyNames(this));
+    this.nonExportableKeys.splice(this.nonExportableKeys.indexOf('n'), 1);
   }
 }
 export default Part;
