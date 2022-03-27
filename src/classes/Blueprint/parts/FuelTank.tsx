@@ -78,7 +78,7 @@ export interface ExportedFuelTank extends ExportedPartWithTransformations {
 }
 
 /**
- * Make this data driven later!
+ * TODO: Make this data driven later!
  * @deprecated
  */
 const temp_material = new MeshStandardMaterial({
@@ -128,6 +128,8 @@ class FuelTank
 
   static IconComponent = Icon;
   LayoutComponent = () => {
+    console.log(this.ID);
+
     usePartProperty(
       this.ID,
       (state: FuelTank) => state.N,
@@ -188,3 +190,8 @@ class FuelTank
   };
 }
 export default FuelTank;
+
+//@ts-ignore
+window.lol = FuelTank;
+//@ts-ignore
+window.part = new lol();

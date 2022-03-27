@@ -35,6 +35,7 @@ abstract class Part<
 
   boundingBox = new Box2();
   meshRef = createRef<Mesh | Group>();
+  private nonexportable: string[];
 
   static isExportable = true;
   static hasTransformations = false;
@@ -58,15 +59,13 @@ abstract class Part<
    * _❕ Parts like `Group` can export multiple parts_
    */
   export(): Exported | AnyVanillaPart[] {
-    const dontExport = Object.keys(this);
     const clonedThis = cloneDeep(this);
     const exportable: Partial<Exported> = {};
 
-    dontExport.splice(dontExport.indexOf('n'), 1);
     Object.keys(clonedThis).forEach((key) => {
       const value = (clonedThis as any)[key];
 
-      if (typeof value !== 'function' && !dontExport.includes(key)) {
+      if (typeof value !== 'function' && !this.nonexportable.includes(key)) {
         (exportable as any)[key] = value;
       }
     });
@@ -92,8 +91,11 @@ abstract class Part<
   abstract LayoutComponent: FC<ReactivePartComponentProps>;
   static PropertyComponent?: FC<PropertyComponentProps>;
 
-  constructor() {
-    this.ID = UUIDV4();
+  constructor(ID?: PartID) {
+    this.ID = ID ?? UUIDV4();
+    this.nonexportable = Object.getOwnPropertyNames(this);
+
+    this.nonexportable.splice(this.nonexportable.indexOf('n'), 1);
   }
 }
 export default Part;
