@@ -91,10 +91,10 @@ abstract class Part<
   abstract LayoutComponent: FC<ReactivePartComponentProps>;
   static PropertyComponent?: FC<PropertyComponentProps>;
 
-  constructor(ID?: PartID) {
+  constructor(ID?: PartID, parentID?: PartID) {
     this.ID = ID ?? UUIDV4();
+    this.parentID = parentID;
     this.nonexportable = Object.getOwnPropertyNames(this);
-
     this.nonexportable.splice(this.nonexportable.indexOf('n'), 1);
   }
 }

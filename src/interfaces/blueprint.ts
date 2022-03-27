@@ -9,7 +9,6 @@ import blueprintPatchHistoryStore, {
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartName, PartID, PartIDs } from 'types/Parts';
-import { v4 as UUIDV4 } from 'uuid';
 import { Blueprint, VanillaBlueprint } from '../types/Blueprint';
 import { getPartClass, importifyParts } from './part';
 
@@ -277,9 +276,13 @@ export const redo = () => {
   );
 };
 
-const createNewPart = (partName: AnyPartName) => {
+const createNewPart = (
+  partName: AnyPartName,
+  ID?: PartID,
+  parentID?: PartID,
+) => {
   const PartClass = getPartClass(partName);
-  let newPart = new PartClass();
+  let newPart = new PartClass(ID, parentID);
 
   return newPart;
 };
@@ -290,19 +293,18 @@ export const insertPart = (
   index = 0,
 ) => {
   mutateBlueprint((draft) => {
-    const partID = UUIDV4();
     const newPart = createNewPart(partName);
 
     if (parentID) {
       const parentPart = getPart(parentID, draft) as Group;
 
       if (parentPart) {
-        parentPart.partOrder.splice(index, 0, partID);
-        draft.parts.set(partID, newPart);
+        parentPart.partOrder.splice(index, 0, newPart.ID);
+        draft.parts.set(newPart.ID, newPart);
       }
     } else {
-      draft.partOrder.splice(index, 0, partID);
-      draft.parts.set(partID, newPart);
+      draft.partOrder.splice(index, 0, newPart.ID);
+      draft.parts.set(newPart.ID, newPart);
     }
   });
 };
@@ -323,21 +325,20 @@ export const getPartIndex = (
 
 export const groupParts = (IDs: PartIDs, replaceID: PartID) => {
   mutateBlueprint((draft) => {
-    const newGroupData = createNewPart('Group') as Group;
-    const newGroupID = UUIDV4();
+    const newGroup = createNewPart('Group') as Group;
     const newGroupParent = getParent(replaceID, draft) ?? draft;
 
-    draft.parts.set(newGroupID, newGroupData);
+    draft.parts.set(newGroup.ID, newGroup);
     newGroupParent.partOrder[newGroupParent.partOrder.indexOf(replaceID)] =
-      newGroupID;
-    newGroupData.partOrder = IDs;
+      newGroup.ID;
+    newGroup.partOrder = IDs;
 
     IDs.forEach((ID) => {
       const currentParent = getParent(ID, draft) ?? draft;
       const currentPart = getPart(ID, draft);
       const spliceIndex = currentParent.partOrder.indexOf(ID);
 
-      if (currentPart) currentPart.parentID = newGroupID;
+      if (currentPart) currentPart.parentID = newGroup.ID;
       if (spliceIndex !== -1) currentParent.partOrder.splice(spliceIndex, 1);
     });
   });

@@ -1,5 +1,6 @@
 import FuelTank from 'classes/Blueprint/parts/FuelTank';
 import Group from 'classes/Blueprint/parts/Group';
+import { ExportedPart } from 'classes/Blueprint/parts/Part';
 import { cloneDeep, isArray, isMap } from 'lodash';
 import {
   AnyPartMap,
@@ -8,7 +9,6 @@ import {
   VanillaBlueprint,
 } from 'types/Blueprint';
 import {
-  AnyPart,
   AnyPartClass,
   AnyPartName,
   AnySavedPart,
@@ -26,19 +26,13 @@ export const importifyPart = <Type extends AnySavedPart>(
   partData: Type,
   ID: PartID,
   parentID?: PartID,
-): AnyPart | undefined => {
+) => {
   const PartClass = getPartClass(partData.n);
 
   if (PartClass) {
-    let newPart = new PartClass();
+    let newPart = new PartClass(ID, parentID);
 
-    // TODO: find a way to remove this any
-    newPart.import({
-      ...(partData as any),
-
-      ID,
-      parentID,
-    });
+    newPart.import(partData as ExportedPart);
 
     return newPart;
   }
