@@ -1,4 +1,4 @@
-import { AnyPart, AnyVanillaPart, PartID, PartIDs } from 'types/Parts';
+import { AnyPart, AnySavedPart, AnyVanillaPart, UUID } from './Parts';
 
 export interface VanillaBlueprint {
   center: number;
@@ -7,18 +7,16 @@ export interface VanillaBlueprint {
   stages: { partIndexes: number[] }[]; // TODO: isolate this type
 }
 
-export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
-  meta: {
-    format_version: number;
-  };
-  selections: PartIDs;
+export interface LiveBlueprint extends Omit<VanillaBlueprint, 'parts'> {
+  format_version: number;
+  selections: UUID[];
   parts: AnyPartMap;
-  partOrder: PartIDs;
+  partOrder: UUID[];
 }
 
-export interface SavifiedBlueprint extends Omit<Blueprint, 'parts'> {
+export interface SavedBlueprint extends Omit<LiveBlueprint, 'parts'> {
   parts: SavifiedPartMap;
 }
 
-export type AnyPartMap = Map<PartID, AnyPart>;
-export type SavifiedPartMap = [PartID, AnyPart][];
+export type AnyPartMap = Map<UUID, AnyPart>;
+export type SavifiedPartMap = [UUID, AnySavedPart][];

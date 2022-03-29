@@ -1,33 +1,31 @@
+import { immerable } from 'immer';
 import { cloneDeep } from 'lodash';
-import { createRef, FC } from 'react';
+import { createRef, FC, NamedExoticComponent } from 'react';
 import { Box2, Group, Mesh } from 'three';
 import DeepPartial from 'types/DeepPartial';
-import {
-  AnyVanillaPart,
-  PartID,
-  PropertyComponentProps,
-  ReactivePartComponentProps,
-} from 'types/Parts';
+import { AnyVanillaPart, PropertyComponentProps, UUID } from 'types/Parts';
 import safeClassMerge from 'utilities/safeClassMerge';
 import { NIL, v4 as UUIDV4 } from 'uuid';
 
-export type ExportedPart = {};
+export interface VanillaPart {}
 
-export interface SavedPart extends ExportedPart {
-  ID: PartID;
-  parentID?: PartID;
+export interface SavedPart extends VanillaPart {
+  ID: UUID;
+  parentID?: UUID;
   label: string;
   hidden: boolean;
   locked: boolean;
 }
 
 abstract class Part<
-  Exported extends ExportedPart = ExportedPart,
+  Exported extends VanillaPart = VanillaPart,
   Saved extends SavedPart = Exported & SavedPart,
 > implements SavedPart
 {
+  [immerable] = true;
+
   abstract readonly n: string;
-  readonly ID: PartID = NIL;
+  readonly ID: UUID = NIL;
   parentID?: string | undefined = undefined;
   label = 'Unnamed Part';
   selected = false;
@@ -52,7 +50,7 @@ abstract class Part<
 
   abstract updateBoundingBox(): void;
 
-  import(data: DeepPartial<Saved>) {
+  hydrate(data: DeepPartial<Saved>) {
     safeClassMerge(this, data);
   }
   /**
@@ -91,10 +89,10 @@ abstract class Part<
   }
 
   static IconComponent: FC;
-  abstract LayoutComponent: FC<ReactivePartComponentProps>;
-  static PropertyComponent?: FC<PropertyComponentProps>;
+  abstract LayoutComponent: FC;
+  static PropertyComponent?: NamedExoticComponent<PropertyComponentProps>;
 
-  constructor(ID?: PartID, parentID?: PartID) {
+  constructor(ID?: UUID, parentID?: UUID) {
     this.ID = ID ?? UUIDV4();
     this.parentID = parentID;
 

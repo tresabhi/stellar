@@ -1,9 +1,9 @@
 import { subscribeToPart } from 'interfaces/blueprint';
 import { useEffect } from 'react';
-import { AnyPart, PartID } from 'types/Parts';
+import { AnyPart, UUID } from 'types/Parts';
 
 const usePartProperty = <T extends AnyPart, S extends any>(
-  ID: PartID,
+  ID: UUID,
   slicer: (state: T) => S,
   handler: (slice: S) => void,
 ) => {

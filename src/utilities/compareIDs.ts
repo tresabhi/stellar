@@ -1,4 +1,4 @@
-import { PartID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 
-const compareIDs = (prevID: PartID, nextID: PartID) => prevID === nextID;
+const compareIDs = (prevID: UUID, nextID: UUID) => prevID === nextID;
 export default compareIDs;

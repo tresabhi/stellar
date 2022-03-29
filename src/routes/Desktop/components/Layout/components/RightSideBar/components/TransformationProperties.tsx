@@ -1,4 +1,4 @@
-import PartWithTransformations from 'classes/Blueprint/parts/PartWithTransformations';
+import PartWithTransformations from 'classes/Parts/PartWithTransformations';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
 import { FC } from 'react';

@@ -1,20 +1,20 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { getPart } from 'interfaces/blueprint';
-import { FC } from 'react';
+import { memo } from 'react';
 import { Box2, Vector2 } from 'three';
-import { PartIDs, ReactivePartComponentProps } from 'types/Parts';
+import { UUID } from 'types/Parts';
 import Part, { SavedPart } from './Part';
 
 export interface SavedGroup extends SavedPart {
   n: 'Group';
   expanded: boolean;
-  partOrder: PartIDs;
+  partOrder: UUID[];
 }
 
 class Group extends Part<{}, SavedGroup> implements SavedGroup {
   readonly n = 'Group';
   expanded = false;
-  partOrder: PartIDs = [];
+  partOrder: UUID[] = [];
   label = this.n;
 
   updateBoundingBox() {
@@ -28,6 +28,6 @@ class Group extends Part<{}, SavedGroup> implements SavedGroup {
   }
 
   static IconComponent = Icon;
-  LayoutComponent: FC<ReactivePartComponentProps> = () => null;
+  LayoutComponent = memo(() => null);
 }
 export default Group;

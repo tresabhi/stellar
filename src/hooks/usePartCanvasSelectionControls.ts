@@ -1,9 +1,9 @@
 import { ThreeEvent } from '@react-three/fiber';
 import { selectPartOnly, togglePartSelection } from 'interfaces/selection';
 import { useEffect } from 'react';
-import { PartID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 
-const usePartCanvasSelectionControls = (ID: PartID) => {
+const usePartCanvasSelectionControls = (ID: UUID) => {
   let isClickValid = false;
 
   const handleClick = (event: ThreeEvent<MouseEvent>) => {

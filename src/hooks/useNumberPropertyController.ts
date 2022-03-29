@@ -1,15 +1,15 @@
-import Part from 'classes/Blueprint/parts/Part';
+import Part from 'classes/Parts/Part';
 import { getPart, mutateParts, subscribeToPart } from 'interfaces/blueprint';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
-import { PartID, PartIDs } from 'types/Parts';
+import { UUID } from 'types/Parts';
 import useUnitInputController, {
-  UseUnitInputControllerOptions,
+    UseUnitInputControllerOptions
 } from './useUnitInputController';
 
 const usePropertyController = <Type extends Part>(
-  IDs: PartIDs,
+  IDs: UUID[],
   get: (state: Type) => number,
   set: (value: number) => DeepPartial<Type>,
   controllerOptions?: Partial<UseUnitInputControllerOptions>,
@@ -29,7 +29,7 @@ const usePropertyController = <Type extends Part>(
     mergedControllerOptions,
   );
   let unsubscribes: (() => void)[] = [];
-  let values = new Map<PartID, number>();
+  let values = new Map<UUID, number>();
 
   const initialize = () => {
     IDs.forEach((ID) => {
@@ -67,7 +67,7 @@ const usePropertyController = <Type extends Part>(
 
     inputController.rerender();
   };
-  const update = (ID: PartID, value: number) => {
+  const update = (ID: UUID, value: number) => {
     values.set(ID, value);
     computeAndRender();
   };

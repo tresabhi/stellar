@@ -2,10 +2,10 @@ import PartOutline from 'components/PartOutline';
 import { getPart } from 'interfaces/blueprint';
 import { useRef } from 'react';
 import { Box2, BufferGeometry, Vector2 } from 'three';
-import { AnyPart, PartID } from 'types/Parts';
+import { AnyPart, UUID } from 'types/Parts';
 
 const usePartOutline = <T extends AnyPart>(
-  ID: PartID,
+  ID: UUID,
   computer: (state: T) => Box2,
 ) => {
   const partOutlineRef = useRef<SVGLineElement>(null!);

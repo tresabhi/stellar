@@ -5,7 +5,7 @@ import usePartCanvasSelectionControls from 'hooks/usePartCanvasSelectionControls
 import usePartCanvasTranslationControls from 'hooks/usePartCanvasTranslationControls';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
-import { createRef, FC } from 'react';
+import { createRef, memo } from 'react';
 import {
   Box2,
   CylinderGeometry,
@@ -13,9 +13,9 @@ import {
   MeshStandardMaterial,
   Vector2,
 } from 'three';
-import { PartID, PropertyComponentProps } from 'types/Parts';
+import { PropertyComponentProps, UUID } from 'types/Parts';
 import PartWithTransformations, {
-  ExportedPartWithTransformations,
+  VanillaPartWithTransformations,
 } from './PartWithTransformations';
 
 type ColorTexture =
@@ -65,7 +65,7 @@ type ShapeTexture =
   | 'Capsule'
   | 'Strut';
 
-export interface ExportedFuelTank extends ExportedPartWithTransformations {
+export interface VanillaFuelTank extends VanillaPartWithTransformations {
   n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -92,8 +92,8 @@ const temp_material = new MeshStandardMaterial({
 });
 
 class FuelTank
-  extends PartWithTransformations<ExportedFuelTank>
-  implements ExportedFuelTank
+  extends PartWithTransformations<VanillaFuelTank>
+  implements VanillaFuelTank
 {
   readonly n = 'Fuel Tank';
   N = {
@@ -125,7 +125,7 @@ class FuelTank
   }
 
   static IconComponent = Icon;
-  LayoutComponent = () => {
+  LayoutComponent = memo(() => {
     usePartProperty(
       this.ID,
       (state: FuelTank) => state.N,
@@ -157,8 +157,8 @@ class FuelTank
         onPointerDown={handlePointerDown}
       />
     );
-  };
-  static PropertyComponent: FC<PropertyComponentProps> = ({ IDs }) => {
+  });
+  static PropertyComponent = memo<PropertyComponentProps>(({ IDs }) => {
     const width = usePropertyController<FuelTank>(
       IDs,
       (state) => state.N.width_original,
@@ -190,9 +190,9 @@ class FuelTank
         </PropertiesExplorer.Row>
       </PropertiesExplorer.Group>
     );
-  };
+  });
 
-  constructor(ID?: PartID, parentID?: PartID) {
+  constructor(ID?: UUID, parentID?: UUID) {
     super(ID, parentID);
 
     this.updateBoundingBox();

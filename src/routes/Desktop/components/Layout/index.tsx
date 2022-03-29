@@ -1,15 +1,14 @@
 import devBlueprint from 'assets/blueprints/mutable/fuelTank';
 import { LayoutRenderer } from 'components/Canvas';
-import { importifyBlueprint } from 'interfaces/blueprint';
+import { mutateBlueprintWithoutHistory } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';
-import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
 import styles from './index.module.scss';
 
 if (settingsStore.getState().debug.dev_blueprint) {
-  blueprintStore.setState(importifyBlueprint(devBlueprint));
+  mutateBlueprintWithoutHistory((draft) => draft.hydrate(devBlueprint));
 }
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {

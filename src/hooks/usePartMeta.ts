@@ -1,9 +1,9 @@
-import Part from 'classes/Blueprint/parts/Part';
+import Part from 'classes/Parts/Part';
 import { subscribeToPart } from 'interfaces/blueprint';
 import { useEffect } from 'react';
-import { PartID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 
-const usePartMeta = (ID: PartID, callback: () => void) => {
+const usePartMeta = (ID: UUID, callback: () => void) => {
   useEffect(() => {
     subscribeToPart(
       ID,

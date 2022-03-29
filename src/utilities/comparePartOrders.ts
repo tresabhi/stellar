@@ -1,6 +1,6 @@
-import { PartIDs } from 'types/Parts';
+import { UUID } from 'types/Parts';
 
-const comparePartOrders = (prevIDs: PartIDs, nextIDs: PartIDs) => {
+const comparePartOrders = (prevIDs: UUID[], nextIDs: UUID[]) => {
   if (prevIDs.length !== nextIDs.length) {
     return false;
   } else {

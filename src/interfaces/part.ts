@@ -1,28 +1,13 @@
-import FuelTank from 'classes/Blueprint/parts/FuelTank';
-import Group from 'classes/Blueprint/parts/Group';
-import { ExportedPart } from 'classes/Blueprint/parts/Part';
-import { cloneDeep, isArray, isMap } from 'lodash';
-import {
-  AnyPartMap,
-  Blueprint,
-  SavifiedBlueprint,
-  VanillaBlueprint,
-} from 'types/Blueprint';
-import {
-  AnyPartClass,
-  AnyPartName,
-  AnySavedPart,
-  PartID,
-  PartIDs,
-} from 'types/Parts';
-import { v4 as UUIDV4 } from 'uuid';
-import { createNewPart } from './blueprint';
+import FuelTank from 'classes/Parts/FuelTank';
+import Group from 'classes/Parts/Group';
+import { AnyPartClass } from 'types/Parts';
 
-const PartClasses = new Map<AnyPartName, AnyPartClass>([
+const PartClasses = new Map<string, AnyPartClass>([
   ['Fuel Tank', FuelTank],
   ['Group', Group],
 ]);
 
+/*
 export const importifyPart = <Type extends AnySavedPart>(
   partData: Type,
   ID: PartID,
@@ -30,15 +15,16 @@ export const importifyPart = <Type extends AnySavedPart>(
 ) => {
   const part = createNewPart(partData.n, ID, parentID);
 
-  part.import(partData as ExportedPart);
-
-  return part;
+  if (part) {
+    part.hydrate(partData as ExportedPart);
+    return part;
+  }
 };
 
 export const importifyParts = (
   blueprint: VanillaBlueprint | SavifiedBlueprint | Blueprint,
   parentID?: PartID,
-): [AnyPartMap, PartIDs] => {
+): [AnyPartMap, PartID[]] => {
   const newPartsMap: AnyPartMap = new Map();
   const clonedBlueprint = cloneDeep(blueprint);
 
@@ -63,7 +49,7 @@ export const importifyParts = (
     return [newPartsMap, (clonedBlueprint as Blueprint).partOrder];
   } else {
     // vanilla blueprint, straight from the game
-    let newPartOrder: PartIDs = [];
+    let newPartOrder: PartID[] = [];
 
     (clonedBlueprint as Blueprint).partOrder = [];
     (clonedBlueprint as VanillaBlueprint).parts.forEach((part) => {
@@ -78,5 +64,6 @@ export const importifyParts = (
     return [newPartsMap, newPartOrder];
   }
 };
+*/
 
-export const getPartClass = (name: AnyPartName) => PartClasses.get(name)!;
+export const getPartClass = (name: string) => PartClasses.get(name);

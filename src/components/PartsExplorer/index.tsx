@@ -1,8 +1,8 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import Group from 'classes/Blueprint/parts/Group';
-import Part from 'classes/Blueprint/parts/Part';
+import Group from 'classes/Parts/Group';
+import Part from 'classes/Parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
 import {
   getPart,
@@ -26,13 +26,13 @@ import {
   useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { PartID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
 import comparePartOrders from 'utilities/comparePartOrders';
 import styles from './index.module.scss';
 
 interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
-  parent?: PartID;
+  parent?: UUID;
   indentation: number;
 }
 export const Container: FC<ContainerProps> = ({
@@ -60,7 +60,7 @@ export const Container: FC<ContainerProps> = ({
 
 interface ListingProps {
   indentation: number;
-  ID: PartID;
+  ID: UUID;
 }
 export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const listingRef = useRef<HTMLDivElement>(null);
@@ -69,7 +69,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const initialState = getPart(ID)!;
   const isGroup = initialState.n === 'Group';
   const [expanded, setExpanded] = useState(
-    isGroup ? initialState.expanded : false,
+    isGroup ? (initialState as Group).expanded : false,
   );
   let lastLabel = initialState.label;
 
@@ -156,10 +156,10 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     }
   };
 
-  let Icon = getPartClass(initialState.n).IconComponent;
+  const partClass = getPartClass(initialState.n);
 
   if (initialState.n === 'Group') {
-    childParts = initialState.partOrder.map((part) => {
+    childParts = (initialState as Group).partOrder.map((part) => {
       return (
         <Listing key={`part-${ID}`} ID={ID} indentation={indentation + 1} />
       );
@@ -189,8 +189,8 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         </button>
 
         <div className={styles['icon-holder']}>
-          {Icon ? (
-            <Icon className={styles.icon} />
+          {partClass ? (
+            <partClass.IconComponent className={styles.icon} />
           ) : (
             <QuestionMarkIcon className={styles.icon} />
           )}

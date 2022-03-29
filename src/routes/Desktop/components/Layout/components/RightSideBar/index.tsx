@@ -8,7 +8,7 @@ import { getPartClass } from 'interfaces/part';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
-import { AnyPartName, PartIDs } from 'types/Parts';
+import { UUID } from 'types/Parts';
 import comparePartOrders from 'utilities/comparePartOrders';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
@@ -70,18 +70,19 @@ const RightSideBar = () => {
       }),
     );
 
-  const sortedSelections: Map<AnyPartName, PartIDs> = new Map();
+  const sortedSelections: Map<string, UUID[]> = new Map();
   const propertyItems: JSX.Element[] = [];
-  const orderedSelections: AnyPartName[] = [];
-  let partsWithTransformations: PartIDs = [];
+  const orderedSelections: string[] = [];
+  let partsWithTransformations: UUID[] = [];
 
   // sort selections by class name and look for common properties
   selections.forEach((selection) => {
     const part = getPart(selection);
     if (part) {
-      const { hasTransformations } = getPartClass(part.n);
+      const partClass = getPartClass(part.n);
 
-      if (hasTransformations) partsWithTransformations.push(selection);
+      if (partClass && partClass.hasTransformations)
+        partsWithTransformations.push(selection);
 
       if (sortedSelections.has(part.n)) {
         sortedSelections.set(part.n, [
@@ -100,11 +101,11 @@ const RightSideBar = () => {
 
   orderedSelections.forEach((partName) => {
     const IDs = sortedSelections.get(partName)!;
-    const { PropertyComponent } = getPartClass(partName);
+    const partClass = getPartClass(partName);
 
-    if (PropertyComponent) {
+    if (partClass && partClass.PropertyComponent) {
       propertyItems.push(
-        <PropertyComponent key={`property-${partName}`} IDs={IDs} />,
+        <partClass.PropertyComponent key={`property-${partName}`} IDs={IDs} />,
       );
     }
   });

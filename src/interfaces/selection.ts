@@ -1,3 +1,4 @@
+import Blueprint from 'classes/Blueprint';
 import {
   getPart,
   mutateBlueprint,
@@ -5,13 +6,12 @@ import {
   mutateParts,
 } from 'interfaces/blueprint';
 import { forEachRight, isEqual } from 'lodash';
-import { Blueprint } from 'types/Blueprint';
-import { PartID, PartIDs } from 'types/Parts';
+import { UUID } from 'types/Parts';
 
-export const selectPart = (ID: PartID) => selectParts([ID]);
+export const selectPart = (ID: UUID) => selectParts([ID]);
 
-export const selectParts = (IDs: PartIDs) => {
-  let newSelections: PartIDs = [];
+export const selectParts = (IDs: UUID[]) => {
+  let newSelections: UUID[] = [];
 
   mutateBlueprintWithoutHistory((draft) => {
     IDs.forEach((ID) => {
@@ -27,10 +27,10 @@ export const selectParts = (IDs: PartIDs) => {
   });
 };
 
-export const selectPartOnly = (ID: PartID, state?: Blueprint) =>
+export const selectPartOnly = (ID: UUID, state?: Blueprint) =>
   selectPartsOnly([ID], state);
 
-export const selectPartsOnly = (IDs: PartIDs, draft?: Blueprint) => {
+export const selectPartsOnly = (IDs: UUID[], draft?: Blueprint) => {
   if (draft) {
     mutateParts(
       draft.selections,
@@ -55,15 +55,15 @@ export const selectPartsOnly = (IDs: PartIDs, draft?: Blueprint) => {
   }
 };
 
-export const selectPartsFrom = (startID: PartID, endID: PartID) => {};
+export const selectPartsFrom = (startID: UUID, endID: UUID) => {};
 
-export const selectPartsFromOnly = (startID: PartID, endID: PartID) => {
+export const selectPartsFromOnly = (startID: UUID, endID: UUID) => {
   // TODO: make this functional
 };
 
-export const unselectPart = (ID: PartID) => unselectParts([ID]);
+export const unselectPart = (ID: UUID) => unselectParts([ID]);
 
-export const unselectParts = (IDs: PartIDs) => {
+export const unselectParts = (IDs: UUID[]) => {
   mutateBlueprintWithoutHistory((draft) => {
     IDs.forEach((ID) => {
       const part = getPart(ID, draft);
@@ -89,12 +89,12 @@ export const unselectAllParts = () => {
   });
 };
 
-export const togglePartSelection = (ID: PartID, state?: Blueprint) =>
+export const togglePartSelection = (ID: UUID, state?: Blueprint) =>
   togglePartsSelection([ID], state);
 
-export const togglePartsSelection = (IDs: PartIDs, state?: Blueprint) => {
-  let spliceIDs: PartIDs = [];
-  let insertIDs: PartIDs = [];
+export const togglePartsSelection = (IDs: UUID[], state?: Blueprint) => {
+  let spliceIDs: UUID[] = [];
+  let insertIDs: UUID[] = [];
 
   if (state) {
     IDs.forEach((ID) => {
@@ -125,7 +125,7 @@ export const togglePartsSelection = (IDs: PartIDs, state?: Blueprint) => {
   }
 };
 
-export const getPartDirection = (startID: PartID, endID: PartID): -1 | 1 => {
+export const getPartDirection = (startID: UUID, endID: UUID): -1 | 1 => {
   // TODO: make this functional
 
   return 1;

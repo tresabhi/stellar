@@ -101,7 +101,9 @@ const ToolBarTop: FC = () => {
       <ControlMenu.Container>
         <ControlMenu.Button label="File">
           <ContextMenu.Container>
-            <ContextMenu.Button onClick={newBlueprint}>New</ContextMenu.Button>
+            <ContextMenu.Button onClick={() => newBlueprint}>
+              New
+            </ContextMenu.Button>
             <ContextMenu.Button disabled onClick={handleOpenClick}>
               Open...
             </ContextMenu.Button>

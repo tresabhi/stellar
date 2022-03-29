@@ -1,18 +1,18 @@
 import { ThreeEvent } from '@react-three/fiber';
-import PartWithTransformations from 'classes/Blueprint/parts/PartWithTransformations';
+import PartWithTransformations from 'classes/Parts/PartWithTransformations';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
-  mutateParts
+  mutateParts,
 } from 'interfaces/blueprint';
 import { selectPartOnly } from 'interfaces/selection';
 import blueprintStore from 'stores/blueprint';
-import { PartID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
 const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
-  ID: PartID,
+  ID: UUID,
 ) => {
   const getMousePos = useMousePos();
 
@@ -38,6 +38,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
           draft,
         );
       });
+
       // apply them again with history
       mutateParts<Type>(blueprintStore.getState().selections, (state) => {
         state.p.x += deltaX;
@@ -57,14 +58,22 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
 
     if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
       mutateBlueprintWithoutHistory((draft) => {
-        mutateParts<Type>(
-          blueprintStore.getState().selections,
-          (state) => {
-            state.p.x += newDeltaX - deltaX;
-            state.p.y += newDeltaY - deltaY;
-          },
-          draft,
-        );
+        // mutateParts<Type>(
+        //   draft.selections,
+        //   (state) => {
+        //     state.p.x += newDeltaX - deltaX;
+        //     state.p.y += newDeltaY - deltaY;
+        //   },
+        //   draft,
+        // );
+        draft.selections.forEach((selection) => {
+          const part = getPart<PartWithTransformations>(selection);
+
+          if (part) {
+            part.p.x += newDeltaX - deltaX;
+            part.p.y += newDeltaY - deltaY;
+          }
+        });
       });
     }
 
