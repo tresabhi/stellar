@@ -1567,10 +1567,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.4.tgz#97c69881788e624d7cc68d4385fdaa9b5fd20642"
   integrity sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==
 
-"@react-three/drei@^8.19.2":
-  version "8.19.2"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.19.2.tgz#1ef6d951f308e5637fd826ee64bc1d6d1a4a7c7e"
-  integrity sha512-bqobKume3qoYff691Z7XUOfa+XnU3DedxfHRI6CijGX1KL/xZN7TMXnqNkofcrYCHk2HgFiGL7tv+C5bbonDhA==
+"@react-three/drei@^8.20.0":
+  version "8.20.0"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-8.20.0.tgz#65cd01eff97affc9c75ea45fc91eb4071f532a10"
+  integrity sha512-XotrnoIZhgEIWA/qQlo5oe9BCSz4vECuO/PEKuDXiBVq3fkc6e4HrKIe+zjQSq0YFa23QgWxVGvv7ezsyP+uRQ==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -2096,10 +2096,10 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
 
-"@types/three@^0.138.0":
-  version "0.138.0"
-  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.138.0.tgz#ec9f1d1fd8dffea2e0572f9d815ff5a35cf4dc6b"
-  integrity sha512-D8AoV7h2kbCfrv/DcebHOFh1WDwyus3HdooBkAwcBikXArdqnsQ38PQ85JCunnvun160oA9jz53GszF3zch3tg==
+"@types/three@^0.139.0":
+  version "0.139.0"
+  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.139.0.tgz#69af1f0c52f8eea390f513e05478af1dd7f49e6f"
+  integrity sha512-4V/jZhyq7Mv05coUzxL3bz8AuBOSi/1F0RY7ujisHTV0Amy/fnYJ+s7TSJ1/hXjZukSkpuFRgV+wvWUEMbsMbQ==
 
 "@types/trusted-types@^2.0.2":
   version "2.0.2"
@@ -3377,10 +3377,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-complex.js@^2.0.15:
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.0.15.tgz#7add6848b4c1d12aa9262f7df925ebe7a51a7406"
-  integrity sha512-gDBvQU8IG139ZBQTSo2qvDFP+lANMGluM779csXOr6ny1NUtA3wkUnCFjlDNH/moAVfXtvClYt6G0zarFbtz5w==
+complex.js@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.1.0.tgz#211258e271345213c6f004c0ea90a34eb1e0c753"
+  integrity sha512-RdcrDz7YynXp/YXGwXIZ4MtmxXXniT5WmLFRX93cuXUX+0geWAqB8l1BoLXF+3BkzviVzHlpw27P9ow7MvlcmA==
 
 compressible@~2.0.14, compressible@~2.0.16:
   version "2.0.18"
@@ -6375,13 +6375,13 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mathjs@^10.4.1:
-  version "10.4.1"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.1.tgz#d0bfc49f7af080d082ef3219a7d1560757c43e6e"
-  integrity sha512-l/ONB3f2N9MMy/Gx3YPdKXjmV0LKN1Ew2fqcz3tzKlAIcPCFuLlup5KHm9cmKTKMHn7MVJZWegqCQhCDEpYyNQ==
+mathjs@^10.4.2:
+  version "10.4.2"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.2.tgz#bae041b99f7774f807a0b0f98b8fd3c06f493a5a"
+  integrity sha512-3yXxFBR0V2Ij+jk7LV5k15lb+yivRxYRzjmuDYB1+yUzM3x7/XXNjIUZlcyp6l96BUMsOWzgZfIeYxg/dzqxKw==
   dependencies:
     "@babel/runtime" "^7.17.8"
-    complex.js "^2.0.15"
+    complex.js "^2.1.0"
     decimal.js "^10.3.1"
     escape-latex "^1.2.0"
     fraction.js "^4.2.0"
@@ -8992,10 +8992,10 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-three-mesh-bvh@^0.5.7:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.7.tgz#bb5620dc4cf213f0ea29c8638347312c81dbfb2b"
-  integrity sha512-CASFj3/3WKQ68S6E3vUNVTPyz9qHPJIDYvO4pEYMTUY0NOGCunz/mMnn71S3TKlDKamYPZO4PMv9SDN8SVBIEA==
+three-mesh-bvh@^0.5.7, three-mesh-bvh@^0.5.8:
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.8.tgz#d8882625c0d5b07e86e0c2ad3cff2091e3650af8"
+  integrity sha512-aw1hGGKP91WC98vDh+M7yGczwnmmtbcCwDjsh7hls076S91GuSfWbCoym3GK64uR0BhySlV5mEitCKQu3o7srg==
 
 three-stdlib@^2.8.9:
   version "2.8.11"
