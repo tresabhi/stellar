@@ -3377,10 +3377,10 @@ commondir@^1.0.1:
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   integrity sha1-3dgA2gxmEnOTzKWVDqloo6rxJTs=
 
-complex.js@^2.0.15:
-  version "2.0.15"
-  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.0.15.tgz#7add6848b4c1d12aa9262f7df925ebe7a51a7406"
-  integrity sha512-gDBvQU8IG139ZBQTSo2qvDFP+lANMGluM779csXOr6ny1NUtA3wkUnCFjlDNH/moAVfXtvClYt6G0zarFbtz5w==
+complex.js@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.1.0.tgz#211258e271345213c6f004c0ea90a34eb1e0c753"
+  integrity sha512-RdcrDz7YynXp/YXGwXIZ4MtmxXXniT5WmLFRX93cuXUX+0geWAqB8l1BoLXF+3BkzviVzHlpw27P9ow7MvlcmA==
 
 compressible@~2.0.14, compressible@~2.0.16:
   version "2.0.18"
@@ -6375,13 +6375,13 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mathjs@^10.4.1:
-  version "10.4.1"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.1.tgz#d0bfc49f7af080d082ef3219a7d1560757c43e6e"
-  integrity sha512-l/ONB3f2N9MMy/Gx3YPdKXjmV0LKN1Ew2fqcz3tzKlAIcPCFuLlup5KHm9cmKTKMHn7MVJZWegqCQhCDEpYyNQ==
+mathjs@^10.4.2:
+  version "10.4.2"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.4.2.tgz#bae041b99f7774f807a0b0f98b8fd3c06f493a5a"
+  integrity sha512-3yXxFBR0V2Ij+jk7LV5k15lb+yivRxYRzjmuDYB1+yUzM3x7/XXNjIUZlcyp6l96BUMsOWzgZfIeYxg/dzqxKw==
   dependencies:
     "@babel/runtime" "^7.17.8"
-    complex.js "^2.0.15"
+    complex.js "^2.1.0"
     decimal.js "^10.3.1"
     escape-latex "^1.2.0"
     fraction.js "^4.2.0"
