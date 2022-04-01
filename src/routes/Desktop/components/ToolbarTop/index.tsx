@@ -1,7 +1,6 @@
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
-import useFile from 'hooks/useFile';
 import produce from 'immer';
 import {
   getParentID,
@@ -14,12 +13,10 @@ import { FC, RefObject, useRef } from 'react';
 import appStore from 'stores/app';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
-import { AnyPartName } from 'types/Parts';
 import reviver from 'utilities/reviver';
 import styles from './index.module.scss';
 
 const ToolBarTop: FC = () => {
-  const draft = useFile();
   const openInputRef = useRef<HTMLInputElement>(null);
   const importInputRef = useRef<HTMLInputElement>(null);
 
@@ -64,7 +61,7 @@ const ToolBarTop: FC = () => {
   const isTabSimulation = tab === 'simulation';
   const isTabRendering = tab === 'rendering';
 
-  const adder = (name: AnyPartName) => {
+  const adder = (name: string) => {
     return () => {
       const selections = blueprintStore.getState().selections;
       const lastPartID = selections[selections.length - 1];
@@ -108,9 +105,7 @@ const ToolBarTop: FC = () => {
               Open...
             </ContextMenu.Button>
             <ContextMenu.Separator />
-            <ContextMenu.Button disabled onClick={draft.save}>
-              Save
-            </ContextMenu.Button>
+            <ContextMenu.Button disabled>Save</ContextMenu.Button>
             <ContextMenu.Button disabled onClick={handleImportClick}>
               Import...
             </ContextMenu.Button>

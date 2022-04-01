@@ -1,4 +1,4 @@
-import Part, { VanillaPart, SavedPart } from './Part';
+import Part, { SavedPart, VanillaPart } from './Part';
 
 export interface VanillaPartWithTransformations extends VanillaPart {
   p: { x: number; y: number };
@@ -9,15 +9,16 @@ export interface SavedPartWithTransformations
     VanillaPartWithTransformations {}
 
 abstract class PartWithTransformations<
-    Exported extends VanillaPartWithTransformations = VanillaPartWithTransformations,
-    Saved extends SavedPartWithTransformations = SavedPartWithTransformations,
+    VanillaState extends VanillaPartWithTransformations,
+    SavedState extends SavedPartWithTransformations = VanillaState &
+      SavedPartWithTransformations,
   >
-  extends Part<Exported, Saved>
+  extends Part<VanillaState, SavedState>
   implements VanillaPartWithTransformations
 {
   p = { x: 0, y: 0 };
   o = { x: 1, y: 1, z: 0 };
 
-  static hasTransformations = true;
+  readonly hasTransformations = true;
 }
 export default PartWithTransformations;

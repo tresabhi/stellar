@@ -11,7 +11,7 @@ import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
-const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
+const usePartCanvasTranslationControls = <Type extends PartWithTransformations<any>>(
   ID: UUID,
 ) => {
   const getMousePos = useMousePos();
@@ -67,7 +67,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
         //   draft,
         // );
         draft.selections.forEach((selection) => {
-          const part = getPart<PartWithTransformations>(selection);
+          const part = getPart<PartWithTransformations<any>>(selection);
 
           if (part) {
             part.p.x += newDeltaX - deltaX;

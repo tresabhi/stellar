@@ -1,69 +1,35 @@
-import FuelTank from 'classes/Parts/FuelTank';
+import FuelTank, { FuelTankPropertyComponent } from 'classes/Parts/FuelTank';
 import Group from 'classes/Parts/Group';
-import { AnyPartClass } from 'types/Parts';
+import Part, { SavedPart, VanillaPart } from 'classes/Parts/Part';
+import { FC } from 'react';
+import { PropertyComponentProps } from 'types/Parts';
 
-const PartClasses = new Map<string, AnyPartClass>([
+export const PartClasses = new Map<string, AnyPartClass>([
   ['Fuel Tank', FuelTank],
   ['Group', Group],
 ]);
 
-/*
-export const importifyPart = <Type extends AnySavedPart>(
-  partData: Type,
-  ID: PartID,
-  parentID?: PartID,
-) => {
-  const part = createNewPart(partData.n, ID, parentID);
+export const PartPropertyComponents = new Map<
+  string,
+  FC<PropertyComponentProps>
+>([['Fuel Tank', FuelTankPropertyComponent]]);
 
-  if (part) {
-    part.hydrate(partData as ExportedPart);
-    return part;
-  }
-};
+export interface AnyVanillaPart extends VanillaPart {
+  [key: string]: any;
+}
 
-export const importifyParts = (
-  blueprint: VanillaBlueprint | SavifiedBlueprint | Blueprint,
-  parentID?: PartID,
-): [AnyPartMap, PartID[]] => {
-  const newPartsMap: AnyPartMap = new Map();
-  const clonedBlueprint = cloneDeep(blueprint);
+export interface AnySavedPart extends SavedPart {
+  [key: string]: any;
+}
 
-  if (isMap(clonedBlueprint.parts)) {
-    // normal blueprint, probably never gonna use this
-    (clonedBlueprint as Blueprint).parts.forEach((part, ID) => {
-      const importifiedPart = importifyPart(cloneDeep(part), ID, parentID);
-      if (importifiedPart) newPartsMap.set(ID, importifiedPart);
-    });
+export type AnyPart = Part<any>;
+export type AnyPartClass = new () => AnyPart;
 
-    return [newPartsMap, (clonedBlueprint as Blueprint).partOrder];
-  } else if (clonedBlueprint.parts.length === 0) {
-    // not parts to convert
-    return [newPartsMap, []];
-  } else if (isArray(clonedBlueprint.parts[0])) {
-    // saved version of the blueprint
-    (clonedBlueprint as SavifiedBlueprint).parts.forEach(([ID, part]) => {
-      const importifiedPart = importifyPart(cloneDeep(part), ID, parentID);
-      if (importifiedPart) newPartsMap.set(ID, importifiedPart);
-    });
+export const getPartClass = <
+  Type extends Part<VanillaPart> = Part<VanillaPart>,
+>(
+  name: string,
+) => PartClasses.get(name) as (new (ID?: string) => Type) | undefined;
 
-    return [newPartsMap, (clonedBlueprint as Blueprint).partOrder];
-  } else {
-    // vanilla blueprint, straight from the game
-    let newPartOrder: PartID[] = [];
-
-    (clonedBlueprint as Blueprint).partOrder = [];
-    (clonedBlueprint as VanillaBlueprint).parts.forEach((part) => {
-      const ID = UUIDV4();
-      const importifiedPart = importifyPart(cloneDeep(part), ID, parentID);
-      if (importifiedPart) {
-        newPartsMap.set(ID, importifiedPart);
-        newPartOrder.push(ID);
-      }
-    });
-
-    return [newPartsMap, newPartOrder];
-  }
-};
-*/
-
-export const getPartClass = (name: string) => PartClasses.get(name);
+export const getPropertyComponent = (name: string) =>
+  PartPropertyComponents.get(name);

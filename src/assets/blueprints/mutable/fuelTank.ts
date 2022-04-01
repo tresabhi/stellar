@@ -1,8 +1,12 @@
+import { SavedBlueprint } from 'types/Blueprint';
+
 const color = 'Color_White';
 const shape = 'Strut';
 const scale = [1, 1];
 
-const blueprint = {
+const blueprint: SavedBlueprint = {
+  format_version: 1,
+  selections: [],
   center: 0,
   offset: {
     x: 0,
@@ -12,9 +16,10 @@ const blueprint = {
     [
       'a',
       {
-        meta: {
-          label: 'box',
-        },
+        label: 'box',
+        ID: 'a',
+        hidden: false,
+        locked: false,
         n: 'Fuel Tank',
         p: {
           x: 1,
@@ -42,9 +47,10 @@ const blueprint = {
     [
       'b',
       {
-        meta: {
-          label: 'tall',
-        },
+        ID: 'b',
+        hidden: false,
+        locked: false,
+        label: 'tall',
         n: 'Fuel Tank',
         p: {
           x: 4,
@@ -72,9 +78,10 @@ const blueprint = {
     [
       'c',
       {
-        meta: {
-          label: 'wide',
-        },
+        ID: 'c',
+        hidden: false,
+        locked: false,
+        label: 'wide',
         n: 'Fuel Tank',
         p: {
           x: 0,
@@ -102,9 +109,10 @@ const blueprint = {
     [
       'd',
       {
-        meta: {
-          label: 'upright cone',
-        },
+        ID: 'd',
+        hidden: false,
+        locked: false,
+        label: 'upright cone',
         n: 'Fuel Tank',
         p: {
           x: -3,
@@ -132,9 +140,10 @@ const blueprint = {
     [
       'e',
       {
-        meta: {
-          label: 'upside down cone',
-        },
+        ID: 'e',
+        hidden: false,
+        locked: false,
+        label: 'upside down cone',
         n: 'Fuel Tank',
         p: {
           x: 0,
@@ -162,9 +171,10 @@ const blueprint = {
     [
       'f',
       {
-        meta: {
-          label: 'titled box',
-        },
+        ID: 'f',
+        hidden: false,
+        locked: false,
+        label: 'titled box',
         n: 'Fuel Tank',
         p: {
           x: 4,
@@ -192,9 +202,10 @@ const blueprint = {
     [
       'g',
       {
-        meta: {
-          label: '0 width tall',
-        },
+        ID: 'g',
+        hidden: false,
+        locked: false,
+        label: '0 width tall',
         n: 'Fuel Tank',
         p: {
           x: -3.5,
@@ -222,9 +233,10 @@ const blueprint = {
     [
       'h',
       {
-        meta: {
-          label: '0 width skinny',
-        },
+        ID: 'h',
+        hidden: false,
+        locked: false,
+        label: '0 width skinny',
         n: 'Fuel Tank',
         p: {
           x: -5.5,
@@ -252,9 +264,10 @@ const blueprint = {
     [
       'i',
       {
-        meta: {
-          label: '0 width even skinnier',
-        },
+        ID: 'i',
+        hidden: false,
+        locked: false,
+        label: '0 width even skinnier',
         n: 'Fuel Tank',
         p: {
           x: -6,
@@ -282,9 +295,10 @@ const blueprint = {
     [
       'j',
       {
-        meta: {
-          label: '0 width omega skinnier',
-        },
+        ID: 'j',
+        hidden: false,
+        locked: false,
+        label: '0 width omega skinnier',
         n: 'Fuel Tank',
         p: {
           x: -5,
@@ -312,9 +326,10 @@ const blueprint = {
     [
       'k',
       {
-        meta: {
-          label: 'both 0 widths',
-        },
+        ID: 'k',
+        hidden: false,
+        locked: false,
+        label: 'both 0 widths',
         n: 'Fuel Tank',
         p: {
           x: -3,
@@ -342,6 +357,10 @@ const blueprint = {
     [
       '1',
       {
+        label: 'Group',
+        ID: '1',
+        hidden: false,
+        locked: false,
         n: 'Group',
         partOrder: ['a', 'b'],
         expanded: true,

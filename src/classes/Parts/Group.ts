@@ -11,11 +11,15 @@ export interface SavedGroup extends SavedPart {
   partOrder: UUID[];
 }
 
-class Group extends Part<{}, SavedGroup> implements SavedGroup {
+// TODO: null for now, but will
+class Group extends Part<null, SavedGroup> implements SavedGroup {
   readonly n = 'Group';
   expanded = false;
   partOrder: UUID[] = [];
   label = this.n;
+
+  readonly isExportable = false;
+  hasTransformations = false;
 
   updateBoundingBox() {
     let newBoundingBox = new Box2(new Vector2(0, 0), new Vector2(0, 0));
@@ -27,7 +31,7 @@ class Group extends Part<{}, SavedGroup> implements SavedGroup {
     return newBoundingBox;
   }
 
-  static IconComponent = Icon;
-  LayoutComponent = memo(() => null);
+  readonly IconComponent = Icon;
+  readonly LayoutComponent = memo(() => null);
 }
 export default Group;

@@ -1,14 +1,15 @@
 import { subscribeToPart } from 'interfaces/blueprint';
+import { AnyPart } from 'interfaces/part';
 import { useEffect } from 'react';
-import { AnyPart, UUID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 
-const usePartProperty = <T extends AnyPart, S extends any>(
+const usePartProperty = <Type extends AnyPart, Slice extends any>(
   ID: UUID,
-  slicer: (state: T) => S,
-  handler: (slice: S) => void,
+  slicer: (state: Type) => Slice,
+  handler: (slice: Slice) => void,
 ) => {
   useEffect(() => {
-    subscribeToPart(ID, handler, slicer, {
+    subscribeToPart(ID, handler, (part) => slicer(part as Type), {
       fireInitially: true,
     });
   }, [ID, handler, slicer]);

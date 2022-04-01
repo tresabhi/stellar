@@ -53,7 +53,6 @@ export const LayoutRenderer = () => {
   return (
     <Canvas
       ref={canvasRef}
-      mode="concurrent"
       orthographic
       camera={{
         zoom: 16,

@@ -1,9 +1,10 @@
 import { SavedPart, VanillaPart } from 'classes/Parts/Part';
 import { immerable } from 'immer';
 import { createNewPart } from 'interfaces/blueprint';
+import { AnyVanillaPart } from 'interfaces/part';
 import { isArray } from 'lodash';
 import { AnyPartMap, SavedBlueprint, VanillaBlueprint } from 'types/Blueprint';
-import { AnyVanillaPart, UUID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 import safeClassMerge from 'utilities/safeClassMerge';
 
 class Blueprint {

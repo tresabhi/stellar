@@ -1,17 +1,16 @@
 import Blueprint from 'classes/Blueprint';
 import Group from 'classes/Parts/Group';
-import Part from 'classes/Parts/Part';
 import PartWithTransformations from 'classes/Parts/PartWithTransformations';
 import produce, { applyPatches, produceWithPatches } from 'immer';
 import { merge } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore
+  BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import { SavedBlueprint, VanillaBlueprint } from 'types/Blueprint';
 import DeepPartial from 'types/DeepPartial';
-import { AnyPart, AnyPartName, UUID } from 'types/Parts';
-import { getPartClass } from './part';
+import { UUID } from 'types/Parts';
+import { AnyPart, getPartClass } from './part';
 
 // TODO: make this data driven
 // 0 is infinite undo/redo limit
@@ -36,9 +35,9 @@ export const deletePartsBySelection = () => {
   });
 };
 
-export const getPart = <T extends Part>(ID: UUID, state?: Blueprint) => {
+export const getPart = <Type extends AnyPart>(ID: UUID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
-  return blueprintState.parts.get(ID) as T | undefined;
+  return blueprintState.parts.get(ID) as Type | undefined;
 };
 
 export const getParts = (IDs: UUID[], state?: Blueprint) => {
@@ -57,22 +56,22 @@ export const getParent = (ID: UUID, state?: Blueprint): Group | undefined => {
   if (parentID) return getPart<Group>(parentID, state);
 };
 
-export const mutatePart = <T extends Part>(
+export const mutatePart = <Type extends AnyPart>(
   ID: UUID,
-  mutator: (draft: T) => void,
+  mutator: (draft: Type) => void,
   state?: Blueprint,
 ) => {
   mutateParts([ID], mutator, state);
 };
 
-export const mutateParts = <T extends Part>(
+export const mutateParts = <Type extends AnyPart>(
   IDs: UUID[],
-  mutator: (draft: T) => void,
+  mutator: (draft: Type) => void,
   state?: Blueprint,
 ) => {
   if (state) {
     IDs.forEach((ID) => {
-      let part = getPart(ID, state) as T | undefined;
+      let part = getPart(ID, state) as Type | undefined;
       if (part) mutator(part);
     });
   } else {
@@ -92,7 +91,7 @@ export const getReactivePart = <T extends AnyPart, S>(
 };
 
 export const translateParts = (IDs: UUID[], x: number, y: number) =>
-  mutateParts<PartWithTransformations>(IDs, (draft) => {
+  mutateParts<PartWithTransformations<any>>(IDs, (draft) => {
     draft.p.x += x;
     draft.p.y += y;
   });
@@ -106,7 +105,7 @@ interface SubscribeToPartOptions {
 const subscribeToPartDefaultOptions = {
   fireInitially: false,
 };
-export const subscribeToPart = <Type extends Part, Slice extends any>(
+export const subscribeToPart = <Type extends AnyPart, Slice extends any>(
   ID: UUID,
   handler: (slice: Slice) => void,
   slicer?: (part: Type) => Slice,
@@ -124,7 +123,7 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
 
       if (part) {
         if (slicer) {
-          return slicer(part as unknown as Type);
+          return slicer(part as Type);
         } else {
           return part as Slice;
         }
@@ -143,7 +142,7 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
 
     if (part) {
       if (slicer) {
-        handler(slicer(part as unknown as Type));
+        handler(slicer(part as Type));
       } else {
         handler(part as Slice);
       }
@@ -230,24 +229,22 @@ export const redo = () => {
   );
 };
 
-export const createNewPart = (
-  partName: AnyPartName,
+export const createNewPart = <Type extends AnyPart>(
+  partName: string,
   ID?: UUID,
   parentID?: UUID,
 ) => {
-  const partClass = getPartClass(partName);
+  const PartClass = getPartClass<Type>(partName);
 
-  if (partClass) {
-    let newPart = new partClass(ID, parentID);
+  if (PartClass) {
+    let newPart = new PartClass(ID);
+    newPart.parentID = parentID;
+
     return newPart;
   }
 };
 
-export const insertPart = (
-  partName: AnyPartName,
-  parentID?: UUID,
-  index = 0,
-) => {
+export const insertPart = (partName: string, parentID?: UUID, index = 0) => {
   mutateBlueprint((draft) => {
     const newPart = createNewPart(partName);
 
@@ -283,22 +280,24 @@ export const getPartIndex = (
 
 export const groupParts = (IDs: UUID[], replaceID: UUID) => {
   mutateBlueprint((draft) => {
-    const newGroup = createNewPart('Group') as Group;
+    const newGroup = createNewPart<Group>('Group');
     const newGroupParent = getParent(replaceID, draft) ?? draft;
 
-    draft.parts.set(newGroup.ID, newGroup);
-    newGroupParent.partOrder[newGroupParent.partOrder.indexOf(replaceID)] =
-      newGroup.ID;
-    newGroup.partOrder = IDs;
+    if (newGroup) {
+      draft.parts.set(newGroup.ID, newGroup);
+      newGroupParent.partOrder[newGroupParent.partOrder.indexOf(replaceID)] =
+        newGroup.ID;
+      newGroup.partOrder = IDs;
 
-    IDs.forEach((ID) => {
-      const currentParent = getParent(ID, draft) ?? draft;
-      const currentPart = getPart(ID, draft);
-      const spliceIndex = currentParent.partOrder.indexOf(ID);
+      IDs.forEach((ID) => {
+        const currentParent = getParent(ID, draft) ?? draft;
+        const currentPart = getPart(ID, draft);
+        const spliceIndex = currentParent.partOrder.indexOf(ID);
 
-      if (currentPart) currentPart.parentID = newGroup.ID;
-      if (spliceIndex !== -1) currentParent.partOrder.splice(spliceIndex, 1);
-    });
+        if (currentPart) currentPart.parentID = newGroup.ID;
+        if (spliceIndex !== -1) currentParent.partOrder.splice(spliceIndex, 1);
+      });
+    }
   });
 };
 

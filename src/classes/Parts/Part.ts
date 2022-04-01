@@ -1,25 +1,36 @@
 import { immerable } from 'immer';
+import { AnyVanillaPart } from 'interfaces/part';
 import { cloneDeep } from 'lodash';
-import { createRef, FC, NamedExoticComponent } from 'react';
-import { Box2, Group, Mesh } from 'three';
+import { createRef, FC } from 'react';
+import { Box2, Mesh } from 'three';
 import DeepPartial from 'types/DeepPartial';
-import { AnyVanillaPart, PropertyComponentProps, UUID } from 'types/Parts';
+import { UUID } from 'types/Parts';
 import safeClassMerge from 'utilities/safeClassMerge';
 import { NIL, v4 as UUIDV4 } from 'uuid';
 
-export interface VanillaPart {}
+export interface VanillaPart {
+  readonly n: string;
+}
 
 export interface SavedPart extends VanillaPart {
   ID: UUID;
   parentID?: UUID;
+
   label: string;
   hidden: boolean;
   locked: boolean;
 }
 
+type NullSafeExporter<
+  VanillaState extends VanillaPart | null,
+  SavedState extends SavedPart,
+> = VanillaState extends null ? SavedState : VanillaState & SavedState;
+
+type DosntExtendsNull<Type> = Type extends null ? false : true;
+
 abstract class Part<
-  Exported extends VanillaPart = VanillaPart,
-  Saved extends SavedPart = Exported & SavedPart,
+  VanillaState extends VanillaPart | null,
+  SavedState extends SavedPart = NullSafeExporter<VanillaState, SavedPart>,
 > implements SavedPart
 {
   [immerable] = true;
@@ -33,7 +44,7 @@ abstract class Part<
   locked = false;
 
   boundingBox = new Box2();
-  meshRef = createRef<Mesh | Group>();
+  meshRef = createRef<Mesh>();
   private nonExportableKeys: string[] = [];
   private savableKeys = [
     'n',
@@ -45,34 +56,46 @@ abstract class Part<
     'locked',
   ];
 
-  static isExportable = true;
-  static hasTransformations = false;
+  abstract readonly isExportable: DosntExtendsNull<VanillaState>;
+  abstract readonly hasTransformations: boolean;
 
   abstract updateBoundingBox(): void;
 
-  hydrate(data: DeepPartial<Saved>) {
+  // #region data managers
+  hydrate(data: DeepPartial<SavedState>) {
     safeClassMerge(this, data);
   }
+
   /**
    * _❕ Parts like `Group` can export multiple parts_
+   * TODO: add Part[] in a way again
    */
-  export(): Exported | AnyVanillaPart[] {
-    const clonedThis = cloneDeep(this);
-    const exportable: Partial<Exported> = {};
+  export<
+    ExportedState = VanillaState extends null
+      ? null
+      : VanillaState | AnyVanillaPart[],
+  >(): ExportedState {
+    if (this.isExportable) {
+      const clonedThis = cloneDeep(this);
+      const exportable: Partial<VanillaState> = {};
 
-    Object.keys(clonedThis).forEach((key) => {
-      const value = (clonedThis as any)[key];
+      Object.keys(clonedThis).forEach((key) => {
+        const value = (clonedThis as any)[key];
 
-      if (!this.nonExportableKeys.includes(key)) {
-        (exportable as any)[key] = value;
-      }
-    });
+        if (!this.nonExportableKeys.includes(key)) {
+          (exportable as any)[key] = value;
+        }
+      });
 
-    return exportable as Exported;
+      return exportable as ExportedState;
+    } else {
+      return null as unknown as ExportedState;
+    }
   }
-  save(): Saved {
+
+  save(): SavedState {
     const clonedThis = cloneDeep(this);
-    const saved: Partial<Saved> = {};
+    const saved: Partial<SavedState> = {};
 
     Object.keys(clonedThis).forEach((key) => {
       const value = (clonedThis as any)[key];
@@ -85,16 +108,15 @@ abstract class Part<
       }
     });
 
-    return saved as Saved;
+    return saved as SavedState;
   }
+  // #endregion
 
-  static IconComponent: FC;
-  abstract LayoutComponent: FC;
-  static PropertyComponent?: NamedExoticComponent<PropertyComponentProps>;
+  abstract readonly IconComponent: FC<any>;
+  abstract readonly LayoutComponent: FC<any>;
 
-  constructor(ID?: UUID, parentID?: UUID) {
+  constructor(ID?: UUID) {
     this.ID = ID ?? UUIDV4();
-    this.parentID = parentID;
 
     this.nonExportableKeys.push(...Object.getOwnPropertyNames(this));
     this.nonExportableKeys.splice(this.nonExportableKeys.indexOf('n'), 1);

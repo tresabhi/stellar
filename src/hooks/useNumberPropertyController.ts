@@ -1,14 +1,14 @@
-import Part from 'classes/Parts/Part';
 import { getPart, mutateParts, subscribeToPart } from 'interfaces/blueprint';
+import { AnyPart } from 'interfaces/part';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
 import useUnitInputController, {
-    UseUnitInputControllerOptions
+  UseUnitInputControllerOptions,
 } from './useUnitInputController';
 
-const usePropertyController = <Type extends Part>(
+const usePropertyController = <Type extends AnyPart>(
   IDs: UUID[],
   get: (state: Type) => number,
   set: (value: number) => DeepPartial<Type>,
@@ -41,8 +41,8 @@ const usePropertyController = <Type extends Part>(
 
         const unsubscribe = subscribeToPart(
           ID,
-          (newValue) => update(ID, newValue),
-          get,
+          (newValue) => update(ID, newValue as number),
+          (part) => get(part as Type),
         );
 
         unsubscribes.push(unsubscribe);

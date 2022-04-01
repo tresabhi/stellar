@@ -5,7 +5,7 @@ import { Group, Mesh } from 'three';
 import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
 
-const usePartTransformations = <Type extends PartWithTransformations>(
+const usePartTransformations = <Type extends PartWithTransformations<any>>(
   ID: UUID,
   mesh: RefObject<Mesh | Group>,
   overrides?: (state: Type) => DeepPartial<Type>,
@@ -63,7 +63,7 @@ const usePartTransformations = <Type extends PartWithTransformations>(
   */
 
   useEffect(() => {
-    const unsubPosX = subscribeToPart<PartWithTransformations, number>(
+    const unsubPosX = subscribeToPart<PartWithTransformations<any>, number>(
       ID,
       (state) => {
         // document.title = `${state}`;

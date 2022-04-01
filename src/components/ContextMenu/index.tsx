@@ -7,7 +7,7 @@ export const Container: FC = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
-    //@ts-ignore
+    // @ts-ignore
     if (document.activeElement?.blur) document.activeElement?.blur();
   };
 

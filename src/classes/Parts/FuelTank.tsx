@@ -5,19 +5,14 @@ import usePartCanvasSelectionControls from 'hooks/usePartCanvasSelectionControls
 import usePartCanvasTranslationControls from 'hooks/usePartCanvasTranslationControls';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
-import { createRef, memo } from 'react';
-import {
-  Box2,
-  CylinderGeometry,
-  Mesh,
-  MeshStandardMaterial,
-  Vector2,
-} from 'three';
+import { memo } from 'react';
+import { Box2, CylinderGeometry, MeshStandardMaterial, Vector2 } from 'three';
 import { PropertyComponentProps, UUID } from 'types/Parts';
 import PartWithTransformations, {
   VanillaPartWithTransformations,
 } from './PartWithTransformations';
 
+// #region texture types
 type ColorTexture =
   | '_'
   | 'Color_White'
@@ -64,6 +59,7 @@ type ShapeTexture =
   | 'Nozzle_4'
   | 'Capsule'
   | 'Strut';
+// #endregion
 
 export interface VanillaFuelTank extends VanillaPartWithTransformations {
   n: 'Fuel Tank';
@@ -109,7 +105,7 @@ class FuelTank
   };
   label = this.n;
 
-  meshRef = createRef<Mesh>();
+  readonly isExportable = true;
 
   updateBoundingBox() {
     this.boundingBox = new Box2(
@@ -124,7 +120,7 @@ class FuelTank
     );
   }
 
-  static IconComponent = Icon;
+  IconComponent = Icon;
   LayoutComponent = memo(() => {
     usePartProperty(
       this.ID,
@@ -158,7 +154,16 @@ class FuelTank
       />
     );
   });
-  static PropertyComponent = memo<PropertyComponentProps>(({ IDs }) => {
+
+  constructor(ID?: UUID, parentID?: UUID) {
+    super(ID);
+    this.updateBoundingBox();
+  }
+}
+export default FuelTank;
+
+export const FuelTankPropertyComponent = memo<PropertyComponentProps>(
+  ({ IDs }) => {
     const width = usePropertyController<FuelTank>(
       IDs,
       (state) => state.N.width_original,
@@ -190,12 +195,5 @@ class FuelTank
         </PropertiesExplorer.Row>
       </PropertiesExplorer.Group>
     );
-  });
-
-  constructor(ID?: UUID, parentID?: UUID) {
-    super(ID, parentID);
-
-    this.updateBoundingBox();
-  }
-}
-export default FuelTank;
+  },
+);

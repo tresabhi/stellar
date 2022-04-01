@@ -1,9 +1,11 @@
-import { AnyPart, AnySavedPart, AnyVanillaPart, UUID } from './Parts';
+import { VanillaPart } from 'classes/Parts/Part';
+import { AnyPart, AnySavedPart } from 'interfaces/part';
+import { UUID } from './Parts';
 
 export interface VanillaBlueprint {
   center: number;
   offset: { x: number; y: number };
-  parts: AnyVanillaPart[];
+  parts: VanillaPart[];
   stages: { partIndexes: number[] }[]; // TODO: isolate this type
 }
 

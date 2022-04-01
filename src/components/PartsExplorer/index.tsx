@@ -2,14 +2,13 @@ import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-dow
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
 import Group from 'classes/Parts/Group';
-import Part from 'classes/Parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
   mutatePart,
 } from 'interfaces/blueprint';
-import { getPartClass } from 'interfaces/part';
+import { AnyPart, getPartClass } from 'interfaces/part';
 import {
   selectPartOnly,
   selectPartsFrom,
@@ -75,7 +74,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
 
   usePartProperty(
     ID,
-    (state: Part) => state.selected,
+    (state: AnyPart) => state.selected,
     (selected) => {
       if (selected) {
         listingRef.current?.classList.add(styles.selected);
@@ -84,9 +83,9 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       }
     },
   );
-  usePartProperty(
+  usePartProperty<Group, boolean>(
     ID,
-    (state: Group) => (isGroup ? state.expanded : false),
+    (state) => (isGroup ? state.expanded : false),
     (expanded) => {
       setExpanded(expanded);
     },
@@ -190,7 +189,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
 
         <div className={styles['icon-holder']}>
           {partClass ? (
-            <partClass.IconComponent className={styles.icon} />
+            <initialState.IconComponent className={styles.icon} />
           ) : (
             <QuestionMarkIcon className={styles.icon} />
           )}
