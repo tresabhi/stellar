@@ -21,7 +21,7 @@
     "react-spinners": "^0.11.0",
     "semver": "^7.3.5",
     "simplebar-react": "^2.3.6",
-    "three": "0.139.1",
+    "three": "0.139.2",
     "three-mesh-bvh": "^0.5.8",
     "ts-mixer": "^6.0.1",
     "ts-unused-exports": "^8.0.0",
