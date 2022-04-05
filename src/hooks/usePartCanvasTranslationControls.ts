@@ -11,7 +11,9 @@ import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
-const usePartCanvasTranslationControls = <Type extends PartWithTransformations<any>>(
+const usePartCanvasTranslationControls = <
+  Type extends PartWithTransformations<any>,
+>(
   ID: UUID,
 ) => {
   const getMousePos = useMousePos();

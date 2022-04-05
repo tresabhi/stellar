@@ -1,0 +1,51 @@
+@import '../../styles/index.scss';
+
+.error-boundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: $black-regular;
+
+  * {
+    margin-bottom: $margin-x-thick;
+  }
+
+  .icon {
+    width: $icon-size-xxxxx-big;
+    height: $icon-size-xxxxx-big;
+
+    &.unsafe {
+      fill: green;
+      fill: $red-regular;
+    }
+
+    &.safe {
+      fill: $yellow-regular;
+    }
+  }
+
+  .title {
+    color: white;
+    font-size: $font-size-big;
+    font-weight: bold;
+  }
+
+  .body {
+    color: white;
+    font-size: $font-size-regular;
+    max-width: $error-screen-paragraph-width;
+    text-align: center;
+  }
+
+  .button-row {
+    display: flex;
+    flex-direction: row;
+
+    * {
+      margin-right: $margin-thick;
+    }
+  }
+}

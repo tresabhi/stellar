@@ -1,0 +1,20 @@
+@import '../../styles/index.scss';
+
+.button {
+  color: white;
+  font-size: $font-size-regular;
+  border-radius: $border-radius-regular;
+  padding: 6px; // TODO: fix this in the styling system revamp
+
+  &.regular {
+    background-color: $black-light;
+
+    &:hover {
+      background-color: $black-lighter;
+    }
+
+    &:active {
+      background-color: $black-x-light;
+    }
+  }
+}
