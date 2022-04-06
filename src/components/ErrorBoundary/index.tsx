@@ -1,5 +1,6 @@
 import { ReactComponent } from 'assets/icons/warning-yellow.svg';
 import Button from 'components/Button';
+import TextArea from 'components/TextArea';
 import { FC, useState } from 'react';
 import {
   ErrorBoundary as ErrorBoundaryLib,
@@ -15,9 +16,6 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
   const [logVisible, setLogVisible] = useState(false);
   const hasUnsavedChanges = blueprintStore((state) => state.hasUnsavedChanges);
 
-  const stack = error.stack?.split(' at ').map((string) => {
-    return <span className={styles.child}>{string}</span>;
-  });
   const URLParams = new URLSearchParams({
     title: `[Bug] ${error.name}`,
   }).toString();
@@ -36,7 +34,12 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
         {logVisible ? error.name : 'Stellar ran into an issue'}
       </span>
       {logVisible ? (
-        []
+        [
+          <TextArea key="error-message">{error.message}</TextArea>,
+          error.stack ? (
+            <TextArea key="error-stack">{error.stack}</TextArea>
+          ) : null,
+        ]
       ) : (
         <span className={styles.body}>
           Your progress <u>was {hasUnsavedChanges ? 'not' : 'safely'} saved</u>
