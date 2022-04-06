@@ -36,7 +36,7 @@
   .body {
     color: white;
     font-size: $font-size-regular;
-    max-width: $error-screen-paragraph-width;
+    max-width: 320px;
     text-align: center;
   }
 
@@ -47,5 +47,10 @@
     * {
       margin-right: $margin-thick;
     }
+  }
+
+  .debug {
+    width: 320px;
+    height: 128px;
   }
 }
