@@ -28,6 +28,20 @@
     height: 100px;
     opacity: 50%;
     background-color: $gray-regular;
+
+    &.inactive {
+      opacity: 0%;
+    }
+
+    &:hover {
+      background-color: $gray-light;
+      opacity: 75%;
+    }
+
+    &:active {
+      background-color: $gray-lighter;
+      opacity: 100%;
+    }
   }
 
   .container {
