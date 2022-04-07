@@ -7,6 +7,7 @@ export interface SettingsStore {
   debug: {
     dev_blueprint: boolean;
     orbit_controls: boolean;
+    error_logs: boolean;
   };
 
   performance: {
@@ -33,6 +34,7 @@ export const SettingsStoreData: SettingsStore = {
   debug: {
     dev_blueprint: false,
     orbit_controls: false,
+    error_logs: false,
   },
 
   performance: {

@@ -1,14 +1,16 @@
 import { ReactComponent } from 'assets/icons/warning-yellow.svg';
 import Button from 'components/Button';
 import TextArea from 'components/TextArea';
+import produce from 'immer';
 import moment from 'moment';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { deviceDetect } from 'react-device-detect';
 import {
   ErrorBoundary as ErrorBoundaryLib,
   FallbackProps,
 } from 'react-error-boundary';
 import blueprintStore from 'stores/blueprint';
+import settingsStore, { SettingsStore } from 'stores/settings';
 import styles from './index.module.scss';
 
 const MESSAGE_MAX_LENGTH = 75;
@@ -17,7 +19,7 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
   error,
   resetErrorBoundary,
 }) => {
-  const [logVisible, setLogVisible] = useState(false);
+  const logVisible = settingsStore((state) => state.debug.error_logs);
   const hasUnsavedChanges = blueprintStore((state) => state.hasUnsavedChanges);
   const slicedMessage = error.message.slice(0, MESSAGE_MAX_LENGTH - 1);
   const ellipses = error.message.length > MESSAGE_MAX_LENGTH ? '...' : '';
@@ -45,7 +47,12 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
   }).toString();
   const reportURL = `https://github.com/TresAbhi/Stellar/issues/new?${URLParams}`;
 
-  const handleDebugClick = () => setLogVisible((state) => !state);
+  const handleDebugClick = () =>
+    settingsStore.setState(
+      produce((state: SettingsStore) => {
+        state.debug.error_logs = !state.debug.error_logs;
+      }),
+    );
 
   return (
     <div className={styles['error-boundary']}>
@@ -70,9 +77,13 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
         ]
       ) : (
         <span className={styles.body}>
-          Your progress <u>was {hasUnsavedChanges ? 'not' : 'safely'} saved</u>
-          in its latest state. Feel free to report this bug to Stellar while
-          making sure you're the first one to do so.
+          Your progress <u>was {hasUnsavedChanges ? 'not' : 'safely'} saved</u>{' '}
+          in its latest state.{' '}
+          {hasUnsavedChanges
+            ? '(turn on auto-save to avoid these kind of issues)'
+            : ''}
+          . Feel free to report this bug to Stellar while making sure you're the
+          first one to do so.
         </span>
       )}
       <div className={styles['button-row']}>

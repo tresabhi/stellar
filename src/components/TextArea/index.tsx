@@ -1,5 +1,5 @@
+import Scrollable from 'components/Scrollable';
 import { FC, InputHTMLAttributes } from 'react';
-import styles from './index.module.scss';
 
 const TextArea: FC<InputHTMLAttributes<HTMLTextAreaElement>> = ({
   children,
@@ -7,9 +7,11 @@ const TextArea: FC<InputHTMLAttributes<HTMLTextAreaElement>> = ({
   ...props
 }) => {
   return (
-    <textarea {...props} className={`${styles.textarea} ${className ?? ''}`}>
+    <Scrollable>
+      {/* <textarea {...props} className={`${styles.textarea} ${className ?? ''}`}> */}
       {children}
-    </textarea>
+      {/* </textarea> */}
+    </Scrollable>
   );
 };
 export default TextArea;

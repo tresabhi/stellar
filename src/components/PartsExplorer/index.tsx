@@ -6,14 +6,14 @@ import usePartProperty from 'hooks/usePartProperty';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
-  mutatePart,
+  mutatePart
 } from 'interfaces/blueprint';
 import { AnyPart, getPartClass } from 'interfaces/part';
 import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'interfaces/selection';
 import {
   FC,
@@ -22,7 +22,7 @@ import {
   memo,
   MouseEvent,
   useRef,
-  useState,
+  useState
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { UUID } from 'types/Parts';

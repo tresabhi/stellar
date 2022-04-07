@@ -20,7 +20,6 @@
     "react-router-dom": "^6.2.2",
     "react-spinners": "^0.11.0",
     "semver": "^7.3.6",
-    "simplebar-react": "^2.3.6",
     "three": "0.139.2",
     "three-mesh-bvh": "^0.5.8",
     "ts-unused-exports": "^8.0.0",
@@ -30,7 +29,7 @@
     "workbox-precaching": "^6.5.2",
     "workbox-routing": "^6.5.0",
     "workbox-strategies": "^6.5.1",
-    "zustand": "^3.7.1"
+    "zustand": "^3.7.2"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
@@ -51,7 +50,8 @@
     "react-scripts": "5.0.0",
     "serve": "^13.0.2",
     "typescript": "^4.6.3",
-    "unzipper": "^0.10.11"
+    "unzipper": "^0.10.11",
+    "webpack": "5"
   },
   "scripts": {
     "start": "react-scripts start",
