@@ -17,20 +17,22 @@
 }
 */
 
+$width: 8px;
+
 .scrollable {
   position: relative;
 
   .thumb {
     position: absolute;
     right: $margin-regular;
-    width: 8px;
+    width: $width;
     border-radius: $border-radius-regular;
     height: 100px;
     opacity: 50%;
     background-color: $gray-regular;
 
     &.inactive {
-      opacity: 0%;
+      opacity: 0;
     }
 
     &:hover {

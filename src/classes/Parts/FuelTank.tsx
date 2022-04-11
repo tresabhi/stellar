@@ -126,16 +126,17 @@ class FuelTank
       this.ID,
       (state: FuelTank) => state.N,
       (N) => {
-        this.meshRef.current!.geometry = new CylinderGeometry(
-          N.width_b / 2,
-          N.width_a / 2,
-          N.height,
-          12,
-          1,
-          true,
-          Math.PI / -2,
-          Math.PI,
-        );
+        if (this.meshRef.current)
+          this.meshRef.current.geometry = new CylinderGeometry(
+            N.width_b / 2,
+            N.width_a / 2,
+            N.height,
+            12,
+            1,
+            true,
+            Math.PI / -2,
+            Math.PI,
+          );
       },
     );
     usePartTransformations<FuelTank>(this.ID, this.meshRef, (state) => ({
