@@ -12,9 +12,6 @@ enablePatches();
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 const App = lazy(() => import('App'));
-// const App = () => {
-//   throw new Error('message');
-// };
 
 root.render(
   <StrictMode>

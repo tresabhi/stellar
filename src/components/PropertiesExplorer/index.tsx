@@ -1,4 +1,4 @@
-import { FC, forwardRef, InputHTMLAttributes } from 'react';
+import { FC, forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import styles from './index.module.scss';
 
 export const Container = forwardRef<
@@ -14,15 +14,24 @@ export const Container = forwardRef<
   </div>
 ));
 
-export const Group: FC = ({ children }) => (
+interface GroupProps {
+  children: ReactNode;
+}
+export const Group: FC<GroupProps> = ({ children }) => (
   <div className={styles.group}>{children}</div>
 );
 
-export const Title: FC = ({ children }) => (
+interface TitleProps {
+  children: ReactNode;
+}
+export const Title: FC<TitleProps> = ({ children }) => (
   <span className={styles.title}>{children}</span>
 );
 
-export const Row: FC = ({ children }) => (
+interface RowProps {
+  children: ReactNode;
+}
+export const Row: FC<RowProps> = ({ children }) => (
   <div className={styles.row}>{children}</div>
 );
 

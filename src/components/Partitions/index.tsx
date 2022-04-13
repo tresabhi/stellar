@@ -1,7 +1,10 @@
-import { FC, InputHTMLAttributes } from 'react';
+import { FC, InputHTMLAttributes, ReactNode } from 'react';
 import styles from './index.module.scss';
 
-export const Container: FC = ({ children }) => (
+interface ContainerProps {
+  children: ReactNode;
+}
+export const Container: FC<ContainerProps> = ({ children }) => (
   <div className={styles.partition}>{children}</div>
 );
 

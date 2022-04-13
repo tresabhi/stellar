@@ -1,12 +1,16 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import styles from './index.module.scss';
 
-export const Container: FC = ({ children }) => (
+interface ContainerProps {
+  children: ReactNode;
+}
+export const Container: FC<ContainerProps> = ({ children }) => (
   <div className={styles['control-menu']}>{children}</div>
 );
 
 interface ButtonProps {
   label: string;
+  children: ReactNode;
 }
 export const Button: FC<ButtonProps> = ({ children, label: title }) => {
   return (

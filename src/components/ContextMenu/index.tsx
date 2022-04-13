@@ -1,9 +1,19 @@
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
-import { FC, InputHTMLAttributes, MouseEvent, useRef, useState } from 'react';
+import {
+  FC,
+  InputHTMLAttributes,
+  MouseEvent,
+  ReactNode,
+  useRef,
+  useState,
+} from 'react';
 import styles from './index.module.scss';
 
-export const Container: FC = ({ children }) => {
+interface ContainerProps {
+  children: ReactNode;
+}
+export const Container: FC<ContainerProps> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
@@ -59,6 +69,7 @@ export const Separator = () => (
 interface ExtensionProps {
   disabled?: boolean;
   label: string;
+  children: ReactNode;
 }
 export const Extension: FC<ExtensionProps> = ({
   children,

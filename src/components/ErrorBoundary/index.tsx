@@ -1,9 +1,10 @@
 import { ReactComponent } from 'assets/icons/warning-yellow.svg';
+import Blueprint from 'classes/Blueprint';
 import Button from 'components/Button';
 import TextArea from 'components/TextArea';
 import produce from 'immer';
 import moment from 'moment';
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { deviceDetect } from 'react-device-detect';
 import {
   ErrorBoundary as ErrorBoundaryLib,
@@ -20,12 +21,10 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
   resetErrorBoundary,
 }) => {
   const logVisible = settingsStore((state) => state.debug.error_logs);
-  const hasUnsavedChanges = blueprintStore((state) => state.hasUnsavedChanges);
   const slicedMessage = error.message.slice(0, MESSAGE_MAX_LENGTH - 1);
   const ellipses = error.message.length > MESSAGE_MAX_LENGTH ? '...' : '';
   const deviceInfo = {
     format_version: 1,
-    hasUnsavedChanges,
     locale: moment.locale(),
     date: moment().format('MMMM Do, YYYY'),
     time: moment().format('h:mm:ss a'),
@@ -53,14 +52,14 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
         state.debug.error_logs = !state.debug.error_logs;
       }),
     );
+  const handleRestartWithoutProgressClick = () => {
+    blueprintStore.setState(new Blueprint());
+    resetErrorBoundary();
+  };
 
   return (
     <div className={styles['error-boundary']}>
-      <ReactComponent
-        className={`${styles.icon} ${
-          hasUnsavedChanges ? styles.unsafe : styles.safe
-        }`}
-      />
+      <ReactComponent className={styles.icon} />
       <span className={styles.title}>
         {logVisible ? error.name : 'Stellar ran into an issue'}
       </span>
@@ -77,17 +76,16 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
         ]
       ) : (
         <span className={styles.body}>
-          Your progress <u>was {hasUnsavedChanges ? 'not' : 'safely'} saved</u>{' '}
-          in its latest state.{' '}
-          {hasUnsavedChanges
-            ? '(turn on auto-save to avoid these kind of issues)'
-            : ''}
-          . Feel free to report this bug to Stellar while making sure you're the
-          first one to do so.
+          Your progress is saved in it's latest state, however, can be discarded
+          if it's causing the issue. Feel free to report this bug to Stellar
+          while making sure you're the first one to do so.
         </span>
       )}
       <div className={styles['button-row']}>
         <Button onClick={resetErrorBoundary}>Restart</Button>
+        <Button onClick={handleRestartWithoutProgressClick}>
+          Restart Without Progress
+        </Button>
         <Button href={reportURL} target="_blank">
           Report
         </Button>
@@ -99,7 +97,10 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
   );
 };
 
-const ErrorBoundary: FC = ({ children }) => {
+interface ErrorBoundaryProps {
+  children: ReactNode;
+}
+const ErrorBoundary: FC<ErrorBoundaryProps> = ({ children }) => {
   return (
     <ErrorBoundaryLib FallbackComponent={ErrorBoundaryFallback}>
       {children}

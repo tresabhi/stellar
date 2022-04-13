@@ -16,15 +16,7 @@
   .icon {
     width: $icon-size-xxxxx-big;
     height: $icon-size-xxxxx-big;
-
-    &.unsafe {
-      fill: green;
-      fill: $red-regular;
-    }
-
-    &.safe {
-      fill: $yellow-regular;
-    }
+    fill: $red-regular;
   }
 
   .title {
