@@ -23,12 +23,16 @@ const Scrollable: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   let deltaY = 0;
 
   const markThumbAsActive = () => {
-    thumbRef.current.classList.remove(styles.inactive);
+    if (
+      containerRef.current.clientHeight !== containerRef.current.offsetHeight
+    ) {
+      thumbRef.current.classList.remove(styles.inactive);
 
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      thumbRef.current.classList.add(styles.inactive);
-    }, INACTIVE_TIME);
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        thumbRef.current.classList.add(styles.inactive);
+      }, INACTIVE_TIME);
+    }
   };
   const updateThumb = () => {
     const containerHeight = containerRef.current.getBoundingClientRect().height;
