@@ -1,5 +1,4 @@
 import { ReactComponent } from 'assets/icons/warning-yellow.svg';
-import Blueprint from 'classes/Blueprint';
 import Button from 'components/Button';
 import TextArea from 'components/TextArea';
 import produce from 'immer';
@@ -10,7 +9,6 @@ import {
   ErrorBoundary as ErrorBoundaryLib,
   FallbackProps,
 } from 'react-error-boundary';
-import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
 import styles from './index.module.scss';
 
@@ -52,10 +50,6 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
         state.debug.error_logs = !state.debug.error_logs;
       }),
     );
-  const handleRestartWithoutProgressClick = () => {
-    blueprintStore.setState(new Blueprint());
-    resetErrorBoundary();
-  };
 
   return (
     <div className={styles['error-boundary']}>
@@ -83,8 +77,8 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
       )}
       <div className={styles['button-row']}>
         <Button onClick={resetErrorBoundary}>Restart</Button>
-        <Button onClick={handleRestartWithoutProgressClick}>
-          Restart Without Progress
+        <Button onClick={window.location.reload}>
+          Restart without progress
         </Button>
         <Button href={reportURL} target="_blank">
           Report
