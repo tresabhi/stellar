@@ -147,7 +147,7 @@ class FuelTank
 
     return (
       <mesh
-        ref={this.meshRef}
+        // ref={this.meshRef}
         material={temp_material}
         position={[0, this.N.height / 2, 0]}
         onClick={handleClick}
