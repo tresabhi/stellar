@@ -5,8 +5,14 @@ import usePartCanvasSelectionControls from 'hooks/usePartCanvasSelectionControls
 import usePartCanvasTranslationControls from 'hooks/usePartCanvasTranslationControls';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartTransformations from 'hooks/usePartTransformations';
-import { memo } from 'react';
-import { Box2, CylinderGeometry, MeshStandardMaterial, Vector2 } from 'three';
+import { memo, useRef } from 'react';
+import {
+  Box2,
+  CylinderGeometry,
+  Mesh,
+  MeshStandardMaterial,
+  Vector2,
+} from 'three';
 import { PropertyComponentProps, UUID } from 'types/Parts';
 import PartWithTransformations, {
   VanillaPartWithTransformations,
@@ -122,24 +128,25 @@ class FuelTank
 
   IconComponent = Icon;
   LayoutComponent = memo(() => {
+    const meshRef = useRef<Mesh>(null!);
+
     usePartProperty(
       this.ID,
       (state: FuelTank) => state.N,
       (N) => {
-        if (this.meshRef.current)
-          this.meshRef.current.geometry = new CylinderGeometry(
-            N.width_b / 2,
-            N.width_a / 2,
-            N.height,
-            12,
-            1,
-            true,
-            Math.PI / -2,
-            Math.PI,
-          );
+        meshRef.current.geometry = new CylinderGeometry(
+          N.width_b / 2,
+          N.width_a / 2,
+          N.height,
+          12,
+          1,
+          true,
+          Math.PI / -2,
+          Math.PI,
+        );
       },
     );
-    usePartTransformations<FuelTank>(this.ID, this.meshRef, (state) => ({
+    usePartTransformations<FuelTank>(this.ID, this.THREERef, (state) => ({
       p: { y: state.p.y + state.N.height / 2 },
     }));
     const handleClick = usePartCanvasSelectionControls(this.ID);
@@ -147,7 +154,7 @@ class FuelTank
 
     return (
       <mesh
-        // ref={this.meshRef}
+        ref={meshRef}
         material={temp_material}
         position={[0, this.N.height / 2, 0]}
         onClick={handleClick}

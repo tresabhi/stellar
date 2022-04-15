@@ -2,7 +2,7 @@ import { immerable } from 'immer';
 import { AnyVanillaPart } from 'interfaces/part';
 import { cloneDeep } from 'lodash';
 import { createRef, FC } from 'react';
-import { Box2, Mesh } from 'three';
+import { Box2, Group } from 'three';
 import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
 import safeClassMerge from 'utilities/safeClassMerge';
@@ -44,7 +44,7 @@ abstract class Part<
   locked = false;
 
   boundingBox = new Box2();
-  meshRef = createRef<Mesh>();
+  THREERef = createRef<Group>();
   private nonExportableKeys: string[] = [];
   private savableKeys = [
     'n',
