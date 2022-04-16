@@ -13,8 +13,7 @@ import styles from './index.module.scss';
 const MAJOR_MARK = 5;
 
 /**
- * ### Layers breakdown
- *
+ * **Layers breakdown**
  * - 0: Infinite grid helper, axis lines
  * - 1: Reference images
  * - 2: Generic parts
@@ -22,10 +21,10 @@ const MAJOR_MARK = 5;
  * - 4: Selection outline, tools, etc.
  */
 export const LayoutRenderer = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null!);
-  const infiniteGridRef = useRef<Mesh>(null!);
-  const gridRef = useRef<GridHelper>(null!);
-  const meshRef = useRef<Group>(null!);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const infiniteGridRef = useRef<Mesh>(null);
+  const gridRef = useRef<GridHelper>(null);
+  const meshRef = useRef<Group>(null);
   const regressAmount = settingsStore(
     (state) => state.performance.regress_amount,
   );
@@ -36,17 +35,17 @@ export const LayoutRenderer = () => {
     blueprintStore.subscribe(
       (state) => state.center,
       (value) => {
-        gridRef.current.position.setX(value);
-        infiniteGridRef.current.position.setX(value % MAJOR_MARK);
+        gridRef.current?.position.setX(value);
+        infiniteGridRef.current?.position.setX(value % MAJOR_MARK);
       },
     );
     blueprintStore.subscribe(
       (state) => state.offset.x,
-      (value) => meshRef.current.position.setX(value),
+      (value) => meshRef.current?.position.setX(value),
     );
     blueprintStore.subscribe(
       (state) => state.offset.y,
-      (value) => meshRef.current.position.setY(value),
+      (value) => meshRef.current?.position.setY(value),
     );
   }, []);
 

@@ -1,7 +1,7 @@
 import { immerable } from 'immer';
 import { AnyVanillaPart } from 'interfaces/part';
 import { cloneDeep } from 'lodash';
-import { createRef, FC } from 'react';
+import { FC } from 'react';
 import { Box2, Group } from 'three';
 import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
@@ -43,8 +43,8 @@ abstract class Part<
   hidden = false;
   locked = false;
 
+  THREERef: { current: Group | null } = { current: null };
   boundingBox = new Box2();
-  THREERef = createRef<Group>();
   private nonExportableKeys: string[] = [];
   private savableKeys = [
     'n',
@@ -115,8 +115,9 @@ abstract class Part<
   abstract readonly IconComponent: FC<any>;
   abstract readonly LayoutComponent: FC<any>;
 
-  constructor(ID?: UUID) {
+  constructor(ID?: UUID, parentID?: UUID) {
     this.ID = ID ?? UUIDV4();
+    this.parentID = parentID;
 
     this.nonExportableKeys.push(...Object.getOwnPropertyNames(this));
     this.nonExportableKeys.splice(this.nonExportableKeys.indexOf('n'), 1);

@@ -1,3 +1,4 @@
+import { UUID } from 'types/Parts';
 import Part, { SavedPart, VanillaPart } from './Part';
 
 export interface VanillaPartWithTransformations extends VanillaPart {
@@ -20,5 +21,13 @@ abstract class PartWithTransformations<
   o = { x: 1, y: 1, z: 0 };
 
   readonly hasTransformations = true;
+
+  constructor(ID?: UUID, parentID?: UUID) {
+    super(ID, parentID);
+
+    setInterval(() => {
+      this.THREERef.current?.position.setX(Math.random());
+    }, 500);
+  }
 }
 export default PartWithTransformations;

@@ -1,10 +1,8 @@
 # testing
 /build
 /coverage
+draft.*
 
 # dependencies
 /node_modules
 package-lock.json
-
-# random
-*.sgr
