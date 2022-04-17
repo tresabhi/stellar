@@ -1,19 +1,20 @@
 import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
 import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
 import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
-import Group from 'classes/Parts/Group';
+import { Group } from 'game/parts/Group';
+import { Part } from 'game/parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
-  mutatePart
+  mutatePart,
 } from 'interfaces/blueprint';
-import { AnyPart, getPartClass } from 'interfaces/part';
+import { getPartData } from 'interfaces/part';
 import {
   selectPartOnly,
   selectPartsFrom,
   selectPartsFromOnly,
-  togglePartSelection
+  togglePartSelection,
 } from 'interfaces/selection';
 import {
   FC,
@@ -22,7 +23,7 @@ import {
   memo,
   MouseEvent,
   useRef,
-  useState
+  useState,
 } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { UUID } from 'types/Parts';
@@ -74,7 +75,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
 
   usePartProperty(
     ID,
-    (state: AnyPart) => state.selected,
+    (state: Part) => state.selected,
     (selected) => {
       if (selected) {
         listingRef.current?.classList.add(styles.selected);
@@ -155,14 +156,12 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     }
   };
 
-  const partClass = getPartClass(initialState.n);
+  const partData = getPartData(initialState.n);
 
   if (initialState.n === 'Group') {
-    childParts = (initialState as Group).partOrder.map((part) => {
-      return (
-        <Listing key={`part-${ID}`} ID={ID} indentation={indentation + 1} />
-      );
-    });
+    childParts = (initialState as Group).partOrder.map(() => (
+      <Listing key={`part-${ID}`} ID={ID} indentation={indentation + 1} />
+    ));
   }
 
   return (
@@ -188,7 +187,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         </button>
 
         <div className={styles['icon-holder']}>
-          {partClass ? (
+          {partData ? (
             <initialState.IconComponent className={styles.icon} />
           ) : (
             <QuestionMarkIcon className={styles.icon} />

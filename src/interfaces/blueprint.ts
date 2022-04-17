@@ -1,28 +1,29 @@
-import Blueprint from 'classes/Blueprint';
-import Group from 'classes/Parts/Group';
-import PartWithTransformations from 'classes/Parts/PartWithTransformations';
+import {
+  Blueprint,
+  BlueprintData,
+  SavedBlueprint,
+  VanillaBlueprint,
+} from 'game/Blueprint';
+import { Group } from 'game/parts/Group';
+import { Part } from 'game/parts/Part';
+import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import produce, { applyPatches, produceWithPatches } from 'immer';
-import { merge } from 'lodash';
+import { cloneDeep, isArray, isMap, merge } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
-import { SavedBlueprint, VanillaBlueprint } from 'types/Blueprint';
 import DeepPartial from 'types/DeepPartial';
-import { UUID } from 'types/Parts';
-import { AnyPart, getPartClass } from './part';
+import { AnyPart, AnyPartMap, UUID } from 'types/Parts';
+import { v4 as UUIDV4 } from 'uuid';
+import { getPartData, importifyPart } from './part';
 
 // TODO: make this data driven
 // 0 is infinite undo/redo limit
 let UNDO_LIMIT = 512;
 
-export const newBlueprint = (
-  importData?: VanillaBlueprint | SavedBlueprint,
-) => {
-  const newBlueprint = new Blueprint();
-  if (importData) newBlueprint.hydrate(importData);
-  blueprintStore.setState(newBlueprint);
-};
+export const newBlueprint = (importData?: VanillaBlueprint | SavedBlueprint) =>
+  blueprintStore.setState(importifyBlueprint(importData ?? BlueprintData));
 
 export const deletePartsBySelection = () => {
   mutateBlueprint((draft) => {
@@ -56,7 +57,7 @@ export const getParent = (ID: UUID, state?: Blueprint): Group | undefined => {
   if (parentID) return getPart<Group>(parentID, state);
 };
 
-export const mutatePart = <Type extends AnyPart>(
+export const mutatePart = <Type extends Part>(
   ID: UUID,
   mutator: (draft: Type) => void,
   state?: Blueprint,
@@ -64,7 +65,7 @@ export const mutatePart = <Type extends AnyPart>(
   mutateParts([ID], mutator, state);
 };
 
-export const mutateParts = <Type extends AnyPart>(
+export const mutateParts = <Type extends Part>(
   IDs: UUID[],
   mutator: (draft: Type) => void,
   state?: Blueprint,
@@ -81,17 +82,17 @@ export const mutateParts = <Type extends AnyPart>(
   }
 };
 
-export const getReactivePart = <T extends AnyPart, S>(
+export const getReactivePart = <Type extends Part, Slice>(
   ID: UUID,
-  slicer?: (state: T) => S,
+  slicer?: (state: Type) => Slice,
 ) => {
   return blueprintStore((state) =>
-    slicer ? slicer(getPart(ID, state) as T) : getPart(ID, state),
+    slicer ? slicer(getPart(ID, state) as Type) : getPart(ID, state),
   );
 };
 
 export const translateParts = (IDs: UUID[], x: number, y: number) =>
-  mutateParts<PartWithTransformations<any>>(IDs, (draft) => {
+  mutateParts<PartWithTransformations>(IDs, (draft) => {
     draft.p.x += x;
     draft.p.y += y;
   });
@@ -105,7 +106,7 @@ interface SubscribeToPartOptions {
 const subscribeToPartDefaultOptions = {
   fireInitially: false,
 };
-export const subscribeToPart = <Type extends AnyPart, Slice extends any>(
+export const subscribeToPart = <Type extends Part, Slice extends any>(
   ID: UUID,
   handler: (slice: Slice) => void,
   slicer?: (part: Type) => Slice,
@@ -229,18 +230,20 @@ export const redo = () => {
   );
 };
 
-export const createNewPart = <Type extends AnyPart>(
+export const createNewPart = <Type extends Part>(
   partName: string,
   ID?: UUID,
   parentID?: UUID,
 ) => {
-  const PartClass = getPartClass<Type>(partName);
+  const partData = getPartData(partName);
 
-  if (PartClass) {
-    let newPart = new PartClass(ID);
+  if (partData) {
+    const newPart = cloneDeep(partData);
+
+    (newPart.ID as string) = ID ?? UUIDV4();
     newPart.parentID = parentID;
 
-    return newPart;
+    return newPart as Type;
   }
 };
 
@@ -308,4 +311,65 @@ export const groupPartsBySelection = () => {
     blueprintState.selections,
     blueprintState.selections[blueprintState.selections.length - 1],
   );
+};
+
+export const importifyBlueprint = (
+  blueprint: VanillaBlueprint | SavedBlueprint | Blueprint,
+) => {
+  const clonedBlueprint = cloneDeep(blueprint);
+  const targetBlueprint = cloneDeep(BlueprintData);
+
+  // STEP 1: Copy all generic properties
+  targetBlueprint.center = clonedBlueprint.center;
+  targetBlueprint.offset.x = clonedBlueprint.offset.x;
+  targetBlueprint.offset.y = clonedBlueprint.offset.y;
+
+  // STEP 2: Convert all parts to the new format
+  const newPartsMap: AnyPartMap = new Map();
+
+  if (isMap(clonedBlueprint.parts)) {
+    // normal blueprint, probably never gonna use this
+    (clonedBlueprint as Blueprint).parts.forEach((part, ID) => {
+      const importifiedPart = importifyPart(cloneDeep(part), ID);
+      if (importifiedPart) newPartsMap.set(ID, importifiedPart);
+    });
+
+    targetBlueprint.parts = newPartsMap;
+  } else if (clonedBlueprint.parts.length === 0) {
+    // not parts to convert
+  } else if (isArray(clonedBlueprint.parts[0])) {
+    // saved version of the blueprint
+    (clonedBlueprint as SavedBlueprint).parts.forEach(([ID, part]) => {
+      const importifiedPart = importifyPart(cloneDeep(part), ID);
+      if (importifiedPart) newPartsMap.set(ID, importifiedPart);
+    });
+
+    targetBlueprint.parts = newPartsMap;
+  } else {
+    // vanilla blueprint, straight from the game
+    let newPartOrder: UUID[] = [];
+
+    (clonedBlueprint as Blueprint).partOrder = [];
+    (clonedBlueprint as VanillaBlueprint).parts.forEach((part) => {
+      const ID = UUIDV4();
+      const importifiedPart = importifyPart(cloneDeep(part), ID);
+      if (importifiedPart) {
+        newPartsMap.set(ID, importifiedPart);
+        newPartOrder.push(ID);
+      }
+    });
+
+    targetBlueprint.partOrder = newPartOrder;
+    targetBlueprint.parts = newPartsMap;
+  }
+
+  // STEP 3: Copy all stages
+  targetBlueprint.stages = clonedBlueprint.stages;
+
+  // STEP 4: Copy all selections
+  if ((clonedBlueprint as Blueprint).selections) {
+    targetBlueprint.selections = (clonedBlueprint as Blueprint).selections;
+  }
+
+  return targetBlueprint;
 };

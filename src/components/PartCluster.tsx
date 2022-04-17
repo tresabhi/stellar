@@ -1,5 +1,5 @@
 import { GroupProps } from '@react-three/fiber';
-import GroupPart from 'classes/Parts/Group';
+import { Group as GroupPart } from 'game/parts/Group';
 import { getPart } from 'interfaces/blueprint';
 import { forwardRef } from 'react';
 import blueprintStore from 'stores/blueprint';

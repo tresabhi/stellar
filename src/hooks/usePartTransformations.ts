@@ -1,16 +1,16 @@
-import PartWithTransformations from 'classes/Parts/PartWithTransformations';
+import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { subscribeToPart } from 'interfaces/blueprint';
 import { RefObject, useEffect } from 'react';
 import { Group, Mesh } from 'three';
+import { degToRad } from 'three/src/math/MathUtils';
 import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
 
-const usePartTransformations = <Type extends PartWithTransformations<any>>(
+const usePartTransformations = <Type extends PartWithTransformations>(
   ID: UUID,
   mesh: RefObject<Mesh | Group>,
   overrides?: (state: Type) => DeepPartial<Type>,
 ) => {
-  /*
   useEffect(() => {
     subscribeToPart(
       ID,
@@ -60,20 +60,5 @@ const usePartTransformations = <Type extends PartWithTransformations<any>>(
       { fireInitially: true },
     );
   }, [ID, mesh, overrides]);
-  */
-
-  useEffect(() => {
-    const unsubPosX = subscribeToPart<PartWithTransformations<any>, number>(
-      ID,
-      (state) => {
-        // document.title = `${state}`;
-      },
-      (state) => state.p.x,
-    );
-
-    return () => {
-      unsubPosX();
-    };
-  }, [ID]);
 };
 export default usePartTransformations;

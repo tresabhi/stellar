@@ -11,3 +11,17 @@ export interface Part extends VanillaPart {
   hidden: boolean;
   locked: boolean;
 }
+
+export const VanillaPartData: VanillaPart = {
+  n: 'Unknown',
+};
+
+export const PartData: Part = {
+  ...VanillaPartData,
+
+  ID: '',
+  label: 'Unknown',
+  selected: false,
+  hidden: false,
+  locked: false,
+};

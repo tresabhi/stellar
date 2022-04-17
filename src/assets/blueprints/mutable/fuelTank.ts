@@ -1,4 +1,4 @@
-import { SavedBlueprint } from 'types/Blueprint';
+import { SavedBlueprint } from 'game/Blueprint';
 
 const color = 'Color_White';
 const shape = 'Strut';
@@ -19,6 +19,7 @@ const blueprint: SavedBlueprint = {
         label: 'box',
         ID: 'a',
         hidden: false,
+        selected: false,
         locked: false,
         n: 'Fuel Tank',
         p: {
@@ -49,6 +50,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'b',
         hidden: false,
+        selected: false,
         locked: false,
         label: 'tall',
         n: 'Fuel Tank',
@@ -80,6 +82,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'c',
         hidden: false,
+        selected: false,
         locked: false,
         label: 'wide',
         n: 'Fuel Tank',
@@ -111,6 +114,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'd',
         hidden: false,
+        selected: false,
         locked: false,
         label: 'upright cone',
         n: 'Fuel Tank',
@@ -142,6 +146,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'e',
         hidden: false,
+        selected: false,
         locked: false,
         label: 'upside down cone',
         n: 'Fuel Tank',
@@ -173,6 +178,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'f',
         hidden: false,
+        selected: false,
         locked: false,
         label: 'titled box',
         n: 'Fuel Tank',
@@ -204,6 +210,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'g',
         hidden: false,
+        selected: false,
         locked: false,
         label: '0 width tall',
         n: 'Fuel Tank',
@@ -235,6 +242,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'h',
         hidden: false,
+        selected: false,
         locked: false,
         label: '0 width skinny',
         n: 'Fuel Tank',
@@ -266,6 +274,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'i',
         hidden: false,
+        selected: false,
         locked: false,
         label: '0 width even skinnier',
         n: 'Fuel Tank',
@@ -297,6 +306,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'j',
         hidden: false,
+        selected: false,
         locked: false,
         label: '0 width omega skinnier',
         n: 'Fuel Tank',
@@ -328,6 +338,7 @@ const blueprint: SavedBlueprint = {
       {
         ID: 'k',
         hidden: false,
+        selected: false,
         locked: false,
         label: 'both 0 widths',
         n: 'Fuel Tank',
@@ -360,6 +371,7 @@ const blueprint: SavedBlueprint = {
         label: 'Group',
         ID: '1',
         hidden: false,
+        selected: false,
         locked: false,
         n: 'Group',
         partOrder: ['a', 'b'],

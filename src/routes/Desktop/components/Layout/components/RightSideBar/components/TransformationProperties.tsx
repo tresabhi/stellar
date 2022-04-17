@@ -1,35 +1,35 @@
-import PartWithTransformations from 'classes/Parts/PartWithTransformations';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import usePropertyController from 'hooks/useNumberPropertyController';
 import { FC } from 'react';
-import { PropertyComponentProps } from 'types/Parts';
+import { PartPropertyComponentProps } from 'types/Parts';
 
-const TransformationProperties: FC<PropertyComponentProps> = ({ IDs }) => {
-  const xPos = usePropertyController<PartWithTransformations<any>>(
+const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
+  const xPos = usePropertyController<PartWithTransformations>(
     IDs,
     (state) => state.p.x,
     (value) => ({ p: { x: value } }),
     { suffix: 'm' },
   );
-  const yPos = usePropertyController<PartWithTransformations<any>>(
+  const yPos = usePropertyController<PartWithTransformations>(
     IDs,
     (state) => state.p.y,
     (value) => ({ p: { y: value } }),
     { suffix: 'm' },
   );
-  const rot = usePropertyController<PartWithTransformations<any>>(
+  const rot = usePropertyController<PartWithTransformations>(
     IDs,
     (state) => state.o.z,
     (value) => ({ o: { z: value } }),
     { modOnClamp: true, max: 360, suffix: '°' },
   );
-  const xScale = usePropertyController<PartWithTransformations<any>>(
+  const xScale = usePropertyController<PartWithTransformations>(
     IDs,
     (state) => state.o.x,
     (value) => ({ o: { x: value } }),
     { min: 0, suffix: 'x' },
   );
-  const yScale = usePropertyController<PartWithTransformations<any>>(
+  const yScale = usePropertyController<PartWithTransformations>(
     IDs,
     (state) => state.o.y,
     (value) => ({ o: { y: value } }),

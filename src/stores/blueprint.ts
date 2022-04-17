@@ -1,4 +1,5 @@
-import Blueprint from 'classes/Blueprint';
+import { Blueprint, BlueprintData } from 'game/Blueprint';
+import { cloneDeep } from 'lodash';
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
@@ -7,5 +8,5 @@ const blueprintStore = create<
   SetState<Blueprint>,
   GetState<Blueprint>,
   Mutate<StoreApi<Blueprint>, [['zustand/subscribeWithSelector', never]]>
->(subscribeWithSelector(() => new Blueprint()));
+>(subscribeWithSelector(() => cloneDeep(BlueprintData)));
 export default blueprintStore;

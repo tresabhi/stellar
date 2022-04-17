@@ -1,8 +1,18 @@
+import { Part, VanillaPart } from 'game/parts/Part';
+
 export type UUID = string;
 
-export interface PropertyComponentProps {
+export interface PartPropertyComponentProps {
   IDs: UUID[];
 }
-export interface ReactivePartComponentProps {
+export interface PartComponentProps {
   ID: UUID;
 }
+
+export interface AnyVanillaPart extends VanillaPart {
+  [key: string]: any;
+}
+
+export interface AnyPart extends Part, AnyVanillaPart {}
+
+export type AnyPartMap = Map<string, AnyPart>;

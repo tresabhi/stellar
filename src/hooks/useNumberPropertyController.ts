@@ -1,5 +1,5 @@
+import { Part } from 'game/parts/Part';
 import { getPart, mutateParts, subscribeToPart } from 'interfaces/blueprint';
-import { AnyPart } from 'interfaces/part';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
@@ -8,7 +8,7 @@ import useUnitInputController, {
   UseUnitInputControllerOptions,
 } from './useUnitInputController';
 
-const usePropertyController = <Type extends AnyPart>(
+const usePropertyController = <Type extends Part>(
   IDs: UUID[],
   get: (state: Type) => number,
   set: (value: number) => DeepPartial<Type>,

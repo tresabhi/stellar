@@ -1,4 +1,4 @@
-import { AnyPartMap } from 'types/Blueprint';
+import { AnyPartMap } from 'types/Parts';
 
 const comparePartsMap = (prevState: AnyPartMap, nextState: AnyPartMap) => {
   const prevKeys = prevState.keys();

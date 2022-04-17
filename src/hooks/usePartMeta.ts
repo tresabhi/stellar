@@ -1,7 +1,6 @@
 import { subscribeToPart } from 'interfaces/blueprint';
-import { AnyPart } from 'interfaces/part';
 import { useEffect } from 'react';
-import { UUID } from 'types/Parts';
+import { AnyPart, UUID } from 'types/Parts';
 
 const usePartMeta = (ID: UUID, callback: () => void) => {
   useEffect(() => {

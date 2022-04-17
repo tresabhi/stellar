@@ -4,7 +4,7 @@ import * as SideBar from 'components/SideBar';
 import useUnitInputController from 'hooks/useUnitInputController';
 import produce from 'immer';
 import { getPart, mutateBlueprint } from 'interfaces/blueprint';
-import { getPropertyComponent } from 'interfaces/part';
+import { getPartPropertyComponent } from 'interfaces/part';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
@@ -78,8 +78,9 @@ const RightSideBar = () => {
   // sort selections by class name and look for common properties
   selections.forEach((selection) => {
     const part = getPart(selection);
+
     if (part) {
-      if (part.hasTransformations) partsWithTransformations.push(selection);
+      if (part.p && part.o) partsWithTransformations.push(selection);
 
       if (sortedSelections.has(part.n)) {
         sortedSelections.set(part.n, [
@@ -98,7 +99,7 @@ const RightSideBar = () => {
 
   orderedSelections.forEach((partName) => {
     const IDs = sortedSelections.get(partName)!;
-    const PropertyComponent = getPropertyComponent(partName);
+    const PropertyComponent = getPartPropertyComponent(partName);
 
     if (PropertyComponent) {
       propertyItems.push(

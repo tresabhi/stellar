@@ -1,4 +1,4 @@
-import Blueprint from 'classes/Blueprint';
+import { Blueprint } from 'game/Blueprint';
 import {
   getPart,
   mutateBlueprint,

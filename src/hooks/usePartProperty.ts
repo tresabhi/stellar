@@ -1,9 +1,9 @@
+import { Part } from 'game/parts/Part';
 import { subscribeToPart } from 'interfaces/blueprint';
-import { AnyPart } from 'interfaces/part';
 import { useEffect } from 'react';
 import { UUID } from 'types/Parts';
 
-const usePartProperty = <Type extends AnyPart, Slice extends any>(
+const usePartProperty = <Type extends Part, Slice extends any>(
   ID: UUID,
   slicer: (state: Type) => Slice,
   handler: (slice: Slice) => void,

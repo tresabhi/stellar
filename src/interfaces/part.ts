@@ -1,35 +1,62 @@
-import FuelTank, { FuelTankPropertyComponent } from 'classes/Parts/FuelTank';
-import Group from 'classes/Parts/Group';
-import Part, { SavedPart, VanillaPart } from 'classes/Parts/Part';
+import {
+  FuelTankData,
+  FuelTankLayoutComponent,
+  FuelTankPropertyComponent,
+  VanillaFuelTankData,
+} from 'game/parts/FuelTank';
+import { GroupData, GroupLayoutComponent } from 'game/parts/Group';
+import { Part, VanillaPart } from 'game/parts/Part';
+import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
-import { PropertyComponentProps } from 'types/Parts';
+import {
+  AnyPart,
+  AnyVanillaPart,
+  PartComponentProps,
+  PartPropertyComponentProps,
+  UUID,
+} from 'types/Parts';
 
-export const PartClasses = new Map<string, AnyPartClass>([
-  ['Fuel Tank', FuelTank],
-  ['Group', Group],
+export const VanillaPartData = new Map<string, VanillaPart>([
+  ['Fuel Tank', VanillaFuelTankData],
+]);
+
+export const PartData = new Map<string, Part>([
+  ['Fuel Tank', FuelTankData],
+  ['Group', GroupData],
+]);
+
+export const PartLayoutComponents = new Map<string, FC<PartComponentProps>>([
+  ['Fuel Tank', FuelTankLayoutComponent],
+  ['Group', GroupLayoutComponent],
 ]);
 
 export const PartPropertyComponents = new Map<
   string,
-  FC<PropertyComponentProps>
+  FC<PartPropertyComponentProps>
 >([['Fuel Tank', FuelTankPropertyComponent]]);
 
-export interface AnyVanillaPart extends VanillaPart {
-  [key: string]: any;
-}
+export const getVanillaPartData = (partName: string) =>
+  VanillaPartData.get(partName);
 
-export interface AnySavedPart extends SavedPart {
-  [key: string]: any;
-}
+export const getPartData = (partName: string) => PartData.get(partName);
 
-export type AnyPart = Part<any>;
-export type AnyPartClass = new () => AnyPart;
+export const getPartLayoutComponent = (partName: string) =>
+  PartLayoutComponents.get(partName);
 
-export const getPartClass = <
-  Type extends Part<VanillaPart> = Part<VanillaPart>,
->(
-  name: string,
-) => PartClasses.get(name) as (new (ID?: string) => Type) | undefined;
+export const getPartPropertyComponent = (partName: string) =>
+  PartPropertyComponents.get(partName);
 
-export const getPropertyComponent = (name: string) =>
-  PartPropertyComponents.get(name);
+export const importifyPart = (
+  part: AnyVanillaPart | AnyPart,
+  ID: UUID,
+  parentID?: UUID,
+) => {
+  const clonedPart = cloneDeep(part);
+
+  if (getPartData(clonedPart.n)) {
+    return merge(clonedPart, getPartData(clonedPart.n), {
+      ID,
+      parentID,
+    }) as AnyPart;
+  }
+};

@@ -1,5 +1,5 @@
 import { ThreeEvent } from '@react-three/fiber';
-import PartWithTransformations from 'classes/Parts/PartWithTransformations';
+import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import {
   getPart,
   mutateBlueprintWithoutHistory,
@@ -11,9 +11,7 @@ import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
-const usePartCanvasTranslationControls = <
-  Type extends PartWithTransformations<any>,
->(
+const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
   ID: UUID,
 ) => {
   const getMousePos = useMousePos();
@@ -69,7 +67,7 @@ const usePartCanvasTranslationControls = <
         //   draft,
         // );
         draft.selections.forEach((selection) => {
-          const part = getPart<PartWithTransformations<any>>(selection);
+          const part = getPart<PartWithTransformations>(selection);
 
           if (part) {
             part.p.x += newDeltaX - deltaX;
