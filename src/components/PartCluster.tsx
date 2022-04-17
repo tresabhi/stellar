@@ -21,10 +21,15 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
     let partListing: JSX.Element[] = [];
 
     state.forEach((ID) => {
-      const LayoutComponent = getPartLayoutComponent(ID);
+      const part = getPart(ID);
 
-      if (LayoutComponent)
-        partListing.push(<LayoutComponent ID={ID} key={`part-${ID}`} />);
+      if (part) {
+        const LayoutComponent = getPartLayoutComponent(part.n);
+
+        if (LayoutComponent) {
+          partListing.push(<LayoutComponent ID={ID} key={`part-${ID}`} />);
+        }
+      }
     });
 
     return (

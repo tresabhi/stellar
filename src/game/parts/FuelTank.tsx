@@ -1,12 +1,14 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
+import usePartProperty from 'hooks/usePartProperty';
 import { getPart } from 'interfaces/blueprint';
 import { FC, useRef } from 'react';
-import { Group, Mesh, MeshStandardMaterial } from 'three';
+import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
+  usePartWithTransformations,
   VanillaPartWithTransformations,
   VanillaPartWithTransformationsData,
 } from './PartWithTransformations';
@@ -116,6 +118,24 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const groupRef = useRef<Group>(null!);
   const meshRef = useRef<Mesh>(null!);
   const state = getPart<FuelTank>(ID)!;
+
+  usePartProperty(
+    ID,
+    (state: FuelTank) => state.N,
+    (N) => {
+      meshRef.current!.geometry = new CylinderGeometry(
+        N.width_b / 2,
+        N.width_a / 2,
+        N.height,
+        12,
+        1,
+        true,
+        Math.PI / -2,
+        Math.PI,
+      );
+    },
+  );
+  usePartWithTransformations(ID, groupRef);
 
   return (
     <group ref={groupRef} position={[state.p.x, state.p.y, 0]}>

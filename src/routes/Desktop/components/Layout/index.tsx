@@ -10,7 +10,6 @@ import styles from './index.module.scss';
 
 if (settingsStore.getState().debug.dev_blueprint) {
   const blueprint = importifyBlueprint(devBlueprint);
-  console.log(blueprint);
   blueprintStore.setState(blueprint);
 }
 

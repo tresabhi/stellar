@@ -1,10 +1,18 @@
+import { MutableRefObject } from 'react';
+import { Group } from 'three';
+import { UUID } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
-import { VanillaPartWithOrientationData } from './PartWithOrientation';
+import {
+  usePartWithOrientation,
+  VanillaPartWithOrientation,
+  VanillaPartWithOrientationData,
+} from './PartWithOrientation';
 import {
   VanillaPartWithScale,
   VanillaPartWithScaleData,
 } from './PartWithScale';
 import {
+  usePartWithTranslations,
   VanillaPartWithTranslations,
   VanillaPartWithTranslationsData,
 } from './PartWithTranslations';
@@ -13,7 +21,7 @@ export interface VanillaPartWithTransformations
   extends VanillaPart,
     VanillaPartWithTranslations,
     // omit to fix o key conflict
-    Omit<VanillaPartWithTranslations, 'o'>,
+    Omit<VanillaPartWithOrientation, 'o'>,
     Omit<VanillaPartWithScale, 'o'> {
   o: { x: number; y: number; z: number };
 }
@@ -37,4 +45,13 @@ export const PartWithTransformationsData: PartWithTransformations = {
   ...VanillaPartWithTransformationsData,
 
   label: 'Unlabeled Part With Transformations',
+};
+
+export const usePartWithTransformations = (
+  ID: UUID,
+  groupRef: MutableRefObject<Group>,
+) => {
+  usePartWithTranslations(ID, groupRef);
+  usePartWithOrientation(ID, groupRef);
+  usePartWithOrientation(ID, groupRef);
 };
