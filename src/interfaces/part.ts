@@ -62,9 +62,13 @@ export const importifyPart = (
   const clonedPart = cloneDeep(part);
 
   if (getPartData(clonedPart.n)) {
-    return merge(clonedPart, getPartData(clonedPart.n), {
+    const defaultPartData = cloneDeep(getPartData(clonedPart.n));
+
+    const newPart = merge(defaultPartData, clonedPart, {
       ID,
       parentID,
     }) as AnyPart;
+
+    return newPart;
   }
 };
