@@ -13,6 +13,6 @@ export interface AnyVanillaPart extends VanillaPart {
   [key: string]: any;
 }
 
-export interface AnyPart extends Part, AnyVanillaPart {}
+export interface AnyPart extends AnyVanillaPart, Part {}
 
 export type AnyPartMap = Map<string, AnyPart>;

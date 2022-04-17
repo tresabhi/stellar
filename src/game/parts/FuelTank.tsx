@@ -3,14 +3,22 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
 import usePartProperty from 'hooks/usePartProperty';
 import { getPart } from 'interfaces/blueprint';
+import { BoundingBoxComputer } from 'interfaces/part';
 import { FC, useRef } from 'react';
-import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
+import {
+  Box2,
+  CylinderGeometry,
+  Group,
+  Mesh,
+  MeshStandardMaterial,
+  Vector2
+} from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
   usePartWithTransformations,
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  VanillaPartWithTransformationsData
 } from './PartWithTransformations';
 
 // #region texture types
@@ -187,3 +195,17 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 };
 
 export const FuelTankIcon = Icon;
+
+export const FuelTankBoundingBoxComputer: BoundingBoxComputer<FuelTank> = (
+  state,
+) =>
+  new Box2(
+    new Vector2(
+      state.p.x - (Math.max(state.N.width_a, state.N.width_b) / 2) * state.o.x,
+      state.p.y,
+    ),
+    new Vector2(
+      state.p.x + (Math.max(state.N.width_a, state.N.width_b) / 2) * state.o.y,
+      state.p.y + state.N.height * state.o.y,
+    ),
+  );
