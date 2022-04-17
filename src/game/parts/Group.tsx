@@ -1,4 +1,5 @@
 import { ReactComponent as Icon } from 'assets/icons/group.svg';
+import PartCluster from 'components/PartCluster';
 import { FC } from 'react';
 import { PartComponentProps, UUID } from 'types/Parts';
 import { Part, PartData } from './Part';
@@ -19,9 +20,7 @@ export const GroupData: Group = {
 };
 
 export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
-  // const state = getPart(ID);
-
-  return null;
+  return <PartCluster parentID={ID} />;
 };
 
 export const GroupIcon = Icon;
