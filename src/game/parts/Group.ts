@@ -13,6 +13,7 @@ export const GroupData: Group = {
   ...PartData,
 
   n: 'Group',
+  label: 'Group',
   expanded: false,
   partOrder: [],
 };

@@ -15,4 +15,6 @@ export const VanillaPartWithScaleData: VanillaPartWithScale = {
 export const PartWithScaleData: PartWithScale = {
   ...PartData,
   ...VanillaPartWithScaleData,
+
+  label: 'Unlabeled Part With Scale',
 };

@@ -35,4 +35,6 @@ export const VanillaPartWithTransformationsData: VanillaPartWithTransformations 
 export const PartWithTransformationsData: PartWithTransformations = {
   ...PartData,
   ...VanillaPartWithTransformationsData,
+
+  label: 'Unlabeled Part With Transformations',
 };

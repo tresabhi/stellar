@@ -1,8 +1,4 @@
-import {
-  Part,
-  PartData, VanillaPart,
-  VanillaPartData
-} from './Part';
+import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithTranslations extends VanillaPart {
   p: { x: number; y: number };
@@ -21,5 +17,6 @@ export const VanillaPartWithTranslationsData: VanillaPartWithTranslations = {
 export const PartWithTranslationsData: PartWithTranslations = {
   ...PartData,
   ...VanillaPartWithTranslationsData,
-};
 
+  label: 'Unlabeled Part With Translations',
+};

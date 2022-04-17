@@ -20,7 +20,7 @@ export const PartData: Part = {
   ...VanillaPartData,
 
   ID: '',
-  label: 'Unknown',
+  label: 'Unlabeled Part',
   selected: false,
   hidden: false,
   locked: false,
