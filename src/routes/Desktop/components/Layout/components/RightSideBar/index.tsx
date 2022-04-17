@@ -8,7 +8,7 @@ import { getPartPropertyComponent } from 'interfaces/part';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
-import { UUID } from 'types/Parts';
+import { AnyPart, UUID } from 'types/Parts';
 import comparePartOrders from 'utilities/comparePartOrders';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
@@ -77,7 +77,7 @@ const RightSideBar = () => {
 
   // sort selections by class name and look for common properties
   selections.forEach((selection) => {
-    const part = getPart(selection);
+    const part = getPart<AnyPart>(selection);
 
     if (part) {
       if (part.p && part.o) partsWithTransformations.push(selection);

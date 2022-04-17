@@ -1,3 +1,4 @@
+import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import usePropertyController from 'hooks/useNumberPropertyController';
 import { getPart } from 'interfaces/blueprint';
@@ -112,7 +113,7 @@ const temp_material = new MeshStandardMaterial({
 export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const groupRef = useRef<Group>(null!);
   const meshRef = useRef<Mesh>(null!);
-  const state = getPart(ID)!;
+  const state = getPart<FuelTank>(ID)!;
 
   return (
     <group ref={groupRef} position={[state.p.x, state.p.y, 0]}>
@@ -162,3 +163,5 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
     </PropertiesExplorer.Group>
   );
 };
+
+export const FuelTankIcon = Icon;

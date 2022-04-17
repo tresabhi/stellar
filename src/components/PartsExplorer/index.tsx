@@ -9,7 +9,7 @@ import {
   mutateBlueprintWithoutHistory,
   mutatePart,
 } from 'interfaces/blueprint';
-import { getPartData } from 'interfaces/part';
+import { getPartIcon } from 'interfaces/part';
 import {
   selectPartOnly,
   selectPartsFrom,
@@ -72,6 +72,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     isGroup ? (initialState as Group).expanded : false,
   );
   let lastLabel = initialState.label;
+  const IconComponent = getPartIcon(initialState.n) ?? QuestionMarkIcon;
 
   usePartProperty(
     ID,
@@ -156,8 +157,6 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     }
   };
 
-  const partData = getPartData(initialState.n);
-
   if (initialState.n === 'Group') {
     childParts = (initialState as Group).partOrder.map(() => (
       <Listing key={`part-${ID}`} ID={ID} indentation={indentation + 1} />
@@ -187,11 +186,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         </button>
 
         <div className={styles['icon-holder']}>
-          {partData ? (
-            <initialState.IconComponent className={styles.icon} />
-          ) : (
-            <QuestionMarkIcon className={styles.icon} />
-          )}
+          <IconComponent className={styles.icon} />
         </div>
 
         <input

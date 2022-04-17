@@ -9,7 +9,9 @@ import RightSideBar from './components/RightSideBar';
 import styles from './index.module.scss';
 
 if (settingsStore.getState().debug.dev_blueprint) {
-  blueprintStore.setState(importifyBlueprint(devBlueprint));
+  const blueprint = importifyBlueprint(devBlueprint);
+  console.log(blueprint);
+  blueprintStore.setState(blueprint);
 }
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {

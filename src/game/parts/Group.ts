@@ -1,3 +1,4 @@
+import { ReactComponent as Icon } from 'assets/icons/group.svg';
 import { FC } from 'react';
 import { PartComponentProps, UUID } from 'types/Parts';
 import { Part, PartData } from './Part';
@@ -21,3 +22,5 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
 
   return null;
 };
+
+export const GroupIcon = Icon;

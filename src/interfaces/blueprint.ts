@@ -36,7 +36,7 @@ export const deletePartsBySelection = () => {
   });
 };
 
-export const getPart = <Type extends AnyPart>(ID: UUID, state?: Blueprint) => {
+export const getPart = <Type extends Part>(ID: UUID, state?: Blueprint) => {
   const blueprintState = state ?? blueprintStore.getState();
   return blueprintState.parts.get(ID) as Type | undefined;
 };
@@ -334,6 +334,7 @@ export const importifyBlueprint = (
       if (importifiedPart) newPartsMap.set(ID, importifiedPart);
     });
 
+    targetBlueprint.partOrder = (clonedBlueprint as Blueprint).partOrder;
     targetBlueprint.parts = newPartsMap;
   } else if (clonedBlueprint.parts.length === 0) {
     // not parts to convert
@@ -344,6 +345,7 @@ export const importifyBlueprint = (
       if (importifiedPart) newPartsMap.set(ID, importifiedPart);
     });
 
+    targetBlueprint.partOrder = (clonedBlueprint as SavedBlueprint).partOrder;
     targetBlueprint.parts = newPartsMap;
   } else {
     // vanilla blueprint, straight from the game

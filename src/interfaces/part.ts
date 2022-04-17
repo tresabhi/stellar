@@ -1,10 +1,11 @@
 import {
   FuelTankData,
+  FuelTankIcon,
   FuelTankLayoutComponent,
   FuelTankPropertyComponent,
   VanillaFuelTankData,
 } from 'game/parts/FuelTank';
-import { GroupData, GroupLayoutComponent } from 'game/parts/Group';
+import { GroupData, GroupIcon, GroupLayoutComponent } from 'game/parts/Group';
 import { Part, VanillaPart } from 'game/parts/Part';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
@@ -35,6 +36,11 @@ export const PartPropertyComponents = new Map<
   FC<PartPropertyComponentProps>
 >([['Fuel Tank', FuelTankPropertyComponent]]);
 
+export const PartIcons = new Map<string, FC>([
+  ['Fuel Tank', FuelTankIcon],
+  ['Group', GroupIcon],
+]);
+
 export const getVanillaPartData = (partName: string) =>
   VanillaPartData.get(partName);
 
@@ -45,6 +51,8 @@ export const getPartLayoutComponent = (partName: string) =>
 
 export const getPartPropertyComponent = (partName: string) =>
   PartPropertyComponents.get(partName);
+
+export const getPartIcon = (partName: string) => PartIcons.get(partName);
 
 export const importifyPart = (
   part: AnyVanillaPart | AnyPart,
