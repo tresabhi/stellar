@@ -83,12 +83,9 @@ const RightSideBar = () => {
       if (part.p && part.o) partsWithTransformations.push(selection);
 
       if (sortedSelections.has(part.n)) {
-        sortedSelections.set(part.n, [
-          ...sortedSelections.get(part.n)!,
-          selection,
-        ]);
+        sortedSelections.get(part.n)!.push(selection);
       } else {
-        sortedSelections.set(part.n, []);
+        sortedSelections.set(part.n, [selection]);
         orderedSelections.push(part.n);
       }
     }

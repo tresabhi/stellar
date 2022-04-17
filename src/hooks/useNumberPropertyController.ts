@@ -17,10 +17,11 @@ const usePropertyController = <Type extends Part>(
   const mergedControllerOptions = {
     ...useUnitInputController,
     ...controllerOptions,
-    onChange: (value) =>
+    onChange: (value) => {
       mutateParts(IDs, (draft) => {
         merge(draft, set(value));
-      }),
+      });
+    },
   } as UseUnitInputControllerOptions;
   const inputRef = useRef<HTMLInputElement>(null!);
   const inputController = useUnitInputController(
@@ -36,7 +37,7 @@ const usePropertyController = <Type extends Part>(
       const part = getPart(ID);
 
       if (part) {
-        const property = get(part as unknown as Type);
+        const property = get(part as Type);
         values.set(ID, property);
 
         const unsubscribe = subscribeToPart(
