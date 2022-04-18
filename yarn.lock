@@ -8901,10 +8901,10 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-three-mesh-bvh@^0.5.7, three-mesh-bvh@^0.5.9:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.9.tgz#bfa51d38e0fd221d8c2822ec0202c6521b418533"
-  integrity sha512-WKvJtM2HXoKOxe4XwZFuPYp885XYEh3DasoUIeGyynnTh++8ZUi2KCI1zganvtc9ob67mcBulXVBhdaC2BqBnQ==
+three-mesh-bvh@^0.5.10, three-mesh-bvh@^0.5.7:
+  version "0.5.10"
+  resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.10.tgz#6eadd0a9f63d8fc1bb3516bdc96b6ed906a888c4"
+  integrity sha512-yOJPT3DhfZB/DvIr0lEfPUPMRX11HJABGapeuBa4GwgsF1NMMsy1nW1wMGxImmVyRCZ61yoor/YVqRRQV1p5VQ==
 
 three-stdlib@^2.8.12:
   version "2.9.1"
