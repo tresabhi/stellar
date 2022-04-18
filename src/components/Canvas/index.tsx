@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import DesktopCanvasControls from 'components/DesktopCanvasControls';
 import InfiniteGridHelper from 'components/InfiniteGridHelper';
 import PartCluster from 'components/PartCluster';
-import { unselectAllParts } from 'interfaces/selection';
+import PartSelectionControls from 'components/PartSelectionControls';
 import { useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
@@ -60,13 +60,13 @@ export const LayoutRenderer = () => {
       }}
       className={styles['editing-canvas']}
       performance={{ min: regressAmount }}
-      onPointerMissed={unselectAllParts}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
       <directionalLight position={[0, 0, 100]} />
       <ambientLight intensity={0.5} />
 
       {allAxisControls ? <OrbitControls /> : <DesktopCanvasControls />}
+      <PartSelectionControls />
 
       <gridHelper
         ref={gridRef}

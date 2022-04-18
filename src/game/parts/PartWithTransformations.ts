@@ -8,6 +8,7 @@ import {
   VanillaPartWithOrientationData,
 } from './PartWithOrientation';
 import {
+  usePartWithScale,
   VanillaPartWithScale,
   VanillaPartWithScaleData,
 } from './PartWithScale';
@@ -53,5 +54,5 @@ export const usePartWithTransformations = (
 ) => {
   usePartWithTranslations(ID, groupRef);
   usePartWithOrientation(ID, groupRef);
-  usePartWithOrientation(ID, groupRef);
+  usePartWithScale(ID, groupRef);
 };

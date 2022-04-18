@@ -7,6 +7,7 @@ import {
   VanillaFuelTankData,
 } from 'game/parts/FuelTank';
 import {
+  Group,
   GroupBoundingBoxComputer,
   GroupData,
   GroupIcon,
@@ -15,7 +16,8 @@ import {
 import { Part, VanillaPart } from 'game/parts/Part';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
-import { Box2 } from 'three';
+import blueprintStore from 'stores/blueprint';
+import { Box2, Vector2 } from 'three';
 import {
   AnyPart,
   AnyVanillaPart,
@@ -23,9 +25,11 @@ import {
   PartPropertyComponentProps,
   UUID,
 } from 'types/Parts';
+import { getPart } from './blueprint';
 
 export type BoundingBoxComputer<Type extends Part> = (state: Type) => Box2;
 
+// #region part repository
 export const VanillaPartData = new Map<string, VanillaPart>([
   ['Fuel Tank', VanillaFuelTankData],
 ]);
@@ -57,7 +61,9 @@ export const PartBoundingBoxComputers = new Map<
   ['Fuel Tank', FuelTankBoundingBoxComputer],
   ['Group', GroupBoundingBoxComputer],
 ]);
+// #endregion
 
+// #region part repository getters
 export const getVanillaPartData = (partName: string) =>
   VanillaPartData.get(partName);
 
@@ -73,6 +79,8 @@ export const getPartIcon = (partName: string) => PartIcons.get(partName);
 
 export const getPartBoundingBoxComputer = (partName: string) =>
   PartBoundingBoxComputers.get(partName);
+
+// #endregion
 
 export const importifyPart = (
   part: AnyVanillaPart | AnyPart,
@@ -91,4 +99,85 @@ export const importifyPart = (
 
     return newPart;
   }
+};
+
+export const ActiveBoundingBoxes = new Map<UUID, Box2>();
+
+export const registerBoundingBox = (ID: UUID) => {
+  const part = getPart(ID);
+
+  if (part) {
+    const boundingBoxComputer = getPartBoundingBoxComputer(part.n);
+
+    if (boundingBoxComputer) {
+      const boundingBox = boundingBoxComputer(part);
+
+      ActiveBoundingBoxes.set(ID, boundingBox);
+    }
+  }
+};
+
+export const disposeBoundingBox = (ID: UUID) => ActiveBoundingBoxes.delete(ID);
+
+export const checkForBoundingBoxIntersection = (point: Vector2) => {
+  for (const [ID, boundingBox] of ActiveBoundingBoxes) {
+    if (boundingBox.containsPoint(point)) return ID;
+  }
+};
+
+export const checkForBoundingBoxIntersections = (point: Vector2) => {
+  const intersections: UUID[] = [];
+
+  ActiveBoundingBoxes.forEach((boundingBox, ID) => {
+    if (boundingBox.containsPoint(point)) intersections.push(ID);
+  });
+
+  return intersections;
+};
+
+export const checkForClickableBoundingBoxIntersection = (point: Vector2) => {
+  const blueprintState = blueprintStore.getState();
+  const checked = new Map<UUID, true>();
+
+  const check = (IDs: UUID[]) => {
+    let result: UUID | undefined;
+
+    IDs.some((ID) => {
+      if (!checked.has(ID)) {
+        checked.set(ID, true);
+
+        const part = getPart(ID);
+
+        if (part) {
+          if (part.n === 'Group' && part.selected) {
+            const groupResult = check((part as Group).partOrder);
+
+            if (groupResult) {
+              result = groupResult;
+
+              return true;
+            }
+          } else {
+            const boundingBoxComputer = getPartBoundingBoxComputer(part.n);
+
+            if (boundingBoxComputer) {
+              const boundingBox = boundingBoxComputer(part);
+
+              if (boundingBox.containsPoint(point)) {
+                result = ID;
+
+                return true;
+              }
+            }
+          }
+        }
+      }
+
+      return false;
+    });
+
+    return result;
+  };
+
+  return check(blueprintState.selections) ?? check(blueprintState.partOrder);
 };

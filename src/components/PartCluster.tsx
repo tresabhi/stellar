@@ -16,7 +16,7 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
     const state = blueprintStore(
       (state) =>
         (parentID ? (getPart(parentID, state) as GroupPart) : state).partOrder,
-      comparePartOrders, // TODO: do we event need to compare if it fires only on mutation?
+      comparePartOrders,
     );
     let partListing: JSX.Element[] = [];
 

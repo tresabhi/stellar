@@ -10,12 +10,12 @@ type CodeName = 'alpha' | 'beta' | 'release' | 'dev';
 
 export default function useStellarContext() {
   let title: string, codeName: CodeName, accentRegular: string, Icon: FC<any>;
+  // TODO: switch to new logo
 
   switch (window.location.hostname) {
     case 'stellaralpha.web.app':
       title = 'Stellar Alpha';
       codeName = 'alpha';
-      // TODO: verify this color
       accentRegular = 'hsl(15, 70%, 45%)';
       Icon = StellarAlphaIcon;
       break;
@@ -23,7 +23,6 @@ export default function useStellarContext() {
     case 'stellarbeta.web.app':
       title = 'Stellar Beta';
       codeName = 'beta';
-      // TODO: verify this color
       accentRegular = 'hsl(170, 80%, 35%)';
       Icon = StellarBetaIcon;
       break;

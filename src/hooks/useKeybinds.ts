@@ -20,7 +20,7 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'rendering',
 ];
 
-// todo: make this date driven
+// TODO: make this date driven
 const TRANSLATE_BY = 1;
 const SHIFT_TRANSLATE_BY = 5;
 

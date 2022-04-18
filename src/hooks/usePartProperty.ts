@@ -9,9 +9,16 @@ const usePartProperty = <Type extends Part, Slice extends any>(
   handler: (slice: Slice) => void,
 ) => {
   useEffect(() => {
-    subscribeToPart(ID, handler, (part) => slicer(part as Type), {
-      fireInitially: true,
-    });
+    const unsubscribe = subscribeToPart(
+      ID,
+      handler,
+      (part) => slicer(part as Type),
+      {
+        fireInitially: true,
+      },
+    );
+
+    return () => unsubscribe();
   }, [ID, handler, slicer]);
 };
 export default usePartProperty;

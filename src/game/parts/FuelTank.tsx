@@ -11,14 +11,14 @@ import {
   Group,
   Mesh,
   MeshStandardMaterial,
-  Vector2
+  Vector2,
 } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
   usePartWithTransformations,
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData
+  VanillaPartWithTransformationsData,
 } from './PartWithTransformations';
 
 // #region texture types
@@ -151,8 +151,6 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
         ref={meshRef}
         material={temp_material}
         position={[0, state.N.height / 2, 0]}
-        // onClick={handleClick}
-        // onPointerDown={handlePointerDown}
       />
     </group>
   );

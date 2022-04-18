@@ -42,7 +42,7 @@ export const Container: FC<ContainerProps> = ({
 }) => {
   const state = blueprintStore(
     (state) => (parent ? (getPart(parent, state) as Group) : state).partOrder,
-    comparePartOrders, // TODO: do we event need to compare if it fires only on mutation?
+    comparePartOrders,
   );
   const partListing = state.map((ID) => (
     <Listing key={`part-${ID}`} ID={ID} indentation={indentation} />

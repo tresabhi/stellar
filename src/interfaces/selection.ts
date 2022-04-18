@@ -23,7 +23,7 @@ export const selectParts = (IDs: UUID[]) => {
       }
     });
 
-    draft.selections = [...draft.selections, ...newSelections];
+    draft.selections.push(...newSelections);
   });
 };
 
@@ -34,8 +34,8 @@ export const selectPartsOnly = (IDs: UUID[], draft?: Blueprint) => {
   if (draft) {
     mutateParts(
       draft.selections,
-      (state) => {
-        state.selected = false;
+      (draft) => {
+        draft.selected = false;
       },
       draft,
     );
