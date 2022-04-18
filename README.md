@@ -1,6 +1,6 @@
 # Stellar [<img src="https://user-images.githubusercontent.com/43380238/148424581-843be3a2-10a4-4503-a2d4-099a987c5ff4.png" alt="PostCSS Logo" width="90" height="90" align="right">](https://github.com/TresAbhi/Stellar)
 
-[![build](https://img.shields.io/github/workflow/status/TresAbhi/Stellar/Alpha%20CD)](https://github.com/TresAbhi/Stellar/actions/workflows/alpha-cd.yml)
+[![Alpha CD](https://github.com/TresAbhi/Stellar/actions/workflows/alpha-cd.yml/badge.svg)](https://github.com/TresAbhi/Stellar/actions/workflows/alpha-cd.yml)
 [![version](https://img.shields.io/github/package-json/v/TresAbhi/Stellar)](https://github.com/TresAbhi/Stellar/blob/main/package.json)
 
 <br>
