@@ -1,7 +1,13 @@
 import { useThree } from '@react-three/fiber';
 import useMousePos from 'hooks/useMousePos';
+import { getPart } from 'interfaces/blueprint';
 import { checkForClickableBoundingBoxIntersection } from 'interfaces/part';
-import { selectPartOnly } from 'interfaces/selection';
+import {
+  selectPartOnly,
+  togglePartSelection,
+  unselectAllParts,
+  unselectPart,
+} from 'interfaces/selection';
 import { useEffect } from 'react';
 
 const PartSelectionControls = () => {
@@ -9,11 +15,22 @@ const PartSelectionControls = () => {
   const canvas = useThree((state) => state.gl.domElement);
 
   useEffect(() => {
-    const handleClick = () => {
+    const handleClick = (event: MouseEvent) => {
       const mousePos = getMousePos();
-      const clickedID = checkForClickableBoundingBoxIntersection(mousePos);
+      const ID = checkForClickableBoundingBoxIntersection(mousePos);
 
-      if (clickedID) selectPartOnly(clickedID);
+      if (ID) {
+        if (event.shiftKey) {
+          const part = getPart(ID);
+
+          togglePartSelection(ID);
+          if (part?.parentID) unselectPart(part.parentID);
+        } else {
+          selectPartOnly(ID);
+        }
+      } else {
+        unselectAllParts();
+      }
     };
 
     canvas.addEventListener('click', handleClick);
@@ -21,7 +38,7 @@ const PartSelectionControls = () => {
     return () => {
       canvas.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [canvas, getMousePos]);
 
   return null;
 };

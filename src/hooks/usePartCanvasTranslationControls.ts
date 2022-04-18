@@ -7,6 +7,7 @@ import {
 } from 'interfaces/blueprint';
 import { selectPartOnly } from 'interfaces/selection';
 import blueprintStore from 'stores/blueprint';
+import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
@@ -17,8 +18,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
   const getMousePos = useMousePos();
 
   let selectedInitially = false;
-  let initialMouseX: number;
-  let initialMouseY: number;
+  let initialMousePos: Vector2;
   let deltaX = 0;
   let deltaY = 0;
 
@@ -47,9 +47,9 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
     }
   };
   const onPointerMove = () => {
-    const [mouseX, mouseY] = getMousePos();
-    const newDeltaX = snap(mouseX - initialMouseX, 1);
-    const newDeltaY = snap(mouseY - initialMouseY, 1);
+    const mousePos = getMousePos();
+    const newDeltaX = snap(mousePos.x - initialMousePos.x, 1);
+    const newDeltaY = snap(mousePos.y - initialMousePos.y, 1);
 
     if (!selectedInitially) {
       selectPartOnly(ID);
@@ -86,7 +86,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
     if (part) {
       event.stopPropagation();
 
-      [initialMouseX, initialMouseY] = getMousePos();
+      initialMousePos = getMousePos();
       deltaX = 0;
       deltaY = 0;
 

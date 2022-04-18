@@ -1,7 +1,7 @@
 import { useThree } from '@react-three/fiber';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
-import { OrthographicCamera } from 'three';
+import { OrthographicCamera, Vector2 } from 'three';
 import { inverseLerp } from 'three/src/math/MathUtils';
 
 const MIN_ZOOM = 2.2;
@@ -19,7 +19,7 @@ const DesktopCanvasControls = () => {
       event.preventDefault();
 
       if (event.ctrlKey) {
-        const [initialX, initialY] = getMousePos();
+        const initialMousePos = getMousePos();
 
         const zoomCompensatedDeltaY =
           event.deltaY * 4 * inverseLerp(0, MAX_ZOOM, camera.zoom);
@@ -31,11 +31,14 @@ const DesktopCanvasControls = () => {
         camera.zoom = zoom;
         camera.updateProjectionMatrix();
 
-        const [newX, newY] = getMousePos();
-        const [deltaX, deltaY] = [newX - initialX, newY - initialY];
+        const newPos = getMousePos();
+        const delta = new Vector2(
+          newPos.x - initialMousePos.x,
+          newPos.y - initialMousePos.y,
+        );
 
-        camera.translateX(-deltaX);
-        camera.translateY(-deltaY);
+        camera.translateX(-delta.x);
+        camera.translateY(-delta.y);
       } else {
         const moveX = event.deltaX / camera.zoom;
         const moveY = event.deltaY / camera.zoom;

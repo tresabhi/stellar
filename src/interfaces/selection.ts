@@ -1,4 +1,5 @@
 import { Blueprint } from 'game/Blueprint';
+import { Group } from 'game/parts/Group';
 import {
   getPart,
   mutateBlueprint,
@@ -19,6 +20,7 @@ export const selectParts = (IDs: UUID[]) => {
 
       if (part && !part.selected) {
         part.selected = true;
+        if (part.n === 'Group') (part as Group).expanded = true;
         newSelections.push(ID);
       }
     });
@@ -43,6 +45,7 @@ export const selectPartsOnly = (IDs: UUID[], draft?: Blueprint) => {
       IDs,
       (draft) => {
         draft.selected = true;
+        if (draft.n === 'Group') (draft as Group).expanded = true;
       },
       draft,
     );

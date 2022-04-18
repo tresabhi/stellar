@@ -2,7 +2,7 @@ import {
   Blueprint,
   BlueprintData,
   SavedBlueprint,
-  VanillaBlueprint,
+  VanillaBlueprint
 } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
@@ -11,7 +11,7 @@ import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isArray, isMap, merge } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore,
+  BlueprintPatchHistoryStore
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartMap, UUID } from 'types/Parts';
