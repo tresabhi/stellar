@@ -3,6 +3,7 @@ import * as PartsExplorer from 'components/PartsExplorer';
 import * as SideBar from 'components/SideBar';
 import produce from 'immer';
 import settingsStore, { SettingsStore } from 'stores/settings';
+import styles from './index.module.scss';
 
 export default function LeftSideBar() {
   const partition = settingsStore(
@@ -25,7 +26,7 @@ export default function LeftSideBar() {
     );
 
   return (
-    <SideBar.Container>
+    <SideBar.Container className={styles['left-side-bar']}>
       <Partition.Container>
         <Partition.Option
           selected={isPartitionParts}

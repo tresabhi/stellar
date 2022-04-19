@@ -1,4 +1,11 @@
-import { FC, forwardRef, InputHTMLAttributes, ReactNode } from 'react';
+import {
+  FC,
+  forwardRef,
+  InputHTMLAttributes,
+  MouseEvent,
+  MutableRefObject,
+  ReactNode
+} from 'react';
 import styles from './index.module.scss';
 
 export const Container = forwardRef<
@@ -25,7 +32,9 @@ interface TitleProps {
   children: ReactNode;
 }
 export const Title: FC<TitleProps> = ({ children }) => (
-  <span className={styles.title}>{children}</span>
+  <Row>
+    <span className={styles.title}>{children}</span>
+  </Row>
 );
 
 interface RowProps {
@@ -40,12 +49,18 @@ interface NamedInputProps extends InputHTMLAttributes<HTMLInputElement> {
   type?: 'small' | 'wide';
 }
 export const NamedInput = forwardRef<HTMLInputElement, NamedInputProps>(
-  ({ label, type = 'small', ...props }, ref) => {
+  ({ label, type = 'small', onClick, ...props }, ref) => {
+    const handleClick = (event: MouseEvent<HTMLInputElement>) => {
+      (ref as MutableRefObject<HTMLInputElement>)?.current.focus();
+      if (onClick) onClick(event);
+    };
+
     return (
       <div
         className={`${styles['input']} ${
           type === 'wide' ? styles.wide : styles.small
         }`}
+        onClick={handleClick}
       >
         <span className={styles.label}>{label}</span>
         <input

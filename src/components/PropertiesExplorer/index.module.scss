@@ -1,42 +1,44 @@
 @import '../../styles/index.scss';
 
+$input-width: 64px;
+$input-height: 24px;
+
 .properties-explorer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: $padding-x-thick;
+  background-color: $black-regular;
 
   .group {
     display: flex;
     flex-direction: column;
-    padding: $padding-x-thick 0 $padding-x-thick 0;
 
-    .title {
-      color: white;
-      font-size: $font-size-regular;
-      padding-bottom: $padding-x-thick;
+    & + .group {
+      margin-top: $margin-x-thick;
     }
 
     .row {
       display: flex;
-      margin-bottom: $margin-thick;
+
+      & + .row {
+        margin-top: $margin-thick;
+      }
+
+      .title {
+        color: white;
+        font-size: $font-size-regular;
+      }
 
       .input {
-        background-color: $black-light;
-        border-radius: $border-radius-regular;
-        padding-left: $padding-thick;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        height: $named-input-height;
+        flex-direction: column;
 
         & + .input {
-          margin-left: $margin-x-thick;
+          margin-left: $margin-thick;
         }
 
         &.small {
-          max-width: calc($named-input-small-width - $padding-thick);
-          width: calc($named-input-small-width - $padding-thick);
+          width: $input-width;
         }
 
         &.wide {
@@ -44,43 +46,22 @@
         }
 
         .label {
+          color: $gray-regular;
+          margin-bottom: $margin-regular;
           font-size: $font-size-small;
-          margin-right: $margin-thick;
-          color: $gray-darker;
-          max-width: 60%;
-          white-space: nowrap;
-          overflow: hidden;
-          display: block;
-          text-overflow: ellipsis;
         }
 
         .value {
-          font-size: $font-size-small;
-          color: white;
-          flex: 1;
+          background-color: $black-light;
+          border-radius: $border-radius-regular;
+          height: $input-height;
           text-align: center;
-          min-width: 0;
-          text-overflow: ellipsis;
+          font-size: $font-size-regular;
+          color: white;
         }
       }
 
       .toggle {
-        background-color: $black-light;
-        border-radius: $border-radius-regular;
-        width: $named-input-small-width;
-        height: $named-input-height;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &:hover {
-          background-color: $black-lighter;
-        }
-
-        &:active,
-        &.on {
-          background-color: $black-x-light;
-        }
       }
     }
   }

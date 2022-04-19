@@ -2,20 +2,11 @@ import ScrollableComponent from 'components/Scrollable';
 import { FC, InputHTMLAttributes } from 'react';
 import styles from './index.module.scss';
 
-interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
-  width?: 'major' | 'minor';
-}
-export const Container: FC<ContainerProps> = ({
+export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   children,
-  width = 'major',
   ...props
 }) => (
-  <div
-    {...props}
-    className={`${props.className ?? ''} ${styles['side-bar']} ${
-      width === 'major' ? styles.major : styles.minor
-    }`}
-  >
+  <div {...props} className={`${props.className ?? ''} ${styles['side-bar']}`}>
     {children}
   </div>
 );

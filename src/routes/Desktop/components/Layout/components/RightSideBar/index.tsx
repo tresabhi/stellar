@@ -143,14 +143,17 @@ const RightSideBar = () => {
             <PropertiesExplorer.Group>
               <PropertiesExplorer.Title>Canvas</PropertiesExplorer.Title>
               <PropertiesExplorer.Row>
-                <PropertiesExplorer.NamedInput ref={centerInputRef} label="C" />
+                <PropertiesExplorer.NamedInput
+                  ref={centerInputRef}
+                  label="Center"
+                />
                 <PropertiesExplorer.NamedInput
                   ref={offsetXInputRef}
-                  label="X"
+                  label="Offset X"
                 />
                 <PropertiesExplorer.NamedInput
                   ref={offsetYInputRef}
-                  label="Y"
+                  label="Offset Y"
                 />
               </PropertiesExplorer.Row>
             </PropertiesExplorer.Group>

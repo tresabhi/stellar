@@ -1,9 +1,7 @@
 @import '../../../../../../styles/index.scss';
 
+$properties-explorer-width: 240px;
+
 .right-side-bar {
-  .constrain-icon {
-    fill: white;
-    width: $icon-size-bigger;
-    height: $icon-size-big;
-  }
+  width: $properties-explorer-width;
 }

@@ -184,9 +184,9 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
     <PropertiesExplorer.Group>
       <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput ref={width} label="W" />
-        <PropertiesExplorer.NamedInput ref={height} label="H" />
-        <PropertiesExplorer.NamedInput ref={fuel} label="F" />
+        <PropertiesExplorer.NamedInput ref={width} label="Width" />
+        <PropertiesExplorer.NamedInput ref={height} label="Height" />
+        <PropertiesExplorer.NamedInput ref={fuel} label="Fuel" />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );
