@@ -4,7 +4,7 @@ import {
   InputHTMLAttributes,
   MouseEvent,
   MutableRefObject,
-  ReactNode
+  ReactNode,
 } from 'react';
 import styles from './index.module.scss';
 
