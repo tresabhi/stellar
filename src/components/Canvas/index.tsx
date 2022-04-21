@@ -45,6 +45,7 @@ export const LayoutRenderer = () => {
 
       <Grid />
       <Parts />
+      {/* <Selections /> */}
     </Canvas>
   );
 };

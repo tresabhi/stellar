@@ -28,7 +28,7 @@ const Grid = () => {
       <gridHelper
         ref={gridRef}
         position={[initialState.center, 0, LAYER.GRID + 0.5]}
-        args={[1e6, 2, '#9952E0']}
+        args={[1e6, 2, 'hsl(270, 70%, 60%)']}
         rotation={[Math.PI / 2, 0, 0]}
         renderOrder={LAYER.GRID}
       />

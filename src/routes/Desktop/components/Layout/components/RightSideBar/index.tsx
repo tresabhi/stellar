@@ -9,7 +9,7 @@ import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import settingsStore, { SettingsStore } from 'stores/settings';
 import { AnyPart, UUID } from 'types/Parts';
-import comparePartOrders from 'utilities/comparePartOrders';
+import compareStringArrays from 'utilities/compareStringArrays';
 import TransformationProperties from './components/TransformationProperties';
 import styles from './index.module.scss';
 
@@ -20,7 +20,7 @@ const RightSideBar = () => {
   );
   const selections = blueprintStore(
     (state) => state.selections,
-    comparePartOrders,
+    compareStringArrays,
   );
   const selectionsLength = blueprintStore((state) => state.selections.length);
   const isPartitionProperties = partition === 'properties';

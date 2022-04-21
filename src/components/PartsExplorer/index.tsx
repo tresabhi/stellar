@@ -28,7 +28,7 @@ import {
 import blueprintStore from 'stores/blueprint';
 import { UUID } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
-import comparePartOrders from 'utilities/comparePartOrders';
+import compareStringArrays from 'utilities/compareStringArrays';
 import styles from './index.module.scss';
 
 interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
@@ -42,7 +42,7 @@ export const Container: FC<ContainerProps> = ({
 }) => {
   const state = blueprintStore(
     (state) => (parent ? (getPart(parent, state) as Group) : state).partOrder,
-    comparePartOrders,
+    compareStringArrays,
   );
   const partListing = state.map((ID) => (
     <Listing key={`part-${ID}`} ID={ID} indentation={indentation} />

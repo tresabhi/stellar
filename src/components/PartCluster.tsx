@@ -6,7 +6,7 @@ import { forwardRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';
 import { UUID } from 'types/Parts';
-import comparePartOrders from 'utilities/comparePartOrders';
+import compareStringArrays from 'utilities/compareStringArrays';
 
 interface PartClusterProps extends GroupProps {
   parentID?: UUID;
@@ -16,7 +16,7 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
     const state = blueprintStore(
       (state) =>
         (parentID ? (getPart(parentID, state) as GroupPart) : state).partOrder,
-      comparePartOrders,
+      compareStringArrays,
     );
     let partListing: JSX.Element[] = [];
 
