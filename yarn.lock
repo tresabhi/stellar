@@ -1560,10 +1560,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.4.tgz#97c69881788e624d7cc68d4385fdaa9b5fd20642"
   integrity sha512-KpxKt/D//q/t/6FBcde/RE36LKp8PpWu7kFEMLwpzMGl9RpcexunmYOQJWwmJWtkQjgE1YRr7DzBMryz6La1cQ==
 
-"@react-three/drei@^9.5.0":
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.5.0.tgz#a1d9c4687a1cd4a645604cef5f54feb641f2b52c"
-  integrity sha512-WN1P/+CBQR7wQbeg1+KpKhX+6aNHnsm7DJzYTFfuZaZkR0bpWZD+78u4yeAoYk39D9d+ltWGj9c1G5htxh1Nmg==
+"@react-three/drei@^9.5.2":
+  version "9.5.2"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.5.2.tgz#113f78ad97751c9b89260287f0528aa8e07bb1e7"
+  integrity sha512-SoaEFRl3MlDSFkOnEhTsqpBjltakgLfG98NvmmaHv0aJXqyCCmo/om+x8jm23xw20Y9l0a2cVgOW9K1Jj6HbeQ==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -1580,7 +1580,7 @@
     stats.js "^0.17.0"
     suspend-react "^0.0.8"
     three-mesh-bvh "^0.5.7"
-    three-stdlib "^2.8.12"
+    three-stdlib "^2.9.1"
     troika-three-text "^0.46.3"
     utility-types "^3.10.0"
     zustand "^3.5.13"
@@ -8915,7 +8915,7 @@ three-mesh-bvh@^0.5.10, three-mesh-bvh@^0.5.7:
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.10.tgz#6eadd0a9f63d8fc1bb3516bdc96b6ed906a888c4"
   integrity sha512-yOJPT3DhfZB/DvIr0lEfPUPMRX11HJABGapeuBa4GwgsF1NMMsy1nW1wMGxImmVyRCZ61yoor/YVqRRQV1p5VQ==
 
-three-stdlib@^2.8.12:
+three-stdlib@^2.9.1:
   version "2.9.1"
   resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.9.1.tgz#300abf6cf12ab388e515fd8572217288dffe4736"
   integrity sha512-e+Hyd47ssVTy2UzUfmaccB7m30qITVMdvGs/QypeGdJa3uwhw1zR9jO/ce61S65Omiy/oGDMWG8dJIZxyQ7u8w==
