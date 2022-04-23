@@ -2,16 +2,16 @@ import usePartProperty from 'hooks/usePartProperty';
 import { getPartBoundingBoxComputer } from 'interfaces/part';
 import { FC, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { BufferGeometry, Vector2 } from 'three';
+import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { UUID } from 'types/Parts';
 
-const WIDTH = 1;
+const WIDTH = 0.004;
 
 interface SelectionProps {
   ID: UUID;
 }
 const Selection: FC<SelectionProps> = ({ ID }) => {
-  const geometryRef = useRef<BufferGeometry>(null!);
+  const lineRef = useRef<Line2>(null!);
 
   usePartProperty(
     ID,
@@ -21,29 +21,42 @@ const Selection: FC<SelectionProps> = ({ ID }) => {
 
       if (boundingBoxComputer) {
         const boundingBox = boundingBoxComputer(state);
-        const points = [
-          new Vector2(boundingBox.min.x, boundingBox.min.y),
-          new Vector2(boundingBox.max.x, boundingBox.min.y),
-          new Vector2(boundingBox.max.x, boundingBox.max.y),
-          new Vector2(boundingBox.min.x, boundingBox.max.y),
-          new Vector2(boundingBox.min.x, boundingBox.min.y),
-        ];
 
-        geometryRef.current.setFromPoints(points);
+        lineRef.current.geometry.setPositions([
+          boundingBox.min.x,
+          boundingBox.min.y,
+          0,
+
+          boundingBox.max.x,
+          boundingBox.min.y,
+          0,
+
+          boundingBox.max.x,
+          boundingBox.max.y,
+          0,
+
+          boundingBox.min.x,
+          boundingBox.max.y,
+          0,
+
+          boundingBox.min.x,
+          boundingBox.min.y,
+          0,
+        ]);
       }
     },
   );
 
   return (
     <group>
-      <line>
-        <bufferGeometry ref={geometryRef} />
-        <lineBasicMaterial
-          color="hsl(270, 70%, 50%)"
+      <line2 ref={lineRef}>
+        <lineGeometry />
+        <lineMaterial
+          color="hsl(270, 70%, 55%)"
           depthTest={false}
           linewidth={WIDTH}
         />
-      </line>
+      </line2>
     </group>
   );
 };
