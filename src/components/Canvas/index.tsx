@@ -7,6 +7,7 @@ import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import Grid from './components/Grid';
 import Parts from './components/Parts';
+import Selections from './components/Selections';
 import styles from './index.module.scss';
 
 export enum LAYER {
@@ -45,7 +46,7 @@ export const LayoutRenderer = () => {
 
       <Grid />
       <Parts />
-      {/* <Selections /> */}
+      <Selections />
     </Canvas>
   );
 };

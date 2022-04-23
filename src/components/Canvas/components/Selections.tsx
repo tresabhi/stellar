@@ -1,38 +1,47 @@
-import { getPart } from 'interfaces/blueprint';
+import usePartProperty from 'hooks/usePartProperty';
 import { getPartBoundingBoxComputer } from 'interfaces/part';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
-import { Box2, BufferGeometry, Vector2 } from 'three';
-import compareStringArrays from 'utilities/compareStringArrays';
+import { BufferGeometry, Vector2 } from 'three';
+import { UUID } from 'types/Parts';
 
-const WIDTH = 100;
+const WIDTH = 1;
 
-interface OutlineProps {
-  outline: Box2;
+interface SelectionProps {
+  ID: UUID;
 }
-export const Outline: FC<OutlineProps> = ({ outline }) => {
+const Selection: FC<SelectionProps> = ({ ID }) => {
   const geometryRef = useRef<BufferGeometry>(null!);
 
-  useEffect(() => {
-    const points = [
-      new Vector2(outline.min.x, outline.min.y),
-      new Vector2(outline.max.x, outline.min.y),
-      new Vector2(outline.max.x, outline.max.y),
-      new Vector2(outline.min.x, outline.max.y),
-      new Vector2(outline.min.x, outline.min.y),
-    ];
+  usePartProperty(
+    ID,
+    (state) => state,
+    (state) => {
+      const boundingBoxComputer = getPartBoundingBoxComputer(state.n);
 
-    geometryRef.current.setFromPoints(points);
-  }, [outline.min.x, outline.min.y, outline.max.x, outline.max.y]);
+      if (boundingBoxComputer) {
+        const boundingBox = boundingBoxComputer(state);
+        const points = [
+          new Vector2(boundingBox.min.x, boundingBox.min.y),
+          new Vector2(boundingBox.max.x, boundingBox.min.y),
+          new Vector2(boundingBox.max.x, boundingBox.max.y),
+          new Vector2(boundingBox.min.x, boundingBox.max.y),
+          new Vector2(boundingBox.min.x, boundingBox.min.y),
+        ];
+
+        geometryRef.current.setFromPoints(points);
+      }
+    },
+  );
 
   return (
     <group>
       <line>
         <bufferGeometry ref={geometryRef} />
         <lineBasicMaterial
-          color="hsl(270, 70%, 60%)"
+          color="hsl(270, 70%, 50%)"
           depthTest={false}
-          linewidth={WIDTH / 2}
+          linewidth={WIDTH}
         />
       </line>
     </group>
@@ -40,29 +49,11 @@ export const Outline: FC<OutlineProps> = ({ outline }) => {
 };
 
 const Selections = () => {
-  const selections = blueprintStore(
-    (state) => state.selections,
-    compareStringArrays,
-  );
+  const selections = blueprintStore((state) => state.selections);
+  const boxes = selections.map((selection) => (
+    <Selection ID={selection} key={`part-${selection}`} />
+  ));
 
-  const outlines: JSX.Element[] = [];
-
-  selections.forEach((selection) => {
-    const part = getPart(selection);
-
-    if (part) {
-      const boundingBoxComputer = getPartBoundingBoxComputer(part.n);
-
-      if (boundingBoxComputer)
-        outlines.push(
-          <Outline
-            outline={boundingBoxComputer(part)}
-            key={`outline-${selection}`}
-          />,
-        );
-    }
-  });
-
-  return <group>{outlines}</group>;
+  return <group>{boxes}</group>;
 };
 export default Selections;

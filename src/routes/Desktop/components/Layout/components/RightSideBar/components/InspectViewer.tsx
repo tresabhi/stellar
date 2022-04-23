@@ -6,8 +6,8 @@ import blueprintStore from 'stores/blueprint';
 import { Box2 } from 'three';
 
 const InspectViewer = () => {
-  const selection = blueprintStore((state) => state.selections);
-  const ID = selection[0];
+  const selections = blueprintStore((state) => state.selections);
+  const ID = selections[0];
   const part = getPartReactive(ID); // TODO: this is reactive, but we need to make it not reactive
   const boundingBoxComputer = part
     ? getPartBoundingBoxComputer(part.n)
@@ -16,7 +16,7 @@ const InspectViewer = () => {
     ? boundingBoxComputer(part)
     : new Box2();
 
-  return part ? (
+  return part && selections.length === 1 ? (
     <PropertiesExplorer.Container>
       {/* <PropertiesExplorer.Group>
         <PropertiesExplorer.Title>JSON</PropertiesExplorer.Title>
@@ -68,7 +68,9 @@ const InspectViewer = () => {
   ) : (
     <PropertiesExplorer.Container>
       <PropertiesExplorer.Group>
-        <PropertiesExplorer.Title>No Selection</PropertiesExplorer.Title>
+        <PropertiesExplorer.Title>
+          {selections.length > 1 ? '>1 Selections' : 'No Selections'}
+        </PropertiesExplorer.Title>
       </PropertiesExplorer.Group>
     </PropertiesExplorer.Container>
   );
