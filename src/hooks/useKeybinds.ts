@@ -3,7 +3,7 @@ import {
   deletePartsBySelection,
   groupPartsBySelection,
   redo,
-  translatePartsBySelection,
+  safeTranslatePartsBySelection,
   undo,
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
@@ -69,14 +69,22 @@ const useKeybinds = () => {
       }));
     });
 
-    bind('up', () => translatePartsBySelection(0, TRANSLATE_BY));
-    bind('down', () => translatePartsBySelection(0, -TRANSLATE_BY));
-    bind('left', () => translatePartsBySelection(-TRANSLATE_BY, 0));
-    bind('right', () => translatePartsBySelection(TRANSLATE_BY, 0));
-    bind('shift+up', () => translatePartsBySelection(0, SHIFT_TRANSLATE_BY));
-    bind('shift+down', () => translatePartsBySelection(0, -SHIFT_TRANSLATE_BY));
-    bind('shift+left', () => translatePartsBySelection(-SHIFT_TRANSLATE_BY, 0));
-    bind('shift+right', () => translatePartsBySelection(SHIFT_TRANSLATE_BY, 0));
+    bind('up', () => safeTranslatePartsBySelection(0, TRANSLATE_BY));
+    bind('down', () => safeTranslatePartsBySelection(0, -TRANSLATE_BY));
+    bind('left', () => safeTranslatePartsBySelection(-TRANSLATE_BY, 0));
+    bind('right', () => safeTranslatePartsBySelection(TRANSLATE_BY, 0));
+    bind('shift+up', () =>
+      safeTranslatePartsBySelection(0, SHIFT_TRANSLATE_BY),
+    );
+    bind('shift+down', () =>
+      safeTranslatePartsBySelection(0, -SHIFT_TRANSLATE_BY),
+    );
+    bind('shift+left', () =>
+      safeTranslatePartsBySelection(-SHIFT_TRANSLATE_BY, 0),
+    );
+    bind('shift+right', () =>
+      safeTranslatePartsBySelection(SHIFT_TRANSLATE_BY, 0),
+    );
 
     bind('ctrl+z', (event) => {
       event.preventDefault();

@@ -7,6 +7,7 @@ import {
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
+import { PartWithTranslations } from 'game/parts/PartWithTranslations';
 import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isArray, isMap, merge } from 'lodash';
 import blueprintStore from 'stores/blueprint';
@@ -95,6 +96,34 @@ export const translateParts = (IDs: UUID[], x: number, y: number) =>
 
 export const translatePartsBySelection = (x: number, y: number) =>
   translateParts(blueprintStore.getState().selections, x, y);
+
+export const safeTranslateParts = (
+  x: number,
+  y: number,
+  selections: UUID[],
+) => {
+  mutateBlueprint((draft) => {
+    const internalTranslator = (selections: UUID[]) => {
+      selections.forEach((selection) => {
+        const part = getPart(selection, draft);
+
+        if (part) {
+          if (part.n === 'Group') {
+            internalTranslator((part as Group).partOrder);
+          } else if ((part as AnyPart).p) {
+            (part as PartWithTranslations).p.x += x;
+            (part as PartWithTranslations).p.y += y;
+          }
+        }
+      });
+    };
+
+    internalTranslator(selections);
+  });
+};
+
+export const safeTranslatePartsBySelection = (x: number, y: number) =>
+  safeTranslateParts(x, y, blueprintStore.getState().selections);
 
 interface SubscribeToPartOptions {
   fireInitially: boolean;
