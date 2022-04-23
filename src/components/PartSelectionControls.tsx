@@ -6,7 +6,7 @@ import {
   selectPartOnly,
   togglePartSelection,
   unselectAllParts,
-  unselectPart,
+  unselectPart
 } from 'interfaces/selection';
 import { useEffect } from 'react';
 
@@ -28,9 +28,7 @@ const PartSelectionControls = () => {
         } else {
           selectPartOnly(ID);
         }
-      } else {
-        unselectAllParts();
-      }
+      } else unselectAllParts();
     };
 
     canvas.addEventListener('click', handleClick);

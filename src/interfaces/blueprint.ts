@@ -2,7 +2,7 @@ import {
   Blueprint,
   BlueprintData,
   SavedBlueprint,
-  VanillaBlueprint
+  VanillaBlueprint,
 } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
@@ -11,12 +11,13 @@ import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isArray, isMap, merge } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
-  BlueprintPatchHistoryStore
+  BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
 import { AnyPart, AnyPartMap, UUID } from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
 import { getPartData, importifyPart } from './part';
+import { selectPartOnly } from './selection';
 
 // TODO: make this data driven
 // 0 is infinite undo/redo limit
@@ -82,13 +83,8 @@ export const mutateParts = <Type extends Part>(
   }
 };
 
-export const getReactivePart = <Type extends Part, Slice>(
-  ID: UUID,
-  slicer?: (state: Type) => Slice,
-) => {
-  return blueprintStore((state) =>
-    slicer ? slicer(getPart(ID, state) as Type) : getPart(ID, state),
-  );
+export const getPartReactive = (ID: UUID) => {
+  return blueprintStore((state) => getPart(ID, state));
 };
 
 export const translateParts = (IDs: UUID[], x: number, y: number) =>
@@ -300,6 +296,8 @@ export const groupParts = (IDs: UUID[], replaceID: UUID) => {
         if (currentPart) currentPart.parentID = newGroup.ID;
         if (spliceIndex !== -1) currentParent.partOrder.splice(spliceIndex, 1);
       });
+
+      selectPartOnly(newGroup.ID, draft);
     }
   });
 };

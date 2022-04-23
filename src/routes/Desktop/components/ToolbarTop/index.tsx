@@ -6,7 +6,7 @@ import {
   getParentID,
   getPartIndex,
   insertPart,
-  newBlueprint
+  newBlueprint,
 } from 'interfaces/blueprint';
 import { isUndefined, random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
