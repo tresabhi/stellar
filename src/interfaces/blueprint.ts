@@ -24,8 +24,12 @@ import { selectPartOnly } from './selection';
 // 0 is infinite undo/redo limit
 let UNDO_LIMIT = 512;
 
-export const newBlueprint = (importData?: VanillaBlueprint | SavedBlueprint) =>
+export const loadBlueprint = (
+  importData?: VanillaBlueprint | SavedBlueprint | Blueprint,
+) => {
   blueprintStore.setState(importifyBlueprint(importData ?? BlueprintData));
+  blueprintPatchHistoryStore.setState({ index: -1, patches: [] });
+};
 
 export const deletePartsBySelection = () => {
   mutateBlueprint((draft) => {

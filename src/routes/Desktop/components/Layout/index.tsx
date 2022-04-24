@@ -1,20 +1,13 @@
-import devBlueprint from 'assets/blueprints/fuelTank.json';
 import { LayoutRenderer } from 'components/Canvas';
-import { SavedBlueprint } from 'game/Blueprint';
-import { importifyBlueprint } from 'interfaces/blueprint';
+import { loadDevBlueprint } from 'interfaces/devBlueprint';
 import { FC, InputHTMLAttributes } from 'react';
-import blueprintStore from 'stores/blueprint';
 import settingsStore from 'stores/settings';
 import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
 import styles from './index.module.scss';
 
-if (settingsStore.getState().debug.dev_blueprint) {
-  const blueprint = importifyBlueprint(
-    devBlueprint as unknown as SavedBlueprint,
-  );
-  blueprintStore.setState(blueprint);
-}
+const devBlueprintName = settingsStore.getState().debug.dev_blueprint;
+if (devBlueprintName) loadDevBlueprint(devBlueprintName);
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   const isLeftSideBarVisible = settingsStore(

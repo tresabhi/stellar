@@ -1,20 +1,5 @@
-const element = document.createElement('input');
-let isMounted = false;
-
 const useClipboard = () => {
-  if (!isMounted) {
-    document.body.appendChild(element);
-    element.style.display = 'none';
-
-    isMounted = true;
-  }
-
-  const copy = (text: string) => {
-    element.value = text;
-    element.select();
-
-    return navigator.clipboard.writeText(text);
-  };
+  const copy = (text: string) => navigator.clipboard.writeText(text);
 
   const hook = { copy };
 

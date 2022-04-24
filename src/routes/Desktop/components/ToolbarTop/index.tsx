@@ -6,8 +6,9 @@ import {
   getParentID,
   getPartIndex,
   insertPart,
-  newBlueprint,
+  loadBlueprint,
 } from 'interfaces/blueprint';
+import { loadDevBlueprint } from 'interfaces/devBlueprint';
 import { isUndefined, random } from 'lodash';
 import { FC, RefObject, useRef } from 'react';
 import appStore from 'stores/app';
@@ -29,7 +30,7 @@ const ToolBarTop: FC = () => {
 
       fileReader.onload = () => {
         if (typeof fileReader.result === 'string')
-          newBlueprint(JSON.parse(fileReader.result, reviver));
+          loadBlueprint(JSON.parse(fileReader.result, reviver));
       };
     }
   };
@@ -38,12 +39,7 @@ const ToolBarTop: FC = () => {
     handleCommonInputChange(importInputRef);
   const handleOpenClick = openInputRef.current?.click;
   const handleImportClick = importInputRef.current?.click;
-  const handleDevBlueprintClick = () =>
-    settingsStore.setState(
-      produce((draft: SettingsStore) => {
-        draft.debug.dev_blueprint = !draft.debug.dev_blueprint;
-      }),
-    );
+  const loadBp = (name: string) => () => loadDevBlueprint(name);
   const handleOrbitControlsClick = () =>
     settingsStore.setState(
       produce((draft: SettingsStore) => {
@@ -98,7 +94,7 @@ const ToolBarTop: FC = () => {
       <ControlMenu.Container>
         <ControlMenu.Button label="File">
           <ContextMenu.Container>
-            <ContextMenu.Button onClick={() => newBlueprint}>
+            <ContextMenu.Button onClick={() => loadBlueprint}>
               New
             </ContextMenu.Button>
             <ContextMenu.Button disabled onClick={handleOpenClick}>
@@ -195,12 +191,25 @@ const ToolBarTop: FC = () => {
         </ControlMenu.Button>
         <ControlMenu.Button label="Debug">
           <ContextMenu.Container>
-            <ContextMenu.Toggle
-              defaultState={settingsStore.getState().debug.dev_blueprint}
-              onClick={handleDevBlueprintClick}
-            >
-              Dev blueprint
-            </ContextMenu.Toggle>
+            <ContextMenu.Extension label="Load Template">
+              <ContextMenu.Container>
+                <ContextMenu.Button onClick={loadBp('fuelTank')}>
+                  Fuel Tank Shapes
+                </ContextMenu.Button>
+                <ContextMenu.Button onClick={loadBp('onePart')}>
+                  One Part
+                </ContextMenu.Button>
+                <ContextMenu.Button onClick={loadBp('shapeAndTextures1')}>
+                  Shape &amp; Textures 1
+                </ContextMenu.Button>
+
+                <ContextMenu.Separator />
+
+                <ContextMenu.Button onClick={loadBp('saturnV')}>
+                  Saturn V
+                </ContextMenu.Button>
+              </ContextMenu.Container>
+            </ContextMenu.Extension>
             <ContextMenu.Toggle
               defaultState={settingsStore.getState().debug.orbit_controls}
               onClick={handleOrbitControlsClick}

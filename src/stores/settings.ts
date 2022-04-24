@@ -5,7 +5,7 @@ import { persist } from 'zustand/middleware';
 
 export interface SettingsStore {
   debug: {
-    dev_blueprint: boolean;
+    dev_blueprint?: string;
     orbit_controls: boolean;
     error_logs: boolean;
   };
@@ -32,7 +32,6 @@ export interface SettingsStore {
 
 export const SettingsStoreData: SettingsStore = {
   debug: {
-    dev_blueprint: false,
     orbit_controls: false,
     error_logs: false,
   },
