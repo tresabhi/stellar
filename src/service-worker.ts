@@ -25,7 +25,7 @@ registerRoute(({ request, url }: { request: Request; url: URL }) => {
 
 registerRoute(
   ({ url }) =>
-    url.origin === self.location.origin && url.pathname.endsWith('.png'),
+    url.origin === window.location.origin && url.pathname.endsWith('.png'),
   new StaleWhileRevalidate({
     cacheName: 'images',
     plugins: [new ExpirationPlugin({ maxEntries: 50 })],
