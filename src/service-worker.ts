@@ -1,33 +1,29 @@
-/* eslint-disable no-restricted-globals */
-
+import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { clientsClaim } from 'workbox-core';
-import { ExpirationPlugin } from 'workbox-expiration';
-import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
+import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
-declare const self: ServiceWorkerGlobalScope & WorkerGlobalScope;
+declare var self: ServiceWorkerGlobalScope;
 
 clientsClaim();
 precacheAndRoute(self.__WB_MANIFEST);
 
-const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
-
-registerRoute(({ request, url }: { request: Request; url: URL }) => {
-  return !(
-    request.mode !== 'navigate' || // isn't a navigation
-    // is a URL that starts with /_
-    url.pathname.startsWith('/_') ||
-    // an URL for a resource
-    url.pathname.match(fileExtensionRegexp)
-  );
-}, createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html'));
+const NETWORK_FIRST_PATHS = ['/manifest.json', '/service-worker.js'];
+const responsePlugin = new CacheableResponsePlugin({ statuses: [200] });
 
 registerRoute(
-  ({ url }) =>
-    url.origin === self.location.origin && url.pathname.endsWith('.png'),
+  ({ url }) => NETWORK_FIRST_PATHS.includes(url.pathname),
+  new NetworkFirst({
+    cacheName: 'network-only',
+    plugins: [responsePlugin],
+  }),
+);
+
+registerRoute(
+  ({ url }) => !NETWORK_FIRST_PATHS.includes(url.pathname),
   new StaleWhileRevalidate({
-    cacheName: 'images',
-    plugins: [new ExpirationPlugin({ maxEntries: 50 })],
+    cacheName: 'stale',
+    plugins: [responsePlugin],
   }),
 );
