@@ -199,11 +199,13 @@ export const FuelTankBoundingBoxComputer: BoundingBoxComputer<FuelTank> = (
 ) =>
   new Box2(
     new Vector2(
-      state.p.x - (Math.max(state.N.width_a, state.N.width_b) / 2) * state.o.x,
+      state.p.x -
+        (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.x),
       state.p.y,
     ),
     new Vector2(
-      state.p.x + (Math.max(state.N.width_a, state.N.width_b) / 2) * state.o.y,
-      state.p.y + state.N.height * state.o.y,
+      state.p.x +
+        (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.y),
+      state.p.y + state.N.height * Math.abs(state.o.y),
     ),
   );
