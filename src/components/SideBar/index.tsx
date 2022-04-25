@@ -1,4 +1,4 @@
-import ScrollableComponent from 'components/Scrollable';
+import ScrollableComponent, { ScrollableProps } from 'components/Scrollable';
 import { FC, InputHTMLAttributes } from 'react';
 import styles from './index.module.scss';
 
@@ -11,7 +11,7 @@ export const Container: FC<InputHTMLAttributes<HTMLDivElement>> = ({
   </div>
 );
 
-export const Scrollable: FC<InputHTMLAttributes<HTMLDivElement>> = ({
+export const Scrollable: FC<ScrollableProps> = ({
   children,
   className,
   ...props

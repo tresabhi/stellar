@@ -54,6 +54,7 @@ const Selection: FC<SelectionProps> = ({ ID }) => {
         <lineMaterial
           color="hsl(270, 70%, 55%)"
           depthTest={false}
+          depthWrite={false}
           linewidth={WIDTH}
         />
       </line2>

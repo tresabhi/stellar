@@ -2,6 +2,7 @@
 /build
 /coverage
 draft.*
+/temp
 
 # dependencies
 /node_modules

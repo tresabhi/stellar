@@ -6,6 +6,7 @@
   flex-direction: column;
 
   .scrollable {
+    min-height: 0;
     flex: 1;
   }
 }
