@@ -1,11 +1,14 @@
+/* eslint-disable no-restricted-globals */
+
 import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 
+declare const self: ServiceWorkerGlobalScope;
+
 clientsClaim();
-/* eslint-disable-line no-restricted-globals */
 precacheAndRoute(self.__WB_MANIFEST);
 
 const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
@@ -22,7 +25,7 @@ registerRoute(({ request, url }: { request: Request; url: URL }) => {
 
 registerRoute(
   ({ url }) =>
-    url.origin === location.origin && url.pathname.endsWith('.png'),
+    url.origin === self.location.origin && url.pathname.endsWith('.png'),
   new StaleWhileRevalidate({
     cacheName: 'images',
     plugins: [new ExpirationPlugin({ maxEntries: 50 })],
