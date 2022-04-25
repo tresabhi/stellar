@@ -1,38 +1,29 @@
-import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { clientsClaim } from 'workbox-core';
-import { precacheAndRoute } from 'workbox-precaching';
+import { ExpirationPlugin } from 'workbox-expiration';
+import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
+import { StaleWhileRevalidate } from 'workbox-strategies';
 
 clientsClaim();
-precacheAndRoute(window.self.__WB_MANIFEST);
+precacheAndRoute(self.__WB_MANIFEST);
 
-const NETWORK_FIRST_PATHS = ['/manifest.json', '/service-worker.js'];
-const responsePlugin = new CacheableResponsePlugin({ statuses: [200] });
+const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
+
+registerRoute(({ request, url }: { request: Request; url: URL }) => {
+  return !(
+    request.mode !== 'navigate' || // isn't a navigation
+    // is a URL that starts with /_
+    url.pathname.startsWith('/_') ||
+    // an URL for a resource
+    url.pathname.match(fileExtensionRegexp)
+  );
+}, createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html'));
 
 registerRoute(
-  ({ url }) => NETWORK_FIRST_PATHS.includes(url.pathname),
-  new NetworkFirst({
-    cacheName: 'network-only',
-    plugins: [responsePlugin],
+  ({ url }) =>
+    url.origin === self.location.origin && url.pathname.endsWith('.png'),
+  new StaleWhileRevalidate({
+    cacheName: 'images',
+    plugins: [new ExpirationPlugin({ maxEntries: 50 })],
   }),
 );
-
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.has('update')) {
-  registerRoute(
-    () => true,
-    new NetworkFirst({
-      cacheName: 'update',
-      plugins: [responsePlugin],
-    }),
-  );
-} else {
-  registerRoute(
-    ({ url }) => !NETWORK_FIRST_PATHS.includes(url.pathname),
-    new StaleWhileRevalidate({
-      cacheName: 'stale',
-      plugins: [responsePlugin],
-    }),
-  );
-}
