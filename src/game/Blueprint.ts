@@ -35,3 +35,8 @@ export const BlueprintData: Blueprint = {
   parts: new Map(),
   partOrder: [],
 };
+
+export const SavedBlueprintData: SavedBlueprint = {
+  ...BlueprintData,
+  parts: [],
+};

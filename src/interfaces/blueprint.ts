@@ -10,6 +10,7 @@ import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { PartWithTranslations } from 'game/parts/PartWithTranslations';
 import produce, { applyPatches, produceWithPatches } from 'immer';
 import { cloneDeep, isArray, isMap, merge } from 'lodash';
+import { WATERMARK_KEY } from 'routes/Desktop/components/ToolbarTop';
 import blueprintStore from 'stores/blueprint';
 import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,
@@ -350,12 +351,15 @@ export const importifyBlueprint = (
   const clonedBlueprint = cloneDeep(blueprint);
   const targetBlueprint = cloneDeep(BlueprintData);
 
-  // STEP 1: Copy all generic properties
+  // STEP 1: Remove watermark
+  delete (clonedBlueprint as any)[WATERMARK_KEY];
+
+  // STEP 2: Copy all generic properties
   targetBlueprint.center = clonedBlueprint.center;
   targetBlueprint.offset.x = clonedBlueprint.offset.x;
   targetBlueprint.offset.y = clonedBlueprint.offset.y;
 
-  // STEP 2: Convert all parts to the new format
+  // STEP 3: Convert all parts to the new format
   const newPartsMap: AnyPartMap = new Map();
 
   if (isMap(clonedBlueprint.parts)) {
@@ -396,13 +400,23 @@ export const importifyBlueprint = (
     targetBlueprint.parts = newPartsMap;
   }
 
-  // STEP 3: Copy all stages
+  // STEP 4: Copy all stages
   targetBlueprint.stages = clonedBlueprint.stages;
 
-  // STEP 4: Copy all selections
+  // STEP 5: Copy all selections
   if ((clonedBlueprint as Blueprint).selections) {
     targetBlueprint.selections = (clonedBlueprint as Blueprint).selections;
   }
 
   return targetBlueprint;
+};
+
+export const savifyBlueprint = (blueprint: Blueprint) => {
+  const clonedBlueprint = cloneDeep(blueprint);
+  const savedBlueprint: SavedBlueprint = {
+    ...clonedBlueprint,
+    parts: Array.from(clonedBlueprint.parts, (couple) => couple),
+  };
+
+  return savedBlueprint;
 };
