@@ -1,7 +1,8 @@
 import usePartProperty from 'hooks/usePartProperty';
 import { getPartBoundingBoxComputer } from 'interfaces/part';
-import { FC, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
+import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { UUID } from 'types/Parts';
 
@@ -67,7 +68,21 @@ const Selections = () => {
   const boxes = selections.map((selection) => (
     <Selection ID={selection} key={`part-${selection}`} />
   ));
+  const initialState = blueprintStore.getState();
+  const meshRef = useRef<Group>(null);
 
-  return <group>{boxes}</group>;
+  useEffect(() => {
+    const unsubscribe = blueprintStore.subscribe(
+      (state) => state.offset,
+      (offset) => {
+        meshRef.current?.position.setX(offset.x);
+        meshRef.current?.position.setY(offset.y);
+      },
+    );
+
+    return unsubscribe;
+  }, []);
+
+  return <group ref={meshRef}>{boxes}</group>;
 };
 export default Selections;

@@ -6,9 +6,10 @@ import {
   selectPartOnly,
   togglePartSelection,
   unselectAllParts,
-  unselectPart
+  unselectPart,
 } from 'interfaces/selection';
 import { useEffect } from 'react';
+import blueprintStore from 'stores/blueprint';
 
 const PartSelectionControls = () => {
   const getMousePos = useMousePos();
@@ -17,6 +18,11 @@ const PartSelectionControls = () => {
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
       const mousePos = getMousePos();
+      const offset = blueprintStore.getState().offset;
+
+      mousePos.x -= offset.x;
+      mousePos.y -= offset.y;
+
       const ID = checkForClickableBoundingBoxIntersection(mousePos);
 
       if (ID) {
