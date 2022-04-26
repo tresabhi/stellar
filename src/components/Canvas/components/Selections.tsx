@@ -83,6 +83,13 @@ const Selections = () => {
     return unsubscribe;
   }, []);
 
-  return <group ref={meshRef}>{boxes}</group>;
+  return (
+    <group
+      ref={meshRef}
+      position={[initialState.offset.x, initialState.offset.y, 0]}
+    >
+      {boxes}
+    </group>
+  );
 };
 export default Selections;
