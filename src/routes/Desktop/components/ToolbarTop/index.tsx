@@ -39,7 +39,7 @@ const ToolBarTop: FC = () => {
     handleCommonInputChange(importInputRef);
   const handleOpenClick = openInputRef.current?.click;
   const handleImportClick = importInputRef.current?.click;
-  const loadBp = (name: string) => () => loadDevBlueprint(name);
+  const loadBp = (name?: string) => () => loadDevBlueprint(name);
   const handleOrbitControlsClick = () =>
     settingsStore.setState(
       produce((draft: SettingsStore) => {
@@ -208,6 +208,10 @@ const ToolBarTop: FC = () => {
                 <ContextMenu.Button onClick={loadBp('saturnV')}>
                   Saturn V
                 </ContextMenu.Button>
+
+                <ContextMenu.Separator />
+
+                <ContextMenu.Button onClick={loadBp()}>None</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
             <ContextMenu.Toggle

@@ -14,13 +14,21 @@ export const devBlueprints: { [key: string]: VanillaBlueprint } = {
   shapeAndTextures1,
 };
 
-export const loadDevBlueprint = (name: string) => {
-  const blueprint = devBlueprints[name];
+export const loadDevBlueprint = (name?: string) => {
+  const blueprint = name?devBlueprints[name]:undefined;
+  
   if (blueprint) {
     loadBlueprint(blueprint);
+    
     settingsStore.setState(
       produce((draft: SettingsStore) => {
         draft.debug.dev_blueprint = name;
+      }),
+    );
+  } else {
+    settingsStore.setState(
+      produce((draft: SettingsStore) => {
+        delete draft.debug.dev_blueprint;
       }),
     );
   }
