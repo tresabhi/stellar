@@ -4,14 +4,17 @@ import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import produce from 'immer';
 import {
+  deletePartsBySelection,
   getParentID,
   getPartIndex,
   importBlueprintFile,
   insertPart,
   loadBlueprint,
   openBlueprintFile,
+  redo,
   saveAsBlueprintFile,
   saveBlueprintFile,
+  undo,
 } from 'interfaces/blueprint';
 import { loadDevBlueprint } from 'interfaces/devBlueprint';
 import { isUndefined, random } from 'lodash';
@@ -90,13 +93,15 @@ const ToolBarTop: FC = () => {
         </ControlMenu.Button>
         <ControlMenu.Button label="Edit">
           <ContextMenu.Container>
-            <ContextMenu.Button disabled>Undo</ContextMenu.Button>
-            <ContextMenu.Button disabled>Redo</ContextMenu.Button>
+            <ContextMenu.Button onClick={undo}>Undo</ContextMenu.Button>
+            <ContextMenu.Button onClick={redo}>Redo</ContextMenu.Button>
             <ContextMenu.Separator />
             <ContextMenu.Button disabled>Cut</ContextMenu.Button>
             <ContextMenu.Button disabled>Copy</ContextMenu.Button>
             <ContextMenu.Button disabled>Paste</ContextMenu.Button>
-            <ContextMenu.Button disabled>Delete</ContextMenu.Button>
+            <ContextMenu.Button onClick={deletePartsBySelection}>
+              Delete
+            </ContextMenu.Button>
             <ContextMenu.Separator />
             <ContextMenu.Button disabled>Hide</ContextMenu.Button>
             <ContextMenu.Button disabled>Unhide</ContextMenu.Button>
@@ -106,10 +111,18 @@ const ToolBarTop: FC = () => {
         </ControlMenu.Button>
         <ControlMenu.Button label="View">
           <ContextMenu.Container>
-            <ContextMenu.Button disabled>Layout</ContextMenu.Button>
-            <ContextMenu.Button disabled>Staging</ContextMenu.Button>
-            <ContextMenu.Button disabled>Simulation</ContextMenu.Button>
-            <ContextMenu.Button disabled>Rendering</ContextMenu.Button>
+            <ContextMenu.Button onClick={handleLayoutTabClick}>
+              Layout
+            </ContextMenu.Button>
+            <ContextMenu.Button onClick={handleStagingTabClick}>
+              Staging
+            </ContextMenu.Button>
+            <ContextMenu.Button onClick={handleSimulationTabClick}>
+              Simulation
+            </ContextMenu.Button>
+            <ContextMenu.Button onClick={handleRenderingTabClick}>
+              Rendering
+            </ContextMenu.Button>
             <ContextMenu.Separator />
             <ContextMenu.Button disabled>Toggle HUD</ContextMenu.Button>
             <ContextMenu.Extension disabled label="Theme">
