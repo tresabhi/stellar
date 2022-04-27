@@ -13,7 +13,7 @@ export interface PartWithScale extends Part, VanillaPartWithScale {}
 export const VanillaPartWithScaleData: VanillaPartWithScale = {
   ...VanillaPartData,
 
-  o: { x: 0, y: 0 },
+  o: { x: 1, y: 1 },
 };
 
 export const PartWithScaleData: PartWithScale = {
