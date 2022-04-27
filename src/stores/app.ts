@@ -2,7 +2,7 @@ import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface AppStore {
-  name: string;
+  fileHandle?: FileSystemFileHandle;
   hasUnsavedChanges: boolean;
 
   tab: 'layout' | 'staging' | 'simulation' | 'rendering';
@@ -11,7 +11,6 @@ export interface AppStore {
 }
 
 export const AppStoreData: AppStore = {
-  name: 'blueprint',
   hasUnsavedChanges: false,
 
   tab: 'layout',

@@ -4,6 +4,7 @@ import {
   groupPartsBySelection,
   redo,
   safeTranslatePartsBySelection,
+  saveBlueprintFileWithFallback,
   undo,
 } from 'interfaces/blueprint';
 import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
@@ -98,6 +99,11 @@ const useKeybinds = () => {
     bind('ctrl+g', (event) => {
       event.preventDefault();
       groupPartsBySelection();
+    });
+
+    bind('ctrl+s', (event) => {
+      event.preventDefault();
+      saveBlueprintFileWithFallback();
     });
   }, []);
 };

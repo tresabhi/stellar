@@ -47,14 +47,17 @@ const App = () => {
   const version = stellarContext.version.split('.');
   document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
 
-  appStore.subscribe(
-    (state) => state.hasUnsavedChanges,
-    (hasUnsavedChanges) => {
-      document.title = `${stellarContext.title} ${version[0]}.${version[1]}${
-        hasUnsavedChanges ? '*' : ''
-      }`;
-    },
-  );
+  const rerenderDocumentTitle = () => {
+    const fileHandle = appStore.getState().fileHandle;
+    const hasUnsavedChanges = appStore.getState().hasUnsavedChanges;
+
+    document.title = `${stellarContext.title} ${
+      fileHandle ? `- ${fileHandle.name}` : `${version[0]}.${version[1]}`
+    }${hasUnsavedChanges ? '*' : ''}`;
+  };
+
+  appStore.subscribe((state) => state.hasUnsavedChanges, rerenderDocumentTitle);
+  appStore.subscribe((state) => state.fileHandle, rerenderDocumentTitle);
 
   return (
     <BrowserRouter>
