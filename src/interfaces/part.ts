@@ -1,3 +1,4 @@
+import { Blueprint } from 'game/Blueprint';
 import {
   FuelTankBoundingBoxComputer,
   FuelTankData,
@@ -7,13 +8,18 @@ import {
   VanillaFuelTankData,
 } from 'game/parts/FuelTank';
 import {
+  exportifyGroup,
   Group,
   GroupBoundingBoxComputer,
   GroupData,
   GroupIcon,
   GroupLayoutComponent,
 } from 'game/parts/Group';
-import { Part, VanillaPart } from 'game/parts/Part';
+import {
+  Part,
+  PartData as DefaultPartData,
+  VanillaPart,
+} from 'game/parts/Part';
 import { cloneDeep, merge } from 'lodash';
 import { FC } from 'react';
 import blueprintStore from 'stores/blueprint';
@@ -61,6 +67,11 @@ export const PartBoundingBoxComputers = new Map<
   ['Fuel Tank', FuelTankBoundingBoxComputer],
   ['Group', GroupBoundingBoxComputer],
 ]);
+
+export const PartCustomExportifiers = new Map<
+  string,
+  (part: any, context: Blueprint) => object | object[] | null
+>([['Group', exportifyGroup]]);
 // #endregion
 
 // #region part repository getters
@@ -79,6 +90,9 @@ export const getPartIcon = (partName: string) => PartIcons.get(partName);
 
 export const getPartBoundingBoxComputer = (partName: string) =>
   PartBoundingBoxComputers.get(partName);
+
+export const getPartCustomExportifier = (partName: string) =>
+  PartCustomExportifiers.get(partName);
 
 // #endregion
 
@@ -180,4 +194,28 @@ export const checkForClickableBoundingBoxIntersection = (point: Vector2) => {
   };
 
   return check(blueprintState.selections) ?? check(blueprintState.partOrder);
+};
+
+export const nonExportableKeys = [
+  ...Object.keys(DefaultPartData).filter((key) => key !== 'n'),
+  'parentID',
+];
+
+export const exportifyPart = (
+  part: AnyPart,
+  context: Blueprint,
+  checkForCustomExportifier: boolean = true,
+): object | object[] | null => {
+  const clonedPart = cloneDeep(part) as AnyVanillaPart;
+  const customExporter = getPartCustomExportifier(part.n);
+
+  if (checkForCustomExportifier && customExporter) {
+    return customExporter(clonedPart, context);
+  } else {
+    nonExportableKeys.forEach((key) => {
+      delete clonedPart[key];
+    });
+
+    return clonedPart;
+  }
 };

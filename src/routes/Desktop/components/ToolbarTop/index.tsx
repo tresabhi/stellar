@@ -5,6 +5,7 @@ import * as Tabs from 'components/Tabs';
 import produce from 'immer';
 import {
   deletePartsBySelection,
+  exportBlueprintFile,
   getParentID,
   getPartIndex,
   importBlueprintFile,
@@ -88,7 +89,9 @@ const ToolBarTop: FC = () => {
             <ContextMenu.Button onClick={importBlueprintFile}>
               Import...
             </ContextMenu.Button>
-            <ContextMenu.Button disabled>Export...</ContextMenu.Button>
+            <ContextMenu.Button onClick={exportBlueprintFile}>
+              Export...
+            </ContextMenu.Button>
           </ContextMenu.Container>
         </ControlMenu.Button>
         <ControlMenu.Button label="Edit">
