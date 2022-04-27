@@ -38,7 +38,10 @@ export const VanillaPartWithTransformationsData: VanillaPartWithTransformations 
     ...VanillaPartWithOrientationData,
     ...VanillaPartWithScaleData,
 
-    o: { x: 0, y: 0, z: 0 },
+    o: {
+      ...VanillaPartWithScaleData.o,
+      ...VanillaPartWithOrientationData.o,
+    },
   };
 
 export const PartWithTransformationsData: PartWithTransformations = {
