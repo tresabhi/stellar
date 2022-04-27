@@ -83,7 +83,7 @@
 
       top: 0;
       right: 0;
-      transform: translateX(100%) translateY(calc($padding-thick * -1));
+      transform: translateX(100%) translateY(calc($padding-thicker * -1));
     }
 
     &:not(.disabled) {

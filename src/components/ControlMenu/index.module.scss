@@ -16,7 +16,7 @@
       cursor: default;
 
       transform: translateX(calc($padding-thick * -1))
-        translateY($padding-thick);
+        translateY(calc($padding-thick - 1px));
     }
 
     &:hover {
