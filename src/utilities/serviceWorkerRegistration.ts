@@ -8,10 +8,10 @@ const isLocalhost = Boolean(
 
 type Config = {
   onSuccess?: (registration: ServiceWorkerRegistration) => void;
-  onUpdate?: (registration: ServiceWorkerRegistration) => void;
+  onUpdate?: (registration: ServiceWorkerRegistration) => void; // TODO: investigate if this is fired on new content
 };
 
-export function register(config?: Config) {
+export function registerServiceWorker(config?: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) return;
