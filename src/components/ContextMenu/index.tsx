@@ -6,7 +6,7 @@ import {
   MouseEvent,
   ReactNode,
   useRef,
-  useState,
+  useState
 } from 'react';
 import styles from './index.module.scss';
 
@@ -45,12 +45,14 @@ export const Button: FC<ButtonProps> = ({
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (to) window.open(to);
     if (props.onClick) props.onClick(event);
+
+    (document.activeElement as HTMLElement | undefined)?.blur();
   };
 
   return (
     <div
       {...props}
-      onClick={handleClick}
+      onMouseUp={handleClick}
       className={`${props.className ?? ''} ${styles.button} ${
         disabled ? styles.disabled : styles.enabled
       }`}
@@ -108,6 +110,8 @@ export const Toggle: FC<ToggleProps> = ({
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     setState((state) => !state);
     if (props.onClick) props.onClick(event);
+
+    (document.activeElement as HTMLElement | undefined)?.blur();
   };
 
   return (
@@ -116,7 +120,7 @@ export const Toggle: FC<ToggleProps> = ({
       className={`${props.className ?? ''} ${styles['toggle']} ${
         disabled ? styles.disabled : styles.enabled
       }`}
-      onClick={handleClick}
+      onMouseUp={handleClick}
     >
       <span className={styles.text}>{children}</span>
       <div className={styles['icon-holder']}>
