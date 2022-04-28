@@ -19,10 +19,11 @@ const ICON_IMG = {
   beta: 'https://i.imgur.com/v84uCWm.png',
   release: 'https://i.imgur.com/30IHOc2.png',
 };
-const BLIND_COPY_EXTENSIONS = ['.png', '.ico', '.svg', '.xml'];
+const COPY_FILE_TYPES = ['.png', '.ico', '.svg', '.xml'];
 
 async function generateFavicons(buildType, faviconAPIKey) {
   console.log(`Generating and fetching new favicons for "${buildType}"`);
+
   const faviconAPIResult = (
     await (
       await fetch(FAVICON_API_URL, {
@@ -98,20 +99,24 @@ async function generateFavicons(buildType, faviconAPIKey) {
           .pipe(Extract({ path: 'temp/favicons' }))
           .on('close', () => {
             console.log('Cloning favicons');
+
             const favicons = readdirSync('temp/favicons');
+
             favicons.forEach((favicon) => {
-              if (BLIND_COPY_EXTENSIONS.includes(extname(favicon))) {
+              if (COPY_FILE_TYPES.includes(extname(favicon))) {
                 copyFileSync(`temp/favicons/${favicon}`, `build/${favicon}`);
               }
             });
 
             console.log('Appending icons to manifest.json');
+
             const providedManifest = JSON.parse(
               readFileSync('temp/favicons/site.webmanifest'),
             );
             const existingManifest = JSON.parse(
               readFileSync('build/manifest.json'),
             );
+
             writeFileSync(
               'build/manifest.json',
               JSON.stringify({
@@ -119,11 +124,6 @@ async function generateFavicons(buildType, faviconAPIKey) {
                 icons: [...existingManifest.icons, ...providedManifest.icons],
               }),
             );
-
-            console.log({
-              ...existingManifest,
-              icons: [...existingManifest.icons, ...providedManifest.icons],
-            });
           });
       })
       .on('error', () => console.log('Downloading failed'))
