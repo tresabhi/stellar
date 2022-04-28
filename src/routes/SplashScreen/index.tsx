@@ -16,7 +16,7 @@ const SplashScreen = () => {
       <PulseLoader
         size={12}
         margin={4}
-        color={stellarContext.accentRegular}
+        color="hsl(270, 70%, 50%)"
         css={loaderStyles}
       />
     </div>
