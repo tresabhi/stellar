@@ -2,6 +2,8 @@ import { Part, VanillaPart } from 'game/parts/Part';
 
 export type UUID = string;
 
+export type ParentID = UUID | null;
+
 export interface PartPropertyComponentProps {
   IDs: UUID[];
 }

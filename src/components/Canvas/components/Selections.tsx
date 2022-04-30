@@ -9,7 +9,7 @@ const LINE_WIDTH = 0.15;
 const selectionMaterial = new MeshBasicMaterial({
   depthWrite: false,
   depthTest: false,
-  color: 'hsl(270, 70%, 60%)',
+  color: 'hsl(270, 70%, 45%)',
 });
 
 interface SelectionProps {

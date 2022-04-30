@@ -27,6 +27,7 @@ import { Box2, Vector2 } from 'three';
 import {
   AnyPart,
   AnyVanillaPart,
+  ParentID,
   PartComponentProps,
   PartPropertyComponentProps,
   UUID,
@@ -99,7 +100,7 @@ export const getPartCustomExportifier = (partName: string) =>
 export const importifyPart = (
   part: AnyVanillaPart | AnyPart,
   ID: UUID,
-  parentID?: UUID,
+  parentID?: ParentID,
 ) => {
   const clonedPart = cloneDeep(part);
 
@@ -108,7 +109,7 @@ export const importifyPart = (
 
     const newPart = merge(defaultPartData, clonedPart, {
       ID,
-      parentID,
+      parentID: parentID ?? null,
     }) as AnyPart;
 
     return newPart;

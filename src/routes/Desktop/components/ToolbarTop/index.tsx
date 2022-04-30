@@ -50,9 +50,10 @@ const ToolBarTop: FC = () => {
     return () => {
       const selections = blueprintStore.getState().selections;
       const lastPartID = selections[selections.length - 1];
+
       if (lastPartID) {
         const parentID = getParentID(lastPartID);
-        const index = getPartIndex(lastPartID, parentID);
+        const index = getPartIndex(lastPartID, parentID ?? null);
         insertPart(name, parentID, isUndefined(index) ? 0 : index + 1);
       } else {
         insertPart(name);

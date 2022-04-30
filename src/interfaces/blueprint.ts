@@ -1,4 +1,4 @@
-import { fileOpen, fileSave, FileSystemHandle } from 'browser-fs-access';
+import { fileOpen, fileSave } from 'browser-fs-access';
 import {
   Blueprint,
   BlueprintData,
@@ -18,7 +18,13 @@ import blueprintPatchHistoryStore, {
   BlueprintPatchHistoryStore,
 } from 'stores/blueprintPatchHistory';
 import DeepPartial from 'types/DeepPartial';
-import { AnyPart, AnyPartMap, AnyVanillaPart, UUID } from 'types/Parts';
+import {
+  AnyPart,
+  AnyPartMap,
+  AnyVanillaPart,
+  ParentID,
+  UUID,
+} from 'types/Parts';
 import { v4 as UUIDV4 } from 'uuid';
 import { exportifyPart, getPartData, importifyPart } from './part';
 import { selectPartOnly } from './selection';
@@ -278,7 +284,7 @@ export const redo = () => {
 export const createNewPart = <Type extends Part>(
   partName: string,
   ID?: UUID,
-  parentID?: UUID,
+  parentID?: ParentID,
 ) => {
   const partData = getPartData(partName);
 
@@ -286,13 +292,17 @@ export const createNewPart = <Type extends Part>(
     const newPart = cloneDeep(partData);
 
     (newPart.ID as string) = ID ?? UUIDV4();
-    newPart.parentID = parentID;
+    newPart.parentID = parentID ?? null;
 
     return newPart as Type;
   }
 };
 
-export const insertPart = (partName: string, parentID?: UUID, index = 0) => {
+export const insertPart = (
+  partName: string,
+  parentID?: ParentID,
+  index = 0,
+) => {
   mutateBlueprint((draft) => {
     const newPart = createNewPart(partName);
 
@@ -314,7 +324,7 @@ export const insertPart = (partName: string, parentID?: UUID, index = 0) => {
 
 export const getPartIndex = (
   partID: UUID,
-  parentID?: UUID,
+  parentID: ParentID,
   state?: Blueprint,
 ) => {
   const parent = parentID
@@ -515,8 +525,8 @@ export const saveBlueprintFile = async () => {
   const newFileHandle = (await fileSave(
     blob,
     undefined,
-    fileHandle as unknown as FileSystemHandle,
-  )) as unknown as FileSystemFileHandle | undefined;
+    fileHandle,
+  )) as unknown as FileSystemFileHandle;
 
   appStore.setState({ fileHandle: newFileHandle });
   declareNoUnsavedChanges();

@@ -26,6 +26,7 @@ const Parts = () => {
       position={[initialState.offset.x, initialState.offset.y, LAYER.PART]}
       ref={meshRef}
       onBeforeRender={(renderer) => renderer.clearDepth()}
+      parentID={null}
     />
   );
 };

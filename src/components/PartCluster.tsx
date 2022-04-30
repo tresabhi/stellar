@@ -5,11 +5,11 @@ import { getPartLayoutComponent } from 'interfaces/part';
 import { forwardRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';
-import { UUID } from 'types/Parts';
+import { ParentID } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
 
 interface PartClusterProps extends GroupProps {
-  parentID?: UUID;
+  parentID: ParentID;
 }
 const PartCluster = forwardRef<Group, PartClusterProps>(
   ({ parentID, ...props }, ref) => {
