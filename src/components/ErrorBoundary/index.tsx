@@ -1,4 +1,4 @@
-import { ReactComponent } from 'assets/icons/warning-yellow.svg';
+import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import Button from 'components/Button';
 import TextArea from 'components/TextArea';
 import produce from 'immer';
@@ -53,7 +53,7 @@ export const ErrorBoundaryFallback: FC<FallbackProps> = ({
 
   return (
     <div className={styles['error-boundary']}>
-      <ReactComponent className={styles.icon} />
+      <ExclamationTriangleIcon className={styles.icon} />
       <span className={styles.title}>
         {logVisible ? error.name : 'Stellar ran into an issue'}
       </span>

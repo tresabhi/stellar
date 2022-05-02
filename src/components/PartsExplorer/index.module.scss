@@ -28,9 +28,9 @@
         height: 100%;
 
         .expand-icon {
-          width: $icon-size-xx-small;
-          height: $icon-size-xx-small;
-          fill: white;
+          width: $icon-size-regular;
+          height: $icon-size-regular;
+          color: white;
         }
       }
 
@@ -44,7 +44,7 @@
         .icon {
           width: $icon-size-regular;
           height: $icon-size-regular;
-          fill: white;
+          color: white;
         }
       }
 

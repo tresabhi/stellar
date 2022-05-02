@@ -37,20 +37,20 @@
       background-color: $black-dark;
 
       .icon-holder .icon {
-        fill: $gray-darker;
+        color: $gray-darker;
       }
     }
 
     .icon-holder {
-      fill: white;
       width: $button-major-height;
       display: flex;
       align-items: center;
       justify-content: center;
 
       .icon {
-        width: $icon-size-x-small;
-        height: $icon-size-x-small;
+        color: white;
+        width: $icon-size-regular;
+        height: $icon-size-regular;
       }
     }
 

@@ -1,12 +1,11 @@
-import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
-import { ReactComponent as CheckmarkIcon } from 'assets/icons/checkmark.svg';
+import { CheckIcon, TriangleRightIcon } from '@radix-ui/react-icons';
 import {
   FC,
   InputHTMLAttributes,
   MouseEvent,
   ReactNode,
   useRef,
-  useState
+  useState,
 } from 'react';
 import styles from './index.module.scss';
 
@@ -86,7 +85,7 @@ export const Extension: FC<ExtensionProps> = ({
     >
       <span className={styles.text}>{title}</span>
       <div className={styles['icon-holder']}>
-        <ArrowHeadRightIcon className={styles.icon} />
+        <TriangleRightIcon className={styles.icon} />
       </div>
       {children ? (
         <div className={styles.extension}>{children}</div>
@@ -124,7 +123,7 @@ export const Toggle: FC<ToggleProps> = ({
     >
       <span className={styles.text}>{children}</span>
       <div className={styles['icon-holder']}>
-        {state ? <CheckmarkIcon className={styles.icon} /> : undefined}
+        {state ? <CheckIcon className={styles.icon} /> : undefined}
       </div>
     </div>
   );

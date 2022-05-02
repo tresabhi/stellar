@@ -1,6 +1,8 @@
-import { ReactComponent as ArrowHeadDownIcon } from 'assets/icons/arrow-head-down.svg';
-import { ReactComponent as ArrowHeadRightIcon } from 'assets/icons/arrow-head-right.svg';
-import { ReactComponent as QuestionMarkIcon } from 'assets/icons/question-mark.svg';
+import {
+  QuestionMarkIcon,
+  TriangleDownIcon,
+  TriangleRightIcon,
+} from '@radix-ui/react-icons';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
@@ -178,9 +180,9 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         >
           {initialState.n === 'Group' ? (
             expanded ? (
-              <ArrowHeadDownIcon className={styles['expand-icon']} />
+              <TriangleDownIcon className={styles['expand-icon']} />
             ) : (
-              <ArrowHeadRightIcon className={styles['expand-icon']} />
+              <TriangleRightIcon className={styles['expand-icon']} />
             )
           ) : undefined}
         </button>

@@ -1,4 +1,4 @@
-import { ReactComponent as Icon } from 'assets/icons/group.svg';
+import { GroupIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/PartCluster';
 import { Blueprint } from 'game/Blueprint';
 import { getPart } from 'interfaces/blueprint';
