@@ -1,4 +1,4 @@
-import { LayoutRenderer } from 'components/Canvas';
+import * as Canvas from 'components/Canvas';
 import { loadDevBlueprint } from 'interfaces/devBlueprint';
 import { FC, InputHTMLAttributes } from 'react';
 import settingsStore from 'stores/settings';
@@ -23,7 +23,7 @@ const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
       className={`${props.className ?? ''} ${styles['layout-tab']}`}
     >
       {isLeftSideBarVisible ? <LeftSideBar /> : undefined}
-      <LayoutRenderer />
+      <Canvas.LayoutCanvas />
       {isRightSideBarVisible ? <RightSideBar /> : undefined}
     </div>
   );

@@ -190,11 +190,8 @@ const ToolBarTop: FC = () => {
           <ContextMenu.Container>
             <ContextMenu.Extension label="Load Template">
               <ContextMenu.Container>
-                <ContextMenu.Button onClick={loadBp('fuelTank')}>
+                <ContextMenu.Button onClick={loadBp('testFuelTank')}>
                   Fuel Tank Shapes
-                </ContextMenu.Button>
-                <ContextMenu.Button onClick={loadBp('onePart')}>
-                  One Part
                 </ContextMenu.Button>
                 <ContextMenu.Button onClick={loadBp('shapeAndTextures1')}>
                   Shape &amp; Textures 1

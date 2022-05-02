@@ -1,4 +1,4 @@
-import { ParentID, UUID } from "types/Parts";
+import { ParentID, UUID } from 'types/Parts';
 
 export interface VanillaPart {
   readonly n: string;

@@ -1,10 +1,13 @@
-import PartCluster from 'components/PartCluster';
 import { useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';
-import { LAYER } from '..';
+import { SelectionBox } from './SelectionBox';
 
-const Parts = () => {
+export const SelectionBoxes = () => {
+  const selections = blueprintStore((state) => state.selections);
+  const boxes = selections.map((selection) => (
+    <SelectionBox ID={selection} key={`part-${selection}`} />
+  ));
   const initialState = blueprintStore.getState();
   const meshRef = useRef<Group>(null);
 
@@ -21,13 +24,11 @@ const Parts = () => {
   }, []);
 
   return (
-    <PartCluster
-      // TODO: This is a temporary way to get them to render in the right order
-      position={[initialState.offset.x, initialState.offset.y, LAYER.PART]}
+    <group
       ref={meshRef}
-      onBeforeRender={(renderer) => renderer.clearDepth()}
-      parentID={null}
-    />
+      position={[initialState.offset.x, initialState.offset.y, 0]}
+    >
+      {boxes}
+    </group>
   );
 };
-export default Parts;

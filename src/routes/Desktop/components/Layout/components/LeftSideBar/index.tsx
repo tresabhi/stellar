@@ -28,19 +28,19 @@ export default function LeftSideBar() {
   return (
     <SideBar.Container className={styles['left-side-bar']}>
       <Partition.Container>
-        <Partition.Option
+        <Partition.Partition
           selected={isPartitionParts}
           onClick={handlePartsClick}
         >
           Parts
-        </Partition.Option>
+        </Partition.Partition>
         <Partition.Separator />
-        <Partition.Option
+        <Partition.Partition
           selected={isPartitionSnippets}
           onClick={handleSnippetsClick}
         >
           Snippets
-        </Partition.Option>
+        </Partition.Partition>
       </Partition.Container>
       <SideBar.Scrollable
         style={{

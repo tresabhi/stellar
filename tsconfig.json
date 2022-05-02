@@ -2,13 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext",
-      "es6",
-      "webworker"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext", "es6", "webworker"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

@@ -11,7 +11,7 @@ import {
 import { useEffect } from 'react';
 import blueprintStore from 'stores/blueprint';
 
-const PartSelectionControls = () => {
+export const SelectionControls = () => {
   const getMousePos = useMousePos();
   const canvas = useThree((state) => state.gl.domElement);
 
@@ -46,4 +46,3 @@ const PartSelectionControls = () => {
 
   return null;
 };
-export default PartSelectionControls;

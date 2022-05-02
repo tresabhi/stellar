@@ -1,4 +1,4 @@
-import InfiniteGridHelper from 'components/InfiniteGridHelper';
+import InfiniteGridHelper from 'components/Canvas/components/InfiniteGridHelper';
 import { useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Color, GridHelper, Mesh } from 'three';
@@ -6,7 +6,7 @@ import { LAYER } from '..';
 
 const MAJOR_MARK = 5;
 
-const Grid = () => {
+export const Grid = () => {
   const initialState = blueprintStore.getState();
   const infiniteGridRef = useRef<Mesh>(null);
   const gridRef = useRef<GridHelper>(null);
@@ -45,4 +45,3 @@ const Grid = () => {
     </>
   );
 };
-export default Grid;

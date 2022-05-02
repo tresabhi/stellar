@@ -1,8 +1,7 @@
 import usePartProperty from 'hooks/usePartProperty';
 import { getPartBoundingBoxComputer } from 'interfaces/part';
-import { FC, useEffect, useRef } from 'react';
-import blueprintStore from 'stores/blueprint';
-import { Group, Mesh, MeshBasicMaterial, PlaneGeometry } from 'three';
+import { FC, useRef } from 'react';
+import { Mesh, MeshBasicMaterial, PlaneGeometry } from 'three';
 import { UUID } from 'types/Parts';
 
 const LINE_WIDTH = 0.15;
@@ -12,10 +11,10 @@ const selectionMaterial = new MeshBasicMaterial({
   color: 'hsl(270, 70%, 45%)',
 });
 
-interface SelectionProps {
+export interface SelectionBoxProps {
   ID: UUID;
 }
-const Selection: FC<SelectionProps> = ({ ID }) => {
+export const SelectionBox: FC<SelectionBoxProps> = ({ ID }) => {
   const topRef = useRef<Mesh>(null!);
   const rightRef = useRef<Mesh>(null!);
   const bottomRef = useRef<Mesh>(null!);
@@ -62,34 +61,3 @@ const Selection: FC<SelectionProps> = ({ ID }) => {
     </group>
   );
 };
-
-const Selections = () => {
-  const selections = blueprintStore((state) => state.selections);
-  const boxes = selections.map((selection) => (
-    <Selection ID={selection} key={`part-${selection}`} />
-  ));
-  const initialState = blueprintStore.getState();
-  const meshRef = useRef<Group>(null);
-
-  useEffect(() => {
-    const unsubscribe = blueprintStore.subscribe(
-      (state) => state.offset,
-      (offset) => {
-        meshRef.current?.position.setX(offset.x);
-        meshRef.current?.position.setY(offset.y);
-      },
-    );
-
-    return unsubscribe;
-  }, []);
-
-  return (
-    <group
-      ref={meshRef}
-      position={[initialState.offset.x, initialState.offset.y, 0]}
-    >
-      {boxes}
-    </group>
-  );
-};
-export default Selections;

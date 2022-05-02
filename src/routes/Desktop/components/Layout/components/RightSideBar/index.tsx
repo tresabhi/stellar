@@ -29,19 +29,19 @@ const RightSideBar = () => {
   return (
     <SideBar.Container className={styles['right-side-bar']} width="minor">
       <Partition.Container>
-        <Partition.Option
+        <Partition.Partition
           selected={isPartitionProperties}
           onClick={handlePropertiesClick}
         >
           Properties
-        </Partition.Option>
+        </Partition.Partition>
         <Partition.Separator />
-        <Partition.Option
+        <Partition.Partition
           selected={isPartitionInspect}
           onClick={handleInspectClick}
         >
           Inspect
-        </Partition.Option>
+        </Partition.Partition>
       </Partition.Container>
       <SideBar.Scrollable
         style={{

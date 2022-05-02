@@ -7,9 +7,7 @@ import { inverseLerp } from 'three/src/math/MathUtils';
 const MIN_ZOOM = 2.2;
 const MAX_ZOOM = 800;
 
-// BUG: pressing shift and selecting parts causes the sensitivity to go up
-
-const DesktopCanvasControls = () => {
+export const PanControls = () => {
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
   const getMousePos = useMousePos();
@@ -62,5 +60,3 @@ const DesktopCanvasControls = () => {
 
   return null;
 };
-
-export default DesktopCanvasControls;

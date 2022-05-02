@@ -1,4 +1,4 @@
-import ErrorBoundary from 'components/ErrorBoundary';
+import * as ErrorBoundary from 'components/ErrorBoundary';
 import { enableMapSet, enablePatches } from 'immer';
 import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -15,10 +15,10 @@ const App = lazy(() => import('App'));
 
 root.render(
   <StrictMode>
-    <ErrorBoundary>
+    <ErrorBoundary.Wrapper>
       <Suspense fallback={<SplashScreen />}>
         <App />
       </Suspense>
-    </ErrorBoundary>
+    </ErrorBoundary.Wrapper>
   </StrictMode>,
 );

@@ -98,18 +98,9 @@ const PropertiesEditor = () => {
         <PropertiesExplorer.Group>
           <PropertiesExplorer.Title>Canvas</PropertiesExplorer.Title>
           <PropertiesExplorer.Row>
-            <PropertiesExplorer.NamedInput
-              ref={centerInputRef}
-              label="Center"
-            />
-            <PropertiesExplorer.NamedInput
-              ref={offsetXInputRef}
-              label="Offset X"
-            />
-            <PropertiesExplorer.NamedInput
-              ref={offsetYInputRef}
-              label="Offset Y"
-            />
+            <PropertiesExplorer.Input ref={centerInputRef} label="Center" />
+            <PropertiesExplorer.Input ref={offsetXInputRef} label="Offset X" />
+            <PropertiesExplorer.Input ref={offsetYInputRef} label="Offset Y" />
           </PropertiesExplorer.Row>
         </PropertiesExplorer.Group>
       )}

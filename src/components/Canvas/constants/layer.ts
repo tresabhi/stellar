@@ -1,0 +1,7 @@
+export enum LAYER {
+  GRID,
+  ALWAYS_ON_BOTTOM_PART,
+  PART,
+  ALWAYS_ON_TOP_PART,
+  TOOL,
+}

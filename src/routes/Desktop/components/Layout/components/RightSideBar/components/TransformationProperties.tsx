@@ -40,13 +40,13 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
     <PropertiesExplorer.Group>
       <PropertiesExplorer.Title>Transformations</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput ref={xPos} label="Position X" />
-        <PropertiesExplorer.NamedInput ref={yPos} label="Position Y" />
-        <PropertiesExplorer.NamedInput ref={rot} label="Rotation" />
+        <PropertiesExplorer.Input ref={xPos} label="Position X" />
+        <PropertiesExplorer.Input ref={yPos} label="Position Y" />
+        <PropertiesExplorer.Input ref={rot} label="Rotation" />
       </PropertiesExplorer.Row>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.NamedInput ref={xScale} label="Scale X" />
-        <PropertiesExplorer.NamedInput ref={yScale} label="Scale Y" />
+        <PropertiesExplorer.Input ref={xScale} label="Scale X" />
+        <PropertiesExplorer.Input ref={yScale} label="Scale Y" />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );

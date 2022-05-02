@@ -1,10 +1,13 @@
 import { FC, ReactNode } from 'react';
 
-interface LayerProps {
-  layer: number;
+export interface HeadsUpDisplayProps {
+  priority: number;
   children: ReactNode;
 }
-const Layer: FC<LayerProps> = ({ layer, children }) => {
+const HeadsUpDisplay: FC<HeadsUpDisplayProps> = ({
+  priority: layer,
+  children,
+}) => {
   return (
     <group renderOrder={layer}>
       <mesh onAfterRender={(renderer) => renderer.clearDepth()} />
@@ -12,4 +15,4 @@ const Layer: FC<LayerProps> = ({ layer, children }) => {
     </group>
   );
 };
-export default Layer;
+export default HeadsUpDisplay;

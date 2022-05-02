@@ -1,5 +1,5 @@
 import { GroupIcon as Icon } from '@radix-ui/react-icons';
-import PartCluster from 'components/PartCluster';
+import PartCluster from 'components/Canvas/components/PartCluster';
 import { Blueprint } from 'game/Blueprint';
 import { getPart } from 'interfaces/blueprint';
 import {
