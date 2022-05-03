@@ -2,7 +2,6 @@ import InfiniteGridHelper from 'components/Canvas/components/InfiniteGridHelper'
 import { useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Color, GridHelper, Mesh } from 'three';
-import { LAYER } from '..';
 
 const MAJOR_MARK = 5;
 
@@ -27,20 +26,18 @@ export const Grid = () => {
     <>
       <gridHelper
         ref={gridRef}
-        position={[initialState.center, 0, LAYER.GRID + 0.5]}
+        position={[initialState.center, 0, 1]}
         args={[1e6, 2, 'hsl(270, 70%, 60%)']}
         rotation={[Math.PI / 2, 0, 0]}
-        renderOrder={LAYER.GRID}
       />
       <InfiniteGridHelper
         ref={infiniteGridRef}
-        position={[initialState.center % MAJOR_MARK, 0, LAYER.GRID]}
+        position={[initialState.center % MAJOR_MARK, 0, 0]}
         axes="xyz"
         size1={1}
         size2={MAJOR_MARK}
         distance={1e3}
         color={new Color('hsl(240, 20%, 65%)')}
-        renderOrder={LAYER.GRID}
       />
     </>
   );

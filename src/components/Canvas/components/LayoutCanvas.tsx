@@ -31,8 +31,7 @@ export const LayoutCanvas = () => {
       performance={{ min: regressAmount }}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
-      <directionalLight position={[0, 0, 100]} />
-      <ambientLight intensity={0.5} />
+
       {allAxisControls ? <OrbitControls /> : <PanControls />}
       <SelectionControls />
 

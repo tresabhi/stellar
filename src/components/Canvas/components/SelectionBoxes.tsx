@@ -1,6 +1,8 @@
+import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import { useEffect, useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';
+import { LAYER } from '../constants/layer';
 import { SelectionBox } from './SelectionBox';
 
 export const SelectionBoxes = () => {
@@ -24,11 +26,13 @@ export const SelectionBoxes = () => {
   }, []);
 
   return (
-    <group
-      ref={meshRef}
-      position={[initialState.offset.x, initialState.offset.y, 0]}
-    >
-      {boxes}
-    </group>
+    <HeadsUpDisplay priority={LAYER.TOOL}>
+      <group
+        ref={meshRef}
+        position={[initialState.offset.x, initialState.offset.y, 0]}
+      >
+        {boxes}
+      </group>
+    </HeadsUpDisplay>
   );
 };

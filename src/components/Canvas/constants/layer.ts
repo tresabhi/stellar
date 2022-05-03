@@ -1,7 +1,10 @@
 export enum LAYER {
-  GRID,
-  ALWAYS_ON_BOTTOM_PART,
+  PART_RENDER_UNDER,
   PART,
-  ALWAYS_ON_TOP_PART,
+  PART_RENDER_OVER,
+
+  /**
+   * TODO: Make this more specific
+   */
   TOOL,
 }
