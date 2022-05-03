@@ -12,6 +12,9 @@ import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
+/**
+ * @deprecated
+ */
 const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
   ID: UUID,
 ) => {

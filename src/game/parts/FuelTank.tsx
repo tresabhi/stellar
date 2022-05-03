@@ -1,6 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import usePropertyController from 'hooks/useNumberPropertyController';
+import usePropertyController from 'hooks/usePropertyController';
 import usePartProperty from 'hooks/usePartProperty';
 import { getPart } from 'interfaces/blueprint';
 import { BoundingBoxComputer } from 'interfaces/part';

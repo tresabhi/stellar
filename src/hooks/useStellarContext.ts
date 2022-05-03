@@ -9,6 +9,7 @@ import packageJSON from '../../package.json';
 type CodeName = 'alpha' | 'beta' | 'release' | 'dev';
 
 export default function useStellarContext() {
+  const version = coerce(packageJSON.version)!.version;
   let title: string;
   let codeName: CodeName;
   let Icon: FC<any>;
@@ -41,8 +42,8 @@ export default function useStellarContext() {
 
   return {
     title,
-    version: coerce(packageJSON.version)!.version,
     codeName,
+    version,
     Icon,
   };
 }

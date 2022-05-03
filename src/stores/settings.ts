@@ -1,4 +1,3 @@
-import { Languages } from 'hooks/useTranslations';
 import { merge } from 'lodash';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -12,8 +11,6 @@ export interface SettingsStore {
   performance: {
     regress_amount: number;
   };
-
-  language: Languages;
 
   layout: {
     leftSideBar: {
@@ -37,8 +34,6 @@ export const SettingsStoreData: SettingsStore = {
   performance: {
     regress_amount: 1,
   },
-
-  language: 'english_us',
 
   layout: {
     leftSideBar: {

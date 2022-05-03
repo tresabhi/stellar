@@ -1,6 +1,6 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import usePropertyController from 'hooks/useNumberPropertyController';
+import usePropertyController from 'hooks/usePropertyController';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 

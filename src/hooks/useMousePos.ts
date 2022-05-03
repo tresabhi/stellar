@@ -2,9 +2,11 @@ import { useThree } from '@react-three/fiber';
 import { Vector2 } from 'three';
 
 const useMousePos = () => {
-  const mouse = useThree((state) => state.mouse);
-  const canvas = useThree((state) => state.gl.domElement);
-  const camera = useThree((state) => state.camera);
+  const {
+    mouse,
+    camera,
+    gl: { domElement: canvas },
+  } = useThree();
 
   return () => {
     const canvasWidth = canvas.width;
