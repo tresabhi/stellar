@@ -2,7 +2,6 @@ import { supported } from 'browser-fs-access';
 import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
-import produce from 'immer';
 import {
   deletePartsBySelection,
   exportBlueprintFile,
@@ -22,19 +21,12 @@ import { isUndefined, random } from 'lodash';
 import { FC } from 'react';
 import appStore from 'stores/app';
 import blueprintStore from 'stores/blueprint';
-import settingsStore, { SettingsStore } from 'stores/settings';
 import styles from './index.module.scss';
 
 const ToolBarTop: FC = () => {
   const disableSave = isUndefined(appStore((state) => state.fileHandle));
 
   const loadBp = (name?: string) => () => loadDevBlueprint(name);
-  const handleOrbitControlsClick = () =>
-    settingsStore.setState(
-      produce((draft: SettingsStore) => {
-        draft.debug.orbit_controls = !draft.debug.orbit_controls;
-      }),
-    );
   const handleLayoutTabClick = () => appStore.setState({ tab: 'layout' });
   const handleStagingTabClick = () => appStore.setState({ tab: 'staging' });
   const handleSimulationTabClick = () =>
@@ -208,12 +200,6 @@ const ToolBarTop: FC = () => {
                 <ContextMenu.Button onClick={loadBp()}>None</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
-            <ContextMenu.Toggle
-              defaultState={settingsStore.getState().debug.orbit_controls}
-              onClick={handleOrbitControlsClick}
-            >
-              Orbit controls
-            </ContextMenu.Toggle>
           </ContextMenu.Container>
         </ControlMenu.Button>
         <ControlMenu.Button label="Help">

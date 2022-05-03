@@ -1,4 +1,4 @@
-import { AdaptiveDpr, OrbitControls } from '@react-three/drei';
+import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
@@ -15,7 +15,6 @@ export const LayoutCanvas = () => {
   const regressAmount = settingsStore(
     (state) => state.performance.regress_amount,
   );
-  const allAxisControls = settingsStore((state) => state.debug.orbit_controls);
   const initialState = blueprintStore.getState();
 
   return (
@@ -32,7 +31,7 @@ export const LayoutCanvas = () => {
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
 
-      {allAxisControls ? <OrbitControls /> : <PanControls />}
+      <PanControls />
       <SelectionControls />
 
       <Grid />
