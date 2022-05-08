@@ -187,7 +187,7 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 
 export const FuelTankIcon = Icon;
 
-export const FuelTankBoundingBoxComputer: BoundingBoxComputer<FuelTank> = (
+export const computeFuelTankBoundingBox: BoundingBoxComputer<FuelTank> = (
   state,
 ) => ({
   min: {

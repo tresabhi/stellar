@@ -4,11 +4,10 @@ import {
   getPart,
   getPartRegistry,
   partExportify,
-  removePartMetaData,
+  removePartMetaData
 } from 'core/part';
-import { Blueprint } from 'game/Blueprint';
 import { PrimitiveBoundingBox } from 'hooks/useBoundingBoxes';
-import { BoundingBoxComputer } from 'hooks/usePartRegistry';
+import { BoundingBoxComputer, PartExportifier } from 'hooks/usePartRegistry';
 import { isArray } from 'lodash';
 import { FC } from 'react';
 import { AnyVanillaPart, PartComponentProps, UUID } from 'types/Parts';
@@ -35,7 +34,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
 
 export const GroupIcon = Icon;
 
-export const GroupBoundingBoxComputer: BoundingBoxComputer<Group> = (state) => {
+export const computeGroupBoundingBox: BoundingBoxComputer<Group> = (state) => {
   let groupBoundingBox: PrimitiveBoundingBox;
 
   state.partOrder.forEach((ID, index) => {
@@ -47,7 +46,7 @@ export const GroupBoundingBoxComputer: BoundingBoxComputer<Group> = (state) => {
       if (computeBoundingBox) {
         const boundingBox = computeBoundingBox(part);
 
-        if (index === 1) {
+        if (index === 0) {
           groupBoundingBox = boundingBox;
         } else {
           groupBoundingBox.min.x = Math.min(
@@ -74,7 +73,7 @@ export const GroupBoundingBoxComputer: BoundingBoxComputer<Group> = (state) => {
   return groupBoundingBox!;
 };
 
-export const exportifyGroup = (part: Group, context: Blueprint) => {
+export const groupExportify: PartExportifier<Group> = (part, context) => {
   const exportedParts: AnyVanillaPart[] = [];
   const partWithoutMetaData = removePartMetaData(part) as Group;
 
