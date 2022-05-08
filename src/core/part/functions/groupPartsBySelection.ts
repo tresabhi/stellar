@@ -1,4 +1,4 @@
-import blueprintStore from 'stores/blueprint';
+import blueprintStore from 'hooks/useBlueprint';
 import { groupParts } from './groupParts';
 
 export const groupPartsBySelection = () => {

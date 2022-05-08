@@ -19,22 +19,21 @@ import {
   getPartIndex,
   insertPart,
 } from 'core/part';
+import useApp from 'hooks/useApp';
+import blueprintStore from 'hooks/useBlueprint';
 import { isUndefined, random } from 'lodash';
 import { FC } from 'react';
-import appStore from 'stores/app';
-import blueprintStore from 'stores/blueprint';
 import styles from './index.module.scss';
 
 const ToolBarTop: FC = () => {
-  const disableSave = isUndefined(appStore((state) => state.fileHandle));
+  const disableSave = isUndefined(useApp((state) => state.fileHandle));
 
   const loadBp = (name?: string) => () => loadBlueprintTemplate(name);
-  const handleLayoutTabClick = () => appStore.setState({ tab: 'layout' });
-  const handleStagingTabClick = () => appStore.setState({ tab: 'staging' });
-  const handleSimulationTabClick = () =>
-    appStore.setState({ tab: 'simulation' });
-  const handleRenderingTabClick = () => appStore.setState({ tab: 'rendering' });
-  const tab = appStore((state) => state.tab);
+  const handleLayoutTabClick = () => useApp.setState({ tab: 'layout' });
+  const handleStagingTabClick = () => useApp.setState({ tab: 'staging' });
+  const handleSimulationTabClick = () => useApp.setState({ tab: 'simulation' });
+  const handleRenderingTabClick = () => useApp.setState({ tab: 'rendering' });
+  const tab = useApp((state) => state.tab);
   const isTabLayout = tab === 'layout';
   const isTabStaging = tab === 'staging';
   const isTabSimulation = tab === 'simulation';

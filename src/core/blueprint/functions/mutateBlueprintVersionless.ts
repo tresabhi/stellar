@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
+import blueprintStore from 'hooks/useBlueprint';
 import produce from 'immer';
-import blueprintStore from 'stores/blueprint';
 
 export const mutateBlueprintVersionless = (
   producer: (state: Blueprint) => void,

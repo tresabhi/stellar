@@ -1,7 +1,7 @@
 import PartCluster from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
+import blueprintStore from 'hooks/useBlueprint';
 import { useEffect, useRef } from 'react';
-import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';
 import { LAYER } from '../constants/layer';
 

@@ -1,7 +1,7 @@
 import { getPart } from 'core/part';
 import { Group } from 'game/parts/Group';
+import blueprintStore from 'hooks/useBlueprint';
 import { FC, InputHTMLAttributes } from 'react';
-import blueprintStore from 'stores/blueprint';
 import { UUID } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
 import styles from '../index.module.scss';

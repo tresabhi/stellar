@@ -1,5 +1,5 @@
+import useApp from 'hooks/useApp';
 import useKeybinds from 'hooks/useKeybinds';
-import appStore from 'stores/app';
 import Layout from './components/Layout';
 import Rendering from './components/Rendering';
 import Simulation from './components/Simulation';
@@ -9,7 +9,7 @@ import ToolbarTop from './components/ToolbarTop';
 import styles from './index.module.scss';
 
 export default function Desktop() {
-  const tab = appStore((state) => state.tab);
+  const tab = useApp((state) => state.tab);
 
   useKeybinds();
 

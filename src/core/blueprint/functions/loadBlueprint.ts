@@ -4,9 +4,9 @@ import {
   SavedBlueprint,
   VanillaBlueprint,
 } from 'game/Blueprint';
-import blueprintStore from 'stores/blueprint';
-import { clearVersionControl } from './clearVersionControl';
+import blueprintStore from 'hooks/useBlueprint';
 import { blueprintImportify } from './blueprintImportify';
+import { clearVersionControl } from './clearVersionControl';
 
 export const loadBlueprint = (
   importData?: VanillaBlueprint | SavedBlueprint | Blueprint,

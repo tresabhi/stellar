@@ -7,9 +7,9 @@ import {
   unselectAllParts,
   unselectPart,
 } from 'core/part';
+import blueprintStore from 'hooks/useBlueprint';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
-import blueprintStore from 'stores/blueprint';
 
 export const SelectionControls = () => {
   const getMousePos = useMousePos();

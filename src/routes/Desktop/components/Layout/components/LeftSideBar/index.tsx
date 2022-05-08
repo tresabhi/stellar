@@ -1,26 +1,24 @@
 import * as Partition from 'components/Partitions';
 import * as PartsExplorer from 'components/PartsExplorer';
 import * as SideBar from 'components/SideBar';
+import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
-import settingsStore, { SettingsStore } from 'stores/settings';
 import styles from './index.module.scss';
 
 export default function LeftSideBar() {
-  const partition = settingsStore(
-    (state) => state.layout.leftSideBar.partition,
-  );
+  const partition = useSettings((state) => state.layout.leftSideBar.partition);
   const isPartitionParts = partition === 'parts';
   const isPartitionSnippets = partition === 'snippets';
 
   const handlePartsClick = () =>
-    settingsStore.setState(
-      produce((draft: SettingsStore) => {
+    useSettings.setState(
+      produce((draft: UseSettings) => {
         draft.layout.leftSideBar.partition = 'parts';
       }),
     );
   const handleSnippetsClick = () =>
-    settingsStore.setState(
-      produce((draft: SettingsStore) => {
+    useSettings.setState(
+      produce((draft: UseSettings) => {
         draft.layout.leftSideBar.partition = 'snippets';
       }),
     );

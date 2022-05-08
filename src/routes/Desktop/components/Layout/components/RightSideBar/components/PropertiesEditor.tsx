@@ -1,9 +1,9 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { mutateBlueprint } from 'core/blueprint';
 import { getPart, getPartRegistry } from 'core/part';
+import blueprintStore from 'hooks/useBlueprint';
 import useUnitInputController from 'hooks/useUnitInputController';
 import { useRef } from 'react';
-import blueprintStore from 'stores/blueprint';
 import { AnyPart, UUID } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
 import TransformationProperties from './TransformationProperties';

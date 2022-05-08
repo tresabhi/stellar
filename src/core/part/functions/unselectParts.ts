@@ -1,6 +1,6 @@
-import { mutateBlueprintVersionless } from "core/blueprint";
-import { UUID } from "types/Parts";
-import { getPart } from "./getPart";
+import { mutateBlueprintVersionless } from 'core/blueprint';
+import { UUID } from 'types/Parts';
+import { getPart } from './getPart';
 
 export const unselectParts = (IDs: UUID[]) => {
   mutateBlueprintVersionless((draft) => {

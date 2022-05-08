@@ -1,9 +1,9 @@
-import appStore from 'stores/app';
+import useApp from 'hooks/useApp';
 import { fileSaveAs } from './fileSaveAs';
 import { fileWrite } from './fileWrite';
 
 export const fileSave = () => {
-  const fileHandle = appStore.getState().fileHandle;
+  const fileHandle = useApp.getState().fileHandle;
 
   if (fileHandle) {
     fileWrite();

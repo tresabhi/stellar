@@ -1,7 +1,7 @@
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-export interface AppStore {
+export interface UseApp {
   fileHandle?: FileSystemFileHandle;
   hasUnsavedChanges: boolean;
 
@@ -10,7 +10,7 @@ export interface AppStore {
   transformationMode: 'translate' | 'rotate' | 'scale';
 }
 
-export const AppStoreData: AppStore = {
+export const UseAppData: UseApp = {
   hasUnsavedChanges: false,
 
   tab: 'layout',
@@ -18,10 +18,10 @@ export const AppStoreData: AppStore = {
   transformationMode: 'rotate',
 };
 
-const appStore = create<
-  AppStore,
-  SetState<AppStore>,
-  GetState<AppStore>,
-  Mutate<StoreApi<AppStore>, [['zustand/subscribeWithSelector', never]]>
->(subscribeWithSelector(() => AppStoreData));
-export default appStore;
+const useApp = create<
+  UseApp,
+  SetState<UseApp>,
+  GetState<UseApp>,
+  Mutate<StoreApi<UseApp>, [['zustand/subscribeWithSelector', never]]>
+>(subscribeWithSelector(() => UseAppData));
+export default useApp;

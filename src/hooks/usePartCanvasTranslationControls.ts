@@ -2,7 +2,7 @@ import { ThreeEvent } from '@react-three/fiber';
 import { mutateBlueprintVersionless } from 'core/blueprint';
 import { getPart, mutateParts, selectPartOnly } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import blueprintStore from 'stores/blueprint';
+import blueprintStore from 'hooks/useBlueprint';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';

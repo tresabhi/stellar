@@ -35,4 +35,3 @@ export * from './functions/translateTranslatablePartsBySelection';
 export * from './functions/unselectAllParts';
 export * from './functions/unselectPart';
 export * from './functions/unselectParts';
-

@@ -1,5 +1,5 @@
-import versionControlStore from 'stores/versionControl';
+import useVersionControl from 'hooks/useVersionControl';
 
 export const clearVersionControl = () => {
-  versionControlStore.setState({ index: -1, history: [] });
+  useVersionControl.setState({ index: -1, history: [] });
 };

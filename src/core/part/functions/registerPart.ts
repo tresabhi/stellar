@@ -1,12 +1,12 @@
-import produce from 'immer';
 import partRegistryStore, {
   PartRegistryItem,
-  PartRegistryStore,
-} from 'stores/partRegistry';
+  UsePartRegistry,
+} from 'hooks/usePartRegistry';
+import produce from 'immer';
 
 export const registerPart = (name: string, item: PartRegistryItem) => {
   partRegistryStore.setState(
-    produce((draft: PartRegistryStore) => {
+    produce((draft: UsePartRegistry) => {
       draft.set(name, item);
     }),
   );

@@ -1,10 +1,10 @@
+import useApp from 'hooks/useApp';
 import useStellarContext from 'hooks/useStellarContext';
 import { isMobile } from 'react-device-detect';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
 import Mobile from 'routes/Mobile';
 import SplashScreen from 'routes/SplashScreen';
-import appStore from 'stores/app';
 import 'styles/index.scss';
 import { BufferGeometry, Mesh } from 'three';
 import {
@@ -48,16 +48,16 @@ const App = () => {
   document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
 
   const rerenderDocumentTitle = () => {
-    const fileHandle = appStore.getState().fileHandle;
-    const hasUnsavedChanges = appStore.getState().hasUnsavedChanges;
+    const fileHandle = useApp.getState().fileHandle;
+    const hasUnsavedChanges = useApp.getState().hasUnsavedChanges;
 
     document.title = `${stellarContext.title} ${
       fileHandle ? `- ${fileHandle.name}` : `${version[0]}.${version[1]}`
     }${hasUnsavedChanges ? '*' : ''}`;
   };
 
-  appStore.subscribe((state) => state.hasUnsavedChanges, rerenderDocumentTitle);
-  appStore.subscribe((state) => state.fileHandle, rerenderDocumentTitle);
+  useApp.subscribe((state) => state.hasUnsavedChanges, rerenderDocumentTitle);
+  useApp.subscribe((state) => state.fileHandle, rerenderDocumentTitle);
 
   return (
     <BrowserRouter>

@@ -1,27 +1,25 @@
 import * as Partition from 'components/Partitions';
 import * as SideBar from 'components/SideBar';
+import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
-import settingsStore, { SettingsStore } from 'stores/settings';
 import InspectViewer from './components/InspectViewer';
 import PropertiesEditor from './components/PropertiesEditor';
 import styles from './index.module.scss';
 
 const RightSideBar = () => {
-  const partition = settingsStore(
-    (state) => state.layout.rightSideBar.partition,
-  );
+  const partition = useSettings((state) => state.layout.rightSideBar.partition);
   const isPartitionProperties = partition === 'properties';
   const isPartitionInspect = partition === 'inspect';
 
   const handlePropertiesClick = () =>
-    settingsStore.setState(
-      produce((draft: SettingsStore) => {
+    useSettings.setState(
+      produce((draft: UseSettings) => {
         draft.layout.rightSideBar.partition = 'properties';
       }),
     );
   const handleInspectClick = () =>
-    settingsStore.setState(
-      produce((draft: SettingsStore) => {
+    useSettings.setState(
+      produce((draft: UseSettings) => {
         draft.layout.rightSideBar.partition = 'inspect';
       }),
     );

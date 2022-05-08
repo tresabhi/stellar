@@ -1,5 +1,5 @@
-import appStore from 'stores/app';
+import useApp from 'hooks/useApp';
 
 export const declareUnsavedChanges = () => {
-  appStore.setState({ hasUnsavedChanges: true });
+  useApp.setState({ hasUnsavedChanges: true });
 };

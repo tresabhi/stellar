@@ -3,13 +3,16 @@ import {
   FILE_EXTENSION_REGEX,
   UNNAMED_BLUEPRINT_FILE_NAME,
 } from 'core/blueprint/constants/file';
-import { WATERMARK_KEY, WATERMARK_VALUE } from 'core/blueprint/constants/watermark';
-import appStore from 'stores/app';
-import blueprintStore from 'stores/blueprint';
+import {
+  WATERMARK_KEY,
+  WATERMARK_VALUE,
+} from 'core/blueprint/constants/watermark';
+import useApp from 'hooks/useApp';
+import blueprintStore from 'hooks/useBlueprint';
 import { blueprintExportify } from './blueprintExportify';
 
 export const exportBlueprintFile = async () => {
-  const fileHandle = appStore.getState().fileHandle;
+  const fileHandle = useApp.getState().fileHandle;
   const fileName =
     fileHandle?.name.replace(FILE_EXTENSION_REGEX, '') ??
     UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');

@@ -1,7 +1,7 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { getPartReactive, getPartRegistry } from 'core/part';
+import blueprintStore from 'hooks/useBlueprint';
 import { isUndefined } from 'lodash';
-import blueprintStore from 'stores/blueprint';
 import { Box2 } from 'three';
 
 const InspectViewer = () => {

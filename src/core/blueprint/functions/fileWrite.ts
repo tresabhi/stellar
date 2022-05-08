@@ -1,12 +1,15 @@
 import { fileSave } from 'browser-fs-access';
-import { WATERMARK_KEY, WATERMARK_VALUE } from 'core/blueprint/constants/watermark';
-import appStore from 'stores/app';
-import blueprintStore from 'stores/blueprint';
-import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
+import {
+  WATERMARK_KEY,
+  WATERMARK_VALUE,
+} from 'core/blueprint/constants/watermark';
+import useApp from 'hooks/useApp';
+import blueprintStore from 'hooks/useBlueprint';
 import { blueprintSavify } from './blueprintSavify';
+import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 
 export const fileWrite = async () => {
-  const fileHandle = appStore.getState().fileHandle;
+  const fileHandle = useApp.getState().fileHandle;
   const data = blueprintSavify(blueprintStore.getState());
   const blob = new Blob(
     [
@@ -25,6 +28,6 @@ export const fileWrite = async () => {
     fileHandle,
   )) as unknown as FileSystemFileHandle;
 
-  appStore.setState({ fileHandle: newFileHandle });
+  useApp.setState({ fileHandle: newFileHandle });
   declareNoUnsavedChanges();
 };

@@ -1,12 +1,12 @@
+import useBoundingBoxes, {
+  UseBoundingBoxesCache,
+} from 'hooks/useBoundingBoxes';
 import produce from 'immer';
-import boundingBoxesCacheStore, {
-  BoundingBoxesCacheStore,
-} from 'stores/boundingBoxesCache';
 import { UUID } from 'types/Parts';
 
 export const disposeBoundingBoxes = (IDs: UUID[]) => {
-  boundingBoxesCacheStore.setState(
-    produce((draft: BoundingBoxesCacheStore) => {
+  useBoundingBoxes.setState(
+    produce((draft: UseBoundingBoxesCache) => {
       IDs.forEach((ID) => {
         draft.delete(ID);
       });

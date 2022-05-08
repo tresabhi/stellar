@@ -1,8 +1,8 @@
 import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import blueprintStore from 'hooks/useBlueprint';
+import useSettings from 'hooks/useSettings';
 import { useRef } from 'react';
-import blueprintStore from 'stores/blueprint';
-import settingsStore from 'stores/settings';
 import styles from '../index.module.scss';
 import { Grid } from './Grid';
 import { LayoutParts } from './LayoutParts';
@@ -12,7 +12,7 @@ import { SelectionControls } from './SelectionControls';
 
 export const LayoutCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const regressAmount = settingsStore(
+  const regressAmount = useSettings(
     (state) => state.performance.regress_amount,
   );
   const initialState = blueprintStore.getState();

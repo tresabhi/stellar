@@ -5,7 +5,7 @@ import {
   FuelTankIcon,
   FuelTankLayoutComponent,
   FuelTankPropertyComponent,
-  VanillaFuelTankData
+  VanillaFuelTankData,
 } from 'game/parts/FuelTank';
 import { Part, VanillaPart } from 'game/parts/Part';
 import { FC } from 'react';
@@ -13,14 +13,14 @@ import {
   AnyPart,
   AnyVanillaPart,
   PartComponentProps,
-  PartPropertyComponentProps
+  PartPropertyComponentProps,
 } from 'types/Parts';
 import create from 'zustand';
-import { BoundingBox } from './boundingBoxesCache';
+import { PrimitiveBoundingBox } from './useBoundingBoxes';
 
 export type BoundingBoxComputer<Type extends Part> = (
   part: Type,
-) => BoundingBox;
+) => PrimitiveBoundingBox;
 
 export interface PartRegistryItem {
   // null if it has a custom exportifier or cannot export at all
@@ -38,9 +38,9 @@ export interface PartRegistryItem {
   ) => AnyVanillaPart | AnyVanillaPart[] | null;
 }
 
-export type PartRegistryStore = Map<string, PartRegistryItem>;
+export type UsePartRegistry = Map<string, PartRegistryItem>;
 
-const defaultState:PartRegistryStore = new Map([
+export const UsePartRegistryData: UsePartRegistry = new Map([
   [
     'Fuel Tank',
     {
@@ -57,5 +57,5 @@ const defaultState:PartRegistryStore = new Map([
 ]);
 
 // TODO: change all stores to start with "use"
-const partRegistryStore = create(() => defaultState);
-export default partRegistryStore;
+const usePartRegistry = create(() => UsePartRegistryData);
+export default usePartRegistry;

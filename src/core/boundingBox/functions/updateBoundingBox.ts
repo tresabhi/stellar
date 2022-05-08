@@ -1,13 +1,16 @@
+import useBoundingBoxes, {
+  PrimitiveBoundingBox,
+  UseBoundingBoxesCache,
+} from 'hooks/useBoundingBoxes';
 import produce from 'immer';
-import boundingBoxesCacheStore, {
-  BoundingBox,
-  BoundingBoxesCacheStore,
-} from 'stores/boundingBoxesCache';
 import { UUID } from 'types/Parts';
 
-export const updateBoundingBox = (ID: UUID, boundingBox: BoundingBox) => {
-  boundingBoxesCacheStore.setState(
-    produce((draft: BoundingBoxesCacheStore) => {
+export const updateBoundingBox = (
+  ID: UUID,
+  boundingBox: PrimitiveBoundingBox,
+) => {
+  useBoundingBoxes.setState(
+    produce((draft: UseBoundingBoxesCache) => {
       draft.set(ID, boundingBox);
     }),
   );

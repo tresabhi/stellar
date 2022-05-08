@@ -1,4 +1,4 @@
-import blueprintStore from 'stores/blueprint';
+import blueprintStore from 'hooks/useBlueprint';
 import { translateTranslatableParts } from './translateTranslatableParts';
 
 export const translateTranslatablePartsBySelection = (x: number, y: number) => {

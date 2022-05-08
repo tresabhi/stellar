@@ -1,6 +1,6 @@
 import { getPart, getPartRegistry } from 'core/part';
 import { Group } from 'game/parts/Group';
-import blueprintStore from 'stores/blueprint';
+import blueprintStore from 'hooks/useBlueprint';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 

@@ -1,10 +1,8 @@
 import { Blueprint } from 'game/Blueprint';
+import blueprintStore from 'hooks/useBlueprint';
+import useVersionControl, { UseVersionControl } from 'hooks/useVersionControl';
 import produce, { produceWithPatches } from 'immer';
 import { merge } from 'lodash';
-import blueprintStore from 'stores/blueprint';
-import versionControlStore, {
-  VersionControlStore,
-} from 'stores/versionControl';
 import DeepPartial from 'types/DeepPartial';
 import { UNDO_LIMIT } from '../constants/versionControl';
 import { declareUnsavedChanges } from './declareUnsavedChanges';
@@ -20,8 +18,8 @@ export const mutateBlueprint = (
     producer,
   );
 
-  versionControlStore.setState(
-    produce((draft: VersionControlStore) => {
+  useVersionControl.setState(
+    produce((draft: UseVersionControl) => {
       draft.history.splice(
         draft.index + 1,
         draft.history.length - draft.index - 1,

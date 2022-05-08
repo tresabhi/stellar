@@ -1,8 +1,8 @@
 import { GroupProps } from '@react-three/fiber';
 import { getPart, getPartRegistry } from 'core/part';
 import { Group as GroupPart } from 'game/parts/Group';
+import blueprintStore from 'hooks/useBlueprint';
 import { forwardRef } from 'react';
-import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';
 import { ParentID } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';

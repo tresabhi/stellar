@@ -13,9 +13,9 @@ import {
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
+import blueprintStore from 'hooks/useBlueprint';
 import usePartProperty from 'hooks/usePartProperty';
 import { KeyboardEvent, memo, MouseEvent, useRef, useState } from 'react';
-import blueprintStore from 'stores/blueprint';
 import { UUID } from 'types/Parts';
 import compareIDProps from 'utilities/compareIDProps';
 import styles from '../index.module.scss';

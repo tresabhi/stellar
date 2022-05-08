@@ -1,5 +1,5 @@
 import { fileOpen } from 'browser-fs-access';
-import appStore from 'stores/app';
+import useApp from 'hooks/useApp';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 import { loadBlueprint } from './loadBlueprint';
 
@@ -12,6 +12,6 @@ export const fileImport = async () => {
   const data = JSON.parse(await file.text());
 
   loadBlueprint(data);
-  appStore.setState({ fileHandle: file.handle ?? undefined });
+  useApp.setState({ fileHandle: file.handle ?? undefined });
   declareNoUnsavedChanges();
 };

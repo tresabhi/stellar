@@ -2,7 +2,7 @@ import { merge } from 'lodash';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export interface SettingsStore {
+export interface UseSettings {
   debug: {
     dev_blueprint?: string;
     error_logs: boolean;
@@ -26,7 +26,7 @@ export interface SettingsStore {
   };
 }
 
-export const SettingsStoreData: SettingsStore = {
+export const UseSettingsData: UseSettings = {
   debug: {
     error_logs: false,
   },
@@ -49,11 +49,11 @@ export const SettingsStoreData: SettingsStore = {
   },
 };
 
-const settingsStore = create<SettingsStore>(
-  persist(() => SettingsStoreData, {
+const useSettings = create<UseSettings>(
+  persist(() => UseSettingsData, {
     name: 'settings',
     merge: (persistedState, currentState) =>
       merge(currentState, persistedState),
   }),
 );
-export default settingsStore;
+export default useSettings;

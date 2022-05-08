@@ -1,13 +1,13 @@
+import useBoundingBoxes, {
+  UseBoundingBoxesCache,
+} from 'hooks/useBoundingBoxes';
 import produce from 'immer';
-import boundingBoxesCacheStore, {
-  BoundingBoxesCacheStore,
-} from 'stores/boundingBoxesCache';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 
 export const translateBoundingBoxes = (IDs: UUID[], vector: Vector2) => {
-  boundingBoxesCacheStore.setState(
-    produce((draft: BoundingBoxesCacheStore) => {
+  useBoundingBoxes.setState(
+    produce((draft: UseBoundingBoxesCache) => {
       IDs.forEach((ID) => {
         const boundingBox = draft.get(ID);
 

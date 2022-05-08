@@ -6,12 +6,12 @@ import {
   translateTranslatablePartsBySelection,
   unselectAllParts,
 } from 'core/part';
+import useApp from 'hooks/useApp';
+import blueprintStore from 'hooks/useBlueprint';
+import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
-import appStore from 'stores/app';
-import blueprintStore from 'stores/blueprint';
-import settingsStore, { SettingsStore } from 'stores/settings';
 
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'layout',
@@ -42,8 +42,8 @@ const useKeybinds = () => {
     bind('alt+1', (event) => {
       event?.preventDefault();
 
-      settingsStore.setState(
-        produce((draft: SettingsStore) => {
+      useSettings.setState(
+        produce((draft: UseSettings) => {
           draft.layout.leftSideBar.visible = !draft.layout.leftSideBar.visible;
         }),
       );
@@ -52,8 +52,8 @@ const useKeybinds = () => {
     bind('alt+2', (event) => {
       event?.preventDefault();
 
-      settingsStore.setState(
-        produce((draft: SettingsStore) => {
+      useSettings.setState(
+        produce((draft: UseSettings) => {
           draft.layout.rightSideBar.visible =
             !draft.layout.rightSideBar.visible;
         }),
@@ -61,7 +61,7 @@ const useKeybinds = () => {
     });
 
     bind('ctrl+tab', (event) => {
-      appStore.setState((state) => ({
+      useApp.setState((state) => ({
         tab:
           state.tab === tabOrder[tabOrder.length - 1]
             ? tabOrder[0]

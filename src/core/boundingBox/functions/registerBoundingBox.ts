@@ -1,12 +1,15 @@
 import { getPart, getPartRegistry } from 'core/part';
+import useBoundingBoxes, {
+  PrimitiveBoundingBox,
+  UseBoundingBoxesCache,
+} from 'hooks/useBoundingBoxes';
 import produce from 'immer';
-import boundingBoxesCacheStore, {
-  BoundingBox,
-  BoundingBoxesCacheStore,
-} from 'stores/boundingBoxesCache';
 import { UUID } from 'types/Parts';
 
-export const registerBoundingBox = (ID: UUID, boundingBox?: BoundingBox) => {
+export const registerBoundingBox = (
+  ID: UUID,
+  boundingBox?: PrimitiveBoundingBox,
+) => {
   const part = getPart(ID);
 
   if (part) {
@@ -15,8 +18,8 @@ export const registerBoundingBox = (ID: UUID, boundingBox?: BoundingBox) => {
     if (boundingBox || computeBoundingBox) {
       const finalBoundingBox = boundingBox || computeBoundingBox!(part);
 
-      boundingBoxesCacheStore.setState(
-        produce((draft: BoundingBoxesCacheStore) => {
+      useBoundingBoxes.setState(
+        produce((draft: UseBoundingBoxesCache) => {
           draft.set(ID, finalBoundingBox);
         }),
       );

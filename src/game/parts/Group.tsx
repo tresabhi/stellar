@@ -1,16 +1,16 @@
 import { GroupIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
 import {
-  partExportify,
   getPart,
   getPartRegistry,
+  partExportify,
   removePartMetaData,
 } from 'core/part';
 import { Blueprint } from 'game/Blueprint';
+import { PrimitiveBoundingBox } from 'hooks/useBoundingBoxes';
+import { BoundingBoxComputer } from 'hooks/usePartRegistry';
 import { isArray } from 'lodash';
 import { FC } from 'react';
-import { BoundingBox } from 'stores/boundingBoxesCache';
-import { BoundingBoxComputer } from 'stores/partRegistry';
 import { AnyVanillaPart, PartComponentProps, UUID } from 'types/Parts';
 import { Part, PartData } from './Part';
 
@@ -36,7 +36,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
 export const GroupIcon = Icon;
 
 export const GroupBoundingBoxComputer: BoundingBoxComputer<Group> = (state) => {
-  let groupBoundingBox: BoundingBox;
+  let groupBoundingBox: PrimitiveBoundingBox;
 
   state.partOrder.forEach((ID, index) => {
     const part = getPart(ID);

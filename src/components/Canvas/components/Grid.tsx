@@ -1,6 +1,6 @@
 import InfiniteGridHelper from 'components/Canvas/components/InfiniteGridHelper';
+import blueprintStore from 'hooks/useBlueprint';
 import { useEffect, useRef } from 'react';
-import blueprintStore from 'stores/blueprint';
 import { Color, GridHelper, Mesh } from 'three';
 
 const MAJOR_MARK = 5;
