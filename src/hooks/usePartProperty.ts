@@ -1,5 +1,5 @@
+import { subscribeToPart } from 'functions/part';
 import { Part } from 'game/parts/Part';
-import { subscribeToPart } from 'interfaces/blueprint';
 import { useEffect } from 'react';
 import { UUID } from 'types/Parts';
 

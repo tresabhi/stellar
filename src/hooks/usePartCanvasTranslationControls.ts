@@ -1,11 +1,7 @@
 import { ThreeEvent } from '@react-three/fiber';
+import { mutateBlueprintWithoutHistory } from 'functions/blueprint';
+import { getPart, mutateParts, selectPartOnly } from 'functions/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import {
-  getPart,
-  mutateBlueprintWithoutHistory,
-  mutateParts,
-} from 'interfaces/blueprint';
-import { selectPartOnly } from 'interfaces/selection';
 import blueprintStore from 'stores/blueprint';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';

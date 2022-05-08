@@ -1,16 +1,17 @@
 import { GroupIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
-import { Blueprint } from 'game/Blueprint';
-import { getPart } from 'interfaces/blueprint';
 import {
-  BoundingBoxComputer,
   exportifyPart,
-  getPartBoundingBoxComputer,
-} from 'interfaces/part';
+  getPart,
+  getPartRegistry,
+  removePartMetaData,
+} from 'functions/part';
+import { Blueprint } from 'game/Blueprint';
 import { isArray } from 'lodash';
 import { FC } from 'react';
-import { Box2 } from 'three';
-import { PartComponentProps, UUID } from 'types/Parts';
+import { BoundingBox } from 'stores/boundingBoxesCache';
+import { BoundingBoxComputer } from 'stores/partRegistry';
+import { AnyVanillaPart, PartComponentProps, UUID } from 'types/Parts';
 import { Part, PartData } from './Part';
 
 export interface Group extends Part {
@@ -35,35 +36,53 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
 export const GroupIcon = Icon;
 
 export const GroupBoundingBoxComputer: BoundingBoxComputer<Group> = (state) => {
-  const box2 = new Box2();
+  let groupBoundingBox: BoundingBox;
 
-  state.partOrder.forEach((ID) => {
+  state.partOrder.forEach((ID, index) => {
     const part = getPart(ID);
 
     if (part) {
-      const boundingBoxComputer = getPartBoundingBoxComputer(part.n);
+      const computeBoundingBox = getPartRegistry(part.n)?.computeBoundingBox;
 
-      if (boundingBoxComputer) {
-        const boundingBox = boundingBoxComputer(part);
+      if (computeBoundingBox) {
+        const boundingBox = computeBoundingBox(part);
 
-        box2.union(boundingBox);
+        if (index === 1) {
+          groupBoundingBox = boundingBox;
+        } else {
+          groupBoundingBox.min.x = Math.min(
+            groupBoundingBox.min.x,
+            boundingBox.min.x,
+          );
+          groupBoundingBox.min.y = Math.min(
+            groupBoundingBox.min.y,
+            boundingBox.min.y,
+          );
+          groupBoundingBox.max.x = Math.max(
+            groupBoundingBox.max.x,
+            boundingBox.max.x,
+          );
+          groupBoundingBox.max.y = Math.max(
+            groupBoundingBox.max.y,
+            boundingBox.max.y,
+          );
+        }
       }
     }
   });
 
-  return box2;
+  return groupBoundingBox!;
 };
 
 export const exportifyGroup = (part: Group, context: Blueprint) => {
-  const exportedParts: object[] = [];
+  const exportedParts: AnyVanillaPart[] = [];
+  const partWithoutMetaData = removePartMetaData(part) as Group;
 
-  part = exportifyPart(part, context, false) as Group;
+  partWithoutMetaData.partOrder.forEach((ID) => {
+    const childPart = getPart(ID, context);
 
-  part.partOrder.forEach((ID) => {
-    const part = getPart(ID, context);
-
-    if (part) {
-      const exportedPart = exportifyPart(part, context);
+    if (childPart) {
+      const exportedPart = exportifyPart(childPart, context);
 
       if (exportedPart) {
         if (isArray(exportedPart)) {

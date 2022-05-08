@@ -1,13 +1,13 @@
 import { useThree } from '@react-three/fiber';
-import useMousePos from 'hooks/useMousePos';
-import { getPart } from 'interfaces/blueprint';
-import { checkForClickableBoundingBoxIntersection } from 'interfaces/part';
+import { getSelectableIntersectingPart } from 'functions/boundingBox';
 import {
+  getPart,
   selectPartOnly,
   togglePartSelection,
   unselectAllParts,
   unselectPart,
-} from 'interfaces/selection';
+} from 'functions/part';
+import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import blueprintStore from 'stores/blueprint';
 
@@ -23,7 +23,7 @@ export const SelectionControls = () => {
       mousePos.x -= offset.x;
       mousePos.y -= offset.y;
 
-      const ID = checkForClickableBoundingBoxIntersection(mousePos);
+      const ID = getSelectableIntersectingPart(mousePos);
 
       if (ID) {
         if (event.shiftKey) {

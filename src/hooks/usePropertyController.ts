@@ -1,5 +1,5 @@
+import { getPart, mutateParts, subscribeToPart } from 'functions/part';
 import { Part } from 'game/parts/Part';
-import { getPart, mutateParts, subscribeToPart } from 'interfaces/blueprint';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';

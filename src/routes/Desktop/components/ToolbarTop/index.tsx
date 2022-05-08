@@ -3,20 +3,22 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import {
-  deletePartsBySelection,
   exportBlueprintFile,
+  fileImport,
+  fileOpen,
+  fileSave,
+  fileSaveAs,
+  loadBlueprint,
+  loadTemplateBlueprint,
+  redo,
+  undo,
+} from 'functions/blueprint';
+import {
+  deletePartsBySelection,
   getParentID,
   getPartIndex,
-  importBlueprintFile,
   insertPart,
-  loadBlueprint,
-  openBlueprintFile,
-  redo,
-  saveAsBlueprintFile,
-  saveBlueprintFile,
-  undo,
-} from 'interfaces/blueprint';
-import { loadDevBlueprint } from 'interfaces/devBlueprint';
+} from 'functions/part';
 import { isUndefined, random } from 'lodash';
 import { FC } from 'react';
 import appStore from 'stores/app';
@@ -26,7 +28,7 @@ import styles from './index.module.scss';
 const ToolBarTop: FC = () => {
   const disableSave = isUndefined(appStore((state) => state.fileHandle));
 
-  const loadBp = (name?: string) => () => loadDevBlueprint(name);
+  const loadBp = (name?: string) => () => loadTemplateBlueprint(name);
   const handleLayoutTabClick = () => appStore.setState({ tab: 'layout' });
   const handleStagingTabClick = () => appStore.setState({ tab: 'staging' });
   const handleSimulationTabClick = () =>
@@ -64,22 +66,17 @@ const ToolBarTop: FC = () => {
             <ContextMenu.Button onClick={() => loadBlueprint()}>
               New
             </ContextMenu.Button>
-            <ContextMenu.Button onClick={openBlueprintFile}>
-              Open...
-            </ContextMenu.Button>
+            <ContextMenu.Button onClick={fileOpen}>Open...</ContextMenu.Button>
             <ContextMenu.Separator />
             {supported ? (
-              <ContextMenu.Button
-                disabled={disableSave}
-                onClick={saveBlueprintFile}
-              >
+              <ContextMenu.Button disabled={disableSave} onClick={fileSave}>
                 Save
               </ContextMenu.Button>
             ) : null}
-            <ContextMenu.Button onClick={saveAsBlueprintFile}>
+            <ContextMenu.Button onClick={fileSaveAs}>
               Save as...
             </ContextMenu.Button>
-            <ContextMenu.Button onClick={importBlueprintFile}>
+            <ContextMenu.Button onClick={fileImport}>
               Import...
             </ContextMenu.Button>
             <ContextMenu.Button onClick={exportBlueprintFile}>

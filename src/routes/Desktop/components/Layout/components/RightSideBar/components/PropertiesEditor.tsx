@@ -1,7 +1,7 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import { mutateBlueprint } from 'functions/blueprint';
+import { getPart, getPartRegistry } from 'functions/part';
 import useUnitInputController from 'hooks/useUnitInputController';
-import { getPart, mutateBlueprint } from 'interfaces/blueprint';
-import { getPartPropertyComponent } from 'interfaces/part';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { AnyPart, UUID } from 'types/Parts';
@@ -44,7 +44,7 @@ const PropertiesEditor = () => {
 
   orderedSelections.forEach((partName) => {
     const IDs = sortedSelections.get(partName)!;
-    const PropertyComponent = getPartPropertyComponent(partName);
+    const PropertyComponent = getPartRegistry(partName)?.propertyComponent;
 
     if (PropertyComponent) {
       propertyItems.push(

@@ -1,7 +1,6 @@
 import { GroupProps } from '@react-three/fiber';
+import { getPart, getPartRegistry } from 'functions/part';
 import { Group as GroupPart } from 'game/parts/Group';
-import { getPart } from 'interfaces/blueprint';
-import { getPartLayoutComponent } from 'interfaces/part';
 import { forwardRef } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { Group } from 'three';
@@ -24,7 +23,7 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
       const part = getPart(ID);
 
       if (part) {
-        const LayoutComponent = getPartLayoutComponent(part.n);
+        const LayoutComponent = getPartRegistry(part.n)?.layoutComponent;
 
         if (LayoutComponent) {
           partListing.push(<LayoutComponent ID={ID} key={`part-${ID}`} />);

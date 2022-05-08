@@ -3,21 +3,17 @@ import {
   TriangleDownIcon,
   TriangleRightIcon,
 } from '@radix-ui/react-icons';
+import { mutateBlueprintWithoutHistory } from 'functions/blueprint';
+import {
+  getPart,
+  getPartRegistry,
+  mutatePart,
+  selectPartOnly,
+  togglePartSelection,
+} from 'functions/part';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
-import {
-  getPart,
-  mutateBlueprintWithoutHistory,
-  mutatePart,
-} from 'interfaces/blueprint';
-import { getPartIcon } from 'interfaces/part';
-import {
-  selectPartOnly,
-  selectPartsFrom,
-  selectPartsFromOnly,
-  togglePartSelection,
-} from 'interfaces/selection';
 import { KeyboardEvent, memo, MouseEvent, useRef, useState } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { UUID } from 'types/Parts';
@@ -39,7 +35,8 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     isGroup ? (initialState as Group).expanded : false,
   );
   let lastLabel = initialState.label;
-  const IconComponent = getPartIcon(initialState.n) ?? QuestionMarkIcon;
+  const IconComponent =
+    getPartRegistry(initialState.n)?.iconComponent ?? QuestionMarkIcon;
 
   usePartProperty(
     ID,
@@ -103,7 +100,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         const lastSelection = selectionState[selectionState.length - 1];
 
         if (lastSelection) {
-          selectPartsFrom(lastSelection, ID);
+          // selectPartsFrom(lastSelection, ID);
         } else {
           selectPartOnly(ID);
         }
@@ -115,7 +112,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       const lastSelection = selectionState[selectionState.length - 1];
 
       if (lastSelection) {
-        selectPartsFromOnly(lastSelection, ID);
+        // selectPartsFromOnly(lastSelection, ID);
       } else {
         selectPartOnly(ID);
       }

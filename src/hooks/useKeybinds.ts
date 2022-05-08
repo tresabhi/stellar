@@ -1,13 +1,16 @@
-import produce from 'immer';
 import {
-  deletePartsBySelection,
+  fileSave,
   groupPartsBySelection,
   redo,
-  safeTranslatePartsBySelection,
-  saveBlueprintFileWithFallback,
   undo,
-} from 'interfaces/blueprint';
-import { selectPartsOnly, unselectAllParts } from 'interfaces/selection';
+} from 'functions/blueprint';
+import {
+  deletePartsBySelection,
+  selectPartsOnly,
+  translateTranslatablePartsBySelection,
+  unselectAllParts,
+} from 'functions/part';
+import produce from 'immer';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
 import appStore from 'stores/app';
@@ -70,21 +73,21 @@ const useKeybinds = () => {
       }));
     });
 
-    bind('up', () => safeTranslatePartsBySelection(0, TRANSLATE_BY));
-    bind('down', () => safeTranslatePartsBySelection(0, -TRANSLATE_BY));
-    bind('left', () => safeTranslatePartsBySelection(-TRANSLATE_BY, 0));
-    bind('right', () => safeTranslatePartsBySelection(TRANSLATE_BY, 0));
+    bind('up', () => translateTranslatablePartsBySelection(0, TRANSLATE_BY));
+    bind('down', () => translateTranslatablePartsBySelection(0, -TRANSLATE_BY));
+    bind('left', () => translateTranslatablePartsBySelection(-TRANSLATE_BY, 0));
+    bind('right', () => translateTranslatablePartsBySelection(TRANSLATE_BY, 0));
     bind('shift+up', () =>
-      safeTranslatePartsBySelection(0, SHIFT_TRANSLATE_BY),
+      translateTranslatablePartsBySelection(0, SHIFT_TRANSLATE_BY),
     );
     bind('shift+down', () =>
-      safeTranslatePartsBySelection(0, -SHIFT_TRANSLATE_BY),
+      translateTranslatablePartsBySelection(0, -SHIFT_TRANSLATE_BY),
     );
     bind('shift+left', () =>
-      safeTranslatePartsBySelection(-SHIFT_TRANSLATE_BY, 0),
+      translateTranslatablePartsBySelection(-SHIFT_TRANSLATE_BY, 0),
     );
     bind('shift+right', () =>
-      safeTranslatePartsBySelection(SHIFT_TRANSLATE_BY, 0),
+      translateTranslatablePartsBySelection(SHIFT_TRANSLATE_BY, 0),
     );
 
     bind('ctrl+z', (event) => {
@@ -103,7 +106,7 @@ const useKeybinds = () => {
 
     bind('ctrl+s', (event) => {
       event.preventDefault();
-      saveBlueprintFileWithFallback();
+      fileSave();
     });
   }, []);
 };

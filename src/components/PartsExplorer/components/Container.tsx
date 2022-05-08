@@ -1,5 +1,5 @@
+import { getPart } from 'functions/part';
 import { Group } from 'game/parts/Group';
-import { getPart } from 'interfaces/blueprint';
 import { FC, InputHTMLAttributes } from 'react';
 import blueprintStore from 'stores/blueprint';
 import { UUID } from 'types/Parts';

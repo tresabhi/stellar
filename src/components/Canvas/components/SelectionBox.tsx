@@ -1,5 +1,5 @@
+import { getPartRegistry } from 'functions/part';
 import usePartProperty from 'hooks/usePartProperty';
-import { getPartBoundingBoxComputer } from 'interfaces/part';
 import { FC, useRef } from 'react';
 import { Mesh, MeshBasicMaterial, PlaneGeometry } from 'three';
 import { UUID } from 'types/Parts';
@@ -24,10 +24,10 @@ export const SelectionBox: FC<SelectionBoxProps> = ({ ID }) => {
     ID,
     (state) => state,
     (state) => {
-      const boundingBoxComputer = getPartBoundingBoxComputer(state.n);
+      const computeBoundingBox = getPartRegistry(state.n)?.computeBoundingBox;
 
-      if (boundingBoxComputer) {
-        const boundingBox = boundingBoxComputer(state);
+      if (computeBoundingBox) {
+        const boundingBox = computeBoundingBox(state);
         const widthGeometry = new PlaneGeometry(
           boundingBox.max.x - boundingBox.min.x + LINE_WIDTH,
           LINE_WIDTH,

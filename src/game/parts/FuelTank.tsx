@@ -1,18 +1,11 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import usePropertyController from 'hooks/usePropertyController';
+import { getPart } from 'functions/part';
 import usePartProperty from 'hooks/usePartProperty';
-import { getPart } from 'interfaces/blueprint';
-import { BoundingBoxComputer } from 'interfaces/part';
+import usePropertyController from 'hooks/usePropertyController';
 import { FC, useRef } from 'react';
-import {
-  Box2,
-  CylinderGeometry,
-  Group,
-  Mesh,
-  MeshStandardMaterial,
-  Vector2,
-} from 'three';
+import { BoundingBoxComputer } from 'stores/partRegistry';
+import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
@@ -196,16 +189,17 @@ export const FuelTankIcon = Icon;
 
 export const FuelTankBoundingBoxComputer: BoundingBoxComputer<FuelTank> = (
   state,
-) =>
-  new Box2(
-    new Vector2(
+) => ({
+  min: {
+    x:
       state.p.x -
-        (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.x),
-      state.p.y,
-    ),
-    new Vector2(
+      (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.x),
+    y: state.p.y,
+  },
+  max: {
+    x:
       state.p.x +
-        (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.y),
-      state.p.y + state.N.height * Math.abs(state.o.y),
-    ),
-  );
+      (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.y),
+    y: state.p.y + state.N.height * Math.abs(state.o.y),
+  },
+});

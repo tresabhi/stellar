@@ -1,6 +1,5 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import { getPartReactive } from 'interfaces/blueprint';
-import { getPartBoundingBoxComputer } from 'interfaces/part';
+import { getPartReactive, getPartRegistry } from 'functions/part';
 import { isUndefined } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import { Box2 } from 'three';
@@ -9,11 +8,11 @@ const InspectViewer = () => {
   const selections = blueprintStore((state) => state.selections);
   const ID = selections[0];
   const part = getPartReactive(ID); // TODO: this is reactive, but we need to make it not reactive
-  const boundingBoxComputer = part
-    ? getPartBoundingBoxComputer(part.n)
+  const computeBoundingBox = part
+    ? getPartRegistry(part.n)?.computeBoundingBox
     : undefined;
-  const boundingBox = boundingBoxComputer
-    ? boundingBoxComputer(part)
+  const boundingBox = computeBoundingBox
+    ? computeBoundingBox(part!) // TODO: is this "!" going to be a problem?
     : new Box2();
 
   return part && selections.length === 1 ? (
