@@ -1,4 +1,4 @@
-import { getPart, mutateParts, subscribeToPart } from 'functions/part';
+import { getPart, mutateParts, subscribeToPart } from 'core/part';
 import { Part } from 'game/parts/Part';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';

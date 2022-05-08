@@ -1,5 +1,5 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import { getPartReactive, getPartRegistry } from 'functions/part';
+import { getPartReactive, getPartRegistry } from 'core/part';
 import { isUndefined } from 'lodash';
 import blueprintStore from 'stores/blueprint';
 import { Box2 } from 'three';

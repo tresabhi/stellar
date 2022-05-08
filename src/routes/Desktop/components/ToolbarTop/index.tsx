@@ -9,16 +9,16 @@ import {
   fileSave,
   fileSaveAs,
   loadBlueprint,
-  loadTemplateBlueprint,
-  redo,
-  undo,
-} from 'functions/blueprint';
+  loadBlueprintTemplate,
+  versionRedo,
+  versionUndo,
+} from 'core/blueprint';
 import {
   deletePartsBySelection,
   getParentID,
   getPartIndex,
   insertPart,
-} from 'functions/part';
+} from 'core/part';
 import { isUndefined, random } from 'lodash';
 import { FC } from 'react';
 import appStore from 'stores/app';
@@ -28,7 +28,7 @@ import styles from './index.module.scss';
 const ToolBarTop: FC = () => {
   const disableSave = isUndefined(appStore((state) => state.fileHandle));
 
-  const loadBp = (name?: string) => () => loadTemplateBlueprint(name);
+  const loadBp = (name?: string) => () => loadBlueprintTemplate(name);
   const handleLayoutTabClick = () => appStore.setState({ tab: 'layout' });
   const handleStagingTabClick = () => appStore.setState({ tab: 'staging' });
   const handleSimulationTabClick = () =>
@@ -86,8 +86,8 @@ const ToolBarTop: FC = () => {
         </ControlMenu.Button>
         <ControlMenu.Button label="Edit">
           <ContextMenu.Container>
-            <ContextMenu.Button onClick={undo}>Undo</ContextMenu.Button>
-            <ContextMenu.Button onClick={redo}>Redo</ContextMenu.Button>
+            <ContextMenu.Button onClick={versionUndo}>Undo</ContextMenu.Button>
+            <ContextMenu.Button onClick={versionRedo}>Redo</ContextMenu.Button>
             <ContextMenu.Separator />
             <ContextMenu.Button disabled>Cut</ContextMenu.Button>
             <ContextMenu.Button disabled>Copy</ContextMenu.Button>

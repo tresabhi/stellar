@@ -1,15 +1,11 @@
-import {
-  fileSave,
-  groupPartsBySelection,
-  redo,
-  undo,
-} from 'functions/blueprint';
+import { fileSave, versionRedo, versionUndo } from 'core/blueprint';
 import {
   deletePartsBySelection,
+  groupPartsBySelection,
   selectPartsOnly,
   translateTranslatablePartsBySelection,
   unselectAllParts,
-} from 'functions/part';
+} from 'core/part';
 import produce from 'immer';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
@@ -92,11 +88,11 @@ const useKeybinds = () => {
 
     bind('ctrl+z', (event) => {
       event.preventDefault();
-      undo();
+      versionUndo();
     });
     bind('ctrl+shift+z', (event) => {
       event.preventDefault();
-      redo();
+      versionRedo();
     });
 
     bind('ctrl+g', (event) => {

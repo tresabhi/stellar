@@ -3,14 +3,14 @@ import {
   TriangleDownIcon,
   TriangleRightIcon,
 } from '@radix-ui/react-icons';
-import { mutateBlueprintWithoutHistory } from 'functions/blueprint';
+import { mutateBlueprintVersionless } from 'core/blueprint';
 import {
   getPart,
   getPartRegistry,
   mutatePart,
   selectPartOnly,
   togglePartSelection,
-} from 'functions/part';
+} from 'core/part';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
@@ -60,7 +60,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   let childParts: JSX.Element[] | undefined;
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    mutateBlueprintWithoutHistory((draft) => {
+    mutateBlueprintVersionless((draft) => {
       const part = getPart(ID, draft) as Group | undefined;
 
       if (part) {

@@ -1,4 +1,4 @@
-import { getPartRegistry } from 'functions/part';
+import { getPartRegistry } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
 import { FC, useRef } from 'react';
 import { Mesh, MeshBasicMaterial, PlaneGeometry } from 'three';

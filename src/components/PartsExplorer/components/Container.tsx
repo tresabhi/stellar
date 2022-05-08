@@ -1,4 +1,4 @@
-import { getPart } from 'functions/part';
+import { getPart } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { FC, InputHTMLAttributes } from 'react';
 import blueprintStore from 'stores/blueprint';

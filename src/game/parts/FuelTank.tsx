@@ -1,6 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import { getPart } from 'functions/part';
+import { getPart } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
 import usePropertyController from 'hooks/usePropertyController';
 import { FC, useRef } from 'react';

@@ -1,12 +1,12 @@
 import { useThree } from '@react-three/fiber';
-import { getSelectableIntersectingPart } from 'functions/boundingBox';
+import { getSelectableIntersectingPart } from 'core/boundingBox';
 import {
   getPart,
   selectPartOnly,
   togglePartSelection,
   unselectAllParts,
   unselectPart,
-} from 'functions/part';
+} from 'core/part';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import blueprintStore from 'stores/blueprint';

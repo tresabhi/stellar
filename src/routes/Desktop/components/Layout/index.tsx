@@ -1,5 +1,5 @@
 import * as Canvas from 'components/Canvas';
-import { loadTemplateBlueprint } from 'functions/blueprint';
+import { loadBlueprintTemplate } from 'core/blueprint';
 import { FC, InputHTMLAttributes } from 'react';
 import settingsStore from 'stores/settings';
 import LeftSideBar from './components/LeftSideBar';
@@ -7,7 +7,7 @@ import RightSideBar from './components/RightSideBar';
 import styles from './index.module.scss';
 
 const devBlueprintName = settingsStore.getState().debug.dev_blueprint;
-if (devBlueprintName) loadTemplateBlueprint(devBlueprintName);
+if (devBlueprintName) loadBlueprintTemplate(devBlueprintName);
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   const isLeftSideBarVisible = settingsStore(

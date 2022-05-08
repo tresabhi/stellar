@@ -1,6 +1,6 @@
 import { ThreeEvent } from '@react-three/fiber';
-import { mutateBlueprintWithoutHistory } from 'functions/blueprint';
-import { getPart, mutateParts, selectPartOnly } from 'functions/part';
+import { mutateBlueprintVersionless } from 'core/blueprint';
+import { getPart, mutateParts, selectPartOnly } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import blueprintStore from 'stores/blueprint';
 import { Vector2 } from 'three';
@@ -27,7 +27,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
 
     if (deltaX > 0 || deltaY > 0) {
       // revert to original offset
-      mutateBlueprintWithoutHistory((draft) => {
+      mutateBlueprintVersionless((draft) => {
         mutateParts<Type>(
           draft.selections,
           (state) => {
@@ -56,7 +56,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
     }
 
     if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
-      mutateBlueprintWithoutHistory((draft) => {
+      mutateBlueprintVersionless((draft) => {
         // mutateParts<Type>(
         //   draft.selections,
         //   (state) => {

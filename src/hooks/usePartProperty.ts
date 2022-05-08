@@ -1,4 +1,4 @@
-import { subscribeToPart } from 'functions/part';
+import { subscribeToPart } from 'core/part';
 import { Part } from 'game/parts/Part';
 import { useEffect } from 'react';
 import { UUID } from 'types/Parts';

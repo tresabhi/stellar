@@ -1,11 +1,11 @@
 import { GroupIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
 import {
-  exportifyPart,
+  partExportify,
   getPart,
   getPartRegistry,
   removePartMetaData,
-} from 'functions/part';
+} from 'core/part';
 import { Blueprint } from 'game/Blueprint';
 import { isArray } from 'lodash';
 import { FC } from 'react';
@@ -82,7 +82,7 @@ export const exportifyGroup = (part: Group, context: Blueprint) => {
     const childPart = getPart(ID, context);
 
     if (childPart) {
-      const exportedPart = exportifyPart(childPart, context);
+      const exportedPart = partExportify(childPart, context);
 
       if (exportedPart) {
         if (isArray(exportedPart)) {

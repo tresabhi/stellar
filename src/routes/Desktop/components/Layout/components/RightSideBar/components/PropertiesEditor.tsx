@@ -1,6 +1,6 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import { mutateBlueprint } from 'functions/blueprint';
-import { getPart, getPartRegistry } from 'functions/part';
+import { mutateBlueprint } from 'core/blueprint';
+import { getPart, getPartRegistry } from 'core/part';
 import useUnitInputController from 'hooks/useUnitInputController';
 import { useRef } from 'react';
 import blueprintStore from 'stores/blueprint';
