@@ -38,11 +38,11 @@
   "devDependencies": {
     "@types/lodash": "^4.14.182",
     "@types/mousetrap": "^1.6.9",
-    "@types/react": "^18.0.8",
+    "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.3",
     "@types/react-router-dom": "^5.3.3",
     "@types/semver": "^7.3.9",
-    "@types/three": "^0.139.0",
+    "@types/three": "^0.140.0",
     "@types/uuid": "^8.3.4",
     "@types/workbox-core": "^4.3.1",
     "depcheck": "^1.4.3",
