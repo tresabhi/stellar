@@ -24,7 +24,7 @@
     "semver": "^7.3.7",
     "simplebar": "^5.3.6",
     "simplebar-react": "^2.3.7",
-    "three": "0.140.0",
+    "three": "0.140.1",
     "three-mesh-bvh": "^0.5.10",
     "ts-unused-exports": "^8.0.0",
     "uuid": "^8.3.2",
