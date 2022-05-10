@@ -1,7 +1,88 @@
 {
-  "file": "File",
-  "edit": "Edit",
-  "selection": "Selection",
-  "view": "View",
-  "help": "Help"
+  "control_menu.file": "File",
+
+  "control_menu.file.new": "New",
+  "control_menu.file.open": "Open...",
+  "control_menu.file.save_as": "Save as...",
+  "control_menu.file.import": "Import...",
+  "control_menu.file.export": "Export...",
+
+  "control_menu.edit": "Edit",
+
+  "control_menu.edit.undo": "Undo",
+  "control_menu.edit.redo": "Redo",
+  "control_menu.edit.cut": "Cut",
+  "control_menu.edit.copy": "Copy",
+  "control_menu.edit.paste": "Paste",
+  "control_menu.edit.delete": "Delete",
+  "control_menu.edit.hide": "Hide",
+  "control_menu.edit.unhide": "Unhide",
+  "control_menu.edit.lock": "Lock",
+  "control_menu.edit.unlock": "Unlock",
+
+  "control_menu.view": "View",
+
+  "control_menu.view.layout": "Layout",
+  "control_menu.view.staging": "Staging",
+  "control_menu.view.simulation": "Simulation",
+  "control_menu.view.rendering": "Rendering",
+  "control_menu.view.hud": "HUD",
+  "control_menu.view.theme": "Theme",
+
+  "control_menu.view.theme.stellar_dark": "Stellar Dark",
+
+  "control_menu.add": "Add",
+
+  "control_menu.add.structural": "Structural",
+
+  "control_menu.add.structural.fuel_tank": "Fuel Tank",
+  "control_menu.add.structural.structural_part": "Structural Part",
+
+  "control_menu.add.propulsion": "Propulsion",
+
+  "control_menu.add.propulsion.titan": "Titan",
+  "control_menu.add.propulsion.hawk": "Hawk",
+  "control_menu.add.propulsion.frontier": "Frontier",
+  "control_menu.add.propulsion.valiant": "Valiant",
+  "control_menu.add.propulsion.ion": "Ion",
+  "control_menu.add.propulsion.rcs_thruster": "RCS Thruster",
+
+  "control_menu.add.electric": "Electric",
+
+  "control_menu.add.electric.parachute": "Parachute",
+  "control_menu.add.electric.side_parachute": "Side Parachute",
+  "control_menu.add.electric.separator": "Separator",
+  "control_menu.add.electric.side_separator": "Side Separator",
+  "control_menu.add.electric.landing_legs": "Landing Legs",
+  "control_menu.add.electric.large_landing_legs": "Large Landing Legs",
+  "control_menu.add.electric.wheel": "Wheel",
+  "control_menu.add.electric.large_wheel": "Large Wheel",
+  "control_menu.add.electric.solar_panel": "Solar Panel",
+  "control_menu.add.electric.large_solar_panel": "Large Solar Panel",
+  "control_menu.add.electric.docking_port": "Docking Port",
+
+  "control_menu.add.aerodynamic": "Aerodynamic",
+
+  "control_menu.add.aerodynamic.nose_cone": "Nose Cone",
+  "control_menu.add.aerodynamic.side_nose_cone": "Side Nose Cone",
+  "control_menu.add.aerodynamic.fuselage": "Fuselage",
+
+  "control_menu.debug": "Debug",
+
+  "control_menu.debug.load_template": "Load Template",
+
+  "control_menu.debug.load_template.fuel_tank_shapes": "Fuel Tank Shapes",
+  "control_menu.debug.load_template.shape_and_textures_1": "Shape & Textures 1",
+  "control_menu.debug.load_template.saturn_v": "Saturn V",
+  "control_menu.debug.load_template.none": "None",
+
+  "control_menu.help": "Help",
+
+  "control_menu.help.discord": "Discord",
+  "control_menu.help.you_will_make_a_wonderful_grown_up": "\"You'll make a wonderful grown-up!\"",
+
+  "tabs.layout": "Layout",
+  "tabs.staging": "Staging",
+  "tabs.simulation": "Simulation",
+  "tabs.rendering": "Rendering"
 }

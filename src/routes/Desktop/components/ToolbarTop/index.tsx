@@ -155,7 +155,6 @@ const ToolBarTop: FC = () => {
                 <ContextMenu.Button>Side Parachute</ContextMenu.Button>
                 <ContextMenu.Button>Separator</ContextMenu.Button>
                 <ContextMenu.Button>Side Separator</ContextMenu.Button>
-                <ContextMenu.Button>Side Landing Leg</ContextMenu.Button>
                 <ContextMenu.Button>Landing Legs</ContextMenu.Button>
                 <ContextMenu.Button>Large Landing Legs</ContextMenu.Button>
                 <ContextMenu.Button>Wheel</ContextMenu.Button>
