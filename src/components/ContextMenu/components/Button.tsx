@@ -21,7 +21,7 @@ export const Button: FC<ButtonProps> = ({
   return (
     <div
       {...props}
-      onMouseUp={handleClick}
+      onClick={handleClick}
       className={`${props.className ?? ''} ${styles.button} ${
         disabled ? styles.disabled : styles.enabled
       }`}

@@ -214,7 +214,7 @@ const ToolBarTop: FC = () => {
   const isTabSimulation = tab === 'simulation';
   const isTabRendering = tab === 'rendering';
 
-  const adder = (name: string) => {
+  const add = (name: string) => {
     return () => {
       const selections = blueprintStore.getState().selections;
       const lastPartID = selections[selections.length - 1];
@@ -334,7 +334,7 @@ const ToolBarTop: FC = () => {
           <ContextMenu.Container>
             <ContextMenu.Extension label="Structural">
               <ContextMenu.Container>
-                <ContextMenu.Button onClick={adder('Fuel Tank')}>
+                <ContextMenu.Button onClick={add('Fuel Tank')}>
                   Fuel Tank
                 </ContextMenu.Button>
                 <ContextMenu.Button disabled>
