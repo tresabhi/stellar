@@ -1,72 +1,58 @@
-[
-  {
-    "id": "de-DE",
+{
+  "de-DE": {
     "name": "Deutsch",
     "dev_name": "german"
   },
-  {
-    "id": "en-GB",
+  "en-GB": {
     "name": "English (UK)",
     "dev_name": "english_uk"
   },
-  {
-    "id": "en-US",
+  "en-US": {
     "name": "English (US)",
     "dev_name": "english_us"
   },
-  {
-    "id": "en-ES",
+  "en-ES": {
     "name": "Español",
     "dev_name": "spanish"
   },
-  {
-    "id": "fr-FR",
+  "fr-FR": {
     "name": "Français",
     "dev_name": "french"
   },
-  {
-    "id": "ga-IE",
+  "ga-IE": {
     "name": "Gaeilge",
     "dev_name": "irish"
   },
-  {
-    "id": "hi-IN",
+  "hi-IN": {
     "name": "हिन्दी",
     "dev_name": "hindi"
   },
-  {
-    "id": "it-IT",
+  "it-IT": {
     "name": "Italiana",
     "dev_name": "italian"
   },
-  {
-    "id": "ja-JP",
+  "ja-JP": {
     "name": "日本",
     "dev_name": "japanese"
   },
-  {
-    "id": "ko-KR",
+  "ko-KR": {
     "name": "한국인",
     "dev_name": "korean"
   },
-  {
-    "id": "ru-RU",
+  "ru-RU": {
     "name": "Pyccкий",
     "dev_name": "russian"
   },
-  {
-    "id": "sv-SE",
+  "sv-SE": {
     "name": "Svenska",
     "dev_name": "swedish"
   },
-  {
-    "id": "zh-CN",
+  "zh-CN": {
     "name": "简体中文",
     "dev_name": "chinese_simplified"
   },
-  {
-    "id": "zh-TW",
+  "zh-TW": {
     "name": "中國傳統的",
     "dev_name": "chinese_traditional"
   }
-]
+}
