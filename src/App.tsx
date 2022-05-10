@@ -1,5 +1,6 @@
 import useApp from 'hooks/useApp';
 import useStellarContext from 'hooks/useStellarContext';
+import useTranslator from 'hooks/useTranslator';
 import { isMobile } from 'react-device-detect';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
@@ -15,6 +16,8 @@ import {
 
 const App = () => {
   const stellarContext = useStellarContext();
+
+  useTranslator();
 
   BufferGeometry.prototype.computeBoundsTree = computeBoundsTree;
   BufferGeometry.prototype.disposeBoundsTree = disposeBoundsTree;

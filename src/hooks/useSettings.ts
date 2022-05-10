@@ -24,6 +24,8 @@ export interface UseSettings {
       scaleConstrained: boolean;
     };
   };
+
+  language: string;
 }
 
 export const UseSettingsData: UseSettings = {
@@ -47,6 +49,8 @@ export const UseSettingsData: UseSettings = {
       scaleConstrained: false,
     },
   },
+
+  language: 'en-US',
 };
 
 const useSettings = create<UseSettings>(

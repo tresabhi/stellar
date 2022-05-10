@@ -6,6 +6,7 @@
 
         "new": "New",
         "open": "Open...",
+        "save": "Save as...",
         "save_as": "Save as...",
         "import": "Import...",
         "export": "Export..."
@@ -32,7 +33,12 @@
         "simulation": "Simulation",
         "rendering": "Rendering",
         "hud": "HUD",
-        "theme": "Theme"
+        "theme": {
+          "$": "Theme",
+
+          "stellar_dark": "Stellar Dark",
+          "stellar_light": "Stellar Light"
+        }
       },
       "add": {
         "$": "Add",
