@@ -2,83 +2,83 @@
   "toolbar": {
     "control_menu": {
       "file": {
-        "$": "File",
-        "new": "New",
-        "open": "Open...",
-        "save": "Save as...",
-        "save_as": "Save as...",
-        "import": "Import...",
-        "export": "Export..."
+        "$": "Archivo",
+        "new": "Nuevo",
+        "open": "Abrir...",
+        "save": "Guardar como...",
+        "save_as": "Guardar como...",
+        "import": "Importar...",
+        "export": "Exportar..."
       },
       "edit": {
-        "$": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "delete": "Delete",
-        "hide": "Hide",
-        "unhide": "Unhide",
-        "lock": "Lock",
-        "unlock": "Unlock"
+        "$": "Editar",
+        "undo": "Deshacer",
+        "redo": "Rehacer",
+        "cut": "Cortar",
+        "copy": "Copiar",
+        "paste": "Pegar",
+        "delete": "Eliminar",
+        "hide": "Ocultar",
+        "unhide": "Desocultar",
+        "lock": "Bloquear",
+        "unlock": "Desbloquear"
       },
       "view": {
-        "$": "View",
+        "$": "Vista",
         "layout": "Layout",
         "staging": "Staging",
-        "simulation": "Simulation",
-        "rendering": "Rendering",
+        "simulation": "Simulación",
+        "rendering": "Renderizado",
         "hud": "HUD",
         "theme": {
-          "$": "Theme",
-          "stellar_dark": "Stellar Dark",
-          "stellar_light": "Stellar Light"
+          "$": "Tema",
+          "stellar_dark": "Stellar oscuro",
+          "stellar_light": "Stellar claro"
         }
       },
       "add": {
-        "$": "Add",
+        "$": "Añadir",
         "structural": {
-          "$": "Structural",
-          "fuel_tank": "Fuel Tank",
-          "structural_part": "Structural Part"
+          "$": "Estructural",
+          "fuel_tank": "Tanque de combustible",
+          "structural_part": "Parte estructural"
         },
         "propulsion": {
-          "$": "Propulsion",
-          "titan": "Titan",
+          "$": "Propulsión",
+          "titan": "Titán",
           "hawk": "Hawk",
-          "frontier": "Frontier",
+          "frontier": "Frontera",
           "valiant": "Valiant",
           "ion": "Ion",
           "rcs_thruster": "RCS Thruster"
         },
         "electric": {
-          "$": "Electric",
-          "parachute": "Parachute",
-          "side_parachute": "Side Parachute",
-          "separator": "Separator",
-          "side_separator": "Side Separator",
-          "landing_legs": "Landing Legs",
-          "large_landing_legs": "Large Landing Legs",
-          "wheel": "Wheel",
-          "large_wheel": "Large Wheel",
-          "solar_panel": "Solar Panel",
-          "large_solar_panel": "Large Solar Panel",
+          "$": "Eléctrico",
+          "parachute": "Paracaídas",
+          "side_parachute": "Paracaídas lateral",
+          "separator": "Separador",
+          "side_separator": "Separador lateral",
+          "landing_legs": "Piernas de aterrizaje",
+          "large_landing_legs": "Piernas de aterrizaje grandes",
+          "wheel": "Rueda",
+          "large_wheel": "Rueda grande",
+          "solar_panel": "Panel solar",
+          "large_solar_panel": "Panel solar grande",
           "docking_port": "Docking Port"
         },
         "aerodynamic": {
-          "$": "Aerodynamic",
+          "$": "Aerodinámico",
           "nose_cone": "Nose Cone",
           "side_nose_cone": "Side Nose Cone",
-          "fuselage": "Fuselage"
+          "fuselage": "Fuselaje"
         }
       },
       "debug": {
-        "$": "Debug",
-        "load_template": "Load Template"
+        "$": "Depuración",
+        "load_template": "Cargar plantilla"
       },
       "help": {
-        "$": "Help",
+        "$": "Ayuda",
         "discord": "Discord",
         "you_will_make_a_wonderful_grown_up": "\"You'll make a wonderful grown-up!\""
       }
@@ -86,71 +86,71 @@
     "tabs": {
       "layout": "Layout",
       "staging": "Staging",
-      "simulation": "Simulation",
-      "rendering": "Rendering"
+      "simulation": "Simulación",
+      "rendering": "Renderizando"
     }
   },
   "parts_explorer": {
     "parts": {
-      "$": "Parts"
+      "$": "Partes"
     },
     "snippets": {
       "$": "Snippets",
-      "coming_soon": "Coming soon!"
+      "coming_soon": "¡Próximamente!"
     }
   },
   "properties_explorer": {
     "properties": {
-      "$": "Properties",
+      "$": "Propiedades",
       "canvas": {
         "$": "Canvas",
-        "center": "Center",
+        "center": "Centro",
         "offset_x": "Offset X",
         "offset_y": "Offset Y"
       },
       "transformations": {
-        "$": "Transformations",
-        "position_x": "Position X",
-        "position_y": "Position Y",
-        "rotation": "Rotation",
-        "scale_x": "Scale X",
-        "scale_y": "Scale Y",
+        "$": "Transformaciones",
+        "position_x": "Posción X",
+        "position_y": "Posición Y",
+        "rotation": "Rotación",
+        "scale_x": "Escala X",
+        "scale_y": "Escala Y",
         "ratio": "Ratio"
       },
       "Fuel Tank": {
-        "$": "Fuel Tank",
-        "width": "Width",
-        "height": "Height",
-        "fuel": "Fuel"
+        "$": "Tanque de combustible",
+        "width": "Anchura",
+        "height": "Altura",
+        "fuel": "Combustible"
       }
     },
     "inspect": {
-      "$": "Inspect",
+      "$": "Inspeccionar",
       "json": "JSON",
       "internal_data": {
-        "$": "Internal Data",
+        "$": "Información interna",
         "id": "ID",
         "parent_id": "Parent ID"
       },
       "meta_data": {
         "$": "Meta Data",
-        "name": "Name",
-        "locked": "Locked",
-        "hidden": "Hidden"
+        "name": "Nombre",
+        "locked": "Bloqueado",
+        "hidden": "Oculto"
       },
       "bounding_box": {
         "$": "Bounding Box",
-        "min_x": "Min X",
-        "min_y": "Min Y",
-        "max_x": "Max X",
-        "max_y": "Max Y"
+        "min_x": "Mín X",
+        "min_y": "Mín Y",
+        "max_x": "Máx X",
+        "max_y": "Máx Y"
       }
     }
   },
   "canvas": {},
   "statusbar": {},
   "parts": {
-    "Fuel Tank": "Fuel Tank",
-    "Group": "Group"
+    "Fuel Tank": "Tanque de combustible",
+    "Group": "Grupo"
   }
 }
