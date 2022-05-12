@@ -26,7 +26,7 @@
       "view": {
         "$": "Vista",
         "layout": "Layout",
-        "staging": "Staging",
+        "staging": "Puesta en escena",
         "simulation": "Simulación",
         "rendering": "Renderizado",
         "hud": "HUD",
@@ -50,26 +50,26 @@
           "frontier": "Frontera",
           "valiant": "Valiant",
           "ion": "Ion",
-          "rcs_thruster": "RCS Thruster"
+          "rcs_thruster": "Propulsor RCS"
         },
         "electric": {
           "$": "Eléctrico",
           "parachute": "Paracaídas",
-          "side_parachute": "Paracaídas lateral",
+          "side_parachute": "Paracaídas Lateral",
           "separator": "Separador",
-          "side_separator": "Separador lateral",
-          "landing_legs": "Piernas de aterrizaje",
-          "large_landing_legs": "Piernas de aterrizaje grandes",
+          "side_separator": "Separador Lateral",
+          "landing_legs": "Piernas de Aterrizaje",
+          "large_landing_legs": "Piernas de Aterrizaje Grandes",
           "wheel": "Rueda",
-          "large_wheel": "Rueda grande",
-          "solar_panel": "Panel solar",
-          "large_solar_panel": "Panel solar grande",
-          "docking_port": "Docking Port"
+          "large_wheel": "Rueda Grande",
+          "solar_panel": "Panel Solar",
+          "large_solar_panel": "Panel Solar Grande",
+          "docking_port": "Puerto de atraque"
         },
         "aerodynamic": {
           "$": "Aerodinámico",
-          "nose_cone": "Nose Cone",
-          "side_nose_cone": "Side Nose Cone",
+          "nose_cone": "Cono de nariz",
+          "side_nose_cone": "Cono de nariz lateral",
           "fuselage": "Fuselaje"
         }
       },
@@ -84,8 +84,8 @@
       }
     },
     "tabs": {
-      "layout": "Layout",
-      "staging": "Staging",
+      "layout": "Diseño",
+      "staging": "Puesta en escena",
       "simulation": "Simulación",
       "rendering": "Renderizando"
     }
@@ -105,8 +105,8 @@
       "canvas": {
         "$": "Canvas",
         "center": "Centro",
-        "offset_x": "Offset X",
-        "offset_y": "Offset Y"
+        "offset_x": "Compensar X",
+        "offset_y": "Compensar Y"
       },
       "transformations": {
         "$": "Transformaciones",
@@ -133,7 +133,7 @@
         "parent_id": "Parent ID"
       },
       "meta_data": {
-        "$": "Meta Data",
+        "$": "Metadatos",
         "name": "Nombre",
         "locked": "Bloqueado",
         "hidden": "Oculto"
@@ -150,7 +150,7 @@
   "canvas": {},
   "statusbar": {},
   "parts": {
-    "Fuel Tank": "Tanque de combustible",
+    "Fuel Tank": "Tanque de Combustible",
     "Group": "Grupo"
   }
 }
