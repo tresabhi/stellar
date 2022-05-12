@@ -2,9 +2,9 @@
   "toolbar": {
     "control_menu": {
       "file": {
-        "$": "File",
-        "new": "New",
-        "open": "Open...",
+        "$": "फाइल",
+        "new": "नया",
+        "open": "खोलो...",
         "save": "Save as...",
         "save_as": "Save as...",
         "import": "Import...",
@@ -62,9 +62,9 @@
           "large_landing_legs": "Large Landing Legs",
           "wheel": "Wheel",
           "large_wheel": "Large Wheel",
-          "solar_panel": "Solar Panel",
-          "large_solar_panel": "Large Solar Panel",
-          "docking_port": "Docking Port"
+          "solar_panel": "सौर पैनल",
+          "large_solar_panel": "बड़े सौर पैनल",
+          "docking_port": "डॉकिंग पोर्ट"
         },
         "aerodynamic": {
           "$": "Aerodynamic",
