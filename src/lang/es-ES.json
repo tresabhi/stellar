@@ -25,7 +25,7 @@
       },
       "view": {
         "$": "Vista",
-        "layout": "Layout",
+        "layout": "Diseño",
         "staging": "Puesta en escena",
         "simulation": "Simulación",
         "rendering": "Renderizado",
@@ -130,7 +130,7 @@
       "internal_data": {
         "$": "Información interna",
         "id": "ID",
-        "parent_id": "Parent ID"
+        "parent_id": "ID Padre"
       },
       "meta_data": {
         "$": "Metadatos",
