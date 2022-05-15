@@ -1,0 +1,19 @@
+@import '../../../../styles/index.scss';
+
+$toolbar-bottom-height: 32px;
+
+.toolbar-bottom {
+  height: $toolbar-bottom-height;
+  background-color: $black-lighter;
+  display: flex;
+
+  .left {
+  }
+
+  .middle {
+    flex: 1;
+  }
+
+  .right {
+  }
+}

@@ -1,0 +1,8 @@
+.container {
+  & + .container {
+    background-color: red;
+  }
+
+  .button {
+  }
+}

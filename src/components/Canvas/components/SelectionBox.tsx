@@ -8,7 +8,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   PlaneGeometry,
-  Vector2,
+  Vector2
 } from 'three';
 import { UUID } from 'types/Parts';
 
@@ -20,7 +20,7 @@ const outlineMaterial = new LineBasicMaterial({
 const shadedMaterial = new MeshBasicMaterial({
   color: COLOR,
   transparent: true,
-  opacity: 0.1,
+  opacity: 0.25,
 });
 
 export interface SelectionBoxProps {
