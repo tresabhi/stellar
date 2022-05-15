@@ -24,7 +24,6 @@ export const LayoutCanvas = () => {
       (tool) => {
         if (tool === 'pan') {
           canvasRef.current.classList.add(styles.pan);
-          console.log('pan');
         } else {
           canvasRef.current.classList.remove(styles.pan);
         }

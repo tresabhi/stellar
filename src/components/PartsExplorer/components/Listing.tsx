@@ -3,7 +3,7 @@ import {
   TriangleDownIcon,
   TriangleRightIcon,
 } from '@radix-ui/react-icons';
-import { mutateBlueprintVersionless } from 'core/blueprint';
+import { mutateBlueprint } from 'core/blueprint';
 import {
   getPart,
   getPartRegistry,
@@ -60,7 +60,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   let childParts: JSX.Element[] | undefined;
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    mutateBlueprintVersionless((draft) => {
+    mutateBlueprint((draft) => {
       const part = getPart(ID, draft) as Group | undefined;
 
       if (part) {

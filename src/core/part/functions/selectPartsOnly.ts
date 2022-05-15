@@ -1,4 +1,4 @@
-import { mutateBlueprintVersionless } from 'core/blueprint';
+import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { UUID } from 'types/Parts';
@@ -24,7 +24,7 @@ export const selectPartsOnly = (IDs: UUID[], draft?: Blueprint) => {
 
     draft.selections = IDs;
   } else {
-    mutateBlueprintVersionless((draft) => {
+    mutateBlueprint((draft) => {
       selectPartsOnly(IDs, draft);
     });
   }

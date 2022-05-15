@@ -1,4 +1,4 @@
-import { mutateBlueprintVersionless } from 'core/blueprint';
+import { mutateBlueprint } from 'core/blueprint';
 import { Group } from 'game/parts/Group';
 import { UUID } from 'types/Parts';
 import { getPart } from './getPart';
@@ -6,7 +6,7 @@ import { getPart } from './getPart';
 export const selectParts = (IDs: UUID[]) => {
   let newSelections: UUID[] = [];
 
-  mutateBlueprintVersionless((draft) => {
+  mutateBlueprint((draft) => {
     IDs.forEach((ID) => {
       const part = getPart(ID, draft);
 

@@ -1,4 +1,4 @@
-import { mutateBlueprintVersionless } from 'core/blueprint';
+import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { forEachRight, isEqual } from 'lodash';
 import { UUID } from 'types/Parts';
@@ -31,7 +31,7 @@ export const togglePartsSelection = (IDs: UUID[], state?: Blueprint) => {
 
     state.selections.push(...insertIDs);
   } else {
-    mutateBlueprintVersionless((draft) => {
+    mutateBlueprint((draft) => {
       togglePartsSelection(IDs, draft);
     });
   }

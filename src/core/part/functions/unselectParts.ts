@@ -1,9 +1,9 @@
-import { mutateBlueprintVersionless } from 'core/blueprint';
+import { mutateBlueprint } from 'core/blueprint';
 import { UUID } from 'types/Parts';
 import { getPart } from './getPart';
 
 export const unselectParts = (IDs: UUID[]) => {
-  mutateBlueprintVersionless((draft) => {
+  mutateBlueprint((draft) => {
     IDs.forEach((ID) => {
       const part = getPart(ID, draft);
       if (part) part.selected = false;
