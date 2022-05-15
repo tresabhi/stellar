@@ -1,0 +1,35 @@
+@import '../../styles/index.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  .notification {
+    & + .notification {
+      margin-top: $margin-thick;
+    }
+
+    &.info {
+    }
+
+    &.warning {
+    }
+
+    &.error {
+    }
+
+    &.success {
+    }
+
+    .title {
+    }
+
+    .body {
+    }
+
+    .actions {
+      .action {
+      }
+    }
+  }
+}
