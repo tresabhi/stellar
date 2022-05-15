@@ -1,7 +1,6 @@
 import { notify } from 'core/notifications';
 import useApp from 'hooks/useApp';
 import useKeybinds from 'hooks/useKeybinds';
-import { useEffect } from 'react';
 import Layout from './components/Layout';
 import Notifications from './components/Notifications';
 import Rendering from './components/Rendering';
@@ -11,17 +10,15 @@ import ToolbarBottom from './components/ToolbarBottom';
 import ToolbarTop from './components/ToolbarTop';
 import styles from './index.module.scss';
 
+notify(
+  'Welcome to Stellar!',
+  'This is a test notification, please disregard. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  'info',
+  true,
+);
+
 export default function Desktop() {
   const tab = useApp((state) => state.tab);
-
-  useEffect(() => {
-    notify(
-      'Welcome to Stellar!',
-      'This is a test notification, please disregard.',
-      'info',
-      true,
-    );
-  }, []);
 
   useKeybinds();
 

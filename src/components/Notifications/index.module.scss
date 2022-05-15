@@ -1,10 +1,21 @@
 @import '../../styles/index.scss';
 
+$notification-width: 320px;
+
 .container {
   display: flex;
   flex-direction: column;
 
   .notification {
+    background-color: $black-lighter;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    padding: $padding-x-thick;
+    border-radius: $border-radius-regular;
+    width: $notification-width;
+    cursor: pointer;
+
     & + .notification {
       margin-top: $margin-thick;
     }
@@ -22,9 +33,24 @@
     }
 
     .title {
+      font-weight: bold;
+      font-size: $font-size-big;
+      margin-bottom: $margin-thick;
     }
 
     .body {
+      font-size: $font-size-regular;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &.expanded {
+      .body {
+        white-space: unset;
+        overflow: unset;
+        text-overflow: unset;
+      }
     }
 
     .actions {
