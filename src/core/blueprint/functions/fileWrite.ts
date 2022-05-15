@@ -4,13 +4,13 @@ import {
   WATERMARK_VALUE,
 } from 'core/blueprint/constants/watermark';
 import useApp from 'hooks/useApp';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { blueprintSavify } from './blueprintSavify';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 
 export const fileWrite = async () => {
   const fileHandle = useApp.getState().fileHandle;
-  const data = blueprintSavify(blueprintStore.getState());
+  const data = blueprintSavify(useBlueprint.getState());
   const blob = new Blob(
     [
       `{\n"${WATERMARK_KEY}": "${WATERMARK_VALUE}"\n\n,${JSON.stringify(

@@ -1,10 +1,14 @@
 @import '../../styles/index.scss';
 
-.editing-canvas {
+.layout-canvas {
   flex: 1;
   height: 100%;
   min-width: 0;
   touch-action: none;
 
   background-color: $black-dark;
+
+  .pan {
+    cursor: grab;
+  }
 }

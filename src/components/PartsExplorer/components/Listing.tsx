@@ -13,7 +13,7 @@ import {
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import usePartProperty from 'hooks/usePartProperty';
 import { KeyboardEvent, memo, MouseEvent, useRef, useState } from 'react';
 import { UUID } from 'types/Parts';
@@ -96,7 +96,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.ctrlKey) {
       if (event.shiftKey) {
-        const selectionState = blueprintStore.getState().selections;
+        const selectionState = useBlueprint.getState().selections;
         const lastSelection = selectionState[selectionState.length - 1];
 
         if (lastSelection) {
@@ -108,7 +108,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         togglePartSelection(ID);
       }
     } else if (event.shiftKey) {
-      const selectionState = blueprintStore.getState().selections;
+      const selectionState = useBlueprint.getState().selections;
       const lastSelection = selectionState[selectionState.length - 1];
 
       if (lastSelection) {

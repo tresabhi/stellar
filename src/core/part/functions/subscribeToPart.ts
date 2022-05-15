@@ -1,5 +1,5 @@
 import { Part } from 'game/parts/Part';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { UUID } from 'types/Parts';
 import { getPart } from './getPart';
 
@@ -21,7 +21,7 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
   };
   let avoidThisEvent = false;
 
-  const unsubscribe = blueprintStore.subscribe(
+  const unsubscribe = useBlueprint.subscribe(
     (state) => {
       const part = getPart(ID, state);
 

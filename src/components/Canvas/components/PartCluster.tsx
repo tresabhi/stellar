@@ -1,7 +1,7 @@
 import { GroupProps } from '@react-three/fiber';
 import { getPart, getPartRegistry } from 'core/part';
 import { Group as GroupPart } from 'game/parts/Group';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { forwardRef } from 'react';
 import { Group } from 'three';
 import { ParentID } from 'types/Parts';
@@ -12,7 +12,7 @@ interface PartClusterProps extends GroupProps {
 }
 const PartCluster = forwardRef<Group, PartClusterProps>(
   ({ parentID, ...props }, ref) => {
-    const state = blueprintStore(
+    const state = useBlueprint(
       (state) =>
         (parentID ? (getPart(parentID, state) as GroupPart) : state).partOrder,
       compareStringArrays,

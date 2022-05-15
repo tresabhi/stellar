@@ -1,4 +1,4 @@
-import partRegistryStore from 'hooks/usePartRegistry';
+import usePartRegistry from 'hooks/usePartRegistry';
 
 export const getPartRegistry = (name: string) =>
-  partRegistryStore.getState().get(name);
+  usePartRegistry.getState().get(name);

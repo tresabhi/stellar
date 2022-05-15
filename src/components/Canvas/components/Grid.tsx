@@ -1,17 +1,17 @@
 import InfiniteGridHelper from 'components/Canvas/components/InfiniteGridHelper';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { useEffect, useRef } from 'react';
 import { Color, GridHelper, Mesh } from 'three';
 
 const MAJOR_MARK = 5;
 
 export const Grid = () => {
-  const initialState = blueprintStore.getState();
+  const initialState = useBlueprint.getState();
   const infiniteGridRef = useRef<Mesh>(null);
   const gridRef = useRef<GridHelper>(null);
 
   useEffect(() => {
-    const unsubscribe = blueprintStore.subscribe(
+    const unsubscribe = useBlueprint.subscribe(
       (state) => state.center,
       (value) => {
         gridRef.current?.position.setX(value);

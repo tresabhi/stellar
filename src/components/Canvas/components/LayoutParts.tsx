@@ -1,16 +1,16 @@
 import PartCluster from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { useEffect, useRef } from 'react';
 import { Group } from 'three';
 import { LAYER } from '../constants/layer';
 
 export const LayoutParts = () => {
-  const initialState = blueprintStore.getState();
+  const initialState = useBlueprint.getState();
   const meshRef = useRef<Group>(null);
 
   useEffect(() => {
-    const unsubscribe = blueprintStore.subscribe(
+    const unsubscribe = useBlueprint.subscribe(
       (state) => state.offset,
       (offset) => {
         meshRef.current?.position.setX(offset.x);

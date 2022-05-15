@@ -1,11 +1,11 @@
 import { getPart, getPartRegistry } from 'core/part';
 import { Group } from 'game/parts/Group';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 
 export const getSelectableIntersectingPart = (point: Vector2) => {
-  const blueprintState = blueprintStore.getState();
+  const blueprintState = useBlueprint.getState();
   const checked = new Map<UUID, true>();
 
   const check = (IDs: UUID[]) => {

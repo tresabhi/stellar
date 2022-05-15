@@ -1,13 +1,14 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import { getPartReactive, getPartRegistry } from 'core/part';
-import blueprintStore from 'hooks/useBlueprint';
+import { getPartRegistry } from 'core/part';
+import useBlueprint from 'hooks/useBlueprint';
+import usePart from 'hooks/usePart';
 import { isUndefined } from 'lodash';
 import { Box2 } from 'three';
 
 const InspectViewer = () => {
-  const selections = blueprintStore((state) => state.selections);
+  const selections = useBlueprint((state) => state.selections);
   const ID = selections[0];
-  const part = getPartReactive(ID); // TODO: this is reactive, but we need to make it not reactive
+  const part = usePart(ID); // TODO: this is reactive, but we need to make it not reactive
   const computeBoundingBox = part
     ? getPartRegistry(part.n)?.computeBoundingBox
     : undefined;

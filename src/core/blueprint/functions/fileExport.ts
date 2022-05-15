@@ -8,7 +8,7 @@ import {
   WATERMARK_VALUE,
 } from 'core/blueprint/constants/watermark';
 import useApp from 'hooks/useApp';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { blueprintExportify } from './blueprintExportify';
 
 export const exportBlueprintFile = async () => {
@@ -16,7 +16,7 @@ export const exportBlueprintFile = async () => {
   const fileName =
     fileHandle?.name.replace(FILE_EXTENSION_REGEX, '') ??
     UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');
-  const data = blueprintExportify(blueprintStore.getState());
+  const data = blueprintExportify(useBlueprint.getState());
   const blob = new Blob(
     [
       `{\n"${WATERMARK_KEY}": "${WATERMARK_VALUE}"\n\n,${JSON.stringify(

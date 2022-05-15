@@ -1,6 +1,6 @@
 import { getPart } from 'core/part';
 import { Group } from 'game/parts/Group';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { FC, InputHTMLAttributes } from 'react';
 import { UUID } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
@@ -16,7 +16,7 @@ export const Container: FC<ContainerProps> = ({
   indentation,
   ...props
 }) => {
-  const state = blueprintStore(
+  const state = useBlueprint(
     (state) => (parent ? (getPart(parent, state) as Group) : state).partOrder,
     compareStringArrays,
   );

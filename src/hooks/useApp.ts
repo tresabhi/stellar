@@ -2,7 +2,7 @@ import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export type TabType = 'layout' | 'staging' | 'simulation' | 'rendering';
-export type TransformationToolType = 'translate' | 'rotate' | 'scale';
+export type ToolType = 'transform' | 'pan';
 
 export interface UseApp {
   fileHandle?: FileSystemFileHandle;
@@ -10,7 +10,7 @@ export interface UseApp {
 
   tab: TabType;
 
-  transformationMode: TransformationToolType;
+  tool: ToolType;
 }
 
 export const UseAppData: UseApp = {
@@ -18,7 +18,7 @@ export const UseAppData: UseApp = {
 
   tab: 'layout',
 
-  transformationMode: 'translate',
+  tool: 'transform',
 };
 
 const useApp = create<

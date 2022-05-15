@@ -1,4 +1,5 @@
 import { useThree } from '@react-three/fiber';
+import useApp from 'hooks/useApp';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import { OrthographicCamera, Vector2 } from 'three';
@@ -13,6 +14,8 @@ export const PanControls = () => {
   const getMousePos = useMousePos();
 
   useEffect(() => {
+    let initialMousePos: Vector2;
+
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
 
@@ -51,10 +54,35 @@ export const PanControls = () => {
       }
     };
 
+    const handleMouseDown = () => {
+      const tool = useApp.getState().tool;
+
+      if (tool === 'pan') {
+        initialMousePos = getMousePos();
+        canvas.addEventListener('mousemove', handleMouseMove);
+      }
+    };
+    const handleMouseMove = () => {
+      const newPos = getMousePos();
+      const delta = new Vector2(
+        newPos.x - initialMousePos.x,
+        newPos.y - initialMousePos.y,
+      );
+
+      camera.translateX(-delta.x);
+      camera.translateY(-delta.y);
+    };
+    const handleMouseUp = () =>
+      canvas.removeEventListener('mousemove', handleMouseMove);
+
     canvas.addEventListener('wheel', handleWheel);
+    canvas.addEventListener('mousedown', handleMouseDown);
+    canvas.addEventListener('mouseup', handleMouseUp);
 
     return () => {
       canvas.removeEventListener('wheel', handleWheel);
+      canvas.removeEventListener('mousedown', handleMouseDown);
+      canvas.removeEventListener('mouseup', handleMouseUp);
     };
   });
 

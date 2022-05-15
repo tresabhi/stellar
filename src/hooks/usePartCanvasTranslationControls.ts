@@ -2,7 +2,7 @@ import { ThreeEvent } from '@react-three/fiber';
 import { mutateBlueprintVersionless } from 'core/blueprint';
 import { getPart, mutateParts, selectPartOnly } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
@@ -39,7 +39,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
       });
 
       // apply them again with history
-      mutateParts<Type>(blueprintStore.getState().selections, (state) => {
+      mutateParts<Type>(useBlueprint.getState().selections, (state) => {
         state.p.x += deltaX;
         state.p.y += deltaY;
       });

@@ -1,5 +1,5 @@
 import { Blueprint } from 'game/Blueprint';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import useVersionControl, { UseVersionControl } from 'hooks/useVersionControl';
 import produce, { produceWithPatches } from 'immer';
 import { merge } from 'lodash';
@@ -13,8 +13,8 @@ export const mutateBlueprint = (
 ) => {
   const [nextState, patches, inversePatches] = produceWithPatches(
     lastStateLie
-      ? merge(blueprintStore.getState(), lastStateLie)
-      : blueprintStore.getState(),
+      ? merge(useBlueprint.getState(), lastStateLie)
+      : useBlueprint.getState(),
     producer,
   );
 
@@ -43,5 +43,5 @@ export const mutateBlueprint = (
   );
 
   declareUnsavedChanges();
-  blueprintStore.setState(nextState);
+  useBlueprint.setState(nextState);
 };

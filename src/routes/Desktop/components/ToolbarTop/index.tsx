@@ -20,7 +20,7 @@ import {
   insertPart,
 } from 'core/part';
 import useApp from 'hooks/useApp';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import useTranslator from 'hooks/useTranslator';
 import { isUndefined, random } from 'lodash';
 import { FC } from 'react';
@@ -42,7 +42,7 @@ const ToolBarTop: FC = () => {
 
   const add = (name: string) => {
     return () => {
-      const selections = blueprintStore.getState().selections;
+      const selections = useBlueprint.getState().selections;
       const lastPartID = selections[selections.length - 1];
 
       if (lastPartID) {

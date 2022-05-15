@@ -7,7 +7,8 @@ import {
   unselectAllParts,
   unselectPart,
 } from 'core/part';
-import blueprintStore from 'hooks/useBlueprint';
+import useApp from 'hooks/useApp';
+import useBlueprint from 'hooks/useBlueprint';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 
@@ -17,24 +18,28 @@ export const SelectionControls = () => {
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
-      const mousePos = getMousePos();
-      const offset = blueprintStore.getState().offset;
+      const tool = useApp.getState().tool;
 
-      mousePos.x -= offset.x;
-      mousePos.y -= offset.y;
+      if (tool === 'transform') {
+        const mousePos = getMousePos();
+        const offset = useBlueprint.getState().offset;
 
-      const ID = getSelectableIntersectingPart(mousePos);
+        mousePos.x -= offset.x;
+        mousePos.y -= offset.y;
 
-      if (ID) {
-        if (event.shiftKey) {
-          const part = getPart(ID);
+        const ID = getSelectableIntersectingPart(mousePos);
 
-          togglePartSelection(ID);
-          if (part?.parentID) unselectPart(part.parentID);
-        } else {
-          selectPartOnly(ID);
-        }
-      } else unselectAllParts();
+        if (ID) {
+          if (event.shiftKey) {
+            const part = getPart(ID);
+
+            togglePartSelection(ID);
+            if (part?.parentID) unselectPart(part.parentID);
+          } else {
+            selectPartOnly(ID);
+          }
+        } else unselectAllParts();
+      }
     };
 
     canvas.addEventListener('click', handleClick);

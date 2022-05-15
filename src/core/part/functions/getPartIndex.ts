@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { AnyPart, ParentID, UUID } from 'types/Parts';
 import { getPart } from './getPart';
 
@@ -11,7 +11,7 @@ export const getPartIndex = (
 ) => {
   const parent = parentID
     ? getPart(parentID)
-    : state ?? blueprintStore.getState();
+    : state ?? useBlueprint.getState();
 
   if (parentID ? parent && (parent as AnyPart).n === 'Group' : true) {
     return (parent as Group | Blueprint).partOrder.indexOf(partID);

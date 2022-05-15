@@ -6,8 +6,8 @@ import {
   translateTranslatablePartsBySelection,
   unselectAllParts,
 } from 'core/part';
-import useApp, { TransformationToolType } from 'hooks/useApp';
-import blueprintStore from 'hooks/useBlueprint';
+import useApp, { ToolType } from 'hooks/useApp';
+import useBlueprint from 'hooks/useBlueprint';
 import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
 import { bind } from 'mousetrap';
@@ -26,11 +26,10 @@ const SHIFT_TRANSLATE_BY = 5;
 
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
-  const tool = (name: TransformationToolType) => () =>
-    useApp.setState({ transformationMode: name });
+  const tool = (name: ToolType) => () => useApp.setState({ tool: name });
 
   useEffect(() => {
-    bind('ctrl+a', () => selectPartsOnly(blueprintStore.getState().partOrder));
+    bind('ctrl+a', () => selectPartsOnly(useBlueprint.getState().partOrder));
     bind('esc', unselectAllParts);
 
     bind('p a r t y', () => {
@@ -107,9 +106,8 @@ const useKeybinds = () => {
       fileSave();
     });
 
-    bind('1', tool('translate'));
-    bind('2', tool('rotate'));
-    bind('3', tool('scale'));
+    bind('1', tool('transform'));
+    bind('2', tool('pan'));
   }, []);
 };
 export default useKeybinds;

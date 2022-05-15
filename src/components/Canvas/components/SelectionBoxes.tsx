@@ -1,20 +1,20 @@
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { useEffect, useRef } from 'react';
 import { Group } from 'three';
 import { LAYER } from '../constants/layer';
 import { SelectionBox } from './SelectionBox';
 
 export const SelectionBoxes = () => {
-  const selections = blueprintStore((state) => state.selections);
+  const selections = useBlueprint((state) => state.selections);
   const boxes = selections.map((selection) => (
     <SelectionBox ID={selection} key={`part-${selection}`} />
   ));
-  const initialState = blueprintStore.getState();
+  const initialState = useBlueprint.getState();
   const meshRef = useRef<Group>(null);
 
   useEffect(() => {
-    const unsubscribe = blueprintStore.subscribe(
+    const unsubscribe = useBlueprint.subscribe(
       (state) => state.offset,
       (offset) => {
         meshRef.current?.position.setX(offset.x);

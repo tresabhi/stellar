@@ -1,7 +1,7 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { mutateBlueprint } from 'core/blueprint';
 import { getPart, getPartRegistry } from 'core/part';
-import blueprintStore from 'hooks/useBlueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import useUnitInputController from 'hooks/useUnitInputController';
 import { useRef } from 'react';
 import { AnyPart, UUID } from 'types/Parts';
@@ -9,8 +9,8 @@ import compareStringArrays from 'utilities/compareStringArrays';
 import TransformationProperties from './TransformationProperties';
 
 const PropertiesEditor = () => {
-  const initialBlueprintState = blueprintStore.getState();
-  const selectionsLength = blueprintStore((state) => state.selections.length);
+  const initialBlueprintState = useBlueprint.getState();
+  const selectionsLength = useBlueprint((state) => state.selections.length);
   const sortedSelections: Map<string, UUID[]> = new Map();
   const propertyItems: JSX.Element[] = [];
   const orderedSelections: string[] = [];
@@ -18,7 +18,7 @@ const PropertiesEditor = () => {
   const centerInputRef = useRef<HTMLInputElement>(null);
   const offsetXInputRef = useRef<HTMLInputElement>(null);
   const offsetYInputRef = useRef<HTMLInputElement>(null);
-  const selections = blueprintStore(
+  const selections = useBlueprint(
     (state) => state.selections,
     compareStringArrays,
   );
