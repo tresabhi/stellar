@@ -1,9 +1,15 @@
-import { FC, ReactNode } from 'react';
+import { FC, InputHTMLAttributes, ReactNode } from 'react';
 import styles from '../index.module.scss';
 
-export interface ContainerProps {
+export interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
-export const Container: FC<ContainerProps> = ({ children }) => (
-  <div className={styles.container}>{children}</div>
+export const Container: FC<ContainerProps> = ({
+  children,
+  className,
+  ...props
+}) => (
+  <div {...props} className={`${styles.container} ${className ?? ''}`}>
+    {children}
+  </div>
 );

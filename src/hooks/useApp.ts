@@ -1,13 +1,16 @@
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
+export type TabType = 'layout' | 'staging' | 'simulation' | 'rendering';
+export type TransformationToolType = 'translate' | 'rotate' | 'scale';
+
 export interface UseApp {
   fileHandle?: FileSystemFileHandle;
   hasUnsavedChanges: boolean;
 
-  tab: 'layout' | 'staging' | 'simulation' | 'rendering';
+  tab: TabType;
 
-  transformationMode: 'translate' | 'rotate' | 'scale';
+  transformationMode: TransformationToolType;
 }
 
 export const UseAppData: UseApp = {

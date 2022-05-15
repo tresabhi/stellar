@@ -1,10 +1,10 @@
-import { GroupIcon as Icon } from '@radix-ui/react-icons';
+import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
 import {
   getPart,
   getPartRegistry,
   partExportify,
-  removePartMetaData
+  removePartMetaData,
 } from 'core/part';
 import { PrimitiveBoundingBox } from 'hooks/useBoundingBoxes';
 import { BoundingBoxComputer, PartExportifier } from 'hooks/usePartRegistry';
