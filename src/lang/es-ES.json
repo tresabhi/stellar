@@ -1,0 +1,156 @@
+{
+  "toolbar": {
+    "control_menu": {
+      "file": {
+        "$": "Archivo",
+        "new": "Nuevo",
+        "open": "Abrir...",
+        "save": "Guardar como...",
+        "save_as": "Guardar como...",
+        "import": "Importar...",
+        "export": "Exportar..."
+      },
+      "edit": {
+        "$": "Editar",
+        "undo": "Deshacer",
+        "redo": "Rehacer",
+        "cut": "Cortar",
+        "copy": "Copiar",
+        "paste": "Pegar",
+        "delete": "Eliminar",
+        "hide": "Ocultar",
+        "unhide": "Desocultar",
+        "lock": "Bloquear",
+        "unlock": "Desbloquear"
+      },
+      "view": {
+        "$": "Vista",
+        "layout": "Diseño",
+        "staging": "Puesta en escena",
+        "simulation": "Simulación",
+        "rendering": "Renderizado",
+        "hud": "HUD",
+        "theme": {
+          "$": "Tema",
+          "stellar_dark": "Stellar oscuro",
+          "stellar_light": "Stellar claro"
+        }
+      },
+      "add": {
+        "$": "Añadir",
+        "structural": {
+          "$": "Estructural",
+          "fuel_tank": "Tanque de combustible",
+          "structural_part": "Parte estructural"
+        },
+        "propulsion": {
+          "$": "Propulsión",
+          "titan": "Titán",
+          "hawk": "Hawk",
+          "frontier": "Frontera",
+          "valiant": "Valiant",
+          "ion": "Ion",
+          "rcs_thruster": "Propulsor RCS"
+        },
+        "electric": {
+          "$": "Eléctrico",
+          "parachute": "Paracaídas",
+          "side_parachute": "Paracaídas Lateral",
+          "separator": "Separador",
+          "side_separator": "Separador Lateral",
+          "landing_legs": "Piernas de Aterrizaje",
+          "large_landing_legs": "Piernas de Aterrizaje Grandes",
+          "wheel": "Rueda",
+          "large_wheel": "Rueda Grande",
+          "solar_panel": "Panel Solar",
+          "large_solar_panel": "Panel Solar Grande",
+          "docking_port": "Puerto de atraque"
+        },
+        "aerodynamic": {
+          "$": "Aerodinámico",
+          "nose_cone": "Cono de nariz",
+          "side_nose_cone": "Cono de nariz lateral",
+          "fuselage": "Fuselaje"
+        }
+      },
+      "debug": {
+        "$": "Depuración",
+        "load_template": "Cargar plantilla"
+      },
+      "help": {
+        "$": "Ayuda",
+        "discord": "Discord",
+        "you_will_make_a_wonderful_grown_up": "\"You'll make a wonderful grown-up!\""
+      }
+    },
+    "tabs": {
+      "layout": "Diseño",
+      "staging": "Puesta en escena",
+      "simulation": "Simulación",
+      "rendering": "Renderizando"
+    }
+  },
+  "parts_explorer": {
+    "parts": {
+      "$": "Partes"
+    },
+    "snippets": {
+      "$": "Snippets",
+      "coming_soon": "¡Próximamente!"
+    }
+  },
+  "properties_explorer": {
+    "properties": {
+      "$": "Propiedades",
+      "canvas": {
+        "$": "Canvas",
+        "center": "Centro",
+        "offset_x": "Compensar X",
+        "offset_y": "Compensar Y"
+      },
+      "transformations": {
+        "$": "Transformaciones",
+        "position_x": "Posción X",
+        "position_y": "Posición Y",
+        "rotation": "Rotación",
+        "scale_x": "Escala X",
+        "scale_y": "Escala Y",
+        "ratio": "Ratio"
+      },
+      "Fuel Tank": {
+        "$": "Tanque de combustible",
+        "width": "Anchura",
+        "height": "Altura",
+        "fuel": "Combustible"
+      }
+    },
+    "inspect": {
+      "$": "Inspeccionar",
+      "json": "JSON",
+      "internal_data": {
+        "$": "Información interna",
+        "id": "ID",
+        "parent_id": "ID Padre"
+      },
+      "meta_data": {
+        "$": "Metadatos",
+        "name": "Nombre",
+        "locked": "Bloqueado",
+        "hidden": "Oculto"
+      },
+      "bounding_box": {
+        "$": "Bounding Box",
+        "min_x": "Mín X",
+        "min_y": "Mín Y",
+        "max_x": "Máx X",
+        "max_y": "Máx Y"
+      }
+    }
+  },
+  "canvas": {},
+  "statusbar": {},
+  "parts": {
+    "Fuel Tank": "Tanque de Combustible",
+    "Group": "Grupo"
+  }
+}
