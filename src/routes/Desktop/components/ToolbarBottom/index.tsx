@@ -14,6 +14,7 @@ import styles from './index.module.scss';
 const ToolbarBottom = () => {
   const tool = (name: TransformationToolType) => () =>
     useApp.setState({ transformationMode: name });
+  const mode = useApp((state) => state.transformationMode);
 
   return (
     <div className={styles['toolbar-bottom']}>
@@ -30,13 +31,16 @@ const ToolbarBottom = () => {
           </Toolbar.Button>
         </Toolbar.Container>
         <Toolbar.Container>
-          <Toolbar.Button onClick={tool('translate')}>
+          <Toolbar.Button
+            selected={mode === 'translate'}
+            onClick={tool('translate')}
+          >
             <MoveIcon />
           </Toolbar.Button>
-          <Toolbar.Button onClick={tool('rotate')}>
+          <Toolbar.Button selected={mode === 'rotate'} onClick={tool('rotate')}>
             <RotateCounterClockwiseIcon />
           </Toolbar.Button>
-          <Toolbar.Button onClick={tool('scale')}>
+          <Toolbar.Button selected={mode === 'scale'} onClick={tool('scale')}>
             <DimensionsIcon />
           </Toolbar.Button>
         </Toolbar.Container>

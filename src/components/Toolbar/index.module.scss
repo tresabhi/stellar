@@ -34,7 +34,8 @@ $button-size: 28px;
       background-color: $black-x-light;
     }
 
-    &:active {
+    &:active,
+    &.selected {
       background-color: $black-xx-light;
     }
   }

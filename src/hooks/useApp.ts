@@ -18,7 +18,7 @@ export const UseAppData: UseApp = {
 
   tab: 'layout',
 
-  transformationMode: 'rotate',
+  transformationMode: 'translate',
 };
 
 const useApp = create<
