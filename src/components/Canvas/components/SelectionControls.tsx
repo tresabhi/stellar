@@ -38,7 +38,9 @@ export const SelectionControls = () => {
           } else {
             selectPartOnly(ID);
           }
-        } else unselectAllParts();
+        } else if (useBlueprint.getState().selections.length > 0) {
+          unselectAllParts();
+        }
       }
     };
 
