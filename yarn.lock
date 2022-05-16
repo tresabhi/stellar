@@ -6477,10 +6477,10 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-mathjs@^10.5.2:
-  version "10.5.2"
-  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.5.2.tgz#bf0618b99b662a3af8a2613b6489ec0422314b08"
-  integrity sha512-yLl2yA597A+07+xsOgy1+pq/m4ZokQceWQbB9OsIkK2guCpA2Px9k11zul93eJAA0WUFZiMK6VcruY9ZBbSKjA==
+mathjs@^10.5.3:
+  version "10.5.3"
+  resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-10.5.3.tgz#79e0dd9cf370adce80699cc40ed18c1c0cb6599e"
+  integrity sha512-RtF+F7SdRIf2E2+btyGDhuB6wmPjOH9KeNglfclaaaI6eK7ZNfsQS6IRAKvGyNsr8sFc6Pyb3JBLqEhYBuknVQ==
   dependencies:
     "@babel/runtime" "^7.17.9"
     complex.js "^2.1.1"
