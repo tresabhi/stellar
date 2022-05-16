@@ -1648,13 +1648,13 @@
     utility-types "^3.10.0"
     zustand "^3.5.13"
 
-"@react-three/fiber@^8.0.13":
-  version "8.0.13"
-  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.0.13.tgz#c4fc57075147ddabe1299034c2fa6a049cc7492d"
-  integrity sha512-hJdVS2F8LJFenR07l80JnkLAMeJ7gf3wiB8OzQ49GjSwjPgPG8bjYumMmchY/eouU+myYtNej0tK6mV6wctmdQ==
+"@react-three/fiber@^8.0.16":
+  version "8.0.16"
+  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.0.16.tgz#1e325c01718ce2c5f8c9caf0ae1a4217013c5025"
+  integrity sha512-c0BqDVNTKHJ0yvnxdaJgficoz173gBTd72ks6rI/Gn4NJew2PA8UpgOYnZMMrcK6oLkOwdxvu3KDSEFx9FmQMw==
   dependencies:
     "@babel/runtime" "^7.17.8"
-    "@types/react-reconciler" "^0.26.6"
+    "@types/react-reconciler" "^0.26.7"
     react-merge-refs "^1.1.0"
     react-reconciler "^0.27.0"
     react-use-measure "^2.1.1"
@@ -2077,10 +2077,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-reconciler@^0.26.6":
-  version "0.26.6"
-  resolved "https://registry.yarnpkg.com/@types/react-reconciler/-/react-reconciler-0.26.6.tgz#271b850616413b5c197ec485403961a11cedd4ef"
-  integrity sha512-N8MpyC6PJksD+CbMaZ1GW1t940+L4K+f7soiNKcKfgOgof3xWLvs5nPRQ/Q0P6QwDX0GH1PT1MsiQh2FtUY6aw==
+"@types/react-reconciler@^0.26.7":
+  version "0.26.7"
+  resolved "https://registry.yarnpkg.com/@types/react-reconciler/-/react-reconciler-0.26.7.tgz#0c4643f30821ae057e401b0d9037e03e8e9b2a36"
+  integrity sha512-mBDYl8x+oyPX/VBb3E638N0B7xG+SPk/EAMcVPeexqus/5aTpTphQi0curhhshOqRrc9t6OPoJfEUkbymse/lQ==
   dependencies:
     "@types/react" "*"
 
