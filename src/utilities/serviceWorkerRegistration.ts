@@ -1,3 +1,5 @@
+import { notify } from 'core/notifications';
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     window.location.hostname === '[::1]' ||
@@ -109,3 +111,17 @@ export function unregister() {
       });
   }
 }
+
+export const primeServiceWorker = () =>
+  registerServiceWorker({
+    onUpdate: () => {
+      notify(
+        'Stellar has upgraded to a newer version!',
+        'Please refresh the page to see the latest changes.',
+        {
+          type: 'success',
+          persistent: true,
+        },
+      );
+    },
+  });

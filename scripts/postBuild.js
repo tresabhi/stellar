@@ -24,9 +24,9 @@ switch (true) {
 
 updateManifestKeys(BUILD_TYPE, APP_NAME);
 
-if (ARGS['favicon-api-token'])
+if (ARGS['favicon-api-token']) {
   generateFavicons(BUILD_TYPE, ARGS['favicon-api-token']);
-else {
+} else {
   console.warn('No favicon API token provided');
 }
 // set to true if you want to use the previous build

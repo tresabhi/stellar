@@ -1,28 +1,36 @@
-import useNotifications, {
-  Notification,
-  NotificationType,
-} from 'hooks/useNotifications';
+import useNotifications, { Notification } from 'hooks/useNotifications';
 import { v4 as UUIDV4 } from 'uuid';
+
+export interface NotifyOptions
+  extends Omit<Omit<Omit<Notification, 'id'>, 'title'>, 'message'> {
+  persistent: boolean;
+  lifespan: number;
+}
+
+export const defaultNotifyOptions: NotifyOptions = {
+  lifespan: 5000,
+  persistent: false,
+  type: 'info',
+};
 
 export const notify = (
   title: string,
   message: string,
-  type: NotificationType = 'info',
-  persistent = false,
-  lifespan = 5000,
+  options: Partial<NotifyOptions> = defaultNotifyOptions,
 ) => {
+  const mergedOptions = { ...defaultNotifyOptions, ...options };
   const id = UUIDV4();
-  const notification: Notification = { id, type, title, message };
+  const notification: Notification = { id, title, message, ...mergedOptions };
 
   useNotifications.setState((state) => [notification, ...state], true);
 
-  if (!persistent) {
+  if (!mergedOptions.persistent) {
     setTimeout(() => {
       useNotifications.setState(
         (state) => state.filter((notification) => notification.id !== id),
         true,
       );
-    }, lifespan);
+    }, mergedOptions.lifespan);
   }
 
   return id;

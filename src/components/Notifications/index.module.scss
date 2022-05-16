@@ -32,10 +32,26 @@ $notification-width: 320px;
     &.success {
     }
 
-    .title {
-      font-weight: bold;
-      font-size: $font-size-big;
+    .title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: $margin-thick;
+
+      .title {
+        flex: 1;
+        font-weight: bold;
+        font-size: $font-size-big;
+      }
+
+      .icon {
+        width: $icon-size-regular;
+        height: $icon-size-regular;
+
+        & + .icon {
+          margin-left: $margin-thick;
+        }
+      }
     }
 
     .body {
@@ -43,6 +59,10 @@ $notification-width: 320px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      & + .actions {
+        margin-top: $margin-thick;
+      }
     }
 
     &.expanded {
@@ -54,7 +74,26 @@ $notification-width: 320px;
     }
 
     .actions {
+      display: flex;
+
       .action {
+        background-color: $black-x-light;
+        color: white;
+        padding: 6px;
+        border-radius: $border-radius-regular;
+        font-size: $font-size-small;
+
+        &:hover {
+          background-color: $black-xx-light;
+        }
+
+        &:active {
+          background-color: $black-xxx-light;
+        }
+
+        & + .action {
+          margin-left: $margin-thick;
+        }
       }
     }
   }

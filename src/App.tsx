@@ -34,8 +34,9 @@ const App = () => {
     );
   }
 
-  if (window.location.pathname === '/')
+  if (window.location.pathname === '/') {
     window.location.pathname = isMobile ? '/mobile' : '/desktop';
+  }
 
   const version = stellarContext.version.split('.');
   document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;

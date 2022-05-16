@@ -5,9 +5,9 @@ import { createRoot } from 'react-dom/client';
 import SplashScreen from 'routes/SplashScreen';
 import applyThreeMeshBVHPatches from 'utilities/applyThreeMeshBVHPatches';
 import registerThreeElements from 'utilities/registerThreeElements';
-import { registerServiceWorker } from 'utilities/serviceWorkerRegistration';
+import { primeServiceWorker } from 'utilities/serviceWorkerRegistration';
 
-registerServiceWorker();
+primeServiceWorker();
 registerThreeElements();
 applyThreeMeshBVHPatches();
 enableMapSet();

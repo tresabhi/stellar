@@ -6,7 +6,8 @@ export type NotificationType = 'info' | 'warning' | 'error' | 'success';
 
 export interface Action {
   label: string;
-  callback: () => void;
+  callback?: () => void;
+  dismiss?: boolean;
 }
 
 export interface Notification {
