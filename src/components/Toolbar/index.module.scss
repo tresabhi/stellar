@@ -30,13 +30,20 @@ $button-size: 28px;
       margin-left: $margin-regular;
     }
 
-    &:hover {
-      background-color: $black-x-light;
+    &:not(.disabled) {
+      &:hover {
+        background-color: $black-x-light;
+      }
+
+      &:active,
+      &.selected {
+        background-color: $black-xx-light;
+      }
     }
 
-    &:active,
-    &.selected {
-      background-color: $black-xx-light;
+    &.disabled {
+      opacity: 0.5;
+      cursor: default;
     }
   }
 }

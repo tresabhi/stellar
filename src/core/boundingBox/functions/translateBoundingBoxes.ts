@@ -3,9 +3,6 @@ import produce from 'immer';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 
-//@ts-ignore
-window.a = useBoundingBoxes;
-
 export const translateBoundingBoxes = (IDs: UUID[], vector: Vector2) => {
   useBoundingBoxes.setState(
     produce((draft: UseBoundingBoxes) => {

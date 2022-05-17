@@ -12,7 +12,7 @@ export const versionUndo = () => {
         useBlueprint.setState(applyPatches(useBlueprint.getState(), undoPatch));
       }
 
-      draft.index = Math.max(0, draft.index - 1);
+      draft.index = Math.max(-1, draft.index - 1);
     }),
   );
 

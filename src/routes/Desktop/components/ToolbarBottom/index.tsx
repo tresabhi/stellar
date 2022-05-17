@@ -5,11 +5,17 @@ import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
 import * as Toolbar from 'components/Toolbar';
 import { fileSave, versionRedo, versionUndo } from 'core/blueprint';
 import useApp, { ToolType } from 'hooks/useApp';
+import useVersionControl from 'hooks/useVersionControl';
 import styles from './index.module.scss';
+
+//@ts-ignore
+window.a = useVersionControl;
 
 const ToolbarBottom = () => {
   const tool = (name: ToolType) => () => useApp.setState({ tool: name });
   const mode = useApp((state) => state.tool);
+  const versionIndex = useVersionControl((state) => state.index);
+  const versionCount = useVersionControl((state) => state.history.length);
 
   return (
     <div className={styles['toolbar-bottom']}>
@@ -26,10 +32,13 @@ const ToolbarBottom = () => {
           </Toolbar.Button>
         </Toolbar.Container>
         <Toolbar.Container>
-          <Toolbar.Button onClick={versionUndo}>
+          <Toolbar.Button disabled={versionIndex === -1} onClick={versionUndo}>
             <UndoIcon />
           </Toolbar.Button>
-          <Toolbar.Button onClick={versionRedo}>
+          <Toolbar.Button
+            disabled={versionIndex === versionCount - 1}
+            onClick={versionRedo}
+          >
             <RedoIcon />
           </Toolbar.Button>
           <Toolbar.Button onClick={fileSave}>
