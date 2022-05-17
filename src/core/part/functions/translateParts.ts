@@ -8,8 +8,7 @@ import { mutateParts } from './mutateParts';
 
 export const translateParts = (
   IDs: UUID[],
-  x: number,
-  y: number,
+  vector: Vector2,
   state?: Blueprint,
   updateBoundingBoxes = true,
 ) => {
@@ -17,15 +16,15 @@ export const translateParts = (
     mutateParts<PartWithTransformations>(
       IDs,
       (draft) => {
-        draft.p.x += x;
-        draft.p.y += y;
+        draft.p.x += vector.x;
+        draft.p.y += vector.y;
       },
       state,
     );
-    if (updateBoundingBoxes) translateBoundingBoxes(IDs, new Vector2(x, y));
+    if (updateBoundingBoxes) translateBoundingBoxes(IDs, vector);
   } else {
     mutateBlueprint((draft) => {
-      translateParts(IDs, x, y, draft);
+      translateParts(IDs, vector, draft);
     });
   }
 };

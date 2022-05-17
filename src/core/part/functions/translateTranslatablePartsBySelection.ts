@@ -1,6 +1,7 @@
 import useBlueprint from 'hooks/useBlueprint';
+import { Vector2 } from 'three';
 import { translateTranslatableParts } from './translateTranslatableParts';
 
-export const translateTranslatablePartsBySelection = (x: number, y: number) => {
-  translateTranslatableParts(x, y, useBlueprint.getState().selections);
+export const translateTranslatablePartsBySelection = (vector: Vector2) => {
+  translateTranslatableParts(vector, useBlueprint.getState().selections);
 };

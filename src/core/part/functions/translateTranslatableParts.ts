@@ -1,14 +1,11 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Group } from 'game/parts/Group';
+import { Vector2 } from 'three';
 import { AnyPart, UUID } from 'types/Parts';
 import { getPart } from './getPart';
 import { translatePart } from './translatePart';
 
-export const translateTranslatableParts = (
-  x: number,
-  y: number,
-  IDs: UUID[],
-) => {
+export const translateTranslatableParts = (vector: Vector2, IDs: UUID[]) => {
   mutateBlueprint((draft) => {
     const translate = (selections: UUID[]) => {
       selections.forEach((selection) => {
@@ -18,7 +15,7 @@ export const translateTranslatableParts = (
           if (part.n === 'Group') {
             translate((part as Group).partOrder);
           } else if ((part as AnyPart).p) {
-            translatePart(part.ID, x, y, draft);
+            translatePart(part.ID, vector, draft);
           }
         }
       });

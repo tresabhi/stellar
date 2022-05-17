@@ -3,8 +3,8 @@ import {
   deletePartsBySelection,
   groupPartsBySelection,
   selectPartsOnly,
-  translateTranslatablePartsBySelection,
-  unselectAllParts
+  translateTranslatablePartsBySelection as translate,
+  unselectAllParts,
 } from 'core/part';
 import useApp, { ToolType } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -12,6 +12,7 @@ import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
+import { Vector2 } from 'three';
 
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'layout',
@@ -21,8 +22,17 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
 ];
 
 // TODO: make this date driven
-const TRANSLATE_BY = 1;
-const SHIFT_TRANSLATE_BY = 10;
+const TRANSLATE = 1;
+const MAJOR_TRANSLATE = 10;
+
+const upVector = new Vector2(0, TRANSLATE);
+const downVector = new Vector2(0, -TRANSLATE);
+const leftVector = new Vector2(-TRANSLATE, 0);
+const rightVector = new Vector2(TRANSLATE, 0);
+const upMajorVector = new Vector2(0, MAJOR_TRANSLATE);
+const downMajorVector = new Vector2(0, -MAJOR_TRANSLATE);
+const leftMajorVector = new Vector2(-MAJOR_TRANSLATE, 0);
+const rightMajorVector = new Vector2(MAJOR_TRANSLATE, 0);
 
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
@@ -70,22 +80,14 @@ const useKeybinds = () => {
       }));
     });
 
-    bind('up', () => translateTranslatablePartsBySelection(0, TRANSLATE_BY));
-    bind('down', () => translateTranslatablePartsBySelection(0, -TRANSLATE_BY));
-    bind('left', () => translateTranslatablePartsBySelection(-TRANSLATE_BY, 0));
-    bind('right', () => translateTranslatablePartsBySelection(TRANSLATE_BY, 0));
-    bind('shift+up', () =>
-      translateTranslatablePartsBySelection(0, SHIFT_TRANSLATE_BY),
-    );
-    bind('shift+down', () =>
-      translateTranslatablePartsBySelection(0, -SHIFT_TRANSLATE_BY),
-    );
-    bind('shift+left', () =>
-      translateTranslatablePartsBySelection(-SHIFT_TRANSLATE_BY, 0),
-    );
-    bind('shift+right', () =>
-      translateTranslatablePartsBySelection(SHIFT_TRANSLATE_BY, 0),
-    );
+    bind('up', () => translate(upVector));
+    bind('down', () => translate(downVector));
+    bind('left', () => translate(leftVector));
+    bind('right', () => translate(rightVector));
+    bind('shift+up', () => translate(upMajorVector));
+    bind('shift+down', () => translate(downMajorVector));
+    bind('shift+left', () => translate(leftMajorVector));
+    bind('shift+right', () => translate(rightMajorVector));
 
     bind('ctrl+z', (event) => {
       event.preventDefault();
