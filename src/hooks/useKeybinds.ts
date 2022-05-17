@@ -4,7 +4,7 @@ import {
   groupPartsBySelection,
   selectPartsOnly,
   translateTranslatablePartsBySelection,
-  unselectAllParts,
+  unselectAllParts
 } from 'core/part';
 import useApp, { ToolType } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -22,7 +22,7 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
 
 // TODO: make this date driven
 const TRANSLATE_BY = 1;
-const SHIFT_TRANSLATE_BY = 5;
+const SHIFT_TRANSLATE_BY = 10;
 
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
