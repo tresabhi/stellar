@@ -8,7 +8,7 @@ export const disposeBoundingBoxes = (IDs: UUID[]) => {
   useBoundingBoxes.setState(
     produce((draft: UseBoundingBoxesCache) => {
       IDs.forEach((ID) => {
-        draft.delete(ID);
+        delete draft[ID];
       });
     }),
   );

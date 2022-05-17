@@ -1,17 +1,14 @@
+import ImmerableBox2 from 'classes/ImmerableBox2';
 import useBoundingBoxes, {
-  PrimitiveBoundingBox,
   UseBoundingBoxesCache,
 } from 'hooks/useBoundingBoxes';
 import produce from 'immer';
 import { UUID } from 'types/Parts';
 
-export const updateBoundingBox = (
-  ID: UUID,
-  boundingBox: PrimitiveBoundingBox,
-) => {
+export const updateBoundingBox = (ID: UUID, boundingBox: ImmerableBox2) => {
   useBoundingBoxes.setState(
     produce((draft: UseBoundingBoxesCache) => {
-      draft.set(ID, boundingBox);
+      draft[ID] = boundingBox;
     }),
   );
 };

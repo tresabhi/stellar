@@ -1,6 +1,5 @@
 import { Blueprint } from 'game/Blueprint';
 import {
-  computeFuelTankBoundingBox,
   FuelTankData,
   FuelTankIcon,
   FuelTankLayoutComponent,
@@ -8,7 +7,6 @@ import {
   VanillaFuelTankData,
 } from 'game/parts/FuelTank';
 import {
-  computeGroupBoundingBox,
   GroupData,
   groupExportify,
   GroupIcon,
@@ -23,11 +21,6 @@ import {
   PartPropertyComponentProps,
 } from 'types/Parts';
 import create from 'zustand';
-import { PrimitiveBoundingBox } from './useBoundingBoxes';
-
-export type BoundingBoxComputer<Type extends Part> = (
-  part: Type,
-) => PrimitiveBoundingBox;
 
 export type PartExportifier<Type extends Part> = (
   part: Type,
@@ -43,7 +36,6 @@ export interface PartRegistryItem {
   propertyComponent?: FC<PartPropertyComponentProps>;
   layoutComponent: FC<PartComponentProps>;
 
-  computeBoundingBox: BoundingBoxComputer<any>;
   exportify?: PartExportifier<any>;
 }
 
@@ -59,8 +51,6 @@ export const UsePartRegistryData: UsePartRegistry = new Map([
       iconComponent: FuelTankIcon,
       propertyComponent: FuelTankPropertyComponent,
       layoutComponent: FuelTankLayoutComponent,
-
-      computeBoundingBox: computeFuelTankBoundingBox,
     },
   ],
   [
@@ -72,7 +62,6 @@ export const UsePartRegistryData: UsePartRegistry = new Map([
       iconComponent: GroupIcon,
       layoutComponent: GroupLayoutComponent,
 
-      computeBoundingBox: computeGroupBoundingBox,
       exportify: groupExportify,
     },
   ],

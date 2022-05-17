@@ -1,8 +1,8 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Group } from 'game/parts/Group';
-import { PartWithTranslations } from 'game/parts/PartWithTranslations';
 import { AnyPart, UUID } from 'types/Parts';
 import { getPart } from './getPart';
+import { translatePart } from './translatePart';
 
 export const translateTranslatableParts = (
   x: number,
@@ -18,8 +18,7 @@ export const translateTranslatableParts = (
           if (part.n === 'Group') {
             translate((part as Group).partOrder);
           } else if ((part as AnyPart).p) {
-            (part as PartWithTranslations).p.x += x;
-            (part as PartWithTranslations).p.y += y;
+            translatePart(part.ID, x, y, draft);
           }
         }
       });

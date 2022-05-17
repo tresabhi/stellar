@@ -1,6 +1,6 @@
-import { getPartRegistry } from 'core/part';
-import usePartProperty from 'hooks/usePartProperty';
-import { FC, useRef } from 'react';
+import ImmerableBox2 from 'classes/ImmerableBox2';
+import useBoundingBoxes from 'hooks/useBoundingBoxes';
+import { FC, useEffect, useRef } from 'react';
 import {
   BufferGeometry,
   Line,
@@ -8,7 +8,7 @@ import {
   Mesh,
   MeshBasicMaterial,
   PlaneGeometry,
-  Vector2
+  Vector2,
 } from 'three';
 import { UUID } from 'types/Parts';
 
@@ -30,14 +30,9 @@ export const SelectionBox: FC<SelectionBoxProps> = ({ ID }) => {
   const line = useRef<Line>(null!);
   const plane = useRef<Mesh>(null!);
 
-  usePartProperty(
-    ID,
-    (state) => state,
-    (state) => {
-      const computeBoundingBox = getPartRegistry(state.n)?.computeBoundingBox;
-
-      if (computeBoundingBox) {
-        const boundingBox = computeBoundingBox(state);
+  useEffect(() => {
+    const rerender = (boundingBox: ImmerableBox2) => {
+      if (boundingBox) {
         const outlineGeometry = new BufferGeometry();
         const positions = [
           new Vector2(boundingBox.min.x, boundingBox.min.y),
@@ -60,8 +55,19 @@ export const SelectionBox: FC<SelectionBoxProps> = ({ ID }) => {
           0,
         );
       }
-    },
-  );
+    };
+    const unsubscribe = useBoundingBoxes.subscribe(
+      (state) => state[ID],
+      rerender,
+    );
+    const initialState = useBoundingBoxes.getState()[ID];
+
+    if (initialState) rerender(initialState);
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <>

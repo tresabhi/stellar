@@ -6,7 +6,7 @@ export * from './functions/deletePartsBySelection';
 export * from './functions/getParentID';
 export * from './functions/getPart';
 export * from './functions/getPartIndex';
-export * from './functions/getPartParent';
+export * from './functions/getParent';
 export * from './functions/getPartRegistry';
 export * from './functions/getParts';
 export * from './functions/groupParts';

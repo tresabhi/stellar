@@ -6,5 +6,4 @@ export * from './components/PanControls';
 export * from './components/PartCluster';
 export * from './components/SelectionBox';
 export * from './components/SelectionBoxes';
-export * from './components/SelectionControls';
 export * from './constants/layer';

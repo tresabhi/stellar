@@ -9,7 +9,6 @@ import { Grid } from './Grid';
 import { LayoutParts } from './LayoutParts';
 import { PanControls } from './PanControls';
 import { SelectionBoxes } from './SelectionBoxes';
-import { SelectionControls } from './SelectionControls';
 
 export const LayoutCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
@@ -46,7 +45,6 @@ export const LayoutCanvas = () => {
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
 
       <PanControls />
-      <SelectionControls />
 
       <Grid />
       <LayoutParts />

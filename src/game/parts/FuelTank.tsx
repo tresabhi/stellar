@@ -1,11 +1,19 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import ImmerableBox2 from 'classes/ImmerableBox2';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import { registerBoundingBox } from 'core/boundingBox';
 import { getPart } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
-import { BoundingBoxComputer } from 'hooks/usePartRegistry';
 import usePropertyController from 'hooks/usePropertyController';
-import { FC, useRef } from 'react';
-import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
+import useSelection from 'hooks/useSelection';
+import { FC, useEffect, useRef } from 'react';
+import {
+  CylinderGeometry,
+  Group,
+  Mesh,
+  MeshStandardMaterial,
+  Vector2,
+} from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
@@ -120,6 +128,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const meshRef = useRef<Mesh>(null!);
   const state = getPart<FuelTank>(ID)!;
 
+  const handleClick = useSelection(ID);
   usePartProperty(
     ID,
     (state: FuelTank) => state.N,
@@ -138,8 +147,30 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   );
   usePartWithTransformations(ID, groupRef);
 
+  useEffect(() => {
+    meshRef.current.geometry.computeBoundingBox();
+
+    const box3 = meshRef.current.geometry.boundingBox!;
+    const box2 = new ImmerableBox2(
+      new Vector2(
+        box3.min.x + meshRef.current.position.x + groupRef.current.position.x,
+        box3.min.y + meshRef.current.position.y + groupRef.current.position.y,
+      ),
+      new Vector2(
+        box3.max.x + meshRef.current.position.x + groupRef.current.position.x,
+        box3.max.y + meshRef.current.position.y + groupRef.current.position.y,
+      ),
+    );
+
+    registerBoundingBox(ID, box2);
+  });
+
   return (
-    <group ref={groupRef} position={[state.p.x, state.p.y, 0]}>
+    <group
+      ref={groupRef}
+      position={[state.p.x, state.p.y, 0]}
+      onClick={handleClick}
+    >
       <mesh
         ref={meshRef}
         material={temp_material}
@@ -186,20 +217,3 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 };
 
 export const FuelTankIcon = Icon;
-
-export const computeFuelTankBoundingBox: BoundingBoxComputer<FuelTank> = (
-  state,
-) => ({
-  min: {
-    x:
-      state.p.x -
-      (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.x),
-    y: state.p.y,
-  },
-  max: {
-    x:
-      state.p.x +
-      (Math.max(state.N.width_a, state.N.width_b) / 2) * Math.abs(state.o.y),
-    y: state.p.y + state.N.height * Math.abs(state.o.y),
-  },
-});
