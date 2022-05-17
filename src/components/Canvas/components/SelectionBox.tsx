@@ -67,7 +67,7 @@ export const SelectionBox: FC<SelectionBoxProps> = ({ ID }) => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [ID]);
 
   return (
     <>
