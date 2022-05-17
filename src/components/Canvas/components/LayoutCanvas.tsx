@@ -1,5 +1,6 @@
 import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
+import { unselectAllParts } from 'core/part';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import useSettings from 'hooks/useSettings';
@@ -41,6 +42,7 @@ export const LayoutCanvas = () => {
       }}
       className={styles['layout-canvas']}
       performance={{ min: regressAmount }}
+      onPointerMissed={unselectAllParts}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
 
