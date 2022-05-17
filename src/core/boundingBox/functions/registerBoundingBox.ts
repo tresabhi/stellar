@@ -1,14 +1,20 @@
-import ImmerableBox2 from 'classes/ImmerableBox2';
 import { getPart } from 'core/part';
-import useBoundingBoxes from 'hooks/useBoundingBoxes';
+import useBoundingBoxes, {
+  PrimitiveBox2,
+  UseBoundingBoxes,
+} from 'hooks/useBoundingBoxes';
+import produce from 'immer';
 import { UUID } from 'types/Parts';
 
-export const registerBoundingBox = (ID: UUID, boundingBox: ImmerableBox2) => {
+export const registerBoundingBox = (ID: UUID, boundingBox: PrimitiveBox2) => {
   const part = getPart(ID);
 
   if (part) {
-    useBoundingBoxes.setState((state) => {
-      state[ID] = boundingBox;
-    });
+    // TODO: replace all produce(state: Type) with produce<Type>(state)
+    useBoundingBoxes.setState(
+      produce<UseBoundingBoxes>((state) => {
+        state[ID] = boundingBox;
+      }),
+    );
   }
 };

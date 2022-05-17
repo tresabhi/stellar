@@ -1,20 +1,21 @@
-import ImmerableBox2 from 'classes/ImmerableBox2';
 import { cloneDeep } from 'lodash';
 import { UUID } from 'types/Parts';
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-export type UseBoundingBoxesCache = { [key: UUID]: ImmerableBox2 };
+export interface PrimitiveBox2 {
+  min: { x: number; y: number };
+  max: { x: number; y: number };
+}
 
-export const UseBoundingBoxStoreData: UseBoundingBoxesCache = {};
+export type UseBoundingBoxes = { [key: UUID]: PrimitiveBox2 };
+
+export const UseBoundingBoxData: UseBoundingBoxes = {};
 
 const useBoundingBoxes = create<
-  UseBoundingBoxesCache,
-  SetState<UseBoundingBoxesCache>,
-  GetState<UseBoundingBoxesCache>,
-  Mutate<
-    StoreApi<UseBoundingBoxesCache>,
-    [['zustand/subscribeWithSelector', never]]
-  >
->(subscribeWithSelector(() => cloneDeep(UseBoundingBoxStoreData)));
+  UseBoundingBoxes,
+  SetState<UseBoundingBoxes>,
+  GetState<UseBoundingBoxes>,
+  Mutate<StoreApi<UseBoundingBoxes>, [['zustand/subscribeWithSelector', never]]>
+>(subscribeWithSelector(() => cloneDeep(UseBoundingBoxData)));
 export default useBoundingBoxes;

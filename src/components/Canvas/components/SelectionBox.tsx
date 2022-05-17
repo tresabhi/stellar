@@ -1,6 +1,5 @@
-import ImmerableBox2 from 'classes/ImmerableBox2';
-import useBoundingBoxes from 'hooks/useBoundingBoxes';
-import { FC, useEffect, useRef } from 'react';
+import useBoundingBoxes, { PrimitiveBox2 } from 'hooks/useBoundingBoxes';
+import { memo, useEffect, useRef } from 'react';
 import {
   BufferGeometry,
   Line,
@@ -26,12 +25,12 @@ const shadedMaterial = new MeshBasicMaterial({
 export interface SelectionBoxProps {
   ID: UUID;
 }
-export const SelectionBox: FC<SelectionBoxProps> = ({ ID }) => {
+export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
   const line = useRef<Line>(null!);
   const plane = useRef<Mesh>(null!);
 
   useEffect(() => {
-    const rerender = (boundingBox: ImmerableBox2) => {
+    const rerender = (boundingBox: PrimitiveBox2) => {
       if (boundingBox) {
         const outlineGeometry = new BufferGeometry();
         const positions = [
@@ -75,4 +74,4 @@ export const SelectionBox: FC<SelectionBoxProps> = ({ ID }) => {
       <mesh ref={plane} material={shadedMaterial} />
     </>
   );
-};
+});

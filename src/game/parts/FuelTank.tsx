@@ -1,5 +1,4 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import ImmerableBox2 from 'classes/ImmerableBox2';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { registerBoundingBox } from 'core/boundingBox';
 import { getPart } from 'core/part';
@@ -7,13 +6,7 @@ import usePartProperty from 'hooks/usePartProperty';
 import usePartSelectionControl from 'hooks/usePartSelectionControl';
 import usePropertyController from 'hooks/usePropertyController';
 import { FC, useEffect, useRef } from 'react';
-import {
-  CylinderGeometry,
-  Group,
-  Mesh,
-  MeshStandardMaterial,
-  Vector2,
-} from 'three';
+import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
@@ -151,18 +144,21 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
     meshRef.current.geometry.computeBoundingBox();
 
     const box3 = meshRef.current.geometry.boundingBox!;
-    const box2 = new ImmerableBox2(
-      new Vector2(
-        box3.min.x + meshRef.current.position.x + groupRef.current.position.x,
-        box3.min.y + meshRef.current.position.y + groupRef.current.position.y,
-      ),
-      new Vector2(
-        box3.max.x + meshRef.current.position.x + groupRef.current.position.x,
-        box3.max.y + meshRef.current.position.y + groupRef.current.position.y,
-      ),
-    );
 
-    registerBoundingBox(ID, box2);
+    registerBoundingBox(ID, {
+      min: {
+        x:
+          box3.min.x + meshRef.current.position.x + groupRef.current.position.x,
+        y:
+          box3.min.y + meshRef.current.position.y + groupRef.current.position.y,
+      },
+      max: {
+        x:
+          box3.max.x + meshRef.current.position.x + groupRef.current.position.x,
+        y:
+          box3.max.y + meshRef.current.position.y + groupRef.current.position.y,
+      },
+    });
   });
 
   return (
