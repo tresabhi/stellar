@@ -18,6 +18,10 @@ export const LayoutCanvas = () => {
   );
   const initialBlueprintState = useBlueprint.getState();
 
+  const handlePointerMissed = () => {
+    if (useApp.getState().tool === 'transform') unselectAllParts();
+  };
+
   useEffect(() => {
     useApp.subscribe(
       (state) => state.tool,
@@ -42,7 +46,7 @@ export const LayoutCanvas = () => {
       }}
       className={styles['layout-canvas']}
       performance={{ min: regressAmount }}
-      onPointerMissed={unselectAllParts}
+      onPointerMissed={handlePointerMissed}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
 

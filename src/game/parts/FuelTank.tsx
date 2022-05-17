@@ -4,8 +4,8 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { registerBoundingBox } from 'core/boundingBox';
 import { getPart } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
+import usePartSelectionControl from 'hooks/usePartSelectionControl';
 import usePropertyController from 'hooks/usePropertyController';
-import useSelection from 'hooks/useSelection';
 import { FC, useEffect, useRef } from 'react';
 import {
   CylinderGeometry,
@@ -128,7 +128,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const meshRef = useRef<Mesh>(null!);
   const state = getPart<FuelTank>(ID)!;
 
-  const handleClick = useSelection(ID);
+  const handleClick = usePartSelectionControl(ID);
   usePartProperty(
     ID,
     (state: FuelTank) => state.N,

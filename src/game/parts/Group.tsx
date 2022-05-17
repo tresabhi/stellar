@@ -2,7 +2,7 @@ import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
 import { getPart, partExportify, removePartMetaData } from 'core/part';
 import { PartExportifier } from 'hooks/usePartRegistry';
-import useSelection from 'hooks/useSelection';
+import usePartSelectionControl from 'hooks/usePartSelectionControl';
 import { isArray } from 'lodash';
 import { FC } from 'react';
 import { AnyVanillaPart, PartComponentProps, UUID } from 'types/Parts';
@@ -24,7 +24,7 @@ export const GroupData: Group = {
 };
 
 export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
-  const handleClick = useSelection(ID);
+  const handleClick = usePartSelectionControl(ID);
 
   return <PartCluster parentID={ID} onClick={handleClick} />;
 };
