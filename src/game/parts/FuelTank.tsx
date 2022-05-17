@@ -1,11 +1,11 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import { registerBoundingBox } from 'core/boundingBox';
 import { getPart } from 'core/part';
+import useBoundingBox from 'hooks/useBoundingBox';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartSelectionControl from 'hooks/usePartSelectionControl';
 import usePropertyController from 'hooks/usePropertyController';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
@@ -117,8 +117,8 @@ const temp_material = new MeshStandardMaterial({
 });
 
 export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
-  const groupRef = useRef<Group>(null!);
-  const meshRef = useRef<Mesh>(null!);
+  const group = useRef<Group>(null!);
+  const mesh = useRef<Mesh>(null!);
   const state = getPart<FuelTank>(ID)!;
 
   const handleClick = usePartSelectionControl(ID);
@@ -126,7 +126,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
     ID,
     (state: FuelTank) => state.N,
     (N) => {
-      meshRef.current!.geometry = new CylinderGeometry(
+      mesh.current!.geometry = new CylinderGeometry(
         N.width_b / 2,
         N.width_a / 2,
         N.height,
@@ -138,37 +138,17 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
       );
     },
   );
-  usePartWithTransformations(ID, groupRef);
-
-  useEffect(() => {
-    meshRef.current.geometry.computeBoundingBox();
-
-    const box3 = meshRef.current.geometry.boundingBox!;
-
-    registerBoundingBox(ID, {
-      min: {
-        x:
-          box3.min.x + meshRef.current.position.x + groupRef.current.position.x,
-        y:
-          box3.min.y + meshRef.current.position.y + groupRef.current.position.y,
-      },
-      max: {
-        x:
-          box3.max.x + meshRef.current.position.x + groupRef.current.position.x,
-        y:
-          box3.max.y + meshRef.current.position.y + groupRef.current.position.y,
-      },
-    });
-  });
+  usePartWithTransformations(ID, group);
+  useBoundingBox(ID, mesh);
 
   return (
     <group
-      ref={groupRef}
+      ref={group}
       position={[state.p.x, state.p.y, 0]}
       onClick={handleClick}
     >
       <mesh
-        ref={meshRef}
+        ref={mesh}
         material={temp_material}
         position={[0, state.N.height / 2, 0]}
       />
