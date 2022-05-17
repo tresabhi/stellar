@@ -3,4 +3,3 @@ export * from './functions/disposeBoundingBoxes';
 export * from './functions/registerBoundingBox';
 export * from './functions/translateBoundingBox';
 export * from './functions/translateBoundingBoxes';
-export * from './functions/updateBoundingBox';

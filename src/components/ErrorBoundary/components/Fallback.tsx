@@ -38,12 +38,14 @@ export const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   }).toString();
   const reportURL = `https://github.com/TresAbhi/Stellar/issues/new?${URLParams}`;
 
-  const handleDebugClick = () =>
+  // TODO: replace all produce(state: Type) with produce<Type>(state)
+  const handleDebugClick = () => {
     useSettings.setState(
       produce((state: UseSettings) => {
         state.debug.error_logs = !state.debug.error_logs;
       }),
     );
+  };
 
   return (
     <div className={styles['error-boundary']}>

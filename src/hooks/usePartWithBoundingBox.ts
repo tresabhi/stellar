@@ -3,7 +3,10 @@ import { MutableRefObject, useEffect } from 'react';
 import { Box3, Group, Mesh } from 'three';
 import { UUID } from 'types/Parts';
 
-const useBoundingBox = (ID: UUID, mesh: MutableRefObject<Mesh | Group>) => {
+const usePartWithBoundingBox = (
+  ID: UUID,
+  mesh: MutableRefObject<Mesh | Group>,
+) => {
   useEffect(() => {
     const box3 = new Box3();
 
@@ -20,4 +23,4 @@ const useBoundingBox = (ID: UUID, mesh: MutableRefObject<Mesh | Group>) => {
     });
   });
 };
-export default useBoundingBox;
+export default usePartWithBoundingBox;

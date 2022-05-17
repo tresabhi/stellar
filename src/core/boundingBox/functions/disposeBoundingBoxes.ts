@@ -1,13 +1,8 @@
-import useBoundingBoxes, { UseBoundingBoxes } from 'hooks/useBoundingBoxes';
-import produce from 'immer';
+import { Blueprint } from 'game/Blueprint';
 import { UUID } from 'types/Parts';
 
-export const disposeBoundingBoxes = (IDs: UUID[]) => {
-  useBoundingBoxes.setState(
-    produce((draft: UseBoundingBoxes) => {
-      IDs.forEach((ID) => {
-        delete draft[ID];
-      });
-    }),
-  );
+export const disposeBoundingBoxes = (IDs: UUID[], state: Blueprint) => {
+  IDs.forEach((ID) => {
+    delete state.boundingBoxes[ID];
+  });
 };

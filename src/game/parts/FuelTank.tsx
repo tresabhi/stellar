@@ -1,9 +1,9 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { getPart } from 'core/part';
-import useBoundingBox from 'hooks/useBoundingBox';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartSelectionControl from 'hooks/usePartSelectionControl';
+import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
 import usePropertyController from 'hooks/usePropertyController';
 import { FC, useRef } from 'react';
 import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
@@ -139,7 +139,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
     },
   );
   usePartWithTransformations(ID, group);
-  useBoundingBox(ID, mesh);
+  usePartWithBoundingBox(ID, mesh);
 
   return (
     <group

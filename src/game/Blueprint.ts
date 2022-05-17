@@ -1,5 +1,10 @@
 import { AnyPart, AnyPartMap, AnyVanillaPart, UUID } from 'types/Parts';
 
+export interface PrimitiveBox2 {
+  min: { x: number; y: number };
+  max: { x: number; y: number };
+}
+
 export interface VanillaBlueprint {
   center: number;
   offset: { x: number; y: number };
@@ -13,6 +18,7 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   selections: UUID[];
   parts: AnyPartMap;
   partOrder: UUID[];
+  boundingBoxes: { [key: UUID]: PrimitiveBox2 };
 }
 
 export interface SavedBlueprint extends Omit<Blueprint, 'parts'> {
@@ -34,6 +40,7 @@ export const BlueprintData: Blueprint = {
   selections: [],
   parts: new Map(),
   partOrder: [],
+  boundingBoxes: {},
 };
 
 export const SavedBlueprintData: SavedBlueprint = {

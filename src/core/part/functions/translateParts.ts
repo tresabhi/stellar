@@ -21,7 +21,7 @@ export const translateParts = (
       },
       state,
     );
-    if (updateBoundingBoxes) translateBoundingBoxes(IDs, vector);
+    if (updateBoundingBoxes) translateBoundingBoxes(IDs, vector, state);
   } else {
     mutateBlueprint((draft) => {
       translateParts(IDs, vector, draft);

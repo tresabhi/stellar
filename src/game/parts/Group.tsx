@@ -1,9 +1,9 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
 import { getPart, partExportify, removePartMetaData } from 'core/part';
-import useBoundingBox from 'hooks/useBoundingBox';
 import { PartExportifier } from 'hooks/usePartRegistry';
 import usePartSelectionControl from 'hooks/usePartSelectionControl';
+import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
 import { isArray } from 'lodash';
 import { FC, useRef } from 'react';
 import { Group as ThreeGroup } from 'three';
@@ -29,7 +29,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const group = useRef<ThreeGroup>(null!);
   const handleClick = usePartSelectionControl(ID);
 
-  useBoundingBox(ID, group);
+  usePartWithBoundingBox(ID, group);
 
   return <PartCluster ref={group} parentID={ID} onClick={handleClick} />;
 };

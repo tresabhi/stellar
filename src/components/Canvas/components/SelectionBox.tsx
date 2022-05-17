@@ -1,4 +1,5 @@
-import useBoundingBoxes, { PrimitiveBox2 } from 'hooks/useBoundingBoxes';
+import { PrimitiveBox2 } from 'game/Blueprint';
+import useBlueprint from 'hooks/useBlueprint';
 import { memo, useEffect, useRef } from 'react';
 import {
   BufferGeometry,
@@ -55,11 +56,11 @@ export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
         );
       }
     };
-    const unsubscribe = useBoundingBoxes.subscribe(
-      (state) => state[ID],
+    const unsubscribe = useBlueprint.subscribe(
+      (state) => state.boundingBoxes[ID],
       rerender,
     );
-    const initialState = useBoundingBoxes.getState()[ID];
+    const initialState = useBlueprint.getState().boundingBoxes[ID];
 
     if (initialState) rerender(initialState);
 
