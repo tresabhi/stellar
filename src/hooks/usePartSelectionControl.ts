@@ -1,9 +1,12 @@
 import { ThreeEvent } from '@react-three/fiber';
+import { mutateBlueprint } from 'core/blueprint';
 import {
   getParent,
+  getParentID,
   getPart,
   selectPartOnly,
   togglePartSelection,
+  unselectPart,
 } from 'core/part';
 import { UUID } from 'types/Parts';
 import useApp from './useApp';
@@ -22,10 +25,23 @@ const usePartSelectionControl = (ID: UUID) => {
         event.stopPropagation();
 
         if (part) {
-          if (event.nativeEvent.shiftKey) {
-            togglePartSelection(ID);
+          if (event.nativeEvent.ctrlKey) {
+            if (event.nativeEvent.shiftKey) {
+              togglePartSelection(ID);
+            } else {
+              selectPartOnly(ID);
+            }
           } else {
-            selectPartOnly(ID);
+            if (event.nativeEvent.shiftKey) {
+              const parentID = getParentID(ID);
+
+              mutateBlueprint((draft) => {
+                togglePartSelection(ID, draft);
+                if (parentID) unselectPart(parentID, draft);
+              });
+            } else {
+              selectPartOnly(ID);
+            }
           }
         }
       }
