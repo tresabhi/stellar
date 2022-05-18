@@ -53,7 +53,9 @@ jobs:
 
   deploy:
     name: Deploy
-    environment: Alpha
+    environment:
+      name: Release
+      url: https://stellaredit.web.app/
     needs: build
     runs-on: ubuntu-latest
     if: github.repository == 'TresAbhi/Stellar'
