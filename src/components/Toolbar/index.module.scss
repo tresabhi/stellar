@@ -30,7 +30,7 @@ $button-size: 28px;
       margin-left: $margin-regular;
     }
 
-    &:not(.disabled) {
+    &:not([disabled]) {
       &:hover {
         background-color: $black-x-light;
       }
@@ -41,7 +41,7 @@ $button-size: 28px;
       }
     }
 
-    &.disabled {
+    &[disabled] {
       opacity: 0.5;
       cursor: default;
     }

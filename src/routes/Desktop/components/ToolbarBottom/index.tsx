@@ -6,16 +6,43 @@ import * as Toolbar from 'components/Toolbar';
 import { fileSave, versionRedo, versionUndo } from 'core/blueprint';
 import useApp, { ToolType } from 'hooks/useApp';
 import useVersionControl from 'hooks/useVersionControl';
+import { useEffect, useRef } from 'react';
 import styles from './index.module.scss';
-
-//@ts-ignore
-window.a = useVersionControl;
 
 const ToolbarBottom = () => {
   const tool = (name: ToolType) => () => useApp.setState({ tool: name });
   const mode = useApp((state) => state.tool);
-  const versionIndex = useVersionControl((state) => state.index);
-  const versionCount = useVersionControl((state) => state.history.length);
+  const undoRef = useRef<HTMLButtonElement>(null!);
+  const redoRef = useRef<HTMLButtonElement>(null!);
+  const initialVersionControlState = useVersionControl.getState();
+
+  useEffect(() => {
+    const unsubscribeUndo = useVersionControl.subscribe(
+      (state) => state.index,
+      (index) => {
+        if (index === -1) {
+          undoRef.current.disabled = true;
+        } else {
+          undoRef.current.disabled = false;
+        }
+      },
+    );
+    const unsubscribeRedo = useVersionControl.subscribe(
+      (state) => ({ length: state.history.length, index: state.index }),
+      ({ index, length }) => {
+        if (index === length - 1) {
+          redoRef.current.disabled = true;
+        } else {
+          redoRef.current.disabled = false;
+        }
+      },
+    );
+
+    return () => {
+      unsubscribeUndo();
+      unsubscribeRedo();
+    };
+  }, []);
 
   return (
     <div className={styles['toolbar-bottom']}>
@@ -32,11 +59,19 @@ const ToolbarBottom = () => {
           </Toolbar.Button>
         </Toolbar.Container>
         <Toolbar.Container>
-          <Toolbar.Button disabled={versionIndex === -1} onClick={versionUndo}>
+          <Toolbar.Button
+            ref={undoRef}
+            disabled={initialVersionControlState.index === -1}
+            onClick={versionUndo}
+          >
             <UndoIcon />
           </Toolbar.Button>
           <Toolbar.Button
-            disabled={versionIndex === versionCount - 1}
+            ref={redoRef}
+            disabled={
+              initialVersionControlState.index ===
+              initialVersionControlState.history.length - 1
+            }
             onClick={versionRedo}
           >
             <RedoIcon />
