@@ -1,6 +1,7 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { getPart } from 'core/part';
+import usePartCanvasTranslationControls from 'hooks/usePartCanvasTranslationControls';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartSelectionControl from 'hooks/usePartSelectionControl';
 import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
@@ -122,6 +123,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const state = getPart<FuelTank>(ID)!;
 
   const handleClick = usePartSelectionControl(ID);
+  const handlePointerDown = usePartCanvasTranslationControls(ID);
   usePartProperty(
     ID,
     (state: FuelTank) => state.N,
@@ -146,6 +148,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
       ref={group}
       position={[state.p.x, state.p.y, 0]}
       onClick={handleClick}
+      onPointerDown={handlePointerDown}
     >
       <mesh
         ref={mesh}

@@ -20,7 +20,7 @@ export const PanControls = () => {
       event.preventDefault();
 
       if (event.ctrlKey) {
-        const initialMousePos = getMousePos();
+        const initialMousePos = getMousePos(event);
 
         const zoomCompensatedDeltaY =
           event.deltaY * 4 * inverseLerp(0, MAX_ZOOM, camera.zoom);
@@ -32,7 +32,7 @@ export const PanControls = () => {
         camera.zoom = zoom;
         camera.updateProjectionMatrix();
 
-        const newPos = getMousePos();
+        const newPos = getMousePos(event);
         const delta = new Vector2(
           newPos.x - initialMousePos.x,
           newPos.y - initialMousePos.y,
@@ -54,16 +54,16 @@ export const PanControls = () => {
       }
     };
 
-    const handleMouseDown = () => {
+    const handleMouseDown = (event: MouseEvent) => {
       const tool = useApp.getState().tool;
 
       if (tool === 'pan') {
-        initialMousePos = getMousePos();
+        initialMousePos = getMousePos(event);
         canvas.addEventListener('mousemove', handleMouseMove);
       }
     };
-    const handleMouseMove = () => {
-      const newPos = getMousePos();
+    const handleMouseMove = (event: MouseEvent) => {
+      const newPos = getMousePos(event);
       const delta = new Vector2(
         newPos.x - initialMousePos.x,
         newPos.y - initialMousePos.y,

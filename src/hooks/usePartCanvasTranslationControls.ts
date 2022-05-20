@@ -1,5 +1,6 @@
 import { ThreeEvent } from '@react-three/fiber';
-import { mutateBlueprintVersionless } from 'core/blueprint';
+import { mutateBlueprint, mutateBlueprintVersionless } from 'core/blueprint';
+import { translateBoundingBoxes } from 'core/boundingBox';
 import { getPart, mutateParts, selectPartOnly } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import useBlueprint from 'hooks/useBlueprint';
@@ -8,9 +9,6 @@ import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useMousePos from './useMousePos';
 
-/**
- * @deprecated
- */
 const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
   ID: UUID,
 ) => {
@@ -26,7 +24,6 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
     window.removeEventListener('pointermove', onPointerMove);
 
     if (deltaX > 0 || deltaY > 0) {
-      // revert to original offset
       mutateBlueprintVersionless((draft) => {
         mutateParts<Type>(
           draft.selections,
@@ -36,17 +33,32 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
           },
           draft,
         );
+        translateBoundingBoxes(
+          draft.selections,
+          new Vector2(-deltaX, -deltaY),
+          draft,
+        );
       });
 
-      // apply them again with history
-      mutateParts<Type>(useBlueprint.getState().selections, (state) => {
-        state.p.x += deltaX;
-        state.p.y += deltaY;
+      mutateBlueprint((draft) => {
+        mutateParts<Type>(
+          useBlueprint.getState().selections,
+          (state) => {
+            state.p.x += deltaX;
+            state.p.y += deltaY;
+          },
+          draft,
+        );
+        translateBoundingBoxes(
+          draft.selections,
+          new Vector2(deltaX, deltaY),
+          draft,
+        );
       });
     }
   };
-  const onPointerMove = () => {
-    const mousePos = getMousePos();
+  const onPointerMove = (event: PointerEvent) => {
+    const mousePos = getMousePos(event);
     const newDeltaX = snap(mousePos.x - initialMousePos.x, 1);
     const newDeltaY = snap(mousePos.y - initialMousePos.y, 1);
 
@@ -57,22 +69,19 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
 
     if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
       mutateBlueprintVersionless((draft) => {
-        // mutateParts<Type>(
-        //   draft.selections,
-        //   (state) => {
-        //     state.p.x += newDeltaX - deltaX;
-        //     state.p.y += newDeltaY - deltaY;
-        //   },
-        //   draft,
-        // );
-        draft.selections.forEach((selection) => {
-          const part = getPart<PartWithTransformations>(selection);
-
-          if (part) {
-            part.p.x += newDeltaX - deltaX;
-            part.p.y += newDeltaY - deltaY;
-          }
-        });
+        mutateParts<Type>(
+          draft.selections,
+          (state) => {
+            state.p.x += newDeltaX - deltaX;
+            state.p.y += newDeltaY - deltaY;
+          },
+          draft,
+        );
+        translateBoundingBoxes(
+          draft.selections,
+          new Vector2(newDeltaX - deltaX, newDeltaY - deltaY),
+          draft,
+        );
       });
     }
 
@@ -85,7 +94,7 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
     if (part) {
       event.stopPropagation();
 
-      initialMousePos = getMousePos();
+      initialMousePos = getMousePos(event);
       deltaX = 0;
       deltaY = 0;
 
