@@ -1,7 +1,7 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { getPart } from 'core/part';
-import usePartCanvasTranslationControls from 'hooks/usePartCanvasTranslationControls';
+import useDragControls from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
 import usePartSelectionControl from 'hooks/usePartSelectionControl';
 import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
@@ -123,7 +123,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const state = getPart<FuelTank>(ID)!;
 
   const handleClick = usePartSelectionControl(ID);
-  const handlePointerDown = usePartCanvasTranslationControls(ID);
+  const handlePointerDown = useDragControls<FuelTank>(ID);
   usePartProperty(
     ID,
     (state: FuelTank) => state.N,

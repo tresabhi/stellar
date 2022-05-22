@@ -22,38 +22,42 @@ const shadedMaterial = new MeshBasicMaterial({
   transparent: true,
   opacity: 0.25,
 });
+const unitSquare = new PlaneGeometry(1, 1);
+const unitPoints = [
+  new Vector2(0, 0),
+  new Vector2(1, 0),
+  new Vector2(1, 1),
+  new Vector2(0, 1),
+  new Vector2(0, 0),
+];
+const outlineGeometry = new BufferGeometry().setFromPoints(unitPoints);
 
 export interface SelectionBoxProps {
   ID: UUID;
 }
 export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
-  const line = useRef<Line>(null!);
-  const plane = useRef<Mesh>(null!);
+  const outline = useRef<Line>(null!);
+  const shading = useRef<Mesh>(null!);
 
   useEffect(() => {
     const rerender = (boundingBox: PrimitiveBox2) => {
       if (boundingBox) {
-        const outlineGeometry = new BufferGeometry();
-        const positions = [
-          new Vector2(boundingBox.min.x, boundingBox.min.y),
-          new Vector2(boundingBox.max.x, boundingBox.min.y),
-          new Vector2(boundingBox.max.x, boundingBox.max.y),
-          new Vector2(boundingBox.min.x, boundingBox.max.y),
-          new Vector2(boundingBox.min.x, boundingBox.min.y),
-        ];
-        const shadedGeometry = new PlaneGeometry(
+        shading.current.scale.set(
           boundingBox.max.x - boundingBox.min.x,
           boundingBox.max.y - boundingBox.min.y,
+          1,
         );
-
-        outlineGeometry.setFromPoints(positions);
-        line.current.geometry = outlineGeometry;
-        plane.current.geometry = shadedGeometry;
-        plane.current.position.set(
+        shading.current.position.set(
           boundingBox.min.x + (boundingBox.max.x - boundingBox.min.x) / 2,
           boundingBox.min.y + (boundingBox.max.y - boundingBox.min.y) / 2,
           0,
         );
+        outline.current.scale.set(
+          boundingBox.max.x - boundingBox.min.x,
+          boundingBox.max.y - boundingBox.min.y,
+          1,
+        );
+        outline.current.position.set(boundingBox.min.x, boundingBox.min.y, 0);
       }
     };
     const unsubscribe = useBlueprint.subscribe(
@@ -71,8 +75,12 @@ export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
 
   return (
     <>
-      <line_ ref={line} material={outlineMaterial} />
-      <mesh ref={plane} material={shadedMaterial} />
+      <line_
+        ref={outline}
+        material={outlineMaterial}
+        geometry={outlineGeometry}
+      />
+      <mesh ref={shading} material={shadedMaterial} geometry={unitSquare} />
     </>
   );
 });

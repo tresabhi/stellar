@@ -11,6 +11,8 @@ export interface UseApp {
   tab: TabType;
 
   tool: ToolType;
+
+  preventNextSelection: boolean;
 }
 
 export const UseAppData: UseApp = {
@@ -19,6 +21,8 @@ export const UseAppData: UseApp = {
   tab: 'layout',
 
   tool: 'transform',
+
+  preventNextSelection: false,
 };
 
 const useApp = create<

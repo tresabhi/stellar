@@ -6,14 +6,17 @@ import {
   getPart,
   selectPartOnly,
   togglePartSelection,
-  unselectPart,
+  unselectPart
 } from 'core/part';
 import { UUID } from 'types/Parts';
 import useApp from './useApp';
 
 const usePartSelectionControl = (ID: UUID) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
-    if (useApp.getState().tool === 'transform') {
+    if (
+      !useApp.getState().preventNextSelection &&
+      useApp.getState().tool === 'transform'
+    ) {
       const part = getPart(ID);
       const parent = getParent(ID);
 
@@ -45,6 +48,9 @@ const usePartSelectionControl = (ID: UUID) => {
           }
         }
       }
+    } else {
+      useApp.setState({ preventNextSelection: false });
+      event.stopPropagation();
     }
   };
 

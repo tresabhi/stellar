@@ -7,11 +7,10 @@ import useBlueprint from 'hooks/useBlueprint';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
+import useApp from './useApp';
 import useMousePos from './useMousePos';
 
-const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
-  ID: UUID,
-) => {
+const useDragControls = <Type extends PartWithTransformations>(ID: UUID) => {
   const getMousePos = useMousePos();
 
   let selectedInitially = false;
@@ -56,6 +55,15 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
         );
       });
     }
+
+    const removeSelectionRestriction = () => {
+      // fire this just in case selection does not happen
+      useApp.setState({ preventNextSelection: false });
+      window.removeEventListener('pointerup', removeSelectionRestriction);
+    };
+
+    useApp.setState({ preventNextSelection: true });
+    window.addEventListener('pointerup', removeSelectionRestriction);
   };
   const onPointerMove = (event: PointerEvent) => {
     const mousePos = getMousePos(event);
@@ -107,4 +115,4 @@ const usePartCanvasTranslationControls = <Type extends PartWithTransformations>(
 
   return handlePointerDown;
 };
-export default usePartCanvasTranslationControls;
+export default useDragControls;
