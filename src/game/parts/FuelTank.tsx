@@ -3,9 +3,9 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { getPart } from 'core/part';
 import useDragControls from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
-import usePartSelectionControl from 'hooks/usePartSelectionControl';
 import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
 import usePropertyController from 'hooks/usePropertyController';
+import useSelectionControl from 'hooks/useSelectionControl';
 import { FC, useRef } from 'react';
 import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
@@ -122,7 +122,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const mesh = useRef<Mesh>(null!);
   const state = getPart<FuelTank>(ID)!;
 
-  const handleClick = usePartSelectionControl(ID);
+  const handleClick = useSelectionControl(ID);
   const handlePointerDown = useDragControls<FuelTank>(ID);
   usePartProperty(
     ID,

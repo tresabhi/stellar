@@ -54,16 +54,16 @@ const useDragControls = <Type extends PartWithTransformations>(ID: UUID) => {
           draft,
         );
       });
+
+      const removeSelectionRestriction = () => {
+        // fire this just in case selection does not happen
+        useApp.setState({ preventNextSelection: false });
+        window.removeEventListener('pointerup', removeSelectionRestriction);
+      };
+
+      useApp.setState({ preventNextSelection: true });
+      window.addEventListener('pointerup', removeSelectionRestriction);
     }
-
-    const removeSelectionRestriction = () => {
-      // fire this just in case selection does not happen
-      useApp.setState({ preventNextSelection: false });
-      window.removeEventListener('pointerup', removeSelectionRestriction);
-    };
-
-    useApp.setState({ preventNextSelection: true });
-    window.addEventListener('pointerup', removeSelectionRestriction);
   };
   const onPointerMove = (event: PointerEvent) => {
     const mousePos = getMousePos(event);

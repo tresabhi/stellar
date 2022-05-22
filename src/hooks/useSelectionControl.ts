@@ -11,7 +11,7 @@ import {
 import { UUID } from 'types/Parts';
 import useApp from './useApp';
 
-const usePartSelectionControl = (ID: UUID) => {
+const useSelectionControl = (ID: UUID) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
     if (
       !useApp.getState().preventNextSelection &&
@@ -56,4 +56,4 @@ const usePartSelectionControl = (ID: UUID) => {
 
   return handleClick;
 };
-export default usePartSelectionControl;
+export default useSelectionControl;
