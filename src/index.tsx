@@ -6,10 +6,12 @@ import SplashScreen from 'routes/SplashScreen';
 import applyThreeMeshBVHPatches from 'utilities/applyThreeMeshBVHPatches';
 import registerThreeElements from 'utilities/registerThreeElements';
 import { primeServiceWorker } from 'utilities/serviceWorkerRegistration';
+import validateLang from 'utilities/validateLang';
 
 primeServiceWorker();
 registerThreeElements();
 applyThreeMeshBVHPatches();
+validateLang();
 enableMapSet();
 enablePatches();
 

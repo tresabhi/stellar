@@ -44,6 +44,11 @@ export const LayoutCanvas = () => {
         }
       },
     );
+
+    return () => {
+      unsubscribeTool();
+      unsubscribeIsSpaceDown();
+    };
   });
 
   return (
