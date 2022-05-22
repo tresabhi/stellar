@@ -6,17 +6,16 @@ import {
   getPart,
   selectPartOnly,
   togglePartSelection,
-  unselectPart
+  unselectPart,
 } from 'core/part';
 import { UUID } from 'types/Parts';
 import useApp from './useApp';
 
 const useSelectionControl = (ID: UUID) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
-    if (
-      !useApp.getState().preventNextSelection &&
-      useApp.getState().tool === 'transform'
-    ) {
+    const { preventNextSelection, tool, isSpaceDown } = useApp.getState();
+
+    if (!preventNextSelection && tool === 'transform' && !isSpaceDown) {
       const part = getPart(ID);
       const parent = getParent(ID);
 

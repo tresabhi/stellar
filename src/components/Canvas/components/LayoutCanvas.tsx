@@ -19,16 +19,27 @@ export const LayoutCanvas = () => {
   const initialBlueprintState = useBlueprint.getState();
 
   const handlePointerMissed = () => {
-    if (useApp.getState().tool === 'transform') unselectAllParts();
+    const { tool, isSpaceDown } = useApp.getState();
+    if (tool === 'transform' && !isSpaceDown) unselectAllParts();
   };
 
   useEffect(() => {
-    useApp.subscribe(
+    const unsubscribeTool = useApp.subscribe(
       (state) => state.tool,
       (tool) => {
         if (tool === 'pan') {
           canvasRef.current.classList.add(styles.pan);
         } else {
+          canvasRef.current.classList.remove(styles.pan);
+        }
+      },
+    );
+    const unsubscribeIsSpaceDown = useApp.subscribe(
+      (state) => state.isSpaceDown,
+      (isSpaceDown) => {
+        if (isSpaceDown) {
+          canvasRef.current.classList.add(styles.pan);
+        } else if (useApp.getState().tool !== 'pan') {
           canvasRef.current.classList.remove(styles.pan);
         }
       },

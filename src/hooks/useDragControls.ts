@@ -98,9 +98,9 @@ const useDragControls = <Type extends PartWithTransformations>(ID: UUID) => {
   };
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(ID) as Type | undefined;
-    const tool = useApp.getState().tool;
+    const { tool, isSpaceDown } = useApp.getState();
 
-    if (part && tool === 'transform') {
+    if (part && tool === 'transform' && !isSpaceDown) {
       event.stopPropagation();
 
       initialMousePos = getMousePos(event);

@@ -56,8 +56,9 @@ export const PanControls = () => {
 
     const handleMouseDown = (event: MouseEvent) => {
       const tool = useApp.getState().tool;
+      const isSpaceDown = useApp.getState().isSpaceDown;
 
-      if (tool === 'pan') {
+      if (tool === 'pan' || isSpaceDown) {
         initialMousePos = getMousePos(event);
         canvas.addEventListener('mousemove', handleMouseMove);
       }

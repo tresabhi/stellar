@@ -10,8 +10,9 @@ import { useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 
 const ToolbarBottom = () => {
-  const tool = (name: ToolType) => () => useApp.setState({ tool: name });
-  const mode = useApp((state) => state.tool);
+  const setTool = (name: ToolType) => () => useApp.setState({ tool: name });
+  const tool = useApp((state) => state.tool);
+  const isSpaceDown = useApp((state) => state.isSpaceDown);
   const undoRef = useRef<HTMLButtonElement>(null!);
   const redoRef = useRef<HTMLButtonElement>(null!);
   const initialVersionControlState = useVersionControl.getState();
@@ -49,12 +50,15 @@ const ToolbarBottom = () => {
       <div className={styles.cluster}>
         <Toolbar.Container>
           <Toolbar.Button
-            selected={mode === 'transform'}
-            onClick={tool('transform')}
+            selected={tool === 'transform' && !isSpaceDown}
+            onClick={setTool('transform')}
           >
             <CursorArrowIcon />
           </Toolbar.Button>
-          <Toolbar.Button selected={mode === 'pan'} onClick={tool('pan')}>
+          <Toolbar.Button
+            selected={tool === 'pan' || isSpaceDown}
+            onClick={setTool('pan')}
+          >
             <HandIcon />
           </Toolbar.Button>
         </Toolbar.Container>

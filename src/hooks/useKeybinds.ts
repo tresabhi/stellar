@@ -110,6 +110,25 @@ const useKeybinds = () => {
 
     bind('1', tool('transform'));
     bind('2', tool('pan'));
+
+    bind(
+      'space',
+      () => {
+        useApp.setState((draft) => {
+          draft.isSpaceDown = true;
+        });
+      },
+      'keydown',
+    );
+    bind(
+      'space',
+      () => {
+        useApp.setState((draft) => {
+          draft.isSpaceDown = false;
+        });
+      },
+      'keyup',
+    );
   }, []);
 };
 export default useKeybinds;
