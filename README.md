@@ -5,7 +5,7 @@
 
 <br>
 
-![image](https://user-images.githubusercontent.com/43380238/148424321-199a10a1-78ac-41ee-8726-827a1b79d366.png)
+![image](https://i.imgur.com/vGGJ0AU.png)
 
 ## 🤔 About
 
