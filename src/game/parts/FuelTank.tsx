@@ -123,7 +123,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const state = getPart<FuelTank>(ID)!;
 
   const handleClick = useSelectionControl(ID);
-  const handlePointerDown = useDragControls<FuelTank>(ID);
+  const handlePointerDown = useDragControls(ID);
   usePartProperty(
     ID,
     (state: FuelTank) => state.N,

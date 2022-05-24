@@ -12,7 +12,7 @@ import styles from './index.module.scss';
 const ToolbarBottom = () => {
   const setTool = (name: ToolType) => () => useApp.setState({ tool: name });
   const tool = useApp((state) => state.tool);
-  const isSpaceDown = useApp((state) => state.isSpaceDown);
+  const isPanning = useApp((state) => state.isPanning);
   const undoRef = useRef<HTMLButtonElement>(null!);
   const redoRef = useRef<HTMLButtonElement>(null!);
   const initialVersionControlState = useVersionControl.getState();
@@ -50,13 +50,13 @@ const ToolbarBottom = () => {
       <div className={styles.cluster}>
         <Toolbar.Container>
           <Toolbar.Button
-            selected={tool === 'transform' && !isSpaceDown}
+            selected={tool === 'transform' && !isPanning}
             onClick={setTool('transform')}
           >
             <CursorArrowIcon />
           </Toolbar.Button>
           <Toolbar.Button
-            selected={tool === 'pan' || isSpaceDown}
+            selected={tool === 'pan' || isPanning}
             onClick={setTool('pan')}
           >
             <HandIcon />

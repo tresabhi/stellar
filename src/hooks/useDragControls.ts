@@ -1,56 +1,42 @@
 import { ThreeEvent } from '@react-three/fiber';
 import { mutateBlueprint, mutateBlueprintVersionless } from 'core/blueprint';
-import { translateBoundingBoxes } from 'core/boundingBox';
-import { getPart, mutateParts, selectPartOnly } from 'core/part';
+import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import useBlueprint from 'hooks/useBlueprint';
 import { Vector2 } from 'three';
 import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useApp from './useApp';
 import useMousePos from './useMousePos';
 
-const useDragControls = <Type extends PartWithTransformations>(ID: UUID) => {
+const DEFAULT_SNAP = 1;
+const CTRL_SNAP = 1 / 5;
+const SHIFT_SNAP = 10;
+const CTRL_SHIFT_SNAP = 0;
+
+const useDragControls = (ID: UUID) => {
   const getMousePos = useMousePos();
 
   let selectedInitially = false;
   let initialMousePos: Vector2;
-  let deltaX = 0;
-  let deltaY = 0;
+  let delta = new Vector2();
 
   const onPointerUp = () => {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
 
-    if (deltaX > 0 || deltaY > 0) {
+    if (delta.length() !== 0) {
       mutateBlueprintVersionless((draft) => {
-        mutateParts<Type>(
+        translateTranslatableParts(
+          delta.multiplyScalar(-1),
           draft.selections,
-          (state) => {
-            state.p.x -= deltaX;
-            state.p.y -= deltaY;
-          },
-          draft,
-        );
-        translateBoundingBoxes(
-          draft.selections,
-          new Vector2(-deltaX, -deltaY),
           draft,
         );
       });
 
       mutateBlueprint((draft) => {
-        mutateParts<Type>(
-          useBlueprint.getState().selections,
-          (state) => {
-            state.p.x += deltaX;
-            state.p.y += deltaY;
-          },
-          draft,
-        );
-        translateBoundingBoxes(
+        translateTranslatableParts(
+          delta.multiplyScalar(-1),
           draft.selections,
-          new Vector2(deltaX, deltaY),
           draft,
         );
       });
@@ -66,46 +52,47 @@ const useDragControls = <Type extends PartWithTransformations>(ID: UUID) => {
     }
   };
   const onPointerMove = (event: PointerEvent) => {
+    const snapDistance = event.ctrlKey
+      ? event.shiftKey
+        ? CTRL_SHIFT_SNAP
+        : CTRL_SNAP
+      : event.shiftKey
+      ? SHIFT_SNAP
+      : DEFAULT_SNAP;
     const mousePos = getMousePos(event);
-    const newDeltaX = snap(mousePos.x - initialMousePos.x, 1);
-    const newDeltaY = snap(mousePos.y - initialMousePos.y, 1);
+    const newDelta = new Vector2(
+      snap(mousePos.x - initialMousePos.x, snapDistance),
+      snap(mousePos.y - initialMousePos.y, snapDistance),
+    );
+    const diff = newDelta.sub(delta);
 
     if (!selectedInitially) {
       selectPartOnly(ID);
       selectedInitially = true;
     }
 
-    if (newDeltaX !== deltaX || newDeltaY !== deltaY) {
+    if (!newDelta.equals(delta)) {
       mutateBlueprintVersionless((draft) => {
-        mutateParts<Type>(
-          draft.selections,
-          (state) => {
-            state.p.x += newDeltaX - deltaX;
-            state.p.y += newDeltaY - deltaY;
-          },
-          draft,
-        );
-        translateBoundingBoxes(
-          draft.selections,
-          new Vector2(newDeltaX - deltaX, newDeltaY - deltaY),
-          draft,
-        );
+        translateTranslatableParts(diff, draft.selections, draft);
       });
     }
 
-    deltaX = newDeltaX;
-    deltaY = newDeltaY;
+    delta.copy(newDelta.add(delta));
   };
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    const part = getPart(ID) as Type | undefined;
-    const { tool, isSpaceDown } = useApp.getState();
+    const part = getPart(ID) as PartWithTransformations | undefined;
+    const { tool, isPanning } = useApp.getState();
 
-    if (part && tool === 'transform' && !isSpaceDown) {
+    if (
+      part && // part actually exists
+      (part.selected || part.parentID === null) && // is selected or is at root level
+      tool === 'transform' && // tool is transform
+      !isPanning // isn't panning right now via the hotkey
+    ) {
       event.stopPropagation();
 
       initialMousePos = getMousePos(event);
-      deltaX = 0;
-      deltaY = 0;
+      delta.set(0, 0);
 
       window.addEventListener('pointerup', onPointerUp);
       window.addEventListener('pointermove', onPointerMove);

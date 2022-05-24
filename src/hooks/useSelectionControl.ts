@@ -13,9 +13,9 @@ import useApp from './useApp';
 
 const useSelectionControl = (ID: UUID) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
-    const { preventNextSelection, tool, isSpaceDown } = useApp.getState();
+    const { preventNextSelection, tool, isPanning } = useApp.getState();
 
-    if (!preventNextSelection && tool === 'transform' && !isSpaceDown) {
+    if (!preventNextSelection && tool === 'transform' && !isPanning) {
       const part = getPart(ID);
       const parent = getParent(ID);
 

@@ -11,7 +11,7 @@ export interface UseApp {
   tab: TabType;
 
   tool: ToolType;
-  isSpaceDown: boolean;
+  isPanning: boolean;
 
   preventNextSelection: boolean;
 }
@@ -22,7 +22,7 @@ export const UseAppData: UseApp = {
   tab: 'layout',
 
   tool: 'transform',
-  isSpaceDown: false,
+  isPanning: false,
 
   preventNextSelection: false,
 };

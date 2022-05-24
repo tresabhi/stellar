@@ -1,6 +1,7 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
 import { getPart, partExportify, removePartMetaData } from 'core/part';
+import useDragControls from 'hooks/useDragControls';
 import { PartExportifier } from 'hooks/usePartRegistry';
 import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
 import useSelectionControl from 'hooks/useSelectionControl';
@@ -28,10 +29,18 @@ export const GroupData: Group = {
 export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
   const group = useRef<ThreeGroup>(null!);
   const handleClick = useSelectionControl(ID);
+  const handlePointerDown = useDragControls(ID);
 
   usePartWithBoundingBox(ID, group);
 
-  return <PartCluster ref={group} parentID={ID} onClick={handleClick} />;
+  return (
+    <PartCluster
+      ref={group}
+      parentID={ID}
+      onClick={handleClick}
+      onPointerDown={handlePointerDown}
+    />
+  );
 };
 
 export const GroupIcon = Icon;
