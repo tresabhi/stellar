@@ -27,13 +27,13 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
     IDs,
     (state) => state.o.x,
     (value) => ({ o: { x: value } }),
-    { min: 0, suffix: 'x' },
+    { suffix: 'x' },
   );
   const yScale = usePropertyController<PartWithTransformations>(
     IDs,
     (state) => state.o.y,
     (value) => ({ o: { y: value } }),
-    { min: 0, suffix: 'x' },
+    { suffix: 'x' },
   );
 
   return (
