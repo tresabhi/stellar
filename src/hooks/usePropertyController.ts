@@ -6,7 +6,7 @@ import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import useUnitInputController, {
-  UseUnitInputControllerOptions,
+  UseUnitInputControllerOptions
 } from './useUnitInputController';
 
 const DEBOUNCE_TIME = 250;
@@ -83,7 +83,7 @@ const usePropertyController = <Type extends Part>(
     return () => {
       unsubscribeFunctions.forEach((unsubscription) => unsubscription());
     };
-  }, []);
+  });
 
   return inputRef;
 };
