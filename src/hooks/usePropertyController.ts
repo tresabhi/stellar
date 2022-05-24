@@ -11,10 +11,10 @@ import useUnitInputController, {
 
 const DEBOUNCE_TIME = 250;
 
-const usePropertyController = (
+const usePropertyController = <Type extends Part>(
   IDs: UUID[],
-  get: (state: Part) => number,
-  set: (value: number) => DeepPartial<Part>,
+  get: (state: Type) => number,
+  set: (value: number) => DeepPartial<Type>,
   controllerOptions?: Partial<UseUnitInputControllerOptions>,
 ) => {
   const mergedControllerOptions = {
@@ -40,13 +40,13 @@ const usePropertyController = (
       const part = getPart(ID);
 
       if (part) {
-        const property = get(part as Part);
+        const property = get(part as Type);
         values.set(ID, property);
 
         const unsubscribe = subscribeToPart(
           ID,
           (newValue) => update(ID, newValue as number),
-          (part) => get(part as Part),
+          (part) => get(part as Type),
         );
 
         unsubscribeFunctions.push(unsubscribe);
