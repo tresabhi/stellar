@@ -4,14 +4,17 @@ import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
+import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import useUnitInputController, {
   UseUnitInputControllerOptions,
 } from './useUnitInputController';
 
-const usePropertyController = <Type extends Part>(
+const DEBOUNCE_TIME = 250;
+
+const usePropertyController = (
   IDs: UUID[],
-  get: (state: Type) => number,
-  set: (value: number) => DeepPartial<Type>,
+  get: (state: Part) => number,
+  set: (value: number) => DeepPartial<Part>,
   controllerOptions?: Partial<UseUnitInputControllerOptions>,
 ) => {
   const mergedControllerOptions = {
@@ -29,7 +32,7 @@ const usePropertyController = <Type extends Part>(
     undefined,
     mergedControllerOptions,
   );
-  let unsubscribes: (() => void)[] = [];
+  let unsubscribeFunctions: (() => void)[] = [];
   let values = new Map<UUID, number>();
 
   const initialize = () => {
@@ -37,22 +40,22 @@ const usePropertyController = <Type extends Part>(
       const part = getPart(ID);
 
       if (part) {
-        const property = get(part as Type);
+        const property = get(part as Part);
         values.set(ID, property);
 
         const unsubscribe = subscribeToPart(
           ID,
           (newValue) => update(ID, newValue as number),
-          (part) => get(part as Type),
+          (part) => get(part as Part),
         );
 
-        unsubscribes.push(unsubscribe);
+        unsubscribeFunctions.push(unsubscribe);
       }
     });
 
-    computeAndRender();
+    rerender();
   };
-  const computeAndRender = () => {
+  const rerender = () => {
     Array.from(values).some(([ID, value], index) => {
       if (index === 0) {
         inputController.value = value;
@@ -68,16 +71,19 @@ const usePropertyController = <Type extends Part>(
 
     inputController.rerender();
   };
+  const debouncedRerender = fallingEdgeDebounce(rerender, DEBOUNCE_TIME);
   const update = (ID: UUID, value: number) => {
     values.set(ID, value);
-    computeAndRender();
+    debouncedRerender();
   };
 
   initialize();
 
-  useEffect(() => () => {
-    unsubscribes.forEach((unsubscription) => unsubscription());
-  });
+  useEffect(() => {
+    return () => {
+      unsubscribeFunctions.forEach((unsubscription) => unsubscription());
+    };
+  }, []);
 
   return inputRef;
 };

@@ -1,4 +1,4 @@
-const timeoutDebounce = (callback: () => void, cooldown: number) => {
+const fallingEdgeDebounce = (callback: () => void, cooldown: number) => {
   let timeout: NodeJS.Timeout;
 
   return () => {
@@ -6,4 +6,4 @@ const timeoutDebounce = (callback: () => void, cooldown: number) => {
     timeout = setTimeout(callback, cooldown);
   };
 };
-export default timeoutDebounce;
+export default fallingEdgeDebounce;

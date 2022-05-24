@@ -34,7 +34,7 @@ export const LayoutCanvas = () => {
         }
       },
     );
-    const unsubscribeisPanning = useApp.subscribe(
+    const unsubscribeIsPanning = useApp.subscribe(
       (state) => state.isPanning,
       (isPanning) => {
         if (isPanning) {
@@ -47,7 +47,7 @@ export const LayoutCanvas = () => {
 
     return () => {
       unsubscribeTool();
-      unsubscribeisPanning();
+      unsubscribeIsPanning();
     };
   });
 

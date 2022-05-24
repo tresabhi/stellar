@@ -20,7 +20,7 @@ const useSelectionControl = (ID: UUID) => {
       const parent = getParent(ID);
 
       if (
-        (part && part.parentID === null) || // part is root
+        (part && part.parentID === null) || // part is at root
         (parent && parent.selected) || // parent is selected
         event.nativeEvent.ctrlKey // deep select is active
       ) {
