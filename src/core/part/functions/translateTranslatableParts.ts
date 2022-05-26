@@ -1,5 +1,4 @@
 import { mutateBlueprint } from 'core/blueprint';
-import { translateBoundingBox } from 'core/boundingBox';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { Vector2 } from 'three';
@@ -20,7 +19,6 @@ export const translateTranslatableParts = (
         if (part) {
           if (part.n === 'Group') {
             translate((part as Group).partOrder);
-            translateBoundingBox(part.ID, vector, state);
           } else if ((part as AnyPart).p) {
             translatePart(part.ID, vector, state);
           }
