@@ -45,7 +45,7 @@ export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
       },
     );
     const unsubscribeIsTranslating = useApp.subscribe(
-      (state) => state.isTranslating,
+      (state) => state.areBoundingBoxesUpdating,
       (isTranslating) => {
         if (!rerendersEnabled.current && !isTranslating) {
           // translating has now stopped

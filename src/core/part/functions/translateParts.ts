@@ -1,5 +1,8 @@
 import { mutateBlueprint } from 'core/blueprint';
-import { translateBoundingBoxes } from 'core/boundingBox';
+import {
+  declareBoundingBoxUpdates,
+  translateBoundingBoxes
+} from 'core/boundingBox';
 import { Blueprint } from 'game/Blueprint';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
@@ -10,7 +13,6 @@ export const translateParts = (
   IDs: UUID[],
   vector: Vector2,
   state?: Blueprint,
-  updateBoundingBoxes = true,
 ) => {
   if (state) {
     mutateParts<PartWithTransformations>(
@@ -21,7 +23,8 @@ export const translateParts = (
       },
       state,
     );
-    if (updateBoundingBoxes) translateBoundingBoxes(IDs, vector, state);
+    translateBoundingBoxes(IDs, vector, state);
+    declareBoundingBoxUpdates();
   } else {
     mutateBlueprint((draft) => {
       translateParts(IDs, vector, draft);

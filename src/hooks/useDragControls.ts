@@ -67,11 +67,6 @@ const useDragControls = (ID: UUID) => {
     }
 
     delta.copy(newDelta.add(delta));
-
-    if (!useApp.getState().isTranslating) {
-      // avoid any unnecessary callbacks
-      useApp.setState({ isTranslating: true });
-    }
   };
   const onPointerUp = () => {
     window.removeEventListener('pointerup', onPointerUp);
@@ -103,8 +98,6 @@ const useDragControls = (ID: UUID) => {
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
     }
-
-    useApp.setState({ isTranslating: false });
   };
 
   return handlePointerDown;

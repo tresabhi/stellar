@@ -1,10 +1,10 @@
 import { fileSave, versionRedo, versionUndo } from 'core/blueprint';
 import {
-    deletePartsBySelection,
-    groupPartsBySelection,
-    selectPartsOnly,
-    translateTranslatablePartsBySelection as translate,
-    unselectAllParts
+  deletePartsBySelection,
+  groupPartsBySelection,
+  selectPartsOnly,
+  translateTranslatablePartsBySelection as translate,
+  unselectAllParts
 } from 'core/part';
 import useApp, { ToolType } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
