@@ -12,7 +12,7 @@ interface InfiniteGridHelperProps extends GroupProps {
 /**
  * Thanks, Fyrestar, for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
  */
-const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
+export const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
   (
     {
       size1 = 10,
@@ -87,5 +87,3 @@ const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
     );
   },
 );
-
-export default InfiniteGridHelper;

@@ -3,6 +3,6 @@ import { UUID } from 'types/Parts';
 
 export const disposeBoundingBoxes = (IDs: UUID[], state: Blueprint) => {
   IDs.forEach((ID) => {
-    delete state.boundingBoxes[ID];
+    state.boundingBoxes.delete(ID);
   });
 };

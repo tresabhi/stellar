@@ -12,6 +12,7 @@ export interface UseApp {
 
   tool: ToolType;
   isPanning: boolean;
+  isTranslating: boolean;
 
   preventNextSelection: boolean;
 }
@@ -23,6 +24,7 @@ export const UseAppData: UseApp = {
 
   tool: 'transform',
   isPanning: false,
+  isTranslating: false,
 
   preventNextSelection: false,
 };

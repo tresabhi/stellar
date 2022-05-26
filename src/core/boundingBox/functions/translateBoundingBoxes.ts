@@ -8,7 +8,7 @@ export const translateBoundingBoxes = (
   state: Blueprint,
 ) => {
   IDs.forEach((ID) => {
-    const boundingBox = state.boundingBoxes[ID];
+    const boundingBox = state.boundingBoxes.get(ID);
 
     if (boundingBox) {
       boundingBox.min.x += vector.x;

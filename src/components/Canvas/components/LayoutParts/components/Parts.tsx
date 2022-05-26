@@ -1,15 +1,11 @@
+import PartCluster from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import useBlueprint from 'hooks/useBlueprint';
 import { useEffect, useRef } from 'react';
 import { Group } from 'three';
-import { LAYER } from '../constants/layer';
-import { SelectionBox } from './SelectionBox';
+import { LAYER } from '../../../constants/layer';
 
-export const SelectionBoxes = () => {
-  const selections = useBlueprint((state) => state.selections);
-  const boxes = selections.map((selection) => (
-    <SelectionBox ID={selection} key={`part-${selection}`} />
-  ));
+export const Parts = () => {
   const initialState = useBlueprint.getState();
   const meshRef = useRef<Group>(null);
 
@@ -26,13 +22,15 @@ export const SelectionBoxes = () => {
   }, []);
 
   return (
-    <HeadsUpDisplay priority={LAYER.TOOL}>
-      <group
-        ref={meshRef}
+    <HeadsUpDisplay priority={LAYER.PART}>
+      <directionalLight position={[0, 0, 100]} />
+      <ambientLight intensity={0.5} />
+
+      <PartCluster
         position={[initialState.offset.x, initialState.offset.y, 0]}
-      >
-        {boxes}
-      </group>
+        ref={meshRef}
+        parentID={null}
+      />
     </HeadsUpDisplay>
   );
 };

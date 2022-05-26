@@ -20,6 +20,59 @@ const useDragControls = (ID: UUID) => {
   let initialMousePos: Vector2;
   let delta = new Vector2();
 
+  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+    const part = getPart(ID) as PartWithTransformations | undefined;
+    const { tool, isPanning } = useApp.getState();
+
+    if (
+      part && // part actually exists
+      (part.selected || part.parentID === null) && // is selected or is at root level
+      tool === 'transform' && // tool is transform
+      !isPanning // isn't panning right now via the hotkey
+    ) {
+      event.stopPropagation();
+
+      initialMousePos = getMousePos(event);
+      delta.set(0, 0);
+      selectedInitially = part.selected;
+
+      window.addEventListener('pointerup', onPointerUp);
+      window.addEventListener('pointermove', onPointerMove);
+    }
+  };
+  const onPointerMove = (event: PointerEvent) => {
+    const snapDistance = event.ctrlKey
+      ? event.shiftKey
+        ? CTRL_SHIFT_SNAP
+        : CTRL_SNAP
+      : event.shiftKey
+      ? SHIFT_SNAP
+      : DEFAULT_SNAP;
+    const mousePos = getMousePos(event);
+    const newDelta = new Vector2(
+      snap(mousePos.x - initialMousePos.x, snapDistance),
+      snap(mousePos.y - initialMousePos.y, snapDistance),
+    );
+    const diff = newDelta.sub(delta);
+
+    if (!selectedInitially) {
+      selectPartOnly(ID);
+      selectedInitially = true;
+    }
+
+    if (!newDelta.equals(delta)) {
+      mutateBlueprintVersionless((draft) => {
+        translateTranslatableParts(diff, draft.selections, draft);
+      });
+    }
+
+    delta.copy(newDelta.add(delta));
+
+    if (!useApp.getState().isTranslating) {
+      // avoid any unnecessary callbacks
+      useApp.setState({ isTranslating: true });
+    }
+  };
   const onPointerUp = () => {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
@@ -50,55 +103,8 @@ const useDragControls = (ID: UUID) => {
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
     }
-  };
-  const onPointerMove = (event: PointerEvent) => {
-    const snapDistance = event.ctrlKey
-      ? event.shiftKey
-        ? CTRL_SHIFT_SNAP
-        : CTRL_SNAP
-      : event.shiftKey
-      ? SHIFT_SNAP
-      : DEFAULT_SNAP;
-    const mousePos = getMousePos(event);
-    const newDelta = new Vector2(
-      snap(mousePos.x - initialMousePos.x, snapDistance),
-      snap(mousePos.y - initialMousePos.y, snapDistance),
-    );
-    const diff = newDelta.sub(delta);
 
-    if (!selectedInitially) {
-      selectPartOnly(ID);
-      selectedInitially = true;
-    }
-
-    if (!newDelta.equals(delta)) {
-      mutateBlueprintVersionless((draft) => {
-        translateTranslatableParts(diff, draft.selections, draft);
-      });
-    }
-
-    delta.copy(newDelta.add(delta));
-  };
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    const part = getPart(ID) as PartWithTransformations | undefined;
-    const { tool, isPanning } = useApp.getState();
-
-    if (
-      part && // part actually exists
-      (part.selected || part.parentID === null) && // is selected or is at root level
-      tool === 'transform' && // tool is transform
-      !isPanning // isn't panning right now via the hotkey
-    ) {
-      event.stopPropagation();
-
-      initialMousePos = getMousePos(event);
-      delta.set(0, 0);
-
-      window.addEventListener('pointerup', onPointerUp);
-      window.addEventListener('pointermove', onPointerMove);
-
-      selectedInitially = part.selected;
-    }
+    useApp.setState({ isTranslating: false });
   };
 
   return handlePointerDown;

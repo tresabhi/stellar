@@ -7,7 +7,7 @@ export const deleteParts = (IDs: UUID[], state?: Blueprint) => {
     state.selections.forEach((selection) => {
       state.parts.delete(selection);
       state.partOrder.splice(state.partOrder.indexOf(selection), 1);
-      delete state.boundingBoxes[selection];
+      state.boundingBoxes.delete(selection);
     });
   } else {
     mutateBlueprint((draft) => {

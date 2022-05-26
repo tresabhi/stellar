@@ -5,11 +5,12 @@ import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import useSettings from 'hooks/useSettings';
 import { useEffect, useRef } from 'react';
-import styles from '../index.module.scss';
-import { Grid } from './Grid';
-import { LayoutParts } from './LayoutParts';
-import { PanControls } from './PanControls';
-import { SelectionBoxes } from './SelectionBoxes';
+import styles from '../../index.module.scss';
+import { PanControls } from '../PanControls';
+import { FullSelectionOutline } from './components/FullSelectionOutline';
+import { Grid } from './components/Grid';
+import { Parts } from './components/Parts';
+import { SelectionBoxes } from './components/SelectionBoxes';
 
 export const LayoutCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null!);
@@ -69,8 +70,14 @@ export const LayoutCanvas = () => {
       <PanControls />
 
       <Grid />
-      <LayoutParts />
+      <Parts />
       <SelectionBoxes />
+
+      <FullSelectionOutline />
     </Canvas>
   );
 };
+
+export * from './components/FullSelectionOutline';
+export * from './components/Grid';
+export * from './components/Parts';

@@ -5,6 +5,8 @@ export interface PrimitiveBox2 {
   max: { x: number; y: number };
 }
 
+export type BoundingBoxMap = Map<UUID, PrimitiveBox2>;
+
 export interface VanillaBlueprint {
   center: number;
   offset: { x: number; y: number };
@@ -18,10 +20,11 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   selections: UUID[];
   parts: AnyPartMap;
   partOrder: UUID[];
-  boundingBoxes: { [key: UUID]: PrimitiveBox2 };
+  boundingBoxes: BoundingBoxMap;
 }
 
-export interface SavedBlueprint extends Omit<Blueprint, 'parts'> {
+export interface SavedBlueprint
+  extends Omit<Omit<Blueprint, 'parts'>, 'boundingBoxes'> {
   parts: [string, AnyPart][];
 }
 
@@ -40,7 +43,7 @@ export const BlueprintData: Blueprint = {
   selections: [],
   parts: new Map(),
   partOrder: [],
-  boundingBoxes: {},
+  boundingBoxes: new Map(),
 };
 
 export const SavedBlueprintData: SavedBlueprint = {
