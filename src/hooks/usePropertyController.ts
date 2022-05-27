@@ -1,4 +1,6 @@
+import { mutateBlueprint } from 'core/blueprint';
 import { getPart, mutateParts, subscribeToPart } from 'core/part';
+import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
@@ -6,24 +8,68 @@ import DeepPartial from 'types/DeepPartial';
 import { UUID } from 'types/Parts';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import useUnitInputController, {
-  UseUnitInputControllerOptions
+  useUnitInputControllerDefaultOptions,
+  UseUnitInputControllerOptions,
 } from './useUnitInputController';
 
 const DEBOUNCE_TIME = 250;
+
+export interface UsePropertyControllerOptions
+  extends UseUnitInputControllerOptions {
+  onChangeDuringMutation: (
+    nextState: number,
+    prevState: number | undefined,
+    state: Blueprint,
+  ) => void;
+  onChangeDuringPartMutation: (
+    nextState: number,
+    prevState: number | undefined,
+    ID: UUID,
+    state: Blueprint,
+  ) => void;
+}
+
+export const usePropertyControllerDefaultOptions: UsePropertyControllerOptions =
+  {
+    ...useUnitInputControllerDefaultOptions,
+    onChangeDuringMutation: () => {},
+    onChangeDuringPartMutation: () => {},
+  };
 
 const usePropertyController = <Type extends Part>(
   IDs: UUID[],
   get: (state: Type) => number,
   set: (value: number) => DeepPartial<Type>,
-  controllerOptions?: Partial<UseUnitInputControllerOptions>,
+  options?: Partial<UsePropertyControllerOptions>,
 ) => {
   const mergedControllerOptions = {
-    ...useUnitInputController,
-    ...controllerOptions,
-    onChange: (value) => {
-      mutateParts(IDs, (draft) => {
-        merge(draft, set(value));
+    ...usePropertyControllerDefaultOptions,
+    ...options,
+    onChange: (nextValue, prevValue) => {
+      mutateBlueprint((draft) => {
+        mutateParts(
+          IDs,
+          (state) => {
+            if (options?.onChangeDuringPartMutation) {
+              options.onChangeDuringPartMutation(
+                nextValue,
+                prevValue,
+                state.ID,
+                draft,
+              );
+            }
+            merge(state, set(nextValue));
+          },
+          draft,
+        );
+
+        if (options?.onChangeDuringMutation) {
+          options.onChangeDuringMutation(nextValue, prevValue, draft);
+        }
       });
+      if (options?.onChange) {
+        options.onChange(nextValue, prevValue);
+      }
     },
   } as UseUnitInputControllerOptions;
   const inputRef = useRef<HTMLInputElement>(null!);

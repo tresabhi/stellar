@@ -62,15 +62,16 @@ const useUnitInputController = (
 
     if (
       typeof newValue! === 'number' &&
-      newValue! !== Infinity &&
-      newValue! !== -Infinity &&
+      newValue !== Infinity &&
+      newValue !== -Infinity &&
       !isNaN(newValue)
     ) {
       newValue = Math.max(
-        mergedOptions!.min!,
-        Math.min(mergedOptions!.max!, newValue),
+        mergedOptions.min,
+        Math.min(mergedOptions.max, newValue),
       );
-      mergedOptions!.onChange!(newValue, hook.value);
+      mergedOptions.onChange(newValue, hook.value);
+      if (options?.onChange) options.onChange(newValue, hook.value);
       hook.value = newValue;
 
       rerender();

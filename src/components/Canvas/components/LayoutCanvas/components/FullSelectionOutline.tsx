@@ -80,6 +80,7 @@ export const FullSelectionOutline = () => {
 
   return (
     <line_
+      visible={false}
       ref={outline}
       material={outlineMaterial}
       geometry={unitBufferGeometry2}
