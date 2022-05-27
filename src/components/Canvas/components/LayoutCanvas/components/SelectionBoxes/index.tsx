@@ -8,7 +8,7 @@ import { SelectionBox } from './components/SelectionBox';
 export const SelectionBoxes = () => {
   const selections = useBlueprint((state) => state.selections);
   const boxes = selections.map((selection) => (
-    <SelectionBox ID={selection} key={`part-${selection}`} />
+    <SelectionBox id={selection} key={`part-${selection}`} />
   ));
   const initialState = useBlueprint.getState();
   const meshRef = useRef<Group>(null);

@@ -1,5 +1,4 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { v4 as UUIDV4 } from 'uuid';
 
 const BUILD_NAMES = {
   alpha: 'Alpha',
@@ -16,8 +15,6 @@ export default function renameBuild(buildType, appName) {
     'build/manifest.json',
     JSON.stringify({
       ...manifest,
-
-      PWA_UUID: UUIDV4(),
 
       name: newName,
       short_name: newName,

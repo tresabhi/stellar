@@ -2,9 +2,9 @@ const compareStringArrays = (prevState: string[], nextState: string[]) => {
   if (prevState.length !== nextState.length) {
     return false;
   } else {
-    return !prevState.some((prevID, index) => {
-      const nextID = nextState[index];
-      return prevID !== nextID;
+    return !prevState.some((prevId, index) => {
+      const nextId = nextState[index];
+      return prevId !== nextId;
     });
   }
 };

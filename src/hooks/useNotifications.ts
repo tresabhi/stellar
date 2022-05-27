@@ -1,4 +1,3 @@
-import { UUID } from 'types/Parts';
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
@@ -11,7 +10,7 @@ export interface Action {
 }
 
 export interface Notification {
-  id: UUID;
+  id: string;
   type: NotificationType;
   title: string;
   message: string;

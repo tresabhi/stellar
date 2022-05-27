@@ -1,12 +1,11 @@
 import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
-import { UUID } from 'types/Parts';
 import { mutateParts } from './mutateParts';
 
 export const mutatePart = <Type extends Part>(
-  ID: UUID,
+  id: string,
   mutator: (draft: Type) => void,
   state?: Blueprint,
 ) => {
-  mutateParts([ID], mutator, state);
+  mutateParts([id], mutator, state);
 };

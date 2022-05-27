@@ -1,11 +1,10 @@
 import { Blueprint } from 'game/Blueprint';
 import useBlueprint from 'hooks/useBlueprint';
-import { UUID } from 'types/Parts';
 import { getPart } from './getPart';
 
-export const getParentID = (ID: UUID, state?: Blueprint) => {
+export const getParentId = (partId: string, state?: Blueprint) => {
   const blueprintState = state ?? useBlueprint.getState();
-  const part = getPart(ID, blueprintState);
+  const part = getPart(partId, blueprintState);
 
-  if (part) return part.parentID;
+  if (part) return part.parentId;
 };

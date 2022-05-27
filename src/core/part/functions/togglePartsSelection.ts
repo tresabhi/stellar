@@ -1,38 +1,37 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { forEachRight, isEqual } from 'lodash';
-import { UUID } from 'types/Parts';
 import { getPart } from './getPart';
 
-export const togglePartsSelection = (IDs: UUID[], state?: Blueprint) => {
-  let spliceIDs: UUID[] = [];
-  let insertIDs: UUID[] = [];
+export const togglePartsSelection = (ids: string[], state?: Blueprint) => {
+  let spliceIds: string[] = [];
+  let insertIds: string[] = [];
 
   if (state) {
-    IDs.forEach((ID) => {
-      const part = getPart(ID, state);
+    ids.forEach((id) => {
+      const part = getPart(id, state);
 
       if (part) {
         if (part.selected) {
-          spliceIDs.push(ID);
+          spliceIds.push(id);
         } else {
-          insertIDs.push(ID);
+          insertIds.push(id);
         }
 
         part.selected = !part.selected;
       }
     });
 
-    spliceIDs.forEach((ID) => {
+    spliceIds.forEach((id) => {
       forEachRight(state.selections, (selection, index) => {
-        if (isEqual(ID, selection)) state.selections.splice(index, 1);
+        if (isEqual(id, selection)) state.selections.splice(index, 1);
       });
     });
 
-    state.selections.push(...insertIDs);
+    state.selections.push(...insertIds);
   } else {
     mutateBlueprint((draft) => {
-      togglePartsSelection(IDs, draft);
+      togglePartsSelection(ids, draft);
     });
   }
 };

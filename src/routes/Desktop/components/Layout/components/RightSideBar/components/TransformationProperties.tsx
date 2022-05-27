@@ -10,9 +10,9 @@ import { FC } from 'react';
 import { Vector2 } from 'three';
 import { AnyPart, PartPropertyComponentProps } from 'types/Parts';
 
-const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
+const TransformationProperties: FC<PartPropertyComponentProps> = ({ ids }) => {
   const xPos = usePropertyController<PartWithTransformations>(
-    IDs,
+    ids,
     (state) => state.p.x,
     (value) => ({ p: { x: value } }),
     {
@@ -20,16 +20,16 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
       onChangeDuringPartMutation: (
         nextValue,
         prevValue,
-        ID,
+        id,
         blueprintDraft,
       ) => {
-        const part = getPart<AnyPart>(ID, blueprintDraft);
+        const part = getPart<AnyPart>(id, blueprintDraft);
 
         if (part) {
           const prevX = part?.p?.x ?? prevValue ?? 0;
 
           translateBoundingBox(
-            ID,
+            id,
             new Vector2(nextValue - prevX, 0),
             blueprintDraft,
           );
@@ -39,7 +39,7 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
     },
   );
   const yPos = usePropertyController<PartWithTransformations>(
-    IDs,
+    ids,
     (state) => state.p.y,
     (value) => ({ p: { y: value } }),
     {
@@ -47,16 +47,16 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
       onChangeDuringPartMutation: (
         nextValue,
         prevValue,
-        ID,
+        id,
         blueprintDraft,
       ) => {
-        const part = getPart<AnyPart>(ID, blueprintDraft);
+        const part = getPart<AnyPart>(id, blueprintDraft);
 
         if (part) {
           const prevY = part?.p?.y ?? prevValue ?? 0;
 
           translateBoundingBox(
-            ID,
+            id,
             new Vector2(0, nextValue - prevY),
             blueprintDraft,
           );
@@ -66,7 +66,7 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
     },
   );
   const rot = usePropertyController<PartWithTransformations>(
-    IDs,
+    ids,
     (state) => state.o.z,
     (value) => ({ o: { z: value } }),
     {
@@ -77,13 +77,13 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ IDs }) => {
     },
   );
   const xScale = usePropertyController<PartWithTransformations>(
-    IDs,
+    ids,
     (state) => state.o.x,
     (value) => ({ o: { x: value } }),
     { suffix: 'x', onChange: declareBoundingBoxUpdates },
   );
   const yScale = usePropertyController<PartWithTransformations>(
-    IDs,
+    ids,
     (state) => state.o.y,
     (value) => ({ o: { y: value } }),
     { suffix: 'x', onChange: declareBoundingBoxUpdates },

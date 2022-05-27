@@ -5,11 +5,10 @@ import { Part } from 'game/parts/Part';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
 import DeepPartial from 'types/DeepPartial';
-import { UUID } from 'types/Parts';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import useUnitInputController, {
   useUnitInputControllerDefaultOptions,
-  UseUnitInputControllerOptions,
+  UseUnitInputControllerOptions
 } from './useUnitInputController';
 
 const DEBOUNCE_TIME = 250;
@@ -24,7 +23,7 @@ export interface UsePropertyControllerOptions
   onChangeDuringPartMutation: (
     nextState: number,
     prevState: number | undefined,
-    ID: UUID,
+    id: string,
     state: Blueprint,
   ) => void;
 }
@@ -37,7 +36,7 @@ export const usePropertyControllerDefaultOptions: UsePropertyControllerOptions =
   };
 
 const usePropertyController = <Type extends Part>(
-  IDs: UUID[],
+  ids: string[],
   get: (state: Type) => number,
   set: (value: number) => DeepPartial<Type>,
   options?: Partial<UsePropertyControllerOptions>,
@@ -48,13 +47,13 @@ const usePropertyController = <Type extends Part>(
     onChange: (nextValue, prevValue) => {
       mutateBlueprint((draft) => {
         mutateParts(
-          IDs,
+          ids,
           (state) => {
             if (options?.onChangeDuringPartMutation) {
               options.onChangeDuringPartMutation(
                 nextValue,
                 prevValue,
-                state.ID,
+                state.id,
                 draft,
               );
             }
@@ -79,19 +78,19 @@ const usePropertyController = <Type extends Part>(
     mergedControllerOptions,
   );
   let unsubscribeFunctions: (() => void)[] = [];
-  let values = new Map<UUID, number>();
+  let values = new Map<string, number>();
 
   const initialize = () => {
-    IDs.forEach((ID) => {
-      const part = getPart(ID);
+    ids.forEach((id) => {
+      const part = getPart(id);
 
       if (part) {
         const property = get(part as Type);
-        values.set(ID, property);
+        values.set(id, property);
 
         const unsubscribe = subscribeToPart(
-          ID,
-          (newValue) => update(ID, newValue as number),
+          id,
+          (newValue) => update(id, newValue as number),
           (part) => get(part as Type),
         );
 
@@ -102,7 +101,7 @@ const usePropertyController = <Type extends Part>(
     rerender();
   };
   const rerender = () => {
-    Array.from(values).some(([ID, value], index) => {
+    Array.from(values).some(([id, value], index) => {
       if (index === 0) {
         inputController.value = value;
       } else {
@@ -118,8 +117,8 @@ const usePropertyController = <Type extends Part>(
     inputController.rerender();
   };
   const debouncedRerender = fallingEdgeDebounce(rerender, DEBOUNCE_TIME);
-  const update = (ID: UUID, value: number) => {
-    values.set(ID, value);
+  const update = (id: string, value: number) => {
+    values.set(id, value);
     debouncedRerender();
   };
 

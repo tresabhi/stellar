@@ -1,28 +1,28 @@
 import { Group } from 'game/parts/Group';
-import { ParentID } from 'types/Parts';
+import { ParentId } from 'types/Parts';
+import { mutateBlueprint } from '../../blueprint/functions/mutateBlueprint';
 import { createNewPart } from './createNewPart';
 import { getPart } from './getPart';
-import { mutateBlueprint } from '../../blueprint/functions/mutateBlueprint';
 
 export const insertPart = (
   partName: string,
-  parentID?: ParentID,
+  parentId?: ParentId,
   index = 0,
 ) => {
   mutateBlueprint((draft) => {
     const newPart = createNewPart(partName);
 
     if (newPart) {
-      if (parentID) {
-        const parentPart = getPart<Group>(parentID, draft);
+      if (parentId) {
+        const parentPart = getPart<Group>(parentId, draft);
 
         if (parentPart) {
-          parentPart.partOrder.splice(index, 0, newPart.ID);
-          draft.parts.set(newPart.ID, newPart);
+          parentPart.partOrder.splice(index, 0, newPart.id);
+          draft.parts.set(newPart.id, newPart);
         }
       } else {
-        draft.partOrder.splice(index, 0, newPart.ID);
-        draft.parts.set(newPart.ID, newPart);
+        draft.partOrder.splice(index, 0, newPart.id);
+        draft.parts.set(newPart.id, newPart);
       }
     }
   });

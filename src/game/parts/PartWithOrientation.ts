@@ -2,7 +2,6 @@ import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
 import { degToRad } from 'three/src/math/MathUtils';
-import { UUID } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithOrientation extends VanillaPart {
@@ -25,11 +24,11 @@ export const PartWithOrientationData: PartWithOrientation = {
 };
 
 export const usePartWithOrientation = (
-  ID: UUID,
+  id: string,
   groupRef: MutableRefObject<Group>,
 ) => {
   usePartProperty(
-    ID,
+    id,
     (part: PartWithOrientation) => part.o,
     (o) => groupRef.current.rotation.set(0, 0, degToRad(o.z)),
   );

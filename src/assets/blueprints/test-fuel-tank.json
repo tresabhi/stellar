@@ -9,7 +9,7 @@
   "parts": [
     {
       "label": "box",
-      "ID": "a",
+      "id": "a",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -37,7 +37,7 @@
       }
     },
     {
-      "ID": "b",
+      "id": "b",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -66,7 +66,7 @@
       }
     },
     {
-      "ID": "c",
+      "id": "c",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -95,7 +95,7 @@
       }
     },
     {
-      "ID": "d",
+      "id": "d",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -124,7 +124,7 @@
       }
     },
     {
-      "ID": "e",
+      "id": "e",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -153,7 +153,7 @@
       }
     },
     {
-      "ID": "f",
+      "id": "f",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -182,7 +182,7 @@
       }
     },
     {
-      "ID": "g",
+      "id": "g",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -211,7 +211,7 @@
       }
     },
     {
-      "ID": "h",
+      "id": "h",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -240,7 +240,7 @@
       }
     },
     {
-      "ID": "i",
+      "id": "i",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -269,7 +269,7 @@
       }
     },
     {
-      "ID": "j",
+      "id": "j",
       "hidden": false,
       "selected": false,
       "locked": false,
@@ -298,7 +298,7 @@
       }
     },
     {
-      "ID": "k",
+      "id": "k",
       "hidden": false,
       "selected": false,
       "locked": false,

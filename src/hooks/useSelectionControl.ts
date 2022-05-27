@@ -2,25 +2,24 @@ import { ThreeEvent } from '@react-three/fiber';
 import { mutateBlueprint } from 'core/blueprint';
 import {
   getParent,
-  getParentID,
+  getParentId,
   getPart,
   selectPartOnly,
   togglePartSelection,
   unselectPart,
 } from 'core/part';
-import { UUID } from 'types/Parts';
 import useApp from './useApp';
 
-const useSelectionControl = (ID: UUID) => {
+const useSelectionControl = (id: string) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
     const { preventNextSelection, tool, isPanning } = useApp.getState();
 
     if (!preventNextSelection && tool === 'transform' && !isPanning) {
-      const part = getPart(ID);
-      const parent = getParent(ID);
+      const part = getPart(id);
+      const parent = getParent(id);
 
       if (
-        (part && part.parentID === null) || // part is at root
+        (part && part.parentId === null) || // part is at root
         (parent && parent.selected) || // parent is selected
         event.nativeEvent.ctrlKey // deep select is active
       ) {
@@ -29,20 +28,20 @@ const useSelectionControl = (ID: UUID) => {
         if (part) {
           if (event.nativeEvent.ctrlKey) {
             if (event.nativeEvent.shiftKey) {
-              togglePartSelection(ID);
+              togglePartSelection(id);
             } else {
-              selectPartOnly(ID);
+              selectPartOnly(id);
             }
           } else {
             if (event.nativeEvent.shiftKey) {
-              const parentID = getParentID(ID);
+              const parentId = getParentId(id);
 
               mutateBlueprint((draft) => {
-                togglePartSelection(ID, draft);
-                if (parentID) unselectPart(parentID, draft);
+                togglePartSelection(id, draft);
+                if (parentId) unselectPart(parentId, draft);
               });
             } else {
-              selectPartOnly(ID);
+              selectPartOnly(id);
             }
           }
         }

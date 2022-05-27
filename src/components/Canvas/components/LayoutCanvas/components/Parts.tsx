@@ -29,7 +29,7 @@ export const Parts = () => {
       <PartCluster
         position={[initialState.offset.x, initialState.offset.y, 0]}
         ref={meshRef}
-        parentID={null}
+        parentId={null}
       />
     </HeadsUpDisplay>
   );

@@ -1,16 +1,15 @@
 import { subscribeToPart } from 'core/part';
 import { Part } from 'game/parts/Part';
 import { useEffect } from 'react';
-import { UUID } from 'types/Parts';
 
 const usePartProperty = <Type extends Part, Slice extends any>(
-  ID: UUID,
+  id: string,
   slicer: (state: Type) => Slice,
   handler: (slice: Slice) => void,
 ) => {
   useEffect(() => {
     const unsubscribe = subscribeToPart(
-      ID,
+      id,
       handler,
       (part) => slicer(part as Type),
       {
@@ -19,6 +18,6 @@ const usePartProperty = <Type extends Part, Slice extends any>(
     );
 
     return () => unsubscribe();
-  }, [ID, handler, slicer]);
+  }, [id, handler, slicer]);
 };
 export default usePartProperty;

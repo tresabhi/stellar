@@ -4,29 +4,29 @@ import { Group as GroupPart } from 'game/parts/Group';
 import useBlueprint from 'hooks/useBlueprint';
 import { forwardRef } from 'react';
 import { Group } from 'three';
-import { ParentID } from 'types/Parts';
+import { ParentId } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
 
 interface PartClusterProps extends GroupProps {
-  parentID: ParentID;
+  parentId: ParentId;
 }
 const PartCluster = forwardRef<Group, PartClusterProps>(
-  ({ parentID, ...props }, ref) => {
+  ({ parentId, ...props }, ref) => {
     const state = useBlueprint(
       (state) =>
-        (parentID ? (getPart(parentID, state) as GroupPart) : state).partOrder,
+        (parentId ? (getPart(parentId, state) as GroupPart) : state).partOrder,
       compareStringArrays,
     );
     let partListing: JSX.Element[] = [];
 
-    state.forEach((ID) => {
-      const part = getPart(ID);
+    state.forEach((Id) => {
+      const part = getPart(Id);
 
       if (part) {
         const LayoutComponent = getPartRegistry(part.n)?.layoutComponent;
 
         if (LayoutComponent) {
-          partListing.push(<LayoutComponent ID={ID} key={`part-${ID}`} />);
+          partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);
         }
       }
     });

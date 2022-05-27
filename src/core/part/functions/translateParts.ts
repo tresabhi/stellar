@@ -6,28 +6,27 @@ import {
 import { Blueprint } from 'game/Blueprint';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
-import { UUID } from 'types/Parts';
 import { mutateParts } from './mutateParts';
 
 export const translateParts = (
-  IDs: UUID[],
+  ids: string[],
   vector: Vector2,
   state?: Blueprint,
 ) => {
   if (state) {
     mutateParts<PartWithTransformations>(
-      IDs,
+      ids,
       (draft) => {
         draft.p.x += vector.x;
         draft.p.y += vector.y;
       },
       state,
     );
-    translateBoundingBoxes(IDs, vector, state);
+    translateBoundingBoxes(ids, vector, state);
     declareBoundingBoxUpdates();
   } else {
     mutateBlueprint((draft) => {
-      translateParts(IDs, vector, draft);
+      translateParts(ids, vector, draft);
     });
   }
 };

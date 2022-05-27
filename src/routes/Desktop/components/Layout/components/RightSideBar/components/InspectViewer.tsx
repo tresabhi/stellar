@@ -5,8 +5,8 @@ import { isUndefined } from 'lodash';
 
 const InspectViewer = () => {
   const selections = useBlueprint((state) => state.selections);
-  const ID = selections[0];
-  const part = usePart(ID); // TODO: this is reactive, but we need to make it not reactive
+  const id = selections[0];
+  const part = usePart(id); // TODO: this is reactive, but we need to make it not reactive
 
   return part && selections.length === 1 ? (
     <PropertiesExplorer.Container>
@@ -20,15 +20,15 @@ const InspectViewer = () => {
         <PropertiesExplorer.Title>Internal Data</PropertiesExplorer.Title>
         <PropertiesExplorer.Property
           type="wide"
-          label="ID"
-          value={ID}
+          label="Id"
+          value={id}
           copyable
         />
         <PropertiesExplorer.Property
           type="wide"
-          label="Parent ID"
-          value={`${part.parentID}`}
-          copyable={!isUndefined(part.parentID)}
+          label="Parent Id"
+          value={`${part.parentId}`}
+          copyable={!isUndefined(part.parentId)}
         />
       </PropertiesExplorer.Group>
       <PropertiesExplorer.Group>

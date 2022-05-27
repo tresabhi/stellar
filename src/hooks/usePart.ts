@@ -1,8 +1,7 @@
 import useBlueprint from 'hooks/useBlueprint';
-import { UUID } from 'types/Parts';
 import { getPart } from '../core/part/functions/getPart';
 
-const usePart = (ID: UUID) => {
-  return useBlueprint((state) => getPart(ID, state));
+const usePart = (id: string) => {
+  return useBlueprint((state) => getPart(id, state));
 };
 export default usePart;

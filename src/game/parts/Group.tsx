@@ -8,13 +8,13 @@ import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
 import { FC, useRef } from 'react';
 import { Group as ThreeGroup } from 'three';
-import { AnyVanillaPart, PartComponentProps, UUID } from 'types/Parts';
+import { AnyVanillaPart, PartComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 
 export interface Group extends Part {
   readonly n: 'Group';
   expanded: boolean;
-  partOrder: UUID[];
+  partOrder: string[];
 }
 
 export const GroupData: Group = {
@@ -26,17 +26,17 @@ export const GroupData: Group = {
   partOrder: [],
 };
 
-export const GroupLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
+export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const group = useRef<ThreeGroup>(null!);
-  const handleClick = useSelectionControl(ID);
-  const handlePointerDown = useDragControls(ID);
+  const handleClick = useSelectionControl(id);
+  const handlePointerDown = useDragControls(id);
 
-  usePartWithBoundingBox(ID, group);
+  usePartWithBoundingBox(id, group);
 
   return (
     <PartCluster
       ref={group}
-      parentID={ID}
+      parentId={id}
       onClick={handleClick}
       onPointerDown={handlePointerDown}
     />
@@ -49,8 +49,8 @@ export const groupExportify: PartExportifier<Group> = (part, context) => {
   const exportedParts: AnyVanillaPart[] = [];
   const partWithoutMetaData = removePartMetaData(part) as Group;
 
-  partWithoutMetaData.partOrder.forEach((ID) => {
-    const childPart = getPart(ID, context);
+  partWithoutMetaData.partOrder.forEach((id) => {
+    const childPart = getPart(id, context);
 
     if (childPart) {
       const exportedPart = partExportify(childPart, context);

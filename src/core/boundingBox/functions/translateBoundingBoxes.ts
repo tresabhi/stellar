@@ -1,14 +1,13 @@
 import { Blueprint } from 'game/Blueprint';
 import { Vector2 } from 'three';
-import { UUID } from 'types/Parts';
 
 export const translateBoundingBoxes = (
-  IDs: UUID[],
+  ids: string[],
   vector: Vector2,
   state: Blueprint,
 ) => {
-  IDs.forEach((ID) => {
-    const boundingBox = state.boundingBoxes.get(ID);
+  ids.forEach((id) => {
+    const boundingBox = state.boundingBoxes.get(id);
 
     if (boundingBox) {
       boundingBox.min.x += vector.x;

@@ -1,19 +1,19 @@
 import { cloneDeep, merge } from 'lodash';
-import { AnyPart, AnyVanillaPart, ParentID, UUID } from 'types/Parts';
+import { AnyPart, AnyVanillaPart, ParentId } from 'types/Parts';
 import { getPartRegistry } from './getPartRegistry';
 
 export const partImportify = (
   part: AnyVanillaPart | AnyPart,
-  ID: UUID,
-  parentID?: ParentID,
+  id: string,
+  parentId?: ParentId,
 ) => {
   const clonedPartData = cloneDeep(part);
   const clonedDefaultData = cloneDeep(getPartRegistry(clonedPartData.n)?.data);
 
   if (clonedDefaultData) {
     const newPart = merge(clonedDefaultData, clonedPartData, {
-      ID,
-      parentID: parentID ?? null,
+      id,
+      parentId: parentId ?? null,
     }) as AnyPart;
 
     return newPart;

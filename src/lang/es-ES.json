@@ -129,8 +129,8 @@
       "json": "JSON",
       "internal_data": {
         "$": "Información interna",
-        "id": "ID",
-        "parent_id": "ID Padre"
+        "id": "Id",
+        "parent_id": "Id Padre"
       },
       "meta_data": {
         "$": "Metadatos",

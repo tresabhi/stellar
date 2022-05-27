@@ -1,6 +1,5 @@
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
-import { UUID } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   usePartWithOrientation,
@@ -52,10 +51,10 @@ export const PartWithTransformationsData: PartWithTransformations = {
 };
 
 export const usePartWithTransformations = (
-  ID: UUID,
+  id: string,
   groupRef: MutableRefObject<Group>,
 ) => {
-  usePartWithTranslations(ID, groupRef);
-  usePartWithOrientation(ID, groupRef);
-  usePartWithScale(ID, groupRef);
+  usePartWithTranslations(id, groupRef);
+  usePartWithOrientation(id, groupRef);
+  usePartWithScale(id, groupRef);
 };

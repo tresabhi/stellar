@@ -3,16 +3,15 @@ import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import { memo, useEffect, useRef } from 'react';
 import { Line, Mesh } from 'three';
-import { UUID } from 'types/Parts';
 import { outlineMaterial } from './constants/outlineMaterial';
 import { shadingMaterial } from './constants/shadingMaterial';
 import { unitBufferGeometry2 } from './constants/unitBufferGeometry2';
 import { unitPlane } from './constants/unitPlane';
 
 export interface SelectionBoxProps {
-  ID: UUID;
+  id: string;
 }
-export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
+export const SelectionBox = memo<SelectionBoxProps>(({ id }) => {
   const outline = useRef<Line>(null!);
   const shading = useRef<Mesh>(null!);
   let rerendersEnabled = useRef(true);
@@ -39,7 +38,7 @@ export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
       }
     };
     const unsubscribeBoundingBox = useBlueprint.subscribe(
-      (state) => state.boundingBoxes.get(ID),
+      (state) => state.boundingBoxes.get(id),
       (boundingBox) => {
         if (rerendersEnabled.current && boundingBox) rerender(boundingBox);
       },
@@ -49,7 +48,7 @@ export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
       (isTranslating) => {
         if (!rerendersEnabled.current && !isTranslating) {
           // translating has now stopped
-          const boundingBox = useBlueprint.getState().boundingBoxes.get(ID);
+          const boundingBox = useBlueprint.getState().boundingBoxes.get(id);
           if (boundingBox) rerender(boundingBox);
         }
 
@@ -58,7 +57,7 @@ export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
         shading.current.visible = rerendersEnabled.current;
       },
     );
-    const initialState = useBlueprint.getState().boundingBoxes.get(ID);
+    const initialState = useBlueprint.getState().boundingBoxes.get(id);
 
     if (initialState) rerender(initialState);
 
@@ -66,7 +65,7 @@ export const SelectionBox = memo<SelectionBoxProps>(({ ID }) => {
       unsubscribeBoundingBox();
       unsubscribeIsTranslating();
     };
-  }, [ID]);
+  }, [id]);
 
   return (
     <>

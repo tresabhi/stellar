@@ -1,8 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
-import { UUID } from 'types/Parts';
 
-export const disposeBoundingBoxes = (IDs: UUID[], state: Blueprint) => {
-  IDs.forEach((ID) => {
-    state.boundingBoxes.delete(ID);
+export const disposeBoundingBoxes = (ids: string[], state: Blueprint) => {
+  ids.forEach((id) => {
+    state.boundingBoxes.delete(id);
   });
 };

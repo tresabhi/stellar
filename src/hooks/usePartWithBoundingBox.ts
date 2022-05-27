@@ -1,17 +1,16 @@
 import { registerBoundingBox } from 'core/boundingBox';
 import { MutableRefObject, useEffect } from 'react';
 import { Box3, Group, Mesh } from 'three';
-import { UUID } from 'types/Parts';
 
 const usePartWithBoundingBox = (
-  ID: UUID,
+  id: string,
   mesh: MutableRefObject<Mesh | Group>,
 ) => {
   useEffect(() => {
     const box3 = new Box3();
 
     box3.setFromObject(mesh.current);
-    registerBoundingBox(ID, {
+    registerBoundingBox(id, {
       min: {
         x: box3.min.x,
         y: box3.min.y,

@@ -13,7 +13,7 @@ import { Part, PartData } from './Part';
 import {
   usePartWithTransformations,
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  VanillaPartWithTransformationsData
 } from './PartWithTransformations';
 
 // #region texture types
@@ -117,15 +117,15 @@ const temp_material = new MeshStandardMaterial({
   flatShading: true,
 });
 
-export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
+export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const group = useRef<Group>(null!);
   const mesh = useRef<Mesh>(null!);
-  const state = getPart<FuelTank>(ID)!;
+  const state = getPart<FuelTank>(id)!;
 
-  const handleClick = useSelectionControl(ID);
-  const handlePointerDown = useDragControls(ID);
+  const handleClick = useSelectionControl(id);
+  const handlePointerDown = useDragControls(id);
   usePartProperty(
-    ID,
+    id,
     (state: FuelTank) => state.N,
     (N) => {
       mesh.current!.geometry = new CylinderGeometry(
@@ -140,8 +140,8 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
       );
     },
   );
-  usePartWithTransformations(ID, group);
-  usePartWithBoundingBox(ID, mesh);
+  usePartWithTransformations(id, group);
+  usePartWithBoundingBox(id, mesh);
 
   return (
     <group
@@ -160,10 +160,10 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ ID }) => {
 };
 
 export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
-  IDs,
+  ids,
 }) => {
   const width = usePropertyController<FuelTank>(
-    IDs,
+    ids,
     (state) => state.N.width_original,
     (value) => ({
       N: { width_original: value, width_a: value, width_b: value },
@@ -171,13 +171,13 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
     { suffix: 'm' },
   );
   const height = usePropertyController<FuelTank>(
-    IDs,
+    ids,
     (state) => state.N.height,
     (value) => ({ N: { height: value } }),
     { suffix: 'm' },
   );
   const fuel = usePropertyController<FuelTank>(
-    IDs,
+    ids,
     (state) => state.N.fuel_percent * 100,
     (value) => ({ N: { fuel_percent: value / 100 } }),
     { min: 0, max: 100, suffix: '%' },

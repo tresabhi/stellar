@@ -1,11 +1,11 @@
-import { AnyPart, AnyPartMap, AnyVanillaPart, UUID } from 'types/Parts';
+import { AnyPart, AnyPartMap, AnyVanillaPart } from 'types/Parts';
 
 export interface PrimitiveBox2 {
   min: { x: number; y: number };
   max: { x: number; y: number };
 }
 
-export type BoundingBoxMap = Map<UUID, PrimitiveBox2>;
+export type BoundingBoxMap = Map<string, PrimitiveBox2>;
 
 export interface VanillaBlueprint {
   center: number;
@@ -17,9 +17,9 @@ export interface VanillaBlueprint {
 export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   readonly format_version: number;
 
-  selections: UUID[];
+  selections: string[];
   parts: AnyPartMap;
-  partOrder: UUID[];
+  partOrder: string[];
   boundingBoxes: BoundingBoxMap;
 }
 

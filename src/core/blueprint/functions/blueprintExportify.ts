@@ -12,8 +12,8 @@ export const blueprintExportify = (blueprint: Blueprint) => {
   exportifiedBlueprint.offset = clonedBlueprint.offset;
   exportifiedBlueprint.stages = clonedBlueprint.stages;
 
-  clonedBlueprint.partOrder.forEach((ID) => {
-    const part = getPart(ID, clonedBlueprint);
+  clonedBlueprint.partOrder.forEach((id) => {
+    const part = getPart(id, clonedBlueprint);
 
     if (part) {
       const exportifiedPart = partExportify(part, clonedBlueprint);

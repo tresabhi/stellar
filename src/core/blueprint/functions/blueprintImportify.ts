@@ -1,5 +1,5 @@
 import { WATERMARK_KEY } from 'core/blueprint/constants/watermark';
-import { partImportify } from 'core/part';
+import { generateId, partImportify } from 'core/part';
 import {
   Blueprint,
   BlueprintData,
@@ -7,8 +7,7 @@ import {
   VanillaBlueprint,
 } from 'game/Blueprint';
 import { cloneDeep, isArray, isMap } from 'lodash';
-import { AnyPartMap, UUID } from 'types/Parts';
-import { v4 as UUIDV4 } from 'uuid';
+import { AnyPartMap } from 'types/Parts';
 
 export const blueprintImportify = (
   blueprint: VanillaBlueprint | SavedBlueprint | Blueprint,
@@ -29,9 +28,9 @@ export const blueprintImportify = (
 
   if (isMap(clonedBlueprint.parts)) {
     // normal blueprint, probably never gonna use this
-    (clonedBlueprint as Blueprint).parts.forEach((part, ID) => {
-      const importifiedPart = partImportify(cloneDeep(part), ID);
-      if (importifiedPart) newPartsMap.set(ID, importifiedPart);
+    (clonedBlueprint as Blueprint).parts.forEach((part, id) => {
+      const importifiedPart = partImportify(cloneDeep(part), id);
+      if (importifiedPart) newPartsMap.set(id, importifiedPart);
     });
 
     targetBlueprint.partOrder = (clonedBlueprint as Blueprint).partOrder;
@@ -40,24 +39,24 @@ export const blueprintImportify = (
     // not parts to convert
   } else if (isArray(clonedBlueprint.parts[0])) {
     // saved version of the blueprint
-    (clonedBlueprint as SavedBlueprint).parts.forEach(([ID, part]) => {
-      const importifiedPart = partImportify(cloneDeep(part), ID);
-      if (importifiedPart) newPartsMap.set(ID, importifiedPart);
+    (clonedBlueprint as SavedBlueprint).parts.forEach(([id, part]) => {
+      const importifiedPart = partImportify(cloneDeep(part), id);
+      if (importifiedPart) newPartsMap.set(id, importifiedPart);
     });
 
     targetBlueprint.partOrder = (clonedBlueprint as SavedBlueprint).partOrder;
     targetBlueprint.parts = newPartsMap;
   } else {
     // vanilla blueprint, straight from the game
-    let newPartOrder: UUID[] = [];
+    let newPartOrder: string[] = [];
 
     (clonedBlueprint as Blueprint).partOrder = [];
     (clonedBlueprint as VanillaBlueprint).parts.forEach((part) => {
-      const ID = UUIDV4();
-      const importifiedPart = partImportify(cloneDeep(part), ID);
+      const id = generateId();
+      const importifiedPart = partImportify(cloneDeep(part), id);
       if (importifiedPart) {
-        newPartsMap.set(ID, importifiedPart);
-        newPartOrder.push(ID);
+        newPartsMap.set(id, importifiedPart);
+        newPartOrder.push(id);
       }
     });
 

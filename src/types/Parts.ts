@@ -1,14 +1,12 @@
 import { Part, VanillaPart } from 'game/parts/Part';
 
-export type UUID = string;
-
-export type ParentID = UUID | null;
+export type ParentId = string | null;
 
 export interface PartPropertyComponentProps {
-  IDs: UUID[];
+  ids: string[];
 }
 export interface PartComponentProps {
-  ID: UUID;
+  id: string;
 }
 
 export interface AnyVanillaPart extends VanillaPart {

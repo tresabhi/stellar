@@ -1,6 +1,5 @@
 import { Part } from 'game/parts/Part';
 import useBlueprint from 'hooks/useBlueprint';
-import { UUID } from 'types/Parts';
 import { getPart } from './getPart';
 
 interface SubscribeToPartOptions {
@@ -10,7 +9,7 @@ const subscribeToPartDefaultOptions = {
   fireInitially: false,
 };
 export const subscribeToPart = <Type extends Part, Slice extends any>(
-  ID: UUID,
+  id: string,
   handler: (slice: Slice) => void,
   slicer?: (part: Type) => Slice,
   options?: Partial<SubscribeToPartOptions>,
@@ -23,7 +22,7 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
 
   const unsubscribe = useBlueprint.subscribe(
     (state) => {
-      const part = getPart(ID, state);
+      const part = getPart(id, state);
 
       if (part) {
         if (slicer) {
@@ -42,7 +41,7 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
   );
 
   if (mergedOptions.fireInitially) {
-    const part = getPart(ID);
+    const part = getPart(id);
 
     if (part) {
       if (slicer) {

@@ -3,7 +3,6 @@ import { mutateBlueprint, mutateBlueprintVersionless } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
-import { UUID } from 'types/Parts';
 import snap from 'utilities/snap';
 import useApp from './useApp';
 import useMousePos from './useMousePos';
@@ -13,7 +12,7 @@ const CTRL_SNAP = 1 / 5;
 const SHIFT_SNAP = 10;
 const CTRL_SHIFT_SNAP = 0;
 
-const useDragControls = (ID: UUID) => {
+const useDragControls = (id: string) => {
   const getMousePos = useMousePos();
 
   let selectedInitially = false;
@@ -21,12 +20,12 @@ const useDragControls = (ID: UUID) => {
   let delta = new Vector2();
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    const part = getPart(ID) as PartWithTransformations | undefined;
+    const part = getPart(id) as PartWithTransformations | undefined;
     const { tool, isPanning } = useApp.getState();
 
     if (
       part && // part actually exists
-      (part.selected || part.parentID === null) && // is selected or is at root level
+      (part.selected || part.parentId === null) && // is selected or is at root level
       tool === 'transform' && // tool is transform
       !isPanning // isn't panning right now via the hotkey
     ) {
@@ -56,7 +55,7 @@ const useDragControls = (ID: UUID) => {
     const diff = newDelta.sub(delta);
 
     if (!selectedInitially) {
-      selectPartOnly(ID);
+      selectPartOnly(id);
       selectedInitially = true;
     }
 

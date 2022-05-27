@@ -1,7 +1,6 @@
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
-import { UUID } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithScale extends VanillaPart {
@@ -24,11 +23,11 @@ export const PartWithScaleData: PartWithScale = {
 };
 
 export const usePartWithScale = (
-  ID: UUID,
+  id: string,
   groupRef: MutableRefObject<Group>,
 ) => {
   usePartProperty(
-    ID,
+    id,
     (part: PartWithScale) => part.o,
     (o) => groupRef.current.scale.set(o.x, o.y, 1),
   );

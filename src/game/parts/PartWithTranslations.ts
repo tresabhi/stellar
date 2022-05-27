@@ -1,7 +1,6 @@
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
-import { UUID } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithTranslations extends VanillaPart {
@@ -26,11 +25,11 @@ export const PartWithTranslationsData: PartWithTranslations = {
 };
 
 export const usePartWithTranslations = (
-  ID: UUID,
+  id: string,
   groupRef: MutableRefObject<Group>,
 ) => {
   usePartProperty(
-    ID,
+    id,
     (part: PartWithTranslations) => part.p,
     (p) => groupRef.current.position.set(p.x, p.y, 0),
   );

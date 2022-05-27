@@ -2,13 +2,12 @@ import { getPart } from 'core/part';
 import { Group } from 'game/parts/Group';
 import useBlueprint from 'hooks/useBlueprint';
 import { FC, InputHTMLAttributes } from 'react';
-import { UUID } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
 import styles from '../index.module.scss';
 import { Listing } from './Listing';
 
 export interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
-  parent?: UUID;
+  parent?: string;
   indentation: number;
 }
 export const Container: FC<ContainerProps> = ({
@@ -20,8 +19,8 @@ export const Container: FC<ContainerProps> = ({
     (state) => (parent ? (getPart(parent, state) as Group) : state).partOrder,
     compareStringArrays,
   );
-  const partListing = state.map((ID) => (
-    <Listing key={`part-${ID}`} ID={ID} indentation={indentation} />
+  const partListing = state.map((id) => (
+    <Listing key={`part-${id}`} id={id} indentation={indentation} />
   ));
 
   return (

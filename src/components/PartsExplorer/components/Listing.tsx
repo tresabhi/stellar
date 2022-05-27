@@ -16,20 +16,19 @@ import { Part } from 'game/parts/Part';
 import useBlueprint from 'hooks/useBlueprint';
 import usePartProperty from 'hooks/usePartProperty';
 import { KeyboardEvent, memo, MouseEvent, useRef, useState } from 'react';
-import { UUID } from 'types/Parts';
-import compareIDProps from 'utilities/compareIDProps';
+import compareIdProps from 'utilities/compareIdProps';
 import styles from '../index.module.scss';
 import { Container } from './Container';
 
 export interface ListingProps {
   indentation: number;
-  ID: UUID;
+  id: string;
 }
-export const Listing = memo<ListingProps>(({ indentation, ID }) => {
+export const Listing = memo<ListingProps>(({ indentation, id }) => {
   const listingRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const initialState = getPart(ID)!;
+  const initialState = getPart(id)!;
   const isGroup = initialState.n === 'Group';
   const [expanded, setExpanded] = useState(
     isGroup ? (initialState as Group).expanded : false,
@@ -39,7 +38,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     getPartRegistry(initialState.n)?.iconComponent ?? QuestionMarkIcon;
 
   usePartProperty(
-    ID,
+    id,
     (state: Part) => state.selected,
     (selected) => {
       if (selected) {
@@ -50,7 +49,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
     },
   );
   usePartProperty<Group, boolean>(
-    ID,
+    id,
     (state) => (isGroup ? state.expanded : false),
     (expanded) => {
       setExpanded(expanded);
@@ -61,7 +60,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     mutateBlueprint((draft) => {
-      const part = getPart(ID, draft) as Group | undefined;
+      const part = getPart(id, draft) as Group | undefined;
 
       if (part) {
         part.expanded = !part.expanded;
@@ -82,7 +81,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
 
     if (newLabel.length > 0 && newLabel !== lastLabel) {
       inputRef.current!.value = newLabel;
-      mutatePart(ID, (draft) => {
+      mutatePart(id, (draft) => {
         draft.label = newLabel;
       });
       lastLabel = newLabel;
@@ -100,30 +99,28 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
         const lastSelection = selectionState[selectionState.length - 1];
 
         if (lastSelection) {
-          // selectPartsFrom(lastSelection, ID);
         } else {
-          selectPartOnly(ID);
+          selectPartOnly(id);
         }
       } else {
-        togglePartSelection(ID);
+        togglePartSelection(id);
       }
     } else if (event.shiftKey) {
       const selectionState = useBlueprint.getState().selections;
       const lastSelection = selectionState[selectionState.length - 1];
 
       if (lastSelection) {
-        // selectPartsFromOnly(lastSelection, ID);
       } else {
-        selectPartOnly(ID);
+        selectPartOnly(id);
       }
     } else {
-      selectPartOnly(ID);
+      selectPartOnly(id);
     }
   };
 
   if (initialState.n === 'Group') {
     childParts = (initialState as Group).partOrder.map(() => (
-      <Listing key={`part-${ID}`} ID={ID} indentation={indentation + 1} />
+      <Listing key={`part-${id}`} id={id} indentation={indentation + 1} />
     ));
   }
 
@@ -168,7 +165,7 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       {isGroup ? (
         <Container
           indentation={indentation + 1}
-          parent={ID}
+          parent={id}
           style={{ display: expanded ? undefined : 'none' }}
         >
           {childParts}
@@ -176,4 +173,4 @@ export const Listing = memo<ListingProps>(({ indentation, ID }) => {
       ) : undefined}
     </div>
   );
-}, compareIDProps);
+}, compareIdProps);

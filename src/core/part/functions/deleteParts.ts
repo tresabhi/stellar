@@ -1,8 +1,7 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { UUID } from 'types/Parts';
 
-export const deleteParts = (IDs: UUID[], state?: Blueprint) => {
+export const deleteParts = (ids: string[], state?: Blueprint) => {
   if (state) {
     state.selections.forEach((selection) => {
       state.parts.delete(selection);
@@ -11,7 +10,7 @@ export const deleteParts = (IDs: UUID[], state?: Blueprint) => {
     });
   } else {
     mutateBlueprint((draft) => {
-      deleteParts(IDs, draft);
+      deleteParts(ids, draft);
     });
   }
 };

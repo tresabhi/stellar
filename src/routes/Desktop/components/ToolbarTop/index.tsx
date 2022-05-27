@@ -11,13 +11,13 @@ import {
   loadBlueprint,
   loadBlueprintTemplate,
   versionRedo,
-  versionUndo,
+  versionUndo
 } from 'core/blueprint';
 import {
   deletePartsBySelection,
-  getParentID,
+  getParentId,
   getPartIndex,
-  insertPart,
+  insertPart
 } from 'core/part';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -43,12 +43,12 @@ const ToolBarTop: FC = () => {
   const add = (name: string) => {
     return () => {
       const selections = useBlueprint.getState().selections;
-      const lastPartID = selections[selections.length - 1];
+      const lastPartId = selections[selections.length - 1];
 
-      if (lastPartID) {
-        const parentID = getParentID(lastPartID);
-        const index = getPartIndex(lastPartID, parentID ?? null);
-        insertPart(name, parentID, isUndefined(index) ? 0 : index + 1);
+      if (lastPartId) {
+        const parentId = getParentId(lastPartId);
+        const index = getPartIndex(lastPartId, parentId ?? null);
+        insertPart(name, parentId, isUndefined(index) ? 0 : index + 1);
       } else {
         insertPart(name);
       }

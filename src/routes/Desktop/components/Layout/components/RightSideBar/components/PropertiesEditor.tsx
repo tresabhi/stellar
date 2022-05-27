@@ -4,17 +4,17 @@ import { getPart, getPartRegistry } from 'core/part';
 import useBlueprint from 'hooks/useBlueprint';
 import useUnitInputController from 'hooks/useUnitInputController';
 import { useRef } from 'react';
-import { AnyPart, UUID } from 'types/Parts';
+import { AnyPart } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
 import TransformationProperties from './TransformationProperties';
 
 const PropertiesEditor = () => {
   const initialBlueprintState = useBlueprint.getState();
   const selectionsLength = useBlueprint((state) => state.selections.length);
-  const sortedSelections: Map<string, UUID[]> = new Map();
+  const sortedSelections: Map<string, string[]> = new Map();
   const propertyItems: JSX.Element[] = [];
   const orderedSelections: string[] = [];
-  let partsWithTransformations: UUID[] = [];
+  let partsWithTransformations: string[] = [];
   const centerInputRef = useRef<HTMLInputElement>(null);
   const offsetXInputRef = useRef<HTMLInputElement>(null);
   const offsetYInputRef = useRef<HTMLInputElement>(null);
@@ -43,12 +43,12 @@ const PropertiesEditor = () => {
   orderedSelections.sort();
 
   orderedSelections.forEach((partName) => {
-    const IDs = sortedSelections.get(partName)!;
+    const ids = sortedSelections.get(partName)!;
     const PropertyComponent = getPartRegistry(partName)?.propertyComponent;
 
     if (PropertyComponent) {
       propertyItems.push(
-        <PropertyComponent key={`property-${partName}`} IDs={IDs} />,
+        <PropertyComponent key={`property-${partName}`} ids={ids} />,
       );
     }
   });
@@ -57,7 +57,7 @@ const PropertiesEditor = () => {
     propertyItems.unshift(
       <TransformationProperties
         key="type-transformations"
-        IDs={partsWithTransformations}
+        ids={partsWithTransformations}
       />,
     );
   }

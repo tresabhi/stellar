@@ -1,12 +1,11 @@
 import { Blueprint } from 'game/Blueprint';
 import useBlueprint from 'hooks/useBlueprint';
-import { UUID } from 'types/Parts';
 import { getPart } from './getPart';
 
-export const getParts = (IDs: UUID[], state?: Blueprint) => {
+export const getParts = (ids: string[], state?: Blueprint) => {
   if (state) {
-    IDs.map((ID) => getPart(ID, state));
+    ids.map((id) => getPart(id, state));
   } else {
-    getParts(IDs, useBlueprint.getState());
+    getParts(ids, useBlueprint.getState());
   }
 };

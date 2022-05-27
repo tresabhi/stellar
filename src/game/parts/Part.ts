@@ -1,12 +1,12 @@
-import { ParentID, UUID } from 'types/Parts';
+import { ParentId } from 'types/Parts';
 
 export interface VanillaPart {
   readonly n: string;
 }
 
 export interface Part extends VanillaPart {
-  readonly ID: UUID;
-  parentID: ParentID;
+  readonly id: string;
+  parentId: ParentId;
 
   label: string;
   selected: boolean;
@@ -21,8 +21,8 @@ export const VanillaPartData: VanillaPart = {
 export const PartData: Part = {
   ...VanillaPartData,
 
-  ID: '',
-  parentID: null,
+  id: '',
+  parentId: null,
   label: 'Unlabeled Part',
   selected: false,
   hidden: false,

@@ -1,5 +1,5 @@
+import { generateId } from 'core/part';
 import useNotifications, { Notification } from 'hooks/useNotifications';
-import { v4 as UUIDV4 } from 'uuid';
 
 export interface NotifyOptions
   extends Omit<Omit<Omit<Notification, 'id'>, 'title'>, 'message'> {
@@ -19,7 +19,7 @@ export const notify = (
   options: Partial<NotifyOptions> = defaultNotifyOptions,
 ) => {
   const mergedOptions = { ...defaultNotifyOptions, ...options };
-  const id = UUIDV4();
+  const id = generateId();
   const notification: Notification = { id, title, message, ...mergedOptions };
 
   useNotifications.setState((state) => [notification, ...state], true);
