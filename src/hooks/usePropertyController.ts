@@ -1,6 +1,5 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { getPart, mutateParts, subscribeToPart } from 'core/part';
-import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
 import { merge } from 'lodash';
 import { useEffect, useRef } from 'react';
@@ -14,25 +13,11 @@ import useUnitInputController, {
 const DEBOUNCE_TIME = 250;
 
 export interface UsePropertyControllerOptions
-  extends UseUnitInputControllerOptions {
-  onChangeDuringMutation: (
-    nextState: number,
-    prevState: number | undefined,
-    state: Blueprint,
-  ) => void;
-  onChangeDuringPartMutation: (
-    nextState: number,
-    prevState: number | undefined,
-    id: string,
-    state: Blueprint,
-  ) => void;
-}
+  extends UseUnitInputControllerOptions {}
 
 export const usePropertyControllerDefaultOptions: UsePropertyControllerOptions =
   {
     ...useUnitInputControllerDefaultOptions,
-    onChangeDuringMutation: () => {},
-    onChangeDuringPartMutation: () => {},
   };
 
 const usePropertyController = <Type extends Part>(
@@ -49,22 +34,10 @@ const usePropertyController = <Type extends Part>(
         mutateParts(
           ids,
           (state) => {
-            if (options?.onChangeDuringPartMutation) {
-              options.onChangeDuringPartMutation(
-                nextValue,
-                prevValue,
-                state.id,
-                draft,
-              );
-            }
             merge(state, set(nextValue));
           },
           draft,
         );
-
-        if (options?.onChangeDuringMutation) {
-          options.onChangeDuringMutation(nextValue, prevValue, draft);
-        }
       });
       if (options?.onChange) {
         options.onChange(nextValue, prevValue);

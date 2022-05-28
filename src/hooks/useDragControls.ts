@@ -7,6 +7,7 @@ import snap from 'utilities/snap';
 import useApp from './useApp';
 import useMousePos from './useMousePos';
 
+// TODO: move these into a constants directory
 const DEFAULT_SNAP = 1;
 const CTRL_SNAP = 1 / 5;
 const SHIFT_SNAP = 10;
@@ -65,6 +66,10 @@ const useDragControls = (id: string) => {
       });
     }
 
+    if (useApp.getState().canBoundingBoxesBeUpdated) {
+      useApp.setState({ canBoundingBoxesBeUpdated: false });
+    }
+
     delta.copy(newDelta.add(delta));
   };
   const onPointerUp = () => {
@@ -79,6 +84,10 @@ const useDragControls = (id: string) => {
           draft,
         );
       });
+
+      if (!useApp.getState().canBoundingBoxesBeUpdated) {
+        useApp.setState({ canBoundingBoxesBeUpdated: true });
+      }
 
       mutateBlueprint((draft) => {
         translateTranslatableParts(
@@ -96,6 +105,8 @@ const useDragControls = (id: string) => {
 
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
+    } else if (!useApp.getState().canBoundingBoxesBeUpdated) {
+      useApp.setState({ canBoundingBoxesBeUpdated: true });
     }
   };
 

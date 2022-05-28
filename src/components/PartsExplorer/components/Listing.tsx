@@ -95,8 +95,8 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.ctrlKey) {
       if (event.shiftKey) {
-        const selectionState = useBlueprint.getState().selections;
-        const lastSelection = selectionState[selectionState.length - 1];
+        const { selections } = useBlueprint.getState();
+        const lastSelection = selections[selections.length - 1];
 
         if (lastSelection) {
         } else {
@@ -106,8 +106,8 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
         togglePartSelection(id);
       }
     } else if (event.shiftKey) {
-      const selectionState = useBlueprint.getState().selections;
-      const lastSelection = selectionState[selectionState.length - 1];
+      const { selections } = useBlueprint.getState();
+      const lastSelection = selections[selections.length - 1];
 
       if (lastSelection) {
       } else {

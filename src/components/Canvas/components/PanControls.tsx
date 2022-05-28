@@ -55,8 +55,7 @@ export const PanControls = () => {
     };
 
     const handleMouseDown = (event: MouseEvent) => {
-      const tool = useApp.getState().tool;
-      const isPanning = useApp.getState().isPanning;
+      const { tool, isPanning } = useApp.getState();
 
       if (tool === 'pan' || isPanning) {
         initialMousePos = getMousePos(event);

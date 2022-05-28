@@ -6,8 +6,8 @@ import LeftSideBar from './components/LeftSideBar';
 import RightSideBar from './components/RightSideBar';
 import styles from './index.module.scss';
 
-const devBlueprintName = useSettings.getState().debug.dev_blueprint;
-if (devBlueprintName) loadBlueprintTemplate(devBlueprintName);
+const { dev_blueprint } = useSettings.getState().debug;
+if (dev_blueprint) loadBlueprintTemplate(dev_blueprint);
 
 const Layout: FC<InputHTMLAttributes<HTMLDivElement>> = (props) => {
   const isLeftSideBarVisible = useSettings(

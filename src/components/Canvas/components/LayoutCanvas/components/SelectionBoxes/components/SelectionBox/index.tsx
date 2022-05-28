@@ -1,6 +1,6 @@
-import { PrimitiveBox2 } from 'game/Blueprint';
+import { getBoundingBox, subscribeToBoundingBox } from 'core/boundingBox';
 import useApp from 'hooks/useApp';
-import useBlueprint from 'hooks/useBlueprint';
+import { PrimitiveBox2 } from 'hooks/useBoundingBoxes';
 import { memo, useEffect, useRef } from 'react';
 import { Line, Mesh } from 'three';
 import { outlineMaterial } from './constants/outlineMaterial';
@@ -14,7 +14,7 @@ export interface SelectionBoxProps {
 export const SelectionBox = memo<SelectionBoxProps>(({ id }) => {
   const outline = useRef<Line>(null!);
   const shading = useRef<Mesh>(null!);
-  let rerendersEnabled = useRef(true);
+  const { canBoundingBoxesBeUpdated } = useApp();
 
   useEffect(() => {
     const rerender = (boundingBox: PrimitiveBox2) => {
@@ -37,33 +37,26 @@ export const SelectionBox = memo<SelectionBoxProps>(({ id }) => {
         outline.current.position.set(boundingBox.min.x, boundingBox.min.y, 0);
       }
     };
-    const unsubscribeBoundingBox = useBlueprint.subscribe(
-      (state) => state.boundingBoxes.get(id),
-      (boundingBox) => {
-        if (rerendersEnabled.current && boundingBox) rerender(boundingBox);
-      },
-    );
-    const unsubscribeIsTranslating = useApp.subscribe(
-      (state) => state.areBoundingBoxesUpdating,
-      (isTranslating) => {
-        if (!rerendersEnabled.current && !isTranslating) {
-          // translating has now stopped
-          const boundingBox = useBlueprint.getState().boundingBoxes.get(id);
-          if (boundingBox) rerender(boundingBox);
-        }
+    const unsubscribeBoundingBox = subscribeToBoundingBox(id, (boundingBox) => {
+      if (boundingBox) rerender(boundingBox);
+    });
+    const unsubscribeCanBoundingBoxesBeUpdated = useApp.subscribe(
+      (state) => state.canBoundingBoxesBeUpdated,
+      (canBoundingBoxesBeUpdated) => {
+        const boundingBox = getBoundingBox(id);
 
-        rerendersEnabled.current = !isTranslating;
-        outline.current.visible = rerendersEnabled.current;
-        shading.current.visible = rerendersEnabled.current;
+        if (canBoundingBoxesBeUpdated && boundingBox) rerender(boundingBox);
+        outline.current.visible = canBoundingBoxesBeUpdated;
+        shading.current.visible = canBoundingBoxesBeUpdated;
       },
     );
-    const initialState = useBlueprint.getState().boundingBoxes.get(id);
+    const initialState = getBoundingBox(id);
 
     if (initialState) rerender(initialState);
 
     return () => {
       unsubscribeBoundingBox();
-      unsubscribeIsTranslating();
+      unsubscribeCanBoundingBoxesBeUpdated();
     };
   }, [id]);
 
@@ -73,8 +66,14 @@ export const SelectionBox = memo<SelectionBoxProps>(({ id }) => {
         ref={outline}
         material={outlineMaterial}
         geometry={unitBufferGeometry2}
+        visible={canBoundingBoxesBeUpdated}
       />
-      <mesh ref={shading} material={shadingMaterial} geometry={unitPlane} />
+      <mesh
+        ref={shading}
+        material={shadingMaterial}
+        geometry={unitPlane}
+        visible={canBoundingBoxesBeUpdated}
+      />
     </>
   );
 });

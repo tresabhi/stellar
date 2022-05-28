@@ -1,4 +1,4 @@
-import { registerBoundingBox } from 'core/boundingBox';
+import { setBoundingBox } from 'core/boundingBox';
 import { MutableRefObject, useEffect } from 'react';
 import { Box3, Group, Mesh } from 'three';
 
@@ -10,15 +10,9 @@ const usePartWithBoundingBox = (
     const box3 = new Box3();
 
     box3.setFromObject(mesh.current);
-    registerBoundingBox(id, {
-      min: {
-        x: box3.min.x,
-        y: box3.min.y,
-      },
-      max: {
-        x: box3.max.x,
-        y: box3.max.y,
-      },
+    setBoundingBox(id, {
+      min: { x: box3.min.x, y: box3.min.y },
+      max: { x: box3.max.x, y: box3.max.y },
     });
   });
 };

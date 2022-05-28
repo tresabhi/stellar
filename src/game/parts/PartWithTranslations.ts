@@ -1,3 +1,6 @@
+import { translateBoundingBox } from 'core/boundingBox';
+import { getPart } from 'core/part';
+import useApp from 'hooks/useApp';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -26,11 +29,27 @@ export const PartWithTranslationsData: PartWithTranslations = {
 
 export const usePartWithTranslations = (
   id: string,
-  groupRef: MutableRefObject<Group>,
+  group: MutableRefObject<Group>,
 ) => {
+  const initialState = getPart<PartWithTranslations>(id);
+  let lastX = initialState?.p.x!;
+  let lastY = initialState?.p.y!;
+
   usePartProperty(
     id,
     (part: PartWithTranslations) => part.p,
-    (p) => groupRef.current.position.set(p.x, p.y, 0),
+    (p) => {
+      group.current.position.set(p.x, p.y, 0);
+
+      if (useApp.getState().canBoundingBoxesBeUpdated) {
+        const deltaX = p.x - lastX;
+        const deltaY = p.y - lastY;
+
+        lastX = p.x;
+        lastY = p.y;
+
+        translateBoundingBox(id, deltaX, deltaY);
+      }
+    },
   );
 };

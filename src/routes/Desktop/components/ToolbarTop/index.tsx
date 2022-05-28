@@ -11,13 +11,13 @@ import {
   loadBlueprint,
   loadBlueprintTemplate,
   versionRedo,
-  versionUndo
+  versionUndo,
 } from 'core/blueprint';
 import {
   deletePartsBySelection,
   getParentId,
   getPartIndex,
-  insertPart
+  insertPart,
 } from 'core/part';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -42,7 +42,7 @@ const ToolBarTop: FC = () => {
 
   const add = (name: string) => {
     return () => {
-      const selections = useBlueprint.getState().selections;
+      const { selections } = useBlueprint.getState();
       const lastPartId = selections[selections.length - 1];
 
       if (lastPartId) {

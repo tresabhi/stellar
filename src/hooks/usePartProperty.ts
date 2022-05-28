@@ -12,9 +12,7 @@ const usePartProperty = <Type extends Part, Slice extends any>(
       id,
       handler,
       (part) => slicer(part as Type),
-      {
-        fireInitially: true,
-      },
+      { fireInitially: true },
     );
 
     return () => unsubscribe();

@@ -1,20 +1,20 @@
 import PartCluster from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import useBlueprint from 'hooks/useBlueprint';
-import { useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import { Group } from 'three';
 import { LAYER } from '../../../constants/layer';
 
-export const Parts = () => {
+export const Parts = forwardRef<Group>((props, ref) => {
   const initialState = useBlueprint.getState();
-  const meshRef = useRef<Group>(null);
+  const cluster = useRef<Group>(null);
 
   useEffect(() => {
     const unsubscribe = useBlueprint.subscribe(
       (state) => state.offset,
       (offset) => {
-        meshRef.current?.position.setX(offset.x);
-        meshRef.current?.position.setY(offset.y);
+        cluster.current?.position.setX(offset.x);
+        cluster.current?.position.setY(offset.y);
       },
     );
 
@@ -28,9 +28,9 @@ export const Parts = () => {
 
       <PartCluster
         position={[initialState.offset.x, initialState.offset.y, 0]}
-        ref={meshRef}
+        ref={ref}
         parentId={null}
       />
     </HeadsUpDisplay>
   );
-};
+});

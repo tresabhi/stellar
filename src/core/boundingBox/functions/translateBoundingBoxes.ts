@@ -1,19 +1,22 @@
-import { Blueprint } from 'game/Blueprint';
-import { Vector2 } from 'three';
+import useBoundingBoxes, { UseBoundingBoxes } from 'hooks/useBoundingBoxes';
+import produce from 'immer';
 
-export const translateBoundingBoxes = (
-  ids: string[],
-  vector: Vector2,
-  state: Blueprint,
-) => {
-  ids.forEach((id) => {
-    const boundingBox = state.boundingBoxes.get(id);
+/**
+ * This function does not accept ThreeJS Vector2 for performance reasons
+ */
+export const translateBoundingBoxes = (ids: string[], x: number, y: number) => {
+  useBoundingBoxes.setState(
+    produce<UseBoundingBoxes>((draft) => {
+      ids.forEach((id) => {
+        const boundingBox = draft.partBounds.get(id);
 
-    if (boundingBox) {
-      boundingBox.min.x += vector.x;
-      boundingBox.min.y += vector.y;
-      boundingBox.max.x += vector.x;
-      boundingBox.max.y += vector.y;
-    }
-  });
+        if (boundingBox) {
+          boundingBox.min.x += x;
+          boundingBox.min.y += y;
+          boundingBox.max.x += x;
+          boundingBox.max.y += y;
+        }
+      });
+    }),
+  );
 };

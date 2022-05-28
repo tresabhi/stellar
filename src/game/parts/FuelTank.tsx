@@ -13,7 +13,7 @@ import { Part, PartData } from './Part';
 import {
   usePartWithTransformations,
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData
+  VanillaPartWithTransformationsData,
 } from './PartWithTransformations';
 
 // #region texture types

@@ -10,7 +10,7 @@ import { blueprintSavify } from './blueprintSavify';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 
 export const fileSaveAs = async () => {
-  const fileHandle = useApp.getState().fileHandle;
+  const { fileHandle } = useApp.getState();
   const data = blueprintSavify(useBlueprint.getState());
   const blob = new Blob(
     [

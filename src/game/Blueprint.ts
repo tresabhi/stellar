@@ -1,12 +1,5 @@
 import { AnyPart, AnyPartMap, AnyVanillaPart } from 'types/Parts';
 
-export interface PrimitiveBox2 {
-  min: { x: number; y: number };
-  max: { x: number; y: number };
-}
-
-export type BoundingBoxMap = Map<string, PrimitiveBox2>;
-
 export interface VanillaBlueprint {
   center: number;
   offset: { x: number; y: number };
@@ -20,11 +13,9 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   selections: string[];
   parts: AnyPartMap;
   partOrder: string[];
-  boundingBoxes: BoundingBoxMap;
 }
 
-export interface SavedBlueprint
-  extends Omit<Omit<Blueprint, 'parts'>, 'boundingBoxes'> {
+export interface SavedBlueprint extends Omit<Blueprint, 'parts'> {
   parts: [string, AnyPart][];
 }
 
@@ -43,7 +34,6 @@ export const BlueprintData: Blueprint = {
   selections: [],
   parts: new Map(),
   partOrder: [],
-  boundingBoxes: new Map(),
 };
 
 export const SavedBlueprintData: SavedBlueprint = {

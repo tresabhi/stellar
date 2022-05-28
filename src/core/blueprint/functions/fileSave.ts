@@ -3,7 +3,7 @@ import { fileSaveAs } from './fileSaveAs';
 import { fileWrite } from './fileWrite';
 
 export const fileSave = () => {
-  const fileHandle = useApp.getState().fileHandle;
+  const { fileHandle } = useApp.getState();
 
   if (fileHandle) {
     fileWrite();

@@ -5,6 +5,7 @@ import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import useSettings from 'hooks/useSettings';
 import { useEffect, useRef } from 'react';
+import { Group } from 'three';
 import styles from '../../index.module.scss';
 import { PanControls } from '../PanControls';
 import { FullSelectionOutline } from './components/FullSelectionOutline';
@@ -13,7 +14,9 @@ import { Parts } from './components/Parts';
 import { SelectionBoxes } from './components/SelectionBoxes';
 
 export const LayoutCanvas = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null!);
+  // TODO: all refs should not end with "ref"
+  const canvas = useRef<HTMLCanvasElement>(null!);
+  const parts = useRef<Group>(null!);
   const regressAmount = useSettings(
     (state) => state.performance.regress_amount,
   );
@@ -29,9 +32,9 @@ export const LayoutCanvas = () => {
       (state) => state.tool,
       (tool) => {
         if (tool === 'pan') {
-          canvasRef.current.classList.add(styles.pan);
+          canvas.current.classList.add(styles.pan);
         } else {
-          canvasRef.current.classList.remove(styles.pan);
+          canvas.current.classList.remove(styles.pan);
         }
       },
     );
@@ -39,9 +42,9 @@ export const LayoutCanvas = () => {
       (state) => state.isPanning,
       (isPanning) => {
         if (isPanning) {
-          canvasRef.current.classList.add(styles.pan);
+          canvas.current.classList.add(styles.pan);
         } else if (useApp.getState().tool !== 'pan') {
-          canvasRef.current.classList.remove(styles.pan);
+          canvas.current.classList.remove(styles.pan);
         }
       },
     );
@@ -54,7 +57,7 @@ export const LayoutCanvas = () => {
 
   return (
     <Canvas
-      ref={canvasRef}
+      ref={canvas}
       orthographic
       camera={{
         zoom: 16,
@@ -70,7 +73,7 @@ export const LayoutCanvas = () => {
       <PanControls />
 
       <Grid />
-      <Parts />
+      <Parts ref={parts} />
       <SelectionBoxes />
 
       <FullSelectionOutline />

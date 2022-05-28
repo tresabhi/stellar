@@ -42,8 +42,8 @@ const App = () => {
   document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
 
   const rerenderDocumentTitle = () => {
-    const fileHandle = useApp.getState().fileHandle;
-    const hasUnsavedChanges = useApp.getState().hasUnsavedChanges;
+    const { fileHandle } = useApp.getState();
+    const { hasUnsavedChanges } = useApp.getState();
 
     document.title = `${stellarContext.title} ${
       fileHandle ? `- ${fileHandle.name}` : `${version[0]}.${version[1]}`
