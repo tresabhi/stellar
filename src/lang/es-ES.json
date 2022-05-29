@@ -130,7 +130,7 @@
       "internal_data": {
         "$": "Información interna",
         "id": "Id",
-        "parent_id": "Parent Id"
+        "parent_id": "Id padre"
       },
       "meta_data": {
         "$": "Metadatos",
