@@ -1,6 +1,6 @@
-import { getBoundingBox, subscribeToBoundingBox } from 'core/boundingBox';
+import { getPartBound, subscribePartBound } from 'core/bounds';
 import useApp from 'hooks/useApp';
-import { PrimitiveBox2 } from 'hooks/useBoundingBoxes';
+import { PrimitiveBound } from 'hooks/useBounds';
 import { memo, useEffect, useRef } from 'react';
 import { Line, Mesh } from 'three';
 import { outlineMaterial } from './constants/outlineMaterial';
@@ -14,49 +14,49 @@ export interface SelectionBoxProps {
 export const SelectionBox = memo<SelectionBoxProps>(({ id }) => {
   const outline = useRef<Line>(null!);
   const shading = useRef<Mesh>(null!);
-  const { canBoundingBoxesBeUpdated } = useApp();
+  const { canBoundsBeUpdated } = useApp();
 
   useEffect(() => {
-    const rerender = (boundingBox: PrimitiveBox2) => {
-      if (boundingBox) {
+    const rerender = (bound: PrimitiveBound) => {
+      if (bound) {
         shading.current.scale.set(
-          boundingBox.max.x - boundingBox.min.x,
-          boundingBox.max.y - boundingBox.min.y,
+          bound.max.x - bound.min.x,
+          bound.max.y - bound.min.y,
           1,
         );
         shading.current.position.set(
-          boundingBox.min.x + (boundingBox.max.x - boundingBox.min.x) / 2,
-          boundingBox.min.y + (boundingBox.max.y - boundingBox.min.y) / 2,
+          bound.min.x + (bound.max.x - bound.min.x) / 2,
+          bound.min.y + (bound.max.y - bound.min.y) / 2,
           0,
         );
         outline.current.scale.set(
-          boundingBox.max.x - boundingBox.min.x,
-          boundingBox.max.y - boundingBox.min.y,
+          bound.max.x - bound.min.x,
+          bound.max.y - bound.min.y,
           1,
         );
-        outline.current.position.set(boundingBox.min.x, boundingBox.min.y, 0);
+        outline.current.position.set(bound.min.x, bound.min.y, 0);
       }
     };
-    const unsubscribeBoundingBox = subscribeToBoundingBox(id, (boundingBox) => {
-      if (boundingBox) rerender(boundingBox);
+    const unsubscribeBound = subscribePartBound(id, (bound) => {
+      if (bound) rerender(bound);
     });
-    const unsubscribeCanBoundingBoxesBeUpdated = useApp.subscribe(
-      (state) => state.canBoundingBoxesBeUpdated,
-      (canBoundingBoxesBeUpdated) => {
-        const boundingBox = getBoundingBox(id);
+    const unsubscribeCanBoundsBeUpdated = useApp.subscribe(
+      (state) => state.canBoundsBeUpdated,
+      (canBoundsBeUpdated) => {
+        const bound = getPartBound(id);
 
-        if (canBoundingBoxesBeUpdated && boundingBox) rerender(boundingBox);
-        outline.current.visible = canBoundingBoxesBeUpdated;
-        shading.current.visible = canBoundingBoxesBeUpdated;
+        if (canBoundsBeUpdated && bound) rerender(bound);
+        outline.current.visible = canBoundsBeUpdated;
+        shading.current.visible = canBoundsBeUpdated;
       },
     );
-    const initialState = getBoundingBox(id);
+    const initialState = getPartBound(id);
 
     if (initialState) rerender(initialState);
 
     return () => {
-      unsubscribeBoundingBox();
-      unsubscribeCanBoundingBoxesBeUpdated();
+      unsubscribeBound();
+      unsubscribeCanBoundsBeUpdated();
     };
   }, [id]);
 
@@ -66,13 +66,13 @@ export const SelectionBox = memo<SelectionBoxProps>(({ id }) => {
         ref={outline}
         material={outlineMaterial}
         geometry={unitBufferGeometry2}
-        visible={canBoundingBoxesBeUpdated}
+        visible={canBoundsBeUpdated}
       />
       <mesh
         ref={shading}
         material={shadingMaterial}
         geometry={unitPlane}
-        visible={canBoundingBoxesBeUpdated}
+        visible={canBoundsBeUpdated}
       />
     </>
   );

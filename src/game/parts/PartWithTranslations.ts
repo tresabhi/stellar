@@ -1,6 +1,6 @@
-import { translateBoundingBox } from 'core/boundingBox';
+import { translateBound } from 'core/bounds';
+import { requestComputeSelectionBound } from 'core/bounds/functions/requestComputeSelectionBound';
 import { getPart } from 'core/part';
-import useApp from 'hooks/useApp';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -39,17 +39,15 @@ export const usePartWithTranslations = (
     id,
     (part: PartWithTranslations) => part.p,
     (p) => {
+      const deltaX = p.x - lastX;
+      const deltaY = p.y - lastY;
+
+      lastX = p.x;
+      lastY = p.y;
+
       group.current.position.set(p.x, p.y, 0);
-
-      if (useApp.getState().canBoundingBoxesBeUpdated) {
-        const deltaX = p.x - lastX;
-        const deltaY = p.y - lastY;
-
-        lastX = p.x;
-        lastY = p.y;
-
-        translateBoundingBox(id, deltaX, deltaY);
-      }
+      translateBound(id, deltaX, deltaY);
+      requestComputeSelectionBound();
     },
   );
 };

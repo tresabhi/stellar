@@ -1,4 +1,7 @@
-import useBoundingBoxes from 'hooks/useBoundingBoxes';
+import { computeSelectionBound, disposeSelectionBound } from 'core/bounds';
+import useApp from 'hooks/useApp';
+import useBlueprint from 'hooks/useBlueprint';
+import useBounds from 'hooks/useBounds';
 import { useEffect, useRef } from 'react';
 import { Line } from 'three';
 import { outlineMaterial } from './SelectionBoxes/components/SelectionBox/constants/outlineMaterial';
@@ -8,9 +11,11 @@ export const FullSelectionOutline = () => {
   const outline = useRef<Line>(null!);
 
   useEffect(() => {
-    return useBoundingBoxes.subscribe(
-      (state) => state.selectionBound,
+    const unsubscribeSelectionBound = useBounds.subscribe(
+      (state) => state.selection,
       (selectionBound) => {
+        console.log('selectionBound', selectionBound);
+
         if (selectionBound) {
           outline.current.scale.set(
             selectionBound.max.x - selectionBound.min.x,
@@ -27,11 +32,33 @@ export const FullSelectionOutline = () => {
         }
       },
     );
+    const unsubscribeSelections = useBlueprint.subscribe(
+      (state) => state.selections,
+      (selections) => {
+        if (selections.length > 1) {
+          computeSelectionBound();
+        } else {
+          disposeSelectionBound();
+        }
+      },
+    );
+    const unsubscribeCanBoundsBeUpdated = useApp.subscribe(
+      (state) => state.canBoundsBeUpdated,
+      (canBoundsBeUpdated) => {
+        outline.current.visible = canBoundsBeUpdated;
+      },
+    );
+
+    return () => {
+      unsubscribeSelectionBound();
+      unsubscribeSelections();
+      unsubscribeCanBoundsBeUpdated();
+    };
   }, []);
 
   return (
     <line_
-      visible={useBoundingBoxes().selectionBound !== null}
+      visible={useBounds().selection !== null}
       ref={outline}
       material={outlineMaterial}
       geometry={unitBufferGeometry2}

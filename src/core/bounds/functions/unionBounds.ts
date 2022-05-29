@@ -1,6 +1,6 @@
-import { PrimitiveBox2 } from 'hooks/useBoundingBoxes';
+import { PrimitiveBound } from 'hooks/useBounds';
 
-export const union = (box1: PrimitiveBox2, box2: PrimitiveBox2) => ({
+export const unionBounds = (box1: PrimitiveBound, box2: PrimitiveBound) => ({
   min: {
     x: Math.min(box1.min.x, box2.min.x),
     y: Math.min(box1.min.y, box2.min.y),

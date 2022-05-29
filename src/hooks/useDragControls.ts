@@ -66,8 +66,8 @@ const useDragControls = (id: string) => {
       });
     }
 
-    if (useApp.getState().canBoundingBoxesBeUpdated) {
-      useApp.setState({ canBoundingBoxesBeUpdated: false });
+    if (useApp.getState().canBoundsBeUpdated) {
+      useApp.setState({ canBoundsBeUpdated: false });
     }
 
     delta.copy(newDelta.add(delta));
@@ -85,8 +85,8 @@ const useDragControls = (id: string) => {
         );
       });
 
-      if (!useApp.getState().canBoundingBoxesBeUpdated) {
-        useApp.setState({ canBoundingBoxesBeUpdated: true });
+      if (!useApp.getState().canBoundsBeUpdated) {
+        useApp.setState({ canBoundsBeUpdated: true });
       }
 
       mutateBlueprint((draft) => {
@@ -105,8 +105,8 @@ const useDragControls = (id: string) => {
 
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
-    } else if (!useApp.getState().canBoundingBoxesBeUpdated) {
-      useApp.setState({ canBoundingBoxesBeUpdated: true });
+    } else if (!useApp.getState().canBoundsBeUpdated) {
+      useApp.setState({ canBoundsBeUpdated: true });
     }
   };
 

@@ -3,7 +3,7 @@ import PartCluster from 'components/Canvas/components/PartCluster';
 import { getPart, partExportify, removePartMetaData } from 'core/part';
 import useDragControls from 'hooks/useDragControls';
 import { PartExportifier } from 'hooks/usePartRegistry';
-import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
+import usePartWithBounds from 'hooks/usePartWithBounds';
 import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
 import { FC, useRef } from 'react';
@@ -31,7 +31,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const handleClick = useSelectionControl(id);
   const handlePointerDown = useDragControls(id);
 
-  usePartWithBoundingBox(id, group);
+  usePartWithBounds(id, group);
 
   return (
     <PartCluster

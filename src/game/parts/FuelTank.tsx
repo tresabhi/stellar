@@ -3,7 +3,7 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { getPart } from 'core/part';
 import useDragControls from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
-import usePartWithBoundingBox from 'hooks/usePartWithBoundingBox';
+import usePartWithBounds from 'hooks/usePartWithBounds';
 import usePropertyController from 'hooks/usePropertyController';
 import useSelectionControl from 'hooks/useSelectionControl';
 import { FC, useRef } from 'react';
@@ -141,7 +141,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
     },
   );
   usePartWithTransformations(id, group);
-  usePartWithBoundingBox(id, mesh);
+  usePartWithBounds(id, group);
 
   return (
     <group

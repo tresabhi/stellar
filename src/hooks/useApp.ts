@@ -13,7 +13,7 @@ export interface UseApp {
   tool: ToolType;
   isPanning: boolean;
 
-  canBoundingBoxesBeUpdated: boolean;
+  canBoundsBeUpdated: boolean;
   preventNextSelection: boolean;
 }
 
@@ -25,7 +25,7 @@ export const UseAppData: UseApp = {
   tool: 'transform',
   isPanning: false,
 
-  canBoundingBoxesBeUpdated: true,
+  canBoundsBeUpdated: true,
   preventNextSelection: false,
 };
 
