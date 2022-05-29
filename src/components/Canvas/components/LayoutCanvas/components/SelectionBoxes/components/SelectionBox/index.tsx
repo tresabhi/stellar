@@ -37,9 +37,7 @@ export const SelectionBox = memo<SelectionBoxProps>(({ id }) => {
         outline.current.position.set(bound.min.x, bound.min.y, 0);
       }
     };
-    const unsubscribeBound = subscribePartBound(id, (bound) => {
-      if (bound) rerender(bound);
-    });
+    const unsubscribeBound = subscribePartBound(id, rerender);
     const unsubscribeCanBoundsBeUpdated = useApp.subscribe(
       (state) => state.canBoundsBeUpdated,
       (canBoundsBeUpdated) => {

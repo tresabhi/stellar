@@ -4,10 +4,9 @@ export interface SubscribePartBoundOptions {
   unmountOnDisposal: boolean;
 }
 
-export const subscribePartBoundDefaultOptions: SubscribePartBoundOptions =
-  {
-    unmountOnDisposal: true,
-  };
+export const subscribePartBoundDefaultOptions: SubscribePartBoundOptions = {
+  unmountOnDisposal: true,
+};
 
 export const subscribePartBound = (
   id: string,
@@ -19,13 +18,20 @@ export const subscribePartBound = (
     ...options,
   };
 
-  let unsubscribe = useBounds.subscribe((state) => {
-    let bound = state.parts.get(id);
+  let unsubscribe: Function | undefined;
 
-    if (!bound && options.unmountOnDisposal) unsubscribe();
+  unsubscribe = useBounds.subscribe(
+    (state) => {
+      let bound = state.parts.get(id);
 
-    return bound!;
-  }, callback);
+      if (!bound && options.unmountOnDisposal && unsubscribe) unsubscribe();
+
+      return bound;
+    },
+    (bound) => {
+      if (bound) callback(bound);
+    },
+  );
 
   return unsubscribe;
 };

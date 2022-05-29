@@ -14,8 +14,6 @@ export const FullSelectionOutline = () => {
     const unsubscribeSelectionBound = useBounds.subscribe(
       (state) => state.selection,
       (selectionBound) => {
-        console.log('selectionBound', selectionBound);
-
         if (selectionBound) {
           outline.current.scale.set(
             selectionBound.max.x - selectionBound.min.x,
@@ -58,7 +56,7 @@ export const FullSelectionOutline = () => {
 
   return (
     <line_
-      visible={useBounds().selection !== null}
+      visible={useApp.getState().canBoundsBeUpdated}
       ref={outline}
       material={outlineMaterial}
       geometry={unitBufferGeometry2}
