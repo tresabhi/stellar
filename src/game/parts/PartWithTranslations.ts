@@ -1,4 +1,4 @@
-import { requestComputeSelectionBound } from 'core/bounds';
+import { declareBoundNeedsUpdate, deferBoundUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -34,7 +34,8 @@ export const usePartWithTranslations = (
     (part: PartWithTranslations) => part.p,
     (p) => {
       group.current.position.set(p.x, p.y, 0);
-      requestComputeSelectionBound();
+      declareBoundNeedsUpdate(id);
+      deferBoundUpdates();
     },
   );
 };

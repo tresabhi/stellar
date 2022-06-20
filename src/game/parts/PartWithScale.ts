@@ -1,4 +1,4 @@
-import { requestComputeSelectionBound } from 'core/bounds';
+import { declareBoundNeedsUpdate, deferBoundUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -32,7 +32,8 @@ export const usePartWithScale = (
     (part: PartWithScale) => part.o,
     (o) => {
       groupRef.current.scale.set(o.x, o.y, 1);
-      requestComputeSelectionBound();
+      declareBoundNeedsUpdate(id);
+      deferBoundUpdates();
     },
   );
 };

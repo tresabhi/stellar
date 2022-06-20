@@ -8,10 +8,10 @@ import { useEffect, useRef } from 'react';
 import { Group } from 'three';
 import styles from '../../index.module.scss';
 import { PanControls } from '../PanControls';
-import { FullSelectionOutline } from './components/FullSelectionOutline';
 import { Grid } from './components/Grid';
+import { PartBounds } from './components/PartBounds';
 import { Parts } from './components/Parts';
-import { SelectionBoxes } from './components/SelectionBoxes';
+import { SelectionOutline } from './components/SelectionOutline';
 
 export const LayoutCanvas = () => {
   // TODO: all refs should not end with "ref"
@@ -73,14 +73,15 @@ export const LayoutCanvas = () => {
       <PanControls />
 
       <Grid />
-      <Parts ref={parts} />
-      <SelectionBoxes />
+      <PartBounds />
+      <SelectionOutline />
 
-      <FullSelectionOutline />
+      <Parts ref={parts} />
     </Canvas>
   );
 };
 
-export * from './components/FullSelectionOutline';
 export * from './components/Grid';
+export * from './components/PartBounds';
 export * from './components/Parts';
+export * from './components/SelectionOutline';

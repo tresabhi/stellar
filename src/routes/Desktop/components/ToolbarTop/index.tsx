@@ -11,13 +11,13 @@ import {
   loadBlueprint,
   loadBlueprintTemplate,
   versionRedo,
-  versionUndo,
+  versionUndo
 } from 'core/blueprint';
 import {
   deletePartsBySelection,
   getParentId,
   getPartIndex,
-  insertPart,
+  insertPart
 } from 'core/part';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -211,6 +211,9 @@ const ToolBarTop: FC = () => {
                 </ContextMenu.Button>
                 <ContextMenu.Button onClick={loadBp('shapeAndTextures1')}>
                   Shape &amp; Textures 1
+                </ContextMenu.Button>
+                <ContextMenu.Button onClick={loadBp('onePart')}>
+                  One Part
                 </ContextMenu.Button>
 
                 <ContextMenu.Separator />

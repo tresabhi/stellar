@@ -4,7 +4,7 @@ import {
   groupPartsBySelection,
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
-  unselectAllParts
+  unselectAllParts,
 } from 'core/part';
 import useApp, { ToolType } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';

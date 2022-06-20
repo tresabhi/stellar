@@ -66,10 +66,6 @@ const useDragControls = (id: string) => {
       });
     }
 
-    if (useApp.getState().canBoundsBeUpdated) {
-      useApp.setState({ canBoundsBeUpdated: false });
-    }
-
     delta.copy(newDelta.add(delta));
   };
   const onPointerUp = () => {
@@ -84,10 +80,6 @@ const useDragControls = (id: string) => {
           draft,
         );
       });
-
-      if (!useApp.getState().canBoundsBeUpdated) {
-        useApp.setState({ canBoundsBeUpdated: true });
-      }
 
       mutateBlueprint((draft) => {
         translateTranslatableParts(
@@ -105,8 +97,6 @@ const useDragControls = (id: string) => {
 
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
-    } else if (!useApp.getState().canBoundsBeUpdated) {
-      useApp.setState({ canBoundsBeUpdated: true });
     }
   };
 

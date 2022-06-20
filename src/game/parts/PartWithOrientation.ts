@@ -1,4 +1,4 @@
-import { requestComputeSelectionBound } from 'core/bounds';
+import { declareBoundNeedsUpdate, deferBoundUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -33,7 +33,8 @@ export const usePartWithOrientation = (
     (part: PartWithOrientation) => part.o,
     (o) => {
       groupRef.current.rotation.set(0, 0, degToRad(o.z));
-      requestComputeSelectionBound();
+      declareBoundNeedsUpdate(id);
+      deferBoundUpdates();
     },
   );
 };

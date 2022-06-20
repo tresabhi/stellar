@@ -1,19 +1,26 @@
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-export interface PrimitiveBound {
+export interface PrimitiveBounds {
   min: { x: number; y: number };
   max: { x: number; y: number };
 }
 
+export interface BoundListing {
+  bounds: PrimitiveBounds;
+  needsUpdate: boolean;
+}
+
 export type UseBounds = {
-  // has to be an object child because immer likes to BLOW UP MY MAP METHODS
-  // NO IMMER NO WHY!?
-  parts: Map<string, PrimitiveBound>;
-  selection: PrimitiveBound | null;
+  deferBoundUpdates: boolean;
+
+  parts: Map<string, BoundListing>;
+  selection: PrimitiveBounds | null;
 };
 
 export const UseBoundsDefaultData: UseBounds = {
+  deferBoundUpdates: false,
+
   parts: new Map(),
   selection: null,
 };
