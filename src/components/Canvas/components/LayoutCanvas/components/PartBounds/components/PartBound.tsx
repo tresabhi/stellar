@@ -83,7 +83,7 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
       unsubscribeBoundListing();
       unsubscribeDeferBoundUpdates();
     };
-  }, []);
+  }, [id]);
 
   return (
     <>
