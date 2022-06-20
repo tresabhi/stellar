@@ -215,12 +215,6 @@ const ToolBarTop: FC = () => {
 
                 <ContextMenu.Separator />
 
-                <ContextMenu.Button onClick={loadBp('saturnV')}>
-                  Saturn V
-                </ContextMenu.Button>
-
-                <ContextMenu.Separator />
-
                 <ContextMenu.Button onClick={loadBp()}>None</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
