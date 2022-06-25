@@ -5,6 +5,9 @@ import { Group } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithScale extends VanillaPart {
+  /**
+   * Scale of the part on both `x` and `y` axis
+   */
   o: { x: number; y: number };
 }
 

@@ -6,6 +6,9 @@ import { degToRad } from 'three/src/math/MathUtils';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithOrientation extends VanillaPart {
+  /**
+   * Rotation of the part denoted by the `z` axis
+   */
   o: { z: number };
 }
 

@@ -17,6 +17,7 @@ export * from './functions/mutatePart';
 export * from './functions/mutateParts';
 export * from './functions/partExportify';
 export * from './functions/partImportify';
+export * from './functions/preloadModel';
 export * from './functions/registerPart';
 export * from './functions/removePartMetaData';
 export * from './functions/selectPart';

@@ -4,17 +4,17 @@ import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   usePartWithOrientation,
   VanillaPartWithOrientation,
-  VanillaPartWithOrientationData,
+  VanillaPartWithOrientationData
 } from './PartWithOrientation';
 import {
   usePartWithScale,
   VanillaPartWithScale,
-  VanillaPartWithScaleData,
+  VanillaPartWithScaleData
 } from './PartWithScale';
 import {
   usePartWithTranslations,
   VanillaPartWithTranslations,
-  VanillaPartWithTranslationsData,
+  VanillaPartWithTranslationsData
 } from './PartWithTranslations';
 
 export interface VanillaPartWithTransformations
@@ -37,6 +37,10 @@ export const VanillaPartWithTransformationsData: VanillaPartWithTransformations 
     ...VanillaPartWithOrientationData,
     ...VanillaPartWithScaleData,
 
+    /**
+     * Both scale and orientation of the part where the `x` and `y` axis
+     * represent scale and the `z` axis represents orientation
+     */
     o: {
       ...VanillaPartWithScaleData.o,
       ...VanillaPartWithOrientationData.o,

@@ -23,9 +23,6 @@ export const Parts = forwardRef<Group>((props, ref) => {
 
   return (
     <HeadsUpDisplay priority={LAYER.PART}>
-      <directionalLight position={[0, 0, 100]} />
-      <ambientLight intensity={0.5} />
-
       <PartCluster
         position={[initialState.offset.x, initialState.offset.y, 0]}
         ref={ref}

@@ -1,5 +1,11 @@
 import { Blueprint } from 'game/Blueprint';
 import {
+  EngineKolibriData,
+  EngineKolibriIcon,
+  EngineKolibriLayoutComponent,
+  VanillaEngineKolibriData,
+} from 'game/parts/EngineKolibri';
+import {
   FuelTankData,
   FuelTankIcon,
   FuelTankLayoutComponent,
@@ -63,6 +69,16 @@ export const UsePartRegistryData: UsePartRegistry = new Map([
       layoutComponent: GroupLayoutComponent,
 
       exportify: groupExportify,
+    },
+  ],
+  [
+    'Engine_Kolibri',
+    {
+      vanillaData: VanillaEngineKolibriData,
+      data: EngineKolibriData,
+
+      iconComponent: EngineKolibriIcon,
+      layoutComponent: EngineKolibriLayoutComponent,
     },
   ],
 ]);

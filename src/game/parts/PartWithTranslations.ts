@@ -5,6 +5,9 @@ import { Group } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithTranslations extends VanillaPart {
+  /**
+   * Position of the part in `x` and `y` axis
+   */
   p: { x: number; y: number };
 }
 

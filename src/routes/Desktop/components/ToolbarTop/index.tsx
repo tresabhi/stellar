@@ -11,13 +11,13 @@ import {
   loadBlueprint,
   loadBlueprintTemplate,
   versionRedo,
-  versionUndo
+  versionUndo,
 } from 'core/blueprint';
 import {
   deletePartsBySelection,
   getParentId,
   getPartIndex,
-  insertPart
+  insertPart,
 } from 'core/part';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -168,14 +168,18 @@ const ToolBarTop: FC = () => {
                 </ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
-            <ContextMenu.Extension disabled label="Propulsion">
+            <ContextMenu.Extension label="Propulsion">
               <ContextMenu.Container>
-                <ContextMenu.Button>Titan</ContextMenu.Button>
-                <ContextMenu.Button>Hawk</ContextMenu.Button>
-                <ContextMenu.Button>Frontier</ContextMenu.Button>
-                <ContextMenu.Button>Valiant</ContextMenu.Button>
-                <ContextMenu.Button>Ion</ContextMenu.Button>
-                <ContextMenu.Button>RCS Thruster</ContextMenu.Button>
+                <ContextMenu.Button disabled>Titan</ContextMenu.Button>
+                <ContextMenu.Button disabled>Hawk</ContextMenu.Button>
+                <ContextMenu.Button disabled>Peregrine</ContextMenu.Button>
+                <ContextMenu.Button disabled>Frontier</ContextMenu.Button>
+                <ContextMenu.Button disabled>Valiant</ContextMenu.Button>
+                <ContextMenu.Button onClick={add('Engine_Kolibri')}>
+                  Kolibri
+                </ContextMenu.Button>
+                <ContextMenu.Button disabled>Ion</ContextMenu.Button>
+                <ContextMenu.Button disabled>RCS Thruster</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
             <ContextMenu.Extension disabled label="Electric">

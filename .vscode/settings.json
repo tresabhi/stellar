@@ -30,6 +30,7 @@
     "Fyrestar",
     "Gaeilge",
     "gitpod",
+    "gltf",
     "immer",
     "immerable",
     "immerify",
@@ -39,6 +40,7 @@
     "Italiana",
     "keybind",
     "Keybinds",
+    "Kolibri",
     "lerp",
     "linewidth",
     "lmao",
@@ -104,5 +106,6 @@
   "css.lint.unknownAtRules": "ignore",
   "yaml.schemas": {
     "https://json.schemastore.org/github-issue-config.json": "file:///workspace/Stellar/.github/ISSUE_TEMPLATE/config.yml"
-  }
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
