@@ -1,5 +1,5 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
-import { preloadModel } from 'core/part';
+// import { preloadModel } from 'core/part';
 import useDragControls from 'hooks/useDragControls';
 import usePartModel from 'hooks/usePartModel';
 import usePartWithBounds from 'hooks/usePartWithBounds';
@@ -57,6 +57,6 @@ export const EngineKolibriLayoutComponent: FC<PartComponentProps> = ({
     </group>
   );
 };
-preloadModel('EngineKolibri');
+// preloadModel('EngineKolibri');
 
 export const EngineKolibriIcon = EngineIcon;
