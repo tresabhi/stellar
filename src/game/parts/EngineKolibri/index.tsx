@@ -21,7 +21,7 @@ import {
 export interface VanillaEngineKolibri
   extends VanillaPartWithTransformations,
     VanillaPartWithEngine {
-  readonly n: 'Engine_Kolibri';
+  readonly n: 'Engine Kolibri';
 }
 
 export interface EngineKolibri extends Omit<Part, 'n'>, VanillaEngineKolibri {}
@@ -30,7 +30,7 @@ export const VanillaEngineKolibriData: VanillaEngineKolibri = {
   ...VanillaPartWithTransformationsData,
   ...VanillaPartWithEngineData,
 
-  n: 'Engine_Kolibri',
+  n: 'Engine Kolibri',
 };
 
 export const EngineKolibriData: EngineKolibri = {
@@ -53,7 +53,7 @@ export const EngineKolibriLayoutComponent: FC<PartComponentProps> = ({
 
   return (
     <group ref={group} onClick={handleClick} onPointerDown={handlePointerDown}>
-      <Model position={[0, 0.5, 0]} />
+      <Model position={[0, -1.5, 0]} />
     </group>
   );
 };
