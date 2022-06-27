@@ -1585,10 +1585,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.4.5.tgz#9c71e5ff866b5484a7ef3db822bf6c10e77bdd8c"
   integrity sha512-mpRIamoHwql0ogxEUh9yr4TP0xU5CWyZxVQeccGkHHF8kPMErtDXJlxyo0lj+telRF35XNihtPTWoflqtyARmg==
 
-"@react-three/drei@^9.11.2":
-  version "9.11.3"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.11.3.tgz#b4205a2b54372507b5cde81cef5f50c812d643bf"
-  integrity sha512-4qMtbWr9+LexJBVA/mS2DmtquDLUle+Vrt5jCmulz1tsW8eYpQN8dvukZQiJ5nVQPCx3yf8icybtwY7GnxNitg==
+"@react-three/drei@^9.14.3":
+  version "9.14.3"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.14.3.tgz#bb3ec0cbcb455e949b23de22be83da281b642945"
+  integrity sha512-0sL8z/VZno/y8lamzMuRFdYoAaRHMWuo3//Jhtuni9FSRsGCh95ZLdfYTxsTvlgf8EQBvU1cf7ESxHyoRSm5ww==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -1603,7 +1603,7 @@
     stats.js "^0.17.0"
     suspend-react "^0.0.8"
     three-mesh-bvh "^0.5.10"
-    three-stdlib "^2.10.1"
+    three-stdlib "^2.10.2"
     troika-three-text "^0.46.4"
     utility-types "^3.10.0"
     zustand "^3.5.13"
@@ -9073,10 +9073,10 @@ three-mesh-bvh@^0.5.10, three-mesh-bvh@^0.5.14:
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.14.tgz#605654cf802b3e92ea7b18997535960d04344159"
   integrity sha512-rSk7SpKDR47m1PmkUxt5na5+dM4h0KW5zF43lMniZGjT4hQn9Om+g64ooFreFIWlQlrNN8pFqiPnDMRZS58/Yw==
 
-three-stdlib@^2.10.1:
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.10.1.tgz#16cc6c45ce605a7e648801ecbeefe7aa0d3f0065"
-  integrity sha512-qKJLFB5KMUhPe4JgtJ6bnY7+nEuNPVbxfKyAeRIRbTTBF1oP/rKogZAio+NI5SXSo4iuIu59e02AzOzh8AR9cQ==
+three-stdlib@^2.10.2:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.12.1.tgz#b63de05cf7f7803e630a7c0c5887e85ae06178ca"
+  integrity sha512-G3SSsCOBiWa0sjjPt+K28ikQ84Plm/ZVUozMfWagK59kZqBWcaPVXpOThkAgvdBpm2zCWLW3edAoW/4XIbljVQ==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@webgpu/glslang" "^0.0.15"
