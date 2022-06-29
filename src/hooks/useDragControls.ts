@@ -59,7 +59,12 @@ const useDragControls = (id: string) => {
 
     if (event.movementX && event.movementY) {
       mutateBlueprintVersionless((draft) => {
-        translateTranslatableParts(movement, draft.selections, draft);
+        translateTranslatableParts(
+          movement.x,
+          movement.y,
+          draft.selections,
+          draft,
+        );
       });
     }
 
@@ -73,7 +78,8 @@ const useDragControls = (id: string) => {
     if (totalDelta.length() !== 0) {
       mutateBlueprintVersionless((draft) => {
         translateTranslatableParts(
-          totalDelta.multiplyScalar(-1),
+          -totalDelta.x,
+          -totalDelta.y,
           draft.selections,
           draft,
         );
@@ -81,7 +87,8 @@ const useDragControls = (id: string) => {
 
       mutateBlueprint((draft) => {
         translateTranslatableParts(
-          totalDelta.multiplyScalar(-1),
+          totalDelta.x,
+          totalDelta.y,
           draft.selections,
           draft,
         );

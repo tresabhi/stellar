@@ -1,13 +1,13 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
-import { Vector2 } from 'three';
 import { AnyPart } from 'types/Parts';
 import { getPart } from './getPart';
 import { translatePart } from './translatePart';
 
 export const translateTranslatableParts = (
-  vector: Vector2,
+  x: number,
+  y: number,
   ids: string[],
   state?: Blueprint,
 ) => {
@@ -20,7 +20,7 @@ export const translateTranslatableParts = (
           if (part.n === 'Group') {
             translate((part as Group).partOrder);
           } else if ((part as AnyPart).p) {
-            translatePart(part.id, vector, state);
+            translatePart(part.id, x, y, state);
           }
         }
       });
@@ -29,7 +29,7 @@ export const translateTranslatableParts = (
     translate(ids);
   } else {
     mutateBlueprint((draft) => {
-      translateTranslatableParts(vector, ids, draft);
+      translateTranslatableParts(x, y, ids, draft);
     });
   }
 };

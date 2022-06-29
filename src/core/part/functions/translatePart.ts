@@ -1,18 +1,18 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { Vector2 } from 'three';
 import { translateParts } from './translateParts';
 
 export const translatePart = (
   id: string,
-  vector: Vector2,
+  x: number,
+  y: number,
   state?: Blueprint,
 ) => {
   if (state) {
-    translateParts([id], vector, state);
+    translateParts([id], x, y, state);
   } else {
     mutateBlueprint((draft) => {
-      translatePart(id, vector, draft);
+      translatePart(id, x, y, draft);
     });
   }
 };

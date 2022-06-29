@@ -12,7 +12,6 @@ import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
-import { Vector2 } from 'three';
 
 const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
   'layout',
@@ -25,14 +24,15 @@ const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
 const TRANSLATE = 1;
 const MAJOR_TRANSLATE = 10;
 
-const upVector = new Vector2(0, TRANSLATE);
-const downVector = new Vector2(0, -TRANSLATE);
-const leftVector = new Vector2(-TRANSLATE, 0);
-const rightVector = new Vector2(TRANSLATE, 0);
-const upMajorVector = new Vector2(0, MAJOR_TRANSLATE);
-const downMajorVector = new Vector2(0, -MAJOR_TRANSLATE);
-const leftMajorVector = new Vector2(-MAJOR_TRANSLATE, 0);
-const rightMajorVector = new Vector2(MAJOR_TRANSLATE, 0);
+type PrimitiveVector2Tuple = [number, number];
+const upVector: PrimitiveVector2Tuple = [0, TRANSLATE];
+const downVector: PrimitiveVector2Tuple = [0, -TRANSLATE];
+const leftVector: PrimitiveVector2Tuple = [-TRANSLATE, 0];
+const rightVector: PrimitiveVector2Tuple = [TRANSLATE, 0];
+const upMajorVector: PrimitiveVector2Tuple = [0, MAJOR_TRANSLATE];
+const downMajorVector: PrimitiveVector2Tuple = [0, -MAJOR_TRANSLATE];
+const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_TRANSLATE, 0];
+const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_TRANSLATE, 0];
 
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
@@ -80,14 +80,14 @@ const useKeybinds = () => {
       }));
     });
 
-    bind('up', () => translate(upVector));
-    bind('down', () => translate(downVector));
-    bind('left', () => translate(leftVector));
-    bind('right', () => translate(rightVector));
-    bind('shift+up', () => translate(upMajorVector));
-    bind('shift+down', () => translate(downMajorVector));
-    bind('shift+left', () => translate(leftMajorVector));
-    bind('shift+right', () => translate(rightMajorVector));
+    bind('up', () => translate(...upVector));
+    bind('down', () => translate(...downVector));
+    bind('left', () => translate(...leftVector));
+    bind('right', () => translate(...rightVector));
+    bind('shift+up', () => translate(...upMajorVector));
+    bind('shift+down', () => translate(...downMajorVector));
+    bind('shift+left', () => translate(...leftMajorVector));
+    bind('shift+right', () => translate(...rightMajorVector));
 
     bind('ctrl+z', (event) => {
       event.preventDefault();
