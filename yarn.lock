@@ -3068,10 +3068,10 @@ braces@^3.0.2, braces@~3.0.2:
   dependencies:
     fill-range "^7.0.1"
 
-browser-fs-access@^0.30.1:
-  version "0.30.1"
-  resolved "https://registry.yarnpkg.com/browser-fs-access/-/browser-fs-access-0.30.1.tgz#32750aa365f804006e536df27bcd2ab62159122c"
-  integrity sha512-ZIVlYOhtWfEeAR4XKA319RY7YbnAsmIX7jikUlTQ6zvx4JldNW9eugNaqVxWDL54uBmwAhJtj8FZdJvaCOup4w==
+browser-fs-access@^0.30.2:
+  version "0.30.2"
+  resolved "https://registry.yarnpkg.com/browser-fs-access/-/browser-fs-access-0.30.2.tgz#b3eeaab95cdca9610bf59e0f802458b2c765bdd2"
+  integrity sha512-FUwj3WRO393gIQUqzvl0NyWwGwlvduBoqi1Ur5w1cnm5YyL789gGPZst3BWec2qiwlcyHjeUPNqbuC3J3YArUg==
 
 browser-process-hrtime@^1.0.0:
   version "1.0.0"
