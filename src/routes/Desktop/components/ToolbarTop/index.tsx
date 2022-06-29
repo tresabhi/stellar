@@ -175,7 +175,7 @@ const ToolBarTop: FC = () => {
                 <ContextMenu.Button disabled>Peregrine</ContextMenu.Button>
                 <ContextMenu.Button disabled>Frontier</ContextMenu.Button>
                 <ContextMenu.Button disabled>Valiant</ContextMenu.Button>
-                <ContextMenu.Button onClick={add('Engine_Kolibri')}>
+                <ContextMenu.Button onClick={add('Engine Kolibri')}>
                   Kolibri
                 </ContextMenu.Button>
                 <ContextMenu.Button disabled>Ion</ContextMenu.Button>

@@ -3,6 +3,7 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { getPart } from 'core/part';
 import useDragControls from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
+import { PartRegistryFragment } from 'hooks/usePartRegistry';
 import usePartWithBounds from 'hooks/usePartWithBounds';
 import usePropertyController from 'hooks/usePropertyController';
 import useSelectionControl from 'hooks/useSelectionControl';
@@ -196,3 +197,15 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 };
 
 export const FuelTankIcon = Icon;
+
+export const FuelTankRegistry: PartRegistryFragment = [
+  'Fuel Tank',
+  {
+    vanillaData: VanillaFuelTankData,
+    data: FuelTankData,
+
+    iconComponent: FuelTankIcon,
+    propertyComponent: FuelTankPropertyComponent,
+    layoutComponent: FuelTankLayoutComponent,
+  },
+];

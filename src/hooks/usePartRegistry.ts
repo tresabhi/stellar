@@ -1,23 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
-import {
-  EngineKolibriData,
-  EngineKolibriIcon,
-  EngineKolibriLayoutComponent,
-  VanillaEngineKolibriData,
-} from 'game/parts/EngineKolibri';
-import {
-  FuelTankData,
-  FuelTankIcon,
-  FuelTankLayoutComponent,
-  FuelTankPropertyComponent,
-  VanillaFuelTankData,
-} from 'game/parts/FuelTank';
-import {
-  GroupData,
-  groupExportify,
-  GroupIcon,
-  GroupLayoutComponent,
-} from 'game/parts/Group';
+import { EngineKolibriRegistry } from 'game/parts/EngineKolibri';
+import { FuelTankRegistry } from 'game/parts/FuelTank';
+import { GroupRegistry } from 'game/parts/Group';
 import { Part, VanillaPart } from 'game/parts/Part';
 import { FC } from 'react';
 import {
@@ -46,43 +30,13 @@ export interface PartRegistryItem {
 }
 
 export type UsePartRegistry = Map<string, PartRegistryItem>;
+export type PartRegistryFragment = [string, PartRegistryItem];
 
-export const UsePartRegistryData: UsePartRegistry = new Map([
-  [
-    'Fuel Tank',
-    {
-      vanillaData: VanillaFuelTankData,
-      data: FuelTankData,
-
-      iconComponent: FuelTankIcon,
-      propertyComponent: FuelTankPropertyComponent,
-      layoutComponent: FuelTankLayoutComponent,
-    },
-  ],
-  [
-    'Group',
-    {
-      vanillaData: null,
-      data: GroupData,
-
-      iconComponent: GroupIcon,
-      layoutComponent: GroupLayoutComponent,
-
-      exportify: groupExportify,
-    },
-  ],
-  [
-    'Engine_Kolibri',
-    {
-      vanillaData: VanillaEngineKolibriData,
-      data: EngineKolibriData,
-
-      iconComponent: EngineKolibriIcon,
-      layoutComponent: EngineKolibriLayoutComponent,
-    },
-  ],
+export const UsePartRegistryData = new Map<string, PartRegistryItem>([
+  FuelTankRegistry,
+  GroupRegistry,
+  EngineKolibriRegistry,
 ]);
 
-// TODO: change all stores to start with "use"
 const usePartRegistry = create(() => UsePartRegistryData);
 export default usePartRegistry;
