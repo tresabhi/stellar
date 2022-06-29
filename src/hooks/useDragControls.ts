@@ -1,24 +1,25 @@
-import { ThreeEvent } from '@react-three/fiber';
+import { ThreeEvent, useThree } from '@react-three/fiber';
 import { mutateBlueprint, mutateBlueprintVersionless } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
 import useApp from './useApp';
-import useMousePos from './useMousePos';
 
 // TODO: move these into a constants directory
-const DEFAULT_SNAP = 1;
+const DEFAULT_SNAP = 0;
 const CTRL_SNAP = 1 / 5;
-const SHIFT_SNAP = 10;
-const CTRL_SHIFT_SNAP = 0;
+const SHIFT_PRECISION = 5;
+const CTRL_SHIFT_SNAP = CTRL_SNAP / SHIFT_PRECISION;
 
 const useDragControls = (id: string) => {
-  const getMousePos = useMousePos();
+  const {
+    gl: { domElement: canvas },
+    camera,
+  } = useThree();
 
   let selectedInitially = false;
-  let initialMousePos: Vector2;
-  let delta = new Vector2();
+  let totalDelta = new Vector2();
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
@@ -32,8 +33,7 @@ const useDragControls = (id: string) => {
     ) {
       event.stopPropagation();
 
-      initialMousePos = getMousePos(event);
-      delta.set(0, 0);
+      totalDelta.set(0, 0);
       selectedInitially = part.selected;
 
       window.addEventListener('pointerup', onPointerUp);
@@ -45,37 +45,35 @@ const useDragControls = (id: string) => {
       ? event.shiftKey
         ? CTRL_SHIFT_SNAP
         : CTRL_SNAP
-      : event.shiftKey
-      ? SHIFT_SNAP
       : DEFAULT_SNAP;
-    const mousePos = getMousePos(event);
-    const newDelta = new Vector2(
-      snap(mousePos.x - initialMousePos.x, snapDistance),
-      snap(mousePos.y - initialMousePos.y, snapDistance),
+    const precision = event.shiftKey ? SHIFT_PRECISION : 1;
+    const movement = new Vector2(
+      snap(event.movementX / camera.zoom / precision, snapDistance),
+      snap(-event.movementY / camera.zoom / precision, snapDistance),
     );
-    const diff = newDelta.sub(delta);
 
     if (!selectedInitially) {
       selectPartOnly(id);
       selectedInitially = true;
     }
 
-    if (!newDelta.equals(delta)) {
+    if (event.movementX && event.movementY) {
       mutateBlueprintVersionless((draft) => {
-        translateTranslatableParts(diff, draft.selections, draft);
+        translateTranslatableParts(movement, draft.selections, draft);
       });
     }
 
-    delta.copy(newDelta.add(delta));
+    totalDelta.add(movement);
+    canvas.requestPointerLock();
   };
   const onPointerUp = () => {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
 
-    if (delta.length() !== 0) {
+    if (totalDelta.length() !== 0) {
       mutateBlueprintVersionless((draft) => {
         translateTranslatableParts(
-          delta.multiplyScalar(-1),
+          totalDelta.multiplyScalar(-1),
           draft.selections,
           draft,
         );
@@ -83,7 +81,7 @@ const useDragControls = (id: string) => {
 
       mutateBlueprint((draft) => {
         translateTranslatableParts(
-          delta.multiplyScalar(-1),
+          totalDelta.multiplyScalar(-1),
           draft.selections,
           draft,
         );
@@ -98,6 +96,8 @@ const useDragControls = (id: string) => {
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
     }
+
+    document.exitPointerLock();
   };
 
   return handlePointerDown;
