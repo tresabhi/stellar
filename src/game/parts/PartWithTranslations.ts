@@ -1,4 +1,4 @@
-import { declareBoundNeedsUpdate, deferBoundUpdates } from 'core/bounds';
+import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -38,7 +38,7 @@ export const usePartWithTranslations = (
     (p) => {
       group.current.position.set(p.x, p.y, 0);
       declareBoundNeedsUpdate(id);
-      deferBoundUpdates();
+      deferUpdates();
     },
   );
 };

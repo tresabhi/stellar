@@ -12,14 +12,14 @@ export interface BoundListing {
 }
 
 export type UseBounds = {
-  deferBoundUpdates: boolean;
+  deferUpdates: boolean;
 
   parts: Map<string, BoundListing>;
   selection: PrimitiveBounds | null;
 };
 
 export const UseBoundsDefaultData: UseBounds = {
-  deferBoundUpdates: false,
+  deferUpdates: false,
 
   parts: new Map(),
   selection: null,

@@ -3,15 +3,15 @@ import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
 export const BOUND_UPDATES_DEFER_TIME = 750;
 
-const allowBoundUpdates = fallingEdgeDebounce(() => {
+const allowUpdates = fallingEdgeDebounce(() => {
   useBounds.setState({
-    deferBoundUpdates: false,
+    deferUpdates: false,
   });
 }, BOUND_UPDATES_DEFER_TIME);
 
-export const deferBoundUpdates = () => {
+export const deferUpdates = () => {
   useBounds.setState({
-    deferBoundUpdates: true,
+    deferUpdates: true,
   });
-  allowBoundUpdates();
+  allowUpdates();
 };

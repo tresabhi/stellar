@@ -40,6 +40,8 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
   const outline = useRef<Line>(null!);
   const shading = useRef<Mesh>(null!);
   const selected = useBlueprint.getState().parts.get(id)?.selected ?? false;
+  const updatesDefered = useBounds.getState().deferUpdates;
+  const initialVisible = selected && !updatesDefered;
 
   const rerender = (bound: PrimitiveBounds) => {
     shading.current.scale.set(
@@ -71,17 +73,17 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
         if (boundListing) rerender(boundListing.bounds);
       },
     );
-    const unsubscribeDeferBoundUpdates = useBounds.subscribe(
-      (state) => state.deferBoundUpdates,
-      (deferBoundUpdates) => {
-        shading.current.visible = !deferBoundUpdates;
-        outline.current.visible = !deferBoundUpdates;
+    const unsubscribeDeferUpdates = useBounds.subscribe(
+      (state) => state.deferUpdates,
+      (deferUpdates) => {
+        shading.current.visible = !deferUpdates;
+        outline.current.visible = !deferUpdates;
       },
     );
 
     return () => {
       unsubscribeBoundListing();
-      unsubscribeDeferBoundUpdates();
+      unsubscribeDeferUpdates();
     };
   }, [id]);
 
@@ -91,13 +93,13 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
         ref={outline}
         material={outlineMaterial}
         geometry={unitBufferGeometry2}
-        visible={selected}
+        visible={initialVisible}
       />
       <mesh
         ref={shading}
         material={shadingMaterial}
         geometry={unitPlane}
-        visible={selected}
+        visible={initialVisible}
       />
     </>
   );

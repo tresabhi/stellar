@@ -1,4 +1,4 @@
-import { declareBoundNeedsUpdate, deferBoundUpdates } from 'core/bounds';
+import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -37,7 +37,7 @@ export const usePartWithOrientation = (
     (o) => {
       groupRef.current.rotation.set(0, 0, degToRad(o.z));
       declareBoundNeedsUpdate(id);
-      deferBoundUpdates();
+      deferUpdates();
     },
   );
 };

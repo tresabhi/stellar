@@ -1,4 +1,4 @@
-import { declareBoundNeedsUpdate, deferBoundUpdates } from 'core/bounds';
+import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
 import { Group } from 'three';
@@ -36,7 +36,7 @@ export const usePartWithScale = (
     (o) => {
       groupRef.current.scale.set(o.x, o.y, 1);
       declareBoundNeedsUpdate(id);
-      deferBoundUpdates();
+      deferUpdates();
     },
   );
 };

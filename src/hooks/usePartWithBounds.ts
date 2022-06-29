@@ -22,12 +22,12 @@ const usePartWithBounds = (id: string, group: MutableRefObject<Group>) => {
   useEffect(computeBounds);
   useEffect(() => {
     const unsubscribe = useBounds.subscribe(
-      (state) => state.deferBoundUpdates,
-      (deferBoundUpdates) => {
+      (state) => state.deferUpdates,
+      (deferUpdates) => {
         const boundListing = useBounds.getState().parts.get(id);
 
         // is not deferred anymore, bound listing exists, and it needs to be updated
-        if (!deferBoundUpdates && boundListing && boundListing.needsUpdate) {
+        if (!deferUpdates && boundListing && boundListing.needsUpdate) {
           computeBounds();
         }
       },

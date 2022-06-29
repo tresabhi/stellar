@@ -7,8 +7,8 @@ import { outlineMaterial, unitBufferGeometry2 } from './PartBounds';
 export const SelectionOutline = () => {
   const outline = useRef<Line>(null!);
   const selections = useBlueprint((state) => state.selections);
-  const deferBoundUpdates = useBounds((state) => state.deferBoundUpdates);
-  const visible = selections.length > 1 && !deferBoundUpdates;
+  const deferUpdates = useBounds((state) => state.deferUpdates);
+  const visible = selections.length > 1 && !deferUpdates;
 
   useEffect(() => {
     if (visible) {
