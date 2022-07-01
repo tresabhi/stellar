@@ -1,25 +1,23 @@
-import { ThreeEvent, useThree } from '@react-three/fiber';
+import { ThreeEvent } from '@react-three/fiber';
 import { mutateBlueprint, mutateBlueprintVersionless } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
 import useApp from './useApp';
+import useMousePos from './useMousePos';
 
-// TODO: move these into a constants directory
-const DEFAULT_SNAP = 0;
-const CTRL_SNAP = 1 / 5;
-const SHIFT_PRECISION = 5;
-const CTRL_SHIFT_SNAP = CTRL_SNAP / SHIFT_PRECISION;
+const DEFAULT_SNAP = 1 / 2;
+const CTRL_SNAP = 1 / 10;
+const SHIFT_SNAP = 1;
+const CTRL_SHIFT_SNAP = 0;
 
 const useDragControls = (id: string) => {
-  const {
-    gl: { domElement: canvas },
-    camera,
-  } = useThree();
+  const getMousePos = useMousePos();
 
   let selectedInitially = false;
-  let totalDelta = new Vector2();
+  let initialMousePos: Vector2;
+  let delta = new Vector2();
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
@@ -33,7 +31,8 @@ const useDragControls = (id: string) => {
     ) {
       event.stopPropagation();
 
-      totalDelta.set(0, 0);
+      initialMousePos = getMousePos(event);
+      delta.set(0, 0);
       selectedInitially = part.selected;
 
       window.addEventListener('pointerup', onPointerUp);
@@ -45,19 +44,22 @@ const useDragControls = (id: string) => {
       ? event.shiftKey
         ? CTRL_SHIFT_SNAP
         : CTRL_SNAP
+      : event.shiftKey
+      ? SHIFT_SNAP
       : DEFAULT_SNAP;
-    const precision = event.shiftKey ? SHIFT_PRECISION : 1;
-    const movement = new Vector2(
-      snap(event.movementX / camera.zoom / precision, snapDistance),
-      snap(-event.movementY / camera.zoom / precision, snapDistance),
+    const mousePos = getMousePos(event);
+    const newDelta = new Vector2(
+      snap(mousePos.x - initialMousePos.x, snapDistance),
+      snap(mousePos.y - initialMousePos.y, snapDistance),
     );
+    const movement = newDelta.sub(delta);
 
     if (!selectedInitially) {
       selectPartOnly(id);
       selectedInitially = true;
     }
 
-    if (event.movementX && event.movementY) {
+    if (!newDelta.equals(delta)) {
       mutateBlueprintVersionless((draft) => {
         translateTranslatableParts(
           movement.x,
@@ -68,30 +70,19 @@ const useDragControls = (id: string) => {
       });
     }
 
-    totalDelta.add(movement);
-    canvas.requestPointerLock();
+    delta.copy(newDelta.add(delta));
   };
   const onPointerUp = () => {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
 
-    if (totalDelta.length() !== 0) {
+    if (delta.length() !== 0) {
       mutateBlueprintVersionless((draft) => {
-        translateTranslatableParts(
-          -totalDelta.x,
-          -totalDelta.y,
-          draft.selections,
-          draft,
-        );
+        translateTranslatableParts(-delta.x, -delta.y, draft.selections, draft);
       });
 
       mutateBlueprint((draft) => {
-        translateTranslatableParts(
-          totalDelta.x,
-          totalDelta.y,
-          draft.selections,
-          draft,
-        );
+        translateTranslatableParts(delta.x, delta.y, draft.selections, draft);
       });
 
       const removeSelectionRestriction = () => {
@@ -103,8 +94,6 @@ const useDragControls = (id: string) => {
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
     }
-
-    document.exitPointerLock();
   };
 
   return handlePointerDown;

@@ -60,7 +60,7 @@ export const LayoutCanvas = () => {
       ref={canvas}
       orthographic
       camera={{
-        zoom: 16,
+        zoom: 32,
         position: [initialBlueprintState.center, 0, 100],
         rotation: [0, 0, 0],
       }}

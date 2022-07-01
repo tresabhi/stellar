@@ -3,7 +3,8 @@ import { useEffect, useRef } from 'react';
 import { Color, GridHelper, Mesh } from 'three';
 import { InfiniteGridHelper } from './components/InfiniteGridHelper';
 
-const MAJOR_MARK = 5;
+const MINOR_MARK = 1 / 5;
+const MAJOR_MARK = 1;
 
 export const Grid = () => {
   const initialState = useBlueprint.getState();
@@ -34,7 +35,7 @@ export const Grid = () => {
         ref={infiniteGridRef}
         position={[initialState.center % MAJOR_MARK, 0, 0]}
         axes="xyz"
-        size1={1}
+        size1={MINOR_MARK}
         size2={MAJOR_MARK}
         distance={1e3}
         color={new Color('hsl(240, 20%, 65%)')}
