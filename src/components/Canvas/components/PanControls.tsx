@@ -6,7 +6,8 @@ import { OrthographicCamera, Vector2 } from 'three';
 import { inverseLerp } from 'three/src/math/MathUtils';
 
 const MIN_ZOOM = 2.2;
-const MAX_ZOOM = 800;
+const MAX_ZOOM = 200;
+const SENSITIVITY = 1;
 
 export const PanControls = () => {
   const canvas = useThree((state) => state.gl.domElement);
@@ -23,7 +24,7 @@ export const PanControls = () => {
         const initialMousePos = getMousePos(event);
 
         const zoomCompensatedDeltaY =
-          event.deltaY * 4 * inverseLerp(0, MAX_ZOOM, camera.zoom);
+          event.deltaY * SENSITIVITY * inverseLerp(0, MAX_ZOOM, camera.zoom);
         const zoom = Math.max(
           MIN_ZOOM,
           Math.min(MAX_ZOOM, camera.zoom - zoomCompensatedDeltaY),

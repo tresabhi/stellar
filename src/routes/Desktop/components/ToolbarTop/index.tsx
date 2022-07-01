@@ -182,7 +182,7 @@ const ToolBarTop: FC = () => {
                   disabled
                 >{t`toolbar.control_menu.add.propulsion.hawk`}</ContextMenu.Button>
                 <ContextMenu.Button
-                  disabled
+                  onClick={add('Engine Peregrine')}
                 >{t`toolbar.control_menu.add.propulsion.peregrine`}</ContextMenu.Button>
                 <ContextMenu.Button
                   onClick={add('Engine Frontier')}
