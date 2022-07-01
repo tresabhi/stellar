@@ -53,7 +53,7 @@ export const EngineKolibriLayoutComponent: FC<PartComponentProps> = ({
 
   return (
     <group ref={group} onClick={handleClick} onPointerDown={handlePointerDown}>
-      <Model position={[0, 0.5, 0]} />
+      <Model position={[0, -1, 0]} />
     </group>
   );
 };

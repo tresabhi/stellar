@@ -1,12 +1,15 @@
 import { getBoundsFromObject } from 'core/bounds/functions/getBoundsFromObject';
 import produce from 'immer';
 import { MutableRefObject, useCallback, useEffect } from 'react';
-import { Group } from 'three';
+import { Group, Mesh } from 'three';
 import useBounds, { BoundListing, UseBounds } from './useBounds';
 
-const usePartWithBounds = (id: string, group: MutableRefObject<Group>) => {
+const usePartWithBounds = (
+  id: string,
+  object: MutableRefObject<Group | Mesh>,
+) => {
   const computeBounds = useCallback(() => {
-    const bounds = getBoundsFromObject(group);
+    const bounds = getBoundsFromObject(object);
     const boundListing: BoundListing = {
       bounds: bounds,
       needsUpdate: false,
@@ -17,7 +20,7 @@ const usePartWithBounds = (id: string, group: MutableRefObject<Group>) => {
         draft.parts.set(id, boundListing);
       }),
     );
-  }, [group, id]);
+  }, [object, id]);
 
   useEffect(computeBounds);
   useEffect(() => {
