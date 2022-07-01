@@ -1,10 +1,12 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import usePropertyController from 'hooks/usePropertyController';
+import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 
 const TransformationProperties: FC<PartPropertyComponentProps> = ({ ids }) => {
+  const { t } = useTranslator();
   const xPos = usePropertyController<PartWithTransformations>(
     ids,
     (state) => state.p.x,
@@ -38,15 +40,30 @@ const TransformationProperties: FC<PartPropertyComponentProps> = ({ ids }) => {
 
   return (
     <PropertiesExplorer.Group>
-      <PropertiesExplorer.Title>Transformations</PropertiesExplorer.Title>
+      <PropertiesExplorer.Title>{t`properties_explorer.properties.transformations`}</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.Input ref={xPos} label="Position X" />
-        <PropertiesExplorer.Input ref={yPos} label="Position Y" />
-        <PropertiesExplorer.Input ref={rot} label="Rotation" />
+        <PropertiesExplorer.Input
+          ref={xPos}
+          label={t`properties_explorer.properties.transformations.position_x`}
+        />
+        <PropertiesExplorer.Input
+          ref={yPos}
+          label={t`properties_explorer.properties.transformations.position_y`}
+        />
+        <PropertiesExplorer.Input
+          ref={rot}
+          label={t`properties_explorer.properties.transformations.rotation`}
+        />
       </PropertiesExplorer.Row>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.Input ref={xScale} label="Scale X" />
-        <PropertiesExplorer.Input ref={yScale} label="Scale Y" />
+        <PropertiesExplorer.Input
+          ref={xScale}
+          label={t`properties_explorer.properties.transformations.scale_x`}
+        />
+        <PropertiesExplorer.Input
+          ref={yScale}
+          label={t`properties_explorer.properties.transformations.scale_y`}
+        />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );

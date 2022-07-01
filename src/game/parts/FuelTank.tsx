@@ -7,6 +7,7 @@ import { PartRegistryFragment } from 'hooks/usePartRegistry';
 import usePartWithBounds from 'hooks/usePartWithBounds';
 import usePropertyController from 'hooks/usePropertyController';
 import useSelectionControl from 'hooks/useSelectionControl';
+import useTranslator from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
 import { CylinderGeometry, Group, Mesh, MeshStandardMaterial } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
@@ -163,6 +164,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
 export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
   ids,
 }) => {
+  const { t } = useTranslator();
   const width = usePropertyController<FuelTank>(
     ids,
     (state) => state.N.width_original,
@@ -186,11 +188,20 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 
   return (
     <PropertiesExplorer.Group>
-      <PropertiesExplorer.Title>Fuel Tank</PropertiesExplorer.Title>
+      <PropertiesExplorer.Title>{t`properties_explorer.properties.fuel_tank`}</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
-        <PropertiesExplorer.Input ref={width} label="Width" />
-        <PropertiesExplorer.Input ref={height} label="Height" />
-        <PropertiesExplorer.Input ref={fuel} label="Fuel" />
+        <PropertiesExplorer.Input
+          ref={width}
+          label={t`properties_explorer.properties.fuel_tank.width`}
+        />
+        <PropertiesExplorer.Input
+          ref={height}
+          label={t`properties_explorer.properties.fuel_tank.height`}
+        />
+        <PropertiesExplorer.Input
+          ref={fuel}
+          label={t`properties_explorer.properties.fuel_tank.fuel`}
+        />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
   );

@@ -2,6 +2,7 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { mutateBlueprint } from 'core/blueprint';
 import { getPart, getPartRegistry } from 'core/part';
 import useBlueprint from 'hooks/useBlueprint';
+import useTranslator from 'hooks/useTranslator';
 import useUnitInputController from 'hooks/useUnitInputController';
 import { useRef } from 'react';
 import { AnyPart } from 'types/Parts';
@@ -9,6 +10,7 @@ import compareStringArrays from 'utilities/compareStringArrays';
 import TransformationProperties from './TransformationProperties';
 
 const PropertiesEditor = () => {
+  const { t } = useTranslator();
   const initialBlueprintState = useBlueprint.getState();
   const selectionsLength = useBlueprint((state) => state.selections.length);
   const sortedSelections: Map<string, string[]> = new Map();
@@ -96,11 +98,20 @@ const PropertiesEditor = () => {
         propertyItems
       ) : (
         <PropertiesExplorer.Group>
-          <PropertiesExplorer.Title>Canvas</PropertiesExplorer.Title>
+          <PropertiesExplorer.Title>{t`properties_explorer.properties.canvas`}</PropertiesExplorer.Title>
           <PropertiesExplorer.Row>
-            <PropertiesExplorer.Input ref={centerInputRef} label="Center" />
-            <PropertiesExplorer.Input ref={offsetXInputRef} label="Offset X" />
-            <PropertiesExplorer.Input ref={offsetYInputRef} label="Offset Y" />
+            <PropertiesExplorer.Input
+              ref={centerInputRef}
+              label={t`properties_explorer.properties.canvas.center`}
+            />
+            <PropertiesExplorer.Input
+              ref={offsetXInputRef}
+              label={t`properties_explorer.properties.canvas.offset_x`}
+            />
+            <PropertiesExplorer.Input
+              ref={offsetYInputRef}
+              label={t`properties_explorer.properties.canvas.offset_y`}
+            />
           </PropertiesExplorer.Row>
         </PropertiesExplorer.Group>
       )}

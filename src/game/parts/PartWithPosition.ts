@@ -4,37 +4,35 @@ import { MutableRefObject } from 'react';
 import { Group } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
-export interface VanillaPartWithTranslations extends VanillaPart {
+export interface VanillaPartWithPosition extends VanillaPart {
   /**
    * Position of the part in `x` and `y` axis
    */
   p: { x: number; y: number };
 }
 
-export interface PartWithTranslations
-  extends Part,
-    VanillaPartWithTranslations {}
+export interface PartWithPosition extends Part, VanillaPartWithPosition {}
 
-export const VanillaPartWithTranslationsData: VanillaPartWithTranslations = {
+export const VanillaPartWithPositionData: VanillaPartWithPosition = {
   ...VanillaPartData,
 
   p: { x: 0, y: 0 },
 };
 
-export const PartWithTranslationsData: PartWithTranslations = {
+export const PartWithPositionData: PartWithPosition = {
   ...PartData,
-  ...VanillaPartWithTranslationsData,
+  ...VanillaPartWithPositionData,
 
   label: 'Unlabeled Part With Translations',
 };
 
-export const usePartWithTranslations = (
+export const usePartWithPosition = (
   id: string,
   group: MutableRefObject<Group>,
 ) => {
   usePartProperty(
     id,
-    (part: PartWithTranslations) => part.p,
+    (part: PartWithPosition) => part.p,
     (p) => {
       group.current.position.set(p.x, p.y, 0);
       declareBoundNeedsUpdate(id);

@@ -4,22 +4,22 @@ import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   usePartWithOrientation,
   VanillaPartWithOrientation,
-  VanillaPartWithOrientationData
+  VanillaPartWithOrientationData,
 } from './PartWithOrientation';
 import {
   usePartWithScale,
   VanillaPartWithScale,
-  VanillaPartWithScaleData
+  VanillaPartWithScaleData,
 } from './PartWithScale';
 import {
-  usePartWithTranslations,
-  VanillaPartWithTranslations,
-  VanillaPartWithTranslationsData
-} from './PartWithTranslations';
+  usePartWithPosition,
+  VanillaPartWithPosition,
+  VanillaPartWithPositionData,
+} from './PartWithPosition';
 
 export interface VanillaPartWithTransformations
   extends VanillaPart,
-    VanillaPartWithTranslations,
+    VanillaPartWithPosition,
     // omit to fix o key conflict
     Omit<VanillaPartWithOrientation, 'o'>,
     Omit<VanillaPartWithScale, 'o'> {
@@ -33,7 +33,7 @@ export interface PartWithTransformations
 export const VanillaPartWithTransformationsData: VanillaPartWithTransformations =
   {
     ...VanillaPartData,
-    ...VanillaPartWithTranslationsData,
+    ...VanillaPartWithPositionData,
     ...VanillaPartWithOrientationData,
     ...VanillaPartWithScaleData,
 
@@ -58,7 +58,7 @@ export const usePartWithTransformations = (
   id: string,
   groupRef: MutableRefObject<Group>,
 ) => {
-  usePartWithTranslations(id, groupRef);
+  usePartWithPosition(id, groupRef);
   usePartWithOrientation(id, groupRef);
   usePartWithScale(id, groupRef);
 };

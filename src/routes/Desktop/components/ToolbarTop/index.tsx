@@ -11,13 +11,13 @@ import {
   loadBlueprint,
   loadBlueprintTemplate,
   versionRedo,
-  versionUndo,
+  versionUndo
 } from 'core/blueprint';
 import {
   deletePartsBySelection,
   getParentId,
   getPartIndex,
-  insertPart,
+  insertPart
 } from 'core/part';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -48,7 +48,9 @@ const ToolBarTop: FC = () => {
       if (lastPartId) {
         const parentId = getParentId(lastPartId);
         const index = getPartIndex(lastPartId, parentId ?? null);
-        insertPart(name, parentId, isUndefined(index) ? 0 : index + 1);
+        insertPart(name, parentId, {
+          index: isUndefined(index) ? 0 : index + 1,
+        });
       } else {
         insertPart(name);
       }
@@ -155,62 +157,85 @@ const ToolBarTop: FC = () => {
             </ContextMenu.Extension>
           </ContextMenu.Container>
         </ControlMenu.Button>
-        <ControlMenu.Button label="Add">
-          {/* TODO: continue off of here */}
+        <ControlMenu.Button label={t`toolbar.control_menu.add`}>
           <ContextMenu.Container>
-            <ContextMenu.Extension label="Structural">
+            <ContextMenu.Extension
+              label={t`toolbar.control_menu.add.structural`}
+            >
               <ContextMenu.Container>
                 <ContextMenu.Button onClick={add('Fuel Tank')}>
-                  Fuel Tank
+                  {t`toolbar.control_menu.add.structural.fuel_tank`}
                 </ContextMenu.Button>
                 <ContextMenu.Button disabled>
-                  Structural Part
+                  {t`toolbar.control_menu.add.structural.structural_part`}
                 </ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
-            <ContextMenu.Extension label="Propulsion">
+            <ContextMenu.Extension
+              label={t`toolbar.control_menu.add.propulsion`}
+            >
               <ContextMenu.Container>
-                <ContextMenu.Button disabled>Titan</ContextMenu.Button>
-                <ContextMenu.Button disabled>Hawk</ContextMenu.Button>
-                <ContextMenu.Button disabled>Peregrine</ContextMenu.Button>
-                <ContextMenu.Button disabled>Frontier</ContextMenu.Button>
+                <ContextMenu.Button
+                  disabled
+                >{t`toolbar.control_menu.add.propulsion.titan`}</ContextMenu.Button>
+                <ContextMenu.Button
+                  disabled
+                >{t`toolbar.control_menu.add.propulsion.hawk`}</ContextMenu.Button>
+                <ContextMenu.Button
+                  disabled
+                >{t`toolbar.control_menu.add.propulsion.peregrine`}</ContextMenu.Button>
+                <ContextMenu.Button
+                  disabled
+                >{t`toolbar.control_menu.add.propulsion.frontier`}</ContextMenu.Button>
                 <ContextMenu.Button onClick={add('Engine Valiant')}>
-                  Valiant
+                  {t`toolbar.control_menu.add.propulsion.valiant`}
                 </ContextMenu.Button>
                 <ContextMenu.Button onClick={add('Engine Kolibri')}>
-                  Kolibri
+                  {t`toolbar.control_menu.add.propulsion.kolibri`}
                 </ContextMenu.Button>
-                <ContextMenu.Button disabled>Ion</ContextMenu.Button>
-                <ContextMenu.Button disabled>RCS Thruster</ContextMenu.Button>
+                <ContextMenu.Button
+                  disabled
+                >{t`toolbar.control_menu.add.propulsion.ion`}</ContextMenu.Button>
+                <ContextMenu.Button
+                  disabled
+                >{t`toolbar.control_menu.add.propulsion.rcs_thruster`}</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
-            <ContextMenu.Extension disabled label="Electric">
+            <ContextMenu.Extension
+              disabled
+              label={t`toolbar.control_menu.add.electric`}
+            >
               <ContextMenu.Container>
-                <ContextMenu.Button>Parachute</ContextMenu.Button>
-                <ContextMenu.Button>Side Parachute</ContextMenu.Button>
-                <ContextMenu.Button>Separator</ContextMenu.Button>
-                <ContextMenu.Button>Side Separator</ContextMenu.Button>
-                <ContextMenu.Button>Landing Legs</ContextMenu.Button>
-                <ContextMenu.Button>Large Landing Legs</ContextMenu.Button>
-                <ContextMenu.Button>Wheel</ContextMenu.Button>
-                <ContextMenu.Button>Large Wheel</ContextMenu.Button>
-                <ContextMenu.Button>Solar Panel</ContextMenu.Button>
-                <ContextMenu.Button>Large Solar Panel</ContextMenu.Button>
-                <ContextMenu.Button>Docking Port</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.parachute`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.side_parachute`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.separator`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.side_separator`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.landing_legs`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.large_landing_legs`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.wheel`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.large_wheel`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.solar_panel`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.large_solar_panel`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.electric.docking_port`}</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
-            <ContextMenu.Extension disabled label="Aerodynamic">
+            <ContextMenu.Extension
+              disabled
+              label={t`toolbar.control_menu.add.aerodynamic`}
+            >
               <ContextMenu.Container>
-                <ContextMenu.Button>Nose Cone</ContextMenu.Button>
-                <ContextMenu.Button>Side Nose Cone</ContextMenu.Button>
-                <ContextMenu.Button>Fuselage</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.aerodynamic.nose_cone`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.aerodynamic.side_nose_cone`}</ContextMenu.Button>
+                <ContextMenu.Button>{t`toolbar.control_menu.add.aerodynamic.fuselage`}</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
           </ContextMenu.Container>
         </ControlMenu.Button>
-        <ControlMenu.Button label="Debug">
+        <ControlMenu.Button label={t`toolbar.control_menu.debug`}>
           <ContextMenu.Container>
-            <ContextMenu.Extension label="Load Template">
+            <ContextMenu.Extension
+              label={t`toolbar.control_menu.debug.load_template`}
+            >
               <ContextMenu.Container>
                 <ContextMenu.Button onClick={loadBp('testFuelTank')}>
                   Fuel Tank Shapes
@@ -224,19 +249,24 @@ const ToolBarTop: FC = () => {
 
                 <ContextMenu.Separator />
 
-                <ContextMenu.Button onClick={loadBp()}>None</ContextMenu.Button>
+                <ContextMenu.Button
+                  onClick={loadBp()}
+                >{t`toolbar.control_menu.debug.load_template.none`}</ContextMenu.Button>
               </ContextMenu.Container>
             </ContextMenu.Extension>
           </ContextMenu.Container>
         </ControlMenu.Button>
-        <ControlMenu.Button label="Help">
+        <ControlMenu.Button label={t`toolbar.control_menu.help`}>
           <ContextMenu.Container>
             <ContextMenu.Button to="https://discord.gg/nDt7AjGJQH/">
-              Discord
+              {t`toolbar.control_menu.help.discord`}
+            </ContextMenu.Button>
+            <ContextMenu.Button to="https://github.com/TresAbhi/stellar">
+              {t`toolbar.control_menu.help.github`}
             </ContextMenu.Button>
             {wonderfulGrownUp ? (
               <ContextMenu.Button disabled>
-                "You'll make a wonderful grown-up!"
+                {t`toolbar.control_menu.help.you_will_make_a_wonderful_grown_up`}
               </ContextMenu.Button>
             ) : null}
           </ContextMenu.Container>
@@ -245,16 +275,16 @@ const ToolBarTop: FC = () => {
 
       <Tabs.Container className={styles['toolbar-tabs']}>
         <Tabs.Tab onClick={handleLayoutTabClick} selected={isTabLayout}>
-          Layout
+          {t`toolbar.tabs.layout`}
         </Tabs.Tab>
         <Tabs.Tab onClick={handleStagingTabClick} selected={isTabStaging}>
-          Staging
+          {t`toolbar.tabs.staging`}
         </Tabs.Tab>
         <Tabs.Tab onClick={handleSimulationTabClick} selected={isTabSimulation}>
-          Simulation
+          {t`toolbar.tabs.simulation`}
         </Tabs.Tab>
         <Tabs.Tab onClick={handleRenderingTabClick} selected={isTabRendering}>
-          Rendering
+          {t`toolbar.tabs.rendering`}
         </Tabs.Tab>
       </Tabs.Container>
     </div>

@@ -54,8 +54,10 @@
 
           "titan": "Titan",
           "hawk": "Hawk",
+          "peregrine": "Peregrine",
           "frontier": "Frontier",
           "valiant": "Valiant",
+          "kolibri": "Kolibri",
           "ion": "Ion",
           "rcs_thruster": "RCS Thruster"
         },
@@ -85,12 +87,17 @@
       "debug": {
         "$": "Debug",
 
-        "load_template": "Load Template"
+        "load_template": {
+          "$": "Load Template",
+
+          "none": "None"
+        }
       },
       "help": {
         "$": "Help",
 
         "discord": "Discord",
+        "github": "GitHub",
         "you_will_make_a_wonderful_grown_up": "\"You'll make a wonderful grown-up!\""
       }
     },
@@ -132,7 +139,7 @@
         "scale_y": "Scale Y",
         "ratio": "Ratio"
       },
-      "Fuel Tank": {
+      "fuel_tank": {
         "$": "Fuel Tank",
 
         "width": "Width",
@@ -144,6 +151,8 @@
     "inspect": {
       "$": "Inspect",
 
+      "too_many_parts_selected": "Too many parts selected",
+      "no_parts_selected": "No parts selected",
       "json": "JSON",
       "internal_data": {
         "$": "Internal Data",
@@ -157,20 +166,13 @@
         "name": "Name",
         "locked": "Locked",
         "hidden": "Hidden"
-      },
-      "bounding_box": {
-        "$": "Bounding Box",
-        "min_x": "Min X",
-        "min_y": "Min Y",
-        "max_x": "Max X",
-        "max_y": "Max Y"
       }
     }
   },
   "canvas": {},
   "statusbar": {},
   "parts": {
-    "Fuel Tank": "Fuel Tank",
-    "Group": "Group"
+    "fuel_tank": "Fuel Tank",
+    "group": "Group"
   }
 }

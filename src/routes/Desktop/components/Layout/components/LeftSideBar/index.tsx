@@ -2,10 +2,12 @@ import * as Partition from 'components/Partitions';
 import * as PartsExplorer from 'components/PartsExplorer';
 import * as SideBar from 'components/SideBar';
 import useSettings, { UseSettings } from 'hooks/useSettings';
+import useTranslator from 'hooks/useTranslator';
 import produce from 'immer';
 import styles from './index.module.scss';
 
 export default function LeftSideBar() {
+  const { t } = useTranslator();
   const partition = useSettings((state) => state.layout.leftSideBar.partition);
   const isPartitionParts = partition === 'parts';
   const isPartitionSnippets = partition === 'snippets';
@@ -30,14 +32,14 @@ export default function LeftSideBar() {
           selected={isPartitionParts}
           onClick={handlePartsClick}
         >
-          Parts
+          {t`parts_explorer.parts`}
         </Partition.Partition>
         <Partition.Separator />
         <Partition.Partition
           selected={isPartitionSnippets}
           onClick={handleSnippetsClick}
         >
-          Snippets
+          {t`parts_explorer.snippets`}
         </Partition.Partition>
       </Partition.Container>
       <SideBar.Scrollable
@@ -61,7 +63,7 @@ export default function LeftSideBar() {
             textAlign: 'center',
           }}
         >
-          Snippets coming soon!
+          {t`parts_explorer.snippets.coming_soon`}
         </span>
       </SideBar.Scrollable>
     </SideBar.Container>
