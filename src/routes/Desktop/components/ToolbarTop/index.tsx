@@ -11,13 +11,13 @@ import {
   loadBlueprint,
   loadBlueprintTemplate,
   versionRedo,
-  versionUndo
+  versionUndo,
 } from 'core/blueprint';
 import {
   deletePartsBySelection,
   getParentId,
   getPartIndex,
-  insertPart
+  insertPart,
 } from 'core/part';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -185,7 +185,7 @@ const ToolBarTop: FC = () => {
                   disabled
                 >{t`toolbar.control_menu.add.propulsion.peregrine`}</ContextMenu.Button>
                 <ContextMenu.Button
-                  disabled
+                  onClick={add('Engine Frontier')}
                 >{t`toolbar.control_menu.add.propulsion.frontier`}</ContextMenu.Button>
                 <ContextMenu.Button onClick={add('Engine Valiant')}>
                   {t`toolbar.control_menu.add.propulsion.valiant`}

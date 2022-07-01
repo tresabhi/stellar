@@ -1,4 +1,5 @@
 import { Blueprint } from 'game/Blueprint';
+import { EngineFrontierRegistry } from 'game/parts/EngineFrontier';
 import { EngineKolibriRegistry } from 'game/parts/EngineKolibri';
 import { EngineValiantRegistry } from 'game/parts/EngineValiant';
 import { FuelTankRegistry } from 'game/parts/FuelTank';
@@ -38,6 +39,7 @@ export const UsePartRegistryData = new Map<string, PartRegistryItem>([
   GroupRegistry,
   EngineKolibriRegistry,
   EngineValiantRegistry,
+  EngineFrontierRegistry,
 ]);
 
 const usePartRegistry = create(() => UsePartRegistryData);
