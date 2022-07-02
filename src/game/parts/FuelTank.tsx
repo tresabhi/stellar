@@ -1,5 +1,6 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
 import useDragControls from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
@@ -130,7 +131,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
     id,
     (state: FuelTank) => state.N,
     (N) => {
-      mesh.current!.geometry = new CylinderGeometry(
+      mesh.current.geometry = new CylinderGeometry(
         N.width_b / 2,
         N.width_a / 2,
         N.height,
@@ -140,6 +141,10 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
         Math.PI / -2,
         Math.PI,
       );
+      mesh.current.position.set(0, N.height / 2, 0);
+      // TODO: maybe merge these two functions?
+      declareBoundNeedsUpdate(id);
+      deferUpdates();
     },
   );
   usePartWithTransformations(id, group);
@@ -152,11 +157,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
       onClick={handleClick}
       onPointerDown={handlePointerDown}
     >
-      <mesh
-        ref={mesh}
-        material={temp_material}
-        position={[0, state.N.height / 2, 0]}
-      />
+      <mesh ref={mesh} material={temp_material} />
     </group>
   );
 };
