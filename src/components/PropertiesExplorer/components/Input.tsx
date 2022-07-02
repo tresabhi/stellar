@@ -8,10 +8,10 @@ import styles from '../index.module.scss';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  type?: 'small' | 'wide';
+  type?: 'compact' | 'half-width' | 'full-width'; // TODO: implement half-width
 }
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, type = 'small', onClick, ...props }, ref) => {
+  ({ label, type = 'compact', onClick, ...props }, ref) => {
     const handleClick = (event: MouseEvent<HTMLInputElement>) => {
       (ref as MutableRefObject<HTMLInputElement>)?.current.focus();
       if (onClick) onClick(event);
@@ -19,9 +19,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div
-        className={`${styles['input']} ${
-          type === 'wide' ? styles.wide : styles.small
-        }`}
+        className={`${styles['input']} ${styles[type]}`}
         onClick={handleClick}
       >
         <span className={styles.label}>{label}</span>

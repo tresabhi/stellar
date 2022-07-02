@@ -2,11 +2,12 @@ import { FC, InputHTMLAttributes } from 'react';
 import styles from '../index.module.scss';
 
 export interface ToggleProps extends InputHTMLAttributes<HTMLButtonElement> {
-  initialState?: boolean;
+  label: string;
+  type: 'compact' | 'half-width' | 'full-width';
 }
 export const Toggle: FC<ToggleProps> = ({
   children,
-  initialState = false,
+  // initialState = false,
   ...props
 }) => {
   return (

@@ -6,7 +6,7 @@ import { Row } from './Row';
 export interface PropertyProps {
   label: string;
   value: string;
-  type?: 'wide' | 'compact';
+  type?: 'full-width' | 'compact';
   copyable?: boolean;
 }
 export const Property: FC<PropertyProps> = ({

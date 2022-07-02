@@ -59,10 +59,10 @@ const useTranslator = () => {
       : translation.$ ?? string; // If translation is an object, return the object's master value or the original string
   };
 
-  const translate_shorthand = (string: TemplateStringsArray) =>
+  const translateShorthand = (string: TemplateStringsArray) =>
     translate(string[0]);
 
-  const hook = { language, translate, t: translate_shorthand };
+  const hook = { language, translate, t: translateShorthand };
 
   return hook;
 };

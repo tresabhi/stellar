@@ -1,13 +1,21 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { mutateBlueprint } from 'core/blueprint';
 import { getPart, getPartRegistry } from 'core/part';
+import { PartWithTransformationsPropertyComponent } from 'game/parts/PartWithTransformations';
 import useBlueprint from 'hooks/useBlueprint';
 import useTranslator from 'hooks/useTranslator';
 import useUnitInputController from 'hooks/useUnitInputController';
-import { useRef } from 'react';
-import { AnyPart } from 'types/Parts';
+import { FC, useRef } from 'react';
+import { AnyPart, PartPropertyComponentProps } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
-import TransformationProperties from './TransformationProperties';
+
+export const partGroupPropertyComponents = new Map<
+  string,
+  FC<PartPropertyComponentProps>
+>([
+  ['PartWithTransformations', PartWithTransformationsPropertyComponent],
+  // ['PartWithEngine', PartWithEnginePropertyComponent],
+]);
 
 const PropertiesEditor = () => {
   const { t } = useTranslator();
@@ -16,7 +24,6 @@ const PropertiesEditor = () => {
   const sortedSelections: Map<string, string[]> = new Map();
   const propertyItems: JSX.Element[] = [];
   const orderedSelections: string[] = [];
-  let partsWithTransformations: string[] = [];
   const centerInputRef = useRef<HTMLInputElement>(null);
   const offsetXInputRef = useRef<HTMLInputElement>(null);
   const offsetYInputRef = useRef<HTMLInputElement>(null);
@@ -24,13 +31,22 @@ const PropertiesEditor = () => {
     (state) => state.selections,
     compareStringArrays,
   );
+  const partGroups = new Map<string, string[]>([
+    ['PartWithTransformations', []],
+    ['PartWithEngine', []],
+  ]);
 
   // sort selections by class name and look for common properties
   selections.forEach((selection) => {
     const part = getPart<AnyPart>(selection);
 
     if (part) {
-      if (part.p && part.o) partsWithTransformations.push(selection);
+      if (part.p && part.o && part.o.z) {
+        partGroups.get('PartWithTransformations')?.push(selection);
+      }
+      if (part.B) {
+        partGroups.get('PartWithEngine')?.push(selection);
+      }
 
       if (sortedSelections.has(part.n)) {
         sortedSelections.get(part.n)!.push(selection);
@@ -38,6 +54,24 @@ const PropertiesEditor = () => {
         sortedSelections.set(part.n, [selection]);
         orderedSelections.push(part.n);
       }
+    }
+  });
+
+  // if (partsWithTransformations.length > 0) {
+  //   propertyItems.unshift(
+  //     <PartWithTransformationsPropertyComponent
+  //       key="type-transformations"
+  //       ids={partsWithTransformations}
+  //     />,
+  //   );
+  // }
+  partGroups.forEach((ids, type) => {
+    const PropertyComponent = partGroupPropertyComponents.get(type);
+
+    if (PropertyComponent) {
+      propertyItems.push(
+        <PropertyComponent ids={ids} key={`property-component-${type}`} />,
+      );
     }
   });
 
@@ -54,15 +88,6 @@ const PropertiesEditor = () => {
       );
     }
   });
-
-  if (partsWithTransformations.length > 0) {
-    propertyItems.unshift(
-      <TransformationProperties
-        key="type-transformations"
-        ids={partsWithTransformations}
-      />,
-    );
-  }
 
   useUnitInputController(centerInputRef, initialBlueprintState.center, {
     onChange: (value) => {

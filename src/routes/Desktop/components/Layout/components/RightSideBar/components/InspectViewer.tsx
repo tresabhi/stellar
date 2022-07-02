@@ -22,13 +22,13 @@ const InspectViewer = () => {
       <PropertiesExplorer.Group>
         <PropertiesExplorer.Title>{t`properties_explorer.inspect.internal_data`}</PropertiesExplorer.Title>
         <PropertiesExplorer.Property
-          type="wide"
+          type="full-width"
           label={t`properties_explorer.inspect.internal_data.id`}
           value={id}
           copyable
         />
         <PropertiesExplorer.Property
-          type="wide"
+          type="full-width"
           label={t`properties_explorer.inspect.internal_data.parent_id`}
           value={`${part.parentId}`}
           copyable={!isUndefined(part.parentId)}

@@ -1,3 +1,6 @@
+import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import { FC } from 'react';
+import { PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithEngine extends VanillaPart {
@@ -25,4 +28,17 @@ export const PartWithEngineData: PartWithEngine = {
   ...VanillaPartWithEngineData,
 
   label: 'Unlabeled Part Engine',
+};
+
+export const PartWithEnginePropertyComponent: FC<
+  PartPropertyComponentProps
+> = ({ ids }) => {
+  return (
+    <PropertiesExplorer.Group>
+      <PropertiesExplorer.Title>Engine</PropertiesExplorer.Title>
+      <PropertiesExplorer.Row>
+        <PropertiesExplorer.Toggle label="Engine On" type="full-width" />
+      </PropertiesExplorer.Row>
+    </PropertiesExplorer.Group>
+  );
 };

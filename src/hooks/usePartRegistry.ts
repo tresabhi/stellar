@@ -3,7 +3,6 @@ import { EngineFrontierRegistry } from 'game/parts/EngineFrontier';
 import { EngineKolibriRegistry } from 'game/parts/EngineKolibri';
 import { EnginePeregrineRegistry } from 'game/parts/EnginePeregrine';
 import { EngineValiantRegistry } from 'game/parts/EngineValiant';
-import { FuelTankRegistry } from 'game/parts/FuelTank';
 import { GroupRegistry } from 'game/parts/Group';
 import { Part, VanillaPart } from 'game/parts/Part';
 import { FC } from 'react';
@@ -36,7 +35,7 @@ export type UsePartRegistry = Map<string, PartRegistryItem>;
 export type PartRegistryFragment = [string, PartRegistryItem];
 
 export const UsePartRegistryData = new Map<string, PartRegistryItem>([
-  FuelTankRegistry,
+  // FuelTankRegistry,
   GroupRegistry,
   EngineKolibriRegistry,
   EngineValiantRegistry,

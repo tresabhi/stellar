@@ -37,11 +37,15 @@ $input-height: 24px;
           margin-left: $margin-thick;
         }
 
-        &.small {
+        &.compact {
           width: $input-width;
         }
 
-        &.wide {
+        &.half-width {
+          // here
+        }
+
+        &.full-width {
           width: 100%;
         }
 
