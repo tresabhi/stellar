@@ -78,8 +78,8 @@
       "debug": {
         "$": "Depuración",
         "load_template": {
-          "$": "Load Template",
-          "none": "None"
+          "$": "Cargar plantilla",
+          "none": "Ninguna"
         }
       },
       "help": {
@@ -137,8 +137,8 @@
       "json": "JSON",
       "internal_data": {
         "$": "Información interna",
-        "id": "Id",
-        "parent_id": "Id padre"
+        "id": "ID",
+        "parent_id": "Parent ID"
       },
       "meta_data": {
         "$": "Metadatos",
