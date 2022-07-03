@@ -137,8 +137,8 @@
       "json": "JSON",
       "internal_data": {
         "$": "Internal Data",
-        "id": "Id",
-        "parent_id": "Parent Id"
+        "id": "ID",
+        "parent_id": "Parent ID"
       },
       "meta_data": {
         "$": "Meta Data",
