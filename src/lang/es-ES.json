@@ -124,21 +124,21 @@
         "ratio": "Ratio"
       },
       "fuel_tank": {
-        "$": "Fuel Tank",
-        "width": "Width",
-        "height": "Height",
-        "fuel": "Fuel"
+        "$": "Tanque de combustible",
+        "width": "Anchura",
+        "height": "Altura",
+        "fuel": "Combustible"
       }
     },
     "inspect": {
       "$": "Inspeccionar",
-      "too_many_parts_selected": "Too many parts selected",
-      "no_parts_selected": "No parts selected",
+      "too_many_parts_selected": "Demasiadas partes seleccionadas",
+      "no_parts_selected": "No hay partes seleccionadas",
       "json": "JSON",
       "internal_data": {
         "$": "Información interna",
         "id": "ID",
-        "parent_id": "Parent ID"
+        "parent_id": "ID Padre"
       },
       "meta_data": {
         "$": "Metadatos",
@@ -151,7 +151,7 @@
   "canvas": {},
   "statusbar": {},
   "parts": {
-    "fuel_tank": "Fuel Tank",
-    "group": "Group"
+    "fuel_tank": "Tanque de combustible",
+    "group": "Grupo"
   }
 }
