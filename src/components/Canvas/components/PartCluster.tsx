@@ -23,7 +23,7 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
       const part = getPart(Id);
 
       if (part) {
-        const LayoutComponent = getPartRegistry(part.n)?.layoutComponent;
+        const LayoutComponent = getPartRegistry(part.n)?.Mesh;
 
         if (LayoutComponent) {
           partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);

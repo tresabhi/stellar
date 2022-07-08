@@ -7,7 +7,7 @@ import DeepPartial from 'types/DeepPartial';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import useUnitInputController, {
   useUnitInputControllerDefaultOptions,
-  UseUnitInputControllerOptions
+  UseUnitInputControllerOptions,
 } from './useUnitInputController';
 
 const DEBOUNCE_TIME = 250;
@@ -74,6 +74,7 @@ const usePropertyController = <Type extends Part>(
     rerender();
   };
   const rerender = () => {
+    // TODO: stop utilizing Array.from since it iterates over all times
     Array.from(values).some(([id, value], index) => {
       if (index === 0) {
         inputController.value = value;

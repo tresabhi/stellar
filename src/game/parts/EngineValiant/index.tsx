@@ -66,7 +66,7 @@ export const EngineValiantRegistry: PartRegistryFragment = [
     vanillaData: VanillaEngineValiantData,
     data: EngineValiantData,
 
-    iconComponent: EngineValiantIcon,
-    layoutComponent: EngineValiantLayoutComponent,
+    Icon: EngineValiantIcon,
+    Mesh: EngineValiantLayoutComponent,
   },
 ];

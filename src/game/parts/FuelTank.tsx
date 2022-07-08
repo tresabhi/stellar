@@ -212,8 +212,8 @@ export const FuelTankRegistry: PartRegistryFragment = [
     vanillaData: VanillaFuelTankData,
     data: FuelTankData,
 
-    iconComponent: FuelTankIcon,
-    propertyComponent: FuelTankPropertyComponent,
-    layoutComponent: FuelTankLayoutComponent,
+    Icon: FuelTankIcon,
+    PropertyEditor: FuelTankPropertyComponent,
+    Mesh: FuelTankLayoutComponent,
   },
 ];

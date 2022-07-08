@@ -68,7 +68,7 @@ export const EngineFrontierRegistry: PartRegistryFragment = [
     vanillaData: VanillaEngineFrontierData,
     data: EngineFrontierData,
 
-    iconComponent: EngineFrontierIcon,
-    layoutComponent: EngineFrontierLayoutComponent,
+    Icon: EngineFrontierIcon,
+    Mesh: EngineFrontierLayoutComponent,
   },
 ];

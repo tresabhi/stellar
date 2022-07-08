@@ -11,7 +11,7 @@ import {
   AnyPart,
   AnyVanillaPart,
   PartComponentProps,
-  PartPropertyComponentProps,
+  PartPropertyComponentProps
 } from 'types/Parts';
 import create from 'zustand';
 
@@ -25,9 +25,9 @@ export interface PartRegistryItem {
   vanillaData: VanillaPart | null;
   data: AnyPart;
 
-  iconComponent: FC;
-  propertyComponent?: FC<PartPropertyComponentProps>;
-  layoutComponent: FC<PartComponentProps>;
+  Icon: FC;
+  PropertyEditor?: FC<PartPropertyComponentProps>;
+  Mesh: FC<PartComponentProps>;
 
   exportify?: PartExportifier<any>;
 }

@@ -5,6 +5,7 @@ import { PartWithTransformationsPropertyComponent } from 'game/parts/PartWithTra
 import useBlueprint from 'hooks/useBlueprint';
 import useTranslator from 'hooks/useTranslator';
 import useUnitInputController from 'hooks/useUnitInputController';
+import { isUndefined } from 'lodash';
 import { FC, useRef } from 'react';
 import { AnyPart, PartPropertyComponentProps } from 'types/Parts';
 import compareStringArrays from 'utilities/compareStringArrays';
@@ -41,7 +42,7 @@ const PropertiesEditor = () => {
     const part = getPart<AnyPart>(selection);
 
     if (part) {
-      if (part.p && part.o && part.o.z) {
+      if (part.p && part.o && !isUndefined(part.o.z)) {
         partGroups.get('PartWithTransformations')?.push(selection);
       }
       if (part.B) {
@@ -57,14 +58,6 @@ const PropertiesEditor = () => {
     }
   });
 
-  // if (partsWithTransformations.length > 0) {
-  //   propertyItems.unshift(
-  //     <PartWithTransformationsPropertyComponent
-  //       key="type-transformations"
-  //       ids={partsWithTransformations}
-  //     />,
-  //   );
-  // }
   partGroups.forEach((ids, type) => {
     const PropertyComponent = partGroupPropertyComponents.get(type);
 
@@ -80,7 +73,7 @@ const PropertiesEditor = () => {
 
   orderedSelections.forEach((partName) => {
     const ids = sortedSelections.get(partName)!;
-    const PropertyComponent = getPartRegistry(partName)?.propertyComponent;
+    const PropertyComponent = getPartRegistry(partName)?.PropertyEditor;
 
     if (PropertyComponent) {
       propertyItems.push(

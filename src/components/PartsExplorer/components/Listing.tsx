@@ -35,7 +35,7 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
   );
   let lastLabel = initialState.label;
   const IconComponent =
-    getPartRegistry(initialState.n)?.iconComponent ?? QuestionMarkIcon;
+    getPartRegistry(initialState.n)?.Icon ?? QuestionMarkIcon;
 
   usePartProperty(
     id,

@@ -68,7 +68,7 @@ export const EnginePeregrineRegistry: PartRegistryFragment = [
     vanillaData: VanillaEnginePeregrineData,
     data: EnginePeregrineData,
 
-    iconComponent: EnginePeregrineIcon,
-    layoutComponent: EnginePeregrineLayoutComponent,
+    Icon: EnginePeregrineIcon,
+    Mesh: EnginePeregrineLayoutComponent,
   },
 ];

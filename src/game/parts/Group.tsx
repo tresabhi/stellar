@@ -74,8 +74,8 @@ export const GroupRegistry: PartRegistryFragment = [
     vanillaData: null,
     data: GroupData,
 
-    iconComponent: GroupIcon,
-    layoutComponent: GroupLayoutComponent,
+    Icon: GroupIcon,
+    Mesh: GroupLayoutComponent,
 
     exportify: groupExportify,
   },

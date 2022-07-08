@@ -66,7 +66,7 @@ export const EngineKolibriRegistry: PartRegistryFragment = [
     vanillaData: VanillaEngineKolibriData,
     data: EngineKolibriData,
 
-    iconComponent: EngineKolibriIcon,
-    layoutComponent: EngineKolibriLayoutComponent,
+    Icon: EngineKolibriIcon,
+    Mesh: EngineKolibriLayoutComponent,
   },
 ];

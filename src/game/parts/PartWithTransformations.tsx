@@ -76,31 +76,31 @@ export const PartWithTransformationsPropertyComponent: FC<
   const xPos = usePropertyController<PartWithTransformations>(
     ids,
     (state) => state.p.x,
-    (value) => ({ p: { x: value } }),
+    (x) => ({ p: { x } }),
     { suffix: 'm' },
   );
   const yPos = usePropertyController<PartWithTransformations>(
     ids,
     (state) => state.p.y,
-    (value) => ({ p: { y: value } }),
+    (y) => ({ p: { y } }),
     { suffix: 'm' },
   );
   const rot = usePropertyController<PartWithTransformations>(
     ids,
     (state) => state.o.z,
-    (value) => ({ o: { z: value } }),
+    (z) => ({ o: { z } }),
     { modOnClamp: true, max: 360, suffix: '°' },
   );
   const xScale = usePropertyController<PartWithTransformations>(
     ids,
     (state) => state.o.x,
-    (value) => ({ o: { x: value } }),
+    (x) => ({ o: { x } }),
     { suffix: 'x' },
   );
   const yScale = usePropertyController<PartWithTransformations>(
     ids,
     (state) => state.o.y,
-    (value) => ({ o: { y: value } }),
+    (y) => ({ o: { y } }),
     { suffix: 'x' },
   );
 
