@@ -10,7 +10,7 @@ import usePropertyController from 'hooks/usePropertyController';
 import useSelectionControl from 'hooks/useSelectionControl';
 import useTranslator from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
-import { CylinderGeometry, Group, Mesh, MeshBasicMaterial } from 'three';
+import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
@@ -109,17 +109,6 @@ export const FuelTankData: FuelTank = {
   label: 'Fuel Tank',
 };
 
-/**
- * TODO: Make this data driven later!
- * @deprecated
- */
-const tempMaterial = new MeshBasicMaterial({
-  color: 'white',
-  // roughness: 0.8,
-  // metalness: 0.8,
-  // flatShading: true,
-});
-
 export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const group = useRef<Group>(null!);
   const mesh = useRef<Mesh>(null!);
@@ -157,7 +146,14 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
       onClick={handleClick}
       onPointerDown={handlePointerDown}
     >
-      <mesh ref={mesh} material={tempMaterial} />
+      <mesh ref={mesh}>
+        <meshStandardMaterial
+          flatShading
+          roughness={0.8}
+          metalness={0.8}
+          color="white"
+        />
+      </mesh>
     </group>
   );
 };

@@ -160,11 +160,10 @@ const ToolBarTop: FC = () => {
         <ControlMenu.Button label={t`toolbar.control_menu.add`}>
           <ContextMenu.Container>
             <ContextMenu.Extension
-              disabled
               label={t`toolbar.control_menu.add.structural`}
             >
               <ContextMenu.Container>
-                <ContextMenu.Button disabled>
+                <ContextMenu.Button onClick={add('Fuel Tank')}>
                   {t`toolbar.control_menu.add.structural.fuel_tank`}
                 </ContextMenu.Button>
                 <ContextMenu.Button disabled>
