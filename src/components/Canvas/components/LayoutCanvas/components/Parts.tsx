@@ -1,5 +1,6 @@
 import PartCluster from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
+import { deferUpdates, translateAllBoundingBoxes } from 'core/bounds';
 import useBlueprint from 'hooks/useBlueprint';
 import { forwardRef, MutableRefObject, useEffect } from 'react';
 import { Group } from 'three';
@@ -11,14 +12,18 @@ export const Parts = forwardRef<Group>((props, ref) => {
   useEffect(() => {
     const unsubscribe = useBlueprint.subscribe(
       (state) => state.offset,
-      (offset) => {
-        console.log('oh yeah baby');
+      (offset, previousOffset) => {
+        const deltaX = offset.x - previousOffset.x;
+        const deltaY = offset.y - previousOffset.y;
 
         (ref as MutableRefObject<Group>).current.position.set(
           offset.x,
           offset.y,
           0,
         );
+
+        translateAllBoundingBoxes(deltaX, deltaY);
+        deferUpdates();
       },
     );
 
