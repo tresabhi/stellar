@@ -28,7 +28,7 @@ export const Parts = forwardRef<Group>((props, ref) => {
     );
 
     return unsubscribe;
-  }, []);
+  }, [ref]);
 
   return (
     <HeadsUpDisplay priority={LAYER.PART}>

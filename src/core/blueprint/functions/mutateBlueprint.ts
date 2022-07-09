@@ -2,24 +2,19 @@ import { Blueprint } from 'game/Blueprint';
 import useBlueprint from 'hooks/useBlueprint';
 import useVersionControl, { UseVersionControl } from 'hooks/useVersionControl';
 import produce, { produceWithPatches } from 'immer';
-import { merge } from 'lodash';
-import DeepPartial from 'types/DeepPartial';
-import { UNDO_LIMIT } from '../constants/versionControl';
 import { declareUnsavedChanges } from './declareUnsavedChanges';
 
-export const mutateBlueprint = (
-  producer: (state: Blueprint) => void,
-  lastStateLie?: DeepPartial<Blueprint>,
-) => {
+// a let statement to avoid static checking error with 0
+export let UNDO_LIMIT = 512;
+
+export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
   const [nextState, patches, inversePatches] = produceWithPatches(
-    lastStateLie
-      ? merge(useBlueprint.getState(), lastStateLie)
-      : useBlueprint.getState(),
+    useBlueprint.getState(),
     producer,
   );
 
   useVersionControl.setState(
-    produce((draft: UseVersionControl) => {
+    produce<UseVersionControl>((draft) => {
       draft.history.splice(
         draft.index + 1,
         draft.history.length - draft.index - 1,

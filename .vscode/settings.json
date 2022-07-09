@@ -10,6 +10,7 @@
     "buildbeta",
     "buildrelease",
     "Cacheable",
+    "chonky",
     "clickables",
     "cooldown",
     "Defered",

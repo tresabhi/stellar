@@ -1,11 +1,14 @@
 import { ThreeEvent } from '@react-three/fiber';
-import { mutateBlueprint, mutateBlueprintVersionless } from 'core/blueprint';
+import { UNDO_LIMIT } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
+import produce, { Patch, produceWithPatches } from 'immer';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
 import useApp from './useApp';
+import useBlueprint from './useBlueprint';
 import useMousePos from './useMousePos';
+import useVersionControl, { UseVersionControl } from './useVersionControl';
 
 const DEFAULT_SNAP = 1 / 2;
 const CTRL_SNAP = 1 / 10;
@@ -18,6 +21,8 @@ const useDragControls = (id: string) => {
   let selectedInitially = false;
   let initialMousePos: Vector2;
   let delta = new Vector2();
+  let firstInversePatches: Patch[] | undefined;
+  let lastPatches: Patch[] | undefined;
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
@@ -59,15 +64,24 @@ const useDragControls = (id: string) => {
       selectedInitially = true;
     }
 
-    if (!newDelta.equals(delta)) {
-      mutateBlueprintVersionless((draft) => {
-        translateTranslatableParts(
-          movement.x,
-          movement.y,
-          draft.selections,
-          draft,
-        );
-      });
+    if (movement.length() > 0) {
+      const [nextState, patches, inversePatches] = produceWithPatches(
+        useBlueprint.getState(),
+        (draft) => {
+          translateTranslatableParts(
+            movement.x,
+            movement.y,
+            draft.selections,
+            draft,
+          );
+        },
+      );
+
+      if (inversePatches.length > 0) {
+        if (!firstInversePatches) firstInversePatches = inversePatches;
+        lastPatches = patches;
+        useBlueprint.setState(nextState);
+      }
     }
 
     delta.copy(newDelta.add(delta));
@@ -76,14 +90,30 @@ const useDragControls = (id: string) => {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
 
-    if (delta.length() !== 0) {
-      mutateBlueprintVersionless((draft) => {
-        translateTranslatableParts(-delta.x, -delta.y, draft.selections, draft);
-      });
+    if (lastPatches) {
+      useVersionControl.setState(
+        produce<UseVersionControl>((draft) => {
+          draft.history.splice(
+            draft.index + 1,
+            draft.history.length - draft.index - 1,
+          );
 
-      mutateBlueprint((draft) => {
-        translateTranslatableParts(delta.x, delta.y, draft.selections, draft);
-      });
+          draft.history.push({
+            undo: firstInversePatches!,
+            redo: lastPatches!,
+          });
+
+          if (UNDO_LIMIT === 0) {
+            draft.index++;
+          } else {
+            if (draft.history.length > UNDO_LIMIT) {
+              draft.history.shift();
+            } else {
+              draft.index++;
+            }
+          }
+        }),
+      );
 
       const removeSelectionRestriction = () => {
         // fire this just in case selection does not happen
@@ -93,9 +123,16 @@ const useDragControls = (id: string) => {
 
       useApp.setState({ preventNextSelection: true });
       window.addEventListener('pointerup', removeSelectionRestriction);
+
+      // clean up
+      firstInversePatches = undefined;
+      lastPatches = undefined;
     }
   };
 
   return handlePointerDown;
 };
 export default useDragControls;
+
+//@ts-ignore
+window.a = useVersionControl;

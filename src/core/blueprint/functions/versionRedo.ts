@@ -6,7 +6,7 @@ import { declareUnsavedChanges } from './declareUnsavedChanges';
 export const versionRedo = () => {
   useVersionControl.setState(
     produce((draft: UseVersionControl) => {
-      const redoPatch = draft.history[draft.index]?.redo;
+      const redoPatch = draft.history[draft.index + 1]?.redo;
 
       if (redoPatch) {
         useBlueprint.setState(applyPatches(useBlueprint.getState(), redoPatch));
