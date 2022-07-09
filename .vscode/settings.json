@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "Abhi",
+    "Akmaster",
     "blurple",
     "Bools",
     "Boundry",
@@ -85,6 +86,7 @@
     "trackpad",
     "TRANSPILES",
     "undefer",
+    "Ungrouping",
     "Unhide",
     "Unrender",
     "UNSAVABLE",
@@ -109,5 +111,11 @@
   "yaml.schemas": {
     "https://json.schemastore.org/github-issue-config.json": "file:///workspace/Stellar/.github/ISSUE_TEMPLATE/config.yml"
   },
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "grammarly.selectors": [
+    {
+      "language": "markdown",
+      "scheme": "file"
+    }
+  ]
 }
