@@ -8017,10 +8017,10 @@ react-scripts@^5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
-react-spinners@^0.13.1:
-  version "0.13.1"
-  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.1.tgz#c485ff9020d6840c0d6d3639d74e4fb4348bbc1e"
-  integrity sha512-iWeSx0kwJoHu5bgEdGcG5q8NYklX2jraJ+WacoidH9GUx5XeFqBXCbG6W37ciy0VahioDS9N6KK9DUoZ6m6Zlg==
+react-spinners@^0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.3.tgz#9d00d10fb2a0869b21efdc13fb0fddbcecd05731"
+  integrity sha512-FHQMH6dAl1Vw4Lxv0H7hbGsjBs0aKNVwjGrDJLuD9R/C3h9+IuBhKJOJyCcegxMaLiBSBV96Tp+XV3OwPK8Vtw==
 
 react-use-measure@^2.1.1:
   version "2.1.1"
