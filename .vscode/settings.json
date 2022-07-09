@@ -117,5 +117,6 @@
       "language": "markdown",
       "scheme": "file"
     }
-  ]
+  ],
+  "liveServer.settings.multiRootWorkspaceName": "Stellar"
 }

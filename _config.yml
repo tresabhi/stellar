@@ -1,16 +1,18 @@
 title: Stellar
 description: 🚀 Documentation for Stellar, a professional blueprint editor for Spaceflight Simulator
+twitter_username: TresAbhi_
+github_username: TresAbhi
 
-baseurl: '/stellar'
-url: 'https://tresabhi.github.io'
+source: docs
+url: 'https://tresabhi.github.io/'
 
-remote_theme: just-the-docs/just-the-docs
+remote_theme: 'svrooij/just-the-docs@relative-everything'
 
 permalink: pretty
 
 # base image: https://i.imgur.com/saA9QuC.png
 # sizing guide: https://superuser.com/questions/1238552/
-logo: 'https://i.imgur.com/saA9QuCs.png'
+logo: 'https://i.imgur.com/saA9QuC.png'
 color_scheme: dark
 aux_links:
   'GitHub':

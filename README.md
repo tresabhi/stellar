@@ -5,7 +5,7 @@
 
 <br>
 
-![image](https://i.imgur.com/vGGJ0AU.png)
+![Image of Stellar featuring Fuel Tanks](https://i.imgur.com/vGGJ0AU.png)
 
 ## 🤔 About
 
