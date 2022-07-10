@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-A list of supported Stellar Editor versions can be found [here](./docs/supported_versions.md).
+Only the latest version alpha, beta, and release versions are supported currently since they're the only ones that are available for usage.
 
 ## Reporting a Vulnerability
 
