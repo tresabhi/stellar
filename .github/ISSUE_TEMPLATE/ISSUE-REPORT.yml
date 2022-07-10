@@ -1,0 +1,13 @@
+name: Issue request
+description: Something that does work as intended, however, should be changed in some way
+title: '[Issue]: TITLE HERE'
+labels: ['enhancement']
+
+body:
+  - type: textarea
+    id: about
+    attributes:
+      label: About
+      description: Describe your issue; include images if possible
+    validations:
+      required: true
