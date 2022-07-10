@@ -16,10 +16,4 @@ body:
     id: debug
     attributes:
       label: Debug info
-      description: Paste in the debug information that can be acquired by going to `Debug > Copy All`
-
-  - type: textarea
-    id: logs
-    attributes:
-      label: Log output
-      description: Paste in the logged information found in the browser devtools
+      description: Paste in the debug information that can be acquired by going to `Debug > Copy All` (this action may not be available yet for some versions; paste in the log from the console instead)
