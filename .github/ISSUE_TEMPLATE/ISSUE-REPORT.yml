@@ -1,4 +1,4 @@
-name: Issue request
+name: Issue report
 description: Something that does work as intended, however, should be changed in some way
 title: '[Issue]: TITLE HERE'
 labels: ['enhancement']
