@@ -1,4 +1,4 @@
-name: Bug Report
+name: Bug report
 description: Something that does not work as intended
 title: '[Bug]: '
 labels: ['bug']
