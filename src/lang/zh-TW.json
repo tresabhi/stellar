@@ -27,8 +27,7 @@
         "$": "View",
         "layout": "Layout",
         "staging": "Staging",
-        "simulation": "Simulation",
-        "rendering": "Rendering",
+        "export": "Export",
         "hud": "HUD",
         "theme": {
           "$": "Theme",
@@ -92,8 +91,7 @@
     "tabs": {
       "layout": "Layout",
       "staging": "Staging",
-      "simulation": "Simulation",
-      "rendering": "Rendering"
+      "export": "Export"
     }
   },
   "parts_explorer": {
