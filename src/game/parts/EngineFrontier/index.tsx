@@ -8,11 +8,11 @@ import { PartComponentProps } from 'types/Parts';
 import { Part, PartData } from '../Part';
 import {
   VanillaPartWithEngine,
-  VanillaPartWithEngineData
+  VanillaPartWithEngineData,
 } from '../PartWithEngine';
 import {
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData
+  VanillaPartWithTransformationsData,
 } from '../PartWithTransformations';
 
 export interface VanillaEngineFrontier

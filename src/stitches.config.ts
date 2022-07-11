@@ -57,11 +57,13 @@ export const {
 
       // Borders
       noninteractiveComponentBorder: mauveDark.mauve6,
-      interactiveComponentBorder: mauveDark.mauve5,
-      interactiveComponentHoverBorder: mauveDark.mauve5,
+      interactiveComponentBorder: mauveDark.mauve7,
+      interactiveComponentHoverBorder: mauveDark.mauve8,
+      interactiveComponentActiveBorder: mauveDark.mauve8,
       noninteractiveComponentBorderAccent: purpleDark.purple6,
-      interactiveComponentBorderAccent: purpleDark.purple5,
-      interactiveComponentHoverBorderAccent: purpleDark.purple5,
+      interactiveComponentBorderAccent: purpleDark.purple7,
+      interactiveComponentHoverBorderAccent: purpleDark.purple8,
+      interactiveComponentHoverActiveAccent: purpleDark.purple8,
 
       // Text
       lowContrastText: mauveDark.mauve11,
@@ -102,6 +104,17 @@ export const {
       // TODO: add fallback fonts
       base: 'Roboto Flex',
       mono: 'Roboto Mono',
+    },
+
+    borderStyles: {
+      noninteractiveComponentBorder: `$${mauveDark.mauve6} solid 0.0625rem`,
+      interactiveComponentBorder: `$${mauveDark.mauve7} solid 0.0625rem`,
+      interactiveComponentHoverBorder: `${mauveDark.mauve8} solid 0.0625rem`,
+      interactiveComponentActiveBorder: `${mauveDark.mauve8} solid 0.0625rem`,
+      noninteractiveComponentBorderAccent: `${purpleDark.purple6} solid 0.0625rem`,
+      interactiveComponentBorderAccent: `${purpleDark.purple7} solid 0.0625rem`,
+      interactiveComponentHoverBorderAccent: `${purpleDark.purple8} solid 0.0625rem`,
+      interactiveComponentActiveBorderAccent: `${purpleDark.purple8} solid 0.0625rem`,
     },
   },
 });
@@ -150,17 +163,30 @@ export const lightTheme = createTheme('theme-light', {
 
     // Borders
     noninteractiveComponentBorder: mauve.mauve6,
-    interactiveComponentBorder: mauve.mauve5,
-    interactiveComponentHoverBorder: mauve.mauve5,
+    interactiveComponentBorder: mauve.mauve7,
+    interactiveComponentHoverBorder: mauve.mauve8,
+    interactiveComponentActiveBorder: mauve.mauve8,
     noninteractiveComponentBorderAccent: purple.purple6,
-    interactiveComponentBorderAccent: purple.purple5,
-    interactiveComponentHoverBorderAccent: purple.purple5,
+    interactiveComponentBorderAccent: purple.purple7,
+    interactiveComponentHoverBorderAccent: purple.purple8,
+    interactiveComponentHoverActiveAccent: purple.purple8,
 
     // Text
     lowContrastText: mauve.mauve11,
     highContrastText: mauve.mauve12,
     lowContrastTextAccent: purple.purple11,
     highContrastTextAccent: purple.purple12,
+  },
+
+  borderStyles: {
+    noninteractiveComponentBorder: `$${mauve.mauve6} solid 0.0625rem`,
+    interactiveComponentBorder: `$${mauve.mauve7} solid 0.0625rem`,
+    interactiveComponentHoverBorder: `${mauve.mauve8} solid 0.0625rem`,
+    interactiveComponentActiveBorder: `${mauve.mauve8} solid 0.0625rem`,
+    noninteractiveComponentBorderAccent: `${purple.purple6} solid 0.0625rem`,
+    interactiveComponentBorderAccent: `${purple.purple7} solid 0.0625rem`,
+    interactiveComponentHoverBorderAccent: `${purple.purple8} solid 0.0625rem`,
+    interactiveComponentActiveBorderAccent: `${purple.purple8} solid 0.0625rem`,
   },
 });
 

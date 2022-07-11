@@ -8,23 +8,51 @@ export const buttonStyles = css({
   width: theme.sizes[40],
   alignItems: 'center',
   justifyContent: 'center',
+  cursor: 'pointer',
 
-  '&:hover': { backgroundColor: theme.colors.componentHoverBackground },
-  '&:active': { backgroundColor: theme.colors.componentActiveBackground },
+  '&:hover, &:focus': {
+    backgroundColor: theme.colors.componentHoverBackground,
+  },
+  '&:active': {
+    backgroundColor: theme.colors.componentActiveBackground,
+  },
+  '&:focus': {
+    outline: theme.borderStyles.interactiveComponentActiveBorder,
+  },
 
   '& svg': {
     width: theme.sizes[16],
     height: theme.sizes[16],
     color: theme.colors.highContrastText,
   },
+
+  variants: {
+    disabled: {
+      true: {
+        cursor: 'default',
+
+        '&:hover': { backgroundColor: 'transparent' },
+        '&:active': { backgroundColor: 'transparent' },
+
+        '& svg': {
+          color: theme.colors.lowContrastText,
+        },
+      },
+    },
+  },
 });
 
 export const Button: FC<ToolbarButtonProps> = ({
   children,
   className,
+  disabled,
   ...props
 }) => (
-  <ToolbarButton {...props} className={`${buttonStyles()} ${className ?? ''}`}>
+  <ToolbarButton
+    {...props}
+    disabled={disabled}
+    className={`${buttonStyles({ disabled })} ${className ?? ''}`}
+  >
     {children}
   </ToolbarButton>
 );

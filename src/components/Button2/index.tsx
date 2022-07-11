@@ -11,6 +11,9 @@ const Button = styled('button', {
         '&:active': {
           backgroundColor: theme.colors.componentActiveBackground,
         },
+        '&:focus': {
+          outline: theme.borderStyles.interactiveComponentActiveBorder,
+        },
       },
       accent: {
         backgroundColor: theme.colors.componentBackgroundAccent,

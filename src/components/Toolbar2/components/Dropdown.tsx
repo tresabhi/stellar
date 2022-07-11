@@ -14,9 +14,16 @@ const caretStyles = css({
   height: `${theme.sizes[8]} !important`,
 });
 
+const triggerStyles = css({
+  display: 'flex',
+  gap: theme.sizes[4],
+});
+
 export const Dropdown: FC<DropdownProps> = ({ icon, children }) => (
   <DropdownComponent.Root>
-    <DropdownComponent.Trigger className={buttonStyles()}>
+    <DropdownComponent.Trigger
+      className={`${buttonStyles()} ${triggerStyles()}`}
+    >
       {icon}
       <CaretDownIcon className={caretStyles()} />
     </DropdownComponent.Trigger>
