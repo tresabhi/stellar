@@ -27,8 +27,7 @@
         "$": "Vista",
         "layout": "Diseño",
         "staging": "Puesta en escena",
-        "simulation": "Simulación",
-        "rendering": "Renderizado",
+        "export": "Export",
         "hud": "HUD",
         "theme": {
           "$": "Tema",
@@ -92,8 +91,7 @@
     "tabs": {
       "layout": "Diseño",
       "staging": "Puesta en escena",
-      "simulation": "Simulación",
-      "rendering": "Renderizando"
+      "export": "Export"
     }
   },
   "parts_explorer": {
