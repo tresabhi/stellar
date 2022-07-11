@@ -21,8 +21,8 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
   let avoidThisEvent = false;
 
   const unsubscribe = useBlueprint.subscribe(
-    (state) => {
-      const part = getPart(id, state);
+    (draft) => {
+      const part = draft.parts.get(id);
 
       if (part) {
         if (slicer) {

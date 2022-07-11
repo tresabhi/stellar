@@ -5,7 +5,7 @@ import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 
 import { MutableRefObject } from 'react';
-import { Group } from 'three';
+import { Group, Mesh } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   usePartWithOrientation,
@@ -62,7 +62,7 @@ export const PartWithTransformationsData: PartWithTransformations = {
 
 export const usePartWithTransformations = (
   id: string,
-  groupRef: MutableRefObject<Group>,
+  groupRef: MutableRefObject<Mesh | Group>,
 ) => {
   usePartWithPosition(id, groupRef);
   usePartWithOrientation(id, groupRef);

@@ -1,4 +1,3 @@
-import { getPart } from 'core/part';
 import { Group } from 'game/parts/Group';
 import useBlueprint from 'hooks/useBlueprint';
 import { FC, InputHTMLAttributes } from 'react';
@@ -16,7 +15,7 @@ export const Container: FC<ContainerProps> = ({
   ...props
 }) => {
   const state = useBlueprint(
-    (state) => (parent ? (getPart(parent, state) as Group) : state).partOrder,
+    (state) => (parent ? (state.parts.get(parent) as Group) : state).partOrder,
     compareStringArrays,
   );
   const partListing = state.map((id) => (

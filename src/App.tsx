@@ -1,4 +1,5 @@
 import useApp from 'hooks/useApp';
+import useKeybinds from 'hooks/useKeybinds';
 import useStellarContext from 'hooks/useStellarContext';
 import useTranslator from 'hooks/useTranslator';
 import { isMobile } from 'react-device-detect';
@@ -13,6 +14,7 @@ const App = () => {
   const stellarContext = useStellarContext();
   useTranslator();
   globalStyles();
+  useKeybinds();
 
   if (stellarContext.codeName !== 'dev') {
     console.log(

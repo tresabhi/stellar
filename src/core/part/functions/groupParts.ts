@@ -2,7 +2,6 @@ import { mutateBlueprint } from 'core/blueprint';
 import { getParent, selectPartOnly } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { createNewPart } from '../../part/functions/createNewPart';
-import { getPart } from '../../part/functions/getPart';
 
 export const groupParts = (ids: string[], replaceId: string) => {
   mutateBlueprint((draft) => {
@@ -17,7 +16,7 @@ export const groupParts = (ids: string[], replaceId: string) => {
 
       ids.forEach((id) => {
         const currentParent = getParent(id, draft) ?? draft;
-        const currentPart = getPart(id, draft);
+        const currentPart = draft.parts.get(id);
         const spliceIndex = currentParent.partOrder.indexOf(id);
 
         if (currentPart) currentPart.parentId = newGroup.id;

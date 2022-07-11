@@ -2,19 +2,16 @@ import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
-import useDragControls from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
 import { PartRegistryFragment } from 'hooks/usePartRegistry';
-import usePartWithBounds from 'hooks/usePartWithBounds';
+import usePhysicalPart from 'hooks/usePhysicalPart';
 import usePropertyController from 'hooks/usePropertyController';
-import useSelectionControl from 'hooks/useSelectionControl';
 import useTranslator from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
 import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
-  usePartWithTransformations,
   VanillaPartWithTransformations,
   VanillaPartWithTransformationsData,
 } from './PartWithTransformations';
@@ -113,9 +110,8 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const group = useRef<Group>(null!);
   const mesh = useRef<Mesh>(null!);
   const state = getPart<FuelTank>(id)!;
+  const { props } = usePhysicalPart(id, group);
 
-  const handleClick = useSelectionControl(id);
-  const handlePointerDown = useDragControls(id);
   usePartProperty(
     id,
     (state: FuelTank) => state.N,
@@ -136,16 +132,9 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
       deferUpdates();
     },
   );
-  usePartWithTransformations(id, group);
-  usePartWithBounds(id, group);
 
   return (
-    <group
-      ref={group}
-      position={[state.p.x, state.p.y, 0]}
-      onClick={handleClick}
-      onPointerDown={handlePointerDown}
-    >
+    <group ref={group} position={[state.p.x, state.p.y, 0]} {...props}>
       <mesh ref={mesh}>
         <meshStandardMaterial
           flatShading

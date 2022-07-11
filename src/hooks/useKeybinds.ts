@@ -1,4 +1,12 @@
-import { fileSave, versionRedo, versionUndo } from 'core/blueprint';
+import {
+  fileExport,
+  fileImport,
+  fileOpen,
+  fileSaveAs,
+  loadBlueprint,
+  versionRedo,
+  versionUndo,
+} from 'core/blueprint';
 import {
   deletePartsBySelection,
   groupPartsBySelection,
@@ -35,7 +43,7 @@ const useKeybinds = () => {
 
   useEffect(() => {
     bind('ctrl+a', () => selectPartsOnly(useBlueprint.getState().partOrder));
-    bind('esc', unselectAllParts);
+    bind('esc', () => unselectAllParts());
 
     bind('p a r t y', () => {
       // party mode easter egg
@@ -98,20 +106,17 @@ const useKeybinds = () => {
       groupPartsBySelection();
     });
 
-    bind('ctrl+s', (event) => {
-      event.preventDefault();
-      fileSave();
-    });
-
     bind('1', tool(TOOL.MOVE));
     bind('2', tool(TOOL.PAN));
 
     bind(
       'space',
-      () => {
-        useApp.setState((draft) => {
-          draft.isPanning = true;
-        });
+      (event) => {
+        if (!event.repeat) {
+          useApp.setState((draft) => {
+            draft.isPanning = true;
+          });
+        }
       },
       'keydown',
     );
@@ -125,5 +130,23 @@ const useKeybinds = () => {
       'keyup',
     );
   }, []);
+
+  bind('ctrl+n', (event) => {
+    event.preventDefault();
+    loadBlueprint();
+  });
+  bind('ctrl+o', (event) => {
+    event.preventDefault();
+    fileOpen();
+  });
+  bind('ctrl+s', (event) => {
+    event.preventDefault();
+    fileSaveAs();
+  });
+  bind('ctrl+i', fileImport);
+  bind('ctrl+e', (event) => {
+    event.preventDefault();
+    fileExport();
+  });
 };
 export default useKeybinds;

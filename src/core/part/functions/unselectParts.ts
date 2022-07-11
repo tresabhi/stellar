@@ -1,15 +1,14 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { getPart } from './getPart';
 
-export const unselectParts = (ids: string[], state?: Blueprint) => {
-  if (state) {
+export const unselectParts = (ids: string[], draft?: Blueprint) => {
+  if (draft) {
     ids.forEach((id) => {
-      const part = getPart(id, state);
+      const part = draft.parts.get(id);
       if (part) part.selected = false;
     });
 
-    state.selections = state.selections.filter(
+    draft.selections = draft.selections.filter(
       (selection) => !ids.includes(selection),
     );
   } else {

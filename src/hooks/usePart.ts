@@ -1,7 +1,6 @@
 import useBlueprint from 'hooks/useBlueprint';
-import { getPart } from '../core/part/functions/getPart';
 
 const usePart = (id: string) => {
-  return useBlueprint((state) => getPart(id, state));
+  return useBlueprint((state) => state.parts.get(id));
 };
 export default usePart;

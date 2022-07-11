@@ -2,7 +2,6 @@ import { partExportify } from 'core/part';
 import { Blueprint, VanillaBlueprintData } from 'game/Blueprint';
 import { cloneDeep, isArray } from 'lodash';
 import { AnyVanillaPart } from 'types/Parts';
-import { getPart } from '../../part/functions/getPart';
 
 export const blueprintExportify = (blueprint: Blueprint) => {
   const clonedBlueprint = cloneDeep(blueprint);
@@ -13,7 +12,7 @@ export const blueprintExportify = (blueprint: Blueprint) => {
   exportifiedBlueprint.stages = clonedBlueprint.stages;
 
   clonedBlueprint.partOrder.forEach((id) => {
-    const part = getPart(id, clonedBlueprint);
+    const part = clonedBlueprint.parts.get(id);
 
     if (part) {
       const exportifiedPart = partExportify(part, clonedBlueprint);
