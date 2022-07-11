@@ -11,7 +11,7 @@ import {
   AnyPart,
   AnyVanillaPart,
   PartComponentProps,
-  PartPropertyComponentProps
+  PartPropertyComponentProps,
 } from 'types/Parts';
 import create from 'zustand';
 

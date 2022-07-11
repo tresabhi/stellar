@@ -1,16 +1,23 @@
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-export type TabType = 'layout' | 'staging' | 'simulation' | 'rendering';
-export type ToolType = 'transform' | 'pan';
+export enum TAB {
+  LAYOUT,
+  STAGING,
+  EXPORT,
+}
+export enum TOOL {
+  MOVE,
+  PAN,
+}
 
 export interface UseApp {
   fileHandle?: FileSystemFileHandle;
   hasUnsavedChanges: boolean;
 
-  tab: TabType;
+  tab: TAB;
 
-  tool: ToolType;
+  tool: TOOL;
   isPanning: boolean;
 
   preventNextSelection: boolean;
@@ -19,9 +26,9 @@ export interface UseApp {
 export const UseAppData: UseApp = {
   hasUnsavedChanges: false,
 
-  tab: 'layout',
+  tab: TAB.LAYOUT,
 
-  tool: 'transform',
+  tool: TOOL.MOVE,
   isPanning: false,
 
   preventNextSelection: false,

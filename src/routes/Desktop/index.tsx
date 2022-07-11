@@ -1,9 +1,8 @@
-import useApp from 'hooks/useApp';
+import useApp, { TAB } from 'hooks/useApp';
 import useKeybinds from 'hooks/useKeybinds';
+import Export from './components/Export';
 import Layout from './components/Layout';
 import Notifications from './components/Notifications';
-import Rendering from './components/Rendering';
-import Simulation from './components/Simulation';
 import Staging from './components/Staging';
 import ToolbarBottom from './components/ToolbarBottom';
 import ToolbarTop from './components/ToolbarTop';
@@ -21,14 +20,9 @@ export default function Desktop() {
       <ToolbarTop />
       <ToolbarBottom />
 
-      <Layout style={{ display: tab === 'layout' ? undefined : 'none' }} />
-      <Staging style={{ display: tab === 'staging' ? undefined : 'none' }} />
-      <Simulation
-        style={{ display: tab === 'simulation' ? undefined : 'none' }}
-      />
-      <Rendering
-        style={{ display: tab === 'rendering' ? undefined : 'none' }}
-      />
+      <Layout style={{ display: tab === TAB.LAYOUT ? undefined : 'none' }} />
+      <Staging style={{ display: tab === TAB.STAGING ? undefined : 'none' }} />
+      <Export style={{ display: tab === TAB.EXPORT ? undefined : 'none' }} />
     </div>
   );
 }

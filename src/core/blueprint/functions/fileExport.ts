@@ -11,7 +11,7 @@ import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import { blueprintExportify } from './blueprintExportify';
 
-export const exportBlueprintFile = async () => {
+export const fileExport = async () => {
   const { fileHandle } = useApp.getState();
   const fileName =
     fileHandle?.name.replace(FILE_EXTENSION_REGEX, '') ??

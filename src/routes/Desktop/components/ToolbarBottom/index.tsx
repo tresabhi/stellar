@@ -4,13 +4,13 @@ import { ReactComponent as SaveIcon } from 'assets/icons/save.svg';
 import { ReactComponent as UndoIcon } from 'assets/icons/undo.svg';
 import * as Toolbar from 'components/Toolbar';
 import { fileSave, versionRedo, versionUndo } from 'core/blueprint';
-import useApp, { ToolType } from 'hooks/useApp';
+import useApp, { TOOL } from 'hooks/useApp';
 import useVersionControl from 'hooks/useVersionControl';
 import { useEffect, useRef } from 'react';
 import styles from './index.module.scss';
 
 const ToolbarBottom = () => {
-  const setTool = (name: ToolType) => () => useApp.setState({ tool: name });
+  const setTool = (name: TOOL) => () => useApp.setState({ tool: name });
   const tool = useApp((state) => state.tool);
   const isPanning = useApp((state) => state.isPanning);
   const undoRef = useRef<HTMLButtonElement>(null!);
@@ -50,14 +50,14 @@ const ToolbarBottom = () => {
       <div className={styles.cluster}>
         <Toolbar.Container>
           <Toolbar.Button
-            selected={tool === 'transform' && !isPanning}
-            onClick={setTool('transform')}
+            selected={tool === TOOL.MOVE && !isPanning}
+            onClick={setTool(TOOL.MOVE)}
           >
             <CursorArrowIcon />
           </Toolbar.Button>
           <Toolbar.Button
-            selected={tool === 'pan' || isPanning}
-            onClick={setTool('pan')}
+            selected={tool === TOOL.PAN || isPanning}
+            onClick={setTool(TOOL.PAN)}
           >
             <HandIcon />
           </Toolbar.Button>

@@ -1,4 +1,4 @@
-import { mauve, mauveDark, purple } from '@radix-ui/colors';
+import { mauve, mauveDark, purple, purpleDark } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 
 export const {
@@ -11,7 +11,6 @@ export const {
   prefix,
   reset,
   styled,
-
   theme,
 } = createStitches({
   theme: {
@@ -29,18 +28,18 @@ export const {
       sidebarBackground2: mauveDark.mauve2,
       canvasAreaBackground1: mauveDark.mauve1,
       canvasAreaBackground2: mauveDark.mauve2,
-      mainAppBackgroundAccent1: purple.purple1,
-      mainAppBackgroundAccent2: purple.purple2,
-      stripedTableBackgroundAccent1: purple.purple1,
-      stripedTableBackgroundAccent2: purple.purple2,
-      codeBlockBackgroundAccent1: purple.purple1,
-      codeBlockBackgroundAccent2: purple.purple2,
-      cardBackgroundAccent1: purple.purple1,
-      cardBackgroundAccent2: purple.purple2,
-      sidebarBackgroundAccent1: purple.purple1,
-      sidebarBackgroundAccent2: purple.purple2,
-      canvasAreaBackgroundAccent1: purple.purple1,
-      canvasAreaBackgroundAccent2: purple.purple2,
+      mainAppBackgroundAccent1: purpleDark.purple1,
+      mainAppBackgroundAccent2: purpleDark.purple2,
+      stripedTableBackgroundAccent1: purpleDark.purple1,
+      stripedTableBackgroundAccent2: purpleDark.purple2,
+      codeBlockBackgroundAccent1: purpleDark.purple1,
+      codeBlockBackgroundAccent2: purpleDark.purple2,
+      cardBackgroundAccent1: purpleDark.purple1,
+      cardBackgroundAccent2: purpleDark.purple2,
+      sidebarBackgroundAccent1: purpleDark.purple1,
+      sidebarBackgroundAccent2: purpleDark.purple2,
+      canvasAreaBackgroundAccent1: purpleDark.purple1,
+      canvasAreaBackgroundAccent2: purpleDark.purple2,
 
       // Component backgrounds
       componentBackground: mauveDark.mauve3,
@@ -49,54 +48,60 @@ export const {
       callToActionComponentBackground: mauveDark.mauve4,
       callToActionComponentHoverBackground: mauveDark.mauve5,
       callToActionComponentActiveBackground: mauveDark.mauve6,
-      componentBackgroundAccent: purple.purple3,
-      componentHoverBackgroundAccent: purple.purple4,
-      componentActiveBackgroundAccent: purple.purple5,
-      callToActionComponentBackgroundAccent: purple.purple4,
-      callToActionComponentHoverBackgroundAccent: purple.purple5,
-      callToActionComponentActiveBackgroundAccent: purple.purple6,
+      componentBackgroundAccent: purpleDark.purple3,
+      componentHoverBackgroundAccent: purpleDark.purple4,
+      componentActiveBackgroundAccent: purpleDark.purple5,
+      callToActionComponentBackgroundAccent: purpleDark.purple4,
+      callToActionComponentHoverBackgroundAccent: purpleDark.purple5,
+      callToActionComponentActiveBackgroundAccent: purpleDark.purple6,
 
       // Borders
       noninteractiveComponentBorder: mauveDark.mauve6,
       interactiveComponentBorder: mauveDark.mauve5,
       interactiveComponentHoverBorder: mauveDark.mauve5,
-      noninteractiveComponentBorderAccent: purple.purple6,
-      interactiveComponentBorderAccent: purple.purple5,
-      interactiveComponentHoverBorderAccent: purple.purple5,
+      noninteractiveComponentBorderAccent: purpleDark.purple6,
+      interactiveComponentBorderAccent: purpleDark.purple5,
+      interactiveComponentHoverBorderAccent: purpleDark.purple5,
 
       // Text
       lowContrastText: mauveDark.mauve11,
       highContrastText: mauveDark.mauve12,
-      lowContrastTextAccent: purple.purple11,
-      highContrastTextAccent: purple.purple12,
+      lowContrastTextAccent: purpleDark.purple11,
+      highContrastTextAccent: purpleDark.purple12,
     },
 
-    /**
-     * All infinitely scalable scales use the
-     * [Metric prefix system](https://en.wikipedia.org/wiki/Metric_prefix)
-     */
-
     fontSizes: {
-      nano: '0rem',
-      micro: '0.125rem',
-      milli: '0.5rem',
-      centi: '0.75rem',
-      deci: '0.875rem',
-      base: '1rem',
-      deca: '1.125rem',
-      hecto: '1.25rem',
-      kilo: '1.5rem',
-      mega: '1.875rem',
-      giga: '2rem',
+      10: '0.625rem',
+      12: '0.75rem',
+      14: '0.875rem',
+      16: '1rem',
     },
 
     sizes: {
-      centi: '0.0625em',
-      deci: '0.125em',
-      base: '0.25em',
-      deca: '0.5em',
-      hecto: '1em',
-      kilo: '2rem',
+      1: '0.0625rem',
+      2: '0.125rem',
+      4: '0.25rem',
+      8: '0.5rem',
+      16: '1rem',
+      18: '1.125rem',
+      24: '1.5rem',
+      32: '2rem',
+      40: '2.5rem',
+
+      dropdownWidth: '15rem',
+    },
+
+    radii: {
+      1: '0.0625rem',
+      2: '0.125rem',
+      4: '0.25rem',
+      8: '0.5rem',
+    },
+
+    fonts: {
+      // TODO: add fallback fonts
+      base: 'Roboto Flex',
+      mono: 'Roboto Mono',
     },
   },
 });
@@ -116,6 +121,18 @@ export const lightTheme = createTheme('theme-light', {
     sidebarBackground2: mauve.mauve2,
     canvasAreaBackground1: mauve.mauve1,
     canvasAreaBackground2: mauve.mauve2,
+    mainAppBackgroundAccent1: purple.purple1,
+    mainAppBackgroundAccent2: purple.purple2,
+    stripedTableBackgroundAccent1: purple.purple1,
+    stripedTableBackgroundAccent2: purple.purple2,
+    codeBlockBackgroundAccent1: purple.purple1,
+    codeBlockBackgroundAccent2: purple.purple2,
+    cardBackgroundAccent1: purple.purple1,
+    cardBackgroundAccent2: purple.purple2,
+    sidebarBackgroundAccent1: purple.purple1,
+    sidebarBackgroundAccent2: purple.purple2,
+    canvasAreaBackgroundAccent1: purple.purple1,
+    canvasAreaBackgroundAccent2: purple.purple2,
 
     // Component backgrounds
     componentBackground: mauve.mauve3,
@@ -124,14 +141,32 @@ export const lightTheme = createTheme('theme-light', {
     callToActionComponentBackground: mauve.mauve4,
     callToActionComponentHoverBackground: mauve.mauve5,
     callToActionComponentActiveBackground: mauve.mauve6,
+    componentBackgroundAccent: purple.purple3,
+    componentHoverBackgroundAccent: purple.purple4,
+    componentActiveBackgroundAccent: purple.purple5,
+    callToActionComponentBackgroundAccent: purple.purple4,
+    callToActionComponentHoverBackgroundAccent: purple.purple5,
+    callToActionComponentActiveBackgroundAccent: purple.purple6,
 
     // Borders
     noninteractiveComponentBorder: mauve.mauve6,
     interactiveComponentBorder: mauve.mauve5,
     interactiveComponentHoverBorder: mauve.mauve5,
+    noninteractiveComponentBorderAccent: purple.purple6,
+    interactiveComponentBorderAccent: purple.purple5,
+    interactiveComponentHoverBorderAccent: purple.purple5,
 
     // Text
     lowContrastText: mauve.mauve11,
     highContrastText: mauve.mauve12,
+    lowContrastTextAccent: purple.purple11,
+    highContrastTextAccent: purple.purple12,
   },
+});
+
+export const globalStyles = globalCss({
+  '@import': [
+    'https://fonts.googleapis.com/css?family=Roboto+Flex&display=swap',
+    'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
+  ],
 });

@@ -6,19 +6,14 @@ import {
   translateTranslatablePartsBySelection as translate,
   unselectAllParts,
 } from 'core/part';
-import useApp, { ToolType } from 'hooks/useApp';
+import useApp, { TAB, TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
 import { bind } from 'mousetrap';
 import { useEffect } from 'react';
 
-const tabOrder = ['layout', 'staging', 'simulation', 'rendering'] as [
-  'layout',
-  'staging',
-  'simulation',
-  'rendering',
-];
+const tabOrder = [TAB.LAYOUT, TAB.STAGING, TAB.EXPORT];
 
 // TODO: make this date driven
 const TRANSLATE = 1;
@@ -36,7 +31,7 @@ const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_TRANSLATE, 0];
 
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
-  const tool = (name: ToolType) => () => useApp.setState({ tool: name });
+  const tool = (name: TOOL) => () => useApp.setState({ tool: name });
 
   useEffect(() => {
     bind('ctrl+a', () => selectPartsOnly(useBlueprint.getState().partOrder));
@@ -108,8 +103,8 @@ const useKeybinds = () => {
       fileSave();
     });
 
-    bind('1', tool('transform'));
-    bind('2', tool('pan'));
+    bind('1', tool(TOOL.MOVE));
+    bind('2', tool(TOOL.PAN));
 
     bind(
       'space',

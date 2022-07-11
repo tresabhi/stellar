@@ -3,7 +3,7 @@ import * as ContextMenu from 'components/ContextMenu';
 import * as ControlMenu from 'components/ControlMenu';
 import * as Tabs from 'components/Tabs';
 import {
-  exportBlueprintFile,
+  fileExport,
   fileImport,
   fileOpen,
   fileSave,
@@ -19,7 +19,7 @@ import {
   getPartIndex,
   insertPart,
 } from 'core/part';
-import useApp from 'hooks/useApp';
+import useApp, { TAB } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import useTranslator from 'hooks/useTranslator';
 import { isUndefined, random } from 'lodash';
@@ -30,15 +30,13 @@ const ToolBarTop: FC = () => {
   const { t } = useTranslator();
   const disableSave = isUndefined(useApp((state) => state.fileHandle));
   const loadBp = (name?: string) => () => loadBlueprintTemplate(name);
-  const handleLayoutTabClick = () => useApp.setState({ tab: 'layout' });
-  const handleStagingTabClick = () => useApp.setState({ tab: 'staging' });
-  const handleSimulationTabClick = () => useApp.setState({ tab: 'simulation' });
-  const handleRenderingTabClick = () => useApp.setState({ tab: 'rendering' });
+  const handleLayoutTabClick = () => useApp.setState({ tab: TAB.LAYOUT });
+  const handleStagingTabClick = () => useApp.setState({ tab: TAB.STAGING });
+  const handleExportTabClick = () => useApp.setState({ tab: TAB.EXPORT });
   const tab = useApp((state) => state.tab);
-  const isTabLayout = tab === 'layout';
-  const isTabStaging = tab === 'staging';
-  const isTabSimulation = tab === 'simulation';
-  const isTabRendering = tab === 'rendering';
+  const isTabLayout = tab === TAB.LAYOUT;
+  const isTabStaging = tab === TAB.STAGING;
+  const isTabExport = tab === TAB.EXPORT;
 
   const add = (name: string) => {
     return () => {
@@ -83,7 +81,7 @@ const ToolBarTop: FC = () => {
             <ContextMenu.Button onClick={fileImport}>
               {t`toolbar.control_menu.file.import`}
             </ContextMenu.Button>
-            <ContextMenu.Button onClick={exportBlueprintFile}>
+            <ContextMenu.Button onClick={fileExport}>
               {t`toolbar.control_menu.file.export`}
             </ContextMenu.Button>
           </ContextMenu.Container>
@@ -132,11 +130,8 @@ const ToolBarTop: FC = () => {
             <ContextMenu.Button onClick={handleStagingTabClick}>
               {t`toolbar.control_menu.view.staging`}
             </ContextMenu.Button>
-            <ContextMenu.Button onClick={handleSimulationTabClick}>
-              {t`toolbar.control_menu.view.simulation`}
-            </ContextMenu.Button>
-            <ContextMenu.Button onClick={handleRenderingTabClick}>
-              {t`toolbar.control_menu.view.rendering`}
+            <ContextMenu.Button onClick={handleExportTabClick}>
+              {t`toolbar.control_menu.view.export`}
             </ContextMenu.Button>
             <ContextMenu.Separator />
             <ContextMenu.CheckBox
@@ -280,11 +275,8 @@ const ToolBarTop: FC = () => {
         <Tabs.Tab onClick={handleStagingTabClick} selected={isTabStaging}>
           {t`toolbar.tabs.staging`}
         </Tabs.Tab>
-        <Tabs.Tab onClick={handleSimulationTabClick} selected={isTabSimulation}>
-          {t`toolbar.tabs.simulation`}
-        </Tabs.Tab>
-        <Tabs.Tab onClick={handleRenderingTabClick} selected={isTabRendering}>
-          {t`toolbar.tabs.rendering`}
+        <Tabs.Tab onClick={handleExportTabClick} selected={isTabExport}>
+          {t`toolbar.tabs.export`}
         </Tabs.Tab>
       </Tabs.Container>
     </div>

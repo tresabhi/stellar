@@ -6,12 +6,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Desktop from 'routes/Desktop';
 import Mobile from 'routes/Mobile';
 import SplashScreen from 'routes/SplashScreen';
+import { globalStyles } from 'stitches.config';
 import 'styles/index.scss';
 
 const App = () => {
   const stellarContext = useStellarContext();
-
   useTranslator();
+  globalStyles();
 
   if (stellarContext.codeName !== 'dev') {
     console.log(
@@ -24,7 +25,7 @@ const App = () => {
       `,
     );
     console.log(
-      `%cDo not paste in anything here unless you know what you are doing!\n\nMalicious code can harm ${stellarContext.title} and your data (blueprints, snippets, etc.) permanently`,
+      `%cDo not paste in anything here unless you know what you are doing!Malicious code can harm ${stellarContext.title} and your data (blueprints, snippets, etc.) permanently`,
       `
         background-color: orange;
         color: white;

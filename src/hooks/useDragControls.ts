@@ -5,7 +5,7 @@ import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import produce, { Patch, produceWithPatches } from 'immer';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
-import useApp from './useApp';
+import useApp, { TOOL } from './useApp';
 import useBlueprint from './useBlueprint';
 import useMousePos from './useMousePos';
 import useVersionControl, { UseVersionControl } from './useVersionControl';
@@ -31,7 +31,7 @@ const useDragControls = (id: string) => {
     if (
       part && // part actually exists
       (part.selected || part.parentId === null) && // is selected or is at root level
-      tool === 'transform' && // tool is transform
+      tool === TOOL.MOVE && // tool is move
       !isPanning // isn't panning right now via the hotkey
     ) {
       event.stopPropagation();
