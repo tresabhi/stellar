@@ -7,7 +7,7 @@ import { css, theme } from 'stitches.config';
 
 const contentStyles = css({
   backgroundColor: theme.colors.componentBackground,
-  border: `${theme.sizes[1]} solid ${theme.colors.interactiveComponentBorder}`,
+  border: theme.borderStyles.interactiveComponentBorder,
   borderRadius: theme.radii[4],
   width: theme.sizes.dropdownWidth,
   padding: theme.sizes[8],

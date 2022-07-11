@@ -103,7 +103,10 @@ const Toolbar = () => {
         </Toolbar2.Dropdown>
       </Toolbar2.Group>
       <Toolbar2.Group>
-        <Toolbar2.Button onClick={handleEyeClick}>
+        <Toolbar2.Button
+          disabled={selections.length === 0}
+          onClick={handleEyeClick}
+        >
           {isOneHidden ? <EyeClosedIcon /> : <EyeOpenIcon />}
         </Toolbar2.Button>
       </Toolbar2.Group>
