@@ -1,6 +1,6 @@
 import { LayoutCanvas } from 'components/Canvas';
 import { css } from 'stitches.config';
-import Toolbar from './components/Toolbar';
+import Toolbar from '../components/Toolbar';
 
 const mobileStyles = css({
   width: '100vw',

@@ -1,6 +1,6 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
-import { getPart, partExportify, removePartMetaData } from 'core/part';
+import { partExportify, removePartMetaData } from 'core/part';
 import useDragControls from 'hooks/useDragControls';
 import { PartExportifier, PartRegistryFragment } from 'hooks/usePartRegistry';
 import usePartWithBounds from 'hooks/usePartWithBounds';
@@ -45,15 +45,15 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
 
 export const GroupIcon = Icon;
 
-export const groupExportify: PartExportifier<Group> = (part, context) => {
+export const groupExportify: PartExportifier<Group> = (part, draft) => {
   const exportedParts: AnyVanillaPart[] = [];
   const partWithoutMetaData = removePartMetaData(part) as Group;
 
   partWithoutMetaData.partOrder.forEach((id) => {
-    const childPart = getPart(id, context);
+    const childPart = draft.parts.get(id);
 
     if (childPart) {
-      const exportedPart = partExportify(childPart, context);
+      const exportedPart = partExportify(childPart, draft);
 
       if (exportedPart) {
         if (isArray(exportedPart)) {

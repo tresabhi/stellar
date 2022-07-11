@@ -3,6 +3,8 @@ import {
   DownloadIcon,
   EnterIcon,
   ExitIcon,
+  EyeClosedIcon,
+  EyeOpenIcon,
   FileIcon,
   FilePlusIcon,
   HandIcon,
@@ -17,17 +19,25 @@ import {
   fileSave,
   loadBlueprint,
 } from 'core/blueprint';
-import { BlueprintData } from 'game/Blueprint';
+import { togglePartsVisibilityBySelection } from 'core/part/functions/togglePartsVisibilityBySelection';
 import useApp, { TOOL } from 'hooks/useApp';
+import useBlueprint from 'hooks/useBlueprint';
 
 const Toolbar = () => {
+  const { tool, isPanning } = useApp();
+  const { selections, parts } = useBlueprint();
+  const isOneHidden = selections.some(
+    (selection) => parts.get(selection)?.hidden,
+  );
+
   const handleMoveClick = () => useApp.setState({ tool: TOOL.MOVE });
   const handlePanClick = () => useApp.setState({ tool: TOOL.PAN });
-  const handleNewClick = () => loadBlueprint(BlueprintData);
+  const handleNewClick = () => loadBlueprint();
   const handleOpenClick = fileOpen;
   const handleSaveClick = fileSave;
   const handleImportClick = fileImport;
   const handleExportClick = fileExport;
+  const handleEyeClick = () => togglePartsVisibilityBySelection();
 
   return (
     <Toolbar2.Root>
@@ -72,7 +82,11 @@ const Toolbar = () => {
             Export
           </Toolbar2.DropdownItem>
         </Toolbar2.Dropdown>
-        <Toolbar2.Dropdown icon={<CursorArrowIcon />}>
+        <Toolbar2.Dropdown
+          icon={
+            tool === TOOL.PAN || isPanning ? <HandIcon /> : <CursorArrowIcon />
+          }
+        >
           <Toolbar2.DropdownItem
             icon={<CursorArrowIcon />}
             onClick={handleMoveClick}
@@ -87,6 +101,11 @@ const Toolbar = () => {
             Pan
           </Toolbar2.DropdownItem>
         </Toolbar2.Dropdown>
+      </Toolbar2.Group>
+      <Toolbar2.Group>
+        <Toolbar2.Button onClick={handleEyeClick}>
+          {isOneHidden ? <EyeClosedIcon /> : <EyeOpenIcon />}
+        </Toolbar2.Button>
       </Toolbar2.Group>
     </Toolbar2.Root>
   );

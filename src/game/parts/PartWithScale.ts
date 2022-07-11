@@ -1,7 +1,7 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { MutableRefObject } from 'react';
-import { Group } from 'three';
+import { Group, Mesh } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithScale extends VanillaPart {
@@ -28,7 +28,7 @@ export const PartWithScaleData: PartWithScale = {
 
 export const usePartWithScale = (
   id: string,
-  groupRef: MutableRefObject<Group>,
+  groupRef: MutableRefObject<Mesh | Group>,
 ) => {
   usePartProperty(
     id,

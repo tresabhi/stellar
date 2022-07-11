@@ -60,7 +60,7 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
   const handleExpandClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     mutateBlueprint((draft) => {
-      const part = getPart(id, draft) as Group | undefined;
+      const part = draft.parts.get(id) as Group;
 
       if (part) {
         part.expanded = !part.expanded;

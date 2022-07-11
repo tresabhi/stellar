@@ -12,11 +12,10 @@ interface PartClusterProps extends GroupProps {
 }
 const PartCluster = forwardRef<Group, PartClusterProps>(
   ({ parentId, ...props }, ref) => {
-    const state = useBlueprint(
-      (state) =>
-        (parentId ? (getPart(parentId, state) as GroupPart) : state).partOrder,
-      compareStringArrays,
-    );
+    const state = useBlueprint((state) => {
+      return (parentId ? (state.parts.get(parentId) as GroupPart) : state)
+        .partOrder;
+    }, compareStringArrays);
     let partListing: JSX.Element[] = [];
 
     state.forEach((Id) => {

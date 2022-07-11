@@ -1,9 +1,7 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
-import useDragControls from 'hooks/useDragControls';
 import usePartModel from 'hooks/usePartModel';
 import { PartRegistryFragment } from 'hooks/usePartRegistry';
-import usePartWithBounds from 'hooks/usePartWithBounds';
-import useSelectionControl from 'hooks/useSelectionControl';
+import usePhysicalPart from 'hooks/usePhysicalPart';
 import { FC, useRef } from 'react';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
@@ -13,7 +11,6 @@ import {
   VanillaPartWithEngineData,
 } from '../PartWithEngine';
 import {
-  usePartWithTransformations,
   VanillaPartWithTransformations,
   VanillaPartWithTransformationsData,
 } from '../PartWithTransformations';
@@ -45,14 +42,10 @@ export const EngineKolibriLayoutComponent: FC<PartComponentProps> = ({
 }) => {
   const group = useRef<Group>(null!);
   const Model = usePartModel('EngineKolibri', 'model');
-
-  const handleClick = useSelectionControl(id); // TODO: fix inconsistency: control vs controls
-  const handlePointerDown = useDragControls(id);
-  usePartWithTransformations(id, group);
-  usePartWithBounds(id, group);
+  const { props } = usePhysicalPart(id, group);
 
   return (
-    <group ref={group} onClick={handleClick} onPointerDown={handlePointerDown}>
+    <group ref={group} {...props}>
       <Model position={[0, -1, 0]} />
     </group>
   );

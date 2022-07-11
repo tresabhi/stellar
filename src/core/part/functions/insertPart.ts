@@ -1,8 +1,6 @@
-import { Group } from 'game/parts/Group';
 import { AnyPart, ParentId } from 'types/Parts';
 import { mutateBlueprint } from '../../blueprint/functions/mutateBlueprint';
 import { createNewPart } from './createNewPart';
-import { getPart } from './getPart';
 
 export interface InsertPartOptions {
   index: number;
@@ -29,7 +27,7 @@ export const insertPart = (
 
     if (newPart) {
       if (parentId) {
-        const parentPart = getPart<Group>(parentId, draft);
+        const parentPart = draft.parts.get(parentId);
 
         if (parentPart) {
           parentPart.partOrder.splice(mergedOptions.index, 0, newPart.id);
