@@ -1,7 +1,6 @@
 import { mutateBlueprint } from 'core/blueprint';
-import { getParent, selectPartOnly } from 'core/part';
+import { createNewPart, getParent, selectPartOnly } from 'core/part';
 import { Group } from 'game/parts/Group';
-import { createNewPart } from '../../part/functions/createNewPart';
 
 export const groupParts = (ids: string[], replaceId: string) => {
   mutateBlueprint((draft) => {

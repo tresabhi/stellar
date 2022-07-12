@@ -1,7 +1,8 @@
 import { Blueprint } from 'game/Blueprint';
 import useBlueprint from 'hooks/useBlueprint';
 import { nanoid } from 'nanoid';
-import { ID_LENGTH } from '../constants/idLength';
+
+export const ID_LENGTH = 16;
 
 export const generateId = (draft?: Blueprint): string => {
   if (draft) {

@@ -1,4 +1,4 @@
-import { getBoundsFromObject } from 'core/bounds/functions/getBoundsFromObject';
+import { getBoundsFromObject } from 'core/bounds';
 import produce from 'immer';
 import { MutableRefObject, useCallback, useEffect } from 'react';
 import { Group, Mesh } from 'three';

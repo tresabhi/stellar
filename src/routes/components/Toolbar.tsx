@@ -33,9 +33,12 @@ import {
   fileSave,
   loadBlueprint,
 } from 'core/blueprint';
-import { copyPartsBySelection, cutPartsBySelection } from 'core/part';
-import { togglePartsLockBySelection } from 'core/part/functions/togglePartsLockBySelection';
-import { togglePartsVisibilityBySelection } from 'core/part/functions/togglePartsVisibilityBySelection';
+import {
+  copyPartsBySelection,
+  cutPartsBySelection,
+  togglePartsLockBySelection,
+  togglePartsVisibilityBySelection,
+} from 'core/part';
 import useApp, { TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 

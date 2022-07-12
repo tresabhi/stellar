@@ -1,15 +1,12 @@
 import { fileSave } from 'browser-fs-access';
-import {
-  FILE_EXTENSION_REGEX,
-  UNNAMED_BLUEPRINT_FILE_NAME,
-} from 'core/blueprint/constants/file';
-import {
-  WATERMARK_KEY,
-  WATERMARK_VALUE,
-} from 'core/blueprint/constants/watermark';
 import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import { blueprintExportify } from './blueprintExportify';
+import { WATERMARK_KEY, WATERMARK_VALUE } from './blueprintImportify';
+import {
+  FILE_EXTENSION_REGEX,
+  UNNAMED_BLUEPRINT_FILE_NAME,
+} from './fileSaveAs';
 
 export const fileExport = async () => {
   const { fileHandle } = useApp.getState();

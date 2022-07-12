@@ -1,1 +1,1 @@
-export * from './functions/notify';
+export * from './notify';
