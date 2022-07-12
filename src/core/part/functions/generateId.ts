@@ -3,11 +3,11 @@ import useBlueprint from 'hooks/useBlueprint';
 import { nanoid } from 'nanoid';
 import { ID_LENGTH } from '../constants/idLength';
 
-export const generateId = (state?: Blueprint): string => {
-  if (state) {
+export const generateId = (draft?: Blueprint): string => {
+  if (draft) {
     while (true) {
       const id = nanoid(ID_LENGTH);
-      if (!state.parts.has(id)) return id;
+      if (!draft.parts.has(id)) return id;
     }
   } else {
     return generateId(useBlueprint.getState());

@@ -33,6 +33,7 @@ import {
   fileSave,
   loadBlueprint,
 } from 'core/blueprint';
+import { copyPartsToClipboardBySelection } from 'core/part';
 import { togglePartsLockBySelection } from 'core/part/functions/togglePartsLockBySelection';
 import { togglePartsVisibilityBySelection } from 'core/part/functions/togglePartsVisibilityBySelection';
 import useApp, { TOOL } from 'hooks/useApp';
@@ -47,6 +48,7 @@ const Toolbar = () => {
   const isOneLocked = selections.some(
     (selection) => parts.get(selection)?.locked,
   );
+  const hasNoSelections = selections.length === 0;
 
   const handleMoveClick = () => useApp.setState({ tool: TOOL.MOVE });
   const handlePanClick = () => useApp.setState({ tool: TOOL.PAN });
@@ -57,7 +59,7 @@ const Toolbar = () => {
   const handleExportClick = fileExport;
   const handleEyeClick = () => togglePartsVisibilityBySelection();
   const handleLockClick = () => togglePartsLockBySelection();
-  // const handleCopyClick =
+  const handleCopyClick = () => copyPartsToClipboardBySelection();
 
   return (
     <ToolbarComponent.Root>
@@ -126,9 +128,13 @@ const Toolbar = () => {
         </ToolbarComponent.Button>
       </ToolbarComponent.Group>
       <ToolbarComponent.Group>
-        <ToolbarComponent.Dropdown icon={<ClipboardIcon />}>
+        <ToolbarComponent.Dropdown
+          disabled={hasNoSelections}
+          icon={<ClipboardIcon />}
+        >
           <ToolbarComponent.DropdownItem
             icon={<ClipboardCopyIcon />}
+            onClick={handleCopyClick}
             keybind="Ctrl + C"
           >
             Copy
@@ -158,20 +164,20 @@ const Toolbar = () => {
             Create Snippet
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
-        <ToolbarComponent.Button>
+        <ToolbarComponent.Button disabled={hasNoSelections}>
           <GroupIcon />
         </ToolbarComponent.Button>
-        <ToolbarComponent.Button disabled={selections.length === 0}>
+        <ToolbarComponent.Button disabled={hasNoSelections}>
           <TrashIcon />
         </ToolbarComponent.Button>
         <ToolbarComponent.Button
-          disabled={selections.length === 0}
+          disabled={hasNoSelections}
           onClick={handleEyeClick}
         >
           {isOneHidden ? <EyeClosedIcon /> : <EyeOpenIcon />}
         </ToolbarComponent.Button>
         <ToolbarComponent.Button
-          disabled={selections.length === 0}
+          disabled={hasNoSelections}
           onClick={handleLockClick}
         >
           {isOneLocked ? <LockClosedIcon /> : <LockOpen2Icon />}
