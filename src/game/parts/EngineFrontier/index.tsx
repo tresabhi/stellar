@@ -4,7 +4,7 @@ import usePartModel from 'hooks/usePartModel';
 import { PartRegistryFragment } from 'hooks/usePartRegistry';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import { FC, useRef } from 'react';
-import { Group } from 'three';
+import { Group, Mesh } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData } from '../Part';
 import {
@@ -43,13 +43,14 @@ export const EngineFrontierData: EngineFrontier = {
 export const EngineFrontierLayoutComponent: FC<PartComponentProps> = ({
   id,
 }) => {
-  const group = useRef<Group>(null!);
+  const wrapper = useRef<Group>(null!);
+  const mesh = useRef<Mesh>(null!);
   const Model = usePartModel('EngineFrontier', 'model');
-  const { props } = usePhysicalPart(id, group);
+  const { props } = usePhysicalPart(id, wrapper, mesh);
 
   return (
-    <group ref={group} {...props}>
-      <Model position={[0, -1, 0]} />
+    <group ref={wrapper} {...props}>
+      <Model ref={mesh} position={[0, -1, 0]} />
     </group>
   );
 };

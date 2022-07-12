@@ -6,10 +6,11 @@ import useBounds, { BoundListing, UseBounds } from './useBounds';
 
 const usePartWithBounds = (
   id: string,
-  object: MutableRefObject<Group | Mesh>,
+  wrapper: MutableRefObject<Group>,
+  mesh: MutableRefObject<Mesh>,
 ) => {
   const computeBounds = useCallback(() => {
-    const bounds = getBoundsFromObject(object);
+    const bounds = getBoundsFromObject(wrapper, mesh);
     const boundListing: BoundListing = {
       bounds: bounds,
       needsUpdate: false,
@@ -20,7 +21,7 @@ const usePartWithBounds = (
         draft.parts.set(id, boundListing);
       }),
     );
-  }, [object, id]);
+  }, [id, mesh, wrapper]);
 
   useEffect(computeBounds);
   useEffect(() => {

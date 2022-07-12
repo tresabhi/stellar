@@ -1,14 +1,20 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
+import { getBoundsFromObject } from 'core/bounds';
 import { partExportify, removePartMetaData } from 'core/part';
 import PART_CATEGORY from 'hooks/constants/partCategory';
+import useBounds, {
+  BoundListing,
+  PartBounds,
+  UseBounds,
+} from 'hooks/useBounds';
 import useDragControls from 'hooks/useDragControls';
 import { PartExportifier, PartRegistryFragment } from 'hooks/usePartRegistry';
-import usePartWithBounds from 'hooks/usePartWithBounds';
 import useSelectionControl from 'hooks/useSelectionControl';
+import produce from 'immer';
 import { isArray } from 'lodash';
-import { FC, useRef } from 'react';
-import { Group as ThreeGroup } from 'three';
+import { FC, MutableRefObject, useCallback, useEffect, useRef } from 'react';
+import { Group as ThreeGroup, Mesh } from 'three';
 import { AnyVanillaPart, PartComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 
@@ -28,15 +34,52 @@ export const GroupData: Group = {
 };
 
 export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
-  const group = useRef<ThreeGroup>(null!);
+  const cluster = useRef<ThreeGroup>(null!);
   const handleClick = useSelectionControl(id);
   const handlePointerDown = useDragControls(id);
 
-  usePartWithBounds(id, group);
+  const computeBounds = useCallback(() => {
+    const bounds: PartBounds = {
+      ...getBoundsFromObject(
+        cluster,
+        cluster as unknown as MutableRefObject<Mesh>,
+      ),
+
+      rotation: 0,
+      offset: { x: 0, y: 0 },
+    };
+    const boundListing: BoundListing = {
+      bounds: bounds,
+      needsUpdate: false,
+    };
+
+    useBounds.setState(
+      produce<UseBounds>((draft) => {
+        draft.parts.set(id, boundListing);
+      }),
+    );
+  }, [id]);
+
+  useEffect(computeBounds);
+  useEffect(() => {
+    const unsubscribe = useBounds.subscribe(
+      (state) => state.deferUpdates,
+      (deferUpdates) => {
+        const boundListing = useBounds.getState().parts.get(id);
+
+        // is not deferred anymore, bound listing exists, and it needs to be updated
+        if (!deferUpdates && boundListing && boundListing.needsUpdate) {
+          computeBounds();
+        }
+      },
+    );
+
+    return unsubscribe;
+  }, [computeBounds, id]);
 
   return (
     <PartCluster
-      ref={group}
+      ref={cluster}
       parentId={id}
       onClick={handleClick}
       onPointerDown={handlePointerDown}

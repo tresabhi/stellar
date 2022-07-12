@@ -81,5 +81,4 @@ export const LayoutCanvas = () => {
 
 export * from './components/Grid';
 export * from './components/PartBounds';
-export * from './components/PartBounds/components/SelectionOutline';
 export * from './components/Parts';

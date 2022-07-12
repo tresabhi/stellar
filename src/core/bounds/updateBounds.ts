@@ -6,9 +6,10 @@ import { getBoundsFromObject } from './getBoundsFromObject';
 
 export const updateBounds = (
   id: string,
-  object: MutableRefObject<Group | Mesh>,
+  wrapper: MutableRefObject<Group>,
+  mesh: MutableRefObject<Mesh>,
 ) => {
-  const bounds = getBoundsFromObject(object);
+  const bounds = getBoundsFromObject(wrapper, mesh);
 
   useBounds.setState(
     produce<UseBounds>((draft) => {

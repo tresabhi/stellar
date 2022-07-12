@@ -108,10 +108,10 @@ export const FuelTankData: FuelTank = {
 };
 
 export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
-  const group = useRef<Group>(null!);
+  const wrapper = useRef<Group>(null!);
   const mesh = useRef<Mesh>(null!);
   const state = getPart<FuelTank>(id)!;
-  const { props } = usePhysicalPart(id, group);
+  const { props } = usePhysicalPart(id, wrapper, mesh);
 
   usePartProperty(
     id,
@@ -135,7 +135,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   );
 
   return (
-    <group ref={group} position={[state.p.x, state.p.y, 0]} {...props}>
+    <group ref={wrapper} position={[state.p.x, state.p.y, 0]} {...props}>
       <mesh ref={mesh}>
         <meshStandardMaterial
           flatShading
