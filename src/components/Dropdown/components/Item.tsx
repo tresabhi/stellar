@@ -8,7 +8,7 @@ import { css, theme } from 'stitches.config';
 export interface ItemProps extends DropdownMenuItemProps {
   icon?: ReactNode;
   children: string;
-  keybind?: string;
+  keybind?: ReactNode;
 }
 
 const itemStyles = css({
@@ -19,13 +19,11 @@ const itemStyles = css({
   alignItems: 'center',
   cursor: 'pointer',
 
-  '&:hover, &:focus': {
-    backgroundColor: theme.colors.componentHoverBackground,
-  },
   '&:active': {
     backgroundColor: theme.colors.componentActiveBackground,
   },
   '&:focus': {
+    backgroundColor: theme.colors.componentHoverBackground,
     outline: theme.borderStyles.interactiveComponentActiveBorder,
   },
 });

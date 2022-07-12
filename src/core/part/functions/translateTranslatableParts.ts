@@ -15,7 +15,7 @@ export const translateTranslatableParts = (
       selections.forEach((selection) => {
         const part = draft.parts.get(selection);
 
-        if (part) {
+        if (part && !part.locked) {
           if (part.n === 'Group') {
             translate((part as Group).partOrder);
           } else if ((part as AnyPart).p) {

@@ -2,6 +2,7 @@ import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
+import PART_CATEGORY from 'hooks/constants/partCategory';
 import usePartProperty from 'hooks/usePartProperty';
 import { PartRegistryFragment } from 'hooks/usePartRegistry';
 import usePhysicalPart from 'hooks/usePhysicalPart';
@@ -198,6 +199,8 @@ export const FuelTankIcon = Icon;
 export const FuelTankRegistry: PartRegistryFragment = [
   'Fuel Tank',
   {
+    category: PART_CATEGORY.STRUCTURAL,
+
     vanillaData: VanillaFuelTankData,
     data: FuelTankData,
 

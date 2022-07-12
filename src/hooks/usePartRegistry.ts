@@ -14,6 +14,7 @@ import {
   PartPropertyComponentProps,
 } from 'types/Parts';
 import create from 'zustand';
+import PART_CATEGORY from './constants/partCategory';
 
 export type PartExportifier<Type extends Part> = (
   part: Type,
@@ -21,6 +22,8 @@ export type PartExportifier<Type extends Part> = (
 ) => AnyVanillaPart | AnyVanillaPart[] | null;
 
 export interface PartRegistryItem {
+  category: PART_CATEGORY;
+
   // null if it has a custom exportifier or cannot export at all
   vanillaData: VanillaPart | null;
   data: AnyPart;

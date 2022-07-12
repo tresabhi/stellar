@@ -107,8 +107,8 @@ export const {
     },
 
     borderStyles: {
-      noninteractiveComponentBorder: `$${mauveDark.mauve6} solid 0.0625rem`,
-      interactiveComponentBorder: `$${mauveDark.mauve7} solid 0.0625rem`,
+      noninteractiveComponentBorder: `${mauveDark.mauve6} solid 0.0625rem`,
+      interactiveComponentBorder: `${mauveDark.mauve7} solid 0.0625rem`,
       interactiveComponentHoverBorder: `${mauveDark.mauve8} solid 0.0625rem`,
       interactiveComponentActiveBorder: `${mauveDark.mauve8} solid 0.0625rem`,
       noninteractiveComponentBorderAccent: `${purpleDark.purple6} solid 0.0625rem`,
@@ -179,8 +179,8 @@ export const lightTheme = createTheme('theme-light', {
   },
 
   borderStyles: {
-    noninteractiveComponentBorder: `$${mauve.mauve6} solid 0.0625rem`,
-    interactiveComponentBorder: `$${mauve.mauve7} solid 0.0625rem`,
+    noninteractiveComponentBorder: `${mauve.mauve6} solid 0.0625rem`,
+    interactiveComponentBorder: `${mauve.mauve7} solid 0.0625rem`,
     interactiveComponentHoverBorder: `${mauve.mauve8} solid 0.0625rem`,
     interactiveComponentActiveBorder: `${mauve.mauve8} solid 0.0625rem`,
     noninteractiveComponentBorderAccent: `${purple.purple6} solid 0.0625rem`,

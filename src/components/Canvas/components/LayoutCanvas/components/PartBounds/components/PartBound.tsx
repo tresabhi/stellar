@@ -1,4 +1,3 @@
-import useBlueprint from 'hooks/useBlueprint';
 import useBounds, { PrimitiveBounds } from 'hooks/useBounds';
 import { FC, useEffect, useRef } from 'react';
 import {
@@ -39,9 +38,6 @@ export interface PartBoundProps {
 export const PartBound: FC<PartBoundProps> = ({ id }) => {
   const outline = useRef<Line>(null!);
   const shading = useRef<Mesh>(null!);
-  const selected = useBlueprint.getState().parts.get(id)?.selected ?? false;
-  const updatesDefered = useBounds.getState().deferUpdates;
-  const initialVisible = selected && !updatesDefered;
 
   const rerender = (bound: PrimitiveBounds) => {
     shading.current.scale.set(
@@ -64,6 +60,7 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
 
   useEffect(() => {
     const bounds = useBounds.getState().parts.get(id)?.bounds;
+
     if (bounds) rerender(bounds);
   });
   useEffect(() => {
@@ -93,14 +90,8 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
         ref={outline}
         material={outlineMaterial}
         geometry={unitBufferGeometry2}
-        visible={initialVisible}
       />
-      <mesh
-        ref={shading}
-        material={shadingMaterial}
-        geometry={unitPlane}
-        visible={initialVisible}
-      />
+      <mesh ref={shading} material={shadingMaterial} geometry={unitPlane} />
     </>
   );
 };

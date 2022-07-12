@@ -1,7 +1,11 @@
 import useBounds from 'hooks/useBounds';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
-export const BOUND_UPDATES_DEFER_TIME = 750;
+/**
+ * 1 extra millisecond to avoid rendering unnecessarily when arrow keys are
+ * held down
+ */
+export const BOUND_UPDATES_DEFER_TIME = 501;
 
 const allowUpdates = fallingEdgeDebounce(() => {
   useBounds.setState({

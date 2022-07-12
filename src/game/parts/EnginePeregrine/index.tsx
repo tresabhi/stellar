@@ -1,4 +1,5 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
+import PART_CATEGORY from 'hooks/constants/partCategory';
 import usePartModel from 'hooks/usePartModel';
 import { PartRegistryFragment } from 'hooks/usePartRegistry';
 import usePhysicalPart from 'hooks/usePhysicalPart';
@@ -58,6 +59,8 @@ export const EnginePeregrineIcon = EngineIcon;
 export const EnginePeregrineRegistry: PartRegistryFragment = [
   'Engine Peregrine',
   {
+    category: PART_CATEGORY.PROPULSION,
+
     vanillaData: VanillaEnginePeregrineData,
     data: EnginePeregrineData,
 
