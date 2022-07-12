@@ -13,30 +13,34 @@ export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
     producer,
   );
 
-  useVersionControl.setState(
-    produce<UseVersionControl>((draft) => {
-      draft.history.splice(
-        draft.index + 1,
-        draft.history.length - draft.index - 1,
-      );
+  if (patches.length > 0) {
+    useVersionControl.setState(
+      produce<UseVersionControl>((draft) => {
+        draft.history.splice(
+          draft.index + 1,
+          draft.history.length - draft.index - 1,
+        );
 
-      draft.history.push({
-        undo: inversePatches,
-        redo: patches,
-      });
+        draft.history.push({
+          undo: inversePatches,
+          redo: patches,
+        });
 
-      if (UNDO_LIMIT === 0) {
-        draft.index++;
-      } else {
-        if (draft.history.length > UNDO_LIMIT) {
-          draft.history.shift();
-        } else {
+        if (UNDO_LIMIT === 0) {
           draft.index++;
+        } else {
+          if (draft.history.length > UNDO_LIMIT) {
+            draft.history.shift();
+          } else {
+            draft.index++;
+          }
         }
-      }
-    }),
-  );
+      }),
+    );
 
-  declareUnsavedChanges();
-  useBlueprint.setState(nextState);
+    declareUnsavedChanges();
+    useBlueprint.setState(nextState);
+  } else {
+    // TODO: warn in verbose mode
+  }
 };

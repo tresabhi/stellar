@@ -66,7 +66,7 @@ const useDragControls = (id: string) => {
       selectedInitially = true;
     }
 
-    if (movement.length() > 0) {
+    if (movement.x !== 0 && movement.y !== 0) {
       const [nextState, patches, inversePatches] = produceWithPatches(
         useBlueprint.getState(),
         (draft) => {
