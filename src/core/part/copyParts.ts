@@ -15,10 +15,10 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
 
       if (part) {
         const [isolatedPartId, isolatedParts] = isolatePart(part, draft);
-        clipboard.partOrder.push(isolatedPartId),
-          isolatedParts.forEach((isolatedPart) => {
-            clipboard.parts.set(isolatedPart.id, isolatedPart);
-          });
+        clipboard.partOrder.push(isolatedPartId);
+        isolatedParts.forEach((isolatedPart) => {
+          clipboard.parts.set(isolatedPart.id, isolatedPart);
+        });
       }
     });
 

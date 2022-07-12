@@ -1,5 +1,5 @@
+import { mutateBlueprint } from 'core/blueprint';
 import { AnyPart, ParentId } from 'types/Parts';
-import { mutateBlueprint } from '../../blueprint/functions/mutateBlueprint';
 import { createNewPart } from './createNewPart';
 
 export interface InsertPartOptions {
