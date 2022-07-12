@@ -1,4 +1,5 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
+import PART_CATEGORY from 'hooks/constants/partCategory';
 import usePartModel from 'hooks/usePartModel';
 import { PartRegistryFragment } from 'hooks/usePartRegistry';
 import usePhysicalPart from 'hooks/usePhysicalPart';
@@ -56,6 +57,8 @@ export const EngineValiantIcon = EngineIcon;
 export const EngineValiantRegistry: PartRegistryFragment = [
   'Engine Valiant',
   {
+    category: PART_CATEGORY.PROPULSION,
+
     vanillaData: VanillaEngineValiantData,
     data: EngineValiantData,
 
