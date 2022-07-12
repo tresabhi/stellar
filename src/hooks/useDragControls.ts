@@ -29,9 +29,11 @@ const useDragControls = (id: string) => {
     const { tool, isPanning } = useApp.getState();
 
     if (
-      part && // part actually exists
+      part &&
       (part.selected || part.parentId === null) && // is selected or is at root level
-      tool === TOOL.MOVE && // tool is move
+      !part.hidden &&
+      !part.locked &&
+      tool === TOOL.MOVE &&
       !isPanning // isn't panning right now via the hotkey
     ) {
       event.stopPropagation();
