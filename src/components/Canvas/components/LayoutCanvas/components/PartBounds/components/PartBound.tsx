@@ -38,6 +38,7 @@ export interface PartBoundProps {
 export const PartBound: FC<PartBoundProps> = ({ id }) => {
   const outline = useRef<Line>(null!);
   const shading = useRef<Mesh>(null!);
+  const { deferUpdates } = useBounds();
 
   const rerender = (bound: PrimitiveBounds) => {
     shading.current.scale.set(
@@ -90,8 +91,14 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
         ref={outline}
         material={outlineMaterial}
         geometry={unitBufferGeometry2}
+        visible={!deferUpdates}
       />
-      <mesh ref={shading} material={shadingMaterial} geometry={unitPlane} />
+      <mesh
+        ref={shading}
+        material={shadingMaterial}
+        geometry={unitPlane}
+        visible={!deferUpdates}
+      />
     </>
   );
 };
