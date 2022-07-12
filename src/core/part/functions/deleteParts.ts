@@ -1,11 +1,11 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 
-export const deleteParts = (ids: string[], state?: Blueprint) => {
-  if (state) {
-    state.selections.forEach((selection) => {
-      state.parts.delete(selection);
-      state.partOrder.splice(state.partOrder.indexOf(selection), 1);
+export const deleteParts = (ids: string[], draft?: Blueprint) => {
+  if (draft) {
+    draft.selections.forEach((selection) => {
+      draft.parts.delete(selection);
+      draft.partOrder.splice(draft.partOrder.indexOf(selection), 1);
     });
   } else {
     mutateBlueprint((draft) => {

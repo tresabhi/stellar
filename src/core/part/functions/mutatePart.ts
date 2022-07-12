@@ -5,7 +5,7 @@ import { mutateParts } from './mutateParts';
 export const mutatePart = <Type extends Part>(
   id: string,
   mutator: (draft: Type) => void,
-  state?: Blueprint,
+  draft?: Blueprint,
 ) => {
-  mutateParts([id], mutator, state);
+  mutateParts([id], mutator, draft);
 };

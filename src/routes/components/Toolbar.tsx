@@ -33,7 +33,7 @@ import {
   fileSave,
   loadBlueprint,
 } from 'core/blueprint';
-import { copyPartsToClipboardBySelection } from 'core/part';
+import { copyPartsBySelection, cutPartsBySelection } from 'core/part';
 import { togglePartsLockBySelection } from 'core/part/functions/togglePartsLockBySelection';
 import { togglePartsVisibilityBySelection } from 'core/part/functions/togglePartsVisibilityBySelection';
 import useApp, { TOOL } from 'hooks/useApp';
@@ -59,7 +59,8 @@ const Toolbar = () => {
   const handleExportClick = fileExport;
   const handleEyeClick = () => togglePartsVisibilityBySelection();
   const handleLockClick = () => togglePartsLockBySelection();
-  const handleCopyClick = () => copyPartsToClipboardBySelection();
+  const handleCopyClick = () => copyPartsBySelection();
+  const handleCutClick = () => cutPartsBySelection();
 
   return (
     <ToolbarComponent.Root>
@@ -141,6 +142,7 @@ const Toolbar = () => {
           </ToolbarComponent.DropdownItem>
           <ToolbarComponent.DropdownItem
             icon={<ScissorsIcon />}
+            onClick={handleCutClick}
             keybind="Ctrl + X"
           >
             Cut

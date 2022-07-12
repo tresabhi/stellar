@@ -7,16 +7,16 @@ export const translateParts = (
   ids: string[],
   x: number,
   y: number,
-  state?: Blueprint,
+  draft?: Blueprint,
 ) => {
-  if (state) {
+  if (draft) {
     mutateParts<PartWithTransformations>(
       ids,
       (draft) => {
         draft.p.x += x;
         draft.p.y += y;
       },
-      state,
+      draft,
     );
   } else {
     mutateBlueprint((draft) => {
