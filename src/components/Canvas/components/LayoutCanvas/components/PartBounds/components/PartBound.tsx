@@ -1,7 +1,8 @@
-import useBounds, { PrimitiveBounds } from 'hooks/useBounds';
+import useBounds, { PartBounds } from 'hooks/useBounds';
 import { FC, useEffect, useRef } from 'react';
 import {
   BufferGeometry,
+  Group,
   Line,
   LineBasicMaterial,
   Mesh,
@@ -38,25 +39,33 @@ export interface PartBoundProps {
 export const PartBound: FC<PartBoundProps> = ({ id }) => {
   const outline = useRef<Line>(null!);
   const shading = useRef<Mesh>(null!);
+  const wrapper = useRef<Group>(null!);
+  const content = useRef<Group>(null!);
   const { deferUpdates } = useBounds();
 
-  const rerender = (bound: PrimitiveBounds) => {
+  const rerender = (bound: PartBounds) => {
     shading.current.scale.set(
       bound.max.x - bound.min.x,
       bound.max.y - bound.min.y,
       1,
-    );
-    shading.current.position.set(
-      bound.min.x + (bound.max.x - bound.min.x) / 2,
-      bound.min.y + (bound.max.y - bound.min.y) / 2,
-      0,
     );
     outline.current.scale.set(
       bound.max.x - bound.min.x,
       bound.max.y - bound.min.y,
       1,
     );
-    outline.current.position.set(bound.min.x, bound.min.y, 0);
+    outline.current.position.set(
+      (bound.max.x - bound.min.x) / -2,
+      (bound.max.y - bound.min.y) / -2,
+      0,
+    );
+    wrapper.current.rotation.set(0, 0, bound.rotation);
+    wrapper.current.position.set(
+      (bound.max.x + bound.min.x) / 2,
+      (bound.max.y + bound.min.y) / 2,
+      0,
+    );
+    content.current.position.set(bound.offset.x, bound.offset.y, 0);
   };
 
   useEffect(() => {
@@ -86,19 +95,21 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
   }, [id]);
 
   return (
-    <>
-      <line_
-        ref={outline}
-        material={outlineMaterial}
-        geometry={unitBufferGeometry2}
-        visible={!deferUpdates}
-      />
-      <mesh
-        ref={shading}
-        material={shadingMaterial}
-        geometry={unitPlane}
-        visible={!deferUpdates}
-      />
-    </>
+    <group ref={wrapper}>
+      <group ref={content}>
+        <line_
+          ref={outline}
+          material={outlineMaterial}
+          geometry={unitBufferGeometry2}
+          visible={!deferUpdates}
+        />
+        <mesh
+          ref={shading}
+          material={shadingMaterial}
+          geometry={unitPlane}
+          visible={!deferUpdates}
+        />
+      </group>
+    </group>
   );
 };

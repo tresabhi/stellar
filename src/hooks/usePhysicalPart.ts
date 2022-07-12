@@ -7,17 +7,21 @@ import usePartWithBounds from './usePartWithBounds';
 import useSelectionControl from './useSelectionControl';
 
 /**
- * Combines all usual part hooks in one to reduce ~~bloat~~ what's the word I'm looking for?
+ * Combines all usual part hooks in one to reduce boilerplate
  */
-const usePhysicalPart = (id: string, mesh: MutableRefObject<Mesh | Group>) => {
+const usePhysicalPart = (
+  id: string,
+  wrapper: MutableRefObject<Group>,
+  mesh: MutableRefObject<Mesh>,
+) => {
   const props = {
     onClick: useSelectionControl(id),
     onPointerDown: useDragControls(id),
   };
 
-  usePartWithTransformations(id, mesh);
-  usePartWithBounds(id, mesh);
-  usePartVisibility(id, mesh);
+  usePartWithTransformations(id, wrapper);
+  usePartWithBounds(id, wrapper, mesh);
+  usePartVisibility(id, wrapper);
 
   return { props };
 };
