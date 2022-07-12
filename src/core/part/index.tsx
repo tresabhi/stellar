@@ -1,4 +1,7 @@
 export * from './constants/partMetaDataKeys';
+export * from './functions/copyPartsToClipboard';
+export * from './functions/copyPartsToClipboardBySelection';
+export * from './functions/copyPartToClipboard';
 export * from './functions/createNewPart';
 export * from './functions/deletePart';
 export * from './functions/deleteParts';
@@ -13,6 +16,7 @@ export * from './functions/getParts';
 export * from './functions/groupParts';
 export * from './functions/groupPartsBySelection';
 export * from './functions/insertPart';
+export * from './functions/isolatePart';
 export * from './functions/mutatePart';
 export * from './functions/mutateParts';
 export * from './functions/partExportify';

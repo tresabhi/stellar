@@ -7,6 +7,7 @@ import { buttonStyles } from './Button';
 export interface DropdownProps {
   icon: ReactNode;
   children: ReactNode;
+  disabled?: boolean;
 }
 
 const caretStyles = css({
@@ -19,10 +20,11 @@ const triggerStyles = css({
   gap: theme.sizes[4],
 });
 
-export const Dropdown: FC<DropdownProps> = ({ icon, children }) => (
+export const Dropdown: FC<DropdownProps> = ({ icon, children, disabled }) => (
   <DropdownComponent.Root>
     <DropdownComponent.Trigger
-      className={`${buttonStyles()} ${triggerStyles()}`}
+      disabled={disabled}
+      className={`${buttonStyles({ disabled })} ${triggerStyles()}`}
     >
       {icon}
       <CaretDownIcon className={caretStyles()} />

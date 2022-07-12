@@ -1,3 +1,4 @@
+import { AnyPartMap } from 'types/Parts';
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
@@ -6,9 +7,15 @@ export enum TAB {
   STAGING,
   EXPORT,
 }
+
 export enum TOOL {
   MOVE,
   PAN,
+}
+
+export interface ClipboardItem {
+  parts: AnyPartMap;
+  partOrder: string[];
 }
 
 export interface UseApp {
@@ -21,9 +28,11 @@ export interface UseApp {
   isPanning: boolean;
 
   preventNextSelection: boolean;
+  clipboard?: ClipboardItem;
 }
 
 export const UseAppData: UseApp = {
+  fileHandle: undefined,
   hasUnsavedChanges: false,
 
   tab: TAB.LAYOUT,
@@ -32,6 +41,7 @@ export const UseAppData: UseApp = {
   isPanning: false,
 
   preventNextSelection: false,
+  clipboard: undefined,
 };
 
 const useApp = create<

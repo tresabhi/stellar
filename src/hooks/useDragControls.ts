@@ -133,6 +133,3 @@ const useDragControls = (id: string) => {
   return handlePointerDown;
 };
 export default useDragControls;
-
-//@ts-ignore
-window.a = useVersionControl;
