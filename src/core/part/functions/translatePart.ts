@@ -6,10 +6,10 @@ export const translatePart = (
   id: string,
   x: number,
   y: number,
-  state?: Blueprint,
+  draft?: Blueprint,
 ) => {
-  if (state) {
-    translateParts([id], x, y, state);
+  if (draft) {
+    translateParts([id], x, y, draft);
   } else {
     mutateBlueprint((draft) => {
       translatePart(id, x, y, draft);

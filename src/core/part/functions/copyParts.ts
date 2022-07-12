@@ -3,7 +3,7 @@ import useApp, { ClipboardItem } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import { isolatePart } from './isolatePart';
 
-export const copyPartsToClipboard = (ids: string[], draft?: Blueprint) => {
+export const copyParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
     const clipboard: ClipboardItem = {
       parts: new Map(),
@@ -24,6 +24,6 @@ export const copyPartsToClipboard = (ids: string[], draft?: Blueprint) => {
 
     useApp.setState({ clipboard });
   } else {
-    copyPartsToClipboard(ids, useBlueprint.getState());
+    copyParts(ids, useBlueprint.getState());
   }
 };
