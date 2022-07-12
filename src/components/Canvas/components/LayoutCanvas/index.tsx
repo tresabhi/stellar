@@ -11,7 +11,6 @@ import { PanControls } from '../PanControls';
 import { Grid } from './components/Grid';
 import { PartBounds } from './components/PartBounds';
 import { Parts } from './components/Parts';
-import { SelectionOutline } from './components/SelectionOutline';
 
 export const LayoutCanvas = () => {
   // TODO: all refs should not end with "ref"
@@ -74,7 +73,6 @@ export const LayoutCanvas = () => {
 
       <Grid />
       <PartBounds />
-      <SelectionOutline />
 
       <Parts ref={parts} />
     </Canvas>
@@ -83,5 +81,5 @@ export const LayoutCanvas = () => {
 
 export * from './components/Grid';
 export * from './components/PartBounds';
+export * from './components/PartBounds/components/SelectionOutline';
 export * from './components/Parts';
-export * from './components/SelectionOutline';

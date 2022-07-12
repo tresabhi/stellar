@@ -2,7 +2,7 @@ import useBlueprint from 'hooks/useBlueprint';
 import useBounds, { PrimitiveBounds } from 'hooks/useBounds';
 import { useEffect, useRef } from 'react';
 import { Line } from 'three';
-import { outlineMaterial, unitBufferGeometry2 } from './PartBounds';
+import { outlineMaterial, unitBufferGeometry2 } from '..';
 
 export const SelectionOutline = () => {
   const outline = useRef<Line>(null!);
