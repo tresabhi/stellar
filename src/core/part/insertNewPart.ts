@@ -12,7 +12,7 @@ export const insertPartDefaultOptions: InsertPartOptions = {
   nearCamera: true,
 };
 
-export const insertPart = (
+export const insertNewPart = (
   partName: string,
   parentId?: ParentId,
   options: Partial<InsertPartOptions> = insertPartDefaultOptions,

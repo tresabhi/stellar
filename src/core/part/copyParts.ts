@@ -1,7 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
 import useApp, { ClipboardItem } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
-import { isolatePart } from './isolatePart';
+import { clonePart } from './clonePart';
 
 export const copyParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
@@ -14,15 +14,23 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
       const part = draft.parts.get(id);
 
       if (part) {
-        const [isolatedPartId, isolatedParts] = isolatePart(part, draft);
-        clipboard.partOrder.push(isolatedPartId);
-        isolatedParts.forEach((isolatedPart) => {
-          clipboard.parts.set(isolatedPart.id, isolatedPart);
-        });
+        const clonedPartData = clonePart(part.id, draft.parts);
+
+        if (clonedPartData) {
+          const [clonedPartId, clonedParts] = clonedPartData;
+          clipboard.partOrder.push(clonedPartId);
+          clonedParts.forEach((clonedPart, clonedPartChildId) => {
+            clipboard.parts.set(clonedPartChildId, clonedPart);
+          });
+        }
       }
     });
 
-    useApp.setState({ clipboard });
+    if (clipboard.parts.size > 0 && clipboard.partOrder.length > 0) {
+      useApp.setState({ clipboard });
+    } else {
+      useApp.setState({ clipboard: undefined });
+    }
   } else {
     copyParts(ids, useBlueprint.getState());
   }
