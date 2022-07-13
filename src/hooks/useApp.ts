@@ -1,6 +1,6 @@
-import { AnyPartMap } from 'types/Parts';
 import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
+import { Snippet } from './useSnippets';
 
 export enum TAB {
   LAYOUT,
@@ -13,11 +13,6 @@ export enum TOOL {
   PAN,
 }
 
-export interface ClipboardItem {
-  parts: AnyPartMap;
-  partOrder: string[];
-}
-
 export interface UseApp {
   fileHandle?: FileSystemFileHandle;
   hasUnsavedChanges: boolean;
@@ -28,7 +23,7 @@ export interface UseApp {
   isPanning: boolean;
 
   preventNextSelection: boolean;
-  clipboard?: ClipboardItem;
+  clipboard?: Snippet;
 }
 
 export const UseAppData: UseApp = {
