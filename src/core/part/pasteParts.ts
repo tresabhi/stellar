@@ -1,6 +1,7 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Group } from 'game/parts/Group';
-import useApp, { ClipboardItem, UseApp } from 'hooks/useApp';
+import useApp, { UseApp } from 'hooks/useApp';
+import { Snippet } from 'hooks/useSnippets';
 import produce from 'immer';
 import { clonePart } from './clonePart';
 import { selectPartsOnly } from './selectPartsOnly';
@@ -31,7 +32,7 @@ export const pasteParts = () => {
 
     useApp.setState(
       produce<UseApp>((draft) => {
-        const newClipboard: ClipboardItem = {
+        const newClipboard: Snippet = {
           parts: new Map(),
           partOrder: [],
         };

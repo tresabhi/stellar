@@ -1,11 +1,12 @@
 import { Blueprint } from 'game/Blueprint';
-import useApp, { ClipboardItem } from 'hooks/useApp';
+import useApp from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
+import { Snippet } from 'hooks/useSnippets';
 import { clonePart } from './clonePart';
 
 export const copyParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
-    const clipboard: ClipboardItem = {
+    const clipboard: Snippet = {
       parts: new Map(),
       partOrder: [],
     };
