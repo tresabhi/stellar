@@ -37,6 +37,7 @@ import {
   copyPartsBySelection,
   cutPartsBySelection,
   duplicateParts,
+  groupPartsBySelection,
   pasteParts,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
@@ -68,6 +69,8 @@ const Toolbar = () => {
   const handleCutClick = () => cutPartsBySelection();
   const handlePasteClick = pasteParts;
   const handleDuplicateClick = duplicateParts;
+  // const handleSnippetClick =
+  const handleGroupClick = groupPartsBySelection;
 
   return (
     <ToolbarComponent.Root>
@@ -175,7 +178,10 @@ const Toolbar = () => {
             Create Snippet
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
-        <ToolbarComponent.Button disabled={hasNoSelections}>
+        <ToolbarComponent.Button
+          onClick={handleGroupClick}
+          disabled={hasNoSelections}
+        >
           <GroupIcon />
         </ToolbarComponent.Button>
         <ToolbarComponent.Button disabled={hasNoSelections}>
