@@ -16,6 +16,7 @@ import {
   pasteParts,
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
+  ungroupGroupsBySelection,
   unselectAllParts,
 } from 'core/part';
 import useApp, { TAB, TOOL } from 'hooks/useApp';
@@ -105,11 +106,6 @@ const useKeybinds = () => {
       versionRedo();
     });
 
-    bind('ctrl+g', (event) => {
-      event.preventDefault();
-      groupPartsBySelection();
-    });
-
     bind('1', tool(TOOL.MOVE));
     bind('2', tool(TOOL.PAN));
 
@@ -159,6 +155,14 @@ const useKeybinds = () => {
   bind('ctrl+d', (event) => {
     event.preventDefault();
     duplicateParts();
+  });
+  bind('ctrl+g', (event) => {
+    event.preventDefault();
+    groupPartsBySelection();
+  });
+  bind('ctrl+shift+g', (event) => {
+    event.preventDefault();
+    ungroupGroupsBySelection();
   });
 };
 export default useKeybinds;

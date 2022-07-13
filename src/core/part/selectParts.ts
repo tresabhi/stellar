@@ -1,10 +1,11 @@
 import { mutateBlueprint } from 'core/blueprint';
+import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 
-export const selectParts = (ids: string[]) => {
-  let newSelections: string[] = [];
+export const selectParts = (ids: string[], draft?: Blueprint) => {
+  if (draft) {
+    let newSelections: string[] = [];
 
-  mutateBlueprint((draft) => {
     ids.forEach((id) => {
       const part = draft.parts.get(id);
 
@@ -16,5 +17,9 @@ export const selectParts = (ids: string[]) => {
     });
 
     draft.selections.push(...newSelections);
-  });
+  } else {
+    mutateBlueprint((draft) => {
+      selectParts(ids, draft);
+    });
+  }
 };
