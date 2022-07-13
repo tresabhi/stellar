@@ -8,8 +8,12 @@ import {
   versionUndo,
 } from 'core/blueprint';
 import {
+  copyPartsBySelection,
+  cutPartsBySelection,
   deletePartsBySelection,
+  duplicateParts,
   groupPartsBySelection,
+  pasteParts,
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   unselectAllParts,
@@ -147,6 +151,14 @@ const useKeybinds = () => {
   bind('ctrl+e', (event) => {
     event.preventDefault();
     fileExport();
+  });
+
+  bind('ctrl+c', () => copyPartsBySelection());
+  bind('ctrl+x', () => cutPartsBySelection());
+  bind('ctrl+v', pasteParts);
+  bind('ctrl+d', (event) => {
+    event.preventDefault();
+    duplicateParts();
   });
 };
 export default useKeybinds;

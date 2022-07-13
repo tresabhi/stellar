@@ -36,6 +36,8 @@ import {
 import {
   copyPartsBySelection,
   cutPartsBySelection,
+  duplicateParts,
+  pasteParts,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
 } from 'core/part';
@@ -64,6 +66,8 @@ const Toolbar = () => {
   const handleLockClick = () => togglePartsLockBySelection();
   const handleCopyClick = () => copyPartsBySelection();
   const handleCutClick = () => cutPartsBySelection();
+  const handlePasteClick = pasteParts;
+  const handleDuplicateClick = duplicateParts;
 
   return (
     <ToolbarComponent.Root>
@@ -152,12 +156,14 @@ const Toolbar = () => {
           </ToolbarComponent.DropdownItem>
           <ToolbarComponent.DropdownItem
             icon={<ClipboardIcon />}
+            onClick={handlePasteClick}
             keybind="Ctrl + V"
           >
             Paste
           </ToolbarComponent.DropdownItem>
           <ToolbarComponent.DropdownItem
             icon={<StackIcon />}
+            onClick={handleDuplicateClick}
             keybind="Ctrl + D"
           >
             Duplicate

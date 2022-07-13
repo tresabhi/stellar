@@ -17,7 +17,7 @@ import {
   deletePartsBySelection,
   getParentId,
   getPartIndex,
-  insertPart,
+  insertNewPart,
 } from 'core/part';
 import useApp, { TAB } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -46,11 +46,11 @@ const ToolBarTop: FC = () => {
       if (lastPartId) {
         const parentId = getParentId(lastPartId);
         const index = getPartIndex(lastPartId, parentId ?? null);
-        insertPart(name, parentId, {
+        insertNewPart(name, parentId, {
           index: isUndefined(index) ? 0 : index + 1,
         });
       } else {
-        insertPart(name);
+        insertNewPart(name);
       }
     };
   };
