@@ -27,7 +27,7 @@
         "$": "Vista",
         "layout": "Diseño",
         "staging": "Puesta en escena",
-        "export": "Export",
+        "export": "Exportar",
         "hud": "HUD",
         "theme": {
           "$": "Tema",
@@ -91,7 +91,7 @@
     "tabs": {
       "layout": "Diseño",
       "staging": "Puesta en escena",
-      "export": "Export"
+      "export": "Exportar"
     }
   },
   "parts_explorer": {
