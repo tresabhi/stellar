@@ -1912,10 +1912,10 @@
     utility-types "^3.10.0"
     zustand "^3.5.13"
 
-"@react-three/fiber@^8.1.0":
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.1.0.tgz#b48a875aea126bd81d87a98c3893f7ff60da90ad"
-  integrity sha512-jtzwgmDq8Q4qi6/F6DETlRDdiTC5Mz/siIY1XoIk+xdw4gA6wqbH62enEKo4LpP+4o+hToGuGsKbARNA+x2tgQ==
+"@react-three/fiber@^8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.2.0.tgz#e8fdd20a7835e091ac507e66bcc779bb9beb172d"
+  integrity sha512-k9JZ7XrOplmzX3wPk1uVq0DBWzUBI8ydr0HhmgZvLp5sJ4c+DKljuTClNH1OIp5oXaHjhzP+QbSAGg+vH3bV1Q==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@types/react-reconciler" "^0.26.7"
