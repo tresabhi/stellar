@@ -16,9 +16,9 @@ logo: 'https://i.imgur.com/saA9QuC.png'
 color_scheme: dark
 aux_links:
   'GitHub':
-    - 'https://github.com/TresAbhi/stellar'
+    - 'https://github.com/tresabhi/stellar'
 aux_links_new_tab: true
 
 gh_edit_link: true
 gh_edit_link_text: 'Edit page on GitHub'
-gh_edit_repository: 'https://github.com/TresAbhi/stellar'
+gh_edit_repository: 'https://github.com/tresabhi/stellar'

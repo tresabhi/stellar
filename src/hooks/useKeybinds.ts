@@ -23,7 +23,7 @@ import useApp, { TAB, TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
-import { bind } from 'mousetrap';
+import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
 
 const tabOrder = [TAB.LAYOUT, TAB.STAGING, TAB.EXPORT];
@@ -42,13 +42,48 @@ const downMajorVector: PrimitiveVector2Tuple = [0, -MAJOR_TRANSLATE];
 const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_TRANSLATE, 0];
 const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_TRANSLATE, 0];
 
+interface BindOptions {
+  preventDefault: boolean;
+  preventWhenInteractingWithUI: boolean;
+  preventRepeats: boolean;
+  action: 'keydown' | 'keyup' | 'keypress';
+}
+
+const bindDefaultOptions: BindOptions = {
+  preventDefault: false,
+  preventWhenInteractingWithUI: false,
+  preventRepeats: true,
+  action: 'keydown',
+};
+
+const bind = (
+  keys: string | string[],
+  callback: () => void,
+  options?: Partial<BindOptions>,
+) => {
+  const mergedOptions = { ...bindDefaultOptions, ...options };
+
+  mousetrapBind(keys, (event) => {
+    if (
+      (mergedOptions.preventWhenInteractingWithUI
+        ? !useApp.getState().isInteractingWithUI
+        : true) &&
+      (mergedOptions.preventRepeats ? !event.repeat : true)
+    ) {
+      if (mergedOptions.preventDefault) event.preventDefault();
+
+      callback();
+    }
+  });
+};
+
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
   const tool = (name: TOOL) => () => useApp.setState({ tool: name });
 
   useEffect(() => {
     bind('ctrl+a', () => selectPartsOnly(useBlueprint.getState().partOrder));
-    bind('esc', () => unselectAllParts());
+    bind('esc', unselectAllParts);
 
     bind('p a r t y', () => {
       // party mode easter egg
@@ -58,52 +93,85 @@ const useKeybinds = () => {
     bind('del', deletePartsBySelection);
     bind('backspace', deletePartsBySelection);
 
-    bind('alt+1', (event) => {
-      event?.preventDefault();
+    bind(
+      'alt+1',
+      () => {
+        useSettings.setState(
+          produce((draft: UseSettings) => {
+            draft.layout.leftSideBar.visible =
+              !draft.layout.leftSideBar.visible;
+          }),
+        );
+      },
+      { preventDefault: true },
+    );
 
-      useSettings.setState(
-        produce((draft: UseSettings) => {
-          draft.layout.leftSideBar.visible = !draft.layout.leftSideBar.visible;
-        }),
-      );
+    bind(
+      'alt+2',
+      () => {
+        useSettings.setState(
+          produce((draft: UseSettings) => {
+            draft.layout.rightSideBar.visible =
+              !draft.layout.rightSideBar.visible;
+          }),
+        );
+      },
+      { preventDefault: true },
+    );
+
+    bind(
+      'ctrl+tab',
+      () => {
+        useApp.setState((state) => ({
+          tab:
+            state.tab === tabOrder[tabOrder.length - 1]
+              ? tabOrder[0]
+              : tabOrder[tabOrder.indexOf(state.tab) + 1],
+        }));
+      },
+      { preventDefault: true },
+    );
+
+    bind('up', () => translate(...upVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
+    });
+    bind('down', () => translate(...downVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
+    });
+    bind('left', () => translate(...leftVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
+    });
+    bind('right', () => translate(...rightVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
+    });
+    bind('shift+up', () => translate(...upMajorVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
+    });
+    bind('shift+down', () => translate(...downMajorVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
+    });
+    bind('shift+left', () => translate(...leftMajorVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
+    });
+    bind('shift+right', () => translate(...rightMajorVector), {
+      preventWhenInteractingWithUI: true,
+      preventRepeats: false,
     });
 
-    bind('alt+2', (event) => {
-      event?.preventDefault();
-
-      useSettings.setState(
-        produce((draft: UseSettings) => {
-          draft.layout.rightSideBar.visible =
-            !draft.layout.rightSideBar.visible;
-        }),
-      );
+    bind('ctrl+z', versionUndo, {
+      preventDefault: true,
+      preventRepeats: false,
     });
-
-    bind('ctrl+tab', (event) => {
-      useApp.setState((state) => ({
-        tab:
-          state.tab === tabOrder[tabOrder.length - 1]
-            ? tabOrder[0]
-            : tabOrder[tabOrder.indexOf(state.tab) + 1],
-      }));
-    });
-
-    bind('up', () => translate(...upVector));
-    bind('down', () => translate(...downVector));
-    bind('left', () => translate(...leftVector));
-    bind('right', () => translate(...rightVector));
-    bind('shift+up', () => translate(...upMajorVector));
-    bind('shift+down', () => translate(...downMajorVector));
-    bind('shift+left', () => translate(...leftMajorVector));
-    bind('shift+right', () => translate(...rightMajorVector));
-
-    bind('ctrl+z', (event) => {
-      event.preventDefault();
-      versionUndo();
-    });
-    bind('ctrl+shift+z', (event) => {
-      event.preventDefault();
-      versionRedo();
+    bind('ctrl+shift+z', versionRedo, {
+      preventDefault: true,
+      preventRepeats: false,
     });
 
     bind('1', tool(TOOL.MOVE));
@@ -111,14 +179,12 @@ const useKeybinds = () => {
 
     bind(
       'space',
-      (event) => {
-        if (!event.repeat) {
-          useApp.setState((draft) => {
-            draft.isPanning = true;
-          });
-        }
+      () => {
+        useApp.setState((draft) => {
+          draft.isPanning = true;
+        });
       },
-      'keydown',
+      { preventRepeats: true, action: 'keydown' },
     );
     bind(
       'space',
@@ -127,42 +193,21 @@ const useKeybinds = () => {
           draft.isPanning = false;
         });
       },
-      'keyup',
+      { action: 'keyup' },
     );
+
+    bind('ctrl+n', loadBlueprint, { preventDefault: true });
+    bind('ctrl+o', fileOpen, { preventDefault: true });
+    bind('ctrl+s', fileSaveAs, { preventDefault: true });
+    bind('ctrl+i', fileImport, { preventDefault: true });
+    bind('ctrl+e', fileExport, { preventDefault: true });
+
+    bind('ctrl+c', copyPartsBySelection);
+    bind('ctrl+x', cutPartsBySelection);
+    bind('ctrl+v', pasteParts);
+    bind('ctrl+d', duplicateParts, { preventDefault: true });
+    bind('ctrl+g', groupPartsBySelection, { preventDefault: true });
+    bind('ctrl+shift+g', ungroupGroupsBySelection, { preventDefault: true });
   }, []);
-
-  bind('ctrl+n', (event) => {
-    event.preventDefault();
-    loadBlueprint();
-  });
-  bind('ctrl+o', (event) => {
-    event.preventDefault();
-    fileOpen();
-  });
-  bind('ctrl+s', (event) => {
-    event.preventDefault();
-    fileSaveAs();
-  });
-  bind('ctrl+i', fileImport);
-  bind('ctrl+e', (event) => {
-    event.preventDefault();
-    fileExport();
-  });
-
-  bind('ctrl+c', () => copyPartsBySelection());
-  bind('ctrl+x', () => cutPartsBySelection());
-  bind('ctrl+v', pasteParts);
-  bind('ctrl+d', (event) => {
-    event.preventDefault();
-    duplicateParts();
-  });
-  bind('ctrl+g', (event) => {
-    event.preventDefault();
-    groupPartsBySelection();
-  });
-  bind('ctrl+shift+g', (event) => {
-    event.preventDefault();
-    ungroupGroupsBySelection();
-  });
 };
 export default useKeybinds;

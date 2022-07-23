@@ -1,7 +1,7 @@
-# Stellar [<img src="https://user-images.githubusercontent.com/43380238/148424581-843be3a2-10a4-4503-a2d4-099a987c5ff4.png" alt="PostCSS Logo" width="90" height="90" align="right">](https://github.com/TresAbhi/Stellar)
+# Stellar [<img src="https://user-images.githubusercontent.com/43380238/148424581-843be3a2-10a4-4503-a2d4-099a987c5ff4.png" alt="PostCSS Logo" width="90" height="90" align="right">](https://github.com/tresabhi/stellar)
 
-[![Alpha CD](https://github.com/TresAbhi/Stellar/actions/workflows/alpha-cd.yml/badge.svg)](https://github.com/TresAbhi/Stellar/actions/workflows/alpha-cd.yml)
-[![version](https://img.shields.io/github/package-json/v/TresAbhi/Stellar)](https://github.com/TresAbhi/Stellar/blob/main/package.json)
+[![Alpha CD](https://github.com/tresabhi/stellar/actions/workflows/alpha-cd.yml/badge.svg)](https://github.com/tresabhi/stellar/actions/workflows/alpha-cd.yml)
+[![version](https://img.shields.io/github/package-json/v/tresabhi/stellar)](https://github.com/tresabhi/stellar/blob/main/package.json)
 
 <br>
 
@@ -33,24 +33,24 @@ _❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it
 ### 💻 Minimum Hardware
 
 - CPU: Intel Pentium 4+
-- RAM: 1GB+
-- Storage: 25MB+
+- RAM: 2GB+
+- Storage: 25MB+ of available storage
 
 ## 👨‍💻 Tech Inside
 
 - **Framework**: [React](https://reactjs.org/) ([create-react-app](https://create-react-app.dev/))
 - **Languages:**
-  - Functionality: [Typescript](https://www.typescriptlang.org/) ([XML](https://www.typescriptlang.org/docs/handbook/jsx.html))
-  - Styling: [SASS](https://sass-lang.com/) ([scss](https://sass-lang.com/documentation/syntax#scss))
+  - Functionality: [Typescript](https://www.typescriptlang.org/)
+  - Styling: [Stitches](https://stitches.dev/)
 
 ## 👉 Main Built-in commands
 
-| Command         | Use                                            |
-| --------------- | ---------------------------------------------- |
-| `yarn start`    | Start hosting dev. build on local host         |
-| `yarn build`    | Compiles code into optimized development build |
-| `yarn test`     | Runs all `*.test.ts` / `*.test.tsx` files      |
-| `yarn format`   | Beautifies all intended files in workspace     |
-| `yarn depcheck` | Finds all unused dependencies                  |
-| `yarn host`     | Hosts the production build                     |
-| `yarn host:new` | Hosts a new compiled production build          |
+| Command             | Use                                            |
+| ------------------- | ---------------------------------------------- |
+| `yarn run start`    | Start hosting dev. build on local host         |
+| `yarn run build`    | Compiles code into optimized development build |
+| `yarn run test`     | Runs all `*.test.ts` / `*.test.tsx` files      |
+| `yarn run format`   | Beautifies all intended files in workspace     |
+| `yarn run depcheck` | Finds all unused dependencies                  |
+| `yarn run host`     | Hosts the production build                     |
+| `yarn run host:new` | Hosts a new compiled production build          |

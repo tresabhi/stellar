@@ -6,22 +6,25 @@ const Button = styled('button', {
       base: {
         backgroundColor: theme.colors.componentBackground,
         '&:hover': {
-          backgroundColor: theme.colors.componentHoverBackground,
+          backgroundColor: theme.colors.componentBackgroundHover,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentActiveBackground,
+          backgroundColor: theme.colors.componentBackgroundActive,
         },
-        '&:focus': {
+        '&:focus-visible': {
           outline: theme.borderStyles.interactiveComponentActiveBorder,
         },
       },
       accent: {
         backgroundColor: theme.colors.componentBackgroundAccent,
         '&:hover': {
-          backgroundColor: theme.colors.componentHoverBackgroundAccent,
+          backgroundColor: theme.colors.componentBackgroundHoverAccent,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentActiveBackgroundAccent,
+          backgroundColor: theme.colors.componentBackgroundActiveAccent,
+        },
+        '&:focus-visible': {
+          outline: theme.borderStyles.interactiveComponentActiveBorderAccent,
         },
       },
     },

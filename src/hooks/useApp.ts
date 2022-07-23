@@ -21,6 +21,7 @@ export interface UseApp {
 
   tool: TOOL;
   isPanning: boolean;
+  isInteractingWithUI: boolean;
 
   preventNextSelection: boolean;
   clipboard?: Snippet;
@@ -34,6 +35,7 @@ export const UseAppData: UseApp = {
 
   tool: TOOL.MOVE,
   isPanning: false,
+  isInteractingWithUI: false,
 
   preventNextSelection: false,
   clipboard: undefined,

@@ -8,7 +8,7 @@ Only the latest version alpha, beta, and release versions are supported currentl
 
 ## Issues
 
-Feel free to create an [issue](https://github.com/StellarEditor/StellarEditor/issues/new) to **report bugs** or to **make suggestions**. Make sure that you're the first one to report the issue (to avoid duplicates).
+Feel free to create an [issue](https://github.com/tresabhi/stellar/issues/new) to **report bugs** or to **make suggestions**. Make sure that you're the first one to report the issue (to avoid duplicates).
 
 ## Patches
 

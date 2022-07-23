@@ -10,13 +10,13 @@ export const buttonStyles = css({
   justifyContent: 'center',
   cursor: 'pointer',
 
-  '&:hover, &:focus': {
-    backgroundColor: theme.colors.componentHoverBackground,
+  '&:hover': {
+    backgroundColor: theme.colors.componentBackgroundHover,
   },
   '&:active': {
-    backgroundColor: theme.colors.componentActiveBackground,
+    backgroundColor: theme.colors.componentBackgroundActive,
   },
-  '&:focus': {
+  '&:focus-visible': {
     outline: theme.borderStyles.interactiveComponentActiveBorder,
   },
 

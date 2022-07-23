@@ -256,7 +256,7 @@ const ToolBarTop: FC = () => {
             <ContextMenu.Button to="https://discord.gg/nDt7AjGJQH/">
               {t`toolbar.control_menu.help.discord`}
             </ContextMenu.Button>
-            <ContextMenu.Button to="https://github.com/TresAbhi/stellar">
+            <ContextMenu.Button to="https://github.com/tresabhi/stellar">
               {t`toolbar.control_menu.help.github`}
             </ContextMenu.Button>
             {wonderfulGrownUp ? (

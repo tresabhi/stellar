@@ -36,7 +36,7 @@ export const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
       error.stack ? `\n\n## Stack\n\`\`\`\n${error.stack}\n\`\`\`` : ''
     }\n\n## Other Info\n\`\`\`\n${deviceInfoStringified}\n\`\`\``,
   }).toString();
-  const reportURL = `https://github.com/TresAbhi/Stellar/issues/new?${URLParams}`;
+  const reportURL = `https://github.com/tresabhi/stellar/issues/new?${URLParams}`;
 
   // TODO: replace all produce(state: Type) with produce<Type>(state)
   const handleDebugClick = () => {

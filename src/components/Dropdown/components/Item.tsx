@@ -19,11 +19,13 @@ const itemStyles = css({
   alignItems: 'center',
   cursor: 'pointer',
 
-  '&:active': {
-    backgroundColor: theme.colors.componentActiveBackground,
+  '&:hover': {
+    backgroundColor: theme.colors.componentBackgroundHover,
   },
-  '&:focus': {
-    backgroundColor: theme.colors.componentHoverBackground,
+  '&:active': {
+    backgroundColor: theme.colors.componentBackgroundActive,
+  },
+  '&:focus-visible': {
     outline: theme.borderStyles.interactiveComponentActiveBorder,
   },
 });

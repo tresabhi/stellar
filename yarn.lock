@@ -9094,6 +9094,13 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
 
+stitches-dye@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/stitches-dye/-/stitches-dye-1.0.0.tgz#a974c68fa9213a9bb289b3476907ee50ffce9aa0"
+  integrity sha512-/vWPRzM06LoblxxdMh8T32WnOhAmk3jyUnIfWtGzbZasD2+F0XppyWblrCralZj81n+j7aUvcBfK5rwlyJuTzA==
+  dependencies:
+    lodash "^4.17.21"
+
 string-length@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/string-length/-/string-length-4.0.2.tgz#a8a8dc7bd5c1a82b9b3c8b87e125f66871b6e57a"
