@@ -38,7 +38,7 @@
     "workbox-precaching": "^6.5.3",
     "workbox-routing": "^6.5.3",
     "workbox-strategies": "^6.5.3",
-    "zustand": "^3.7.2"
+    "zustand": "^4.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
