@@ -31,7 +31,7 @@
     "simplebar-react": "^2.3.7",
     "stitches-dye": "^1.0.0",
     "three": "^0.143.0",
-    "three-mesh-bvh": "^0.5.14",
+    "three-mesh-bvh": "^0.5.15",
     "ts-unused-exports": "^8.0.0",
     "workbox-cacheable-response": "^6.5.3",
     "workbox-core": "^6.5.4",
