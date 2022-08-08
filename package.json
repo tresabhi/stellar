@@ -50,7 +50,7 @@
     "@types/three": "^0.143.0",
     "@types/workbox-core": "^4.3.1",
     "depcheck": "^1.4.3",
-    "node-downloader-helper": "^2.1.1",
+    "node-downloader-helper": "^2.1.2",
     "node-fetch": "^3.2.10",
     "prettier": "^2.7.1",
     "react-scripts": "^5.0.1",
