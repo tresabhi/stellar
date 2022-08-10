@@ -8,22 +8,16 @@ import { declareUnsavedChanges } from './declareUnsavedChanges';
 export let UNDO_LIMIT = 512;
 
 export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
-  const [nextState, patches, inversePatches] = produceWithPatches(
-    useBlueprint.getState(),
-    producer,
-  );
+  const [nextState, patches, inversePatches] = produceWithPatches(useBlueprint.getState(), producer);
 
   if (patches.length > 0) {
     useVersionControl.setState(
       produce<UseVersionControl>((draft) => {
-        draft.history.splice(
-          draft.index + 1,
-          draft.history.length - draft.index - 1,
-        );
+        draft.history.splice(draft.index + 1, draft.history.length - draft.index - 1);
 
         draft.history.push({
-          undo: inversePatches,
-          redo: patches,
+          inversePatches: inversePatches,
+          patches: patches,
         });
 
         if (UNDO_LIMIT === 0) {

@@ -6,13 +6,13 @@ import { declareUnsavedChanges } from './declareUnsavedChanges';
 export const versionUndo = () => {
   useVersionControl.setState(
     produce((draft: UseVersionControl) => {
-      const undoPatch = draft.history[draft.index]?.undo;
+      const inversePatches = draft.history[draft.index]?.inversePatches;
 
-      if (undoPatch) {
-        useBlueprint.setState(applyPatches(useBlueprint.getState(), undoPatch));
+      if (inversePatches) {
+        useBlueprint.setState(applyPatches(useBlueprint.getState(), inversePatches));
       }
 
-      draft.index = Math.max(0, draft.index - 1);
+      draft.index = Math.max(-1, draft.index - 1);
     }),
   );
 

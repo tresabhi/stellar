@@ -3,8 +3,8 @@ import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface VersionItem {
-  undo: Patch[];
-  redo: Patch[];
+  inversePatches: Patch[];
+  patches: Patch[];
 }
 
 export interface UseVersionControl {
@@ -17,8 +17,7 @@ export const UseVersionControlData: UseVersionControl = {
   history: [],
 };
 
-const useVersionControl = create<
-  UseVersionControl,
-  [['zustand/subscribeWithSelector', never]]
->(subscribeWithSelector(() => UseVersionControlData));
+const useVersionControl = create<UseVersionControl, [['zustand/subscribeWithSelector', never]]>(
+  subscribeWithSelector(() => UseVersionControlData),
+);
 export default useVersionControl;

@@ -6,10 +6,10 @@ import { declareUnsavedChanges } from './declareUnsavedChanges';
 export const versionRedo = () => {
   useVersionControl.setState(
     produce((draft: UseVersionControl) => {
-      const redoPatch = draft.history[draft.index + 1]?.redo;
+      const patches = draft.history[draft.index + 1]?.patches;
 
-      if (redoPatch) {
-        useBlueprint.setState(applyPatches(useBlueprint.getState(), redoPatch));
+      if (patches) {
+        useBlueprint.setState(applyPatches(useBlueprint.getState(), patches));
       }
 
       draft.index = Math.min(draft.history.length - 1, draft.index + 1);

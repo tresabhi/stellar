@@ -5,7 +5,7 @@ import {
   fileSaveAs,
   loadBlueprint,
   versionRedo,
-  versionUndo,
+  versionUndo
 } from 'core/blueprint';
 import {
   copyPartsBySelection,
@@ -17,7 +17,7 @@ import {
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts,
+  unselectAllParts
 } from 'core/part';
 import useApp, { TAB, TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -155,6 +155,10 @@ const useKeybinds = () => {
       preventRepeats: false,
     });
     bind('ctrl+shift+z', versionRedo, {
+      preventDefault: true,
+      preventRepeats: false,
+    });
+    bind('ctrl+y', versionRedo, {
       preventDefault: true,
       preventRepeats: false,
     });

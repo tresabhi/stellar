@@ -21,12 +21,11 @@ import {
   ScissorsIcon,
   StackIcon,
   TrashIcon,
-  UploadIcon,
+  UploadIcon
 } from '@radix-ui/react-icons';
-import { ReactComponent as RedoIcon } from 'assets/icons/redo.svg';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
-import { fileExport, fileImport, fileOpen, fileSave, loadBlueprint } from 'core/blueprint';
+import { fileExport, fileImport, fileOpen, fileSave, loadBlueprint, versionRedo, versionUndo } from 'core/blueprint';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
@@ -34,17 +33,22 @@ import {
   groupPartsBySelection,
   pasteParts,
   togglePartsLockBySelection,
-  togglePartsVisibilityBySelection,
+  togglePartsVisibilityBySelection
 } from 'core/part';
 import useApp, { TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
+import useVersionControl from 'hooks/useVersionControl';
 
 const Toolbar = () => {
-  const { tool, isPanning } = useApp();
-  const { selections, parts } = useBlueprint();
+  const tool = useApp((state) => state.tool);
+  const isPanning = useApp((state) => state.isPanning);
+  const parts = useBlueprint((state) => state.parts);
+  const selections = useBlueprint((state) => state.selections);
   const isOneHidden = selections.some((selection) => parts.get(selection)?.hidden);
   const isOneLocked = selections.some((selection) => parts.get(selection)?.locked);
   const hasNoSelections = selections.length === 0;
+  const hasUndos = useVersionControl((state) => state.index > -1);
+  const hasRedos = useVersionControl((state) => state.history.length - 1 > state.index);
 
   const handleMoveClick = () => useApp.setState({ tool: TOOL.MOVE });
   const handlePanClick = () => useApp.setState({ tool: TOOL.PAN });
@@ -61,6 +65,8 @@ const Toolbar = () => {
   const handleDuplicateClick = duplicateParts;
   // const handleSnippetClick =
   const handleGroupClick = groupPartsBySelection;
+  const handleUndoClick = versionUndo;
+  const handleRedoClick = versionRedo;
 
   return (
     <ToolbarComponent.Container>
@@ -129,11 +135,11 @@ const Toolbar = () => {
         </ToolbarComponent.Button>
       </ToolbarComponent.Group>
       <ToolbarComponent.Group>
-        <ToolbarComponent.Button>
+        <ToolbarComponent.Button onClick={handleUndoClick} disabled={!hasUndos}>
           <ResetIcon />
         </ToolbarComponent.Button>
-        <ToolbarComponent.Button>
-          <RedoIcon />
+        <ToolbarComponent.Button onClick={handleRedoClick} disabled={!hasRedos}>
+          <ResetIcon style={{ transform: 'scaleX(-1)' }} />
         </ToolbarComponent.Button>
         <ToolbarComponent.Dropdown icon={<GearIcon />}>
           <ToolbarComponent.DropdownItem icon={<GearIcon />} keybind="Ctrl + ,">
