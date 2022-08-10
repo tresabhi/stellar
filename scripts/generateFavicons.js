@@ -1,4 +1,3 @@
-import { sync as delSync } from 'del';
 import {
   copyFileSync,
   createReadStream,
@@ -6,6 +5,7 @@ import {
   mkdirSync,
   readdirSync,
   readFileSync,
+  rmSync,
   writeFileSync,
 } from 'fs';
 import { DownloaderHelper } from 'node-downloader-helper';
@@ -91,7 +91,7 @@ async function generateFavicons(buildType, faviconAPIKey) {
       .on('end', () => {
         if (existsSync('temp/favicons')) {
           console.log(`"temp/favicons" already exists; it will be deleted`);
-          delSync('temp/favicons');
+          rmSync('temp/favicons', { recursive: true, force: true });
         }
 
         console.log('Unzipping favicons');
@@ -110,12 +110,8 @@ async function generateFavicons(buildType, faviconAPIKey) {
 
             console.log('Appending icons to manifest.json');
 
-            const providedManifest = JSON.parse(
-              readFileSync('temp/favicons/site.webmanifest'),
-            );
-            const existingManifest = JSON.parse(
-              readFileSync('build/manifest.json'),
-            );
+            const providedManifest = JSON.parse(readFileSync('temp/favicons/site.webmanifest'));
+            const existingManifest = JSON.parse(readFileSync('build/manifest.json'));
 
             writeFileSync(
               'build/manifest.json',
