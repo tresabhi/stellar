@@ -53,7 +53,7 @@ export const UseSettingsData: UseSettings = {
   language: 'en-US',
 };
 
-const useSettings = create<UseSettings>(
+const useSettings = create<UseSettings, [['zustand/persist', UseSettings]]>(
   persist(() => UseSettingsData, {
     name: 'settings',
     merge: (persistedState, currentState) =>

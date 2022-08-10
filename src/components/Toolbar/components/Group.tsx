@@ -1,11 +1,12 @@
-import { Toolbar, ToolbarProps } from '@radix-ui/react-toolbar';
-import { FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 import { css } from 'stitches.config';
+
+export interface GroupProps extends InputHTMLAttributes<HTMLDivElement> {}
 
 const groupStyles = css({ display: 'flex' });
 
-export const Group: FC<ToolbarProps> = ({ children, className, ...props }) => (
-  <Toolbar {...props} className={`${groupStyles()} ${className ?? ''}`}>
+export const Group: FC<GroupProps> = ({ children, className, ...props }) => (
+  <div {...props} className={`${groupStyles()} ${className ?? ''}`}>
     {children}
-  </Toolbar>
+  </div>
 );

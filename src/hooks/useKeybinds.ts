@@ -44,14 +44,12 @@ const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_TRANSLATE, 0];
 
 interface BindOptions {
   preventDefault: boolean;
-  preventWhenInteractingWithUI: boolean;
   preventRepeats: boolean;
   action: 'keydown' | 'keyup' | 'keypress';
 }
 
 const bindDefaultOptions: BindOptions = {
   preventDefault: false,
-  preventWhenInteractingWithUI: false,
   preventRepeats: true,
   action: 'keydown',
 };
@@ -64,12 +62,7 @@ const bind = (
   const mergedOptions = { ...bindDefaultOptions, ...options };
 
   mousetrapBind(keys, (event) => {
-    if (
-      (mergedOptions.preventWhenInteractingWithUI
-        ? !useApp.getState().isInteractingWithUI
-        : true) &&
-      (mergedOptions.preventRepeats ? !event.repeat : true)
-    ) {
+    if (mergedOptions.preventRepeats ? !event.repeat : true) {
       if (mergedOptions.preventDefault) event.preventDefault();
 
       callback();
@@ -133,35 +126,27 @@ const useKeybinds = () => {
     );
 
     bind('up', () => translate(...upVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
     bind('down', () => translate(...downVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
     bind('left', () => translate(...leftVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
     bind('right', () => translate(...rightVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
     bind('shift+up', () => translate(...upMajorVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
     bind('shift+down', () => translate(...downMajorVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
     bind('shift+left', () => translate(...leftMajorVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
     bind('shift+right', () => translate(...rightMajorVector), {
-      preventWhenInteractingWithUI: true,
       preventRepeats: false,
     });
 
@@ -180,8 +165,8 @@ const useKeybinds = () => {
     bind(
       'space',
       () => {
-        useApp.setState((draft) => {
-          draft.isPanning = true;
+        useApp.setState({
+          isPanning: true,
         });
       },
       { preventRepeats: true, action: 'keydown' },
@@ -189,8 +174,8 @@ const useKeybinds = () => {
     bind(
       'space',
       () => {
-        useApp.setState((draft) => {
-          draft.isPanning = false;
+        useApp.setState({
+          isPanning: false,
         });
       },
       { action: 'keyup' },

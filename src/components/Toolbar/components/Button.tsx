@@ -1,6 +1,5 @@
-import { ToolbarButton, ToolbarButtonProps } from '@radix-ui/react-toolbar';
 import { css } from '@stitches/react';
-import { FC } from 'react';
+import { FC, InputHTMLAttributes } from 'react';
 import { theme } from 'stitches.config';
 
 export const buttonStyles = css({
@@ -11,19 +10,19 @@ export const buttonStyles = css({
   cursor: 'pointer',
 
   '&:hover': {
-    backgroundColor: theme.colors.componentBackgroundHover,
+    backgroundColor: theme.colors.componentInteractiveBorderHover,
   },
   '&:active': {
-    backgroundColor: theme.colors.componentBackgroundActive,
+    backgroundColor: theme.colors.componentInteractiveBorderActive,
   },
   '&:focus-visible': {
-    outline: theme.borderStyles.interactiveComponentActiveBorder,
+    outline: theme.borderStyles.componentInteractiveActive,
   },
 
-  '& svg': {
+  '& > svg': {
     width: theme.sizes[16],
     height: theme.sizes[16],
-    color: theme.colors.highContrastText,
+    color: theme.colors.textHighContrast,
   },
 
   variants: {
@@ -34,25 +33,19 @@ export const buttonStyles = css({
         '&:hover': { backgroundColor: 'transparent' },
         '&:active': { backgroundColor: 'transparent' },
 
-        '& svg': {
-          color: theme.colors.lowContrastText,
+        '& > svg': {
+          color: theme.colors.textLowContrast,
         },
       },
     },
   },
 });
 
-export const Button: FC<ToolbarButtonProps> = ({
-  children,
-  className,
-  disabled,
-  ...props
-}) => (
-  <ToolbarButton
-    {...props}
-    disabled={disabled}
-    className={`${buttonStyles({ disabled })} ${className ?? ''}`}
-  >
+export interface ButtonProps extends InputHTMLAttributes<ButtonProps> {}
+
+export const Button: FC<ButtonProps> = ({ children, className, disabled, ...props }) => (
+  // @ts-ignore
+  <button {...props} disabled={disabled} className={`${buttonStyles({ disabled })} ${className ?? ''}`}>
     {children}
-  </ToolbarButton>
+  </button>
 );

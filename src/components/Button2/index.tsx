@@ -3,7 +3,7 @@ import { styled, theme } from 'stitches.config';
 const Button = styled('button', {
   variants: {
     color: {
-      base: {
+      default: {
         backgroundColor: theme.colors.componentBackground,
         '&:hover': {
           backgroundColor: theme.colors.componentBackgroundHover,
@@ -12,19 +12,19 @@ const Button = styled('button', {
           backgroundColor: theme.colors.componentBackgroundActive,
         },
         '&:focus-visible': {
-          outline: theme.borderStyles.interactiveComponentActiveBorder,
+          outline: theme.borderStyles.componentInteractiveActive,
         },
       },
       accent: {
-        backgroundColor: theme.colors.componentBackgroundAccent,
+        backgroundColor: theme.colors.componentBackground_accent,
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHoverAccent,
+          backgroundColor: theme.colors.componentBackgroundHover_accent,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActiveAccent,
+          backgroundColor: theme.colors.componentBackgroundActive_accent,
         },
         '&:focus-visible': {
-          outline: theme.borderStyles.interactiveComponentActiveBorderAccent,
+          outline: theme.borderStyles.componentInteractiveActive_accent,
         },
       },
     },

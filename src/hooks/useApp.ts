@@ -1,4 +1,4 @@
-import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
+import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 import { Snippet } from './useSnippets';
 
@@ -21,7 +21,6 @@ export interface UseApp {
 
   tool: TOOL;
   isPanning: boolean;
-  isInteractingWithUI: boolean;
 
   preventNextSelection: boolean;
   clipboard?: Snippet;
@@ -35,16 +34,12 @@ export const UseAppData: UseApp = {
 
   tool: TOOL.MOVE,
   isPanning: false,
-  isInteractingWithUI: false,
 
   preventNextSelection: false,
   clipboard: undefined,
 };
 
-const useApp = create<
-  UseApp,
-  SetState<UseApp>,
-  GetState<UseApp>,
-  Mutate<StoreApi<UseApp>, [['zustand/subscribeWithSelector', never]]>
->(subscribeWithSelector(() => UseAppData));
+const useApp = create<UseApp, [['zustand/subscribeWithSelector', never]]>(
+  subscribeWithSelector(() => UseAppData),
+);
 export default useApp;

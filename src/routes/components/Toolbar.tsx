@@ -26,13 +26,7 @@ import {
 import { ReactComponent as RedoIcon } from 'assets/icons/redo.svg';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
-import {
-  fileExport,
-  fileImport,
-  fileOpen,
-  fileSave,
-  loadBlueprint,
-} from 'core/blueprint';
+import { fileExport, fileImport, fileOpen, fileSave, loadBlueprint } from 'core/blueprint';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
@@ -48,12 +42,8 @@ import useBlueprint from 'hooks/useBlueprint';
 const Toolbar = () => {
   const { tool, isPanning } = useApp();
   const { selections, parts } = useBlueprint();
-  const isOneHidden = selections.some(
-    (selection) => parts.get(selection)?.hidden,
-  );
-  const isOneLocked = selections.some(
-    (selection) => parts.get(selection)?.locked,
-  );
+  const isOneHidden = selections.some((selection) => parts.get(selection)?.hidden);
+  const isOneLocked = selections.some((selection) => parts.get(selection)?.locked);
   const hasNoSelections = selections.length === 0;
 
   const handleMoveClick = () => useApp.setState({ tool: TOOL.MOVE });
@@ -73,64 +63,33 @@ const Toolbar = () => {
   const handleGroupClick = groupPartsBySelection;
 
   return (
-    <ToolbarComponent.Root>
+    <ToolbarComponent.Container>
       <ToolbarComponent.Group>
         <ToolbarComponent.Button>
           <StellarIcon />
         </ToolbarComponent.Button>
         <ToolbarComponent.Dropdown icon={<FileIcon />}>
-          <ToolbarComponent.DropdownItem
-            icon={<FilePlusIcon />}
-            keybind="Ctrl + N"
-            onClick={handleNewClick}
-          >
+          <ToolbarComponent.DropdownItem icon={<FilePlusIcon />} keybind="Ctrl + N" onClick={handleNewClick}>
             New
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<UploadIcon />}
-            keybind="Ctrl + O"
-            onClick={handleOpenClick}
-          >
+          <ToolbarComponent.DropdownItem icon={<UploadIcon />} keybind="Ctrl + O" onClick={handleOpenClick}>
             Open
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<DownloadIcon />}
-            keybind="Ctrl + S"
-            onClick={handleSaveClick}
-          >
+          <ToolbarComponent.DropdownItem icon={<DownloadIcon />} keybind="Ctrl + S" onClick={handleSaveClick}>
             Save
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<EnterIcon />}
-            keybind="Ctrl + I"
-            onClick={handleImportClick}
-          >
+          <ToolbarComponent.DropdownItem icon={<EnterIcon />} keybind="Ctrl + I" onClick={handleImportClick}>
             Import
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<ExitIcon />}
-            keybind="Ctrl + E"
-            onClick={handleExportClick}
-          >
+          <ToolbarComponent.DropdownItem icon={<ExitIcon />} keybind="Ctrl + E" onClick={handleExportClick}>
             Export
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
-        <ToolbarComponent.Dropdown
-          icon={
-            tool === TOOL.PAN || isPanning ? <HandIcon /> : <CursorArrowIcon />
-          }
-        >
-          <ToolbarComponent.DropdownItem
-            icon={<CursorArrowIcon />}
-            onClick={handleMoveClick}
-          >
+        <ToolbarComponent.Dropdown icon={tool === TOOL.PAN || isPanning ? <HandIcon /> : <CursorArrowIcon />}>
+          <ToolbarComponent.DropdownItem icon={<CursorArrowIcon />} onClick={handleMoveClick}>
             Move
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<HandIcon />}
-            keybind="Space"
-            onClick={handlePanClick}
-          >
+          <ToolbarComponent.DropdownItem icon={<HandIcon />} keybind="Space" onClick={handlePanClick}>
             Pan
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
@@ -139,64 +98,33 @@ const Toolbar = () => {
         </ToolbarComponent.Button>
       </ToolbarComponent.Group>
       <ToolbarComponent.Group>
-        <ToolbarComponent.Dropdown
-          disabled={hasNoSelections}
-          icon={<ClipboardIcon />}
-        >
-          <ToolbarComponent.DropdownItem
-            icon={<ClipboardCopyIcon />}
-            onClick={handleCopyClick}
-            keybind="Ctrl + C"
-          >
+        <ToolbarComponent.Dropdown disabled={hasNoSelections} icon={<ClipboardIcon />}>
+          <ToolbarComponent.DropdownItem icon={<ClipboardCopyIcon />} onClick={handleCopyClick} keybind="Ctrl + C">
             Copy
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<ScissorsIcon />}
-            onClick={handleCutClick}
-            keybind="Ctrl + X"
-          >
+          <ToolbarComponent.DropdownItem icon={<ScissorsIcon />} onClick={handleCutClick} keybind="Ctrl + X">
             Cut
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<ClipboardIcon />}
-            onClick={handlePasteClick}
-            keybind="Ctrl + V"
-          >
+          <ToolbarComponent.DropdownItem icon={<ClipboardIcon />} onClick={handlePasteClick} keybind="Ctrl + V">
             Paste
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<StackIcon />}
-            onClick={handleDuplicateClick}
-            keybind="Ctrl + D"
-          >
+          <ToolbarComponent.DropdownItem icon={<StackIcon />} onClick={handleDuplicateClick} keybind="Ctrl + D">
             Duplicate
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem
-            icon={<Component1Icon />}
-            keybind="Ctrl + M"
-          >
+          <ToolbarComponent.DropdownItem icon={<Component1Icon />} keybind="Ctrl + M">
             Create Snippet
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
-        <ToolbarComponent.Button
-          onClick={handleGroupClick}
-          disabled={hasNoSelections}
-        >
+        <ToolbarComponent.Button onClick={handleGroupClick} disabled={hasNoSelections}>
           <GroupIcon />
         </ToolbarComponent.Button>
         <ToolbarComponent.Button disabled={hasNoSelections}>
           <TrashIcon />
         </ToolbarComponent.Button>
-        <ToolbarComponent.Button
-          disabled={hasNoSelections}
-          onClick={handleEyeClick}
-        >
+        <ToolbarComponent.Button disabled={hasNoSelections} onClick={handleEyeClick}>
           {isOneHidden ? <EyeClosedIcon /> : <EyeOpenIcon />}
         </ToolbarComponent.Button>
-        <ToolbarComponent.Button
-          disabled={hasNoSelections}
-          onClick={handleLockClick}
-        >
+        <ToolbarComponent.Button disabled={hasNoSelections} onClick={handleLockClick}>
           {isOneLocked ? <LockClosedIcon /> : <LockOpen2Icon />}
         </ToolbarComponent.Button>
       </ToolbarComponent.Group>
@@ -211,12 +139,10 @@ const Toolbar = () => {
           <ToolbarComponent.DropdownItem icon={<GearIcon />} keybind="Ctrl + ,">
             Settings
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem icon={<MixerHorizontalIcon />}>
-            File Preferences
-          </ToolbarComponent.DropdownItem>
+          <ToolbarComponent.DropdownItem icon={<MixerHorizontalIcon />}>File Preferences</ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
       </ToolbarComponent.Group>
-    </ToolbarComponent.Root>
+    </ToolbarComponent.Container>
   );
 };
 export default Toolbar;

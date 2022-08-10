@@ -1,5 +1,5 @@
 import { Patch } from 'immer';
-import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
+import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface VersionItem {
@@ -19,11 +19,6 @@ export const UseVersionControlData: UseVersionControl = {
 
 const useVersionControl = create<
   UseVersionControl,
-  SetState<UseVersionControl>,
-  GetState<UseVersionControl>,
-  Mutate<
-    StoreApi<UseVersionControl>,
-    [['zustand/subscribeWithSelector', never]]
-  >
+  [['zustand/subscribeWithSelector', never]]
 >(subscribeWithSelector(() => UseVersionControlData));
 export default useVersionControl;

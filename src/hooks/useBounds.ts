@@ -1,4 +1,4 @@
-import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
+import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface Bounds {
@@ -28,10 +28,7 @@ export const UseBoundsDefaultData: UseBounds = {
   parts: new Map(),
 };
 
-const useBounds = create<
-  UseBounds,
-  SetState<UseBounds>,
-  GetState<UseBounds>,
-  Mutate<StoreApi<UseBounds>, [['zustand/subscribeWithSelector', never]]>
->(subscribeWithSelector(() => UseBoundsDefaultData));
+const useBounds = create<UseBounds, [['zustand/subscribeWithSelector', never]]>(
+  subscribeWithSelector(() => UseBoundsDefaultData),
+);
 export default useBounds;

@@ -1,4 +1,4 @@
-import create, { GetState, Mutate, SetState, StoreApi } from 'zustand';
+import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export type NotificationType = 'info' | 'warning' | 'error' | 'success';
@@ -21,8 +21,6 @@ export type UseNotification = Notification[];
 
 const useNotifications = create<
   UseNotification,
-  SetState<UseNotification>,
-  GetState<UseNotification>,
-  Mutate<StoreApi<UseNotification>, [['zustand/subscribeWithSelector', never]]>
+  [['zustand/subscribeWithSelector', never]]
 >(subscribeWithSelector(() => [] as UseNotification));
 export default useNotifications;
