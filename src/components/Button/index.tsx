@@ -1,29 +1,96 @@
-import { forwardRef, InputHTMLAttributes, MouseEvent } from 'react';
-import styles from './index.module.scss';
+import { styled, theme } from 'stitches.config';
 
-export interface ButtonProps extends InputHTMLAttributes<HTMLButtonElement> {
-  href?: string;
-  target?: '_blank' | '_self' | '_parent' | '_top';
-  color?: 'regular'; // add more as needed in the future
-}
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, href, target, onClick, color = 'regular', ...props }, ref) => {
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-      if (href) window.open(href, target);
-      if (onClick) onClick(event);
-    };
+export const Button = styled('button', {
+  cursor: 'pointer',
 
-    return (
-      //@ts-ignore
-      <button
-        {...props}
-        className={`${styles.button} ${styles[color]} ${props.className ?? ''}`}
-        onClick={handleClick}
-        ref={ref}
-      >
-        {children}
-      </button>
-    );
+  variants: {
+    color: {
+      default: {
+        color: theme.colors.textHighContrast,
+
+        backgroundColor: theme.colors.componentBackground,
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackgroundHover,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackgroundActive,
+        },
+        '&:focus-visible': {
+          outline: theme.borderStyles.componentInteractiveActive,
+        },
+      },
+
+      accent: {
+        color: theme.colors.textHighContrast_accent,
+
+        backgroundColor: theme.colors.componentBackground_accent,
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackgroundHover_accent,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackgroundActive_accent,
+        },
+        '&:focus-visible': {
+          outline: theme.borderStyles.componentInteractiveActive_accent,
+        },
+      },
+    },
+
+    transparent: {
+      true: {
+        backgroundColor: 'transparent',
+      },
+    },
+
+    disabled: {
+      true: {
+        cursor: 'default',
+      },
+    },
   },
-);
-export default Button;
+
+  compoundVariants: [
+    {
+      color: 'default',
+      disabled: true,
+
+      css: {
+        color: theme.colors.textLowContrast,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackground,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackground,
+        },
+        '&:focus-visible': {
+          outline: 'none',
+        },
+      },
+    },
+    {
+      color: 'accent',
+      disabled: true,
+
+      css: {
+        color: theme.colors.textLowContrast_accent,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackground_accent,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackground_accent,
+        },
+        '&:focus-visible': {
+          outline: 'none',
+        },
+      },
+    },
+  ],
+
+  defaultVariants: {
+    color: 'default',
+    disabled: false,
+    transparent: false,
+  },
+});

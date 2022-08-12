@@ -1,8 +1,8 @@
-import { LayoutCanvas } from 'components/Canvas';
-import { css, styled } from 'stitches.config';
-import Toolbar from '../components/Toolbar';
+import { Layout } from 'routes/components/Layout';
+import { Tabs } from 'routes/components/Tabs';
+import { styled } from 'stitches.config';
 
-const Container = styled('div', {
+export const DeviceVariantContainer = styled('div', {
   width: '100vw',
   height: '100vh',
   display: 'flex',
@@ -10,10 +10,10 @@ const Container = styled('div', {
 });
 
 const Mobile = () => (
-  <Container>
-    <Toolbar />
-    <LayoutCanvas />
-  </Container>
+  <DeviceVariantContainer>
+    <Tabs />
+    <Layout />
+  </DeviceVariantContainer>
 );
 
 export default Mobile;

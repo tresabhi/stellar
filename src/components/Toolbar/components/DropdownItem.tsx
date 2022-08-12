@@ -1,4 +1,4 @@
-import { Button } from 'components/Button2';
+import { Button } from 'components/Button';
 import { FC, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 

@@ -1,6 +1,6 @@
 import { mauve, mauveDark, purple, purpleDark } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
-import { createColors } from 'bepaint';
+import { createColors, createSpaces } from 'bepaint';
 
 const colorsLight = {
   ...createColors({ scale: mauve }),
@@ -35,6 +35,8 @@ export const { config, createTheme, css, getCssText, globalCss, keyframes, prefi
         40: '2.5rem',
 
         dropdownWidth: '15rem',
+        inputHeightMajor: '2rem',
+        tabMaxWidth: '15rem',
       },
 
       radii: {
@@ -64,6 +66,10 @@ export const { config, createTheme, css, getCssText, globalCss, keyframes, prefi
         componentInteractive_accent: `${colorsLight.componentInteractiveBorder_accent} solid 0.0625rem`,
         componentInteractiveHover_accent: `${colorsLight.componentInteractiveBorderHover_accent} solid 0.0625rem`,
         componentInteractiveActive_accent: `${colorsLight.componentInteractiveBorderActive_accent} solid 0.0625rem`,
+      },
+
+      space: {
+        ...createSpaces(),
       },
     },
   });

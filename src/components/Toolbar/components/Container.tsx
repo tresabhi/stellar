@@ -6,4 +6,5 @@ export const Container = styled('div', {
   height: theme.sizes[40],
   display: 'flex',
   justifyContent: 'space-between',
+  borderBottom: theme.borderStyles.componentInteractive,
 });

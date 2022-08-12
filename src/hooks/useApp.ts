@@ -3,6 +3,7 @@ import { subscribeWithSelector } from 'zustand/middleware';
 import { Snippet } from './useSnippets';
 
 export enum TAB {
+  CREATE,
   LAYOUT,
   STAGING,
   EXPORT,
@@ -30,7 +31,7 @@ export const UseAppData: UseApp = {
   fileHandle: undefined,
   hasUnsavedChanges: false,
 
-  tab: TAB.LAYOUT,
+  tab: TAB.CREATE,
 
   tool: TOOL.MOVE,
   isPanning: false,
@@ -39,7 +40,5 @@ export const UseAppData: UseApp = {
   clipboard: undefined,
 };
 
-const useApp = create<UseApp, [['zustand/subscribeWithSelector', never]]>(
-  subscribeWithSelector(() => UseAppData),
-);
+const useApp = create<UseApp, [['zustand/subscribeWithSelector', never]]>(subscribeWithSelector(() => UseAppData));
 export default useApp;
