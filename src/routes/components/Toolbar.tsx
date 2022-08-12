@@ -21,7 +21,7 @@ import {
   ScissorsIcon,
   StackIcon,
   TrashIcon,
-  UploadIcon
+  UploadIcon,
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
@@ -33,7 +33,8 @@ import {
   groupPartsBySelection,
   pasteParts,
   togglePartsLockBySelection,
-  togglePartsVisibilityBySelection
+  togglePartsVisibilityBySelection,
+  ungroupGroupsBySelection,
 } from 'core/part';
 import useApp, { TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -65,13 +66,14 @@ const Toolbar = () => {
   const handleDuplicateClick = duplicateParts;
   // const handleSnippetClick =
   const handleGroupClick = groupPartsBySelection;
+  const handleUngroupClick = () => ungroupGroupsBySelection();
   const handleUndoClick = versionUndo;
   const handleRedoClick = versionRedo;
 
   return (
     <ToolbarComponent.Container>
       <ToolbarComponent.Group>
-        <ToolbarComponent.Button>
+        <ToolbarComponent.Button disabled>
           <StellarIcon />
         </ToolbarComponent.Button>
         <ToolbarComponent.Dropdown icon={<FileIcon />}>
@@ -117,13 +119,18 @@ const Toolbar = () => {
           <ToolbarComponent.DropdownItem icon={<StackIcon />} onClick={handleDuplicateClick} keybind="Ctrl + D">
             Duplicate
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem icon={<Component1Icon />} keybind="Ctrl + M">
+          <ToolbarComponent.DropdownItem disabled icon={<Component1Icon />} keybind="Ctrl + M">
             Create Snippet
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
-        <ToolbarComponent.Button onClick={handleGroupClick} disabled={hasNoSelections}>
-          <GroupIcon />
-        </ToolbarComponent.Button>
+        <ToolbarComponent.Dropdown disabled={hasNoSelections} icon={<GroupIcon />}>
+          <ToolbarComponent.DropdownItem icon={<GroupIcon />} onClick={handleGroupClick} keybind="Ctrl + G">
+            Group
+          </ToolbarComponent.DropdownItem>
+          <ToolbarComponent.DropdownItem icon={<StackIcon />} onClick={handleUngroupClick} keybind="Ctrl + Shift + G">
+            Ungroup
+          </ToolbarComponent.DropdownItem>
+        </ToolbarComponent.Dropdown>
         <ToolbarComponent.Button disabled={hasNoSelections}>
           <TrashIcon />
         </ToolbarComponent.Button>
@@ -141,7 +148,7 @@ const Toolbar = () => {
         <ToolbarComponent.Button onClick={handleRedoClick} disabled={!hasRedos}>
           <ResetIcon style={{ transform: 'scaleX(-1)' }} />
         </ToolbarComponent.Button>
-        <ToolbarComponent.Dropdown icon={<GearIcon />}>
+        <ToolbarComponent.Dropdown disabled icon={<GearIcon />}>
           <ToolbarComponent.DropdownItem icon={<GearIcon />} keybind="Ctrl + ,">
             Settings
           </ToolbarComponent.DropdownItem>

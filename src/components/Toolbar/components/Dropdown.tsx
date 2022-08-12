@@ -1,9 +1,9 @@
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import { FC, ReactNode, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
-import { Button, ButtonProps } from './Button';
+import { Button } from './Button';
 
-export interface DropdownProps extends ButtonProps {
+export interface DropdownProps {
   icon: ReactNode;
   children: ReactNode;
   disabled?: boolean;
@@ -59,7 +59,6 @@ export const Dropdown: FC<DropdownProps> = ({ icon, children, ...props }) => {
 
   const handleFocus = () => {
     const boundingClientRect = childrenElement.current.getBoundingClientRect();
-    console.log(boundingClientRect);
 
     if (boundingClientRect.x + boundingClientRect.width + PADDING_FROM_EDGE > document.body.clientWidth) {
       childrenElement.current.style.transform = `translate(${
