@@ -1,12 +1,4 @@
-import {
-  fileExport,
-  fileImport,
-  fileOpen,
-  fileSaveAs,
-  loadBlueprint,
-  versionRedo,
-  versionUndo
-} from 'core/blueprint';
+import { fileExport, fileImport, fileOpen, fileSaveAs, loadBlueprint, versionRedo, versionUndo } from 'core/blueprint';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
@@ -17,7 +9,7 @@ import {
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts
+  unselectAllParts,
 } from 'core/part';
 import useApp, { TAB, TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
@@ -54,20 +46,20 @@ const bindDefaultOptions: BindOptions = {
   action: 'keydown',
 };
 
-const bind = (
-  keys: string | string[],
-  callback: () => void,
-  options?: Partial<BindOptions>,
-) => {
+const bind = (keys: string | string[], callback: () => void, options?: Partial<BindOptions>) => {
   const mergedOptions = { ...bindDefaultOptions, ...options };
 
-  mousetrapBind(keys, (event) => {
-    if (mergedOptions.preventRepeats ? !event.repeat : true) {
-      if (mergedOptions.preventDefault) event.preventDefault();
+  mousetrapBind(
+    keys,
+    (event) => {
+      if (mergedOptions.preventRepeats ? !event.repeat : true) {
+        if (mergedOptions.preventDefault) event.preventDefault();
 
-      callback();
-    }
-  });
+        callback();
+      }
+    },
+    mergedOptions.action,
+  );
 };
 
 const useKeybinds = () => {
@@ -91,8 +83,7 @@ const useKeybinds = () => {
       () => {
         useSettings.setState(
           produce((draft: UseSettings) => {
-            draft.layout.leftSideBar.visible =
-              !draft.layout.leftSideBar.visible;
+            draft.layout.leftSideBar.visible = !draft.layout.leftSideBar.visible;
           }),
         );
       },
@@ -104,8 +95,7 @@ const useKeybinds = () => {
       () => {
         useSettings.setState(
           produce((draft: UseSettings) => {
-            draft.layout.rightSideBar.visible =
-              !draft.layout.rightSideBar.visible;
+            draft.layout.rightSideBar.visible = !draft.layout.rightSideBar.visible;
           }),
         );
       },
@@ -116,10 +106,7 @@ const useKeybinds = () => {
       'ctrl+tab',
       () => {
         useApp.setState((state) => ({
-          tab:
-            state.tab === tabOrder[tabOrder.length - 1]
-              ? tabOrder[0]
-              : tabOrder[tabOrder.indexOf(state.tab) + 1],
+          tab: state.tab === tabOrder[tabOrder.length - 1] ? tabOrder[0] : tabOrder[tabOrder.indexOf(state.tab) + 1],
         }));
       },
       { preventDefault: true },
@@ -169,18 +156,14 @@ const useKeybinds = () => {
     bind(
       'space',
       () => {
-        useApp.setState({
-          isPanning: true,
-        });
+        useApp.setState({ isPanning: true });
       },
       { preventRepeats: true, action: 'keydown' },
     );
     bind(
       'space',
       () => {
-        useApp.setState({
-          isPanning: false,
-        });
+        useApp.setState({ isPanning: false });
       },
       { action: 'keyup' },
     );
