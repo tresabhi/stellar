@@ -101,7 +101,7 @@ const Toolbar = () => {
             Pan
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
-        <ToolbarComponent.Button>
+        <ToolbarComponent.Button disabled>
           <PlusIcon />
         </ToolbarComponent.Button>
       </ToolbarComponent.Group>

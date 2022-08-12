@@ -56,6 +56,16 @@ export const Button = styled('button', {
 
       css: {
         color: theme.colors.textLowContrast,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackground,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackground,
+        },
+        '&:focus-visible': {
+          outline: 'none',
+        },
       },
     },
     {
@@ -64,6 +74,16 @@ export const Button = styled('button', {
 
       css: {
         color: theme.colors.textLowContrast_accent,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackground_accent,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackground_accent,
+        },
+        '&:focus-visible': {
+          outline: 'none',
+        },
       },
     },
   ],
