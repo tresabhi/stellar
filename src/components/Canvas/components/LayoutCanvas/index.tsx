@@ -1,10 +1,10 @@
 import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
-import useApp, { TOOL } from 'hooks/useApp';
-import useBlueprint from 'hooks/useBlueprint';
-import useSettings from 'hooks/useSettings';
 import { useEffect, useRef } from 'react';
+import useApp, { TOOL } from 'stores/useApp';
+import useBlueprint from 'stores/useBlueprint';
+import useSettings from 'stores/useSettings';
 import { Group } from 'three';
 import styles from '../../index.module.scss';
 import { PanControls } from '../PanControls';
@@ -82,3 +82,4 @@ export const LayoutCanvas = () => {
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';
+

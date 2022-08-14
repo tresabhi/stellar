@@ -37,9 +37,9 @@ import {
   ungroupGroupsBySelection,
 } from 'core/part';
 import { popupOpen } from 'core/ui';
-import useApp, { POPUP, TOOL } from 'hooks/useApp';
-import useBlueprint from 'hooks/useBlueprint';
-import useVersionControl from 'hooks/useVersionControl';
+import useApp, { POPUP, TOOL } from 'stores/useApp';
+import useBlueprint from 'stores/useBlueprint';
+import useVersionControl from 'stores/useVersionControl';
 
 const Toolbar = () => {
   const tool = useApp((state) => state.tool);

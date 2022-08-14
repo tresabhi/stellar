@@ -1,15 +1,6 @@
-import useBounds, { PartBounds } from 'hooks/useBounds';
 import { FC, useEffect, useRef } from 'react';
-import {
-  BufferGeometry,
-  Group,
-  Line,
-  LineBasicMaterial,
-  Mesh,
-  MeshBasicMaterial,
-  PlaneGeometry,
-  Vector2,
-} from 'three';
+import useBounds, { PartBounds } from 'stores/useBounds';
+import { BufferGeometry, Group, Line, LineBasicMaterial, Mesh, MeshBasicMaterial, PlaneGeometry, Vector2 } from 'three';
 
 const unitVector2Points = [
   new Vector2(0, 0),
@@ -20,9 +11,7 @@ const unitVector2Points = [
 ];
 const unitPlane = new PlaneGeometry(1, 1);
 const SELECTION_BOX_COLOR = 'hsl(270, 60%, 30%)';
-export const unitBufferGeometry2 = new BufferGeometry().setFromPoints(
-  unitVector2Points,
-);
+export const unitBufferGeometry2 = new BufferGeometry().setFromPoints(unitVector2Points);
 export const outlineMaterial = new LineBasicMaterial({
   color: SELECTION_BOX_COLOR,
 });
@@ -44,27 +33,11 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
   const { deferUpdates } = useBounds();
 
   const rerender = (bound: PartBounds) => {
-    shading.current.scale.set(
-      bound.max.x - bound.min.x,
-      bound.max.y - bound.min.y,
-      1,
-    );
-    outline.current.scale.set(
-      bound.max.x - bound.min.x,
-      bound.max.y - bound.min.y,
-      1,
-    );
-    outline.current.position.set(
-      (bound.max.x - bound.min.x) / -2,
-      (bound.max.y - bound.min.y) / -2,
-      0,
-    );
+    shading.current.scale.set(bound.max.x - bound.min.x, bound.max.y - bound.min.y, 1);
+    outline.current.scale.set(bound.max.x - bound.min.x, bound.max.y - bound.min.y, 1);
+    outline.current.position.set((bound.max.x - bound.min.x) / -2, (bound.max.y - bound.min.y) / -2, 0);
     wrapper.current.rotation.set(0, 0, bound.rotation);
-    wrapper.current.position.set(
-      (bound.max.x + bound.min.x) / 2,
-      (bound.max.y + bound.min.y) / 2,
-      0,
-    );
+    wrapper.current.position.set((bound.max.x + bound.min.x) / 2, (bound.max.y + bound.min.y) / 2, 0);
     content.current.position.set(bound.offset.x, bound.offset.y, 0);
   };
 
@@ -97,18 +70,8 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
   return (
     <group ref={wrapper}>
       <group ref={content}>
-        <line_
-          ref={outline}
-          material={outlineMaterial}
-          geometry={unitBufferGeometry2}
-          visible={!deferUpdates}
-        />
-        <mesh
-          ref={shading}
-          material={shadingMaterial}
-          geometry={unitPlane}
-          visible={!deferUpdates}
-        />
+        <line_ ref={outline} material={outlineMaterial} geometry={unitBufferGeometry2} visible={!deferUpdates} />
+        <mesh ref={shading} material={shadingMaterial} geometry={unitPlane} visible={!deferUpdates} />
       </group>
     </group>
   );

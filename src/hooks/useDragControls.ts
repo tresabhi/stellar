@@ -5,10 +5,10 @@ import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import produce, { Patch, produceWithPatches } from 'immer';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
-import useApp, { TOOL } from './useApp';
-import useBlueprint from './useBlueprint';
+import useApp, { TOOL } from '../stores/useApp';
 import useMousePos from './useMousePos';
-import useVersionControl, { UseVersionControl } from './useVersionControl';
+import useVersionControl, { UseVersionControl } from '../stores/useVersionControl';
+import useBlueprint from 'stores/useBlueprint';
 
 const DEFAULT_SNAP = 1 / 2;
 const CTRL_SNAP = 1 / 10;

@@ -1,4 +1,4 @@
-import useBounds from 'hooks/useBounds';
+import useBounds from 'stores/useBounds';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
 /**

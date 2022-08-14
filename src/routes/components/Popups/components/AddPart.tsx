@@ -1,8 +1,8 @@
 import { Pallet, PalletItem } from 'components/Pallet';
 import { getParent, getPart, insertNewPart } from 'core/part';
 import { popupClose } from 'core/ui';
-import useBlueprint from 'hooks/useBlueprint';
-import usePartRegistry from 'hooks/usePartRegistry';
+import useBlueprint from 'stores/useBlueprint';
+import usePartRegistry from 'stores/usePartRegistry';
 
 export const AddPart = () => {
   const partRegistry = usePartRegistry();

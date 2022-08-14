@@ -1,7 +1,7 @@
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import LegacyButton from 'components/LegacyButton';
 import TextArea from 'components/TextArea';
-import useSettings, { UseSettings } from 'hooks/useSettings';
+import useSettings, { UseSettings } from 'stores/useSettings';
 import produce from 'immer';
 import moment from 'moment';
 import { FC } from 'react';

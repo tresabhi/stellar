@@ -1,7 +1,7 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Group } from 'game/parts/Group';
-import useApp, { UseApp } from 'hooks/useApp';
-import { Snippet } from 'hooks/useSnippets';
+import useApp, { UseApp } from 'stores/useApp';
+import { Snippet } from 'stores/useSnippets';
 import produce from 'immer';
 import { clonePart } from './clonePart';
 import { selectPartsOnly } from './selectPartsOnly';

@@ -1,7 +1,7 @@
 import partRegistryStore, {
   PartRegistryItem,
   UsePartRegistry,
-} from 'hooks/usePartRegistry';
+} from 'stores/usePartRegistry';
 import produce from 'immer';
 
 export const registerPart = (name: string, item: PartRegistryItem) => {

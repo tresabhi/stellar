@@ -1,5 +1,5 @@
 import { fileOpen } from 'browser-fs-access';
-import useApp from 'hooks/useApp';
+import useApp from 'stores/useApp';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 import { loadBlueprint } from './loadBlueprint';
 

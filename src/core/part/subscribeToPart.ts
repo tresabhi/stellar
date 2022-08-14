@@ -1,5 +1,5 @@
 import { Part } from 'game/parts/Part';
-import useBlueprint from 'hooks/useBlueprint';
+import useBlueprint from 'stores/useBlueprint';
 import { getPart } from './getPart';
 
 interface SubscribeToPartOptions {

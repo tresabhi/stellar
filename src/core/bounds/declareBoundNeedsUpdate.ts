@@ -1,6 +1,6 @@
-import useBlueprint from 'hooks/useBlueprint';
-import useBounds, { UseBounds } from 'hooks/useBounds';
 import produce from 'immer';
+import useBlueprint from 'stores/useBlueprint';
+import useBounds, { UseBounds } from 'stores/useBounds';
 
 export const declareBoundNeedsUpdate = (id: string, draft?: UseBounds) => {
   if (draft) {

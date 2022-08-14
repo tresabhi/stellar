@@ -1,5 +1,5 @@
 import { LayoutCanvas } from 'components/Canvas';
-import useApp, { TAB } from 'hooks/useApp';
+import useApp, { TAB } from 'stores/useApp';
 import { styled } from 'stitches.config';
 import Toolbar from '../Toolbar';
 

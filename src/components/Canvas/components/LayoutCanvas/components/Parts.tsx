@@ -1,8 +1,8 @@
 import PartCluster from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import { deferUpdates, translateAllBoundingBoxes } from 'core/bounds';
-import useBlueprint from 'hooks/useBlueprint';
 import { forwardRef, MutableRefObject, useEffect } from 'react';
+import useBlueprint from 'stores/useBlueprint';
 import { Group } from 'three';
 import { LAYER } from '../../../constants/layer';
 

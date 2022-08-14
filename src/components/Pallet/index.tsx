@@ -2,7 +2,7 @@ import * as Listing from 'components/Listing';
 import { Search } from 'components/Search';
 import { popupClose } from 'core/ui';
 import { go } from 'fuzzysort';
-import useApp from 'hooks/useApp';
+import useApp from 'stores/useApp';
 import { FC, KeyboardEvent, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { styled, theme } from 'stitches.config';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';

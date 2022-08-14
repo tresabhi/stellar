@@ -1,6 +1,6 @@
 import { ExitIcon, FilePlusIcon, ListBulletIcon, RulerHorizontalIcon } from '@radix-ui/react-icons';
 import * as Tabbar from 'components/Tabbar';
-import useApp, { TAB } from 'hooks/useApp';
+import useApp, { TAB } from 'stores/useApp';
 
 export const Tabs = () => {
   const tab = useApp((state) => state.tab);

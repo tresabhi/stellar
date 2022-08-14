@@ -8,7 +8,7 @@ import {
   togglePartSelection,
   unselectPart,
 } from 'core/part';
-import useApp, { TOOL } from './useApp';
+import useApp, { TOOL } from '../stores/useApp';
 
 const useSelectionControl = (id: string) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {

@@ -14,7 +14,7 @@ import sv_SE from 'lang/sv-SE.json';
 import zh_CN from 'lang/zh-CN.json';
 import zh_TW from 'lang/zh-TW.json';
 import { isUndefined } from 'lodash';
-import useSettings from './useSettings';
+import useSettings from '../stores/useSettings';
 
 export const translationsRegistry = new Map<string, AnyObject>([
   ['de-DE', de_DE],

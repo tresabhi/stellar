@@ -1,5 +1,5 @@
-import useBounds, { UseBounds } from 'hooks/useBounds';
 import produce from 'immer';
+import useBounds, { UseBounds } from 'stores/useBounds';
 
 export const translateAllBoundingBoxes = (x: number, y: number) => {
   useBounds.setState(

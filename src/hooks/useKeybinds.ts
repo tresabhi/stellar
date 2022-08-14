@@ -12,13 +12,13 @@ import {
   unselectAllParts,
 } from 'core/part';
 import { popupClose, popupOpen } from 'core/ui';
-import useApp, { POPUP, TAB, TOOL } from 'hooks/useApp';
-import useBlueprint from 'hooks/useBlueprint';
-import useSettings, { UseSettings } from 'hooks/useSettings';
 import produce from 'immer';
 import { isNull } from 'lodash';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
+import useApp, { POPUP, TAB, TOOL } from 'stores/useApp';
+import useBlueprint from 'stores/useBlueprint';
+import useSettings, { UseSettings } from 'stores/useSettings';
 
 const tabOrder = [TAB.LAYOUT, TAB.STAGING, TAB.EXPORT];
 

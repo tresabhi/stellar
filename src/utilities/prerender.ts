@@ -1,5 +1,5 @@
 import { extend } from '@react-three/fiber';
-import useSettings from 'hooks/useSettings';
+import useSettings from 'stores/useSettings';
 import { translationsRegistry } from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
 import { BufferGeometry, Line, Mesh } from 'three';

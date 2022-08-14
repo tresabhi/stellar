@@ -1,6 +1,6 @@
-import useBlueprint from 'hooks/useBlueprint';
-import useVersionControl, { UseVersionControl } from 'hooks/useVersionControl';
 import produce, { applyPatches } from 'immer';
+import useBlueprint from 'stores/useBlueprint';
+import useVersionControl, { UseVersionControl } from 'stores/useVersionControl';
 import { declareUnsavedChanges } from './declareUnsavedChanges';
 
 export const versionRedo = () => {

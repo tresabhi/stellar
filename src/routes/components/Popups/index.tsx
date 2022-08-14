@@ -1,5 +1,5 @@
 import { PopupContainer } from 'components/PopupContainer';
-import useApp, { POPUP } from 'hooks/useApp';
+import useApp, { POPUP } from 'stores/useApp';
 import { isNull } from 'lodash';
 import { FC } from 'react';
 import { AddPart } from './components/AddPart';

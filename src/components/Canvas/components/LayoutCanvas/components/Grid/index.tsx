@@ -1,5 +1,5 @@
-import useBlueprint from 'hooks/useBlueprint';
 import { useEffect, useRef } from 'react';
+import useBlueprint from 'stores/useBlueprint';
 import { Color, GridHelper, Mesh } from 'three';
 import { InfiniteGridHelper } from './components/InfiniteGridHelper';
 

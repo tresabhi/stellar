@@ -1,5 +1,5 @@
 import { generateId } from 'core/part';
-import useNotifications, { Notification } from 'hooks/useNotifications';
+import useNotifications, { Notification } from 'stores/useNotifications';
 
 export interface NotifyOptions
   extends Omit<Omit<Omit<Notification, 'id'>, 'title'>, 'message'> {

@@ -1,4 +1,4 @@
-import useBlueprint from 'hooks/useBlueprint';
+import useBlueprint from 'stores/useBlueprint';
 
 const usePart = (id: string) => {
   return useBlueprint((state) => state.parts.get(id));

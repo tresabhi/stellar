@@ -1,5 +1,5 @@
 import { Blueprint } from 'game/Blueprint';
-import useBlueprint from 'hooks/useBlueprint';
+import useBlueprint from 'stores/useBlueprint';
 import { copyParts } from './copyParts';
 
 export const copyPartsBySelection = (draft?: Blueprint) => {

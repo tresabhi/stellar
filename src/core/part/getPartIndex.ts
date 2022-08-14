@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
-import useBlueprint from 'hooks/useBlueprint';
+import useBlueprint from 'stores/useBlueprint';
 import { AnyPart, ParentId } from 'types/Parts';
 import { getPart } from './getPart';
 

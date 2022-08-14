@@ -1,6 +1,6 @@
 import { Group } from 'game/parts/Group';
-import useBlueprint from 'hooks/useBlueprint';
 import { FC, InputHTMLAttributes } from 'react';
+import useBlueprint from 'stores/useBlueprint';
 import compareStringArrays from 'utilities/compareStringArrays';
 import styles from '../index.module.scss';
 import { Listing } from './Listing';

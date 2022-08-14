@@ -1,4 +1,4 @@
-import useApp from 'hooks/useApp';
+import useApp from 'stores/useApp';
 import useKeybinds from 'hooks/useKeybinds';
 import useStellarContext from 'hooks/useStellarContext';
 import useTranslator from 'hooks/useTranslator';

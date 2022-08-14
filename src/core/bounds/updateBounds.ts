@@ -1,14 +1,10 @@
-import useBounds, { UseBounds } from 'hooks/useBounds';
 import produce from 'immer';
 import { MutableRefObject } from 'react';
+import useBounds, { UseBounds } from 'stores/useBounds';
 import { Group, Mesh } from 'three';
 import { getBoundsFromObject } from './getBoundsFromObject';
 
-export const updateBounds = (
-  id: string,
-  wrapper: MutableRefObject<Group>,
-  mesh: MutableRefObject<Mesh>,
-) => {
+export const updateBounds = (id: string, wrapper: MutableRefObject<Group>, mesh: MutableRefObject<Mesh>) => {
   const bounds = getBoundsFromObject(wrapper, mesh);
 
   useBounds.setState(

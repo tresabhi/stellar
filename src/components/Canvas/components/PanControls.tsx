@@ -1,5 +1,5 @@
 import { useThree } from '@react-three/fiber';
-import useApp, { TOOL } from 'hooks/useApp';
+import useApp, { TOOL } from 'stores/useApp';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import { OrthographicCamera, Vector2 } from 'three';

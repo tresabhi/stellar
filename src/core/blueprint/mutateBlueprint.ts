@@ -1,7 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
-import useBlueprint from 'hooks/useBlueprint';
-import useVersionControl, { UseVersionControl } from 'hooks/useVersionControl';
 import produce, { produceWithPatches } from 'immer';
+import useBlueprint from 'stores/useBlueprint';
+import useVersionControl, { UseVersionControl } from 'stores/useVersionControl';
 import { declareUnsavedChanges } from './declareUnsavedChanges';
 
 // a let statement to avoid static checking error with 0

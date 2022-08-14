@@ -1,7 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
-import useApp from 'hooks/useApp';
-import useBlueprint from 'hooks/useBlueprint';
-import { Snippet } from 'hooks/useSnippets';
+import useApp from 'stores/useApp';
+import useBlueprint from 'stores/useBlueprint';
+import { Snippet } from 'stores/useSnippets';
 import { clonePart } from './clonePart';
 
 export const copyParts = (ids: string[], draft?: Blueprint) => {

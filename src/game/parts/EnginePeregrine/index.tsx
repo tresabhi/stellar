@@ -1,7 +1,7 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PART_CATEGORY from 'hooks/constants/partCategory';
 import usePartModel from 'hooks/usePartModel';
-import { PartRegistryFragment } from 'hooks/usePartRegistry';
+import { PartRegistryFragment } from 'stores/usePartRegistry';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import { FC, useRef } from 'react';
 import { Group, Mesh } from 'three';

@@ -9,7 +9,7 @@ import { Part, VanillaPart } from 'game/parts/Part';
 import { FC } from 'react';
 import { AnyPart, AnyVanillaPart, PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import create from 'zustand';
-import PART_CATEGORY from './constants/partCategory';
+import PART_CATEGORY from '../hooks/constants/partCategory';
 
 export type PartExportifier<Type extends Part> = (
   part: Type,

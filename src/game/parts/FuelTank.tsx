@@ -4,7 +4,7 @@ import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
 import PART_CATEGORY from 'hooks/constants/partCategory';
 import usePartProperty from 'hooks/usePartProperty';
-import { PartRegistryFragment } from 'hooks/usePartRegistry';
+import { PartRegistryFragment } from 'stores/usePartRegistry';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import usePropertyController from 'hooks/usePropertyController';
 import useTranslator from 'hooks/useTranslator';
