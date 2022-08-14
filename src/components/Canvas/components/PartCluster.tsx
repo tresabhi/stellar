@@ -10,28 +10,31 @@ import compareStringArrays from 'utilities/compareStringArrays';
 interface PartClusterProps extends GroupProps {
   parentId: ParentId;
 }
-const PartCluster = forwardRef<Group, PartClusterProps>(({ parentId, ...props }, ref) => {
-  const state = useBlueprint((state) => {
-    return (parentId ? (state.parts.get(parentId) as GroupPart) : state).part_order;
-  }, compareStringArrays);
-  let partListing: JSX.Element[] = [];
+const PartCluster = forwardRef<Group, PartClusterProps>(
+  ({ parentId, ...props }, ref) => {
+    const state = useBlueprint((state) => {
+      return (parentId ? (state.parts.get(parentId) as GroupPart) : state)
+        .part_order;
+    }, compareStringArrays);
+    let partListing: JSX.Element[] = [];
 
-  state.forEach((Id) => {
-    const part = getPart(Id);
+    state.forEach((Id) => {
+      const part = getPart(Id);
 
-    if (part) {
-      const LayoutComponent = getPartRegistry(part.n)?.Mesh;
+      if (part) {
+        const LayoutComponent = getPartRegistry(part.n)?.Mesh;
 
-      if (LayoutComponent) {
-        partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);
+        if (LayoutComponent) {
+          partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);
+        }
       }
-    }
-  });
+    });
 
-  return (
-    <group {...props} ref={ref}>
-      {partListing}
-    </group>
-  );
-});
+    return (
+      <group {...props} ref={ref}>
+        {partListing}
+      </group>
+    );
+  },
+);
 export default PartCluster;

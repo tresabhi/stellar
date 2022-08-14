@@ -2,7 +2,8 @@ import { Button } from 'components/Button';
 import { FC, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
-export interface DropdownItemProps extends InputHTMLAttributes<HTMLButtonElement> {
+export interface DropdownItemProps
+  extends InputHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
   children: string;
   keybind?: ReactNode;
@@ -67,7 +68,14 @@ const Keybind = styled('span', {
   fontFamily: theme.fonts.mono,
 });
 
-export const DropdownItem: FC<DropdownItemProps> = ({ children, icon, keybind, disabled, onClick, ...props }) => {
+export const DropdownItem: FC<DropdownItemProps> = ({
+  children,
+  icon,
+  keybind,
+  disabled,
+  onClick,
+  ...props
+}) => {
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();

@@ -12,9 +12,16 @@ export const FILE_EXTENSION_REGEX = /\.[^/.]+$/;
 export const fileSaveAs = async () => {
   const { fileHandle } = useApp.getState();
   const data = blueprintSavify(useBlueprint.getState());
-  const blob = new Blob([`{\n"${WATERMARK_KEY}": "${WATERMARK_VALUE}"\n\n,${JSON.stringify(data).slice(1)}`], {
-    type: 'application/json',
-  });
+  const blob = new Blob(
+    [
+      `{\n"${WATERMARK_KEY}": "${WATERMARK_VALUE}"\n\n,${JSON.stringify(
+        data,
+      ).slice(1)}`,
+    ],
+    {
+      type: 'application/json',
+    },
+  );
   const newFileHandle = (await fileSave(blob, {
     fileName: fileHandle?.name ?? UNNAMED_BLUEPRINT_FILE_NAME,
     description: 'Stellar blueprint file',

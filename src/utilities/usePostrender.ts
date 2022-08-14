@@ -1,9 +1,12 @@
-import useApp from 'stores/useApp';
+import { useGLTF } from '@react-three/drei';
 import useKeybinds from 'hooks/useKeybinds';
+import { PART_MODEL_PATH } from 'hooks/usePartModel';
 import useStellarContext from 'hooks/useStellarContext';
 import useTranslator from 'hooks/useTranslator';
 import { isMobile } from 'react-device-detect';
 import { globalStyles, themeDark } from 'stitches.config';
+import useApp from 'stores/useApp';
+import usePartRegistry from 'stores/usePartRegistry';
 
 const usePostrender = () => {
   const stellarContext = useStellarContext();
@@ -46,12 +49,22 @@ const usePostrender = () => {
     const { fileHandle } = useApp.getState();
     const { hasUnsavedChanges } = useApp.getState();
 
-    document.title = `${stellarContext.title} ${fileHandle ? `- ${fileHandle.name}` : `${version[0]}.${version[1]}`}${
-      hasUnsavedChanges ? '*' : ''
-    }`;
+    document.title = `${stellarContext.title} ${
+      fileHandle ? `- ${fileHandle.name}` : `${version[0]}.${version[1]}`
+    }${hasUnsavedChanges ? '*' : ''}`;
   };
 
   useApp.subscribe((state) => state.hasUnsavedChanges, rerenderDocumentTitle);
   useApp.subscribe((state) => state.fileHandle, rerenderDocumentTitle);
+
+  usePartRegistry.getState().forEach(({ preload }) => {
+    if (preload) {
+      const preloads = typeof preload === 'string' ? [preload] : preload;
+
+      preloads.forEach((fileName) => {
+        useGLTF.preload(`${PART_MODEL_PATH}${fileName}.gltf`);
+      });
+    }
+  });
 };
 export default usePostrender;

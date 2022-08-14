@@ -60,13 +60,21 @@ export const Dropdown: FC<DropdownProps> = ({ icon, children, ...props }) => {
   const handleFocus = () => {
     const boundingClientRect = childrenElement.current.getBoundingClientRect();
 
-    if (boundingClientRect.x + boundingClientRect.width + PADDING_FROM_EDGE > document.body.clientWidth) {
+    if (
+      boundingClientRect.x + boundingClientRect.width + PADDING_FROM_EDGE >
+      document.body.clientWidth
+    ) {
       childrenElement.current.style.transform = `translate(${
-        (document.body.clientWidth - (boundingClientRect.x + boundingClientRect.width) - PADDING_FROM_EDGE) / 16
+        (document.body.clientWidth -
+          (boundingClientRect.x + boundingClientRect.width) -
+          PADDING_FROM_EDGE) /
+        16
       }rem)`;
     }
     if (boundingClientRect.x - PADDING_FROM_EDGE < 0) {
-      childrenElement.current.style.transform = `translate(${(-boundingClientRect.x + PADDING_FROM_EDGE) / 16}rem)`;
+      childrenElement.current.style.transform = `translate(${
+        (-boundingClientRect.x + PADDING_FROM_EDGE) / 16
+      }rem)`;
     }
   };
 

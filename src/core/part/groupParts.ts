@@ -9,7 +9,8 @@ export const groupParts = (ids: string[], replaceId: string) => {
 
     if (newGroup) {
       draft.parts.set(newGroup.id, newGroup);
-      newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] = newGroup.id;
+      newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] =
+        newGroup.id;
       newGroup.part_order = ids;
 
       ids.forEach((id) => {

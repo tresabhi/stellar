@@ -17,7 +17,8 @@ export const UseVersionControlData: UseVersionControl = {
   history: [],
 };
 
-const useVersionControl = create<UseVersionControl, [['zustand/subscribeWithSelector', never]]>(
-  subscribeWithSelector(() => UseVersionControlData),
-);
+const useVersionControl = create<
+  UseVersionControl,
+  [['zustand/subscribeWithSelector', never]]
+>(subscribeWithSelector(() => UseVersionControlData));
 export default useVersionControl;

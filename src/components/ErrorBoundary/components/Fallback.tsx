@@ -50,7 +50,9 @@ export const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   return (
     <div className={styles['error-boundary']}>
       <ExclamationTriangleIcon className={styles.icon} />
-      <span className={styles.title}>{logVisible ? error.name : 'Stellar ran into an issue'}</span>
+      <span className={styles.title}>
+        {logVisible ? error.name : 'Stellar ran into an issue'}
+      </span>
       {logVisible ? (
         [
           <TextArea className={styles.debug} key="error-message">
@@ -64,17 +66,22 @@ export const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
         ]
       ) : (
         <span className={styles.body}>
-          Your progress is saved in it's latest state, however, can be discarded if it's causing the issue. Feel free to
-          report this bug to Stellar while making sure you're the first one to do so.
+          Your progress is saved in it's latest state, however, can be discarded
+          if it's causing the issue. Feel free to report this bug to Stellar
+          while making sure you're the first one to do so.
         </span>
       )}
       <div className={styles['button-row']}>
         <LegacyButton onClick={resetErrorBoundary}>Restart</LegacyButton>
-        <LegacyButton onClick={window.location.reload}>Restart without progress</LegacyButton>
+        <LegacyButton onClick={window.location.reload}>
+          Restart without progress
+        </LegacyButton>
         <LegacyButton href={reportURL} target="_blank">
           Report
         </LegacyButton>
-        <LegacyButton onClick={handleDebugClick}>{logVisible ? 'Hide' : ''} Debug</LegacyButton>
+        <LegacyButton onClick={handleDebugClick}>
+          {logVisible ? 'Hide' : ''} Debug
+        </LegacyButton>
       </div>
     </div>
   );

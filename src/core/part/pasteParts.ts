@@ -13,8 +13,12 @@ export const pasteParts = () => {
     mutateBlueprint((draft) => {
       const firstSelection = draft.selections[0];
       const parentId = draft.parts.get(firstSelection)?.parentId ?? null;
-      const parent = parentId ? (draft.parts.get(parentId) as Group) ?? draft : draft;
-      const insertIndex = firstSelection ? parent.part_order.indexOf(firstSelection) : 0;
+      const parent = parentId
+        ? (draft.parts.get(parentId) as Group) ?? draft
+        : draft;
+      const insertIndex = firstSelection
+        ? parent.part_order.indexOf(firstSelection)
+        : 0;
 
       clipboard.parts.forEach((part, partId) => {
         draft.parts.set(partId, {

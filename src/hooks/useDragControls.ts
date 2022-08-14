@@ -7,7 +7,9 @@ import { Vector2 } from 'three';
 import snap from 'utilities/snap';
 import useApp, { TOOL } from '../stores/useApp';
 import useMousePos from './useMousePos';
-import useVersionControl, { UseVersionControl } from '../stores/useVersionControl';
+import useVersionControl, {
+  UseVersionControl,
+} from '../stores/useVersionControl';
 import useBlueprint from 'stores/useBlueprint';
 
 const DEFAULT_SNAP = 1 / 2;
@@ -67,9 +69,17 @@ const useDragControls = (id: string) => {
     }
 
     if (movement.x !== 0 && movement.y !== 0) {
-      const [nextState, patches, inversePatches] = produceWithPatches(useBlueprint.getState(), (draft) => {
-        translateTranslatableParts(movement.x, movement.y, draft.selections, draft);
-      });
+      const [nextState, patches, inversePatches] = produceWithPatches(
+        useBlueprint.getState(),
+        (draft) => {
+          translateTranslatableParts(
+            movement.x,
+            movement.y,
+            draft.selections,
+            draft,
+          );
+        },
+      );
 
       if (inversePatches.length > 0) {
         if (!firstInversePatches) firstInversePatches = inversePatches;
@@ -87,7 +97,10 @@ const useDragControls = (id: string) => {
     if (lastPatches) {
       useVersionControl.setState(
         produce<UseVersionControl>((draft) => {
-          draft.history.splice(draft.index + 1, draft.history.length - draft.index - 1);
+          draft.history.splice(
+            draft.index + 1,
+            draft.history.length - draft.index - 1,
+          );
 
           draft.history.push({
             inversePatches: firstInversePatches!,

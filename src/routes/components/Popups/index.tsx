@@ -10,5 +10,9 @@ export const Popups = () => {
   const popup = useApp((state) => state.popup);
   const PopupComponent = !isNull(popup) ? PopupMap.get(popup) : undefined;
 
-  return <PopupContainer visible={!isNull(popup)}>{PopupComponent && <PopupComponent />}</PopupContainer>;
+  return (
+    <PopupContainer visible={!isNull(popup)}>
+      {PopupComponent && <PopupComponent />}
+    </PopupContainer>
+  );
 };

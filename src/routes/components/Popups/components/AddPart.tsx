@@ -32,7 +32,11 @@ export const AddPart = () => {
     palletItems.push({
       name,
       callback: () => {
-        insertNewPart(name, parentId, { index, nearCamera: true, select: true });
+        insertNewPart(name, parentId, {
+          index,
+          nearCamera: true,
+          select: true,
+        });
         popupClose();
       },
       note: registry.vanillaData === null ? 'Abstract' : undefined,

@@ -110,8 +110,12 @@ async function generateFavicons(buildType, faviconAPIKey) {
 
             console.log('Appending icons to manifest.json');
 
-            const providedManifest = JSON.parse(readFileSync('temp/favicons/site.webmanifest'));
-            const existingManifest = JSON.parse(readFileSync('build/manifest.json'));
+            const providedManifest = JSON.parse(
+              readFileSync('temp/favicons/site.webmanifest'),
+            );
+            const existingManifest = JSON.parse(
+              readFileSync('build/manifest.json'),
+            );
 
             writeFileSync(
               'build/manifest.json',

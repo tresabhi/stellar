@@ -1,9 +1,16 @@
-import { Blueprint, BlueprintData, SavedBlueprint, VanillaBlueprint } from 'game/Blueprint';
+import {
+  Blueprint,
+  BlueprintData,
+  SavedBlueprint,
+  VanillaBlueprint,
+} from 'game/Blueprint';
 import useBlueprint from 'stores/useBlueprint';
 import { blueprintImportify } from './blueprintImportify';
 import { clearVersionControl } from './clearVersionControl';
 
-export const loadBlueprint = (importData?: VanillaBlueprint | SavedBlueprint | Blueprint) => {
+export const loadBlueprint = (
+  importData?: VanillaBlueprint | SavedBlueprint | Blueprint,
+) => {
   useBlueprint.setState(blueprintImportify(importData ?? BlueprintData));
   clearVersionControl();
 };

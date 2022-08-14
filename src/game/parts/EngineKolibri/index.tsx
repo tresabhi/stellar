@@ -1,9 +1,9 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PART_CATEGORY from 'hooks/constants/partCategory';
 import usePartModel from 'hooks/usePartModel';
-import { PartRegistryFragment } from 'stores/usePartRegistry';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import { FC, useRef } from 'react';
+import { PartRegistryFragment } from 'stores/usePartRegistry';
 import { Group, Mesh } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData } from '../Part';
@@ -65,5 +65,7 @@ export const EngineKolibriRegistry: PartRegistryFragment = [
 
     Icon: EngineKolibriIcon,
     Mesh: EngineKolibriLayoutComponent,
+
+    preload: 'EngineKolibri',
   },
 ];

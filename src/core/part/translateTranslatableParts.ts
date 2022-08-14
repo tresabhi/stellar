@@ -4,7 +4,12 @@ import { Group } from 'game/parts/Group';
 import { AnyPart } from 'types/Parts';
 import { translatePart } from './translatePart';
 
-export const translateTranslatableParts = (x: number, y: number, ids: string[], draft?: Blueprint) => {
+export const translateTranslatableParts = (
+  x: number,
+  y: number,
+  ids: string[],
+  draft?: Blueprint,
+) => {
   if (draft) {
     const translate = (selections: string[]) => {
       selections.forEach((selection) => {

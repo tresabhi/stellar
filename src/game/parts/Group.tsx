@@ -8,7 +8,11 @@ import useSelectionControl from 'hooks/useSelectionControl';
 import produce from 'immer';
 import { isArray } from 'lodash';
 import { FC, MutableRefObject, useCallback, useEffect, useRef } from 'react';
-import useBounds, { BoundListing, PartBounds, UseBounds } from 'stores/useBounds';
+import useBounds, {
+  BoundListing,
+  PartBounds,
+  UseBounds,
+} from 'stores/useBounds';
 import { PartExportifier, PartRegistryFragment } from 'stores/usePartRegistry';
 import { Group as ThreeGroup, Mesh } from 'three';
 import { AnyVanillaPart, PartComponentProps } from 'types/Parts';
@@ -36,7 +40,10 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
 
   const computeBounds = useCallback(() => {
     const bounds: PartBounds = {
-      ...getBoundsFromObject(cluster, cluster as unknown as MutableRefObject<Mesh>),
+      ...getBoundsFromObject(
+        cluster,
+        cluster as unknown as MutableRefObject<Mesh>,
+      ),
 
       rotation: 0,
       offset: { x: 0, y: 0 },
@@ -70,7 +77,14 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
     return unsubscribe;
   }, [computeBounds, id]);
 
-  return <PartCluster ref={cluster} parentId={id} onClick={handleClick} onPointerDown={handlePointerDown} />;
+  return (
+    <PartCluster
+      ref={cluster}
+      parentId={id}
+      onClick={handleClick}
+      onPointerDown={handlePointerDown}
+    />
+  );
 };
 
 export const GroupIcon = Icon;

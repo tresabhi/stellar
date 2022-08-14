@@ -29,11 +29,13 @@ const Icon = styled(MagnifyingGlassIcon, {
   color: theme.colors.textLowContrast,
 });
 
-export const Search = forwardRef<HTMLInputElement, SearchProps>(({ ...props }, ref) => {
-  return (
-    <Container {...props}>
-      <Input ref={ref} />
-      <Icon />
-    </Container>
-  );
-});
+export const Search = forwardRef<HTMLInputElement, SearchProps>(
+  ({ ...props }, ref) => {
+    return (
+      <Container {...props}>
+        <Input ref={ref} />
+        <Icon />
+      </Container>
+    );
+  },
+);

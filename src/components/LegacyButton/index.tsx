@@ -1,7 +1,8 @@
 import { forwardRef, InputHTMLAttributes, MouseEvent } from 'react';
 import styles from './index.module.scss';
 
-export interface LegacyButtonProps extends InputHTMLAttributes<HTMLButtonElement> {
+export interface LegacyButtonProps
+  extends InputHTMLAttributes<HTMLButtonElement> {
   href?: string;
   target?: '_blank' | '_self' | '_parent' | '_top';
   color?: 'regular'; // add more as needed in the future

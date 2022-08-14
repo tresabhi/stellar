@@ -46,5 +46,7 @@ export const UseAppData: UseApp = {
   clipboard: undefined,
 };
 
-const useApp = create<UseApp, [['zustand/subscribeWithSelector', never]]>(subscribeWithSelector(() => UseAppData));
+const useApp = create<UseApp, [['zustand/subscribeWithSelector', never]]>(
+  subscribeWithSelector(() => UseAppData),
+);
 export default useApp;

@@ -9,7 +9,9 @@ export const versionUndo = () => {
       const inversePatches = draft.history[draft.index]?.inversePatches;
 
       if (inversePatches) {
-        useBlueprint.setState(applyPatches(useBlueprint.getState(), inversePatches));
+        useBlueprint.setState(
+          applyPatches(useBlueprint.getState(), inversePatches),
+        );
       }
 
       draft.index = Math.max(-1, draft.index - 1);

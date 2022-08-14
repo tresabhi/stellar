@@ -3,7 +3,15 @@ import { Search } from 'components/Search';
 import { popupClose } from 'core/ui';
 import { go } from 'fuzzysort';
 import useApp from 'stores/useApp';
-import { FC, KeyboardEvent, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  FC,
+  KeyboardEvent,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { styled, theme } from 'stitches.config';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
@@ -32,12 +40,18 @@ const Container = styled('div', {
 });
 
 export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
-  const nameMap = useMemo(() => new Map(items.map((item) => [item.name, item])), [items]);
+  const nameMap = useMemo(
+    () => new Map(items.map((item) => [item.name, item])),
+    [items],
+  );
   const names = useMemo(() => items.map((item) => item.name), [items]);
   const [search, setSearch] = useState('');
   const results = useMemo(() => go(search, names), [names, search]);
   const input = useRef<HTMLInputElement>(null!);
-  const handleChange = fallingEdgeDebounce(() => setSearch(input.current.value), debounce);
+  const handleChange = fallingEdgeDebounce(
+    () => setSearch(input.current.value),
+    debounce,
+  );
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Enter') popupClose();
   };
@@ -47,7 +61,13 @@ export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
         const item = nameMap.get(result.target)!;
 
         return (
-          <Listing.Item onClick={item.callback} key={item.name} note={item.note} iconGap={iconGap} icon={item.icon}>
+          <Listing.Item
+            onClick={item.callback}
+            key={item.name}
+            note={item.note}
+            iconGap={iconGap}
+            icon={item.icon}
+          >
             {item.name}
           </Listing.Item>
         );
@@ -67,7 +87,12 @@ export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
 
   return (
     <Container>
-      <Search ref={input} onKeyDown={handleKeyDown} onChange={handleChange} placeholder="Search parts..." />
+      <Search
+        ref={input}
+        onKeyDown={handleKeyDown}
+        onChange={handleChange}
+        placeholder="Search parts..."
+      />
       {listings.length > 0 && <Listing.Container>{listings}</Listing.Container>}
     </Container>
   );

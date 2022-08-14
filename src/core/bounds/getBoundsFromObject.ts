@@ -2,7 +2,10 @@ import { MutableRefObject } from 'react';
 import { PartBounds } from 'stores/useBounds';
 import { Box3, Group, Mesh } from 'three';
 
-export const getBoundsFromObject = (wrapper: MutableRefObject<Group>, mesh: MutableRefObject<Mesh>) => {
+export const getBoundsFromObject = (
+  wrapper: MutableRefObject<Group>,
+  mesh: MutableRefObject<Mesh>,
+) => {
   const position = mesh.current.position.toArray();
   const rotation = wrapper.current.rotation.toArray();
 

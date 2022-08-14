@@ -11,74 +11,84 @@ const colorsDark = {
   ...createColors({ scale: purpleDark, suffix: 'accent' }),
 };
 
-export const { config, createTheme, css, getCssText, globalCss, keyframes, prefix, reset, styled, theme } =
-  createStitches({
-    theme: {
-      colors: {
-        ...colorsLight,
-        popupBackground: blackA.blackA9,
-      },
-
-      fontSizes: {
-        10: '0.625rem',
-        12: '0.75rem',
-        14: '0.875rem',
-        16: '1rem',
-      },
-
-      sizes: {
-        1: '0.0625rem',
-        2: '0.125rem',
-        4: '0.25rem',
-        8: '0.5rem',
-        12: '0.75rem',
-        16: '1rem',
-        18: '1.125rem',
-        24: '1.5rem',
-        32: '2rem',
-        40: '2.5rem',
-
-        dropdownWidth: '15rem',
-        inputHeightMajor: '2rem',
-        tabMaxWidth: '15rem',
-        palletMaxHeight: '15rem',
-        palletWidth: '20rem',
-      },
-
-      radii: {
-        1: '0.0625rem',
-        2: '0.125rem',
-        4: '0.25rem',
-        8: '0.5rem',
-      },
-
-      fonts: {
-        // TODO: add fallback fonts
-        default: 'Roboto Flex',
-        mono: 'Roboto Mono',
-      },
-
-      borderStyles: {
-        componentNonInteractive: `${colorsLight.componentNonInteractiveBorder} solid 0.0625rem`,
-        componentNonInteractiveHover: `${colorsLight.componentNonInteractiveBorderHover} solid 0.0625rem`,
-        componentNonInteractiveActive: `${colorsLight.componentNonInteractiveBorderActive} solid 0.0625rem`,
-        componentInteractive: `${colorsLight.componentInteractiveBorder} solid 0.0625rem`,
-        componentInteractiveHover: `${colorsLight.componentInteractiveBorderHover} solid 0.0625rem`,
-        componentInteractiveActive: `${colorsLight.componentInteractiveBorderActive} solid 0.0625rem`,
-
-        componentNonInteractive_accent: `${colorsLight.componentNonInteractiveBorder_accent} solid 0.0625rem`,
-        componentNonInteractiveHover_accent: `${colorsLight.componentNonInteractiveBorderHover_accent} solid 0.0625rem`,
-        componentNonInteractiveActive_accent: `${colorsLight.componentNonInteractiveBorderActive_accent} solid 0.0625rem`,
-        componentInteractive_accent: `${colorsLight.componentInteractiveBorder_accent} solid 0.0625rem`,
-        componentInteractiveHover_accent: `${colorsLight.componentInteractiveBorderHover_accent} solid 0.0625rem`,
-        componentInteractiveActive_accent: `${colorsLight.componentInteractiveBorderActive_accent} solid 0.0625rem`,
-      },
-
-      space: {
-        ...createSpaces(),
-      },
+export const {
+  config,
+  createTheme,
+  css,
+  getCssText,
+  globalCss,
+  keyframes,
+  prefix,
+  reset,
+  styled,
+  theme,
+} = createStitches({
+  theme: {
+    colors: {
+      ...colorsLight,
+      popupBackground: blackA.blackA9,
     },
-  });
+
+    fontSizes: {
+      10: '0.625rem',
+      12: '0.75rem',
+      14: '0.875rem',
+      16: '1rem',
+    },
+
+    sizes: {
+      1: '0.0625rem',
+      2: '0.125rem',
+      4: '0.25rem',
+      8: '0.5rem',
+      12: '0.75rem',
+      16: '1rem',
+      18: '1.125rem',
+      24: '1.5rem',
+      32: '2rem',
+      40: '2.5rem',
+
+      dropdownWidth: '15rem',
+      inputHeightMajor: '2rem',
+      tabMaxWidth: '15rem',
+      palletMaxHeight: '15rem',
+      palletWidth: '20rem',
+    },
+
+    radii: {
+      1: '0.0625rem',
+      2: '0.125rem',
+      4: '0.25rem',
+      8: '0.5rem',
+    },
+
+    fonts: {
+      // TODO: add fallback fonts
+      default: 'Roboto Flex',
+      mono: 'Roboto Mono',
+    },
+
+    borderStyles: {
+      componentNonInteractive: `${colorsLight.componentNonInteractiveBorder} solid 0.0625rem`,
+      componentNonInteractiveHover: `${colorsLight.componentNonInteractiveBorderHover} solid 0.0625rem`,
+      componentNonInteractiveActive: `${colorsLight.componentNonInteractiveBorderActive} solid 0.0625rem`,
+      componentInteractive: `${colorsLight.componentInteractiveBorder} solid 0.0625rem`,
+      componentInteractiveHover: `${colorsLight.componentInteractiveBorderHover} solid 0.0625rem`,
+      componentInteractiveActive: `${colorsLight.componentInteractiveBorderActive} solid 0.0625rem`,
+
+      componentNonInteractive_accent: `${colorsLight.componentNonInteractiveBorder_accent} solid 0.0625rem`,
+      componentNonInteractiveHover_accent: `${colorsLight.componentNonInteractiveBorderHover_accent} solid 0.0625rem`,
+      componentNonInteractiveActive_accent: `${colorsLight.componentNonInteractiveBorderActive_accent} solid 0.0625rem`,
+      componentInteractive_accent: `${colorsLight.componentInteractiveBorder_accent} solid 0.0625rem`,
+      componentInteractiveHover_accent: `${colorsLight.componentInteractiveBorderHover_accent} solid 0.0625rem`,
+      componentInteractiveActive_accent: `${colorsLight.componentInteractiveBorderActive_accent} solid 0.0625rem`,
+    },
+
+    space: {
+      ...createSpaces(),
+    },
+  },
+});
 
 export const themeDark = createTheme('theme-dark', {
   colors: colorsDark,

@@ -4,7 +4,11 @@ import { MutableRefObject, useCallback, useEffect } from 'react';
 import useBounds, { BoundListing, UseBounds } from 'stores/useBounds';
 import { Group, Mesh } from 'three';
 
-const usePartWithBounds = (id: string, wrapper: MutableRefObject<Group>, mesh: MutableRefObject<Mesh>) => {
+const usePartWithBounds = (
+  id: string,
+  wrapper: MutableRefObject<Group>,
+  mesh: MutableRefObject<Mesh>,
+) => {
   const computeBounds = useCallback(() => {
     const bounds = getBoundsFromObject(wrapper, mesh);
     const boundListing: BoundListing = {

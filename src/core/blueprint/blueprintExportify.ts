@@ -19,7 +19,9 @@ export const blueprintExportify = (blueprint: Blueprint) => {
 
       if (exportifiedPart) {
         if (isArray(exportifiedPart)) {
-          exportifiedBlueprint.parts.push(...(exportifiedPart as AnyVanillaPart[]));
+          exportifiedBlueprint.parts.push(
+            ...(exportifiedPart as AnyVanillaPart[]),
+          );
         } else {
           exportifiedBlueprint.parts.push(exportifiedPart as AnyVanillaPart);
         }

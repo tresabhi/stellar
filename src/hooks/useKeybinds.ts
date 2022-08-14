@@ -1,4 +1,12 @@
-import { fileExport, fileImport, fileOpen, fileSaveAs, loadBlueprint, versionRedo, versionUndo } from 'core/blueprint';
+import {
+  fileExport,
+  fileImport,
+  fileOpen,
+  fileSaveAs,
+  loadBlueprint,
+  versionRedo,
+  versionUndo,
+} from 'core/blueprint';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
@@ -50,7 +58,11 @@ const bindDefaultOptions: BindOptions = {
   action: 'keydown',
 };
 
-const bind = (keys: string | string[], callback: () => void, options?: Partial<BindOptions>) => {
+const bind = (
+  keys: string | string[],
+  callback: () => void,
+  options?: Partial<BindOptions>,
+) => {
   const mergedOptions = { ...bindDefaultOptions, ...options };
 
   mousetrapBind(
@@ -60,7 +72,9 @@ const bind = (keys: string | string[], callback: () => void, options?: Partial<B
 
       if (
         (mergedOptions.preventRepeats ? !event.repeat : true) &&
-        (mergedOptions.preventWhenInteractingWithUI ? !isInteractingWithUI : true)
+        (mergedOptions.preventWhenInteractingWithUI
+          ? !isInteractingWithUI
+          : true)
       ) {
         if (mergedOptions.preventDefault) event.preventDefault();
 
@@ -110,14 +124,18 @@ const useKeybinds = () => {
     bind('alt+2', () => {
       useSettings.setState(
         produce((draft: UseSettings) => {
-          draft.layout.rightSideBar.visible = !draft.layout.rightSideBar.visible;
+          draft.layout.rightSideBar.visible =
+            !draft.layout.rightSideBar.visible;
         }),
       );
     });
 
     bind('ctrl+tab', () => {
       useApp.setState((state) => ({
-        tab: state.tab === tabOrder[tabOrder.length - 1] ? tabOrder[0] : tabOrder[tabOrder.indexOf(state.tab) + 1],
+        tab:
+          state.tab === tabOrder[tabOrder.length - 1]
+            ? tabOrder[0]
+            : tabOrder[tabOrder.indexOf(state.tab) + 1],
       }));
     });
 

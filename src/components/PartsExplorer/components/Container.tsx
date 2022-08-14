@@ -9,15 +9,24 @@ export interface ContainerProps extends InputHTMLAttributes<HTMLDivElement> {
   parent?: string;
   indentation: number;
 }
-export const Container: FC<ContainerProps> = ({ parent, indentation, ...props }) => {
+export const Container: FC<ContainerProps> = ({
+  parent,
+  indentation,
+  ...props
+}) => {
   const state = useBlueprint(
     (state) => (parent ? (state.parts.get(parent) as Group) : state).part_order,
     compareStringArrays,
   );
-  const partListing = state.map((id) => <Listing key={`part-${id}`} id={id} indentation={indentation} />);
+  const partListing = state.map((id) => (
+    <Listing key={`part-${id}`} id={id} indentation={indentation} />
+  ));
 
   return (
-    <div {...props} className={`${props.className ?? ''} ${styles['parts-explorer']}`}>
+    <div
+      {...props}
+      className={`${props.className ?? ''} ${styles['parts-explorer']}`}
+    >
       {partListing}
     </div>
   );

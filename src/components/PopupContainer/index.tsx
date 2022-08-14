@@ -27,12 +27,18 @@ const Container = styled('div', {
   },
 });
 
-export interface PopupContainerProps extends InputHTMLAttributes<HTMLDivElement> {
+export interface PopupContainerProps
+  extends InputHTMLAttributes<HTMLDivElement> {
   visible?: boolean;
   children: ReactNode;
 }
 
-export const PopupContainer: FC<PopupContainerProps> = ({ children, visible, onClick, ...props }) => {
+export const PopupContainer: FC<PopupContainerProps> = ({
+  children,
+  visible,
+  onClick,
+  ...props
+}) => {
   const handleContainerClick = (event: MouseEvent<HTMLDivElement>) => {
     popupClose();
     if (onClick) onClick(event);
