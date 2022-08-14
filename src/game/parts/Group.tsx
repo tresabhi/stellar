@@ -3,11 +3,7 @@ import PartCluster from 'components/Canvas/components/PartCluster';
 import { getBoundsFromObject } from 'core/bounds';
 import { partExportify, removePartMetaData } from 'core/part';
 import PART_CATEGORY from 'hooks/constants/partCategory';
-import useBounds, {
-  BoundListing,
-  PartBounds,
-  UseBounds,
-} from 'hooks/useBounds';
+import useBounds, { BoundListing, PartBounds, UseBounds } from 'hooks/useBounds';
 import useDragControls from 'hooks/useDragControls';
 import { PartExportifier, PartRegistryFragment } from 'hooks/usePartRegistry';
 import useSelectionControl from 'hooks/useSelectionControl';
@@ -21,7 +17,7 @@ import { Part, PartData } from './Part';
 export interface Group extends Part {
   readonly n: 'Group';
   expanded: boolean;
-  partOrder: string[];
+  part_order: string[];
 }
 
 export const GroupData: Group = {
@@ -30,7 +26,7 @@ export const GroupData: Group = {
   n: 'Group',
   label: 'Group',
   expanded: false,
-  partOrder: [],
+  part_order: [],
 };
 
 export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
@@ -40,10 +36,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
 
   const computeBounds = useCallback(() => {
     const bounds: PartBounds = {
-      ...getBoundsFromObject(
-        cluster,
-        cluster as unknown as MutableRefObject<Mesh>,
-      ),
+      ...getBoundsFromObject(cluster, cluster as unknown as MutableRefObject<Mesh>),
 
       rotation: 0,
       offset: { x: 0, y: 0 },
@@ -77,14 +70,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
     return unsubscribe;
   }, [computeBounds, id]);
 
-  return (
-    <PartCluster
-      ref={cluster}
-      parentId={id}
-      onClick={handleClick}
-      onPointerDown={handlePointerDown}
-    />
-  );
+  return <PartCluster ref={cluster} parentId={id} onClick={handleClick} onPointerDown={handlePointerDown} />;
 };
 
 export const GroupIcon = Icon;
@@ -93,7 +79,7 @@ export const groupExportify: PartExportifier<Group> = (part, draft) => {
   const exportedParts: AnyVanillaPart[] = [];
   const partWithoutMetaData = removePartMetaData(part) as Group;
 
-  partWithoutMetaData.partOrder.forEach((id) => {
+  partWithoutMetaData.part_order.forEach((id) => {
     const childPart = draft.parts.get(id);
 
     if (childPart) {

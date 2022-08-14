@@ -8,10 +8,12 @@ export enum TAB {
   STAGING,
   EXPORT,
 }
-
 export enum TOOL {
   MOVE,
   PAN,
+}
+export enum POPUP {
+  ADD_PART,
 }
 
 export interface UseApp {
@@ -19,9 +21,11 @@ export interface UseApp {
   hasUnsavedChanges: boolean;
 
   tab: TAB;
+  popup: POPUP | null;
 
   tool: TOOL;
   isPanning: boolean;
+  isInteractingWithUI: boolean;
 
   preventNextSelection: boolean;
   clipboard?: Snippet;
@@ -31,10 +35,12 @@ export const UseAppData: UseApp = {
   fileHandle: undefined,
   hasUnsavedChanges: false,
 
-  tab: TAB.CREATE,
+  tab: TAB.LAYOUT, // temporarily set to layout
+  popup: null,
 
   tool: TOOL.MOVE,
   isPanning: false,
+  isInteractingWithUI: false,
 
   preventNextSelection: false,
   clipboard: undefined,

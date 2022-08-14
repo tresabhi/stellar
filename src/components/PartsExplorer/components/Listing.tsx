@@ -1,16 +1,6 @@
-import {
-  QuestionMarkIcon,
-  TriangleDownIcon,
-  TriangleRightIcon,
-} from '@radix-ui/react-icons';
+import { QuestionMarkIcon, TriangleDownIcon, TriangleRightIcon } from '@radix-ui/react-icons';
 import { mutateBlueprint } from 'core/blueprint';
-import {
-  getPart,
-  getPartRegistry,
-  mutatePart,
-  selectPartOnly,
-  togglePartSelection,
-} from 'core/part';
+import { getPart, getPartRegistry, mutatePart, selectPartOnly, togglePartSelection } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import useBlueprint from 'hooks/useBlueprint';
@@ -30,12 +20,9 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const initialState = getPart(id)!;
   const isGroup = initialState.n === 'Group';
-  const [expanded, setExpanded] = useState(
-    isGroup ? (initialState as Group).expanded : false,
-  );
+  const [expanded, setExpanded] = useState(isGroup ? (initialState as Group).expanded : false);
   let lastLabel = initialState.label;
-  const IconComponent =
-    getPartRegistry(initialState.n)?.Icon ?? QuestionMarkIcon;
+  const IconComponent = getPartRegistry(initialState.n)?.Icon ?? QuestionMarkIcon;
 
   usePartProperty(
     id,
@@ -119,18 +106,14 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
   };
 
   if (initialState.n === 'Group') {
-    childParts = (initialState as Group).partOrder.map(() => (
+    childParts = (initialState as Group).part_order.map(() => (
       <Listing key={`part-${id}`} id={id} indentation={indentation + 1} />
     ));
   }
 
   return (
     <div ref={listingRef} tabIndex={-1} className={styles.listing}>
-      <div
-        className={styles.button}
-        style={{ paddingLeft: `${16 * indentation}px` }}
-        onClick={handleClick}
-      >
+      <div className={styles.button} style={{ paddingLeft: `${16 * indentation}px` }} onClick={handleClick}>
         <button
           ref={buttonRef}
           onClick={handleExpandClick}
@@ -163,11 +146,7 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
       </div>
 
       {isGroup ? (
-        <Container
-          indentation={indentation + 1}
-          parent={id}
-          style={{ display: expanded ? undefined : 'none' }}
-        >
+        <Container indentation={indentation + 1} parent={id} style={{ display: expanded ? undefined : 'none' }}>
           {childParts}
         </Container>
       ) : undefined}

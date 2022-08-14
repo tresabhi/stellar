@@ -7,12 +7,7 @@ import { FuelTankRegistry } from 'game/parts/FuelTank';
 import { GroupRegistry } from 'game/parts/Group';
 import { Part, VanillaPart } from 'game/parts/Part';
 import { FC } from 'react';
-import {
-  AnyPart,
-  AnyVanillaPart,
-  PartComponentProps,
-  PartPropertyComponentProps,
-} from 'types/Parts';
+import { AnyPart, AnyVanillaPart, PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import create from 'zustand';
 import PART_CATEGORY from './constants/partCategory';
 

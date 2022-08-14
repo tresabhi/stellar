@@ -1,4 +1,4 @@
-import { mauve, mauveDark, purple, purpleDark } from '@radix-ui/colors';
+import { blackA, mauve, mauveDark, purple, purpleDark } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 import { createColors, createSpaces } from 'bepaint';
 
@@ -14,7 +14,10 @@ const colorsDark = {
 export const { config, createTheme, css, getCssText, globalCss, keyframes, prefix, reset, styled, theme } =
   createStitches({
     theme: {
-      colors: colorsLight,
+      colors: {
+        ...colorsLight,
+        popupBackground: blackA.blackA9,
+      },
 
       fontSizes: {
         10: '0.625rem',
@@ -28,6 +31,7 @@ export const { config, createTheme, css, getCssText, globalCss, keyframes, prefi
         2: '0.125rem',
         4: '0.25rem',
         8: '0.5rem',
+        12: '0.75rem',
         16: '1rem',
         18: '1.125rem',
         24: '1.5rem',
@@ -37,6 +41,8 @@ export const { config, createTheme, css, getCssText, globalCss, keyframes, prefi
         dropdownWidth: '15rem',
         inputHeightMajor: '2rem',
         tabMaxWidth: '15rem',
+        palletMaxHeight: '15rem',
+        palletWidth: '20rem',
       },
 
       radii: {
@@ -48,7 +54,7 @@ export const { config, createTheme, css, getCssText, globalCss, keyframes, prefi
 
       fonts: {
         // TODO: add fallback fonts
-        base: 'Roboto Flex',
+        default: 'Roboto Flex',
         mono: 'Roboto Mono',
       },
 
@@ -99,4 +105,8 @@ export const globalStyles = globalCss({
     'https://fonts.googleapis.com/css?family=Roboto+Flex&display=swap',
     'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
   ],
+
+  '*': {
+    fontFamily: theme.fonts.default,
+  },
 });

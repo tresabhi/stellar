@@ -11,7 +11,7 @@ export const blueprintExportify = (blueprint: Blueprint) => {
   exportifiedBlueprint.offset = clonedBlueprint.offset;
   exportifiedBlueprint.stages = clonedBlueprint.stages;
 
-  clonedBlueprint.partOrder.forEach((id) => {
+  clonedBlueprint.part_order.forEach((id) => {
     const part = clonedBlueprint.parts.get(id);
 
     if (part) {
@@ -19,9 +19,7 @@ export const blueprintExportify = (blueprint: Blueprint) => {
 
       if (exportifiedPart) {
         if (isArray(exportifiedPart)) {
-          exportifiedBlueprint.parts.push(
-            ...(exportifiedPart as AnyVanillaPart[]),
-          );
+          exportifiedBlueprint.parts.push(...(exportifiedPart as AnyVanillaPart[]));
         } else {
           exportifiedBlueprint.parts.push(exportifiedPart as AnyVanillaPart);
         }

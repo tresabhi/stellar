@@ -12,7 +12,7 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
 
   selections: string[];
   parts: AnyPartMap;
-  partOrder: string[];
+  part_order: string[];
 }
 
 export interface SavedBlueprint extends Omit<Blueprint, 'parts'> {
@@ -33,7 +33,7 @@ export const BlueprintData: Blueprint = {
 
   selections: [],
   parts: new Map(),
-  partOrder: [],
+  part_order: [],
 };
 
 export const SavedBlueprintData: SavedBlueprint = {

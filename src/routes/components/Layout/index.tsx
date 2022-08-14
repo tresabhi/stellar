@@ -6,7 +6,7 @@ import Toolbar from '../Toolbar';
 const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  flex: '1',
+  flex: 1,
 
   variants: {
     visible: {

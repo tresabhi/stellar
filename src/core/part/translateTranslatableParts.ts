@@ -4,12 +4,7 @@ import { Group } from 'game/parts/Group';
 import { AnyPart } from 'types/Parts';
 import { translatePart } from './translatePart';
 
-export const translateTranslatableParts = (
-  x: number,
-  y: number,
-  ids: string[],
-  draft?: Blueprint,
-) => {
+export const translateTranslatableParts = (x: number, y: number, ids: string[], draft?: Blueprint) => {
   if (draft) {
     const translate = (selections: string[]) => {
       selections.forEach((selection) => {
@@ -17,7 +12,7 @@ export const translateTranslatableParts = (
 
         if (part && !part.locked) {
           if (part.n === 'Group') {
-            translate((part as Group).partOrder);
+            translate((part as Group).part_order);
           } else if ((part as AnyPart).p) {
             translatePart(part.id, x, y, draft);
           }

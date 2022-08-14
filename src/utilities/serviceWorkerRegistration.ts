@@ -1,4 +1,4 @@
-import { notify } from 'core/notifications';
+import { notify } from 'core/ui';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||

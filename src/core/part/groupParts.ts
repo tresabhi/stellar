@@ -9,17 +9,16 @@ export const groupParts = (ids: string[], replaceId: string) => {
 
     if (newGroup) {
       draft.parts.set(newGroup.id, newGroup);
-      newGroupParent.partOrder[newGroupParent.partOrder.indexOf(replaceId)] =
-        newGroup.id;
-      newGroup.partOrder = ids;
+      newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] = newGroup.id;
+      newGroup.part_order = ids;
 
       ids.forEach((id) => {
         const currentParent = getParent(id, draft) ?? draft;
         const currentPart = draft.parts.get(id);
-        const spliceIndex = currentParent.partOrder.indexOf(id);
+        const spliceIndex = currentParent.part_order.indexOf(id);
 
         if (currentPart) currentPart.parentId = newGroup.id;
-        if (spliceIndex !== -1) currentParent.partOrder.splice(spliceIndex, 1);
+        if (spliceIndex !== -1) currentParent.part_order.splice(spliceIndex, 1);
       });
 
       selectPartOnly(newGroup.id, draft);

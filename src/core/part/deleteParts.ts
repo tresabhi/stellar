@@ -6,7 +6,7 @@ export const deleteParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
     ids.forEach((id) => {
       draft.parts.delete(id);
-      draft.partOrder.splice(draft.partOrder.indexOf(id), 1);
+      draft.part_order.splice(draft.part_order.indexOf(id), 1);
       draft.selections.splice(draft.selections.indexOf(id), 1);
     });
     disposeBounds(ids);

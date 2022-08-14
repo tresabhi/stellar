@@ -44,9 +44,9 @@ const IconContainer = styled('div', {
 const Label = styled('span', {
   color: theme.colors.textHighContrast,
   fontSize: theme.fontSizes[12],
-  fontFamily: theme.fonts.base,
+  fontFamily: theme.fonts.default,
   textAlign: 'left',
-  flex: '1',
+  flex: 1,
 
   variants: {
     disabled: {

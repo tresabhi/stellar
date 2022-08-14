@@ -36,7 +36,8 @@ import {
   togglePartsVisibilityBySelection,
   ungroupGroupsBySelection,
 } from 'core/part';
-import useApp, { TOOL } from 'hooks/useApp';
+import { popupOpen } from 'core/ui';
+import useApp, { POPUP, TOOL } from 'hooks/useApp';
 import useBlueprint from 'hooks/useBlueprint';
 import useVersionControl from 'hooks/useVersionControl';
 
@@ -53,6 +54,7 @@ const Toolbar = () => {
 
   const handleMoveClick = () => useApp.setState({ tool: TOOL.MOVE });
   const handlePanClick = () => useApp.setState({ tool: TOOL.PAN });
+  const handlePlusClick = () => popupOpen(POPUP.ADD_PART);
   const handleNewClick = () => loadBlueprint();
   const handleOpenClick = fileOpen;
   const handleSaveClick = fileSave;
@@ -101,7 +103,7 @@ const Toolbar = () => {
             Pan
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
-        <ToolbarComponent.Button disabled>
+        <ToolbarComponent.Button onClick={handlePlusClick}>
           <PlusIcon />
         </ToolbarComponent.Button>
       </ToolbarComponent.Group>

@@ -8,10 +8,7 @@ import { generateId } from './generateId';
  * - Maintains the correct descendent tree
  * - Assigns new ids for all parts
  */
-export const clonePart = (
-  id: string,
-  parts: AnyPartMap,
-): [string, AnyPartMap] | undefined => {
+export const clonePart = (id: string, parts: AnyPartMap): [string, AnyPartMap] | undefined => {
   const part = parts.get(id);
 
   if (part) {
@@ -23,19 +20,17 @@ export const clonePart = (
       const clonedGroup = clonedPart as Group;
       const clonedParts: AnyPartMap = new Map([[clonedPart.id, clonedPart]]);
 
-      clonedGroup.partOrder.forEach((childId, index) => {
+      clonedGroup.part_order.forEach((childId, index) => {
         const child = parts.get(childId);
 
         if (child) {
           const clonedGroupChildData = clonePart(child.id, parts);
 
           if (clonedGroupChildData) {
-            const [clonedGroupChildId, clonedGroupChildrenParts] =
-              clonedGroupChildData;
-            const clonedGroupChild =
-              clonedGroupChildrenParts.get(clonedGroupChildId);
+            const [clonedGroupChildId, clonedGroupChildrenParts] = clonedGroupChildData;
+            const clonedGroupChild = clonedGroupChildrenParts.get(clonedGroupChildId);
 
-            clonedGroup.partOrder[index] = clonedGroupChildId;
+            clonedGroup.part_order[index] = clonedGroupChildId;
 
             if (clonedGroupChild) {
               clonedGroupChild.parentId = clonedGroup.id;
