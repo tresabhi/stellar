@@ -15,7 +15,7 @@ export const Button = styled('button', {
         '&:active': {
           backgroundColor: theme.colors.componentBackgroundActive,
         },
-        '&:focus-visible': {
+        '&:focus:not(.focus-visible)': {
           outline: theme.borderStyles.componentInteractiveActive,
         },
       },
@@ -30,7 +30,7 @@ export const Button = styled('button', {
         '&:active': {
           backgroundColor: theme.colors.componentBackgroundActive_accent,
         },
-        '&:focus-visible': {
+        '&:focus:not(.focus-visible)': {
           outline: theme.borderStyles.componentInteractiveActive_accent,
         },
       },
@@ -63,7 +63,7 @@ export const Button = styled('button', {
         '&:active': {
           backgroundColor: theme.colors.componentBackground,
         },
-        '&:focus-visible': {
+        '&:focus:not(.focus-visible)': {
           outline: 'none',
         },
       },
@@ -81,7 +81,7 @@ export const Button = styled('button', {
         '&:active': {
           backgroundColor: theme.colors.componentBackground_accent,
         },
-        '&:focus-visible': {
+        '&:focus:not(.focus-visible)': {
           outline: 'none',
         },
       },
