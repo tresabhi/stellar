@@ -21,7 +21,7 @@ import {
   ScissorsIcon,
   StackIcon,
   TrashIcon,
-  UploadIcon,
+  UploadIcon
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
@@ -32,7 +32,7 @@ import {
   fileSave,
   loadBlueprint,
   versionRedo,
-  versionUndo,
+  versionUndo
 } from 'core/blueprint';
 import {
   copyPartsBySelection,
@@ -42,7 +42,7 @@ import {
   pasteParts,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
-  ungroupGroupsBySelection,
+  ungroupGroupsBySelection
 } from 'core/part';
 import { popupOpen } from 'core/ui';
 import useApp, { POPUP, TOOL } from 'stores/useApp';
@@ -52,8 +52,8 @@ import useVersionControl from 'stores/useVersionControl';
 const Toolbar = () => {
   const tool = useApp((state) => state.tool);
   const isPanning = useApp((state) => state.isPanning);
-  const parts = useBlueprint((state) => state.parts);
   const selections = useBlueprint((state) => state.selections);
+  const parts =  useBlueprint.getState().parts;
   const isOneHidden = selections.some(
     (selection) => parts.get(selection)?.hidden,
   );
