@@ -1,7 +1,7 @@
 import * as ErrorBoundary from 'components/ErrorBoundary';
 import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
-import SplashScreen from 'routes/SplashScreen';
+import SplashScreen from 'routes/components/SplashScreen';
 import prerender from 'utilities/prerender';
 
 prerender();

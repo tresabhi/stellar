@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Layout } from 'routes/components/Layout';
 import { Popups } from 'routes/components/Popups';
 import { Tabs } from 'routes/components/Tabs';
@@ -10,7 +11,9 @@ export const DeviceVariantContainer = styled('div', {
   flexDirection: 'column',
 });
 
-const Mobile = () => (
+export interface InterfaceProps {}
+
+const Interface: FC<InterfaceProps> = () => (
   <DeviceVariantContainer>
     <Popups />
 
@@ -19,4 +22,4 @@ const Mobile = () => (
   </DeviceVariantContainer>
 );
 
-export default Mobile;
+export default Interface;
