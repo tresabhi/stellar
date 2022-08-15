@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { Layout } from 'routes/components/Layout';
-import { Popups } from 'routes/components/Popups';
-import { Tabs } from 'routes/components/Tabs';
 import { styled } from 'stitches.config';
+import { Popups } from './components/Popups';
+import { TabCreate } from './components/TabCreate';
+import { TabLayout } from './components/TabLayout';
+import { Tabs } from './components/Tabs';
 
 export const DeviceVariantContainer = styled('div', {
   width: '100vw',
@@ -18,7 +19,8 @@ const Interface: FC<InterfaceProps> = () => (
     <Popups />
 
     <Tabs />
-    <Layout />
+    <TabCreate />
+    <TabLayout />
   </DeviceVariantContainer>
 );
 

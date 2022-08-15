@@ -6,5 +6,16 @@ export const Container = styled('div', {
   backgroundColor: theme.colors.componentBackground,
   borderRadius: theme.radii[4],
   overflowY: 'visible',
-  maxHeight: theme.sizes.palletMaxHeight,
+
+  variants: {
+    darkBackground: {
+      true: {
+        backgroundColor: theme.colors.appBackground2,
+      },
+    },
+  },
+
+  defaultVariants: {
+    darkBackground: true,
+  },
 });

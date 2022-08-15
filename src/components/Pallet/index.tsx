@@ -1,6 +1,5 @@
 import * as Listing from 'components/Listing';
 import { Search } from 'components/Search';
-import { popupClose } from 'core/ui';
 import { go } from 'fuzzysort';
 import {
   FC,
@@ -12,13 +11,13 @@ import {
   useState,
 } from 'react';
 import { styled, theme } from 'stitches.config';
-import useApp from 'stores/useApp';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
 export interface PalletItem {
   name: string;
   callback: () => void;
   note?: string;
+  noteURL?: string;
   icon?: ReactNode;
 }
 
@@ -26,25 +25,66 @@ export interface PalletProps {
   debounce?: number;
   iconGap?: boolean;
   items: PalletItem[];
+  placeholder?: string;
+  transparent?: boolean;
+  darkBackground?: boolean;
+  hasMaxHeight?: boolean;
+  gainFocus?: boolean;
 }
 
 const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  padding: theme.space.padding,
   gap: theme.space.gapRelatedMajor,
-  borderRadius: theme.radii[4],
-  border: theme.borderStyles.componentInteractive,
-  backgroundColor: theme.colors.componentBackground,
-  width: theme.sizes.palletWidth,
+  flex: 1,
+
+  variants: {
+    transparent: {
+      false: {
+        borderRadius: theme.radii[4],
+        border: theme.borderStyles.componentInteractive,
+        backgroundColor: theme.colors.componentBackground,
+        padding: theme.space.padding,
+        width: theme.sizes.palletWidth,
+      },
+    },
+
+    hasMaxHeight: {
+      true: {
+        maxHeight: theme.sizes.palletMaxHeight,
+      },
+    },
+  },
+
+  defaultVariants: {
+    transparent: false,
+    hasMaxHeight: true,
+  },
 });
 
-export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
+const FullHeightListingContainer = styled(Listing.Container, {
+  flex: 1,
+});
+
+export const Pallet: FC<PalletProps> = ({
+  items,
+  iconGap,
+  debounce = 0,
+  placeholder,
+  transparent,
+  darkBackground,
+  hasMaxHeight,
+  gainFocus,
+}) => {
   const nameMap = useMemo(
     () => new Map(items.map((item) => [item.name, item])),
     [items],
   );
   const names = useMemo(() => items.map((item) => item.name), [items]);
+  const namesFormatted = useMemo(
+    () => names.map((name) => ({ target: name })),
+    [names],
+  );
   const [search, setSearch] = useState('');
   const results = useMemo(() => go(search, names), [names, search]);
   const input = useRef<HTMLInputElement>(null!);
@@ -54,14 +94,11 @@ export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
     debounce,
   );
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter') {
-      firstResult.current?.click();
-      popupClose();
-    }
+    if (event.key === 'Enter') firstResult.current?.click();
   };
   const listings = useMemo(
     () =>
-      results.map((result, index) => {
+      (search.length > 0 ? results : namesFormatted).map((result, index) => {
         const item = nameMap.get(result.target)!;
 
         return (
@@ -70,6 +107,7 @@ export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
             onClick={item.callback}
             key={item.name}
             note={item.note}
+            noteURL={item.noteURL}
             iconGap={iconGap}
             icon={item.icon}
           >
@@ -77,28 +115,25 @@ export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
           </Listing.Item>
         );
       }),
-    [iconGap, nameMap, results],
+    [iconGap, nameMap, results, namesFormatted, search],
   );
 
   useEffect(() => {
-    input.current.focus();
+    if (gainFocus) input.current.focus();
   });
 
-  useEffect(() => {
-    useApp.setState({ isInteractingWithUI: true });
-
-    return () => useApp.setState({ isInteractingWithUI: false });
-  }, []);
-
   return (
-    <Container>
+    <Container hasMaxHeight={hasMaxHeight} transparent={transparent}>
       <Search
         ref={input}
         onKeyDown={handleKeyDown}
         onChange={handleChange}
-        placeholder="Search parts..."
+        placeholder={placeholder}
       />
-      {listings.length > 0 && <Listing.Container>{listings}</Listing.Container>}
+
+      <FullHeightListingContainer darkBackground={darkBackground}>
+        {listings}
+      </FullHeightListingContainer>
     </Container>
   );
 };

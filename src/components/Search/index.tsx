@@ -8,21 +8,32 @@ const Container = styled('div', {
   display: 'flex',
   padding: `0 ${theme.space.padding}`,
   gap: theme.space.gapRelatedMajor,
-  border: theme.borderStyles.componentInteractive,
   borderRadius: theme.radii[4],
   height: theme.sizes.inputHeightMajor,
   justifyContent: 'center',
   alignItems: 'center',
+  border: theme.borderStyles.componentInteractive,
+
+  '&:hover': {
+    border: theme.borderStyles.componentInteractiveHover,
+  },
+  '&:active, &:focus-within': {
+    border: theme.borderStyles.componentInteractiveActive,
+  },
 });
+
 const Input = styled('input', {
   fontSize: theme.fontSizes[12],
   color: theme.colors.textHighContrast,
   flex: 1,
+  height: '100%',
+  padding: 'none',
 
   '&::placeholder': {
     color: theme.colors.textLowContrast,
   },
 });
+
 const Icon = styled(MagnifyingGlassIcon, {
   width: theme.sizes[16],
   height: theme.sizes[16],

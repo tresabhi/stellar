@@ -35,7 +35,7 @@ export const UseAppData: UseApp = {
   fileHandle: undefined,
   hasUnsavedChanges: false,
 
-  tab: TAB.LAYOUT, // temporarily set to layout
+  tab: TAB.CREATE,
   popup: null,
 
   tool: TOOL.MOVE,

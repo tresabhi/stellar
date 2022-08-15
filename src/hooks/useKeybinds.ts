@@ -48,6 +48,7 @@ interface BindOptions {
   preventDefault: boolean;
   preventRepeats: boolean;
   preventWhenInteractingWithUI: boolean;
+  preventOnNonLayoutTab: boolean;
   action: 'keydown' | 'keyup' | 'keypress';
 }
 
@@ -55,6 +56,7 @@ const bindDefaultOptions: BindOptions = {
   preventDefault: true,
   preventRepeats: true,
   preventWhenInteractingWithUI: true,
+  preventOnNonLayoutTab: true,
   action: 'keydown',
 };
 
@@ -68,13 +70,16 @@ const bind = (
   mousetrapBind(
     keys,
     (event) => {
-      const { isInteractingWithUI } = useApp.getState();
+      const { isInteractingWithUI, tab } = useApp.getState();
+
+      console.log(isInteractingWithUI);
 
       if (
         (mergedOptions.preventRepeats ? !event.repeat : true) &&
         (mergedOptions.preventWhenInteractingWithUI
           ? !isInteractingWithUI
-          : true)
+          : true) &&
+        (mergedOptions.preventOnNonLayoutTab ? tab === TAB.LAYOUT : true)
       ) {
         if (mergedOptions.preventDefault) event.preventDefault();
 
@@ -105,13 +110,16 @@ const useKeybinds = () => {
       { preventWhenInteractingWithUI: false },
     );
 
-    bind('p a r t y', () => {
-      // party mode easter egg
-      document.body.classList.toggle('party');
-    });
+    bind(
+      'p a r t y',
+      () => {
+        // party mode easter egg
+        document.body.classList.toggle('party');
+      },
+      { preventOnNonLayoutTab: false },
+    );
 
-    bind('del', deletePartsBySelection);
-    bind('backspace', deletePartsBySelection);
+    bind(['del', 'backspace'], deletePartsBySelection);
 
     bind('alt+1', () => {
       useSettings.setState(
@@ -120,24 +128,39 @@ const useKeybinds = () => {
         }),
       );
     });
-
     bind('alt+2', () => {
       useSettings.setState(
         produce((draft: UseSettings) => {
-          draft.layout.rightSideBar.visible =
-            !draft.layout.rightSideBar.visible;
+          draft.layout.rightSideBar.visible = !draft.layout.rightSideBar
+            .visible;
         }),
       );
     });
 
-    bind('ctrl+tab', () => {
-      useApp.setState((state) => ({
-        tab:
-          state.tab === tabOrder[tabOrder.length - 1]
-            ? tabOrder[0]
-            : tabOrder[tabOrder.indexOf(state.tab) + 1],
-      }));
-    });
+    bind(
+      ['ctrl+tab', ']'],
+      () => {
+        useApp.setState((state) => ({
+          tab:
+            state.tab === tabOrder[tabOrder.length - 1]
+              ? tabOrder[0]
+              : tabOrder[tabOrder.indexOf(state.tab) + 1],
+        }));
+      },
+      { preventOnNonLayoutTab: false },
+    );
+    bind(
+      ['ctrl+shift+tab', '['],
+      () => {
+        useApp.setState((state) => ({
+          tab:
+            state.tab === 0
+              ? tabOrder[tabOrder.length - 1]
+              : tabOrder[tabOrder.indexOf(state.tab) - 1],
+        }));
+      },
+      { preventOnNonLayoutTab: false },
+    );
 
     bind('up', () => translate(...upVector), {
       preventRepeats: false,
@@ -167,10 +190,7 @@ const useKeybinds = () => {
     bind('ctrl+z', versionUndo, {
       preventRepeats: false,
     });
-    bind('ctrl+shift+z', versionRedo, {
-      preventRepeats: false,
-    });
-    bind('ctrl+y', versionRedo, {
+    bind(['ctrl+shift+z', 'ctrl+y'], versionRedo, {
       preventRepeats: false,
     });
 
@@ -192,11 +212,26 @@ const useKeybinds = () => {
       { action: 'keyup' },
     );
 
-    bind('ctrl+n', loadBlueprint);
-    bind('ctrl+o', fileOpen);
-    bind('ctrl+s', fileSaveAs);
-    bind('ctrl+i', fileImport);
-    bind('ctrl+e', fileExport);
+    bind('ctrl+n', () => {
+      loadBlueprint();
+      useApp.setState({ tab: TAB.LAYOUT });
+    });
+    bind('ctrl+o', () => {
+      fileOpen();
+      useApp.setState({ tab: TAB.LAYOUT });
+    });
+    bind('ctrl+s', () => {
+      fileSaveAs();
+      useApp.setState({ tab: TAB.LAYOUT });
+    });
+    bind('ctrl+i', () => {
+      fileImport();
+      useApp.setState({ tab: TAB.LAYOUT });
+    });
+    bind('ctrl+e', () => {
+      fileExport();
+      useApp.setState({ tab: TAB.LAYOUT });
+    });
 
     bind('ctrl+c', copyPartsBySelection);
     bind('ctrl+x', cutPartsBySelection);

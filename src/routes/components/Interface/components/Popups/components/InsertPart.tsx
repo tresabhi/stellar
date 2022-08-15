@@ -1,10 +1,12 @@
 import { Pallet, PalletItem } from 'components/Pallet';
 import { getParent, getPart, insertNewPart } from 'core/part';
 import { popupClose } from 'core/ui';
+import { useEffect } from 'react';
+import useApp from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import usePartRegistry from 'stores/usePartRegistry';
 
-export const AddPart = () => {
+export const InsertPart = () => {
   const partRegistry = usePartRegistry();
   const palletItems: PalletItem[] = [];
   const { selections } = useBlueprint.getState();
@@ -44,5 +46,11 @@ export const AddPart = () => {
     });
   });
 
-  return <Pallet items={palletItems} />;
+  useEffect(() => {
+    useApp.setState({ isInteractingWithUI: true });
+
+    return () => useApp.setState({ isInteractingWithUI: false });
+  }, []);
+
+  return <Pallet gainFocus placeholder="Insert part..." items={palletItems} />;
 };

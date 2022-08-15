@@ -1,10 +1,10 @@
 import { PopupContainer } from 'components/PopupContainer';
-import useApp, { POPUP } from 'stores/useApp';
 import { isNull } from 'lodash';
 import { FC } from 'react';
-import { AddPart } from './components/AddPart';
+import useApp, { POPUP } from 'stores/useApp';
+import { InsertPart } from './components/InsertPart';
 
-const PopupMap = new Map<POPUP, FC>([[POPUP.ADD_PART, AddPart]]);
+const PopupMap = new Map<POPUP, FC>([[POPUP.ADD_PART, InsertPart]]);
 
 export const Popups = () => {
   const popup = useApp((state) => state.popup);
