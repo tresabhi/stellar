@@ -28,7 +28,7 @@ import useApp, { POPUP, TAB, TOOL } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings, { UseSettings } from 'stores/useSettings';
 
-const tabOrder = [TAB.LAYOUT, TAB.STAGING, TAB.EXPORT];
+const tabOrder = [TAB.CREATE, TAB.LAYOUT, TAB.STAGING, TAB.EXPORT];
 
 // TODO: make this date driven
 const TRANSLATE = 1;

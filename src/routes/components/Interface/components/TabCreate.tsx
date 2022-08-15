@@ -1,5 +1,12 @@
+import dragonHelicopter from 'assets/blueprints/dragon-helicopter.json';
+import gaganyaan from 'assets/blueprints/gaganyaan.json';
+import marsVenusRover from 'assets/blueprints/mars-venus-rover.json';
+import perseveranceRover from 'assets/blueprints/perseverance-rover.json';
 import saturnV from 'assets/blueprints/saturn-v.json';
+import smallShuttle from 'assets/blueprints/small-shuttle.json';
+import sovietN1 from 'assets/blueprints/soviet-n1.json';
 import starship from 'assets/blueprints/starship.json';
+import titanIIIC from 'assets/blueprints/titan-iiic.json';
 import { Pallet, PalletItem } from 'components/Pallet';
 import { loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
@@ -7,13 +14,16 @@ import { styled, theme } from 'stitches.config';
 import useApp, { TAB } from 'stores/useApp';
 import { TabContainer } from './Tabs';
 
-const jmnetMember = (id: number) => {
-  return `https://jmnet.one/sfs/forum/index.php?members/${id}/`;
-};
-
-const TEMPLATES: [string, string, string, VanillaBlueprint][] = [
-  ['Saturn V', 'Luke96', jmnetMember(4805), saturnV],
-  ['SpaceX Starship', 'SouthwestSpaceFlight', jmnetMember(4673), starship],
+const TEMPLATES: [string, string, number, VanillaBlueprint][] = [
+  ['Saturn V', 'Luke96', 4805, saturnV],
+  ['SpaceX Starship', 'SouthwestSpaceFlight', 4673, starship],
+  ['Soviet N1', 'SSA', 5649, sovietN1],
+  ['Perseverance Rover', 'alexmb48', 4829, perseveranceRover],
+  ['Gaganyaan', 'SFSAbhishek', 3320, gaganyaan],
+  ['Titan IIIC', 'Cjuwa1985', 4688, titanIIIC],
+  ['Mars/Venus Rover', 'Bilo92', 6120, marsVenusRover],
+  ['Small Shuttle', 'Soyuzturtle', 4706, smallShuttle],
+  ['Dragon Helicopter', 'mosscow', 4845, dragonHelicopter],
 ];
 const PALLET_ITEMS = TEMPLATES.sort((a, b) => {
   if (a[0] < b[0]) return -1;
@@ -24,7 +34,7 @@ const PALLET_ITEMS = TEMPLATES.sort((a, b) => {
     ({
       name: template[0],
       note: template[1],
-      noteURL: template[2],
+      noteURL: `https://jmnet.one/sfs/forum/index.php?members/${template[2]}`,
       callback: () => {
         loadBlueprint(template[3]);
         useApp.setState({ tab: TAB.LAYOUT });
