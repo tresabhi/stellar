@@ -30,10 +30,10 @@ const Icon = styled(MagnifyingGlassIcon, {
 });
 
 export const Search = forwardRef<HTMLInputElement, SearchProps>(
-  ({ ...props }, ref) => {
+  (props, ref) => {
     return (
-      <Container {...props}>
-        <Input ref={ref} />
+      <Container>
+        <Input {...props} ref={ref} />
         <Icon />
       </Container>
     );
