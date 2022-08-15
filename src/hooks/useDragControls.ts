@@ -3,14 +3,14 @@ import { UNDO_LIMIT } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import produce, { Patch, produceWithPatches } from 'immer';
+import useBlueprint from 'stores/useBlueprint';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
 import useApp, { TOOL } from '../stores/useApp';
-import useMousePos from './useMousePos';
 import useVersionControl, {
   UseVersionControl,
 } from '../stores/useVersionControl';
-import useBlueprint from 'stores/useBlueprint';
+import useMousePos from './useMousePos';
 
 const DEFAULT_SNAP = 1 / 2;
 const CTRL_SNAP = 1 / 10;
@@ -22,7 +22,8 @@ const useDragControls = (id: string) => {
 
   let selectedInitially = false;
   let initialMousePos: Vector2;
-  let delta = new Vector2();
+  let lastDelta = new Vector2();
+  let lastSnappedDelta = new Vector2();
   let firstInversePatches: Patch[] | undefined;
   let lastPatches: Patch[] | undefined;
 
@@ -41,7 +42,8 @@ const useDragControls = (id: string) => {
       event.stopPropagation();
 
       initialMousePos = getMousePos(event);
-      delta.set(0, 0);
+      lastDelta.set(0, 0);
+      lastSnappedDelta.set(0, 0);
       selectedInitially = part.selected;
 
       window.addEventListener('pointerup', onPointerUp);
@@ -57,18 +59,22 @@ const useDragControls = (id: string) => {
       ? SHIFT_SNAP
       : DEFAULT_SNAP;
     const mousePos = getMousePos(event);
-    const newDelta = new Vector2(
-      snap(mousePos.x - initialMousePos.x, snapDistance),
-      snap(mousePos.y - initialMousePos.y, snapDistance),
+    const delta = new Vector2(
+      mousePos.x - initialMousePos.x,
+      mousePos.y - initialMousePos.y,
     );
-    const movement = newDelta.sub(delta);
+    const snappedDelta = new Vector2(
+      snap(delta.x, snapDistance),
+      snap(delta.y, snapDistance),
+    );
+    const movement = snappedDelta.clone().sub(lastSnappedDelta);
 
     if (!selectedInitially) {
       selectPartOnly(id);
       selectedInitially = true;
     }
 
-    if (movement.x !== 0 && movement.y !== 0) {
+    if (movement.x !== 0 || movement.y !== 0) {
       const [nextState, patches, inversePatches] = produceWithPatches(
         useBlueprint.getState(),
         (draft) => {
@@ -88,7 +94,8 @@ const useDragControls = (id: string) => {
       }
     }
 
-    delta.copy(newDelta.add(delta));
+    lastDelta.copy(delta);
+    lastSnappedDelta.copy(snappedDelta);
   };
   const onPointerUp = () => {
     window.removeEventListener('pointerup', onPointerUp);
