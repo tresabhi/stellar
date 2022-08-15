@@ -2,7 +2,6 @@ import * as Listing from 'components/Listing';
 import { Search } from 'components/Search';
 import { popupClose } from 'core/ui';
 import { go } from 'fuzzysort';
-import useApp from 'stores/useApp';
 import {
   FC,
   KeyboardEvent,
@@ -13,6 +12,7 @@ import {
   useState,
 } from 'react';
 import { styled, theme } from 'stitches.config';
+import useApp from 'stores/useApp';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
 export interface PalletItem {
@@ -48,20 +48,25 @@ export const Pallet: FC<PalletProps> = ({ items, iconGap, debounce = 0 }) => {
   const [search, setSearch] = useState('');
   const results = useMemo(() => go(search, names), [names, search]);
   const input = useRef<HTMLInputElement>(null!);
+  const firstResult = useRef<HTMLButtonElement>(null);
   const handleChange = fallingEdgeDebounce(
     () => setSearch(input.current.value),
     debounce,
   );
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter') popupClose();
+    if (event.key === 'Enter') {
+      firstResult.current?.click();
+      popupClose();
+    }
   };
   const listings = useMemo(
     () =>
-      results.map((result) => {
+      results.map((result, index) => {
         const item = nameMap.get(result.target)!;
 
         return (
           <Listing.Item
+            ref={index === 0 ? firstResult : undefined}
             onClick={item.callback}
             key={item.name}
             note={item.note}

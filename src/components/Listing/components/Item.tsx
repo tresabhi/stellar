@@ -1,5 +1,11 @@
 import { Button } from 'components/Button';
-import { InputHTMLAttributes, memo, ReactNode } from 'react';
+import {
+  ForwardedRef,
+  forwardRef,
+  InputHTMLAttributes,
+  memo,
+  ReactNode,
+} from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface ItemProps extends InputHTMLAttributes<HTMLButtonElement> {
@@ -7,6 +13,7 @@ export interface ItemProps extends InputHTMLAttributes<HTMLButtonElement> {
   note?: string;
   icon?: ReactNode;
   iconGap?: boolean;
+  ref?: ForwardedRef<HTMLButtonElement>;
 }
 
 const Container = styled(Button, {
@@ -49,15 +56,17 @@ const Note = styled('span', {
 });
 
 export const Item = memo<ItemProps>(
-  ({ children, note, icon, iconGap, ...props }) => {
-    return (
-      // @ts-ignore
-      <Container {...props}>
-        {icon || iconGap ? <IconContainer>{icon}</IconContainer> : null}
-        <Label>{children}</Label>
-        <Note>{note}</Note>
-      </Container>
-    );
-  },
+  forwardRef<HTMLButtonElement, ItemProps>(
+    ({ children, note, icon, iconGap, ...props }, ref) => {
+      return (
+        // @ts-ignore
+        <Container {...props} ref={ref}>
+          {icon || iconGap ? <IconContainer>{icon}</IconContainer> : null}
+          <Label>{children}</Label>
+          <Note>{note}</Note>
+        </Container>
+      );
+    },
+  ),
   ({ name: prevName }, { name: nextName }) => prevName === nextName,
 );
