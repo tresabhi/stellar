@@ -62,8 +62,9 @@ const Container = styled('div', {
   },
 });
 
-const FullHeightListingContainer = styled(Listing.Container, {
-  flex: 1,
+const FlexListingContainer = styled(Listing.Container, {
+  flexGrow: 1,
+  flexBasis: 0,
 });
 
 export const Pallet: FC<PalletProps> = ({
@@ -131,9 +132,9 @@ export const Pallet: FC<PalletProps> = ({
         placeholder={placeholder}
       />
 
-      <FullHeightListingContainer darkBackground={darkBackground}>
+      <FlexListingContainer darkBackground={darkBackground}>
         {listings}
-      </FullHeightListingContainer>
+      </FlexListingContainer>
     </Container>
   );
 };
