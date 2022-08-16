@@ -53,6 +53,7 @@ export const {
       tabMaxWidth: '15rem',
       palletMaxHeight: '15rem',
       palletWidth: '20rem',
+      separatorWidth: '0.0625rem',
     },
 
     radii: {
