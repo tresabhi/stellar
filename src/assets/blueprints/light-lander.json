@@ -1,0 +1,142 @@
+{
+  "center": 7.0,
+  "parts": [
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 1.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Probe",
+      "p": {
+        "x": 7.0,
+        "y": 2.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 2.0
+      }
+    },
+    {
+      "n": "RCS",
+      "p": {
+        "x": 6.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity"
+    },
+    {
+      "n": "RCS",
+      "p": {
+        "x": 8.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity"
+    },
+    {
+      "n": "Landing Leg",
+      "p": {
+        "x": 6.0,
+        "y": 2.0
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "state": 0.0,
+        "state_target": 0.0
+      }
+    },
+    {
+      "n": "Landing Leg",
+      "p": {
+        "x": 8.0,
+        "y": 2.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "state": 0.0,
+        "state_target": 0.0
+      }
+    },
+    {
+      "n": "Engine Kolibri",
+      "p": {
+        "x": 7.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageId": 1,
+      "partIndexes": [
+        6,
+        2
+      ]
+    },
+    {
+      "stageId": 2,
+      "partIndexes": [
+        4
+      ]
+    }
+  ],
+  "rotation": 0.0,
+  "offset": {
+    "x": 0.0,
+    "y": 0.0
+  }
+}

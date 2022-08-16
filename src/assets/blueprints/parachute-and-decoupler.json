@@ -1,0 +1,125 @@
+{
+  "center": 7.0,
+  "parts": [
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 3.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Engine Hawk",
+      "p": {
+        "x": 7.0,
+        "y": 3.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    },
+    {
+      "n": "Parachute",
+      "p": {
+        "x": 7.0,
+        "y": 9.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "deploy_state": 0.0,
+        "animation_state": 0.0
+      }
+    },
+    {
+      "n": "Separator",
+      "p": {
+        "x": 7.0,
+        "y": 7.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 2.0,
+        "width_b": 2.0,
+        "height": 0.0,
+        "height_max": 4.0,
+        "force_percent": 0.5
+      },
+      "T": {
+        "color_tex": ""
+      }
+    },
+    {
+      "n": "Capsule",
+      "p": {
+        "x": 7.0,
+        "y": 7.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity"
+    }
+  ],
+  "stages": [
+    {
+      "stageId": 1,
+      "partIndexes": [
+        1
+      ]
+    },
+    {
+      "stageId": 2,
+      "partIndexes": [
+        1,
+        3
+      ]
+    },
+    {
+      "stageId": 3,
+      "partIndexes": [
+        2
+      ]
+    }
+  ],
+  "rotation": 0.0,
+  "offset": {
+    "x": 0.0,
+    "y": 0.0
+  }
+}

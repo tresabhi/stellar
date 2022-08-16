@@ -1,0 +1,128 @@
+{
+  "center": 7.0,
+  "parts": [
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 6.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 270.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 2.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Cone Side",
+      "p": {
+        "x": 8.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 270.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "size": 2.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Engine Valiant",
+      "p": {
+        "x": 6.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 270.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    },
+    {
+      "n": "Wheel Medium",
+      "p": {
+        "x": 5.0,
+        "y": 1.0
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "wheel_on": false
+      }
+    },
+    {
+      "n": "Probe",
+      "p": {
+        "x": 5.0,
+        "y": 1.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 270.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 2.0
+      }
+    },
+    {
+      "n": "Wheel Medium",
+      "p": {
+        "x": 9.5,
+        "y": 1.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "wheel_on": false
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageId": 1,
+      "partIndexes": [
+        3,
+        5
+      ]
+    }
+  ],
+  "rotation": 0.0,
+  "offset": {
+    "x": 0.0,
+    "y": 0.0
+  }
+}

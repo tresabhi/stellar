@@ -1,0 +1,958 @@
+{
+  "center": 7.0,
+  "parts": [
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 7.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Engine Hawk",
+      "p": {
+        "x": 4.0,
+        "y": 2.999999
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    },
+    {
+      "n": "Engine Hawk",
+      "p": {
+        "x": 10.0,
+        "y": 2.999999
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 10.0,
+        "y": 2.999999
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Docking Port",
+      "p": {
+        "x": 7.0,
+        "y": 25.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 0.95
+      }
+    },
+    {
+      "n": "Docking Port",
+      "p": {
+        "x": 7.0,
+        "y": 25.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 180.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 0.95
+      }
+    },
+    {
+      "n": "Landing Leg",
+      "p": {
+        "x": 8.0,
+        "y": 26.5
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 180.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "state": 0.0,
+        "state_target": 0.0
+      }
+    },
+    {
+      "n": "Landing Leg",
+      "p": {
+        "x": 6.0,
+        "y": 26.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 180.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "state": 0.0,
+        "state_target": 0.0
+      }
+    },
+    {
+      "n": "Probe",
+      "p": {
+        "x": 7.0,
+        "y": 26.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 180.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 2.0
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 10.0,
+        "y": 11.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 4.0,
+        "y": 11.0
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Cone",
+      "p": {
+        "x": 4.0,
+        "y": 15.0
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "size": 2.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Engine Kolibri",
+      "p": {
+        "x": 7.0,
+        "y": 27.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 180.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 27.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 180.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 1.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 4.0,
+        "y": 2.999999
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Engine Hawk",
+      "p": {
+        "x": 7.0,
+        "y": 3.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    },
+    {
+      "n": "Side Separator",
+      "p": {
+        "x": 8.5,
+        "y": 9.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "force_percent": 1.0
+      },
+      "T": {
+        "fragment": ""
+      }
+    },
+    {
+      "n": "Side Separator",
+      "p": {
+        "x": 5.5,
+        "y": 9.0
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "force_percent": 1.0
+      },
+      "T": {
+        "fragment": ""
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 4.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 3.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 3.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 3.0,
+        "height": 1.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Cone",
+      "p": {
+        "x": 10.0,
+        "y": 15.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "size": 2.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 11.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 19.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 2.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Engine Valiant",
+      "p": {
+        "x": 7.0,
+        "y": 19.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "B": {
+        "engine_on": false,
+        "heat_on__for_creative_use": true
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 10.0,
+        "y": 7.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 4.0,
+        "y": 7.0
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 2.0,
+        "width_b": 2.0,
+        "height": 4.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "RCS",
+      "p": {
+        "x": 8.0,
+        "y": 20.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity"
+    },
+    {
+      "n": "RCS",
+      "p": {
+        "x": 6.0,
+        "y": 20.5
+      },
+      "o": {
+        "x": -1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity"
+    },
+    {
+      "n": "Capsule",
+      "p": {
+        "x": 7.0,
+        "y": 22.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity"
+    },
+    {
+      "n": "Heat Shield",
+      "p": {
+        "x": 7.0,
+        "y": 22.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width": 2.0,
+        "shield_temp": "-Infinity"
+      }
+    },
+    {
+      "n": "Separator",
+      "p": {
+        "x": 7.0,
+        "y": 21.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 2.0,
+        "width_b": 2.0,
+        "height": 0.42000007629394531,
+        "height_max": 4.0,
+        "force_percent": 0.5
+      },
+      "T": {
+        "color_tex": ""
+      }
+    },
+    {
+      "n": "Parachute",
+      "p": {
+        "x": 7.0,
+        "y": 24.5
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 180.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "deploy_state": 0.0,
+        "animation_state": 0.0
+      }
+    },
+    {
+      "n": "Separator",
+      "p": {
+        "x": 7.0,
+        "y": 17.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width": 3.0,
+        "width_b": 2.0,
+        "height": 2.0,
+        "height_max": 4.5,
+        "force_percent": 0.5
+      },
+      "T": {
+        "color_tex": ""
+      }
+    },
+    {
+      "n": "Fairing",
+      "p": {
+        "x": 7.0,
+        "y": 17.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 2.0,
+        "force_percent": 0.5
+      },
+      "B": {
+        "occupied_a": false,
+        "detach_edge": false
+      },
+      "T": {
+        "fragment": "",
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fuel Tank",
+      "p": {
+        "x": 7.0,
+        "y": 15.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 2.0,
+        "fuel_percent": 1.0
+      },
+      "T": {
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fairing",
+      "p": {
+        "x": 7.0,
+        "y": 23.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 2.0,
+        "force_percent": 0.5
+      },
+      "B": {
+        "occupied_a": true,
+        "detach_edge": false
+      },
+      "T": {
+        "fragment": "",
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fairing",
+      "p": {
+        "x": 7.0,
+        "y": 27.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width_a": 3.0,
+        "width_b": 2.0,
+        "height": 1.0,
+        "force_percent": 0.5
+      },
+      "B": {
+        "occupied_a": true,
+        "detach_edge": false
+      },
+      "T": {
+        "fragment": "",
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fairing Cone",
+      "p": {
+        "x": 7.0,
+        "y": 28.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 2.0,
+        "width": 2.0,
+        "height": 2.0,
+        "force_percent": 0.5
+      },
+      "B": {
+        "detach_edge": false
+      },
+      "T": {
+        "fragment": "",
+        "color_tex": "_",
+        "shade_tex": "_"
+      }
+    },
+    {
+      "n": "Fairing",
+      "p": {
+        "x": 7.0,
+        "y": 25.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 2.0,
+        "force_percent": 0.5
+      },
+      "B": {
+        "occupied_a": true,
+        "detach_edge": false
+      },
+      "T": {
+        "fragment": "",
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fairing",
+      "p": {
+        "x": 7.0,
+        "y": 21.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 2.0,
+        "force_percent": 0.5
+      },
+      "B": {
+        "occupied_a": true,
+        "detach_edge": false
+      },
+      "T": {
+        "fragment": "",
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    },
+    {
+      "n": "Fairing",
+      "p": {
+        "x": 7.0,
+        "y": 19.0
+      },
+      "o": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 0.0
+      },
+      "t": "-Infinity",
+      "N": {
+        "width_original": 3.0,
+        "width_a": 3.0,
+        "width_b": 3.0,
+        "height": 2.0,
+        "force_percent": 0.5
+      },
+      "B": {
+        "occupied_a": true,
+        "detach_edge": false
+      },
+      "T": {
+        "fragment": "",
+        "color_tex": "_",
+        "shape_tex": "_"
+      }
+    }
+  ],
+  "stages": [
+    {
+      "stageId": 1,
+      "partIndexes": [
+        15,
+        1,
+        2
+      ]
+    },
+    {
+      "stageId": 2,
+      "partIndexes": [
+        1,
+        2,
+        17,
+        16,
+        33
+      ]
+    },
+    {
+      "stageId": 3,
+      "partIndexes": [
+        15,
+        23,
+        26,
+        27,
+        32
+      ]
+    },
+    {
+      "stageId": 4,
+      "partIndexes": [
+        5
+      ]
+    },
+    {
+      "stageId": 5,
+      "partIndexes": [
+        12,
+        7,
+        6
+      ]
+    },
+    {
+      "stageId": 6,
+      "partIndexes": [
+        6,
+        7
+      ]
+    },
+    {
+      "stageId": 7,
+      "partIndexes": [
+        5
+      ]
+    },
+    {
+      "stageId": 8,
+      "partIndexes": [
+        30
+      ]
+    },
+    {
+      "stageId": 9,
+      "partIndexes": [
+        31,
+        29
+      ]
+    }
+  ],
+  "rotation": 0.0,
+  "offset": {
+    "x": 0.0,
+    "y": 0.0
+  }
+}
