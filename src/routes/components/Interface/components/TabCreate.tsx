@@ -125,13 +125,18 @@ const Container = styled('div', {
   backgroundColor: theme.colors.componentBackground,
   display: 'flex',
   gap: theme.space.gapUnrelatedMajor,
+  alignItems: 'center',
+  justifyContent: 'center',
 });
 
 const SectionContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.space.gapUnrelatedMajor,
+  gap: theme.space[32],
   padding: theme.space.paddingMajor,
+  height: '100%',
+  maxWidth: theme.sizes.createTabContentMaxWidth,
+  maxHeight: theme.sizes.createTabContentMaxHeight,
 
   variants: {
     full: {
@@ -159,7 +164,7 @@ const FullHeightPallet = styled(Pallet, {
 
 const Separator = styled('div', {
   width: theme.sizes.separatorWidth,
-  height: '75vh',
+  height: '75%',
   // TODO: add a seperator color
   backgroundColor: theme.colors.componentNonInteractiveBorder,
   borderRadius: theme.radii[1],
@@ -167,7 +172,13 @@ const Separator = styled('div', {
 
 const Title = styled('span', {
   color: theme.colors.textHighContrast,
-  fontSize: theme.fontSizes[14],
+  fontSize: theme.fontSizes[32],
+});
+
+const SubTitle = styled('span', {
+  color: theme.colors.textLowContrast,
+  fontSize: theme.fontSizes[12],
+  fontFamily: theme.fonts.mono,
 });
 
 const Button = styled(ButtonComponent, {
@@ -229,7 +240,10 @@ export const TabCreate = () => {
         </SectionContainer>
 
         <SectionContainer full center>
-          <Title>Or, alternatively...</Title>
+          <FileActions>
+            <Title>Stellar</Title>
+            <SubTitle>Blueprint editing redefined</SubTitle>
+          </FileActions>
 
           <FileActions>
             <Button onClick={handleScratchClick} callToAction>

@@ -34,6 +34,7 @@ export const {
       12: '0.75rem',
       14: '0.875rem',
       16: '1rem',
+      32: '2rem',
     },
 
     sizes: {
@@ -54,6 +55,8 @@ export const {
       palletMaxHeight: '15rem',
       palletWidth: '20rem',
       separatorWidth: '0.0625rem',
+      createTabContentMaxWidth: '35rem',
+      createTabContentMaxHeight: '25rem',
     },
 
     radii: {
@@ -87,6 +90,8 @@ export const {
 
     space: {
       ...createSpaces(),
+
+      32: '2rem',
     },
   },
 });

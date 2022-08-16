@@ -27,6 +27,7 @@ const Container = styled(Button, {
   gap: theme.space.gapRelatedMajor,
   color: theme.colors.textHighContrast,
   height: theme.sizes.inputHeightMajor,
+  width: '100%',
 
   defaultVariants: {
     transparent: true,
