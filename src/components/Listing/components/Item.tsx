@@ -1,3 +1,4 @@
+import { Anchor } from 'components/Anchor';
 import { Button } from 'components/Button';
 import {
   ForwardedRef,
@@ -50,11 +51,13 @@ const Label = styled('span', {
   textAlign: 'left',
 });
 
-const ANote = styled('a', {
+const ANote = styled(Anchor, {
   fontSize: theme.fontSizes[10],
-  color: theme.colors.textLowContrast,
-  fontFamily: theme.fonts.mono,
-  textDecoration: 'underline',
+
+  defaultVariants: {
+    monoSpace: true,
+    accent: false,
+  },
 });
 
 const Note = styled('span', {
