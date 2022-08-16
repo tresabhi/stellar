@@ -8,6 +8,8 @@ import { Tabs } from './components/Tabs';
 export const DeviceVariantContainer = styled('div', {
   width: '100vw',
   height: '100vh',
+  maxWidth: '100vw',
+  maxHeight: '100vh',
   display: 'flex',
   flexDirection: 'column',
 });
