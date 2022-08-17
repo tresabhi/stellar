@@ -1,5 +1,5 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
-import PART_CATEGORY from 'hooks/constants/partCategory';
+import PartCategory from 'hooks/constants/partCategory';
 import usePartModel from 'hooks/usePartModel';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import { FC, useRef } from 'react';
@@ -58,7 +58,7 @@ export const EngineKolibriIcon = EngineIcon;
 export const EngineKolibriRegistry: PartRegistryFragment = [
   'Engine Kolibri',
   {
-    category: PART_CATEGORY.PROPULSION,
+    category: PartCategory.Propulsion,
 
     vanillaData: VanillaEngineKolibriData,
     data: EngineKolibriData,

@@ -1,10 +1,10 @@
-export enum LAYER {
-  PART_RENDER_UNDER,
-  PART,
-  PART_RENDER_OVER,
+export enum Layer {
+  PartRenderUnder,
+  PartRenderBetween,
+  PartRenderOver,
 
   /**
    * TODO: Make this more specific
    */
-  TOOL,
+  Tool,
 }

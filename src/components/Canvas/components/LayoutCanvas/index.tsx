@@ -2,7 +2,7 @@ import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
 import { useEffect, useRef } from 'react';
-import useApp, { TOOL } from 'stores/useApp';
+import useApp, { Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings from 'stores/useSettings';
 import { Group } from 'three';
@@ -24,7 +24,7 @@ export const LayoutCanvas = () => {
   const handlePointerMissed = () => {
     const { tool, isPanning } = useApp.getState();
     const { selections } = useBlueprint.getState();
-    if (selections.length > 0 && tool === TOOL.MOVE && !isPanning) {
+    if (selections.length > 0 && tool === Tool.Move && !isPanning) {
       unselectAllParts();
     }
   };
@@ -33,7 +33,7 @@ export const LayoutCanvas = () => {
     const unsubscribeTool = useApp.subscribe(
       (state) => state.tool,
       (tool) => {
-        if (tool === TOOL.PAN) {
+        if (tool === Tool.Pan) {
           canvas.current.classList.add(styles.pan);
         } else {
           canvas.current.classList.remove(styles.pan);
@@ -45,7 +45,7 @@ export const LayoutCanvas = () => {
       (isPanning) => {
         if (isPanning) {
           canvas.current.classList.add(styles.pan);
-        } else if (useApp.getState().tool !== TOOL.PAN) {
+        } else if (useApp.getState().tool !== Tool.Pan) {
           canvas.current.classList.remove(styles.pan);
         }
       },

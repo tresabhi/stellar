@@ -8,13 +8,13 @@ import {
   togglePartSelection,
   unselectPart,
 } from 'core/part';
-import useApp, { TOOL } from '../stores/useApp';
+import useApp, { Tool } from '../stores/useApp';
 
 const useSelectionControl = (id: string) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
     const { preventNextSelection, tool, isPanning } = useApp.getState();
 
-    if (!preventNextSelection && tool === TOOL.MOVE && !isPanning) {
+    if (!preventNextSelection && tool === Tool.Move && !isPanning) {
       const part = getPart(id);
       const parent = getParent(id);
 

@@ -1,5 +1,5 @@
-import useApp, { POPUP } from 'stores/useApp';
+import useApp, { Popup } from 'stores/useApp';
 
-export const popupOpen = (popup: POPUP) => {
+export const popupOpen = (popup: Popup) => {
   useApp.setState({ popup });
 };

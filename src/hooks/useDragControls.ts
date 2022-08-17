@@ -6,7 +6,7 @@ import produce, { Patch, produceWithPatches } from 'immer';
 import useBlueprint from 'stores/useBlueprint';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
-import useApp, { TOOL } from '../stores/useApp';
+import useApp, { Tool } from '../stores/useApp';
 import useVersionControl, {
   UseVersionControl,
 } from '../stores/useVersionControl';
@@ -36,7 +36,7 @@ const useDragControls = (id: string) => {
       (part.selected || part.parentId === null) && // is selected or is at root level
       !part.hidden &&
       !part.locked &&
-      tool === TOOL.MOVE &&
+      tool === Tool.Move &&
       !isPanning // isn't panning right now via the hotkey
     ) {
       event.stopPropagation();

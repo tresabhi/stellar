@@ -24,11 +24,11 @@ import produce from 'immer';
 import { isNull } from 'lodash';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
-import useApp, { POPUP, TAB, TOOL } from 'stores/useApp';
+import useApp, { Popup, Tab, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings, { UseSettings } from 'stores/useSettings';
 
-const tabOrder = [TAB.CREATE, TAB.LAYOUT, TAB.STAGING, TAB.EXPORT];
+const tabOrder = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
 // TODO: make this date driven
 const TRANSLATE = 1;
@@ -79,7 +79,7 @@ const bind = (
         (mergedOptions.preventWhenInteractingWithUI
           ? !isInteractingWithUI
           : true) &&
-        (mergedOptions.preventOnNonLayoutTab ? tab === TAB.LAYOUT : true)
+        (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
       ) {
         if (mergedOptions.preventDefault) event.preventDefault();
 
@@ -92,7 +92,7 @@ const bind = (
 
 const useKeybinds = () => {
   // BIG TODO: Make this date driven
-  const tool = (name: TOOL) => () => useApp.setState({ tool: name });
+  const tool = (name: Tool) => () => useApp.setState({ tool: name });
 
   useEffect(() => {
     bind('ctrl+a', () => selectPartsOnly(useBlueprint.getState().part_order));
@@ -131,8 +131,8 @@ const useKeybinds = () => {
     bind('alt+2', () => {
       useSettings.setState(
         produce((draft: UseSettings) => {
-          draft.layout.rightSideBar.visible = !draft.layout.rightSideBar
-            .visible;
+          draft.layout.rightSideBar.visible =
+            !draft.layout.rightSideBar.visible;
         }),
       );
     });
@@ -194,8 +194,8 @@ const useKeybinds = () => {
       preventRepeats: false,
     });
 
-    bind('1', tool(TOOL.MOVE));
-    bind('2', tool(TOOL.PAN));
+    bind('1', tool(Tool.Move));
+    bind('2', tool(Tool.Pan));
 
     bind(
       'space',
@@ -214,23 +214,23 @@ const useKeybinds = () => {
 
     bind('ctrl+n', () => {
       loadBlueprint();
-      useApp.setState({ tab: TAB.LAYOUT });
+      useApp.setState({ tab: Tab.Layout });
     });
     bind('ctrl+o', () => {
       fileOpen();
-      useApp.setState({ tab: TAB.LAYOUT });
+      useApp.setState({ tab: Tab.Layout });
     });
     bind('ctrl+s', () => {
       fileSaveAs();
-      useApp.setState({ tab: TAB.LAYOUT });
+      useApp.setState({ tab: Tab.Layout });
     });
     bind('ctrl+i', () => {
       fileImport();
-      useApp.setState({ tab: TAB.LAYOUT });
+      useApp.setState({ tab: Tab.Layout });
     });
     bind('ctrl+e', () => {
       fileExport();
-      useApp.setState({ tab: TAB.LAYOUT });
+      useApp.setState({ tab: Tab.Layout });
     });
 
     bind('ctrl+c', copyPartsBySelection);
@@ -239,7 +239,7 @@ const useKeybinds = () => {
     bind('ctrl+d', duplicateParts);
     bind('ctrl+g', groupPartsBySelection);
     bind('ctrl+shift+g', ungroupGroupsBySelection);
-    bind('ctrl+shift+i', () => popupOpen(POPUP.ADD_PART));
+    bind('ctrl+shift+i', () => popupOpen(Popup.InsertPart));
   }, []);
 };
 export default useKeybinds;

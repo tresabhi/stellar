@@ -2,7 +2,7 @@ import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
 import { getBoundsFromObject } from 'core/bounds';
 import { partExportify, removePartMetaData } from 'core/part';
-import PART_CATEGORY from 'hooks/constants/partCategory';
+import PartCategory from 'hooks/constants/partCategory';
 import useDragControls from 'hooks/useDragControls';
 import useSelectionControl from 'hooks/useSelectionControl';
 import produce from 'immer';
@@ -115,7 +115,7 @@ export const groupExportify: PartExportifier<Group> = (part, draft) => {
 export const GroupRegistry: PartRegistryFragment = [
   'Group',
   {
-    category: PART_CATEGORY.ABSTRACT,
+    category: PartCategory.Abstract,
 
     vanillaData: null,
     data: GroupData,

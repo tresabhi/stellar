@@ -7,11 +7,11 @@ import {
 import * as Tabbar from 'components/Tabbar';
 import { FC, ReactNode } from 'react';
 import { styled } from 'stitches.config';
-import useApp, { TAB } from 'stores/useApp';
+import useApp, { Tab } from 'stores/useApp';
 
 export const Tabs = () => {
   const tab = useApp((state) => state.tab);
-  const is = (target: TAB) => {
+  const is = (target: Tab) => {
     return {
       selected: tab === target,
       onClick: () => useApp.setState({ tab: target }),
@@ -20,16 +20,16 @@ export const Tabs = () => {
 
   return (
     <Tabbar.Container>
-      <Tabbar.Tab {...is(TAB.CREATE)} icon={<FilePlusIcon />}>
+      <Tabbar.Tab {...is(Tab.Create)} icon={<FilePlusIcon />}>
         Create
       </Tabbar.Tab>
-      <Tabbar.Tab {...is(TAB.LAYOUT)} icon={<RulerHorizontalIcon />}>
+      <Tabbar.Tab {...is(Tab.Layout)} icon={<RulerHorizontalIcon />}>
         Layout
       </Tabbar.Tab>
-      <Tabbar.Tab {...is(TAB.STAGING)} icon={<ListBulletIcon />}>
+      <Tabbar.Tab {...is(Tab.Staging)} icon={<ListBulletIcon />}>
         Staging
       </Tabbar.Tab>
-      <Tabbar.Tab {...is(TAB.EXPORT)} icon={<ExitIcon />}>
+      <Tabbar.Tab {...is(Tab.Export)} icon={<ExitIcon />}>
         Export
       </Tabbar.Tab>
     </Tabbar.Container>

@@ -4,7 +4,7 @@ import { deferUpdates, translateAllBoundingBoxes } from 'core/bounds';
 import { forwardRef, MutableRefObject, useEffect } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import { Group } from 'three';
-import { LAYER } from '../../../constants/layer';
+import { Layer } from '../../../constants/layer';
 
 export const Parts = forwardRef<Group>((props, ref) => {
   const initialState = useBlueprint.getState();
@@ -31,7 +31,7 @@ export const Parts = forwardRef<Group>((props, ref) => {
   }, [ref]);
 
   return (
-    <HeadsUpDisplay priority={LAYER.PART}>
+    <HeadsUpDisplay priority={Layer.PartRenderBetween}>
       {/**
        * Temporary lighting solution for fuel tanks before we figure out the
        * texturing issue

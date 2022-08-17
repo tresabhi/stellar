@@ -1,8 +1,8 @@
-enum PART_CATEGORY {
-  STRUCTURAL,
-  PROPULSION,
-  ELECTRIC,
-  AERODYNAMIC,
-  ABSTRACT,
+enum PartCategory {
+  Structural,
+  Propulsion,
+  Electric,
+  Aerodynamic,
+  Abstract,
 }
-export default PART_CATEGORY;
+export default PartCategory;

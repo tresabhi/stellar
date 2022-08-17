@@ -2,28 +2,28 @@ import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 import { Snippet } from './useSnippets';
 
-export enum TAB {
-  CREATE,
-  LAYOUT,
-  STAGING,
-  EXPORT,
+export enum Tab {
+  Create,
+  Layout,
+  Staging,
+  Export,
 }
-export enum TOOL {
-  MOVE,
-  PAN,
+export enum Tool {
+  Move,
+  Pan,
 }
-export enum POPUP {
-  ADD_PART,
+export enum Popup {
+  InsertPart,
 }
 
 export interface UseApp {
   fileHandle?: FileSystemFileHandle;
   hasUnsavedChanges: boolean;
 
-  tab: TAB;
-  popup: POPUP | null;
+  tab: Tab;
+  popup: Popup | null;
 
-  tool: TOOL;
+  tool: Tool;
   isPanning: boolean;
   isInteractingWithUI: boolean;
 
@@ -35,10 +35,10 @@ export const UseAppData: UseApp = {
   fileHandle: undefined,
   hasUnsavedChanges: false,
 
-  tab: TAB.CREATE,
+  tab: Tab.Create,
   popup: null,
 
-  tool: TOOL.MOVE,
+  tool: Tool.Move,
   isPanning: false,
   isInteractingWithUI: false,
 

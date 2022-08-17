@@ -1,4 +1,4 @@
-import { LAYER } from 'components/Canvas/constants/layer';
+import { Layer } from 'components/Canvas/constants/layer';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/useBlueprint';
@@ -56,7 +56,7 @@ export const PartBounds = () => {
   }, [selections.length]);
 
   return (
-    <HeadsUpDisplay priority={LAYER.TOOL}>
+    <HeadsUpDisplay priority={Layer.Tool}>
       <group ref={partBoundsWrapper}>{partBounds}</group>
       <line_
         visible={selections.length > 1}

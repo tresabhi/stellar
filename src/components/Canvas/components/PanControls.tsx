@@ -1,5 +1,5 @@
 import { useThree } from '@react-three/fiber';
-import useApp, { TOOL } from 'stores/useApp';
+import useApp, { Tool } from 'stores/useApp';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import { OrthographicCamera, Vector2 } from 'three';
@@ -58,7 +58,7 @@ export const PanControls = () => {
     const handlePointerDown = (event: PointerEvent) => {
       const { tool, isPanning } = useApp.getState();
 
-      if (tool === TOOL.PAN || isPanning) {
+      if (tool === Tool.Pan || isPanning) {
         initialMousePos = getMousePos(event);
         canvas.addEventListener('pointermove', handlePointerMove);
       }
