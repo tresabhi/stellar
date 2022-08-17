@@ -27,7 +27,7 @@ export const Statusbar = () => {
   const user = splitRepo[0];
   const repo = splitRepo[1];
   const releaseNotes =
-    codeName !== 'alpha' || codeName !== 'dev'
+    codeName !== 'alpha' && codeName !== 'dev'
       ? undefined
       : `${parsedVersion.major}.${parsedVersion.minor}${
           parsedVersion.patch === 0 ? '' : parsedVersion.patch
