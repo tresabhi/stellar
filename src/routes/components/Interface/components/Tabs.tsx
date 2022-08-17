@@ -5,8 +5,6 @@ import {
   RulerHorizontalIcon,
 } from '@radix-ui/react-icons';
 import * as Tabbar from 'components/Tabbar';
-import { FC, ReactNode } from 'react';
-import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/useApp';
 
 export const Tabs = () => {
