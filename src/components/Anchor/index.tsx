@@ -1,17 +1,22 @@
 import { styled, theme } from 'stitches.config';
 
 export const Anchor = styled('a', {
-  textDecoration: 'underline',
   color: theme.colors.textLowContrast,
   borderRadius: theme.radii[2],
+  cursor: 'default',
 
-  '&:hover': {
-    color: theme.colors.textHighContrast,
-    textDecoration: 'none',
-  },
-  '&:focus': {
-    outline: theme.borderStyles.componentInteractiveActive,
-    textDecoration: 'none',
+  '&[href]': {
+    textDecoration: 'underline',
+    cursor: 'pointer',
+
+    '&:hover': {
+      color: theme.colors.textHighContrast,
+      textDecoration: 'none',
+    },
+    '&:focus': {
+      outline: theme.borderStyles.componentInteractiveActive,
+      textDecoration: 'none',
+    },
   },
 
   variants: {

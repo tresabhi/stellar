@@ -8,7 +8,7 @@ import packageJSON from '../../package.json';
 
 type CodeName = 'alpha' | 'beta' | 'release' | 'dev';
 
-export default function useStellarContext() {
+export default function getStellarContext() {
   const version = coerce(packageJSON.version)!.version;
   let title: string;
   let codeName: CodeName;

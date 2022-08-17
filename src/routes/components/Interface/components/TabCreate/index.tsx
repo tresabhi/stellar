@@ -17,11 +17,12 @@ import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
 import { Button as ButtonComponent } from 'components/Button';
 import { Pallet, PalletItem } from 'components/Pallet';
+import { TabContainer } from 'components/TabContainer';
 import { fileImport, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
 import { styled, theme } from 'stitches.config';
-import useApp, { TAB } from 'stores/useApp';
-import { TabContainer } from './Tabs';
+import useApp, { Tab } from 'stores/useApp';
+import { Statusbar } from './components/Statusbar';
 
 const ABHI = 'TrèsAbhi';
 const ABHI_WEB = 'https://tresabhi.github.io/';
@@ -114,7 +115,7 @@ const PALLET_ITEMS = TEMPLATES.sort((a, b) => {
           : `https://jmnet.one/sfs/forum/index.php?members/${template.link}`,
       callback: () => {
         loadBlueprint(template.blueprint);
-        useApp.setState({ tab: TAB.LAYOUT });
+        useApp.setState({ tab: Tab.Layout });
       },
       icon: template.inbuilt ? <FileTextIcon /> : <ArchiveIcon />,
     } as PalletItem),
@@ -210,19 +211,19 @@ const FileActions = styled('div', {
 export const TabCreate = () => {
   const handleScratchClick = () => {
     loadBlueprint();
-    useApp.setState({ tab: TAB.LAYOUT });
+    useApp.setState({ tab: Tab.Layout });
   };
   const handleImportClick = async () => {
     await fileImport();
-    useApp.setState({ tab: TAB.LAYOUT });
+    useApp.setState({ tab: Tab.Layout });
   };
   const handleOpenClick = async () => {
     await fileOpen();
-    useApp.setState({ tab: TAB.LAYOUT });
+    useApp.setState({ tab: Tab.Layout });
   };
 
   return (
-    <TabContainer tab={TAB.CREATE}>
+    <TabContainer tab={Tab.Create}>
       <Container>
         <SectionContainer full>
           <FullHeightPallet
@@ -258,6 +259,8 @@ export const TabCreate = () => {
           </FileActions>
         </SectionContainer>
       </Container>
+
+      <Statusbar />
     </TabContainer>
   );
 };

@@ -1,9 +1,9 @@
-import useStellarContext from 'hooks/useStellarContext';
+import getStellarContext from 'utilities/getStellarContext';
 import { PulseLoader } from 'react-spinners';
 import styles from './index.module.scss';
 
 const SplashScreen = () => {
-  const stellarContext = useStellarContext();
+  const stellarContext = getStellarContext();
 
   return (
     <div className={styles['splash-screen']}>
