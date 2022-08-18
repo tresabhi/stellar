@@ -63,8 +63,7 @@ const Container = styled('div', {
 });
 
 const FlexListingContainer = styled(Listing.Container, {
-  flexGrow: 1,
-  flexBasis: 0,
+  flex: 1,
 });
 
 export const Pallet: FC<PalletProps> = ({
