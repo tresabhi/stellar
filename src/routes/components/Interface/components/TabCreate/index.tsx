@@ -126,18 +126,17 @@ const Container = styled('div', {
   backgroundColor: theme.colors.componentBackground,
   display: 'flex',
   gap: theme.space.gapUnrelatedMajor,
-  alignItems: 'center',
+  alignItems: 'stretch',
   justifyContent: 'center',
 });
 
 const SectionContainer = styled('div', {
   display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
   flexDirection: 'column',
   gap: theme.space[32],
   padding: theme.space.paddingMajor,
-  height: '100%',
-  maxWidth: theme.sizes.createTabContentMaxWidth,
-  maxHeight: theme.sizes.createTabContentMaxHeight,
 
   variants: {
     full: {
@@ -145,18 +144,21 @@ const SectionContainer = styled('div', {
         flex: 1,
       },
     },
-
-    center: {
-      true: {
-        justifyContent: 'center',
-        alignItems: 'center',
-      },
-    },
   },
 
   defaultVariants: {
     full: false,
   },
+});
+
+const PalletWrapper = styled('div', {
+  display: 'flex',
+  alignItems: 'stretch',
+  justifyContent: 'stretch',
+  width: '100%',
+  height: '100%',
+  maxWidth: theme.sizes.createTabContentMaxWidth,
+  maxHeight: theme.sizes.createTabContentMaxHeight,
 });
 
 const FullHeightPallet = styled(Pallet, {
@@ -223,24 +225,26 @@ export const TabCreate = () => {
   };
 
   return (
-    <TabContainer tab={Tab.Create}>
+    <TabContainer overflow tab={Tab.Create}>
       <Container>
         <SectionContainer full>
-          <FullHeightPallet
-            iconGap
-            transparent
-            darkBackground
-            items={PALLET_ITEMS}
-            placeholder="Search templates..."
-            hasMaxHeight={false}
-          />
+          <PalletWrapper>
+            <FullHeightPallet
+              iconGap
+              transparent
+              darkBackground
+              items={PALLET_ITEMS}
+              placeholder="Search templates..."
+              hasMaxHeight={false}
+            />
+          </PalletWrapper>
         </SectionContainer>
 
-        <SectionContainer center>
+        <SectionContainer>
           <Separator />
         </SectionContainer>
 
-        <SectionContainer full center>
+        <SectionContainer full>
           <FileActions>
             <Title>Stellar</Title>
             <SubTitle>Blueprint editing redefined</SubTitle>
