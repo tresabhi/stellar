@@ -103,7 +103,7 @@ const Children = styled('div', {
   padding: theme.sizes[8],
   gap: theme.sizes[8],
   borderRadius: theme.radii[4],
-  border: theme.borderStyles.componentInteractive,
+  border: theme.borderStyles.componentNonInteractive,
   backgroundColor: theme.colors.componentBackground,
 });
 

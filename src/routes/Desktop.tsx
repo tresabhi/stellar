@@ -1,5 +1,5 @@
-import Interface from './components/Interface';
+import Interface, { InterfaceVariant } from './components/Interface';
 
-const Desktop = () => <Interface />;
+const Desktop = () => <Interface type={InterfaceVariant.Comfortable} />;
 
 export default Desktop;

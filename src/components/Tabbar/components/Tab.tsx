@@ -58,7 +58,6 @@ const Container = styled(Button, {
 });
 
 const Label = styled('span', {
-  fontWeight: 'bold',
   fontSize: theme.fontSizes[14],
 });
 

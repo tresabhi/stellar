@@ -2987,10 +2987,10 @@ batch@0.6.1:
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
   integrity sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==
 
-bepaint@^0.1.8-beta:
-  version "0.1.8-beta"
-  resolved "https://registry.yarnpkg.com/bepaint/-/bepaint-0.1.8-beta.tgz#425f80b23d844ef06dc625dfbc984538deeb9788"
-  integrity sha512-wi2VDHevqR0T8GFqlhyvWAUJINyQE8sXNLrx8TmmXomoVDW471hIxmHYB0AueWdlZSapgDtZn9Vqe2oglxO9kQ==
+bepaint@^0.1.11-beta:
+  version "0.1.11-beta"
+  resolved "https://registry.yarnpkg.com/bepaint/-/bepaint-0.1.11-beta.tgz#bbbfcb35de91cd5e5d474a770b397ebd38578d11"
+  integrity sha512-hrRIKJiFOmiCz5LDrLmbZbNG6O7fKxIfEJTgX4TuwsrGmQgVnvhXqdbwzlmOez+BGvqM1KEELBPbHVXOuorlug==
   dependencies:
     lodash "^4.17.21"
 

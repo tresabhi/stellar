@@ -2,6 +2,11 @@ import { merge } from 'lodash';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export enum SidebarTab {
+  Left,
+  Right,
+}
+
 export interface UseSettings {
   debug: {
     dev_blueprint?: string;
@@ -15,12 +20,12 @@ export interface UseSettings {
   layout: {
     leftSideBar: {
       visible: boolean;
-      partition: 'parts' | 'snippets';
+      tab: SidebarTab;
     };
 
     rightSideBar: {
       visible: boolean;
-      partition: 'properties' | 'inspect';
+      tab: SidebarTab;
       scaleConstrained: boolean;
     };
   };
@@ -40,12 +45,12 @@ export const UseSettingsData: UseSettings = {
   layout: {
     leftSideBar: {
       visible: true,
-      partition: 'parts',
+      tab: SidebarTab.Left,
     },
 
     rightSideBar: {
       visible: true,
-      partition: 'properties',
+      tab: SidebarTab.Left,
       scaleConstrained: false,
     },
   },

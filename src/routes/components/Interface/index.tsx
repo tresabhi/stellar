@@ -5,6 +5,20 @@ import { TabCreate } from './components/TabCreate';
 import { TabLayout } from './components/TabLayout';
 import { Tabs } from './components/Tabs';
 
+export enum InterfaceVariant {
+  Comfortable,
+  Compact,
+}
+
+export interface InterfaceProps {
+  type: InterfaceVariant;
+}
+
+export interface SidebarTabProps {
+  selected: boolean;
+  onClick: () => void;
+}
+
 export const DeviceVariantContainer = styled('div', {
   width: '100vw',
   height: '100vh',
@@ -14,15 +28,13 @@ export const DeviceVariantContainer = styled('div', {
   flexDirection: 'column',
 });
 
-export interface InterfaceProps {}
-
-const Interface: FC<InterfaceProps> = () => (
+const Interface: FC<InterfaceProps> = ({ type }) => (
   <DeviceVariantContainer>
     <Popups />
 
     <Tabs />
     <TabCreate />
-    <TabLayout />
+    <TabLayout swapSecondTab={type === InterfaceVariant.Compact} />
   </DeviceVariantContainer>
 );
 

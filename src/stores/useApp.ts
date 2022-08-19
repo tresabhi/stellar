@@ -8,10 +8,12 @@ export enum Tab {
   Staging,
   Export,
 }
+
 export enum Tool {
   Move,
   Pan,
 }
+
 export enum Popup {
   InsertPart,
 }

@@ -57,6 +57,7 @@ export const {
       separatorWidth: '0.0625rem',
       createTabContentMaxWidth: '35rem',
       createTabContentMaxHeight: '25rem',
+      sidebarWidth: '16rem',
     },
 
     radii: {

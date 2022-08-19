@@ -44,7 +44,7 @@ const Container = styled('div', {
     transparent: {
       false: {
         borderRadius: theme.radii[4],
-        border: theme.borderStyles.componentInteractive,
+        border: theme.borderStyles.componentNonInteractive,
         backgroundColor: theme.colors.componentBackground,
         padding: theme.space.padding,
         width: theme.sizes.palletWidth,
