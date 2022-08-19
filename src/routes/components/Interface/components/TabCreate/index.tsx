@@ -11,7 +11,7 @@ import hopper from 'assets/blueprints/hopper.json';
 import joints from 'assets/blueprints/joints.json';
 import lightLander from 'assets/blueprints/light-lander.json';
 import orbitAndReEntry from 'assets/blueprints/orbit-and-re-entry.json';
-import parachuteAndDecoupler from 'assets/blueprints/parachute-and-decoupler.json';
+import parachuteAndSeparator from 'assets/blueprints/parachute-and-separator.json';
 import raceCar from 'assets/blueprints/race-car.json';
 import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
@@ -65,10 +65,10 @@ const TEMPLATES: Template[] = [
     inbuilt: true,
   },
   {
-    name: 'Parachute & Decoupler',
+    name: 'Parachute & Separator',
     author: ABHI,
     link: ABHI_WEB,
-    blueprint: parachuteAndDecoupler,
+    blueprint: parachuteAndSeparator,
     inbuilt: true,
   },
   {
