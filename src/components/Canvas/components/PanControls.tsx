@@ -1,7 +1,7 @@
 import { useThree } from '@react-three/fiber';
-import useApp, { Tool } from 'stores/useApp';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
+import useApp, { Tool } from 'stores/useApp';
 import { OrthographicCamera, Vector2 } from 'three';
 import { inverseLerp } from 'three/src/math/MathUtils';
 

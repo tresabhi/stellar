@@ -1,12 +1,12 @@
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import LegacyButton from 'components/LegacyButton';
 import TextArea from 'components/TextArea';
-import useSettings, { UseSettings } from 'stores/useSettings';
 import produce from 'immer';
 import moment from 'moment';
 import { FC } from 'react';
 import { deviceDetect } from 'react-device-detect';
 import { FallbackProps } from 'react-error-boundary';
+import useSettings, { UseSettings } from 'stores/useSettings';
 import styles from '../index.module.scss';
 
 const MESSAGE_MAX_LENGTH = 75;

@@ -1,8 +1,8 @@
 import { CaretDownIcon, CaretUpIcon, Cross2Icon } from '@radix-ui/react-icons';
+import { FC, MouseEvent, useState } from 'react';
 import useNotifications, {
   Notification as NotificationPayload,
 } from 'stores/useNotifications';
-import { FC, MouseEvent, useState } from 'react';
 import styles from '../index.module.scss';
 
 export interface NotificationProps {

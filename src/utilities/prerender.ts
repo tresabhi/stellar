@@ -1,7 +1,7 @@
 import { extend } from '@react-three/fiber';
-import useSettings from 'stores/useSettings';
 import { translationsRegistry } from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
+import useSettings from 'stores/useSettings';
 import { BufferGeometry, Line, Mesh } from 'three';
 import {
   acceleratedRaycast,

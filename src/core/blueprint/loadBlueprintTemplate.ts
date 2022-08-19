@@ -3,8 +3,8 @@ import shapeAndTextures1 from 'assets/blueprints/shape-and-textures-1.json';
 import testFuelTank from 'assets/blueprints/test-fuel-tank.json';
 import { loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
-import useSettings, { UseSettings } from 'stores/useSettings';
 import produce from 'immer';
+import useSettings, { UseSettings } from 'stores/useSettings';
 
 export const templateBlueprints: { [key: string]: VanillaBlueprint } = {
   testFuelTank,

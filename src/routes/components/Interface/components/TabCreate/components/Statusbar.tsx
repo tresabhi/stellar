@@ -4,11 +4,11 @@ import {
   TwitterLogoIcon,
 } from '@radix-ui/react-icons';
 import * as StatusbarComponent from 'components/Statusbar';
-import getStellarContext from 'utilities/getStellarContext';
 import { useEffect, useState } from 'react';
 import { parse } from 'semver';
-import packageJSON from '../../../../../../../package.json';
 import { styled, theme } from 'stitches.config';
+import getStellarContext from 'utilities/getStellarContext';
+import packageJSON from '../../../../../../../package.json';
 
 export const GITHUB_REPO = 'tresabhi/stellar';
 const { Icon, codeName } = getStellarContext();

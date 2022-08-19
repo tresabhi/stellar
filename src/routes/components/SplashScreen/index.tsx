@@ -1,5 +1,5 @@
-import getStellarContext from 'utilities/getStellarContext';
 import { PulseLoader } from 'react-spinners';
+import getStellarContext from 'utilities/getStellarContext';
 import styles from './index.module.scss';
 
 const SplashScreen = () => {

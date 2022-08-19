@@ -1,12 +1,12 @@
 import { useGLTF } from '@react-three/drei';
 import useKeybinds from 'hooks/useKeybinds';
 import { PART_MODEL_PATH } from 'hooks/usePartModel';
-import getStellarContext from 'utilities/getStellarContext';
 import useTranslator from 'hooks/useTranslator';
 import { isMobile } from 'react-device-detect';
 import { globalStyles, themeDark } from 'stitches.config';
 import useApp from 'stores/useApp';
 import usePartRegistry from 'stores/usePartRegistry';
+import getStellarContext from 'utilities/getStellarContext';
 
 const usePostrender = () => {
   const stellarContext = getStellarContext();
