@@ -31,6 +31,7 @@ export interface PalletProps {
   darkBackground?: boolean;
   hasMaxHeight?: boolean;
   gainFocus?: boolean;
+  collapse?: boolean;
 }
 
 const Container = styled('div', {
@@ -64,7 +65,21 @@ const Container = styled('div', {
 });
 
 const FlexListingContainer = styled(Listing.Container, {
-  flex: '1 0 0',
+  variants: {
+    collapse: {
+      true: {
+        flex: '1 0 0',
+      },
+
+      false: {
+        flex: 1,
+      },
+    },
+  },
+
+  defaultVariants: {
+    collapse: false,
+  },
 });
 
 export const Pallet: FC<PalletProps> = ({
@@ -76,6 +91,7 @@ export const Pallet: FC<PalletProps> = ({
   darkBackground,
   hasMaxHeight,
   gainFocus,
+  collapse,
 }) => {
   const nameMap = useMemo(
     () => new Map(items.map((item) => [item.name, item])),
@@ -136,7 +152,7 @@ export const Pallet: FC<PalletProps> = ({
         placeholder={placeholder}
       />
 
-      <FlexListingContainer darkBackground={darkBackground}>
+      <FlexListingContainer collapse={collapse} darkBackground={darkBackground}>
         {listings}
       </FlexListingContainer>
     </Container>

@@ -114,10 +114,7 @@
   "stages": [
     {
       "stageId": 1,
-      "partIndexes": [
-        3,
-        5
-      ]
+      "partIndexes": [3, 5]
     }
   ],
   "rotation": 0.0,

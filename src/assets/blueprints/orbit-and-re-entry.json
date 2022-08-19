@@ -255,33 +255,19 @@
   "stages": [
     {
       "stageId": 1,
-      "partIndexes": [
-        0
-      ]
+      "partIndexes": [0]
     },
     {
       "stageId": 2,
-      "partIndexes": [
-        0,
-        10,
-        7,
-        8,
-        9
-      ]
+      "partIndexes": [0, 10, 7, 8, 9]
     },
     {
       "stageId": 3,
-      "partIndexes": [
-        6,
-        7
-      ]
+      "partIndexes": [6, 7]
     },
     {
       "stageId": 4,
-      "partIndexes": [
-        4,
-        3
-      ]
+      "partIndexes": [4, 3]
     }
   ],
   "rotation": 0.0,

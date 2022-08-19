@@ -13,9 +13,9 @@ import {
   GearIcon,
   GroupIcon,
   HandIcon,
+  KeyboardIcon,
   LockClosedIcon,
   LockOpen2Icon,
-  MixerHorizontalIcon,
   PlusIcon,
   ResetIcon,
   ScissorsIcon,
@@ -239,8 +239,11 @@ const Toolbar = () => {
           <ToolbarComponent.DropdownItem icon={<GearIcon />} keybind="Ctrl + ,">
             Settings
           </ToolbarComponent.DropdownItem>
-          <ToolbarComponent.DropdownItem icon={<MixerHorizontalIcon />}>
-            File Preferences
+          <ToolbarComponent.DropdownItem
+            keybind="Ctrl + K"
+            icon={<KeyboardIcon />}
+          >
+            Keybinds
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
       </ToolbarComponent.Group>

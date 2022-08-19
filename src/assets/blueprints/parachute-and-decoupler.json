@@ -99,22 +99,15 @@
   "stages": [
     {
       "stageId": 1,
-      "partIndexes": [
-        1
-      ]
+      "partIndexes": [1]
     },
     {
       "stageId": 2,
-      "partIndexes": [
-        1,
-        3
-      ]
+      "partIndexes": [1, 3]
     },
     {
       "stageId": 3,
-      "partIndexes": [
-        2
-      ]
+      "partIndexes": [2]
     }
   ],
   "rotation": 0.0,

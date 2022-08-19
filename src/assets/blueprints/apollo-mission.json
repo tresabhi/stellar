@@ -883,71 +883,39 @@
   "stages": [
     {
       "stageId": 1,
-      "partIndexes": [
-        15,
-        1,
-        2
-      ]
+      "partIndexes": [15, 1, 2]
     },
     {
       "stageId": 2,
-      "partIndexes": [
-        1,
-        2,
-        17,
-        16,
-        33
-      ]
+      "partIndexes": [1, 2, 17, 16, 33]
     },
     {
       "stageId": 3,
-      "partIndexes": [
-        15,
-        23,
-        26,
-        27,
-        32
-      ]
+      "partIndexes": [15, 23, 26, 27, 32]
     },
     {
       "stageId": 4,
-      "partIndexes": [
-        5
-      ]
+      "partIndexes": [5]
     },
     {
       "stageId": 5,
-      "partIndexes": [
-        12,
-        7,
-        6
-      ]
+      "partIndexes": [12, 7, 6]
     },
     {
       "stageId": 6,
-      "partIndexes": [
-        6,
-        7
-      ]
+      "partIndexes": [6, 7]
     },
     {
       "stageId": 7,
-      "partIndexes": [
-        5
-      ]
+      "partIndexes": [5]
     },
     {
       "stageId": 8,
-      "partIndexes": [
-        30
-      ]
+      "partIndexes": [30]
     },
     {
       "stageId": 9,
-      "partIndexes": [
-        31,
-        29
-      ]
+      "partIndexes": [31, 29]
     }
   ],
   "rotation": 0.0,

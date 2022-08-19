@@ -365,38 +365,23 @@
   "stages": [
     {
       "stageId": 1,
-      "partIndexes": [
-        1,
-        2,
-        11,
-        12
-      ]
+      "partIndexes": [1, 2, 11, 12]
     },
     {
       "stageId": 2,
-      "partIndexes": [
-        6
-      ]
+      "partIndexes": [6]
     },
     {
       "stageId": 3,
-      "partIndexes": [
-        15
-      ]
+      "partIndexes": [15]
     },
     {
       "stageId": 4,
-      "partIndexes": [
-        12,
-        11
-      ]
+      "partIndexes": [12, 11]
     },
     {
       "stageId": 5,
-      "partIndexes": [
-        1,
-        2
-      ]
+      "partIndexes": [1, 2]
     }
   ],
   "rotation": 0.0,

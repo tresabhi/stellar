@@ -161,10 +161,6 @@ const PalletWrapper = styled('div', {
   maxHeight: theme.sizes.createTabContentMaxHeight,
 });
 
-const FullHeightPallet = styled(Pallet, {
-  flex: 1,
-});
-
 const Separator = styled('div', {
   width: theme.sizes.separatorWidth,
   height: '75%',
@@ -229,7 +225,8 @@ export const TabCreate = () => {
       <Container>
         <SectionContainer full>
           <PalletWrapper>
-            <FullHeightPallet
+            <Pallet
+              collapse
               iconGap
               transparent
               darkBackground
