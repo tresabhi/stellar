@@ -11,7 +11,6 @@ import {
   selectPartOnly,
   togglePartSelection,
 } from 'core/part';
-import { popupClose } from 'core/ui';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import usePartProperty from 'hooks/usePartProperty';
@@ -92,7 +91,6 @@ export const Listing = memo<ListingProps>(({ indentation, id }) => {
   };
   const handleLabelKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') buttonRef.current?.focus();
-    if (event.key === 'Escape') popupClose();
   };
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (event.ctrlKey) {

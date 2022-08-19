@@ -1,5 +1,6 @@
 import * as Listing from 'components/Listing';
 import { Search } from 'components/Search';
+import { popupClose } from 'core/ui';
 import { go } from 'fuzzysort';
 import {
   FC,
@@ -94,7 +95,11 @@ export const Pallet: FC<PalletProps> = ({
     debounce,
   );
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Enter') firstResult.current?.click();
+    if (event.key === 'Enter') {
+      firstResult.current?.click();
+    } else if (event.key === 'Escape') {
+      popupClose();
+    }
   };
   const listings = useMemo(
     () =>
