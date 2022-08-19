@@ -1,7 +1,13 @@
-import { CaretDownIcon } from '@radix-ui/react-icons';
-import { FC, ReactNode, useRef } from 'react';
+import { CaretDownIcon, CaretUpIcon } from '@radix-ui/react-icons';
+import {
+  FC,
+  MouseEvent,
+  PointerEvent,
+  ReactNode,
+  useEffect,
+  useRef,
+} from 'react';
 import { styled, theme } from 'stitches.config';
-import { Button } from './Button';
 
 export interface DropdownProps {
   icon: ReactNode;
@@ -11,26 +17,88 @@ export interface DropdownProps {
 
 const PADDING_FROM_EDGE = 8;
 
-const Content = styled('div', {
-  zIndex: 2,
-  position: 'absolute',
-  top: '100%',
-  paddingTop: theme.sizes[8],
-});
-
-const Trigger = styled(Button, {
-  display: 'flex',
-  gap: theme.sizes[4],
+const Wrapper = styled('details', {
   position: 'relative',
 
-  [`&:not(:focus-within) ${Content}`]: {
+  variants: {
+    disabled: {
+      true: {
+        pointerEvents: 'none',
+      },
+    },
+  },
+
+  defaultVariants: {
+    disabled: false,
+  },
+});
+
+const Trigger = styled('summary', {
+  listStyle: 'none',
+  width: theme.sizes[40],
+  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: theme.sizes[4],
+
+  '& > svg': {
+    width: theme.sizes[16],
+    height: theme.sizes[16],
+  },
+
+  variants: {
+    disabled: {
+      true: {
+        color: theme.colors.textLowContrast,
+      },
+
+      false: {
+        cursor: 'pointer',
+        color: theme.colors.textHighContrast,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackgroundHover,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackgroundActive,
+        },
+        '&:focus': {
+          outline: theme.borderStyles.componentInteractiveActive,
+        },
+      },
+    },
+  },
+
+  defaultVariants: {
+    disabled: false,
+  },
+});
+
+const CaretUp = styled(CaretUpIcon, {
+  width: `${theme.sizes[8]} !important`,
+  height: `${theme.sizes[8]} !important`,
+
+  [`${Wrapper}:not([open]) &`]: {
+    display: 'none',
+  },
+});
+
+const CaretDown = styled(CaretDownIcon, {
+  width: `${theme.sizes[8]} !important`,
+  height: `${theme.sizes[8]} !important`,
+
+  [`${Wrapper}[open] &`]: {
     display: 'none',
   },
 });
 
 const Children = styled('div', {
+  position: 'absolute',
+  zIndex: 2,
   width: theme.sizes.dropdownWidth,
   display: 'flex',
+  top: `calc(100% + ${theme.space.padding})`,
   flexDirection: 'column',
   padding: theme.sizes[8],
   gap: theme.sizes[8],
@@ -39,26 +107,13 @@ const Children = styled('div', {
   backgroundColor: theme.colors.componentBackground,
 });
 
-const Caret = styled(CaretDownIcon, {
-  width: `${theme.sizes[8]} !important`,
-  height: `${theme.sizes[8]} !important`,
-});
-
-/**
- * TODO: implement this arrow because I can't spend another living minute
- * trying to figure out why it has padding
- */
-// const DropdownArrow = styled(DropdownArrowIcon, {
-//   color: theme.colors.componentInteractiveBorder,
-//   width: '8px',
-//   height: '4px',
-// });
-
-export const Dropdown: FC<DropdownProps> = ({ icon, children, ...props }) => {
+export const Dropdown: FC<DropdownProps> = ({ icon, children, disabled }) => {
+  const wrapper = useRef<HTMLDetailsElement>(null!);
   const childrenElement = useRef<HTMLDivElement>(null!);
 
-  const handleFocus = () => {
+  const handleToggle = () => {
     const boundingClientRect = childrenElement.current.getBoundingClientRect();
+    const otherWrappers = document.querySelectorAll(`${Wrapper}`);
 
     if (
       boundingClientRect.x + boundingClientRect.width + PADDING_FROM_EDGE >
@@ -70,22 +125,54 @@ export const Dropdown: FC<DropdownProps> = ({ icon, children, ...props }) => {
           PADDING_FROM_EDGE) /
         16
       }rem)`;
-    }
-    if (boundingClientRect.x - PADDING_FROM_EDGE < 0) {
+    } else if (boundingClientRect.x - PADDING_FROM_EDGE < 0) {
       childrenElement.current.style.transform = `translate(${
         (-boundingClientRect.x + PADDING_FROM_EDGE) / 16
       }rem)`;
     }
+
+    if (wrapper.current.open) {
+      otherWrappers.forEach((otherWrapper) => {
+        if (otherWrapper !== wrapper.current) {
+          (otherWrapper as HTMLDetailsElement).open = false;
+        }
+      });
+    }
   };
 
+  const handleClick = (event: MouseEvent) => {
+    if (disabled) event.preventDefault();
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLDetailsElement>) => {
+    event.stopPropagation();
+  };
+
+  useEffect(() => {
+    const handleWindowPointerDown = () => (wrapper.current.open = false);
+
+    window.addEventListener('pointerdown', handleWindowPointerDown);
+
+    return () => {
+      window.removeEventListener('pointerdown', handleWindowPointerDown);
+    };
+  }, []);
+
   return (
-    <Trigger onFocus={handleFocus} {...props}>
-      {icon}
-      <Caret />
-      <Content>
-        {/* <DropdownArrow /> */}
-        <Children ref={childrenElement}>{children}</Children>
-      </Content>
-    </Trigger>
+    <Wrapper
+      disabled={disabled}
+      onToggle={handleToggle}
+      onClick={handleClick}
+      onPointerDown={handlePointerDown}
+      ref={wrapper}
+    >
+      <Trigger disabled={disabled}>
+        {icon}
+        <CaretUp />
+        <CaretDown />
+      </Trigger>
+
+      <Children ref={childrenElement}>{children}</Children>
+    </Wrapper>
   );
 };

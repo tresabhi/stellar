@@ -1,5 +1,5 @@
 import { Button } from 'components/Button';
-import { FC, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
+import { FC, InputHTMLAttributes, MouseEvent, ReactNode, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface DropdownItemProps
@@ -76,17 +76,18 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   onClick,
   ...props
 }) => {
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
-    }
+  const trigger = useRef<HTMLButtonElement>(null!);
 
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    const wrapper = trigger.current.parentElement?.parentElement;
+
+    if (wrapper instanceof HTMLDetailsElement) wrapper.open = false;
     if (onClick) onClick(event);
   };
 
   return (
     // @ts-ignore
-    <Trigger disabled={disabled} onClick={handleClick} {...props}>
+    <Trigger ref={trigger} disabled={disabled} onClick={handleClick} {...props}>
       <IconContainer disabled={disabled}>{icon}</IconContainer>
       <Label disabled={disabled}>{children}</Label>
       <Keybind>{keybind}</Keybind>
