@@ -24,8 +24,10 @@ const useDragControls = (id: string) => {
   let initialMousePos: Vector2;
   let lastDelta = new Vector2();
   let lastSnappedDelta = new Vector2();
-  let firstInversePatches: Patch[] | undefined;
-  let lastPatches: Patch[] | undefined;
+  let firstInversePatchesX: Patch[] | undefined;
+  let firstInversePatchesY: Patch[] | undefined;
+  let lastPatchesX: Patch[] | undefined;
+  let lastPatchesY: Patch[] | undefined;
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
@@ -74,22 +76,34 @@ const useDragControls = (id: string) => {
       selectedInitially = true;
     }
 
-    if (movement.x !== 0 || movement.y !== 0) {
+    if (movement.x !== 0) {
       const [nextState, patches, inversePatches] = produceWithPatches(
         useBlueprint.getState(),
         (draft) => {
-          translateTranslatableParts(
-            movement.x,
-            movement.y,
-            draft.selections,
-            draft,
-          );
+          translateTranslatableParts(movement.x, 0, draft.selections, draft);
         },
       );
 
-      if (inversePatches.length > 0) {
-        if (!firstInversePatches) firstInversePatches = inversePatches;
-        lastPatches = patches;
+      if (patches.length > 0) {
+        lastPatchesX = patches;
+        if (!firstInversePatchesX) firstInversePatchesX = inversePatches;
+
+        useBlueprint.setState(nextState);
+      }
+    }
+
+    if (movement.y !== 0) {
+      const [nextState, patches, inversePatches] = produceWithPatches(
+        useBlueprint.getState(),
+        (draft) => {
+          translateTranslatableParts(0, movement.y, draft.selections, draft);
+        },
+      );
+
+      if (patches.length > 0) {
+        lastPatchesY = patches;
+        if (!firstInversePatchesY) firstInversePatchesY = inversePatches;
+
         useBlueprint.setState(nextState);
       }
     }
@@ -101,7 +115,13 @@ const useDragControls = (id: string) => {
     window.removeEventListener('pointerup', onPointerUp);
     window.removeEventListener('pointermove', onPointerMove);
 
-    if (lastPatches) {
+    const lastPatches = [...(lastPatchesX ?? []), ...(lastPatchesY ?? [])];
+    const firstInversePatches = [
+      ...(firstInversePatchesX ?? []),
+      ...(firstInversePatchesY ?? []),
+    ];
+
+    if (lastPatches.length > 0) {
       useVersionControl.setState(
         produce<UseVersionControl>((draft) => {
           draft.history.splice(
@@ -110,8 +130,8 @@ const useDragControls = (id: string) => {
           );
 
           draft.history.push({
-            inversePatches: firstInversePatches!,
-            patches: lastPatches!,
+            inversePatches: firstInversePatches,
+            patches: lastPatches,
           });
 
           if (UNDO_LIMIT === 0) {
@@ -136,8 +156,10 @@ const useDragControls = (id: string) => {
       window.addEventListener('pointerup', removeSelectionRestriction);
 
       // clean up
-      firstInversePatches = undefined;
-      lastPatches = undefined;
+      firstInversePatchesX = undefined;
+      firstInversePatchesY = undefined;
+      lastPatchesX = undefined;
+      lastPatchesY = undefined;
     }
   };
 
