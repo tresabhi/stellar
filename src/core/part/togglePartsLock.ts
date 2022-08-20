@@ -9,7 +9,9 @@ export const togglePartsLock = (ids: string[], draft?: Blueprint) => {
 
     mutateParts(
       ids,
-      (draft) => (draft.locked = isMixed ? false : !firstLock),
+      (draft) => {
+        draft.locked = isMixed ? false : !firstLock;
+      },
       draft,
     );
   } else {

@@ -19,33 +19,43 @@ export enum Popup {
 }
 
 export interface UseApp {
-  fileHandle?: FileSystemFileHandle;
-  hasUnsavedChanges: boolean;
+  file: {
+    handle?: FileSystemFileHandle;
+    hasUnsavedChanges: boolean;
+  };
 
-  tab: Tab;
-  popup: Popup | null;
+  interface: {
+    tab: Tab;
+    popup?: Popup;
+    isInteracting: boolean;
+  };
 
-  tool: Tool;
-  isPanning: boolean;
-  isInteractingWithUI: boolean;
-
-  preventNextSelection: boolean;
-  clipboard?: Snippet;
+  editor: {
+    tool: Tool;
+    isPanning: boolean;
+    preventNextSelection: boolean;
+    clipboard?: Snippet;
+  };
 }
 
 export const UseAppData: UseApp = {
-  fileHandle: undefined,
-  hasUnsavedChanges: false,
+  file: {
+    handle: undefined,
+    hasUnsavedChanges: false,
+  },
 
-  tab: Tab.Create,
-  popup: null,
+  interface: {
+    tab: Tab.Create,
+    popup: undefined,
+    isInteracting: false,
+  },
 
-  tool: Tool.Move,
-  isPanning: false,
-  isInteractingWithUI: false,
-
-  preventNextSelection: false,
-  clipboard: undefined,
+  editor: {
+    tool: Tool.Move,
+    isPanning: false,
+    preventNextSelection: false,
+    clipboard: undefined,
+  },
 };
 
 const useApp = create<UseApp, [['zustand/subscribeWithSelector', never]]>(

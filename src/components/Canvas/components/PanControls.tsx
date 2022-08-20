@@ -56,7 +56,9 @@ export const PanControls = () => {
     };
 
     const handlePointerDown = (event: PointerEvent) => {
-      const { tool, isPanning } = useApp.getState();
+      const {
+        editor: { tool, isPanning },
+      } = useApp.getState();
 
       if (tool === Tool.Pan || isPanning) {
         initialMousePos = getMousePos(event);

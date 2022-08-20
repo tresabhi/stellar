@@ -38,7 +38,7 @@ export const TabContainer: FC<TabContainerProps> = ({
   children,
   overflow,
 }) => {
-  const currentTab = useApp((state) => state.tab);
+  const currentTab = useApp((state) => state.interface.tab);
 
   return (
     <Container overflow={overflow} visible={currentTab === tab}>

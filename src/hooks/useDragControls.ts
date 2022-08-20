@@ -1,4 +1,5 @@
 import { ThreeEvent } from '@react-three/fiber';
+import { mutateApp } from 'core/app/mutateApp';
 import { UNDO_LIMIT } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
@@ -31,7 +32,9 @@ const useDragControls = (id: string) => {
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
-    const { tool, isPanning } = useApp.getState();
+    const {
+      editor: { tool, isPanning },
+    } = useApp.getState();
 
     if (
       part &&
@@ -121,7 +124,7 @@ const useDragControls = (id: string) => {
       ...(firstInversePatchesY ?? []),
     ];
 
-    if (lastPatches.length > 0) {
+    if (lastDelta.length() > 0) {
       useVersionControl.setState(
         produce<UseVersionControl>((draft) => {
           draft.history.splice(
@@ -148,11 +151,15 @@ const useDragControls = (id: string) => {
 
       const removeSelectionRestriction = () => {
         // fire this just in case selection does not happen
-        useApp.setState({ preventNextSelection: false });
+        mutateApp((draft) => {
+          draft.editor.preventNextSelection = false;
+        });
         window.removeEventListener('pointerup', removeSelectionRestriction);
       };
 
-      useApp.setState({ preventNextSelection: true });
+      mutateApp((draft) => {
+        draft.editor.preventNextSelection = true;
+      });
       window.addEventListener('pointerup', removeSelectionRestriction);
 
       // clean up

@@ -1,4 +1,5 @@
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Input as InputComponent } from 'components/Input';
 import { forwardRef, InputHTMLAttributes } from 'react';
 import { styled, theme } from 'stitches.config';
 
@@ -22,16 +23,10 @@ const Container = styled('div', {
   },
 });
 
-const Input = styled('input', {
+const Input = styled(InputComponent, {
   fontSize: theme.fontSizes[12],
-  color: theme.colors.textHighContrast,
   flex: 1,
   height: '100%',
-  padding: 'none',
-
-  '&::placeholder': {
-    color: theme.colors.textLowContrast,
-  },
 });
 
 const Icon = styled(MagnifyingGlassIcon, {

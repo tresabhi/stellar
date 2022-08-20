@@ -18,10 +18,11 @@ import { fileOpen } from 'browser-fs-access';
 import { Button as ButtonComponent } from 'components/Button';
 import { Pallet, PalletItem } from 'components/Pallet';
 import { TabContainer } from 'components/TabContainer';
+import { mutateApp } from 'core/app/mutateApp';
 import { fileImport, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
 import { styled, theme } from 'stitches.config';
-import useApp, { Tab } from 'stores/useApp';
+import { Tab } from 'stores/useApp';
 import { Statusbar } from './components/Statusbar';
 
 const ABHI = 'TrèsAbhi';
@@ -115,7 +116,9 @@ const PALLET_ITEMS = TEMPLATES.sort((a, b) => {
           : `https://jmnet.one/sfs/forum/index.php?members/${template.link}`,
       callback: () => {
         loadBlueprint(template.blueprint);
-        useApp.setState({ tab: Tab.Layout });
+        mutateApp((draft) => {
+          draft.interface.tab = Tab.Layout;
+        });
       },
       icon: template.inbuilt ? <FileTextIcon /> : <ArchiveIcon />,
     } as PalletItem),
@@ -207,17 +210,22 @@ const FileActions = styled('div', {
 });
 
 export const TabCreate = () => {
+  const toLayout = () => {
+    mutateApp((draft) => {
+      draft.interface.tab = Tab.Layout;
+    });
+  };
   const handleScratchClick = () => {
     loadBlueprint();
-    useApp.setState({ tab: Tab.Layout });
+    toLayout();
   };
   const handleImportClick = async () => {
     await fileImport();
-    useApp.setState({ tab: Tab.Layout });
+    toLayout();
   };
   const handleOpenClick = async () => {
     await fileOpen();
-    useApp.setState({ tab: Tab.Layout });
+    toLayout();
   };
 
   return (

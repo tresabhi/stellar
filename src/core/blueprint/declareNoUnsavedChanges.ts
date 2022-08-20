@@ -1,5 +1,7 @@
-import useApp from 'stores/useApp';
+import { mutateApp } from 'core/app/mutateApp';
 
 export const declareNoUnsavedChanges = () => {
-  useApp.setState({ hasUnsavedChanges: false });
+  mutateApp((draft) => {
+    draft.file.hasUnsavedChanges = false;
+  });
 };

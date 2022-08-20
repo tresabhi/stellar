@@ -34,7 +34,7 @@ export const translationsRegistry = new Map<string, AnyObject>([
 ]);
 
 const useTranslator = () => {
-  const language = useSettings((state) => state.language);
+  const language = useSettings((state) => state.interface.language);
   let translations = translationsRegistry.get(language);
 
   if (isUndefined(translations)) {

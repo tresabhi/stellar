@@ -5,14 +5,18 @@ import {
   RulerHorizontalIcon,
 } from '@radix-ui/react-icons';
 import * as Tabbar from 'components/Tabbar';
+import { mutateApp } from 'core/app/mutateApp';
 import useApp, { Tab } from 'stores/useApp';
 
 export const Tabs = () => {
-  const tab = useApp((state) => state.tab);
-  const is = (target: Tab) => {
+  const tab = useApp((state) => state.interface.tab);
+  const is = (targetTab: Tab) => {
     return {
-      selected: tab === target,
-      onClick: () => useApp.setState({ tab: target }),
+      selected: tab === targetTab,
+      onClick: () =>
+        mutateApp((draft) => {
+          draft.interface.tab = targetTab;
+        }),
     };
   };
 

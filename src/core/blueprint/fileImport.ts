@@ -1,5 +1,5 @@
 import { fileOpen } from 'browser-fs-access';
-import useApp from 'stores/useApp';
+import { mutateApp } from 'core/app/mutateApp';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 import { loadBlueprint } from './loadBlueprint';
 
@@ -12,6 +12,8 @@ export const fileImport = async () => {
   const data = JSON.parse(await file.text());
 
   loadBlueprint(data);
-  useApp.setState({ fileHandle: file.handle ?? undefined });
+  mutateApp((draft) => {
+    draft.file.handle = file.handle;
+  });
   declareNoUnsavedChanges();
 };

@@ -1,3 +1,4 @@
+import { mutateApp } from 'core/app/mutateApp';
 import {
   fileExport,
   fileImport,
@@ -5,8 +6,9 @@ import {
   fileSaveAs,
   loadBlueprint,
   versionRedo,
-  versionUndo,
+  versionUndo
 } from 'core/blueprint';
+import { popupClose, popupOpen } from 'core/interface';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
@@ -17,16 +19,16 @@ import {
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts,
+  unselectAllParts
 } from 'core/part';
-import { popupClose, popupOpen } from 'core/ui';
 import produce from 'immer';
 import { isNull } from 'lodash';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
 import useApp, { Popup, Tab, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
-import useSettings, { UseSettings } from 'stores/useSettings';
+import useSettings, { InterfaceMode, UseSettings } from 'stores/useSettings';
+import { getInterfaceMode } from 'utilities/getInterfaceMode';
 
 const tabOrder = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
@@ -70,15 +72,13 @@ const bind = (
   mousetrapBind(
     keys,
     (event) => {
-      const { isInteractingWithUI, tab } = useApp.getState();
-
-      console.log(isInteractingWithUI);
+      const {
+        interface: { isInteracting, tab },
+      } = useApp.getState();
 
       if (
         (mergedOptions.preventRepeats ? !event.repeat : true) &&
-        (mergedOptions.preventWhenInteractingWithUI
-          ? !isInteractingWithUI
-          : true) &&
+        (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
         (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
       ) {
         if (mergedOptions.preventDefault) event.preventDefault();
@@ -91,15 +91,23 @@ const bind = (
 };
 
 const useKeybinds = () => {
-  // BIG TODO: Make this date driven
-  const tool = (name: Tool) => () => useApp.setState({ tool: name });
+  const toTool = (tool: Tool) => () =>
+    mutateApp((draft) => {
+      draft.editor.tool = tool;
+    });
+  const toLayout = () =>
+    mutateApp((draft) => {
+      draft.interface.tab = Tab.Layout;
+    });
 
   useEffect(() => {
     bind('ctrl+a', () => selectPartsOnly(useBlueprint.getState().part_order));
     bind(
       'esc',
       () => {
-        const { popup } = useApp.getState();
+        const {
+          interface: { popup },
+        } = useApp.getState();
 
         if (!isNull(popup)) {
           popupClose();
@@ -124,15 +132,22 @@ const useKeybinds = () => {
     bind('alt+1', () => {
       useSettings.setState(
         produce((draft: UseSettings) => {
-          draft.layout.leftSideBar.visible = !draft.layout.leftSideBar.visible;
+          draft.interface.tabs.layout.leftSideBar.visible =
+            !draft.interface.tabs.layout.leftSideBar.visible;
         }),
       );
     });
     bind('alt+2', () => {
       useSettings.setState(
         produce((draft: UseSettings) => {
-          draft.layout.rightSideBar.visible =
-            !draft.layout.rightSideBar.visible;
+          if (getInterfaceMode() === InterfaceMode.Compact) {
+            draft.interface.tabs.layout.rightSideBar.visible.inCompactMode =
+              !draft.interface.tabs.layout.rightSideBar.visible.inCompactMode;
+          } else {
+            draft.interface.tabs.layout.rightSideBar.visible.inComfortableMode =
+              !draft.interface.tabs.layout.rightSideBar.visible
+                .inComfortableMode;
+          }
         }),
       );
     });
@@ -140,24 +155,24 @@ const useKeybinds = () => {
     bind(
       ['ctrl+tab', ']'],
       () => {
-        useApp.setState((state) => ({
-          tab:
-            state.tab === tabOrder[tabOrder.length - 1]
+        mutateApp((draft) => {
+          draft.interface.tab =
+            draft.interface.tab === tabOrder[tabOrder.length - 1]
               ? tabOrder[0]
-              : tabOrder[tabOrder.indexOf(state.tab) + 1],
-        }));
+              : tabOrder[tabOrder.indexOf(draft.interface.tab) + 1];
+        });
       },
       { preventOnNonLayoutTab: false },
     );
     bind(
       ['ctrl+shift+tab', '['],
       () => {
-        useApp.setState((state) => ({
-          tab:
-            state.tab === 0
+        mutateApp((draft) => {
+          draft.interface.tab =
+            draft.interface.tab === 0
               ? tabOrder[tabOrder.length - 1]
-              : tabOrder[tabOrder.indexOf(state.tab) - 1],
-        }));
+              : tabOrder[tabOrder.indexOf(draft.interface.tab) - 1];
+        });
       },
       { preventOnNonLayoutTab: false },
     );
@@ -194,43 +209,47 @@ const useKeybinds = () => {
       preventRepeats: false,
     });
 
-    bind('1', tool(Tool.Move));
-    bind('2', tool(Tool.Pan));
+    bind('1', toTool(Tool.Move));
+    bind('2', toTool(Tool.Pan));
 
     bind(
       'space',
       () => {
-        useApp.setState({ isPanning: true });
+        mutateApp((draft) => {
+          draft.editor.isPanning = true;
+        });
       },
       { preventRepeats: true, action: 'keydown' },
     );
     bind(
       'space',
       () => {
-        useApp.setState({ isPanning: false });
+        mutateApp((draft) => {
+          draft.editor.isPanning = false;
+        });
       },
       { action: 'keyup' },
     );
 
     bind('ctrl+n', () => {
       loadBlueprint();
-      useApp.setState({ tab: Tab.Layout });
+      toLayout();
     });
     bind('ctrl+o', () => {
       fileOpen();
-      useApp.setState({ tab: Tab.Layout });
+      toLayout();
     });
     bind('ctrl+s', () => {
       fileSaveAs();
-      useApp.setState({ tab: Tab.Layout });
+      toLayout();
     });
     bind('ctrl+i', () => {
       fileImport();
-      useApp.setState({ tab: Tab.Layout });
+      toLayout();
     });
     bind('ctrl+e', () => {
       fileExport();
-      useApp.setState({ tab: Tab.Layout });
+      toLayout();
     });
 
     bind('ctrl+c', copyPartsBySelection);

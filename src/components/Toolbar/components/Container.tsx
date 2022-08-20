@@ -1,5 +1,4 @@
-import { styled } from '@stitches/react';
-import { theme } from 'stitches.config';
+import { styled, theme } from 'stitches.config';
 
 export const Container = styled('div', {
   backgroundColor: theme.colors.componentBackground,

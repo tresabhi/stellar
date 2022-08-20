@@ -1,21 +1,17 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Interface from 'routes/components/Interface';
 import SplashScreen from 'routes/components/SplashScreen';
-import Desktop from 'routes/Desktop';
-import Mobile from 'routes/Mobile';
 import 'styles/index.scss';
-import usePostrender from 'utilities/usePostrender';
+import usePrerender from 'utilities/usePrerender';
 
 const App = () => {
-  usePostrender();
+  usePrerender();
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<SplashScreen />} />
-        <Route path="/mobile" element={<Mobile />} />
-        <Route path="/desktop" element={<Desktop />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/" element={<SplashScreen navigateTo="/interface" />} />
+      <Route path="/interface" element={<Interface />} />
+    </Routes>
   );
 };
 export default App;

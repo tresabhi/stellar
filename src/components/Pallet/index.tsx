@@ -1,6 +1,6 @@
 import * as Listing from 'components/Listing';
 import { Search } from 'components/Search';
-import { popupClose } from 'core/ui';
+import { popupClose } from 'core/interface';
 import { go } from 'fuzzysort';
 import {
   FC,

@@ -9,9 +9,11 @@ import {
 } from './fileSaveAs';
 
 export const fileExport = async () => {
-  const { fileHandle } = useApp.getState();
+  const {
+    file: { handle },
+  } = useApp.getState();
   const fileName =
-    fileHandle?.name.replace(FILE_EXTENSION_REGEX, '') ??
+    handle?.name.replace(FILE_EXTENSION_REGEX, '') ??
     UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');
   const data = blueprintExportify(useBlueprint.getState());
   const blob = new Blob(

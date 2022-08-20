@@ -1,8 +1,8 @@
 import { Pallet, PalletItem } from 'components/Pallet';
+import { mutateApp } from 'core/app/mutateApp';
+import { popupClose } from 'core/interface';
 import { getParent, getPart, insertNewPart } from 'core/part';
-import { popupClose } from 'core/ui';
 import { useEffect } from 'react';
-import useApp from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import usePartRegistry from 'stores/usePartRegistry';
 
@@ -47,9 +47,14 @@ export const InsertPart = () => {
   });
 
   useEffect(() => {
-    useApp.setState({ isInteractingWithUI: true });
+    mutateApp((draft) => {
+      draft.interface.isInteracting = true;
+    });
 
-    return () => useApp.setState({ isInteractingWithUI: false });
+    return () =>
+      mutateApp((draft) => {
+        draft.interface.isInteracting = false;
+      });
   }, []);
 
   return <Pallet gainFocus placeholder="Insert part..." items={palletItems} />;

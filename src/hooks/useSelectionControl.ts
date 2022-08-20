@@ -1,4 +1,5 @@
 import { ThreeEvent } from '@react-three/fiber';
+import { mutateApp } from 'core/app/mutateApp';
 import { mutateBlueprint } from 'core/blueprint';
 import {
   getParent,
@@ -12,7 +13,9 @@ import useApp, { Tool } from '../stores/useApp';
 
 const useSelectionControl = (id: string) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
-    const { preventNextSelection, tool, isPanning } = useApp.getState();
+    const {
+      editor: { preventNextSelection, tool, isPanning },
+    } = useApp.getState();
 
     if (!preventNextSelection && tool === Tool.Move && !isPanning) {
       const part = getPart(id);
@@ -48,7 +51,9 @@ const useSelectionControl = (id: string) => {
           }
         }
       } else {
-        useApp.setState({ preventNextSelection: false });
+        mutateApp((draft) => {
+          draft.editor.preventNextSelection = false;
+        });
         event.stopPropagation();
       }
     }

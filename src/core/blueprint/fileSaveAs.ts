@@ -1,4 +1,5 @@
 import { fileSave } from 'browser-fs-access';
+import { mutateApp } from 'core/app/mutateApp';
 import useApp from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './blueprintImportify';
@@ -10,7 +11,9 @@ export const UNNAMED_BLUEPRINT_FILE_NAME = 'Blueprint.stbp';
 export const FILE_EXTENSION_REGEX = /\.[^/.]+$/;
 
 export const fileSaveAs = async () => {
-  const { fileHandle } = useApp.getState();
+  const {
+    file: { handle },
+  } = useApp.getState();
   const data = blueprintSavify(useBlueprint.getState());
   const blob = new Blob(
     [
@@ -22,13 +25,15 @@ export const fileSaveAs = async () => {
       type: 'application/json',
     },
   );
-  const newFileHandle = (await fileSave(blob, {
-    fileName: fileHandle?.name ?? UNNAMED_BLUEPRINT_FILE_NAME,
+  const newHandle = (await fileSave(blob, {
+    fileName: handle?.name ?? UNNAMED_BLUEPRINT_FILE_NAME,
     description: 'Stellar blueprint file',
     mimeTypes: ['application/json'],
     extensions: ['.stbp'],
   })) as unknown as FileSystemFileHandle | null;
 
-  useApp.setState({ fileHandle: newFileHandle ?? undefined });
+  mutateApp((draft) => {
+    draft.file.handle = newHandle ?? undefined;
+  });
   declareNoUnsavedChanges();
 };

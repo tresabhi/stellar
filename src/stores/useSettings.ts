@@ -7,6 +7,11 @@ export enum SidebarTab {
   Right,
 }
 
+export enum InterfaceMode {
+  Compact,
+  Comfortable,
+}
+
 export interface UseSettings {
   debug: {
     dev_blueprint?: string;
@@ -17,20 +22,28 @@ export interface UseSettings {
     regress_amount: number;
   };
 
-  layout: {
-    leftSideBar: {
-      visible: boolean;
-      tab: SidebarTab;
-    };
+  interface: {
+    mode: InterfaceMode | null; // null is auto detect
+    language: string;
 
-    rightSideBar: {
-      visible: boolean;
-      tab: SidebarTab;
-      scaleConstrained: boolean;
+    tabs: {
+      layout: {
+        leftSideBar: {
+          visible: boolean;
+          tab: SidebarTab;
+        };
+
+        rightSideBar: {
+          visible: {
+            inCompactMode: boolean;
+            inComfortableMode: boolean;
+          };
+          tab: SidebarTab;
+          scaleConstrained: boolean;
+        };
+      };
     };
   };
-
-  language: string;
 }
 
 export const UseSettingsData: UseSettings = {
@@ -42,20 +55,28 @@ export const UseSettingsData: UseSettings = {
     regress_amount: 1,
   },
 
-  layout: {
-    leftSideBar: {
-      visible: true,
-      tab: SidebarTab.Left,
-    },
+  interface: {
+    mode: null,
+    language: 'en-US',
 
-    rightSideBar: {
-      visible: true,
-      tab: SidebarTab.Left,
-      scaleConstrained: false,
+    tabs: {
+      layout: {
+        leftSideBar: {
+          visible: true,
+          tab: SidebarTab.Left,
+        },
+
+        rightSideBar: {
+          visible: {
+            inCompactMode: false,
+            inComfortableMode: true,
+          },
+          tab: SidebarTab.Left,
+          scaleConstrained: false,
+        },
+      },
     },
   },
-
-  language: 'en-US',
 };
 
 const useSettings = create<UseSettings, [['zustand/persist', UseSettings]]>(

@@ -1,4 +1,5 @@
 import { fileSave } from 'browser-fs-access';
+import { mutateApp } from 'core/app/mutateApp';
 import useApp from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './blueprintImportify';
@@ -6,7 +7,9 @@ import { blueprintSavify } from './blueprintSavify';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 
 export const fileWrite = async () => {
-  const { fileHandle } = useApp.getState();
+  const {
+    file: { handle },
+  } = useApp.getState();
   const data = blueprintSavify(useBlueprint.getState());
   const blob = new Blob(
     [
@@ -19,12 +22,14 @@ export const fileWrite = async () => {
     },
   );
 
-  const newFileHandle = (await fileSave(
+  const newHandle = (await fileSave(
     blob,
     undefined,
-    fileHandle,
+    handle,
   )) as unknown as FileSystemFileHandle;
 
-  useApp.setState({ fileHandle: newFileHandle });
+  mutateApp((draft) => {
+    draft.file.handle = newHandle;
+  });
   declareNoUnsavedChanges();
 };

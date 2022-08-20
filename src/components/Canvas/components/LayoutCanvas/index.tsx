@@ -22,7 +22,9 @@ export const LayoutCanvas = () => {
   const initialBlueprintState = useBlueprint.getState();
 
   const handlePointerMissed = () => {
-    const { tool, isPanning } = useApp.getState();
+    const {
+      editor: { tool, isPanning },
+    } = useApp.getState();
     const { selections } = useBlueprint.getState();
     if (selections.length > 0 && tool === Tool.Move && !isPanning) {
       unselectAllParts();
@@ -31,7 +33,7 @@ export const LayoutCanvas = () => {
 
   useEffect(() => {
     const unsubscribeTool = useApp.subscribe(
-      (state) => state.tool,
+      (state) => state.editor.tool,
       (tool) => {
         if (tool === Tool.Pan) {
           canvas.current.classList.add(styles.pan);
@@ -41,11 +43,11 @@ export const LayoutCanvas = () => {
       },
     );
     const unsubscribeIsPanning = useApp.subscribe(
-      (state) => state.isPanning,
+      (state) => state.editor.isPanning,
       (isPanning) => {
         if (isPanning) {
           canvas.current.classList.add(styles.pan);
-        } else if (useApp.getState().tool !== Tool.Pan) {
+        } else if (useApp.getState().editor.tool !== Tool.Pan) {
           canvas.current.classList.remove(styles.pan);
         }
       },

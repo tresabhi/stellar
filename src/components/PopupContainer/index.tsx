@@ -1,4 +1,4 @@
-import { popupClose } from 'core/ui';
+import { popupClose } from 'core/interface';
 import { FC, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 

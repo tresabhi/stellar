@@ -1,5 +1,5 @@
+import { mutateApp } from 'core/app/mutateApp';
 import { Blueprint } from 'game/Blueprint';
-import useApp from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import { Snippet } from 'stores/useSnippets';
 import { clonePart } from './clonePart';
@@ -28,9 +28,11 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
     });
 
     if (clipboard.parts.size > 0 && clipboard.partOrder.length > 0) {
-      useApp.setState({ clipboard });
+      mutateApp((draft) => {
+        draft.editor.clipboard = clipboard;
+      });
     } else {
-      useApp.setState({ clipboard: undefined });
+      mutateApp((draft) => delete draft.editor.clipboard);
     }
   } else {
     copyParts(ids, useBlueprint.getState());

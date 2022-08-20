@@ -25,6 +25,7 @@ import {
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
+import { mutateApp } from 'core/app/mutateApp';
 import {
   fileExport,
   fileImport,
@@ -34,6 +35,7 @@ import {
   versionRedo,
   versionUndo,
 } from 'core/blueprint';
+import { popupOpen } from 'core/interface';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
@@ -44,14 +46,13 @@ import {
   togglePartsVisibilityBySelection,
   ungroupGroupsBySelection,
 } from 'core/part';
-import { popupOpen } from 'core/ui';
 import useApp, { Popup, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import useVersionControl from 'stores/useVersionControl';
 
 const Toolbar = () => {
-  const tool = useApp((state) => state.tool);
-  const isPanning = useApp((state) => state.isPanning);
+  const tool = useApp((state) => state.editor.tool);
+  const isPanning = useApp((state) => state.editor.isPanning);
   const selections = useBlueprint((state) => state.selections);
   const parts = useBlueprint.getState().parts;
   const isOneHidden = selections.some(
@@ -66,8 +67,14 @@ const Toolbar = () => {
     (state) => state.history.length - 1 > state.index,
   );
 
-  const handleMoveClick = () => useApp.setState({ tool: Tool.Move });
-  const handlePanClick = () => useApp.setState({ tool: Tool.Pan });
+  const handleMoveClick = () =>
+    mutateApp((draft) => {
+      draft.editor.tool = Tool.Move;
+    });
+  const handlePanClick = () =>
+    mutateApp((draft) => {
+      draft.editor.tool = Tool.Pan;
+    });
   const handlePlusClick = () => popupOpen(Popup.InsertPart);
   const handleNewClick = () => loadBlueprint();
   const handleOpenClick = fileOpen;

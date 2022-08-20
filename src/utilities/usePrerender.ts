@@ -2,13 +2,12 @@ import { useGLTF } from '@react-three/drei';
 import useKeybinds from 'hooks/useKeybinds';
 import { PART_MODEL_PATH } from 'hooks/usePartModel';
 import useTranslator from 'hooks/useTranslator';
-import { isMobile } from 'react-device-detect';
 import { globalStyles, themeDark } from 'stitches.config';
 import useApp from 'stores/useApp';
 import usePartRegistry from 'stores/usePartRegistry';
 import getStellarContext from 'utilities/getStellarContext';
 
-const usePostrender = () => {
+const usePrerender = () => {
   const stellarContext = getStellarContext();
   useTranslator();
   globalStyles();
@@ -38,24 +37,24 @@ const usePostrender = () => {
     );
   }
 
-  if (window.location.pathname === '/') {
-    window.location.pathname = isMobile ? '/mobile' : '/desktop';
-  }
-
   const version = stellarContext.version.split('.');
   document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
 
   const rerenderDocumentTitle = () => {
-    const { fileHandle } = useApp.getState();
-    const { hasUnsavedChanges } = useApp.getState();
+    const {
+      file: { handle, hasUnsavedChanges },
+    } = useApp.getState();
 
     document.title = `${stellarContext.title} ${
-      fileHandle ? `- ${fileHandle.name}` : `${version[0]}.${version[1]}`
+      handle ? `- ${handle.name}` : `${version[0]}.${version[1]}`
     }${hasUnsavedChanges ? '*' : ''}`;
   };
 
-  useApp.subscribe((state) => state.hasUnsavedChanges, rerenderDocumentTitle);
-  useApp.subscribe((state) => state.fileHandle, rerenderDocumentTitle);
+  useApp.subscribe(
+    (state) => state.file.hasUnsavedChanges,
+    rerenderDocumentTitle,
+  );
+  useApp.subscribe((state) => state.file.handle, rerenderDocumentTitle);
 
   usePartRegistry.getState().forEach(({ preload }) => {
     if (preload) {
@@ -67,4 +66,4 @@ const usePostrender = () => {
     }
   });
 };
-export default usePostrender;
+export default usePrerender;

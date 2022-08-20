@@ -1,18 +1,11 @@
-import { FC } from 'react';
+import { useMemo } from 'react';
 import { styled } from 'stitches.config';
+import useSettings, { InterfaceMode } from 'stores/useSettings';
+import { getInterfaceMode } from 'utilities/getInterfaceMode';
 import { Popups } from './components/Popups';
 import { TabCreate } from './components/TabCreate';
 import { TabLayout } from './components/TabLayout';
 import { Tabs } from './components/Tabs';
-
-export enum InterfaceVariant {
-  Comfortable,
-  Compact,
-}
-
-export interface InterfaceProps {
-  type: InterfaceVariant;
-}
 
 export interface SidebarTabProps {
   selected: boolean;
@@ -28,14 +21,19 @@ export const DeviceVariantContainer = styled('div', {
   flexDirection: 'column',
 });
 
-const Interface: FC<InterfaceProps> = ({ type }) => (
-  <DeviceVariantContainer>
-    <Popups />
+const Interface = () => {
+  const mode = useSettings((state) => state.interface.mode);
+  const interfaceMode = useMemo(() => getInterfaceMode(mode), [mode]);
 
-    <Tabs />
-    <TabCreate />
-    <TabLayout swapSecondTab={type === InterfaceVariant.Compact} />
-  </DeviceVariantContainer>
-);
+  return (
+    <DeviceVariantContainer>
+      <Popups />
+
+      <Tabs />
+      <TabCreate />
+      <TabLayout swapSecondTab={interfaceMode === InterfaceMode.Compact} />
+    </DeviceVariantContainer>
+  );
+};
 
 export default Interface;
