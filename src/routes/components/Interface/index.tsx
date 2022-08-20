@@ -1,7 +1,6 @@
-import { useMemo } from 'react';
+import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { styled } from 'stitches.config';
-import useSettings, { InterfaceMode } from 'stores/useSettings';
-import { getInterfaceMode } from 'utilities/getInterfaceMode';
+import { InterfaceMode } from 'stores/useSettings';
 import { Popups } from './components/Popups';
 import { TabCreate } from './components/TabCreate';
 import { TabLayout } from './components/TabLayout';
@@ -22,8 +21,7 @@ export const DeviceVariantContainer = styled('div', {
 });
 
 const Interface = () => {
-  const mode = useSettings((state) => state.interface.mode);
-  const interfaceMode = useMemo(() => getInterfaceMode(mode), [mode]);
+  const interfaceMode = useInterfaceMode();
 
   return (
     <DeviceVariantContainer>

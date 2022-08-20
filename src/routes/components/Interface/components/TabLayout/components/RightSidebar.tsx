@@ -4,9 +4,14 @@ import {
   MixerVerticalIcon,
 } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
+import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import produce from 'immer';
 import { FC } from 'react';
-import useSettings, { SidebarTab, UseSettings } from 'stores/useSettings';
+import useSettings, {
+  InterfaceMode,
+  SidebarTab,
+  UseSettings,
+} from 'stores/useSettings';
 import { TabLayoutProps } from '..';
 
 export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
@@ -22,9 +27,17 @@ export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
       );
     };
   };
+  const interfaceMode = useInterfaceMode();
 
   return (
-    <Sidebar.Container visible={rightSidebar.visible} position="right">
+    <Sidebar.Container
+      visible={
+        interfaceMode === InterfaceMode.Compact
+          ? rightSidebar.visible.inCompactMode
+          : rightSidebar.visible.inComfortableMode
+      }
+      position="right"
+    >
       <Sidebar.TabContainer>
         <Sidebar.Tab
           onClick={handleClick(SidebarTab.Left)}
