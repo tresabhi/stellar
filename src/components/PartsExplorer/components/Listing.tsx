@@ -28,7 +28,7 @@ const triggerStyles = css({
   boxSizing: 'border-box',
   width: '100%',
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'stretch',
   justifyContent: 'center',
   padding: `0 ${theme.space.paddingMajor}`,
   gap: theme.space.gapRelatedMajor,
@@ -36,6 +36,10 @@ const triggerStyles = css({
   color: theme.colors.textHighContrast,
   listStyle: 'none',
   cursor: 'pointer',
+
+  '&:focus': {
+    outline: theme.borderStyles.componentInteractiveActive,
+  },
 
   '&::-webkit-details-marker': {
     display: 'none',
@@ -45,14 +49,14 @@ const triggerStyles = css({
     selected: {
       true: {
         backgroundColor: theme.colors.componentBackgroundActive,
-
-        '&:hover': { backgroundColor: theme.colors.componentBackgroundActive },
-        '&:active': { backgroundColor: theme.colors.componentBackgroundActive },
       },
 
       false: {
-        '&:not(:hover), &:not(:active)': {
-          backgroundColor: 'transparent !important',
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackgroundHover,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackgroundActive,
         },
       },
     },
@@ -67,7 +71,9 @@ const triggerStyles = css({
 
 const IconContainer = styled('div', {
   width: theme.sizes[12],
-  height: theme.sizes[12],
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 
   '& > svg': {
     width: theme.sizes[12],
