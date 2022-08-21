@@ -4,7 +4,7 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection
+  togglePartSelection,
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import usePartProperty from 'hooks/usePartProperty';
@@ -25,6 +25,7 @@ const Details = styled('details', {
 });
 
 const triggerStyles = css({
+  boxSizing: 'border-box',
   width: '100%',
   display: 'flex',
   alignItems: 'center',

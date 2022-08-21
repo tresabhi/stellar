@@ -137,7 +137,7 @@ export const globalStyles = globalCss({
     backgroundColor: 'transparent',
   },
   '::-webkit-scrollbar-thumb': {
-    backgroundColor: theme.colors.componentInteractiveBorder,
+    backgroundColor: theme.colors.componentInteractiveBorder, // TODO: add scrollbar colors
     borderRadius: 16, // chrome doesn't like rem (●__●)
     border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidth}) / 2) solid transparent`,
     backgroundClip: 'content-box',
