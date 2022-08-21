@@ -72,6 +72,7 @@ const IconContainer = styled('div', {
   '& > svg': {
     width: theme.sizes[12],
     height: theme.sizes[12],
+    display: 'block',
   },
 
   variants: {
