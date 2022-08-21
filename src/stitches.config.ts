@@ -130,24 +130,27 @@ export const globalStyles = globalCss({
     fontFamily: theme.fonts.default,
   },
 
-  '*::-webkit-scrollbar': {
+  '::-webkit-scrollbar': {
     width: theme.sizes.scrollbarWidth,
   },
-  '*::-webkit-scrollbar-track': {
+  '::-webkit-scrollbar-track': {
     backgroundColor: 'transparent',
   },
-  '*::-webkit-scrollbar-thumb': {
+  '::-webkit-scrollbar-thumb': {
     backgroundColor: theme.colors.componentInteractiveBorder,
     borderRadius: 16, // chrome doesn't like rem (●__●)
     border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidth}) / 2) solid transparent`,
     backgroundClip: 'content-box',
   },
-  '*::-webkit-scrollbar-thumb:hover': {
+  '::-webkit-scrollbar-thumb:hover': {
     border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHover}) / 2) solid transparent`,
     backgroundColor: theme.colors.componentInteractiveBorderHover,
   },
-  '*::-webkit-scrollbar-thumb:active': {
+  '::-webkit-scrollbar-thumb:active': {
     border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHover}) / 2) solid transparent`,
     backgroundColor: theme.colors.componentInteractiveBorderActive,
+  },
+  '::-webkit-scrollbar-corner': {
+    backgroundColor: 'transparent',
   },
 });

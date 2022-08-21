@@ -1,5 +1,4 @@
 import { CaretRightIcon } from '@radix-ui/react-icons';
-import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import {
   getPart,
@@ -7,18 +6,26 @@ import {
   selectPartOnly,
   togglePartSelection
 } from 'core/part';
+import { Group } from 'game/parts/Group';
 import usePartProperty from 'hooks/usePartProperty';
 import { isUndefined } from 'lodash';
 import { KeyboardEvent, memo, MouseEvent, PointerEvent, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/useBlueprint';
 import usePartRegistry from 'stores/usePartRegistry';
+import { Container } from './Container';
 
 export interface ListingProps {
   id: string;
+  indent: number;
 }
 
-const buttonStyles = css({
+const Details = styled('details', {
+  width: '100%',
+});
+
+const triggerStyles = css({
+  width: '100%',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -26,6 +33,12 @@ const buttonStyles = css({
   gap: theme.space.gapRelatedMajor,
   minHeight: theme.sizes.inputHeightMajor,
   color: theme.colors.textHighContrast,
+  listStyle: 'none',
+  cursor: 'pointer',
+
+  '&::-webkit-details-marker': {
+    display: 'none',
+  },
 
   variants: {
     selected: {
@@ -52,13 +65,22 @@ const buttonStyles = css({
 });
 
 const IconContainer = styled('div', {
-  // maintain this size regardless of icon's existence
   width: theme.sizes[12],
   height: theme.sizes[12],
 
   '& > svg': {
     width: theme.sizes[12],
     height: theme.sizes[12],
+  },
+
+  variants: {
+    openCaret: {
+      true: {
+        'details[open] > summary > & > svg': {
+          transform: 'rotate(90deg)',
+        },
+      },
+    },
   },
 });
 
@@ -73,19 +95,20 @@ const Label = styled(Input, {
 });
 
 export const Listing = memo<ListingProps>(
-  ({ id }) => {
+  ({ id, indent }) => {
     const part = getPart(id)!;
     const isGroup = part.n === 'Group';
     let lastLabel = part.label;
     const { Icon } = usePartRegistry.getState().get(part.n)!;
-    const button = useRef<HTMLButtonElement>(null!);
+    const trigger = useRef<HTMLElement>(null!);
     const label = useRef<HTMLInputElement>(null!);
     const iconContainer = useRef<HTMLDivElement>(null!);
     let buttonDefaultClassNames: string;
 
     const handleLabelPointerDown = (event: PointerEvent) => {
       event.preventDefault();
-      button.current.focus();
+      trigger.current.focus();
+      trigger.current.click();
     };
     const handleLabelDoubleClick = (event: MouseEvent) => {
       event.preventDefault();
@@ -140,32 +163,44 @@ export const Listing = memo<ListingProps>(
       (state) => state.selected,
       (selected) => {
         if (isUndefined(buttonDefaultClassNames)) {
-          buttonDefaultClassNames = button.current.className;
+          buttonDefaultClassNames = trigger.current.className;
         }
 
-        button.current.className = `${buttonDefaultClassNames} ${buttonStyles({
-          selected,
-        })}`;
+        trigger.current.className = `${buttonDefaultClassNames} ${triggerStyles(
+          {
+            selected,
+          },
+        )}`;
       },
     );
 
     return (
-      <Button ref={button} onClick={handleTriggerClick}>
-        <IconContainer ref={iconContainer}>
-          {isGroup ? <CaretRightIcon /> : <Icon />}
-        </IconContainer>
+      <Details open={isGroup && (part as Group).expanded}>
+        <summary
+          style={{
+            paddingLeft: `calc(${theme.space.paddingMajor} + ${indent} * ${theme.space.padding})`,
+          }}
+          ref={trigger}
+          onClick={handleTriggerClick}
+        >
+          <IconContainer openCaret={isGroup} ref={iconContainer}>
+            {isGroup ? <CaretRightIcon /> : <Icon />}
+          </IconContainer>
 
-        <Label
-          ref={label}
-          defaultValue={part.label}
-          placeholder="No Label"
-          onPointerDown={handleLabelPointerDown}
-          onDoubleClick={handleLabelDoubleClick}
-          onFocus={handleLabelFocus}
-          onKeyDown={handleLabelKeyDown}
-          onBlur={handleLabelBlur}
-        />
-      </Button>
+          <Label
+            ref={label}
+            defaultValue={part.label}
+            placeholder="No Label"
+            onPointerDown={handleLabelPointerDown}
+            onDoubleClick={handleLabelDoubleClick}
+            onFocus={handleLabelFocus}
+            onKeyDown={handleLabelKeyDown}
+            onBlur={handleLabelBlur}
+          />
+        </summary>
+
+        {isGroup && <Container indent={indent + 1} parentId={part.id} />}
+      </Details>
     );
   },
   ({ id: prevId }, { id: nextId }) => prevId === nextId,
