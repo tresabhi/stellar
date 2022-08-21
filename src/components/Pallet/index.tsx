@@ -9,7 +9,7 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
@@ -152,7 +152,7 @@ export const Pallet: FC<PalletProps> = ({
         placeholder={placeholder}
       />
 
-      <FlexListingContainer collapse={collapse} darkBackground={darkBackground}>
+      <FlexListingContainer collapse={collapse} contrast={darkBackground}>
         {listings}
       </FlexListingContainer>
     </Container>

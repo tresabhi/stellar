@@ -4,10 +4,9 @@ export const Container = styled('div', {
   backgroundColor: theme.colors.componentBackground,
   borderRadius: theme.radii[4],
   overflowY: 'auto',
-  height: '100px',
 
   variants: {
-    darkBackground: {
+    contrast: {
       true: {
         backgroundColor: theme.colors.appBackground2,
       },
@@ -15,6 +14,6 @@ export const Container = styled('div', {
   },
 
   defaultVariants: {
-    darkBackground: true,
+    contrast: true,
   },
 });

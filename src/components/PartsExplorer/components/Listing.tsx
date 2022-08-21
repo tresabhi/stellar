@@ -5,7 +5,7 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
 import { isUndefined } from 'lodash';
@@ -24,7 +24,7 @@ const buttonStyles = css({
   justifyContent: 'center',
   padding: `0 ${theme.space.paddingMajor}`,
   gap: theme.space.gapRelatedMajor,
-  height: theme.sizes.inputHeightMajor,
+  minHeight: theme.sizes.inputHeightMajor,
   color: theme.colors.textHighContrast,
 
   variants: {
