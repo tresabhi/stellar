@@ -14,10 +14,10 @@ const App = lazy(() => import('App'));
 root.render(
   <StrictMode>
     <ErrorBoundary.Wrapper>
-    <BrowserRouter>
-      <Suspense fallback={<SplashScreen />}>
-        <App />
-      </Suspense>
+      <BrowserRouter>
+        <Suspense fallback={<SplashScreen />}>
+          <App />
+        </Suspense>
       </BrowserRouter>
     </ErrorBoundary.Wrapper>
   </StrictMode>,

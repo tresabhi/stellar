@@ -5,7 +5,7 @@ import {
   PointerEvent,
   ReactNode,
   useEffect,
-  useRef
+  useRef,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 
@@ -43,7 +43,7 @@ const Trigger = styled('summary', {
   gap: theme.sizes[4],
 
   '&::-webkit-details-marker': {
-    display: 'none'
+    display: 'none',
   },
 
   '& > svg': {
