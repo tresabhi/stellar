@@ -45,8 +45,8 @@
         "propulsion": {
           "$": "Propulsión",
           "titan": "Titán",
-          "hawk": "Hawk",
-          "peregrine": "Peregrine",
+          "hawk": "Halcón",
+          "peregrine": "Peregrino",
           "frontier": "Frontera",
           "valiant": "Valiant",
           "kolibri": "Kolibri",
@@ -99,7 +99,7 @@
       "$": "Partes"
     },
     "snippets": {
-      "$": "Snippets",
+      "$": "Fragmentos",
       "coming_soon": "¡Próximamente!"
     }
   },
