@@ -1,5 +1,6 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
+import { getPartRegistry } from './getPartRegistry';
 
 export interface RenamePartsOptions {
   trim: boolean;
@@ -27,8 +28,14 @@ export const renameParts = (
     ids.forEach((id, index) => {
       const part = draft.parts.get(id);
 
-      if (part && (mergedOptions.skipLocked ? !part.locked : true)) {
-        part.label = `${name} ${mergedOptions.suffix ? index + 1 : ''}`.trim();
+      if (part) {
+        const partRegistry = getPartRegistry(part.n);
+
+        if (partRegistry && (mergedOptions.skipLocked ? !part.locked : true)) {
+          part.label = `${name.length === 0 ? partRegistry.data.label : name} ${
+            mergedOptions.suffix ? index + 1 : ''
+          }`.trim();
+        }
       }
     });
   } else {

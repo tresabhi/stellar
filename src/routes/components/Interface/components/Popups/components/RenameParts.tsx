@@ -38,7 +38,7 @@ export const RenameParts = () => {
   const handleApplyClick = apply;
 
   return (
-    <Popup.Container>
+    <Popup.Container width="regular">
       <IconInput
         ref={input}
         onKeyDown={handleKeyDown}
@@ -47,7 +47,7 @@ export const RenameParts = () => {
         placeholder="Label"
       />
 
-      <Popup.Content width="regular">
+      <Popup.Content>
         <LabeledCheckbox
           defaultValue={rename.trim}
           onChange={handleClick('trim')}

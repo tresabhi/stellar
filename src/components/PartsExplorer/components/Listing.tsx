@@ -107,37 +107,36 @@ export const Listing = memo<ListingProps>(
     const part = getPart(id)!;
     const isGroup = part.n === 'Group';
     let lastLabel = part.label;
-    const { Icon } = usePartRegistry.getState().get(part.n)!;
+    const { Icon, data } = usePartRegistry.getState().get(part.n)!;
     const trigger = useRef<HTMLElement>(null!);
     const label = useRef<HTMLInputElement>(null!);
     const iconContainer = useRef<HTMLDivElement>(null!);
     let buttonDefaultClassNames: string;
 
-    const handleLabelPointerDown = (event: PointerEvent) => {
-      event.preventDefault();
-      trigger.current.focus();
-      trigger.current.click();
-    };
-    const handleLabelDoubleClick = (event: MouseEvent) => {
-      event.preventDefault();
-      label.current.focus();
-    };
-    const handleLabelFocus = () => label.current.select();
     const handleLabelKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' || event.key === 'Enter') label.current.blur();
     };
     const handleLabelBlur = () => {
       const newLabel = label.current.value.trim();
 
-      if (newLabel.length > 0 && newLabel !== lastLabel) {
-        label.current.value = newLabel;
-        lastLabel = newLabel;
+      if (newLabel.length > 0) {
+        if (newLabel !== lastLabel) {
+          label.current.value = newLabel;
+          lastLabel = newLabel;
+
+          mutatePart(id, (draft) => {
+            draft.label = newLabel;
+          });
+        } else {
+          label.current.value = lastLabel;
+        }
+      } else {
+        label.current.value = data.label;
+        lastLabel = data.label;
 
         mutatePart(id, (draft) => {
-          draft.label = newLabel;
+          draft.label = data.label;
         });
-      } else {
-        label.current.value = lastLabel;
       }
     };
     const handleTriggerClick = (event: MouseEvent) => {
@@ -164,6 +163,13 @@ export const Listing = memo<ListingProps>(
       } else {
         selectPartOnly(id);
       }
+    };
+    const handleTriggerDoubleClick = () => {
+      label.current.focus();
+      label.current.select();
+    };
+    const handleLabelPointerDown = (event: PointerEvent) => {
+      event.preventDefault();
     };
 
     usePartProperty(
@@ -197,20 +203,20 @@ export const Listing = memo<ListingProps>(
           }}
           ref={trigger}
           onClick={handleTriggerClick}
+          onDoubleClick={handleTriggerDoubleClick}
         >
           <IconContainer openCaret={isGroup} ref={iconContainer}>
             {isGroup ? <CaretRightIcon /> : <Icon />}
           </IconContainer>
 
           <Label
+            tabIndex={-1}
             ref={label}
             defaultValue={part.label}
-            placeholder="No Label"
+            placeholder={`Unlabeled ${data.label}`}
             onPointerDown={handleLabelPointerDown}
-            onDoubleClick={handleLabelDoubleClick}
-            onFocus={handleLabelFocus}
-            onKeyDown={handleLabelKeyDown}
             onBlur={handleLabelBlur}
+            onKeyDown={handleLabelKeyDown}
           />
         </summary>
 

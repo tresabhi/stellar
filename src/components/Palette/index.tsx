@@ -10,7 +10,7 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';

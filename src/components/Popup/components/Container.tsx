@@ -8,4 +8,12 @@ export const Container = styled('div', {
   border: theme.borderStyles.componentNonInteractive,
   backgroundColor: theme.colors.componentBackground,
   padding: theme.space.padding,
+
+  variants: {
+    width: {
+      regular: {
+        width: theme.sizes.popupWidth,
+      },
+    },
+  },
 });
