@@ -27,13 +27,12 @@ const Container = styled('div', {
   },
 });
 
-export interface PopupContainerProps
-  extends InputHTMLAttributes<HTMLDivElement> {
+export interface OverlayProps extends InputHTMLAttributes<HTMLDivElement> {
   visible?: boolean;
   children: ReactNode;
 }
 
-export const PopupContainer: FC<PopupContainerProps> = ({
+export const Overlay: FC<OverlayProps> = ({
   children,
   visible,
   onClick,

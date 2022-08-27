@@ -6,7 +6,7 @@ import {
   fileSaveAs,
   loadBlueprint,
   versionRedo,
-  versionUndo
+  versionUndo,
 } from 'core/blueprint';
 import { popupClose, popupOpen } from 'core/interface';
 import {
@@ -19,7 +19,7 @@ import {
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts
+  unselectAllParts,
 } from 'core/part';
 import produce from 'immer';
 import { isNull } from 'lodash';
@@ -258,7 +258,13 @@ const useKeybinds = () => {
     bind('ctrl+d', duplicateParts);
     bind('ctrl+g', groupPartsBySelection);
     bind('ctrl+shift+g', ungroupGroupsBySelection);
+
     bind('ctrl+shift+i', () => popupOpen(Popup.InsertPart));
+    bind('ctrl+r', () => {
+      if (useBlueprint.getState().selections.length > 0) {
+        popupOpen(Popup.RenameParts);
+      }
+    });
   }, []);
 };
 export default useKeybinds;

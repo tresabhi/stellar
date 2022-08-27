@@ -5,7 +5,7 @@ import { persist } from 'zustand/middleware';
 
 export interface Snippet {
   parts: AnyPartMap;
-  partOrder: string[];
+  part_order: string[];
 }
 
 export interface SnippetListing {
@@ -20,7 +20,7 @@ export interface UseSnippets {
 
 export const SnippetData: Snippet = {
   parts: new Map(),
-  partOrder: [],
+  part_order: [],
 };
 
 export const useSnippetsData: UseSnippets = { snippets: [] };

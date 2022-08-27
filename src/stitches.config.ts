@@ -5,10 +5,26 @@ import { createColors, createSpaces } from 'bepaint';
 const colorsLight = {
   ...createColors({ scale: mauve }),
   ...createColors({ scale: purple, suffix: 'accent' }),
+
+  // TODO: rename componentBackground to componentInteractiveBackground for consistency
+
+  componentSolidBackground: mauve.mauve9,
+  componentSolidBackgroundHover: mauve.mauve10,
+  componentSolidBackgroundActive: mauve.mauve11,
+  componentSolidBackground_accent: purple.purple9,
+  componentSolidBackgroundHover_accent: purple.purple10,
+  componentSolidBackgroundActive_accent: purple.purple11,
 };
 const colorsDark = {
   ...createColors({ scale: mauveDark }),
   ...createColors({ scale: purpleDark, suffix: 'accent' }),
+
+  componentSolidBackground: mauveDark.mauve9, // TODO: add solid backgrounds
+  componentSolidBackgroundHover: mauveDark.mauve10,
+  componentSolidBackgroundActive: mauveDark.mauve11,
+  componentSolidBackground_accent: purpleDark.purple9,
+  componentSolidBackgroundHover_accent: purpleDark.purple10,
+  componentSolidBackgroundActive_accent: purpleDark.purple11,
 };
 
 export const {
@@ -26,6 +42,7 @@ export const {
   theme: {
     colors: {
       ...colorsLight,
+
       popupBackground: blackA.blackA9,
     },
 
@@ -51,10 +68,11 @@ export const {
       40: '2.5rem',
 
       dropdownWidth: '15rem',
-      inputHeightMajor: '2rem',
+      inputSizeMinor: '1rem',
+      inputSizeMajor: '2rem',
       tabMaxWidth: '15rem',
-      palletMaxHeight: '15rem',
-      palletWidth: '20rem',
+      paletteMaxHeight: '15rem',
+      popupWidth: '20rem',
       separatorWidth: '0.0625rem',
       createTabContentMaxWidth: '35rem',
       createTabContentMaxHeight: '25rem',

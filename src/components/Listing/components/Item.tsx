@@ -26,7 +26,7 @@ const Container = styled(Button, {
   padding: `0 ${theme.space.padding}`,
   gap: theme.space.gapRelatedMajor,
   color: theme.colors.textHighContrast,
-  height: theme.sizes.inputHeightMajor,
+  height: theme.sizes.inputSizeMajor,
   width: '100%',
 
   defaultVariants: {

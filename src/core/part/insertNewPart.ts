@@ -33,7 +33,7 @@ export const insertNewPart = (
         const parentPart = draft.parts.get(parentId);
 
         if (parentPart) {
-          parentPart.partOrder.splice(mergedOptions.index, 0, newPart.id);
+          parentPart.part_order.splice(mergedOptions.index, 0, newPart.id);
           draft.parts.set(newPart.id, newPart);
         }
       } else {

@@ -28,6 +28,9 @@ export * from './pasteParts';
 export * from './preloadModel';
 export * from './registerPart';
 export * from './removePartMetaData';
+export * from './renamePart';
+export * from './renameParts';
+export * from './renamePartsBySelection';
 export * from './selectPart';
 export * from './selectPartOnly';
 export * from './selectParts';
@@ -59,3 +62,4 @@ export * from './ungroupGroupsBySelection';
 export * from './unselectAllParts';
 export * from './unselectPart';
 export * from './unselectParts';
+

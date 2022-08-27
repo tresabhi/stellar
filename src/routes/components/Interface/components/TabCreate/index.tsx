@@ -16,7 +16,7 @@ import raceCar from 'assets/blueprints/race-car.json';
 import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
 import { Button as ButtonComponent } from 'components/Button';
-import { Pallet, PalletItem } from 'components/Pallet';
+import { Palette, PaletteItem } from 'components/Palette';
 import { TabContainer } from 'components/TabContainer';
 import { mutateApp } from 'core/app/mutateApp';
 import { fileImport, loadBlueprint } from 'core/blueprint';
@@ -101,7 +101,7 @@ const TEMPLATES: Template[] = [
     inbuilt: true,
   },
 ];
-const PALLET_ITEMS = TEMPLATES.sort((a, b) => {
+const PALETTE_ITEMS = TEMPLATES.sort((a, b) => {
   if (a.name < b.name) return -1;
   if (a.name > b.name) return 1;
   return 0;
@@ -121,7 +121,7 @@ const PALLET_ITEMS = TEMPLATES.sort((a, b) => {
         });
       },
       icon: template.inbuilt ? <FileTextIcon /> : <ArchiveIcon />,
-    } as PalletItem),
+    } as PaletteItem),
 );
 
 const Container = styled('div', {
@@ -154,7 +154,7 @@ const SectionContainer = styled('div', {
   },
 });
 
-const PalletWrapper = styled('div', {
+const PaletteWrapper = styled('div', {
   display: 'flex',
   alignItems: 'stretch',
   justifyContent: 'stretch',
@@ -189,6 +189,8 @@ const Button = styled(ButtonComponent, {
   alignItems: 'center',
   fontSize: theme.fontSizes[12],
   gap: theme.space.gapRelated,
+  padding: theme.space.padding,
+  borderRadius: theme.radii[4],
 
   '& > svg': {
     width: theme.sizes[16],
@@ -196,9 +198,7 @@ const Button = styled(ButtonComponent, {
   },
 
   defaultVariants: {
-    padding: true,
     border: true,
-    borderRadius: true,
     color: 'accent',
   },
 });
@@ -232,17 +232,17 @@ export const TabCreate = () => {
     <TabContainer overflow tab={Tab.Create}>
       <Container>
         <SectionContainer full>
-          <PalletWrapper>
-            <Pallet
+          <PaletteWrapper>
+            <Palette
               collapse
               iconGap
               transparent
               darkBackground
-              items={PALLET_ITEMS}
+              items={PALETTE_ITEMS}
               placeholder="Search templates..."
               hasMaxHeight={false}
             />
-          </PalletWrapper>
+          </PaletteWrapper>
         </SectionContainer>
 
         <SectionContainer>
@@ -256,7 +256,7 @@ export const TabCreate = () => {
           </FileActions>
 
           <FileActions>
-            <Button onClick={handleScratchClick} callToAction>
+            <Button onClick={handleScratchClick} priority="solid">
               <FilePlusIcon /> Start From Scratch
             </Button>
             <Button onClick={handleImportClick}>

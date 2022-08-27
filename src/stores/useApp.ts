@@ -15,7 +15,9 @@ export enum Tool {
 }
 
 export enum Popup {
+  None,
   InsertPart,
+  RenameParts,
 }
 
 export interface UseApp {
@@ -26,7 +28,7 @@ export interface UseApp {
 
   interface: {
     tab: Tab;
-    popup?: Popup;
+    popup: Popup;
     isInteracting: boolean;
   };
 
@@ -46,7 +48,7 @@ export const UseAppData: UseApp = {
 
   interface: {
     tab: Tab.Create,
-    popup: undefined,
+    popup: Popup.None,
     isInteracting: false,
   },
 

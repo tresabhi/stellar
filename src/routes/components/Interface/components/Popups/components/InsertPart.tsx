@@ -1,4 +1,4 @@
-import { Pallet, PalletItem } from 'components/Pallet';
+import { Palette, PaletteItem } from 'components/Palette';
 import { mutateApp } from 'core/app/mutateApp';
 import { popupClose } from 'core/interface';
 import { getParent, getPart, insertNewPart } from 'core/part';
@@ -8,7 +8,7 @@ import usePartRegistry from 'stores/usePartRegistry';
 
 export const InsertPart = () => {
   const partRegistry = usePartRegistry();
-  const palletItems: PalletItem[] = [];
+  const paletteItems: PaletteItem[] = [];
   const { selections } = useBlueprint.getState();
   const lastSelectionId = selections[selections.length - 1];
   const lastSelection = getPart(lastSelectionId);
@@ -31,7 +31,7 @@ export const InsertPart = () => {
   partRegistry.forEach((registry, name) => {
     const Icon = registry.Icon;
 
-    palletItems.push({
+    paletteItems.push({
       name,
       callback: () => {
         insertNewPart(name, parentId, {
@@ -57,5 +57,7 @@ export const InsertPart = () => {
       });
   }, []);
 
-  return <Pallet gainFocus placeholder="Insert part..." items={palletItems} />;
+  return (
+    <Palette gainFocus placeholder="Insert part..." items={paletteItems} />
+  );
 };

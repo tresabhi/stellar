@@ -50,7 +50,7 @@ export const blueprintImportify = (
     targetBlueprint.parts = newPartsMap;
   } else {
     // vanilla blueprint, straight from the game
-    let newPartOrder: string[] = [];
+    let newpart_order: string[] = [];
 
     (clonedBlueprint as Blueprint).part_order = [];
     (clonedBlueprint as VanillaBlueprint).parts.forEach((part) => {
@@ -58,11 +58,11 @@ export const blueprintImportify = (
       const importifiedPart = partImportify(cloneDeep(part), id);
       if (importifiedPart) {
         newPartsMap.set(id, importifiedPart);
-        newPartOrder.push(id);
+        newpart_order.push(id);
       }
     });
 
-    targetBlueprint.part_order = newPartOrder;
+    targetBlueprint.part_order = newpart_order;
     targetBlueprint.parts = newPartsMap;
   }
 

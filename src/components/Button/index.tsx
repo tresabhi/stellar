@@ -7,6 +7,48 @@ export const Button = styled('button', {
     color: {
       default: {
         color: theme.colors.textHighContrast,
+
+        '&:focus': {
+          outline: theme.borderStyles.componentInteractiveActive,
+        },
+      },
+
+      accent: {
+        color: theme.colors.textHighContrast_accent,
+
+        '&:focus': {
+          outline: theme.borderStyles.componentInteractiveActive_accent,
+        },
+      },
+    },
+
+    priority: {
+      default: {},
+
+      callToAction: {},
+
+      solid: {},
+
+      disabled: {},
+    },
+
+    transparent: {
+      true: {
+        '&:not(:hover), &:not(:active)': {
+          backgroundColor: 'transparent',
+        },
+      },
+    },
+
+    border: { true: {} },
+  },
+
+  compoundVariants: [
+    {
+      color: 'default',
+      priority: 'default',
+
+      css: {
         backgroundColor: theme.colors.componentBackground,
 
         '&:hover': {
@@ -16,9 +58,12 @@ export const Button = styled('button', {
           backgroundColor: theme.colors.componentBackgroundActive,
         },
       },
+    },
+    {
+      color: 'accent',
+      priority: 'default',
 
-      accent: {
-        color: theme.colors.textHighContrast_accent,
+      css: {
         backgroundColor: theme.colors.componentBackground_accent,
 
         '&:hover': {
@@ -30,28 +75,11 @@ export const Button = styled('button', {
       },
     },
 
-    disabled: {
-      true: {
-        color: theme.colors.textLowContrast,
-        cursor: 'default',
+    {
+      color: 'default',
+      priority: 'callToAction',
 
-        '&:hover': {
-          backgroundColor: theme.colors.componentBackground,
-        },
-        '&:active': {
-          backgroundColor: theme.colors.componentBackground,
-        },
-      },
-
-      false: {
-        '&:focus': {
-          outline: theme.borderStyles.componentInteractiveActive,
-        },
-      },
-    },
-
-    callToAction: {
-      true: {
+      css: {
         backgroundColor: theme.colors.componentCallToActionBackground,
 
         '&:hover': {
@@ -62,54 +90,12 @@ export const Button = styled('button', {
         },
       },
     },
-
-    padding: {
-      true: {
-        padding: theme.space.padding,
-      },
-    },
-
-    borderRadius: {
-      true: {
-        borderRadius: theme.radii[4],
-      },
-    },
-
-    border: {
-      true: {
-        border: theme.borderStyles.componentInteractive,
-      },
-    },
-
-    transparent: {
-      true: {
-        backgroundColor: 'transparent',
-      },
-    },
-  },
-
-  compoundVariants: [
     {
       color: 'accent',
-      disabled: true,
+      priority: 'callToAction',
 
       css: {
-        color: theme.colors.textLowContrast_accent,
-
-        '&:hover': {
-          backgroundColor: theme.colors.componentBackground_accent,
-        },
-        '&:active': {
-          backgroundColor: theme.colors.componentBackground_accent,
-        },
-      },
-    },
-    {
-      color: 'accent',
-      callToAction: true,
-
-      css: {
-        backgroundColor: 'none',
+        backgroundColor: theme.colors.componentCallToActionBackground_accent,
 
         '&:hover': {
           backgroundColor:
@@ -121,13 +107,82 @@ export const Button = styled('button', {
         },
       },
     },
+
     {
-      color: 'accent',
-      callToAction: true,
-      transparent: false,
+      color: 'default',
+      priority: 'solid',
 
       css: {
-        backgroundColor: theme.colors.componentCallToActionBackground_accent,
+        backgroundColor: theme.colors.componentSolidBackground,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentSolidBackgroundHover,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentSolidBackgroundActive,
+        },
+      },
+    },
+    {
+      color: 'accent',
+      priority: 'solid',
+
+      css: {
+        backgroundColor: theme.colors.componentSolidBackground_accent,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentSolidBackgroundHover_accent,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentSolidBackgroundActive_accent,
+        },
+      },
+    },
+
+    {
+      color: 'default',
+      priority: 'disabled',
+
+      css: {
+        backgroundColor: theme.colors.componentBackground,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackground,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackground,
+        },
+      },
+    },
+    {
+      color: 'accent',
+      priority: 'disabled',
+
+      css: {
+        backgroundColor: theme.colors.componentBackground_accent,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackgroundHover_accent,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackgroundActive_accent,
+        },
+      },
+    },
+
+    {
+      color: 'default',
+      border: true,
+
+      css: {
+        border: theme.borderStyles.componentInteractive,
+
+        '&:hover': {
+          border: theme.borderStyles.componentInteractiveHover,
+        },
+        '&:active': {
+          border: theme.borderStyles.componentInteractiveActive,
+        },
       },
     },
     {
@@ -136,27 +191,19 @@ export const Button = styled('button', {
 
       css: {
         border: theme.borderStyles.componentInteractive_accent,
-      },
-    },
-    {
-      color: 'accent',
-      disabled: false,
 
-      css: {
-        '&:focus': {
-          outline: theme.borderStyles.componentInteractiveActive_accent,
+        '&:hover': {
+          border: theme.borderStyles.componentInteractiveHover_accent,
+        },
+        '&:active': {
+          border: theme.borderStyles.componentInteractiveActive_accent,
         },
       },
     },
   ],
 
   defaultVariants: {
-    border: false,
-    borderRadius: false,
-    callToAction: false,
     color: 'default',
-    disabled: false,
-    padding: false,
-    transparent: false,
+    priority: 'default',
   },
 });

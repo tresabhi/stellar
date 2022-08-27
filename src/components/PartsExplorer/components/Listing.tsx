@@ -4,7 +4,7 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import usePartProperty from 'hooks/usePartProperty';
@@ -32,7 +32,7 @@ const triggerStyles = css({
   justifyContent: 'center',
   padding: `0 ${theme.space.paddingMajor}`,
   gap: theme.space.gapRelatedMajor,
-  minHeight: theme.sizes.inputHeightMajor,
+  minHeight: theme.sizes.inputSizeMajor,
   color: theme.colors.textHighContrast,
   listStyle: 'none',
   cursor: 'pointer',
@@ -179,6 +179,13 @@ export const Listing = memo<ListingProps>(
             selected,
           },
         )}`;
+      },
+    );
+    usePartProperty(
+      id,
+      (state) => state.label,
+      (labelValue) => {
+        label.current.value = labelValue;
       },
     );
 

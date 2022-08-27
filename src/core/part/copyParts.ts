@@ -8,7 +8,7 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
     const clipboard: Snippet = {
       parts: new Map(),
-      partOrder: [],
+      part_order: [],
     };
 
     ids.forEach((id) => {
@@ -19,7 +19,7 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;
-          clipboard.partOrder.push(clonedPartId);
+          clipboard.part_order.push(clonedPartId);
           clonedParts.forEach((clonedPart, clonedPartChildId) => {
             clipboard.parts.set(clonedPartChildId, clonedPart);
           });
@@ -27,7 +27,7 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
       }
     });
 
-    if (clipboard.parts.size > 0 && clipboard.partOrder.length > 0) {
+    if (clipboard.parts.size > 0 && clipboard.part_order.length > 0) {
       mutateApp((draft) => {
         draft.editor.clipboard = clipboard;
       });

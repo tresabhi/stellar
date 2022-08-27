@@ -14,7 +14,7 @@ const Container = styled(Button, {
   justifyContent: 'center',
   alignItems: 'center',
   gap: theme.space.gapRelated,
-  height: theme.sizes.inputHeightMajor,
+  height: theme.sizes.inputSizeMajor,
   borderRadius: `${theme.radii[4]} ${theme.radii[4]} 0 0`,
   maxWidth: theme.sizes.tabMaxWidth,
 
@@ -24,21 +24,27 @@ const Container = styled(Button, {
   },
 
   variants: {
-    selected: {
-      true: {
+    selected: { true: {} },
+  },
+
+  compoundVariants: [
+    {
+      selected: true,
+
+      css: {
         color: theme.colors.textLowContrast_accent,
         backgroundColor: theme.colors.componentBackground,
         cursor: 'default',
 
-        '&:hover': {
-          backgroundColor: theme.colors.componentBackground,
-        },
-        '&:active': {
+        '&:hover, &:active': {
           backgroundColor: theme.colors.componentBackground,
         },
       },
+    },
+    {
+      selected: false,
 
-      false: {
+      css: {
         color: theme.colors.textLowContrast,
         backgroundColor: theme.colors.appBackground1,
 
@@ -50,7 +56,7 @@ const Container = styled(Button, {
         },
       },
     },
-  },
+  ],
 
   defaultVariants: {
     selected: false,

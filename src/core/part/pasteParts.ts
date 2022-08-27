@@ -28,29 +28,29 @@ export const pasteParts = () => {
           parentId,
         });
       });
-      parent.part_order.splice(insertIndex, 0, ...clipboard.partOrder);
-      selectPartsOnly(clipboard.partOrder, draft);
+      parent.part_order.splice(insertIndex, 0, ...clipboard.part_order);
+      selectPartsOnly(clipboard.part_order, draft);
     });
 
     mutateApp((draft) => {
       const newClipboard: Snippet = {
         parts: new Map(),
-        partOrder: [],
+        part_order: [],
       };
 
-      clipboard.partOrder.forEach((partId) => {
+      clipboard.part_order.forEach((partId) => {
         const clonedPartData = clonePart(partId, clipboard.parts);
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;
-          newClipboard.partOrder.push(clonedPartId);
+          newClipboard.part_order.push(clonedPartId);
           clonedParts.forEach((clonedChildPart, clonedChildPartId) => {
             newClipboard.parts.set(clonedChildPartId, clonedChildPart);
           });
         }
       });
 
-      if (newClipboard.partOrder.length > 0 && newClipboard.parts.size > 0) {
+      if (newClipboard.part_order.length > 0 && newClipboard.parts.size > 0) {
         draft.editor.clipboard = newClipboard;
       }
     });

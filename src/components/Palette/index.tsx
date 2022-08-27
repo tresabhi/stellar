@@ -1,5 +1,6 @@
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { IconInput } from 'components/IconInput';
 import * as Listing from 'components/Listing';
-import { Search } from 'components/Search';
 import { popupClose } from 'core/interface';
 import { go } from 'fuzzysort';
 import {
@@ -9,12 +10,12 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
-export interface PalletItem {
+export interface PaletteItem {
   name: string;
   callback: () => void;
   note?: string;
@@ -22,10 +23,10 @@ export interface PalletItem {
   icon?: ReactNode;
 }
 
-export interface PalletProps {
+export interface PaletteProps {
   debounce?: number;
   iconGap?: boolean;
-  items: PalletItem[];
+  items: PaletteItem[];
   placeholder?: string;
   transparent?: boolean;
   darkBackground?: boolean;
@@ -36,6 +37,7 @@ export interface PalletProps {
 
 const Container = styled('div', {
   display: 'flex',
+  alignItems: 'stretch',
   flexDirection: 'column',
   gap: theme.space.gapRelatedMajor,
   flex: 1,
@@ -47,13 +49,13 @@ const Container = styled('div', {
         border: theme.borderStyles.componentNonInteractive,
         backgroundColor: theme.colors.componentBackground,
         padding: theme.space.padding,
-        width: theme.sizes.palletWidth,
+        width: theme.sizes.popupWidth,
       },
     },
 
     hasMaxHeight: {
       true: {
-        maxHeight: theme.sizes.palletMaxHeight,
+        maxHeight: theme.sizes.paletteMaxHeight,
       },
     },
   },
@@ -82,7 +84,14 @@ const FlexListingContainer = styled(Listing.Container, {
   },
 });
 
-export const Pallet: FC<PalletProps> = ({
+const NoResults = styled('span', {
+  textAlign: 'center',
+  color: theme.colors.textLowContrast,
+  fontSize: theme.fontSizes[12],
+  marginTop: theme.space.marginUnrelated,
+});
+
+export const Palette: FC<PaletteProps> = ({
   items,
   iconGap,
   debounce = 0,
@@ -145,16 +154,21 @@ export const Pallet: FC<PalletProps> = ({
 
   return (
     <Container hasMaxHeight={hasMaxHeight} transparent={transparent}>
-      <Search
+      <IconInput
+        icon={<MagnifyingGlassIcon />}
         ref={input}
         onKeyDown={handleKeyDown}
         onChange={handleChange}
         placeholder={placeholder}
       />
 
-      <FlexListingContainer collapse={collapse} contrast={darkBackground}>
-        {listings}
-      </FlexListingContainer>
+      {listings.length > 0 ? (
+        <FlexListingContainer collapse={collapse} contrast={darkBackground}>
+          {listings}
+        </FlexListingContainer>
+      ) : (
+        <NoResults>No parts found</NoResults>
+      )}
     </Container>
   );
 };

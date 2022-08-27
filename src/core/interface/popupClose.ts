@@ -1,7 +1,8 @@
 import { mutateApp } from 'core/app/mutateApp';
+import { Popup } from 'stores/useApp';
 
 export const popupClose = () => {
   mutateApp((draft) => {
-    delete draft.interface.popup;
+    draft.interface.popup = Popup.None;
   });
 };

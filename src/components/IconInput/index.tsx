@@ -1,16 +1,23 @@
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Input as InputComponent } from 'components/Input';
-import { forwardRef, InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
-export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {}
+export enum IconSide {
+  Left,
+  Right,
+}
+
+export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
+  iconSide?: IconSide;
+  icon: ReactNode;
+}
 
 const Container = styled('div', {
   display: 'flex',
   padding: `0 ${theme.space.padding}`,
   gap: theme.space.gapRelatedMajor,
   borderRadius: theme.radii[4],
-  height: theme.sizes.inputHeightMajor,
+  height: theme.sizes.inputSizeMajor,
   justifyContent: 'center',
   alignItems: 'center',
   border: theme.borderStyles.componentInteractive,
@@ -29,18 +36,22 @@ const Input = styled(InputComponent, {
   height: '100%',
 });
 
-const Icon = styled(MagnifyingGlassIcon, {
-  width: theme.sizes[16],
-  height: theme.sizes[16],
-  color: theme.colors.textLowContrast,
+const IconContainer = styled('div', {
+  '& > svg': {
+    width: theme.sizes[16],
+    height: theme.sizes[16],
+    color: theme.colors.textLowContrast,
+    display: 'block',
+  },
 });
 
-export const Search = forwardRef<HTMLInputElement, SearchProps>(
-  (props, ref) => {
+export const IconInput = forwardRef<HTMLInputElement, SearchProps>(
+  ({ iconSide = IconSide.Right, icon, ...props }, ref) => {
     return (
       <Container>
+        {iconSide === IconSide.Left && <IconContainer>{icon}</IconContainer>}
         <Input {...props} ref={ref} />
-        <Icon />
+        {iconSide === IconSide.Right && <IconContainer>{icon}</IconContainer>}
       </Container>
     );
   },

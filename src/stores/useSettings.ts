@@ -1,3 +1,4 @@
+import { RenamePartsOptions } from 'core/part/renameParts';
 import { merge } from 'lodash';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -44,6 +45,10 @@ export interface UseSettings {
       };
     };
   };
+
+  editor: {
+    rename: RenamePartsOptions;
+  };
 }
 
 export const UseSettingsData: UseSettings = {
@@ -75,6 +80,14 @@ export const UseSettingsData: UseSettings = {
           scaleConstrained: false,
         },
       },
+    },
+  },
+
+  editor: {
+    rename: {
+      trim: true,
+      skipLocked: true,
+      suffix: false,
     },
   },
 };
