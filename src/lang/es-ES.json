@@ -27,8 +27,7 @@
         "$": "Vista",
         "layout": "Diseño",
         "staging": "Puesta en escena",
-        "simulation": "Simulación",
-        "rendering": "Renderizado",
+        "export": "Exportar",
         "hud": "HUD",
         "theme": {
           "$": "Tema",
@@ -46,8 +45,8 @@
         "propulsion": {
           "$": "Propulsión",
           "titan": "Titán",
-          "hawk": "Hawk",
-          "peregrine": "Peregrine",
+          "hawk": "Halcón",
+          "peregrine": "Peregrino",
           "frontier": "Frontera",
           "valiant": "Valiant",
           "kolibri": "Kolibri",
@@ -92,8 +91,7 @@
     "tabs": {
       "layout": "Diseño",
       "staging": "Puesta en escena",
-      "simulation": "Simulación",
-      "rendering": "Renderizando"
+      "export": "Exportar"
     }
   },
   "parts_explorer": {
@@ -101,7 +99,7 @@
       "$": "Partes"
     },
     "snippets": {
-      "$": "Snippets",
+      "$": "Fragmentos",
       "coming_soon": "¡Próximamente!"
     }
   },
