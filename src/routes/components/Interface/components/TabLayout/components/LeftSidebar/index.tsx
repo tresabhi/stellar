@@ -1,28 +1,21 @@
-import {
-  Component1Icon,
-  LayersIcon,
-  MixerVerticalIcon
-} from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
-import produce from 'immer';
+import { mutateSettings } from 'core/app';
 import { FC } from 'react';
-import useSettings, { SidebarTab, UseSettings } from 'stores/useSettings';
+import useSettings, { SidebarTab } from 'stores/useSettings';
 import { TabLayoutProps } from '../..';
 import { Parts } from './components/Parts';
 import { Rename } from './components/Rename';
+import { Tabs } from './components/Tabs';
 
 export const LeftSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   const leftSidebar = useSettings(
     (state) => state.interface.tabs.layout.leftSideBar,
   );
-  const handleClick = (tab: SidebarTab) => {
-    return () => {
-      useSettings.setState(
-        produce<UseSettings>((draft) => {
-          draft.interface.tabs.layout.leftSideBar.tab = tab;
-        }),
-      );
-    };
+  const handleCollapseClick = () => {
+    mutateSettings((draft) => {
+      draft.interface.tabs.layout.leftSideBar.visible =
+        !draft.interface.tabs.layout.leftSideBar.visible;
+    });
   };
 
   return (
@@ -31,26 +24,15 @@ export const LeftSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
       visible={leftSidebar.visible}
       position="left"
     >
-      <Sidebar.TabContainer>
-        <Sidebar.Tab
-          onClick={handleClick(SidebarTab.Left)}
-          selected={leftSidebar.tab === SidebarTab.Left}
-          icon={<LayersIcon />}
-        >
-          Parts
-        </Sidebar.Tab>
-        <Sidebar.Tab
-          onClick={handleClick(SidebarTab.Right)}
-          selected={leftSidebar.tab === SidebarTab.Right}
-          icon={swapSecondTab ? <MixerVerticalIcon /> : <Component1Icon />}
-        >
-          {swapSecondTab ? 'Properties' : 'Snippets'}
-        </Sidebar.Tab>
-      </Sidebar.TabContainer>
-
+      <Tabs swapSecondTab={swapSecondTab} />
       <Parts visible={leftSidebar.tab === SidebarTab.Left} />
 
       <Rename />
+      <Sidebar.Collapse
+        position="right"
+        expanded={leftSidebar.visible}
+        onClick={handleCollapseClick}
+      />
     </Sidebar.Container>
   );
 };
