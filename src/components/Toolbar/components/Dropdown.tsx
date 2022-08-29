@@ -15,7 +15,7 @@ export interface DropdownProps {
   disabled?: boolean;
 }
 
-const PADDING_FROM_EDGE = 8;
+const PADDING_FROM_EDGE = 4;
 
 const Wrapper = styled('details', {
   position: 'relative',

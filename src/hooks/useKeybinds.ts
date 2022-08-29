@@ -3,10 +3,11 @@ import {
   fileExport,
   fileImport,
   fileOpen,
+  fileSave,
   fileSaveAs,
   loadBlueprint,
   versionRedo,
-  versionUndo,
+  versionUndo
 } from 'core/blueprint';
 import { popupClose, popupOpen } from 'core/interface';
 import {
@@ -19,7 +20,7 @@ import {
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts,
+  unselectAllParts
 } from 'core/part';
 import produce from 'immer';
 import { isNull } from 'lodash';
@@ -239,10 +240,22 @@ const useKeybinds = () => {
       fileOpen();
       toLayout();
     });
-    bind('ctrl+s', () => {
-      fileSaveAs();
-      toLayout();
-    });
+    bind(
+      'ctrl+s',
+      () => {
+        fileSave();
+        toLayout();
+      },
+      { preventOnNonLayoutTab: true },
+    );
+    bind(
+      'ctrl+shift+s',
+      () => {
+        fileSaveAs();
+        toLayout();
+      },
+      { preventOnNonLayoutTab: true },
+    );
     bind('ctrl+i', () => {
       fileImport();
       toLayout();
@@ -260,7 +273,7 @@ const useKeybinds = () => {
     bind('ctrl+shift+g', ungroupGroupsBySelection);
 
     bind('ctrl+shift+i', () => popupOpen(Popup.InsertPart));
-    bind('ctrl+r', () => {
+    bind(['ctrl+r', 'f2'], () => {
       if (useBlueprint.getState().selections.length > 0) {
         popupOpen(Popup.RenameParts);
       }
