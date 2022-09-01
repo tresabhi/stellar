@@ -1,5 +1,6 @@
 import { RenamePartsOptions } from 'core/part/renameParts';
 import { merge } from 'lodash';
+import { theme, themeDark } from 'stitches.config';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -12,6 +13,12 @@ export enum InterfaceMode {
   Compact,
   Comfortable,
 }
+
+type Theme = typeof theme;
+
+export const themes = new Map<string, Theme>([
+  ['theme-dark', themeDark as Theme],
+]);
 
 export interface UseSettings {
   debug: {
@@ -26,6 +33,7 @@ export interface UseSettings {
   interface: {
     mode: InterfaceMode | null; // null is auto detect
     language: string;
+    theme?: string;
 
     tabs: {
       layout: {
@@ -63,6 +71,7 @@ export const UseSettingsData: UseSettings = {
   interface: {
     mode: null,
     language: 'en-US',
+    theme: themeDark.toString(),
 
     tabs: {
       layout: {

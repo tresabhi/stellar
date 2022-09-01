@@ -1,16 +1,22 @@
 import { AdaptiveDpr } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas as CanvasComponent } from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
 import { useEffect, useRef } from 'react';
+import { styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings from 'stores/useSettings';
 import { Group } from 'three';
-import styles from '../../index.module.scss';
 import { PanControls } from '../PanControls';
 import { Grid } from './components/Grid';
 import { PartBounds } from './components/PartBounds';
 import { Parts } from './components/Parts';
+
+const Canvas = styled(CanvasComponent, {
+  backgroundColor: theme.colors.appBackground1,
+  flex: 1,
+  touchAction: 'none',
+});
 
 export const LayoutCanvas = () => {
   // TODO: all refs should not end with "ref"
@@ -36,9 +42,9 @@ export const LayoutCanvas = () => {
       (state) => state.editor.tool,
       (tool) => {
         if (tool === Tool.Pan) {
-          canvas.current.classList.add(styles.pan);
+          // canvas.current.classList.add(styles.pan);
         } else {
-          canvas.current.classList.remove(styles.pan);
+          // canvas.current.classList.remove(styles.pan);
         }
       },
     );
@@ -46,9 +52,9 @@ export const LayoutCanvas = () => {
       (state) => state.editor.isPanning,
       (isPanning) => {
         if (isPanning) {
-          canvas.current.classList.add(styles.pan);
+          // canvas.current.classList.add(styles.pan);
         } else if (useApp.getState().editor.tool !== Tool.Pan) {
-          canvas.current.classList.remove(styles.pan);
+          // canvas.current.classList.remove(styles.pan);
         }
       },
     );
@@ -68,7 +74,6 @@ export const LayoutCanvas = () => {
         position: [initialBlueprintState.center, 0, 100],
         rotation: [0, 0, 0],
       }}
-      className={styles['layout-canvas']}
       performance={{ min: regressAmount }}
       onPointerMissed={handlePointerMissed}
     >

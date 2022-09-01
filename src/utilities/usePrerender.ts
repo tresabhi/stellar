@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei';
 import useKeybinds from 'hooks/useKeybinds';
 import { PART_MODEL_PATH } from 'hooks/usePartModel';
 import useTranslator from 'hooks/useTranslator';
-import { globalStyles, themeDark } from 'stitches.config';
+import { globalStyles } from 'stitches.config';
 import useApp from 'stores/useApp';
 import usePartRegistry from 'stores/usePartRegistry';
 import getStellarContext from 'utilities/getStellarContext';
@@ -12,9 +12,6 @@ const usePrerender = () => {
   useTranslator();
   globalStyles();
   useKeybinds();
-
-  // Temporarily enforce dark mode
-  document.getElementById('root')?.classList.add(themeDark);
 
   if (stellarContext.codeName !== 'dev') {
     console.log(

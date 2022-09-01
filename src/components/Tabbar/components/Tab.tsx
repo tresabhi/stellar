@@ -46,13 +46,13 @@ const Container = styled(Button, {
 
       css: {
         color: theme.colors.textLowContrast,
-        backgroundColor: theme.colors.appBackground1,
+        backgroundColor: theme.colors.appBackground2,
 
         '&:hover': {
-          backgroundColor: theme.colors.appBackground2,
+          backgroundColor: theme.colors.componentBackgroundHover,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackground,
+          backgroundColor: theme.colors.componentBackgroundActive,
         },
       },
     },
