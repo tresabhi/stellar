@@ -1,8 +1,8 @@
 import { Blueprint } from 'game/Blueprint';
-import { Part } from 'game/parts/Part';
 import useBlueprint from 'stores/useBlueprint';
+import { AnyPart } from 'types/Parts';
 
-export const getPart = <Type extends Part>(
+export const getPart = <Type extends AnyPart>(
   id: string,
   draft?: Blueprint,
 ): Type | undefined => {

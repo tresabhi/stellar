@@ -1,11 +1,12 @@
 import DeepPartial from 'types/DeepPartial';
 
-type NullIfSame = <T1, T2>(source1: T1, source2: T2) => DeepPartial<T1>;
-
-const nullIfSame: NullIfSame = (source1, source2) => {
+const nullIfSame = <Source1 extends {}, Source2 = DeepPartial<Source1>>(
+  source1: Source1,
+  source2: Source2,
+): DeepPartial<Source1> => {
   const keys = Object.keys(source1);
-  const obj1 = source1 as any;
-  const obj2 = source2 as any;
+  const obj1 = source1 as any; // TODO: pretty up the types?
+  const obj2 = source2 as any; // I'm too lazy lol
 
   keys.forEach((key) => {
     if (typeof obj1[key] === 'object') {
@@ -17,6 +18,6 @@ const nullIfSame: NullIfSame = (source1, source2) => {
     }
   });
 
-  return obj1 as DeepPartial<typeof source1>;
+  return obj1;
 };
 export default nullIfSame;

@@ -1,5 +1,5 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import usePropertyController from 'hooks/usePropertyController';
+import { useNumericalPropertyInput } from 'hooks/useNumericalPropertyInput';
 import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
@@ -73,35 +73,40 @@ export const PartWithTransformationsPropertyComponent: FC<
   PartPropertyComponentProps
 > = ({ ids }) => {
   const { t } = useTranslator();
-  const xPos = usePropertyController<PartWithTransformations>(
+  const xPosition = useNumericalPropertyInput<PartWithTransformations>(
     ids,
     (state) => state.p.x,
-    (x) => ({ p: { x } }),
-    { suffix: 'm' },
+    (draft, value) => {
+      draft.p.x = value;
+    },
   );
-  const yPos = usePropertyController<PartWithTransformations>(
+  const yPosition = useNumericalPropertyInput<PartWithTransformations>(
     ids,
     (state) => state.p.y,
-    (y) => ({ p: { y } }),
-    { suffix: 'm' },
+    (draft, value) => {
+      draft.p.y = value;
+    },
   );
-  const rot = usePropertyController<PartWithTransformations>(
+  const rotation = useNumericalPropertyInput<PartWithTransformations>(
     ids,
     (state) => state.o.z,
-    (z) => ({ o: { z } }),
-    { modOnClamp: true, max: 360, suffix: '°' },
+    (draft, value) => {
+      draft.o.z = value;
+    },
   );
-  const xScale = usePropertyController<PartWithTransformations>(
+  const xScale = useNumericalPropertyInput<PartWithTransformations>(
     ids,
     (state) => state.o.x,
-    (x) => ({ o: { x } }),
-    { suffix: 'x' },
+    (draft, value) => {
+      draft.o.x = value;
+    },
   );
-  const yScale = usePropertyController<PartWithTransformations>(
+  const yScale = useNumericalPropertyInput<PartWithTransformations>(
     ids,
     (state) => state.o.y,
-    (y) => ({ o: { y } }),
-    { suffix: 'x' },
+    (draft, value) => {
+      draft.o.y = value;
+    },
   );
 
   return (
@@ -109,26 +114,31 @@ export const PartWithTransformationsPropertyComponent: FC<
       <PropertiesExplorer.Title>{t`properties_explorer.properties.transformations`}</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
         <PropertiesExplorer.Input
-          ref={xPos}
+          ref={xPosition}
           label={t`properties_explorer.properties.transformations.position_x`}
+          unit="m"
         />
         <PropertiesExplorer.Input
-          ref={yPos}
+          ref={yPosition}
           label={t`properties_explorer.properties.transformations.position_y`}
+          unit="m"
         />
         <PropertiesExplorer.Input
-          ref={rot}
+          ref={rotation}
           label={t`properties_explorer.properties.transformations.rotation`}
+          unit="°"
         />
       </PropertiesExplorer.Row>
       <PropertiesExplorer.Row>
         <PropertiesExplorer.Input
           ref={xScale}
           label={t`properties_explorer.properties.transformations.scale_x`}
+          unit="x"
         />
         <PropertiesExplorer.Input
           ref={yScale}
           label={t`properties_explorer.properties.transformations.scale_y`}
+          unit="x"
         />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>

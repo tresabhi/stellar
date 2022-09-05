@@ -1,9 +1,7 @@
-import { FC, ReactNode } from 'react';
-import styles from '../index.module.scss';
+import { styled, theme } from 'stitches.config';
 
-export interface GroupProps {
-  children: ReactNode;
-}
-export const Group: FC<GroupProps> = ({ children }) => (
-  <div className={styles.group}>{children}</div>
-);
+export const Group = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  gap: theme.space.gapRelatedMajor,
+});

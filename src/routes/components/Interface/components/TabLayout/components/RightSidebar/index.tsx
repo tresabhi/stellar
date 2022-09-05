@@ -2,8 +2,9 @@ import * as Sidebar from 'components/Sidebar';
 import { mutateSettings } from 'core/app';
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { FC } from 'react';
-import useSettings, { InterfaceMode } from 'stores/useSettings';
+import useSettings, { InterfaceMode, SidebarTab } from 'stores/useSettings';
 import { TabLayoutProps } from '../..';
+import { Properties } from './components/Properties';
 import { Tabs } from './components/Tabs';
 
 export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
@@ -37,6 +38,7 @@ export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
       position="right"
     >
       <Tabs swapSecondTab={swapSecondTab} />
+      {!swapSecondTab && rightSidebar.tab === SidebarTab.Left && <Properties />}
 
       <Sidebar.Collapse
         position="right"

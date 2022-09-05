@@ -3,9 +3,9 @@ import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
+import { useNumericalPropertyInput } from 'hooks/useNumericalPropertyInput';
 import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
-import usePropertyController from 'hooks/usePropertyController';
 import useTranslator from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
 import { PartRegistryFragment } from 'stores/usePartRegistry';
@@ -152,25 +152,28 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
   ids,
 }) => {
   const { t } = useTranslator();
-  const width = usePropertyController<FuelTank>(
+  const width = useNumericalPropertyInput<FuelTank>(
     ids,
     (state) => state.N.width_original,
-    (value) => ({
-      N: { width_original: value, width_a: value, width_b: value },
-    }),
-    { suffix: 'm' },
+    (draft, value) => {
+      draft.N.width_original = value;
+      draft.N.width_a = value;
+      draft.N.width_b = value;
+    },
   );
-  const height = usePropertyController<FuelTank>(
+  const height = useNumericalPropertyInput<FuelTank>(
     ids,
     (state) => state.N.height,
-    (value) => ({ N: { height: value } }),
-    { suffix: 'm' },
+    (draft, value) => {
+      draft.N.height = value;
+    },
   );
-  const fuel = usePropertyController<FuelTank>(
+  const fuel = useNumericalPropertyInput<FuelTank>(
     ids,
     (state) => state.N.fuel_percent * 100,
-    (value) => ({ N: { fuel_percent: value / 100 } }),
-    { min: 0, max: 100, suffix: '%' },
+    (draft, value) => {
+      draft.N.fuel_percent = value / 100;
+    },
   );
 
   return (
@@ -180,14 +183,17 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
         <PropertiesExplorer.Input
           ref={width}
           label={t`properties_explorer.properties.fuel_tank.width`}
+          unit="m"
         />
         <PropertiesExplorer.Input
           ref={height}
           label={t`properties_explorer.properties.fuel_tank.height`}
+          unit="m"
         />
         <PropertiesExplorer.Input
           ref={fuel}
           label={t`properties_explorer.properties.fuel_tank.fuel`}
+          unit="m"
         />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>

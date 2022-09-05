@@ -1,15 +1,9 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
-import styles from '../index.module.scss';
+import { styled, theme } from 'stitches.config';
 
-export const Container = forwardRef<
-  HTMLDivElement,
-  InputHTMLAttributes<HTMLDivElement>
->(({ children, ...props }, ref) => (
-  <div
-    ref={ref}
-    {...props}
-    className={`${props.className ?? ''} ${styles['properties-explorer']}`}
-  >
-    {children}
-  </div>
-));
+export const Container = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+  padding: theme.space.paddingMajor,
+  gap: theme.space.gapUnrelatedMajor,
+  flex: 1,
+});

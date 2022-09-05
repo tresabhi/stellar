@@ -1,9 +1,6 @@
-import { FC, ReactNode } from 'react';
-import styles from '../index.module.scss';
+import { styled, theme } from 'stitches.config';
 
-export interface RowProps {
-  children: ReactNode;
-}
-export const Row: FC<RowProps> = ({ children }) => (
-  <div className={styles.row}>{children}</div>
-);
+export const Row = styled('div', {
+  display: 'flex',
+  gap: theme.space.gapRelatedMajor,
+});

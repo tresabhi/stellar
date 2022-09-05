@@ -1,4 +1,4 @@
-import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import * as PropertiesExplorer from 'components/LegacyPropertiesExplorer';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
