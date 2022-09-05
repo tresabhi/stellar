@@ -2164,10 +2164,10 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-2.0.1.tgz#20f18294f797f2209b5f65c8e3b5c8e8261d127c"
   integrity sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==
 
-"@types/three@^0.143.0":
-  version "0.143.1"
-  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.143.1.tgz#198288a3be02c8e630fc67c6f6ecf093e6c79424"
-  integrity sha512-OzXb9Zx7gh0CrKiYnL/u+YeGJW0oDEmvL19vHq+sDmQ5V2Ibglf0I8Yoy/z4XPEv2YTFnYJs4imlEaupuBYRMA==
+"@types/three@^0.144.0":
+  version "0.144.0"
+  resolved "https://registry.yarnpkg.com/@types/three/-/three-0.144.0.tgz#a154f40122dbc3668c5424a5373f3965c6564557"
+  integrity sha512-psvEs6q5rLN50jUYZ3D4pZMfxTbdt3A243blt0my7/NcL6chaCZpHe2csbCtx0SOD9fI/XnF3wnVUAYZGqCSYg==
   dependencies:
     "@types/webxr" "*"
 
@@ -9032,10 +9032,10 @@ three-stdlib@^2.14.3:
     potpack "^1.0.1"
     zstddec "^0.0.2"
 
-three@^0.143.0:
-  version "0.143.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.143.0.tgz#1455bca132cc2b20beb7f41d313e10c29e5ed9df"
-  integrity sha512-oKcAGYHhJ46TGEuHjodo2n6TY2R6lbvrkp+feKZxqsUL/WkH7GKKaeu6RHeyb2Xjfk2dPLRKLsOP0KM2VgT8Zg==
+three@^0.144.0:
+  version "0.144.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.144.0.tgz#2818517169f8ff94eea5f664f6ff1fcdcd436cc8"
+  integrity sha512-R8AXPuqfjfRJKkYoTQcTK7A6i3AdO9++2n8ubya/GTU+fEHhYKu1ZooRSCPkx69jbnzT7dD/xEo6eROQTt2lJw==
 
 throat@^6.0.1:
   version "6.0.1"
