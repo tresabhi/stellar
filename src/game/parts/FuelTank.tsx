@@ -193,7 +193,7 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
         <PropertiesExplorer.Input
           ref={fuel}
           label={t`properties_explorer.properties.fuel_tank.fuel`}
-          unit="m"
+          unit="%"
         />
       </PropertiesExplorer.Row>
     </PropertiesExplorer.Group>
