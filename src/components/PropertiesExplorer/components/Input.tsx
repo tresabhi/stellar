@@ -1,7 +1,7 @@
 import { Input as InputComponent } from 'components/Input';
 import {
-  ChangeEvent,
   FocusEvent,
+  FormEvent,
   forwardRef,
   InputHTMLAttributes,
   useEffect,
@@ -65,7 +65,7 @@ const Unit = styled('span', {
 });
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, unit, onChange, onFocus, onBlur, ...props }, ref) => {
+  ({ label, unit, onInput, onFocus, onBlur, ...props }, ref) => {
     const input = useRef<HTMLInputElement>(null!);
     const resize = () => {
       input.current.style.width = `${Math.min(
@@ -73,9 +73,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         MAX_CHARACTERS,
       )}ch`;
     };
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleInput = (event: FormEvent<HTMLInputElement>) => {
       resize();
-      if (onChange) onChange(event);
+      if (onInput) onInput(event);
     };
     const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
       input.current.select();
@@ -97,7 +97,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <Field
             {...props}
             ref={input}
-            onChange={handleChange}
+            onInput={handleInput}
             onFocus={handleFocus}
             onBlur={handleBlur}
           />
