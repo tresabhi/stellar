@@ -5,7 +5,6 @@ import { forwardRef } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import { Group } from 'three';
 import { ParentId } from 'types/Parts';
-import compareStringArrays from 'utilities/compareStringArrays';
 
 interface PartClusterProps extends GroupProps {
   parentId: ParentId;
@@ -15,7 +14,7 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
     const state = useBlueprint((state) => {
       return (parentId ? (state.parts.get(parentId) as GroupPart) : state)
         .part_order;
-    }, compareStringArrays);
+    });
     let partListing: JSX.Element[] = [];
 
     state.forEach((Id) => {

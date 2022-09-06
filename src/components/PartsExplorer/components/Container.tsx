@@ -5,7 +5,6 @@ import { FC } from 'react';
 import { styled } from 'stitches.config';
 import useBlueprint from 'stores/useBlueprint';
 import { ParentId } from 'types/Parts';
-import compareStringArrays from 'utilities/compareStringArrays';
 import { Listing } from './Listing';
 
 export interface ContainerProps {
@@ -51,12 +50,10 @@ export const Container: FC<ContainerProps> = ({
   indent = 0,
   ...props
 }) => {
-  const part_order = useBlueprint(
-    (state) =>
-      isNull(parent)
-        ? state.part_order
-        : getPart<Group>(parent, state)!.part_order,
-    compareStringArrays,
+  const part_order = useBlueprint((state) =>
+    isNull(parent)
+      ? state.part_order
+      : getPart<Group>(parent, state)!.part_order,
   );
   const children = part_order.map((id) => (
     <Listing indent={indent} id={id} key={`part-${id}`} />
