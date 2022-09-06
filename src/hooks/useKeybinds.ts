@@ -7,7 +7,7 @@ import {
   fileSaveAs,
   loadBlueprint,
   versionRedo,
-  versionUndo
+  versionUndo,
 } from 'core/blueprint';
 import { popupClose, popupOpen } from 'core/interface';
 import {
@@ -20,7 +20,7 @@ import {
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts
+  unselectAllParts,
 } from 'core/part';
 import produce from 'immer';
 import { isNull } from 'lodash';
@@ -133,8 +133,8 @@ const useKeybinds = () => {
     bind('alt+1', () => {
       useSettings.setState(
         produce((draft: UseSettings) => {
-          draft.interface.tabs.layout.leftSideBar.visible =
-            !draft.interface.tabs.layout.leftSideBar.visible;
+          draft.interface.tabs.layout.leftSidebar.visible =
+            !draft.interface.tabs.layout.leftSidebar.visible;
         }),
       );
     });
@@ -142,11 +142,11 @@ const useKeybinds = () => {
       useSettings.setState(
         produce((draft: UseSettings) => {
           if (getInterfaceMode() === InterfaceMode.Compact) {
-            draft.interface.tabs.layout.rightSideBar.visible.inCompactMode =
-              !draft.interface.tabs.layout.rightSideBar.visible.inCompactMode;
+            draft.interface.tabs.layout.rightSidebar.visible.inCompactMode =
+              !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
           } else {
-            draft.interface.tabs.layout.rightSideBar.visible.inComfortableMode =
-              !draft.interface.tabs.layout.rightSideBar.visible
+            draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode =
+              !draft.interface.tabs.layout.rightSidebar.visible
                 .inComfortableMode;
           }
         }),

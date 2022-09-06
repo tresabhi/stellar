@@ -37,12 +37,12 @@ export interface UseSettings {
 
     tabs: {
       layout: {
-        leftSideBar: {
+        leftSidebar: {
           visible: boolean;
           tab: SidebarTab;
         };
 
-        rightSideBar: {
+        rightSidebar: {
           visible: {
             inCompactMode: boolean;
             inComfortableMode: boolean;
@@ -75,12 +75,12 @@ export const UseSettingsData: UseSettings = {
 
     tabs: {
       layout: {
-        leftSideBar: {
+        leftSidebar: {
           visible: true,
           tab: SidebarTab.Left,
         },
 
-        rightSideBar: {
+        rightSidebar: {
           visible: {
             inCompactMode: false,
             inComfortableMode: true,

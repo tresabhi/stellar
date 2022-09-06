@@ -9,17 +9,17 @@ import { Tabs } from './components/Tabs';
 
 export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   const rightSidebar = useSettings(
-    (draft) => draft.interface.tabs.layout.rightSideBar,
+    (draft) => draft.interface.tabs.layout.rightSidebar,
   );
   const interfaceMode = useInterfaceMode();
   const handleCollapseClick = () => {
     mutateSettings((draft) => {
       if (interfaceMode === InterfaceMode.Compact) {
-        draft.interface.tabs.layout.rightSideBar.visible.inCompactMode =
-          !draft.interface.tabs.layout.rightSideBar.visible.inCompactMode;
+        draft.interface.tabs.layout.rightSidebar.visible.inCompactMode =
+          !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
       } else {
-        draft.interface.tabs.layout.rightSideBar.visible.inComfortableMode =
-          !draft.interface.tabs.layout.rightSideBar.visible.inComfortableMode;
+        draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode =
+          !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
       }
     });
   };

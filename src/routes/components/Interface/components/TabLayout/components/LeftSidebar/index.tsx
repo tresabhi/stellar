@@ -10,12 +10,12 @@ import { Tabs } from './components/Tabs';
 
 export const LeftSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   const leftSidebar = useSettings(
-    (state) => state.interface.tabs.layout.leftSideBar,
+    (state) => state.interface.tabs.layout.leftSidebar,
   );
   const handleCollapseClick = () => {
     mutateSettings((draft) => {
-      draft.interface.tabs.layout.leftSideBar.visible =
-        !draft.interface.tabs.layout.leftSideBar.visible;
+      draft.interface.tabs.layout.leftSidebar.visible =
+        !draft.interface.tabs.layout.leftSidebar.visible;
     });
   };
 

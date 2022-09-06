@@ -3,7 +3,7 @@ import {
   EnterIcon,
   FilePlusIcon,
   FileTextIcon,
-  UploadIcon,
+  UploadIcon
 } from '@radix-ui/react-icons';
 import apolloMission from 'assets/blueprints/apollo-mission.json';
 import basicRocket from 'assets/blueprints/basic-rocket.json';
@@ -21,9 +21,10 @@ import { TabContainer } from 'components/TabContainer';
 import { mutateApp } from 'core/app/mutateApp';
 import { fileImport, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
+import { useTranslator } from 'hooks/useTranslator';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/useApp';
-import { Statusbar } from './components/Statusbar';
+import { StatusBar } from './components/StatusBar';
 
 const ABHI = 'TrèsAbhi';
 const ABHI_WEB = 'https://tresabhi.github.io/';
@@ -35,94 +36,6 @@ interface Template {
   blueprint: VanillaBlueprint;
   inbuilt: boolean;
 }
-
-const TEMPLATES: Template[] = [
-  {
-    name: 'Hopper',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: hopper,
-    inbuilt: true,
-  },
-  {
-    name: 'Apollo Mission',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: apolloMission,
-    inbuilt: true,
-  },
-  {
-    name: 'Light Lander',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: lightLander,
-    inbuilt: true,
-  },
-  {
-    name: 'Rover',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: rover,
-    inbuilt: true,
-  },
-  {
-    name: 'Parachute & Separator',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: parachuteAndSeparator,
-    inbuilt: true,
-  },
-  {
-    name: 'Joints',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: joints,
-    inbuilt: true,
-  },
-  {
-    name: 'Orbit & Re-entry',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: orbitAndReEntry,
-    inbuilt: true,
-  },
-  {
-    name: 'Race Car',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: raceCar,
-    inbuilt: true,
-  },
-  {
-    name: 'Basic Rocket',
-    author: ABHI,
-    link: ABHI_WEB,
-    blueprint: basicRocket,
-    inbuilt: true,
-  },
-];
-const PALETTE_ITEMS = TEMPLATES.sort((a, b) => {
-  if (a.name < b.name) return -1;
-  if (a.name > b.name) return 1;
-  return 0;
-}).map(
-  (template) =>
-    ({
-      name: template.name,
-      note: template.author,
-      noteURL:
-        typeof template.link === 'string'
-          ? template.link
-          : `https://jmnet.one/sfs/forum/index.php?members/${template.link}`,
-      callback: () => {
-        loadBlueprint(template.blueprint);
-        mutateApp((draft) => {
-          draft.interface.tab = Tab.Layout;
-        });
-      },
-      icon: template.inbuilt ? <FileTextIcon /> : <ArchiveIcon />,
-    } as PaletteItem),
-);
 
 const Container = styled('div', {
   flex: 1,
@@ -210,6 +123,7 @@ const FileActions = styled('div', {
 });
 
 export const TabCreate = () => {
+  const { t } = useTranslator();
   const toLayout = () => {
     mutateApp((draft) => {
       draft.interface.tab = Tab.Layout;
@@ -228,6 +142,94 @@ export const TabCreate = () => {
     toLayout();
   };
 
+  const TEMPLATES: Template[] = [
+    {
+      name: t`tab.create.templates.list.hopper`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: hopper,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.apollo_mission`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: apolloMission,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.light_lander`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: lightLander,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.rover`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: rover,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.parachute_and_separator`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: parachuteAndSeparator,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.joints`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: joints,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.orbit_and_re_entry`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: orbitAndReEntry,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.race_car`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: raceCar,
+      inbuilt: true,
+    },
+    {
+      name: t`tab.create.templates.list.basic_rocket`,
+      author: ABHI,
+      link: ABHI_WEB,
+      blueprint: basicRocket,
+      inbuilt: true,
+    },
+  ];
+  const PALETTE_ITEMS = TEMPLATES.sort((a, b) => {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  }).map(
+    (template) =>
+      ({
+        name: template.name,
+        note: template.author,
+        noteURL:
+          typeof template.link === 'string'
+            ? template.link
+            : `https://jmnet.one/sfs/forum/index.php?members/${template.link}`,
+        callback: () => {
+          loadBlueprint(template.blueprint);
+          mutateApp((draft) => {
+            draft.interface.tab = Tab.Layout;
+          });
+        },
+        icon: template.inbuilt ? <FileTextIcon /> : <ArchiveIcon />,
+      } as PaletteItem),
+  );
+
   return (
     <TabContainer overflow tab={Tab.Create}>
       <Container>
@@ -239,7 +241,7 @@ export const TabCreate = () => {
               transparent
               darkBackground
               items={PALETTE_ITEMS}
-              placeholder="Search templates..."
+              placeholder={t`tab.create.templates.search_placeholder`}
               hasMaxHeight={false}
             />
           </PaletteWrapper>
@@ -252,24 +254,24 @@ export const TabCreate = () => {
         <SectionContainer full>
           <FileActions>
             <Title>Stellar</Title>
-            <SubTitle>Blueprint editing redefined</SubTitle>
+            <SubTitle>{t`tab.create.file_options.motto`}</SubTitle>
           </FileActions>
 
           <FileActions>
             <Button onClick={handleScratchClick} priority="solid">
-              <FilePlusIcon /> Start From Scratch
+              <FilePlusIcon /> {t`tab.create.file_options.from_scratch`}
             </Button>
             <Button onClick={handleImportClick}>
-              <EnterIcon /> Import Blueprint File
+              <EnterIcon /> {t`tab.create.file_options.import`}
             </Button>
             <Button onClick={handleOpenClick}>
-              <UploadIcon /> Open Stellar File
+              <UploadIcon /> {t`tab.create.file_options.open`}
             </Button>
           </FileActions>
         </SectionContainer>
       </Container>
 
-      <Statusbar />
+      <StatusBar />
     </TabContainer>
   );
 };

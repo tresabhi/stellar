@@ -1,10 +1,9 @@
 import {
-  ChatBubbleIcon,
   ClipboardCopyIcon,
   ClipboardIcon,
-  CodeIcon,
   Component1Icon,
   CursorArrowIcon,
+  DiscordLogoIcon,
   DownloadIcon,
   EnterIcon,
   ExclamationTriangleIcon,
@@ -14,6 +13,7 @@ import {
   FileIcon,
   FilePlusIcon,
   GearIcon,
+  GitHubLogoIcon,
   GroupIcon,
   HandIcon,
   InfoCircledIcon,
@@ -54,11 +54,13 @@ import {
   togglePartsVisibilityBySelection,
   ungroupGroupsBySelection,
 } from 'core/part';
+import { useTranslator } from 'hooks/useTranslator';
 import useApp, { Popup, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import useVersionControl from 'stores/useVersionControl';
 
 const Toolbar = () => {
+  const { t } = useTranslator();
   const tool = useApp((state) => state.editor.tool);
   const isPanning = useApp((state) => state.editor.isPanning);
   const selections = useBlueprint((state) => state.selections);
@@ -116,7 +118,7 @@ const Toolbar = () => {
             keybind="Ctrl + N"
             onClick={handleNewClick}
           >
-            New
+            {t`tab.layout.toolbar.file.new`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -124,7 +126,7 @@ const Toolbar = () => {
             keybind="Ctrl + O"
             onClick={handleOpenClick}
           >
-            Open
+            {t`tab.layout.toolbar.file.open`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -132,7 +134,7 @@ const Toolbar = () => {
             keybind="Ctrl + S"
             onClick={handleSaveClick}
           >
-            Save
+            {t`tab.layout.toolbar.file.save`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -140,7 +142,7 @@ const Toolbar = () => {
             keybind="Ctrl + Shift + S"
             onClick={handleSaveAsClick}
           >
-            Save
+            {t`tab.layout.toolbar.file.save_as`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -148,7 +150,7 @@ const Toolbar = () => {
             keybind="Ctrl + I"
             onClick={handleImportClick}
           >
-            Import
+            {t`tab.layout.toolbar.file.import`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -156,7 +158,7 @@ const Toolbar = () => {
             keybind="Ctrl + E"
             onClick={handleExportClick}
           >
-            Export
+            {t`tab.layout.toolbar.file.export`}
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
 
@@ -169,7 +171,7 @@ const Toolbar = () => {
             icon={<CursorArrowIcon />}
             onClick={handleMoveClick}
           >
-            Move
+            {t`tab.layout.toolbar.tool.move`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -177,7 +179,7 @@ const Toolbar = () => {
             keybind="Space"
             onClick={handlePanClick}
           >
-            Pan
+            {t`tab.layout.toolbar.tool.pan`}
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
 
@@ -196,7 +198,7 @@ const Toolbar = () => {
             onClick={handleCopyClick}
             keybind="Ctrl + C"
           >
-            Copy
+            {t`tab.layout.toolbar.selection.copy`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -204,7 +206,7 @@ const Toolbar = () => {
             onClick={handleCutClick}
             keybind="Ctrl + X"
           >
-            Cut
+            {t`tab.layout.toolbar.selection.cut`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -212,7 +214,7 @@ const Toolbar = () => {
             onClick={handlePasteClick}
             keybind="Ctrl + V"
           >
-            Paste
+            {t`tab.layout.toolbar.selection.paste`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -220,7 +222,7 @@ const Toolbar = () => {
             onClick={handleDuplicateClick}
             keybind="Ctrl + D"
           >
-            Duplicate
+            {t`tab.layout.toolbar.selection.duplicate`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -228,7 +230,7 @@ const Toolbar = () => {
             icon={<Component1Icon />}
             keybind="Ctrl + M"
           >
-            Create Snippet
+            {t`tab.layout.toolbar.selection.create_snippet`}
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
 
@@ -241,7 +243,7 @@ const Toolbar = () => {
             onClick={handleGroupClick}
             keybind="Ctrl + G"
           >
-            Group
+            {t`tab.layout.toolbar.group.group`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -249,7 +251,7 @@ const Toolbar = () => {
             onClick={handleUngroupClick}
             keybind="Ctrl + Shift + G"
           >
-            Ungroup
+            {t`tab.layout.toolbar.group.ungroup`}
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
 
@@ -287,7 +289,7 @@ const Toolbar = () => {
             keybind="F1"
             onClick={link(WEBSITE)}
           >
-            About stellar
+            {t`tab.layout.toolbar.help.about`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -295,34 +297,34 @@ const Toolbar = () => {
             keybind="F4"
             onClick={link(`${GH_REPO_URL}issues/new/choose`)}
           >
-            Report an issue
+            {t`tab.layout.toolbar.help.report`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
-            icon={<ChatBubbleIcon />}
+            icon={<DiscordLogoIcon />}
             onClick={link(DISCORD)}
           >
-            Chat on discord
+            {t`tab.layout.toolbar.help.discord`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
-            icon={<CodeIcon />}
+            icon={<GitHubLogoIcon />}
             onClick={link(GH_REPO_URL)}
           >
-            View source code
+            {t`tab.layout.toolbar.help.github`}
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
 
         <ToolbarComponent.Dropdown disabled icon={<GearIcon />}>
           <ToolbarComponent.DropdownItem icon={<GearIcon />} keybind="Ctrl + ,">
-            Settings
+            {t`tab.layout.toolbar.preferences.settings`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
             keybind="Ctrl + K"
             icon={<KeyboardIcon />}
           >
-            Keybinds
+            {t`tab.layout.toolbar.preferences.keybinds`}
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
       </ToolbarComponent.Group>

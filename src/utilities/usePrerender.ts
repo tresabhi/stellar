@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei';
 import useKeybinds from 'hooks/useKeybinds';
 import { PART_MODEL_PATH } from 'hooks/usePartModel';
-import useTranslator from 'hooks/useTranslator';
+import { useTranslator } from 'hooks/useTranslator';
 import { globalStyles } from 'stitches.config';
 import useApp from 'stores/useApp';
 import usePartRegistry from 'stores/usePartRegistry';

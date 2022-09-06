@@ -2,11 +2,13 @@ import { Palette, PaletteItem } from 'components/Palette';
 import { mutateApp } from 'core/app/mutateApp';
 import { popupClose } from 'core/interface';
 import { getParent, getPart, insertNewPart } from 'core/part';
+import { useTranslator } from 'hooks/useTranslator';
 import { useEffect } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import usePartRegistry from 'stores/usePartRegistry';
 
 export const InsertPart = () => {
+  const { t } = useTranslator();
   const partRegistry = usePartRegistry();
   const paletteItems: PaletteItem[] = [];
   const { selections } = useBlueprint.getState();
@@ -41,7 +43,10 @@ export const InsertPart = () => {
         });
         popupClose();
       },
-      note: registry.vanillaData === null ? 'Abstract' : undefined,
+      note:
+        registry.vanillaData === null
+          ? t`tab.layout.popup.insert_part.abstract`
+          : undefined,
       icon: <Icon />,
     });
   });
@@ -58,6 +63,10 @@ export const InsertPart = () => {
   }, []);
 
   return (
-    <Palette gainFocus placeholder="Insert part..." items={paletteItems} />
+    <Palette
+      gainFocus
+      placeholder={t`tab.layout.popup.insert_part.search_placeholder`}
+      items={paletteItems}
+    />
   );
 };

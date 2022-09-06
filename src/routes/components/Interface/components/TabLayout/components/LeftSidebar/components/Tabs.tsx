@@ -4,20 +4,22 @@ import {
   MixerVerticalIcon,
 } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
+import { useTranslator } from 'hooks/useTranslator';
 import produce from 'immer';
 import { FC } from 'react';
 import useSettings, { SidebarTab, UseSettings } from 'stores/useSettings';
 import { TabLayoutProps } from '../../..';
 
 export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
+  const { t } = useTranslator();
   const leftSidebar = useSettings(
-    (state) => state.interface.tabs.layout.leftSideBar,
+    (state) => state.interface.tabs.layout.leftSidebar,
   );
   const handleClick = (tab: SidebarTab) => {
     return () => {
       useSettings.setState(
         produce<UseSettings>((draft) => {
-          draft.interface.tabs.layout.leftSideBar.tab = tab;
+          draft.interface.tabs.layout.leftSidebar.tab = tab;
         }),
       );
     };
@@ -30,14 +32,16 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
         selected={leftSidebar.tab === SidebarTab.Left}
         icon={<LayersIcon />}
       >
-        Parts
+        {t`tab.layout.left_sidebar.parts`}
       </Sidebar.Tab>
       <Sidebar.Tab
         onClick={handleClick(SidebarTab.Right)}
         selected={leftSidebar.tab === SidebarTab.Right}
         icon={swapSecondTab ? <MixerVerticalIcon /> : <Component1Icon />}
       >
-        {swapSecondTab ? 'Properties' : 'Snippets'}
+        {swapSecondTab
+          ? t`tab.layout.right_sidebar.properties`
+          : t`tab.layout.left_sidebar.snippets`}
       </Sidebar.Tab>
     </Sidebar.TabContainer>
   );

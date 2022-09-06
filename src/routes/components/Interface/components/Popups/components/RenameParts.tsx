@@ -6,10 +6,12 @@ import { mutateSettings } from 'core/app';
 import { popupClose } from 'core/interface';
 import { RenamePartsOptions } from 'core/part/renameParts';
 import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
+import { useTranslator } from 'hooks/useTranslator';
 import { KeyboardEvent, useRef } from 'react';
 import useSettings from 'stores/useSettings';
 
 export const RenameParts = () => {
+  const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null!);
   const apply = () => {
@@ -44,7 +46,7 @@ export const RenameParts = () => {
         onKeyDown={handleKeyDown}
         autoFocus
         icon={<Pencil1Icon />}
-        placeholder="Label"
+        placeholder={t`tab.layout.popup.rename.search_placeholder`}
       />
 
       <Popup.Content>
@@ -52,30 +54,32 @@ export const RenameParts = () => {
           defaultValue={rename.trim}
           onChange={handleClick('trim')}
         >
-          Trim whitespace on ends
+          {t`tab.layout.popup.rename.trim`}
         </LabeledCheckbox>
         <LabeledCheckbox
           defaultValue={rename.skipLocked}
           onChange={handleClick('skipLocked')}
         >
-          Skip locked parts
+          {t`tab.layout.popup.rename.skip_locked`}
         </LabeledCheckbox>
         <LabeledCheckbox
           defaultValue={rename.suffix}
           onChange={handleClick('suffix')}
         >
-          Add unique numerical suffixes
+          {t`tab.layout.popup.rename.suffix`}
         </LabeledCheckbox>
       </Popup.Content>
 
       <Popup.ActionRow>
-        <Popup.Button onClick={handleCancelClick}>Cancel</Popup.Button>
+        <Popup.Button
+          onClick={handleCancelClick}
+        >{t`tab.layout.popup.rename.cancel`}</Popup.Button>
         <Popup.Button
           onClick={handleApplyClick}
           priority="callToAction"
           color="accent"
         >
-          Apply
+          {t`tab.layout.popup.rename.apply`}
         </Popup.Button>
       </Popup.ActionRow>
     </Popup.Container>

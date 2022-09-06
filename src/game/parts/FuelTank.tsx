@@ -6,7 +6,7 @@ import PartCategory from 'hooks/constants/partCategory';
 import { useNumericalPropertyInput } from 'hooks/useNumericalPropertyInput';
 import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
-import useTranslator from 'hooks/useTranslator';
+import { useTranslator } from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
 import { PartRegistryFragment } from 'stores/usePartRegistry';
 import { CylinderGeometry, Group, Mesh } from 'three';
@@ -178,21 +178,21 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 
   return (
     <PropertiesExplorer.Group>
-      <PropertiesExplorer.Title>{t`properties_explorer.properties.fuel_tank`}</PropertiesExplorer.Title>
+      <PropertiesExplorer.Title>{t`tab.layout.right_sidebar.properties.fuel_tank`}</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
         <PropertiesExplorer.Input
           ref={width}
-          label={t`properties_explorer.properties.fuel_tank.width`}
+          label={t`tab.layout.right_sidebar.properties.fuel_tank.width`}
           unit="m"
         />
         <PropertiesExplorer.Input
           ref={height}
-          label={t`properties_explorer.properties.fuel_tank.height`}
+          label={t`tab.layout.right_sidebar.properties.fuel_tank.height`}
           unit="m"
         />
         <PropertiesExplorer.Input
           ref={fuel}
-          label={t`properties_explorer.properties.fuel_tank.fuel`}
+          label={t`tab.layout.right_sidebar.properties.fuel_tank.fuel`}
           unit="%"
         />
       </PropertiesExplorer.Row>

@@ -1,9 +1,10 @@
 import {
   DiscordLogoIcon,
   GitHubLogoIcon,
-  TwitterLogoIcon,
+  TwitterLogoIcon
 } from '@radix-ui/react-icons';
-import * as StatusbarComponent from 'components/Statusbar';
+import * as StatusBarComponent from 'components/StatusBar';
+import { useTranslator } from 'hooks/useTranslator';
 import { useEffect, useState } from 'react';
 import { parse } from 'semver';
 import { styled, theme } from 'stitches.config';
@@ -18,7 +19,8 @@ const StellarIcon = styled(Icon, {
   height: theme.sizes[16],
 });
 
-export const Statusbar = () => {
+export const StatusBar = () => {
+  const { t } = useTranslator();
   const date = new Date();
   const year = date.getUTCFullYear();
   const [license, setLicense] = useState('LICENSE');
@@ -58,75 +60,75 @@ export const Statusbar = () => {
   }, []);
 
   return (
-    <StatusbarComponent.Container>
-      <StatusbarComponent.Group unrelated>
-        <StatusbarComponent.Anchor
+    <StatusBarComponent.Container>
+      <StatusBarComponent.Group unrelated>
+        <StatusBarComponent.Anchor
           target="_blank"
           href="https://discord.gg/nDt7AjGJQH"
         >
           <DiscordLogoIcon />
-        </StatusbarComponent.Anchor>
+        </StatusBarComponent.Anchor>
 
-        <StatusbarComponent.Anchor
+        <StatusBarComponent.Anchor
           target="_blank"
           href="https://twitter.com/tresabhi_"
         >
           <TwitterLogoIcon />
-        </StatusbarComponent.Anchor>
+        </StatusBarComponent.Anchor>
 
-        <StatusbarComponent.Anchor
+        <StatusBarComponent.Anchor
           target="_blank"
           href={`https://github.com/${GITHUB_REPO}`}
         >
           <GitHubLogoIcon />
-        </StatusbarComponent.Anchor>
+        </StatusBarComponent.Anchor>
 
-        <StatusbarComponent.Group>
-          <StatusbarComponent.Anchor
+        <StatusBarComponent.Group>
+          <StatusBarComponent.Anchor
             target="_blank"
             href="https://tresabhi.github.io/"
           >
             TrèsAbhi
-          </StatusbarComponent.Anchor>
+          </StatusBarComponent.Anchor>
 
-          <StatusbarComponent.Dot />
+          <StatusBarComponent.Dot />
 
-          <StatusbarComponent.Anchor
+          <StatusBarComponent.Anchor
             target="_blank"
             href={`https://github.com/${GITHUB_REPO}/commits/`}
           >
             &copy; {year}
-          </StatusbarComponent.Anchor>
+          </StatusBarComponent.Anchor>
 
-          <StatusbarComponent.Dot />
+          <StatusBarComponent.Dot />
 
-          <StatusbarComponent.Anchor
+          <StatusBarComponent.Anchor
             target="_blank"
             href={`https://github.com/${GITHUB_REPO}/blob/main/LICENSE`}
           >
             {license}
-          </StatusbarComponent.Anchor>
-        </StatusbarComponent.Group>
-      </StatusbarComponent.Group>
+          </StatusBarComponent.Anchor>
+        </StatusBarComponent.Group>
+      </StatusBarComponent.Group>
 
-      <StatusbarComponent.Group unrelated>
+      <StatusBarComponent.Group unrelated>
         <StellarIcon />
 
-        <StatusbarComponent.Group>
-          <StatusbarComponent.Anchor target="_blank" href={releaseNotes}>
+        <StatusBarComponent.Group>
+          <StatusBarComponent.Anchor target="_blank" href={releaseNotes}>
             Stellar {version} {prerelease}
-          </StatusbarComponent.Anchor>
+          </StatusBarComponent.Anchor>
 
-          <StatusbarComponent.Dot />
+          <StatusBarComponent.Dot />
 
-          <StatusbarComponent.Anchor
+          <StatusBarComponent.Anchor
             target="_blank"
             href={`https://${user}.github.io/${repo}/`}
           >
-            Docs
-          </StatusbarComponent.Anchor>
-        </StatusbarComponent.Group>
-      </StatusbarComponent.Group>
-    </StatusbarComponent.Container>
+            {t`tab.create.status_bar.docs`}
+          </StatusBarComponent.Anchor>
+        </StatusBarComponent.Group>
+      </StatusBarComponent.Group>
+    </StatusBarComponent.Container>
   );
 };

@@ -1,6 +1,6 @@
 import * as PropertiesExplorer from 'components/PropertiesExplorer';
 import { useNumericalPropertyInput } from 'hooks/useNumericalPropertyInput';
-import useTranslator from 'hooks/useTranslator';
+import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 
@@ -111,33 +111,33 @@ export const PartWithTransformationsPropertyComponent: FC<
 
   return (
     <PropertiesExplorer.Group>
-      <PropertiesExplorer.Title>{t`properties_explorer.properties.transformations`}</PropertiesExplorer.Title>
+      <PropertiesExplorer.Title>{t`tab.layout.right_sidebar.properties.transformations`}</PropertiesExplorer.Title>
       <PropertiesExplorer.Row>
         <PropertiesExplorer.Input
           ref={xPosition}
-          label={t`properties_explorer.properties.transformations.position_x`}
+          label={t`tab.layout.right_sidebar.properties.transformations.x_position`}
           unit="m"
         />
         <PropertiesExplorer.Input
           ref={yPosition}
-          label={t`properties_explorer.properties.transformations.position_y`}
+          label={t`tab.layout.right_sidebar.properties.transformations.y_position`}
           unit="m"
         />
         <PropertiesExplorer.Input
           ref={rotation}
-          label={t`properties_explorer.properties.transformations.rotation`}
+          label={t`tab.layout.right_sidebar.properties.transformations.rotation`}
           unit="°"
         />
       </PropertiesExplorer.Row>
       <PropertiesExplorer.Row>
         <PropertiesExplorer.Input
           ref={xScale}
-          label={t`properties_explorer.properties.transformations.scale_x`}
+          label={t`tab.layout.right_sidebar.properties.transformations.x_scale`}
           unit="x"
         />
         <PropertiesExplorer.Input
           ref={yScale}
-          label={t`properties_explorer.properties.transformations.scale_y`}
+          label={t`tab.layout.right_sidebar.properties.transformations.y_scale`}
           unit="x"
         />
       </PropertiesExplorer.Row>

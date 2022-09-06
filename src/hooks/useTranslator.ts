@@ -13,7 +13,6 @@ import ru_RU from 'lang/ru-RU.json';
 import sv_SE from 'lang/sv-SE.json';
 import zh_CN from 'lang/zh-CN.json';
 import zh_TW from 'lang/zh-TW.json';
-import { isUndefined } from 'lodash';
 import useSettings from '../stores/useSettings';
 
 export const translationsRegistry = new Map<string, AnyObject>([
@@ -33,11 +32,12 @@ export const translationsRegistry = new Map<string, AnyObject>([
   ['zh-TW', zh_TW],
 ]);
 
-const useTranslator = () => {
-  const language = useSettings((state) => state.interface.language);
+export const createTranslator = (
+  language = useSettings.getState().interface.language,
+) => {
   let translations = translationsRegistry.get(language);
 
-  if (isUndefined(translations)) {
+  if (translations === undefined) {
     console.warn(`No translations for language ${language}`);
   }
 
@@ -52,7 +52,7 @@ const useTranslator = () => {
         translations,
       );
 
-    return isUndefined(translation)
+    return translation === undefined
       ? string // If translation is not found, return the original string
       : typeof translation === 'string'
       ? translation // If translation is a string, return the string
@@ -66,4 +66,9 @@ const useTranslator = () => {
 
   return hook;
 };
-export default useTranslator;
+
+export const useTranslator = () => {
+  const language = useSettings((state) => state.interface.language);
+
+  return createTranslator(language);
+};
