@@ -1,0 +1,121 @@
+{
+  "tab": {
+    "create": {
+      "$": "Create",
+      "templates": {
+        "search_placeholder": "Search templates...",
+        "list": {
+          "apollo_mission": "Apollo Mission",
+          "basic_rocket": "Basic Rocket",
+          "hopper": "Hopper",
+          "joints": "Joints",
+          "light_lander": "Light Lander",
+          "orbit_and_re_entry": "Orbit & Re-entry",
+          "parachute_and_separator": "Parachute & Separator",
+          "race_car": "Race Car",
+          "rover": "Rover"
+        }
+      },
+      "file_options": {
+        "motto": "Blueprint editing redefined",
+        "from_scratch": "Start From Scratch",
+        "import": "Import Blueprint File",
+        "open": "Open Stellar File"
+      },
+      "status_bar": {
+        "docs": "Docs"
+      }
+    },
+    "layout": {
+      "$": "Layout",
+      "toolbar": {
+        "file": {
+          "new": "New",
+          "open": "Open...",
+          "save": "Save",
+          "save_as": "Save As...",
+          "import": "Import...",
+          "export": "Export..."
+        },
+        "tool": {
+          "move": "Move",
+          "pan": "Pan"
+        },
+        "selection": {
+          "copy": "Copy",
+          "cut": "Cut",
+          "paste": "Paste",
+          "duplicate": "Duplicate",
+          "create_snippet": "Create Snippet"
+        },
+        "group": {
+          "group": "Group",
+          "ungroup": "Ungroup"
+        },
+        "help": {
+          "about": "About Stellar",
+          "report": "Report an Issue",
+          "discord": "Discord",
+          "github": "GitHub"
+        },
+        "preferences": {
+          "settings": "Settings",
+          "keybinds": "Keybinds"
+        }
+      },
+      "left_sidebar": {
+        "parts": {
+          "$": "Parts"
+        },
+        "snippets": {
+          "$": "Snippets"
+        }
+      },
+      "right_sidebar": {
+        "properties": {
+          "$": "Properties",
+          "transformations": {
+            "$": "Transformations",
+            "x_position": "X Position",
+            "y_position": "Y Position",
+            "rotation": "Rotation",
+            "x_scale": "X Scale",
+            "y_scale": "Y Scale"
+          },
+          "fuel_tank": {
+            "$": "Fuel Tank",
+            "width": "Width",
+            "TODO:top_width": "Top Width",
+            "TODO:bottom_width": "Bottom Width",
+            "height": "Height",
+            "fuel": "Fuel"
+          }
+        },
+        "inspect": {
+          "$": "Inspect"
+        }
+      },
+      "popup": {
+        "insert_part": {
+          "search_placeholder": "Insert part...",
+          "abstract": "Abstract",
+          "TODO:cancel": "Cancel"
+        },
+        "rename": {
+          "search_placeholder": "Label...",
+          "trim": "Trim whitespace on ends",
+          "skip_locked": "Skip locked parts",
+          "suffix": "Add unique numerical suffixes",
+          "cancel": "Cancel",
+          "apply": "Apply"
+        }
+      }
+    },
+    "staging": {
+      "$": "Staging"
+    },
+    "export": {
+      "$": "Export"
+    }
+  }
+}
