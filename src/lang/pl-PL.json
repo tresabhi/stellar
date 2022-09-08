@@ -1,12 +1,12 @@
 {
   "tab": {
     "create": {
-      "$": "Create",
+      "$": "Stwórz",
       "templates": {
-        "search_placeholder": "Search templates...",
+        "search_placeholder": "Szukaj szablonu...",
         "list": {
-          "apollo_mission": "Apollo Mission",
-          "basic_rocket": "Basic Rocket",
+          "apollo_mission": "Misja Apollo",
+          "basic_rocket": "Podstawowa Rakieta",
           "hopper": "Hopper",
           "joints": "Joints",
           "light_lander": "Light Lander",
