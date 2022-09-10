@@ -1,0 +1,121 @@
+{
+  "tab": {
+    "create": {
+      "$": "Summon",
+      "templates": {
+        "search_placeholder": "Sail ye' drafts...",
+        "list": {
+          "apollo_mission": "Up Yander Sailin'",
+          "basic_rocket": "Ain't Booty-full Ship",
+          "hopper": "Bobbin'",
+          "joints": "Knots",
+          "light_lander": "Feather o' Sailer",
+          "orbit_and_re_entry": "Up n' Above an' Down Lo'",
+          "parachute_and_separator": "Drape an' Hook",
+          "race_car": "Knots a Lot Lan' Ship",
+          "rover": "Lan' Ship"
+        }
+      },
+      "file_options": {
+        "motto": "Sail o' port movin' moved",
+        "from_scratch": "Sail Fro' Deck",
+        "import": "Pull in Loads o' Sail o' Port",
+        "open": "Pull in Loads o' Sky"
+      },
+      "status_bar": {
+        "docs": "Task o' Rich"
+      }
+    },
+    "layout": {
+      "$": "Where Yander All at",
+      "toolbar": {
+        "file": {
+          "new": "Ain't Ol'",
+          "open": "Tug in...",
+          "save": "Tug Out",
+          "save_as": "Tug Out Imposterous...",
+          "import": "Tug ya' In All The Way...",
+          "export": "Tug ye' Out All The Way..."
+        },
+        "tool": {
+          "move": "Sail",
+          "pan": "Looksey"
+        },
+        "selection": {
+          "copy": "Loot",
+          "cut": "Loot n' Sail",
+          "paste": "Bury",
+          "duplicate": "Loot, Sail, n' Bury",
+          "create_snippet": "Summon Booty"
+        },
+        "group": {
+          "group": "Crew Up",
+          "ungroup": "Uncrew"
+        },
+        "help": {
+          "about": "'bout That Stellar",
+          "report": "Yell Y'all",
+          "discord": "Shoutin'",
+          "github": "Thinkin'"
+        },
+        "preferences": {
+          "settings": "Changin'",
+          "keybinds": "Steerin'"
+        }
+      },
+      "left_sidebar": {
+        "parts": {
+          "$": "Booty Share"
+        },
+        "snippets": {
+          "$": "Booty"
+        }
+      },
+      "right_sidebar": {
+        "properties": {
+          "$": "Booty Share o' Reason",
+          "transformations": {
+            "$": "Movin', Sailin', Dockin'",
+            "x_position": "Movin' Arm",
+            "y_position": "Movin' Poop",
+            "rotation": "Yaw",
+            "x_scale": "Blowin' Arm",
+            "y_scale": "Blowin' Poop"
+          },
+          "fuel_tank": {
+            "$": "Barrel o' Rum",
+            "width": "Rich Dame",
+            "TODO:top_width": "Up Above o' Rich Dame",
+            "TODO:bottom_width": "Down Below o' Rich Dame",
+            "height": "Nest o' Sparrow",
+            "fuel": "Rum"
+          }
+        },
+        "inspect": {
+          "$": "Lookin' In"
+        }
+      },
+      "popup": {
+        "insert_part": {
+          "search_placeholder": "Puttin' Booty Share...",
+          "abstract": "Ain't Thinkin'",
+          "TODO:cancel": "Naw"
+        },
+        "rename": {
+          "search_placeholder": "Call Ya...",
+          "trim": "Undock the ain't busy decks",
+          "skip_locked": "Sailin' through anchored booty shares",
+          "suffix": "Dock in some countin'",
+          "cancel": "Aargh",
+          "apply": "Savvy"
+        }
+      }
+    },
+    "staging": {
+      "$": "Movin' Decks"
+    },
+    "export": {
+      "$": "Tug ye' Out All The Way"
+    }
+  }
+}
