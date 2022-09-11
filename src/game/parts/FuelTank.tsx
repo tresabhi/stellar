@@ -153,13 +153,19 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
   ids,
 }) => {
   const { t } = useTranslator();
-  const width = useNumericalInputProperty<FuelTank>(
+  const topWidth = useNumericalInputProperty<FuelTank>(
     ids,
-    (state) => state.N.width_original,
+    (state) => state.N.width_b,
     (draft, value) => {
-      draft.N.width_original = value;
-      draft.N.width_a = value;
       draft.N.width_b = value;
+    },
+  );
+  const bottomWidth = useNumericalInputProperty<FuelTank>(
+    ids,
+    (state) => state.N.width_a,
+    (draft, value) => {
+      draft.N.width_a = value;
+      draft.N.width_original = value;
     },
   );
   const height = useNumericalInputProperty<FuelTank>(
@@ -182,8 +188,13 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
       <Properties.Title>{t`tab.layout.right_sidebar.properties.fuel_tank`}</Properties.Title>
       <Properties.Row>
         <Properties.Input
-          {...width}
-          label={t`tab.layout.right_sidebar.properties.fuel_tank.width`}
+          {...topWidth}
+          label={t`tab.layout.right_sidebar.properties.fuel_tank.top_width`}
+          unit="m"
+        />
+        <Properties.Input
+          {...bottomWidth}
+          label={t`tab.layout.right_sidebar.properties.fuel_tank.bottom_width`}
           unit="m"
         />
         <Properties.Input

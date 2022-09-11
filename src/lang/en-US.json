@@ -103,9 +103,8 @@
           "fuel_tank": {
             "$": "Fuel Tank",
 
-            "width": "Width",
-            "TODO:top_width": "Top Width",
-            "TODO:bottom_width": "Bottom Width",
+            "top_width": "Top Width",
+            "bottom_width": "Bottom Width",
             "height": "Height",
             "fuel": "Fuel"
           }
