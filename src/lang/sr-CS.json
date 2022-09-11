@@ -1,39 +1,39 @@
 {
   "tab": {
     "create": {
-      "$": "Create",
+      "$": "Napravi",
       "templates": {
-        "search_placeholder": "Search templates...",
+        "search_placeholder": "Pretraži šablone...",
         "list": {
-          "apollo_mission": "Apollo Mission",
-          "basic_rocket": "Basic Rocket",
-          "hopper": "Hopper",
-          "joints": "Joints",
-          "light_lander": "Light Lander",
-          "orbit_and_re_entry": "Orbit & Re-entry",
-          "parachute_and_separator": "Parachute & Separator",
-          "race_car": "Race Car",
+          "apollo_mission": "\"Apolo\" Misija",
+          "basic_rocket": "Osnovna Raketa",
+          "hopper": "Skakač",
+          "joints": "Zglobovi",
+          "light_lander": "Laki Sletač",
+          "orbit_and_re_entry": "Orbita i Ponovan-ulazak",
+          "parachute_and_separator": "Padobran i Razdvajač",
+          "race_car": "Trkački Auto",
           "rover": "Rover"
         }
       },
       "file_options": {
-        "motto": "Blueprint editing redefined",
-        "from_scratch": "Start From Scratch",
-        "import": "Import Blueprint File",
-        "open": "Open Stellar File"
+        "motto": "Uređivanje planova redefinisano",
+        "from_scratch": "Počni iz početka",
+        "import": "Ubaci Plan",
+        "open": "Otvori \"Stellar\" Fajl"
       },
       "status_bar": {
-        "docs": "Docs"
+        "docs": "Dokumenti"
       }
     },
     "layout": {
-      "$": "Layout",
+      "$": "Raspored",
       "toolbar": {
         "file": {
-          "new": "New",
-          "open": "Open...",
-          "save": "Save",
-          "save_as": "Save As...",
+          "new": "Novi",
+          "open": "Otvori...",
+          "save": "Sačuvaj",
+          "save_as": "Sačuvaj kao...",
           "import": "Import...",
           "export": "Export..."
         },
