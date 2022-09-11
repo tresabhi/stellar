@@ -1,0 +1,120 @@
+{
+  "tab": {
+    "create": {
+      "$": "ǝʇɐǝɹƆ",
+      "templates": {
+        "search_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
+        "list": {
+          "apollo_mission": "uoᴉssᴉW ollod∀",
+          "basic_rocket": "Basic Rocket",
+          "hopper": "ɹǝddoH",
+          "joints": "sʇuᴉoſ",
+          "light_lander": "ɹǝpuɐ˥ ʇɥƃᴉ˥",
+          "orbit_and_re_entry": "ʎɹʇuǝ-ǝɹ ⅋ ʇᴉqɹO",
+          "parachute_and_separator": "ɹoʇɐɹɐdǝS ⅋ ǝʇnɥɔɐɹɐԀ",
+          "race_car": "ɹɐƆ ǝɔɐɹ",
+          "rover": "ɹǝʌoɹ"
+        }
+      },
+      "file_options": {
+        "motto": "pǝuᴉɟǝpǝɹ ƃuᴉʇᴉpǝ ʇuᴉɹdǝnlq",
+        "from_scratch": "ɥɔʇɐɹɔS ɯoɹℲ ʇɹɐʇS",
+        "import": "ǝlᴉℲ ʇuᴉɹdǝnlq ʇɹodɯI",
+        "open": "ǝlᴉℲ ɹɐllǝʇS uǝdO"
+      },
+      "status_bar": {
+        "docs": "sɔop"
+      }
+    },
+    "layout": {
+      "$": "ʇnoʎɐ˥",
+      "toolbar": {
+        "file": {
+          "new": "ʍǝN",
+          "open": "…uǝdO",
+          "save": "ǝʌɐS",
+          "save_as": "˙˙˙s∀ ǝʌɐS",
+          "import": "…ʇɹodɯI",
+          "export": "…ʇɹodxƎ"
+        },
+        "tool": {
+          "move": "ǝʌoW",
+          "pan": "uɐԀ"
+        },
+        "selection": {
+          "copy": "ʎdoƆ",
+          "cut": "ʇnƆ",
+          "paste": "ǝʇsɐԀ",
+          "duplicate": "ǝʇɐɔᴉldnp",
+          "create_snippet": "ʇǝddᴉuS ǝʇɐǝɹƆ"
+        },
+        "group": {
+          "group": "dnoɹפ",
+          "ungroup": "dnoɹƃu∩"
+        },
+        "help": {
+          "about": "ɹɐllǝʇS ʇnoq∀",
+          "report": "ǝnssI uɐ ʇɹodǝɹ",
+          "discord": "pɹoɔsᴉp",
+          "github": "qnHʇᴉפ"
+        },
+        "preferences": {
+          "settings": "sƃuᴉʇʇǝS",
+          "keybinds": "spuᴉqʎǝʞ"
+        }
+      },
+      "left_sidebar": {
+        "parts": {
+          "$": "sʇɹɐԀ"
+        },
+        "snippets": {
+          "$": "sʇǝddᴉuS"
+        }
+      },
+      "right_sidebar": {
+        "properties": {
+          "$": "sǝᴉʇɹǝdoɹԀ",
+          "transformations": {
+            "$": "suoᴉʇɐɯɹoɟsuɐɹ┴",
+            "x_position": "uoᴉʇᴉsoԀ X",
+            "y_position": "uoᴉʇᴉsoԀ ⅄",
+            "rotation": "uoᴉʇɐʇoɹ",
+            "x_scale": "ǝlɐɔS X",
+            "y_scale": "ǝlɐɔS ⅄"
+          },
+          "fuel_tank": {
+            "$": "ʞuɐ┴ lǝnℲ",
+            "top_width": "Top Width",
+            "bottom_width": "Bottom Width",
+            "height": "ʇɥƃᴉǝH",
+            "fuel": "lǝnℲ"
+          }
+        },
+        "inspect": {
+          "$": "ʇɔǝdsuI"
+        }
+      },
+      "popup": {
+        "insert_part": {
+          "search_placeholder": "˙˙˙ʇɹɐd ʇɹǝsuI",
+          "abstract": "ʇɔɐɹʇsq",
+          "TODO:cancel": "lǝɔuɐƆ"
+        },
+        "rename": {
+          "search_placeholder": "…lǝqɐ˥",
+          "trim": "spuǝ uo ǝɔɐdsǝʇᴉɥʍ ɯᴉɹ┴",
+          "skip_locked": "sʇɹɐd pǝʞɔol dᴉʞS",
+          "suffix": "sǝxᴉɟɟns lɐɔᴉɹǝɯnu ǝnbᴉun pp∀",
+          "cancel": "lǝɔuɐƆ",
+          "apply": "ʎldd∀"
+        }
+      }
+    },
+    "staging": {
+      "$": "ƃuᴉƃɐʇS"
+    },
+    "export": {
+      "$": "ʇɹodxƎ"
+    }
+  }
+}

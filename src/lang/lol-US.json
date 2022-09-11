@@ -1,0 +1,120 @@
+{
+  "tab": {
+    "create": {
+      "$": "Makee Makee",
+      "templates": {
+        "search_placeholder": "Swearch twemplase...",
+        "list": {
+          "apollo_mission": "Awuwu Mizzn",
+          "basic_rocket": "Smol Rowet",
+          "hopper": "Jumber",
+          "joints": "Joins",
+          "light_lander": "Lit Laner",
+          "orbit_and_re_entry": "Ovbit & Re-entvy",
+          "parachute_and_separator": "Parashute & Sepewatow",
+          "race_car": "Raz Caw",
+          "rover": "Rovew"
+        }
+      },
+      "file_options": {
+        "motto": "Bwuepint edwitin redefind",
+        "from_scratch": "Stawd From Scrach",
+        "import": "Impowt Bluepwint File",
+        "open": "Open Stewar File"
+      },
+      "status_bar": {
+        "docs": "Dozz"
+      }
+    },
+    "layout": {
+      "$": "Layowt",
+      "toolbar": {
+        "file": {
+          "new": "Nuwu",
+          "open": "Owen...",
+          "save": "Saww",
+          "save_as": "Saww Az...",
+          "import": "Impwot...",
+          "export": "Expowt..."
+        },
+        "tool": {
+          "move": "Mowe",
+          "pan": "Pwan"
+        },
+        "selection": {
+          "copy": "Cwopy",
+          "cut": "Cut",
+          "paste": "Pwwaste",
+          "duplicate": "Duplicwatew",
+          "create_snippet": "Crwet Snipetz"
+        },
+        "group": {
+          "group": "Group",
+          "ungroup": "Ungroup"
+        },
+        "help": {
+          "about": "About Stellar",
+          "report": "Report an Issue",
+          "discord": "Discord",
+          "github": "GitHub"
+        },
+        "preferences": {
+          "settings": "Settings",
+          "keybinds": "Keybinds"
+        }
+      },
+      "left_sidebar": {
+        "parts": {
+          "$": "Parts"
+        },
+        "snippets": {
+          "$": "Snippets"
+        }
+      },
+      "right_sidebar": {
+        "properties": {
+          "$": "Properties",
+          "transformations": {
+            "$": "Transformations",
+            "x_position": "X Position",
+            "y_position": "Y Position",
+            "rotation": "Rotation",
+            "x_scale": "X Scale",
+            "y_scale": "Y Scale"
+          },
+          "fuel_tank": {
+            "$": "Fuel Tank",
+            "top_width": "Top Width",
+            "bottom_width": "Bottom Width",
+            "height": "Height",
+            "fuel": "Fuel"
+          }
+        },
+        "inspect": {
+          "$": "Inspect"
+        }
+      },
+      "popup": {
+        "insert_part": {
+          "search_placeholder": "Insert part...",
+          "abstract": "Abstract",
+          "TODO:cancel": "Cancel"
+        },
+        "rename": {
+          "search_placeholder": "Label...",
+          "trim": "Trim whitespace on ends",
+          "skip_locked": "Skip locked parts",
+          "suffix": "Add unique numerical suffixes",
+          "cancel": "Cancel",
+          "apply": "Apply"
+        }
+      }
+    },
+    "staging": {
+      "$": "Staging"
+    },
+    "export": {
+      "$": "Export"
+    }
+  }
+}
