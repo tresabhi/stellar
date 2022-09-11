@@ -61,6 +61,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:lang": "node scripts/generateLanguageManifest/index.js",
     "test": "jest",
     "format": "prettier --write \"**/*.@(json|js|jsx|css|scss|sass|md|ts|tsx|html|xml|yml)\"",
     "depcheck": "npx depcheck",

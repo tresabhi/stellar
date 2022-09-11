@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { parse } from 'semver';
 import { styled, theme } from 'stitches.config';
 import getStellarContext from 'utilities/getStellarContext';
-import packageJSON from '../../../../../../../package.json';
+import packageJSON from '../../../../../../package.json';
 
 export const GITHUB_REPO = 'tresabhi/stellar';
 const { Icon, codeName } = getStellarContext();

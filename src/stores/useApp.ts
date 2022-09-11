@@ -38,6 +38,10 @@ export interface UseApp {
     preventNextSelection: boolean;
     clipboard?: Snippet;
   };
+
+  loadStatus: {
+    'TODO: add loading list here': boolean;
+  };
 }
 
 export const UseAppData: UseApp = {
@@ -57,6 +61,10 @@ export const UseAppData: UseApp = {
     isPanning: false,
     preventNextSelection: false,
     clipboard: undefined,
+  },
+
+  loadStatus: {
+    'TODO: add loading list here': true,
   },
 };
 

@@ -1,5 +1,4 @@
-import { FC, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { FC } from 'react';
 import { PulseLoader } from 'react-spinners';
 import getStellarContext from 'utilities/getStellarContext';
 import styles from './index.module.scss';
@@ -10,11 +9,6 @@ interface SplashScreenProps {
 
 const SplashScreen: FC<SplashScreenProps> = ({ navigateTo }) => {
   const stellarContext = getStellarContext();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (navigateTo) navigate('/interface');
-  });
 
   return (
     <div className={styles['splash-screen']}>

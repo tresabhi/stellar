@@ -1,7 +1,8 @@
 import { extend } from '@react-three/fiber';
 import { mutateSettings } from 'core/app';
-import { translationsRegistry } from 'hooks/useTranslator';
+import { FALLBACK_LANG } from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
+import { langs } from 'langs';
 import useSettings from 'stores/useSettings';
 import { BufferGeometry, Line, Mesh } from 'three';
 import {
@@ -34,14 +35,15 @@ const preroot = () => {
   Mesh.prototype.raycast = acceleratedRaycast;
 
   // check if language exists
-  if (!translationsRegistry.has(useSettings.getState().interface.language)) {
+  if (!langs.has(useSettings.getState().interface.language)) {
     console.warn(
       `No translations for language ${
         useSettings.getState().interface.language
-      }, falling back to en-US`,
+      }, falling back to ${FALLBACK_LANG}`,
     );
+
     mutateSettings((draft) => {
-      draft.interface.language = 'en-US';
+      draft.interface.language = FALLBACK_LANG;
     });
   }
 };

@@ -7,7 +7,7 @@ import useApp from 'stores/useApp';
 import usePartRegistry from 'stores/usePartRegistry';
 import getStellarContext from 'utilities/getStellarContext';
 
-const usePrerender = () => {
+export const usePrerender = () => {
   const stellarContext = getStellarContext();
   useTranslator();
   globalStyles();
@@ -63,4 +63,3 @@ const usePrerender = () => {
     }
   });
 };
-export default usePrerender;

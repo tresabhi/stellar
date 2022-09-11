@@ -15,7 +15,7 @@ import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  VanillaPartWithTransformationsData
 } from './PartWithTransformations';
 
 // #region texture types
