@@ -1,0 +1,120 @@
+{
+  "tab": {
+    "create": {
+      "$": "Napravi",
+      "templates": {
+        "search_placeholder": "Pretraži šablone...",
+        "list": {
+          "apollo_mission": "\"Apolo\" Misija",
+          "basic_rocket": "Osnovna Raketa",
+          "hopper": "Skakač",
+          "joints": "Zglobovi",
+          "light_lander": "Laki Sletač",
+          "orbit_and_re_entry": "Orbita i Ponovan-ulazak",
+          "parachute_and_separator": "Padobran i Razdvajač",
+          "race_car": "Trkački Auto",
+          "rover": "Rover"
+        }
+      },
+      "file_options": {
+        "motto": "Uređivanje planova redefinisano",
+        "from_scratch": "Počni iz početka",
+        "import": "Ubaci Plan",
+        "open": "Otvori \"Stellar\" Fajl"
+      },
+      "status_bar": {
+        "docs": "Dokumenti"
+      }
+    },
+    "layout": {
+      "$": "Raspored",
+      "toolbar": {
+        "file": {
+          "new": "Novi",
+          "open": "Otvori...",
+          "save": "Sačuvaj",
+          "save_as": "Sačuvaj kao...",
+          "import": "Import...",
+          "export": "Export..."
+        },
+        "tool": {
+          "move": "Move",
+          "pan": "Pan"
+        },
+        "selection": {
+          "copy": "Copy",
+          "cut": "Cut",
+          "paste": "Paste",
+          "duplicate": "Duplicate",
+          "create_snippet": "Create Snippet"
+        },
+        "group": {
+          "group": "Group",
+          "ungroup": "Ungroup"
+        },
+        "help": {
+          "about": "About Stellar",
+          "report": "Report an Issue",
+          "discord": "Discord",
+          "github": "GitHub"
+        },
+        "preferences": {
+          "settings": "Settings",
+          "keybinds": "Keybinds"
+        }
+      },
+      "left_sidebar": {
+        "parts": {
+          "$": "Parts"
+        },
+        "snippets": {
+          "$": "Snippets"
+        }
+      },
+      "right_sidebar": {
+        "properties": {
+          "$": "Properties",
+          "transformations": {
+            "$": "Transformations",
+            "x_position": "X Position",
+            "y_position": "Y Position",
+            "rotation": "Rotation",
+            "x_scale": "X Scale",
+            "y_scale": "Y Scale"
+          },
+          "fuel_tank": {
+            "$": "Fuel Tank",
+            "top_width": "Top Width",
+            "bottom_width": "Bottom Width",
+            "height": "Height",
+            "fuel": "Fuel"
+          }
+        },
+        "inspect": {
+          "$": "Inspect"
+        }
+      },
+      "popup": {
+        "insert_part": {
+          "search_placeholder": "Insert part...",
+          "abstract": "Abstract",
+          "TODO:cancel": "Cancel"
+        },
+        "rename": {
+          "search_placeholder": "Label...",
+          "trim": "Trim whitespace on ends",
+          "skip_locked": "Skip locked parts",
+          "suffix": "Add unique numerical suffixes",
+          "cancel": "Cancel",
+          "apply": "Apply"
+        }
+      }
+    },
+    "staging": {
+      "$": "Staging"
+    },
+    "export": {
+      "$": "Export"
+    }
+  }
+}
