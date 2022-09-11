@@ -9,44 +9,44 @@
           "basic_rocket": "Smol Rowet",
           "hopper": "Jumber",
           "joints": "Joins",
-          "light_lander": "Light Lander",
-          "orbit_and_re_entry": "Orbit & Re-entry",
-          "parachute_and_separator": "Parachute & Separator",
-          "race_car": "Race Car",
-          "rover": "Rover"
+          "light_lander": "Lit Laner",
+          "orbit_and_re_entry": "Ovbit & Re-entvy",
+          "parachute_and_separator": "Parashute & Sepewatow",
+          "race_car": "Raz Caw",
+          "rover": "Rovew"
         }
       },
       "file_options": {
-        "motto": "Blueprint editing redefined",
-        "from_scratch": "Start From Scratch",
-        "import": "Import Blueprint File",
-        "open": "Open Stellar File"
+        "motto": "Bwuepint edwitin redefind",
+        "from_scratch": "Stawd From Scrach",
+        "import": "Impowt Bluepwint File",
+        "open": "Open Stewar File"
       },
       "status_bar": {
-        "docs": "Docs"
+        "docs": "Dozz"
       }
     },
     "layout": {
-      "$": "Layout",
+      "$": "Layowt",
       "toolbar": {
         "file": {
-          "new": "New",
-          "open": "Open...",
-          "save": "Save",
-          "save_as": "Save As...",
-          "import": "Import...",
-          "export": "Export..."
+          "new": "Nuwu",
+          "open": "Owen...",
+          "save": "Saww",
+          "save_as": "Saww Az...",
+          "import": "Impwot...",
+          "export": "Expowt..."
         },
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "move": "Mowe",
+          "pan": "Pwan"
         },
         "selection": {
-          "copy": "Copy",
+          "copy": "Cwopy",
           "cut": "Cut",
-          "paste": "Paste",
-          "duplicate": "Duplicate",
-          "create_snippet": "Create Snippet"
+          "paste": "Pwwaste",
+          "duplicate": "Duplicwatew",
+          "create_snippet": "Crwet Snipetz"
         },
         "group": {
           "group": "Group",
