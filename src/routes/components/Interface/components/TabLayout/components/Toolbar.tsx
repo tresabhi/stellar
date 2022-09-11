@@ -63,15 +63,16 @@ const Toolbar = () => {
   const { t } = useTranslator();
   const tool = useApp((state) => state.editor.tool);
   const isPanning = useApp((state) => state.editor.isPanning);
-  const selections = useBlueprint((state) => state.selections);
   const parts = useBlueprint.getState().parts;
-  const isOneHidden = selections.some(
-    (selection) => parts.get(selection)?.hidden,
+  const isOneHidden = useBlueprint((state) =>
+    state.selections.some((selection) => parts.get(selection)?.hidden),
   );
-  const isOneLocked = selections.some(
-    (selection) => parts.get(selection)?.locked,
+  const isOneLocked = useBlueprint((state) =>
+    state.selections.some((selection) => parts.get(selection)?.locked),
   );
-  const hasNoSelections = selections.length === 0;
+  const hasNoSelections = useBlueprint(
+    (state) => state.selections.length === 0,
+  );
   const hasUndos = useVersionControl((state) => state.index > -1);
   const hasRedos = useVersionControl(
     (state) => state.history.length - 1 > state.index,
