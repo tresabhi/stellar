@@ -60,6 +60,7 @@ export const {
       2: '0.125rem',
       4: '0.25rem',
       8: '0.5rem',
+      10: '0.625rem',
       12: '0.75rem',
       14: '0.875rem',
       16: '1rem',
@@ -81,6 +82,8 @@ export const {
       scrollbarWidth: '1rem',
       scrollbarThumbWidth: '0.125rem',
       scrollbarThumbWidthHover: '0.5rem',
+      sliderThumb: '1rem',
+      sliderTrackWidth: '0.125rem',
     },
 
     radii: {
@@ -88,6 +91,7 @@ export const {
       2: '0.125rem',
       4: '0.25rem',
       8: '0.5rem',
+      16: '1rem',
     },
 
     fonts: {
@@ -144,6 +148,7 @@ export const globalStyles = globalCss({
   '@import': [
     'https://fonts.googleapis.com/css?family=Roboto+Flex&display=swap',
     'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
+    'https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css', // TODO: remove this when bepaint supports this
   ],
 
   '*': {

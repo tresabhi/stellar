@@ -1,7 +1,7 @@
-// import { Button as ButtonComponent } from 'components/Button';
+// import { Button as ButtonPrimitive } from 'components/Button';
 import { styled, theme } from 'stitches.config';
 
-// TODO: switch to ButtonComponent when disabled variant is not needed
+// TODO: switch to ButtonPrimitive when disabled variant is not needed
 export const Button = styled('button', {
   display: 'flex',
   width: theme.sizes[40],

@@ -1,7 +1,7 @@
-import { Anchor as AnchorComponent } from 'components/Anchor';
+import { Anchor as AnchorPrimitive } from 'components/Anchor';
 import { styled, theme } from 'stitches.config';
 
-export const Anchor = styled(AnchorComponent, {
+export const Anchor = styled(AnchorPrimitive, {
   fontSize: theme.fontSizes[10],
   display: 'flex',
   alignItems: 'center',

@@ -1,5 +1,5 @@
-import * as PropertiesExplorer from 'components/PropertiesExplorer';
-import { useNumericalPropertyInput } from 'hooks/useNumericalPropertyInput';
+import * as Properties from 'components/Properties';
+import { useNumericalInputProperty } from 'hooks/useNumericalInputProperty';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
@@ -73,35 +73,35 @@ export const PartWithTransformationsPropertyComponent: FC<
   PartPropertyComponentProps
 > = ({ ids }) => {
   const { t } = useTranslator();
-  const xPosition = useNumericalPropertyInput<PartWithTransformations>(
+  const xPosition = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.p.x,
     (draft, value) => {
       draft.p.x = value;
     },
   );
-  const yPosition = useNumericalPropertyInput<PartWithTransformations>(
+  const yPosition = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.p.y,
     (draft, value) => {
       draft.p.y = value;
     },
   );
-  const rotation = useNumericalPropertyInput<PartWithTransformations>(
+  const rotation = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.o.z,
     (draft, value) => {
       draft.o.z = value;
     },
   );
-  const xScale = useNumericalPropertyInput<PartWithTransformations>(
+  const xScale = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.o.x,
     (draft, value) => {
       draft.o.x = value;
     },
   );
-  const yScale = useNumericalPropertyInput<PartWithTransformations>(
+  const yScale = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.o.y,
     (draft, value) => {
@@ -110,37 +110,39 @@ export const PartWithTransformationsPropertyComponent: FC<
   );
 
   return (
-    <PropertiesExplorer.Group>
-      <PropertiesExplorer.Title>{t`tab.layout.right_sidebar.properties.transformations`}</PropertiesExplorer.Title>
-      <PropertiesExplorer.Row>
-        <PropertiesExplorer.Input
-          ref={xPosition}
+    <Properties.Group>
+      <Properties.Title>{t`tab.layout.right_sidebar.properties.transformations`}</Properties.Title>
+
+      <Properties.Row>
+        <Properties.Input
+          {...xPosition}
           label={t`tab.layout.right_sidebar.properties.transformations.x_position`}
           unit="m"
         />
-        <PropertiesExplorer.Input
-          ref={yPosition}
+        <Properties.Input
+          {...yPosition}
           label={t`tab.layout.right_sidebar.properties.transformations.y_position`}
           unit="m"
         />
-        <PropertiesExplorer.Input
-          ref={rotation}
+        <Properties.Input
+          {...rotation}
           label={t`tab.layout.right_sidebar.properties.transformations.rotation`}
           unit="°"
         />
-      </PropertiesExplorer.Row>
-      <PropertiesExplorer.Row>
-        <PropertiesExplorer.Input
-          ref={xScale}
+      </Properties.Row>
+
+      <Properties.Row>
+        <Properties.Input
+          {...xScale}
           label={t`tab.layout.right_sidebar.properties.transformations.x_scale`}
           unit="x"
         />
-        <PropertiesExplorer.Input
-          ref={yScale}
+        <Properties.Input
+          {...yScale}
           label={t`tab.layout.right_sidebar.properties.transformations.y_scale`}
           unit="x"
         />
-      </PropertiesExplorer.Row>
-    </PropertiesExplorer.Group>
+      </Properties.Row>
+    </Properties.Group>
   );
 };

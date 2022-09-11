@@ -1,5 +1,5 @@
 import { AdaptiveDpr } from '@react-three/drei';
-import { Canvas as CanvasComponent } from '@react-three/fiber';
+import { Canvas as CanvasPrimitive } from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
 import { useEffect, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
@@ -12,7 +12,7 @@ import { Grid } from './components/Grid';
 import { PartBounds } from './components/PartBounds';
 import { Parts } from './components/Parts';
 
-const Canvas = styled(CanvasComponent, {
+const Canvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,
   flex: 1,
   touchAction: 'none',

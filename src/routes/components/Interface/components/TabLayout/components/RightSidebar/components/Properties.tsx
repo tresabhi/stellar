@@ -1,4 +1,4 @@
-import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import * as PropertiesPrimitive from 'components/Properties';
 import { getPart, getPartRegistry } from 'core/part';
 import { PartWithTransformationsPropertyComponent } from 'game/parts/PartWithTransformations';
 import { isUndefined } from 'lodash';
@@ -6,12 +6,12 @@ import { FC } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import { AnyPart, PartPropertyComponentProps } from 'types/Parts';
 
-interface GroupedPropertiesExplorer {
+interface GroupedProperties {
   test: (part: AnyPart) => boolean;
   Component: FC<PartPropertyComponentProps>;
 }
 
-const groupedPropertiesExplorers: GroupedPropertiesExplorer[] = [
+const groupedPropertiess: GroupedProperties[] = [
   {
     test: (part) => !isUndefined(part.p) && !isUndefined(part.o),
     Component: PartWithTransformationsPropertyComponent,
@@ -24,7 +24,7 @@ export const Properties = () => {
   const nameSortedParts = new Map<string, string[]>();
   const children: JSX.Element[] = [];
 
-  groupedPropertiesExplorers.forEach(({ test }, index) => {
+  groupedPropertiess.forEach(({ test }, index) => {
     selections.forEach((selection) => {
       const part = getPart(selection);
 
@@ -51,7 +51,7 @@ export const Properties = () => {
   });
 
   typeSortedParts.forEach((ids, index) => {
-    const { Component } = groupedPropertiesExplorers[index];
+    const { Component } = groupedPropertiess[index];
 
     children.push(
       <Component ids={ids} key={`type-sorted-properties-explorer-${index}`} />,
@@ -72,6 +72,6 @@ export const Properties = () => {
   });
 
   return (
-    <PropertiesExplorer.Container>{children}</PropertiesExplorer.Container>
+    <PropertiesPrimitive.Container>{children}</PropertiesPrimitive.Container>
   );
 };

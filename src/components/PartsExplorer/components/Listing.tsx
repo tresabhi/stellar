@@ -4,12 +4,13 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection
+  togglePartSelection,
 } from 'core/part';
 import { Group } from 'game/parts/Group';
+import { useInputEscape } from 'hooks/useInputEscape';
 import usePartProperty from 'hooks/usePartProperty';
 import { isUndefined } from 'lodash';
-import { KeyboardEvent, memo, MouseEvent, PointerEvent, useRef } from 'react';
+import { memo, MouseEvent, PointerEvent, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/useBlueprint';
 import usePartRegistry from 'stores/usePartRegistry';
@@ -113,9 +114,7 @@ export const Listing = memo<ListingProps>(
     const iconContainer = useRef<HTMLDivElement>(null!);
     let buttonDefaultClassNames: string;
 
-    const handleLabelKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' || event.key === 'Enter') label.current.blur();
-    };
+    const handleLabelKeyDown = useInputEscape();
     const handleLabelBlur = () => {
       const newLabel = label.current.value.trim();
 

@@ -1,4 +1,4 @@
-import * as PropertiesExplorer from 'components/LegacyPropertiesExplorer';
+import * as Properties from 'components/LegacyProperties';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
@@ -34,11 +34,11 @@ export const PartWithEnginePropertyComponent: FC<
   PartPropertyComponentProps
 > = ({ ids }) => {
   return (
-    <PropertiesExplorer.Group>
-      <PropertiesExplorer.Title>Engine</PropertiesExplorer.Title>
-      <PropertiesExplorer.Row>
-        <PropertiesExplorer.Toggle label="Engine On" type="full-width" />
-      </PropertiesExplorer.Row>
-    </PropertiesExplorer.Group>
+    <Properties.Group>
+      <Properties.Title>Engine</Properties.Title>
+      <Properties.Row>
+        <Properties.Toggle label="Engine On" type="full-width" />
+      </Properties.Row>
+    </Properties.Group>
   );
 };

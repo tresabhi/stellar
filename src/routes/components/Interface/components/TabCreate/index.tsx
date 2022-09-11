@@ -3,7 +3,7 @@ import {
   EnterIcon,
   FilePlusIcon,
   FileTextIcon,
-  UploadIcon
+  UploadIcon,
 } from '@radix-ui/react-icons';
 import apolloMission from 'assets/blueprints/apollo-mission.json';
 import basicRocket from 'assets/blueprints/basic-rocket.json';
@@ -15,7 +15,7 @@ import parachuteAndSeparator from 'assets/blueprints/parachute-and-separator.jso
 import raceCar from 'assets/blueprints/race-car.json';
 import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
-import { Button as ButtonComponent } from 'components/Button';
+import { Button as ButtonPrimitive } from 'components/Button';
 import { Palette, PaletteItem } from 'components/Palette';
 import { TabContainer } from 'components/TabContainer';
 import { mutateApp } from 'core/app/mutateApp';
@@ -96,7 +96,7 @@ const SubTitle = styled('span', {
   fontFamily: theme.fonts.mono,
 });
 
-const Button = styled(ButtonComponent, {
+const Button = styled(ButtonPrimitive, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

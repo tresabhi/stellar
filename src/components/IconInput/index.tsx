@@ -1,4 +1,4 @@
-import { Input as InputComponent } from 'components/Input';
+import { Input as InputPrimitive } from 'components/Input';
 import { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
@@ -30,7 +30,7 @@ const Container = styled('div', {
   },
 });
 
-const Input = styled(InputComponent, {
+const Input = styled(InputPrimitive, {
   fontSize: theme.fontSizes[12],
   flex: 1,
   height: '100%',

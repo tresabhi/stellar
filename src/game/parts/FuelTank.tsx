@@ -1,11 +1,12 @@
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import * as PropertiesExplorer from 'components/PropertiesExplorer';
+import * as Properties from 'components/Properties';
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
-import { useNumericalPropertyInput } from 'hooks/useNumericalPropertyInput';
+import { useNumericalInputProperty } from 'hooks/useNumericalInputProperty';
 import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
+import { useSliderProperty } from 'hooks/useSliderProperty';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
 import { PartRegistryFragment } from 'stores/usePartRegistry';
@@ -152,7 +153,7 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
   ids,
 }) => {
   const { t } = useTranslator();
-  const width = useNumericalPropertyInput<FuelTank>(
+  const width = useNumericalInputProperty<FuelTank>(
     ids,
     (state) => state.N.width_original,
     (draft, value) => {
@@ -161,14 +162,14 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
       draft.N.width_b = value;
     },
   );
-  const height = useNumericalPropertyInput<FuelTank>(
+  const height = useNumericalInputProperty<FuelTank>(
     ids,
     (state) => state.N.height,
     (draft, value) => {
       draft.N.height = value;
     },
   );
-  const fuel = useNumericalPropertyInput<FuelTank>(
+  const fuel = useSliderProperty<FuelTank>(
     ids,
     (state) => state.N.fuel_percent * 100,
     (draft, value) => {
@@ -177,26 +178,31 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
   );
 
   return (
-    <PropertiesExplorer.Group>
-      <PropertiesExplorer.Title>{t`tab.layout.right_sidebar.properties.fuel_tank`}</PropertiesExplorer.Title>
-      <PropertiesExplorer.Row>
-        <PropertiesExplorer.Input
-          ref={width}
+    <Properties.Group>
+      <Properties.Title>{t`tab.layout.right_sidebar.properties.fuel_tank`}</Properties.Title>
+      <Properties.Row>
+        <Properties.Input
+          {...width}
           label={t`tab.layout.right_sidebar.properties.fuel_tank.width`}
           unit="m"
         />
-        <PropertiesExplorer.Input
-          ref={height}
+        <Properties.Input
+          {...height}
           label={t`tab.layout.right_sidebar.properties.fuel_tank.height`}
           unit="m"
         />
-        <PropertiesExplorer.Input
-          ref={fuel}
+      </Properties.Row>
+
+      <Properties.Row>
+        <Properties.SliderWithInput
+          {...fuel}
           label={t`tab.layout.right_sidebar.properties.fuel_tank.fuel`}
           unit="%"
+          min={0}
+          max={100}
         />
-      </PropertiesExplorer.Row>
-    </PropertiesExplorer.Group>
+      </Properties.Row>
+    </Properties.Group>
   );
 };
 
