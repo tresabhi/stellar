@@ -1,121 +1,121 @@
 {
   "tab": {
     "create": {
-      "$": "Create",
+      "$": "Crear",
       "templates": {
-        "search_placeholder": "Search templates...",
+        "search_placeholder": "Buscar plantillas...",
         "list": {
-          "apollo_mission": "Apollo Mission",
-          "basic_rocket": "Basic Rocket",
+          "apollo_mission": "Misión Apolo",
+          "basic_rocket": "Cohéte Básico",
           "hopper": "Hopper",
-          "joints": "Joints",
-          "light_lander": "Light Lander",
-          "orbit_and_re_entry": "Orbit & Re-entry",
-          "parachute_and_separator": "Parachute & Separator",
-          "race_car": "Race Car",
+          "joints": "Articulaciones",
+          "light_lander": "Módulo de aterrizaje ligero",
+          "orbit_and_re_entry": "Órbita y reentrada",
+          "parachute_and_separator": "Paracaídas y separador",
+          "race_car": "Coche de carreras",
           "rover": "Rover"
         }
       },
       "file_options": {
-        "motto": "Blueprint editing redefined",
-        "from_scratch": "Start From Scratch",
-        "import": "Import Blueprint File",
-        "open": "Open Stellar File"
+        "motto": "Edición de plano redefinida",
+        "from_scratch": "Empezar de cero",
+        "import": "Importar archivo de plano",
+        "open": "Abrir Archivo Stellar"
       },
       "status_bar": {
         "docs": "Docs"
       }
     },
     "layout": {
-      "$": "Layout",
+      "$": "Diseño",
       "toolbar": {
         "file": {
-          "new": "New",
-          "open": "Open...",
-          "save": "Save",
-          "save_as": "Save As...",
-          "import": "Import...",
-          "export": "Export..."
+          "new": "Nuevo",
+          "open": "Abrir...",
+          "save": "Guardar",
+          "save_as": "Guardar como...",
+          "import": "Importar...",
+          "export": "Exportar..."
         },
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "move": "Mover",
+          "pan": "Sartén"
         },
         "selection": {
-          "copy": "Copy",
-          "cut": "Cut",
-          "paste": "Paste",
-          "duplicate": "Duplicate",
-          "create_snippet": "Create Snippet"
+          "copy": "Copiar",
+          "cut": "Cortar",
+          "paste": "Pegar",
+          "duplicate": "Duplicar",
+          "create_snippet": "Crear fragmento"
         },
         "group": {
-          "group": "Group",
-          "ungroup": "Ungroup"
+          "group": "Grupo",
+          "ungroup": "Desagrupar"
         },
         "help": {
-          "about": "About Stellar",
-          "report": "Report an Issue",
+          "about": "Acerca de Estellar",
+          "report": "Reportar un problema",
           "discord": "Discord",
           "github": "GitHub"
         },
         "preferences": {
-          "settings": "Settings",
-          "keybinds": "Keybinds"
+          "settings": "Ajustes",
+          "keybinds": "Atajos de teclado"
         }
       },
       "left_sidebar": {
         "parts": {
-          "$": "Parts"
+          "$": "Partes"
         },
         "snippets": {
-          "$": "Snippets"
+          "$": "Fragmentos"
         }
       },
       "right_sidebar": {
         "properties": {
-          "$": "Properties",
+          "$": "Propiedades",
           "transformations": {
-            "$": "Transformations",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation",
-            "x_scale": "X Scale",
-            "y_scale": "Y Scale"
+            "$": "Transformaciones",
+            "x_position": "Posición X",
+            "y_position": "Posición Y",
+            "rotation": "Rotación",
+            "x_scale": "Escala X",
+            "y_scale": "Escala Y"
           },
           "fuel_tank": {
-            "$": "Fuel Tank",
-            "width": "Width",
-            "TODO:top_width": "Top Width",
-            "TODO:bottom_width": "Bottom Width",
-            "height": "Height",
-            "fuel": "Fuel"
+            "$": "Tanque de combustible",
+            "width": "Anchura",
+            "TODO:top_width": "Anchura superior",
+            "TODO:bottom_width": "Anchura inferior",
+            "height": "Altura",
+            "fuel": "Combustible"
           }
         },
         "inspect": {
-          "$": "Inspect"
+          "$": "Inspeccionar"
         }
       },
       "popup": {
         "insert_part": {
-          "search_placeholder": "Insert part...",
-          "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "search_placeholder": "Insertar parte...",
+          "abstract": "Abstracto",
+          "TODO:cancel": "Cancelar"
         },
         "rename": {
-          "search_placeholder": "Label...",
-          "trim": "Trim whitespace on ends",
-          "skip_locked": "Skip locked parts",
-          "suffix": "Add unique numerical suffixes",
-          "cancel": "Cancel",
-          "apply": "Apply"
+          "search_placeholder": "Etiqueta...",
+          "trim": "Recortar espacio en blanco en los finales",
+          "skip_locked": "Omitir partes bloqueadas",
+          "suffix": "Añadir sufijos numéricos únicos",
+          "cancel": "Cancelar",
+          "apply": "Aplicar"
         }
       }
     },
     "staging": {
-      "$": "Staging"
+      "$": "Puesta en escena"
     },
     "export": {
-      "$": "Export"
+      "$": "Exportar"
     }
   }
 }
