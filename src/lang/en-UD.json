@@ -1,121 +1,121 @@
 {
   "tab": {
     "create": {
-      "$": "Create",
+      "$": "ǝʇɐǝɹƆ",
       "templates": {
-        "search_placeholder": "Search templates...",
+        "search_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
         "list": {
-          "apollo_mission": "Apollo Mission",
+          "apollo_mission": "uoᴉssᴉW ollod∀",
           "basic_rocket": "Basic Rocket",
-          "hopper": "Hopper",
-          "joints": "Joints",
-          "light_lander": "Light Lander",
-          "orbit_and_re_entry": "Orbit & Re-entry",
-          "parachute_and_separator": "Parachute & Separator",
-          "race_car": "Race Car",
-          "rover": "Rover"
+          "hopper": "ɹǝddoH",
+          "joints": "sʇuᴉoſ",
+          "light_lander": "ɹǝpuɐ˥ ʇɥƃᴉ˥",
+          "orbit_and_re_entry": "ʎɹʇuǝ-ǝɹ ⅋ ʇᴉqɹO",
+          "parachute_and_separator": "ɹoʇɐɹɐdǝS ⅋ ǝʇnɥɔɐɹɐԀ",
+          "race_car": "ɹɐƆ ǝɔɐɹ",
+          "rover": "ɹǝʌoɹ"
         }
       },
       "file_options": {
-        "motto": "Blueprint editing redefined",
-        "from_scratch": "Start From Scratch",
-        "import": "Import Blueprint File",
-        "open": "Open Stellar File"
+        "motto": "pǝuᴉɟǝpǝɹ ƃuᴉʇᴉpǝ ʇuᴉɹdǝnlq",
+        "from_scratch": "ɥɔʇɐɹɔS ɯoɹℲ ʇɹɐʇS",
+        "import": "ǝlᴉℲ ʇuᴉɹdǝnlq ʇɹodɯI",
+        "open": "ǝlᴉℲ ɹɐllǝʇS uǝdO"
       },
       "status_bar": {
-        "docs": "Docs"
+        "docs": "sɔop"
       }
     },
     "layout": {
-      "$": "Layout",
+      "$": "ʇnoʎɐ˥",
       "toolbar": {
         "file": {
-          "new": "New",
-          "open": "Open...",
-          "save": "Save",
-          "save_as": "Save As...",
-          "import": "Import...",
-          "export": "Export..."
+          "new": "ʍǝN",
+          "open": "…uǝdO",
+          "save": "ǝʌɐS",
+          "save_as": "˙˙˙s∀ ǝʌɐS",
+          "import": "…ʇɹodɯI",
+          "export": "…ʇɹodxƎ"
         },
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "move": "ǝʌoW",
+          "pan": "uɐԀ"
         },
         "selection": {
-          "copy": "Copy",
-          "cut": "Cut",
-          "paste": "Paste",
-          "duplicate": "Duplicate",
-          "create_snippet": "Create Snippet"
+          "copy": "ʎdoƆ",
+          "cut": "ʇnƆ",
+          "paste": "ǝʇsɐԀ",
+          "duplicate": "ǝʇɐɔᴉldnp",
+          "create_snippet": "ʇǝddᴉuS ǝʇɐǝɹƆ"
         },
         "group": {
-          "group": "Group",
-          "ungroup": "Ungroup"
+          "group": "dnoɹפ",
+          "ungroup": "dnoɹƃu∩"
         },
         "help": {
-          "about": "About Stellar",
-          "report": "Report an Issue",
-          "discord": "Discord",
-          "github": "GitHub"
+          "about": "ɹɐllǝʇS ʇnoq∀",
+          "report": "ǝnssI uɐ ʇɹodǝɹ",
+          "discord": "pɹoɔsᴉp",
+          "github": "qnHʇᴉפ"
         },
         "preferences": {
-          "settings": "Settings",
-          "keybinds": "Keybinds"
+          "settings": "sƃuᴉʇʇǝS",
+          "keybinds": "spuᴉqʎǝʞ"
         }
       },
       "left_sidebar": {
         "parts": {
-          "$": "Parts"
+          "$": "sʇɹɐԀ"
         },
         "snippets": {
-          "$": "Snippets"
+          "$": "sʇǝddᴉuS"
         }
       },
       "right_sidebar": {
         "properties": {
-          "$": "Properties",
+          "$": "sǝᴉʇɹǝdoɹԀ",
           "transformations": {
-            "$": "Transformations",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation",
-            "x_scale": "X Scale",
-            "y_scale": "Y Scale"
+            "$": "suoᴉʇɐɯɹoɟsuɐɹ┴",
+            "x_position": "uoᴉʇᴉsoԀ X",
+            "y_position": "uoᴉʇᴉsoԀ ⅄",
+            "rotation": "uoᴉʇɐʇoɹ",
+            "x_scale": "ǝlɐɔS X",
+            "y_scale": "ǝlɐɔS ⅄"
           },
           "fuel_tank": {
-            "$": "Fuel Tank",
-            "width": "Width",
-            "TODO:top_width": "Top Width",
-            "TODO:bottom_width": "Bottom Width",
-            "height": "Height",
-            "fuel": "Fuel"
+            "$": "ʞuɐ┴ lǝnℲ",
+            "width": "ɥʇpᴉM",
+            "TODO:top_width": "ɥʇpᴉM do┴",
+            "TODO:bottom_width": "ɥʇpᴉM ɯoʇʇoq",
+            "height": "ʇɥƃᴉǝH",
+            "fuel": "lǝnℲ"
           }
         },
         "inspect": {
-          "$": "Inspect"
+          "$": "ʇɔǝdsuI"
         }
       },
       "popup": {
         "insert_part": {
-          "search_placeholder": "Insert part...",
-          "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "search_placeholder": "˙˙˙ʇɹɐd ʇɹǝsuI",
+          "abstract": "ʇɔɐɹʇsq",
+          "TODO:cancel": "lǝɔuɐƆ"
         },
         "rename": {
-          "search_placeholder": "Label...",
-          "trim": "Trim whitespace on ends",
-          "skip_locked": "Skip locked parts",
-          "suffix": "Add unique numerical suffixes",
-          "cancel": "Cancel",
-          "apply": "Apply"
+          "search_placeholder": "…lǝqɐ˥",
+          "trim": "spuǝ uo ǝɔɐdsǝʇᴉɥʍ ɯᴉɹ┴",
+          "skip_locked": "sʇɹɐd pǝʞɔol dᴉʞS",
+          "suffix": "sǝxᴉɟɟns lɐɔᴉɹǝɯnu ǝnbᴉun pp∀",
+          "cancel": "lǝɔuɐƆ",
+          "apply": "ʎldd∀"
         }
       }
     },
     "staging": {
-      "$": "Staging"
+      "$": "ƃuᴉƃɐʇS"
     },
     "export": {
-      "$": "Export"
+      "$": "ʇɹodxƎ"
     }
   }
 }
