@@ -1,0 +1,120 @@
+{
+  "tab": {
+    "create": {
+      "$": "Crear",
+      "templates": {
+        "search_placeholder": "Buscar plantillas...",
+        "list": {
+          "apollo_mission": "Misión Apolo",
+          "basic_rocket": "Cohéte Básico",
+          "hopper": "Hopper",
+          "joints": "Articulaciones",
+          "light_lander": "Módulo de aterrizaje ligero",
+          "orbit_and_re_entry": "Órbita y reentrada",
+          "parachute_and_separator": "Paracaídas y separador",
+          "race_car": "Coche de carreras",
+          "rover": "Rover"
+        }
+      },
+      "file_options": {
+        "motto": "Edición de plano redefinida",
+        "from_scratch": "Empezar de cero",
+        "import": "Importar archivo de plano",
+        "open": "Abrir Archivo Stellar"
+      },
+      "status_bar": {
+        "docs": "Docs"
+      }
+    },
+    "layout": {
+      "$": "Diseño",
+      "toolbar": {
+        "file": {
+          "new": "Nuevo",
+          "open": "Abrir...",
+          "save": "Guardar",
+          "save_as": "Guardar como...",
+          "import": "Importar...",
+          "export": "Exportar..."
+        },
+        "tool": {
+          "move": "Mover",
+          "pan": "Sartén"
+        },
+        "selection": {
+          "copy": "Copiar",
+          "cut": "Cortar",
+          "paste": "Pegar",
+          "duplicate": "Duplicar",
+          "create_snippet": "Crear fragmento"
+        },
+        "group": {
+          "group": "Grupo",
+          "ungroup": "Desagrupar"
+        },
+        "help": {
+          "about": "Acerca de Estellar",
+          "report": "Reportar un problema",
+          "discord": "Discord",
+          "github": "GitHub"
+        },
+        "preferences": {
+          "settings": "Ajustes",
+          "keybinds": "Atajos de teclado"
+        }
+      },
+      "left_sidebar": {
+        "parts": {
+          "$": "Partes"
+        },
+        "snippets": {
+          "$": "Fragmentos"
+        }
+      },
+      "right_sidebar": {
+        "properties": {
+          "$": "Propiedades",
+          "transformations": {
+            "$": "Transformaciones",
+            "x_position": "Posición X",
+            "y_position": "Posición Y",
+            "rotation": "Rotación",
+            "x_scale": "Escala X",
+            "y_scale": "Escala Y"
+          },
+          "fuel_tank": {
+            "$": "Tanque de combustible",
+            "top_width": "Top Width",
+            "bottom_width": "Bottom Width",
+            "height": "Altura",
+            "fuel": "Combustible"
+          }
+        },
+        "inspect": {
+          "$": "Inspeccionar"
+        }
+      },
+      "popup": {
+        "insert_part": {
+          "search_placeholder": "Insertar parte...",
+          "abstract": "Abstracto",
+          "TODO:cancel": "Cancelar"
+        },
+        "rename": {
+          "search_placeholder": "Etiqueta...",
+          "trim": "Recortar espacio en blanco en los finales",
+          "skip_locked": "Omitir partes bloqueadas",
+          "suffix": "Añadir sufijos numéricos únicos",
+          "cancel": "Cancelar",
+          "apply": "Aplicar"
+        }
+      }
+    },
+    "staging": {
+      "$": "Puesta en escena"
+    },
+    "export": {
+      "$": "Exportar"
+    }
+  }
+}
