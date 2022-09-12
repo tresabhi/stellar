@@ -87,7 +87,13 @@ export const DropdownItem: FC<DropdownItemProps> = ({
 
   return (
     // @ts-ignore
-    <Trigger ref={trigger} disabled={disabled} onClick={handleClick} {...props}>
+    <Trigger
+      ref={trigger}
+      disabled={disabled}
+      priority={disabled ? 'disabled' : undefined}
+      onClick={handleClick}
+      {...props}
+    >
       <IconContainer disabled={disabled}>{icon}</IconContainer>
       <Label disabled={disabled}>{children}</Label>
       <Keybind>{keybind}</Keybind>

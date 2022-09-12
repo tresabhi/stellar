@@ -26,7 +26,7 @@ import {
   ScissorsIcon,
   StackIcon,
   TrashIcon,
-  UploadIcon
+  UploadIcon,
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
@@ -41,7 +41,7 @@ import {
   redoVersion,
   saveFile,
   saveFileAs,
-  undoVersion
+  undoVersion,
 } from 'core/blueprint';
 import { popupOpen } from 'core/interface';
 import {
@@ -52,7 +52,7 @@ import {
   pasteParts,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
-  ungroupGroupsBySelection
+  ungroupGroupsBySelection,
 } from 'core/part';
 import { useTranslator } from 'hooks/useTranslator';
 import useApp, { Popup, Tool } from 'stores/useApp';
@@ -76,6 +76,9 @@ const Toolbar = () => {
   const hasUndos = useVersionControl((state) => state.index > -1);
   const hasRedos = useVersionControl(
     (state) => state.history.length - 1 > state.index,
+  );
+  const hasItemInClipboard = useApp(
+    (state) => state.editor.clipboard !== undefined,
   );
 
   const handleMoveClick = () =>
@@ -191,13 +194,14 @@ const Toolbar = () => {
 
       <ToolbarComponent.Group>
         <ToolbarComponent.Dropdown
-          disabled={hasNoSelections}
+          disabled={!hasItemInClipboard && hasNoSelections}
           icon={<ClipboardIcon />}
         >
           <ToolbarComponent.DropdownItem
             icon={<ClipboardCopyIcon />}
             onClick={handleCopyClick}
             keybind="Ctrl + C"
+            disabled={hasNoSelections}
           >
             {t`tab.layout.toolbar.selection.copy`}
           </ToolbarComponent.DropdownItem>
@@ -206,6 +210,7 @@ const Toolbar = () => {
             icon={<ScissorsIcon />}
             onClick={handleCutClick}
             keybind="Ctrl + X"
+            disabled={hasNoSelections}
           >
             {t`tab.layout.toolbar.selection.cut`}
           </ToolbarComponent.DropdownItem>
@@ -222,14 +227,15 @@ const Toolbar = () => {
             icon={<StackIcon />}
             onClick={handleDuplicateClick}
             keybind="Ctrl + D"
+            disabled={hasNoSelections}
           >
             {t`tab.layout.toolbar.selection.duplicate`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
-            disabled
             icon={<Component1Icon />}
             keybind="Ctrl + M"
+            disabled
           >
             {t`tab.layout.toolbar.selection.create_snippet`}
           </ToolbarComponent.DropdownItem>

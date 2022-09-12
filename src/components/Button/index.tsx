@@ -29,7 +29,7 @@ export const Button = styled('button', {
 
       solid: {},
 
-      disabled: {},
+      disabled: { cursor: 'default' },
     },
 
     transparent: {
