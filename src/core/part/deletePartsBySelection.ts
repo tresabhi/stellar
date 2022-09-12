@@ -1,9 +1,28 @@
 import { mutateBlueprint } from 'core/blueprint';
-import { deleteParts } from './deleteParts';
+import { disposeBounds } from 'core/bounds';
+import { Blueprint } from 'game/Blueprint';
+import { getParent } from './getParent';
 
-export const deletePartsBySelection = () => {
-  mutateBlueprint((draft) => {
-    deleteParts(draft.selections, draft);
+// fork of `deleteParts` for selections splicing optimization
+export const deletePartsBySelection = (draft?: Blueprint) => {
+  if (draft) {
+    [...draft.selections].forEach((selection) => {
+      const parent = getParent(selection, draft) ?? draft;
+
+      draft.parts.delete(selection);
+
+      if (parent) {
+        parent.part_order.splice(parent.part_order.indexOf(selection), 1);
+      }
+    });
+
     draft.selections = [];
-  });
+
+    // TODO: dispose bounds in the part layout component on unrender (useEffect(() => () => { ... }))
+    disposeBounds(draft.selections);
+  } else {
+    mutateBlueprint((draft) => {
+      deletePartsBySelection(draft);
+    });
+  }
 };
