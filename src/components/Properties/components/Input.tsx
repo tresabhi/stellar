@@ -6,7 +6,7 @@ import {
   InputHTMLAttributes,
   useEffect,
   useImperativeHandle,
-  useRef
+  useRef,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PropertyWithLabel } from '../types/propertyWithLabel';
@@ -29,6 +29,7 @@ const Container = styled('div', {
   flexDirection: 'column',
   flex: 1,
   gap: theme.space.gapRelated,
+  cursor: 'text',
 });
 
 const FieldContainer = styled('div', {
@@ -66,59 +67,6 @@ const Unit = styled('span', {
   fontSize: theme.fontSizes[10],
   color: theme.colors.textLowContrast,
 });
-
-// export const Input = memo<
-//   InputProps &
-//     ForwardRefExoticComponent<
-//       PropsWithoutRef<InputProps> & RefAttributes<HTMLInputElement>
-//     >
-// >(
-//   forwardRef<HTMLInputElement, InputProps>(
-//     (
-//       { label, unit, onChange, onKeyDown, value, defaultValue, ...props },
-//       ref,
-//     ) => {
-//       const input = useRef<HTMLInputElement>(null!);
-//       const handleContainerClick = () => {
-//         input.current.focus();
-//         input.current.select();
-//       };
-//       const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-//         resize();
-//         if (onChange) onChange(event);
-//       };
-//       const handleKeyDown = useInputEscape(onKeyDown);
-//       const resize = () => {
-//         input.current.style.width = `${Math.min(
-//           input.current.value.length,
-//           MAX_CHARACTERS,
-//         )}ch`;
-//       };
-
-//       useEffect(resize);
-//       useImperativeHandle(ref, () => input.current);
-
-//       return (
-//         <Container onClick={handleContainerClick}>
-//           {label && <Label>{label}</Label>}
-
-//           <FieldContainer>
-//             <StyledInput
-//               {...props}
-//               ref={input}
-//               onChange={handleInputChange}
-//               onKeyDown={handleKeyDown}
-//               value={value}
-//               defaultValue={defaultValue}
-//             />
-//             <Unit>{unit}</Unit>
-//           </FieldContainer>
-//         </Container>
-//       );
-//     },
-//   ),
-//   (prevProps, nextProps) => prevProps.defaultValue === nextProps.defaultValue,
-// );
 
 export const Input = forwardRef<InputRef, InputProps>(
   (

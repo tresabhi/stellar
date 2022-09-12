@@ -1,9 +1,9 @@
 import {
   Checkbox as CheckboxPrimitive,
   CheckboxProps as CheckboxPrimitiveProps,
-  CheckboxRef
+  CheckboxRef,
 } from 'components/Checkbox';
-import { forwardRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PropertyWithLabel } from '../types/propertyWithLabel';
 import { Label as LabelPrimitive } from './Label';
@@ -18,6 +18,7 @@ const Container = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   gap: theme.space.gapRelatedMajor,
+  cursor: 'pointer',
 });
 
 const Label = styled(LabelPrimitive, {
@@ -25,10 +26,18 @@ const Label = styled(LabelPrimitive, {
 });
 
 export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
-  ({ label, ...props }, ref) => (
-    <Container>
-      <CheckboxPrimitive {...props} ref={ref} />
-      <Label>{label}</Label>
-    </Container>
-  ),
+  ({ label, ...props }, ref) => {
+    const checkbox = useRef<CheckboxRef>(null!);
+
+    useImperativeHandle(ref, () => checkbox.current);
+
+    const handleContainerClick = () => checkbox.current.click();
+
+    return (
+      <Container onClick={handleContainerClick}>
+        <CheckboxPrimitive {...props} ref={checkbox} />
+        <Label>{label}</Label>
+      </Container>
+    );
+  },
 );
