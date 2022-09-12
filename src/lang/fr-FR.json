@@ -1,5 +1,6 @@
 {
   "tab": {
+    "coming_soon": "This tab is coming soon!",
     "create": {
       "$": "Créer",
       "templates": {
@@ -81,6 +82,11 @@
             "rotation": "Orientation",
             "x_scale": "Mise à l'échelle X",
             "y_scale": "Mise à l'échelle Y"
+          },
+          "engine": {
+            "$": "Engine",
+            "enabled": "Enabled",
+            "heat_damage": "Heat Damage"
           },
           "fuel_tank": {
             "$": "Réservoir de carburant",
