@@ -1,13 +1,8 @@
-import { FC } from 'react';
 import { PulseLoader } from 'react-spinners';
 import getStellarContext from 'utilities/getStellarContext';
 import styles from './index.module.scss';
 
-interface SplashScreenProps {
-  navigateTo?: string;
-}
-
-const SplashScreen: FC<SplashScreenProps> = ({ navigateTo }) => {
+const SplashScreenLegacy = () => {
   const stellarContext = getStellarContext();
 
   return (
@@ -18,4 +13,4 @@ const SplashScreen: FC<SplashScreenProps> = ({ navigateTo }) => {
   );
 };
 
-export default SplashScreen;
+export default SplashScreenLegacy;

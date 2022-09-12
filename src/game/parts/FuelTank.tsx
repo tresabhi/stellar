@@ -3,10 +3,12 @@ import * as Properties from 'components/Properties';
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
-import { useNumericalInputProperty } from 'hooks/useNumericalInputProperty';
+import {
+  useNumericalInputProperty,
+  useSliderProperty,
+} from 'hooks/propertyControllers';
 import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
-import { useSliderProperty } from 'hooks/useSliderProperty';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
 import { PartRegistryFragment } from 'stores/usePartRegistry';
@@ -15,7 +17,7 @@ import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 import {
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData
+  VanillaPartWithTransformationsData,
 } from './PartWithTransformations';
 
 // #region texture types

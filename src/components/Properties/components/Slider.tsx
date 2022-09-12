@@ -1,6 +1,6 @@
 import {
   Slider as SliderPrimitive,
-  SliderProps as SliderPrimitiveProps,
+  SliderProps as SliderPrimitiveProps
 } from 'components/Slider';
 import { FC } from 'react';
 import { styled } from 'stitches.config';

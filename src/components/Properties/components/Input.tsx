@@ -6,7 +6,7 @@ import {
   InputHTMLAttributes,
   useEffect,
   useImperativeHandle,
-  useRef,
+  useRef
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PropertyWithLabel } from '../types/propertyWithLabel';

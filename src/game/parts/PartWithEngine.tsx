@@ -1,5 +1,5 @@
 import * as Properties from 'components/Properties';
-import { useCheckboxProperty } from 'hooks/useCheckboxProperty';
+import { useCheckboxProperty } from 'hooks/propertyControllers';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';

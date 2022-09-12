@@ -5,7 +5,7 @@ import {
   PointerEvent,
   ReactNode,
   useEffect,
-  useRef,
+  useRef
 } from 'react';
 import { styled, theme } from 'stitches.config';
 

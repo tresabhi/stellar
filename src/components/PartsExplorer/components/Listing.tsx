@@ -4,7 +4,7 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { useInputEscape } from 'hooks/useInputEscape';

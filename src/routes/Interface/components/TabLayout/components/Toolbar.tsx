@@ -26,7 +26,7 @@ import {
   ScissorsIcon,
   StackIcon,
   TrashIcon,
-  UploadIcon,
+  UploadIcon
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
@@ -34,14 +34,14 @@ import { DISCORD, WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import { mutateApp } from 'core/app/mutateApp';
 import {
-  fileExport,
-  fileImport,
-  fileOpen,
-  fileSave,
-  fileSaveAs,
+  exportFile,
+  importFile,
   loadBlueprint,
-  versionRedo,
-  versionUndo,
+  openFile,
+  redoVersion,
+  saveFile,
+  saveFileAs,
+  undoVersion
 } from 'core/blueprint';
 import { popupOpen } from 'core/interface';
 import {
@@ -52,7 +52,7 @@ import {
   pasteParts,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
-  ungroupGroupsBySelection,
+  ungroupGroupsBySelection
 } from 'core/part';
 import { useTranslator } from 'hooks/useTranslator';
 import useApp, { Popup, Tool } from 'stores/useApp';
@@ -88,11 +88,11 @@ const Toolbar = () => {
     });
   const handlePlusClick = () => popupOpen(Popup.InsertPart);
   const handleNewClick = () => loadBlueprint();
-  const handleOpenClick = fileOpen;
-  const handleSaveClick = fileSave;
-  const handleSaveAsClick = fileSaveAs;
-  const handleImportClick = fileImport;
-  const handleExportClick = fileExport;
+  const handleOpenClick = openFile;
+  const handleSaveClick = saveFile;
+  const handleSaveAsClick = saveFileAs;
+  const handleImportClick = importFile;
+  const handleExportClick = exportFile;
   const handleEyeClick = () => togglePartsVisibilityBySelection();
   const handleLockClick = () => togglePartsLockBySelection();
   const handleCopyClick = () => copyPartsBySelection();
@@ -102,8 +102,8 @@ const Toolbar = () => {
   // const handleSnippetClick =
   const handleGroupClick = groupPartsBySelection;
   const handleUngroupClick = () => ungroupGroupsBySelection();
-  const handleUndoClick = versionUndo;
-  const handleRedoClick = versionRedo;
+  const handleUndoClick = undoVersion;
+  const handleRedoClick = redoVersion;
   const link = (url: string) => () => window.open(url, '_blank');
 
   return (

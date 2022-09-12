@@ -1,8 +1,8 @@
-import * as ErrorBoundary from 'components/ErrorBoundary';
+import * as ErrorBoundary from 'components/ErrorBoundaryLegacy';
 import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import SplashScreen from 'routes/components/SplashScreen';
+import SplashScreenLegacy from 'routes/components/SplashScreen';
 import preroot from 'utilities/preroot';
 
 preroot();
@@ -13,12 +13,12 @@ const App = lazy(() => import('App'));
 
 root.render(
   <StrictMode>
-    <ErrorBoundary.Wrapper>
+    <ErrorBoundary.WrapperLegacy>
       <BrowserRouter>
-        <Suspense fallback={<SplashScreen />}>
+        <Suspense fallback={<SplashScreenLegacy />}>
           <App />
         </Suspense>
       </BrowserRouter>
-    </ErrorBoundary.Wrapper>
+    </ErrorBoundary.WrapperLegacy>
   </StrictMode>,
 );

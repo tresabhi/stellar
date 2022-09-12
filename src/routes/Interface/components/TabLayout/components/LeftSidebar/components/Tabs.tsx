@@ -4,10 +4,10 @@ import {
   MixerVerticalIcon,
 } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
+import { mutateSettings } from 'core/app';
 import { useTranslator } from 'hooks/useTranslator';
-import produce from 'immer';
 import { FC } from 'react';
-import useSettings, { SidebarTab, UseSettings } from 'stores/useSettings';
+import useSettings, { SidebarTab } from 'stores/useSettings';
 import { TabLayoutProps } from '../../..';
 
 export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
@@ -17,11 +17,9 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   );
   const handleClick = (tab: SidebarTab) => {
     return () => {
-      useSettings.setState(
-        produce<UseSettings>((draft) => {
-          draft.interface.tabs.layout.leftSidebar.tab = tab;
-        }),
-      );
+      mutateSettings((draft) => {
+        draft.interface.tabs.layout.leftSidebar.tab = tab;
+      });
     };
   };
 

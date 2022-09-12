@@ -6,7 +6,7 @@ import {
   InputHTMLAttributes,
   memo,
   MouseEvent,
-  ReactNode,
+  ReactNode
 } from 'react';
 import { styled, theme } from 'stitches.config';
 

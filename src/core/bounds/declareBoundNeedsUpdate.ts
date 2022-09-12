@@ -1,6 +1,6 @@
-import produce from 'immer';
+import { mutateBounds } from 'core/app';
 import useBlueprint from 'stores/useBlueprint';
-import useBounds, { UseBounds } from 'stores/useBounds';
+import { UseBounds } from 'stores/useBounds';
 
 export const declareBoundNeedsUpdate = (id: string, draft?: UseBounds) => {
   if (draft) {
@@ -10,10 +10,8 @@ export const declareBoundNeedsUpdate = (id: string, draft?: UseBounds) => {
     if (boundListing) boundListing.needsUpdate = true;
     if (part && part.parentId) declareBoundNeedsUpdate(part.parentId, draft);
   } else {
-    useBounds.setState(
-      produce<UseBounds>((draft) => {
-        declareBoundNeedsUpdate(id, draft);
-      }),
-    );
+    mutateBounds((draft) => {
+      declareBoundNeedsUpdate(id, draft);
+    });
   }
 };

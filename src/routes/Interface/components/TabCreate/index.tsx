@@ -19,7 +19,7 @@ import { Button as ButtonPrimitive } from 'components/Button';
 import { Palette, PaletteItem } from 'components/Palette';
 import { TabContainer } from 'components/TabContainer';
 import { mutateApp } from 'core/app/mutateApp';
-import { fileImport, loadBlueprint } from 'core/blueprint';
+import { importFile, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
 import { useTranslator } from 'hooks/useTranslator';
 import { styled, theme } from 'stitches.config';
@@ -134,7 +134,7 @@ export const TabCreate = () => {
     toLayout();
   };
   const handleImportClick = async () => {
-    await fileImport();
+    await importFile();
     toLayout();
   };
   const handleOpenClick = async () => {

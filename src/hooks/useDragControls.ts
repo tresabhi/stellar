@@ -1,16 +1,14 @@
 import { ThreeEvent } from '@react-three/fiber';
+import { mutateVersionControl } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
 import { UNDO_LIMIT } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import produce, { Patch, produceWithPatches } from 'immer';
+import { Patch, produceWithPatches } from 'immer';
 import useBlueprint from 'stores/useBlueprint';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
 import useApp, { Tool } from '../stores/useApp';
-import useVersionControl, {
-  UseVersionControl,
-} from '../stores/useVersionControl';
 import useMousePos from './useMousePos';
 
 const DEFAULT_SNAP = 1 / 2;
@@ -125,29 +123,27 @@ const useDragControls = (id: string) => {
     ];
 
     if (lastDelta.length() > 0) {
-      useVersionControl.setState(
-        produce<UseVersionControl>((draft) => {
-          draft.history.splice(
-            draft.index + 1,
-            draft.history.length - draft.index - 1,
-          );
+      mutateVersionControl((draft) => {
+        draft.history.splice(
+          draft.index + 1,
+          draft.history.length - draft.index - 1,
+        );
 
-          draft.history.push({
-            inversePatches: firstInversePatches,
-            patches: lastPatches,
-          });
+        draft.history.push({
+          inversePatches: firstInversePatches,
+          patches: lastPatches,
+        });
 
-          if (UNDO_LIMIT === 0) {
-            draft.index++;
+        if (UNDO_LIMIT === 0) {
+          draft.index++;
+        } else {
+          if (draft.history.length > UNDO_LIMIT) {
+            draft.history.shift();
           } else {
-            if (draft.history.length > UNDO_LIMIT) {
-              draft.history.shift();
-            } else {
-              draft.index++;
-            }
+            draft.index++;
           }
-        }),
-      );
+        }
+      });
 
       const removeSelectionRestriction = () => {
         // fire this just in case selection does not happen

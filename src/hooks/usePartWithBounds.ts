@@ -1,7 +1,7 @@
+import { mutateBounds } from 'core/app';
 import { getBoundsFromObject } from 'core/bounds';
-import produce from 'immer';
 import { MutableRefObject, useCallback, useEffect } from 'react';
-import useBounds, { BoundListing, UseBounds } from 'stores/useBounds';
+import useBounds, { BoundListing } from 'stores/useBounds';
 import { Group, Mesh } from 'three';
 
 const usePartWithBounds = (
@@ -16,11 +16,9 @@ const usePartWithBounds = (
       needsUpdate: false,
     };
 
-    useBounds.setState(
-      produce<UseBounds>((draft) => {
-        draft.parts.set(id, boundListing);
-      }),
-    );
+    mutateBounds((draft) => {
+      draft.parts.set(id, boundListing);
+    });
   }, [id, mesh, wrapper]);
 
   useEffect(computeBounds);

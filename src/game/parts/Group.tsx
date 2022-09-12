@@ -1,18 +1,14 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
+import { mutateBounds } from 'core/app';
 import { getBoundsFromObject } from 'core/bounds';
 import { partExportify, removePartMetaData } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import useDragControls from 'hooks/useDragControls';
 import useSelectionControl from 'hooks/useSelectionControl';
-import produce from 'immer';
 import { isArray } from 'lodash';
 import { FC, MutableRefObject, useCallback, useEffect, useRef } from 'react';
-import useBounds, {
-  BoundListing,
-  PartBounds,
-  UseBounds,
-} from 'stores/useBounds';
+import useBounds, { BoundListing, PartBounds } from 'stores/useBounds';
 import { PartExportifier, PartRegistryFragment } from 'stores/usePartRegistry';
 import { Group as ThreeGroup, Mesh } from 'three';
 import { AnyVanillaPart, PartComponentProps } from 'types/Parts';
@@ -53,11 +49,9 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
       needsUpdate: false,
     };
 
-    useBounds.setState(
-      produce<UseBounds>((draft) => {
-        draft.parts.set(id, boundListing);
-      }),
-    );
+    mutateBounds((draft) => {
+      draft.parts.set(id, boundListing);
+    });
   }, [id]);
 
   useEffect(computeBounds);

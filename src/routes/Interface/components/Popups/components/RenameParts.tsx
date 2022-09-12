@@ -1,6 +1,6 @@
 import { Pencil1Icon } from '@radix-ui/react-icons';
-import { IconInput } from 'components/IconInput';
-import { LabeledCheckbox } from 'components/LabeledCheckbox';
+import { CheckboxWithLabel } from 'components/CheckboxWithLabel';
+import { InputWithIcon } from 'components/InputWithIcon';
 import * as Popup from 'components/Popup';
 import { mutateSettings } from 'core/app';
 import { popupClose } from 'core/interface';
@@ -41,7 +41,7 @@ export const RenameParts = () => {
 
   return (
     <Popup.Container width="regular">
-      <IconInput
+      <InputWithIcon
         ref={input}
         onKeyDown={handleKeyDown}
         autoFocus
@@ -50,24 +50,24 @@ export const RenameParts = () => {
       />
 
       <Popup.Content>
-        <LabeledCheckbox
+        <CheckboxWithLabel
           defaultValue={rename.trim}
           onChange={handleClick('trim')}
         >
           {t`tab.layout.popup.rename.trim`}
-        </LabeledCheckbox>
-        <LabeledCheckbox
+        </CheckboxWithLabel>
+        <CheckboxWithLabel
           defaultValue={rename.skipLocked}
           onChange={handleClick('skipLocked')}
         >
           {t`tab.layout.popup.rename.skip_locked`}
-        </LabeledCheckbox>
-        <LabeledCheckbox
+        </CheckboxWithLabel>
+        <CheckboxWithLabel
           defaultValue={rename.suffix}
           onChange={handleClick('suffix')}
         >
           {t`tab.layout.popup.rename.suffix`}
-        </LabeledCheckbox>
+        </CheckboxWithLabel>
       </Popup.Content>
 
       <Popup.ActionRow>

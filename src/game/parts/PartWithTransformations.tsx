@@ -1,5 +1,5 @@
 import * as Properties from 'components/Properties';
-import { useNumericalInputProperty } from 'hooks/useNumericalInputProperty';
+import { useNumericalInputProperty } from 'hooks/propertyControllers';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';

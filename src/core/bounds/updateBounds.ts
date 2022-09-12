@@ -1,6 +1,5 @@
-import produce from 'immer';
+import { mutateBounds } from 'core/app';
 import { MutableRefObject } from 'react';
-import useBounds, { UseBounds } from 'stores/useBounds';
 import { Group, Mesh } from 'three';
 import { getBoundsFromObject } from './getBoundsFromObject';
 
@@ -11,14 +10,12 @@ export const updateBounds = (
 ) => {
   const bounds = getBoundsFromObject(wrapper, mesh);
 
-  useBounds.setState(
-    produce<UseBounds>((draft) => {
-      const boundListing = draft.parts.get(id);
+  mutateBounds((draft) => {
+    const boundListing = draft.parts.get(id);
 
-      if (boundListing) {
-        boundListing.bounds = bounds;
-        boundListing.needsUpdate = false;
-      }
-    }),
-  );
+    if (boundListing) {
+      boundListing.bounds = bounds;
+      boundListing.needsUpdate = false;
+    }
+  });
 };

@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { IconInput } from 'components/IconInput';
+import { InputWithIcon } from 'components/InputWithIcon';
 import * as Listing from 'components/Listing';
 import { popupClose } from 'core/interface';
 import { go } from 'fuzzysort';
@@ -154,7 +154,7 @@ export const Palette: FC<PaletteProps> = ({
 
   return (
     <Container hasMaxHeight={hasMaxHeight} transparent={transparent}>
-      <IconInput
+      <InputWithIcon
         icon={<MagnifyingGlassIcon />}
         ref={input}
         onKeyDown={handleKeyDown}

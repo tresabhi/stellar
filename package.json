@@ -65,7 +65,7 @@
     "test": "jest",
     "format": "prettier --write \"**/*.@(json|js|jsx|css|scss|sass|md|ts|tsx|html|xml|yml)\"",
     "depcheck": "npx depcheck",
-    "unused": "ts-unused-exports tsconfig.js",
+    "unused": "ts-unused-exports tsconfig.json",
     "host": "serve -s build",
     "host:new": "react-scripts build && serve -s build",
     "update": "yarn upgrade --latest"

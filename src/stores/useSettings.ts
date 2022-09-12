@@ -22,7 +22,6 @@ export const themes = new Map<string, Theme>([
 
 export interface UseSettings {
   debug: {
-    dev_blueprint?: string;
     error_logs: boolean;
   };
 

@@ -1,13 +1,14 @@
+import { mutateSettings } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
 import {
-  fileExport,
-  fileImport,
-  fileOpen,
-  fileSave,
-  fileSaveAs,
+  exportFile,
+  importFile,
   loadBlueprint,
-  versionRedo,
-  versionUndo,
+  openFile,
+  redoVersion,
+  saveFile,
+  saveFileAs,
+  undoVersion
 } from 'core/blueprint';
 import { popupClose, popupOpen } from 'core/interface';
 import {
@@ -20,15 +21,14 @@ import {
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts,
+  unselectAllParts
 } from 'core/part';
-import produce from 'immer';
 import { isNull } from 'lodash';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
 import useApp, { Popup, Tab, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
-import useSettings, { InterfaceMode, UseSettings } from 'stores/useSettings';
+import { InterfaceMode, UseSettings } from 'stores/useSettings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
 
 const tabOrder = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
@@ -131,26 +131,21 @@ const useKeybinds = () => {
     bind(['del', 'backspace'], deletePartsBySelection);
 
     bind('alt+1', () => {
-      useSettings.setState(
-        produce((draft: UseSettings) => {
-          draft.interface.tabs.layout.leftSidebar.visible =
-            !draft.interface.tabs.layout.leftSidebar.visible;
-        }),
-      );
+      mutateSettings((draft: UseSettings) => {
+        draft.interface.tabs.layout.leftSidebar.visible =
+          !draft.interface.tabs.layout.leftSidebar.visible;
+      });
     });
     bind('alt+2', () => {
-      useSettings.setState(
-        produce((draft: UseSettings) => {
-          if (getInterfaceMode() === InterfaceMode.Compact) {
-            draft.interface.tabs.layout.rightSidebar.visible.inCompactMode =
-              !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
-          } else {
-            draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode =
-              !draft.interface.tabs.layout.rightSidebar.visible
-                .inComfortableMode;
-          }
-        }),
-      );
+      mutateSettings((draft: UseSettings) => {
+        if (getInterfaceMode() === InterfaceMode.Compact) {
+          draft.interface.tabs.layout.rightSidebar.visible.inCompactMode =
+            !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
+        } else {
+          draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode =
+            !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
+        }
+      });
     });
 
     bind(
@@ -203,10 +198,10 @@ const useKeybinds = () => {
       preventRepeats: false,
     });
 
-    bind('ctrl+z', versionUndo, {
+    bind('ctrl+z', undoVersion, {
       preventRepeats: false,
     });
-    bind(['ctrl+shift+z', 'ctrl+y'], versionRedo, {
+    bind(['ctrl+shift+z', 'ctrl+y'], redoVersion, {
       preventRepeats: false,
     });
 
@@ -237,13 +232,13 @@ const useKeybinds = () => {
       toLayout();
     });
     bind('ctrl+o', () => {
-      fileOpen();
+      openFile();
       toLayout();
     });
     bind(
       'ctrl+s',
       () => {
-        fileSave();
+        saveFile();
         toLayout();
       },
       { preventOnNonLayoutTab: true },
@@ -251,17 +246,17 @@ const useKeybinds = () => {
     bind(
       'ctrl+shift+s',
       () => {
-        fileSaveAs();
+        saveFileAs();
         toLayout();
       },
       { preventOnNonLayoutTab: true },
     );
     bind('ctrl+i', () => {
-      fileImport();
+      importFile();
       toLayout();
     });
     bind('ctrl+e', () => {
-      fileExport();
+      exportFile();
       toLayout();
     });
 

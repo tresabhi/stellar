@@ -1,12 +1,12 @@
 import { Slider as SliderPrimitive, SliderProps } from 'components/Slider';
-import { MIXED_VALUE_PLACEHOLDER } from 'hooks/useNumericalInputProperty';
+import { MIXED_VALUE_PLACEHOLDER } from 'hooks/propertyControllers';
 import {
   FocusEvent,
   forwardRef,
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import { evaluateExpression } from 'utilities/evaluateExpression';
