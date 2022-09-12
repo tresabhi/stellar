@@ -27,11 +27,12 @@ export const useCheckboxProperty = <
   const recomputeAndRerender = useCallback(() => {
     value.current = getMutualProperty<Type, Value>(ids, slice);
 
-    if (value === undefined) {
+    if (value.current === undefined) {
+      checkbox.current.setValue(false);
       checkbox.current.setIndeterminate(true);
     } else {
+      checkbox.current.setValue(value.current);
       checkbox.current.setIndeterminate(false);
-      if (value.current !== undefined) checkbox.current.setValue(value.current);
     }
   }, [ids, slice]);
 
