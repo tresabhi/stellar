@@ -77,8 +77,8 @@ const Toolbar = () => {
   const hasRedos = useVersionControl(
     (state) => state.history.length - 1 > state.index,
   );
-  const hasItemInClipboard = useApp(
-    (state) => state.editor.clipboard !== undefined,
+  const hasNoItemInClipboard = useApp(
+    (state) => state.editor.clipboard === undefined,
   );
 
   const handleMoveClick = () =>
@@ -194,7 +194,7 @@ const Toolbar = () => {
 
       <ToolbarComponent.Group>
         <ToolbarComponent.Dropdown
-          disabled={!hasItemInClipboard && hasNoSelections}
+          disabled={hasNoItemInClipboard && hasNoSelections}
           icon={<ClipboardIcon />}
         >
           <ToolbarComponent.DropdownItem
@@ -219,6 +219,7 @@ const Toolbar = () => {
             icon={<ClipboardIcon />}
             onClick={handlePasteClick}
             keybind="Ctrl + V"
+            disabled={hasNoItemInClipboard}
           >
             {t`tab.layout.toolbar.selection.paste`}
           </ToolbarComponent.DropdownItem>
