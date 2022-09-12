@@ -34,6 +34,7 @@ export interface UseSettings {
     mode: InterfaceMode | null; // null is auto detect
     language: string;
     theme?: string;
+    hasShownSplashScreen: boolean;
 
     tabs: {
       layout: {
@@ -72,6 +73,7 @@ export const UseSettingsData: UseSettings = {
     mode: null,
     language: 'en-US',
     theme: themeDark.toString(),
+    hasShownSplashScreen: false,
 
     tabs: {
       layout: {

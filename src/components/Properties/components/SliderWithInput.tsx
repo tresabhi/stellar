@@ -44,60 +44,6 @@ const Slider = styled(SliderPrimitive, {
   flex: 2,
 });
 
-// export const SliderWithInput: FC<SliderWithInputProps> = ({
-//   label,
-//   min = 0,
-//   unit,
-//   indeterminate,
-//   value = min,
-//   defaultValue = min,
-//   onValueChange,
-//   ...props
-// }) => {
-//   const input = useRef<InputRef>(null!);
-//   const handleKeyDown = useInputEscape();
-//   const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
-//     if (onValueChange) {
-//       const evaluatedValue = evaluateExpression(event.target.value);
-
-//       if (evaluatedValue === null) {
-//         input.current.value = indeterminate
-//           ? MIXED_VALUE_PLACEHOLDER
-//           : `${value}`;
-//       } else {
-//         onValueChange(evaluatedValue);
-//       }
-//     }
-//   };
-
-//   useEffect(() => {
-//     input.current.value = indeterminate ? MIXED_VALUE_PLACEHOLDER : `${value}`;
-//   }, [value, indeterminate]);
-
-//   return (
-//     <Container>
-//       {label && <Label>{label}</Label>}
-
-//       <Content>
-//         <Slider
-//           {...props}
-//           value={value}
-//           defaultValue={defaultValue}
-//           onValueChange={onValueChange}
-//           disabled // stop from focusing
-//         />
-//         <Input
-//           ref={input}
-//           unit={unit}
-//           defaultValue={indeterminate ? MIXED_VALUE_PLACEHOLDER : value}
-//           onKeyDown={handleKeyDown}
-//           onBlur={handleBlur}
-//         />
-//       </Content>
-//     </Container>
-//   );
-// };
-
 export const SliderWithInput = forwardRef<
   SliderWithInputRef,
   SliderWithInputProps

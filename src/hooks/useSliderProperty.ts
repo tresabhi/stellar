@@ -11,45 +11,6 @@ import { getMutualProperty } from 'utilities/getMutualProperty';
 export const COMMIT_DEBOUNCE = 500;
 export const RERENDER_DEBOUNCE = 500;
 
-/*
-export const useSliderProperty = <
-  Type extends Part,
-  Value extends number = number,
->(
-  ids: string[],
-  slice: (state: Type) => Value,
-  mutate: (draft: Type, value: Value) => void,
-) => {
-  let [value, setValue] = useState<Value | undefined>(
-    getMutualProperty(ids, slice),
-  );
-  const compute = () => {
-    setValue(getMutualProperty(ids, slice));
-  };
-  const commit = fallingEdgeDebounce((value: Value) => {
-    if (value !== undefined) {
-      mutateParts<Type>(ids, (draft) => {
-        mutate(draft, value);
-      });
-    }
-  }, COMMIT_DEBOUNCE);
-  const onValueChange = ([newValue]: [Value]) => {
-    commit(newValue);
-    setValue(newValue);
-  };
-
-  useEffect(compute);
-
-  const hook: Partial<SliderWithInputProps> = {
-    onValueChange,
-    value: value === undefined ? undefined : [value],
-    indeterminate: value === null,
-  };
-
-  return hook;
-};
-*/
-
 export const useSliderProperty = <
   Type extends Part,
   Value extends number = number,

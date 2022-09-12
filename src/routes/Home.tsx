@@ -1,4 +1,4 @@
-import { usePrerender } from 'hooks/usePrerender';
+import { mutateSettings } from 'core/app';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useApp from 'stores/useApp';
@@ -17,7 +17,9 @@ export const Home = () => {
   useEffect(() => {
     if (isLoadingDone) navigate('/interface');
   });
-  usePrerender();
+  mutateSettings((draft) => {
+    draft.interface.hasShownSplashScreen = true;
+  });
 
   return <SplashScreen />;
 };

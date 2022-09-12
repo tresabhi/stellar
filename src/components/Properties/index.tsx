@@ -1,3 +1,4 @@
+export * from './components/Checkbox';
 export * from './components/Container';
 export * from './components/Group';
 export * from './components/Input';

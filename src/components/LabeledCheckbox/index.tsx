@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxProps } from 'components/Checkbox';
+import { Checkbox, CheckboxProps, CheckboxRef } from 'components/Checkbox';
 import { FC, MouseEvent, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 
@@ -24,7 +24,7 @@ export const LabeledCheckbox: FC<NamedCheckboxProps> = ({
   onClick,
   ...props
 }) => {
-  const checkbox = useRef<HTMLButtonElement>(null!);
+  const checkbox = useRef<CheckboxRef>(null!);
   const handleContainerClick = () => checkbox.current.click();
   const handleTriggerClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();

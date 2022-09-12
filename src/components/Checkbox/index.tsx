@@ -1,24 +1,38 @@
 import { CheckIcon, DashIcon } from '@radix-ui/react-icons';
 import { Button } from 'components/Button';
-import { forwardRef, InputHTMLAttributes, MouseEvent, useState } from 'react';
+import {
+  forwardRef,
+  InputHTMLAttributes,
+  MouseEvent,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState
+} from 'react';
 import { styled, theme } from 'stitches.config';
-
-export type CheckboxValue = boolean | null;
 
 export interface CheckboxProps
   extends Omit<
-    Omit<InputHTMLAttributes<HTMLButtonElement>, 'defaultValue'>,
-    'onChange'
+    Omit<
+      Omit<InputHTMLAttributes<HTMLButtonElement>, 'defaultValue'>,
+      'onChange'
+    >,
+    'value'
   > {
-  /**
-   * `true`: checked
-   * `false`: unchecked
-   * `null`: indeterminate
-   */
-  defaultValue?: CheckboxValue;
+  value?: boolean;
+  defaultValue?: boolean;
+  indeterminate?: boolean;
   onChange?: (
-    event: MouseEvent<HTMLButtonElement> & { value: CheckboxValue },
+    event: MouseEvent<HTMLButtonElement> & {
+      value: boolean;
+      indeterminate: boolean;
+    },
   ) => void;
+}
+
+export interface CheckboxRef extends HTMLButtonElement {
+  setValue: (newValue: boolean) => void;
+  setIndeterminate: (newValue: boolean) => void;
 }
 
 const Trigger = styled(Button, {
@@ -53,26 +67,49 @@ const Trigger = styled(Button, {
   },
 });
 
-export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
-  ({ defaultValue = false, onChange, onClick, ...props }, ref) => {
+export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
+  (
+    {
+      defaultValue = false,
+      value: givenValue,
+      indeterminate: givenIndeterminate = false,
+      onChange,
+      onClick,
+      ...props
+    },
+    ref,
+  ) => {
     const [value, setValue] = useState(defaultValue);
+    const [indeterminate, setIndeterminate] = useState(givenIndeterminate);
+    const trigger = useRef<HTMLButtonElement>(null!);
+
+    const trueValue = () => givenValue ?? value;
+
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       setValue((state) => !state);
+      setIndeterminate(false);
 
-      if (onClick) onClick(event);
-      if (onChange) onChange({ ...event, value: !value });
+      onClick && onClick(event);
+      onChange && onChange({ ...event, value: !value, indeterminate: false });
     };
+
+    // eslint-disable-next-line
+    useEffect(() => {
+      (trigger.current as CheckboxRef).setValue = setValue;
+      (trigger.current as CheckboxRef).setIndeterminate = setIndeterminate;
+    });
+    useImperativeHandle(ref, () => trigger.current as CheckboxRef);
 
     return (
       // @ts-ignore
       <Trigger
         {...props}
-        ref={ref}
+        ref={trigger}
         onClick={handleClick}
-        selected={value !== false}
+        selected={trueValue() ?? indeterminate}
       >
-        {value === true && <CheckIcon />}
-        {value === null && <DashIcon />}
+        {trueValue() && <CheckIcon />}
+        {indeterminate && <DashIcon />}
       </Trigger>
     );
   },

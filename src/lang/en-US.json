@@ -100,6 +100,13 @@
             "y_scale": "Y Scale"
           },
 
+          "engine": {
+            "$": "Engine",
+
+            "enabled": "Enabled",
+            "heat_damage": "Heat Damage"
+          },
+
           "fuel_tank": {
             "$": "Fuel Tank",
 

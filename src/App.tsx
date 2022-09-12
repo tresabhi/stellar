@@ -1,3 +1,4 @@
+import { usePrerender } from 'hooks/usePrerender';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from 'routes/Home';
 import Interface from 'routes/Interface';
@@ -11,6 +12,8 @@ const AppContainer = styled('div', {
 
 const App = () => {
   const theme = useSettings((state) => state.interface.theme);
+
+  usePrerender();
 
   return (
     <AppContainer className={theme}>
