@@ -26,7 +26,7 @@ import {
   ScissorsIcon,
   StackIcon,
   TrashIcon,
-  UploadIcon
+  UploadIcon,
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
@@ -41,19 +41,19 @@ import {
   redoVersion,
   saveFile,
   saveFileAs,
-  undoVersion
+  undoVersion,
 } from 'core/blueprint';
 import { popupOpen } from 'core/interface';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
-  duplicateParts,
   groupPartsBySelection,
   pasteParts,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
-  ungroupGroupsBySelection
+  ungroupGroupsBySelection,
 } from 'core/part';
+import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { useTranslator } from 'hooks/useTranslator';
 import useApp, { Popup, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
@@ -101,7 +101,7 @@ const Toolbar = () => {
   const handleCopyClick = () => copyPartsBySelection();
   const handleCutClick = () => cutPartsBySelection();
   const handlePasteClick = pasteParts;
-  const handleDuplicateClick = duplicateParts;
+  const handleDuplicateClick = () => duplicatePartsBySelection();
   // const handleSnippetClick =
   const handleGroupClick = groupPartsBySelection;
   const handleUngroupClick = () => ungroupGroupsBySelection();

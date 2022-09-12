@@ -8,21 +8,21 @@ import {
   redoVersion,
   saveFile,
   saveFileAs,
-  undoVersion
+  undoVersion,
 } from 'core/blueprint';
 import { popupClose, popupOpen } from 'core/interface';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
   deletePartsBySelection,
-  duplicateParts,
   groupPartsBySelection,
   pasteParts,
   selectPartsOnly,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
-  unselectAllParts
+  unselectAllParts,
 } from 'core/part';
+import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { isNull } from 'lodash';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
@@ -263,7 +263,7 @@ const useKeybinds = () => {
     bind('ctrl+c', copyPartsBySelection);
     bind('ctrl+x', cutPartsBySelection);
     bind('ctrl+v', pasteParts);
-    bind('ctrl+d', duplicateParts);
+    bind('ctrl+d', duplicatePartsBySelection);
     bind('ctrl+g', groupPartsBySelection);
     bind('ctrl+shift+g', ungroupGroupsBySelection);
 
