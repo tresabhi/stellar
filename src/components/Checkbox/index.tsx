@@ -7,7 +7,7 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 
@@ -46,6 +46,7 @@ const Trigger = styled(Button, {
   '& > svg': {
     width: theme.sizes[12],
     height: theme.sizes[12],
+    color: theme.colors.textHighContrast,
   },
 
   variants: {
@@ -106,7 +107,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
         {...props}
         ref={trigger}
         onClick={handleClick}
-        selected={trueValue() ?? indeterminate}
+        selected={trueValue() || indeterminate}
       >
         {trueValue() && <CheckIcon />}
         {indeterminate && <DashIcon />}
