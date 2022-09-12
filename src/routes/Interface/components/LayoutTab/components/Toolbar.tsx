@@ -26,7 +26,7 @@ import {
   ScissorsIcon,
   StackIcon,
   TrashIcon,
-  UploadIcon,
+  UploadIcon
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarComponent from 'components/Toolbar';
@@ -41,7 +41,7 @@ import {
   redoVersion,
   saveFile,
   saveFileAs,
-  undoVersion,
+  undoVersion
 } from 'core/blueprint';
 import { popupOpen } from 'core/interface';
 import {
@@ -52,7 +52,7 @@ import {
   pasteParts,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
-  ungroupGroupsBySelection,
+  ungroupGroupsBySelection
 } from 'core/part';
 import { useTranslator } from 'hooks/useTranslator';
 import useApp, { Popup, Tool } from 'stores/useApp';

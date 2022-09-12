@@ -6,7 +6,7 @@ import { getParent } from './getParent';
 export const deleteParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
     ids.forEach((id) => {
-      const parent = getParent(id, draft);
+      const parent = getParent(id, draft) ?? draft;
       const selectionIndex = draft.selections.indexOf(id);
 
       draft.parts.delete(id);
