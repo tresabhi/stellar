@@ -17,11 +17,11 @@ import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
 import { Button as ButtonPrimitive } from 'components/Button';
 import { Palette, PaletteItem } from 'components/Palette';
-import { TabContainer } from 'components/TabContainer';
 import { mutateApp } from 'core/app/mutateApp';
 import { importFile, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
 import { useTranslator } from 'hooks/useTranslator';
+import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/useApp';
 import { StatusBar } from './components/StatusBar';
@@ -122,7 +122,7 @@ const FileActions = styled('div', {
   gap: theme.space.gapRelatedMajor,
 });
 
-export const TabCreate = () => {
+export const CreateTab = () => {
   const { t } = useTranslator();
   const toLayout = () => {
     mutateApp((draft) => {
@@ -231,7 +231,7 @@ export const TabCreate = () => {
   );
 
   return (
-    <TabContainer overflow tab={Tab.Create}>
+    <TabContainer overflow>
       <Container>
         <SectionContainer full>
           <PaletteWrapper>

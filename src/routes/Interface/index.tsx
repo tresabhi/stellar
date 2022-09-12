@@ -1,9 +1,12 @@
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { styled } from 'stitches.config';
+import useApp, { Tab } from 'stores/useApp';
 import { InterfaceMode } from 'stores/useSettings';
+import { CreateTab } from './components/CreateTab';
+import { ExportTab } from './components/ExportTab';
+import { LayoutTab } from './components/LayoutTab';
 import { Popups } from './components/Popups';
-import { TabCreate } from './components/TabCreate';
-import { TabLayout } from './components/TabLayout';
+import { StagingTab } from './components/StagingTab';
 import { Tabs } from './components/Tabs';
 
 export interface SidebarTabProps {
@@ -22,14 +25,20 @@ export const DeviceVariantContainer = styled('div', {
 
 const Interface = () => {
   const interfaceMode = useInterfaceMode();
+  const tab = useApp((state) => state.interface.tab);
 
   return (
     <DeviceVariantContainer>
       <Popups />
 
       <Tabs />
-      <TabCreate />
-      <TabLayout swapSecondTab={interfaceMode === InterfaceMode.Compact} />
+
+      {tab === Tab.Create && <CreateTab />}
+      {tab === Tab.Layout && (
+        <LayoutTab swapSecondTab={interfaceMode === InterfaceMode.Compact} />
+      )}
+      {tab === Tab.Staging && <StagingTab />}
+      {tab === Tab.Export && <ExportTab />}
     </DeviceVariantContainer>
   );
 };
