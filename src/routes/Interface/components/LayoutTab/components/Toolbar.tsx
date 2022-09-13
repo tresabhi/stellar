@@ -91,22 +91,22 @@ const Toolbar = () => {
     });
   const handlePlusClick = () => popupOpen(Popup.InsertPart);
   const handleNewClick = () => loadBlueprint();
-  const handleOpenClick = openFile;
-  const handleSaveClick = saveFile;
-  const handleSaveAsClick = saveFileAs;
-  const handleImportClick = importFile;
-  const handleExportClick = exportFile;
+  const handleOpenClick = () => openFile();
+  const handleSaveClick = () => saveFile();
+  const handleSaveAsClick = () => saveFileAs();
+  const handleImportClick = () => importFile();
+  const handleExportClick = () => exportFile();
   const handleEyeClick = () => togglePartsVisibilityBySelection();
   const handleLockClick = () => togglePartsLockBySelection();
   const handleCopyClick = () => copyPartsBySelection();
   const handleCutClick = () => cutPartsBySelection();
-  const handlePasteClick = pasteParts;
+  const handlePasteClick = () => pasteParts();
   const handleDuplicateClick = () => duplicatePartsBySelection();
   // const handleSnippetClick =
-  const handleGroupClick = groupPartsBySelection;
+  const handleGroupClick = () => groupPartsBySelection();
   const handleUngroupClick = () => ungroupGroupsBySelection();
-  const handleUndoClick = undoVersion;
-  const handleRedoClick = redoVersion;
+  const handleUndoClick = () => undoVersion();
+  const handleRedoClick = () => redoVersion();
   const link = (url: string) => () => window.open(url, '_blank');
 
   return (
