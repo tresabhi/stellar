@@ -4,6 +4,8 @@ import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { FC } from 'react';
 import useSettings, { InterfaceMode, SidebarTab } from 'stores/useSettings';
 import { TabLayoutProps } from '../..';
+import { Snippets } from '../LeftSidebar/components/Snippets';
+import { Inspect } from './components/Inspect';
 import { Properties } from './components/Properties';
 import { Tabs } from './components/Tabs';
 
@@ -39,6 +41,8 @@ export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
     >
       <Tabs swapSecondTab={swapSecondTab} />
       {!swapSecondTab && rightSidebar.tab === SidebarTab.Left && <Properties />}
+      {swapSecondTab && rightSidebar.tab === SidebarTab.Left && <Snippets />}
+      {rightSidebar.tab === SidebarTab.Right && <Inspect />}
 
       <Sidebar.Collapse
         position="right"

@@ -1,7 +1,9 @@
 import * as PropertiesPrimitive from 'components/Properties';
+import * as Sidebar from 'components/Sidebar';
 import { getPart, getPartRegistry } from 'core/part';
 import { PartWithEnginePropertyComponent } from 'game/parts/PartWithEngine';
 import { PartWithTransformationsPropertyComponent } from 'game/parts/PartWithTransformations';
+import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import { AnyPart, PartPropertyComponentProps } from 'types/Parts';
@@ -23,6 +25,10 @@ const groupedProperties: GroupedProperties[] = [
 ];
 
 export const Properties = () => {
+  const { t } = useTranslator();
+  const hasNoSelections = useBlueprint(
+    (state) => state.selections.length === 0,
+  );
   const selections = useBlueprint((state) => state.selections);
   const typeSortedParts = new Map<number, string[]>();
   const nameSortedParts = new Map<string, string[]>();
@@ -75,7 +81,21 @@ export const Properties = () => {
     }
   });
 
-  return (
+  return hasNoSelections ? (
+    <Sidebar.MessageContainer>
+      <Sidebar.Message>{t`tab.layout.right_sidebar.properties.no_selection`}</Sidebar.Message>
+      <Sidebar.Message subMessage>
+        {t`tab.layout.right_sidebar.properties.no_selection.instructions`}
+      </Sidebar.Message>
+    </Sidebar.MessageContainer>
+  ) : children.length > 0 ? (
     <PropertiesPrimitive.Container>{children}</PropertiesPrimitive.Container>
+  ) : (
+    <Sidebar.MessageContainer>
+      <Sidebar.Message>{t`tab.layout.right_sidebar.properties.no_properties`}</Sidebar.Message>
+      <Sidebar.Message subMessage>
+        {t`tab.layout.right_sidebar.properties.no_properties.instructions`}
+      </Sidebar.Message>
+    </Sidebar.MessageContainer>
   );
 };

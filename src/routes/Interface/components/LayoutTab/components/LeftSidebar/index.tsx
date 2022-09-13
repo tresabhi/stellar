@@ -6,6 +6,7 @@ import { TabLayoutProps } from '../..';
 import { Properties } from '../RightSidebar/components/Properties';
 import { Parts } from './components/Parts';
 import { Rename } from './components/Rename';
+import { Snippets } from './components/Snippets';
 import { Tabs } from './components/Tabs';
 
 export const LeftSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
@@ -28,6 +29,7 @@ export const LeftSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
       <Tabs swapSecondTab={swapSecondTab} />
       {leftSidebar.tab === SidebarTab.Left && <Parts />}
       {swapSecondTab && leftSidebar.tab === SidebarTab.Right && <Properties />}
+      {!swapSecondTab && leftSidebar.tab === SidebarTab.Right && <Snippets />}
 
       {leftSidebar.tab === SidebarTab.Left && <Rename />}
       <Sidebar.Collapse

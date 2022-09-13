@@ -14,7 +14,9 @@ export const createTranslator = (
     console.warn(`No translations for language ${language}`);
   }
 
-  const translate = (string: string) => {
+  // TODO: remove usage of AnyObject
+
+  const translate = (string: string, tokens: string[] = []) => {
     const translation = string
       .split('.')
       .reduce(
@@ -25,17 +27,28 @@ export const createTranslator = (
         translations,
       );
 
+    const applyTokens = (string: string) =>
+      tokens.reduce(
+        (previousTranslation, currentTranslation, index) =>
+          previousTranslation.replaceAll(`%${index + 1}$s`, tokens[index]),
+        string,
+      );
+
     return translation === undefined
-      ? string // If translation is not found, return the original string
+      ? string // if translation is not found, return the original string
       : typeof translation === 'string'
-      ? translation // If translation is a string, return the string
-      : translation.$ ?? string; // If translation is an object, return the object's master value or the original string
+      ? applyTokens(translation) // if translation is a string, return the translation
+      : translation.$ === undefined
+      ? string // if root translation does not exists, return the string
+      : applyTokens(translation.$); // if root translation exists, return the root translation
   };
 
-  const translateShorthand = (string: TemplateStringsArray) =>
-    translate(string[0]);
+  const fragments = (string: string) => translate(string).split(/%[0-9]\$s/);
 
-  const hook = { language, translate, t: translateShorthand };
+  const t = (string: TemplateStringsArray) => translate(string[0]);
+  const f = (string: TemplateStringsArray) => fragments(string[0]);
+
+  const hook = { language, translate, fragment: fragments, t, f };
 
   return hook;
 };
