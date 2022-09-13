@@ -1,12 +1,13 @@
 {
   "tab": {
+    "coming_soon": "¡uoos ƃuᴉɯoɔ sᴉ qɐʇ sᴉɥ┴",
     "create": {
       "$": "ǝʇɐǝɹƆ",
       "templates": {
         "search_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
         "list": {
           "apollo_mission": "uoᴉssᴉW ollod∀",
-          "basic_rocket": "Basic Rocket",
+          "basic_rocket": "ʇǝʞɔoɹ ɔᴉsɐq",
           "hopper": "ɹǝddoH",
           "joints": "sʇuᴉoſ",
           "light_lander": "ɹǝpuɐ˥ ʇɥƃᴉ˥",
@@ -82,10 +83,15 @@
             "x_scale": "ǝlɐɔS X",
             "y_scale": "ǝlɐɔS ⅄"
           },
+          "engine": {
+            "$": "ǝuᴉƃuƎ",
+            "enabled": "pǝlqɐuƎ",
+            "heat_damage": "ǝƃɐɯɐp ʇɐǝH"
+          },
           "fuel_tank": {
             "$": "ʞuɐ┴ lǝnℲ",
-            "top_width": "Top Width",
-            "bottom_width": "Bottom Width",
+            "top_width": "ɥʇpᴉM do┴",
+            "bottom_width": "ɥʇpᴉM ɯoʇʇoq",
             "height": "ʇɥƃᴉǝH",
             "fuel": "lǝnℲ"
           }

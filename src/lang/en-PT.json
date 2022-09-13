@@ -1,5 +1,6 @@
 {
   "tab": {
+    "coming_soon": "This tab is coming soon!",
     "create": {
       "$": "Summon",
       "templates": {
@@ -81,6 +82,11 @@
             "rotation": "Yaw",
             "x_scale": "Blowin' Arm",
             "y_scale": "Blowin' Poop"
+          },
+          "engine": {
+            "$": "Engine",
+            "enabled": "Enabled",
+            "heat_damage": "Heat Damage"
           },
           "fuel_tank": {
             "$": "Barrel o' Rum",

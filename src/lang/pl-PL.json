@@ -1,5 +1,6 @@
 {
   "tab": {
+    "coming_soon": "This tab is coming soon!",
     "create": {
       "$": "Stwórz",
       "templates": {
@@ -81,6 +82,11 @@
             "rotation": "Rotation",
             "x_scale": "X Scale",
             "y_scale": "Y Scale"
+          },
+          "engine": {
+            "$": "Engine",
+            "enabled": "Enabled",
+            "heat_damage": "Heat Damage"
           },
           "fuel_tank": {
             "$": "Fuel Tank",

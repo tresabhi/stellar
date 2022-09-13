@@ -1,5 +1,6 @@
 {
   "tab": {
+    "coming_soon": "¡Esta pestaña estará disponible pronto!",
     "create": {
       "$": "Crear",
       "templates": {
@@ -82,10 +83,15 @@
             "x_scale": "Escala X",
             "y_scale": "Escala Y"
           },
+          "engine": {
+            "$": "Motor",
+            "enabled": "Habilitado",
+            "heat_damage": "Daño de calor"
+          },
           "fuel_tank": {
             "$": "Tanque de combustible",
-            "top_width": "Top Width",
-            "bottom_width": "Bottom Width",
+            "top_width": "Anchura superior",
+            "bottom_width": "Anchura inferior",
             "height": "Altura",
             "fuel": "Combustible"
           }

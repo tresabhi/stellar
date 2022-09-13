@@ -1,5 +1,6 @@
 {
   "tab": {
+    "coming_soon": "This tab is coming soon!",
     "create": {
       "$": "Napravi",
       "templates": {
@@ -34,87 +35,92 @@
           "open": "Otvori...",
           "save": "Sačuvaj",
           "save_as": "Sačuvaj kao...",
-          "import": "Import...",
-          "export": "Export..."
+          "import": "Uvezi...",
+          "export": "Izvezi..."
         },
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "move": "Pomeri",
+          "pan": "Pomeraj"
         },
         "selection": {
-          "copy": "Copy",
-          "cut": "Cut",
-          "paste": "Paste",
-          "duplicate": "Duplicate",
-          "create_snippet": "Create Snippet"
+          "copy": "Kopiraj",
+          "cut": "Iseci",
+          "paste": "Zalepi",
+          "duplicate": "Dupliraj",
+          "create_snippet": "Napravi Isečak"
         },
         "group": {
-          "group": "Group",
-          "ungroup": "Ungroup"
+          "group": "Grupa",
+          "ungroup": "Degrupiraj"
         },
         "help": {
-          "about": "About Stellar",
-          "report": "Report an Issue",
+          "about": "O aplikaciji \"Stellar\"",
+          "report": "Prijavi problem",
           "discord": "Discord",
           "github": "GitHub"
         },
         "preferences": {
-          "settings": "Settings",
-          "keybinds": "Keybinds"
+          "settings": "Podešavanja",
+          "keybinds": "Prečice na tastaturi"
         }
       },
       "left_sidebar": {
         "parts": {
-          "$": "Parts"
+          "$": "Delovi"
         },
         "snippets": {
-          "$": "Snippets"
+          "$": "Isečci"
         }
       },
       "right_sidebar": {
         "properties": {
-          "$": "Properties",
+          "$": "Svojstva",
           "transformations": {
-            "$": "Transformations",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation",
-            "x_scale": "X Scale",
-            "y_scale": "Y Scale"
+            "$": "Transformacije",
+            "x_position": "X pozicija",
+            "y_position": "Y pozicija",
+            "rotation": "Rotacija",
+            "x_scale": "X Opseg",
+            "y_scale": "Y Opseg"
+          },
+          "engine": {
+            "$": "Engine",
+            "enabled": "Enabled",
+            "heat_damage": "Heat Damage"
           },
           "fuel_tank": {
-            "$": "Fuel Tank",
-            "top_width": "Top Width",
-            "bottom_width": "Bottom Width",
-            "height": "Height",
-            "fuel": "Fuel"
+            "$": "Kanister sa Gorivom",
+            "top_width": "Gornja Širina",
+            "bottom_width": "Donja Širina",
+            "height": "Visina",
+            "fuel": "Gorivo"
           }
         },
         "inspect": {
-          "$": "Inspect"
+          "$": "Prouči"
         }
       },
       "popup": {
         "insert_part": {
-          "search_placeholder": "Insert part...",
-          "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "search_placeholder": "Ubaci deo...",
+          "abstract": "Ostalo (Abstraktno)",
+          "TODO:cancel": "Poništi"
         },
         "rename": {
-          "search_placeholder": "Label...",
-          "trim": "Trim whitespace on ends",
-          "skip_locked": "Skip locked parts",
-          "suffix": "Add unique numerical suffixes",
-          "cancel": "Cancel",
-          "apply": "Apply"
+          "search_placeholder": "Označi...",
+          "trim": "Izbriši razmake na krajevima",
+          "skip_locked": "Preskoči zaključane delove",
+          "suffix": "Dodaj jedinstvene numeričke sufikse",
+          "cancel": "Poništi",
+          "apply": "Primeni"
         }
       }
     },
     "staging": {
-      "$": "Staging"
+      "$": "Faze"
     },
     "export": {
-      "$": "Export"
+      "$": "Izvezi"
     }
   }
 }

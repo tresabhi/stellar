@@ -1,5 +1,6 @@
 {
   "tab": {
+    "coming_soon": "This tab is coming soon!",
     "create": {
       "$": "Makee Makee",
       "templates": {
@@ -49,72 +50,77 @@
           "create_snippet": "Crwet Snipetz"
         },
         "group": {
-          "group": "Group",
-          "ungroup": "Ungroup"
+          "group": "Gwoup",
+          "ungroup": "No gwoup"
         },
         "help": {
-          "about": "About Stellar",
-          "report": "Report an Issue",
-          "discord": "Discord",
-          "github": "GitHub"
+          "about": "Whas this",
+          "report": "I wown't wok",
+          "discord": "Funny chat place",
+          "github": "Da codin site"
         },
         "preferences": {
-          "settings": "Settings",
-          "keybinds": "Keybinds"
+          "settings": "You want to conwigure something",
+          "keybinds": "Rewmap key"
         }
       },
       "left_sidebar": {
         "parts": {
-          "$": "Parts"
+          "$": "Pawts"
         },
         "snippets": {
-          "$": "Snippets"
+          "$": "You prewius buils"
         }
       },
       "right_sidebar": {
         "properties": {
-          "$": "Properties",
+          "$": "Pwopweties",
           "transformations": {
-            "$": "Transformations",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation",
-            "x_scale": "X Scale",
-            "y_scale": "Y Scale"
+            "$": "Morphin time",
+            "x_position": "X Posishun",
+            "y_position": "Y Posishun",
+            "rotation": "Spin around",
+            "x_scale": "X Scal",
+            "y_scale": "Y Scal"
+          },
+          "engine": {
+            "$": "Engine",
+            "enabled": "Enabled",
+            "heat_damage": "Heat Damage"
           },
           "fuel_tank": {
-            "$": "Fuel Tank",
-            "top_width": "Top Width",
-            "bottom_width": "Bottom Width",
-            "height": "Height",
-            "fuel": "Fuel"
+            "$": "Canwister with stuf",
+            "top_width": "Twop With",
+            "bottom_width": "Bwotom With",
+            "height": "How tall",
+            "fuel": "Stuf"
           }
         },
         "inspect": {
-          "$": "Inspect"
+          "$": "Check it out"
         }
       },
       "popup": {
         "insert_part": {
-          "search_placeholder": "Insert part...",
-          "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "search_placeholder": "Inswet pawt...",
+          "abstract": "Something else",
+          "TODO:cancel": "Nu"
         },
         "rename": {
-          "search_placeholder": "Label...",
-          "trim": "Trim whitespace on ends",
-          "skip_locked": "Skip locked parts",
-          "suffix": "Add unique numerical suffixes",
-          "cancel": "Cancel",
-          "apply": "Apply"
+          "search_placeholder": "Asign someting...",
+          "trim": "Kut white endwings",
+          "skip_locked": "Skwip locked pwats",
+          "suffix": "Give Id",
+          "cancel": "Nu",
+          "apply": "Ye"
         }
       }
     },
     "staging": {
-      "$": "Staging"
+      "$": "Actwinos"
     },
     "export": {
-      "$": "Export"
+      "$": "Expowt"
     }
   }
 }
