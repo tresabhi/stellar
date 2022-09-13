@@ -61,14 +61,14 @@ import useVersionControl from 'stores/useVersionControl';
 
 const Toolbar = () => {
   const { t } = useTranslator();
-  const tool = useApp((state) => state.editor.tool);
-  const isPanning = useApp((state) => state.editor.isPanning);
-  const parts = useBlueprint.getState().parts;
+  const tool = useApp((state) =>
+    state.editor.isPanning ? Tool.Pan : state.editor.tool,
+  );
   const isOneHidden = useBlueprint((state) =>
-    state.selections.some((selection) => parts.get(selection)?.hidden),
+    state.selections.some((selection) => state.parts.get(selection)?.hidden),
   );
   const isOneLocked = useBlueprint((state) =>
-    state.selections.some((selection) => parts.get(selection)?.locked),
+    state.selections.some((selection) => state.parts.get(selection)?.locked),
   );
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
@@ -167,9 +167,7 @@ const Toolbar = () => {
         </ToolbarComponent.Dropdown>
 
         <ToolbarComponent.Dropdown
-          icon={
-            tool === Tool.Pan || isPanning ? <HandIcon /> : <CursorArrowIcon />
-          }
+          icon={tool === Tool.Pan ? <HandIcon /> : <CursorArrowIcon />}
         >
           <ToolbarComponent.DropdownItem
             icon={<CursorArrowIcon />}
