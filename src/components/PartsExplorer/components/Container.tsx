@@ -1,4 +1,4 @@
-import { getPart } from 'core/part';
+import { getPart, unselectAllParts } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { isNull } from 'lodash';
 import { FC } from 'react';
@@ -59,5 +59,11 @@ export const Container: FC<ContainerProps> = ({
     <Listing indent={indent} id={id} key={`part-${id}`} />
   ));
 
-  return <StyledContainer {...props}>{children}</StyledContainer>;
+  const handleClick = () => unselectAllParts();
+
+  return (
+    <StyledContainer {...props} onClick={handleClick}>
+      {children}
+    </StyledContainer>
+  );
 };
