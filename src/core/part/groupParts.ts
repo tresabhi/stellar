@@ -1,9 +1,14 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { createNewPart, getParent, selectPartOnly } from 'core/part';
+import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 
-export const groupParts = (ids: string[], replaceId: string) => {
-  mutateBlueprint((draft) => {
+export const groupParts = (
+  ids: string[],
+  replaceId: string,
+  draft?: Blueprint,
+) => {
+  if (draft) {
     const newGroup = createNewPart<Group>('Group');
     const newGroupParent = getParent(replaceId, draft) ?? draft;
 
@@ -24,5 +29,9 @@ export const groupParts = (ids: string[], replaceId: string) => {
 
       selectPartOnly(newGroup.id, draft);
     }
-  });
+  } else {
+    mutateBlueprint((draft) => {
+      groupParts(ids, replaceId, draft);
+    });
+  }
 };
