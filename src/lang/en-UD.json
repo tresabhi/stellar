@@ -66,15 +66,31 @@
       },
       "left_sidebar": {
         "parts": {
-          "$": "sʇɹɐԀ"
+          "$": "sʇɹɐԀ",
+          "no_parts": {
+            "$": "ʇuᴉɹdǝnlq uᴉ sʇɹɐԀ oN",
+            "instructions": "˙ʇɹɐd ɐ ʇɹǝsuᴉ oʇ ɹɐqloo┴ ǝɥʇ uᴉ uoɔᴉ %1$s ǝɥʇ dɐ┴"
+          }
         },
         "snippets": {
-          "$": "sʇǝddᴉuS"
+          "$": "sʇǝddᴉuS",
+          "coming_soon": {
+            "$": "¡uooS ƃuᴉɯoƆ sʇǝddᴉuS",
+            "instructions": "˙ʇǝddᴉuS ǝʇɐǝɹƆ %2$s < pɹɐoqdᴉlƆ %1$s < ɹɐqloo┴ oʇ ƃuᴉoƃ ʎq ʇǝddᴉus ʍǝu ɐ ǝʇɐǝɹɔ oʇ ǝlqɐ ǝq llᴉʍ no⅄ ˙sʇǝddᴉus sɐ ǝɹǝɥ sʇuᴉɹdǝnlq ɹǝɥʇo ɟo suoᴉʇɔǝs llɐɯs ʇɹǝsuᴉ oʇ ǝlqɐ ǝq llᴉʍ no⅄"
+          }
         }
       },
       "right_sidebar": {
         "properties": {
           "$": "sǝᴉʇɹǝdoɹԀ",
+          "no_selection": {
+            "$": "pǝʇɔǝlǝS sʇɹɐԀ oN",
+            "instructions": "˙ʇᴉ ʇɔǝlǝs oʇ ɹɐqǝpᴉs ǝɥʇ uᴉ ɹo ʇuᴉɹdǝnlq ǝɥʇ uo ɹǝɥʇᴉǝ ʇɹɐd ɐ uo ʞɔᴉlƆ"
+          },
+          "no_properties": {
+            "$": "sʇɹɐԀ pǝʇɔǝlǝS ɹoɟ sǝᴉʇɹǝdoɹԀ oN",
+            "instructions": "˙ssǝɹƃoɹd uᴉ ʞɹoʍ ɐ ɹo ʇɔɐɹʇsqɐ ɹǝɥʇᴉǝ ǝɹ,ʎǝɥʇ ǝsnɐɔǝq ʎlqɐqoɹd sǝᴉʇɹǝdoɹd ǝlqɐʇsnɾpɐ ʞɔɐl pǝʇɔǝlǝs ǝʌɐɥ noʎ (s)ʇɹɐd ǝɥ┴"
+          },
           "transformations": {
             "$": "suoᴉʇɐɯɹoɟsuɐɹ┴",
             "x_position": "uoᴉʇᴉsoԀ X",
@@ -97,7 +113,11 @@
           }
         },
         "inspect": {
-          "$": "ʇɔǝdsuI"
+          "$": "ʇɔǝdsuI",
+          "coming_soon": {
+            "$": "¡uooS ƃuᴉɯoƆ ʇɔǝdsuI",
+            "instructions": "˙pǝʇɔǝlǝs sʇɹɐd ʇnoqɐ ɐʇɐpɐʇǝɯ ⅋ uoᴉʇɐɯɹoɟuᴉ ǝɹoɔ ʎɐldsᴉp llᴉʍ ɹɐqǝpᴉs sᴉɥ┴"
+          }
         }
       },
       "popup": {
