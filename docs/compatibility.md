@@ -1,7 +1,3 @@
----
-nav_order: 2
----
-
 # 🔌 Compatibility
 
 _❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it runs Stellar._

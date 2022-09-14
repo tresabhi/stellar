@@ -1,11 +1,11 @@
-# Stellar [<img src="https://user-images.githubusercontent.com/43380238/148424581-843be3a2-10a4-4503-a2d4-099a987c5ff4.png" alt="PostCSS Logo" width="90" height="90" align="right">](https://github.com/tresabhi/stellar)
+# Stellar [<img src="https://stellarbeta.web.app/android-chrome-512x512.png" alt="PostCSS Logo" width="90" height="90" align="right">](https://github.com/tresabhi/stellar)
 
 [![Alpha CD](https://github.com/tresabhi/stellar/actions/workflows/alpha-cd.yml/badge.svg)](https://github.com/tresabhi/stellar/actions/workflows/alpha-cd.yml)
 [![version](https://img.shields.io/github/package-json/v/tresabhi/stellar)](https://github.com/tresabhi/stellar/blob/main/package.json)
 
 <br>
 
-![Image of Stellar featuring Fuel Tanks](https://i.imgur.com/vGGJ0AU.png)
+![Image of Stellar featuring Fuel Tanks](https://user-images.githubusercontent.com/43380238/189721254-951f9c8c-addd-4844-a09b-091f3cf83274.png)
 
 ## 🤔 About
 
@@ -35,22 +35,3 @@ _❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it
 - CPU: Intel Pentium 4+
 - RAM: 2GB+
 - Storage: 25MB+ of available storage
-
-## 👨‍💻 Tech Inside
-
-- **Framework**: [React](https://reactjs.org/) ([create-react-app](https://create-react-app.dev/))
-- **Languages:**
-  - Functionality: [Typescript](https://www.typescriptlang.org/)
-  - Styling: [Stitches](https://stitches.dev/)
-
-## 👉 Main Built-in commands
-
-| Command             | Use                                            |
-| ------------------- | ---------------------------------------------- |
-| `yarn run start`    | Start hosting dev. build on local host         |
-| `yarn run build`    | Compiles code into optimized development build |
-| `yarn run test`     | Runs all `*.test.ts` / `*.test.tsx` files      |
-| `yarn run format`   | Beautifies all intended files in workspace     |
-| `yarn run depcheck` | Finds all unused dependencies                  |
-| `yarn run host`     | Hosts the production build                     |
-| `yarn run host:new` | Hosts a new compiled production build          |
