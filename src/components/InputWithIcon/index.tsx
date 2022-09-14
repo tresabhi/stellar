@@ -22,6 +22,7 @@ const Container = styled('div', {
   justifyContent: 'center',
   alignItems: 'center',
   border: theme.borderStyles.componentInteractive,
+  cursor: 'text',
 
   '&:hover': {
     border: theme.borderStyles.componentInteractiveHover,
