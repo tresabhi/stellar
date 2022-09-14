@@ -2,7 +2,7 @@ import { AdaptiveDpr } from '@react-three/drei';
 import { Canvas as CanvasPrimitive } from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
 import { useEffect, useRef } from 'react';
-import { styled, theme } from 'stitches.config';
+import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings from 'stores/useSettings';
@@ -16,6 +16,14 @@ const Canvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,
   flex: 1,
   touchAction: 'none',
+});
+
+const panningStyles = css({
+  cursor: 'grab',
+
+  '&:active': {
+    cursor: 'grabbing',
+  },
 });
 
 export const LayoutCanvas = () => {
@@ -37,30 +45,17 @@ export const LayoutCanvas = () => {
 
   useEffect(() => {
     const unsubscribeTool = useApp.subscribe(
-      (state) => state.editor.tool,
+      (state) => (state.editor.isPanning ? Tool.Pan : state.editor.tool),
       (tool) => {
         if (tool === Tool.Pan) {
-          // canvas.current.classList.add(styles.pan);
+          canvas.current.classList.add(panningStyles());
         } else {
-          // canvas.current.classList.remove(styles.pan);
-        }
-      },
-    );
-    const unsubscribeIsPanning = useApp.subscribe(
-      (state) => state.editor.isPanning,
-      (isPanning) => {
-        if (isPanning) {
-          // canvas.current.classList.add(styles.pan);
-        } else if (useApp.getState().editor.tool !== Tool.Pan) {
-          // canvas.current.classList.remove(styles.pan);
+          canvas.current.classList.remove(panningStyles());
         }
       },
     );
 
-    return () => {
-      unsubscribeTool();
-      unsubscribeIsPanning();
-    };
+    return unsubscribeTool;
   });
 
   return (
