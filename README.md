@@ -13,6 +13,20 @@ Stellar allows anyone to make custom blueprints with extensive customization wit
 
 Spaceflight Simulator, the game, is available for both PC and mobile on [Steam](https://store.steampowered.com/app/1718870/), [Play Store](https://play.google.com/store/apps/details?id=com.StefMorojna.SpaceflightSimulator), and [App Store](https://apps.apple.com/us/app/id1308057272).
 
+## 🌟 Where to Get Stellar
+
+Stellar can be used as a web app and downloaded as a PWA. There are three versions available:
+
+- Stellar: https://stellaredit.web.app/
+  - Recomended for daily usage
+  - **Unavailable - no releases yet**
+- Stellar Beta: https://stellarbeta.web.app/
+  - Early preview for upcoming features
+  - Bound to be untested; report all issues
+- Stellar Alpha: https://stellaralpha.web.app/
+  - Only meant to be used by developers
+  - Guarenteed to have broken features and translations
+
 ## 🔌 Compatibility
 
 _❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it runs Stellar._
