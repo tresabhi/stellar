@@ -4,8 +4,9 @@ title: 🤔 About
 
 # Stellar [<img src="https://stellarbeta.web.app/android-chrome-512x512.png" alt="PostCSS Logo" width="90" height="90" align="right">](https://github.com/tresabhi/stellar)
 
-[![Alpha CD](https://github.com/tresabhi/stellar/actions/workflows/alpha-cd.yml/badge.svg)](https://github.com/tresabhi/stellar/actions/workflows/alpha-cd.yml)
+[![CI Build](https://github.com/tresabhi/stellar/actions/workflows/ci-build.yml/badge.svg)](https://github.com/tresabhi/stellar/actions/workflows/ci-build.yml)
 [![version](https://img.shields.io/github/package-json/v/tresabhi/stellar)](https://github.com/tresabhi/stellar/blob/main/package.json)
+[![GitHub](https://img.shields.io/github/license/tresabhi/stellar)](https://github.com/tresabhi/stellar/blob/main/LICENSE)
 
 <br>
 
