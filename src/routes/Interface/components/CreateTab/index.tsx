@@ -26,13 +26,10 @@ import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/useApp';
 import { StatusBar } from './components/StatusBar';
 
-const ABHI = 'TrèsAbhi';
-const ABHI_WEB = 'https://tresabhi.github.io/';
-
 interface Template {
   name: string;
-  author: string;
-  link: number | string;
+  author?: string; // inbuilt if undefined
+  link?: number | string; // inbuilt if undefined
   blueprint: VanillaBlueprint;
   inbuilt: boolean;
 }
@@ -116,6 +113,54 @@ const Button = styled(ButtonPrimitive, {
   },
 });
 
+const TEMPLATES: Template[] = [
+  {
+    name: `tab.create.templates.list.hopper`,
+    blueprint: hopper,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.apollo_mission`,
+    blueprint: apolloMission,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.light_lander`,
+    blueprint: lightLander,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.rover`,
+    blueprint: rover,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.parachute_and_separator`,
+    blueprint: parachuteAndSeparator,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.joints`,
+    blueprint: joints,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.orbit_and_re_entry`,
+    blueprint: orbitAndReEntry,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.race_car`,
+    blueprint: raceCar,
+    inbuilt: true,
+  },
+  {
+    name: `tab.create.templates.list.basic_rocket`,
+    blueprint: basicRocket,
+    inbuilt: true,
+  },
+];
+
 const FileActions = styled('div', {
   display: 'flex',
   flexDirection: 'column',
@@ -123,7 +168,7 @@ const FileActions = styled('div', {
 });
 
 export const CreateTab = () => {
-  const { t } = useTranslator();
+  const { t, translate } = useTranslator();
   const toLayout = () => {
     mutateApp((draft) => {
       draft.interface.tab = Tab.Layout;
@@ -142,71 +187,6 @@ export const CreateTab = () => {
     toLayout();
   };
 
-  const TEMPLATES: Template[] = [
-    {
-      name: t`tab.create.templates.list.hopper`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: hopper,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.apollo_mission`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: apolloMission,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.light_lander`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: lightLander,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.rover`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: rover,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.parachute_and_separator`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: parachuteAndSeparator,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.joints`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: joints,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.orbit_and_re_entry`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: orbitAndReEntry,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.race_car`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: raceCar,
-      inbuilt: true,
-    },
-    {
-      name: t`tab.create.templates.list.basic_rocket`,
-      author: ABHI,
-      link: ABHI_WEB,
-      blueprint: basicRocket,
-      inbuilt: true,
-    },
-  ];
   const PALETTE_ITEMS = TEMPLATES.sort((a, b) => {
     if (a.name < b.name) return -1;
     if (a.name > b.name) return 1;
@@ -214,10 +194,12 @@ export const CreateTab = () => {
   }).map(
     (template) =>
       ({
-        name: template.name,
-        note: template.author,
+        name: translate(template.name),
+        note: template.author ?? 'Built-in',
         noteURL:
-          typeof template.link === 'string'
+          template.link === undefined
+            ? undefined
+            : typeof template.link === 'string'
             ? template.link
             : `https://jmnet.one/sfs/forum/index.php?members/${template.link}`,
         callback: () => {
