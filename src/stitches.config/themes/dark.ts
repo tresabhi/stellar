@@ -1,10 +1,11 @@
-import { mauveDark, purpleDark } from '@radix-ui/colors';
+import { mauveDark, purpleDark, redDark } from '@radix-ui/colors';
 import { createColors } from 'bepaint';
 import { createTheme } from 'stitches.config';
 
 const colorsDark = {
   ...createColors({ scale: mauveDark }),
   ...createColors({ scale: purpleDark, suffix: 'accent' }),
+  ...createColors({ scale: redDark, suffix: 'error' }),
 
   componentSolidBackground: mauveDark.mauve9, // TODO: add solid backgrounds
   componentSolidBackgroundHover: mauveDark.mauve10,

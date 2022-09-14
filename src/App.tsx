@@ -8,6 +8,7 @@ import 'styles/index.scss';
 
 const AppContainer = styled('div', {
   backgroundColor: theme.colors.appBackground1,
+  // TODO: make this the one that controls the dimensions of the app
 });
 
 const App = () => {

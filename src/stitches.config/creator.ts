@@ -1,10 +1,11 @@
-import { blackA, mauve, purple } from '@radix-ui/colors';
+import { blackA, mauve, purple, red } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 import { createColors, createSpaces } from 'bepaint';
 
 const colorsLight = {
   ...createColors({ scale: mauve }),
   ...createColors({ scale: purple, suffix: 'accent' }),
+  ...createColors({ scale: red, suffix: 'error' }),
 
   // TODO: rename componentBackground to componentInteractiveBackground for consistency
 
@@ -73,6 +74,9 @@ export const {
       scrollbarThumbWidthHover: '0.5rem',
       sliderThumb: '1rem',
       sliderTrackWidth: '0.125rem',
+      errorScreenInfoMaxWidth: '30rem',
+      errorScreenDebugInfoMaxWidth: '24rem',
+      errorScreenDebugInfoMaxHeight: '16rem',
     },
 
     radii: {

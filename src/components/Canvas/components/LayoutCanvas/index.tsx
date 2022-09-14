@@ -22,9 +22,7 @@ export const LayoutCanvas = () => {
   // TODO: all refs should not end with "ref"
   const canvas = useRef<HTMLCanvasElement>(null!);
   const parts = useRef<Group>(null!);
-  const regressAmount = useSettings(
-    (state) => state.performance.regress_amount,
-  );
+  const regressAmount = useSettings((state) => state.performance.regressAmount);
   const initialBlueprintState = useBlueprint.getState();
 
   const handlePointerMissed = () => {
@@ -91,4 +89,3 @@ export const LayoutCanvas = () => {
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';
-

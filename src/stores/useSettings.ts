@@ -22,11 +22,13 @@ export const themes = new Map<string, Theme>([
 
 export interface UseSettings {
   debug: {
-    error_logs: boolean;
+    errorScreen: {
+      showDebug: boolean;
+    };
   };
 
   performance: {
-    regress_amount: number;
+    regressAmount: number;
   };
 
   interface: {
@@ -61,11 +63,13 @@ export interface UseSettings {
 
 export const UseSettingsData: UseSettings = {
   debug: {
-    error_logs: false,
+    errorScreen: {
+      showDebug: false,
+    },
   },
 
   performance: {
-    regress_amount: 1,
+    regressAmount: 1,
   },
 
   interface: {
