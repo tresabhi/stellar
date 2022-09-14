@@ -1,8 +1,8 @@
-name: Beta CD
+name: CD Alpha
 
 on:
   push:
-    branches: [beta-cd]
+    branches: [main]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -43,7 +43,7 @@ jobs:
         run: npx react-scripts build
 
       - name: Post build make-up
-        run: node scripts/postBuild.js --beta -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
+        run: node scripts/postBuild.js --alpha -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
 
       - name: Archive build
         uses: actions/upload-artifact@v2
@@ -54,8 +54,8 @@ jobs:
   deploy:
     name: Deploy
     environment:
-      name: Beta
-      url: https://stellarbeta.web.app/
+      name: Alpha
+      url: https://stellaralpha.web.app/
     needs: build
     runs-on: ubuntu-latest
     if: github.repository == 'tresabhi/stellar'
@@ -73,6 +73,6 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:beta
+          args: deploy --only hosting:alpha
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

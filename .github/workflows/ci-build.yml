@@ -1,4 +1,4 @@
-name: Alpha CD
+name: CI Build
 
 on:
   push:
@@ -50,29 +50,3 @@ jobs:
         with:
           name: build
           path: build
-
-  deploy:
-    name: Deploy
-    environment:
-      name: Alpha
-      url: https://stellaralpha.web.app/
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.repository == 'tresabhi/stellar'
-
-    steps:
-      - name: Get code
-        uses: actions/checkout@v2
-
-      - name: Unarchive build
-        uses: actions/download-artifact@v2
-        with:
-          name: build
-          path: build
-
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting:alpha
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}

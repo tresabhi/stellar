@@ -1,0 +1,78 @@
+name: CD Release
+
+on:
+  push:
+    branches: [release-cd]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v2
+
+      - name: Use node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install Yarn
+        run: npm install --location=global yarn
+
+      - name: Use node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build static site
+        run: npx react-scripts build
+
+      - name: Post build make-up
+        run: node scripts/postBuild.js --release -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
+
+      - name: Archive build
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+
+  deploy:
+    name: Deploy
+    environment:
+      name: Release
+      url: https://stellaredit.web.app/
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.repository == 'tresabhi/stellar'
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v2
+
+      - name: Unarchive build
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only hosting:release
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
