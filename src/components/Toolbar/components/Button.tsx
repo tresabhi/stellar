@@ -7,6 +7,7 @@ export const Button = styled('button', {
   width: theme.sizes[40],
   alignItems: 'center',
   justifyContent: 'center',
+  border: 'none',
 
   '& > svg': {
     width: theme.sizes[16],

@@ -8,7 +8,7 @@ export interface TabProps extends InputHTMLAttributes<HTMLButtonElement> {
   children: string;
 }
 
-const Container = styled(Button, {
+const Trigger = styled(Button, {
   flex: 1,
   display: 'flex',
   justifyContent: 'center',
@@ -70,9 +70,9 @@ const Label = styled('span', {
 export const Tab: FC<TabProps> = ({ icon, selected, children, ...props }) => {
   return (
     // @ts-ignore
-    <Container selected={selected} {...props}>
+    <Trigger selected={selected} {...props}>
       {icon}
       <Label>{children}</Label>
-    </Container>
+    </Trigger>
   );
 };

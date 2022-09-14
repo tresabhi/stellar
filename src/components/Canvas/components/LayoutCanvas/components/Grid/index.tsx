@@ -3,22 +3,11 @@ import { theme } from 'stitches.config';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings, { themes } from 'stores/useSettings';
 import { Color, GridHelper, Mesh } from 'three';
+import { toThreeSafeHSL } from 'utilities/toThreeSafeHSL';
 import { InfiniteGridHelper } from './components/InfiniteGridHelper';
 
 const MINOR_MARK = 1 / 5;
 const MAJOR_MARK = 1;
-const numberPattern = /([0-9]|\.)+/g;
-
-const toThreeSafeHSL = (color: string) =>
-  new Color(
-    `hsl(${color
-      .match(numberPattern)!
-      .map((numberString) => Number(numberString))
-      .map((number, index) =>
-        index === 0 ? Math.round(number) : `${Math.round(number)}%`,
-      )
-      .join(', ')})`,
-  );
 
 export const Grid = () => {
   const initialState = useBlueprint.getState();
@@ -26,10 +15,12 @@ export const Grid = () => {
   const gridRef = useRef<GridHelper>(null);
   const currentTheme = useSettings((state) => state.interface.theme);
   const themeTokens = currentTheme ? themes.get(currentTheme) ?? theme : theme;
-  const gridColor = toThreeSafeHSL(
-    themeTokens.colors.textLowContrast_accent.value,
+  const gridColor = new Color(
+    toThreeSafeHSL(themeTokens.colors.textLowContrast_accent.value),
   );
-  const subGridColor = toThreeSafeHSL(themeTokens.colors.textLowContrast.value);
+  const subGridColor = new Color(
+    toThreeSafeHSL(themeTokens.colors.textLowContrast.value),
+  );
 
   useEffect(() => {
     const unsubscribe = useBlueprint.subscribe(

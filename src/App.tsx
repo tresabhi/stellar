@@ -4,7 +4,6 @@ import { Home } from 'routes/Home';
 import Interface from 'routes/Interface';
 import { styled, theme } from 'stitches.config';
 import useSettings from 'stores/useSettings';
-import 'styles/index.scss';
 
 const AppContainer = styled('div', {
   backgroundColor: theme.colors.appBackground1,

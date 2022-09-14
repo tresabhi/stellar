@@ -4,12 +4,25 @@ export const globalStyles = globalCss({
   '@import': [
     'https://fonts.googleapis.com/css?family=Roboto+Flex&display=swap',
     'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
-    'https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css', // TODO: remove this when bepaint supports this
+    'https://cdn.jsdelivr.net/npm/normalize.css/normalize.css', // TODO: remove this when bepaint supports this
   ],
+
+  html: {
+    // don't blow their eyes out on reload
+    backgroundColor: theme.colors.appBackground1,
+  },
 
   '*': {
     fontFamily: theme.fonts.default,
   },
+
+  'button, input, details, summary': {
+    padding: 'unset',
+    background: 'unset',
+    border: 'unset',
+  },
+
+  '*:focus, *:focus-within': { outline: 'unset' },
 
   '::-webkit-scrollbar': {
     width: theme.sizes.scrollbarWidth,

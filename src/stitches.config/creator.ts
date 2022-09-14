@@ -58,6 +58,7 @@ export const {
       24: '1.5rem',
       32: '2rem',
       40: '2.5rem',
+      64: '4rem',
 
       dropdownWidth: '15rem',
       inputSizeMinor: '1rem',

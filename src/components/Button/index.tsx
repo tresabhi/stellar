@@ -40,7 +40,12 @@ export const Button = styled('button', {
       },
     },
 
-    border: { true: {} },
+    border: {
+      true: {},
+      false: {
+        border: 'none',
+      },
+    },
   },
 
   compoundVariants: [
