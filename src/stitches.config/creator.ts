@@ -78,6 +78,8 @@ export const {
       errorScreenInfoMaxWidth: '30rem',
       errorScreenDebugInfoMaxWidth: '24rem',
       errorScreenDebugInfoMaxHeight: '16rem',
+      sidebarCollapseButtonWidth: '1.5rem',
+      sidebarCollapseButtonHeight: '2rem',
     },
 
     radii: {

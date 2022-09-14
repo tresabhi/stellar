@@ -3,26 +3,45 @@ import { styled, theme } from 'stitches.config';
 export const Container = styled('div', {
   backgroundColor: theme.colors.componentBackground,
   display: 'flex',
+  position: 'relative',
   flexDirection: 'column',
-  width: theme.sizes.sidebarWidth,
 
   variants: {
     position: {
-      left: {
-        borderRight: theme.borderStyles.componentNonInteractive,
-      },
+      left: {},
 
-      right: {
-        borderLeft: theme.borderStyles.componentNonInteractive,
-      },
+      right: {},
     },
 
     visible: {
+      true: {
+        width: theme.sizes.sidebarWidth,
+      },
+
       false: {
-        display: 'none',
+        width: 0,
       },
     },
   },
+
+  compoundVariants: [
+    {
+      visible: true,
+      position: 'left',
+
+      css: {
+        borderRight: theme.borderStyles.componentNonInteractive,
+      },
+    },
+    {
+      visible: true,
+      position: 'right',
+
+      css: {
+        borderRight: theme.borderStyles.componentNonInteractive,
+      },
+    },
+  ],
 
   defaultVariants: {
     visible: true,

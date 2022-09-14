@@ -1,3 +1,4 @@
+import 'App.css';
 import { usePrerender } from 'hooks/usePrerender';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from 'routes/Home';

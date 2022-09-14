@@ -31,18 +31,19 @@ export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
       : rightSidebar.visible.inComfortableMode;
 
   return (
-    <Sidebar.Container
-      visible={
-        interfaceMode === InterfaceMode.Compact
-          ? rightSidebar.visible.inCompactMode
-          : rightSidebar.visible.inComfortableMode
-      }
-      position="right"
-    >
-      <Tabs swapSecondTab={swapSecondTab} />
-      {!swapSecondTab && rightSidebar.tab === SidebarTab.Left && <Properties />}
-      {swapSecondTab && rightSidebar.tab === SidebarTab.Left && <Snippets />}
-      {rightSidebar.tab === SidebarTab.Right && <Inspect />}
+    <Sidebar.Container visible={expanded} position="right">
+      {expanded && (
+        <>
+          <Tabs swapSecondTab={swapSecondTab} />
+          {!swapSecondTab && rightSidebar.tab === SidebarTab.Left && (
+            <Properties />
+          )}
+          {swapSecondTab && rightSidebar.tab === SidebarTab.Left && (
+            <Snippets />
+          )}
+          {rightSidebar.tab === SidebarTab.Right && <Inspect />}
+        </>
+      )}
 
       <Sidebar.Collapse
         position="right"

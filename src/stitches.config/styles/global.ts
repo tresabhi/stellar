@@ -7,9 +7,10 @@ export const globalStyles = globalCss({
     'https://cdn.jsdelivr.net/npm/normalize.css/normalize.css', // TODO: remove this when bepaint supports this
   ],
 
-  html: {
+  'html, body': {
     // don't blow their eyes out on reload
     backgroundColor: theme.colors.appBackground1,
+    overflow: 'hidden',
   },
 
   '*': {

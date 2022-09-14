@@ -21,19 +21,24 @@ export const LeftSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   };
 
   return (
-    <Sidebar.Container
-      css={{ position: 'relative' }}
-      visible={leftSidebar.visible}
-      position="left"
-    >
-      <Tabs swapSecondTab={swapSecondTab} />
-      {leftSidebar.tab === SidebarTab.Left && <Parts />}
-      {swapSecondTab && leftSidebar.tab === SidebarTab.Right && <Properties />}
-      {!swapSecondTab && leftSidebar.tab === SidebarTab.Right && <Snippets />}
+    <Sidebar.Container visible={leftSidebar.visible} position="left">
+      {leftSidebar.visible && (
+        <>
+          <Tabs swapSecondTab={swapSecondTab} />
+          {leftSidebar.tab === SidebarTab.Left && <Parts />}
+          {swapSecondTab && leftSidebar.tab === SidebarTab.Right && (
+            <Properties />
+          )}
+          {!swapSecondTab && leftSidebar.tab === SidebarTab.Right && (
+            <Snippets />
+          )}
 
-      {leftSidebar.tab === SidebarTab.Left && <Rename />}
+          {leftSidebar.tab === SidebarTab.Left && <Rename />}
+        </>
+      )}
+
       <Sidebar.Collapse
-        position="right"
+        position="left"
         expanded={leftSidebar.visible}
         onClick={handleCollapseClick}
       />
