@@ -1,6 +1,6 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
-import { MutableRefObject } from 'react';
+import { RefObject } from 'react';
 import { Group, Mesh } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
@@ -28,13 +28,13 @@ export const PartWithScaleData: PartWithScale = {
 
 export const usePartWithScale = (
   id: string,
-  groupRef: MutableRefObject<Mesh | Group>,
+  groupRef: RefObject<Mesh | Group>,
 ) => {
   usePartProperty(
     id,
     (part: PartWithScale) => part.o,
     (o) => {
-      groupRef.current.scale.set(o.x, o.y, 1);
+      groupRef.current?.scale.set(o.x, o.y, 1);
       declareBoundNeedsUpdate(id);
       deferUpdates();
     },

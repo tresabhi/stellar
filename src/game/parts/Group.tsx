@@ -7,10 +7,10 @@ import PartCategory from 'hooks/constants/partCategory';
 import useDragControls from 'hooks/useDragControls';
 import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
-import { FC, MutableRefObject, useCallback, useEffect, useRef } from 'react';
+import { FC, useCallback, useEffect, useRef } from 'react';
 import useBounds, { BoundListing, PartBounds } from 'stores/useBounds';
 import { PartExportifier, PartRegistryFragment } from 'stores/usePartRegistry';
-import { Group as ThreeGroup, Mesh } from 'three';
+import { Group as ThreeGroup } from 'three';
 import { AnyVanillaPart, PartComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
 
@@ -30,28 +30,29 @@ export const GroupData: Group = {
 };
 
 export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
-  const cluster = useRef<ThreeGroup>(null!);
+  const cluster = useRef<ThreeGroup>(null);
   const handleClick = useSelectionControl(id);
   const handlePointerDown = useDragControls(id);
 
   const computeBounds = useCallback(() => {
-    const bounds: PartBounds = {
-      ...getBoundsFromObject(
-        cluster,
-        cluster as unknown as MutableRefObject<Mesh>,
-      ),
+    const boundsFromObject = getBoundsFromObject(cluster, cluster);
 
-      rotation: 0,
-      offset: { x: 0, y: 0 },
-    };
-    const boundListing: BoundListing = {
-      bounds: bounds,
-      needsUpdate: false,
-    };
+    if (boundsFromObject) {
+      const bounds: PartBounds = {
+        ...boundsFromObject,
 
-    mutateBounds((draft) => {
-      draft.parts.set(id, boundListing);
-    });
+        rotation: 0,
+        offset: { x: 0, y: 0 },
+      };
+      const boundListing: BoundListing = {
+        bounds: bounds,
+        needsUpdate: false,
+      };
+
+      mutateBounds((draft) => {
+        draft.parts.set(id, boundListing);
+      });
+    }
   }, [id]);
 
   useEffect(computeBounds);

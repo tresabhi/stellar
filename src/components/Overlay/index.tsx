@@ -1,5 +1,5 @@
 import { popupClose } from 'core/interface';
-import { FC, InputHTMLAttributes, MouseEvent, ReactNode } from 'react';
+import { FC, HTMLAttributes, MouseEvent } from 'react';
 import { styled, theme } from 'stitches.config';
 
 const Container = styled('div', {
@@ -27,9 +27,8 @@ const Container = styled('div', {
   },
 });
 
-export interface OverlayProps extends InputHTMLAttributes<HTMLDivElement> {
+export interface OverlayProps extends HTMLAttributes<HTMLDivElement> {
   visible?: boolean;
-  children: ReactNode;
 }
 
 export const Overlay: FC<OverlayProps> = ({

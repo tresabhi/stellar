@@ -8,12 +8,12 @@ import { Group, Mesh } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData } from '../Part';
 import {
-  VanillaPartWithEngine,
-  VanillaPartWithEngineData,
+    VanillaPartWithEngine,
+    VanillaPartWithEngineData
 } from '../PartWithEngine';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+    VanillaPartWithTransformations,
+    VanillaPartWithTransformationsData
 } from '../PartWithTransformations';
 
 export interface VanillaEngineKolibri
@@ -41,8 +41,8 @@ export const EngineKolibriData: EngineKolibri = {
 export const EngineKolibriLayoutComponent: FC<PartComponentProps> = ({
   id,
 }) => {
-  const wrapper = useRef<Group>(null!);
-  const mesh = useRef<Mesh>(null!);
+  const wrapper = useRef<Group>(null);
+  const mesh = useRef<Mesh>(null);
   const Model = usePartModel('EngineKolibri', 'model');
   const { props } = usePhysicalPart(id, wrapper, mesh);
 

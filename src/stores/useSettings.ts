@@ -57,6 +57,7 @@ export interface UseSettings {
   };
 
   editor: {
+    undoLimit: number;
     rename: RenamePartsOptions;
   };
 }
@@ -98,6 +99,7 @@ export const UseSettingsData: UseSettings = {
   },
 
   editor: {
+    undoLimit: 512,
     rename: {
       trim: true,
       skipLocked: true,

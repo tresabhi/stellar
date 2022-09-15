@@ -1,8 +1,9 @@
 import { Button } from 'components/Button';
-import { FC, InputHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
-export interface TabProps extends InputHTMLAttributes<HTMLButtonElement> {
+export interface TabProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
   icon?: ReactNode;
   selected?: boolean;
   children: string;
@@ -69,8 +70,7 @@ const Label = styled('span', {
 
 export const Tab: FC<TabProps> = ({ icon, selected, children, ...props }) => {
   return (
-    // @ts-ignore
-    <Trigger selected={selected} {...props}>
+    <Trigger {...props} selected={selected}>
       {icon}
       <Label>{children}</Label>
     </Trigger>

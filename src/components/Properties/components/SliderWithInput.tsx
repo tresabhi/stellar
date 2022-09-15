@@ -6,7 +6,7 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import { evaluateExpression } from 'utilities/evaluateExpression';
@@ -54,7 +54,6 @@ export const SliderWithInput = forwardRef<
       min = 0,
       max = 100,
       step = 1,
-      unit,
       indeterminate: givenIndeterminate = false,
       value: givenValue,
       defaultValue = min,
@@ -63,8 +62,8 @@ export const SliderWithInput = forwardRef<
     },
     ref,
   ) => {
-    const container = useRef<HTMLDivElement>(null!);
-    const input = useRef<InputRef>(null!);
+    const container = useRef<HTMLDivElement>(null);
+    const input = useRef<InputRef>(null);
     const [value, setValue] = useState(defaultValue ?? min);
     const [indeterminate, setIndeterminate] = useState(givenIndeterminate);
 
@@ -73,7 +72,7 @@ export const SliderWithInput = forwardRef<
     };
 
     const handleSliderValueChange = (newValue: number) => {
-      if (givenValue === undefined) {
+      if (givenValue === undefined && input.current) {
         input.current.value = normalizedValue(newValue);
         input.current.resize();
 
@@ -100,18 +99,21 @@ export const SliderWithInput = forwardRef<
       }
     };
 
-    // eslint-disable-next-line
     useEffect(() => {
-      (container.current as SliderWithInputRef).setValue = (
-        newValue: number,
-      ) => {
-        input.current.value = normalizedValue(newValue);
-        input.current.resize();
+      if (container.current) {
+        (container.current as SliderWithInputRef).setValue = (
+          newValue: number,
+        ) => {
+          if (input.current) {
+            input.current.value = normalizedValue(newValue);
+            input.current.resize();
+          }
 
-        setValue(newValue);
-      };
-      (container.current as SliderWithInputRef).setIndeterminate =
-        setIndeterminate;
+          setValue(newValue);
+        };
+        (container.current as SliderWithInputRef).setIndeterminate =
+          setIndeterminate;
+      }
     });
 
     useImperativeHandle(ref, () => container.current as SliderWithInputRef);

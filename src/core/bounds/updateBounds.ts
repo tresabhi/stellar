@@ -8,12 +8,11 @@ export const updateBounds = (
   wrapper: MutableRefObject<Group>,
   mesh: MutableRefObject<Mesh>,
 ) => {
-  const bounds = getBoundsFromObject(wrapper, mesh);
-
   mutateBounds((draft) => {
     const boundListing = draft.parts.get(id);
+    const bounds = getBoundsFromObject(wrapper, mesh);
 
-    if (boundListing) {
+    if (bounds && boundListing) {
       boundListing.bounds = bounds;
       boundListing.needsUpdate = false;
     }

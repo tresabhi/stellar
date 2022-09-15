@@ -5,7 +5,7 @@ import {
   PointerEvent,
   ReactNode,
   useEffect,
-  useRef
+  useRef,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 
@@ -112,35 +112,37 @@ const Children = styled('div', {
 });
 
 export const Dropdown: FC<DropdownProps> = ({ icon, children, disabled }) => {
-  const wrapper = useRef<HTMLDetailsElement>(null!);
-  const childrenElement = useRef<HTMLDivElement>(null!);
+  const wrapper = useRef<HTMLDetailsElement>(null);
+  const childrenRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => {
-    const boundingClientRect = childrenElement.current.getBoundingClientRect();
-    const otherWrappers = document.querySelectorAll(`${Wrapper}`);
+    if (childrenRef.current) {
+      const boundingClientRect = childrenRef.current.getBoundingClientRect();
+      const otherWrappers = document.querySelectorAll(`${Wrapper}`);
 
-    if (
-      boundingClientRect.x + boundingClientRect.width + PADDING_FROM_EDGE >
-      document.body.clientWidth
-    ) {
-      childrenElement.current.style.transform = `translate(${
-        (document.body.clientWidth -
-          (boundingClientRect.x + boundingClientRect.width) -
-          PADDING_FROM_EDGE) /
-        16
-      }rem)`;
-    } else if (boundingClientRect.x - PADDING_FROM_EDGE < 0) {
-      childrenElement.current.style.transform = `translate(${
-        (-boundingClientRect.x + PADDING_FROM_EDGE) / 16
-      }rem)`;
-    }
+      if (
+        boundingClientRect.x + boundingClientRect.width + PADDING_FROM_EDGE >
+        document.body.clientWidth
+      ) {
+        childrenRef.current.style.transform = `translate(${
+          (document.body.clientWidth -
+            (boundingClientRect.x + boundingClientRect.width) -
+            PADDING_FROM_EDGE) /
+          16
+        }rem)`;
+      } else if (boundingClientRect.x - PADDING_FROM_EDGE < 0) {
+        childrenRef.current.style.transform = `translate(${
+          (-boundingClientRect.x + PADDING_FROM_EDGE) / 16
+        }rem)`;
+      }
 
-    if (wrapper.current.open) {
-      otherWrappers.forEach((otherWrapper) => {
-        if (otherWrapper !== wrapper.current) {
-          (otherWrapper as HTMLDetailsElement).open = false;
-        }
-      });
+      if (wrapper.current?.open) {
+        otherWrappers.forEach((otherWrapper) => {
+          if (otherWrapper !== wrapper.current) {
+            (otherWrapper as HTMLDetailsElement).open = false;
+          }
+        });
+      }
     }
   };
 
@@ -153,7 +155,9 @@ export const Dropdown: FC<DropdownProps> = ({ icon, children, disabled }) => {
   };
 
   useEffect(() => {
-    const handleWindowPointerDown = () => (wrapper.current.open = false);
+    const handleWindowPointerDown = () => {
+      if (wrapper.current) wrapper.current.open = false;
+    };
 
     window.addEventListener('pointerdown', handleWindowPointerDown);
 
@@ -176,7 +180,7 @@ export const Dropdown: FC<DropdownProps> = ({ icon, children, disabled }) => {
         <CaretDown />
       </Trigger>
 
-      <Children ref={childrenElement}>{children}</Children>
+      <Children ref={childrenRef}>{children}</Children>
     </Wrapper>
   );
 };

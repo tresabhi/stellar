@@ -9,12 +9,14 @@ export const PART_MODEL_PATH = '/assets/models/parts/';
 const usePartModel = (fileName: string, modelName: string) => {
   const result = useGLTF(`${PART_MODEL_PATH}${fileName}.gltf`) as GLTFResult;
 
-  return forwardRef<Mesh, MeshProps>((props, ref) => (
+  const Component = forwardRef<Mesh, MeshProps>((props, ref) => (
     <mesh {...props} ref={ref} geometry={result.nodes[modelName].geometry}>
       <meshBasicMaterial
         map={(result.nodes[modelName].material as MeshStandardMaterial).map}
       />
     </mesh>
   ));
+
+  return Component;
 };
 export default usePartModel;

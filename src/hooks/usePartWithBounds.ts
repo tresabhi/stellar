@@ -1,24 +1,25 @@
 import { mutateBounds } from 'core/app';
 import { getBoundsFromObject } from 'core/bounds';
-import { MutableRefObject, useCallback, useEffect } from 'react';
-import useBounds, { BoundListing } from 'stores/useBounds';
+import { RefObject, useCallback, useEffect } from 'react';
+import useBounds from 'stores/useBounds';
 import { Group, Mesh } from 'three';
 
 const usePartWithBounds = (
   id: string,
-  wrapper: MutableRefObject<Group>,
-  mesh: MutableRefObject<Mesh>,
+  wrapper: RefObject<Group>,
+  mesh: RefObject<Mesh>,
 ) => {
   const computeBounds = useCallback(() => {
     const bounds = getBoundsFromObject(wrapper, mesh);
-    const boundListing: BoundListing = {
-      bounds: bounds,
-      needsUpdate: false,
-    };
 
-    mutateBounds((draft) => {
-      draft.parts.set(id, boundListing);
-    });
+    if (bounds) {
+      mutateBounds((draft) => {
+        draft.parts.set(id, {
+          bounds: bounds,
+          needsUpdate: false,
+        });
+      });
+    }
   }, [id, mesh, wrapper]);
 
   useEffect(computeBounds);

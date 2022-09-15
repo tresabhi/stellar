@@ -19,7 +19,7 @@ export const useSliderProperty = <
   slice: (state: Type) => Value,
   mutate: (draft: Type, value: Value) => void,
 ) => {
-  const slider = useRef<SliderWithInputRef>(null!);
+  const slider = useRef<SliderWithInputRef>(null);
   let value = getMutualProperty<Type, Value>(ids, slice);
   const firstRender = useRef(true);
 
@@ -29,13 +29,15 @@ export const useSliderProperty = <
     });
   }, COMMIT_DEBOUNCE);
   const recomputeAndRerender = () => {
-    value = getMutualProperty<Type, Value>(ids, slice);
+    if (slider.current) {
+      value = getMutualProperty<Type, Value>(ids, slice);
 
-    if (value === undefined) {
-      slider.current.setIndeterminate(true);
-    } else {
-      slider.current.setIndeterminate(false);
-      slider.current.setValue(value);
+      if (value === undefined) {
+        slider.current.setIndeterminate(true);
+      } else {
+        slider.current.setIndeterminate(false);
+        slider.current.setValue(value);
+      }
     }
   };
   const debouncedRecomputeAndRerender = fallingEdgeDebounce(

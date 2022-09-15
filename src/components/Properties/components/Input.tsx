@@ -2,8 +2,8 @@ import { Input as InputPrimitive } from 'components/Input';
 import { useInputEscape } from 'hooks/useInputEscape';
 import {
   ChangeEvent,
+  ComponentPropsWithoutRef,
   forwardRef,
-  InputHTMLAttributes,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -16,7 +16,7 @@ import { Label } from './Label';
 const MAX_CHARACTERS = 6;
 
 export interface InputProps
-  extends InputHTMLAttributes<HTMLInputElement>,
+  extends ComponentPropsWithoutRef<typeof InputPrimitive>,
     PropertyWithLabel,
     PropertyWithUnit {}
 
@@ -73,10 +73,10 @@ export const Input = forwardRef<InputRef, InputProps>(
     { label, unit, onChange, onKeyDown, value, defaultValue, ...props },
     ref,
   ) => {
-    const input = useRef<HTMLInputElement>(null!);
+    const input = useRef<HTMLInputElement>(null);
     const handleContainerClick = () => {
-      input.current.focus();
-      input.current.select();
+      input.current?.focus();
+      input.current?.select();
     };
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
       resize();
@@ -84,10 +84,12 @@ export const Input = forwardRef<InputRef, InputProps>(
     };
     const handleKeyDown = useInputEscape(onKeyDown);
     const resize = () => {
-      input.current.style.width = `${Math.min(
-        input.current.value.length,
-        MAX_CHARACTERS,
-      )}ch`;
+      if (input.current) {
+        input.current.style.width = `${Math.min(
+          input.current.value.length,
+          MAX_CHARACTERS,
+        )}ch`;
+      }
     };
 
     useEffect(() => {

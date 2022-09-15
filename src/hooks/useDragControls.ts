@@ -1,11 +1,11 @@
 import { ThreeEvent } from '@react-three/fiber';
 import { mutateVersionControl } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
-import { UNDO_LIMIT } from 'core/blueprint';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Patch, produceWithPatches } from 'immer';
 import useBlueprint from 'stores/useBlueprint';
+import useSettings from 'stores/useSettings';
 import { Vector2 } from 'three';
 import snap from 'utilities/snap';
 import useApp, { Tool } from '../stores/useApp';
@@ -21,8 +21,8 @@ const useDragControls = (id: string) => {
 
   let selectedInitially = false;
   let initialMousePos: Vector2;
-  let lastDelta = new Vector2();
-  let lastSnappedDelta = new Vector2();
+  const lastDelta = new Vector2();
+  const lastSnappedDelta = new Vector2();
   let firstInversePatchesX: Patch[] | undefined;
   let firstInversePatchesY: Patch[] | undefined;
   let lastPatchesX: Patch[] | undefined;
@@ -123,6 +123,8 @@ const useDragControls = (id: string) => {
     ];
 
     if (lastDelta.length() > 0) {
+      const { undoLimit } = useSettings.getState().editor;
+
       mutateVersionControl((draft) => {
         draft.history.splice(
           draft.index + 1,
@@ -134,10 +136,10 @@ const useDragControls = (id: string) => {
           patches: lastPatches,
         });
 
-        if (UNDO_LIMIT === 0) {
+        if (undoLimit === 0) {
           draft.index++;
         } else {
-          if (draft.history.length > UNDO_LIMIT) {
+          if (draft.history.length > undoLimit) {
             draft.history.shift();
           } else {
             draft.index++;

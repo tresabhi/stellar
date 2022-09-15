@@ -15,8 +15,8 @@ export const useCheckboxProperty = <
   slice: (state: Type) => Value,
   mutate: (draft: Type, value: Value) => void,
 ) => {
-  const checkbox = useRef<CheckboxRef>(null!);
-  let value = useRef(getMutualProperty<Type, Value>(ids, slice));
+  const checkbox = useRef<CheckboxRef>(null);
+  const value = useRef(getMutualProperty<Type, Value>(ids, slice));
   const firstRender = useRef(true);
 
   const commit = fallingEdgeDebounce((value: Value) => {
@@ -28,11 +28,11 @@ export const useCheckboxProperty = <
     value.current = getMutualProperty<Type, Value>(ids, slice);
 
     if (value.current === undefined) {
-      checkbox.current.setValue(false);
-      checkbox.current.setIndeterminate(true);
+      checkbox.current?.setValue(false);
+      checkbox.current?.setIndeterminate(true);
     } else {
-      checkbox.current.setValue(value.current);
-      checkbox.current.setIndeterminate(false);
+      checkbox.current?.setValue(value.current);
+      checkbox.current?.setIndeterminate(false);
     }
   }, [ids, slice]);
 

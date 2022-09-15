@@ -1,11 +1,9 @@
+import { mutateVersionControl } from 'core/app';
 import { Blueprint } from 'game/Blueprint';
-import produce, { produceWithPatches } from 'immer';
+import { produceWithPatches } from 'immer';
 import useBlueprint from 'stores/useBlueprint';
-import useVersionControl, { UseVersionControl } from 'stores/useVersionControl';
+import useSettings from 'stores/useSettings';
 import { declareUnsavedChanges } from './declareUnsavedChanges';
-
-// a let statement to avoid static checking error with 0
-export let UNDO_LIMIT = 512;
 
 export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
   const [nextState, patches, inversePatches] = produceWithPatches(
@@ -14,29 +12,29 @@ export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
   );
 
   if (patches.length > 0) {
-    useVersionControl.setState(
-      produce<UseVersionControl>((draft) => {
-        draft.history.splice(
-          draft.index + 1,
-          draft.history.length - draft.index - 1,
-        );
+    const { undoLimit } = useSettings.getState().editor;
 
-        draft.history.push({
-          inversePatches: inversePatches,
-          patches: patches,
-        });
+    mutateVersionControl((draft) => {
+      draft.history.splice(
+        draft.index + 1,
+        draft.history.length - draft.index - 1,
+      );
 
-        if (UNDO_LIMIT === 0) {
-          draft.index++;
+      draft.history.push({
+        inversePatches: inversePatches,
+        patches: patches,
+      });
+
+      if (undoLimit === 0) {
+        draft.index++;
+      } else {
+        if (draft.history.length > undoLimit) {
+          draft.history.shift();
         } else {
-          if (draft.history.length > UNDO_LIMIT) {
-            draft.history.shift();
-          } else {
-            draft.index++;
-          }
+          draft.index++;
         }
-      }),
-    );
+      }
+    });
 
     declareUnsavedChanges();
     useBlueprint.setState(nextState);

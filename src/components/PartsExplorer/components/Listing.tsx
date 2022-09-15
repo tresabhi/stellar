@@ -4,7 +4,7 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { useInputEscape } from 'hooks/useInputEscape';
@@ -105,125 +105,138 @@ const Label = styled(Input, {
 
 export const Listing = memo<ListingProps>(
   ({ id, indent }) => {
-    const part = getPart(id)!;
-    const isGroup = part.n === 'Group';
-    let lastLabel = part.label;
-    const { Icon, data } = usePartRegistry.getState().get(part.n)!;
-    const trigger = useRef<HTMLElement>(null!);
-    const label = useRef<HTMLInputElement>(null!);
-    const iconContainer = useRef<HTMLDivElement>(null!);
-    let buttonDefaultClassNames: string;
+    const part = getPart(id);
 
-    const handleLabelKeyDown = useInputEscape();
-    const handleLabelBlur = () => {
-      const newLabel = label.current.value.trim();
+    if (part) {
+      const isGroup = part.n === 'Group';
+      let lastLabel = part.label;
+      const partRegistry = usePartRegistry.getState().get(part.n);
 
-      if (newLabel.length > 0) {
-        if (newLabel !== lastLabel) {
-          label.current.value = newLabel;
-          lastLabel = newLabel;
+      if (partRegistry) {
+        const { Icon, data } = partRegistry;
+        const trigger = useRef<HTMLElement>(null);
+        const label = useRef<HTMLInputElement>(null);
+        const iconContainer = useRef<HTMLDivElement>(null);
+        let buttonDefaultClassNames: string;
 
-          mutatePart(id, (draft) => {
-            draft.label = newLabel;
-          });
-        } else {
-          label.current.value = lastLabel;
-        }
-      } else {
-        label.current.value = data.label;
-        lastLabel = data.label;
+        const handleLabelKeyDown = useInputEscape();
+        const handleLabelBlur = () => {
+          if (label.current) {
+            const newLabel = label.current.value.trim();
 
-        mutatePart(id, (draft) => {
-          draft.label = data.label;
-        });
-      }
-    };
-    const handleTriggerClick = (event: MouseEvent) => {
-      event.stopPropagation();
+            if (newLabel.length > 0) {
+              if (newLabel !== lastLabel) {
+                label.current.value = newLabel;
+                lastLabel = newLabel;
 
-      if (event.ctrlKey) {
-        if (event.shiftKey) {
-          const { selections } = useBlueprint.getState();
-          const lastSelection = selections[selections.length - 1];
+                mutatePart(id, (draft) => {
+                  draft.label = newLabel;
+                });
+              } else {
+                label.current.value = lastLabel;
+              }
+            } else {
+              label.current.value = data.label;
+              lastLabel = data.label;
 
-          if (lastSelection) {
+              mutatePart(id, (draft) => {
+                draft.label = data.label;
+              });
+            }
+          }
+        };
+        const handleTriggerClick = (event: MouseEvent) => {
+          event.stopPropagation();
+
+          if (event.ctrlKey) {
+            if (event.shiftKey) {
+              const { selections } = useBlueprint.getState();
+              const lastSelection = selections[selections.length - 1];
+
+              if (lastSelection) {
+                // TODO: all shift selections
+              } else {
+                selectPartOnly(id);
+              }
+            } else {
+              togglePartSelection(id);
+            }
+          } else if (event.shiftKey) {
+            const { selections } = useBlueprint.getState();
+            const lastSelection = selections[selections.length - 1];
+
+            if (lastSelection) {
+              // TODO: all shift selections
+            } else {
+              selectPartOnly(id);
+            }
           } else {
             selectPartOnly(id);
           }
-        } else {
-          togglePartSelection(id);
-        }
-      } else if (event.shiftKey) {
-        const { selections } = useBlueprint.getState();
-        const lastSelection = selections[selections.length - 1];
+        };
+        const handleTriggerDoubleClick = () => {
+          label.current?.focus();
+          label.current?.select();
+        };
+        const handleLabelPointerDown = (event: PointerEvent) => {
+          event.preventDefault();
+        };
 
-        if (lastSelection) {
-        } else {
-          selectPartOnly(id);
-        }
-      } else {
-        selectPartOnly(id);
-      }
-    };
-    const handleTriggerDoubleClick = () => {
-      label.current.focus();
-      label.current.select();
-    };
-    const handleLabelPointerDown = (event: PointerEvent) => {
-      event.preventDefault();
-    };
+        usePartProperty(
+          id,
+          (state) => state.selected,
+          (selected) => {
+            if (isUndefined(buttonDefaultClassNames) && trigger.current) {
+              buttonDefaultClassNames = trigger.current.className;
 
-    usePartProperty(
-      id,
-      (state) => state.selected,
-      (selected) => {
-        if (isUndefined(buttonDefaultClassNames)) {
-          buttonDefaultClassNames = trigger.current.className;
-        }
-
-        trigger.current.className = `${buttonDefaultClassNames} ${triggerStyles(
-          {
-            selected,
+              trigger.current.className = `${buttonDefaultClassNames} ${triggerStyles(
+                {
+                  selected,
+                },
+              )}`;
+            }
           },
-        )}`;
-      },
-    );
-    usePartProperty(
-      id,
-      (state) => state.label,
-      (labelValue) => {
-        label.current.value = labelValue;
-      },
-    );
+        );
+        usePartProperty(
+          id,
+          (state) => state.label,
+          (labelValue) => {
+            if (label.current) label.current.value = labelValue;
+          },
+        );
 
-    return (
-      <Details open={isGroup && (part as Group).expanded}>
-        <summary
-          style={{
-            paddingLeft: `calc(${theme.space.paddingMajor} + ${indent} * ${theme.space.padding})`,
-          }}
-          ref={trigger}
-          onClick={handleTriggerClick}
-          onDoubleClick={handleTriggerDoubleClick}
-        >
-          <IconContainer openCaret={isGroup} ref={iconContainer}>
-            {isGroup ? <CaretRightIcon /> : <Icon />}
-          </IconContainer>
+        return (
+          <Details open={isGroup && (part as Group).expanded}>
+            <summary
+              style={{
+                paddingLeft: `calc(${theme.space.paddingMajor} + ${indent} * ${theme.space.padding})`,
+              }}
+              ref={trigger}
+              onClick={handleTriggerClick}
+              onDoubleClick={handleTriggerDoubleClick}
+            >
+              <IconContainer openCaret={isGroup} ref={iconContainer}>
+                {isGroup ? <CaretRightIcon /> : <Icon />}
+              </IconContainer>
 
-          <Label
-            tabIndex={-1}
-            ref={label}
-            defaultValue={part.label}
-            placeholder={`Unlabeled ${data.label}`}
-            onPointerDown={handleLabelPointerDown}
-            onBlur={handleLabelBlur}
-            onKeyDown={handleLabelKeyDown}
-          />
-        </summary>
+              <Label
+                tabIndex={-1}
+                ref={label}
+                defaultValue={part.label}
+                placeholder={`Unlabeled ${data.label}`}
+                onPointerDown={handleLabelPointerDown}
+                onBlur={handleLabelBlur}
+                onKeyDown={handleLabelKeyDown}
+              />
+            </summary>
 
-        {isGroup && <Container indent={indent + 1} parentId={part.id} />}
-      </Details>
-    );
+            {isGroup && <Container indent={indent + 1} parentId={part.id} />}
+          </Details>
+        );
+      }
+    }
+
+    return null;
   },
   ({ id: prevId }, { id: nextId }) => prevId === nextId,
 );

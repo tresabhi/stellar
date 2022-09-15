@@ -27,9 +27,8 @@ const panningStyles = css({
 });
 
 export const LayoutCanvas = () => {
-  // TODO: all refs should not end with "ref"
-  const canvas = useRef<HTMLCanvasElement>(null!);
-  const parts = useRef<Group>(null!);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const parts = useRef<Group>(null);
   const regressAmount = useSettings((state) => state.performance.regressAmount);
   const initialBlueprintState = useBlueprint.getState();
 
@@ -47,10 +46,12 @@ export const LayoutCanvas = () => {
     const unsubscribeTool = useApp.subscribe(
       (state) => (state.editor.isPanning ? Tool.Pan : state.editor.tool),
       (tool) => {
-        if (tool === Tool.Pan) {
-          canvas.current.classList.add(panningStyles());
-        } else {
-          canvas.current.classList.remove(panningStyles());
+        if (canvas.current) {
+          if (tool === Tool.Pan) {
+            canvas.current.classList.add(panningStyles());
+          } else {
+            canvas.current.classList.remove(panningStyles());
+          }
         }
       },
     );
@@ -81,6 +82,7 @@ export const LayoutCanvas = () => {
     </Canvas>
   );
 };
+
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';

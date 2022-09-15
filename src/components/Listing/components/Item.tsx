@@ -1,22 +1,20 @@
 import { Anchor } from 'components/Anchor';
 import { Button } from 'components/Button';
 import {
-  ForwardedRef,
+  ComponentPropsWithoutRef,
   forwardRef,
-  InputHTMLAttributes,
   memo,
   MouseEvent,
-  ReactNode
+  ReactNode,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 
-export interface ItemProps extends InputHTMLAttributes<HTMLButtonElement> {
+export interface ItemProps extends ComponentPropsWithoutRef<typeof Container> {
   children: ReactNode;
   note?: string;
   noteURL?: string;
   icon?: ReactNode;
   iconGap?: boolean;
-  ref?: ForwardedRef<HTMLButtonElement>;
 }
 
 const Container = styled(Button, {
@@ -52,7 +50,7 @@ const Label = styled('span', {
   textAlign: 'left',
 });
 
-const ANote = styled(Anchor, {
+const AnchorNote = styled(Anchor, {
   fontSize: theme.fontSizes[10],
 
   defaultVariants: {
@@ -67,7 +65,7 @@ const Note = styled('span', {
   fontFamily: theme.fonts.mono,
 });
 
-export const Item = memo<ItemProps>(
+export const Item = memo(
   forwardRef<HTMLButtonElement, ItemProps>(
     ({ children, note, icon, iconGap, noteURL, ...props }, ref) => {
       const handleANoteClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -75,14 +73,17 @@ export const Item = memo<ItemProps>(
       };
 
       return (
-        // @ts-ignore
         <Container {...props} ref={ref}>
           {icon || iconGap ? <IconContainer>{icon}</IconContainer> : null}
           <Label>{children}</Label>
           {noteURL ? (
-            <ANote target="_blank" onClick={handleANoteClick} href={noteURL}>
+            <AnchorNote
+              target="_blank"
+              onClick={handleANoteClick}
+              href={noteURL}
+            >
               {note}
-            </ANote>
+            </AnchorNote>
           ) : (
             <Note>{note}</Note>
           )}

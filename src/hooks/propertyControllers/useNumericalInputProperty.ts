@@ -17,12 +17,14 @@ export const useNumericalInputProperty = <
   slice: (state: Type) => Value,
   mutate: (draft: Type, value: Value) => void,
 ) => {
-  const input = useRef<InputRef>(null!);
+  const input = useRef<InputRef>(null);
   let value: Value | undefined = getMutualProperty(ids, slice);
 
   const setInputValue = (value?: number) => {
-    input.current.value = `${value ?? MIXED_VALUE_PLACEHOLDER}`;
-    input.current.resize();
+    if (input.current) {
+      input.current.value = `${value ?? MIXED_VALUE_PLACEHOLDER}`;
+      input.current.resize();
+    }
   };
   const commit = (value: Value) => {
     mutateParts<Type>(ids, (draft) => {

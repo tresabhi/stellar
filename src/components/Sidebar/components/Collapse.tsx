@@ -1,9 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { Button } from 'components/Button';
-import { FC, InputHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, FC } from 'react';
 import { styled, theme } from 'stitches.config';
 
-export interface CollapseProps extends InputHTMLAttributes<HTMLButtonElement> {
+export interface CollapseProps
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
   expanded?: boolean;
   position: 'left' | 'right';
 }
@@ -61,7 +62,6 @@ export const Collapse: FC<CollapseProps> = ({
   position,
   ...props
 }) => (
-  // @ts-ignore
   <Trigger {...props} position={position} expanded={expanded}>
     {position === 'left' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
   </Trigger>

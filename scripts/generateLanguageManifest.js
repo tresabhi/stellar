@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import { readdirSync, writeFileSync } from 'fs';
 import { parse } from 'path';
 

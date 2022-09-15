@@ -1,9 +1,9 @@
 import { Button } from 'components/Button';
-import { FC, InputHTMLAttributes, MouseEvent, ReactNode, useRef } from 'react';
+import { ButtonHTMLAttributes, FC, MouseEvent, ReactNode, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface DropdownItemProps
-  extends InputHTMLAttributes<HTMLButtonElement> {
+  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'color'> {
   icon?: ReactNode;
   children: string;
   keybind?: ReactNode;
@@ -76,23 +76,23 @@ export const DropdownItem: FC<DropdownItemProps> = ({
   onClick,
   ...props
 }) => {
-  const trigger = useRef<HTMLButtonElement>(null!);
+  const trigger = useRef<HTMLButtonElement>(null);
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    const wrapper = trigger.current.parentElement?.parentElement;
+    const wrapper = trigger.current?.parentElement?.parentElement;
 
     if (wrapper instanceof HTMLDetailsElement) wrapper.open = false;
+
     if (onClick) onClick(event);
   };
 
   return (
-    // @ts-ignore
     <Trigger
+      {...props}
       ref={trigger}
       disabled={disabled}
       priority={disabled ? 'disabled' : undefined}
       onClick={handleClick}
-      {...props}
     >
       <IconContainer disabled={disabled}>{icon}</IconContainer>
       <Label disabled={disabled}>{children}</Label>

@@ -1,13 +1,18 @@
-import PartCluster from 'components/Canvas/components/PartCluster';
+import PartCluster, {
+  PartClusterProps,
+} from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import { deferUpdates, translateAllBoundingBoxes } from 'core/bounds';
-import { forwardRef, MutableRefObject, useEffect } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import { Group } from 'three';
 import { Layer } from '../../../constants/layer';
 
-export const Parts = forwardRef<Group>((props, ref) => {
+export type PartsProps = Omit<PartClusterProps, 'parentId'>;
+
+export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
   const initialState = useBlueprint.getState();
+  const partsCluster = useRef<Group>(null);
 
   useEffect(() => {
     const unsubscribe = useBlueprint.subscribe(
@@ -16,11 +21,7 @@ export const Parts = forwardRef<Group>((props, ref) => {
         const deltaX = offset.x - previousOffset.x;
         const deltaY = offset.y - previousOffset.y;
 
-        (ref as MutableRefObject<Group>).current.position.set(
-          offset.x,
-          offset.y,
-          0,
-        );
+        partsCluster.current?.position.set(offset.x, offset.y, 0);
 
         translateAllBoundingBoxes(deltaX, deltaY);
         deferUpdates();
@@ -28,20 +29,23 @@ export const Parts = forwardRef<Group>((props, ref) => {
     );
 
     return unsubscribe;
-  }, [ref]);
+  }, [partsCluster]);
+
+  useImperativeHandle(ref, () => partsCluster.current as Group);
 
   return (
     <HeadsUpDisplay priority={Layer.PartRenderBetween}>
       {/**
-       * Temporary lighting solution for fuel tanks before we figure out the
+       * Temporary lighting solution for fuel tanks until we figure out the
        * texturing issue
        */}
       <directionalLight position={[0, 0, 100]} intensity={0.8} />
       <ambientLight intensity={0.2} />
 
       <PartCluster
+        {...props}
         position={[initialState.offset.x, initialState.offset.y, 0]}
-        ref={ref}
+        ref={partsCluster}
         parentId={null}
       />
     </HeadsUpDisplay>

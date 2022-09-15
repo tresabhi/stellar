@@ -1,5 +1,5 @@
 import { usePartWithTransformations } from 'game/parts/PartWithTransformations';
-import { MutableRefObject } from 'react';
+import { RefObject } from 'react';
 import { Group, Mesh } from 'three';
 import useDragControls from './useDragControls';
 import usePartVisibility from './usePartVisibility';
@@ -11,8 +11,8 @@ import useSelectionControl from './useSelectionControl';
  */
 const usePhysicalPart = (
   id: string,
-  wrapper: MutableRefObject<Group>,
-  mesh: MutableRefObject<Mesh>,
+  wrapper: RefObject<Group>,
+  mesh: RefObject<Mesh>,
 ) => {
   const props = {
     onClick: useSelectionControl(id),

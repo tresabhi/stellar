@@ -113,10 +113,10 @@ export const Palette: FC<PaletteProps> = ({
   );
   const [search, setSearch] = useState('');
   const results = useMemo(() => go(search, names), [names, search]);
-  const input = useRef<HTMLInputElement>(null!);
+  const input = useRef<HTMLInputElement>(null);
   const firstResult = useRef<HTMLButtonElement>(null);
   const handleChange = fallingEdgeDebounce(
-    () => setSearch(input.current.value),
+    () => input.current && setSearch(input.current.value),
     debounce,
   );
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -129,9 +129,9 @@ export const Palette: FC<PaletteProps> = ({
   const listings = useMemo(
     () =>
       (search.length > 0 ? results : namesFormatted).map((result, index) => {
-        const item = nameMap.get(result.target)!;
+        const item = nameMap.get(result.target);
 
-        return (
+        return item === undefined ? null : (
           <Listing.Item
             ref={index === 0 ? firstResult : undefined}
             onClick={item.callback}
@@ -149,7 +149,7 @@ export const Palette: FC<PaletteProps> = ({
   );
 
   useEffect(() => {
-    if (gainFocus) input.current.focus();
+    gainFocus && input.current?.focus();
   });
 
   return (

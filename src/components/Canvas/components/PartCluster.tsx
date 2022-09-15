@@ -6,16 +6,17 @@ import useBlueprint from 'stores/useBlueprint';
 import { Group } from 'three';
 import { ParentId } from 'types/Parts';
 
-interface PartClusterProps extends GroupProps {
+export interface PartClusterProps extends GroupProps {
   parentId: ParentId;
 }
+
 const PartCluster = forwardRef<Group, PartClusterProps>(
   ({ parentId, ...props }, ref) => {
     const state = useBlueprint((state) => {
       return (parentId ? (state.parts.get(parentId) as GroupPart) : state)
         .part_order;
     });
-    let partListing: JSX.Element[] = [];
+    const partListing: JSX.Element[] = [];
 
     state.forEach((Id) => {
       const part = getPart(Id);
@@ -36,4 +37,5 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
     );
   },
 );
+
 export default PartCluster;

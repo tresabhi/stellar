@@ -13,12 +13,13 @@ import useSettings from 'stores/useSettings';
 export const RenameParts = () => {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
-  const input = useRef<HTMLInputElement>(null!);
+  const input = useRef<HTMLInputElement>(null);
   const apply = () => {
-    renamePartsBySelection(
-      input.current.value,
-      useSettings.getState().editor.rename,
-    );
+    input.current &&
+      renamePartsBySelection(
+        input.current.value,
+        useSettings.getState().editor.rename,
+      );
     popupClose();
   };
   const handleClick = (type: keyof RenamePartsOptions) => {

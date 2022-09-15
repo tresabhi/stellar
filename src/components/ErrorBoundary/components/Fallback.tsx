@@ -139,7 +139,7 @@ const DebugContent = styled('span', {
 export const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   const theme = useSettings((state) => state.interface.theme);
   const debug = useSettings((state) => state.debug.errorScreen.showDebug);
-  let rawStack = useRef(
+  const rawStack = useRef(
     error.stack === undefined
       ? 'No stack provided'
       : error.stack

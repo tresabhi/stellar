@@ -111,44 +111,52 @@ export const FuelTankData: FuelTank = {
 };
 
 export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
-  const wrapper = useRef<Group>(null!);
-  const mesh = useRef<Mesh>(null!);
-  const state = getPart<FuelTank>(id)!;
-  const { props } = usePhysicalPart(id, wrapper, mesh);
+  const wrapper = useRef<Group>(null);
+  const mesh = useRef<Mesh>(null);
+  const state = getPart<FuelTank>(id);
 
-  usePartProperty(
-    id,
-    (state: FuelTank) => state.N,
-    (N) => {
-      mesh.current.geometry = new CylinderGeometry(
-        N.width_b / 2,
-        N.width_a / 2,
-        N.height,
-        12,
-        1,
-        true,
-        Math.PI / -2,
-        Math.PI,
-      );
-      mesh.current.position.set(0, N.height / 2, 0);
-      // TODO: maybe merge these two functions?
-      declareBoundNeedsUpdate(id);
-      deferUpdates();
-    },
-  );
+  if (state) {
+    const { props } = usePhysicalPart(id, wrapper, mesh);
 
-  return (
-    <group ref={wrapper} position={[state.p.x, state.p.y, 0]} {...props}>
-      <mesh ref={mesh}>
-        <meshStandardMaterial
-          flatShading
-          roughness={0.8}
-          metalness={0.8}
-          color="white"
-        />
-      </mesh>
-    </group>
-  );
+    usePartProperty(
+      id,
+      (state: FuelTank) => state.N,
+      (N) => {
+        if (mesh.current) {
+          mesh.current.geometry = new CylinderGeometry(
+            N.width_b / 2,
+            N.width_a / 2,
+            N.height,
+            12,
+            1,
+            true,
+            Math.PI / -2,
+            Math.PI,
+          );
+          mesh.current.position.set(0, N.height / 2, 0);
+
+          // TODO: maybe merge these two functions?
+          declareBoundNeedsUpdate(id);
+          deferUpdates();
+        }
+      },
+    );
+
+    return (
+      <group ref={wrapper} position={[state.p.x, state.p.y, 0]} {...props}>
+        <mesh ref={mesh}>
+          <meshStandardMaterial
+            flatShading
+            roughness={0.8}
+            metalness={0.8}
+            color="white"
+          />
+        </mesh>
+      </group>
+    );
+  }
+
+  return null;
 };
 
 export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({

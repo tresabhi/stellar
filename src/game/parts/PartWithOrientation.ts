@@ -1,6 +1,6 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
-import { MutableRefObject } from 'react';
+import { RefObject } from 'react';
 import { Group, Mesh } from 'three';
 import { degToRad } from 'three/src/math/MathUtils';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
@@ -29,13 +29,13 @@ export const PartWithOrientationData: PartWithOrientation = {
 
 export const usePartWithOrientation = (
   id: string,
-  groupRef: MutableRefObject<Mesh | Group>,
+  groupRef: RefObject<Mesh | Group>,
 ) => {
   usePartProperty(
     id,
     (part: PartWithOrientation) => part.o,
     (o) => {
-      groupRef.current.rotation.set(0, 0, degToRad(o.z));
+      groupRef.current?.rotation.set(0, 0, degToRad(o.z));
       declareBoundNeedsUpdate(id);
       deferUpdates();
     },

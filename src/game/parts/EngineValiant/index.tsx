@@ -41,8 +41,8 @@ export const EngineValiantData: EngineValiant = {
 export const EngineValiantLayoutComponent: FC<PartComponentProps> = ({
   id,
 }) => {
-  const wrapper = useRef<Group>(null!);
-  const mesh = useRef<Mesh>(null!);
+  const wrapper = useRef<Group>(null);
+  const mesh = useRef<Mesh>(null);
   const Model = usePartModel('EngineValiant', 'model');
   const { props } = usePhysicalPart(id, wrapper, mesh);
 

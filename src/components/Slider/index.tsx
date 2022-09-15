@@ -1,12 +1,12 @@
 import { DragHandleDots2Icon } from '@radix-ui/react-icons';
 import * as SliderPrimitive from '@radix-ui/react-slider';
-import { FocusEvent, forwardRef } from 'react';
+import { FC, FocusEvent } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface SliderProps
   extends Omit<
-    Omit<Omit<SliderPrimitive.SliderProps, 'onValueChange'>, 'value'>,
-    'defaultValue'
+    SliderPrimitive.SliderProps,
+    'value' | 'defaultValue' | 'onValueChange'
   > {
   value?: number;
   defaultValue?: number;
@@ -78,31 +78,34 @@ const Icon = styled(DragHandleDots2Icon, {
   height: theme.sizes[10],
 });
 
-export const Slider = forwardRef<HTMLSpanElement, SliderProps>(
-  ({ disabled, value, defaultValue, onValueChange, ...props }, ref) => {
-    const handleFocus = (event: FocusEvent<HTMLSpanElement>) => {
-      if (disabled) event.target.blur();
-    };
-    const handleValueChange = ([value]: [number]) => {
-      onValueChange && onValueChange(value);
-    };
+export const Slider: FC<SliderProps> = ({
+  disabled,
+  value,
+  defaultValue,
+  onValueChange,
+  ...props
+}) => {
+  const handleFocus = (event: FocusEvent<HTMLSpanElement>) => {
+    if (disabled) event.target.blur();
+  };
+  const handleValueChange = ([value]: [number]) => {
+    onValueChange && onValueChange(value);
+  };
 
-    return (
-      <Root
-        {...props}
-        ref={ref}
-        value={value === undefined ? undefined : [value]}
-        defaultValue={defaultValue === undefined ? undefined : [defaultValue]}
-        onValueChange={handleValueChange}
-      >
-        <Track>
-          <Range />
-        </Track>
+  return (
+    <Root
+      {...props}
+      value={value === undefined ? undefined : [value]}
+      defaultValue={defaultValue === undefined ? undefined : [defaultValue]}
+      onValueChange={handleValueChange}
+    >
+      <Track>
+        <Range />
+      </Track>
 
-        <Thumb onFocus={handleFocus}>
-          <Icon />
-        </Thumb>
-      </Root>
-    );
-  },
-);
+      <Thumb onFocus={handleFocus}>
+        <Icon />
+      </Thumb>
+    </Root>
+  );
+};

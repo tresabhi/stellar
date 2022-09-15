@@ -1,10 +1,9 @@
 import * as Properties from 'components/Properties';
 import { useNumericalInputProperty } from 'hooks/propertyControllers';
 import { useTranslator } from 'hooks/useTranslator';
-import { FC } from 'react';
+import { FC, RefObject } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 
-import { MutableRefObject } from 'react';
 import { Group, Mesh } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
@@ -62,7 +61,7 @@ export const PartWithTransformationsData: PartWithTransformations = {
 
 export const usePartWithTransformations = (
   id: string,
-  groupRef: MutableRefObject<Mesh | Group>,
+  groupRef: RefObject<Mesh | Group>,
 ) => {
   usePartWithPosition(id, groupRef);
   usePartWithOrientation(id, groupRef);

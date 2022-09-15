@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import { readFileSync, writeFileSync } from 'fs';
 
 const BUILD_NAMES = {

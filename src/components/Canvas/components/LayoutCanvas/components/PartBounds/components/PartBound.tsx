@@ -37,35 +37,35 @@ export interface PartBoundProps {
 }
 
 export const PartBound: FC<PartBoundProps> = ({ id }) => {
-  const outline = useRef<Line>(null!);
-  const shading = useRef<Mesh>(null!);
-  const wrapper = useRef<Group>(null!);
-  const content = useRef<Group>(null!);
+  const outline = useRef<Line>(null);
+  const shading = useRef<Mesh>(null);
+  const wrapper = useRef<Group>(null);
+  const content = useRef<Group>(null);
   const { deferUpdates } = useBounds();
 
   const rerender = (bound: PartBounds) => {
-    shading.current.scale.set(
+    shading.current?.scale.set(
       bound.max.x - bound.min.x,
       bound.max.y - bound.min.y,
       1,
     );
-    outline.current.scale.set(
+    outline.current?.scale.set(
       bound.max.x - bound.min.x,
       bound.max.y - bound.min.y,
       1,
     );
-    outline.current.position.set(
+    outline.current?.position.set(
       (bound.max.x - bound.min.x) / -2,
       (bound.max.y - bound.min.y) / -2,
       0,
     );
-    wrapper.current.rotation.set(0, 0, bound.rotation);
-    wrapper.current.position.set(
+    wrapper.current?.rotation.set(0, 0, bound.rotation);
+    wrapper.current?.position.set(
       (bound.max.x + bound.min.x) / 2,
       (bound.max.y + bound.min.y) / 2,
       0,
     );
-    content.current.position.set(bound.offset.x, bound.offset.y, 0);
+    content.current?.position.set(bound.offset.x, bound.offset.y, 0);
   };
 
   useEffect(() => {
@@ -83,8 +83,8 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
     const unsubscribeDeferUpdates = useBounds.subscribe(
       (state) => state.deferUpdates,
       (deferUpdates) => {
-        shading.current.visible = !deferUpdates;
-        outline.current.visible = !deferUpdates;
+        if (shading.current) shading.current.visible = !deferUpdates;
+        if (outline.current) outline.current.visible = !deferUpdates;
       },
     );
 

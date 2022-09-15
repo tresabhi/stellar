@@ -27,11 +27,13 @@ const Label = styled(LabelPrimitive, {
 
 export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
   ({ label, ...props }, ref) => {
-    const checkbox = useRef<CheckboxRef>(null!);
+    const checkbox = useRef<CheckboxRef>(null);
 
-    useImperativeHandle(ref, () => checkbox.current);
+    useImperativeHandle(ref, () => checkbox.current as CheckboxRef);
 
-    const handleContainerClick = () => checkbox.current.click();
+    const handleContainerClick = () => {
+      (checkbox.current as HTMLButtonElement | null)?.click();
+    };
 
     return (
       <Container onClick={handleContainerClick}>

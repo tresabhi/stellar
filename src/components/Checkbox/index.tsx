@@ -1,8 +1,8 @@
 import { CheckIcon, DashIcon } from '@radix-ui/react-icons';
 import { Button } from 'components/Button';
 import {
+  ComponentPropsWithoutRef,
   forwardRef,
-  InputHTMLAttributes,
   MouseEvent,
   useEffect,
   useImperativeHandle,
@@ -13,11 +13,8 @@ import { styled, theme } from 'stitches.config';
 
 export interface CheckboxProps
   extends Omit<
-    Omit<
-      Omit<InputHTMLAttributes<HTMLButtonElement>, 'defaultValue'>,
-      'onChange'
-    >,
-    'value'
+    ComponentPropsWithoutRef<typeof Trigger>,
+    'value' | 'defaultValue' | 'onChange' | 'ref'
   > {
   value?: boolean;
   defaultValue?: boolean;
@@ -82,7 +79,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
   ) => {
     const [value, setValue] = useState(defaultValue);
     const [indeterminate, setIndeterminate] = useState(givenIndeterminate);
-    const trigger = useRef<HTMLButtonElement>(null!);
+    const trigger = useRef<HTMLButtonElement>(null);
 
     const trueValue = () => givenValue ?? value;
 
@@ -94,15 +91,15 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
       onChange && onChange({ ...event, value: !value, indeterminate: false });
     };
 
-    // eslint-disable-next-line
     useEffect(() => {
-      (trigger.current as CheckboxRef).setValue = setValue;
-      (trigger.current as CheckboxRef).setIndeterminate = setIndeterminate;
+      if (trigger.current) {
+        (trigger.current as CheckboxRef).setValue = setValue;
+        (trigger.current as CheckboxRef).setIndeterminate = setIndeterminate;
+      }
     });
     useImperativeHandle(ref, () => trigger.current as CheckboxRef);
 
     return (
-      // @ts-ignore
       <Trigger
         {...props}
         ref={trigger}

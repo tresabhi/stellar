@@ -43,8 +43,8 @@ export const EnginePeregrineData: EnginePeregrine = {
 export const EnginePeregrineLayoutComponent: FC<PartComponentProps> = ({
   id,
 }) => {
-  const wrapper = useRef<Group>(null!);
-  const mesh = useRef<Mesh>(null!);
+  const wrapper = useRef<Group>(null);
+  const mesh = useRef<Mesh>(null);
   const Model = usePartModel('EnginePeregrine', 'model');
   const { props } = usePhysicalPart(id, wrapper, mesh);
 

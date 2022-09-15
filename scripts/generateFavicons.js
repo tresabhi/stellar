@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import {
   copyFileSync,
   createReadStream,
