@@ -7,7 +7,7 @@ export const FALLBACK_LANG = 'en-US';
 export const createTranslator = (
   language = useSettings.getState().interface.language,
 ) => {
-  let translations = (langs.get(language) ?? langs.get(FALLBACK_LANG)!)
+  const translations = (langs.get(language) ?? langs.get(FALLBACK_LANG)!)
     .translations;
 
   if (translations === undefined) {

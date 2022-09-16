@@ -4,7 +4,7 @@ import { Group } from 'game/parts/Group';
 
 export const selectParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
-    let newSelections: string[] = [];
+    const newSelections: string[] = [];
 
     ids.forEach((id) => {
       const part = draft.parts.get(id);

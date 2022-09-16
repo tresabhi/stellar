@@ -3,8 +3,8 @@ import { Blueprint } from 'game/Blueprint';
 import { forEachRight, isEqual } from 'lodash';
 
 export const togglePartsSelection = (ids: string[], draft?: Blueprint) => {
-  let spliceIds: string[] = [];
-  let insertIds: string[] = [];
+  const spliceIds: string[] = [];
+  const insertIds: string[] = [];
 
   if (draft) {
     ids.forEach((id) => {

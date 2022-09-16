@@ -9,7 +9,7 @@ export const mutateParts = <Type extends Part>(
 ) => {
   if (draft) {
     ids.forEach((id) => {
-      let part = draft.parts.get(id) as Type | undefined;
+      const part = draft.parts.get(id) as Type | undefined;
       if (part) mutator(part);
     });
   } else {
