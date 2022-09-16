@@ -66,15 +66,31 @@
       },
       "left_sidebar": {
         "parts": {
-          "$": "Partes"
+          "$": "Partes",
+          "no_parts": {
+            "$": "No hay partes en el plano",
+            "instructions": "Toca el icono %1$s en la barra de herramientas para insertar una parte."
+          }
         },
         "snippets": {
-          "$": "Fragmentos"
+          "$": "Fragmentos",
+          "coming_soon": {
+            "$": "¡Fragmentos próximamente!",
+            "instructions": "Podrás insertar pequeñas secciones en otros planos aquí como fragmentos. Podrás crear un nuevo fragmento yendo a Barra de herramientas > %1$s Portapapeles > %2$s Crear fragmento."
+          }
         }
       },
       "right_sidebar": {
         "properties": {
           "$": "Propiedades",
+          "no_selection": {
+            "$": "No hay partes seleccionadas",
+            "instructions": "Haz clic en una parte en el plano o en la barra lateral para seleccionarlo."
+          },
+          "no_properties": {
+            "$": "No hay propiedades para las partes seleccionadas",
+            "instructions": "La(s) parte(s) que has seleccionado carecen de propiedades ajustables probablemente porque son abstractas o un trabajo en curso."
+          },
           "transformations": {
             "$": "Transformaciones",
             "x_position": "Posición X",
@@ -97,7 +113,11 @@
           }
         },
         "inspect": {
-          "$": "Inspeccionar"
+          "$": "Inspeccionar",
+          "coming_soon": {
+            "$": "¡Inspeccionar próximamente!",
+            "instructions": "Esta barra lateral mostrará la información principal y los metadatos sobre las partes seleccionadas."
+          }
         }
       },
       "popup": {

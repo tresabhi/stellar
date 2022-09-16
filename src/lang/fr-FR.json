@@ -66,15 +66,31 @@
       },
       "left_sidebar": {
         "parts": {
-          "$": "Pièces"
+          "$": "Pièces",
+          "no_parts": {
+            "$": "No Parts in Blueprint",
+            "instructions": "Tap the %1$s icon in the Toolbar to insert a part."
+          }
         },
         "snippets": {
-          "$": "Extrait"
+          "$": "Extrait",
+          "coming_soon": {
+            "$": "Snippets Coming Soon!",
+            "instructions": "You will be able to insert small sections of other blueprints here as snippets. You will be able to create a new snippet by going to Toolbar > %1$s Clipboard > %2$s Create Snippet."
+          }
         }
       },
       "right_sidebar": {
         "properties": {
           "$": "Propriétés",
+          "no_selection": {
+            "$": "No Parts Selected",
+            "instructions": "Click on a part either on the blueprint or in the sidebar to select it."
+          },
+          "no_properties": {
+            "$": "No Properties for Selected Parts",
+            "instructions": "The part(s) you have selected lack adjustable properties probably because they're either abstract or a work in progress."
+          },
           "transformations": {
             "$": "Transformations",
             "x_position": "Position X",
@@ -97,7 +113,11 @@
           }
         },
         "inspect": {
-          "$": "Examiner"
+          "$": "Examiner",
+          "coming_soon": {
+            "$": "Inspect Coming Soon!",
+            "instructions": "This sidebar will display core information & metadata about parts selected."
+          }
         }
       },
       "popup": {
