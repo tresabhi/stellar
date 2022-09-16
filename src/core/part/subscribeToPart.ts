@@ -18,7 +18,7 @@ export const subscribeToPart = <Type extends Part, Slice>(
     ...subscribeToPartDefaultOptions,
     ...(options ?? {}),
   };
-  let avoidThisEvent = false;
+  let skipNextEvent = false;
 
   const unsubscribe = useBlueprint.subscribe(
     (draft) => {
@@ -31,12 +31,12 @@ export const subscribeToPart = <Type extends Part, Slice>(
           return part as unknown as Slice;
         }
       } else {
-        avoidThisEvent = true;
+        skipNextEvent = true;
         unsubscribe();
       }
     },
     (slice) => {
-      if (!avoidThisEvent && slice) handler(slice);
+      if (!skipNextEvent && slice !== undefined) handler(slice);
     },
   );
 
