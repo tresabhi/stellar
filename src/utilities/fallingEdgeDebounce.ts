@@ -1,4 +1,4 @@
-const fallingEdgeDebounce = <Args extends any[]>(
+const fallingEdgeDebounce = <Args extends unknown[]>(
   callback: (...args: Args) => void,
   cooldown: number,
 ) => {

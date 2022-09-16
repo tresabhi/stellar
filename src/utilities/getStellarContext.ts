@@ -2,17 +2,21 @@ import { ReactComponent as StellarAlphaIcon } from 'assets/icons/stellar-alpha.s
 import { ReactComponent as StellarBetaIcon } from 'assets/icons/stellar-beta.svg';
 import { ReactComponent as StellarDevIcon } from 'assets/icons/stellar-dev.svg';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar.svg';
-import { FC } from 'react';
-import { coerce } from 'semver';
+import { FC, SVGProps } from 'react';
+import { parse } from 'semver';
 import packageJSON from '../../package.json';
 
 type CodeName = 'alpha' | 'beta' | 'release' | 'dev';
 
+/**
+ * TODO: needs rework and a cleanup
+ * @deprecated
+ */
 export default function getStellarContext() {
-  const version = coerce(packageJSON.version)!.version;
+  const version = parse(packageJSON.version);
   let title: string;
   let codeName: CodeName;
-  let Icon: FC<any>;
+  let Icon: FC<SVGProps<SVGSVGElement>>;
 
   switch (window.location.hostname) {
     case 'stellaralpha.web.app':

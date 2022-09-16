@@ -2,7 +2,7 @@ import { subscribeToPart } from 'core/part';
 import { Part } from 'game/parts/Part';
 import { useEffect } from 'react';
 
-const usePartProperty = <Type extends Part, Slice extends any>(
+const usePartProperty = <Type extends Part, Slice>(
   id: string,
   slicer: (state: Type) => Slice,
   handler: (slice: Slice) => void,

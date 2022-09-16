@@ -39,7 +39,7 @@ export const pasteParts = () => {
       };
 
       clipboard.part_order.forEach((partId) => {
-        const clonedPartData = clonePart(partId, clipboard.parts);
+        const clonedPartData = clonePart(partId, clipboard);
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;

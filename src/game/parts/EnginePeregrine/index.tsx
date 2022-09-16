@@ -57,7 +57,7 @@ export const EnginePeregrineLayoutComponent: FC<PartComponentProps> = ({
 
 export const EnginePeregrineIcon = EngineIcon;
 
-export const EnginePeregrineRegistry: PartRegistryFragment = [
+export const EnginePeregrineRegistry: PartRegistryFragment<EnginePeregrine> = [
   'Engine Peregrine',
   {
     category: PartCategory.Propulsion,

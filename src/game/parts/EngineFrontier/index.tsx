@@ -8,12 +8,12 @@ import { Group, Mesh } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData } from '../Part';
 import {
-    VanillaPartWithEngine,
-    VanillaPartWithEngineData
+  VanillaPartWithEngine,
+  VanillaPartWithEngineData,
 } from '../PartWithEngine';
 import {
-    VanillaPartWithTransformations,
-    VanillaPartWithTransformationsData
+  VanillaPartWithTransformations,
+  VanillaPartWithTransformationsData,
 } from '../PartWithTransformations';
 
 export interface VanillaEngineFrontier
@@ -57,7 +57,7 @@ export const EngineFrontierLayoutComponent: FC<PartComponentProps> = ({
 
 export const EngineFrontierIcon = EngineIcon;
 
-export const EngineFrontierRegistry: PartRegistryFragment = [
+export const EngineFrontierRegistry: PartRegistryFragment<EngineFrontier> = [
   'Engine Frontier',
   {
     category: PartCategory.Propulsion,

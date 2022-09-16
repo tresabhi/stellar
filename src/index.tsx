@@ -7,7 +7,7 @@ import preroot from 'utilities/preroot';
 
 preroot();
 
-const container = document.getElementById('root')!;
+const container = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(container);
 const App = lazy(() => import('App'));
 

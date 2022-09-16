@@ -229,7 +229,7 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 
 export const FuelTankIcon = Icon;
 
-export const FuelTankRegistry: PartRegistryFragment = [
+export const FuelTankRegistry: PartRegistryFragment<FuelTank> = [
   'Fuel Tank',
   {
     category: PartCategory.Structural,

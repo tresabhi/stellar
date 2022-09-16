@@ -11,8 +11,8 @@ import { FC, useCallback, useEffect, useRef } from 'react';
 import useBounds, { BoundListing, PartBounds } from 'stores/useBounds';
 import { PartExportifier, PartRegistryFragment } from 'stores/usePartRegistry';
 import { Group as ThreeGroup } from 'three';
-import { AnyVanillaPart, PartComponentProps } from 'types/Parts';
-import { Part, PartData } from './Part';
+import { PartComponentProps } from 'types/Parts';
+import { Part, PartData, VanillaPart } from './Part';
 
 export interface Group extends Part {
   readonly n: 'Group';
@@ -85,7 +85,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
 export const GroupIcon = Icon;
 
 export const groupExportify: PartExportifier<Group> = (part, draft) => {
-  const exportedParts: AnyVanillaPart[] = [];
+  const exportedParts: VanillaPart[] = [];
   const partWithoutMetaData = removePartMetaData(part) as Group;
 
   partWithoutMetaData.part_order.forEach((id) => {
@@ -107,7 +107,7 @@ export const groupExportify: PartExportifier<Group> = (part, draft) => {
   return exportedParts;
 };
 
-export const GroupRegistry: PartRegistryFragment = [
+export const GroupRegistry: PartRegistryFragment<Group> = [
   'Group',
   {
     category: PartCategory.Abstract,

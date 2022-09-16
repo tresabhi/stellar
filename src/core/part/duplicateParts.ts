@@ -14,7 +14,7 @@ export const duplicateParts = (ids: string[], draft?: Blueprint) => {
       const partIndex = parent.part_order.indexOf(id);
 
       if (partIndex !== -1) {
-        const clonedPartData = clonePart(id, draft.parts);
+        const clonedPartData = clonePart(id, draft);
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;

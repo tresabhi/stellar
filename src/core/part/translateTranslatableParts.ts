@@ -1,7 +1,7 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
-import { AnyPart } from 'types/Parts';
+import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { translatePart } from './translatePart';
 
 export const translateTranslatableParts = (
@@ -18,7 +18,7 @@ export const translateTranslatableParts = (
         if (part && !part.locked) {
           if (part.n === 'Group') {
             translate((part as Group).part_order);
-          } else if ((part as AnyPart).p) {
+          } else if ((part as PartWithTransformations).p) {
             translatePart(part.id, x, y, draft);
           }
         }

@@ -2,15 +2,11 @@ import { simplify } from 'mathjs';
 import { validateNumber } from './validateNumber';
 
 export const evaluateExpression = (expression: string) => {
-  let value: number;
-
   try {
-    value = simplify(expression).evaluate();
-  } catch {}
+    const evaluated = simplify(expression).evaluate();
 
-  if (validateNumber(value!)) {
-    return value!;
-  } else {
+    return validateNumber(evaluated) ? evaluated : NaN;
+  } catch {
     return NaN;
   }
 };

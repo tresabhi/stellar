@@ -1,5 +1,6 @@
 import { AnyObject } from 'immer/dist/internal';
 import { langs } from 'langs';
+import { Translations } from 'stores/useTranslationsCache';
 import useSettings from '../stores/useSettings';
 
 export const FALLBACK_LANG = 'en-US';
@@ -7,8 +8,9 @@ export const FALLBACK_LANG = 'en-US';
 export const createTranslator = (
   language = useSettings.getState().interface.language,
 ) => {
-  let translations = (langs.get(language) ?? langs.get(FALLBACK_LANG)!)
-    .translations;
+  const translations = (
+    langs.get(language) ?? (langs.get(FALLBACK_LANG) as unknown as Translations)
+  ).translations;
 
   if (translations === undefined) {
     console.warn(`No translations for language ${language}`);

@@ -8,12 +8,12 @@ import { Group, Mesh } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData } from '../Part';
 import {
-    VanillaPartWithEngine,
-    VanillaPartWithEngineData
+  VanillaPartWithEngine,
+  VanillaPartWithEngineData,
 } from '../PartWithEngine';
 import {
-    VanillaPartWithTransformations,
-    VanillaPartWithTransformationsData
+  VanillaPartWithTransformations,
+  VanillaPartWithTransformationsData,
 } from '../PartWithTransformations';
 
 export interface VanillaEngineKolibri
@@ -55,7 +55,7 @@ export const EngineKolibriLayoutComponent: FC<PartComponentProps> = ({
 
 export const EngineKolibriIcon = EngineIcon;
 
-export const EngineKolibriRegistry: PartRegistryFragment = [
+export const EngineKolibriRegistry: PartRegistryFragment<EngineKolibri> = [
   'Engine Kolibri',
   {
     category: PartCategory.Propulsion,

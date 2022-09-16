@@ -1,9 +1,10 @@
-import { AnyPart, AnyPartMap, AnyVanillaPart } from 'types/Parts';
+import { PartMap } from 'types/Parts';
+import { Part, VanillaPart } from './parts/Part';
 
 export interface VanillaBlueprint {
   center: number;
   offset: { x: number; y: number };
-  parts: AnyVanillaPart[];
+  parts: VanillaPart[];
   stages: { partIndexes: number[] }[]; // TODO: isolate this type
 }
 
@@ -11,12 +12,12 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   readonly format_version: number;
 
   selections: string[];
-  parts: AnyPartMap;
+  parts: PartMap;
   part_order: string[];
 }
 
 export interface SavedBlueprint extends Omit<Blueprint, 'parts'> {
-  parts: [string, AnyPart][];
+  parts: [string, Part][];
 }
 
 export const VanillaBlueprintData: VanillaBlueprint = {

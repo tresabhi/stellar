@@ -15,7 +15,7 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
       const part = draft.parts.get(id);
 
       if (part) {
-        const clonedPartData = clonePart(part.id, draft.parts);
+        const clonedPartData = clonePart(part.id, draft);
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;

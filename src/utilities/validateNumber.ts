@@ -1,6 +1,6 @@
 export const validateNumber = (value: number) => {
   return (
-    typeof value! === 'number' &&
+    typeof value === 'number' &&
     value !== Infinity &&
     value !== -Infinity &&
     !isNaN(value)

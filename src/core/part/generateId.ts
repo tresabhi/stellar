@@ -1,15 +1,19 @@
 import { nanoid } from 'nanoid';
 import useBlueprint from 'stores/useBlueprint';
-import { AnyPartMap } from 'types/Parts';
+import { PartMap } from 'types/Parts';
 
 export const ID_LENGTH = 16;
 
-export const generateId = (parts?: AnyPartMap): string => {
+export const generateId = (parts?: PartMap): string => {
   if (parts) {
-    while (true) {
-      const id = nanoid(ID_LENGTH);
-      if (!parts.has(id)) return id;
+    let id = '';
+
+    while (id.length === 0) {
+      const possibleId = nanoid(ID_LENGTH);
+      if (!parts.has(possibleId)) id = possibleId;
     }
+
+    return id;
   } else {
     return generateId(useBlueprint.getState().parts);
   }

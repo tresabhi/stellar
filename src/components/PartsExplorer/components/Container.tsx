@@ -1,6 +1,5 @@
 import { getPart, unselectAllParts } from 'core/part';
 import { Group } from 'game/parts/Group';
-import { isNull } from 'lodash';
 import { FC } from 'react';
 import { styled } from 'stitches.config';
 import useBlueprint from 'stores/useBlueprint';
@@ -50,20 +49,29 @@ export const Container: FC<ContainerProps> = ({
   indent = 0,
   ...props
 }) => {
-  const part_order = useBlueprint((state) =>
-    isNull(parent)
-      ? state.part_order
-      : getPart<Group>(parent, state)!.part_order,
-  );
-  const children = part_order.map((id) => (
-    <Listing indent={indent} id={id} key={`part-${id}`} />
-  ));
+  const part_order = useBlueprint((state) => {
+    if (parent === null) {
+      return state.part_order;
+    } else {
+      const part = getPart<Group>(parent, state);
+      if (part) return part.part_order;
+    }
+  });
 
-  const handleClick = () => unselectAllParts();
+  // still wanna render if array is empty in which case it'd be falsey
+  if (part_order !== undefined) {
+    const children = part_order.map((id) => (
+      <Listing indent={indent} id={id} key={`part-${id}`} />
+    ));
 
-  return (
-    <StyledContainer {...props} onClick={handleClick}>
-      {children}
-    </StyledContainer>
-  );
+    const handleClick = () => unselectAllParts();
+
+    return (
+      <StyledContainer {...props} onClick={handleClick}>
+        {children}
+      </StyledContainer>
+    );
+  }
+
+  return null;
 };

@@ -1,7 +1,7 @@
 import {
   DiscordLogoIcon,
   GitHubLogoIcon,
-  TwitterLogoIcon
+  TwitterLogoIcon,
 } from '@radix-ui/react-icons';
 import * as StatusBarComponent from 'components/StatusBar';
 import { useTranslator } from 'hooks/useTranslator';
@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { parse } from 'semver';
 import { styled, theme } from 'stitches.config';
 import getStellarContext from 'utilities/getStellarContext';
+import { prettifyVersion } from 'utilities/prettifyVersion';
 import packageJSON from '../../../../../../package.json';
 
 export const GITHUB_REPO = 'tresabhi/stellar';
@@ -24,12 +25,13 @@ export const StatusBar = () => {
   const date = new Date();
   const year = date.getUTCFullYear();
   const [license, setLicense] = useState('LICENSE');
-  const parsedVersion = parse(packageJSON.version)!;
+  const prettyVersion = prettifyVersion(packageJSON.version);
+  const parsedVersion = parse(packageJSON.version);
   const splitRepo = GITHUB_REPO.split('/');
   const user = splitRepo[0];
   const repo = splitRepo[1];
-  const releaseNotes =
-    codeName !== 'alpha' && codeName !== 'dev'
+  const releaseNotes = parsedVersion
+    ? codeName !== 'alpha' && codeName !== 'dev'
       ? undefined
       : `${parsedVersion.major}.${parsedVersion.minor}${
           parsedVersion.patch === 0 ? '' : parsedVersion.patch
@@ -37,16 +39,8 @@ export const StatusBar = () => {
           parsedVersion.prerelease.length === 0
             ? ''
             : `-${parsedVersion.prerelease[0]}.${parsedVersion.prerelease[1]}`
-        }/`;
-  const version = `${parsedVersion.major}.${parsedVersion.minor}${
-    parsedVersion.patch !== 0 ? `.${parsedVersion.patch}` : ''
-  }`;
-  const prerelease =
-    parsedVersion.prerelease.length === 0
-      ? ''
-      : `${(parsedVersion.prerelease[0] as string)[0].toUpperCase()}${(
-          parsedVersion.prerelease[0] as string
-        ).slice(1)} ${parsedVersion.prerelease[1]}`;
+        }/`
+    : undefined;
 
   useEffect(() => {
     (async () => {
@@ -116,7 +110,7 @@ export const StatusBar = () => {
 
         <StatusBarComponent.Group>
           <StatusBarComponent.Anchor target="_blank" href={releaseNotes}>
-            Stellar {version} {prerelease}
+            Stellar {prettyVersion}
           </StatusBarComponent.Anchor>
 
           <StatusBarComponent.Dot />

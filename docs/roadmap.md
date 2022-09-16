@@ -6,6 +6,7 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 
 - [ ] Resolve all applicable `// TODO:` comments
 - [ ] Eliminate all `*.scss` files with CSS-in-JS
+- [ ] Fix Stellar version name link in the status bar
 
 ## v1.0 Beta 6
 

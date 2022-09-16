@@ -8,7 +8,7 @@ interface SubscribeToPartOptions {
 const subscribeToPartDefaultOptions = {
   fireInitially: false,
 };
-export const subscribeToPart = <Type extends Part, Slice extends any>(
+export const subscribeToPart = <Type extends Part, Slice>(
   id: string,
   handler: (slice: Slice) => void,
   slicer?: (part: Type) => Slice,
@@ -22,13 +22,13 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
 
   const unsubscribe = useBlueprint.subscribe(
     (draft) => {
-      const part = draft.parts.get(id);
+      const part = getPart<Type>(id, draft);
 
       if (part) {
         if (slicer) {
-          return slicer(part as Type);
+          return slicer(part);
         } else {
-          return part as Slice;
+          return part as unknown as Slice;
         }
       } else {
         avoidThisEvent = true;
@@ -36,7 +36,7 @@ export const subscribeToPart = <Type extends Part, Slice extends any>(
       }
     },
     (slice) => {
-      if (!avoidThisEvent) handler(slice!);
+      if (!avoidThisEvent && slice) handler(slice);
     },
   );
 

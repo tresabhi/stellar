@@ -1,10 +1,10 @@
 import { merge } from 'lodash';
-import { AnyPartMap } from 'types/Parts';
+import { PartMap } from 'types/Parts';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface Snippet {
-  parts: AnyPartMap;
+  parts: PartMap;
   part_order: string[];
 }
 

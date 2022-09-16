@@ -1,6 +1,7 @@
 import { Group } from 'game/parts/Group';
 import { cloneDeep } from 'lodash';
-import { AnyPartMap } from 'types/Parts';
+import { Snippet } from 'stores/useSnippets';
+import { PartMap } from 'types/Parts';
 import { generateId } from './generateId';
 
 /**
@@ -10,24 +11,24 @@ import { generateId } from './generateId';
  */
 export const clonePart = (
   id: string,
-  parts: AnyPartMap,
-): [string, AnyPartMap] | undefined => {
-  const part = parts.get(id);
+  draft: Snippet,
+): [string, PartMap] | undefined => {
+  const part = draft.parts.get(id);
 
   if (part) {
     const clonedPart = cloneDeep(part);
-    (clonedPart.id as string) = generateId(parts);
+    (clonedPart.id as string) = generateId(draft.parts);
     clonedPart.parentId = null;
 
     if (clonedPart.n === 'Group') {
       const clonedGroup = clonedPart as Group;
-      const clonedParts: AnyPartMap = new Map([[clonedPart.id, clonedPart]]);
+      const clonedParts: PartMap = new Map([[clonedPart.id, clonedPart]]);
 
       clonedGroup.part_order.forEach((childId, index) => {
-        const child = parts.get(childId);
+        const child = draft.parts.get(childId) as Group | undefined;
 
         if (child) {
-          const clonedGroupChildData = clonePart(child.id, parts);
+          const clonedGroupChildData = clonePart(child.id, draft);
 
           if (clonedGroupChildData) {
             const [clonedGroupChildId, clonedGroupChildrenParts] =

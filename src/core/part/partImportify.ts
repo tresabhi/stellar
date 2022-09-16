@@ -1,9 +1,10 @@
+import { Part, VanillaPart } from 'game/parts/Part';
 import { cloneDeep, merge } from 'lodash';
-import { AnyPart, AnyVanillaPart, ParentId } from 'types/Parts';
+import { ParentId } from 'types/Parts';
 import { getPartRegistry } from './getPartRegistry';
 
 export const partImportify = (
-  part: AnyVanillaPart | AnyPart,
+  part: VanillaPart | Part,
   id: string,
   parentId?: ParentId,
 ) => {
@@ -14,7 +15,7 @@ export const partImportify = (
     const newPart = merge(clonedDefaultData, clonedPartData, {
       id,
       parentId: parentId ?? null,
-    }) as AnyPart;
+    });
 
     return newPart;
   }

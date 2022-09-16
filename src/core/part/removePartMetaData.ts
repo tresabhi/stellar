@@ -1,11 +1,10 @@
-import { PartData } from 'game/parts/Part';
-import { AnyPart } from 'types/Parts';
+import { Part, PartData } from 'game/parts/Part';
 
-export const partMetaDataKeys = Object.keys(PartData).filter(
-  (key) => key !== 'n',
-);
+export const partMetaDataKeys = (
+  Object.keys(PartData) as (keyof Part)[]
+).filter((key) => key !== 'n');
 
-export const removePartMetaData = (part: AnyPart) => {
+export const removePartMetaData = (part: Part) => {
   partMetaDataKeys.forEach((key) => {
     delete part[key];
   });

@@ -1,25 +1,34 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import { getPart, getPartRegistry } from 'core/part';
-import { PartWithEnginePropertyComponent } from 'game/parts/PartWithEngine';
-import { PartWithTransformationsPropertyComponent } from 'game/parts/PartWithTransformations';
+import { Part } from 'game/parts/Part';
+import {
+  PartWithEngine,
+  PartWithEnginePropertyComponent,
+} from 'game/parts/PartWithEngine';
+import {
+  PartWithTransformations,
+  PartWithTransformationsPropertyComponent,
+} from 'game/parts/PartWithTransformations';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
 import useBlueprint from 'stores/useBlueprint';
-import { AnyPart, PartPropertyComponentProps } from 'types/Parts';
+import { PartPropertyComponentProps } from 'types/Parts';
 
 interface GroupedProperties {
-  test: (part: AnyPart) => boolean;
+  test: (part: Part) => boolean;
   Component: FC<PartPropertyComponentProps>;
 }
 
 const groupedProperties: GroupedProperties[] = [
   {
-    test: (part) => part.p !== undefined && part.o !== undefined,
+    test: (part) =>
+      (part as PartWithTransformations).p !== undefined &&
+      (part as PartWithTransformations).o !== undefined,
     Component: PartWithTransformationsPropertyComponent,
   },
   {
-    test: (part) => part.B !== undefined,
+    test: (part) => (part as PartWithEngine).B !== undefined,
     Component: PartWithEnginePropertyComponent,
   },
 ];

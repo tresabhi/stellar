@@ -6,6 +6,8 @@ import { globalStyles } from 'stitches.config';
 import useApp from 'stores/useApp';
 import usePartRegistry from 'stores/usePartRegistry';
 import getStellarContext from 'utilities/getStellarContext';
+import { prettifyVersion } from 'utilities/prettifyVersion';
+import packageJSON from '../../package.json';
 
 export const usePrerender = () => {
   const stellarContext = getStellarContext();
@@ -34,8 +36,12 @@ export const usePrerender = () => {
     );
   }
 
-  const version = stellarContext.version.split('.');
-  document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
+  // const version = stellarContext.version.split('.');
+  // document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
+  const prettifiedVersion = prettifyVersion(packageJSON.version);
+  document.title = `${stellarContext.title}${
+    prettifiedVersion ? ` ${prettifiedVersion}` : ''
+  }`;
 
   const rerenderDocumentTitle = () => {
     const {
@@ -43,7 +49,7 @@ export const usePrerender = () => {
     } = useApp.getState();
 
     document.title = `${stellarContext.title} ${
-      handle ? `- ${handle.name}` : `${version[0]}.${version[1]}`
+      handle ? `- ${handle.name}` : `${prettifiedVersion}`
     }${hasUnsavedChanges ? '*' : ''}`;
   };
 

@@ -55,7 +55,7 @@ export const EngineValiantLayoutComponent: FC<PartComponentProps> = ({
 
 export const EngineValiantIcon = EngineIcon;
 
-export const EngineValiantRegistry: PartRegistryFragment = [
+export const EngineValiantRegistry: PartRegistryFragment<EngineValiant> = [
   'Engine Valiant',
   {
     category: PartCategory.Propulsion,
