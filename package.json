@@ -16,7 +16,7 @@
     "fuzzysort": "^2.0.1",
     "immer": "^9.0.15",
     "lodash": "^4.17.21",
-    "mathjs": "^11.1.0",
+    "mathjs": "^11.2.1",
     "moment": "^2.29.4",
     "mousetrap": "^1.6.5",
     "nanoid": "^4.0.0",
