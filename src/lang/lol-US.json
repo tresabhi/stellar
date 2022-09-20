@@ -4,7 +4,7 @@
     "create": {
       "$": "Makee Makee",
       "templates": {
-        "input_placeholder": "Swearch twemplase...",
+        "input_placeholder": "Search templates...",
         "list": {
           "apollo_mission": "Awuwu Mizzn",
           "basic_rocket": "Smol Rowet",
@@ -122,12 +122,13 @@
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Inswet pawt...",
+          "input_placeholder": "Insert part...",
           "abstract": "Something else",
-          "TODO:cancel": "Nu"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
         "rename": {
-          "input_placeholder": "Asign someting...",
+          "input_placeholder": "Label...",
           "trim": "Kut white endwings",
           "skip_locked": "Skwip locked pwats",
           "suffix": "Give Id",
