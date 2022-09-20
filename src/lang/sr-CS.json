@@ -4,7 +4,7 @@
     "create": {
       "$": "Napravi",
       "templates": {
-        "input_placeholder": "Pretraži šablone...",
+        "input_placeholder": "Search templates...",
         "list": {
           "apollo_mission": "\"Apolo\" Misija",
           "basic_rocket": "Osnovna Raketa",
@@ -122,12 +122,13 @@
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Ubaci deo...",
+          "input_placeholder": "Insert part...",
           "abstract": "Ostalo (Abstraktno)",
-          "TODO:cancel": "Poništi"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
         "rename": {
-          "input_placeholder": "Označi...",
+          "input_placeholder": "Label...",
           "trim": "Izbriši razmake na krajevima",
           "skip_locked": "Preskoči zaključane delove",
           "suffix": "Dodaj jedinstvene numeričke sufikse",
