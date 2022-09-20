@@ -4,7 +4,7 @@
     "create": {
       "$": "Créer",
       "templates": {
-        "search_placeholder": "Rechercher un modèle...",
+        "input_placeholder": "Rechercher un modèle...",
         "list": {
           "apollo_mission": "Mission Apollo",
           "basic_rocket": "Fusée basique",
@@ -122,12 +122,12 @@
       },
       "popup": {
         "insert_part": {
-          "search_placeholder": "Insérer une pièce...",
+          "input_placeholder": "Insérer une pièce...",
           "abstract": "Résumé",
           "TODO:cancel": "Annuler"
         },
         "rename": {
-          "search_placeholder": "Étiquette...",
+          "input_placeholder": "Étiquette...",
           "trim": "Ajuster les espaces aux extrémités",
           "skip_locked": "Ignorer les pièces verrouillées",
           "suffix": "Ajouter des suffixes numériques uniques",

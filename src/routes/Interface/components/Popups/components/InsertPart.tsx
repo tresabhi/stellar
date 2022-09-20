@@ -1,16 +1,19 @@
-import { Palette, PaletteItem } from 'components/Palette';
-import { mutateApp } from 'core/app/mutateApp';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { InputWithIcon } from 'components/InputWithIcon';
+import * as Popup from 'components/Popup';
+import { SearchItem } from 'components/Search';
 import { popupClose } from 'core/interface';
 import { getParent, getPart, insertNewPart } from 'core/part';
 import { useTranslator } from 'hooks/useTranslator';
-import { useEffect } from 'react';
+import { useRef } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import usePartRegistry from 'stores/usePartRegistry';
 
 export const InsertPart = () => {
   const { t } = useTranslator();
+  const input = useRef<HTMLInputElement>(null);
+  const list: SearchItem[] = [];
   const partRegistry = usePartRegistry();
-  const paletteItems: PaletteItem[] = [];
   const { selections } = useBlueprint.getState();
   const lastSelectionId = selections[selections.length - 1];
   const lastSelection = getPart(lastSelectionId);
@@ -30,43 +33,66 @@ export const InsertPart = () => {
     }
   }
 
-  partRegistry.forEach((registry, name) => {
-    const Icon = registry.Icon;
+  const handleEscape = popupClose;
+  const handleCancelClick = popupClose;
 
-    paletteItems.push({
-      name,
-      callback: () => {
-        insertNewPart(name, parentId, {
-          index,
-          nearCamera: true,
-          select: true,
-        });
-        popupClose();
-      },
-      note:
-        registry.vanillaData === null
-          ? t`tab.layout.popup.insert_part.abstract`
-          : undefined,
-      icon: <Icon />,
+  partRegistry.forEach(({ vanillaData, Icon, data: { label } }, name) => {
+    const note =
+      vanillaData === null
+        ? t`tab.layout.popup.insert_part.abstract`
+        : undefined;
+
+    const handleClick = () => {
+      insertNewPart(name, parentId, {
+        index,
+        nearCamera: true,
+        select: true,
+      });
+      popupClose();
+    };
+
+    list.push({
+      string:
+        vanillaData === null
+          ? `${label} ${t`tab.layout.popup.insert_part.abstract`}`
+          : label,
+      node: (
+        <Popup.SearchItem
+          key={`part-${name}`}
+          icon={<Icon />}
+          note={note}
+          onClick={handleClick}
+        >
+          {label}
+        </Popup.SearchItem>
+      ),
+      callback: handleClick,
     });
   });
 
-  useEffect(() => {
-    mutateApp((draft) => {
-      draft.interface.isInteracting = true;
-    });
-
-    return () =>
-      mutateApp((draft) => {
-        draft.interface.isInteracting = false;
-      });
-  }, []);
-
   return (
-    <Palette
-      gainFocus
-      placeholder={t`tab.layout.popup.insert_part.search_placeholder`}
-      items={paletteItems}
-    />
+    <Popup.Container width="regular">
+      <InputWithIcon
+        ref={input}
+        icon={<MagnifyingGlassIcon />}
+        placeholder={t`tab.layout.popup.insert_part.input_placeholder`}
+        autoFocus
+      />
+
+      <Popup.Search
+        list={list}
+        input={input}
+        fallback={
+          <Popup.SearchFallback>{t`tab.layout.popup.insert_part.fallback`}</Popup.SearchFallback>
+        }
+        escape={handleEscape}
+      />
+
+      <Popup.ActionRow>
+        <Popup.Button
+          onClick={handleCancelClick}
+        >{t`tab.layout.popup.insert_part.cancel`}</Popup.Button>
+      </Popup.ActionRow>
+    </Popup.Container>
   );
 };

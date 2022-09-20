@@ -4,7 +4,7 @@
     "create": {
       "$": "Summon",
       "templates": {
-        "search_placeholder": "Sail ye' drafts...",
+        "input_placeholder": "Sail ye' drafts...",
         "list": {
           "apollo_mission": "Up Yander Sailin'",
           "basic_rocket": "Ain't Booty-full Ship",
@@ -122,12 +122,12 @@
       },
       "popup": {
         "insert_part": {
-          "search_placeholder": "Puttin' Booty Share...",
+          "input_placeholder": "Puttin' Booty Share...",
           "abstract": "Ain't Thinkin'",
           "TODO:cancel": "Naw"
         },
         "rename": {
-          "search_placeholder": "Call Ya...",
+          "input_placeholder": "Call Ya...",
           "trim": "Undock the ain't busy decks",
           "skip_locked": "Sailin' through anchored booty shares",
           "suffix": "Dock in some countin'",

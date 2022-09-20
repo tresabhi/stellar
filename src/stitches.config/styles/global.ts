@@ -15,6 +15,7 @@ export const globalStyles = globalCss({
 
   '*': {
     fontFamily: theme.fonts.default,
+    userSelect: 'none',
   },
 
   'button, input, details, summary': {

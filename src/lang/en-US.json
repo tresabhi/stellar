@@ -6,7 +6,7 @@
       "$": "Create",
 
       "templates": {
-        "search_placeholder": "Search templates...",
+        "input_placeholder": "Search templates...",
 
         "list": {
           "apollo_mission": "Apollo Mission",
@@ -156,14 +156,15 @@
 
       "popup": {
         "insert_part": {
-          "search_placeholder": "Insert part...",
+          "input_placeholder": "Insert part...",
 
           "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
 
         "rename": {
-          "search_placeholder": "Label...",
+          "input_placeholder": "Label...",
 
           "trim": "Trim whitespace on ends",
           "skip_locked": "Skip locked parts",

@@ -1,8 +1,7 @@
 import {
-  ArchiveIcon,
   EnterIcon,
   FilePlusIcon,
-  FileTextIcon,
+  MagnifyingGlassIcon,
   UploadIcon,
 } from '@radix-ui/react-icons';
 import apolloMission from 'assets/blueprints/apollo-mission.json';
@@ -16,23 +15,18 @@ import raceCar from 'assets/blueprints/race-car.json';
 import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
 import { Button as ButtonPrimitive } from 'components/Button';
-import { Palette, PaletteItem } from 'components/Palette';
+import { InputWithIcon } from 'components/InputWithIcon';
+import * as Popup from 'components/Popup';
+import { SearchItem } from 'components/Search';
 import { mutateApp } from 'core/app/mutateApp';
 import { importFile, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
 import { useTranslator } from 'hooks/useTranslator';
+import { useMemo, useRef } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/useApp';
 import { StatusBar } from './components/StatusBar';
-
-interface Template {
-  name: string;
-  author?: string; // inbuilt if undefined
-  link?: number | string; // inbuilt if undefined
-  blueprint: VanillaBlueprint;
-  inbuilt: boolean;
-}
 
 const Container = styled('div', {
   flex: 1,
@@ -64,14 +58,22 @@ const SectionContainer = styled('div', {
   },
 });
 
-const PaletteWrapper = styled('div', {
+const SearchWrapper = styled('div', {
   display: 'flex',
+  flexDirection: 'column',
+  gap: theme.space.gapRelatedMajor,
   alignItems: 'stretch',
   justifyContent: 'stretch',
   width: '100%',
   height: '100%',
   maxWidth: theme.sizes.createTabContentMaxWidth,
   maxHeight: theme.sizes.createTabContentMaxHeight,
+});
+
+const StyledSearch = styled(Popup.Search, {
+  flex: 1,
+  width: '100%',
+  backgroundColor: theme.colors.appBackground2,
 });
 
 const Separator = styled('div', {
@@ -113,51 +115,47 @@ const Button = styled(ButtonPrimitive, {
   },
 });
 
+interface Template {
+  name: string;
+  blueprint: VanillaBlueprint;
+}
+
 const TEMPLATES: Template[] = [
   {
-    name: `tab.create.templates.list.hopper`,
+    name: 'tab.create.templates.list.hopper',
     blueprint: hopper,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.apollo_mission`,
+    name: 'tab.create.templates.list.apollo_mission',
     blueprint: apolloMission,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.light_lander`,
+    name: 'tab.create.templates.list.light_lander',
     blueprint: lightLander,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.rover`,
+    name: 'tab.create.templates.list.rover',
     blueprint: rover,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.parachute_and_separator`,
+    name: 'tab.create.templates.list.parachute_and_separator',
     blueprint: parachuteAndSeparator,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.joints`,
+    name: 'tab.create.templates.list.joints',
     blueprint: joints,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.orbit_and_re_entry`,
+    name: 'tab.create.templates.list.orbit_and_re_entry',
     blueprint: orbitAndReEntry,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.race_car`,
+    name: 'tab.create.templates.list.race_car',
     blueprint: raceCar,
-    inbuilt: true,
   },
   {
-    name: `tab.create.templates.list.basic_rocket`,
+    name: 'tab.create.templates.list.basic_rocket',
     blueprint: basicRocket,
-    inbuilt: true,
   },
 ];
 
@@ -168,12 +166,41 @@ const FileActions = styled('div', {
 });
 
 export const CreateTab = () => {
-  const { t, translate } = useTranslator();
+  const { t, translate, language } = useTranslator();
+  const input = useRef<HTMLInputElement>(null);
+  const templates = useMemo(
+    () =>
+      TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
+        ({ name, blueprint }) => {
+          const translation = translate(name);
+
+          const handleClick = () => {
+            loadBlueprint(blueprint);
+            toLayout();
+          };
+
+          const searchItem: SearchItem = {
+            string: translation,
+            node: (
+              <Popup.SearchItem onClick={handleClick}>
+                {translation}
+              </Popup.SearchItem>
+            ),
+            callback: handleClick,
+          };
+
+          return searchItem;
+        },
+      ),
+    [language],
+  );
+
   const toLayout = () => {
     mutateApp((draft) => {
       draft.interface.tab = Tab.Layout;
     });
   };
+
   const handleScratchClick = () => {
     loadBlueprint();
     toLayout();
@@ -187,46 +214,18 @@ export const CreateTab = () => {
     toLayout();
   };
 
-  const PALETTE_ITEMS = TEMPLATES.sort((a, b) => {
-    if (a.name < b.name) return -1;
-    if (a.name > b.name) return 1;
-    return 0;
-  }).map(
-    (template) =>
-      ({
-        name: translate(template.name),
-        note: template.author ?? 'Built-in',
-        noteURL:
-          template.link === undefined
-            ? undefined
-            : typeof template.link === 'string'
-            ? template.link
-            : `https://jmnet.one/sfs/forum/index.php?members/${template.link}`,
-        callback: () => {
-          loadBlueprint(template.blueprint);
-          mutateApp((draft) => {
-            draft.interface.tab = Tab.Layout;
-          });
-        },
-        icon: template.inbuilt ? <FileTextIcon /> : <ArchiveIcon />,
-      } as PaletteItem),
-  );
-
   return (
     <TabContainer overflow>
       <Container>
         <SectionContainer full>
-          <PaletteWrapper>
-            <Palette
-              collapse
-              iconGap
-              transparent
-              darkBackground
-              items={PALETTE_ITEMS}
-              placeholder={t`tab.create.templates.search_placeholder`}
-              hasMaxHeight={false}
+          <SearchWrapper>
+            <InputWithIcon
+              ref={input}
+              placeholder={t`tab.create.templates.input_placeholder`}
+              icon={<MagnifyingGlassIcon />}
             />
-          </PaletteWrapper>
+            <StyledSearch input={input} list={templates} />
+          </SearchWrapper>
         </SectionContainer>
 
         <SectionContainer>

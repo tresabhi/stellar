@@ -47,7 +47,7 @@ export const RenameParts = () => {
         onKeyDown={handleKeyDown}
         autoFocus
         icon={<Pencil1Icon />}
-        placeholder={t`tab.layout.popup.rename.search_placeholder`}
+        placeholder={t`tab.layout.popup.rename.input_placeholder`}
       />
 
       <Popup.Content>

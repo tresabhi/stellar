@@ -4,7 +4,7 @@
     "create": {
       "$": "Create",
       "templates": {
-        "search_placeholder": "Search templates...",
+        "input_placeholder": "Search templates...",
         "list": {
           "apollo_mission": "Apollo Mission",
           "basic_rocket": "Basic Rocket",
@@ -122,12 +122,12 @@
       },
       "popup": {
         "insert_part": {
-          "search_placeholder": "Insert Part...",
+          "input_placeholder": "Insert Part...",
           "abstract": "Abstract",
           "TODO:cancel": "Cancel"
         },
         "rename": {
-          "search_placeholder": "Label...",
+          "input_placeholder": "Label...",
           "trim": "Trim whitespace on ends",
           "skip_locked": "Skip locked parts",
           "suffix": "Add unique numerical suffixes",
