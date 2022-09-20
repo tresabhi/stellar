@@ -4,7 +4,7 @@
     "create": {
       "$": "ǝʇɐǝɹƆ",
       "templates": {
-        "input_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
+        "input_placeholder": "Search templates...",
         "list": {
           "apollo_mission": "uoᴉssᴉW ollod∀",
           "basic_rocket": "ʇǝʞɔoɹ ɔᴉsɐq",
@@ -122,12 +122,13 @@
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "˙˙˙ʇɹɐd ʇɹǝsuI",
+          "input_placeholder": "Insert part...",
           "abstract": "ʇɔɐɹʇsq",
-          "TODO:cancel": "lǝɔuɐƆ"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
         "rename": {
-          "input_placeholder": "…lǝqɐ˥",
+          "input_placeholder": "Label...",
           "trim": "spuǝ uo ǝɔɐdsǝʇᴉɥʍ ɯᴉɹ┴",
           "skip_locked": "sʇɹɐd pǝʞɔol dᴉʞS",
           "suffix": "sǝxᴉɟɟns lɐɔᴉɹǝɯnu ǝnbᴉun pp∀",
