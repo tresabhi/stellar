@@ -4,7 +4,7 @@
     "create": {
       "$": "Stwórz",
       "templates": {
-        "input_placeholder": "Szukaj szablonu...",
+        "input_placeholder": "Search templates...",
         "list": {
           "apollo_mission": "Misja Apollo",
           "basic_rocket": "Podstawowa Rakieta",
@@ -124,7 +124,8 @@
         "insert_part": {
           "input_placeholder": "Insert part...",
           "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
         "rename": {
           "input_placeholder": "Label...",
