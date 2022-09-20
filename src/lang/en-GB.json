@@ -122,9 +122,10 @@
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Insert Part...",
+          "input_placeholder": "Insert part...",
           "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
         "rename": {
           "input_placeholder": "Label...",
