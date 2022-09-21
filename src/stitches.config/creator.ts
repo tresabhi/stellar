@@ -91,9 +91,8 @@ export const {
     },
 
     fonts: {
-      // TODO: add fallback fonts
-      default: 'Roboto Flex',
-      mono: 'Roboto Mono',
+      default: 'Roboto Flex, Arial, Verdana',
+      mono: 'Roboto Mono, Courier New',
     },
 
     borderStyles: {
