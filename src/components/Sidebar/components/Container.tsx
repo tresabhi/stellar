@@ -38,7 +38,7 @@ export const Container = styled('div', {
       position: 'right',
 
       css: {
-        borderRight: theme.borderStyles.componentNonInteractive,
+        borderLeft: theme.borderStyles.componentNonInteractive,
       },
     },
   ],
