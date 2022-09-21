@@ -33,7 +33,7 @@ import { getInterfaceMode } from 'utilities/getInterfaceMode';
 
 const tabOrder = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
-// TODO: make this date driven
+// TODO: add this to settings
 const TRANSLATE = 1;
 const MAJOR_TRANSLATE = 10;
 

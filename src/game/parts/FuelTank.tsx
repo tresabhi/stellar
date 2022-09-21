@@ -135,7 +135,6 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
           );
           mesh.current.position.set(0, N.height / 2, 0);
 
-          // TODO: maybe merge these two functions?
           declareBoundNeedsUpdate(id);
           deferUpdates();
         }

@@ -1,11 +1,15 @@
 import { PartMap } from 'types/Parts';
 import { Part, VanillaPart } from './parts/Part';
 
+export interface VanillaStage {
+  partIndexes: number[];
+}
+
 export interface VanillaBlueprint {
   center: number;
   offset: { x: number; y: number };
   parts: VanillaPart[];
-  stages: { partIndexes: number[] }[]; // TODO: isolate this type
+  stages: VanillaStage[];
 }
 
 export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
