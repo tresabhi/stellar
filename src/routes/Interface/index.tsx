@@ -14,11 +14,9 @@ export interface SidebarTabProps {
   onClick: () => void;
 }
 
-export const DeviceVariantContainer = styled('div', {
-  width: '100vw',
-  height: '100vh',
-  maxWidth: '100vw',
-  maxHeight: '100vh',
+export const Container = styled('div', {
+  width: '100%',
+  height: '100%',
   display: 'flex',
   flexDirection: 'column',
 });
@@ -28,7 +26,7 @@ const Interface = () => {
   const tab = useApp((state) => state.interface.tab);
 
   return (
-    <DeviceVariantContainer>
+    <Container>
       <Popups />
 
       <Tabs />
@@ -39,7 +37,7 @@ const Interface = () => {
       )}
       {tab === Tab.Staging && <StagingTab />}
       {tab === Tab.Export && <ExportTab />}
-    </DeviceVariantContainer>
+    </Container>
   );
 };
 

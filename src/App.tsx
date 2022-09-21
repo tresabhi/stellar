@@ -8,7 +8,8 @@ import useSettings from 'stores/useSettings';
 
 const AppContainer = styled('div', {
   backgroundColor: theme.colors.appBackground1,
-  // TODO: make this the one that controls the dimensions of the app
+  width: '100vw',
+  height: '100vh',
 });
 
 const App = () => {
