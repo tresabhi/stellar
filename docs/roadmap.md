@@ -2,10 +2,6 @@
 
 _❕ Items will be removed when they're completed. This is **not** a changelog._
 
-## v1.0 Beta 5
-
-- Sidebar visibility buttons show on top of popups
-
 ## v1.0 Beta 6
 
 - Switch to Vite
