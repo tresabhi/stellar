@@ -109,7 +109,10 @@ export const StatusBar = () => {
         <StellarIcon />
 
         <StatusBarComponent.Group>
-          <StatusBarComponent.Anchor target="_blank" href={releaseNotes}>
+          <StatusBarComponent.Anchor
+            target="_blank"
+            href={`https://tresabhi.github.io/stellar/changelogs/${releaseNotes}`}
+          >
             Stellar {prettyVersion}
           </StatusBarComponent.Anchor>
 
