@@ -1,5 +1,5 @@
 import { mutateBounds } from 'core/app';
-import { getBoundsFromObject } from 'core/bounds';
+import { disposeBound, getBoundsFromObject } from 'core/bounds';
 import { RefObject, useCallback, useEffect } from 'react';
 import useBounds from 'stores/useBounds';
 import { Group, Mesh } from 'three';
@@ -36,7 +36,10 @@ const usePartWithBounds = (
       },
     );
 
-    return unsubscribe;
+    return () => {
+      unsubscribe();
+      disposeBound(id);
+    };
   }, [computeBounds, id]);
 };
 export default usePartWithBounds;

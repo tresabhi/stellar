@@ -1,5 +1,4 @@
 import { mutateBlueprint } from 'core/blueprint';
-import { disposeBounds } from 'core/bounds';
 import { Blueprint } from 'game/Blueprint';
 import { getParent } from './getParent';
 
@@ -17,9 +16,6 @@ export const deletePartsBySelection = (draft?: Blueprint) => {
     });
 
     draft.selections = [];
-
-    // TODO: dispose bounds in the part layout component on unrender (useEffect(() => () => { ... }))
-    disposeBounds(draft.selections);
   } else {
     mutateBlueprint((draft) => {
       deletePartsBySelection(draft);

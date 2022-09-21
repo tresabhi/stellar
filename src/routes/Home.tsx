@@ -2,7 +2,7 @@ import { mutateSettings } from 'core/app';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useApp from 'stores/useApp';
-import SplashScreenLegacy from './components/SplashScreen';
+import SplashScreen from './components/SplashScreen';
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -21,5 +21,5 @@ export const Home = () => {
     draft.interface.hasShownSplashScreen = true;
   });
 
-  return <SplashScreenLegacy />;
+  return <SplashScreen />;
 };

@@ -22,7 +22,7 @@ const Container = styled('div', {
   },
 });
 
-const SplashScreenLegacy = () => {
+const SplashScreen = () => {
   const stellarContext = getStellarContext();
   const themeClassName = useSettings((state) => state.interface.theme);
 
@@ -37,4 +37,4 @@ const SplashScreenLegacy = () => {
   );
 };
 
-export default SplashScreenLegacy;
+export default SplashScreen;

@@ -4,7 +4,7 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection,
+  togglePartSelection
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
@@ -155,7 +155,7 @@ export const Listing = memo<ListingProps>(
           const lastSelection = selections[selections.length - 1];
 
           if (lastSelection) {
-            // TODO: all shift selections
+            // TODO: add shift selections
           } else {
             selectPartOnly(id);
           }
@@ -167,7 +167,7 @@ export const Listing = memo<ListingProps>(
         const lastSelection = selections[selections.length - 1];
 
         if (lastSelection) {
-          // TODO: all shift selections
+          // TODO: add shift selections
         } else {
           selectPartOnly(id);
         }
