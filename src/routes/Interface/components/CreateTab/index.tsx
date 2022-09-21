@@ -79,7 +79,7 @@ const StyledSearch = styled(Popup.Search, {
 const Separator = styled('div', {
   width: theme.sizes.separatorWidth,
   height: '75%',
-  // TODO: add a seperator color
+  // TODO: add a separator color
   backgroundColor: theme.colors.componentNonInteractiveBorder,
   borderRadius: theme.radii[1],
 });

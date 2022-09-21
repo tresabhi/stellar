@@ -1,4 +1,3 @@
-import { AnyObject } from 'immer/dist/internal';
 import { langs } from 'langs';
 import { Translations } from 'stores/useTranslationsCache';
 import useSettings from '../stores/useSettings';
@@ -16,17 +15,15 @@ export const createTranslator = (
     console.warn(`No translations for language ${language}`);
   }
 
-  // TODO: remove usage of AnyObject
-
   const translate = (string: string, tokens: string[] = []) => {
     const translation = string
       .split('.')
       .reduce(
-        (object: AnyObject | string | undefined, key) =>
+        (object: Translations | string | undefined, key) =>
           typeof object === string
             ? object
-            : (object as AnyObject | undefined)?.[key],
-        translations,
+            : (object as Translations | undefined)?.[key],
+        translations as Translations,
       );
 
     const applyTokens = (string: string) =>
