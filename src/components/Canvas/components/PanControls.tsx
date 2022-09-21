@@ -3,11 +3,10 @@ import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/useApp';
 import { OrthographicCamera, Vector2, Vector3 } from 'three';
-import { inverseLerp } from 'three/src/math/MathUtils';
 
 const MIN_ZOOM = 2.2;
-const MAX_ZOOM = 200;
-const SENSITIVITY = 1;
+const MAX_ZOOM = 512;
+const ZOOM_SENSITIVITY = 1 / 250;
 
 export const PanControls = () => {
   const canvas = useThree((state) => state.gl.domElement);
@@ -25,11 +24,12 @@ export const PanControls = () => {
       if (event.ctrlKey) {
         const initialMousePos = getMousePos(event);
 
-        const zoomCompensatedDeltaY =
-          event.deltaY * SENSITIVITY * inverseLerp(0, MAX_ZOOM, camera.zoom);
         const zoom = Math.max(
           MIN_ZOOM,
-          Math.min(MAX_ZOOM, camera.zoom - zoomCompensatedDeltaY),
+          Math.min(
+            MAX_ZOOM,
+            camera.zoom - event.deltaY * ZOOM_SENSITIVITY * camera.zoom,
+          ),
         );
 
         camera.zoom = zoom;
