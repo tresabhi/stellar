@@ -4,7 +4,7 @@
     "create": {
       "$": "Crear",
       "templates": {
-        "input_placeholder": "Search templates...",
+        "input_placeholder": "Buscar plantillas...",
         "list": {
           "apollo_mission": "Misión Apolo",
           "basic_rocket": "Cohéte Básico",
@@ -122,13 +122,13 @@
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Insert part...",
+          "input_placeholder": "Insertar parte...",
           "abstract": "Abstracto",
-          "fallback": "No parts found",
-          "cancel": "Cancel"
+          "fallback": "No se encontraron partes",
+          "cancel": "Cancelar"
         },
         "rename": {
-          "input_placeholder": "Label...",
+          "input_placeholder": "Etiqueta...",
           "trim": "Recortar espacio en blanco en los finales",
           "skip_locked": "Omitir partes bloqueadas",
           "suffix": "Añadir sufijos numéricos únicos",
