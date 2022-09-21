@@ -1,3 +1,4 @@
+import { Camera } from 'three';
 import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 import { Snippet } from './useSnippets';
@@ -37,6 +38,7 @@ export interface UseApp {
     isPanning: boolean;
     preventNextSelection: boolean;
     clipboard?: Snippet;
+    camera?: Camera;
   };
 
   loadStatus: {
@@ -61,6 +63,7 @@ export const UseAppData: UseApp = {
     isPanning: false,
     preventNextSelection: false,
     clipboard: undefined,
+    camera: undefined,
   },
 
   loadStatus: {

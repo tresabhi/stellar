@@ -8,6 +8,7 @@ import useBlueprint from 'stores/useBlueprint';
 import useSettings from 'stores/useSettings';
 import { Group } from 'three';
 import { PanControls } from '../PanControls';
+import { Expose } from './components/Expose';
 import { Grid } from './components/Grid';
 import { PartBounds } from './components/PartBounds';
 import { Parts } from './components/Parts';
@@ -72,6 +73,7 @@ export const LayoutCanvas = () => {
       onPointerMissed={handlePointerMissed}
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
+      <Expose />
 
       <PanControls />
 
@@ -83,6 +85,7 @@ export const LayoutCanvas = () => {
   );
 };
 
+export * from './components/Expose';
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';
