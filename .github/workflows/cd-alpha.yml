@@ -40,7 +40,7 @@ jobs:
         run: yarn
 
       - name: Build static site
-        run: npx react-scripts build
+        run: yarn build
 
       - name: Post build make-up
         run: node scripts/postBuild.js --alpha -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
