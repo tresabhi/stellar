@@ -1,6 +1,6 @@
 {
   "name": "stellar",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.6",
   "private": true,
   "type": "module",
   "dependencies": {
@@ -51,20 +51,24 @@
     "@types/workbox-core": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "@vitejs/plugin-react": "^2.1.0",
     "depcheck": "^1.4.3",
     "eslint": "^8.23.1",
     "node-downloader-helper": "^2.1.4",
     "node-fetch": "^3.2.10",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.1.1",
-    "react-scripts": "^5.0.1",
     "serve": "^14.0.1",
     "typescript": "^4.8.3",
-    "unzipper": "^0.10.11"
+    "unzipper": "^0.10.11",
+    "vite": "^3.1.3",
+    "vite-plugin-svgr": "^2.2.1",
+    "vite-tsconfig-paths": "^3.5.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "build:lang": "node scripts/generateLanguageManifest.js",
     "test": "jest",
     "format": "prettier --write \"**/*.@(json|js|jsx|css|md|ts|tsx|html|xml|yml)\"",
