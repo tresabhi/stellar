@@ -40,6 +40,8 @@ export const Search: FC<SearchProps> = ({
       });
 
       if (resultNodes.length === 0) {
+        firstCallback.current = undefined;
+
         if (fallback) {
           setChildren([fallback]);
         } else {
