@@ -9,9 +9,8 @@ const Container = styled('div', {
 
 export interface TabContainerProps {
   children: ReactNode;
-  overflow?: boolean;
 }
 
-export const TabContainer: FC<TabContainerProps> = ({ children, overflow }) => (
+export const TabContainer: FC<TabContainerProps> = ({ children }) => (
   <Container>{children}</Container>
 );

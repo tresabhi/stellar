@@ -1,8 +1,8 @@
 import { LayersIcon } from '@radix-ui/react-icons';
 import { Button as ButtonPrimitive } from 'components/Button';
-import { mutateApp } from 'core/app';
+import { mutateSettings } from 'core/app';
 import { styled, theme } from 'stitches.config';
-import useApp from 'stores/useApp';
+import useSettings from 'stores/useSettings';
 
 const Button = styled(ButtonPrimitive, {
   position: 'absolute',
@@ -23,9 +23,9 @@ const Button = styled(ButtonPrimitive, {
 });
 
 export const SelectMultiple = () => {
-  const selectMultiple = useApp((state) => state.editor.selectMultiple);
+  const selectMultiple = useSettings((state) => state.editor.selectMultiple);
   const handleClick = () =>
-    mutateApp((draft) => {
+    mutateSettings((draft) => {
       draft.editor.selectMultiple = !draft.editor.selectMultiple;
     });
 

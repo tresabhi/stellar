@@ -9,6 +9,7 @@ import {
   togglePartSelection,
   unselectPart,
 } from 'core/part';
+import useSettings from 'stores/useSettings';
 import useApp, { Tool } from '../stores/useApp';
 
 const useSelectionControl = (id: string) => {
@@ -22,7 +23,7 @@ const useSelectionControl = (id: string) => {
       !isSpacePanning &&
       !isTouchPanning
     ) {
-      const { selectMultiple } = useApp.getState().editor;
+      const { selectMultiple } = useSettings.getState().editor;
       const part = getPart(id);
       const parent = getParent(id);
 

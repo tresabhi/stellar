@@ -57,6 +57,7 @@ export interface UseSettings {
   };
 
   editor: {
+    selectMultiple: boolean;
     undoLimit: number;
     rename: RenamePartsOptions;
   };
@@ -99,6 +100,7 @@ export const UseSettingsData: UseSettings = {
   },
 
   editor: {
+    selectMultiple: false,
     undoLimit: 512,
     rename: {
       trim: true,
