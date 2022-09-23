@@ -2,7 +2,7 @@ import {
   EnterIcon,
   FilePlusIcon,
   MagnifyingGlassIcon,
-  UploadIcon
+  UploadIcon,
 } from '@radix-ui/react-icons';
 import apolloMission from 'assets/blueprints/apollo-mission.json';
 import basicRocket from 'assets/blueprints/basic-rocket.json';
@@ -29,12 +29,13 @@ import { Tab } from 'stores/useApp';
 import { StatusBar } from './components/StatusBar';
 
 const Container = styled('div', {
-  flex: 1,
+  flex: '1 0 0',
   backgroundColor: theme.colors.componentBackground,
   display: 'flex',
   gap: theme.space.gapUnrelatedMajor,
   alignItems: 'stretch',
   justifyContent: 'center',
+  overflowY: 'auto',
 });
 
 const SectionContainer = styled('div', {
@@ -71,7 +72,7 @@ const SearchWrapper = styled('div', {
 });
 
 const StyledSearch = styled(Popup.Search, {
-  flex: 1,
+  flex: '1 0 0',
   width: '100%',
   backgroundColor: theme.colors.appBackground2,
 });
@@ -215,7 +216,7 @@ export const CreateTab = () => {
   };
 
   return (
-    <TabContainer overflow>
+    <TabContainer>
       <Container>
         <SectionContainer full>
           <SearchWrapper>

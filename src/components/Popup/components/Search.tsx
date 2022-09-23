@@ -14,6 +14,7 @@ const Container = styled('div', {
   flexDirection: 'column',
   backgroundColor: theme.colors.appBackground1,
   borderRadius: theme.radii[4],
+  overflowY: 'auto',
 });
 
 export const Search: FC<SearchProps> = ({

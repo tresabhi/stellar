@@ -5,18 +5,6 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
-
-  variants: {
-    overflow: {
-      true: {
-        overflowY: 'auto',
-      },
-    },
-  },
-
-  defaultVariants: {
-    overflow: false,
-  },
 });
 
 export interface TabContainerProps {
@@ -25,5 +13,5 @@ export interface TabContainerProps {
 }
 
 export const TabContainer: FC<TabContainerProps> = ({ children, overflow }) => (
-  <Container overflow={overflow}>{children}</Container>
+  <Container>{children}</Container>
 );
