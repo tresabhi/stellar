@@ -19,6 +19,7 @@ const PADDING_FROM_EDGE = 4;
 
 const Wrapper = styled('details', {
   position: 'relative',
+  zIndex: 3,
 
   variants: {
     disabled: {
