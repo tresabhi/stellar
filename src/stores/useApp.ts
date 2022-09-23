@@ -37,6 +37,7 @@ export interface UseApp {
     tool: Tool;
     isSpacePanning: boolean;
     isTouchPanning: boolean;
+    selectMultiple: boolean;
     preventNextSelection: boolean;
     clipboard?: Snippet;
     camera?: Camera;
@@ -63,6 +64,7 @@ export const UseAppData: UseApp = {
     tool: Tool.Move,
     isSpacePanning: false,
     isTouchPanning: false,
+    selectMultiple: false,
     preventNextSelection: false,
     clipboard: undefined,
     camera: undefined,

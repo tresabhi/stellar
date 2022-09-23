@@ -22,6 +22,7 @@ const useSelectionControl = (id: string) => {
       !isSpacePanning &&
       !isTouchPanning
     ) {
+      const { selectMultiple } = useApp.getState().editor;
       const part = getPart(id);
       const parent = getParent(id);
 
@@ -35,13 +36,13 @@ const useSelectionControl = (id: string) => {
 
           if (part) {
             if (event.nativeEvent.ctrlKey) {
-              if (event.nativeEvent.shiftKey) {
+              if (event.nativeEvent.shiftKey || selectMultiple) {
                 togglePartSelection(id);
               } else {
                 selectPartOnly(id);
               }
             } else {
-              if (event.nativeEvent.shiftKey) {
+              if (event.nativeEvent.shiftKey || selectMultiple) {
                 const parentId = getParentId(id);
 
                 mutateBlueprint((draft) => {
