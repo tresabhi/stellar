@@ -151,14 +151,14 @@ export const PanControls = () => {
 
           lastHypotenuse = hypotenuse;
         }
-
-        [...event.changedTouches].forEach((changedTouch) => {
-          touchMemories.set(changedTouch.identifier, [
-            changedTouch.clientX,
-            changedTouch.clientY,
-          ]);
-        });
       }
+
+      [...event.changedTouches].forEach((changedTouch) => {
+        touchMemories.set(changedTouch.identifier, [
+          changedTouch.clientX,
+          changedTouch.clientY,
+        ]);
+      });
     };
     const handleTouchEnd = (event: TouchEvent) => {
       [...event.changedTouches].forEach((changedTouch) => {
