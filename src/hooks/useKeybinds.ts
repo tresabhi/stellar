@@ -17,7 +17,7 @@ import {
   deletePartsBySelection,
   groupPartsBySelection,
   pasteParts,
-  selectPartsOnly,
+  selectAllPartsAtRoot,
   translateTranslatablePartsBySelection as translate,
   ungroupGroupsBySelection,
   unselectAllParts,
@@ -102,7 +102,7 @@ const useKeybinds = () => {
     });
 
   useEffect(() => {
-    bind('ctrl+a', () => selectPartsOnly(useBlueprint.getState().part_order));
+    bind('ctrl+a', selectAllPartsAtRoot);
     bind(
       'esc',
       () => {

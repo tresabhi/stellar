@@ -31,6 +31,7 @@ export * from './removePartMetaData';
 export * from './renamePart';
 export * from './renameParts';
 export * from './renamePartsBySelection';
+export * from './selectAllPartsAtRoot';
 export * from './selectPart';
 export * from './selectPartOnly';
 export * from './selectParts';
@@ -62,4 +63,3 @@ export * from './ungroupGroupsBySelection';
 export * from './unselectAllParts';
 export * from './unselectPart';
 export * from './unselectParts';
-
