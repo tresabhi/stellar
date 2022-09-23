@@ -1,0 +1,17 @@
+# testing
+/build
+/coverage
+draft.*
+/temp
+_site
+
+# dependencies
+node_modules
+package-lock.json
+yarn-error.log
+
+# cache
+.jekyll-cache
+.jekyll-metadata
+.sass-cache
+vendor
