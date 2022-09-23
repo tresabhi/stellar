@@ -2,7 +2,7 @@ import {
   EnterIcon,
   FilePlusIcon,
   MagnifyingGlassIcon,
-  UploadIcon,
+  UploadIcon
 } from '@radix-ui/react-icons';
 import apolloMission from 'assets/blueprints/apollo-mission.json';
 import basicRocket from 'assets/blueprints/basic-rocket.json';
@@ -182,7 +182,7 @@ export const CreateTab = () => {
           const searchItem: SearchItem = {
             string: translation,
             node: (
-              <Popup.SearchItem onClick={handleClick}>
+              <Popup.SearchItem onClick={handleClick} key={`item-${name}`}>
                 {translation}
               </Popup.SearchItem>
             ),
