@@ -2,7 +2,7 @@ const fallingEdgeDebounce = <Args extends unknown[]>(
   callback: (...args: Args) => void,
   cooldown: number,
 ) => {
-  let timeout: NodeJS.Timeout;
+  let timeout: number;
 
   return (...args: Args) => {
     clearTimeout(timeout);
