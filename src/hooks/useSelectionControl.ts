@@ -14,7 +14,7 @@ import useApp, { Tool } from '../stores/useApp';
 const useSelectionControl = (id: string) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
     const {
-      editor: { preventNextSelection, tool, isPanning },
+      editor: { preventNextSelection, tool, isSpacePanning: isPanning },
     } = useApp.getState();
 
     if (!preventNextSelection && tool === Tool.Move && !isPanning) {

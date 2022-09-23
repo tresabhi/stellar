@@ -31,7 +31,7 @@ const useDragControls = (id: string) => {
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
     const {
-      editor: { tool, isPanning },
+      editor: { tool, isSpacePanning: isPanning },
     } = useApp.getState();
 
     if (

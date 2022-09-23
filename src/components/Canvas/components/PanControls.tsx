@@ -1,4 +1,5 @@
 import { useThree } from '@react-three/fiber';
+import { mutateApp } from 'core/app';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/useApp';
@@ -59,24 +60,28 @@ export const PanControls = () => {
     };
 
     const handlePointerDown = (event: PointerEvent) => {
-      const {
-        editor: { tool, isPanning },
-      } = useApp.getState();
+      if (!useApp.getState().editor.isTouchPanning) {
+        const { tool, isSpacePanning: isPanning } = useApp.getState().editor;
 
-      if (tool === Tool.Pan || isPanning) {
-        initialMousePos = getMousePos(event);
-        canvas.addEventListener('pointermove', handlePointerMove);
+        if (tool === Tool.Pan || isPanning) {
+          initialMousePos = getMousePos(event);
+          canvas.addEventListener('pointermove', handlePointerMove);
+        }
       }
     };
     const handlePointerMove = (event: PointerEvent) => {
-      const newPos = getMousePos(event);
-      const delta = new Vector2(
-        newPos.x - initialMousePos.x,
-        newPos.y - initialMousePos.y,
-      );
+      if (useApp.getState().editor.isTouchPanning) {
+        handlePointerUp();
+      } else {
+        const newPos = getMousePos(event);
+        const delta = new Vector2(
+          newPos.x - initialMousePos.x,
+          newPos.y - initialMousePos.y,
+        );
 
-      camera.translateX(-delta.x);
-      camera.translateY(-delta.y);
+        camera.translateX(-delta.x);
+        camera.translateY(-delta.y);
+      }
     };
     const handlePointerUp = () => {
       canvas.removeEventListener('pointermove', handlePointerMove);
@@ -97,8 +102,14 @@ export const PanControls = () => {
       });
 
       if (touchMemories.size === 2) {
+        event.preventDefault();
+
         const firstTouch = touchMemories.get(0);
         const secondTouch = touchMemories.get(1);
+
+        mutateApp((draft) => {
+          draft.editor.isTouchPanning = true;
+        });
 
         if (firstTouch && secondTouch) {
           lastHypotenuse = Math.sqrt(
@@ -155,6 +166,10 @@ export const PanControls = () => {
       });
 
       if (touchMemories.size === 0) {
+        mutateApp((draft) => {
+          draft.editor.isTouchPanning = false;
+        });
+
         window.removeEventListener('touchmove', handleTouchMove);
         window.removeEventListener('touchend', handleTouchEnd);
         window.removeEventListener('touchcancel', handleTouchEnd);

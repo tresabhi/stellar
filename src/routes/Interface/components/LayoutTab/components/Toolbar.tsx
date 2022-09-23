@@ -62,7 +62,9 @@ import useVersionControl from 'stores/useVersionControl';
 const Toolbar = () => {
   const { t } = useTranslator();
   const tool = useApp((state) =>
-    state.editor.isPanning ? Tool.Pan : state.editor.tool,
+    state.editor.isSpacePanning || state.editor.isTouchPanning
+      ? Tool.Pan
+      : state.editor.tool,
   );
   const isOneHidden = useBlueprint((state) =>
     state.selections.some((selection) => state.parts.get(selection)?.hidden),

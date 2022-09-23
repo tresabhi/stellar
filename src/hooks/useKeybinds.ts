@@ -212,7 +212,7 @@ const useKeybinds = () => {
       'space',
       () => {
         mutateApp((draft) => {
-          draft.editor.isPanning = true;
+          draft.editor.isSpacePanning = true;
         });
       },
       { preventRepeats: true, action: 'keydown' },
@@ -221,7 +221,7 @@ const useKeybinds = () => {
       'space',
       () => {
         mutateApp((draft) => {
-          draft.editor.isPanning = false;
+          draft.editor.isSpacePanning = false;
         });
       },
       { action: 'keyup' },

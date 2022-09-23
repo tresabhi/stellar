@@ -35,7 +35,7 @@ export const LayoutCanvas = () => {
 
   const handlePointerMissed = () => {
     const {
-      editor: { tool, isPanning },
+      editor: { tool, isSpacePanning: isPanning },
     } = useApp.getState();
     const { selections } = useBlueprint.getState();
     if (selections.length > 0 && tool === Tool.Move && !isPanning) {
@@ -45,7 +45,7 @@ export const LayoutCanvas = () => {
 
   useEffect(() => {
     const unsubscribeTool = useApp.subscribe(
-      (state) => (state.editor.isPanning ? Tool.Pan : state.editor.tool),
+      (state) => (state.editor.isSpacePanning ? Tool.Pan : state.editor.tool),
       (tool) => {
         if (canvas.current) {
           if (tool === Tool.Pan) {
@@ -89,3 +89,4 @@ export * from './components/Expose';
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';
+

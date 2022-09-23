@@ -4,7 +4,11 @@ import svgrPlugin from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  build: { outDir: 'build' },
+  build: {
+    outDir: 'build',
+    sourcemap: true,
+  },
+
   plugins: [
     tsconfigPaths(),
     react(),
