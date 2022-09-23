@@ -61,9 +61,9 @@ export const PanControls = () => {
 
     const handlePointerDown = (event: PointerEvent) => {
       if (!useApp.getState().editor.isTouchPanning) {
-        const { tool, isSpacePanning: isPanning } = useApp.getState().editor;
+        const { tool, isSpacePanning } = useApp.getState().editor;
 
-        if (tool === Tool.Pan || isPanning) {
+        if (tool === Tool.Pan || isSpacePanning) {
           initialMousePos = getMousePos(event);
           canvas.addEventListener('pointermove', handlePointerMove);
         }

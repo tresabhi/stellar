@@ -30,9 +30,7 @@ const useDragControls = (id: string) => {
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
-    const {
-      editor: { tool, isSpacePanning: isPanning },
-    } = useApp.getState();
+    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
     if (
       part &&
@@ -40,7 +38,8 @@ const useDragControls = (id: string) => {
       !part.hidden &&
       !part.locked &&
       tool === Tool.Move &&
-      !isPanning // isn't panning right now via the hotkey
+      !isSpacePanning &&
+      !isTouchPanning
     ) {
       event.stopPropagation();
 
@@ -49,72 +48,78 @@ const useDragControls = (id: string) => {
       lastSnappedDelta.set(0, 0);
       selectedInitially = part.selected;
 
-      window.addEventListener('pointerup', onPointerUp);
-      window.addEventListener('pointermove', onPointerMove);
+      window.addEventListener('pointerup', handlePointerUp);
+      window.addEventListener('pointermove', handlePointerMove);
     }
   };
-  const onPointerMove = (event: PointerEvent) => {
-    const snapDistance = event.ctrlKey
-      ? event.shiftKey
-        ? CTRL_SHIFT_SNAP
-        : CTRL_SNAP
-      : event.shiftKey
-      ? SHIFT_SNAP
-      : DEFAULT_SNAP;
-    const mousePos = getMousePos(event);
-    const delta = new Vector2(
-      mousePos.x - initialMousePos.x,
-      mousePos.y - initialMousePos.y,
-    );
-    const snappedDelta = new Vector2(
-      snap(delta.x, snapDistance),
-      snap(delta.y, snapDistance),
-    );
-    const movement = snappedDelta.clone().sub(lastSnappedDelta);
+  const handlePointerMove = (event: PointerEvent) => {
+    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
-    if (!selectedInitially) {
-      selectPartOnly(id);
-      selectedInitially = true;
-    }
-
-    if (movement.x !== 0) {
-      const [nextState, patches, inversePatches] = produceWithPatches(
-        useBlueprint.getState(),
-        (draft) => {
-          translateTranslatableParts(movement.x, 0, draft.selections, draft);
-        },
+    if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
+      handlePointerUp();
+    } else {
+      const snapDistance = event.ctrlKey
+        ? event.shiftKey
+          ? CTRL_SHIFT_SNAP
+          : CTRL_SNAP
+        : event.shiftKey
+        ? SHIFT_SNAP
+        : DEFAULT_SNAP;
+      const mousePos = getMousePos(event);
+      const delta = new Vector2(
+        mousePos.x - initialMousePos.x,
+        mousePos.y - initialMousePos.y,
       );
-
-      if (patches.length > 0) {
-        lastPatchesX = patches;
-        if (!firstInversePatchesX) firstInversePatchesX = inversePatches;
-
-        useBlueprint.setState(nextState);
-      }
-    }
-
-    if (movement.y !== 0) {
-      const [nextState, patches, inversePatches] = produceWithPatches(
-        useBlueprint.getState(),
-        (draft) => {
-          translateTranslatableParts(0, movement.y, draft.selections, draft);
-        },
+      const snappedDelta = new Vector2(
+        snap(delta.x, snapDistance),
+        snap(delta.y, snapDistance),
       );
+      const movement = snappedDelta.clone().sub(lastSnappedDelta);
 
-      if (patches.length > 0) {
-        lastPatchesY = patches;
-        if (!firstInversePatchesY) firstInversePatchesY = inversePatches;
-
-        useBlueprint.setState(nextState);
+      if (!selectedInitially) {
+        selectPartOnly(id);
+        selectedInitially = true;
       }
-    }
 
-    lastDelta.copy(delta);
-    lastSnappedDelta.copy(snappedDelta);
+      if (movement.x !== 0) {
+        const [nextState, patches, inversePatches] = produceWithPatches(
+          useBlueprint.getState(),
+          (draft) => {
+            translateTranslatableParts(movement.x, 0, draft.selections, draft);
+          },
+        );
+
+        if (patches.length > 0) {
+          lastPatchesX = patches;
+          if (!firstInversePatchesX) firstInversePatchesX = inversePatches;
+
+          useBlueprint.setState(nextState);
+        }
+      }
+
+      if (movement.y !== 0) {
+        const [nextState, patches, inversePatches] = produceWithPatches(
+          useBlueprint.getState(),
+          (draft) => {
+            translateTranslatableParts(0, movement.y, draft.selections, draft);
+          },
+        );
+
+        if (patches.length > 0) {
+          lastPatchesY = patches;
+          if (!firstInversePatchesY) firstInversePatchesY = inversePatches;
+
+          useBlueprint.setState(nextState);
+        }
+      }
+
+      lastDelta.copy(delta);
+      lastSnappedDelta.copy(snappedDelta);
+    }
   };
-  const onPointerUp = () => {
-    window.removeEventListener('pointerup', onPointerUp);
-    window.removeEventListener('pointermove', onPointerMove);
+  const handlePointerUp = () => {
+    window.removeEventListener('pointerup', handlePointerUp);
+    window.removeEventListener('pointermove', handlePointerMove);
 
     const lastPatches = [...(lastPatchesX ?? []), ...(lastPatchesY ?? [])];
     const firstInversePatches = [

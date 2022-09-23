@@ -35,10 +35,10 @@ export const LayoutCanvas = () => {
 
   const handlePointerMissed = () => {
     const {
-      editor: { tool, isSpacePanning: isPanning },
+      editor: { tool, isSpacePanning },
     } = useApp.getState();
     const { selections } = useBlueprint.getState();
-    if (selections.length > 0 && tool === Tool.Move && !isPanning) {
+    if (selections.length > 0 && tool === Tool.Move && !isSpacePanning) {
       unselectAllParts();
     }
   };
@@ -89,4 +89,3 @@ export * from './components/Expose';
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';
-
