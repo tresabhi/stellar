@@ -739,11 +739,6 @@
   resolved "https://registry.yarnpkg.com/@types/mousetrap/-/mousetrap-1.6.9.tgz#f1ef9adbd1eac3466f21b6988b1c82c633a45340"
   integrity sha512-HUAiN65VsRXyFCTicolwb5+I7FM6f72zjMWr+ajGk+YTvzBgXqa2A5U7d+rtsouAkunJ5U4Sb5lNJjo9w+nmXg==
 
-"@types/node@^18.7.18":
-  version "18.7.18"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.7.18.tgz#633184f55c322e4fb08612307c274ee6d5ed3154"
-  integrity sha512-m+6nTEOadJZuTPkKR/SYK3A2d7FZrgElol9UP1Kae90VVU4a6mxnPuLiIW1m4Cq4gZ/nWb9GrdVXJCoCazDAbg==
-
 "@types/offscreencanvas@^2019.6.4":
   version "2019.7.0"
   resolved "https://registry.yarnpkg.com/@types/offscreencanvas/-/offscreencanvas-2019.7.0.tgz#e4a932069db47bb3eabeb0b305502d01586fa90d"
