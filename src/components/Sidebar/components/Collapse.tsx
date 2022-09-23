@@ -29,14 +29,14 @@ const Trigger = styled(Button, {
 
     position: {
       left: {
-        transform: `translate(calc(100% - 0.0625rem), 50%)`,
+        transform: `translate(calc(100%), 50%)`,
         right: 0,
         borderWidth: `${theme.sizes[1]} ${theme.sizes[1]} ${theme.sizes[1]} 0 !important`,
         borderRadius: `0 ${theme.radii[4]} ${theme.radii[4]} 0`,
       },
 
       right: {
-        transform: `translate(calc(-100% + 0.0625rem), 50%)`,
+        transform: `translate(calc(-100%), 50%)`,
         left: 0,
         borderWidth: `${theme.sizes[1]} 0 ${theme.sizes[1]} ${theme.sizes[1]} !important`,
         borderRadius: `${theme.radii[4]} 0 0 ${theme.radii[4]}`,
