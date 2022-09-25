@@ -93,7 +93,9 @@ export const PartWithTransformationsPropertyComponent: FC<
     ids,
     (state) => state.o.z,
     (draft, value) => {
-      draft.o.z = value;
+      draft.o.z = value % 360;
+
+      return draft.o.z;
     },
   );
   const xScale = useNumericalInputProperty<PartWithTransformations>(

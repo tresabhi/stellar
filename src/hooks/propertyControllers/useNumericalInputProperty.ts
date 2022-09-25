@@ -15,7 +15,7 @@ export const useNumericalInputProperty = <
 >(
   ids: string[],
   slice: (state: Type) => Value,
-  mutate: (draft: Type, newValue: Value, lastValue?: Value) => void,
+  mutate: (draft: Type, newValue: Value, lastValue?: Value) => Value | void,
 ) => {
   const input = useRef<InputRef>(null);
   let value: Value | undefined = getMutualProperty(ids, slice);
@@ -28,7 +28,12 @@ export const useNumericalInputProperty = <
   };
   const commit = (newValue: Value, lastValue?: Value) => {
     mutateParts<Type>(ids, (draft) => {
-      mutate(draft, newValue, lastValue);
+      const returnValue = mutate(draft, newValue, lastValue);
+
+      if (returnValue !== undefined) {
+        value = returnValue;
+        setInputValue(value);
+      }
     });
   };
   const recomputeAndRerender = fallingEdgeDebounce(() => {
