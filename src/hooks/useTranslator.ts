@@ -1,15 +1,30 @@
-import { langs } from 'langs';
 import { Translations } from 'stores/useTranslationsCache';
 import useSettings from '../stores/useSettings';
 
+const localePattern = /[A-z]{2}-[A-z]{2}/;
+
 export const FALLBACK_LANG = 'en-US';
+
+const TRANSLATIONS = import.meta.glob<true, string, Translations>('../lang/*', {
+  eager: true,
+  import: 'default',
+});
+
+for (const path in TRANSLATIONS) {
+  const localeMatch = path.match(localePattern);
+
+  if (localeMatch) {
+    const locale = localeMatch[0];
+
+    TRANSLATIONS[locale] = TRANSLATIONS[path];
+    delete TRANSLATIONS[path];
+  }
+}
 
 export const createTranslator = (
   language = useSettings.getState().interface.language,
 ) => {
-  const translations = (
-    langs.get(language) ?? (langs.get(FALLBACK_LANG) as unknown as Translations)
-  ).translations;
+  const translations = TRANSLATIONS[language] ?? TRANSLATIONS[FALLBACK_LANG];
 
   if (translations === undefined) {
     console.warn(`No translations for language ${language}`);

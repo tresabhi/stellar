@@ -70,7 +70,6 @@
     "start": "vite --host",
     "build": "eslint . && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "build:lang": "node scripts/generateLanguageManifest.js",
     "test": "jest",
     "format": "prettier --write \"**/*.@(json|js|jsx|css|md|ts|tsx|html|xml|yml)\"",
     "depcheck": "npx depcheck",
