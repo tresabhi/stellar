@@ -42,14 +42,14 @@
           "move": "Sail",
           "pan": "Looksey"
         },
-        "selection": {
+        "clipboard": {
           "copy": "Loot",
           "cut": "Loot n' Sail",
           "paste": "Bury",
           "duplicate": "Loot, Sail, n' Bury",
           "create_snippet": "Summon Booty"
         },
-        "group": {
+        "selection": {
           "group": "Crew Up",
           "ungroup": "Uncrew"
         },

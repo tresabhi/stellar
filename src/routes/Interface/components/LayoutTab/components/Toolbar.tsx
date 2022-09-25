@@ -49,9 +49,11 @@ import {
   cutPartsBySelection,
   groupPartsBySelection,
   pasteParts,
+  selectAllPartsAtRoot,
   togglePartsLockBySelection,
   togglePartsVisibilityBySelection,
   ungroupGroupsBySelection,
+  unselectAllParts,
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { useTranslator } from 'hooks/useTranslator';
@@ -75,6 +77,7 @@ const Toolbar = () => {
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
   );
+  const hasParts = useBlueprint((state) => state.parts.size !== 0);
   const hasUndos = useVersionControl((state) => state.index > -1);
   const hasRedos = useVersionControl(
     (state) => state.history.length - 1 > state.index,
@@ -105,6 +108,8 @@ const Toolbar = () => {
   const handlePasteClick = () => pasteParts();
   const handleDuplicateClick = () => duplicatePartsBySelection();
   // const handleSnippetClick =
+  const handleSelectAllClick = () => selectAllPartsAtRoot();
+  const handleUnselectAllClick = () => unselectAllParts();
   const handleGroupClick = () => groupPartsBySelection();
   const handleUngroupClick = () => ungroupGroupsBySelection();
   const handleUndoClick = () => undoVersion();
@@ -194,6 +199,47 @@ const Toolbar = () => {
 
       <ToolbarComponent.Group>
         <ToolbarComponent.Dropdown
+          disabled={!hasParts && hasNoSelections}
+          icon={<GroupIcon />}
+        >
+          <ToolbarComponent.DropdownItem
+            disabled={!hasParts}
+            icon={<GroupIcon />}
+            onClick={handleSelectAllClick}
+            keybind="Ctrl + A"
+          >
+            {t`tab.layout.toolbar.selection.select_all`}
+          </ToolbarComponent.DropdownItem>
+
+          <ToolbarComponent.DropdownItem
+            disabled={hasNoSelections}
+            icon={<StackIcon />}
+            onClick={handleUnselectAllClick}
+            keybind="Esc"
+          >
+            {t`tab.layout.toolbar.selection.unselect_all`}
+          </ToolbarComponent.DropdownItem>
+
+          <ToolbarComponent.DropdownItem
+            disabled={hasNoSelections}
+            icon={<GroupIcon />}
+            onClick={handleGroupClick}
+            keybind="Ctrl + G"
+          >
+            {t`tab.layout.toolbar.selection.group`}
+          </ToolbarComponent.DropdownItem>
+
+          <ToolbarComponent.DropdownItem
+            disabled={hasNoSelections}
+            icon={<StackIcon />}
+            onClick={handleUngroupClick}
+            keybind="Ctrl + Shift + G"
+          >
+            {t`tab.layout.toolbar.selection.ungroup`}
+          </ToolbarComponent.DropdownItem>
+        </ToolbarComponent.Dropdown>
+
+        <ToolbarComponent.Dropdown
           disabled={hasNoItemInClipboard && hasNoSelections}
           icon={<ClipboardIcon />}
         >
@@ -203,7 +249,7 @@ const Toolbar = () => {
             keybind="Ctrl + C"
             disabled={hasNoSelections}
           >
-            {t`tab.layout.toolbar.selection.copy`}
+            {t`tab.layout.toolbar.clipboard.copy`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -212,7 +258,7 @@ const Toolbar = () => {
             keybind="Ctrl + X"
             disabled={hasNoSelections}
           >
-            {t`tab.layout.toolbar.selection.cut`}
+            {t`tab.layout.toolbar.clipboard.cut`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -221,7 +267,7 @@ const Toolbar = () => {
             keybind="Ctrl + V"
             disabled={hasNoItemInClipboard}
           >
-            {t`tab.layout.toolbar.selection.paste`}
+            {t`tab.layout.toolbar.clipboard.paste`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -230,7 +276,7 @@ const Toolbar = () => {
             keybind="Ctrl + D"
             disabled={hasNoSelections}
           >
-            {t`tab.layout.toolbar.selection.duplicate`}
+            {t`tab.layout.toolbar.clipboard.duplicate`}
           </ToolbarComponent.DropdownItem>
 
           <ToolbarComponent.DropdownItem
@@ -238,28 +284,7 @@ const Toolbar = () => {
             keybind="Ctrl + M"
             disabled
           >
-            {t`tab.layout.toolbar.selection.create_snippet`}
-          </ToolbarComponent.DropdownItem>
-        </ToolbarComponent.Dropdown>
-
-        <ToolbarComponent.Dropdown
-          disabled={hasNoSelections}
-          icon={<GroupIcon />}
-        >
-          <ToolbarComponent.DropdownItem
-            icon={<GroupIcon />}
-            onClick={handleGroupClick}
-            keybind="Ctrl + G"
-          >
-            {t`tab.layout.toolbar.group.group`}
-          </ToolbarComponent.DropdownItem>
-
-          <ToolbarComponent.DropdownItem
-            icon={<StackIcon />}
-            onClick={handleUngroupClick}
-            keybind="Ctrl + Shift + G"
-          >
-            {t`tab.layout.toolbar.group.ungroup`}
+            {t`tab.layout.toolbar.clipboard.create_snippet`}
           </ToolbarComponent.DropdownItem>
         </ToolbarComponent.Dropdown>
 

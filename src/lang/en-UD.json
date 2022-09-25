@@ -42,14 +42,14 @@
           "move": "ǝʌoW",
           "pan": "uɐԀ"
         },
-        "selection": {
+        "clipboard": {
           "copy": "ʎdoƆ",
           "cut": "ʇnƆ",
           "paste": "ǝʇsɐԀ",
           "duplicate": "ǝʇɐɔᴉldnp",
           "create_snippet": "ʇǝddᴉuS ǝʇɐǝɹƆ"
         },
-        "group": {
+        "selection": {
           "group": "dnoɹפ",
           "ungroup": "dnoɹƃu∩"
         },

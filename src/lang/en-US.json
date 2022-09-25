@@ -52,7 +52,7 @@
           "pan": "Pan"
         },
 
-        "selection": {
+        "clipboard": {
           "copy": "Copy",
           "cut": "Cut",
           "paste": "Paste",
@@ -60,7 +60,9 @@
           "create_snippet": "Create Snippet"
         },
 
-        "group": {
+        "selection": {
+          "select_all": "Select All",
+          "unselect_all": "Unselect All",
           "group": "Group",
           "ungroup": "Ungroup"
         },

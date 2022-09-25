@@ -42,14 +42,14 @@
           "move": "Pomeri",
           "pan": "Pomeraj"
         },
-        "selection": {
+        "clipboard": {
           "copy": "Kopiraj",
           "cut": "Iseci",
           "paste": "Zalepi",
           "duplicate": "Dupliraj",
           "create_snippet": "Napravi Isečak"
         },
-        "group": {
+        "selection": {
           "group": "Grupa",
           "ungroup": "Degrupiraj"
         },

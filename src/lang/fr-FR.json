@@ -42,14 +42,14 @@
           "move": "Déplacer",
           "pan": "Pan"
         },
-        "selection": {
+        "clipboard": {
           "copy": "Copier",
           "cut": "Couper",
           "paste": "Coller",
           "duplicate": "Dupliquer",
           "create_snippet": "Créer un extrait"
         },
-        "group": {
+        "selection": {
           "group": "Grouper",
           "ungroup": "Dégrouper"
         },

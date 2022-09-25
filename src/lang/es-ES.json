@@ -42,14 +42,14 @@
           "move": "Mover",
           "pan": "Sartén"
         },
-        "selection": {
+        "clipboard": {
           "copy": "Copiar",
           "cut": "Cortar",
           "paste": "Pegar",
           "duplicate": "Duplicar",
           "create_snippet": "Crear fragmento"
         },
-        "group": {
+        "selection": {
           "group": "Grupo",
           "ungroup": "Desagrupar"
         },

@@ -42,14 +42,14 @@
           "move": "Mowe",
           "pan": "Pwan"
         },
-        "selection": {
+        "clipboard": {
           "copy": "Cwopy",
           "cut": "Cut",
           "paste": "Pwwaste",
           "duplicate": "Duplicwatew",
           "create_snippet": "Crwet Snipetz"
         },
-        "group": {
+        "selection": {
           "group": "Gwoup",
           "ungroup": "No gwoup"
         },
