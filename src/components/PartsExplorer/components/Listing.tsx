@@ -4,7 +4,7 @@ import {
   getPart,
   mutatePart,
   selectPartOnly,
-  togglePartSelection
+  togglePartSelection,
 } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
@@ -14,6 +14,7 @@ import { memo, MouseEvent, PointerEvent, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/useBlueprint';
 import usePartRegistry, { PartRegistryItem } from 'stores/usePartRegistry';
+import useSettings from 'stores/useSettings';
 import { Container } from './Container';
 
 export interface ListingProps {
@@ -148,6 +149,8 @@ export const Listing = memo<ListingProps>(
     };
     const handleTriggerClick = (event: MouseEvent) => {
       event.stopPropagation();
+      event.ctrlKey =
+        event.ctrlKey || useSettings.getState().editor.selectMultiple;
 
       if (event.ctrlKey) {
         if (event.shiftKey) {
