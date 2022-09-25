@@ -60,6 +60,7 @@ export interface UseSettings {
     selectMultiple: boolean;
     undoLimit: number;
     rename: RenamePartsOptions;
+    constraintScales: boolean;
   };
 }
 
@@ -107,6 +108,7 @@ export const UseSettingsData: UseSettings = {
       skipLocked: true,
       suffix: false,
     },
+    constraintScales: true,
   },
 };
 

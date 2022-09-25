@@ -125,7 +125,8 @@
             "y_position": "Y Position",
             "rotation": "Rotation",
             "x_scale": "X Scale",
-            "y_scale": "Y Scale"
+            "y_scale": "Y Scale",
+            "constraint": "Constraint"
           },
 
           "engine": {

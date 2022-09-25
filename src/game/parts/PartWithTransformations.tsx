@@ -4,6 +4,9 @@ import { useTranslator } from 'hooks/useTranslator';
 import { FC, RefObject } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 
+import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
+import { mutateSettings } from 'core/app';
+import useSettings from 'stores/useSettings';
 import { Group, Mesh } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
@@ -96,17 +99,30 @@ export const PartWithTransformationsPropertyComponent: FC<
   const xScale = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.o.x,
-    (draft, value) => {
-      draft.o.x = value;
+    (draft, newValue, lastValue) => {
+      draft.o.x = newValue;
+      if (constraint && lastValue !== undefined) {
+        draft.o.y *= newValue / lastValue;
+      }
     },
   );
   const yScale = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.o.y,
-    (draft, value) => {
-      draft.o.y = value;
+    (draft, newValue, lastValue) => {
+      draft.o.y = newValue;
+      if (constraint && lastValue !== undefined) {
+        draft.o.x *= newValue / lastValue;
+      }
     },
   );
+
+  const constraint = useSettings((state) => state.editor.constraintScales);
+  const handleConstraintClick = () => {
+    mutateSettings((state) => {
+      state.editor.constraintScales = !state.editor.constraintScales;
+    });
+  };
 
   return (
     <Properties.Group>
@@ -141,6 +157,13 @@ export const PartWithTransformationsPropertyComponent: FC<
           label={t`tab.layout.right_sidebar.properties.transformations.y_scale`}
           unit="x"
         />
+        <Properties.ToggleButton
+          label={t`tab.layout.right_sidebar.properties.transformations.constraint`}
+          onClick={handleConstraintClick}
+          selected={constraint}
+        >
+          {constraint ? <Link1Icon /> : <LinkNone1Icon />}
+        </Properties.ToggleButton>
       </Properties.Row>
     </Properties.Group>
   );
