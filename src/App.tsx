@@ -1,4 +1,5 @@
 import 'App.css';
+import * as ErrorBoundary from 'components/ErrorBoundary';
 import { usePrerender } from 'hooks/usePrerender';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from 'routes/Home';
@@ -18,12 +19,14 @@ const App = () => {
   usePrerender();
 
   return (
-    <AppContainer className={theme}>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/interface" element={<Interface />} />
-      </Routes>
-    </AppContainer>
+    <ErrorBoundary.Wrapper>
+      <AppContainer className={theme}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/interface" element={<Interface />} />
+        </Routes>
+      </AppContainer>
+    </ErrorBoundary.Wrapper>
   );
 };
 export default App;

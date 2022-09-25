@@ -1,4 +1,3 @@
-import * as ErrorBoundary from 'components/ErrorBoundary';
 import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -14,12 +13,10 @@ const App = lazy(() => import('App'));
 
 root.render(
   <StrictMode>
-    <ErrorBoundary.Wrapper>
-      <BrowserRouter>
-        <Suspense fallback={<SplashScreen />}>
-          <App />
-        </Suspense>
-      </BrowserRouter>
-    </ErrorBoundary.Wrapper>
+    <BrowserRouter>
+      <Suspense fallback={<SplashScreen />}>
+        <App />
+      </Suspense>
+    </BrowserRouter>
   </StrictMode>,
 );
