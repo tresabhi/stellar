@@ -23,7 +23,10 @@ import zh_CN from 'lang/zh-CN.json';
 import zh_TW from 'lang/zh-TW.json';
 
 export const langs = new Map([
-  ['ar-SA', { translations: ar_SA, name: 'العربية (المملكة العربية السعودية)' }],
+  [
+    'ar-SA',
+    { translations: ar_SA, name: 'العربية (المملكة العربية السعودية)' },
+  ],
   ['de-DE', { translations: de_DE, name: 'Deutsch (Deutschland)' }],
   ['en-GB', { translations: en_GB, name: 'British English' }],
   ['en-PT', { translations: en_PT, name: 'English (Portugal)' }],

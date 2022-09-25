@@ -2,11 +2,11 @@ import { fileSave } from 'browser-fs-access';
 import useApp from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import { exportifyBlueprint } from './exportifyBlueprint';
+import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 import {
   FILE_EXTENSION_REGEX,
   UNNAMED_BLUEPRINT_FILE_NAME,
 } from './saveFileAs';
-import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 
 export const exportFile = async () => {
   const {

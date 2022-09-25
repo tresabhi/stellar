@@ -14,11 +14,7 @@ type Config = {
 };
 
 export function registerServiceWorker(config?: Config) {
-  if (
-    import.meta.env.PROD &&
-    'serviceWorker' in navigator &&
-    import.meta.url
-  ) {
+  if (import.meta.env.PROD && 'serviceWorker' in navigator && import.meta.url) {
     const publicUrl = new URL(import.meta.url, window.location.href);
     if (publicUrl.origin !== window.location.origin) return;
 
