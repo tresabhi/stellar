@@ -1,4 +1,6 @@
 import {
+  CardStackMinusIcon,
+  CardStackPlusIcon,
   ClipboardCopyIcon,
   ClipboardIcon,
   Component1Icon,
@@ -204,7 +206,7 @@ const Toolbar = () => {
         >
           <ToolbarComponent.DropdownItem
             disabled={!hasParts}
-            icon={<GroupIcon />}
+            icon={<CardStackPlusIcon />}
             onClick={handleSelectAllClick}
             keybind="Ctrl + A"
           >
@@ -213,7 +215,7 @@ const Toolbar = () => {
 
           <ToolbarComponent.DropdownItem
             disabled={hasNoSelections}
-            icon={<StackIcon />}
+            icon={<CardStackMinusIcon />}
             onClick={handleUnselectAllClick}
             keybind="Esc"
           >
