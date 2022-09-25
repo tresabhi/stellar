@@ -30,7 +30,7 @@ export interface SliderWithInputRef extends HTMLDivElement {
 const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  flex: 1,
+  flex: 2,
   gap: theme.space.gapRelated,
 });
 

@@ -1,5 +1,7 @@
+import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as Properties from 'components/Properties';
+import { mutateSettings } from 'core/app';
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import { getPart } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
@@ -12,6 +14,7 @@ import usePhysicalPart from 'hooks/usePhysicalPart';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
 import { PartRegistryFragment } from 'stores/usePartRegistry';
+import useSettings from 'stores/useSettings';
 import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData } from './Part';
@@ -165,16 +168,25 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
   const topWidth = useNumericalInputProperty<FuelTank>(
     ids,
     (state) => state.N.width_b,
-    (draft, value) => {
-      draft.N.width_b = value;
+    (draft, newValue, lastValue) => {
+      draft.N.width_b = newValue;
+
+      if (constraint && lastValue !== undefined && lastValue !== 0) {
+        draft.N.width_a *= newValue / lastValue;
+        draft.N.width_original *= newValue / lastValue;
+      }
     },
   );
   const bottomWidth = useNumericalInputProperty<FuelTank>(
     ids,
     (state) => state.N.width_a,
-    (draft, value) => {
-      draft.N.width_a = value;
-      draft.N.width_original = value;
+    (draft, newValue, lastValue) => {
+      draft.N.width_a = newValue;
+      draft.N.width_original = newValue;
+
+      if (constraint && lastValue !== undefined && lastValue !== 0) {
+        draft.N.width_b *= newValue / lastValue;
+      }
     },
   );
   const height = useNumericalInputProperty<FuelTank>(
@@ -192,9 +204,28 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
     },
   );
 
+  const constraint = useSettings(
+    (state) => state.editor.constraintFuelTankWidths,
+  );
+  const handleConstraintClick = () => {
+    mutateSettings((state) => {
+      state.editor.constraintFuelTankWidths =
+        !state.editor.constraintFuelTankWidths;
+    });
+  };
+
   return (
     <Properties.Group>
       <Properties.Title>{t`tab.layout.right_sidebar.properties.fuel_tank`}</Properties.Title>
+
+      <Properties.Row>
+        <Properties.Input
+          {...height}
+          label={t`tab.layout.right_sidebar.properties.fuel_tank.height`}
+          unit="m"
+        />
+      </Properties.Row>
+
       <Properties.Row>
         <Properties.Input
           {...topWidth}
@@ -206,11 +237,13 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
           label={t`tab.layout.right_sidebar.properties.fuel_tank.bottom_width`}
           unit="m"
         />
-        <Properties.Input
-          {...height}
-          label={t`tab.layout.right_sidebar.properties.fuel_tank.height`}
-          unit="m"
-        />
+        <Properties.ToggleButton
+          label={t`tab.layout.right_sidebar.properties.fuel_tank.constraint`}
+          onClick={handleConstraintClick}
+          selected={constraint}
+        >
+          {constraint ? <Link1Icon /> : <LinkNone1Icon />}
+        </Properties.ToggleButton>
       </Properties.Row>
 
       <Properties.Row>

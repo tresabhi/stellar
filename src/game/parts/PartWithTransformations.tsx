@@ -101,7 +101,7 @@ export const PartWithTransformationsPropertyComponent: FC<
     (state) => state.o.x,
     (draft, newValue, lastValue) => {
       draft.o.x = newValue;
-      if (constraint && lastValue !== undefined) {
+      if (constraint && lastValue !== undefined && lastValue !== 0) {
         draft.o.y *= newValue / lastValue;
       }
     },
@@ -111,7 +111,7 @@ export const PartWithTransformationsPropertyComponent: FC<
     (state) => state.o.y,
     (draft, newValue, lastValue) => {
       draft.o.y = newValue;
-      if (constraint && lastValue !== undefined) {
+      if (constraint && lastValue !== undefined && lastValue !== 0) {
         draft.o.x *= newValue / lastValue;
       }
     },

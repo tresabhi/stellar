@@ -141,6 +141,7 @@
 
             "top_width": "Top Width",
             "bottom_width": "Bottom Width",
+            "constraint": "Constraint",
             "height": "Height",
             "fuel": "Fuel"
           }

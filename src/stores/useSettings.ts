@@ -61,6 +61,7 @@ export interface UseSettings {
     undoLimit: number;
     rename: RenamePartsOptions;
     constraintScales: boolean;
+    constraintFuelTankWidths: boolean;
   };
 }
 
@@ -109,6 +110,7 @@ export const UseSettingsData: UseSettings = {
       suffix: false,
     },
     constraintScales: true,
+    constraintFuelTankWidths: true,
   },
 };
 
