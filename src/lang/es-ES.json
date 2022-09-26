@@ -42,16 +42,18 @@
           "move": "Mover",
           "pan": "Sartén"
         },
-        "selection": {
-          "copy": "Copiar",
-          "cut": "Cortar",
-          "paste": "Pegar",
-          "duplicate": "Duplicar",
-          "create_snippet": "Crear fragmento"
+        "clipboard": {
+          "copy": "Copy",
+          "cut": "Cut",
+          "paste": "Paste",
+          "duplicate": "Duplicate",
+          "create_snippet": "Create Snippet"
         },
-        "group": {
-          "group": "Grupo",
-          "ungroup": "Desagrupar"
+        "selection": {
+          "select_all": "Select All",
+          "unselect_all": "Unselect All",
+          "group": "Group",
+          "ungroup": "Ungroup"
         },
         "help": {
           "about": "Acerca de Estellar",
@@ -97,7 +99,8 @@
             "y_position": "Posición Y",
             "rotation": "Rotación",
             "x_scale": "Escala X",
-            "y_scale": "Escala Y"
+            "y_scale": "Escala Y",
+            "constraint": "Constraint"
           },
           "engine": {
             "$": "Motor",
@@ -108,6 +111,7 @@
             "$": "Tanque de combustible",
             "top_width": "Anchura superior",
             "bottom_width": "Anchura inferior",
+            "constraint": "Constraint",
             "height": "Altura",
             "fuel": "Combustible"
           }
