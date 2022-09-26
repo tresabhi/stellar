@@ -69,6 +69,7 @@
   "scripts": {
     "start": "vite --host",
     "build": "eslint . && tsc --noEmit && vite build",
+    "build:lang": "echo this command is deprecated and does not do anything",
     "preview": "vite preview",
     "test": "jest",
     "format": "prettier --write \"**/*.@(json|js|jsx|css|md|ts|tsx|html|xml|yml)\"",

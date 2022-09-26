@@ -6,8 +6,13 @@ export interface Bounds {
   max: { x: number; y: number };
 }
 
-export interface PartBounds extends Bounds {
-  offset: { x: number; y: number };
+/**
+ * A box with rotation from the center
+ */
+export interface PartBounds {
+  width: number;
+  height: number;
+  position: { x: number; y: number };
   rotation: number;
 }
 

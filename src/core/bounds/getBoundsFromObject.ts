@@ -7,23 +7,36 @@ export const getBoundsFromObject = (
   mesh: RefObject<Mesh | Group>,
 ) => {
   if (wrapper.current && mesh.current) {
-    const position = mesh.current.position.toArray();
-    const rotation = wrapper.current.rotation.toArray();
+    const meshOffset = mesh.current.position.clone();
+    const wrapperRotation = wrapper.current.rotation.clone();
 
     mesh.current.position.set(0, 0, 0);
     wrapper.current.rotation.set(0, 0, 0);
     wrapper.current.updateMatrixWorld();
 
     const box3 = new Box3().setFromObject(mesh.current);
+
+    const meshOffsetX = meshOffset.x * wrapper.current.scale.x;
+    const meshOffsetY = meshOffset.y * wrapper.current.scale.y;
+    const offsetHypotenuse = Math.sqrt(meshOffsetX ** 2 + meshOffsetY ** 2);
+    const offsetAngleOriginal =
+      Math.atan(meshOffsetY / meshOffsetX) - Math.PI / 2;
+    const offsetAngle = offsetAngleOriginal - wrapperRotation.z;
+    // sin and cos swapped because we're not in standard position
+    const offsetX =
+      offsetHypotenuse * Math.sin(offsetAngle) + wrapper.current.position.x;
+    const offsetY =
+      offsetHypotenuse * Math.cos(offsetAngle) + wrapper.current.position.y;
+
     const partBounds: PartBounds = {
-      min: { x: box3.min.x, y: box3.min.y },
-      max: { x: box3.max.x, y: box3.max.y },
-      offset: { x: position[0], y: position[1] },
-      rotation: rotation[2],
+      width: box3.max.x - box3.min.x,
+      height: box3.max.y - box3.min.y,
+      position: { x: offsetX, y: offsetY },
+      rotation: -offsetAngle,
     };
 
-    mesh.current.position.set(...position);
-    wrapper.current.rotation.set(rotation[0], rotation[1], rotation[2]);
+    mesh.current.position.copy(meshOffset);
+    wrapper.current.rotation.copy(wrapperRotation);
 
     return partBounds;
   }

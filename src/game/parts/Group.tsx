@@ -1,14 +1,12 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
-import { mutateBounds } from 'core/app';
-import { getBoundsFromObject } from 'core/bounds';
 import { partExportify, removePartMetaData } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import useDragControls from 'hooks/useDragControls';
 import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
 import { FC, useCallback, useEffect, useRef } from 'react';
-import useBounds, { BoundListing, PartBounds } from 'stores/useBounds';
+import useBounds from 'stores/useBounds';
 import { PartExportifier, PartRegistryFragment } from 'stores/usePartRegistry';
 import { Group as ThreeGroup } from 'three';
 import { PartComponentProps } from 'types/Parts';
@@ -35,24 +33,22 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const handlePointerDown = useDragControls(id);
 
   const computeBounds = useCallback(() => {
-    const boundsFromObject = getBoundsFromObject(cluster, cluster);
-
-    if (boundsFromObject) {
-      const bounds: PartBounds = {
-        ...boundsFromObject,
-
-        rotation: 0,
-        offset: { x: 0, y: 0 },
-      };
-      const boundListing: BoundListing = {
-        bounds: bounds,
-        needsUpdate: false,
-      };
-
-      mutateBounds((draft) => {
-        draft.parts.set(id, boundListing);
-      });
-    }
+    // TODO: calculate group bounds
+    // const boundsFromObject = getBoundsFromObject(cluster, cluster);
+    // if (boundsFromObject) {
+    //   const bounds: PartBounds = {
+    //     ...boundsFromObject,
+    //     rotation: 0,
+    //     offset: { x: 0, y: 0 },
+    //   };
+    //   const boundListing: BoundListing = {
+    //     bounds: bounds,
+    //     needsUpdate: false,
+    //   };
+    //   mutateBounds((draft) => {
+    //     draft.parts.set(id, boundListing);
+    //   });
+    // }
   }, [id]);
 
   useEffect(computeBounds);

@@ -40,32 +40,14 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
   const outline = useRef<Line>(null);
   const shading = useRef<Mesh>(null);
   const wrapper = useRef<Group>(null);
-  const content = useRef<Group>(null);
   const { deferUpdates } = useBounds();
 
   const rerender = (bound: PartBounds) => {
-    shading.current?.scale.set(
-      bound.max.x - bound.min.x,
-      bound.max.y - bound.min.y,
-      1,
-    );
-    outline.current?.scale.set(
-      bound.max.x - bound.min.x,
-      bound.max.y - bound.min.y,
-      1,
-    );
-    outline.current?.position.set(
-      (bound.max.x - bound.min.x) / -2,
-      (bound.max.y - bound.min.y) / -2,
-      0,
-    );
+    shading.current?.scale.set(bound.width, bound.height, 1);
+    outline.current?.scale.set(bound.width, bound.height, 1);
+    outline.current?.position.set(bound.width / -2, bound.height / -2, 0);
     wrapper.current?.rotation.set(0, 0, bound.rotation);
-    wrapper.current?.position.set(
-      (bound.max.x + bound.min.x) / 2,
-      (bound.max.y + bound.min.y) / 2,
-      0,
-    );
-    content.current?.position.set(bound.offset.x, bound.offset.y, 0);
+    wrapper.current?.position.set(bound.position.x, bound.position.y, 0);
   };
 
   useEffect(() => {
@@ -96,20 +78,18 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
 
   return (
     <group ref={wrapper}>
-      <group ref={content}>
-        <line_
-          ref={outline}
-          material={outlineMaterial}
-          geometry={unitBufferGeometry2}
-          visible={!deferUpdates}
-        />
-        <mesh
-          ref={shading}
-          material={shadingMaterial}
-          geometry={unitPlane}
-          visible={!deferUpdates}
-        />
-      </group>
+      <line_
+        ref={outline}
+        material={outlineMaterial}
+        geometry={unitBufferGeometry2}
+        visible={!deferUpdates}
+      />
+      <mesh
+        ref={shading}
+        material={shadingMaterial}
+        geometry={unitPlane}
+        visible={!deferUpdates}
+      />
     </group>
   );
 };
