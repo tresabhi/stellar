@@ -34,7 +34,11 @@ export const usePartWithScale = (
     id,
     (part: PartWithScale) => part.o,
     (o) => {
-      groupRef.current?.scale.set(o.x, o.y, (o.x + o.y) / 2);
+      groupRef.current?.scale.set(
+        o.x,
+        o.y,
+        (Math.abs(o.x) + Math.abs(o.y)) / 2,
+      );
       declareBoundNeedsUpdate(id);
       deferUpdates();
     },
