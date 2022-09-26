@@ -572,10 +572,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.5.4.tgz#6d26df992a32ea5532a1e7b732f5485857116b00"
   integrity sha512-dzcGxqL1kPKociXK+pcq5ley77cWDWiphfv8OREv8dAZS1dKDTJq1zVy7ZD5ocyMtKMZw/7AcOdIJ1H80Dp56g==
 
-"@react-three/drei@^9.31.1":
-  version "9.32.0"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.32.0.tgz#882833b927d81309b23970c8424d0d0e6cc0e6c0"
-  integrity sha512-Ddb81jkmqDNCtKcYcEjfxG1QVRcYElnaqAIoxNe5kLg4+kuMHbb+c94/qNRYVj79iidn50ACmFQ87jsrmuQWEw==
+"@react-three/drei@^9.32.1":
+  version "9.32.1"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.32.1.tgz#685f5ba0298e87794ecf411b5735fff47edd5c87"
+  integrity sha512-eSzUXitDw6dYl9qn0RtkeOf46ZPO9dCzTv0b88SuW7MYmTzRpbDCblUI3kCJ/3f4BWb9f0AziHmWz1/aglRCsg==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -591,7 +591,7 @@
     stats.js "^0.17.0"
     suspend-react "^0.0.8"
     three-mesh-bvh "^0.5.15"
-    three-stdlib "^2.14.3"
+    three-stdlib "^2.16.2"
     troika-three-text "^0.46.4"
     utility-types "^3.10.0"
     zustand "^3.5.13"
@@ -3297,10 +3297,10 @@ three-mesh-bvh@^0.5.15:
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.16.tgz#ed8518355fb70d7da6a5537558ba43f76a56b067"
   integrity sha512-kN3QGKJNiQQcuiOsjVIkjtPnV3PJa+0Orih2E52afa+kQfs3zfoYt6Kxn6b6RNiAfaQ+7ckwPK0mTVFVl2F2LA==
 
-three-stdlib@^2.14.3:
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.16.1.tgz#3548eca5350a06e79b8e24bd7ee7877cfeab11f6"
-  integrity sha512-AuWs5OFOQfrSYYg49DF2driU9OI9AG8vS1/KBrKjQnJqW5vyn8WvhePexcSmDKgsBfAsxcXk8W/tR9uOESnr3w==
+three-stdlib@^2.16.2:
+  version "2.16.2"
+  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.16.2.tgz#7c4adfa9768aa205f111e6a3a6c176748e117b9e"
+  integrity sha512-YTOO76/xjJnjmgM5o7tOj/YCpdWgG6TMo2arNwBb6jO7xpIgr+aw4tDohvgg1EZgo2tmKrOqEOmpjgy+ca9Wog==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@types/offscreencanvas" "^2019.6.4"
