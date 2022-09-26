@@ -42,16 +42,18 @@
           "move": "Sail",
           "pan": "Looksey"
         },
-        "selection": {
-          "copy": "Loot",
-          "cut": "Loot n' Sail",
-          "paste": "Bury",
-          "duplicate": "Loot, Sail, n' Bury",
-          "create_snippet": "Summon Booty"
+        "clipboard": {
+          "copy": "Copy",
+          "cut": "Cut",
+          "paste": "Paste",
+          "duplicate": "Duplicate",
+          "create_snippet": "Create Snippet"
         },
-        "group": {
-          "group": "Crew Up",
-          "ungroup": "Uncrew"
+        "selection": {
+          "select_all": "Select All",
+          "unselect_all": "Unselect All",
+          "group": "Group",
+          "ungroup": "Ungroup"
         },
         "help": {
           "about": "'bout That Stellar",
@@ -97,7 +99,8 @@
             "y_position": "Movin' Poop",
             "rotation": "Yaw",
             "x_scale": "Blowin' Arm",
-            "y_scale": "Blowin' Poop"
+            "y_scale": "Blowin' Poop",
+            "constraint": "Constraint"
           },
           "engine": {
             "$": "Engine",
@@ -108,6 +111,7 @@
             "$": "Barrel o' Rum",
             "top_width": "Top Width",
             "bottom_width": "Bottom Width",
+            "constraint": "Constraint",
             "height": "Nest o' Sparrow",
             "fuel": "Rum"
           }
