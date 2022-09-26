@@ -22,6 +22,8 @@ export * from './groupPartsBySelection';
 export * from './insertNewPart';
 export * from './mutatePart';
 export * from './mutateParts';
+export * from './panToPart';
+export * from './panToPartBySelection';
 export * from './partExportify';
 export * from './partImportify';
 export * from './pasteParts';

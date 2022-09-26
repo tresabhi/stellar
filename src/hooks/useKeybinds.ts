@@ -16,6 +16,7 @@ import {
   cutPartsBySelection,
   deletePartsBySelection,
   groupPartsBySelection,
+  panToPartBySelection,
   pasteParts,
   selectAllPartsAtRoot,
   translateTranslatablePartsBySelection as translate,
@@ -273,6 +274,8 @@ const useKeybinds = () => {
         popupOpen(Popup.RenameParts);
       }
     });
+
+    bind('.', panToPartBySelection);
   }, []);
 };
 export default useKeybinds;
