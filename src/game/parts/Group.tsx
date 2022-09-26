@@ -1,14 +1,15 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
+import { mutateBounds } from 'core/app';
 import { partExportify, removePartMetaData } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import useDragControls from 'hooks/useDragControls';
 import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
 import { FC, useCallback, useEffect, useRef } from 'react';
-import useBounds from 'stores/useBounds';
+import useBounds, { BoundListing } from 'stores/useBounds';
 import { PartExportifier, PartRegistryFragment } from 'stores/usePartRegistry';
-import { Group as ThreeGroup } from 'three';
+import { Box3, Group as ThreeGroup } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData, VanillaPart } from './Part';
 
@@ -33,22 +34,25 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const handlePointerDown = useDragControls(id);
 
   const computeBounds = useCallback(() => {
-    // TODO: calculate group bounds
-    // const boundsFromObject = getBoundsFromObject(cluster, cluster);
-    // if (boundsFromObject) {
-    //   const bounds: PartBounds = {
-    //     ...boundsFromObject,
-    //     rotation: 0,
-    //     offset: { x: 0, y: 0 },
-    //   };
-    //   const boundListing: BoundListing = {
-    //     bounds: bounds,
-    //     needsUpdate: false,
-    //   };
-    //   mutateBounds((draft) => {
-    //     draft.parts.set(id, boundListing);
-    //   });
-    // }
+    if (cluster.current) {
+      const box3 = new Box3().setFromObject(cluster.current);
+      const boundListing: BoundListing = {
+        bounds: {
+          width: box3.max.x - box3.min.x,
+          height: box3.max.y - box3.min.y,
+          position: {
+            x: (box3.min.x + box3.max.x) / 2,
+            y: (box3.min.y + box3.max.y) / 2,
+          },
+          rotation: 0,
+        },
+        needsUpdate: false,
+      };
+
+      mutateBounds((draft) => {
+        draft.parts.set(id, boundListing);
+      });
+    }
   }, [id]);
 
   useEffect(computeBounds);
