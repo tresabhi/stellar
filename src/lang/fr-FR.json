@@ -42,16 +42,18 @@
           "move": "Déplacer",
           "pan": "Pan"
         },
-        "selection": {
-          "copy": "Copier",
-          "cut": "Couper",
-          "paste": "Coller",
-          "duplicate": "Dupliquer",
-          "create_snippet": "Créer un extrait"
+        "clipboard": {
+          "copy": "Copy",
+          "cut": "Cut",
+          "paste": "Paste",
+          "duplicate": "Duplicate",
+          "create_snippet": "Create Snippet"
         },
-        "group": {
-          "group": "Grouper",
-          "ungroup": "Dégrouper"
+        "selection": {
+          "select_all": "Select All",
+          "unselect_all": "Unselect All",
+          "group": "Group",
+          "ungroup": "Ungroup"
         },
         "help": {
           "about": "À propos de Stellar",
@@ -97,7 +99,8 @@
             "y_position": "Position Y",
             "rotation": "Orientation",
             "x_scale": "Mise à l'échelle X",
-            "y_scale": "Mise à l'échelle Y"
+            "y_scale": "Mise à l'échelle Y",
+            "constraint": "Constraint"
           },
           "engine": {
             "$": "Engine",
@@ -108,6 +111,7 @@
             "$": "Réservoir de carburant",
             "top_width": "Top Width",
             "bottom_width": "Bottom Width",
+            "constraint": "Constraint",
             "height": "Taille",
             "fuel": "Carburant"
           }
