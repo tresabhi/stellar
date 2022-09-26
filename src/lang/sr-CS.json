@@ -42,16 +42,18 @@
           "move": "Pomeri",
           "pan": "Pomeraj"
         },
-        "selection": {
-          "copy": "Kopiraj",
-          "cut": "Iseci",
-          "paste": "Zalepi",
-          "duplicate": "Dupliraj",
-          "create_snippet": "Napravi Isečak"
+        "clipboard": {
+          "copy": "Copy",
+          "cut": "Cut",
+          "paste": "Paste",
+          "duplicate": "Duplicate",
+          "create_snippet": "Create Snippet"
         },
-        "group": {
-          "group": "Grupa",
-          "ungroup": "Degrupiraj"
+        "selection": {
+          "select_all": "Select All",
+          "unselect_all": "Unselect All",
+          "group": "Group",
+          "ungroup": "Ungroup"
         },
         "help": {
           "about": "O aplikaciji \"Stellar\"",
@@ -97,7 +99,8 @@
             "y_position": "Y pozicija",
             "rotation": "Rotacija",
             "x_scale": "X Opseg",
-            "y_scale": "Y Opseg"
+            "y_scale": "Y Opseg",
+            "constraint": "Constraint"
           },
           "engine": {
             "$": "Engine",
@@ -108,6 +111,7 @@
             "$": "Kanister sa Gorivom",
             "top_width": "Gornja Širina",
             "bottom_width": "Donja Širina",
+            "constraint": "Constraint",
             "height": "Visina",
             "fuel": "Gorivo"
           }
