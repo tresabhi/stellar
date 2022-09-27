@@ -1,5 +1,26 @@
 /* Contains styles that should be instantaneously applied */
 
+* {
+  user-select: none;
+}
+
+html,
 body {
   margin: none;
+  overflow: hidden;
+  background-color: black;
+}
+
+button,
+input,
+details,
+summary {
+  padding: unset;
+  background: unset;
+  border: unset;
+}
+
+*:focus,
+*:focus-within {
+  outline: unset;
 }

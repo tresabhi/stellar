@@ -10,21 +10,11 @@ export const globalStyles = globalCss({
   'html, body': {
     // don't blow their eyes out on reload
     backgroundColor: theme.colors.appBackground1,
-    overflow: 'hidden',
   },
 
   '*': {
     fontFamily: theme.fonts.default,
-    userSelect: 'none',
   },
-
-  'button, input, details, summary': {
-    padding: 'unset',
-    background: 'unset',
-    border: 'unset',
-  },
-
-  '*:focus, *:focus-within': { outline: 'unset' },
 
   '::-webkit-scrollbar': {
     width: theme.sizes.scrollbarWidth,

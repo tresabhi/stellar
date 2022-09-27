@@ -12,6 +12,8 @@ const AppContainer = styled('div', {
   backgroundColor: theme.colors.appBackground1,
   width: '100vw',
   height: '100vh',
+  padding:
+    'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
 });
 
 const App = () => {
