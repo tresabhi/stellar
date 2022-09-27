@@ -1,11 +1,19 @@
-import { FC, ReactNode } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import { FC, HTMLAttributes } from 'react';
+import {
+  ErrorBoundary,
+  FallbackProps as FallbackPrimitiveProps
+} from 'react-error-boundary';
 import { Fallback } from './Fallback';
 
-export interface WrapperProps {
-  children: ReactNode;
-}
+export const Wrapper: FC<HTMLAttributes<HTMLDivElement>> = ({
+  children,
+  ...props
+}) => {
+  const StyledFallback = (fallbackProps: FallbackPrimitiveProps) => (
+    <Fallback {...fallbackProps} {...props} />
+  );
 
-export const Wrapper: FC<WrapperProps> = ({ children }) => (
-  <ErrorBoundary FallbackComponent={Fallback}>{children}</ErrorBoundary>
-);
+  return (
+    <ErrorBoundary FallbackComponent={StyledFallback}>{children}</ErrorBoundary>
+  );
+};

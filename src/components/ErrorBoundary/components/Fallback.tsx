@@ -3,17 +3,21 @@ import {
   CounterClockwiseClockIcon,
   EnvelopeClosedIcon,
   ExclamationTriangleIcon,
-  ResetIcon,
+  ResetIcon
 } from '@radix-ui/react-icons';
 import { Button as ButtonPrimitive } from 'components/Button';
 import { mutateSettings } from 'core/app';
 import moment from 'moment';
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
 import { deviceDetect } from 'react-device-detect';
-import { FallbackProps } from 'react-error-boundary';
+import { FallbackProps as FallbackPrimitiveProps } from 'react-error-boundary';
 import { mapStackTrace } from 'sourcemapped-stacktrace';
 import { styled, theme } from 'stitches.config';
 import useSettings from 'stores/useSettings';
+
+export interface FallbackProps
+  extends FallbackPrimitiveProps,
+    HTMLAttributes<HTMLDivElement> {}
 
 const Container = styled('div', {
   width: '100vw',
@@ -136,7 +140,12 @@ const DebugContent = styled('span', {
   whiteSpace: 'nowrap',
 });
 
-export const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
+export const Fallback: FC<FallbackProps> = ({
+  error,
+  resetErrorBoundary,
+  className,
+  ...props
+}) => {
   const theme = useSettings((state) => state.interface.theme);
   const debug = useSettings((state) => state.debug.errorScreen.showDebug);
   const rawStack = useRef(
@@ -213,8 +222,10 @@ export const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
     });
   });
 
+  // TODO: translate this
+
   return (
-    <Container className={theme}>
+    <Container className={`${theme} ${className ?? ''}`} {...props}>
       <InfoContainer>
         <Title mono={debug}>
           <ExclamationTriangleIcon />{' '}

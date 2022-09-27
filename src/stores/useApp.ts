@@ -31,6 +31,7 @@ export interface UseApp {
     tab: Tab;
     popup: Popup;
     isInteracting: boolean;
+    orientationPromptDismissed: boolean;
   };
 
   editor: {
@@ -57,6 +58,7 @@ export const UseAppData: UseApp = {
     tab: Tab.Create,
     popup: Popup.None,
     isInteracting: false,
+    orientationPromptDismissed: false,
   },
 
   editor: {

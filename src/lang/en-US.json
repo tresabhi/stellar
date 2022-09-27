@@ -187,5 +187,11 @@
     "export": {
       "$": "Export"
     }
+  },
+
+  "landscape_prompt": {
+    "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
+    "never": "Never Ask Again",
+    "dismiss": "Dismiss For Now"
   }
 }

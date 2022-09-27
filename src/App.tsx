@@ -1,5 +1,6 @@
 import 'App.css';
 import * as ErrorBoundary from 'components/ErrorBoundary';
+import { LandscapePrompt } from 'components/LandscapePrompt';
 import { usePrerender } from 'hooks/usePrerender';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from 'routes/Home';
@@ -19,13 +20,15 @@ const App = () => {
   usePrerender();
 
   return (
-    <ErrorBoundary.Wrapper>
-      <AppContainer className={theme}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/interface" element={<Interface />} />
-        </Routes>
-      </AppContainer>
+    <ErrorBoundary.Wrapper className={theme}>
+      <LandscapePrompt className={theme}>
+        <AppContainer className={theme}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/interface" element={<Interface />} />
+          </Routes>
+        </AppContainer>
+      </LandscapePrompt>
     </ErrorBoundary.Wrapper>
   );
 };

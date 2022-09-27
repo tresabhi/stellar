@@ -36,6 +36,7 @@ export interface UseSettings {
     language: string;
     theme?: string;
     hasShownSplashScreen: boolean;
+    showOrientationPrompt: boolean;
 
     tabs: {
       layout: {
@@ -81,6 +82,7 @@ export const UseSettingsData: UseSettings = {
     language: 'en-US',
     theme: themeDark.toString(),
     hasShownSplashScreen: false,
+    showOrientationPrompt: true,
 
     tabs: {
       layout: {

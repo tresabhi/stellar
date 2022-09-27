@@ -15,7 +15,7 @@ export default defineConfig({
     checker({
       typescript: true,
       eslint: { lintCommand: 'eslint .' },
-      overlay: true,
+      enableBuild: true,
     }),
     react(),
     svgrPlugin({
