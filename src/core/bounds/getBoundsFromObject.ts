@@ -16,7 +16,7 @@ export const getBoundsFromObject = (
 
     const box3 = new Box3().setFromObject(mesh.current);
 
-    const meshOffsetX = meshOffset.x * wrapper.current.scale.x;
+    const meshOffsetX = meshOffset.x * Math.abs(wrapper.current.scale.x);
     const meshOffsetY = meshOffset.y * wrapper.current.scale.y;
     const offsetHypotenuse = Math.sqrt(meshOffsetX ** 2 + meshOffsetY ** 2);
     const offsetAngleOriginal =
