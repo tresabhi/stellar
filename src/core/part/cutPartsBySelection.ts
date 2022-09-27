@@ -4,7 +4,7 @@ import { cutParts } from './cutParts';
 
 export const cutPartsBySelection = (draft?: Blueprint) => {
   if (draft) {
-    cutParts(draft.selections, draft);
+    cutParts([...draft.selections], draft);
   } else {
     mutateBlueprint((draft) => cutPartsBySelection(draft));
   }
