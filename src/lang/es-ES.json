@@ -147,5 +147,10 @@
     "export": {
       "$": "Exportar"
     }
+  },
+  "landscape_prompt": {
+    "message": "Parece que estás en modo retrato. Por favor, gira al modo horizontal.%1$sSi estás en un escritorio, esto puede ser descartado.",
+    "never": "No volver a preguntar de nuevo",
+    "dismiss": "Descartar por ahora"
   }
 }
