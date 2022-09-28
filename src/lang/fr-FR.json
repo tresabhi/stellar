@@ -4,7 +4,7 @@
     "create": {
       "$": "Créer",
       "templates": {
-        "input_placeholder": "Rechercher un modèle...",
+        "input_placeholder": "Search templates...",
         "list": {
           "apollo_mission": "Mission Apollo",
           "basic_rocket": "Fusée basique",
@@ -43,15 +43,17 @@
           "pan": "Pan"
         },
         "clipboard": {
-          "copy": "Copier",
-          "cut": "Couper",
-          "paste": "Coller",
-          "duplicate": "Dupliquer",
-          "create_snippet": "Créer un extrait"
+          "copy": "Copy",
+          "cut": "Cut",
+          "paste": "Paste",
+          "duplicate": "Duplicate",
+          "create_snippet": "Create Snippet"
         },
         "selection": {
-          "group": "Grouper",
-          "ungroup": "Dégrouper"
+          "select_all": "Select All",
+          "unselect_all": "Unselect All",
+          "group": "Group",
+          "ungroup": "Ungroup"
         },
         "help": {
           "about": "À propos de Stellar",
@@ -97,7 +99,8 @@
             "y_position": "Position Y",
             "rotation": "Orientation",
             "x_scale": "Mise à l'échelle X",
-            "y_scale": "Mise à l'échelle Y"
+            "y_scale": "Mise à l'échelle Y",
+            "constraint": "Constraint"
           },
           "engine": {
             "$": "Engine",
@@ -108,6 +111,7 @@
             "$": "Réservoir de carburant",
             "top_width": "Top Width",
             "bottom_width": "Bottom Width",
+            "constraint": "Constraint",
             "height": "Taille",
             "fuel": "Carburant"
           }
@@ -122,12 +126,13 @@
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Insérer une pièce...",
+          "input_placeholder": "Insert part...",
           "abstract": "Résumé",
-          "TODO:cancel": "Annuler"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
         "rename": {
-          "input_placeholder": "Étiquette...",
+          "input_placeholder": "Label...",
           "trim": "Ajuster les espaces aux extrémités",
           "skip_locked": "Ignorer les pièces verrouillées",
           "suffix": "Ajouter des suffixes numériques uniques",
@@ -142,5 +147,10 @@
     "export": {
       "$": "Exporter"
     }
+  },
+  "landscape_prompt": {
+    "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
+    "never": "Never Ask Again",
+    "dismiss": "Dismiss For Now"
   }
 }
