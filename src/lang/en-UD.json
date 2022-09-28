@@ -147,5 +147,10 @@
     "export": {
       "$": "ʇɹodxƎ"
     }
+  },
+  "landscape_prompt": {
+    "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
+    "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
+    "dismiss": "ʍoN ɹoℲ ssᴉɯsᴉp"
   }
 }
