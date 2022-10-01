@@ -50,6 +50,8 @@
           "create_snippet": "Create Snippet"
         },
         "selection": {
+          "select_all": "Select All",
+          "unselect_all": "Unselect All",
           "group": "Group",
           "ungroup": "Ungroup"
         },
@@ -97,7 +99,8 @@
             "y_position": "Y Position",
             "rotation": "Rotation",
             "x_scale": "X Scale",
-            "y_scale": "Y Scale"
+            "y_scale": "Y Scale",
+            "constraint": "Constraint"
           },
           "engine": {
             "$": "Engine",
@@ -108,6 +111,7 @@
             "$": "Fuel Tank",
             "top_width": "Top Width",
             "bottom_width": "Bottom Width",
+            "constraint": "Constraint",
             "height": "Height",
             "fuel": "Fuel"
           }
@@ -122,9 +126,10 @@
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Insert Part...",
+          "input_placeholder": "Insert part...",
           "abstract": "Abstract",
-          "TODO:cancel": "Cancel"
+          "fallback": "No parts found",
+          "cancel": "Cancel"
         },
         "rename": {
           "input_placeholder": "Label...",
@@ -142,5 +147,10 @@
     "export": {
       "$": "Export"
     }
+  },
+  "landscape_prompt": {
+    "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
+    "never": "Never Ask Again",
+    "dismiss": "Dismiss For Now"
   }
 }

@@ -50,6 +50,8 @@
           "create_snippet": "Crear fragmento"
         },
         "selection": {
+          "select_all": "Seleccionar todo",
+          "unselect_all": "Deseleccionar todo",
           "group": "Grupo",
           "ungroup": "Desagrupar"
         },
@@ -97,7 +99,8 @@
             "y_position": "Posición Y",
             "rotation": "Rotación",
             "x_scale": "Escala X",
-            "y_scale": "Escala Y"
+            "y_scale": "Escala Y",
+            "constraint": "Restricción"
           },
           "engine": {
             "$": "Motor",
@@ -108,6 +111,7 @@
             "$": "Tanque de combustible",
             "top_width": "Anchura superior",
             "bottom_width": "Anchura inferior",
+            "constraint": "Restricción",
             "height": "Altura",
             "fuel": "Combustible"
           }
@@ -124,7 +128,8 @@
         "insert_part": {
           "input_placeholder": "Insertar parte...",
           "abstract": "Abstracto",
-          "TODO:cancel": "Cancelar"
+          "fallback": "No se encontraron partes",
+          "cancel": "Cancelar"
         },
         "rename": {
           "input_placeholder": "Etiqueta...",
@@ -142,5 +147,10 @@
     "export": {
       "$": "Exportar"
     }
+  },
+  "landscape_prompt": {
+    "message": "Parece que estás en modo retrato. Por favor, gira al modo horizontal.%1$sSi estás en un escritorio, esto puede ser descartado.",
+    "never": "No volver a preguntar de nuevo",
+    "dismiss": "Descartar por ahora"
   }
 }

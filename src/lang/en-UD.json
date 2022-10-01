@@ -50,6 +50,8 @@
           "create_snippet": "ʇǝddᴉuS ǝʇɐǝɹƆ"
         },
         "selection": {
+          "select_all": "ll∀ ʇɔǝlǝS",
+          "unselect_all": "ll∀ ʇɔǝlǝsu∩",
           "group": "dnoɹפ",
           "ungroup": "dnoɹƃu∩"
         },
@@ -97,7 +99,8 @@
             "y_position": "uoᴉʇᴉsoԀ ⅄",
             "rotation": "uoᴉʇɐʇoɹ",
             "x_scale": "ǝlɐɔS X",
-            "y_scale": "ǝlɐɔS ⅄"
+            "y_scale": "ǝlɐɔS ⅄",
+            "constraint": "ʇuᴉɐɹʇsuoƆ"
           },
           "engine": {
             "$": "ǝuᴉƃuƎ",
@@ -108,6 +111,7 @@
             "$": "ʞuɐ┴ lǝnℲ",
             "top_width": "ɥʇpᴉM do┴",
             "bottom_width": "ɥʇpᴉM ɯoʇʇoq",
+            "constraint": "ʇuᴉɐɹʇsuoƆ",
             "height": "ʇɥƃᴉǝH",
             "fuel": "lǝnℲ"
           }
@@ -124,10 +128,11 @@
         "insert_part": {
           "input_placeholder": "˙˙˙ʇɹɐd ʇɹǝsuI",
           "abstract": "ʇɔɐɹʇsq",
-          "TODO:cancel": "lǝɔuɐƆ"
+          "fallback": "punoɟ sʇɹɐd oN",
+          "cancel": "lǝɔuɐƆ"
         },
         "rename": {
-          "input_placeholder": "…lǝqɐ˥",
+          "input_placeholder": "˙˙˙lǝqɐ˥",
           "trim": "spuǝ uo ǝɔɐdsǝʇᴉɥʍ ɯᴉɹ┴",
           "skip_locked": "sʇɹɐd pǝʞɔol dᴉʞS",
           "suffix": "sǝxᴉɟɟns lɐɔᴉɹǝɯnu ǝnbᴉun pp∀",
@@ -142,5 +147,10 @@
     "export": {
       "$": "ʇɹodxƎ"
     }
+  },
+  "landscape_prompt": {
+    "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
+    "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
+    "dismiss": "ʍoN ɹoℲ ssᴉɯsᴉp"
   }
 }
