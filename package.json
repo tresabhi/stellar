@@ -28,7 +28,7 @@
     "react-spinners": "^0.13.3",
     "semver": "^7.3.7",
     "sourcemapped-stacktrace": "^1.1.11",
-    "three": "^0.144.0",
+    "three": "^0.145.0",
     "three-mesh-bvh": "^0.5.15",
     "ts-unused-exports": "^8.0.0",
     "workbox-cacheable-response": "^6.5.4",
