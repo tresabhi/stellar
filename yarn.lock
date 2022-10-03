@@ -1797,14 +1797,14 @@
     utility-types "^3.10.0"
     zustand "^3.5.13"
 
-"@react-three/fiber@^8.8.3":
-  version "8.8.3"
-  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.8.3.tgz#a562793ae02d847889f6d6a304ad8ba564387960"
-  integrity sha512-eQB0Kd05FLRtdNafpB9zaXiXHyGj1yEwo5ixTIpvzASrN8eO4uQOPbd38cCK4lNaS9/VaeAswMjwHVH+cR2pRw==
+"@react-three/fiber@^8.8.8":
+  version "8.8.8"
+  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-8.8.8.tgz#0e6b1842d4bfacdac5331fe2c48e844dd15609a2"
+  integrity sha512-eEqC9SPH54XDFHSx5l+lTIWuV4lyPZRqo8OOYFETVxz7gk0NYayD+bGjXe1jr9IQA5WV3vLhf1frbvw4s38oPQ==
   dependencies:
     "@babel/runtime" "^7.17.8"
     "@types/react-reconciler" "^0.26.7"
-    its-fine "^1.0.1"
+    its-fine "^1.0.4"
     react-reconciler "^0.27.0"
     react-use-measure "^2.1.1"
     scheduler "^0.21.0"
@@ -7752,10 +7752,10 @@ iterate-value@^1.0.2:
     es-get-iterator "^1.0.2"
     iterate-iterator "^1.0.1"
 
-its-fine@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/its-fine/-/its-fine-1.0.1.tgz#5b336ae72d221b01d8ed5d41fbacaac4c301eff5"
-  integrity sha512-E7ihBaOViboN99S9x1UkYVSrHyCguSls9ndOmLsq74wFZ6mUr+7PUSjykywVC5Ip065USSGdrjnys23nZb7xcQ==
+its-fine@^1.0.4:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/its-fine/-/its-fine-1.0.5.tgz#dbd8130e021aafe030ca5001085c27ff2a057ab3"
+  integrity sha512-JVqIHuUGRF4mBJWV/o9CS86wU57oWAX+mE2iokFpZ+B1R1tcfRvLZXVFd9tWJgY7gfhBURYyXJs7LcoJl/Af+Q==
   dependencies:
     "@types/react-reconciler" "^0.28.0"
 
