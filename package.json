@@ -39,14 +39,6 @@
     "zustand": "^4.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-interactions": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/builder-vite": "^0.2.3",
-    "@storybook/react": "^6.5.12",
-    "@storybook/testing-library": "^0.0.13",
     "@types/lodash": "^4.14.186",
     "@types/mousetrap": "^1.6.9",
     "@types/react": "^18.0.20",
@@ -58,10 +50,8 @@
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "@vitejs/plugin-react": "^2.1.0",
-    "babel-loader": "^8.2.5",
     "depcheck": "^1.4.3",
     "eslint": "^8.24.0",
-    "eslint-plugin-storybook": "^0.6.4",
     "node-downloader-helper": "^2.1.4",
     "node-fetch": "^3.2.10",
     "prettier": "^2.7.1",
@@ -86,9 +76,7 @@
     "host": "serve -s build",
     "host:new": "react-scripts build && serve -s build",
     "update": "yarn upgrade --latest",
-    "lint": "eslint .",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "lint": "eslint ."
   },
   "eslintConfig": {
     "extends": [
