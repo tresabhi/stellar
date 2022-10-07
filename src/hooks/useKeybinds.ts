@@ -32,11 +32,11 @@ import useBlueprint from 'stores/useBlueprint';
 import { InterfaceMode, UseSettings } from 'stores/useSettings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
 
-const tabOrder = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
+const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
 // TODO: add this to settings
-const TRANSLATE = 1;
-const MAJOR_TRANSLATE = 10;
+const TRANSLATE = 0.2;
+const MAJOR_TRANSLATE = 2;
 
 type PrimitiveVector2Tuple = [number, number];
 const upVector: PrimitiveVector2Tuple = [0, TRANSLATE];
@@ -74,9 +74,7 @@ const bind = (
   mousetrapBind(
     keys,
     (event) => {
-      const {
-        interface: { isInteracting, tab },
-      } = useApp.getState();
+      const { isInteracting, tab } = useApp.getState().interface;
 
       if (
         (mergedOptions.preventRepeats ? !event.repeat : true) &&
@@ -154,9 +152,9 @@ const useKeybinds = () => {
       () => {
         mutateApp((draft) => {
           draft.interface.tab =
-            draft.interface.tab === tabOrder[tabOrder.length - 1]
-              ? tabOrder[0]
-              : tabOrder[tabOrder.indexOf(draft.interface.tab) + 1];
+            draft.interface.tab === TAB_ORDER[TAB_ORDER.length - 1]
+              ? TAB_ORDER[0]
+              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
         });
       },
       { preventOnNonLayoutTab: false },
@@ -167,8 +165,8 @@ const useKeybinds = () => {
         mutateApp((draft) => {
           draft.interface.tab =
             draft.interface.tab === 0
-              ? tabOrder[tabOrder.length - 1]
-              : tabOrder[tabOrder.indexOf(draft.interface.tab) - 1];
+              ? TAB_ORDER[TAB_ORDER.length - 1]
+              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
         });
       },
       { preventOnNonLayoutTab: false },

@@ -1,5 +1,5 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { ComponentPropsWithoutRef, FC } from 'react';
+import { FC } from 'react';
 import { styled, theme } from 'stitches.config';
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
@@ -17,9 +17,10 @@ const Arrow = styled(DropdownMenuPrimitive.Arrow, {
   fill: theme.colors.componentNonInteractiveBorder,
 });
 
-export const Content: FC<
-  ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
-> = ({ children, ...props }) => (
+export const Content: FC<DropdownMenuPrimitive.DropdownMenuContentProps> = ({
+  children,
+  ...props
+}) => (
   <DropdownMenuPrimitive.Portal>
     <StyledContent {...props}>
       <Arrow />

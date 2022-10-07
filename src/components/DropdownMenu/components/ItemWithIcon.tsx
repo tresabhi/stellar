@@ -1,9 +1,10 @@
-import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
+import { FC, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Item } from './Item';
 
 export interface InputWithIconProps
-  extends ComponentPropsWithoutRef<typeof Item> {
+  extends DropdownMenuPrimitive.DropdownMenuItemProps {
   icon?: ReactNode;
   keybind?: ReactNode;
 }
