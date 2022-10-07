@@ -8,6 +8,7 @@ import { getMutualProperty } from 'utilities/getMutualProperty';
 import { RERENDER_DEBOUNCE } from './useSliderProperty';
 
 export const MIXED_VALUE_PLACEHOLDER = '~';
+const DECIMAL_PLACES = 4;
 
 export const useNumericalInputProperty = <
   Type extends Part,
@@ -22,7 +23,11 @@ export const useNumericalInputProperty = <
 
   const setInputValue = (value?: number) => {
     if (input.current) {
-      input.current.value = `${value ?? MIXED_VALUE_PLACEHOLDER}`;
+      input.current.value = `${
+        value === undefined
+          ? MIXED_VALUE_PLACEHOLDER
+          : Number(value.toFixed(DECIMAL_PLACES))
+      }`;
       input.current.resize();
     }
   };
