@@ -125,74 +125,74 @@ const Toolbar = () => {
           <StellarIcon />
         </ToolbarComponent.Button>
 
-        <ToolbarComponent.Dropdown icon={<FileIcon />}>
-          <ToolbarComponent.DropdownItem
+        <ToolbarComponent.DropdownMenu icon={<FileIcon />}>
+          <ToolbarComponent.DropdownMenuItem
             icon={<FilePlusIcon />}
             keybind="Ctrl + N"
             onClick={handleNewClick}
           >
             {t`tab.layout.toolbar.file.new`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<UploadIcon />}
             keybind="Ctrl + O"
             onClick={handleOpenClick}
           >
             {t`tab.layout.toolbar.file.open`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<DownloadIcon />}
             keybind="Ctrl + S"
             onClick={handleSaveClick}
           >
             {t`tab.layout.toolbar.file.save`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<DownloadIcon />}
             keybind="Ctrl + Shift + S"
             onClick={handleSaveAsClick}
           >
             {t`tab.layout.toolbar.file.save_as`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<EnterIcon />}
             keybind="Ctrl + I"
             onClick={handleImportClick}
           >
             {t`tab.layout.toolbar.file.import`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<ExitIcon />}
             keybind="Ctrl + E"
             onClick={handleExportClick}
           >
             {t`tab.layout.toolbar.file.export`}
-          </ToolbarComponent.DropdownItem>
-        </ToolbarComponent.Dropdown>
+          </ToolbarComponent.DropdownMenuItem>
+        </ToolbarComponent.DropdownMenu>
 
-        <ToolbarComponent.Dropdown
+        <ToolbarComponent.DropdownMenu
           icon={tool === Tool.Pan ? <HandIcon /> : <CursorArrowIcon />}
         >
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<CursorArrowIcon />}
             onClick={handleMoveClick}
           >
             {t`tab.layout.toolbar.tool.move`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<HandIcon />}
             keybind="Space"
             onClick={handlePanClick}
           >
             {t`tab.layout.toolbar.tool.pan`}
-          </ToolbarComponent.DropdownItem>
-        </ToolbarComponent.Dropdown>
+          </ToolbarComponent.DropdownMenuItem>
+        </ToolbarComponent.DropdownMenu>
 
         <ToolbarComponent.Button onClick={handlePlusClick}>
           <PlusIcon />
@@ -200,95 +200,95 @@ const Toolbar = () => {
       </ToolbarComponent.Group>
 
       <ToolbarComponent.Group>
-        <ToolbarComponent.Dropdown
+        <ToolbarComponent.DropdownMenu
           disabled={!hasParts && hasNoSelections}
           icon={<GroupIcon />}
         >
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             disabled={!hasParts}
             icon={<CardStackPlusIcon />}
             onClick={handleSelectAllClick}
             keybind="Ctrl + A"
           >
             {t`tab.layout.toolbar.selection.select_all`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<CardStackMinusIcon />}
             onClick={handleUnselectAllClick}
             keybind="Esc"
           >
             {t`tab.layout.toolbar.selection.unselect_all`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<GroupIcon />}
             onClick={handleGroupClick}
             keybind="Ctrl + G"
           >
             {t`tab.layout.toolbar.selection.group`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<StackIcon />}
             onClick={handleUngroupClick}
             keybind="Ctrl + Shift + G"
           >
             {t`tab.layout.toolbar.selection.ungroup`}
-          </ToolbarComponent.DropdownItem>
-        </ToolbarComponent.Dropdown>
+          </ToolbarComponent.DropdownMenuItem>
+        </ToolbarComponent.DropdownMenu>
 
-        <ToolbarComponent.Dropdown
+        <ToolbarComponent.DropdownMenu
           disabled={hasNoItemInClipboard && hasNoSelections}
           icon={<ClipboardIcon />}
         >
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<ClipboardCopyIcon />}
             onClick={handleCopyClick}
             keybind="Ctrl + C"
             disabled={hasNoSelections}
           >
             {t`tab.layout.toolbar.clipboard.copy`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<ScissorsIcon />}
             onClick={handleCutClick}
             keybind="Ctrl + X"
             disabled={hasNoSelections}
           >
             {t`tab.layout.toolbar.clipboard.cut`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<ClipboardIcon />}
             onClick={handlePasteClick}
             keybind="Ctrl + V"
             disabled={hasNoItemInClipboard}
           >
             {t`tab.layout.toolbar.clipboard.paste`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<StackIcon />}
             onClick={handleDuplicateClick}
             keybind="Ctrl + D"
             disabled={hasNoSelections}
           >
             {t`tab.layout.toolbar.clipboard.duplicate`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<Component1Icon />}
             keybind="Ctrl + M"
             disabled
           >
             {t`tab.layout.toolbar.clipboard.create_snippet`}
-          </ToolbarComponent.DropdownItem>
-        </ToolbarComponent.Dropdown>
+          </ToolbarComponent.DropdownMenuItem>
+        </ToolbarComponent.DropdownMenu>
 
         <ToolbarComponent.Button disabled={hasNoSelections}>
           <TrashIcon />
@@ -318,50 +318,53 @@ const Toolbar = () => {
           <ResetIcon style={{ transform: 'scaleX(-1)' }} />
         </ToolbarComponent.Button>
 
-        <ToolbarComponent.Dropdown icon={<QuestionMarkCircledIcon />}>
-          <ToolbarComponent.DropdownItem
+        <ToolbarComponent.DropdownMenu icon={<QuestionMarkCircledIcon />}>
+          <ToolbarComponent.DropdownMenuItem
             icon={<InfoCircledIcon />}
             keybind="F1"
             onClick={link(WEBSITE)}
           >
             {t`tab.layout.toolbar.help.about`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<ExclamationTriangleIcon />}
             keybind="F4"
             onClick={link(`${GH_REPO_URL}issues/new/choose`)}
           >
             {t`tab.layout.toolbar.help.report`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<DiscordLogoIcon />}
             onClick={link(DISCORD)}
           >
             {t`tab.layout.toolbar.help.discord`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             icon={<GitHubLogoIcon />}
             onClick={link(GH_REPO_URL)}
           >
             {t`tab.layout.toolbar.help.github`}
-          </ToolbarComponent.DropdownItem>
-        </ToolbarComponent.Dropdown>
+          </ToolbarComponent.DropdownMenuItem>
+        </ToolbarComponent.DropdownMenu>
 
-        <ToolbarComponent.Dropdown disabled icon={<GearIcon />}>
-          <ToolbarComponent.DropdownItem icon={<GearIcon />} keybind="Ctrl + ,">
+        <ToolbarComponent.DropdownMenu disabled icon={<GearIcon />}>
+          <ToolbarComponent.DropdownMenuItem
+            icon={<GearIcon />}
+            keybind="Ctrl + ,"
+          >
             {t`tab.layout.toolbar.preferences.settings`}
-          </ToolbarComponent.DropdownItem>
+          </ToolbarComponent.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownItem
+          <ToolbarComponent.DropdownMenuItem
             keybind="Ctrl + K"
             icon={<KeyboardIcon />}
           >
             {t`tab.layout.toolbar.preferences.keybinds`}
-          </ToolbarComponent.DropdownItem>
-        </ToolbarComponent.Dropdown>
+          </ToolbarComponent.DropdownMenuItem>
+        </ToolbarComponent.DropdownMenu>
       </ToolbarComponent.Group>
     </ToolbarComponent.Container>
   );

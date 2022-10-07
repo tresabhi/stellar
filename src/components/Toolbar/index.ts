@@ -1,5 +1,5 @@
+export { ItemWithIcon as DropdownMenuItem } from 'components/DropdownMenu';
 export * from './components/Button';
 export * from './components/Container';
-export * from './components/Dropdown';
-export * from './components/DropdownItem';
+export * from './components/DropdownMenu';
 export * from './components/Group';
