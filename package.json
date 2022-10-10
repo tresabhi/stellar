@@ -27,7 +27,7 @@
     "react-error-boundary": "^3.1.4",
     "react-router-dom": "^6.4.0",
     "react-spinners": "^0.13.3",
-    "semver": "^7.3.7",
+    "semver": "^7.3.8",
     "sourcemapped-stacktrace": "^1.1.11",
     "three": "^0.145.0",
     "three-mesh-bvh": "^0.5.15",
