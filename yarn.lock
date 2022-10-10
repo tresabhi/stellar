@@ -738,10 +738,10 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.5.4.tgz#6d26df992a32ea5532a1e7b732f5485857116b00"
   integrity sha512-dzcGxqL1kPKociXK+pcq5ley77cWDWiphfv8OREv8dAZS1dKDTJq1zVy7ZD5ocyMtKMZw/7AcOdIJ1H80Dp56g==
 
-"@react-three/drei@^9.32.7":
-  version "9.32.7"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.32.7.tgz#1b8b03f8e1904d7c30a5dd4663997c3e81aa9351"
-  integrity sha512-F9XkOod8kVg/OQNaal0uyO1EHiWAnxbroHbXACOZlLrTKtzTkzGBV3gnyPs0Y4erBURIJ/4JCakWy4qqs9C7jg==
+"@react-three/drei@^9.34.3":
+  version "9.34.3"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.34.3.tgz#1f8d8b2bed79ae04388c97e74fd26bdda4e96a40"
+  integrity sha512-to6d0l1pELS7IJg64Grkk6nsPD2IFEEmcgRbnik/HxBGv6hbhrti23dA7I0UO6ndaQU2gaNAxqxagupaht5SiA==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/three" "^9.3.1"
@@ -757,7 +757,7 @@
     stats.js "^0.17.0"
     suspend-react "^0.0.8"
     three-mesh-bvh "^0.5.15"
-    three-stdlib "2.17.0"
+    three-stdlib "^2.17.1"
     troika-three-text "^0.46.4"
     utility-types "^3.10.0"
     zustand "^3.5.13"
@@ -3502,10 +3502,10 @@ three-mesh-bvh@^0.5.15:
   resolved "https://registry.yarnpkg.com/three-mesh-bvh/-/three-mesh-bvh-0.5.16.tgz#ed8518355fb70d7da6a5537558ba43f76a56b067"
   integrity sha512-kN3QGKJNiQQcuiOsjVIkjtPnV3PJa+0Orih2E52afa+kQfs3zfoYt6Kxn6b6RNiAfaQ+7ckwPK0mTVFVl2F2LA==
 
-three-stdlib@2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.17.0.tgz#5915b110ec6dbf07e0e653bd59889293c7b93407"
-  integrity sha512-m19X4+ajh+2EJIVcjB288LgbqTli5b8kFahJlg9oNCBfaL8geCgEoM4OUirgV0Ez6Lr58N1MPBR6LjJt7ALfKQ==
+three-stdlib@^2.17.1:
+  version "2.17.2"
+  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.17.2.tgz#9c2a2914a16123853531612dac8870e6e242685b"
+  integrity sha512-7ZLCJJogtn1D1MlUi7q0iLUbrxj7K++YxjHIIz5AZ4wX4E137BgiiTmhH4XhAuvXGRk9ph3ZtoHTfJBXhqDX3w==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@types/offscreencanvas" "^2019.6.4"
