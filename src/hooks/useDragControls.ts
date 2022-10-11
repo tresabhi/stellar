@@ -11,10 +11,9 @@ import snap from 'utilities/snap';
 import useApp, { Tool } from '../stores/useApp';
 import useMousePos from './useMousePos';
 
-const DEFAULT_SNAP = 1 / 2;
-const CTRL_SNAP = 1 / 10;
-const SHIFT_SNAP = 1;
-const CTRL_SHIFT_SNAP = 0;
+export const DEFAULT_SNAP = 0.2;
+export const FINE_SNAP = 0.05;
+export const MAJOR_SNAP = 2;
 
 const useDragControls = (id: string) => {
   const getMousePos = useMousePos();
@@ -61,10 +60,10 @@ const useDragControls = (id: string) => {
     } else {
       const snapDistance = event.ctrlKey
         ? event.shiftKey
-          ? CTRL_SHIFT_SNAP
-          : CTRL_SNAP
+          ? 0
+          : FINE_SNAP
         : event.shiftKey
-        ? SHIFT_SNAP
+        ? MAJOR_SNAP
         : DEFAULT_SNAP;
       const mousePos = getMousePos(event);
       const delta = new Vector2(

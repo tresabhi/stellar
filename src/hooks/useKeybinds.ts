@@ -8,7 +8,7 @@ import {
   redoVersion,
   saveFile,
   saveFileAs,
-  undoVersion,
+  undoVersion
 } from 'core/blueprint';
 import { popupClose, popupOpen } from 'core/interface';
 import {
@@ -19,9 +19,9 @@ import {
   panToPartBySelection,
   pasteParts,
   selectAllPartsAtRoot,
-  translateTranslatablePartsBySelection as translate,
+  translateTranslatablePartsBySelection,
   ungroupGroupsBySelection,
-  unselectAllParts,
+  unselectAllParts
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { isNull } from 'lodash';
@@ -31,22 +31,19 @@ import useApp, { Popup, Tab, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import { InterfaceMode, UseSettings } from 'stores/useSettings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
+import { DEFAULT_SNAP, MAJOR_SNAP } from './useDragControls';
 
 const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
-// TODO: add this to settings
-const TRANSLATE = 0.2;
-const MAJOR_TRANSLATE = 2;
-
 type PrimitiveVector2Tuple = [number, number];
-const upVector: PrimitiveVector2Tuple = [0, TRANSLATE];
-const downVector: PrimitiveVector2Tuple = [0, -TRANSLATE];
-const leftVector: PrimitiveVector2Tuple = [-TRANSLATE, 0];
-const rightVector: PrimitiveVector2Tuple = [TRANSLATE, 0];
-const upMajorVector: PrimitiveVector2Tuple = [0, MAJOR_TRANSLATE];
-const downMajorVector: PrimitiveVector2Tuple = [0, -MAJOR_TRANSLATE];
-const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_TRANSLATE, 0];
-const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_TRANSLATE, 0];
+const upVector: PrimitiveVector2Tuple = [0, DEFAULT_SNAP];
+const downVector: PrimitiveVector2Tuple = [0, -DEFAULT_SNAP];
+const leftVector: PrimitiveVector2Tuple = [-DEFAULT_SNAP, 0];
+const rightVector: PrimitiveVector2Tuple = [DEFAULT_SNAP, 0];
+const upMajorVector: PrimitiveVector2Tuple = [0, MAJOR_SNAP];
+const downMajorVector: PrimitiveVector2Tuple = [0, -MAJOR_SNAP];
+const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_SNAP, 0];
+const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_SNAP, 0];
 
 interface BindOptions {
   preventDefault: boolean;
@@ -88,6 +85,13 @@ const bind = (
     },
     mergedOptions.action,
   );
+};
+
+const translate = (vector: PrimitiveVector2Tuple) => {
+  const { invalidateFrame } = useApp.getState().editor;
+
+  translateTranslatablePartsBySelection(vector[0], vector[1]);
+  invalidateFrame && invalidateFrame();
 };
 
 const useKeybinds = () => {
@@ -172,28 +176,28 @@ const useKeybinds = () => {
       { preventOnNonLayoutTab: false },
     );
 
-    bind('up', () => translate(...upVector), {
+    bind('up', () => translate(upVector), {
       preventRepeats: false,
     });
-    bind('down', () => translate(...downVector), {
+    bind('down', () => translate(downVector), {
       preventRepeats: false,
     });
-    bind('left', () => translate(...leftVector), {
+    bind('left', () => translate(leftVector), {
       preventRepeats: false,
     });
-    bind('right', () => translate(...rightVector), {
+    bind('right', () => translate(rightVector), {
       preventRepeats: false,
     });
-    bind('shift+up', () => translate(...upMajorVector), {
+    bind('shift+up', () => translate(upMajorVector), {
       preventRepeats: false,
     });
-    bind('shift+down', () => translate(...downMajorVector), {
+    bind('shift+down', () => translate(downMajorVector), {
       preventRepeats: false,
     });
-    bind('shift+left', () => translate(...leftMajorVector), {
+    bind('shift+left', () => translate(leftMajorVector), {
       preventRepeats: false,
     });
-    bind('shift+right', () => translate(...rightMajorVector), {
+    bind('shift+right', () => translate(rightMajorVector), {
       preventRepeats: false,
     });
 

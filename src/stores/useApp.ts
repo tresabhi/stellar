@@ -41,6 +41,7 @@ export interface UseApp {
     preventNextSelection: boolean;
     clipboard?: Snippet;
     camera?: Camera;
+    invalidateFrame?: () => void;
   };
 
   loadStatus: {
@@ -68,6 +69,7 @@ export const UseAppData: UseApp = {
     preventNextSelection: false,
     clipboard: undefined,
     camera: undefined,
+    invalidateFrame: undefined,
   },
 
   loadStatus: {
