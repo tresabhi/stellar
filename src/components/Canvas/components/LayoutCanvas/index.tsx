@@ -1,7 +1,10 @@
 import { AdaptiveDpr } from '@react-three/drei';
-import { Canvas as CanvasPrimitive } from '@react-three/fiber';
+import {
+  Canvas as CanvasPrimitive,
+  Props as CanvasPrimitiveProps,
+} from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
-import { useEffect, useRef } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
@@ -27,7 +30,9 @@ const panningStyles = css({
   },
 });
 
-export const LayoutCanvas = () => {
+export const LayoutCanvas: FC<Omit<CanvasPrimitiveProps, 'children'>> = (
+  props,
+) => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const parts = useRef<Group>(null);
   const regressAmount = useSettings((state) => state.performance.regressAmount);
@@ -62,6 +67,7 @@ export const LayoutCanvas = () => {
 
   return (
     <Canvas
+      {...props}
       ref={canvas}
       orthographic
       camera={{
@@ -90,4 +96,3 @@ export * from './components/Expose';
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';
-
