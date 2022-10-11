@@ -1,9 +1,5 @@
 import { Button as ButtonPrimitive } from 'components/Button';
-import {
-  ButtonHTMLAttributes,
-  ComponentPropsWithoutRef,
-  forwardRef,
-} from 'react';
+import { ComponentPropsWithoutRef, FC } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PropertyWithLabel } from '../types/propertyWithLabel';
 import { Label } from './Label';
@@ -30,10 +26,12 @@ const Trigger = styled(ButtonPrimitive, {
   flex: 1,
 });
 
-export const ToggleButton = forwardRef<
-  ButtonHTMLAttributes<HTMLButtonElement>,
-  ToggleButtonProps
->(({ label, children, selected, ...props }) => {
+export const ToggleButton: FC<ToggleButtonProps> = ({
+  label,
+  children,
+  selected,
+  ...props
+}) => {
   return (
     <Container>
       <Label>{label}</Label>
@@ -42,4 +40,4 @@ export const ToggleButton = forwardRef<
       </Trigger>
     </Container>
   );
-});
+};
