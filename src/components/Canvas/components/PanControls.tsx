@@ -10,6 +10,7 @@ const MAX_ZOOM = 512;
 const ZOOM_SENSITIVITY = 1 / 250;
 
 export const PanControls = () => {
+  const invalidate = useThree((state) => state.invalidate);
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
   const getMousePos = useMousePos();
@@ -45,6 +46,7 @@ export const PanControls = () => {
         camera.position.add(
           new Vector3(delta.x, delta.y, 0).multiplyScalar(-1),
         );
+        invalidate();
       } else {
         const moveX = event.deltaX / camera.zoom;
         const moveY = event.deltaY / camera.zoom;
@@ -81,6 +83,7 @@ export const PanControls = () => {
 
         camera.translateX(-delta.x);
         camera.translateY(-delta.y);
+        invalidate();
       }
     };
     const handlePointerUp = () => {
@@ -133,6 +136,7 @@ export const PanControls = () => {
                 1 / 2 / camera.zoom,
               ),
             );
+            invalidate();
           }
         });
 

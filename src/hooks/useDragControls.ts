@@ -1,4 +1,4 @@
-import { ThreeEvent } from '@react-three/fiber';
+import { ThreeEvent, useThree } from '@react-three/fiber';
 import { mutateVersionControl } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
 import { getPart, selectPartOnly, translateTranslatableParts } from 'core/part';
@@ -18,6 +18,7 @@ const CTRL_SHIFT_SNAP = 0;
 
 const useDragControls = (id: string) => {
   const getMousePos = useMousePos();
+  const { invalidate } = useThree();
 
   let selectedInitially = false;
   let initialMousePos: Vector2;
@@ -95,6 +96,8 @@ const useDragControls = (id: string) => {
 
           useBlueprint.setState(nextState);
         }
+
+        invalidate();
       }
 
       if (movement.y !== 0) {

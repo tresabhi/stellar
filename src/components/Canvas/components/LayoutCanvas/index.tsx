@@ -71,6 +71,7 @@ export const LayoutCanvas = () => {
       }}
       performance={{ min: regressAmount }}
       onPointerMissed={handlePointerMissed}
+      frameloop="demand"
     >
       {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
       <Expose />
@@ -89,3 +90,4 @@ export * from './components/Expose';
 export * from './components/Grid';
 export * from './components/PartBounds';
 export * from './components/Parts';
+
