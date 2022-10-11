@@ -46,7 +46,6 @@ export const PanControls = () => {
         camera.position.add(
           new Vector3(delta.x, delta.y, 0).multiplyScalar(-1),
         );
-        invalidate();
       } else {
         const moveX = event.deltaX / camera.zoom;
         const moveY = event.deltaY / camera.zoom;
@@ -59,6 +58,8 @@ export const PanControls = () => {
           camera.position.y -= moveY;
         }
       }
+
+      invalidate();
     };
 
     const handlePointerDown = (event: PointerEvent) => {
