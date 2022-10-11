@@ -16,3 +16,4 @@ yarn-error.log
 .jekyll-metadata
 .sass-cache
 vendor
+/dev-dist

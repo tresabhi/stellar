@@ -8,12 +8,21 @@ import {
 } from 'three-mesh-bvh';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
-import { primeServiceWorker } from './serviceWorkerRegistration';
+// import { registerSW } from 'virtual:pwa-register';
+
+// TODO: update these to use actual notifications
+// const updateSW = registerSW({
+//   onNeedRefresh: () => {
+//     console.log('needs refresh');
+//   },
+//   onOfflineReady: () => {
+//     console.log('offline ready');
+//   },
+// });
+
+// console.log('call', updateSW);
 
 const preroot = () => {
-  // register the service worker
-  primeServiceWorker();
-
   // enable immer features
   enableMapSet();
   enablePatches();
