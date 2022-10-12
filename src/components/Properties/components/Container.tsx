@@ -4,12 +4,6 @@ import { styled, theme } from 'stitches.config';
 
 const Root = styled(ScrollArea.Root, {
   flex: '1 0 0',
-  overflow: 'hidden',
-});
-
-const Viewport = styled(ScrollArea.Viewport, {
-  width: '100%',
-  height: '100%',
 });
 
 const Wrapper = styled('div', {
@@ -22,9 +16,9 @@ const Wrapper = styled('div', {
 export const Container: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
   return (
     <Root>
-      <Viewport>
+      <ScrollArea.Viewport>
         <Wrapper {...props} />
-      </Viewport>
+      </ScrollArea.Viewport>
 
       <ScrollArea.Scrollbar orientation="vertical">
         <ScrollArea.Thumb />

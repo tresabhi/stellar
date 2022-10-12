@@ -1,3 +1,4 @@
+import * as ScrollArea from 'components/ScrollArea';
 import { getPart, unselectAllParts } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { FC } from 'react';
@@ -14,34 +15,13 @@ export interface ContainerProps {
   parentId: ParentId;
 }
 
-export const StyledContainer = styled('div', {
+const Root = styled(ScrollArea.Root, {
+  flex: '1 0 0',
+});
+
+const Wrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-
-  variants: {
-    fullHeight: {
-      true: {
-        flex: '1 1 0',
-      },
-    },
-
-    visible: {
-      false: {
-        display: 'none',
-      },
-    },
-
-    overflow: {
-      true: {
-        overflowY: 'auto',
-        overflowX: 'clip',
-      },
-    },
-  },
-
-  defaultVariants: {
-    visible: true,
-  },
 });
 
 export const Container: FC<ContainerProps> = ({
@@ -58,7 +38,6 @@ export const Container: FC<ContainerProps> = ({
     }
   });
 
-  // still wanna render if array is empty in which case it'd be falsey
   if (part_order !== undefined) {
     const children = part_order.map((id) => (
       <Listing indent={indent} id={id} key={`part-${id}`} />
@@ -67,9 +46,18 @@ export const Container: FC<ContainerProps> = ({
     const handleClick = () => unselectAllParts();
 
     return (
-      <StyledContainer {...props} onClick={handleClick}>
-        {children}
-      </StyledContainer>
+      <Root>
+        <ScrollArea.Viewport onClick={handleClick}>
+          <Wrapper {...props}>{children}</Wrapper>
+        </ScrollArea.Viewport>
+
+        <ScrollArea.Scrollbar orientation="vertical">
+          <ScrollArea.Thumb />
+        </ScrollArea.Scrollbar>
+        <ScrollArea.Scrollbar orientation="horizontal">
+          <ScrollArea.Thumb />
+        </ScrollArea.Scrollbar>
+      </Root>
     );
   }
 
