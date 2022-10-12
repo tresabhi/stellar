@@ -3,7 +3,11 @@ import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { mutateParts } from './mutateParts';
 
-export const selectPartsOnly = (ids: string[], draft?: Blueprint) => {
+export const selectPartsOnly = (
+  ids: string[],
+  draft?: Blueprint,
+  expandGroups?: boolean,
+) => {
   if (draft) {
     mutateParts(
       draft.selections,
@@ -16,7 +20,9 @@ export const selectPartsOnly = (ids: string[], draft?: Blueprint) => {
       ids,
       (draft) => {
         draft.selected = true;
-        if (draft.n === 'Group') (draft as Group).expanded = true;
+        if (expandGroups && draft.n === 'Group') {
+          (draft as Group).expanded = true;
+        }
       },
       draft,
     );
