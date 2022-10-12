@@ -7,3 +7,4 @@ export * from './components/Slider';
 export * from './components/SliderWithInput';
 export * from './components/Title';
 export * from './components/ToggleButton';
+export * from './components/Value';

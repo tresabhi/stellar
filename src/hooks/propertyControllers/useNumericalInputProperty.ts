@@ -4,6 +4,7 @@ import { Part } from 'game/parts/Part';
 import { ChangeEvent, Ref, useEffect, useRef } from 'react';
 import { evaluateExpression } from 'utilities/evaluateExpression';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
+import { fixFloatRounding } from 'utilities/fixFloatRounding';
 import { getMutualProperty } from 'utilities/getMutualProperty';
 import { RERENDER_DEBOUNCE } from './useSliderProperty';
 
@@ -26,7 +27,7 @@ export const useNumericalInputProperty = <
       input.current.value = `${
         value === undefined
           ? MIXED_VALUE_PLACEHOLDER
-          : Number(value.toFixed(DECIMAL_PLACES))
+          : fixFloatRounding(DECIMAL_PLACES)
       }`;
       input.current.resize();
     }
