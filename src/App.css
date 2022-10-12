@@ -14,7 +14,8 @@ body {
 button,
 input,
 details,
-summary {
+summary,
+textarea {
   padding: unset;
   background: unset;
   border: unset;

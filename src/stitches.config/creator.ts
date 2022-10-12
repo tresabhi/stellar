@@ -80,6 +80,7 @@ export const {
       errorScreenDebugInfoMaxHeight: '16rem',
       sidebarCollapseButtonWidth: '1.5rem',
       sidebarCollapseButtonHeight: '2rem',
+      propertiesTextAreaHeight: '10rem',
     },
 
     radii: {

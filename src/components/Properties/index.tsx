@@ -5,6 +5,7 @@ export * from './components/Input';
 export * from './components/Row';
 export * from './components/Slider';
 export * from './components/SliderWithInput';
+export * from './components/TextArea';
 export * from './components/Title';
 export * from './components/ToggleButton';
 export * from './components/Value';

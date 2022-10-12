@@ -151,7 +151,7 @@
           "$": "Inspect",
 
           "select_one_part": {
-            "$": "Select Only One Part",
+            "$": "Select a Part",
 
             "instructions": "You have either no parts or more than 1 parts currently selected"
           },
