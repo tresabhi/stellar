@@ -25,9 +25,7 @@ export const useNumericalInputProperty = <
   const setInputValue = (value?: number) => {
     if (input.current) {
       input.current.value = `${
-        value === undefined
-          ? MIXED_VALUE_PLACEHOLDER
-          : fixFloatRounding(DECIMAL_PLACES)
+        value === undefined ? MIXED_VALUE_PLACEHOLDER : fixFloatRounding(value)
       }`;
       input.current.resize();
     }
