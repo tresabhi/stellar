@@ -4,4 +4,5 @@ export const Group = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: theme.space.gapRelatedMajor,
+  minHeight: 'min-content',
 });

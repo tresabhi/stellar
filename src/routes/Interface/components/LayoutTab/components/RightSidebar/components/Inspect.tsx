@@ -21,86 +21,84 @@ export const Inspect = () => {
     data && JSON.stringify(partExportify(data, state), undefined, INDENT);
 
   return isOneSelected && data && bounds ? (
-    <Sidebar.Container>
-      <Properties.Container>
-        <Properties.Group>
-          <Properties.Title>{t`tab.layout.right_sidebar.inspect.meta_data`}</Properties.Title>
+    <Properties.Container>
+      <Properties.Group>
+        <Properties.Title>{t`tab.layout.right_sidebar.inspect.meta_data`}</Properties.Title>
 
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.meta_data.id`}
-          >
-            {data.id}
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.meta_data.parent_id`}
-          >
-            {`${data.parentId}`}
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.meta_data.name`}
-          >
-            {data.n}
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.meta_data.selected`}
-          >
-            {`${data.selected}`}
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.meta_data.hidden`}
-          >
-            {`${data.hidden}`}
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.meta_data.locked`}
-          >
-            {`${data.locked}`}
-          </Properties.Value>
-        </Properties.Group>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.meta_data.id`}
+        >
+          {data.id}
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.meta_data.parent_id`}
+        >
+          {`${data.parentId}`}
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.meta_data.name`}
+        >
+          {data.n}
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.meta_data.selected`}
+        >
+          {`${data.selected}`}
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.meta_data.hidden`}
+        >
+          {`${data.hidden}`}
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.meta_data.locked`}
+        >
+          {`${data.locked}`}
+        </Properties.Value>
+      </Properties.Group>
 
-        <Properties.Group>
-          <Properties.Title>{t`tab.layout.right_sidebar.inspect.bounds`}</Properties.Title>
+      <Properties.Group>
+        <Properties.Title>{t`tab.layout.right_sidebar.inspect.bounds`}</Properties.Title>
 
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.bounds.width`}
-          >
-            {fixFloatRounding(bounds.width)}m
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.bounds.height`}
-          >
-            {fixFloatRounding(bounds.height)}m
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.bounds.x_position`}
-          >
-            {fixFloatRounding(bounds.position.x)}m
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.bounds.y_position`}
-          >
-            {fixFloatRounding(bounds.position.y)}m
-          </Properties.Value>
-          <Properties.Value
-            label={t`tab.layout.right_sidebar.inspect.bounds.rotation`}
-          >
-            {fixFloatRounding(bounds.rotation)}°
-          </Properties.Value>
-        </Properties.Group>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.bounds.width`}
+        >
+          {fixFloatRounding(bounds.width)}m
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.bounds.height`}
+        >
+          {fixFloatRounding(bounds.height)}m
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.bounds.x_position`}
+        >
+          {fixFloatRounding(bounds.position.x)}m
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.bounds.y_position`}
+        >
+          {fixFloatRounding(bounds.position.y)}m
+        </Properties.Value>
+        <Properties.Value
+          label={t`tab.layout.right_sidebar.inspect.bounds.rotation`}
+        >
+          {fixFloatRounding(bounds.rotation)}°
+        </Properties.Value>
+      </Properties.Group>
 
-        <Properties.Group>
-          <Properties.Title>{t`tab.layout.right_sidebar.inspect.json`}</Properties.Title>
+      <Properties.Group>
+        <Properties.Title>{t`tab.layout.right_sidebar.inspect.json`}</Properties.Title>
 
-          <Properties.TextArea selectAll value={json} />
-        </Properties.Group>
+        <Properties.TextArea value={json} />
+      </Properties.Group>
 
-        <Properties.Group>
-          <Properties.Title>{t`tab.layout.right_sidebar.inspect.vanilla_json`}</Properties.Title>
+      <Properties.Group>
+        <Properties.Title>{t`tab.layout.right_sidebar.inspect.vanilla_json`}</Properties.Title>
 
-          <Properties.TextArea selectAll value={vanillaJson} />
-        </Properties.Group>
-      </Properties.Container>
-    </Sidebar.Container>
+        <Properties.TextArea value={vanillaJson} />
+      </Properties.Group>
+    </Properties.Container>
   ) : (
     <Sidebar.MessageContainer>
       <Sidebar.Message>{t`tab.layout.right_sidebar.inspect.select_one_part`}</Sidebar.Message>

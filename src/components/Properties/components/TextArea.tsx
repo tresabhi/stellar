@@ -18,12 +18,4 @@ export const TextArea = styled('textarea', {
   '&:focus': {
     outline: theme.borderStyles.componentInteractiveActive,
   },
-
-  variants: {
-    selectAll: {
-      true: {
-        userSelect: 'all',
-      },
-    },
-  },
 });

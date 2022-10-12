@@ -18,7 +18,6 @@ const Root = styled(SliderPrimitive.Root, {
   display: 'flex',
   userSelect: 'none',
   alignItems: 'center',
-  touchAction: 'none',
 
   '&[data-orientation="horizontal"]': {
     height: theme.sizes.sliderThumb,
