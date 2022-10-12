@@ -118,10 +118,29 @@
         },
         "inspect": {
           "$": "ʇɔǝdsuI",
-          "coming_soon": {
-            "$": "¡uooS ƃuᴉɯoƆ ʇɔǝdsuI",
-            "instructions": "˙pǝʇɔǝlǝs sʇɹɐd ʇnoqɐ ɐʇɐpɐʇǝɯ ⅋ uoᴉʇɐɯɹoɟuᴉ ǝɹoɔ ʎɐldsᴉp llᴉʍ ɹɐqǝpᴉs sᴉɥ┴"
-          }
+          "select_one_part": {
+            "$": "Select a Part",
+            "instructions": "You have either no parts or more than 1 parts currently selected"
+          },
+          "meta_data": {
+            "$": "Meta Data",
+            "id": "ID",
+            "parent_id": "Parent ID",
+            "name": "Name",
+            "selected": "Selected",
+            "hidden": "Hidden",
+            "locked": "Locked"
+          },
+          "bounds": {
+            "$": "Bounds",
+            "width": "Width",
+            "height": "Height",
+            "x_position": "X Position",
+            "y_position": "Y Position",
+            "rotation": "Rotation"
+          },
+          "json": "JSON",
+          "vanilla_json": "Vanilla JSON"
         }
       },
       "popup": {
