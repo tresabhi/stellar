@@ -6,7 +6,7 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import { evaluateExpression } from 'utilities/evaluateExpression';
@@ -54,6 +54,7 @@ export const SliderWithInput = forwardRef<
       min = 0,
       max = 100,
       step = 1,
+      unit,
       indeterminate: givenIndeterminate = false,
       value: givenValue,
       defaultValue = min,
@@ -135,6 +136,7 @@ export const SliderWithInput = forwardRef<
           />
           <Input
             ref={input}
+            unit={unit}
             defaultValue={normalizedValue(givenValue ?? value)}
             onBlur={handleInputBlur}
           />
