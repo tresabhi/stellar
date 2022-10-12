@@ -31,7 +31,8 @@ export const getBoundsFromObject = (
     const partBounds: PartBounds = {
       width: box3.max.x - box3.min.x,
       height: box3.max.y - box3.min.y,
-      position: { x: offsetX, y: offsetY },
+      x: offsetX,
+      y: offsetY,
       rotation: -offsetAngle,
     };
 

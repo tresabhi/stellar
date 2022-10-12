@@ -7,8 +7,8 @@ export const panToPart = (id: string) => {
 
   if (partBounds) {
     camera?.position.set(
-      partBounds.bounds.position.x,
-      partBounds.bounds.position.y,
+      partBounds.bounds.x,
+      partBounds.bounds.y,
       camera.position.z,
     );
   }

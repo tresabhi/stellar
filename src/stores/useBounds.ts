@@ -1,18 +1,14 @@
 import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
-export interface Bounds {
-  min: { x: number; y: number };
-  max: { x: number; y: number };
-}
-
 /**
  * A box with rotation from the center
  */
 export interface PartBounds {
   width: number;
   height: number;
-  position: { x: number; y: number };
+  x: number;
+  y: number;
   rotation: number;
 }
 

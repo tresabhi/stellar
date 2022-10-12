@@ -40,10 +40,8 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
         bounds: {
           width: box3.max.x - box3.min.x,
           height: box3.max.y - box3.min.y,
-          position: {
             x: (box3.min.x + box3.max.x) / 2,
             y: (box3.min.y + box3.max.y) / 2,
-          },
           rotation: 0,
         },
         needsUpdate: false,

@@ -47,7 +47,7 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
     outline.current?.scale.set(bound.width, bound.height, 1);
     outline.current?.position.set(bound.width / -2, bound.height / -2, 0);
     wrapper.current?.rotation.set(0, 0, bound.rotation);
-    wrapper.current?.position.set(bound.position.x, bound.position.y, 0);
+    wrapper.current?.position.set(bound.x, bound.y, 0);
   };
 
   useEffect(() => {

@@ -73,12 +73,12 @@ export const Inspect = () => {
         <Properties.Value
           label={t`tab.layout.right_sidebar.inspect.bounds.x_position`}
         >
-          {fixFloatRounding(bounds.position.x)}m
+          {fixFloatRounding(bounds.x)}m
         </Properties.Value>
         <Properties.Value
           label={t`tab.layout.right_sidebar.inspect.bounds.y_position`}
         >
-          {fixFloatRounding(bounds.position.y)}m
+          {fixFloatRounding(bounds.y)}m
         </Properties.Value>
         <Properties.Value
           label={t`tab.layout.right_sidebar.inspect.bounds.rotation`}
