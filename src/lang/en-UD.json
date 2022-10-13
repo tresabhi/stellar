@@ -119,28 +119,28 @@
         "inspect": {
           "$": "ʇɔǝdsuI",
           "select_one_part": {
-            "$": "Select a Part",
-            "instructions": "You have either no parts or more than 1 parts currently selected"
+            "$": "ʇɹɐԀ ɐ ʇɔǝlǝS",
+            "instructions": "pǝʇɔǝlǝs ʎlʇuǝɹɹnɔ sʇɹɐd 1 uɐɥʇ ǝɹoɯ ɹo sʇɹɐd ou ɹǝɥʇᴉǝ ǝʌɐɥ no⅄"
           },
           "meta_data": {
-            "$": "Meta Data",
-            "id": "ID",
-            "parent_id": "Parent ID",
-            "name": "Name",
-            "selected": "Selected",
-            "hidden": "Hidden",
-            "locked": "Locked"
+            "$": "ɐʇɐp ɐʇǝW",
+            "id": "pI",
+            "parent_id": "pI ʇuǝɹɐԀ",
+            "name": "ǝɯɐN",
+            "selected": "pǝʇɔǝlǝS",
+            "hidden": "uǝppᴉH",
+            "locked": "pǝʞɔo˥"
           },
           "bounds": {
-            "$": "Bounds",
-            "width": "Width",
-            "height": "Height",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation"
+            "$": "spunoq",
+            "width": "ɥʇpᴉM",
+            "height": "ʇɥƃᴉǝH",
+            "x_position": "uoᴉʇᴉsoԀ X",
+            "y_position": "uoᴉʇᴉsoԀ ⅄",
+            "rotation": "uoᴉʇɐʇoɹ"
           },
-          "json": "JSON",
-          "vanilla_json": "Vanilla JSON"
+          "json": "NOSſ",
+          "vanilla_json": "NOSſ ɐllᴉuɐΛ"
         }
       },
       "popup": {
