@@ -120,27 +120,27 @@
           "$": "Inspeccionar",
           "select_one_part": {
             "$": "Select a Part",
-            "instructions": "You have either no parts or more than 1 parts currently selected"
+            "instructions": "O no has seleccionado ninguna parte o tienes actualmente más de una parte seleccionada"
           },
           "meta_data": {
-            "$": "Meta Data",
+            "$": "Metadatos",
             "id": "ID",
-            "parent_id": "Parent ID",
-            "name": "Name",
-            "selected": "Selected",
-            "hidden": "Hidden",
-            "locked": "Locked"
+            "parent_id": "ID Padre",
+            "name": "Nombre",
+            "selected": "Seleccionado",
+            "hidden": "Oculto",
+            "locked": "Bloqueado"
           },
           "bounds": {
-            "$": "Bounds",
-            "width": "Width",
-            "height": "Height",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation"
+            "$": "Límites",
+            "width": "Anchura",
+            "height": "Altura",
+            "x_position": "Posición X",
+            "y_position": "Posición Y",
+            "rotation": "Rotación"
           },
           "json": "JSON",
-          "vanilla_json": "Vanilla JSON"
+          "vanilla_json": "JSON Vanilla"
         }
       },
       "popup": {
