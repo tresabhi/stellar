@@ -8,7 +8,7 @@ import {
   redoVersion,
   saveFile,
   saveFileAs,
-  undoVersion
+  undoVersion,
 } from 'core/blueprint';
 import { popupClose, popupOpen } from 'core/interface';
 import {
@@ -21,7 +21,7 @@ import {
   selectAllPartsAtRoot,
   translateTranslatablePartsBySelection,
   ungroupGroupsBySelection,
-  unselectAllParts
+  unselectAllParts,
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { isNull } from 'lodash';
@@ -31,7 +31,7 @@ import useApp, { Popup, Tab, Tool } from 'stores/useApp';
 import useBlueprint from 'stores/useBlueprint';
 import { InterfaceMode, UseSettings } from 'stores/useSettings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
-import { DEFAULT_SNAP, MAJOR_SNAP } from './useDragControls';
+import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 
 const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 

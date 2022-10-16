@@ -7,13 +7,10 @@ import { Patch, produceWithPatches } from 'immer';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings from 'stores/useSettings';
 import { Vector2 } from 'three';
+import { getSnapDistance } from 'utilities/getSnapDistance';
 import snap from 'utilities/snap';
 import useApp, { Tool } from '../stores/useApp';
 import useMousePos from './useMousePos';
-
-export const DEFAULT_SNAP = 0.2;
-export const FINE_SNAP = 0.05;
-export const MAJOR_SNAP = 2;
 
 const useDragControls = (id: string) => {
   const getMousePos = useMousePos();
@@ -58,13 +55,7 @@ const useDragControls = (id: string) => {
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
       handlePointerUp();
     } else {
-      const snapDistance = event.ctrlKey
-        ? event.shiftKey
-          ? 0
-          : FINE_SNAP
-        : event.shiftKey
-        ? MAJOR_SNAP
-        : DEFAULT_SNAP;
+      const snapDistance = getSnapDistance(event);
       const mousePos = getMousePos(event);
       const delta = new Vector2(
         mousePos.x - initialMousePos.x,

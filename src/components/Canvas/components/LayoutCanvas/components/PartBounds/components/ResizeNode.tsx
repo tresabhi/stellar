@@ -2,7 +2,6 @@ import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
 import { mutateVersionControl } from 'core/app';
 import { getPart } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import { DEFAULT_SNAP } from 'hooks/useDragControls';
 import { Patch, produceWithPatches } from 'immer';
 import { FC, useEffect, useRef } from 'react';
 import useBlueprint from 'stores/useBlueprint';
@@ -14,6 +13,7 @@ import {
   Vector2Tuple,
   Vector3,
 } from 'three';
+import { getSnapDistance } from 'utilities/getSnapDistance';
 import { unitBufferGeometry2 } from './PartBound';
 
 export interface ResizeNodeProps {
@@ -78,15 +78,17 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       .sub(initialPosition)
       .multiplyScalar(1 / camera.zoom)
       .multiply(canvasMatrixScale);
-
-    const newMovementSnapped = new Vector2(
-      Math.round(newMovement.x / DEFAULT_SNAP) * DEFAULT_SNAP,
-      Math.round(newMovement.y / DEFAULT_SNAP) * DEFAULT_SNAP,
-    );
+    const snapDistance = getSnapDistance(event);
+    const newMovementSnapped =
+      snapDistance === 0
+        ? newMovement.clone()
+        : new Vector2(
+            Math.round(newMovement.x / snapDistance) * snapDistance,
+            Math.round(newMovement.y / snapDistance) * snapDistance,
+          );
     const deltaMovementSnapped = newMovementSnapped
       .clone()
       .sub(movementSnapped);
-
     const originalDimensions = movablePoint.clone().sub(constantPoint);
     const movedMovablePoint = movablePoint.clone().add(deltaMovementSnapped);
     const scaledDimensions = movedMovablePoint.clone().sub(constantPoint);
