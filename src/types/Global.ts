@@ -21,6 +21,10 @@ declare global {
       line2: Object3DNode<Line2, typeof Line2>;
       lineGeometry: Object3DNode<LineGeometry, typeof LineGeometry>;
       lineMaterial: Object3DNode<LineMaterial, typeof LineMaterial>;
+
+      /**
+       * Deprecated; used drei's `Line`
+       */
       line_: Object3DNode<Line, typeof Line>;
     }
   }

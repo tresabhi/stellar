@@ -113,6 +113,8 @@ const useDragControls = (id: string) => {
 
           useBlueprint.setState(nextState);
         }
+
+        invalidate();
       }
 
       lastDelta.copy(delta);

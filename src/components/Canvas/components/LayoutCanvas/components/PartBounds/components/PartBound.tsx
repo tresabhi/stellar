@@ -9,8 +9,20 @@ import {
   MeshBasicMaterial,
   PlaneGeometry,
   Vector2,
+  Vector2Tuple,
 } from 'three';
 
+export const UNIT_POINTS: Vector2Tuple[] = [
+  [-0.5, 0.5],
+  [0.5, 0.5],
+  [0.5, -0.5],
+  [-0.5, -0.5],
+  [-0.5, 0.5],
+];
+
+/**
+ * @deprecated Use `UNIT_POINTS` instead
+ */
 const unitVector2Points = [
   new Vector2(0, 0),
   new Vector2(1, 0),
@@ -20,6 +32,9 @@ const unitVector2Points = [
 ];
 const unitPlane = new PlaneGeometry(1, 1);
 const SELECTION_BOX_COLOR = 'hsl(270, 60%, 30%)';
+/**
+ * @deprecated Use `UNIT_POINTS` instead
+ */
 export const unitBufferGeometry2 = new BufferGeometry().setFromPoints(
   unitVector2Points,
 );
@@ -40,7 +55,6 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
   const outline = useRef<Line>(null);
   const shading = useRef<Mesh>(null);
   const wrapper = useRef<Group>(null);
-  const { deferUpdates } = useBounds();
 
   const rerender = (bound: PartBounds) => {
     shading.current?.scale.set(bound.width, bound.height, 1);
@@ -82,14 +96,8 @@ export const PartBound: FC<PartBoundProps> = ({ id }) => {
         ref={outline}
         material={outlineMaterial}
         geometry={unitBufferGeometry2}
-        visible={!deferUpdates}
       />
-      <mesh
-        ref={shading}
-        material={shadingMaterial}
-        geometry={unitPlane}
-        visible={!deferUpdates}
-      />
+      <mesh ref={shading} material={shadingMaterial} geometry={unitPlane} />
     </group>
   );
 };
