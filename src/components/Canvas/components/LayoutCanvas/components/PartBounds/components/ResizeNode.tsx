@@ -112,7 +112,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
               if (modifyX) {
                 part.p.x += deltaOffset.x;
-                part.o.x *= scale.x;
+                part.o.x = part.o.x === 0 ? scale.x : part.o.x * scale.x;
               }
             }
           });
@@ -143,7 +143,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
               if (modifyY) {
                 part.p.y += deltaOffset.y;
-                part.o.y *= scale.y;
+                part.o.y = part.o.y === 0 ? scale.y : part.o.y * scale.y;
               }
             }
           });
