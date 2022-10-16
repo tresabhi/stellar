@@ -1,9 +1,12 @@
 import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
-import { mutateBlueprintVersionless } from 'core/blueprint';
+import { mutateVersionControl } from 'core/app';
 import { getPart } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { DEFAULT_SNAP } from 'hooks/useDragControls';
+import { Patch, produceWithPatches } from 'immer';
 import { FC, useEffect, useRef } from 'react';
+import useBlueprint from 'stores/useBlueprint';
+import useSettings from 'stores/useSettings';
 import {
   Group,
   LineBasicMaterial,
@@ -37,12 +40,16 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 }) => {
   const { camera, invalidate } = useThree();
   const group = useRef<Group>(null);
-
   const initialPosition = new Vector2();
   const movement = new Vector2();
   const movementSnapped = new Vector2();
   const constantPoint = new Vector2();
   const movablePoint = new Vector2();
+  const scale = new Vector2();
+  let firstInversePatchesX: Patch[] | undefined;
+  let firstInversePatchesY: Patch[] | undefined;
+  let lastPatchesX: Patch[] | undefined;
+  let lastPatchesY: Patch[] | undefined;
 
   useFrame(({ camera }) => {
     const scale = (1 / camera.zoom) * NODE_SIZE;
@@ -83,31 +90,73 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     const originalDimensions = movablePoint.clone().sub(constantPoint);
     const movedMovablePoint = movablePoint.clone().add(deltaMovementSnapped);
     const scaledDimensions = movedMovablePoint.clone().sub(constantPoint);
-    const scale = scaledDimensions.clone().divide(originalDimensions);
+
+    scale.copy(scaledDimensions).divide(originalDimensions);
 
     if (scale.x === undefined) scale.setX(scaledDimensions.x);
     if (scale.y === undefined) scale.setY(scaledDimensions.y);
 
-    mutateBlueprintVersionless((draft) => {
-      draft.selections.forEach((selection) => {
-        const part = getPart<PartWithTransformations>(selection, draft);
+    if (scale.x !== 0) {
+      const [nextState, patches, inversePatches] = produceWithPatches(
+        useBlueprint.getState(),
+        (draft) => {
+          draft.selections.forEach((selection) => {
+            const part = getPart<PartWithTransformations>(selection, draft);
 
-        if (part && part.p !== undefined && part.o !== undefined) {
-          const partOffset = new Vector2(part.p.x, part.p.y).sub(constantPoint);
-          const scaledOffset = partOffset.clone().multiply(scale);
-          const deltaOffset = scaledOffset.clone().sub(partOffset);
+            if (part && part.p !== undefined && part.o !== undefined) {
+              const partOffset = new Vector2(part.p.x, part.p.y).sub(
+                constantPoint,
+              );
+              const scaledOffset = partOffset.clone().multiply(scale);
+              const deltaOffset = scaledOffset.clone().sub(partOffset);
 
-          if (modifyX) {
-            part.p.x += deltaOffset.x;
-            part.o.x *= scale.x;
-          }
-          if (modifyY) {
-            part.p.y += deltaOffset.y;
-            part.o.y *= scale.y;
-          }
-        }
-      });
-    });
+              if (modifyX) {
+                part.p.x += deltaOffset.x;
+                part.o.x *= scale.x;
+              }
+            }
+          });
+        },
+      );
+
+      if (patches.length > 0) {
+        lastPatchesX = patches;
+        if (!firstInversePatchesX) firstInversePatchesX = inversePatches;
+
+        useBlueprint.setState(nextState);
+      }
+    }
+
+    if (scale.x !== 0) {
+      const [nextState, patches, inversePatches] = produceWithPatches(
+        useBlueprint.getState(),
+        (draft) => {
+          draft.selections.forEach((selection) => {
+            const part = getPart<PartWithTransformations>(selection, draft);
+
+            if (part && part.p !== undefined && part.o !== undefined) {
+              const partOffset = new Vector2(part.p.x, part.p.y).sub(
+                constantPoint,
+              );
+              const scaledOffset = partOffset.clone().multiply(scale);
+              const deltaOffset = scaledOffset.clone().sub(partOffset);
+
+              if (modifyY) {
+                part.p.y += deltaOffset.y;
+                part.o.y *= scale.y;
+              }
+            }
+          });
+        },
+      );
+
+      if (patches.length > 0) {
+        lastPatchesY = patches;
+        if (!firstInversePatchesY) firstInversePatchesY = inversePatches;
+
+        useBlueprint.setState(nextState);
+      }
+    }
 
     group.current?.position.add(
       new Vector3(...deltaMovementSnapped.toArray(), 0),
@@ -119,6 +168,38 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     invalidate();
   };
   const handlePointerUp = () => {
+    const lastPatches = [...(lastPatchesX ?? []), ...(lastPatchesY ?? [])];
+    const firstInversePatches = [
+      ...(firstInversePatchesX ?? []),
+      ...(firstInversePatchesY ?? []),
+    ];
+
+    if (scale.length() > 0) {
+      const { undoLimit } = useSettings.getState().editor;
+
+      mutateVersionControl((draft) => {
+        draft.history.splice(
+          draft.index + 1,
+          draft.history.length - draft.index - 1,
+        );
+
+        draft.history.push({
+          inversePatches: firstInversePatches,
+          patches: lastPatches,
+        });
+
+        if (undoLimit === 0) {
+          draft.index++;
+        } else {
+          if (draft.history.length > undoLimit) {
+            draft.history.shift();
+          } else {
+            draft.index++;
+          }
+        }
+      });
+    }
+
     window.removeEventListener('pointermove', handlePointerMove);
     window.removeEventListener('pointerup', handlePointerUp);
   };
