@@ -9,57 +9,6 @@ import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { PartBound, UNIT_POINTS } from './components/PartBound';
 import { ResizeNode } from './components/ResizeNode';
 
-// export const PartBounds = () => {
-//   const wrapper = useRef<Group>(null);
-//   const outline = useRef<Line>(null);
-//   const selections = useBlueprint((state) => state.selections);
-//   const deferUpdates = useBounds((state) => state.deferUpdates);
-//   const [box3, setBox3] = useState(new Box3());
-//   const partBounds = selections.map((id) => (
-//     <PartBound key={`part-bound-${id}`} id={id} />
-//   ));
-//   const partBoundsWrapper = useRef<Group>(null);
-
-//   useEffect(() => {
-//     if (partBoundsWrapper.current && outline.current && wrapper.current) {
-//       if (deferUpdates || selections.length === 0) {
-//         wrapper.current.visible = false;
-//       } else {
-//         const newBox3 = new Box3().setFromObject(partBoundsWrapper.current);
-
-//         newBox3 && setBox3(newBox3);
-
-//         wrapper.current.visible = true;
-//       }
-//     }
-//   }, []);
-
-//   return (
-//     <HeadsUpDisplay priority={Layer.Tool}>
-//       <group ref={partBoundsWrapper}>{partBounds}</group>
-
-//       <group visible={selections.length !== 0} ref={wrapper}>
-//         <line_
-//           ref={outline}
-//           position={[
-//             (box3.max.x + box3.min.x) / 2, // - outline.current.scale.x / 2,
-//             (box3.max.y + box3.min.y) / 2, // - outline.current.scale.y / 2,
-//             0,
-//           ]}
-//           scale={[box3.max.x - box3.min.x, box3.max.y - box3.min.y, 1]}
-//           material={outlineMaterial}
-//           geometry={unitBufferGeometry2}
-//         />
-
-//         <ResizeNode // top left
-//           movable={[box3.min.x, box3.max.y]}
-//           constant={[box3.max.x, box3.min.y]}
-//         />
-//       </group>
-//     </HeadsUpDisplay>
-//   );
-// };
-
 export const PartBounds = () => {
   const selections = useBlueprint((state) => state.selections);
   const deferUpdates = useBounds((state) => state.deferUpdates);

@@ -129,7 +129,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       }
     }
 
-    if (scale.x !== 0) {
+    if (scale.y !== 0) {
       const [nextState, patches, inversePatches] = produceWithPatches(
         useBlueprint.getState(),
         (draft) => {
