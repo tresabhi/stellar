@@ -98,7 +98,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     if (scale.x === undefined) scale.setX(scaledDimensions.x);
     if (scale.y === undefined) scale.setY(scaledDimensions.y);
 
-    if (scale.x !== 0) {
+    if (scale.length() > 0) {
       const [nextState, patches, inversePatches] = produceWithPatches(
         useBlueprint.getState(),
         (draft) => {
@@ -116,33 +116,6 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
                 part.p.x += deltaOffset.x;
                 part.o.x = part.o.x === 0 ? scale.x : part.o.x * scale.x;
               }
-            }
-          });
-        },
-      );
-
-      if (patches.length > 0) {
-        lastPatchesX = patches;
-        if (!firstInversePatchesX) firstInversePatchesX = inversePatches;
-
-        useBlueprint.setState(nextState);
-      }
-    }
-
-    if (scale.y !== 0) {
-      const [nextState, patches, inversePatches] = produceWithPatches(
-        useBlueprint.getState(),
-        (draft) => {
-          draft.selections.forEach((selection) => {
-            const part = getPart<PartWithTransformations>(selection, draft);
-
-            if (part && part.p !== undefined && part.o !== undefined) {
-              const partOffset = new Vector2(part.p.x, part.p.y).sub(
-                constantPoint,
-              );
-              const scaledOffset = partOffset.clone().multiply(scale);
-              const deltaOffset = scaledOffset.clone().sub(partOffset);
-
               if (modifyY) {
                 part.p.y += deltaOffset.y;
                 part.o.y = part.o.y === 0 ? scale.y : part.o.y * scale.y;
@@ -153,17 +126,36 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       );
 
       if (patches.length > 0) {
-        lastPatchesY = patches;
-        if (!firstInversePatchesY) firstInversePatchesY = inversePatches;
+        if (scale.x !== 0 && scale.y !== 0) {
+          // both moved
+          lastPatchesX = patches;
+          lastPatchesY = undefined;
+          if (firstInversePatchesX === undefined)
+            firstInversePatchesX = inversePatches;
+          firstInversePatchesY = undefined;
+        } else if (scale.x !== 0) {
+          // x moved
+          lastPatchesX = patches;
+          lastPatchesY = undefined;
+          if (firstInversePatchesX === undefined)
+            firstInversePatchesX = inversePatches;
+        } else if (scale.y !== 0) {
+          // y moved
+          lastPatchesX = undefined;
+          lastPatchesY = patches;
+          if (firstInversePatchesY === undefined)
+            firstInversePatchesY = inversePatches;
+        }
 
         useBlueprint.setState(nextState);
+        invalidate();
       }
     }
 
     group.current?.position.add(
       new Vector3(...deltaMovementSnapped.toArray(), 0),
     );
-    movement.copy(newMovement);
+    scale.copy(newMovement);
     movementSnapped.copy(newMovementSnapped);
     movablePoint.copy(movedMovablePoint);
 
