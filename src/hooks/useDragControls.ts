@@ -72,40 +72,44 @@ const useDragControls = (id: string) => {
         selectedInitially = true;
       }
 
-      if (movement.x !== 0) {
+      if (movement.length() > 0) {
         const [nextState, patches, inversePatches] = produceWithPatches(
           useBlueprint.getState(),
           (draft) => {
-            translateTranslatableParts(movement.x, 0, draft.selections, draft);
+            translateTranslatableParts(
+              movement.x,
+              movement.y,
+              draft.selections,
+              draft,
+            );
           },
         );
 
         if (patches.length > 0) {
-          lastPatchesX = patches;
-          if (!firstInversePatchesX) firstInversePatchesX = inversePatches;
+          if (movement.x !== 0 && movement.y !== 0) {
+            // both moved
+            lastPatchesX = patches;
+            lastPatchesY = undefined;
+            if (firstInversePatchesX === undefined)
+              firstInversePatchesX = inversePatches;
+            firstInversePatchesY = undefined;
+          } else if (movement.x !== 0) {
+            // x moved
+            lastPatchesX = patches;
+            lastPatchesY = undefined;
+            if (firstInversePatchesX === undefined)
+              firstInversePatchesX = inversePatches;
+          } else if (movement.y !== 0) {
+            // y moved
+            lastPatchesX = undefined;
+            lastPatchesY = patches;
+            if (firstInversePatchesY === undefined)
+              firstInversePatchesY = inversePatches;
+          }
 
           useBlueprint.setState(nextState);
+          invalidate();
         }
-
-        invalidate();
-      }
-
-      if (movement.y !== 0) {
-        const [nextState, patches, inversePatches] = produceWithPatches(
-          useBlueprint.getState(),
-          (draft) => {
-            translateTranslatableParts(0, movement.y, draft.selections, draft);
-          },
-        );
-
-        if (patches.length > 0) {
-          lastPatchesY = patches;
-          if (!firstInversePatchesY) firstInversePatchesY = inversePatches;
-
-          useBlueprint.setState(nextState);
-        }
-
-        invalidate();
       }
 
       lastDelta.copy(delta);
