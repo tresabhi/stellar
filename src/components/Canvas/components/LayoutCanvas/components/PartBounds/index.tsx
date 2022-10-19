@@ -1,4 +1,5 @@
 import { Line } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import { Layer } from 'components/Canvas/constants/layer';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import { useEffect, useRef } from 'react';
@@ -15,6 +16,7 @@ export const PartBounds = () => {
   const partBoundsWrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
   const box3 = new Box3();
+  const { invalidate } = useThree();
 
   const partBounds = selections.map((selection) => (
     <PartBound id={selection} key={`part-bound-${selection}`} />
@@ -32,6 +34,8 @@ export const PartBounds = () => {
       outline.current?.scale.set(width, height, 1);
       outline.current?.position.set(x, y, 0);
     }
+
+    invalidate();
   });
 
   return (
