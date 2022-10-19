@@ -52,7 +52,7 @@
         "selection": {
           "select_all": "Seleccionar todo",
           "unselect_all": "Deseleccionar todo",
-          "group": "Grupo",
+          "group": "Agrupar",
           "ungroup": "Desagrupar"
         },
         "help": {
@@ -91,7 +91,7 @@
           },
           "no_properties": {
             "$": "No hay propiedades para las partes seleccionadas",
-            "instructions": "La(s) parte(s) que has seleccionado carecen de propiedades ajustables probablemente porque son abstractas o un trabajo en curso."
+            "instructions": "La(s) parte(s) que has seleccionado carece(n) de propiedades ajustables probablemente porque es/son abstracta(s) o un trabajo en curso."
           },
           "transformations": {
             "$": "Transformaciones",
@@ -119,7 +119,7 @@
         "inspect": {
           "$": "Inspeccionar",
           "select_one_part": {
-            "$": "Select a Part",
+            "$": "Seleccionar una parte",
             "instructions": "O no has seleccionado ninguna parte o tienes actualmente más de una parte seleccionada"
           },
           "meta_data": {
