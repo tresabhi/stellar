@@ -103,15 +103,16 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
             const part = getPart<PartWithTransformations>(selection, draft);
 
             if (part && part.p !== undefined && part.o !== undefined) {
-              const partOffset = new Vector2(part.p.x, part.p.y).sub(
-                constantPoint,
-              );
-              const scaledOffset = partOffset.clone().multiply(scale);
-              const deltaOffset = scaledOffset.clone().sub(partOffset);
+              const partOffsetX = part.p.x - constantPoint.x;
+              const partOffsetY = part.p.y - constantPoint.y;
+              const scaledOffsetX = partOffsetX * scale.x;
+              const scaledOffsetY = partOffsetY * scale.y;
+              const deltaOffsetX = scaledOffsetX - partOffsetX;
+              const deltaOffsetY = scaledOffsetY - partOffsetY;
 
-              part.p.x += deltaOffset.x;
+              part.p.x += deltaOffsetX;
               part.o.x = part.o.x === 0 ? scale.x : part.o.x * scale.x;
-              part.p.y += deltaOffset.y;
+              part.p.y += deltaOffsetY;
               part.o.y = part.o.y === 0 ? scale.y : part.o.y * scale.y;
             }
           });
