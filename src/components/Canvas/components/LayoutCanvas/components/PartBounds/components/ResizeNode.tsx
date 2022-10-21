@@ -6,13 +6,7 @@ import { Patch, produceWithPatches } from 'immer';
 import { FC, useEffect, useRef } from 'react';
 import useBlueprint from 'stores/useBlueprint';
 import useSettings from 'stores/useSettings';
-import {
-  Group,
-  LineBasicMaterial,
-  Vector2,
-  Vector2Tuple,
-  Vector3,
-} from 'three';
+import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
 import { getSnapDistance } from 'utilities/getSnapDistance';
 import { unitBufferGeometry2 } from './PartBound';
 
@@ -46,10 +40,10 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   const constantPoint = new Vector2();
   const movablePoint = new Vector2();
   const scale = new Vector2();
-  let firstInversePatchesX: Patch[] | undefined;
-  let firstInversePatchesY: Patch[] | undefined;
-  let lastPatchesX: Patch[] | undefined;
-  let lastPatchesY: Patch[] | undefined;
+  let inversePatchesX: Patch[] | undefined;
+  let inversePatchesY: Patch[] | undefined;
+  let patchesX: Patch[] | undefined;
+  let patchesY: Patch[] | undefined;
 
   useFrame(({ camera }) => {
     const scale = (1 / camera.zoom) * NODE_SIZE;
@@ -89,16 +83,19 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     const deltaMovementSnapped = newMovementSnapped
       .clone()
       .sub(movementSnapped);
-    const originalDimensions = movablePoint.clone().sub(constantPoint);
-    const movedMovablePoint = movablePoint.clone().add(deltaMovementSnapped);
-    const scaledDimensions = movedMovablePoint.clone().sub(constantPoint);
 
-    scale.copy(scaledDimensions).divide(originalDimensions);
+    if (deltaMovementSnapped.length() !== 0) {
+      const originalDimensions = movablePoint.clone().sub(constantPoint);
+      const movedMovablePoint = movablePoint.clone().add(deltaMovementSnapped);
+      const scaledDimensions = movedMovablePoint.clone().sub(constantPoint);
 
-    if (scale.x === undefined) scale.setX(scaledDimensions.x);
-    if (scale.y === undefined) scale.setY(scaledDimensions.y);
+      scale.copy(scaledDimensions).divide(originalDimensions);
 
-    if (scale.length() > 0) {
+      if (!modifyX) scale.x = 1;
+      if (!modifyY) scale.y = 1;
+      if (scale.x === undefined) scale.setX(scaledDimensions.x);
+      if (scale.y === undefined) scale.setY(scaledDimensions.y);
+
       const [nextState, patches, inversePatches] = produceWithPatches(
         useBlueprint.getState(),
         (draft) => {
@@ -112,63 +109,56 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
               const scaledOffset = partOffset.clone().multiply(scale);
               const deltaOffset = scaledOffset.clone().sub(partOffset);
 
-              if (modifyX) {
-                part.p.x += deltaOffset.x;
-                part.o.x = part.o.x === 0 ? scale.x : part.o.x * scale.x;
-              }
-              if (modifyY) {
-                part.p.y += deltaOffset.y;
-                part.o.y = part.o.y === 0 ? scale.y : part.o.y * scale.y;
-              }
+              part.p.x += deltaOffset.x;
+              part.o.x = part.o.x === 0 ? scale.x : part.o.x * scale.x;
+              part.p.y += deltaOffset.y;
+              part.o.y = part.o.y === 0 ? scale.y : part.o.y * scale.y;
             }
           });
         },
       );
 
-      if (patches.length > 0) {
-        if (scale.x !== 0 && scale.y !== 0) {
-          // both moved
-          lastPatchesX = patches;
-          lastPatchesY = undefined;
-          if (firstInversePatchesX === undefined)
-            firstInversePatchesX = inversePatches;
-          firstInversePatchesY = undefined;
-        } else if (scale.x !== 0) {
-          // x moved
-          lastPatchesX = patches;
-          lastPatchesY = undefined;
-          if (firstInversePatchesX === undefined)
-            firstInversePatchesX = inversePatches;
-        } else if (scale.y !== 0) {
-          // y moved
-          lastPatchesX = undefined;
-          lastPatchesY = patches;
-          if (firstInversePatchesY === undefined)
-            firstInversePatchesY = inversePatches;
+      if (deltaMovementSnapped.x !== 0 && deltaMovementSnapped.y === 0) {
+        patchesX = patches;
+        if (inversePatchesX === undefined) inversePatchesX = inversePatches;
+      } else if (deltaMovementSnapped.x === 0 && deltaMovementSnapped.y !== 0) {
+        patchesY = patches;
+        if (inversePatchesY === undefined) inversePatchesY = inversePatches;
+      } else {
+        patchesX = patches.filter(
+          (patch) => patch.path[patch.path.length - 1] === 'x',
+        );
+        patchesY = patches.filter(
+          (patch) => patch.path[patch.path.length - 1] === 'y',
+        );
+
+        if (inversePatchesX === undefined) {
+          inversePatchesX = inversePatches.filter(
+            (patch) => patch.path[patch.path.length - 1] === 'x',
+          );
         }
-
-        useBlueprint.setState(nextState);
-        invalidate();
+        if (inversePatchesY === undefined) {
+          inversePatchesY = inversePatches.filter(
+            (patch) => patch.path[patch.path.length - 1] === 'y',
+          );
+        }
       }
+
+      useBlueprint.setState(nextState);
+      scale.copy(newMovement);
+      movementSnapped.copy(newMovementSnapped);
+      movablePoint.copy(movedMovablePoint);
+      invalidate();
     }
-
-    group.current?.position.add(
-      new Vector3(...deltaMovementSnapped.toArray(), 0),
-    );
-    scale.copy(newMovement);
-    movementSnapped.copy(newMovementSnapped);
-    movablePoint.copy(movedMovablePoint);
-
-    invalidate();
   };
   const handlePointerUp = () => {
-    const lastPatches = [...(lastPatchesX ?? []), ...(lastPatchesY ?? [])];
-    const firstInversePatches = [
-      ...(firstInversePatchesX ?? []),
-      ...(firstInversePatchesY ?? []),
+    const patches = [...(patchesX ?? []), ...(patchesY ?? [])];
+    const inversePatches = [
+      ...(inversePatchesX ?? []),
+      ...(inversePatchesY ?? []),
     ];
 
-    if (scale.length() > 0) {
+    if (movementSnapped.length() > 0) {
       const { undoLimit } = useSettings.getState().editor;
 
       mutateVersionControl((draft) => {
@@ -178,8 +168,8 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
         );
 
         draft.history.push({
-          inversePatches: firstInversePatches,
-          patches: lastPatches,
+          inversePatches: inversePatches,
+          patches: patches,
         });
 
         if (undoLimit === 0) {

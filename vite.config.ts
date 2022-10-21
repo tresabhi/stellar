@@ -13,20 +13,16 @@ export default defineConfig({
 
   plugins: [
     tsconfigPaths(),
+
+    VitePWA({ registerType: 'prompt' }),
+
     checker({
       typescript: true,
       eslint: { lintCommand: 'eslint .' },
       enableBuild: true,
     }),
 
-    VitePWA({
-      registerType: 'prompt',
-      workbox: { sourcemap: true },
-    }),
-
     react(),
-    svgrPlugin({
-      svgrOptions: { icon: true },
-    }),
+    svgrPlugin({ svgrOptions: { icon: true } }),
   ],
 });

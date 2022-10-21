@@ -20,10 +20,10 @@ const useDragControls = (id: string) => {
   let initialMousePos: Vector2;
   const lastDelta = new Vector2();
   const lastSnappedDelta = new Vector2();
-  let firstInversePatchesX: Patch[] | undefined;
-  let firstInversePatchesY: Patch[] | undefined;
-  let lastPatchesX: Patch[] | undefined;
-  let lastPatchesY: Patch[] | undefined;
+  let inversePatchesX: Patch[] | undefined;
+  let inversePatchesY: Patch[] | undefined;
+  let patchesX: Patch[] | undefined;
+  let patchesY: Patch[] | undefined;
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
@@ -85,45 +85,47 @@ const useDragControls = (id: string) => {
           },
         );
 
-        if (patches.length > 0) {
-          if (movement.x !== 0 && movement.y !== 0) {
-            // both moved
-            lastPatchesX = patches;
-            lastPatchesY = undefined;
-            if (firstInversePatchesX === undefined)
-              firstInversePatchesX = inversePatches;
-            firstInversePatchesY = undefined;
-          } else if (movement.x !== 0) {
-            // x moved
-            lastPatchesX = patches;
-            lastPatchesY = undefined;
-            if (firstInversePatchesX === undefined)
-              firstInversePatchesX = inversePatches;
-          } else if (movement.y !== 0) {
-            // y moved
-            lastPatchesX = undefined;
-            lastPatchesY = patches;
-            if (firstInversePatchesY === undefined)
-              firstInversePatchesY = inversePatches;
+        if (movement.x !== 0 && movement.y === 0) {
+          patchesX = patches;
+          if (inversePatchesX === undefined) inversePatchesX = inversePatches;
+        } else if (movement.x === 0 && movement.y !== 0) {
+          patchesY = patches;
+          if (inversePatchesY === undefined) inversePatchesY = inversePatches;
+        } else {
+          patchesX = patches.filter(
+            (patch) => patch.path[patch.path.length - 1] === 'x',
+          );
+          patchesY = patches.filter(
+            (patch) => patch.path[patch.path.length - 1] === 'y',
+          );
+
+          if (inversePatchesX === undefined) {
+            inversePatchesX = inversePatches.filter(
+              (patch) => patch.path[patch.path.length - 1] === 'x',
+            );
           }
-
-          useBlueprint.setState(nextState);
-          invalidate();
+          if (inversePatchesY === undefined) {
+            inversePatchesY = inversePatches.filter(
+              (patch) => patch.path[patch.path.length - 1] === 'y',
+            );
+          }
         }
-      }
 
-      lastDelta.copy(delta);
-      lastSnappedDelta.copy(snappedDelta);
+        useBlueprint.setState(nextState);
+        lastDelta.copy(delta);
+        lastSnappedDelta.copy(snappedDelta);
+        invalidate();
+      }
     }
   };
   const handlePointerUp = () => {
     window.removeEventListener('pointerup', handlePointerUp);
     window.removeEventListener('pointermove', handlePointerMove);
 
-    const lastPatches = [...(lastPatchesX ?? []), ...(lastPatchesY ?? [])];
+    const lastPatches = [...(patchesX ?? []), ...(patchesY ?? [])];
     const firstInversePatches = [
-      ...(firstInversePatchesX ?? []),
-      ...(firstInversePatchesY ?? []),
+      ...(inversePatchesX ?? []),
+      ...(inversePatchesY ?? []),
     ];
 
     if (lastDelta.length() > 0) {
@@ -165,10 +167,10 @@ const useDragControls = (id: string) => {
       window.addEventListener('pointerup', removeSelectionRestriction);
 
       // clean up
-      firstInversePatchesX = undefined;
-      firstInversePatchesY = undefined;
-      lastPatchesX = undefined;
-      lastPatchesY = undefined;
+      inversePatchesX = undefined;
+      inversePatchesY = undefined;
+      patchesX = undefined;
+      patchesY = undefined;
     }
   };
 
