@@ -1,7 +1,7 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject } from 'react';
-import { Group, Mesh } from 'three';
+import { Object3D } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithScale extends VanillaPart {
@@ -26,19 +26,12 @@ export const PartWithScaleData: PartWithScale = {
   label: 'Unlabeled Part With Scale',
 };
 
-export const usePartWithScale = (
-  id: string,
-  groupRef: RefObject<Mesh | Group>,
-) => {
+export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
   usePartProperty(
     id,
     (part: PartWithScale) => part.o,
     (o) => {
-      groupRef.current?.scale.set(
-        o.x,
-        o.y,
-        (Math.abs(o.x) + Math.abs(o.y)) / 2,
-      );
+      object.current?.scale.set(o.x, o.y, (Math.abs(o.x) + Math.abs(o.y)) / 2);
       declareBoundNeedsUpdate(id);
       deferUpdates();
     },

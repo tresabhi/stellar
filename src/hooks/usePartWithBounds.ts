@@ -2,15 +2,11 @@ import { mutateBounds } from 'core/app';
 import { disposeBound, getBoundsFromObject } from 'core/bounds';
 import { RefObject, useCallback, useEffect } from 'react';
 import useBounds from 'stores/useBounds';
-import { Group, Mesh } from 'three';
+import { Object3D } from 'three';
 
-const usePartWithBounds = (
-  id: string,
-  wrapper: RefObject<Group>,
-  mesh: RefObject<Mesh>,
-) => {
+const usePartWithBounds = (id: string, object: RefObject<Object3D>) => {
   const computeBounds = useCallback(() => {
-    const bounds = getBoundsFromObject(wrapper, mesh);
+    const bounds = getBoundsFromObject(object);
 
     if (bounds) {
       mutateBounds((draft) => {
@@ -20,7 +16,7 @@ const usePartWithBounds = (
         });
       });
     }
-  }, [id, mesh, wrapper]);
+  }, [id, object]);
 
   useEffect(computeBounds);
   useEffect(() => {

@@ -7,7 +7,7 @@ import { PartPropertyComponentProps } from 'types/Parts';
 import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { mutateSettings } from 'core/app';
 import useSettings from 'stores/useSettings';
-import { Group, Mesh } from 'three';
+import { Object3D } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   usePartWithOrientation,
@@ -64,11 +64,11 @@ export const PartWithTransformationsData: PartWithTransformations = {
 
 export const usePartWithTransformations = (
   id: string,
-  groupRef: RefObject<Mesh | Group>,
+  object: RefObject<Object3D>,
 ) => {
-  usePartWithPosition(id, groupRef);
-  usePartWithOrientation(id, groupRef);
-  usePartWithScale(id, groupRef);
+  usePartWithPosition(id, object);
+  usePartWithOrientation(id, object);
+  usePartWithScale(id, object);
 };
 
 export const PartWithTransformationsPropertyComponent: FC<

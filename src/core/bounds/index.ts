@@ -4,4 +4,3 @@ export * from './disposeBound';
 export * from './disposeBounds';
 export * from './getBoundsFromObject';
 export * from './translateAllBoundingBoxes';
-export * from './updateBounds';

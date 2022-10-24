@@ -119,7 +119,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const state = getPart<FuelTank>(id);
 
   if (state) {
-    const { props } = usePhysicalPart(id, wrapper, mesh);
+    const props = usePhysicalPart(id, wrapper);
 
     usePartProperty(
       id,

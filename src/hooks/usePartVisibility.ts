@@ -1,8 +1,8 @@
 import { RefObject } from 'react';
-import { Group, Mesh } from 'three';
+import { Object3D } from 'three';
 import usePartProperty from './usePartProperty';
 
-const usePartVisibility = (id: string, mesh: RefObject<Mesh | Group>) => {
+const usePartVisibility = (id: string, mesh: RefObject<Object3D>) => {
   usePartProperty(
     id,
     (state) => state.hidden,

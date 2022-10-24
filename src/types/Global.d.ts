@@ -28,4 +28,9 @@ declare global {
       line_: Object3DNode<Line, typeof Line>;
     }
   }
+
+  module '*.gltf' {
+    const url: string;
+    export default url;
+  }
 }

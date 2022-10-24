@@ -1,10 +1,7 @@
-import { useGLTF } from '@react-three/drei';
 import useKeybinds from 'hooks/useKeybinds';
-import { PART_MODEL_PATH } from 'hooks/usePartModel';
 import { useTranslator } from 'hooks/useTranslator';
 import { globalStyles } from 'stitches.config';
 import useApp from 'stores/useApp';
-import usePartRegistry from 'stores/usePartRegistry';
 import getStellarContext from 'utilities/getStellarContext';
 import { prettifyVersion } from 'utilities/prettifyVersion';
 import packageJSON from '../../package.json';
@@ -58,14 +55,4 @@ export const usePrerender = () => {
     rerenderDocumentTitle,
   );
   useApp.subscribe((state) => state.file.handle, rerenderDocumentTitle);
-
-  usePartRegistry.getState().forEach(({ preload }) => {
-    if (preload) {
-      const preloads = typeof preload === 'string' ? [preload] : preload;
-
-      preloads.forEach((fileName) => {
-        useGLTF.preload(`${PART_MODEL_PATH}${fileName}.gltf`);
-      });
-    }
-  });
 };

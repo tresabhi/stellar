@@ -27,7 +27,6 @@ export * from './panToPartBySelection';
 export * from './partExportify';
 export * from './partImportify';
 export * from './pasteParts';
-export * from './preloadModel';
 export * from './registerPart';
 export * from './removePartMetaData';
 export * from './renamePart';

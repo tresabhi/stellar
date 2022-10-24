@@ -1,8 +1,11 @@
+import { Material, Mesh } from 'three';
 import { GLTF } from 'three-stdlib';
 
 export default interface GLTFResult extends GLTF {
   nodes: {
-    [key: string]: THREE.Mesh;
+    [key: string]: Mesh;
   };
-  materials: Record<string, unknown>;
+  materials: {
+    [key: string]: Material;
+  };
 }

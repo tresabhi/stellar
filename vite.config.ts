@@ -11,17 +11,16 @@ export default defineConfig({
     sourcemap: true,
   },
 
+  assetsInclude: ['**/*.gltf'],
+
   plugins: [
     tsconfigPaths(),
-
     VitePWA({ registerType: 'prompt' }),
-
     checker({
       typescript: true,
       eslint: { lintCommand: 'eslint .' },
       enableBuild: true,
     }),
-
     react(),
     svgrPlugin({ svgrOptions: { icon: true } }),
   ],
