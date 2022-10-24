@@ -118,10 +118,29 @@
         },
         "inspect": {
           "$": "Inspect",
-          "coming_soon": {
-            "$": "Inspect Coming Soon!",
-            "instructions": "This sidebar will display core information & metadata about parts selected."
-          }
+          "select_one_part": {
+            "$": "Select a Part",
+            "instructions": "You have either no parts or more than 1 parts currently selected"
+          },
+          "meta_data": {
+            "$": "Meta Data",
+            "id": "ID",
+            "parent_id": "Parent ID",
+            "name": "Name",
+            "selected": "Selected",
+            "hidden": "Hidden",
+            "locked": "Locked"
+          },
+          "bounds": {
+            "$": "Bounds",
+            "width": "Width",
+            "height": "Height",
+            "x_position": "X Position",
+            "y_position": "Y Position",
+            "rotation": "Rotation"
+          },
+          "json": "JSON",
+          "vanilla_json": "Vanilla JSON"
         }
       },
       "popup": {

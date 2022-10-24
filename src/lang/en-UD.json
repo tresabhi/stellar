@@ -118,10 +118,29 @@
         },
         "inspect": {
           "$": "ʇɔǝdsuI",
-          "coming_soon": {
-            "$": "¡uooS ƃuᴉɯoƆ ʇɔǝdsuI",
-            "instructions": "˙pǝʇɔǝlǝs sʇɹɐd ʇnoqɐ ɐʇɐpɐʇǝɯ ⅋ uoᴉʇɐɯɹoɟuᴉ ǝɹoɔ ʎɐldsᴉp llᴉʍ ɹɐqǝpᴉs sᴉɥ┴"
-          }
+          "select_one_part": {
+            "$": "ʇɹɐԀ ɐ ʇɔǝlǝS",
+            "instructions": "pǝʇɔǝlǝs ʎlʇuǝɹɹnɔ sʇɹɐd 1 uɐɥʇ ǝɹoɯ ɹo sʇɹɐd ou ɹǝɥʇᴉǝ ǝʌɐɥ no⅄"
+          },
+          "meta_data": {
+            "$": "ɐʇɐp ɐʇǝW",
+            "id": "pI",
+            "parent_id": "pI ʇuǝɹɐԀ",
+            "name": "ǝɯɐN",
+            "selected": "pǝʇɔǝlǝS",
+            "hidden": "uǝppᴉH",
+            "locked": "pǝʞɔo˥"
+          },
+          "bounds": {
+            "$": "spunoq",
+            "width": "ɥʇpᴉM",
+            "height": "ʇɥƃᴉǝH",
+            "x_position": "uoᴉʇᴉsoԀ X",
+            "y_position": "uoᴉʇᴉsoԀ ⅄",
+            "rotation": "uoᴉʇɐʇoɹ"
+          },
+          "json": "NOSſ",
+          "vanilla_json": "NOSſ ɐllᴉuɐΛ"
         }
       },
       "popup": {
