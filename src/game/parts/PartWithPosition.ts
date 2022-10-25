@@ -40,3 +40,5 @@ export const usePartWithPosition = (
     },
   );
 };
+
+export const registry = null;

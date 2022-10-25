@@ -1,6 +1,6 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
-import { PartRegistryFragment } from 'stores/usePartRegistry';
+import { PartRegistryItem } from 'stores/usePartRegistry';
 import { createPhysicalPart } from 'utilities/createPhysicalPart';
 import { Part, PartData } from '../Part';
 import {
@@ -39,17 +39,14 @@ export const EngineTitanLayoutComponent = createPhysicalPart(model, [0, -2]);
 
 export const EngineTitanIcon = EngineIcon;
 
-export const EngineTitanRegistry: PartRegistryFragment<EngineTitan> = [
-  'Engine Titan',
-  {
-    category: PartCategory.Propulsion,
+export const registry: PartRegistryItem<EngineTitan> = {
+  category: PartCategory.Propulsion,
+  vanillaData: VanillaEngineTitanData,
+  data: EngineTitanData,
 
-    vanillaData: VanillaEngineTitanData,
-    data: EngineTitanData,
+  Icon: EngineTitanIcon,
+  PropertyEditor: undefined,
+  Mesh: EngineTitanLayoutComponent,
 
-    Icon: EngineTitanIcon,
-    Mesh: EngineTitanLayoutComponent,
-
-    preload: 'EngineTitan',
-  },
-];
+  exportify: undefined,
+};

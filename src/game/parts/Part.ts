@@ -49,3 +49,5 @@ export const PartData: Part = {
   hidden: false,
   locked: false,
 };
+
+export const registry = null;

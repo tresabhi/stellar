@@ -13,7 +13,7 @@ import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
-import { PartRegistryFragment } from 'stores/usePartRegistry';
+import { PartRegistryItem } from 'stores/usePartRegistry';
 import useSettings from 'stores/useSettings';
 import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
@@ -261,16 +261,14 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 
 export const FuelTankIcon = Icon;
 
-export const FuelTankRegistry: PartRegistryFragment<FuelTank> = [
-  'Fuel Tank',
-  {
-    category: PartCategory.Structural,
+export const registry: PartRegistryItem<FuelTank> = {
+  category: PartCategory.Structural,
+  vanillaData: VanillaFuelTankData,
+  data: FuelTankData,
 
-    vanillaData: VanillaFuelTankData,
-    data: FuelTankData,
+  Icon: FuelTankIcon,
+  PropertyEditor: FuelTankPropertyComponent,
+  Mesh: FuelTankLayoutComponent,
 
-    Icon: FuelTankIcon,
-    PropertyEditor: FuelTankPropertyComponent,
-    Mesh: FuelTankLayoutComponent,
-  },
-];
+  exportify: undefined,
+};

@@ -1,6 +1,6 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
-import { PartRegistryFragment } from 'stores/usePartRegistry';
+import { PartRegistryItem } from 'stores/usePartRegistry';
 import { createPhysicalPart } from 'utilities/createPhysicalPart';
 import { Part, PartData } from '../Part';
 import {
@@ -39,17 +39,14 @@ export const EngineKolibriLayoutComponent = createPhysicalPart(model, [0, -1]);
 
 export const EngineKolibriIcon = EngineIcon;
 
-export const EngineKolibriRegistry: PartRegistryFragment<EngineKolibri> = [
-  'Engine Kolibri',
-  {
-    category: PartCategory.Propulsion,
+export const registry: PartRegistryItem<EngineKolibri> = {
+  category: PartCategory.Propulsion,
+  vanillaData: VanillaEngineKolibriData,
+  data: EngineKolibriData,
 
-    vanillaData: VanillaEngineKolibriData,
-    data: EngineKolibriData,
+  Icon: EngineKolibriIcon,
+  PropertyEditor: undefined,
+  Mesh: EngineKolibriLayoutComponent,
 
-    Icon: EngineKolibriIcon,
-    Mesh: EngineKolibriLayoutComponent,
-
-    preload: 'EngineKolibri',
-  },
-];
+  exportify: undefined,
+};

@@ -1,26 +1,12 @@
 import { Blueprint } from 'game/Blueprint';
-import { EngineFrontierRegistry } from 'game/parts/EngineFrontier';
-import { EngineKolibriRegistry } from 'game/parts/EngineKolibri';
-import { EnginePeregrineRegistry } from 'game/parts/EnginePeregrine';
-import { EngineTitanRegistry } from 'game/parts/EngineTitan';
-import { EngineValiantRegistry } from 'game/parts/EngineValiant';
-import { FuelTankRegistry } from 'game/parts/FuelTank';
-import { GroupRegistry } from 'game/parts/Group';
 import { Part, VanillaPart } from 'game/parts/Part';
+import PartCategory from 'hooks/constants/partCategory';
 import { FC } from 'react';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import create from 'zustand';
-import PartCategory from '../hooks/constants/partCategory';
 
-export type PartExportifier<Type extends Part> = (
-  part: Type,
-  context: Blueprint,
-) => VanillaPart | VanillaPart[] | null;
-
-export interface PartRegistryItem<Type extends Part> {
+export type PartRegistryItem<Type extends Part> = {
   category: PartCategory;
-
-  // null if it has a custom exportifier or cannot export at all
   vanillaData: VanillaPart | null;
   data: Part;
 
@@ -29,25 +15,31 @@ export interface PartRegistryItem<Type extends Part> {
   Mesh: FC<PartComponentProps>;
 
   exportify?: PartExportifier<Type>;
+};
 
-  preload?: string | string[];
-}
+export type PartExportifier<Type extends Part> = (
+  part: Type,
+  context: Blueprint,
+) => VanillaPart | VanillaPart[] | null;
 
 export type UsePartRegistry = Map<string, PartRegistryItem<Part>>;
-export type PartRegistryFragment<Type extends Part> = [
-  string,
-  PartRegistryItem<Type>,
-];
 
-export const UsePartRegistryData = new Map([
-  FuelTankRegistry,
-  GroupRegistry,
-  EngineKolibriRegistry,
-  EngineValiantRegistry,
-  EngineFrontierRegistry,
-  EnginePeregrineRegistry,
-  EngineTitanRegistry,
-] as PartRegistryFragment<Part>[]);
+const partsGlob = {
+  ...import.meta.glob('../game/parts/*', { eager: true, import: 'registry' }),
+  ...import.meta.glob('../game/parts/*/index.tsx', {
+    eager: true,
+    import: 'registry',
+  }),
+};
 
-const usePartRegistry = create(() => UsePartRegistryData);
+const UsePartRegistryData: [string, PartRegistryItem<Part>][] = [];
+
+Object.keys(partsGlob).forEach((path) => {
+  const partRegistry = partsGlob[path] as PartRegistryItem<Part> | null;
+  if (partRegistry) {
+    UsePartRegistryData.push([partRegistry.data.n, partRegistry]);
+  }
+});
+
+const usePartRegistry = create(() => new Map(UsePartRegistryData));
 export default usePartRegistry;

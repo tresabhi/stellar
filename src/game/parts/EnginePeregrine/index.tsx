@@ -1,6 +1,6 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
-import { PartRegistryFragment } from 'stores/usePartRegistry';
+import { PartRegistryItem } from 'stores/usePartRegistry';
 import { createPhysicalPart } from 'utilities/createPhysicalPart';
 import { Part, PartData } from '../Part';
 import {
@@ -44,17 +44,14 @@ export const EnginePeregrineLayoutComponent = createPhysicalPart(
 
 export const EnginePeregrineIcon = EngineIcon;
 
-export const EnginePeregrineRegistry: PartRegistryFragment<EnginePeregrine> = [
-  'Engine Peregrine',
-  {
-    category: PartCategory.Propulsion,
+export const registry: PartRegistryItem<EnginePeregrine> = {
+  category: PartCategory.Propulsion,
+  vanillaData: VanillaEnginePeregrineData,
+  data: EnginePeregrineData,
 
-    vanillaData: VanillaEnginePeregrineData,
-    data: EnginePeregrineData,
+  Icon: EnginePeregrineIcon,
+  PropertyEditor: undefined,
+  Mesh: EnginePeregrineLayoutComponent,
 
-    Icon: EnginePeregrineIcon,
-    Mesh: EnginePeregrineLayoutComponent,
-
-    preload: 'EnginePeregrine',
-  },
-];
+  exportify: undefined,
+};

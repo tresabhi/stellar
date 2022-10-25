@@ -8,7 +8,7 @@ import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
 import { FC, useCallback, useEffect, useRef } from 'react';
 import useBounds, { BoundListing } from 'stores/useBounds';
-import { PartExportifier, PartRegistryFragment } from 'stores/usePartRegistry';
+import { PartExportifier, PartRegistryItem } from 'stores/usePartRegistry';
 import { Box3, Group as ThreeGroup } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData, VanillaPart } from './Part';
@@ -40,8 +40,8 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
         bounds: {
           width: box3.max.x - box3.min.x,
           height: box3.max.y - box3.min.y,
-            x: (box3.min.x + box3.max.x) / 2,
-            y: (box3.min.y + box3.max.y) / 2,
+          x: (box3.min.x + box3.max.x) / 2,
+          y: (box3.min.y + box3.max.y) / 2,
           rotation: 0,
         },
         needsUpdate: false,
@@ -105,17 +105,14 @@ export const groupExportify: PartExportifier<Group> = (part, draft) => {
   return exportedParts;
 };
 
-export const GroupRegistry: PartRegistryFragment<Group> = [
-  'Group',
-  {
-    category: PartCategory.Abstract,
+export const registry: PartRegistryItem<Group> = {
+  category: PartCategory.Abstract,
+  vanillaData: null,
+  data: GroupData,
 
-    vanillaData: null,
-    data: GroupData,
+  Icon: GroupIcon,
+  PropertyEditor: undefined,
+  Mesh: GroupLayoutComponent,
 
-    Icon: GroupIcon,
-    Mesh: GroupLayoutComponent,
-
-    exportify: groupExportify,
-  },
-];
+  exportify: groupExportify,
+};

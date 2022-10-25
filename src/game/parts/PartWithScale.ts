@@ -37,3 +37,5 @@ export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
     },
   );
 };
+
+export const registry = null;

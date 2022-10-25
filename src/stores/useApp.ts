@@ -21,6 +21,11 @@ export enum Popup {
   RenameParts,
 }
 
+export interface LoadStatus {
+  message: string;
+  done: boolean;
+}
+
 export interface UseApp {
   file: {
     handle?: FileSystemFileHandle;
@@ -42,10 +47,6 @@ export interface UseApp {
     clipboard?: Snippet;
     camera?: Camera;
     invalidateFrame?: () => void;
-  };
-
-  loadStatus: {
-    'TODO: add loading list here': boolean;
   };
 }
 
@@ -70,10 +71,6 @@ export const UseAppData: UseApp = {
     clipboard: undefined,
     camera: undefined,
     invalidateFrame: undefined,
-  },
-
-  loadStatus: {
-    'TODO: add loading list here': true,
   },
 };
 

@@ -73,3 +73,5 @@ export const PartWithEnginePropertyComponent: FC<
     </Properties.Group>
   );
 };
+
+export const registry = null;

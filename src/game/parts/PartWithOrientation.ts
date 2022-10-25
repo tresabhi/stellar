@@ -41,3 +41,5 @@ export const usePartWithOrientation = (
     },
   );
 };
+
+export const registry = null;

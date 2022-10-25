@@ -170,3 +170,5 @@ export const PartWithTransformationsPropertyComponent: FC<
     </Properties.Group>
   );
 };
+
+export const registry = null;
