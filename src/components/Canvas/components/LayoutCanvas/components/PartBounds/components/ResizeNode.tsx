@@ -53,8 +53,8 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   useEffect(() => {
     constantPoint.fromArray(constant());
     movablePoint.fromArray(movable());
-
     group.current?.position.set(...movablePoint.toArray(), 2);
+    invalidate();
   });
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
