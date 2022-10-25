@@ -18,7 +18,11 @@ export const createPhysicalPart = (
 
     const nodeNames = Object.keys(nodes);
     const meshes = nodeNames.map((nodeName) => (
-      <mesh position={[...offset, 0]} geometry={nodes[nodeName].geometry}>
+      <mesh
+        position={[...offset, 0]}
+        geometry={nodes[nodeName].geometry}
+        key={`node-${nodeName}`}
+      >
         <meshBasicMaterial
           map={(nodes[nodeName].material as MeshStandardMaterial)?.map}
         />
