@@ -26,8 +26,8 @@ const App = () => {
       <LandscapePrompt className={theme}>
         <AppContainer className={theme}>
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/interface" element={<Interface />} />
+            <Route path="*" element={<Home />} />
           </Routes>
         </AppContainer>
       </LandscapePrompt>
