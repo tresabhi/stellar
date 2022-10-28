@@ -1,6 +1,6 @@
 import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
 import { mutateVersionControl } from 'core/app';
-import { getPart } from 'core/part';
+import { mutateParts } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Patch, produceWithPatches } from 'immer';
 import { FC, useEffect, useRef } from 'react';
@@ -99,23 +99,32 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       const [nextState, patches, inversePatches] = produceWithPatches(
         useBlueprint.getState(),
         (draft) => {
-          draft.selections.forEach((selection) => {
-            const part = getPart<PartWithTransformations>(selection, draft);
+          mutateParts<PartWithTransformations>(
+            draft.selections,
+            (partDraft) => {
+              if (
+                partDraft &&
+                partDraft.p !== undefined &&
+                partDraft.o !== undefined
+              ) {
+                const partOffsetX = partDraft.p.x - constantPoint.x;
+                const partOffsetY = partDraft.p.y - constantPoint.y;
+                const scaledOffsetX = partOffsetX * scale.x;
+                const scaledOffsetY = partOffsetY * scale.y;
+                const deltaOffsetX = scaledOffsetX - partOffsetX;
+                const deltaOffsetY = scaledOffsetY - partOffsetY;
 
-            if (part && part.p !== undefined && part.o !== undefined) {
-              const partOffsetX = part.p.x - constantPoint.x;
-              const partOffsetY = part.p.y - constantPoint.y;
-              const scaledOffsetX = partOffsetX * scale.x;
-              const scaledOffsetY = partOffsetY * scale.y;
-              const deltaOffsetX = scaledOffsetX - partOffsetX;
-              const deltaOffsetY = scaledOffsetY - partOffsetY;
-
-              part.p.x += deltaOffsetX;
-              part.o.x = part.o.x === 0 ? scale.x : part.o.x * scale.x;
-              part.p.y += deltaOffsetY;
-              part.o.y = part.o.y === 0 ? scale.y : part.o.y * scale.y;
-            }
-          });
+                partDraft.p.x += deltaOffsetX;
+                partDraft.o.x =
+                  partDraft.o.x === 0 ? scale.x : partDraft.o.x * scale.x;
+                partDraft.p.y += deltaOffsetY;
+                partDraft.o.y =
+                  partDraft.o.y === 0 ? scale.y : partDraft.o.y * scale.y;
+              }
+            },
+            draft,
+            true,
+          );
         },
       );
 

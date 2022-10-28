@@ -14,6 +14,7 @@ export const PartBounds = () => {
   const selections = useBlueprint((state) => state.selections);
   const deferUpdates = useBounds((state) => state.deferUpdates);
   const partBoundsWrapper = useRef<Group>(null);
+  const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
   const box3 = new Box3();
   const { invalidate } = useThree();
@@ -23,7 +24,7 @@ export const PartBounds = () => {
   ));
 
   useEffect(() => {
-    if (partBoundsWrapper.current) {
+    if (wrapper.current && partBoundsWrapper.current) {
       box3.setFromObject(partBoundsWrapper.current);
 
       const width = box3.max.x - box3.min.x;
@@ -40,12 +41,12 @@ export const PartBounds = () => {
 
   return (
     <HeadsUpDisplay priority={Layer.Tool}>
-      <group visible={!deferUpdates}>
+      <group visible={!deferUpdates} ref={wrapper}>
         <group ref={partBoundsWrapper}>{partBounds}</group>
 
         <Line
           ref={outline}
-          visible={selections.length > 1}
+          visible={!deferUpdates}
           lineWidth={1.5}
           color={'#9d5bd2'}
           points={UNIT_POINTS}
