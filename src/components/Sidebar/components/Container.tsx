@@ -1,7 +1,7 @@
 import { styled, theme } from 'stitches.config';
 
 export const Container = styled('div', {
-  backgroundColor: theme.colors.componentBackground,
+  backgroundColor: theme.colors.appBackground2,
   display: 'flex',
   position: 'relative',
   flexDirection: 'column',

@@ -38,6 +38,7 @@ const triggerStyles = css({
   color: theme.colors.textHighContrast,
   listStyle: 'none',
   cursor: 'pointer',
+  backgroundColor: theme.colors.componentBackground,
 
   '&:focus': {
     outline: theme.borderStyles.componentInteractiveActive,
