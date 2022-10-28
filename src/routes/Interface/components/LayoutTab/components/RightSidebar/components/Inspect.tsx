@@ -1,6 +1,8 @@
+import { CopyIcon } from '@radix-ui/react-icons';
 import * as Properties from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import { partExportify } from 'core/part';
+import useClipboard from 'hooks/useClipboard';
 import usePart from 'hooks/usePart';
 import { useTranslator } from 'hooks/useTranslator';
 import useBlueprint from 'stores/useBlueprint';
@@ -11,14 +13,18 @@ const INDENT = 2;
 
 export const Inspect = () => {
   const { t } = useTranslator();
+  const { copy } = useClipboard();
   const isOneSelected = useBlueprint((state) => state.selections.length === 1);
   const state = useBlueprint.getState();
   const id = state.selections[0];
   const data = usePart(id);
   const bounds = useBounds((state) => state.parts.get(id)?.bounds);
-  const json = JSON.stringify(data, undefined, INDENT);
-  const vanillaJson =
+  const JSON_ = JSON.stringify(data, undefined, INDENT);
+  const vanillaJSON =
     data && JSON.stringify(partExportify(data, state), undefined, INDENT);
+
+  const handleJSONClick = () => copy(JSON_);
+  const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);
 
   return isOneSelected && data && bounds ? (
     <Properties.Container>
@@ -88,15 +94,27 @@ export const Inspect = () => {
       </Properties.Group>
 
       <Properties.Group>
-        <Properties.Title>{t`tab.layout.right_sidebar.inspect.json`}</Properties.Title>
+        <Properties.TitleWithButton
+          buttons={
+            <Properties.TitleButton onClick={handleJSONClick}>
+              <CopyIcon />
+            </Properties.TitleButton>
+          }
+        >{t`tab.layout.right_sidebar.inspect.json`}</Properties.TitleWithButton>
 
-        <Properties.TextArea value={json} />
+        <Properties.TextArea value={JSON_} />
       </Properties.Group>
 
       <Properties.Group>
-        <Properties.Title>{t`tab.layout.right_sidebar.inspect.vanilla_json`}</Properties.Title>
+        <Properties.TitleWithButton
+          buttons={
+            <Properties.TitleButton onClick={handleVanillaJSONClick}>
+              <CopyIcon />
+            </Properties.TitleButton>
+          }
+        >{t`tab.layout.right_sidebar.inspect.vanilla_json`}</Properties.TitleWithButton>
 
-        <Properties.TextArea value={vanillaJson} />
+        <Properties.TextArea value={vanillaJSON} />
       </Properties.Group>
     </Properties.Container>
   ) : (
