@@ -37,7 +37,7 @@ const updateSW = registerSW({
   },
 
   onOfflineReady: () => {
-    toast(() => {
+    toast(({ close }) => {
       const { t } = useTranslator();
 
       return (
