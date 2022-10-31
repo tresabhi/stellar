@@ -171,5 +171,22 @@
     "message": "Parece que estás en modo retrato. Por favor, gira al modo horizontal.%1$sSi estás en un escritorio, esto puede ser descartado.",
     "never": "No volver a preguntar de nuevo",
     "dismiss": "Descartar por ahora"
+  },
+  "toasts": {
+    "update_available": {
+      "title": "Stellar updated to a newer version",
+      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "actions": {
+        "restart": "Restart",
+        "dismiss": "Dismiss"
+      }
+    }
+  },
+  "offline_ready": {
+    "title": "Stellar is now available offline",
+    "description": "You can now access Stellar regardless of a connection to WiFi.",
+    "actions": {
+      "dismiss": "Dismiss"
+    }
   }
 }
