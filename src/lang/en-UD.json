@@ -171,5 +171,22 @@
     "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
     "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
     "dismiss": "ʍoN ɹoℲ ssᴉɯsᴉp"
+  },
+  "toasts": {
+    "update_available": {
+      "title": "Stellar updated to a newer version",
+      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "actions": {
+        "restart": "Restart",
+        "dismiss": "Dismiss"
+      }
+    }
+  },
+  "offline_ready": {
+    "title": "Stellar is now available offline",
+    "description": "You can now access Stellar regardless of a connection to WiFi.",
+    "actions": {
+      "dismiss": "Dismiss"
+    }
   }
 }
