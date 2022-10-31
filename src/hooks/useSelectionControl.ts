@@ -9,60 +9,81 @@ import {
   togglePartSelection,
   unselectPart,
 } from 'core/part';
+import useApp, { Tool } from 'stores/useApp';
 import useSettings from 'stores/useSettings';
-import useApp, { Tool } from '../stores/useApp';
 
-const useSelectionControl = (id: string) => {
-  const handleClick = (event: ThreeEvent<MouseEvent>) => {
-    const { preventNextSelection, tool, isSpacePanning, isTouchPanning } =
-      useApp.getState().editor;
+interface SelectionAbstractionEvent {
+  ctrlKey: boolean;
+  shiftKey: boolean;
+  stopPropagation: () => void;
+}
 
-    if (
-      !preventNextSelection &&
-      tool === Tool.Move &&
-      !isSpacePanning &&
-      !isTouchPanning
-    ) {
-      const { selectMultiple } = useSettings.getState().editor;
-      const part = getPart(id);
-      const parent = getParent(id);
+export const selectionAbstraction = (
+  event: SelectionAbstractionEvent,
+  id: string,
+) => {
+  const { preventNextSelection, tool, isSpacePanning, isTouchPanning } =
+    useApp.getState().editor;
 
-      if (part && !part.hidden && !part.locked) {
-        if (
-          part.parentId === null || // part is at root
-          (parent && parent.selected) || // parent is selected
-          event.nativeEvent.ctrlKey // deep select is active
-        ) {
-          event.stopPropagation();
+  if (
+    !preventNextSelection &&
+    tool === Tool.Move &&
+    !isSpacePanning &&
+    !isTouchPanning
+  ) {
+    const { selectMultiple, selectDeep } = useSettings.getState().editor;
+    const part = getPart(id);
+    const parent = getParent(id);
 
-          if (part) {
-            if (event.nativeEvent.ctrlKey) {
-              if (event.nativeEvent.shiftKey || selectMultiple) {
-                togglePartSelection(id);
-              } else {
-                selectPartOnly(id);
-              }
+    if (part && !part.hidden && !part.locked) {
+      if (
+        part.parentId === null || // part is at root
+        (parent && parent.selected) || // parent is selected
+        event.ctrlKey || // deep select is active
+        selectDeep
+      ) {
+        event.stopPropagation();
+
+        if (part) {
+          if (event.ctrlKey || selectDeep) {
+            if (event.shiftKey || selectMultiple) {
+              togglePartSelection(id);
             } else {
-              if (event.nativeEvent.shiftKey || selectMultiple) {
-                const parentId = getParentId(id);
+              selectPartOnly(id);
+            }
+          } else {
+            if (event.shiftKey || selectMultiple) {
+              const parentId = getParentId(id);
 
-                mutateBlueprint((draft) => {
-                  togglePartSelection(id, draft);
-                  if (parentId) unselectPart(parentId, draft);
-                });
-              } else {
-                selectPartOnly(id);
-              }
+              mutateBlueprint((draft) => {
+                togglePartSelection(id, draft);
+                if (parentId) unselectPart(parentId, draft);
+              });
+            } else {
+              selectPartOnly(id);
             }
           }
         }
-      } else {
-        mutateApp((draft) => {
-          draft.editor.preventNextSelection = false;
-        });
-        event.stopPropagation();
       }
+    } else {
+      mutateApp((draft) => {
+        draft.editor.preventNextSelection = false;
+      });
+      event.stopPropagation();
     }
+  }
+};
+
+const useSelectionControl = (id: string) => {
+  const handleClick = (event: ThreeEvent<MouseEvent>) => {
+    selectionAbstraction(
+      {
+        ctrlKey: event.nativeEvent.ctrlKey,
+        shiftKey: event.nativeEvent.shiftKey,
+        stopPropagation: event.stopPropagation,
+      },
+      id,
+    );
   };
 
   return handleClick;

@@ -58,6 +58,7 @@ export interface UseSettings {
 
   editor: {
     selectMultiple: boolean;
+    selectDeep: boolean;
     undoLimit: number;
     rename: RenamePartsOptions;
     constraintScales: boolean;
@@ -103,6 +104,7 @@ export const UseSettingsData: UseSettings = {
 
   editor: {
     selectMultiple: false,
+    selectDeep: false,
     undoLimit: 512,
     rename: {
       trim: true,

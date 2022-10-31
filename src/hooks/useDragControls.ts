@@ -11,6 +11,7 @@ import { getSnapDistance } from 'utilities/getSnapDistance';
 import snap from 'utilities/snap';
 import useApp, { Tool } from '../stores/useApp';
 import useMousePos from './useMousePos';
+import { selectionAbstraction } from './useSelectionControl';
 
 const useDragControls = (id: string) => {
   const getMousePos = useMousePos();
@@ -53,7 +54,7 @@ const useDragControls = (id: string) => {
     const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
-      handlePointerUp();
+      handlePointerUp(event);
     } else {
       const snapDistance = getSnapDistance(event);
       const mousePos = getMousePos(event);
@@ -118,7 +119,7 @@ const useDragControls = (id: string) => {
       }
     }
   };
-  const handlePointerUp = () => {
+  const handlePointerUp = (event: PointerEvent) => {
     window.removeEventListener('pointerup', handlePointerUp);
     window.removeEventListener('pointermove', handlePointerMove);
 
@@ -171,6 +172,15 @@ const useDragControls = (id: string) => {
       inversePatchesY = undefined;
       patchesX = undefined;
       patchesY = undefined;
+    } else {
+      selectionAbstraction(
+        {
+          ctrlKey: event.ctrlKey,
+          shiftKey: event.shiftKey,
+          stopPropagation: event.stopPropagation,
+        },
+        id,
+      );
     }
   };
 

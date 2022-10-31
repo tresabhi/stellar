@@ -149,9 +149,11 @@ export const Listing = memo<ListingProps>(
       }
     };
     const handleTriggerClick = (event: MouseEvent) => {
+      const { selectMultiple, selectDeep } = useSettings.getState().editor;
+
       event.stopPropagation();
-      event.ctrlKey =
-        event.ctrlKey || useSettings.getState().editor.selectMultiple;
+      event.ctrlKey = event.ctrlKey || selectMultiple;
+      event.shiftKey = event.shiftKey || selectDeep;
 
       if (event.ctrlKey) {
         if (event.shiftKey) {

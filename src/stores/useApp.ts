@@ -37,6 +37,7 @@ export interface UseApp {
     popup: Popup;
     isInteracting: boolean;
     orientationPromptDismissed: boolean;
+    zenMode: boolean;
   };
 
   editor: {
@@ -61,6 +62,7 @@ export const UseAppData: UseApp = {
     popup: Popup.None,
     isInteracting: false,
     orientationPromptDismissed: false,
+    zenMode: false,
   },
 
   editor: {

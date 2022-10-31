@@ -2,8 +2,8 @@ import { LayoutCanvas } from 'components/Canvas';
 import { FC } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled } from 'stitches.config';
+import { CanvasControls } from './components/CanvasControls';
 import { LeftSidebar } from './components/LeftSidebar';
-import { SelectMultiple } from './components/LeftSidebar/components/SelectMultiple';
 import { RightSidebar } from './components/RightSidebar';
 import Toolbar from './components/Toolbar';
 
@@ -32,10 +32,13 @@ export const LayoutTab: FC<TabLayoutProps> = ({ swapSecondTab }) => {
 
       <HorizontalContainer>
         <LeftSidebar swapSecondTab={swapSecondTab} />
+
         <CanvasContainer>
           <LayoutCanvas style={{ position: 'absolute' }} />
-          <SelectMultiple />
+
+          <CanvasControls />
         </CanvasContainer>
+
         <RightSidebar swapSecondTab={swapSecondTab} />
       </HorizontalContainer>
     </TabContainer>
