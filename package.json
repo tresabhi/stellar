@@ -9,6 +9,7 @@
     "@radix-ui/react-icons": "^1.1.1",
     "@radix-ui/react-scroll-area": "^1.0.0",
     "@radix-ui/react-slider": "^1.1.0",
+    "@radix-ui/react-toast": "^1.1.1",
     "@react-three/drei": "^9.36.0",
     "@react-three/fiber": "^8.8.10",
     "@stitches/react": "^1.2.8",

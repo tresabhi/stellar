@@ -218,5 +218,26 @@
     "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
     "never": "Never Ask Again",
     "dismiss": "Dismiss For Now"
+  },
+
+  "toasts": {
+    "update_available": {
+      "title": "Stellar updated to a newer version",
+      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+
+      "actions": {
+        "restart": "Restart",
+        "dismiss": "Dismiss"
+      }
+    }
+  },
+
+  "offline_ready": {
+    "title": "Stellar is now available offline",
+    "description": "You can now access Stellar regardless of a connection to WiFi.",
+
+    "actions": {
+      "dismiss": "Dismiss"
+    }
   }
 }

@@ -81,6 +81,7 @@ export const {
       sidebarCollapseButtonWidth: '1.5rem',
       sidebarCollapseButtonHeight: '2rem',
       propertiesTextAreaHeight: '10rem',
+      toastWidth: '18rem',
     },
 
     radii: {
