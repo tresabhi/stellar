@@ -2,6 +2,7 @@ import { LayoutCanvas } from 'components/Canvas';
 import { FC } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled } from 'stitches.config';
+import useApp from 'stores/useApp';
 import { CanvasControls } from './components/CanvasControls';
 import { LeftSidebar } from './components/LeftSidebar';
 import { RightSidebar } from './components/RightSidebar';
@@ -26,12 +27,14 @@ const CanvasContainer = styled('div', {
 });
 
 export const LayoutTab: FC<TabLayoutProps> = ({ swapSecondTab }) => {
+  const zenMode = useApp((state) => state.interface.zenMode);
+
   return (
     <TabContainer>
       <Toolbar />
 
       <HorizontalContainer>
-        <LeftSidebar swapSecondTab={swapSecondTab} />
+        {!zenMode && <LeftSidebar swapSecondTab={swapSecondTab} />}
 
         <CanvasContainer>
           <LayoutCanvas style={{ position: 'absolute' }} />
@@ -39,7 +42,7 @@ export const LayoutTab: FC<TabLayoutProps> = ({ swapSecondTab }) => {
           <CanvasControls />
         </CanvasContainer>
 
-        <RightSidebar swapSecondTab={swapSecondTab} />
+        {!zenMode && <RightSidebar swapSecondTab={swapSecondTab} />}
       </HorizontalContainer>
     </TabContainer>
   );

@@ -22,6 +22,7 @@ export const Container = styled('div', {
 });
 
 const Interface = () => {
+  const zenMode = useApp((state) => state.interface.zenMode);
   const interfaceMode = useInterfaceMode();
   const tab = useApp((state) => state.interface.tab);
 
@@ -29,7 +30,7 @@ const Interface = () => {
     <Container>
       <Popups />
 
-      <Tabs />
+      {!zenMode && <Tabs />}
 
       {tab === Tab.Create && <CreateTab />}
       {tab === Tab.Layout && (

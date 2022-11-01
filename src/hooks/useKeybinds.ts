@@ -150,6 +150,11 @@ const useKeybinds = () => {
         }
       });
     });
+    bind('alt+z', () => {
+      mutateApp((draft) => {
+        draft.interface.zenMode = !draft.interface.zenMode;
+      });
+    });
 
     bind(
       ['ctrl+tab', ']'],
