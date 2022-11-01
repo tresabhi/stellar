@@ -26,6 +26,7 @@ import { useMemo, useRef } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/useApp';
+import getStellarContext from 'utilities/getStellarContext';
 import { StatusBar } from './components/StatusBar';
 
 const Container = styled('div', {
@@ -59,6 +60,19 @@ const SectionContainer = styled('div', {
   },
 });
 
+const StellarContainer = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: theme.space.gapUnrelatedMajor,
+});
+
+const { Icon } = getStellarContext();
+const StellarIcon = styled(Icon, {
+  width: theme.sizes[64],
+  height: theme.sizes[64],
+});
+
 const SearchWrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
@@ -87,13 +101,12 @@ const Separator = styled('div', {
 
 const Title = styled('span', {
   color: theme.colors.textHighContrast,
-  fontSize: theme.fontSizes[32],
+  fontSize: theme.fontSizes[24],
 });
 
 const SubTitle = styled('span', {
   color: theme.colors.textLowContrast,
   fontSize: theme.fontSizes[12],
-  fontFamily: theme.fonts.mono,
 });
 
 const Button = styled(ButtonPrimitive, {
@@ -234,10 +247,14 @@ export const CreateTab = () => {
         </SectionContainer>
 
         <SectionContainer full>
-          <FileActions>
-            <Title>Stellar</Title>
-            <SubTitle>{t`tab.create.file_options.motto`}</SubTitle>
-          </FileActions>
+          <StellarContainer>
+            <StellarIcon />
+
+            <FileActions>
+              <Title>Stellar</Title>
+              <SubTitle>{t`tab.create.file_options.motto`}</SubTitle>
+            </FileActions>
+          </StellarContainer>
 
           <FileActions>
             <Button onClick={handleScratchClick} priority="solid">
