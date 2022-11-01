@@ -12,5 +12,3 @@ export const Viewport = styled(ToastPrimitive.Viewport, {
   margin: 0,
   listStyle: 'none',
 });
-
-console.log(Viewport.className);

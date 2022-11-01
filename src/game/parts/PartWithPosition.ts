@@ -1,6 +1,7 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
+import { PartMoveEventData } from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
-import { RefObject } from 'react';
+import { RefObject, useEffect } from 'react';
 import { Object3D } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
@@ -30,6 +31,16 @@ export const usePartWithPosition = (
   id: string,
   object: RefObject<Object3D>,
 ) => {
+  const handlePartMove = (event: CustomEvent<PartMoveEventData>) => {
+    if (object.current) {
+      object.current.position.x += event.detail.x;
+      object.current.position.y += event.detail.y;
+
+      declareBoundNeedsUpdate(id);
+      deferUpdates();
+    }
+  };
+
   usePartProperty(
     id,
     (part: PartWithPosition) => part.p,
@@ -39,6 +50,14 @@ export const usePartWithPosition = (
       deferUpdates();
     },
   );
+
+  useEffect(() => {
+    window.addEventListener('partmove', handlePartMove as EventListener);
+
+    return () => {
+      window.removeEventListener('partmove', handlePartMove as EventListener);
+    };
+  });
 };
 
 export const registry = null;

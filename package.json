@@ -72,7 +72,7 @@
     "depcheck": "npx depcheck",
     "unused": "ts-unused-exports tsconfig.json",
     "host": "serve -s build",
-    "host:new": "react-scripts build && serve -s build",
+    "host:new": "vite build && serve -s build",
     "update": "yarn upgrade --latest",
     "lint": "eslint ."
   },

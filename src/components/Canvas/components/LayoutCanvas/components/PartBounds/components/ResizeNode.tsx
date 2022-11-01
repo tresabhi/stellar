@@ -17,7 +17,7 @@ export interface ResizeNodeProps {
   y?: boolean;
 }
 
-const canvasMatrixScale = new Vector2(1, -1);
+export const CANVAS_MATRIX_SCALE = new Vector2(1, -1);
 
 const NODE_SIZE = 10;
 const NODE_COLOR = '#eeedef';
@@ -71,7 +71,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     const newMovement = new Vector2(event.clientX, event.clientY)
       .sub(initialPosition)
       .multiplyScalar(1 / camera.zoom)
-      .multiply(canvasMatrixScale);
+      .multiply(CANVAS_MATRIX_SCALE);
     const snapDistance = getSnapDistance(event);
     const newMovementSnapped =
       snapDistance === 0
@@ -80,13 +80,11 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
             Math.round(newMovement.x / snapDistance) * snapDistance,
             Math.round(newMovement.y / snapDistance) * snapDistance,
           );
-    const deltaMovementSnapped = newMovementSnapped
-      .clone()
-      .sub(movementSnapped);
+    const delta = newMovementSnapped.clone().sub(movementSnapped);
 
-    if (deltaMovementSnapped.length() !== 0) {
+    if (delta.length() !== 0) {
       const originalDimensions = movablePoint.clone().sub(constantPoint);
-      const movedMovablePoint = movablePoint.clone().add(deltaMovementSnapped);
+      const movedMovablePoint = movablePoint.clone().add(delta);
       const scaledDimensions = movedMovablePoint.clone().sub(constantPoint);
 
       scale.copy(scaledDimensions).divide(originalDimensions);
@@ -128,10 +126,10 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
         },
       );
 
-      if (deltaMovementSnapped.x !== 0 && deltaMovementSnapped.y === 0) {
+      if (delta.x !== 0 && delta.y === 0) {
         patchesX = patches;
         if (inversePatchesX === undefined) inversePatchesX = inversePatches;
-      } else if (deltaMovementSnapped.x === 0 && deltaMovementSnapped.y !== 0) {
+      } else if (delta.x === 0 && delta.y !== 0) {
         patchesY = patches;
         if (inversePatchesY === undefined) inversePatchesY = inversePatches;
       } else {
