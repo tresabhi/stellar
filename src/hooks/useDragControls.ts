@@ -11,7 +11,6 @@ import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import { getSnapDistance } from 'utilities/getSnapDistance';
 import useApp, { Tool } from '../stores/useApp';
-import useMousePos from './useMousePos';
 
 export interface PartMoveEventData {
   x: number;
@@ -19,7 +18,6 @@ export interface PartMoveEventData {
 }
 
 const useDragControls = (id: string) => {
-  const getMousePos = useMousePos();
   const { camera, invalidate } = useThree();
 
   let selectedInitially = false;
@@ -99,22 +97,22 @@ const useDragControls = (id: string) => {
         movementSnapped.x,
         movementSnapped.y,
       );
-
-      const removeSelectionRestriction = () => {
-        // fire this just in case selection does not happen
-        mutateApp((draft) => {
-          draft.editor.preventNextSelection = false;
-        });
-        window.removeEventListener('pointerup', removeSelectionRestriction);
-      };
-      mutateApp((draft) => {
-        draft.editor.preventNextSelection = true;
-      });
-
-      window.addEventListener('pointerup', removeSelectionRestriction);
-      window.removeEventListener('pointerup', handlePointerUp);
-      window.removeEventListener('pointermove', handlePointerMove);
     }
+
+    const removeSelectionRestriction = () => {
+      // fire this just in case selection does not happen
+      mutateApp((draft) => {
+        draft.editor.preventNextSelection = false;
+      });
+      window.removeEventListener('pointerup', removeSelectionRestriction);
+    };
+    mutateApp((draft) => {
+      draft.editor.preventNextSelection = true;
+    });
+
+    window.addEventListener('pointerup', removeSelectionRestriction);
+    window.removeEventListener('pointerup', handlePointerUp);
+    window.removeEventListener('pointermove', handlePointerMove);
   };
 
   return handlePointerDown;
