@@ -1,6 +1,7 @@
 import {
   EnterIcon,
   FilePlusIcon,
+  FileTextIcon,
   MagnifyingGlassIcon,
   UploadIcon,
 } from '@radix-ui/react-icons';
@@ -132,8 +133,10 @@ const Button = styled(ButtonPrimitive, {
 interface Template {
   name: string;
   blueprint: VanillaBlueprint;
+  credit?: string;
 }
 
+// TODO: add move templates with credits
 const TEMPLATES: Template[] = [
   {
     name: 'tab.create.templates.list.hopper',
@@ -185,7 +188,7 @@ export const CreateTab = () => {
   const templates = useMemo(
     () =>
       TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
-        ({ name, blueprint }) => {
+        ({ name, blueprint, credit }) => {
           const translation = translate(name);
 
           const handleClick = () => {
@@ -196,7 +199,12 @@ export const CreateTab = () => {
           const searchItem: SearchItem = {
             string: translation,
             node: (
-              <Popup.SearchItem onClick={handleClick} key={`item-${name}`}>
+              <Popup.SearchItem
+                icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
+                onClick={handleClick}
+                key={`item-${name}`}
+                note={credit ?? 'In-Built'}
+              >
                 {translation}
               </Popup.SearchItem>
             ),
