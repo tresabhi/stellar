@@ -87,7 +87,14 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       const movedMovablePoint = movablePoint.clone().add(delta);
       const scaledDimensions = movedMovablePoint.clone().sub(constantPoint);
 
-      scale.copy(scaledDimensions).divide(originalDimensions);
+      scale.set(
+        originalDimensions.x === 0
+          ? scaledDimensions.x
+          : scaledDimensions.x / originalDimensions.x,
+        originalDimensions.y === 0
+          ? scaledDimensions.y
+          : scaledDimensions.y / originalDimensions.y,
+      );
 
       if (!modifyX) scale.x = 1;
       if (!modifyY) scale.y = 1;
