@@ -175,18 +175,18 @@
   "toasts": {
     "update_available": {
       "title": "uoᴉsɹǝʌ ɹǝʍǝu ɐ oʇ pǝʇɐpdn ɹɐllǝʇS",
-      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "description": "˙ɹǝʇɐl ʇᴉ op ɹo ʍou ʇɹɐʇsǝɹ uɐɔ no⅄ ˙sǝƃuɐɥɔ ǝɥʇ ʎlddɐ oʇ pǝɹᴉnbǝɹ sᴉ ʇɹɐʇsǝɹ ∀",
       "actions": {
-        "restart": "Restart",
-        "dismiss": "Dismiss"
+        "restart": "ʇɹɐʇsǝɹ",
+        "dismiss": "ssᴉɯsᴉp"
       }
     }
   },
   "offline_ready": {
-    "title": "Stellar is now available offline",
-    "description": "You can now access Stellar regardless of a connection to WiFi.",
+    "title": "ǝuᴉlɟɟo ǝlqɐlᴉɐʌɐ ʍou sᴉ ɹɐllǝʇS",
+    "description": "˙ᴉℲᴉM oʇ uoᴉʇɔǝuuoɔ ɐ ɟo ssǝlpɹɐƃǝɹ ɹɐllǝʇS ssǝɔɔɐ ʍou uɐɔ no⅄",
     "actions": {
-      "dismiss": "Dismiss"
+      "dismiss": "ssᴉɯsᴉp"
     }
   }
 }
