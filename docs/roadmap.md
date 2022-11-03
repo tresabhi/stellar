@@ -4,8 +4,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 
 ## v1.0 Beta 6
 
-- Switch to Vite
-- Switch to Preact
 - Rename parentId to parent_id
   - And fix other non-snake cases issues
 - Update textures and models
@@ -17,6 +15,19 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
   - RCS: https://i.imgur.com/31x4ve7.png
   - Ion: https://i.imgur.com/ownRjiK.png
   - Peperengine: ???
+- Updates from Figma
+  - Error screen
+    - Background color
+    - Text area background color
+  - Notifications
+    - Button orders and colors
+    - Remove "available offline" notification
+    - Add PWA installable notification
+    - Fix button font size
+  - Popups
+    - Button paddings
+  - Create tab "stellar" text
+    - Update subtitle font size
 
 ## v1.0 Beta 7
 
