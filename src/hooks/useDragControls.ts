@@ -5,17 +5,13 @@ import {
   getPart,
   selectPart,
   selectPartOnly,
+  translatePartsBySelectionAsync,
   translateTranslatablePartsBySelection,
 } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import { getSnapDistance } from 'utilities/getSnapDistance';
 import useApp, { Tool } from '../stores/useApp';
-
-export interface PartMoveEventData {
-  x: number;
-  y: number;
-}
 
 const useDragControls = (id: string) => {
   const { camera, invalidate } = useThree();
@@ -80,11 +76,7 @@ const useDragControls = (id: string) => {
       }
 
       if (delta.length() > 0) {
-        const partMoveEvent = new CustomEvent<PartMoveEventData>('partmove', {
-          detail: { x: delta.x, y: delta.y },
-        });
-
-        window.dispatchEvent(partMoveEvent);
+        translatePartsBySelectionAsync(delta.x, delta.y);
         movement.copy(newMovement);
         movementSnapped.copy(newMovementSnapped);
         invalidate();

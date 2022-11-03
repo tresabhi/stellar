@@ -1,7 +1,8 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
+import { getPart, PartScaleEventDetail } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
-import { RefObject } from 'react';
-import { Object3D } from 'three';
+import { RefObject, useEffect } from 'react';
+import { Object3D, Vector3 } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithScale extends VanillaPart {
@@ -27,6 +28,27 @@ export const PartWithScaleData: PartWithScale = {
 };
 
 export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
+  const scale = new Vector3();
+
+  const handlePartMove = (event: CustomEvent<PartScaleEventDetail>) => {
+    if (object.current && getPart(id)?.selected) {
+      object.current.scale.multiply(
+        scale.set(event.detail.x, event.detail.y, 0),
+      );
+
+      declareBoundNeedsUpdate(id);
+      deferUpdates();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('partscale', handlePartMove as EventListener);
+
+    return () => {
+      window.removeEventListener('partscale', handlePartMove as EventListener);
+    };
+  });
+
   usePartProperty(
     id,
     (part: PartWithScale) => part.o,

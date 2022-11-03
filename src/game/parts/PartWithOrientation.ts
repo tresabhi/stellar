@@ -1,6 +1,7 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
+import { getPart, PartRotateEventDetail } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
-import { RefObject } from 'react';
+import { RefObject, useEffect } from 'react';
 import { Object3D } from 'three';
 import { degToRad } from 'three/src/math/MathUtils';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
@@ -31,6 +32,26 @@ export const usePartWithOrientation = (
   id: string,
   object: RefObject<Object3D>,
 ) => {
+  const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
+    if (object.current && getPart(id)?.selected) {
+      object.current.rotateZ(event.detail);
+
+      declareBoundNeedsUpdate(id);
+      deferUpdates();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('partrotate', handlePartRotate as EventListener);
+
+    return () => {
+      window.removeEventListener(
+        'partrotate',
+        handlePartRotate as EventListener,
+      );
+    };
+  });
+
   usePartProperty(
     id,
     (part: PartWithOrientation) => part.o,

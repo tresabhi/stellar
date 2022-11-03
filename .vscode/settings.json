@@ -65,6 +65,8 @@
     "nocheck",
     "noninteractive",
     "partmove",
+    "partrotate",
+    "partscale",
     "popables",
     "postrender",
     "preact",

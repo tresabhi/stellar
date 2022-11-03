@@ -1,9 +1,8 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
-import { getPart } from 'core/part';
-import { PartMoveEventData } from 'hooks/useDragControls';
+import { getPart, PartMoveEventDetail } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
-import { Object3D } from 'three';
+import { Object3D, Vector3 } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithPosition extends VanillaPart {
@@ -32,15 +31,26 @@ export const usePartWithPosition = (
   id: string,
   object: RefObject<Object3D>,
 ) => {
-  const handlePartMove = (event: CustomEvent<PartMoveEventData>) => {
+  const movement = new Vector3();
+
+  const handlePartMove = (event: CustomEvent<PartMoveEventDetail>) => {
     if (object.current && getPart(id)?.selected) {
-      object.current.position.x += event.detail.x;
-      object.current.position.y += event.detail.y;
+      object.current.position.add(
+        movement.set(event.detail.x, event.detail.y, 0),
+      );
 
       declareBoundNeedsUpdate(id);
       deferUpdates();
     }
   };
+
+  useEffect(() => {
+    window.addEventListener('partmove', handlePartMove as EventListener);
+
+    return () => {
+      window.removeEventListener('partmove', handlePartMove as EventListener);
+    };
+  });
 
   usePartProperty(
     id,
@@ -51,14 +61,6 @@ export const usePartWithPosition = (
       deferUpdates();
     },
   );
-
-  useEffect(() => {
-    window.addEventListener('partmove', handlePartMove as EventListener);
-
-    return () => {
-      window.removeEventListener('partmove', handlePartMove as EventListener);
-    };
-  });
 };
 
 export const registry = null;
