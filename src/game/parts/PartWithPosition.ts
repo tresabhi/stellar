@@ -1,4 +1,5 @@
 import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
+import { getPart } from 'core/part';
 import { PartMoveEventData } from 'hooks/useDragControls';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
@@ -32,7 +33,7 @@ export const usePartWithPosition = (
   object: RefObject<Object3D>,
 ) => {
   const handlePartMove = (event: CustomEvent<PartMoveEventData>) => {
-    if (object.current) {
+    if (object.current && getPart(id)?.selected) {
       object.current.position.x += event.detail.x;
       object.current.position.y += event.detail.y;
 
