@@ -5,6 +5,8 @@ export const MAJOR_SNAP = 2;
 export interface EventWithModifiers {
   ctrlKey: boolean;
   shiftKey: boolean;
+  altKey: boolean;
+  metaKey: boolean;
 }
 
 export const getSnapDistance = (event: EventWithModifiers) =>

@@ -17,9 +17,8 @@ const useDragControls = (id: string) => {
   const { camera, invalidate } = useThree();
 
   let selectedInitially = false;
-  const initialPosition = new Vector2();
+  const initial = new Vector2();
   const movement = new Vector2();
-  const movementSnapped = new Vector2();
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     const part = getPart(id) as PartWithTransformations | undefined;
@@ -36,9 +35,8 @@ const useDragControls = (id: string) => {
     ) {
       event.stopPropagation();
 
-      initialPosition.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
+      initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
       movement.set(0, 0);
-      movementSnapped.set(0, 0);
       selectedInitially = part.selected;
 
       window.addEventListener('pointerup', handlePointerUp);
@@ -51,19 +49,20 @@ const useDragControls = (id: string) => {
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
       handlePointerUp();
     } else {
-      const newMovement = new Vector2(event.clientX, event.clientY)
-        .sub(initialPosition)
-        .multiplyScalar(1 / camera.zoom)
-        .multiply(CANVAS_MATRIX_SCALE);
       const snapDistance = getSnapDistance(event);
-      const newMovementSnapped =
-        snapDistance === 0
-          ? newMovement.clone()
-          : new Vector2(
-              Math.round(newMovement.x / snapDistance) * snapDistance,
-              Math.round(newMovement.y / snapDistance) * snapDistance,
-            );
-      const delta = newMovementSnapped.clone().sub(movementSnapped);
+      const newMovement = new Vector2(event.clientX, event.clientY)
+        .sub(initial)
+        .divideScalar(camera.zoom)
+        .multiply(CANVAS_MATRIX_SCALE);
+
+      if (snapDistance !== 0) {
+        newMovement
+          .divideScalar(snapDistance)
+          .round()
+          .multiplyScalar(snapDistance);
+      }
+
+      const delta = newMovement.clone().sub(movement);
 
       if (!selectedInitially) {
         if (event.shiftKey) {
@@ -78,17 +77,13 @@ const useDragControls = (id: string) => {
       if (delta.length() > 0) {
         translatePartsBySelectionAsync(delta.x, delta.y);
         movement.copy(newMovement);
-        movementSnapped.copy(newMovementSnapped);
         invalidate();
       }
     }
   };
   const handlePointerUp = () => {
-    if (movementSnapped.length() > 0) {
-      translateTranslatablePartsBySelection(
-        movementSnapped.x,
-        movementSnapped.y,
-      );
+    if (movement.length() > 0) {
+      translateTranslatablePartsBySelection(movement.x, movement.y);
     }
 
     const removeSelectionRestriction = () => {

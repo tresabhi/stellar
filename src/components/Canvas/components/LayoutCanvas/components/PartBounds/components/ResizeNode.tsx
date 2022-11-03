@@ -34,9 +34,8 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 }) => {
   const { camera, invalidate } = useThree();
   const group = useRef<Group>(null);
-  const initialPosition = new Vector2();
+  const initial = new Vector2();
   const movement = new Vector2();
-  const movementSnapped = new Vector2();
   const constantPoint = new Vector2();
   const movablePoint = new Vector2();
   const scale = new Vector2();
@@ -60,27 +59,27 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
 
-    initialPosition.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
+    initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
     movement.set(0, 0);
-    movementSnapped.set(0, 0);
 
     window.addEventListener('pointermove', handlePointerMove);
     window.addEventListener('pointerup', handlePointerUp);
   };
   const handlePointerMove = (event: PointerEvent) => {
-    const newMovement = new Vector2(event.clientX, event.clientY)
-      .sub(initialPosition)
-      .multiplyScalar(1 / camera.zoom)
-      .multiply(CANVAS_MATRIX_SCALE);
     const snapDistance = getSnapDistance(event);
-    const newMovementSnapped =
-      snapDistance === 0
-        ? newMovement.clone()
-        : new Vector2(
-            Math.round(newMovement.x / snapDistance) * snapDistance,
-            Math.round(newMovement.y / snapDistance) * snapDistance,
-          );
-    const delta = newMovementSnapped.clone().sub(movementSnapped);
+    const newMovement = new Vector2(event.clientX, event.clientY)
+      .sub(initial)
+      .divideScalar(camera.zoom)
+      .multiply(CANVAS_MATRIX_SCALE);
+
+    if (snapDistance !== 0) {
+      newMovement
+        .divideScalar(snapDistance)
+        .round()
+        .multiplyScalar(snapDistance);
+    }
+
+    const delta = newMovement.clone().sub(movement);
 
     if (delta.length() !== 0) {
       const originalDimensions = movablePoint.clone().sub(constantPoint);
@@ -161,7 +160,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
       useBlueprint.setState(nextState);
       scale.copy(newMovement);
-      movementSnapped.copy(newMovementSnapped);
+      movement.copy(newMovement);
       movablePoint.copy(movedMovablePoint);
       invalidate();
     }
@@ -173,7 +172,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       ...(inversePatchesY ?? []),
     ];
 
-    if (movementSnapped.length() > 0) {
+    if (movement.length() > 0) {
       const { undoLimit } = useSettings.getState().editor;
 
       mutateVersionControl((draft) => {
