@@ -171,5 +171,22 @@
     "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
     "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
     "dismiss": "ʍoN ɹoℲ ssᴉɯsᴉp"
+  },
+  "toasts": {
+    "update_available": {
+      "title": "uoᴉsɹǝʌ ɹǝʍǝu ɐ oʇ pǝʇɐpdn ɹɐllǝʇS",
+      "description": "˙ɹǝʇɐl ʇᴉ op ɹo ʍou ʇɹɐʇsǝɹ uɐɔ no⅄ ˙sǝƃuɐɥɔ ǝɥʇ ʎlddɐ oʇ pǝɹᴉnbǝɹ sᴉ ʇɹɐʇsǝɹ ∀",
+      "actions": {
+        "restart": "ʇɹɐʇsǝɹ",
+        "dismiss": "ssᴉɯsᴉp"
+      }
+    }
+  },
+  "offline_ready": {
+    "title": "ǝuᴉlɟɟo ǝlqɐlᴉɐʌɐ ʍou sᴉ ɹɐllǝʇS",
+    "description": "˙ᴉℲᴉM oʇ uoᴉʇɔǝuuoɔ ɐ ɟo ssǝlpɹɐƃǝɹ ɹɐllǝʇS ssǝɔɔɐ ʍou uɐɔ no⅄",
+    "actions": {
+      "dismiss": "ssᴉɯsᴉp"
+    }
   }
 }
