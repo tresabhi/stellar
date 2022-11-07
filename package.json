@@ -58,7 +58,7 @@
     "unzipper": "^0.10.11",
     "vite": "^3.1.8",
     "vite-plugin-checker": "^0.5.1",
-    "vite-plugin-pwa": "^0.13.1",
+    "vite-plugin-pwa": "^0.13.2",
     "vite-plugin-svgr": "^2.2.2",
     "vite-tsconfig-paths": "^3.5.1"
   },
