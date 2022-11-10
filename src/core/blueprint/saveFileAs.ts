@@ -1,7 +1,7 @@
 import { fileSave } from 'browser-fs-access';
 import { mutateApp } from 'core/app/mutateApp';
-import useApp from 'stores/useApp';
-import useBlueprint from 'stores/useBlueprint';
+import useApp from 'stores/app';
+import useBlueprint from 'stores/blueprint';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 import { savifyBlueprint } from './savifyBlueprint';

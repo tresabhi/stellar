@@ -1,8 +1,8 @@
 import { mutateApp } from 'core/app/mutateApp';
 import { mutateBlueprint } from 'core/blueprint';
 import { Group } from 'game/parts/Group';
-import useApp from 'stores/useApp';
-import { Snippet } from 'stores/useSnippets';
+import useApp from 'stores/app';
+import { Snippet } from 'stores/snippets';
 import { clonePart } from './clonePart';
 import { selectPartsOnly } from './selectPartsOnly';
 

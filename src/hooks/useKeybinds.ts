@@ -27,9 +27,9 @@ import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { isNull } from 'lodash';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
-import useApp, { Popup, Tab, Tool } from 'stores/useApp';
-import useBlueprint from 'stores/useBlueprint';
-import { InterfaceMode, UseSettings } from 'stores/useSettings';
+import useApp, { Popup, Tab, Tool } from 'stores/app';
+import useBlueprint from 'stores/blueprint';
+import { InterfaceMode, UseSettings } from 'stores/settings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 

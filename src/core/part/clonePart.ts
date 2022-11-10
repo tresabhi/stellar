@@ -1,6 +1,6 @@
 import { Group } from 'game/parts/Group';
 import { cloneDeep } from 'lodash';
-import { Snippet } from 'stores/useSnippets';
+import { Snippet } from 'stores/snippets';
 import { PartMap } from 'types/Parts';
 import { generateId } from './generateId';
 

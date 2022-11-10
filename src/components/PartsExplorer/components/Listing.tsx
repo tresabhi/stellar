@@ -12,9 +12,9 @@ import { useInputEscape } from 'hooks/useInputEscape';
 import usePartProperty from 'hooks/usePartProperty';
 import { memo, MouseEvent, PointerEvent, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
-import useBlueprint from 'stores/useBlueprint';
-import usePartRegistry, { PartRegistryItem } from 'stores/usePartRegistry';
-import useSettings from 'stores/useSettings';
+import useBlueprint from 'stores/blueprint';
+import usePartRegistry, { PartRegistryItem } from 'stores/partRegistry';
+import useSettings from 'stores/settings';
 import { Container } from './Container';
 
 export interface ListingProps {

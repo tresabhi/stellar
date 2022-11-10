@@ -1,7 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 import { ParentId } from 'types/Parts';
 import { getPart } from './getPart';
 

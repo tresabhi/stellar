@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { theme } from 'stitches.config';
-import useBlueprint from 'stores/useBlueprint';
-import useSettings, { themes } from 'stores/useSettings';
+import useBlueprint from 'stores/blueprint';
+import useSettings, { themes } from 'stores/settings';
 import { Color, GridHelper, Mesh } from 'three';
 import { toThreeSafeHSL } from 'utilities/toThreeSafeHSL';
 import { InfiniteGridHelper } from './components/InfiniteGridHelper';

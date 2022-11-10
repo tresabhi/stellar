@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Home } from 'routes/Home';
 import Interface from 'routes/Interface';
 import { styled, theme } from 'stitches.config';
-import useSettings from 'stores/useSettings';
+import useSettings from 'stores/settings';
 
 const AppContainer = styled('div', {
   backgroundColor: theme.colors.appBackground1,

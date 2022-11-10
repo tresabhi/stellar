@@ -2,7 +2,7 @@ import { PlusIcon } from '@radix-ui/react-icons';
 import * as PartsExplorer from 'components/PartsExplorer';
 import * as Sidebar from 'components/Sidebar';
 import { useTranslator } from 'hooks/useTranslator';
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 
 export const Parts = () => {
   const { t, f } = useTranslator();

@@ -1,12 +1,9 @@
-import { mutateBounds } from 'core/app';
+import boundsStore from 'stores/bounds';
 
 export const translateAllBoundingBoxes = (x: number, y: number) => {
-  mutateBounds((draft) => {
-    draft.parts.forEach(({ bounds, needsUpdate }) => {
-      if (!needsUpdate) {
-        bounds.x += x;
-        bounds.y += y;
-      }
-    });
-  });
+  for (const id in boundsStore) {
+    const { bounds } = boundsStore[id];
+    bounds.x += x;
+    bounds.y += y;
+  }
 };

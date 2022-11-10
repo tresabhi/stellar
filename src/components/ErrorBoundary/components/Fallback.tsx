@@ -3,7 +3,7 @@ import {
   CounterClockwiseClockIcon,
   EnvelopeClosedIcon,
   ExclamationTriangleIcon,
-  ResetIcon
+  ResetIcon,
 } from '@radix-ui/react-icons';
 import { Button as ButtonPrimitive } from 'components/Button';
 import { mutateSettings } from 'core/app';
@@ -13,7 +13,7 @@ import { deviceDetect } from 'react-device-detect';
 import { FallbackProps as FallbackPrimitiveProps } from 'react-error-boundary';
 import { mapStackTrace } from 'sourcemapped-stacktrace';
 import { styled, theme } from 'stitches.config';
-import useSettings from 'stores/useSettings';
+import useSettings from 'stores/settings';
 
 export interface FallbackProps
   extends FallbackPrimitiveProps,

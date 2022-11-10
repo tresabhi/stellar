@@ -4,7 +4,7 @@ import PartCluster, {
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import { deferUpdates, translateAllBoundingBoxes } from 'core/bounds';
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
 import { Layer } from '../../../constants/layer';
 

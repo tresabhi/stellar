@@ -8,8 +8,8 @@ import { Button as ButtonPrimitive } from 'components/Button';
 import { mutateApp, mutateSettings } from 'core/app';
 import { useState } from 'react';
 import { styled, theme } from 'stitches.config';
-import useApp from 'stores/useApp';
-import useSettings from 'stores/useSettings';
+import useApp from 'stores/app';
+import useSettings from 'stores/settings';
 
 const Button = styled(ButtonPrimitive, {
   padding: theme.space.padding,

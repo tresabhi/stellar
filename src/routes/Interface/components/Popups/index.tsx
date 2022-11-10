@@ -1,6 +1,6 @@
 import { Overlay } from 'components/Overlay';
 import { FC } from 'react';
-import useApp, { Popup } from 'stores/useApp';
+import useApp, { Popup } from 'stores/app';
 import { InsertPart } from './components/InsertPart';
 import { RenameParts } from './components/RenameParts';
 

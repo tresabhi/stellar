@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 
 export const getPart = <Type extends Part>(
   id: string,

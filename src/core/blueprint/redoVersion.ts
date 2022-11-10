@@ -1,8 +1,8 @@
 import { mutateVersionControl } from 'core/app';
 import { applyPatches } from 'immer';
-import useApp from 'stores/useApp';
-import useBlueprint from 'stores/useBlueprint';
-import { UseVersionControl } from 'stores/useVersionControl';
+import useApp from 'stores/app';
+import useBlueprint from 'stores/blueprint';
+import { UseVersionControl } from 'stores/versionControl';
 import { declareUnsavedChanges } from './declareUnsavedChanges';
 
 export const redoVersion = () => {

@@ -1,5 +1,6 @@
-import useBounds from 'stores/useBounds';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
+
+export type DeferUpdatesEventDetail = boolean;
 
 /**
  * 1 extra millisecond to avoid rendering unnecessarily when arrow keys are
@@ -7,15 +8,26 @@ import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
  */
 export const BOUND_UPDATES_DEFER_TIME = 501;
 
+let areUpdatesDefered = false;
+
+const dispatch = () => {
+  window.dispatchEvent(
+    new CustomEvent<DeferUpdatesEventDetail>('deferupdates', {
+      detail: areUpdatesDefered,
+    }),
+  );
+};
+
 const allowUpdates = fallingEdgeDebounce(() => {
-  useBounds.setState({
-    deferUpdates: false,
-  });
+  areUpdatesDefered = false;
+  dispatch();
 }, BOUND_UPDATES_DEFER_TIME);
 
 export const deferUpdates = () => {
-  useBounds.setState({
-    deferUpdates: true,
-  });
+  if (!areUpdatesDefered) {
+    areUpdatesDefered = true;
+    dispatch();
+  }
+
   allowUpdates();
 };

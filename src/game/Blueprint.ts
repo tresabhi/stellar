@@ -31,6 +31,8 @@ export const VanillaBlueprintData: VanillaBlueprint = {
   stages: [],
 };
 
+// TODO: switch from Map to plain object
+
 export const BlueprintData: Blueprint = {
   ...VanillaBlueprintData,
 

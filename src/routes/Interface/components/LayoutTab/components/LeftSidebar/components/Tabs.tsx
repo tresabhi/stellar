@@ -7,7 +7,7 @@ import * as Sidebar from 'components/Sidebar';
 import { mutateSettings } from 'core/app';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
-import useSettings, { SidebarTab } from 'stores/useSettings';
+import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../../..';
 
 export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {

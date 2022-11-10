@@ -1,6 +1,6 @@
 import { fileSave } from 'browser-fs-access';
-import useApp from 'stores/useApp';
-import useBlueprint from 'stores/useBlueprint';
+import useApp from 'stores/app';
+import useBlueprint from 'stores/blueprint';
 import { exportifyBlueprint } from './exportifyBlueprint';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 import {

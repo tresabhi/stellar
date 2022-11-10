@@ -1,7 +1,7 @@
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { styled } from 'stitches.config';
-import useApp, { Tab } from 'stores/useApp';
-import { InterfaceMode } from 'stores/useSettings';
+import useApp, { Tab } from 'stores/app';
+import { InterfaceMode } from 'stores/settings';
 import { CreateTab } from './components/CreateTab';
 import { ExportTab } from './components/ExportTab';
 import { LayoutTab } from './components/LayoutTab';

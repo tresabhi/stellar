@@ -1,5 +1,5 @@
 import produce from 'immer';
-import usePartRegistry, { UsePartRegistry } from 'stores/usePartRegistry';
+import usePartRegistry, { UsePartRegistry } from 'stores/partRegistry';
 
 export const mutatePartRegistry = (
   recipe: (draft: UsePartRegistry) => void,

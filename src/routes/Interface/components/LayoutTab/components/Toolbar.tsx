@@ -59,9 +59,9 @@ import {
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { useTranslator } from 'hooks/useTranslator';
-import useApp, { Popup, Tool } from 'stores/useApp';
-import useBlueprint from 'stores/useBlueprint';
-import useVersionControl from 'stores/useVersionControl';
+import useApp, { Popup, Tool } from 'stores/app';
+import useBlueprint from 'stores/blueprint';
+import useVersionControl from 'stores/versionControl';
 
 const Toolbar = () => {
   const { t } = useTranslator();

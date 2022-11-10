@@ -7,7 +7,7 @@ import {
 import * as TabBar from 'components/TabBar';
 import { mutateApp } from 'core/app/mutateApp';
 import { useTranslator } from 'hooks/useTranslator';
-import useApp, { Tab } from 'stores/useApp';
+import useApp, { Tab } from 'stores/app';
 
 export const Tabs = () => {
   const { t } = useTranslator();

@@ -5,8 +5,8 @@ import { Orientation, useOrientation } from 'hooks/useOrientation';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC, HTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
-import useApp from 'stores/useApp';
-import useSettings from 'stores/useSettings';
+import useApp from 'stores/app';
+import useSettings from 'stores/settings';
 
 export interface LandscapePromptProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;

@@ -1,5 +1,5 @@
-import { Translations } from 'stores/useTranslationsCache';
-import useSettings from '../stores/useSettings';
+import { Translations } from 'stores/translationsCache';
+import useSettings from '../stores/settings';
 
 const localePattern = /[A-z]{2}-[A-z]{2}/;
 

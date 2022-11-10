@@ -1,7 +1,7 @@
 import { Camera } from 'three';
 import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
-import { Snippet } from './useSnippets';
+import { Snippet } from './snippets';
 
 export enum Tab {
   Create,

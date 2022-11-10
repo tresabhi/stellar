@@ -1,6 +1,6 @@
 import { mutateToasts } from 'core/app/mutateToasts';
 import { memo } from 'react';
-import useToasts from 'stores/useToasts';
+import useToasts from 'stores/toasts';
 import { Viewport } from './Viewport';
 
 export const All = () => {

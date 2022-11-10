@@ -3,7 +3,7 @@ import { getPart, unselectAllParts } from 'core/part';
 import { Group } from 'game/parts/Group';
 import { FC } from 'react';
 import { styled } from 'stitches.config';
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 import { ParentId } from 'types/Parts';
 import { Listing } from './Listing';
 

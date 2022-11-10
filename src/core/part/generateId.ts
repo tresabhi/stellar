@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 import { PartMap } from 'types/Parts';
 
 export const ID_LENGTH = 16;

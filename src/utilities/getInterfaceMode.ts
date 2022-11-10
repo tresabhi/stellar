@@ -1,6 +1,6 @@
 import { isNull } from 'lodash';
 import { isMobile } from 'react-device-detect';
-import useSettings, { InterfaceMode } from 'stores/useSettings';
+import useSettings, { InterfaceMode } from 'stores/settings';
 
 export const getInterfaceMode = (
   mode: InterfaceMode | null = useSettings.getState().interface.mode,

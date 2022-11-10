@@ -9,8 +9,8 @@ import {
   togglePartSelection,
   unselectPart,
 } from 'core/part';
-import useApp, { Tool } from 'stores/useApp';
-import useSettings from 'stores/useSettings';
+import useApp, { Tool } from 'stores/app';
+import useSettings from 'stores/settings';
 
 interface SelectionAbstractionEvent {
   ctrlKey: boolean;

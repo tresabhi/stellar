@@ -6,8 +6,8 @@ import { popupClose } from 'core/interface';
 import { getParent, getPart, insertNewPart } from 'core/part';
 import { useTranslator } from 'hooks/useTranslator';
 import { useRef } from 'react';
-import useBlueprint from 'stores/useBlueprint';
-import usePartRegistry from 'stores/usePartRegistry';
+import useBlueprint from 'stores/blueprint';
+import usePartRegistry from 'stores/partRegistry';
 
 export const InsertPart = () => {
   const { t } = useTranslator();

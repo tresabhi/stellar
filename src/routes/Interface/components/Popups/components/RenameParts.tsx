@@ -8,7 +8,7 @@ import { RenamePartsOptions } from 'core/part/renameParts';
 import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
 import { useTranslator } from 'hooks/useTranslator';
 import { KeyboardEvent, useRef } from 'react';
-import useSettings from 'stores/useSettings';
+import useSettings from 'stores/settings';
 
 export const RenameParts = () => {
   const { t } = useTranslator();

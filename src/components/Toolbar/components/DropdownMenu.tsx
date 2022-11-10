@@ -2,7 +2,7 @@ import { CaretDownIcon } from '@radix-ui/react-icons';
 import * as DropdownMenuPrimitive from 'components/DropdownMenu';
 import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
-import useSettings from 'stores/useSettings';
+import useSettings from 'stores/settings';
 
 export interface DropdownMenuProps
   extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root> {

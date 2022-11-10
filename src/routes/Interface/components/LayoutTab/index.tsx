@@ -2,7 +2,7 @@ import { LayoutCanvas } from 'components/Canvas';
 import { FC } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled } from 'stitches.config';
-import useApp from 'stores/useApp';
+import useApp from 'stores/app';
 import { CanvasControls } from './components/CanvasControls';
 import { LeftSidebar } from './components/LeftSidebar';
 import { RightSidebar } from './components/RightSidebar';

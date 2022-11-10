@@ -26,7 +26,7 @@ import { useTranslator } from 'hooks/useTranslator';
 import { useMemo, useRef } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
-import { Tab } from 'stores/useApp';
+import { Tab } from 'stores/app';
 import getStellarContext from 'utilities/getStellarContext';
 import { StatusBar } from './components/StatusBar';
 

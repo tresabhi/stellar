@@ -2,7 +2,7 @@ import { useThree } from '@react-three/fiber';
 import { mutateApp } from 'core/app';
 import useMousePos from 'hooks/useMousePos';
 import { useEffect } from 'react';
-import useApp, { Tool } from 'stores/useApp';
+import useApp, { Tool } from 'stores/app';
 import { OrthographicCamera, Vector2, Vector3 } from 'three';
 
 const MIN_ZOOM = 2.2;

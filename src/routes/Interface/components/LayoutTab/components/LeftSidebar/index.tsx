@@ -1,7 +1,7 @@
 import * as Sidebar from 'components/Sidebar';
 import { mutateSettings } from 'core/app';
 import { FC } from 'react';
-import useSettings, { SidebarTab } from 'stores/useSettings';
+import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../..';
 import { Properties } from '../RightSidebar/components/Properties';
 import { Parts } from './components/Parts';

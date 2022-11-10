@@ -1,17 +1,11 @@
-import { mutateBounds } from 'core/app';
-import useBlueprint from 'stores/useBlueprint';
-import { UseBounds } from 'stores/useBounds';
+import useBlueprint from 'stores/blueprint';
+import boundsStore from 'stores/bounds';
 
-export const declareBoundNeedsUpdate = (id: string, draft?: UseBounds) => {
-  if (draft) {
-    const boundListing = draft.parts.get(id);
+export const declareBoundNeedsUpdate = (id: string) => {
+  if (boundsStore[id]) {
+    boundsStore[id].needsRecomputation = true;
     const part = useBlueprint.getState().parts.get(id);
 
-    if (boundListing) boundListing.needsUpdate = true;
-    if (part && part.parentId) declareBoundNeedsUpdate(part.parentId, draft);
-  } else {
-    mutateBounds((draft) => {
-      declareBoundNeedsUpdate(id, draft);
-    });
+    if (part?.parentId) declareBoundNeedsUpdate(part.parentId);
   }
 };

@@ -1,7 +1,7 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Group } from 'game/parts/Group';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
-import useApp from 'stores/useApp';
+import useApp from 'stores/app';
 import { ParentId } from 'types/Parts';
 import { createNewPart } from './createNewPart';
 import { getPart } from './getPart';

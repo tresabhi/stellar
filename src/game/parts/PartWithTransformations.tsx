@@ -6,7 +6,7 @@ import { PartPropertyComponentProps } from 'types/Parts';
 
 import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { mutateSettings } from 'core/app';
-import useSettings from 'stores/useSettings';
+import useSettings from 'stores/settings';
 import { Object3D } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {

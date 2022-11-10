@@ -2,7 +2,7 @@ import * as Sidebar from 'components/Sidebar';
 import { mutateSettings } from 'core/app';
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { FC } from 'react';
-import useSettings, { InterfaceMode, SidebarTab } from 'stores/useSettings';
+import useSettings, { InterfaceMode, SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../..';
 import { Snippets } from '../LeftSidebar/components/Snippets';
 import { Inspect } from './components/Inspect';

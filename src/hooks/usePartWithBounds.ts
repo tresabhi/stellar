@@ -1,41 +1,41 @@
-import { mutateBounds } from 'core/app';
 import { disposeBound, getBoundsFromObject } from 'core/bounds';
-import { RefObject, useCallback, useEffect } from 'react';
-import useBounds from 'stores/useBounds';
+import { DeferUpdatesEventDetail } from 'core/bounds/deferUpdates';
+import { RefObject, useEffect } from 'react';
+import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
 
 const usePartWithBounds = (id: string, object: RefObject<Object3D>) => {
-  const computeBounds = useCallback(() => {
-    const bounds = getBoundsFromObject(object);
-
-    if (bounds) {
-      mutateBounds((draft) => {
-        draft.parts.set(id, {
-          bounds: bounds,
-          needsUpdate: false,
-        });
-      });
+  const recomputeBounds = () => {
+    if (object.current) {
+      const bounds = getBoundsFromObject(object.current);
+      boundsStore[id] = { bounds, needsRecomputation: false };
     }
-  }, [id, object]);
 
-  useEffect(computeBounds);
+    window.dispatchEvent(new CustomEvent(`updatebounds${id}`));
+  };
+
+  useEffect(recomputeBounds);
+
   useEffect(() => {
-    const unsubscribe = useBounds.subscribe(
-      (state) => state.deferUpdates,
-      (deferUpdates) => {
-        const boundListing = useBounds.getState().parts.get(id);
+    const handleDeferUpdates = (
+      event: CustomEvent<DeferUpdatesEventDetail>,
+    ) => {
+      const listing = boundsStore[id];
+      if (listing.needsRecomputation && !event.detail) recomputeBounds();
+    };
 
-        // is not deferred anymore, bound listing exists, and it needs to be updated
-        if (!deferUpdates && boundListing && boundListing.needsUpdate) {
-          computeBounds();
-        }
-      },
+    window.addEventListener(
+      'deferupdates',
+      handleDeferUpdates as EventListener,
     );
 
     return () => {
-      unsubscribe();
+      window.removeEventListener(
+        'deferupdates',
+        handleDeferUpdates as EventListener,
+      );
       disposeBound(id);
     };
-  }, [computeBounds, id]);
+  }, []);
 };
 export default usePartWithBounds;

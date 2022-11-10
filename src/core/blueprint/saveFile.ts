@@ -1,4 +1,4 @@
-import useApp from 'stores/useApp';
+import useApp from 'stores/app';
 import { saveFileAs } from './saveFileAs';
 import { writeFile } from './writeFile';
 

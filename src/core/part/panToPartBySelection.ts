@@ -1,4 +1,4 @@
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 import { panToPart } from '.';
 
 export const panToPartBySelection = () => {

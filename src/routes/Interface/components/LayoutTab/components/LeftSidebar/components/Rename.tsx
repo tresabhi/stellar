@@ -2,8 +2,8 @@ import { Pencil1Icon } from '@radix-ui/react-icons';
 import { Button as ButtonPrimitive } from 'components/Button';
 import { popupOpen } from 'core/interface';
 import { styled, theme } from 'stitches.config';
-import { Popup } from 'stores/useApp';
-import useBlueprint from 'stores/useBlueprint';
+import { Popup } from 'stores/app';
+import useBlueprint from 'stores/blueprint';
 
 const Button = styled(ButtonPrimitive, {
   position: 'absolute',

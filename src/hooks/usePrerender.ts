@@ -1,7 +1,7 @@
 import useKeybinds from 'hooks/useKeybinds';
 import { useTranslator } from 'hooks/useTranslator';
 import { globalStyles } from 'stitches.config';
-import useApp from 'stores/useApp';
+import useApp from 'stores/app';
 import getStellarContext from 'utilities/getStellarContext';
 import { prettifyVersion } from 'utilities/prettifyVersion';
 import packageJSON from '../../package.json';

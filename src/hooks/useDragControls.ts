@@ -1,5 +1,5 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import { CANVAS_MATRIX_SCALE } from 'components/Canvas/components/LayoutCanvas/components/PartBounds/components/ResizeNode';
+import { CANVAS_MATRIX_SCALE } from 'components/Canvas/components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
 import { mutateApp } from 'core/app';
 import {
   getPart,
@@ -11,7 +11,7 @@ import {
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import { getSnapDistance } from 'utilities/getSnapDistance';
-import useApp, { Tool } from '../stores/useApp';
+import useApp, { Tool } from '../stores/app';
 
 const useDragControls = (id: string) => {
   const { camera, invalidate } = useThree();

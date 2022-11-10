@@ -4,7 +4,7 @@ import {
   SavedBlueprint,
   VanillaBlueprint,
 } from 'game/Blueprint';
-import useBlueprint from 'stores/useBlueprint';
+import useBlueprint from 'stores/blueprint';
 import { clearVersionControl } from './clearVersionControl';
 import { importifyBlueprint } from './importifyBlueprint';
 

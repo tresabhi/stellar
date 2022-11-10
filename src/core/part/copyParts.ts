@@ -1,7 +1,7 @@
 import { mutateApp } from 'core/app/mutateApp';
 import { Blueprint } from 'game/Blueprint';
-import useBlueprint from 'stores/useBlueprint';
-import { Snippet } from 'stores/useSnippets';
+import useBlueprint from 'stores/blueprint';
+import { Snippet } from 'stores/snippets';
 import { clonePart } from './clonePart';
 
 export const copyParts = (ids: string[], draft?: Blueprint) => {
