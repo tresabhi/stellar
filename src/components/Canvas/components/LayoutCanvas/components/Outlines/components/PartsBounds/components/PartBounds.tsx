@@ -1,3 +1,4 @@
+import { useThree } from '@react-three/fiber';
 import { getPart } from 'core/part';
 import { memo, useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
@@ -53,11 +54,12 @@ export interface PartBoundProps {
   id: string;
 }
 
-export const PartBound = memo<PartBoundProps>(
+export const PartBounds = memo<PartBoundProps>(
   ({ id }) => {
     const outline = useRef<Line>(null);
     const shading = useRef<Mesh>(null);
     const wrapper = useRef<Group>(null);
+    const invalidate = useThree((state) => state.invalidate);
 
     const resize = () => {
       if (boundsStore[id]) {
@@ -76,7 +78,10 @@ export const PartBound = memo<PartBoundProps>(
       useBlueprint.subscribe(
         (state) => getPart(id, state)?.selected,
         (selected = false) => {
-          if (wrapper.current) wrapper.current.visible = selected;
+          if (wrapper.current) {
+            wrapper.current.visible = selected;
+            invalidate();
+          }
         },
       );
 

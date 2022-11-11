@@ -2,7 +2,7 @@ import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
 import { FC, useEffect, useRef } from 'react';
 import { Bounds } from 'stores/bounds';
 import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
-import { unitBufferGeometry2 } from '../../PartsBounds/components/PartBound';
+import { unitBufferGeometry2 } from '../../PartsBounds/components/PartBounds';
 
 export interface ResizeNodeProps {
   bounds: Bounds;

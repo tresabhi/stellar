@@ -82,22 +82,23 @@ const useDragControls = (id: string) => {
     }
   };
   const handlePointerUp = () => {
-    if (movement.length() > 0) {
-      translateTranslatablePartsBySelection(movement.x, movement.y);
-    }
-
     const removeSelectionRestriction = () => {
-      // fire this just in case selection does not happen
+      window.removeEventListener('pointerup', removeSelectionRestriction);
+
       mutateApp((draft) => {
         draft.editor.preventNextSelection = false;
       });
-      window.removeEventListener('pointerup', removeSelectionRestriction);
     };
-    mutateApp((draft) => {
-      draft.editor.preventNextSelection = true;
-    });
 
-    window.addEventListener('pointerup', removeSelectionRestriction);
+    if (movement.length() > 0) {
+      translateTranslatablePartsBySelection(movement.x, movement.y);
+
+      mutateApp((draft) => {
+        draft.editor.preventNextSelection = true;
+      });
+      window.addEventListener('pointerup', removeSelectionRestriction);
+    }
+
     window.removeEventListener('pointerup', handlePointerUp);
     window.removeEventListener('pointermove', handlePointerMove);
   };

@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
-import { UNIT_POINTS } from '../PartsBounds/components/PartBound';
+import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
 
 export const ResizeControls = () => {
   const wrapper = useRef<Group>(null);
