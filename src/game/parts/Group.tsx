@@ -89,7 +89,7 @@ export const groupExportify: PartExportifier<Group> = (part, draft) => {
   const partWithoutMetaData = removePartMetaData(part) as Group;
 
   partWithoutMetaData.part_order.forEach((id) => {
-    const childPart = draft.parts.get(id);
+    const childPart = draft.parts[id];
 
     if (childPart) {
       const exportedPart = partExportify(childPart, draft);

@@ -11,19 +11,17 @@ export const mutateParts = <Type extends Part>(
 ) => {
   if (draft) {
     ids.forEach((id) => {
-      const part = draft.parts.get(id) as Type | undefined;
+      const part = draft.parts[id] as Type;
 
-      if (part) {
-        if (recursive && part.n === 'Group') {
-          mutateParts(
-            (part as unknown as Group).part_order,
-            mutator,
-            draft,
-            true,
-          );
-        } else {
-          mutator(part);
-        }
+      if (recursive && part.n === 'Group') {
+        mutateParts(
+          (part as unknown as Group).part_order,
+          mutator,
+          draft,
+          true,
+        );
+      } else {
+        mutator(part);
       }
     });
   } else {

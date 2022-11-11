@@ -8,17 +8,15 @@ export const togglePartsSelection = (ids: string[], draft?: Blueprint) => {
 
   if (draft) {
     ids.forEach((id) => {
-      const part = draft.parts.get(id);
+      const part = draft.parts[id];
 
-      if (part) {
-        if (part.selected) {
-          spliceIds.push(id);
-        } else {
-          insertIds.push(id);
-        }
-
-        part.selected = !part.selected;
+      if (part.selected) {
+        spliceIds.push(id);
+      } else {
+        insertIds.push(id);
       }
+
+      part.selected = !part.selected;
     });
 
     spliceIds.forEach((id) => {

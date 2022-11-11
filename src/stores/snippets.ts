@@ -1,10 +1,10 @@
+import { Part } from 'game/parts/Part';
 import { merge } from 'lodash';
-import { PartMap } from 'types/Parts';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface Snippet {
-  parts: PartMap;
+  parts: Record<string, Part>;
   part_order: string[];
 }
 
@@ -19,7 +19,7 @@ export interface UseSnippets {
 }
 
 export const SnippetData: Snippet = {
-  parts: new Map(),
+  parts: {},
   part_order: [],
 };
 

@@ -20,9 +20,11 @@ export const duplicateParts = (ids: string[], draft?: Blueprint) => {
           const [clonedPartId, clonedParts] = clonedPartData;
 
           parent.part_order.splice(partIndex + 1, 0, clonedPartId);
-          clonedParts.forEach((clonedPart, clonedPartChildId) => {
-            draft.parts.set(clonedPartChildId, clonedPart);
-          });
+
+          for (const clonedPartChildId in clonedParts) {
+            const clonedPart = clonedParts[clonedPartChildId];
+            draft.parts[clonedPartChildId] = clonedPart;
+          }
 
           selectPart(clonedPartId, draft);
         }

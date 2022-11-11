@@ -8,7 +8,7 @@ export const deleteParts = (ids: string[], draft?: Blueprint) => {
       const parent = getParent(id, draft) ?? draft;
       const selectionIndex = draft.selections.indexOf(id);
 
-      draft.parts.delete(id);
+      delete draft.parts[id];
 
       if (selectionIndex !== -1) draft.selections.splice(selectionIndex, 1);
       if (parent) parent.part_order.splice(parent.part_order.indexOf(id), 1);

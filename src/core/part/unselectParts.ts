@@ -4,8 +4,7 @@ import { Blueprint } from 'game/Blueprint';
 export const unselectParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
     ids.forEach((id) => {
-      const part = draft.parts.get(id);
-      if (part) part.selected = false;
+      draft.parts[id].selected = false;
     });
 
     draft.selections = draft.selections.filter(

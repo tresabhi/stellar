@@ -4,8 +4,8 @@ import boundsStore from 'stores/bounds';
 export const declareBoundNeedsUpdate = (id: string) => {
   if (boundsStore[id]) {
     boundsStore[id].needsRecomputation = true;
-    const part = useBlueprint.getState().parts.get(id);
+    const part = useBlueprint.getState().parts[id];
 
-    if (part?.parentId) declareBoundNeedsUpdate(part.parentId);
+    if (part.parent_id) declareBoundNeedsUpdate(part.parent_id);
   }
 };

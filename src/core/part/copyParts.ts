@@ -7,27 +7,29 @@ import { clonePart } from './clonePart';
 export const copyParts = (ids: string[], draft?: Blueprint) => {
   if (draft) {
     const clipboard: Snippet = {
-      parts: new Map(),
+      parts: {},
       part_order: [],
     };
 
     ids.forEach((id) => {
-      const part = draft.parts.get(id);
+      const part = draft.parts[id];
+      const clonedPartData = clonePart(part.id, draft);
 
-      if (part) {
-        const clonedPartData = clonePart(part.id, draft);
+      if (clonedPartData) {
+        const [clonedPartId, clonedParts] = clonedPartData;
+        clipboard.part_order.push(clonedPartId);
 
-        if (clonedPartData) {
-          const [clonedPartId, clonedParts] = clonedPartData;
-          clipboard.part_order.push(clonedPartId);
-          clonedParts.forEach((clonedPart, clonedPartChildId) => {
-            clipboard.parts.set(clonedPartChildId, clonedPart);
-          });
+        for (const clonedPartChildId in clonedParts) {
+          const clonedPart = clonedParts[clonedPartChildId];
+          clipboard.parts[clonedPartChildId] = clonedPart;
         }
       }
     });
 
-    if (clipboard.parts.size > 0 && clipboard.part_order.length > 0) {
+    if (
+      Object.keys(clipboard.parts).length > 0 &&
+      clipboard.part_order.length > 0
+    ) {
       mutateApp((draft) => {
         draft.editor.clipboard = clipboard;
       });

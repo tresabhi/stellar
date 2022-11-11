@@ -26,7 +26,7 @@ const useDragControls = (id: string) => {
 
     if (
       part &&
-      (part.selected || part.parentId === null) && // is selected or is at root level
+      (part.selected || part.parent_id === null) && // is selected or is at root level
       !part.hidden &&
       !part.locked &&
       tool === Tool.Move &&

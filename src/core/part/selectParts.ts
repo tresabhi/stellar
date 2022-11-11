@@ -11,9 +11,9 @@ export const selectParts = (
     const newSelections: string[] = [];
 
     ids.forEach((id) => {
-      const part = draft.parts.get(id);
+      const part = draft.parts[id];
 
-      if (part && !part.selected) {
+      if (!part.selected) {
         part.selected = true;
         if (expandGroups && part.n === 'Group') {
           (part as Group).expanded = true;

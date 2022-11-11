@@ -4,4 +4,4 @@ import useBlueprint from 'stores/blueprint';
 export const getParentId = (
   id: string,
   draft: Blueprint = useBlueprint.getState(),
-) => draft.parts.get(id)?.parentId;
+) => draft.parts[id].parent_id;

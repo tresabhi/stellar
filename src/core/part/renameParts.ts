@@ -26,16 +26,13 @@ export const renameParts = (
 
   if (draft) {
     ids.forEach((id, index) => {
-      const part = draft.parts.get(id);
+      const part = draft.parts[id];
+      const partRegistry = getPartRegistry(part.n);
 
-      if (part) {
-        const partRegistry = getPartRegistry(part.n);
-
-        if (partRegistry && (mergedOptions.skipLocked ? !part.locked : true)) {
-          part.label = `${name.length === 0 ? partRegistry.data.label : name} ${
-            mergedOptions.suffix ? index + 1 : ''
-          }`.trim();
-        }
+      if (partRegistry && (mergedOptions.skipLocked ? !part.locked : true)) {
+        part.label = `${name.length === 0 ? partRegistry.data.label : name} ${
+          mergedOptions.suffix ? index + 1 : ''
+        }`.trim();
       }
     });
   } else {

@@ -4,10 +4,8 @@ import { mutateParts } from './mutateParts';
 
 export const togglePartsVisibility = (ids: string[], draft?: Blueprint) => {
   if (draft) {
-    const firstHidden = draft.parts.get(ids[0])?.hidden ?? true;
-    const isMixed = ids.some(
-      (id) => draft.parts.get(id)?.hidden !== firstHidden,
-    );
+    const firstHidden = draft.parts[ids[0]].hidden ?? true;
+    const isMixed = ids.some((id) => draft.parts[id].hidden !== firstHidden);
 
     mutateParts(
       ids,

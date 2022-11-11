@@ -9,9 +9,9 @@ export const ungroupGroups = (ids: string[], draft?: Blueprint) => {
     unselectAllParts(draft);
 
     ids.forEach((id) => {
-      const part = draft.parts.get(id);
+      const part = draft.parts[id];
 
-      if (part && part.n === 'Group') {
+      if (part.n === 'Group') {
         const group = part as Group;
         const parent = getParent(id, draft) ?? draft;
         const insertIndex = parent.part_order.indexOf(group.id);
@@ -22,15 +22,15 @@ export const ungroupGroups = (ids: string[], draft?: Blueprint) => {
         );
 
         group.part_order.forEach((childId) => {
-          const child = draft.parts.get(childId);
-          if (child) child.parentId = group.parentId;
+          const child = draft.parts[childId];
+          if (child) child.parent_id = group.parent_id;
         });
         parent.part_order = [
           ...chunkBefore,
           ...group.part_order,
           ...chunkAfter,
         ];
-        draft.parts.delete(group.id);
+        delete draft.parts[group.id];
         selectParts(group.part_order, draft);
       }
     });

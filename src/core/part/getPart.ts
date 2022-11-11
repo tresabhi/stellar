@@ -5,9 +5,9 @@ import useBlueprint from 'stores/blueprint';
 export const getPart = <Type extends Part>(
   id: string,
   draft?: Blueprint,
-): Type | undefined => {
+): Type => {
   if (draft) {
-    return draft.parts.get(id) as Type | undefined;
+    return draft.parts[id] as Type;
   } else {
     return getPart<Type>(id, useBlueprint.getState());
   }

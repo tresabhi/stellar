@@ -47,7 +47,7 @@ export const Properties = () => {
     selections.forEach((selection) => {
       const part = getPart(selection);
 
-      if (part && test(part)) {
+      if (test(part)) {
         if (typeSortedParts.has(index)) {
           typeSortedParts.get(index)?.push(selection);
         } else {
@@ -60,12 +60,10 @@ export const Properties = () => {
   selections.forEach((selection) => {
     const part = getPart(selection);
 
-    if (part) {
-      if (nameSortedParts.has(part.n)) {
-        nameSortedParts.get(part.n)?.push(selection);
-      } else {
-        nameSortedParts.set(part.n, [selection]);
-      }
+    if (nameSortedParts.has(part.n)) {
+      nameSortedParts.get(part.n)?.push(selection);
+    } else {
+      nameSortedParts.set(part.n, [selection]);
     }
   });
 

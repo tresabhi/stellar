@@ -43,12 +43,10 @@ export const subscribeToPart = <Type extends Part, Slice>(
   if (mergedOptions.fireInitially) {
     const part = getPart(id);
 
-    if (part) {
-      if (slicer) {
-        handler(slicer(part as Type));
-      } else {
-        handler(part as Slice);
-      }
+    if (slicer) {
+      handler(slicer(part as Type));
+    } else {
+      handler(part as Slice);
     }
   }
 

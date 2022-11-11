@@ -33,33 +33,29 @@ export const Container: FC<ContainerProps> = ({
     if (parent === null) {
       return state.part_order;
     } else {
-      const part = getPart<Group>(parent, state);
-      if (part) return part.part_order;
+      return getPart<Group>(parent, state).part_order;
     }
   });
+  const children = part_order.map((id) => (
+    <Listing indent={indent} id={id} key={`part-${id}`} />
+  ));
 
-  if (part_order !== undefined) {
-    const children = part_order.map((id) => (
-      <Listing indent={indent} id={id} key={`part-${id}`} />
-    ));
+  const handleClick = () => unselectAllParts();
 
-    const handleClick = () => unselectAllParts();
+  return (
+    <Root>
+      <ScrollArea.Viewport onClick={handleClick}>
+        <Wrapper {...props}>{children}</Wrapper>
+      </ScrollArea.Viewport>
 
-    return (
-      <Root>
-        <ScrollArea.Viewport onClick={handleClick}>
-          <Wrapper {...props}>{children}</Wrapper>
-        </ScrollArea.Viewport>
-
-        <ScrollArea.Scrollbar orientation="vertical">
-          <ScrollArea.Thumb />
-        </ScrollArea.Scrollbar>
-        <ScrollArea.Scrollbar orientation="horizontal">
-          <ScrollArea.Thumb />
-        </ScrollArea.Scrollbar>
-      </Root>
-    );
-  }
+      <ScrollArea.Scrollbar orientation="vertical">
+        <ScrollArea.Thumb />
+      </ScrollArea.Scrollbar>
+      <ScrollArea.Scrollbar orientation="horizontal">
+        <ScrollArea.Thumb />
+      </ScrollArea.Scrollbar>
+    </Root>
+  );
 
   return null;
 };

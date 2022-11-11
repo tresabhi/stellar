@@ -8,11 +8,7 @@ export const setPartsLock = (
 ) => {
   if (draft) {
     ids.forEach((id) => {
-      const part = draft.parts.get(id);
-
-      if (part) {
-        part.locked = locked;
-      }
+      draft.parts[id].locked = locked;
     });
   } else {
     mutateBlueprint((draft) => setPartsLock(ids, locked, draft));

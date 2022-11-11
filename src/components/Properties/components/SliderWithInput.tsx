@@ -6,7 +6,7 @@ import {
   useEffect,
   useImperativeHandle,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import { evaluateExpression } from 'utilities/evaluateExpression';

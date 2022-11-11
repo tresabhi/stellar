@@ -14,27 +14,29 @@ export const pasteParts = () => {
   if (clipboard) {
     mutateBlueprint((draft) => {
       const firstSelection = draft.selections[0];
-      const parentId = draft.parts.get(firstSelection)?.parentId ?? null;
+      const parentId = draft.parts[firstSelection].parent_id;
       const parent = parentId
-        ? (draft.parts.get(parentId) as Group) ?? draft
+        ? (draft.parts[parentId] as Group) ?? draft
         : draft;
       const insertIndex = firstSelection
         ? parent.part_order.indexOf(firstSelection)
         : 0;
 
-      clipboard.parts.forEach((part, partId) => {
-        draft.parts.set(partId, {
+      for (const partId in clipboard.parts) {
+        const part = clipboard.parts[partId];
+
+        draft.parts[partId] = {
           ...part,
-          parentId,
-        });
-      });
+          parent_id: parentId,
+        };
+      }
       parent.part_order.splice(insertIndex, 0, ...clipboard.part_order);
       selectPartsOnly(clipboard.part_order, draft);
     });
 
     mutateApp((draft) => {
       const newClipboard: Snippet = {
-        parts: new Map(),
+        parts: {},
         part_order: [],
       };
 
@@ -44,13 +46,18 @@ export const pasteParts = () => {
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;
           newClipboard.part_order.push(clonedPartId);
-          clonedParts.forEach((clonedChildPart, clonedChildPartId) => {
-            newClipboard.parts.set(clonedChildPartId, clonedChildPart);
-          });
+
+          for (const clonedChildPartId in clonedParts) {
+            const clonedChildPart = clonedParts[clonedChildPartId];
+            newClipboard.parts[clonedChildPartId] = clonedChildPart;
+          }
         }
       });
 
-      if (newClipboard.part_order.length > 0 && newClipboard.parts.size > 0) {
+      if (
+        newClipboard.part_order.length > 0 &&
+        Object.keys(newClipboard.parts).length > 0
+      ) {
         draft.editor.clipboard = newClipboard;
       }
     });

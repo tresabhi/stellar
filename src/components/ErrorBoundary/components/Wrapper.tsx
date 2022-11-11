@@ -1,7 +1,7 @@
 import { FC, HTMLAttributes } from 'react';
 import {
   ErrorBoundary,
-  FallbackProps as FallbackPrimitiveProps
+  FallbackProps as FallbackPrimitiveProps,
 } from 'react-error-boundary';
 import { Fallback } from './Fallback';
 

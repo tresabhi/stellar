@@ -35,33 +35,31 @@ export const selectionAbstraction = (
     const part = getPart(id);
     const parent = getParent(id);
 
-    if (part && !part.hidden && !part.locked) {
+    if (!part.hidden && !part.locked) {
       if (
-        part.parentId === null || // part is at root
+        part.parent_id === null || // part is at root
         (parent && parent.selected) || // parent is selected
         event.ctrlKey || // deep select is active
         selectDeep
       ) {
         event.stopPropagation();
 
-        if (part) {
-          if (event.ctrlKey || selectDeep) {
-            if (event.shiftKey || selectMultiple) {
-              togglePartSelection(id);
-            } else {
-              selectPartOnly(id);
-            }
+        if (event.ctrlKey || selectDeep) {
+          if (event.shiftKey || selectMultiple) {
+            togglePartSelection(id);
           } else {
-            if (event.shiftKey || selectMultiple) {
-              const parentId = getParentId(id);
+            selectPartOnly(id);
+          }
+        } else {
+          if (event.shiftKey || selectMultiple) {
+            const parentId = getParentId(id);
 
-              mutateBlueprint((draft) => {
-                togglePartSelection(id, draft);
-                if (parentId) unselectPart(parentId, draft);
-              });
-            } else {
-              selectPartOnly(id);
-            }
+            mutateBlueprint((draft) => {
+              togglePartSelection(id, draft);
+              if (parentId) unselectPart(parentId, draft);
+            });
+          } else {
+            selectPartOnly(id);
           }
         }
       }

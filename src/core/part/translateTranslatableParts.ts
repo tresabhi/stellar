@@ -13,9 +13,9 @@ export const translateTranslatableParts = (
   if (draft) {
     const translate = (selections: string[]) => {
       selections.forEach((selection) => {
-        const part = draft.parts.get(selection);
+        const part = draft.parts[selection];
 
-        if (part && !part.locked) {
+        if (!part.locked) {
           if (part.n === 'Group') {
             translate((part as Group).part_order);
           } else if ((part as PartWithTransformations).p) {

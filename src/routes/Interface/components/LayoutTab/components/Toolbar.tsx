@@ -71,15 +71,15 @@ const Toolbar = () => {
       : state.editor.tool,
   );
   const isOneHidden = useBlueprint((state) =>
-    state.selections.some((selection) => state.parts.get(selection)?.hidden),
+    state.selections.some((selection) => state.parts[selection].hidden),
   );
   const isOneLocked = useBlueprint((state) =>
-    state.selections.some((selection) => state.parts.get(selection)?.locked),
+    state.selections.some((selection) => state.parts[selection].locked),
   );
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
   );
-  const hasParts = useBlueprint((state) => state.parts.size !== 0);
+  const hasParts = useBlueprint((state) => Object.keys(state.parts).length > 0);
   const hasUndos = useVersionControl((state) => state.index > -1);
   const hasRedos = useVersionControl(
     (state) => state.history.length - 1 > state.index,

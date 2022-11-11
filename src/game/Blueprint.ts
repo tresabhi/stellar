@@ -1,4 +1,3 @@
-import { PartMap } from 'types/Parts';
 import { Part, VanillaPart } from './parts/Part';
 
 export interface VanillaStage {
@@ -16,15 +15,11 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   readonly format_version: number;
 
   selections: string[];
-  parts: PartMap;
+  parts: Record<string, Part>;
   part_order: string[];
 }
 
-export interface SavedBlueprint extends Omit<Blueprint, 'parts'> {
-  parts: [string, Part][];
-}
-
-export const VanillaBlueprintData: VanillaBlueprint = {
+export const vanillaBlueprintData: VanillaBlueprint = {
   center: 0,
   offset: { x: 0, y: 0 },
   parts: [],
@@ -33,17 +28,12 @@ export const VanillaBlueprintData: VanillaBlueprint = {
 
 // TODO: switch from Map to plain object
 
-export const BlueprintData: Blueprint = {
-  ...VanillaBlueprintData,
+export const blueprintData: Blueprint = {
+  ...vanillaBlueprintData,
 
-  format_version: 5,
+  format_version: 6,
 
   selections: [],
-  parts: new Map(),
+  parts: {},
   part_order: [],
-};
-
-export const SavedBlueprintData: SavedBlueprint = {
-  ...BlueprintData,
-  parts: [],
 };

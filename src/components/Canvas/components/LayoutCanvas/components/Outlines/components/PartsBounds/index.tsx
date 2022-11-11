@@ -11,9 +11,9 @@ export const PartsBounds = () => {
   const wrapper = useRef<Group>(null);
   const invalidate = useThree((state) => state.invalidate);
 
-  parts.forEach((part, id) => {
+  for (const id in parts) {
     partBounds.push(<PartBound id={id} key={`part-bound-${id}`} />);
-  });
+  }
 
   useEffect(() => {
     const handleDeferUpdates = (

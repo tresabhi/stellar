@@ -6,21 +6,8 @@ export const getMutualProperty = <Type extends Part, Value = number | string>(
   slice: (state: Type) => Value,
 ) => {
   const part = getPart<Type>(ids[0]);
+  const initialValue = slice(part);
+  const mixed = ids.some((id) => initialValue !== slice(getPart<Type>(id)));
 
-  if (part) {
-    const initialValue = slice(part);
-    const mixed = ids.some((id) => {
-      const part = getPart<Type>(id);
-
-      if (part) {
-        const value = slice(part);
-
-        return initialValue !== value;
-      } else {
-        return false;
-      }
-    });
-
-    return mixed ? undefined : initialValue;
-  }
+  return mixed ? undefined : initialValue;
 };

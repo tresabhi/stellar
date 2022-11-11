@@ -13,17 +13,17 @@ export const groupParts = (
     const newGroupParent = getParent(replaceId, draft) ?? draft;
 
     if (newGroup) {
-      draft.parts.set(newGroup.id, newGroup);
+      draft.parts[newGroup.id] = newGroup;
       newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] =
         newGroup.id;
       newGroup.part_order = ids;
 
       ids.forEach((id) => {
         const currentParent = getParent(id, draft) ?? draft;
-        const currentPart = draft.parts.get(id);
+        const currentPart = draft.parts[id];
         const spliceIndex = currentParent.part_order.indexOf(id);
 
-        if (currentPart) currentPart.parentId = newGroup.id;
+        if (currentPart) currentPart.parent_id = newGroup.id;
         if (spliceIndex !== -1) currentParent.part_order.splice(spliceIndex, 1);
       });
 

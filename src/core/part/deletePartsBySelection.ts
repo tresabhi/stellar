@@ -8,7 +8,7 @@ export const deletePartsBySelection = (draft?: Blueprint) => {
     [...draft.selections].forEach((selection) => {
       const parent = getParent(selection, draft) ?? draft;
 
-      draft.parts.delete(selection);
+      delete draft.parts[selection];
 
       if (parent) {
         parent.part_order.splice(parent.part_order.indexOf(selection), 1);

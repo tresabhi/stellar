@@ -8,9 +8,7 @@ export const setPartsVisibility = (
 ) => {
   if (draft) {
     ids.forEach((id) => {
-      const part = draft.parts.get(id);
-
-      if (part) part.hidden = hidden;
+      draft.parts[id].hidden = hidden;
     });
   } else {
     mutateBlueprint((draft) => setPartsVisibility(ids, hidden, draft));

@@ -4,8 +4,8 @@ import { mutateParts } from './mutateParts';
 
 export const togglePartsLock = (ids: string[], draft?: Blueprint) => {
   if (draft) {
-    const firstLock = draft.parts.get(ids[0])?.locked ?? true;
-    const isMixed = ids.some((id) => draft.parts.get(id)?.locked !== firstLock);
+    const firstLock = draft.parts[ids[0]].locked ?? true;
+    const isMixed = ids.some((id) => draft.parts[id].locked !== firstLock);
 
     mutateParts(
       ids,

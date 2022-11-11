@@ -12,24 +12,20 @@ export interface PartClusterProps extends GroupProps {
 
 const PartCluster = forwardRef<Group, PartClusterProps>(
   ({ parentId, ...props }, ref) => {
-    const state = useBlueprint((state) => {
-      return (
-        parentId ? (state.parts.get(parentId) as GroupPart | undefined) : state
-      )?.part_order;
-    });
+    const state = useBlueprint(
+      (state) =>
+        (parentId ? (state.parts[parentId] as GroupPart) : state).part_order,
+    );
 
     if (state) {
       const partListing: JSX.Element[] = [];
 
       state.forEach((Id) => {
         const part = getPart(Id);
+        const LayoutComponent = getPartRegistry(part.n)?.Mesh;
 
-        if (part) {
-          const LayoutComponent = getPartRegistry(part.n)?.Mesh;
-
-          if (LayoutComponent) {
-            partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);
-          }
+        if (LayoutComponent) {
+          partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);
         }
       });
 

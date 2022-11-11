@@ -1,7 +1,7 @@
 import { Group } from 'game/parts/Group';
+import { Part } from 'game/parts/Part';
 import { cloneDeep } from 'lodash';
 import { Snippet } from 'stores/snippets';
-import { PartMap } from 'types/Parts';
 import { generateId } from './generateId';
 
 /**
@@ -12,45 +12,43 @@ import { generateId } from './generateId';
 export const clonePart = (
   id: string,
   draft: Snippet,
-): [string, PartMap] | undefined => {
-  const part = draft.parts.get(id);
+): [string, Record<string, Part>] => {
+  const part = draft.parts[id];
 
-  if (part) {
-    const clonedPart = cloneDeep(part);
-    (clonedPart.id as string) = generateId(draft.parts);
-    clonedPart.parentId = null;
+  const clonedPart = cloneDeep(part);
+  (clonedPart.id as string) = generateId(draft.parts);
+  clonedPart.parent_id = null;
 
-    if (clonedPart.n === 'Group') {
-      const clonedGroup = clonedPart as Group;
-      const clonedParts: PartMap = new Map([[clonedPart.id, clonedPart]]);
+  if (clonedPart.n === 'Group') {
+    const clonedGroup = clonedPart as Group;
+    const clonedParts: Record<string, Part> = { [clonedPart.id]: clonedPart };
 
-      clonedGroup.part_order.forEach((childId, index) => {
-        const child = draft.parts.get(childId) as Group | undefined;
+    clonedGroup.part_order.forEach((childId, index) => {
+      const child = draft.parts[childId] as Group;
 
-        if (child) {
-          const clonedGroupChildData = clonePart(child.id, draft);
+      if (child) {
+        const clonedGroupChildData = clonePart(child.id, draft);
 
-          if (clonedGroupChildData) {
-            const [clonedGroupChildId, clonedGroupChildrenParts] =
-              clonedGroupChildData;
-            const clonedGroupChild =
-              clonedGroupChildrenParts.get(clonedGroupChildId);
+        if (clonedGroupChildData) {
+          const [clonedGroupChildId, clonedGroupChildrenParts] =
+            clonedGroupChildData;
+          const clonedGroupChild = clonedGroupChildrenParts[clonedGroupChildId];
 
-            clonedGroup.part_order[index] = clonedGroupChildId;
+          clonedGroup.part_order[index] = clonedGroupChildId;
 
-            if (clonedGroupChild) {
-              clonedGroupChild.parentId = clonedGroup.id;
-            }
-            clonedGroupChildrenParts.forEach((part, id) => {
-              clonedParts.set(id, part);
-            });
+          if (clonedGroupChild) {
+            clonedGroupChild.parent_id = clonedGroup.id;
+          }
+          for (const id in clonedGroupChildrenParts) {
+            const part = clonedGroupChildrenParts[id];
+            clonedParts[id] = part;
           }
         }
-      });
+      }
+    });
 
-      return [clonedGroup.id, clonedParts];
-    } else {
-      return [clonedPart.id, new Map([[clonedPart.id, clonedPart]])];
-    }
+    return [clonedGroup.id, clonedParts];
+  } else {
+    return [clonedPart.id, { [clonedPart.id]: clonedPart }];
   }
 };

@@ -36,7 +36,7 @@ export const Inspect = () => {
         <Properties.Value
           label={t`tab.layout.right_sidebar.inspect.meta_data.parent_id`}
         >
-          {`${data.parentId}`}
+          {`${data.parent_id}`}
         </Properties.Value>
         <Properties.Value
           label={t`tab.layout.right_sidebar.inspect.meta_data.name`}

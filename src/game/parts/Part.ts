@@ -15,7 +15,7 @@ export interface Part extends VanillaPart {
   /**
    * Id of the parent group (`null` if at root level)
    */
-  parentId: ParentId;
+  parent_id: ParentId;
 
   /**
    * Human-readable label for that specific part that can be changed in the UI
@@ -43,7 +43,7 @@ export const PartData: Part = {
   ...VanillaPartData,
 
   id: '',
-  parentId: null,
+  parent_id: null,
   label: 'Unlabeled Part',
   selected: false,
   hidden: false,
