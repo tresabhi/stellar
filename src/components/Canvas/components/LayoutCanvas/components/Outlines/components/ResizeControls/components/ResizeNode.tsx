@@ -1,8 +1,9 @@
+import { Line } from '@react-three/drei';
 import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
 import { FC, useEffect, useRef } from 'react';
 import { Bounds } from 'stores/bounds';
 import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
-import { unitBufferGeometry2 } from '../../PartsBounds/components/PartBounds';
+import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
 export interface ResizeNodeProps {
   bounds: Bounds;
@@ -80,10 +81,11 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
         <meshBasicMaterial color={NODE_COLOR} />
       </mesh>
 
-      <line_
-        position={[-0.5, -0.5, 2]}
-        material={borderMaterial}
-        geometry={unitBufferGeometry2}
+      <Line
+        position={[0, 0, 2]}
+        color={'#8f8f8f'}
+        points={UNIT_POINTS}
+        lineWidth={2}
       />
     </group>
   );

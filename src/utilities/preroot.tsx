@@ -66,7 +66,6 @@ const preroot = () => {
   extend({
     Line2,
     LineMaterial,
-    Line_: Line,
   });
 
   // apply three mesh bvh optimizations
