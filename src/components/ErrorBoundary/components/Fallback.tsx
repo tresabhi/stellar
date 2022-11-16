@@ -8,7 +8,14 @@ import {
 import { Button as ButtonPrimitive } from 'components/Button';
 import { mutateSettings } from 'core/app';
 import moment from 'moment';
-import { FC, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import {
+  FC,
+  HTMLAttributes,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { deviceDetect } from 'react-device-detect';
 import { FallbackProps as FallbackPrimitiveProps } from 'react-error-boundary';
 import { mapStackTrace } from 'sourcemapped-stacktrace';
@@ -156,12 +163,9 @@ export const Fallback: FC<FallbackProps> = ({
           .filter((value, index) => index !== 0)
           .map((value) => `at ${value}`),
   );
-  const [stack, setStack] = useState(
-    typeof rawStack.current === 'string'
-      ? rawStack.current
-      : rawStack.current.map((stackItem) => (
-          <DebugContent>{stackItem}</DebugContent>
-        )),
+  // alert(location.origin);
+  const [stack, setStack] = useState<ReactNode>(
+    <DebugContent>Mapping...</DebugContent>,
   );
   const [mapped, setMapped] = useState(false);
 
@@ -211,11 +215,18 @@ export const Fallback: FC<FallbackProps> = ({
 
   useEffect(() => {
     mapStackTrace(error.stack, (mappedStackRaw) => {
-      rawStack.current = mappedStackRaw.map((stackItem) => stackItem.trim());
+      rawStack.current = mappedStackRaw
+        .map((stackItem) => stackItem.trim())
+        .filter((item) => !item.includes('react-reconciler'));
 
       setStack(
         rawStack.current.map((stackItem) => (
-          <DebugContent>{stackItem}</DebugContent>
+          <DebugContent>
+            {stackItem
+              .replace(`${location.origin}/`, '')
+              .replace(/\?[a-zA-Z]=(.*?):/, ':')
+              .replace('at ', '')}
+          </DebugContent>
         )),
       );
       setMapped(true);
