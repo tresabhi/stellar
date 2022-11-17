@@ -1,15 +1,13 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/Canvas/components/PartCluster';
-import { DeferUpdatesEventDetail, disposeBound } from 'core/bounds';
 import { partExportify, removePartMetaData } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import useDragControls from 'hooks/useDragControls';
 import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
-import { FC, useCallback, useEffect, useRef } from 'react';
-import boundsStore, { Bounds } from 'stores/bounds';
+import { FC, useRef } from 'react';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
-import { Box3, Group as ThreeGroup } from 'three';
+import { Group as ThreeGroup } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import { Part, PartData, VanillaPart } from './Part';
 
@@ -32,45 +30,6 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const cluster = useRef<ThreeGroup>(null);
   const handleClick = useSelectionControl(id);
   const handlePointerDown = useDragControls(id);
-
-  const computeBounds = useCallback(() => {
-    if (cluster.current) {
-      const box3 = new Box3().setFromObject(cluster.current);
-      const bounds: Bounds = {
-        width: box3.max.x - box3.min.x,
-        height: box3.max.y - box3.min.y,
-        x: (box3.min.x + box3.max.x) / 2,
-        y: (box3.min.y + box3.max.y) / 2,
-        rotation: 0,
-      };
-
-      boundsStore[id] = { bounds, needsRecomputation: false };
-    }
-  }, []);
-
-  useEffect(computeBounds);
-
-  useEffect(() => {
-    const handleDeferUpdates = (
-      event: CustomEvent<DeferUpdatesEventDetail>,
-    ) => {
-      const listing = boundsStore[id];
-      if (listing.needsRecomputation && !event.detail) computeBounds();
-    };
-
-    window.addEventListener(
-      'deferupdates',
-      handleDeferUpdates as EventListener,
-    );
-
-    return () => {
-      window.removeEventListener(
-        'deferupdates',
-        handleDeferUpdates as EventListener,
-      );
-      disposeBound(id);
-    };
-  }, []);
 
   return (
     <PartCluster
