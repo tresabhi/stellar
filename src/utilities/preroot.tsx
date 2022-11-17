@@ -3,7 +3,7 @@ import * as Toast from 'components/Toast';
 import { toast } from 'core/interface';
 import { useTranslator } from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
-import { BufferGeometry, Line, Mesh } from 'three';
+import { BufferGeometry, Mesh } from 'three';
 import {
   acceleratedRaycast,
   computeBoundsTree,
@@ -30,26 +30,6 @@ const updateSW = registerSW({
             <Toast.Action
               onClick={close}
             >{t`toasts.update_available.actions.dismiss`}</Toast.Action>
-          </Toast.Actions>
-        </Toast.Root>
-      );
-    });
-  },
-
-  onOfflineReady: () => {
-    toast(({ close }) => {
-      const { t } = useTranslator();
-
-      return (
-        <Toast.Root>
-          <Toast.Info>
-            <Toast.Title>{t`toasts.offline_ready.title`}</Toast.Title>
-            <Toast.Description>{t`toasts.offline_ready.description`}</Toast.Description>
-          </Toast.Info>
-          <Toast.Actions>
-            <Toast.Action
-              onClick={close}
-            >{t`toasts.offline_ready.actions.dismiss`}</Toast.Action>
           </Toast.Actions>
         </Toast.Root>
       );
