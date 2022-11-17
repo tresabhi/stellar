@@ -1,6 +1,7 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
 import { CANVAS_MATRIX_SCALE } from 'components/Canvas/components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
 import { mutateApp } from 'core/app';
+import { deferUpdates, undeferUpdates } from 'core/bounds';
 import {
   getPart,
   selectPart,
@@ -14,8 +15,9 @@ import { getSnapDistance } from 'utilities/getSnapDistance';
 import useApp, { Tool } from '../stores/app';
 
 const useDragControls = (id: string) => {
-  const { camera, invalidate } = useThree();
+  const camera = useThree((state) => state.camera);
 
+  let firstMove = true;
   let selectedInitially = false;
   const initial = new Vector2();
   const movement = new Vector2();
@@ -35,9 +37,10 @@ const useDragControls = (id: string) => {
     ) {
       event.stopPropagation();
 
+      firstMove = true;
+      selectedInitially = part.selected;
       initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
       movement.set(0, 0);
-      selectedInitially = part.selected;
 
       window.addEventListener('pointerup', handlePointerUp);
       window.addEventListener('pointermove', handlePointerMove);
@@ -49,6 +52,11 @@ const useDragControls = (id: string) => {
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
       handlePointerUp();
     } else {
+      if (firstMove) {
+        firstMove = false;
+        deferUpdates();
+      }
+
       const snapDistance = getSnapDistance(event);
       const newMovement = new Vector2(event.clientX, event.clientY)
         .sub(initial)
@@ -77,11 +85,12 @@ const useDragControls = (id: string) => {
       if (delta.length() > 0) {
         translatePartsBySelectionAsync(delta.x, delta.y);
         movement.copy(newMovement);
-        invalidate();
       }
     }
   };
   const handlePointerUp = () => {
+    if (!firstMove) undeferUpdates();
+
     const removeSelectionRestriction = () => {
       window.removeEventListener('pointerup', removeSelectionRestriction);
 

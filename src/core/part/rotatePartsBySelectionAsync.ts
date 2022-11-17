@@ -2,6 +2,6 @@ export type PartRotateEventDetail = number;
 
 export const rotatePartsBySelectionAsync = (z: number) => {
   window.dispatchEvent(
-    new CustomEvent<PartRotateEventDetail>('partmove', { detail: z }),
+    new CustomEvent<PartRotateEventDetail>('partrotate', { detail: z }),
   );
 };

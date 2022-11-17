@@ -31,7 +31,7 @@ export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
       if (importifiedPart) newBlueprint.parts[id] = importifiedPart;
     });
   } else {
-    for (const id in importedBlueprint) {
+    for (const id in importedBlueprint.parts) {
       const importifiedPart = partImportify(importedBlueprint.parts[id], id);
 
       if (importifiedPart) newBlueprint.parts[id] = importifiedPart;

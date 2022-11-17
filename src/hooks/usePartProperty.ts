@@ -1,18 +1,25 @@
-import { subscribeToPart } from 'core/part';
+import { subscribeToPart, SubscribeToPartOptions } from 'core/part';
 import { Part } from 'game/parts/Part';
 import { useEffect } from 'react';
+import useBlueprint from 'stores/blueprint';
 
 const usePartProperty = <Type extends Part, Slice>(
   id: string,
   slicer: (state: Type) => Slice,
-  handler: (slice: Slice) => void,
+  handler: (slice: Slice, prevState: Slice) => void,
+  options?: SubscribeToPartOptions,
 ) => {
+  let lastState = slicer(useBlueprint.getState().parts[id] as Type);
+
   useEffect(() => {
     const unsubscribe = subscribeToPart(
       id,
-      handler,
+      (slice: Slice) => {
+        handler(slice, lastState);
+        lastState = slicer(useBlueprint.getState().parts[id] as Type);
+      },
       (part) => slicer(part as Type),
-      { fireInitially: true },
+      { fireInitially: true, ...options },
     );
 
     return () => unsubscribe();

@@ -1,7 +1,9 @@
-import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
+import { useThree } from '@react-three/fiber';
+import { declareBoundsUpdated } from 'core/bounds';
 import { getPart, PartMoveEventDetail } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
+import boundsStore from 'stores/bounds';
 import { Object3D, Vector3 } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
@@ -31,6 +33,7 @@ export const usePartWithPosition = (
   id: string,
   object: RefObject<Object3D>,
 ) => {
+  const invalidate = useThree((state) => state.invalidate);
   const movement = new Vector3();
 
   const handlePartMove = (event: CustomEvent<PartMoveEventDetail>) => {
@@ -38,9 +41,7 @@ export const usePartWithPosition = (
       object.current.position.add(
         movement.set(event.detail.x, event.detail.y, 0),
       );
-
-      declareBoundNeedsUpdate(id);
-      deferUpdates();
+      invalidate();
     }
   };
 
@@ -55,11 +56,20 @@ export const usePartWithPosition = (
   usePartProperty(
     id,
     (part: PartWithPosition) => part.p,
-    (p) => {
+    (p, prevP) => {
       object.current?.position.set(p.x, p.y, 0);
-      declareBoundNeedsUpdate(id);
-      deferUpdates();
+      invalidate();
+
+      if (object.current) {
+        const { bounds } = boundsStore[id];
+
+        bounds.x += p.x - prevP.x;
+        bounds.y += p.y - prevP.y;
+
+        declareBoundsUpdated(id);
+      }
     },
+    { fireInitially: false },
   );
 };
 

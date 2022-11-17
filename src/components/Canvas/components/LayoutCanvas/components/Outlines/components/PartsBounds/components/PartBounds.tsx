@@ -1,15 +1,13 @@
 import { Line } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
-import { getPart } from 'core/part';
+import { getPart, subscribeToPart } from 'core/part';
 import { memo, useEffect, useRef } from 'react';
-import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import {
   Group,
   Mesh,
   MeshBasicMaterial,
   PlaneGeometry,
-  Vector2,
   Vector2Tuple,
 } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
@@ -20,17 +18,6 @@ export const UNIT_POINTS: Vector2Tuple[] = [
   [0.5, -0.5],
   [-0.5, -0.5],
   [-0.5, 0.5],
-];
-
-/**
- * @deprecated Use `UNIT_POINTS` instead
- */
-const unitVector2Points = [
-  new Vector2(0, 0),
-  new Vector2(1, 0),
-  new Vector2(1, 1),
-  new Vector2(0, 1),
-  new Vector2(0, 0),
 ];
 const unitPlane = new PlaneGeometry(1, 1);
 const SELECTION_BOX_COLOR = 'hsl(270, 60%, 30%)';
@@ -63,33 +50,36 @@ export const PartBounds = memo<PartBoundProps>(
     useEffect(() => {
       resize();
 
-      useBlueprint.subscribe(
-        (state) => getPart(id, state)?.selected,
-        (selected = false) => {
+      const unsubscribeSelected = subscribeToPart(
+        id,
+        (selected: boolean) => {
           if (wrapper.current) {
             wrapper.current.visible = selected;
             invalidate();
           }
         },
+        (state) => state.selected,
       );
 
-      const handleUpdateBounds = resize;
+      const handleBoundsUpdated = resize;
 
       window.addEventListener(
-        `updatebounds${id}`,
-        handleUpdateBounds as EventListener,
+        `boundsupdated${id}`,
+        handleBoundsUpdated as EventListener,
       );
 
       return () => {
+        unsubscribeSelected();
+
         window.removeEventListener(
-          `updatebounds${id}`,
-          handleUpdateBounds as EventListener,
+          `boundsupdated${id}`,
+          handleBoundsUpdated as EventListener,
         );
       };
     });
 
     return (
-      <group ref={wrapper} visible={getPart(id)?.selected}>
+      <group ref={wrapper} visible={getPart(id).selected}>
         <Line
           ref={outline}
           color={'#9d5bd2'}
@@ -100,5 +90,5 @@ export const PartBounds = memo<PartBoundProps>(
       </group>
     );
   },
-  ({ id: prevId }, { id: nextId }) => prevId === nextId,
+  (prevProps, nextProps) => prevProps.id === nextProps.id,
 );

@@ -2,7 +2,6 @@ import PartCluster, {
   PartClusterProps,
 } from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
-import { deferUpdates, translateAllBoundingBoxes } from 'core/bounds';
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
@@ -17,14 +16,8 @@ export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
   useEffect(() => {
     const unsubscribe = useBlueprint.subscribe(
       (state) => state.offset,
-      (offset, previousOffset) => {
-        const deltaX = offset.x - previousOffset.x;
-        const deltaY = offset.y - previousOffset.y;
-
+      (offset) => {
         partsCluster.current?.position.set(offset.x, offset.y, 0);
-
-        translateAllBoundingBoxes(deltaX, deltaY);
-        deferUpdates();
       },
     );
 

@@ -2,7 +2,7 @@ import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as Properties from 'components/Properties';
 import { mutateSettings } from 'core/app';
-import { declareBoundNeedsUpdate, deferUpdates } from 'core/bounds';
+import { declareBoundsUpdated, getBoundsFromObject } from 'core/bounds';
 import { getPart } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import {
@@ -13,6 +13,7 @@ import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC, useRef } from 'react';
+import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
 import { CylinderGeometry, Group, Mesh } from 'three';
@@ -117,48 +118,44 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const wrapper = useRef<Group>(null);
   const mesh = useRef<Mesh>(null);
   const state = getPart<FuelTank>(id);
+  const props = usePhysicalPart(id, wrapper);
 
-  if (state) {
-    const props = usePhysicalPart(id, wrapper);
+  usePartProperty(
+    id,
+    (state: FuelTank) => state.N,
+    (N) => {
+      if (mesh.current) {
+        mesh.current.geometry = new CylinderGeometry(
+          N.width_b / 2,
+          N.width_a / 2,
+          N.height,
+          12,
+          1,
+          true,
+          Math.PI / -2,
+          Math.PI,
+        );
+        mesh.current.position.set(0, N.height / 2, 0);
 
-    usePartProperty(
-      id,
-      (state: FuelTank) => state.N,
-      (N) => {
-        if (mesh.current) {
-          mesh.current.geometry = new CylinderGeometry(
-            N.width_b / 2,
-            N.width_a / 2,
-            N.height,
-            12,
-            1,
-            true,
-            Math.PI / -2,
-            Math.PI,
-          );
-          mesh.current.position.set(0, N.height / 2, 0);
+        const bounds = getBoundsFromObject(mesh.current);
+        boundsStore[id] = { bounds, needsRecomputation: false };
+        declareBoundsUpdated(id);
+      }
+    },
+  );
 
-          declareBoundNeedsUpdate(id);
-          deferUpdates();
-        }
-      },
-    );
-
-    return (
-      <group ref={wrapper} position={[state.p.x, state.p.y, 0]} {...props}>
-        <mesh ref={mesh}>
-          <meshStandardMaterial
-            flatShading
-            roughness={0.8}
-            metalness={0.8}
-            color="white"
-          />
-        </mesh>
-      </group>
-    );
-  }
-
-  return null;
+  return (
+    <group ref={wrapper} position={[state.p.x, state.p.y, 0]} {...props}>
+      <mesh ref={mesh}>
+        <meshStandardMaterial
+          flatShading
+          roughness={0.8}
+          metalness={0.8}
+          color="white"
+        />
+      </mesh>
+    </group>
+  );
 };
 
 export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({

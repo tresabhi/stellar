@@ -1,86 +1,52 @@
 import { Line } from '@react-three/drei';
+import { DeferUpdatesEventDetail } from 'core/bounds';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
-import boundsStore from 'stores/bounds';
+import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Group, Vector2 } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
+import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
-import { sideToPoint } from './components/ResizeNode';
+import { ResizeNode, sideToPoint } from './components/ResizeNode';
+
+const DEBOUNCE_TIME = 10;
 
 export const ResizeControls = () => {
   const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
   const selections = useBlueprint((state) => state.selections);
-  // const selectionBounds = useBounds(
-  //   (state) => {
-  //     if (selections.length === 0) {
-  //       const partBounds = state.parts.get(selections[0])?.bounds;
-  //       if (partBounds) return partBounds;
-  //     }
-
-  //     const box2 = new Box2();
-  //     const point = new Vector2();
-
-  //     selections.forEach((selection) => {
-  //       const partBounds = state.parts.get(selection)?.bounds;
-
-  //       if (partBounds) {
-  //
-  //       }
-  //     });
-
-  //     return {
-  //       width: box2.max.x - box2.min.x,
-  //       height: box2.max.y - box2.min.y,
-  //       x: (box2.min.x + box2.max.x) / 2,
-  //       y: (box2.min.y + box2.max.y) / 2,
-  //       rotation: 0,
-  //     };
-  //   },
-  //   (a, b) =>
-  //     a.width === b.width &&
-  //     a.height == b.height &&
-  //     a.x === b.x &&
-  //     a.y === b.y &&
-  //     a.rotation === b.rotation,
-  // );
-
-  // useEffect(() => {
-  //   if (selections.length > 1) {
-  //     outline.current?.position.set(selectionBounds.x, selectionBounds.y, 0);
-  //     outline.current?.scale.set(
-  //       selectionBounds.width,
-  //       selectionBounds.height,
-  //       1,
-  //     );
-  //     outline.current?.rotation.set(0, 0, selectionBounds.rotation);
-  //   }
-
-  //   return useBounds.subscribe(
-  //     (state) => state.deferUpdates,
-  //     (deferUpdates) => {
-  //       if (wrapper.current) {
-  //         wrapper.current.visible = !deferUpdates && selections.length > 0;
-  //       }
-  //     },
-  //   );
-  // });
+  const selectionBounds = useRef<Bounds>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+    rotation: 0,
+  });
 
   const resize = () => {
-    const box2 = new Box2();
-    const point = new Vector2();
+    outline.current?.position.set(
+      selectionBounds.current.x,
+      selectionBounds.current.y,
+      0,
+    );
+    outline.current?.rotation.set(0, 0, selectionBounds.current.rotation);
+    outline.current?.scale.set(
+      selectionBounds.current.width,
+      selectionBounds.current.height,
+      1,
+    );
 
+    if (wrapper.current) wrapper.current.visible = true;
+  };
+
+  const debouncedResize = fallingEdgeDebounce(() => {
     if (selections.length === 1) {
-      const boundsListing = boundsStore[selections[0]];
+      selectionBounds.current = boundsStore[selections[0]].bounds;
+      resize();
+    } else {
+      const box2 = new Box2();
+      const point = new Vector2();
 
-      if (boundsListing) {
-        const { bounds } = boundsListing;
-
-        outline.current?.position.set(bounds.x, bounds.y, 0);
-        outline.current?.scale.set(bounds.width, bounds.height, 1);
-        outline.current?.rotation.set(0, 0, bounds.rotation);
-      }
-    } else if (selections.length > 1) {
       selections.forEach((selection) => {
         const { bounds } = boundsStore[selection];
 
@@ -90,23 +56,65 @@ export const ResizeControls = () => {
           .expandByPoint(point.set(...sideToPoint(bounds, [1, -1])))
           .expandByPoint(point.set(...sideToPoint(bounds, [-1, -1])));
       });
-    }
-  };
 
-  useEffect(resize);
+      selectionBounds.current = {
+        width: box2.max.x - box2.min.x,
+        height: box2.max.y - box2.min.y,
+        x: (box2.min.x + box2.max.x) / 2,
+        y: (box2.min.y + box2.max.y) / 2,
+        rotation: 0,
+      };
+      resize();
+    }
+  }, DEBOUNCE_TIME);
+
+  useEffect(() => {
+    const callbacks: Record<string, EventListener> = {};
+    selections.forEach((selection) => {
+      callbacks[selection] = () => {
+        debouncedResize();
+        if (wrapper.current) wrapper.current.visible = false;
+      };
+
+      window.addEventListener(
+        `boundsupdated${selection}`,
+        callbacks[selection],
+      );
+    });
+
+    const handleDeferUpdates = (
+      event: CustomEvent<DeferUpdatesEventDetail>,
+    ) => {
+      if (event.detail && wrapper.current) wrapper.current.visible = false;
+    };
+
+    window.addEventListener(
+      'deferupdates',
+      handleDeferUpdates as EventListener,
+    );
+
+    return () => {
+      for (const id in callbacks) {
+        window.removeEventListener(`boundsupdated${id}`, callbacks[id]);
+      }
+
+      window.removeEventListener(
+        'deferupdates',
+        handleDeferUpdates as EventListener,
+      );
+    };
+  });
 
   return (
     <group ref={wrapper} visible={selections.length > 0}>
-      {selections.length > 1 && (
-        <Line
-          ref={outline}
-          lineWidth={2}
-          color={'#9d5bd2'}
-          points={UNIT_POINTS}
-        />
-      )}
+      <Line
+        ref={outline}
+        lineWidth={2}
+        color={'#9d5bd2'}
+        points={UNIT_POINTS}
+      />
 
-      {/* <ResizeNode // top left
+      <ResizeNode // top left
         bounds={selectionBounds}
         constant={[1, -1]}
         movable={[-1, 1]}
@@ -149,7 +157,7 @@ export const ResizeControls = () => {
         constant={[1, 0]}
         movable={[-1, 0]}
         maintainSlope
-      /> */}
+      />
     </group>
   );
 };

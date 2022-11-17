@@ -2,7 +2,7 @@ import { Part } from 'game/parts/Part';
 import useBlueprint from 'stores/blueprint';
 import { getPart } from './getPart';
 
-interface SubscribeToPartOptions {
+export interface SubscribeToPartOptions {
   fireInitially: boolean;
 }
 const subscribeToPartDefaultOptions = {

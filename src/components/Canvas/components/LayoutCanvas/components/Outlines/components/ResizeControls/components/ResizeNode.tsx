@@ -1,12 +1,12 @@
 import { Line } from '@react-three/drei';
-import { ThreeEvent, useFrame, useThree } from '@react-three/fiber';
-import { FC, useEffect, useRef } from 'react';
+import { ThreeEvent, useFrame } from '@react-three/fiber';
+import { FC, MutableRefObject, useEffect, useRef } from 'react';
 import { Bounds } from 'stores/bounds';
 import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
 import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
 export interface ResizeNodeProps {
-  bounds: Bounds;
+  bounds: MutableRefObject<Bounds>;
   constant: Vector2Tuple;
   movable: Vector2Tuple;
   maintainSlope?: boolean;
@@ -44,10 +44,9 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   movable: movableSide,
   // maintainSlope = false,
 }) => {
-  const { invalidate } = useThree();
   const group = useRef<Group>(null);
   // const constant = sideToPoint(bounds, constantSide);
-  const movable = sideToPoint(bounds, movableSide);
+  const movable = sideToPoint(bounds.current, movableSide);
 
   useFrame(({ camera }) => {
     const scale = (1 / camera.zoom) * NODE_SIZE;
@@ -56,8 +55,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
   useEffect(() => {
     group.current?.position.set(...movable, 2);
-    group.current?.rotation.set(0, 0, bounds.rotation);
-    invalidate();
+    group.current?.rotation.set(0, 0, bounds.current.rotation);
   });
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
@@ -67,7 +65,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     window.addEventListener('pointerup', handlePointerUp);
   };
   const handlePointerMove = () => {
-    invalidate();
+    //
   };
   const handlePointerUp = () => {
     window.removeEventListener('pointermove', handlePointerMove);

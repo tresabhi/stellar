@@ -1,10 +1,10 @@
 import { DeferUpdatesEventDetail, getDeferUpdates } from './getDeferUpdates';
 
-export const deferUpdates = () => {
-  if (!getDeferUpdates()) {
+export const undeferUpdates = () => {
+  if (getDeferUpdates()) {
     window.dispatchEvent(
       new CustomEvent<DeferUpdatesEventDetail>('deferupdates', {
-        detail: true,
+        detail: false,
       }),
     );
   }
