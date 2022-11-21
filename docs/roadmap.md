@@ -7,8 +7,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 - Rename parentId to parent_id
   - And fix other non-snake cases issues
 - Update textures and models
-  - Titan: https://i.imgur.com/5LMMyH1.png
-  - Hawk: https://i.imgur.com/VYA1EQ0.png
   - Frontier: https://i.imgur.com/XYssj66.png
   - Valiant: https://i.imgur.com/UkF5vIc.png
   - Kolibri: https://i.imgur.com/VjTrrqi.png
