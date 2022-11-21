@@ -5,6 +5,8 @@ import { Group, MeshStandardMaterial, Vector2Tuple } from 'three';
 import GLTFResult from 'types/GLTFResult';
 import { PartComponentProps } from 'types/Parts';
 
+// TODO: depricate offset
+
 export const createPhysicalPart = (
   model: string,
   offset: Vector2Tuple = [0, 0],
