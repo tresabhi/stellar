@@ -55,14 +55,14 @@ export const usePartWithOrientation = (
 
   usePartProperty(
     id,
-    (part: PartWithOrientation) => part.o,
-    (o, prevO) => {
-      object.current?.rotation.set(0, 0, (o.z / 180) * Math.PI);
+    (part: PartWithOrientation) => part.o.z,
+    (z, prevZ) => {
+      object.current?.rotation.set(0, 0, (z / 180) * Math.PI);
       invalidate();
 
-      if (object.current) {
+      if (object.current && boundsStore[id]) {
         const { bounds } = boundsStore[id];
-        const deltaRotation = ((o.z - prevO.z) / 180) * Math.PI;
+        const deltaRotation = ((z - prevZ) / 180) * Math.PI;
         const offsetX = bounds.x - object.current.position.x;
         const offsetY = bounds.y - object.current.position.y;
         const offset = Math.hypot(offsetX, offsetY);
@@ -81,7 +81,6 @@ export const usePartWithOrientation = (
         declareBoundsUpdated(id);
       }
     },
-    { fireInitially: false },
   );
 };
 

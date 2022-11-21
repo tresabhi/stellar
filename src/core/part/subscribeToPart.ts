@@ -2,17 +2,19 @@ import { Part } from 'game/parts/Part';
 import useBlueprint from 'stores/blueprint';
 import { getPart } from './getPart';
 
-export interface SubscribeToPartOptions {
+export interface SubscribeToPartOptions<Slice> {
   fireInitially: boolean;
+  equalityFn: (a: Slice, b: Slice) => boolean;
 }
-const subscribeToPartDefaultOptions = {
+const subscribeToPartDefaultOptions: SubscribeToPartOptions<unknown> = {
   fireInitially: false,
+  equalityFn: (a, b) => a === b,
 };
 export const subscribeToPart = <Type extends Part, Slice>(
   id: string,
-  handler: (slice: Slice) => void,
+  handler: (slice: Slice, prevSlice?: Slice) => void,
   slicer?: (part: Type) => Slice,
-  options?: Partial<SubscribeToPartOptions>,
+  options?: Partial<SubscribeToPartOptions<Slice>>,
 ) => {
   const mergedOptions = {
     ...subscribeToPartDefaultOptions,
@@ -20,7 +22,7 @@ export const subscribeToPart = <Type extends Part, Slice>(
   };
   let skipNextEvent = false;
 
-  const unsubscribe = useBlueprint.subscribe(
+  const unsubscribe = useBlueprint.subscribe<Slice | undefined>(
     (draft) => {
       const part = getPart<Type>(id, draft);
 
@@ -35,8 +37,14 @@ export const subscribeToPart = <Type extends Part, Slice>(
         unsubscribe();
       }
     },
-    (slice) => {
-      if (!skipNextEvent && slice !== undefined) handler(slice);
+    (slice, prevSlice) => {
+      if (!skipNextEvent && slice !== undefined) handler(slice, prevSlice);
+    },
+    {
+      equalityFn: (a, b) =>
+        a === undefined || b === undefined
+          ? false
+          : mergedOptions.equalityFn(a, b),
     },
   );
 

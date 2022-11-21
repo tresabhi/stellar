@@ -57,18 +57,28 @@ export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
       object.current?.scale.set(o.x, o.y, (Math.abs(o.x) + Math.abs(o.y)) / 2);
       invalidate();
 
-      if (object.current) {
+      if (object.current && boundsStore[id]) {
         const { bounds } = boundsStore[id];
         const scaleX = o.x / prevO.x;
         const scaleY = o.y / prevO.y;
-        const offsetX = bounds.x - object.current.position.x;
-        const offsetY = bounds.y - object.current.position.y;
-        const newOffsetX = offsetX * scaleX;
-        const newOffsetY = offsetY * scaleY;
-        const x = object.current.position.x + newOffsetX;
-        const y = object.current.position.y + newOffsetY;
         const width = bounds.width * scaleX;
         const height = bounds.height * scaleY;
+        const offsetX = bounds.x - object.current.position.x;
+        const offsetY = bounds.y - object.current.position.y;
+        const offset = Math.hypot(offsetX, offsetY);
+        const offsetRotation = Math.atan2(offsetY, offsetX);
+        const offsetRotationSubbed = offsetRotation - bounds.rotation;
+        const subbedOffsetX = offset * Math.cos(offsetRotationSubbed);
+        const subbedOffsetY = offset * Math.sin(offsetRotationSubbed);
+        const scaledOffsetX = subbedOffsetX * scaleX;
+        const scaledOffsetY = subbedOffsetY * scaleY;
+        const scaledOffset = Math.hypot(scaledOffsetX, scaledOffsetY);
+        const scaledRotation = Math.atan2(scaledOffsetY, scaledOffsetX);
+        const scaledRotationAdded = scaledRotation + bounds.rotation;
+        const finalOffsetX = scaledOffset * Math.cos(scaledRotationAdded);
+        const finalOffsetY = scaledOffset * Math.sin(scaledRotationAdded);
+        const x = object.current.position.x + finalOffsetX;
+        const y = object.current.position.y + finalOffsetY;
 
         bounds.x = x;
         bounds.y = y;
@@ -78,7 +88,7 @@ export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
         declareBoundsUpdated(id);
       }
     },
-    { fireInitially: false },
+    { equalityFn: (a, b) => a.x === b.x && a.y === b.y },
   );
 };
 

@@ -60,7 +60,7 @@ export const usePartWithPosition = (
       object.current?.position.set(p.x, p.y, 0);
       invalidate();
 
-      if (object.current) {
+      if (object.current && boundsStore[id]) {
         const { bounds } = boundsStore[id];
 
         bounds.x += p.x - prevP.x;
@@ -69,7 +69,6 @@ export const usePartWithPosition = (
         declareBoundsUpdated(id);
       }
     },
-    { fireInitially: false },
   );
 };
 

@@ -7,7 +7,7 @@ const usePartProperty = <Type extends Part, Slice>(
   id: string,
   slicer: (state: Type) => Slice,
   handler: (slice: Slice, prevState: Slice) => void,
-  options?: SubscribeToPartOptions,
+  options?: Partial<SubscribeToPartOptions<Slice>>,
 ) => {
   let lastState = slicer(useBlueprint.getState().parts[id] as Type);
 
