@@ -28,7 +28,10 @@ export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
       const id = generateId(newBlueprint.parts);
       const importifiedPart = partImportify(vanillaPart, id);
 
-      if (importifiedPart) newBlueprint.parts[id] = importifiedPart;
+      if (importifiedPart) {
+        newBlueprint.parts[id] = importifiedPart;
+        newBlueprint.part_order.push(id);
+      }
     });
   } else {
     for (const id in importedBlueprint.parts) {
@@ -36,6 +39,8 @@ export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
 
       if (importifiedPart) newBlueprint.parts[id] = importifiedPart;
     }
+
+    newBlueprint.part_order = (importedBlueprint as Blueprint).part_order;
   }
 
   return newBlueprint;

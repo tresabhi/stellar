@@ -138,42 +138,15 @@ interface Template {
 
 // TODO: add move templates with credits
 const TEMPLATES: Template[] = [
-  {
-    name: 'tab.create.templates.list.hopper',
-    blueprint: hopper,
-  },
-  {
-    name: 'tab.create.templates.list.apollo_mission',
-    blueprint: apolloMission,
-  },
-  {
-    name: 'tab.create.templates.list.light_lander',
-    blueprint: lightLander,
-  },
-  {
-    name: 'tab.create.templates.list.rover',
-    blueprint: rover,
-  },
-  {
-    name: 'tab.create.templates.list.parachute_and_separator',
-    blueprint: parachuteAndSeparator,
-  },
-  {
-    name: 'tab.create.templates.list.joints',
-    blueprint: joints,
-  },
-  {
-    name: 'tab.create.templates.list.orbit_and_re_entry',
-    blueprint: orbitAndReEntry,
-  },
-  {
-    name: 'tab.create.templates.list.race_car',
-    blueprint: raceCar,
-  },
-  {
-    name: 'tab.create.templates.list.basic_rocket',
-    blueprint: basicRocket,
-  },
+  { name: 'hopper', blueprint: hopper },
+  { name: 'apollo_mission', blueprint: apolloMission },
+  { name: 'light_lander', blueprint: lightLander },
+  { name: 'rover', blueprint: rover },
+  { name: 'parachute_and_separator', blueprint: parachuteAndSeparator },
+  { name: 'joints', blueprint: joints },
+  { name: 'orbit_and_re_entry', blueprint: orbitAndReEntry },
+  { name: 'race_car', blueprint: raceCar },
+  { name: 'basic_rocket', blueprint: basicRocket },
 ];
 
 const FileActions = styled('div', {
@@ -189,7 +162,7 @@ export const CreateTab = () => {
     () =>
       TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
         ({ name, blueprint, credit }) => {
-          const translation = translate(name);
+          const translation = translate(`tab.create.templates.list.${name}`);
 
           const handleClick = () => {
             loadBlueprint(blueprint);
