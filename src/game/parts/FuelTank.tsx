@@ -3,7 +3,7 @@ import { useThree } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as Properties from 'components/Properties';
 import { mutateSettings } from 'core/app';
-import { declareBoundsUpdated, getBoundsFromObject } from 'core/bounds';
+import { declareBoundsUpdated } from 'core/bounds';
 import { getPart } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import {
@@ -139,11 +139,27 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
         );
         mesh.current.position.set(0, N.height / 2, 0);
 
-        const bounds = getBoundsFromObject(mesh.current);
-        boundsStore[id] = { bounds, needsRecomputation: false };
+        if (boundsStore[id] && wrapper.current) {
+          const { o } = getPart<FuelTank>(id);
+          const { bounds } = boundsStore[id];
+          const width = Math.max(N.width_a, N.width_b) * o.x;
+          const height = N.height * o.y;
+          const offset = height / 2;
+          const offsetRotation = mesh.current.rotation.z + Math.PI / 2;
+          const offsetX = offset * Math.cos(offsetRotation);
+          const offsetY = offset * Math.sin(offsetRotation);
+          const x = wrapper.current.position.x + offsetX;
+          const y = wrapper.current.position.y + offsetY;
 
-invalidate()
-        declareBoundsUpdated(id);
+          bounds.x = x;
+          bounds.y = y;
+          bounds.width = width;
+          bounds.height = height;
+
+          declareBoundsUpdated(id);
+        }
+
+        invalidate();
       }
     },
   );
