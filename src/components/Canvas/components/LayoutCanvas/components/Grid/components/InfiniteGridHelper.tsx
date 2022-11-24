@@ -81,7 +81,7 @@ export const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
             },
           ]}
         />
-        <planeBufferGeometry />
+        <planeGeometry />
       </mesh>
     );
   },
