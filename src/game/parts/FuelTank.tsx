@@ -145,7 +145,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
           const width = Math.max(N.width_a, N.width_b) * o.x;
           const height = N.height * o.y;
           const offset = height / 2;
-          const offsetRotation = mesh.current.rotation.z + Math.PI / 2;
+          const offsetRotation = wrapper.current.rotation.z + Math.PI / 2;
           const offsetX = offset * Math.cos(offsetRotation);
           const offsetY = offset * Math.sin(offsetRotation);
           const x = wrapper.current.position.x + offsetX;
