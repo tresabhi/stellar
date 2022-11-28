@@ -41,9 +41,11 @@ export const PartBounds = memo<PartBoundProps>(
     const resize = () => {
       if (boundsStore[id]) {
         const { bounds } = boundsStore[id];
+
         wrapper.current?.position.set(bounds.x, bounds.y, 0);
         wrapper.current?.rotation.set(0, 0, bounds.rotation);
         wrapper.current?.scale.set(bounds.width, bounds.height, 1);
+        invalidate();
       }
     };
 
@@ -61,20 +63,12 @@ export const PartBounds = memo<PartBoundProps>(
         (state) => state.selected,
       );
 
-      const handleBoundsUpdated = resize;
-
-      window.addEventListener(
-        `boundsupdated${id}`,
-        handleBoundsUpdated as EventListener,
-      );
+      window.addEventListener(`boundsupdated${id}`, resize);
 
       return () => {
         unsubscribeSelected();
 
-        window.removeEventListener(
-          `boundsupdated${id}`,
-          handleBoundsUpdated as EventListener,
-        );
+        window.removeEventListener(`boundsupdated${id}`, resize);
       };
     });
 

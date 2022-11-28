@@ -11,6 +11,7 @@ export interface Bounds {
 
 export interface BoundListing {
   bounds: Bounds;
+  // TODO: deprecate this if we don't actually need this
   needsRecomputation: boolean;
 }
 

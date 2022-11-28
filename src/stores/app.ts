@@ -48,6 +48,7 @@ export interface UseApp {
     clipboard?: Snippet;
     camera?: Camera;
     invalidateFrame?: () => void;
+    batchBoundUpdates: boolean;
   };
 }
 
@@ -73,6 +74,7 @@ export const UseAppData: UseApp = {
     clipboard: undefined,
     camera: undefined,
     invalidateFrame: undefined,
+    batchBoundUpdates: false,
   },
 };
 

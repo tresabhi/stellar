@@ -1,15 +1,23 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
-import PartCluster from 'components/Canvas/components/PartCluster';
-import { partExportify, removePartMetaData } from 'core/part';
+import { declareBoundsUpdated, getBoundsFromParts } from 'core/bounds';
+import {
+  getPart,
+  getPartRegistry,
+  partExportify,
+  removePartMetaData,
+} from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
-import useDragControls from 'hooks/useDragControls';
-import useSelectionControl from 'hooks/useSelectionControl';
 import { isArray } from 'lodash';
-import { FC, useRef } from 'react';
+import { FC, useEffect } from 'react';
+import useApp from 'stores/app';
+import useBlueprint from 'stores/blueprint';
+import boundsStore from 'stores/bounds';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
-import { Group as ThreeGroup } from 'three';
 import { PartComponentProps } from 'types/Parts';
+import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { Part, PartData, VanillaPart } from './Part';
+
+const RECALCULATE_DEBOUNCE = 0;
 
 export interface Group extends Part {
   readonly n: 'Group';
@@ -27,18 +35,51 @@ export const GroupData: Group = {
 };
 
 export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
-  const cluster = useRef<ThreeGroup>(null);
-  const handleClick = useSelectionControl(id);
-  const handlePointerDown = useDragControls(id);
-
-  return (
-    <PartCluster
-      ref={cluster}
-      parentId={id}
-      onClick={handleClick}
-      onPointerDown={handlePointerDown}
-    />
+  const partOrder = useBlueprint(
+    (state) => getPart<Group>(id, state).part_order,
   );
+  const partListing: JSX.Element[] = [];
+
+  const recalculateBounds = () => {
+    if (!useApp.getState().editor.batchBoundUpdates) {
+      const bounds = getBoundsFromParts(partOrder);
+      boundsStore[id] = { bounds, needsRecomputation: false };
+
+      declareBoundsUpdated(id);
+    }
+  };
+  const debouncedRecalculateBounds = fallingEdgeDebounce(
+    recalculateBounds,
+    RECALCULATE_DEBOUNCE,
+  );
+
+  partOrder.forEach((Id) => {
+    const part = getPart(Id);
+    const LayoutComponent = getPartRegistry(part.n)?.Mesh;
+
+    if (LayoutComponent) {
+      partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);
+    }
+  });
+
+  useEffect(() => {
+    recalculateBounds();
+
+    partOrder.forEach((id) => {
+      window.addEventListener(`boundsupdated${id}`, debouncedRecalculateBounds);
+    });
+
+    return () => {
+      partOrder.forEach((id) => {
+        window.removeEventListener(
+          `boundsupdated${id}`,
+          debouncedRecalculateBounds,
+        );
+      });
+    };
+  });
+
+  return <group>{partListing}</group>;
 };
 
 export const GroupIcon = Icon;

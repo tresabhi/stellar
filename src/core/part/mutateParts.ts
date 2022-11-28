@@ -5,12 +5,12 @@ import { Part } from 'game/parts/Part';
 
 export const mutateParts = <Type extends Part>(
   ids: string[],
-  mutator: (draft: Type) => void,
+  mutator: (draft: Type, index:number) => void,
   draft?: Blueprint,
   recursive = false,
 ) => {
   if (draft) {
-    ids.forEach((id) => {
+    ids.forEach((id,index) => {
       const part = draft.parts[id] as Type;
 
       if (recursive && part.n === 'Group') {
@@ -21,7 +21,7 @@ export const mutateParts = <Type extends Part>(
           true,
         );
       } else {
-        mutator(part);
+        mutator(part,index);
       }
     });
   } else {
