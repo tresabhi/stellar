@@ -181,12 +181,5 @@
         "dismiss": "Dismiss"
       }
     }
-  },
-  "offline_ready": {
-    "title": "Stellar is now available offline",
-    "description": "You can now access Stellar regardless of a connection to WiFi.",
-    "actions": {
-      "dismiss": "Dismiss"
-    }
   }
 }

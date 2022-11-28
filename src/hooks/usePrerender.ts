@@ -12,27 +12,6 @@ export const usePrerender = () => {
   globalStyles();
   useKeybinds();
 
-  if (stellarContext.codeName !== 'dev') {
-    console.log(
-      '%cWARNING!',
-      `
-        background-color: red;
-        color: white;
-        font-size: 32px;
-        font-weight: bold;
-      `,
-    );
-    console.log(
-      `%cDo not paste in anything here unless you know what you are doing!Malicious code can harm ${stellarContext.title} and your data (blueprints, snippets, etc.) permanently`,
-      `
-        background-color: orange;
-        color: white;
-        font-weight: bold;
-        font-size: 16px;
-      `,
-    );
-  }
-
   // const version = stellarContext.version.split('.');
   // document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
   const prettifiedVersion = prettifyVersion(packageJSON.version);
