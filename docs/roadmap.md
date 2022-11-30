@@ -4,37 +4,43 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 
 ## v1.0 Beta 6
 
-- Rename parentId to parent_id
-  - And fix other non-snake cases issues
-- Parts
-	- 3D 
-		- `Engine Titan`: https://i.imgur.com/9zLhESv.png
-		- `Engine Hawk`: https://i.imgur.com/5MdIm2G.png
-		- `Engine Fontier`: https://i.imgur.com/Zfmk9sz.png
-		- `Engine Valiant`: https://i.imgur.com/dJau6vf.png
-		- `Engine Kolibri`: https://i.imgur.com/2PMB5JX.png
-		- `Placeholder Ion`: https://i.imgur.com/Up8gkgP.png
-		- `Parachute`: https://i.imgur.com/YR58C0G.png
-		- `Engine Peregrine`: REMOVE FOR NOW
-		- `Capsule`: https://i.imgur.com/ei0PBxQ.png
-		- `Fuel Tank`: MAKE DEFAULT 2x2
-	- Flat
-		- `RCS`: https://i.imgur.com/breaWuI.png
-		- `Cone`: https://i.imgur.com/DKOMgyf.png
-		- `Cone Side`: https://i.imgur.com/tetvUJC.png
-- Updates from Figma
-  - Error screen
-    - Background color
-    - Text area background color
-  - Notifications
-    - Button orders and colors
-    - Remove "available offline" notification
-    - Add PWA installable notification
-    - Fix button font size
-  - Popups
-    - Button paddings
-  - Create tab "stellar" text
-    - Update subtitle font size
+ - Rename parentId to parent_id
+ - And fix other non-snake cases issues
+ - Parts
+	 - 3D
+		 - `Engine Titan`: https://i.imgur.com/9zLhESv.png
+		 - `Engine Hawk`: https://i.imgur.com/5MdIm2G.png
+		 - `Engine Fontier`: https://i.imgur.com/Zfmk9sz.png
+		 - `Engine Valiant`: https://i.imgur.com/dJau6vf.png
+		 - `Engine Kolibri`: https://i.imgur.com/2PMB5JX.png
+		 - `Placeholder Ion`: https://i.imgur.com/Up8gkgP.png
+		 - `Parachute`: https://i.imgur.com/YR58C0G.png
+		 - `Engine Peregrine`: REMOVE FOR NOW
+		 - `Capsule`: https://i.imgur.com/ei0PBxQ.png
+		 - `Fuel Tank`: MAKE DEFAULT 2x2
+	 - Flat
+		 - `RCS`: https://i.imgur.com/breaWuI.png
+		 - `Cone`: https://i.imgur.com/DKOMgyf.png
+		 - `Cone Side`: https://i.imgur.com/tetvUJC.png
+ - Updates from Figma
+ - Error screen
+	 - Background color
+	 - Text area background color
+ - Notifications
+	 - Button orders and colors
+	 - Remove "available offline" notification
+	 - Add PWA installable notification
+	 - Fix button font size
+ - Popups
+	 - Button paddings
+ - Create tab "stellar" text
+	 - Update subtitle font size
+ - Canvas
+	 - Move all to toolbar
+	 - Move zen-mode to preferences
+ - Property editor
+	 - Property hints
+ - Add settings
 
 ## v1.0 Beta 7
 
