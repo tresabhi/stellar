@@ -4,7 +4,6 @@ import {
   ComponentPropsWithoutRef,
   forwardRef,
   MouseEvent,
-  RefObject,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -92,7 +91,13 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
       onChange && onChange({ ...event, value: !value, indeterminate: false });
     };
 
-    useCustomProperties(trigger);
+    useEffect(() => {
+      if (trigger.current) {
+        (trigger.current as CheckboxRef).setValue = setValue;
+        (trigger.current as CheckboxRef).setIndeterminate = setIndeterminate;
+      }
+    });
+
     useImperativeHandle(ref, () => trigger.current as CheckboxRef);
 
     return (
@@ -108,12 +113,3 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
     );
   },
 );
-
-const useCustomProperties = (trigger: RefObject<HTMLButtonElement>) => {
-  useEffect(() => {
-    if (trigger.current) {
-      (trigger.current as CheckboxRef).setValue = setValue;
-      (trigger.current as CheckboxRef).setIndeterminate = setIndeterminate;
-    }
-  });
-};
