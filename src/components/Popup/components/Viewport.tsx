@@ -24,15 +24,18 @@ const Container = styled('div', {
 
 export const Viewport = () => {
   const popups = usePopups((state) => state.popups);
-  const popupNodes = popups.map(({ id, node }) => {
-    const handleClick = () => dismissPopup(id);
+  const popupNodes = popups
+    .slice(0)
+    .reverse()
+    .map(({ id, node }) => {
+      const handleClick = () => dismissPopup(id);
 
-    return (
-      <Container onClick={handleClick} key={id}>
-        {node}
-      </Container>
-    );
-  });
+      return (
+        <Container onClick={handleClick} key={id}>
+          {node}
+        </Container>
+      );
+    });
 
   return <Wrapper>{popupNodes}</Wrapper>;
 };

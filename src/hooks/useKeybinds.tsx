@@ -154,7 +154,7 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
   );
 };
 
-export const RenamePartsPopup:FC<PopupProps> = ({ id }) => {
+export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
@@ -448,14 +448,8 @@ const useKeybinds = () => {
     bind('ctrl+g', groupPartsBySelection);
     bind('ctrl+shift+g', ungroupGroupsBySelection);
 
-    // bind('ctrl+shift+i', () => popupOpen(Popup.InsertPart));
-    // bind(['ctrl+r', 'f2'], () => {
-    //   if (useBlueprint.getState().selections.length > 0) {
-    //     popupOpen(Popup.RenameParts);
-    //   }
-    // });
-    bind('ctrl+shift+i', () => popup(InsertPartPopup));
-    bind('ctrl+r', () => popup(RenamePartsPopup));
+    bind('ctrl+shift+i', () => popup(InsertPartPopup, 'insert-part'));
+    bind('ctrl+r', () => popup(RenamePartsPopup, 'rename-parts'));
 
     bind('.', panToPartBySelection);
   }, []);
