@@ -45,6 +45,7 @@ import { PopupProps } from 'stores/popups';
 import useSettings, { InterfaceMode, UseSettings } from 'stores/settings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
+import { usePopupConcurrency } from './usePopupConcurrency';
 
 const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
@@ -127,6 +128,8 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
     });
   });
 
+  usePopupConcurrency();
+
   return (
     <Popup.Container width="regular">
       <InputWithIcon
@@ -183,6 +186,8 @@ export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
   };
   const handleCancelClick = () => dismissPopup(id);
   const handleApplyClick = apply;
+
+  usePopupConcurrency();
 
   return (
     <Popup.Container width="regular">
