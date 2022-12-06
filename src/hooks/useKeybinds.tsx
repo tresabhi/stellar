@@ -454,7 +454,11 @@ const useKeybinds = () => {
     bind('ctrl+shift+g', ungroupGroupsBySelection);
 
     bind('ctrl+shift+i', () => popup(InsertPartPopup, 'insert-part'));
-    bind('ctrl+r', () => popup(RenamePartsPopup, 'rename-parts'));
+    bind('ctrl+r', () => {
+      if (useBlueprint.getState().selections.length > 0) {
+        popup(RenamePartsPopup, 'rename-parts');
+      }
+    });
 
     bind('.', panToPartBySelection);
   }, []);
