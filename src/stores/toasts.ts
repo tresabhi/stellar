@@ -1,21 +1,18 @@
-import { FC } from 'react';
+import { ReactNode } from 'react';
 import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface ToastProps {
   id: string;
-  close: () => void;
 }
 
-export type Toast = FC<ToastProps>;
-
-export interface ToastData {
+export interface Toast {
   id: string;
-  Component: Toast;
+  node: ReactNode;
 }
 
 export type UseToasts = {
-  toasts: ToastData[];
+  toasts: Toast[];
 };
 
 const useToasts = create<UseToasts, [['zustand/subscribeWithSelector', never]]>(

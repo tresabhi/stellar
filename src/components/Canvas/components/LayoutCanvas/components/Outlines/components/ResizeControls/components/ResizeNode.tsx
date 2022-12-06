@@ -156,7 +156,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     scaledSize.copy(movedMovable).sub(constant);
     scale.copy(scaledSize).divide(size);
 
-    selections.forEach((selection, index) => {
+    selections.forEach((selection) => {
       resizePartAsync(selection, [constant.x, constant.y], [scale.x, scale.y]);
     });
 

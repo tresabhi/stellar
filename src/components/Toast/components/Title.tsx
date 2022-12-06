@@ -1,7 +1,6 @@
-import * as ToastPrimitive from '@radix-ui/react-toast';
 import { styled, theme } from 'stitches.config';
 
-export const Title = styled(ToastPrimitive.Title, {
+export const Title = styled('span', {
   fontSize: theme.fontSizes[14],
   color: theme.colors.textHighContrast,
 });

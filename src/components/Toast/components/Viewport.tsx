@@ -1,7 +1,7 @@
-import * as ToastPrimitive from '@radix-ui/react-toast';
 import { styled, theme } from 'stitches.config';
+import useToasts from 'stores/toasts';
 
-export const Viewport = styled(ToastPrimitive.Viewport, {
+const Container = styled('div', {
   position: 'fixed',
   bottom: 0,
   right: 0,
@@ -12,3 +12,10 @@ export const Viewport = styled(ToastPrimitive.Viewport, {
   margin: 0,
   listStyle: 'none',
 });
+
+export const Viewport = () => {
+  const toasts = useToasts((state) => state.toasts);
+  const toastNodes = toasts.map((toast) => toast.node);
+
+  return <Container>{toastNodes}</Container>;
+};

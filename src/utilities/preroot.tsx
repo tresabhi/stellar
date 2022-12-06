@@ -1,6 +1,7 @@
 import { extend } from '@react-three/fiber';
 import * as Toast from 'components/Toast';
 import { toast } from 'core/interface';
+import { dismissToast } from 'core/interface/dismissToast';
 import { useTranslator } from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
 import { BufferGeometry, Mesh } from 'three';
@@ -12,9 +13,10 @@ import {
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
 import { registerSW } from 'virtual:pwa-register';
+
 const updateSW = registerSW({
   onNeedRefresh: () => {
-    toast(({ close }) => {
+    toast(({ id }) => {
       const { t } = useTranslator();
 
       return (
@@ -28,7 +30,7 @@ const updateSW = registerSW({
               onClick={() => updateSW(true)}
             >{t`toasts.update_available.actions.restart`}</Toast.Action>
             <Toast.Action
-              onClick={close}
+              onClick={() => dismissToast(id)}
             >{t`toasts.update_available.actions.dismiss`}</Toast.Action>
           </Toast.Actions>
         </Toast.Root>

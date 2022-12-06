@@ -1,7 +1,6 @@
-import * as ToastPrimitive from '@radix-ui/react-toast';
 import { styled, theme } from 'stitches.config';
 
-export const Root = styled(ToastPrimitive.Root, {
+export const Root = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   padding: theme.space.paddingMajor,

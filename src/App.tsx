@@ -1,7 +1,6 @@
 import 'App.css';
 import * as ErrorBoundary from 'components/ErrorBoundary';
 import { LandscapePrompt } from 'components/LandscapePrompt';
-import * as Toast from 'components/Toast';
 import { usePrerender } from 'hooks/usePrerender';
 import { Route, Routes } from 'react-router-dom';
 import { Home } from 'routes/Home';
@@ -25,16 +24,12 @@ const App = () => {
   return (
     <ErrorBoundary.Wrapper className={theme}>
       <LandscapePrompt className={theme}>
-        <Toast.Provider duration={Infinity} swipeThreshold={Infinity}>
-          <AppContainer className={theme}>
-            <Routes>
-              <Route path="/interface" element={<Interface />} />
-              <Route path="*" element={<Home />} />
-            </Routes>
-
-            <Toast.All />
-          </AppContainer>
-        </Toast.Provider>
+        <AppContainer className={theme}>
+          <Routes>
+            <Route path="/interface" element={<Interface />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </AppContainer>
       </LandscapePrompt>
     </ErrorBoundary.Wrapper>
   );

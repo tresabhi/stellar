@@ -1,3 +1,4 @@
+import * as Toast from 'components/Toast';
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/app';
@@ -29,6 +30,7 @@ const Interface = () => {
   return (
     <Container>
       <Popups />
+      <Toast.Viewport />
 
       {!zenMode && <Tabs />}
 
