@@ -30,7 +30,7 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
         selected={leftSidebar.tab === SidebarTab.Left}
         icon={<LayersIcon />}
       >
-        {t`tab.layout.left_sidebar.parts`}
+        {t`tabs.layout.left_sidebar.parts`}
       </Sidebar.Tab>
       <Sidebar.Tab
         onClick={handleClick(SidebarTab.Right)}
@@ -38,8 +38,8 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
         icon={swapSecondTab ? <MixerVerticalIcon /> : <Component1Icon />}
       >
         {swapSecondTab
-          ? t`tab.layout.right_sidebar.properties`
-          : t`tab.layout.left_sidebar.snippets`}
+          ? t`tabs.layout.right_sidebar.properties`
+          : t`tabs.layout.left_sidebar.snippets`}
       </Sidebar.Tab>
     </Sidebar.TabContainer>
   );

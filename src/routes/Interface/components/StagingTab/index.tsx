@@ -19,7 +19,7 @@ export const StagingTab = () => {
           fontSize: theme.fontSizes[16].toString(),
         }}
       >
-        {t`tab.coming_soon`}
+        {t`tabs.coming_soon`}
       </div>
     </TabContainer>
   );

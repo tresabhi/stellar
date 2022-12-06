@@ -10,11 +10,11 @@ export const Parts = () => {
 
   return hasNoParts ? (
     <Sidebar.MessageContainer>
-      <Sidebar.Message>{t`tab.layout.left_sidebar.parts.no_parts`}</Sidebar.Message>
+      <Sidebar.Message>{t`tabs.layout.left_sidebar.parts.no_parts`}</Sidebar.Message>
       <Sidebar.Message subMessage>
-        {f`tab.layout.left_sidebar.parts.no_parts.instructions`[0]}
+        {f`tabs.layout.left_sidebar.parts.no_parts.instructions`[0]}
         <PlusIcon />
-        {f`tab.layout.left_sidebar.parts.no_parts.instructions`[1]}
+        {f`tabs.layout.left_sidebar.parts.no_parts.instructions`[1]}
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   ) : (

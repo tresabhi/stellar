@@ -31,15 +31,15 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
         icon={swapSecondTab ? <Component1Icon /> : <MixerVerticalIcon />}
       >
         {swapSecondTab
-          ? t`tab.layout.left_sidebar.snippets`
-          : t`tab.layout.right_sidebar.properties`}
+          ? t`tabs.layout.left_sidebar.snippets`
+          : t`tabs.layout.right_sidebar.properties`}
       </Sidebar.Tab>
       <Sidebar.Tab
         onClick={handleClick(SidebarTab.Right)}
         selected={rightSidebar.tab === SidebarTab.Right}
         icon={<MagnifyingGlassIcon />}
       >
-        {t`tab.layout.right_sidebar.inspect`}
+        {t`tabs.layout.right_sidebar.inspect`}
       </Sidebar.Tab>
     </Sidebar.TabContainer>
   );

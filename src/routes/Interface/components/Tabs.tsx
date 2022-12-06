@@ -25,16 +25,16 @@ export const Tabs = () => {
   return (
     <TabBar.Container>
       <TabBar.Tab {...is(Tab.Create)} icon={<FilePlusIcon />}>
-        {t`tab.create`}
+        {t`tabs.create`}
       </TabBar.Tab>
       <TabBar.Tab {...is(Tab.Layout)} icon={<RulerHorizontalIcon />}>
-        {t`tab.layout`}
+        {t`tabs.layout`}
       </TabBar.Tab>
       <TabBar.Tab {...is(Tab.Staging)} icon={<ListBulletIcon />}>
-        {t`tab.staging`}
+        {t`tabs.staging`}
       </TabBar.Tab>
       <TabBar.Tab {...is(Tab.Export)} icon={<ExitIcon />}>
-        {t`tab.export`}
+        {t`tabs.export`}
       </TabBar.Tab>
     </TabBar.Container>
   );

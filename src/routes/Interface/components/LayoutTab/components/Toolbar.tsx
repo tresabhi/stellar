@@ -131,7 +131,7 @@ const Toolbar = () => {
             keybind="Ctrl + N"
             onClick={handleNewClick}
           >
-            {t`tab.layout.toolbar.file.new`}
+            {t`tabs.layout.toolbar.file.new`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -139,7 +139,7 @@ const Toolbar = () => {
             keybind="Ctrl + O"
             onClick={handleOpenClick}
           >
-            {t`tab.layout.toolbar.file.open`}
+            {t`tabs.layout.toolbar.file.open`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -147,7 +147,7 @@ const Toolbar = () => {
             keybind="Ctrl + S"
             onClick={handleSaveClick}
           >
-            {t`tab.layout.toolbar.file.save`}
+            {t`tabs.layout.toolbar.file.save`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -155,7 +155,7 @@ const Toolbar = () => {
             keybind="Ctrl + Shift + S"
             onClick={handleSaveAsClick}
           >
-            {t`tab.layout.toolbar.file.save_as`}
+            {t`tabs.layout.toolbar.file.save_as`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -163,7 +163,7 @@ const Toolbar = () => {
             keybind="Ctrl + I"
             onClick={handleImportClick}
           >
-            {t`tab.layout.toolbar.file.import`}
+            {t`tabs.layout.toolbar.file.import`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -171,7 +171,7 @@ const Toolbar = () => {
             keybind="Ctrl + E"
             onClick={handleExportClick}
           >
-            {t`tab.layout.toolbar.file.export`}
+            {t`tabs.layout.toolbar.file.export`}
           </ToolbarComponent.DropdownMenuItem>
         </ToolbarComponent.DropdownMenu>
 
@@ -182,7 +182,7 @@ const Toolbar = () => {
             icon={<CursorArrowIcon />}
             onClick={handleMoveClick}
           >
-            {t`tab.layout.toolbar.tool.move`}
+            {t`tabs.layout.toolbar.tool.move`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -190,7 +190,7 @@ const Toolbar = () => {
             keybind="Space"
             onClick={handlePanClick}
           >
-            {t`tab.layout.toolbar.tool.pan`}
+            {t`tabs.layout.toolbar.tool.pan`}
           </ToolbarComponent.DropdownMenuItem>
         </ToolbarComponent.DropdownMenu>
 
@@ -210,7 +210,7 @@ const Toolbar = () => {
             onClick={handleSelectAllClick}
             keybind="Ctrl + A"
           >
-            {t`tab.layout.toolbar.selection.select_all`}
+            {t`tabs.layout.toolbar.selection.select_all`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -219,7 +219,7 @@ const Toolbar = () => {
             onClick={handleUnselectAllClick}
             keybind="Esc"
           >
-            {t`tab.layout.toolbar.selection.unselect_all`}
+            {t`tabs.layout.toolbar.selection.unselect_all`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -228,7 +228,7 @@ const Toolbar = () => {
             onClick={handleGroupClick}
             keybind="Ctrl + G"
           >
-            {t`tab.layout.toolbar.selection.group`}
+            {t`tabs.layout.toolbar.selection.group`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -237,7 +237,7 @@ const Toolbar = () => {
             onClick={handleUngroupClick}
             keybind="Ctrl + Shift + G"
           >
-            {t`tab.layout.toolbar.selection.ungroup`}
+            {t`tabs.layout.toolbar.selection.ungroup`}
           </ToolbarComponent.DropdownMenuItem>
         </ToolbarComponent.DropdownMenu>
 
@@ -251,7 +251,7 @@ const Toolbar = () => {
             keybind="Ctrl + C"
             disabled={hasNoSelections}
           >
-            {t`tab.layout.toolbar.clipboard.copy`}
+            {t`tabs.layout.toolbar.clipboard.copy`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -260,7 +260,7 @@ const Toolbar = () => {
             keybind="Ctrl + X"
             disabled={hasNoSelections}
           >
-            {t`tab.layout.toolbar.clipboard.cut`}
+            {t`tabs.layout.toolbar.clipboard.cut`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -269,7 +269,7 @@ const Toolbar = () => {
             keybind="Ctrl + V"
             disabled={hasNoItemInClipboard}
           >
-            {t`tab.layout.toolbar.clipboard.paste`}
+            {t`tabs.layout.toolbar.clipboard.paste`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -278,7 +278,7 @@ const Toolbar = () => {
             keybind="Ctrl + D"
             disabled={hasNoSelections}
           >
-            {t`tab.layout.toolbar.clipboard.duplicate`}
+            {t`tabs.layout.toolbar.clipboard.duplicate`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -286,7 +286,7 @@ const Toolbar = () => {
             keybind="Ctrl + M"
             disabled
           >
-            {t`tab.layout.toolbar.clipboard.create_snippet`}
+            {t`tabs.layout.toolbar.clipboard.create_snippet`}
           </ToolbarComponent.DropdownMenuItem>
         </ToolbarComponent.DropdownMenu>
 
@@ -324,7 +324,7 @@ const Toolbar = () => {
             keybind="F1"
             onClick={link(WEBSITE)}
           >
-            {t`tab.layout.toolbar.help.about`}
+            {t`tabs.layout.toolbar.help.about`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
@@ -332,21 +332,21 @@ const Toolbar = () => {
             keybind="F4"
             onClick={link(`${GH_REPO_URL}issues/new/choose`)}
           >
-            {t`tab.layout.toolbar.help.report`}
+            {t`tabs.layout.toolbar.help.report`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
             icon={<DiscordLogoIcon />}
             onClick={link(DISCORD)}
           >
-            {t`tab.layout.toolbar.help.discord`}
+            {t`tabs.layout.toolbar.help.discord`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
             icon={<GitHubLogoIcon />}
             onClick={link(GH_REPO_URL)}
           >
-            {t`tab.layout.toolbar.help.github`}
+            {t`tabs.layout.toolbar.help.github`}
           </ToolbarComponent.DropdownMenuItem>
         </ToolbarComponent.DropdownMenu>
 
@@ -355,14 +355,14 @@ const Toolbar = () => {
             icon={<GearIcon />}
             keybind="Ctrl + ,"
           >
-            {t`tab.layout.toolbar.preferences.settings`}
+            {t`tabs.layout.toolbar.preferences.settings`}
           </ToolbarComponent.DropdownMenuItem>
 
           <ToolbarComponent.DropdownMenuItem
             keybind="Ctrl + K"
             icon={<KeyboardIcon />}
           >
-            {t`tab.layout.toolbar.preferences.keybinds`}
+            {t`tabs.layout.toolbar.preferences.keybinds`}
           </ToolbarComponent.DropdownMenuItem>
         </ToolbarComponent.DropdownMenu>
       </ToolbarComponent.Group>

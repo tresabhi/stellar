@@ -47,7 +47,7 @@ export const RenameParts = () => {
         onKeyDown={handleKeyDown}
         autoFocus
         icon={<Pencil1Icon />}
-        placeholder={t`tab.layout.popup.rename.input_placeholder`}
+        placeholder={t`tabs.layout.popup.rename.input_placeholder`}
       />
 
       <Popup.Content>
@@ -55,32 +55,32 @@ export const RenameParts = () => {
           defaultValue={rename.trim}
           onChange={handleClick('trim')}
         >
-          {t`tab.layout.popup.rename.trim`}
+          {t`tabs.layout.popup.rename.trim`}
         </CheckboxWithLabel>
         <CheckboxWithLabel
           defaultValue={rename.skipLocked}
           onChange={handleClick('skipLocked')}
         >
-          {t`tab.layout.popup.rename.skip_locked`}
+          {t`tabs.layout.popup.rename.skip_locked`}
         </CheckboxWithLabel>
         <CheckboxWithLabel
           defaultValue={rename.suffix}
           onChange={handleClick('suffix')}
         >
-          {t`tab.layout.popup.rename.suffix`}
+          {t`tabs.layout.popup.rename.suffix`}
         </CheckboxWithLabel>
       </Popup.Content>
 
       <Popup.ActionRow>
         <Popup.Button
           onClick={handleCancelClick}
-        >{t`tab.layout.popup.rename.cancel`}</Popup.Button>
+        >{t`tabs.layout.popup.rename.cancel`}</Popup.Button>
         <Popup.Button
           onClick={handleApplyClick}
           priority="callToAction"
           color="accent"
         >
-          {t`tab.layout.popup.rename.apply`}
+          {t`tabs.layout.popup.rename.apply`}
         </Popup.Button>
       </Popup.ActionRow>
     </Popup.Container>

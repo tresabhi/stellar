@@ -90,18 +90,18 @@ export const Properties = () => {
 
   return hasNoSelections ? (
     <Sidebar.MessageContainer>
-      <Sidebar.Message>{t`tab.layout.right_sidebar.properties.no_selection`}</Sidebar.Message>
+      <Sidebar.Message>{t`tabs.layout.right_sidebar.properties.no_selection`}</Sidebar.Message>
       <Sidebar.Message subMessage>
-        {t`tab.layout.right_sidebar.properties.no_selection.instructions`}
+        {t`tabs.layout.right_sidebar.properties.no_selection.instructions`}
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   ) : children.length > 0 ? (
     <PropertiesPrimitive.Container>{children}</PropertiesPrimitive.Container>
   ) : (
     <Sidebar.MessageContainer>
-      <Sidebar.Message>{t`tab.layout.right_sidebar.properties.no_properties`}</Sidebar.Message>
+      <Sidebar.Message>{t`tabs.layout.right_sidebar.properties.no_properties`}</Sidebar.Message>
       <Sidebar.Message subMessage>
-        {t`tab.layout.right_sidebar.properties.no_properties.instructions`}
+        {t`tabs.layout.right_sidebar.properties.no_properties.instructions`}
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   );

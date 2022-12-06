@@ -232,12 +232,12 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
 
   return (
     <Properties.Group>
-      <Properties.Title>{t`tab.layout.right_sidebar.properties.fuel_tank`}</Properties.Title>
+      <Properties.Title>{t`tabs.layout.right_sidebar.properties.fuel_tank`}</Properties.Title>
 
       <Properties.Row>
         <Properties.Input
           {...height}
-          label={t`tab.layout.right_sidebar.properties.fuel_tank.height`}
+          label={t`tabs.layout.right_sidebar.properties.fuel_tank.height`}
           unit="m"
         />
       </Properties.Row>
@@ -245,16 +245,16 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
       <Properties.Row>
         <Properties.Input
           {...topWidth}
-          label={t`tab.layout.right_sidebar.properties.fuel_tank.top_width`}
+          label={t`tabs.layout.right_sidebar.properties.fuel_tank.top_width`}
           unit="m"
         />
         <Properties.Input
           {...bottomWidth}
-          label={t`tab.layout.right_sidebar.properties.fuel_tank.bottom_width`}
+          label={t`tabs.layout.right_sidebar.properties.fuel_tank.bottom_width`}
           unit="m"
         />
         <Properties.ToggleButton
-          label={t`tab.layout.right_sidebar.properties.fuel_tank.constraint`}
+          label={t`tabs.layout.right_sidebar.properties.fuel_tank.constraint`}
           onClick={handleConstraintClick}
           selected={constraint}
         >
@@ -265,7 +265,7 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
       <Properties.Row>
         <Properties.SliderWithInput
           {...fuel}
-          label={t`tab.layout.right_sidebar.properties.fuel_tank.fuel`}
+          label={t`tabs.layout.right_sidebar.properties.fuel_tank.fuel`}
           unit="%"
           min={0}
           max={100}

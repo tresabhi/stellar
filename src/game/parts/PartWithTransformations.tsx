@@ -126,22 +126,22 @@ export const PartWithTransformationsPropertyComponent: FC<
 
   return (
     <Properties.Group>
-      <Properties.Title>{t`tab.layout.right_sidebar.properties.transformations`}</Properties.Title>
+      <Properties.Title>{t`tabs.layout.right_sidebar.properties.transformations`}</Properties.Title>
 
       <Properties.Row>
         <Properties.Input
           {...xPosition}
-          label={t`tab.layout.right_sidebar.properties.transformations.x_position`}
+          label={t`tabs.layout.right_sidebar.properties.transformations.x_position`}
           unit="m"
         />
         <Properties.Input
           {...yPosition}
-          label={t`tab.layout.right_sidebar.properties.transformations.y_position`}
+          label={t`tabs.layout.right_sidebar.properties.transformations.y_position`}
           unit="m"
         />
         <Properties.Input
           {...rotation}
-          label={t`tab.layout.right_sidebar.properties.transformations.rotation`}
+          label={t`tabs.layout.right_sidebar.properties.transformations.rotation`}
           unit="°"
         />
       </Properties.Row>
@@ -149,16 +149,16 @@ export const PartWithTransformationsPropertyComponent: FC<
       <Properties.Row>
         <Properties.Input
           {...xScale}
-          label={t`tab.layout.right_sidebar.properties.transformations.x_scale`}
+          label={t`tabs.layout.right_sidebar.properties.transformations.x_scale`}
           unit="x"
         />
         <Properties.Input
           {...yScale}
-          label={t`tab.layout.right_sidebar.properties.transformations.y_scale`}
+          label={t`tabs.layout.right_sidebar.properties.transformations.y_scale`}
           unit="x"
         />
         <Properties.ToggleButton
-          label={t`tab.layout.right_sidebar.properties.transformations.constraint`}
+          label={t`tabs.layout.right_sidebar.properties.transformations.constraint`}
           onClick={handleConstraintClick}
           selected={constraint}
         >

@@ -162,7 +162,7 @@ export const CreateTab = () => {
     () =>
       TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
         ({ name, blueprint, credit }) => {
-          const translation = translate(`tab.create.templates.list.${name}`);
+          const translation = translate(`tabs.create.templates.list.${name}`);
 
           const handleClick = () => {
             loadBlueprint(blueprint);
@@ -216,7 +216,7 @@ export const CreateTab = () => {
           <SearchWrapper>
             <InputWithIcon
               ref={input}
-              placeholder={t`tab.create.templates.input_placeholder`}
+              placeholder={t`tabs.create.templates.input_placeholder`}
               icon={<MagnifyingGlassIcon />}
             />
             <StyledSearch input={input} list={templates} />
@@ -233,19 +233,19 @@ export const CreateTab = () => {
 
             <FileActions>
               <Title>Stellar</Title>
-              <SubTitle>{t`tab.create.file_options.motto`}</SubTitle>
+              <SubTitle>{t`tabs.create.file_options.motto`}</SubTitle>
             </FileActions>
           </StellarContainer>
 
           <FileActions>
             <Button onClick={handleScratchClick} priority="solid">
-              <FilePlusIcon /> {t`tab.create.file_options.from_scratch`}
+              <FilePlusIcon /> {t`tabs.create.file_options.from_scratch`}
             </Button>
             <Button onClick={handleImportClick}>
-              <EnterIcon /> {t`tab.create.file_options.import`}
+              <EnterIcon /> {t`tabs.create.file_options.import`}
             </Button>
             <Button onClick={handleOpenClick}>
-              <UploadIcon /> {t`tab.create.file_options.open`}
+              <UploadIcon /> {t`tabs.create.file_options.open`}
             </Button>
           </FileActions>
         </SectionContainer>

@@ -122,7 +122,7 @@ export const StatusBar = () => {
             target="_blank"
             href={`https://${user}.github.io/${repo}/`}
           >
-            {t`tab.create.status_bar.docs`}
+            {t`tabs.create.status_bar.docs`}
           </StatusBarComponent.Anchor>
         </StatusBarComponent.Group>
       </StatusBarComponent.Group>

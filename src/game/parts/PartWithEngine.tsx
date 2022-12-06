@@ -58,16 +58,16 @@ export const PartWithEnginePropertyComponent: FC<
 
   return (
     <Properties.Group>
-      <Properties.Title>{t`tab.layout.right_sidebar.properties.engine`}</Properties.Title>
+      <Properties.Title>{t`tabs.layout.right_sidebar.properties.engine`}</Properties.Title>
 
       <Properties.Row>
         <Properties.Checkbox
           {...enabled}
-          label={t`tab.layout.right_sidebar.properties.engine.enabled`}
+          label={t`tabs.layout.right_sidebar.properties.engine.enabled`}
         />
         <Properties.Checkbox
           {...heatDamage}
-          label={t`tab.layout.right_sidebar.properties.engine.heat_damage`}
+          label={t`tabs.layout.right_sidebar.properties.engine.heat_damage`}
         />
       </Properties.Row>
     </Properties.Group>

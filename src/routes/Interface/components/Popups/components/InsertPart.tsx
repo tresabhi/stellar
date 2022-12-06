@@ -39,7 +39,7 @@ export const InsertPart = () => {
   partRegistry.forEach(({ vanillaData, Icon, data: { label } }, name) => {
     const note =
       vanillaData === null
-        ? t`tab.layout.popup.insert_part.abstract`
+        ? t`tabs.layout.popup.insert_part.abstract`
         : undefined;
 
     const handleClick = () => {
@@ -54,7 +54,7 @@ export const InsertPart = () => {
     list.push({
       string:
         vanillaData === null
-          ? `${label} ${t`tab.layout.popup.insert_part.abstract`}`
+          ? `${label} ${t`tabs.layout.popup.insert_part.abstract`}`
           : label,
       node: (
         <Popup.SearchItem
@@ -75,7 +75,7 @@ export const InsertPart = () => {
       <InputWithIcon
         ref={input}
         icon={<MagnifyingGlassIcon />}
-        placeholder={t`tab.layout.popup.insert_part.input_placeholder`}
+        placeholder={t`tabs.layout.popup.insert_part.input_placeholder`}
         autoFocus
       />
 
@@ -83,7 +83,7 @@ export const InsertPart = () => {
         list={list}
         input={input}
         fallback={
-          <Popup.SearchFallback>{t`tab.layout.popup.insert_part.fallback`}</Popup.SearchFallback>
+          <Popup.SearchFallback>{t`tabs.layout.popup.insert_part.fallback`}</Popup.SearchFallback>
         }
         escape={handleEscape}
       />
@@ -91,7 +91,7 @@ export const InsertPart = () => {
       <Popup.ActionRow>
         <Popup.Button
           onClick={handleCancelClick}
-        >{t`tab.layout.popup.insert_part.cancel`}</Popup.Button>
+        >{t`tabs.layout.popup.insert_part.cancel`}</Popup.Button>
       </Popup.ActionRow>
     </Popup.Container>
   );

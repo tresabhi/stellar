@@ -26,35 +26,35 @@ export const Inspect = () => {
   return isOneSelected && data ? (
     <Properties.Container>
       <Properties.Group>
-        <Properties.Title>{t`tab.layout.right_sidebar.inspect.meta_data`}</Properties.Title>
+        <Properties.Title>{t`tabs.layout.right_sidebar.inspect.meta_data`}</Properties.Title>
 
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.meta_data.id`}
+          label={t`tabs.layout.right_sidebar.inspect.meta_data.id`}
         >
           {data.id}
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.meta_data.parent_id`}
+          label={t`tabs.layout.right_sidebar.inspect.meta_data.parent_id`}
         >
           {`${data.parent_id}`}
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.meta_data.name`}
+          label={t`tabs.layout.right_sidebar.inspect.meta_data.name`}
         >
           {data.n}
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.meta_data.selected`}
+          label={t`tabs.layout.right_sidebar.inspect.meta_data.selected`}
         >
           {`${data.selected}`}
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.meta_data.hidden`}
+          label={t`tabs.layout.right_sidebar.inspect.meta_data.hidden`}
         >
           {`${data.hidden}`}
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.meta_data.locked`}
+          label={t`tabs.layout.right_sidebar.inspect.meta_data.locked`}
         >
           {`${data.locked}`}
         </Properties.Value>
@@ -63,30 +63,30 @@ export const Inspect = () => {
       {/* TODO: implement this */}
 
       {/* <Properties.Group>
-        <Properties.Title>{t`tab.layout.right_sidebar.inspect.bounds`}</Properties.Title>
+        <Properties.Title>{t`tabs.layout.right_sidebar.inspect.bounds`}</Properties.Title>
 
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.bounds.width`}
+          label={t`tabs.layout.right_sidebar.inspect.bounds.width`}
         >
           {fixFloatRounding(bounds.width)}m
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.bounds.height`}
+          label={t`tabs.layout.right_sidebar.inspect.bounds.height`}
         >
           {fixFloatRounding(bounds.height)}m
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.bounds.x_position`}
+          label={t`tabs.layout.right_sidebar.inspect.bounds.x_position`}
         >
           {fixFloatRounding(bounds.x)}m
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.bounds.y_position`}
+          label={t`tabs.layout.right_sidebar.inspect.bounds.y_position`}
         >
           {fixFloatRounding(bounds.y)}m
         </Properties.Value>
         <Properties.Value
-          label={t`tab.layout.right_sidebar.inspect.bounds.rotation`}
+          label={t`tabs.layout.right_sidebar.inspect.bounds.rotation`}
         >
           {fixFloatRounding(bounds.rotation)}°
         </Properties.Value>
@@ -99,7 +99,7 @@ export const Inspect = () => {
               <CopyIcon />
             </Properties.TitleButton>
           }
-        >{t`tab.layout.right_sidebar.inspect.json`}</Properties.TitleWithButton>
+        >{t`tabs.layout.right_sidebar.inspect.json`}</Properties.TitleWithButton>
 
         <Properties.TextArea value={JSON_} />
       </Properties.Group>
@@ -111,16 +111,16 @@ export const Inspect = () => {
               <CopyIcon />
             </Properties.TitleButton>
           }
-        >{t`tab.layout.right_sidebar.inspect.vanilla_json`}</Properties.TitleWithButton>
+        >{t`tabs.layout.right_sidebar.inspect.vanilla_json`}</Properties.TitleWithButton>
 
         <Properties.TextArea value={vanillaJSON} />
       </Properties.Group>
     </Properties.Container>
   ) : (
     <Sidebar.MessageContainer>
-      <Sidebar.Message>{t`tab.layout.right_sidebar.inspect.select_one_part`}</Sidebar.Message>
+      <Sidebar.Message>{t`tabs.layout.right_sidebar.inspect.select_one_part`}</Sidebar.Message>
       <Sidebar.Message subMessage>
-        {t`tab.layout.right_sidebar.inspect.select_one_part.instructions`}
+        {t`tabs.layout.right_sidebar.inspect.select_one_part.instructions`}
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   );
