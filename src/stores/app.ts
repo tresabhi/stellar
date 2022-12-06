@@ -15,12 +15,6 @@ export enum Tool {
   Pan,
 }
 
-export enum Popup {
-  None,
-  InsertPart,
-  RenameParts,
-}
-
 export interface LoadStatus {
   message: string;
   done: boolean;
@@ -34,7 +28,6 @@ export interface UseApp {
 
   interface: {
     tab: Tab;
-    popup: Popup;
     isInteracting: boolean;
     orientationPromptDismissed: boolean;
     zenMode: boolean;
@@ -59,7 +52,6 @@ export const UseAppData: UseApp = {
 
   interface: {
     tab: Tab.Create,
-    popup: Popup.None,
     isInteracting: false,
     orientationPromptDismissed: false,
     zenMode: false,

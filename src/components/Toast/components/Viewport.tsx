@@ -15,7 +15,7 @@ const Container = styled('div', {
 
 export const Viewport = () => {
   const toasts = useToasts((state) => state.toasts);
-  const toastNodes = toasts.map((toast) => toast.node);
+  const toastNodes = toasts.map(({ node }) => node);
 
   return <Container>{toastNodes}</Container>;
 };

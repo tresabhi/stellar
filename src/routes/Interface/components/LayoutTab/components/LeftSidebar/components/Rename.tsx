@@ -1,8 +1,8 @@
 import { Pencil1Icon } from '@radix-ui/react-icons';
 import { Button as ButtonPrimitive } from 'components/Button';
-import { popupOpen } from 'core/interface';
+import { popup } from 'core/interface';
+import { RenamePartsPopup } from 'hooks/useKeybinds';
 import { styled, theme } from 'stitches.config';
-import { Popup } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 
 const Button = styled(ButtonPrimitive, {
@@ -36,7 +36,7 @@ const Button = styled(ButtonPrimitive, {
 
 export const Rename = () => {
   const visible = useBlueprint((state) => state.selections.length > 0);
-  const handleClick = () => popupOpen(Popup.RenameParts);
+  const handleClick = () => popup(RenamePartsPopup);
 
   return (
     <Button visible={visible} onClick={handleClick}>

@@ -1,3 +1,4 @@
+import * as Popup from 'components/Popup';
 import * as Toast from 'components/Toast';
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
 import { styled } from 'stitches.config';
@@ -6,7 +7,6 @@ import { InterfaceMode } from 'stores/settings';
 import { CreateTab } from './components/CreateTab';
 import { ExportTab } from './components/ExportTab';
 import { LayoutTab } from './components/LayoutTab';
-import { Popups } from './components/Popups';
 import { StagingTab } from './components/StagingTab';
 import { Tabs } from './components/Tabs';
 
@@ -29,9 +29,6 @@ const Interface = () => {
 
   return (
     <Container>
-      <Popups />
-      <Toast.Viewport />
-
       {!zenMode && <Tabs />}
 
       {tab === Tab.Create && <CreateTab />}
@@ -40,6 +37,9 @@ const Interface = () => {
       )}
       {tab === Tab.Staging && <StagingTab />}
       {tab === Tab.Export && <ExportTab />}
+
+      <Popup.Viewport />
+      <Toast.Viewport />
     </Container>
   );
 };

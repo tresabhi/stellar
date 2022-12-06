@@ -5,3 +5,4 @@ export * from './components/Content';
 export * from './components/Search';
 export * from './components/SearchFallback';
 export * from './components/SearchItem';
+export * from './components/Viewport';

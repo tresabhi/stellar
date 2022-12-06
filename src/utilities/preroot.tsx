@@ -1,7 +1,6 @@
 import { extend } from '@react-three/fiber';
 import * as Toast from 'components/Toast';
-import { toast } from 'core/interface';
-import { dismissToast } from 'core/interface/dismissToast';
+import { dismissToast, toast } from 'core/interface';
 import { useTranslator } from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
 import { BufferGeometry, Mesh } from 'three';

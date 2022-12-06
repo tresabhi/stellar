@@ -1,5 +1,11 @@
+import { MagnifyingGlassIcon, Pencil1Icon } from '@radix-ui/react-icons';
+import { CheckboxWithLabel } from 'components/CheckboxWithLabel';
+import { InputWithIcon } from 'components/InputWithIcon';
+import * as Popup from 'components/Popup';
+import { SearchItem } from 'components/Search';
 import { mutateSettings } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
+import { mutatePopups } from 'core/app/mutatePopups';
 import {
   exportFile,
   importFile,
@@ -10,26 +16,33 @@ import {
   saveFileAs,
   undoVersion,
 } from 'core/blueprint';
-import { popupClose, popupOpen } from 'core/interface';
+import { dismissPopup } from 'core/interface/dismissPopup';
+import { popup } from 'core/interface/popup';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
   deletePartsBySelection,
+  getParent,
+  getPart,
   groupPartsBySelection,
+  insertNewPart,
   panToPartBySelection,
   pasteParts,
   selectAllPartsAtRoot,
   translateTranslatablePartsBySelection,
   ungroupGroupsBySelection,
-  unselectAllParts,
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
-import { isNull } from 'lodash';
+import { RenamePartsOptions } from 'core/part/renameParts';
+import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
+import { useTranslator } from 'hooks/useTranslator';
 import { bind as mousetrapBind } from 'mousetrap';
-import { useEffect } from 'react';
-import useApp, { Popup, Tab, Tool } from 'stores/app';
+import { FC, KeyboardEvent, useEffect, useRef } from 'react';
+import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import { InterfaceMode, UseSettings } from 'stores/settings';
+import usePartRegistry from 'stores/partRegistry';
+import { PopupProps } from 'stores/popups';
+import useSettings, { InterfaceMode, UseSettings } from 'stores/settings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 
@@ -44,6 +57,179 @@ const upMajorVector: PrimitiveVector2Tuple = [0, MAJOR_SNAP];
 const downMajorVector: PrimitiveVector2Tuple = [0, -MAJOR_SNAP];
 const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_SNAP, 0];
 const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_SNAP, 0];
+
+const translate = (vector: PrimitiveVector2Tuple) => {
+  const { invalidateFrame } = useApp.getState().editor;
+
+  translateTranslatablePartsBySelection(vector[0], vector[1]);
+  invalidateFrame && invalidateFrame();
+};
+
+// TODO: clean this up
+export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
+  const { t } = useTranslator();
+  const input = useRef<HTMLInputElement>(null);
+  const list: SearchItem[] = [];
+  const partRegistry = usePartRegistry();
+  const { selections } = useBlueprint.getState();
+  const lastSelectionId = selections[selections.length - 1];
+  const lastSelection = getPart(lastSelectionId);
+  let parentId: string | null = null;
+  let index: number | undefined = undefined;
+
+  if (lastSelection) {
+    if (lastSelection.n === 'Group') {
+      parentId = lastSelectionId;
+    } else {
+      const parent = getParent(lastSelectionId);
+
+      if (parent) {
+        parentId = parent.id;
+        index = parent.part_order.indexOf(lastSelectionId);
+      }
+    }
+  }
+
+  const handleEscape = () => dismissPopup(id);
+  const handleCancelClick = () => dismissPopup(id);
+
+  partRegistry.forEach(({ vanillaData, Icon, data: { label } }, name) => {
+    const note =
+      vanillaData === null
+        ? t`tabs.layout.popup.insert_part.abstract`
+        : undefined;
+
+    const handleClick = () => {
+      insertNewPart(name, parentId, {
+        index,
+        nearCamera: true,
+        select: true,
+      });
+      dismissPopup(id);
+    };
+
+    list.push({
+      string:
+        vanillaData === null
+          ? `${label} ${t`tabs.layout.popup.insert_part.abstract`}`
+          : label,
+      node: (
+        <Popup.SearchItem
+          key={`part-${name}`}
+          icon={<Icon />}
+          note={note}
+          onClick={handleClick}
+        >
+          {label}
+        </Popup.SearchItem>
+      ),
+      callback: handleClick,
+    });
+  });
+
+  return (
+    <Popup.Container width="regular">
+      <InputWithIcon
+        ref={input}
+        icon={<MagnifyingGlassIcon />}
+        placeholder={t`tabs.layout.popup.insert_part.input_placeholder`}
+        autoFocus
+      />
+
+      <Popup.Search
+        list={list}
+        input={input}
+        fallback={
+          <Popup.SearchFallback>{t`tabs.layout.popup.insert_part.fallback`}</Popup.SearchFallback>
+        }
+        escape={handleEscape}
+      />
+
+      <Popup.ActionRow>
+        <Popup.Button
+          onClick={handleCancelClick}
+        >{t`tabs.layout.popup.insert_part.cancel`}</Popup.Button>
+      </Popup.ActionRow>
+    </Popup.Container>
+  );
+};
+
+export const RenamePartsPopup:FC<PopupProps> = ({ id }) => {
+  const { t } = useTranslator();
+  const { rename } = useSettings.getState().editor;
+  const input = useRef<HTMLInputElement>(null);
+  const apply = () => {
+    input.current &&
+      renamePartsBySelection(
+        input.current.value,
+        useSettings.getState().editor.rename,
+      );
+    dismissPopup(id);
+  };
+  const handleClick = (type: keyof RenamePartsOptions) => {
+    return () => {
+      mutateSettings((draft) => {
+        draft.editor.rename[type] = !draft.editor.rename[type];
+      });
+    };
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      apply();
+    } else if (event.key === 'Escape') {
+      dismissPopup(id);
+    }
+  };
+  const handleCancelClick = () => dismissPopup(id);
+  const handleApplyClick = apply;
+
+  return (
+    <Popup.Container width="regular">
+      <InputWithIcon
+        ref={input}
+        onKeyDown={handleKeyDown}
+        autoFocus
+        icon={<Pencil1Icon />}
+        placeholder={t`tabs.layout.popup.rename.input_placeholder`}
+      />
+
+      <Popup.Content>
+        <CheckboxWithLabel
+          defaultValue={rename.trim}
+          onChange={handleClick('trim')}
+        >
+          {t`tabs.layout.popup.rename.trim`}
+        </CheckboxWithLabel>
+        <CheckboxWithLabel
+          defaultValue={rename.skipLocked}
+          onChange={handleClick('skipLocked')}
+        >
+          {t`tabs.layout.popup.rename.skip_locked`}
+        </CheckboxWithLabel>
+        <CheckboxWithLabel
+          defaultValue={rename.suffix}
+          onChange={handleClick('suffix')}
+        >
+          {t`tabs.layout.popup.rename.suffix`}
+        </CheckboxWithLabel>
+      </Popup.Content>
+
+      <Popup.ActionRow>
+        <Popup.Button
+          onClick={handleCancelClick}
+        >{t`tabs.layout.popup.rename.cancel`}</Popup.Button>
+        <Popup.Button
+          onClick={handleApplyClick}
+          priority="callToAction"
+          color="accent"
+        >
+          {t`tabs.layout.popup.rename.apply`}
+        </Popup.Button>
+      </Popup.ActionRow>
+    </Popup.Container>
+  );
+};
 
 interface BindOptions {
   preventDefault: boolean;
@@ -87,13 +273,6 @@ const bind = (
   );
 };
 
-const translate = (vector: PrimitiveVector2Tuple) => {
-  const { invalidateFrame } = useApp.getState().editor;
-
-  translateTranslatablePartsBySelection(vector[0], vector[1]);
-  invalidateFrame && invalidateFrame();
-};
-
 const useKeybinds = () => {
   const toTool = (tool: Tool) => () =>
     mutateApp((draft) => {
@@ -109,15 +288,9 @@ const useKeybinds = () => {
     bind(
       'esc',
       () => {
-        const {
-          interface: { popup },
-        } = useApp.getState();
-
-        if (!isNull(popup)) {
-          popupClose();
-        } else {
-          unselectAllParts();
-        }
+        mutatePopups((draft) => {
+          draft.popups.pop();
+        });
       },
       { preventWhenInteractingWithUI: false },
     );
@@ -275,12 +448,14 @@ const useKeybinds = () => {
     bind('ctrl+g', groupPartsBySelection);
     bind('ctrl+shift+g', ungroupGroupsBySelection);
 
-    bind('ctrl+shift+i', () => popupOpen(Popup.InsertPart));
-    bind(['ctrl+r', 'f2'], () => {
-      if (useBlueprint.getState().selections.length > 0) {
-        popupOpen(Popup.RenameParts);
-      }
-    });
+    // bind('ctrl+shift+i', () => popupOpen(Popup.InsertPart));
+    // bind(['ctrl+r', 'f2'], () => {
+    //   if (useBlueprint.getState().selections.length > 0) {
+    //     popupOpen(Popup.RenameParts);
+    //   }
+    // });
+    bind('ctrl+shift+i', () => popup(InsertPartPopup));
+    bind('ctrl+r', () => popup(RenamePartsPopup));
 
     bind('.', panToPartBySelection);
   }, []);

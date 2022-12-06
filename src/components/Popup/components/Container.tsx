@@ -1,6 +1,13 @@
+import { VariantProps } from '@stitches/react';
+import { FC, HTMLAttributes, MouseEvent } from 'react';
 import { styled, theme } from 'stitches.config';
 
-export const Container = styled('div', {
+export interface ContainerProps
+  extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof Primitive> {}
+
+// TODO: rename to Root
+const Primitive = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: theme.space.gapUnrelated,
@@ -17,3 +24,12 @@ export const Container = styled('div', {
     },
   },
 });
+
+export const Container: FC<ContainerProps> = ({ onClick, ...props }) => {
+  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    onClick && onClick(event);
+  };
+
+  return <Primitive {...props} onClick={handleClick} />;
+};

@@ -45,7 +45,7 @@ import {
   saveFileAs,
   undoVersion,
 } from 'core/blueprint';
-import { popupOpen } from 'core/interface';
+import { popup } from 'core/interface';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
@@ -58,8 +58,9 @@ import {
   unselectAllParts,
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
+import { InsertPartPopup } from 'hooks/useKeybinds';
 import { useTranslator } from 'hooks/useTranslator';
-import useApp, { Popup, Tool } from 'stores/app';
+import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import useVersionControl from 'stores/versionControl';
 
@@ -96,7 +97,7 @@ const Toolbar = () => {
     mutateApp((draft) => {
       draft.editor.tool = Tool.Pan;
     });
-  const handlePlusClick = () => popupOpen(Popup.InsertPart);
+  const handlePlusClick = () => popup(InsertPartPopup);
   const handleNewClick = () => loadBlueprint();
   const handleOpenClick = () => openFile();
   const handleSaveClick = () => saveFile();
