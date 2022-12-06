@@ -31,6 +31,7 @@ import {
   selectAllPartsAtRoot,
   translateTranslatablePartsBySelection,
   ungroupGroupsBySelection,
+  unselectAllParts,
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { RenamePartsOptions } from 'core/part/renameParts';
@@ -41,7 +42,7 @@ import { FC, KeyboardEvent, useEffect, useRef } from 'react';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry from 'stores/partRegistry';
-import { PopupProps } from 'stores/popups';
+import usePopups, { PopupProps } from 'stores/popups';
 import useSettings, { InterfaceMode, UseSettings } from 'stores/settings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
@@ -293,9 +294,13 @@ const useKeybinds = () => {
     bind(
       'esc',
       () => {
-        mutatePopups((draft) => {
-          draft.popups.pop();
-        });
+        if (usePopups.getState().popups.length > 0) {
+          mutatePopups((draft) => {
+            draft.popups.pop();
+          });
+        } else {
+          unselectAllParts();
+        }
       },
       { preventWhenInteractingWithUI: false },
     );
