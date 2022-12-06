@@ -62,7 +62,6 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   const offset = new Vector2();
   let blueprint = useBlueprint.getState();
   let selections: string[] = [];
-  // let cache: Record<string, { position: Vector2Tuple }> = {};
 
   const handleUpdateResizeNodes = () => {
     constant.set(...sideToPoint(bounds.current, constantSide));

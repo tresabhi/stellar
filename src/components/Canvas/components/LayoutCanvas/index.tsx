@@ -4,7 +4,7 @@ import {
   Props as CanvasPrimitiveProps,
 } from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
-import { FC, useEffect, useRef } from 'react';
+import { FC, RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
@@ -47,22 +47,7 @@ export const LayoutCanvas: FC<Omit<CanvasPrimitiveProps, 'children'>> = (
     }
   };
 
-  useEffect(() => {
-    const unsubscribeTool = useApp.subscribe(
-      (state) => (state.editor.isSpacePanning ? Tool.Pan : state.editor.tool),
-      (tool) => {
-        if (canvas.current) {
-          if (tool === Tool.Pan) {
-            canvas.current.classList.add(panningStyles());
-          } else {
-            canvas.current.classList.remove(panningStyles());
-          }
-        }
-      },
-    );
-
-    return unsubscribeTool;
-  });
+  useCursor(canvas);
 
   return (
     <Canvas
@@ -89,6 +74,25 @@ export const LayoutCanvas: FC<Omit<CanvasPrimitiveProps, 'children'>> = (
       <Parts ref={parts} />
     </Canvas>
   );
+};
+
+const useCursor = (canvas: RefObject<HTMLCanvasElement>) => {
+  useEffect(() => {
+    const unsubscribeTool = useApp.subscribe(
+      (state) => (state.editor.isSpacePanning ? Tool.Pan : state.editor.tool),
+      (tool) => {
+        if (canvas.current) {
+          if (tool === Tool.Pan) {
+            canvas.current.classList.add(panningStyles());
+          } else {
+            canvas.current.classList.remove(panningStyles());
+          }
+        }
+      },
+    );
+
+    return unsubscribeTool;
+  });
 };
 
 export * from './components/Expose';

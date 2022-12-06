@@ -2,7 +2,13 @@ import PartCluster, {
   PartClusterProps,
 } from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
-import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import {
+  forwardRef,
+  RefObject,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
 import { Layer } from '../../../constants/layer';
@@ -11,20 +17,10 @@ export type PartsProps = Omit<PartClusterProps, 'parentId'>;
 
 export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
   const initialState = useBlueprint.getState();
-  const partsCluster = useRef<Group>(null);
+  const parts = useRef<Group>(null);
 
-  useEffect(() => {
-    const unsubscribe = useBlueprint.subscribe(
-      (state) => state.offset,
-      (offset) => {
-        partsCluster.current?.position.set(offset.x, offset.y, 0);
-      },
-    );
-
-    return unsubscribe;
-  }, [partsCluster]);
-
-  useImperativeHandle(ref, () => partsCluster.current as Group);
+  useOffset(parts);
+  useImperativeHandle(ref, () => parts.current as Group);
 
   return (
     <HeadsUpDisplay priority={Layer.PartRenderBetween}>
@@ -38,9 +34,22 @@ export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
       <PartCluster
         {...props}
         position={[initialState.offset.x, initialState.offset.y, 0]}
-        ref={partsCluster}
+        ref={parts}
         parentId={null}
       />
     </HeadsUpDisplay>
   );
 });
+
+const useOffset = (parts: RefObject<Group>) => {
+  useEffect(() => {
+    const unsubscribe = useBlueprint.subscribe(
+      (state) => state.offset,
+      (offset) => {
+        parts.current?.position.set(offset.x, offset.y, 0);
+      },
+    );
+
+    return unsubscribe;
+  }, []);
+};

@@ -24,7 +24,6 @@ export const StatusBar = () => {
   const { t } = useTranslator();
   const date = new Date();
   const year = date.getUTCFullYear();
-  const [license, setLicense] = useState('LICENSE');
   const prettyVersion = prettifyVersion(packageJSON.version);
   const parsedVersion = parse(packageJSON.version);
   const splitRepo = GITHUB_REPO.split('/');
@@ -42,16 +41,7 @@ export const StatusBar = () => {
         }/`
     : undefined;
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        `https://api.github.com/repos/${GITHUB_REPO}`,
-      );
-      const json = await response.json();
-
-      setLicense(json.license.spdx_id);
-    })();
-  }, []);
+  const license = useLicense();
 
   return (
     <StatusBarComponent.Container>
@@ -128,4 +118,21 @@ export const StatusBar = () => {
       </StatusBarComponent.Group>
     </StatusBarComponent.Container>
   );
+};
+
+const useLicense = () => {
+  const [license, setLicense] = useState('LICENSE');
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(
+        `https://api.github.com/repos/${GITHUB_REPO}`,
+      );
+      const json = await response.json();
+
+      setLicense(json.license.spdx_id);
+    })();
+  }, []);
+
+  return license;
 };

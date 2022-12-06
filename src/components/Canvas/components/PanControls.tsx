@@ -15,10 +15,9 @@ export const PanControls = () => {
   const getMousePos = useMousePosition();
   const touchMemories = new Map<number, [number, number]>();
   let lastHypotenuse = 0;
+  let initialMousePos: Vector2Tuple;
 
   useEffect(() => {
-    let initialMousePos: Vector2Tuple;
-
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
 

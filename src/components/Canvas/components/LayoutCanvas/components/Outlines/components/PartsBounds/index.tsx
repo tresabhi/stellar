@@ -10,18 +10,16 @@ export const PartsBounds = () => {
   const parts = useBlueprint((state) => state.parts);
   const wrapper = useRef<Group>(null);
 
+  const handleDeferUpdates = (event: CustomEvent<DeferUpdatesEventDetail>) => {
+    if (wrapper.current) wrapper.current.visible = !event.detail;
+    invalidate();
+  };
+
   for (const id in parts) {
     partBounds.push(<PartBounds id={id} key={`part-bound-${id}`} />);
   }
 
   useEffect(() => {
-    const handleDeferUpdates = (
-      event: CustomEvent<DeferUpdatesEventDetail>,
-    ) => {
-      if (wrapper.current) wrapper.current.visible = !event.detail;
-      invalidate();
-    };
-
     window.addEventListener(
       'deferupdates',
       handleDeferUpdates as EventListener,

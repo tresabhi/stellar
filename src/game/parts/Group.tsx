@@ -32,32 +32,32 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
     (state) => getPart<Group>(id, state).part_order,
   );
 
-  const recalculateBounds = () => {
+  useBoundsUpdated(partOrder, () => {
     const bounds = getBoundsFromParts(partOrder);
     boundsStore[id] = { bounds, needsRecomputation: false };
 
     declareBoundsUpdated(id);
-  };
-  const debouncedRecalculateBounds = fallingEdgeDebounce(recalculateBounds, 0);
-
-  useEffect(() => {
-    recalculateBounds();
-
-    partOrder.forEach((id) => {
-      window.addEventListener(`boundsupdated${id}`, debouncedRecalculateBounds);
-    });
-
-    return () => {
-      partOrder.forEach((id) => {
-        window.removeEventListener(
-          `boundsupdated${id}`,
-          debouncedRecalculateBounds,
-        );
-      });
-    };
   });
 
   return <PartCluster parentId={id} />;
+};
+
+const useBoundsUpdated = (ids: string[], callback: () => void) => {
+  const debouncedCallback = fallingEdgeDebounce(callback, 0);
+
+  useEffect(() => {
+    callback();
+
+    ids.forEach((id) => {
+      window.addEventListener(`boundsupdated${id}`, debouncedCallback);
+    });
+
+    return () => {
+      ids.forEach((id) => {
+        window.removeEventListener(`boundsupdated${id}`, debouncedCallback);
+      });
+    };
+  });
 };
 
 export const GroupIcon = Icon;
