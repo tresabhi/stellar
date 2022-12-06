@@ -1,15 +1,15 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import { Vector2 } from 'three';
+import { Vector2Tuple } from 'three';
 
-const useMousePos = () => {
+const useMousePosition = () => {
   const {
     camera,
     gl: { domElement: canvas },
   } = useThree();
 
-  const getMousePos = (
+  const getMousePosition = (
     event: MouseEvent | PointerEvent | ThreeEvent<PointerEvent>,
-  ) => {
+  ): Vector2Tuple => {
     const boundingRect = canvas.getBoundingClientRect();
     const canvasRelativeX =
       ((event as ThreeEvent<PointerEvent>).nativeEvent?.clientX ??
@@ -24,9 +24,9 @@ const useMousePos = () => {
     const offsetRelativeX = zoomRelativeX + camera.position.x;
     const offsetRelativeY = zoomRelativeY + camera.position.y;
 
-    return new Vector2(offsetRelativeX, offsetRelativeY);
+    return [offsetRelativeX, offsetRelativeY];
   };
 
-  return getMousePos;
+  return getMousePosition;
 };
-export default useMousePos;
+export default useMousePosition;

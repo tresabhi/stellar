@@ -1,23 +1,16 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
+import PartCluster from 'components/Canvas/components/PartCluster';
 import { declareBoundsUpdated, getBoundsFromParts } from 'core/bounds';
-import {
-  getPart,
-  getPartRegistry,
-  partExportify,
-  removePartMetaData,
-} from 'core/part';
+import { getPart, partExportify, removePartMetaData } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import { isArray } from 'lodash';
 import { FC, useEffect } from 'react';
-import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
 import { PartComponentProps } from 'types/Parts';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { Part, PartData, VanillaPart } from './Part';
-
-const RECALCULATE_DEBOUNCE = 0;
 
 export interface Group extends Part {
   readonly n: 'Group';
@@ -38,29 +31,14 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const partOrder = useBlueprint(
     (state) => getPart<Group>(id, state).part_order,
   );
-  const partListing: JSX.Element[] = [];
 
   const recalculateBounds = () => {
-    if (!useApp.getState().editor.batchBoundUpdates) {
-      const bounds = getBoundsFromParts(partOrder);
-      boundsStore[id] = { bounds, needsRecomputation: false };
+    const bounds = getBoundsFromParts(partOrder);
+    boundsStore[id] = { bounds, needsRecomputation: false };
 
-      declareBoundsUpdated(id);
-    }
+    declareBoundsUpdated(id);
   };
-  const debouncedRecalculateBounds = fallingEdgeDebounce(
-    recalculateBounds,
-    RECALCULATE_DEBOUNCE,
-  );
-
-  partOrder.forEach((Id) => {
-    const part = getPart(Id);
-    const LayoutComponent = getPartRegistry(part.n)?.Mesh;
-
-    if (LayoutComponent) {
-      partListing.push(<LayoutComponent id={Id} key={`part-${Id}`} />);
-    }
-  });
+  const debouncedRecalculateBounds = fallingEdgeDebounce(recalculateBounds, 0);
 
   useEffect(() => {
     recalculateBounds();
@@ -79,7 +57,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
     };
   });
 
-  return <group>{partListing}</group>;
+  return <PartCluster parentId={id} />;
 };
 
 export const GroupIcon = Icon;

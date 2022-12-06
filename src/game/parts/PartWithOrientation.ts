@@ -1,4 +1,4 @@
-import { useThree } from '@react-three/fiber';
+import { invalidate } from '@react-three/fiber';
 import { declareBoundsUpdated } from 'core/bounds';
 import { getPart, PartRotateEventDetail } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
@@ -33,8 +33,6 @@ export const usePartWithOrientation = (
   id: string,
   object: RefObject<Object3D>,
 ) => {
-  const invalidate = useThree((state) => state.invalidate);
-
   const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
     if (object.current && getPart(id)?.selected) {
       object.current.rotateZ((event.detail / 180) * Math.PI);

@@ -1,21 +1,20 @@
 import { Line } from '@react-three/drei';
-import { DeferUpdatesEventDetail } from 'core/bounds';
+import { invalidate } from '@react-three/fiber';
+import { DeferUpdatesEventDetail, getBoundsFromParts } from 'core/bounds';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
-import boundsStore, { Bounds } from 'stores/bounds';
-import { Box2, Group, Vector2 } from 'three';
+import { Bounds } from 'stores/bounds';
+import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
-import { ResizeNode, sideToPoint } from './components/ResizeNode';
-
-const DEBOUNCE_TIME = 10;
+import { ResizeNode } from './components/ResizeNode';
 
 export const ResizeControls = () => {
   const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
   const selections = useBlueprint((state) => state.selections);
-  const selectionBounds = useRef<Bounds>({
+  const bounds = useRef<Bounds>({
     x: 0,
     y: 0,
     width: 0,
@@ -23,85 +22,49 @@ export const ResizeControls = () => {
     rotation: 0,
   });
 
-  const resize = () => {
-    outline.current?.position.set(
-      selectionBounds.current.x,
-      selectionBounds.current.y,
-      0,
-    );
-    outline.current?.rotation.set(0, 0, selectionBounds.current.rotation);
-    outline.current?.scale.set(
-      selectionBounds.current.width,
-      selectionBounds.current.height,
-      1,
-    );
+  const recalculateBounds = () => {
+    bounds.current = getBoundsFromParts(selections);
 
-    if (wrapper.current) wrapper.current.visible = true;
+    outline.current?.position.set(bounds.current.x, bounds.current.y, 0);
+    outline.current?.rotation.set(0, 0, bounds.current.rotation);
+    outline.current?.scale.set(bounds.current.width, bounds.current.height, 1);
+
+    window.dispatchEvent(new CustomEvent('updateresizenodes'));
+    invalidate();
   };
-
-  const debouncedResize = fallingEdgeDebounce(() => {
-    if (selections.length === 1) {
-      selectionBounds.current = boundsStore[selections[0]].bounds;
-      resize();
-    } else {
-      const box2 = new Box2();
-      const point = new Vector2();
-
-      selections.forEach((selection) => {
-        const { bounds } = boundsStore[selection];
-
-        box2
-          .expandByPoint(point.set(...sideToPoint(bounds, [-1, 1])))
-          .expandByPoint(point.set(...sideToPoint(bounds, [1, 1])))
-          .expandByPoint(point.set(...sideToPoint(bounds, [1, -1])))
-          .expandByPoint(point.set(...sideToPoint(bounds, [-1, -1])));
-      });
-
-      selectionBounds.current = {
-        width: box2.max.x - box2.min.x,
-        height: box2.max.y - box2.min.y,
-        x: (box2.min.x + box2.max.x) / 2,
-        y: (box2.min.y + box2.max.y) / 2,
-        rotation: 0,
-      };
-      resize();
-    }
-  }, DEBOUNCE_TIME);
+  const debouncedRecalculateBounds = fallingEdgeDebounce(recalculateBounds, 0);
 
   useEffect(() => {
-    const callbacks: Record<string, EventListener> = {};
-    selections.forEach((selection) => {
-      callbacks[selection] = () => {
-        debouncedResize();
-        if (wrapper.current) wrapper.current.visible = false;
-      };
-
-      window.addEventListener(
-        `boundsupdated${selection}`,
-        callbacks[selection],
-      );
-    });
-
     const handleDeferUpdates = (
       event: CustomEvent<DeferUpdatesEventDetail>,
     ) => {
-      if (event.detail && wrapper.current) wrapper.current.visible = false;
+      if (wrapper.current) wrapper.current.visible = !event.detail;
     };
+
+    debouncedRecalculateBounds();
 
     window.addEventListener(
       'deferupdates',
       handleDeferUpdates as EventListener,
     );
+    selections.forEach((selection) => {
+      window.addEventListener(
+        `boundsupdated${selection}`,
+        debouncedRecalculateBounds,
+      );
+    });
 
     return () => {
-      for (const id in callbacks) {
-        window.removeEventListener(`boundsupdated${id}`, callbacks[id]);
-      }
-
       window.removeEventListener(
         'deferupdates',
         handleDeferUpdates as EventListener,
       );
+      selections.forEach((selection) => {
+        window.removeEventListener(
+          `boundsupdated${selection}`,
+          debouncedRecalculateBounds,
+        );
+      });
     };
   });
 
@@ -115,45 +78,45 @@ export const ResizeControls = () => {
       />
 
       <ResizeNode // top left
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[1, -1]}
         movable={[-1, 1]}
       />
       <ResizeNode // top
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[0, -1]}
         movable={[0, 1]}
         maintainSlope
       />
       <ResizeNode // top right
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[-1, -1]}
         movable={[1, 1]}
       />
       <ResizeNode // right
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[-1, 0]}
         movable={[1, 0]}
         maintainSlope
       />
       <ResizeNode // bottom right
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[-1, 1]}
         movable={[1, -1]}
       />
       <ResizeNode // bottom
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[0, 1]}
         movable={[0, -1]}
         maintainSlope
       />
       <ResizeNode // bottom left
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[1, 1]}
         movable={[-1, -1]}
       />
       <ResizeNode // left
-        bounds={selectionBounds}
+        bounds={bounds}
         constant={[1, 0]}
         movable={[-1, 0]}
         maintainSlope

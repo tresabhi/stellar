@@ -1,24 +1,23 @@
-import { useThree } from '@react-three/fiber';
+import { invalidate, useThree } from '@react-three/fiber';
 import { mutateApp } from 'core/app';
-import useMousePos from 'hooks/useMousePos';
+import useMousePosition from 'hooks/useMousePosition';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/app';
-import { OrthographicCamera, Vector2, Vector3 } from 'three';
+import { OrthographicCamera, Vector2, Vector2Tuple, Vector3 } from 'three';
 
 const MIN_ZOOM = 2.2;
 const MAX_ZOOM = 512;
 const ZOOM_SENSITIVITY = 1 / 250;
 
 export const PanControls = () => {
-  const invalidate = useThree((state) => state.invalidate);
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
-  const getMousePos = useMousePos();
+  const getMousePos = useMousePosition();
   const touchMemories = new Map<number, [number, number]>();
   let lastHypotenuse = 0;
 
   useEffect(() => {
-    let initialMousePos: Vector2;
+    let initialMousePos: Vector2Tuple;
 
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
@@ -39,8 +38,8 @@ export const PanControls = () => {
 
         const newPos = getMousePos(event);
         const delta = new Vector2(
-          newPos.x - initialMousePos.x,
-          newPos.y - initialMousePos.y,
+          newPos[0] - initialMousePos[0],
+          newPos[1] - initialMousePos[1],
         );
 
         camera.position.add(
@@ -78,8 +77,8 @@ export const PanControls = () => {
       } else {
         const newPos = getMousePos(event);
         const delta = new Vector2(
-          newPos.x - initialMousePos.x,
-          newPos.y - initialMousePos.y,
+          newPos[0] - initialMousePos[0],
+          newPos[1] - initialMousePos[1],
         );
 
         camera.translateX(-delta.x);

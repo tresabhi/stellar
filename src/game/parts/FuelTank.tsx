@@ -1,5 +1,5 @@
 import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
-import { useThree } from '@react-three/fiber';
+import { invalidate } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as Properties from 'components/Properties';
 import { mutateSettings } from 'core/app';
@@ -120,7 +120,6 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   const mesh = useRef<Mesh>(null);
   const state = getPart<FuelTank>(id);
   const props = usePhysicalPart(id, wrapper);
-  const invalidate = useThree((state) => state.invalidate);
 
   usePartProperty(
     id,

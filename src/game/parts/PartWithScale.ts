@@ -1,4 +1,4 @@
-import { useThree } from '@react-three/fiber';
+import { invalidate } from '@react-three/fiber';
 import { declareBoundsUpdated } from 'core/bounds';
 import { getPart, PartScaleEventDetail } from 'core/part';
 import usePartProperty from 'hooks/usePartProperty';
@@ -30,7 +30,6 @@ export const PartWithScaleData: PartWithScale = {
 };
 
 export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
-  const invalidate = useThree((state) => state.invalidate);
   const scale = new Vector3();
 
   const handlePartMove = (event: CustomEvent<PartScaleEventDetail>) => {

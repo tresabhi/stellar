@@ -1,5 +1,5 @@
 import { Line } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
+import { invalidate } from '@react-three/fiber';
 import { getPart, subscribeToPart } from 'core/part';
 import { memo, useEffect, useRef } from 'react';
 import boundsStore from 'stores/bounds';
@@ -36,7 +36,6 @@ export const PartBounds = memo<PartBoundProps>(
     const outline = useRef<Line2>(null);
     const shading = useRef<Mesh>(null);
     const wrapper = useRef<Group>(null);
-    const invalidate = useThree((state) => state.invalidate);
 
     const resize = () => {
       if (boundsStore[id]) {

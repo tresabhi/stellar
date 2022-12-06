@@ -1,4 +1,4 @@
-import { useThree } from '@react-three/fiber';
+import { invalidate } from '@react-three/fiber';
 import { DeferUpdatesEventDetail } from 'core/bounds';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
@@ -9,7 +9,6 @@ export const PartsBounds = () => {
   const partBounds: JSX.Element[] = [];
   const parts = useBlueprint((state) => state.parts);
   const wrapper = useRef<Group>(null);
-  const invalidate = useThree((state) => state.invalidate);
 
   for (const id in parts) {
     partBounds.push(<PartBounds id={id} key={`part-bound-${id}`} />);
