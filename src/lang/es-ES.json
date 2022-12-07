@@ -1,170 +1,170 @@
 {
   "tabs": {
-    "coming_soon": "This tab is coming soon!",
+    "coming_soon": "¡Esta pestaña estará disponible pronto!",
     "create": {
-      "$": "Create",
+      "$": "Crear",
       "templates": {
-        "input_placeholder": "Search templates...",
+        "input_placeholder": "Buscar plantillas...",
         "list": {
-          "apollo_mission": "Apollo Mission",
-          "basic_rocket": "Basic Rocket",
-          "hopper": "Hopper",
-          "joints": "Joints",
-          "light_lander": "Light Lander",
-          "orbit_and_re_entry": "Orbit & Re-entry",
-          "parachute_and_separator": "Parachute & Separator",
-          "race_car": "Race Car",
+          "apollo_mission": "Misión Apolo",
+          "basic_rocket": "Cohete básico",
+          "hopper": "Saltador",
+          "joints": "Articulaciones",
+          "light_lander": "Módulo de aterrizaje ligero",
+          "orbit_and_re_entry": "Órbita y reentrada",
+          "parachute_and_separator": "Paracaídas y separador",
+          "race_car": "Coche de carreras",
           "rover": "Rover"
         }
       },
       "file_options": {
-        "motto": "Blueprint editing redefined",
-        "from_scratch": "Start From Scratch",
-        "import": "Import Blueprint File",
-        "open": "Open Stellar File"
+        "motto": "Edición de plano redefinida",
+        "from_scratch": "Empezar de cero",
+        "import": "Importar archivo de plano",
+        "open": "Abrir archivo de Estellar"
       },
       "status_bar": {
-        "docs": "Docs"
+        "docs": "Documentos"
       }
     },
     "layout": {
-      "$": "Layout",
+      "$": "Diseño",
       "toolbar": {
         "file": {
-          "new": "New",
-          "open": "Open...",
-          "save": "Save",
-          "save_as": "Save As...",
-          "import": "Import...",
-          "export": "Export..."
+          "new": "Nuevo",
+          "open": "Abrir...",
+          "save": "Guardar",
+          "save_as": "Guardar como...",
+          "import": "Importar...",
+          "export": "Exportar..."
         },
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "move": "Mover",
+          "pan": "Sartén"
         },
         "clipboard": {
-          "copy": "Copy",
-          "cut": "Cut",
-          "paste": "Paste",
-          "duplicate": "Duplicate",
-          "create_snippet": "Create Snippet"
+          "copy": "Copiar",
+          "cut": "Cortar",
+          "paste": "Pegar",
+          "duplicate": "Duplicar",
+          "create_snippet": "Crear fragmento"
         },
         "selection": {
-          "select_all": "Select All",
-          "unselect_all": "Unselect All",
-          "group": "Group",
-          "ungroup": "Ungroup"
+          "select_all": "Seleccionar todo",
+          "unselect_all": "Deseleccionar todo",
+          "group": "Agrupar",
+          "ungroup": "Desagrupar"
         },
         "help": {
-          "about": "About Stellar",
-          "report": "Report an Issue",
+          "about": "Acerca de Stellar",
+          "report": "Reportar un problema",
           "discord": "Discord",
           "github": "GitHub"
         },
         "preferences": {
-          "settings": "Settings",
-          "keybinds": "Keybinds"
+          "settings": "Ajustes",
+          "keybinds": "Atajos de teclado"
         }
       },
       "left_sidebar": {
         "parts": {
-          "$": "Parts",
+          "$": "Partes",
           "no_parts": {
-            "$": "No Parts in Blueprint",
-            "instructions": "Tap the %1$s icon in the Toolbar to insert a part."
+            "$": "No hay partes en el plano",
+            "instructions": "Toca el icono %1$s en la barra de herramientas para insertar una parte."
           }
         },
         "snippets": {
-          "$": "Snippets",
+          "$": "Fragmentos",
           "coming_soon": {
-            "$": "Snippets Coming Soon!",
-            "instructions": "You will be able to insert small sections of other blueprints here as snippets. You will be able to create a new snippet by going to Toolbar > %1$s Clipboard > %2$s Create Snippet."
+            "$": "¡Fragmentos próximamente!",
+            "instructions": "Podrás insertar pequeñas secciones en otros planos aquí como fragmentos. Podrás crear un nuevo fragmento yendo a Barra de herramientas > %1$s Portapapeles > %2$s Crear fragmento."
           }
         }
       },
       "right_sidebar": {
         "properties": {
-          "$": "Properties",
+          "$": "Propiedades",
           "no_selection": {
-            "$": "No Parts Selected",
-            "instructions": "Click on a part either on the blueprint or in the sidebar to select it."
+            "$": "No hay partes seleccionadas",
+            "instructions": "Haz clic en una parte en el plano o en la barra lateral para seleccionarlo."
           },
           "no_properties": {
-            "$": "No Properties for Selected Parts",
-            "instructions": "The part(s) you have selected lack adjustable properties probably because they're either abstract or a work in progress."
+            "$": "No hay propiedades para las partes seleccionadas",
+            "instructions": "La(s) parte(s) que has seleccionado carece(n) de propiedades ajustables probablemente porque es/son abstracta(s) o un trabajo en curso."
           },
           "transformations": {
-            "$": "Transformations",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation",
-            "x_scale": "X Scale",
-            "y_scale": "Y Scale",
-            "constraint": "Constraint"
+            "$": "Transformaciones",
+            "x_position": "Posición X",
+            "y_position": "Posición Y",
+            "rotation": "Rotación",
+            "x_scale": "Escala X",
+            "y_scale": "Escala Y",
+            "constraint": "Restricción"
           },
           "engine": {
-            "$": "Engine",
-            "enabled": "Enabled",
-            "heat_damage": "Heat Damage"
+            "$": "Motor",
+            "enabled": "Habilitado",
+            "heat_damage": "Daño de calor"
           },
           "fuel_tank": {
-            "$": "Fuel Tank",
-            "top_width": "Top Width",
-            "bottom_width": "Bottom Width",
-            "constraint": "Constraint",
-            "height": "Height",
-            "fuel": "Fuel"
+            "$": "Tanque de combustible",
+            "top_width": "Anchura superior",
+            "bottom_width": "Anchura inferior",
+            "constraint": "Restricción",
+            "height": "Altura",
+            "fuel": "Combustible"
           }
         },
         "inspect": {
-          "$": "Inspect",
+          "$": "Inspeccionar",
           "select_one_part": {
-            "$": "Select a Part",
-            "instructions": "You have either no parts or more than 1 parts currently selected"
+            "$": "Seleccionar una parte",
+            "instructions": "O no has seleccionado ninguna parte o tienes actualmente más de una parte seleccionada"
           },
           "meta_data": {
-            "$": "Meta Data",
+            "$": "Metadatos",
             "id": "ID",
-            "parent_id": "Parent ID",
-            "name": "Name",
-            "selected": "Selected",
-            "hidden": "Hidden",
-            "locked": "Locked"
+            "parent_id": "ID Padre",
+            "name": "Nombre",
+            "selected": "Seleccionado",
+            "hidden": "Oculto",
+            "locked": "Bloqueado"
           },
           "bounds": {
-            "$": "Bounds",
-            "width": "Width",
-            "height": "Height",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation"
+            "$": "Límites",
+            "width": "Anchura",
+            "height": "Altura",
+            "x_position": "Posición X",
+            "y_position": "Posición Y",
+            "rotation": "Ritación"
           },
           "json": "JSON",
-          "vanilla_json": "Vanilla JSON"
+          "vanilla_json": "JSON Vanilla"
         }
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Insert part...",
-          "abstract": "Abstract",
-          "fallback": "No parts found",
-          "cancel": "Cancel"
+          "input_placeholder": "Insertar parte...",
+          "abstract": "Abstracto",
+          "fallback": "No se encontraron partes",
+          "cancel": "Cancelar"
         },
         "rename": {
-          "input_placeholder": "Label...",
-          "trim": "Trim whitespace on ends",
-          "skip_locked": "Skip locked parts",
-          "suffix": "Add unique numerical suffixes",
-          "cancel": "Cancel",
-          "apply": "Apply"
+          "input_placeholder": "Etiqueta...",
+          "trim": "Recortar espacio en blanco en los finales",
+          "skip_locked": "Omitir partes bloqueadas",
+          "suffix": "Añadir sufijos numéricos únicos",
+          "cancel": "Cancelar",
+          "apply": "Aplicar"
         }
       }
     },
     "staging": {
-      "$": "Staging"
+      "$": "Puesta en escena"
     },
     "export": {
-      "$": "Export"
+      "$": "Exportar"
     }
   },
   "landscape_prompt": {
@@ -184,20 +184,20 @@
   },
   "prompts": {
     "welcome": {
-      "title": "Welcome!",
-      "description": "Select a language to continue.",
+      "title": "¡Bienvenido!",
+      "description": "Selecciona un idioma para continuar.",
       "actions": {
-        "dismiss": "Dismiss",
-        "apply": "Apply"
+        "dismiss": "Descartar",
+        "apply": "Aplicar"
       }
     },
     "alpha_warning": {
-      "title": "You are using an experimental version",
-      "description": "Use the %1$sbeta version%2$s instead. You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+      "title": "Estás usando una versión experimental",
+      "description": "Usa la %1$sversión beta%2$s en su lugar. Ahora mismo estás usando la versión alfa de Stellar. Esta versión puede ser altamente inestable y no probada. Si sabes lo que estás haciendo, puedes seguir.",
       "actions": {
-        "never": "Never Ask Again",
-        "dismiss": "Dismiss",
-        "beta": "Go to Beta"
+        "never": "No volver a preguntar de nuevo",
+        "dismiss": "Descartar",
+        "beta": "Ir a la beta"
       }
     }
   }
