@@ -1,8 +1,3 @@
-import { MagnifyingGlassIcon, Pencil1Icon } from '@radix-ui/react-icons';
-import { CheckboxWithLabel } from 'components/CheckboxWithLabel';
-import { InputWithIcon } from 'components/InputWithIcon';
-import * as Popup from 'components/Popup';
-import { SearchItem } from 'components/Search';
 import { mutateSettings } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
 import { mutatePopups } from 'core/app/mutatePopups';
@@ -16,16 +11,12 @@ import {
   saveFileAs,
   undoVersion,
 } from 'core/blueprint';
-import { dismissPopup } from 'core/interface/dismissPopup';
 import { popup } from 'core/interface/popup';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
   deletePartsBySelection,
-  getParent,
-  getPart,
   groupPartsBySelection,
-  insertNewPart,
   panToPartBySelection,
   pasteParts,
   selectAllPartsAtRoot,
@@ -34,19 +25,16 @@ import {
   unselectAllParts,
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
-import { RenamePartsOptions } from 'core/part/renameParts';
-import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
-import { useTranslator } from 'hooks/useTranslator';
 import { bind as mousetrapBind } from 'mousetrap';
-import { FC, KeyboardEvent, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import { InsertPartPopup } from 'routes/components/InsertPartPopup';
+import { RenamePartsPopup } from 'routes/components/RenamePartsPopup';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import usePartRegistry from 'stores/partRegistry';
-import usePopups, { PopupProps } from 'stores/popups';
-import useSettings, { InterfaceMode, UseSettings } from 'stores/settings';
+import usePopups from 'stores/popups';
+import { InterfaceMode, UseSettings } from 'stores/settings';
 import { getInterfaceMode } from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
-import { usePopupConcurrency } from './usePopupConcurrency';
 
 const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
@@ -65,176 +53,6 @@ const translate = (vector: PrimitiveVector2Tuple) => {
 
   translateTranslatablePartsBySelection(vector[0], vector[1]);
   invalidateFrame && invalidateFrame();
-};
-
-// TODO: clean this up
-export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
-  const { t } = useTranslator();
-  const input = useRef<HTMLInputElement>(null);
-  const list: SearchItem[] = [];
-  const partRegistry = usePartRegistry();
-  const { selections } = useBlueprint.getState();
-  const lastSelectionId = selections[selections.length - 1];
-  const lastSelection = getPart(lastSelectionId);
-  let parentId: string | null = null;
-  let index: number | undefined = undefined;
-
-  if (lastSelection) {
-    if (lastSelection.n === 'Group') {
-      parentId = lastSelectionId;
-    } else {
-      const parent = getParent(lastSelectionId);
-
-      if (parent) {
-        parentId = parent.id;
-        index = parent.part_order.indexOf(lastSelectionId);
-      }
-    }
-  }
-
-  const handleEscape = () => dismissPopup(id);
-  const handleCancelClick = () => dismissPopup(id);
-
-  partRegistry.forEach(({ vanillaData, Icon, data: { label } }, name) => {
-    const note =
-      vanillaData === null
-        ? t`tabs.layout.popup.insert_part.abstract`
-        : undefined;
-
-    const handleClick = () => {
-      insertNewPart(name, parentId, {
-        index,
-        nearCamera: true,
-        select: true,
-      });
-      dismissPopup(id);
-    };
-
-    list.push({
-      string:
-        vanillaData === null
-          ? `${label} ${t`tabs.layout.popup.insert_part.abstract`}`
-          : label,
-      node: (
-        <Popup.SearchItem
-          key={`part-${name}`}
-          icon={<Icon />}
-          note={note}
-          onClick={handleClick}
-        >
-          {label}
-        </Popup.SearchItem>
-      ),
-      callback: handleClick,
-    });
-  });
-
-  usePopupConcurrency();
-
-  return (
-    <Popup.Container>
-      <InputWithIcon
-        ref={input}
-        icon={<MagnifyingGlassIcon />}
-        placeholder={t`tabs.layout.popup.insert_part.input_placeholder`}
-        autoFocus
-      />
-
-      <Popup.Search
-        list={list}
-        input={input}
-        fallback={
-          <Popup.SearchFallback>{t`tabs.layout.popup.insert_part.fallback`}</Popup.SearchFallback>
-        }
-        escape={handleEscape}
-      />
-
-      <Popup.Actions>
-        <Popup.Action
-          onClick={handleCancelClick}
-        >{t`tabs.layout.popup.insert_part.cancel`}</Popup.Action>
-      </Popup.Actions>
-    </Popup.Container>
-  );
-};
-
-export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
-  const { t } = useTranslator();
-  const { rename } = useSettings.getState().editor;
-  const input = useRef<HTMLInputElement>(null);
-  const apply = () => {
-    input.current &&
-      renamePartsBySelection(
-        input.current.value,
-        useSettings.getState().editor.rename,
-      );
-    dismissPopup(id);
-  };
-  const handleClick = (type: keyof RenamePartsOptions) => {
-    return () => {
-      mutateSettings((draft) => {
-        draft.editor.rename[type] = !draft.editor.rename[type];
-      });
-    };
-  };
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      apply();
-    } else if (event.key === 'Escape') {
-      dismissPopup(id);
-    }
-  };
-  const handleCancelClick = () => dismissPopup(id);
-  const handleApplyClick = apply;
-
-  usePopupConcurrency();
-
-  return (
-    <Popup.Container>
-      <InputWithIcon
-        ref={input}
-        onKeyDown={handleKeyDown}
-        autoFocus
-        icon={<Pencil1Icon />}
-        placeholder={t`tabs.layout.popup.rename.input_placeholder`}
-      />
-
-      <Popup.Content>
-        <CheckboxWithLabel
-          defaultValue={rename.trim}
-          onChange={handleClick('trim')}
-        >
-          {t`tabs.layout.popup.rename.trim`}
-        </CheckboxWithLabel>
-        <CheckboxWithLabel
-          defaultValue={rename.skipLocked}
-          onChange={handleClick('skipLocked')}
-        >
-          {t`tabs.layout.popup.rename.skip_locked`}
-        </CheckboxWithLabel>
-        <CheckboxWithLabel
-          defaultValue={rename.suffix}
-          onChange={handleClick('suffix')}
-        >
-          {t`tabs.layout.popup.rename.suffix`}
-        </CheckboxWithLabel>
-      </Popup.Content>
-
-      <Popup.Actions>
-        <Popup.Action
-          onClick={handleCancelClick}
-        >{t`tabs.layout.popup.rename.cancel`}</Popup.Action>
-        <Popup.Action
-          onClick={handleApplyClick}
-          priority="callToAction"
-          color="accent"
-        >
-          {t`tabs.layout.popup.rename.apply`}
-        </Popup.Action>
-      </Popup.Actions>
-    </Popup.Container>
-  );
 };
 
 interface BindOptions {

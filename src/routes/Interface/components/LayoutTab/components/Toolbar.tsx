@@ -58,8 +58,8 @@ import {
   unselectAllParts,
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
-import { InsertPartPopup } from 'hooks/useKeybinds';
 import { useTranslator } from 'hooks/useTranslator';
+import { InsertPartPopup } from 'routes/components/InsertPartPopup';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import useVersionControl from 'stores/versionControl';

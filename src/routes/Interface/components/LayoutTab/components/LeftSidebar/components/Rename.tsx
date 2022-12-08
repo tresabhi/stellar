@@ -1,7 +1,7 @@
 import { Pencil1Icon } from '@radix-ui/react-icons';
 import { Button as ButtonPrimitive } from 'components/Button';
 import { popup } from 'core/interface';
-import { RenamePartsPopup } from 'hooks/useKeybinds';
+import { RenamePartsPopup } from 'routes/components/RenamePartsPopup';
 import { styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 
