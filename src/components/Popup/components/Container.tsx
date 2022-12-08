@@ -6,7 +6,6 @@ export interface ContainerProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof Primitive> {}
 
-// TODO: rename to Root
 const Primitive = styled('div', {
   display: 'flex',
   flexDirection: 'column',
@@ -23,8 +22,13 @@ const Primitive = styled('div', {
       },
     },
   },
+
+  defaultVariants: {
+    width: 'regular',
+  },
 });
 
+// TODO: rename to Root
 export const Container: FC<ContainerProps> = ({ onClick, ...props }) => {
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

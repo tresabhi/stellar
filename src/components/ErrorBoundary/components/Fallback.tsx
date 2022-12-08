@@ -150,10 +150,8 @@ const DebugContent = styled('span', {
 export const Fallback: FC<FallbackProps> = ({
   error,
   resetErrorBoundary,
-  className,
   ...props
 }) => {
-  const theme = useSettings((state) => state.interface.theme);
   const debug = useSettings((state) => state.debug.errorScreen.showDebug);
   const rawStack = useRef(
     error.stack === undefined
@@ -236,7 +234,7 @@ export const Fallback: FC<FallbackProps> = ({
   // TODO: translate this
 
   return (
-    <Container className={`${theme} ${className ?? ''}`} {...props}>
+    <Container {...props}>
       <InfoContainer>
         <Title mono={debug}>
           <ExclamationTriangleIcon />{' '}

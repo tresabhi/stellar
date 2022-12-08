@@ -1,9 +1,11 @@
 import * as Popup from 'components/Popup';
 import * as Toast from 'components/Toast';
+import { popup } from 'core/interface';
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
+import { WelcomePopup } from 'routes/components/WelcomePopup';
 import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/app';
-import { InterfaceMode } from 'stores/settings';
+import useSettings, { InterfaceMode } from 'stores/settings';
 import { CreateTab } from './components/CreateTab';
 import { ExportTab } from './components/ExportTab';
 import { LayoutTab } from './components/LayoutTab';
@@ -27,6 +29,8 @@ const Interface = () => {
   const interfaceMode = useInterfaceMode();
   const tab = useApp((state) => state.interface.tab);
 
+  useWelcomePopup();
+
   return (
     <Container>
       {!zenMode && <Tabs />}
@@ -42,6 +46,15 @@ const Interface = () => {
       <Toast.Viewport />
     </Container>
   );
+};
+
+const useWelcomePopup = () => {
+  const { welcomePromptCompleted } = useSettings.getState().interface;
+  const { welcomePopupDismissed } = useApp.getState().interface;
+
+  if (!welcomePromptCompleted && !welcomePopupDismissed) {
+    popup(WelcomePopup, 'welcome-popup');
+  }
 };
 
 export default Interface;

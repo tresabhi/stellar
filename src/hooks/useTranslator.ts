@@ -5,10 +5,13 @@ const localePattern = /[A-z]{2}-[A-z]{2}/;
 
 export const FALLBACK_LANG = 'en-US';
 
-const TRANSLATIONS = import.meta.glob<true, string, Translations>('../lang/*', {
-  eager: true,
-  import: 'default',
-});
+export const TRANSLATIONS = import.meta.glob<true, string, Translations>(
+  '../lang/*',
+  {
+    eager: true,
+    import: 'default',
+  },
+);
 
 for (const path in TRANSLATIONS) {
   const localeMatch = path.match(localePattern);

@@ -66,7 +66,7 @@ export const {
       inputSizeMajor: '2rem',
       tabMaxWidth: '15rem',
       paletteMaxHeight: '15rem',
-      popupWidth: '20rem',
+      popupWidth: '18rem',
       separatorWidth: '0.0625rem',
       createTabContentMaxWidth: '35rem',
       createTabContentMaxHeight: '25rem',

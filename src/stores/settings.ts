@@ -36,6 +36,7 @@ export interface UseSettings {
     language: string;
     theme?: string;
     showOrientationPrompt: boolean;
+    welcomePromptCompleted: boolean;
 
     tabs: {
       layout: {
@@ -82,6 +83,7 @@ export const UseSettingsData: UseSettings = {
     language: 'en-US',
     theme: themeDark.toString(),
     showOrientationPrompt: true,
+    welcomePromptCompleted: false,
 
     tabs: {
       layout: {

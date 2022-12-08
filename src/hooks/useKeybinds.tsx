@@ -132,7 +132,7 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
   usePopupConcurrency();
 
   return (
-    <Popup.Container width="regular">
+    <Popup.Container>
       <InputWithIcon
         ref={input}
         icon={<MagnifyingGlassIcon />}
@@ -149,11 +149,11 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
         escape={handleEscape}
       />
 
-      <Popup.ActionRow>
-        <Popup.Button
+      <Popup.Actions>
+        <Popup.Action
           onClick={handleCancelClick}
-        >{t`tabs.layout.popup.insert_part.cancel`}</Popup.Button>
-      </Popup.ActionRow>
+        >{t`tabs.layout.popup.insert_part.cancel`}</Popup.Action>
+      </Popup.Actions>
     </Popup.Container>
   );
 };
@@ -191,7 +191,7 @@ export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
   usePopupConcurrency();
 
   return (
-    <Popup.Container width="regular">
+    <Popup.Container>
       <InputWithIcon
         ref={input}
         onKeyDown={handleKeyDown}
@@ -221,18 +221,18 @@ export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
         </CheckboxWithLabel>
       </Popup.Content>
 
-      <Popup.ActionRow>
-        <Popup.Button
+      <Popup.Actions>
+        <Popup.Action
           onClick={handleCancelClick}
-        >{t`tabs.layout.popup.rename.cancel`}</Popup.Button>
-        <Popup.Button
+        >{t`tabs.layout.popup.rename.cancel`}</Popup.Action>
+        <Popup.Action
           onClick={handleApplyClick}
           priority="callToAction"
           color="accent"
         >
           {t`tabs.layout.popup.rename.apply`}
-        </Popup.Button>
-      </Popup.ActionRow>
+        </Popup.Action>
+      </Popup.Actions>
     </Popup.Container>
   );
 };

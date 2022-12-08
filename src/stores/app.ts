@@ -32,6 +32,7 @@ export interface UseApp {
     orientationPromptDismissed: boolean;
     zenMode: boolean;
     newPopupsEnabled: boolean;
+    welcomePopupDismissed: boolean;
   };
 
   editor: {
@@ -57,6 +58,7 @@ export const UseAppData: UseApp = {
     orientationPromptDismissed: false,
     zenMode: false,
     newPopupsEnabled: true,
+    welcomePopupDismissed: false,
   },
 
   editor: {

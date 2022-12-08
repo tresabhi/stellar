@@ -14,6 +14,7 @@ import packageJSON from '../../../../../../package.json';
 
 export const GITHUB_REPO = 'tresabhi/stellar';
 const { Icon, codeName } = getStellarContext();
+let licenseCache: string | undefined;
 
 const StellarIcon = styled(Icon, {
   width: theme.sizes[16],
@@ -121,17 +122,20 @@ export const StatusBar = () => {
 };
 
 const useLicense = () => {
-  const [license, setLicense] = useState('LICENSE');
+  const [license, setLicense] = useState(licenseCache ?? 'LICENSE');
 
   useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        `https://api.github.com/repos/${GITHUB_REPO}`,
-      );
-      const json = await response.json();
+    if (licenseCache === undefined) {
+      (async () => {
+        const response = await fetch(
+          `https://api.github.com/repos/${GITHUB_REPO}`,
+        );
+        const json = await response.json();
 
-      setLicense(json.license.spdx_id);
-    })();
+        licenseCache = json.license.spdx_id;
+        setLicense(licenseCache as string);
+      })();
+    }
   }, []);
 
   return license;

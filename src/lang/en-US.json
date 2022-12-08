@@ -232,10 +232,12 @@
     }
   },
 
-  "prompts": {
-    "welcome": {
+  "popups": {
+    "welcome_slide_1": {
       "title": "Welcome!",
-      "description": "Select a language to continue.",
+      "description": "Select a language to continue. Some languages may not be fully translated. Help us translate Stellar on %1$sCrowdin%2$s.",
+
+      "select": "Select a language...",
 
       "actions": {
         "dismiss": "Dismiss",
