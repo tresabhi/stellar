@@ -55,3 +55,4 @@ export const Trigger: FC<SelectPrimitive.SelectValueProps> = (props) => (
     </SelectPrimitive.Icon>
   </Primitive>
 );
+Trigger.toString = Primitive.toString;

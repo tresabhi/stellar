@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useRef } from 'react';
 import { theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
-import useSettings, { themes } from 'stores/settings';
+import useSettings, { THEMES } from 'stores/settings';
 import { Color, GridHelper, Mesh } from 'three';
 import { toThreeSafeHSL } from 'utilities/toThreeSafeHSL';
 import { InfiniteGridHelper } from './components/InfiniteGridHelper';
@@ -14,7 +14,7 @@ export const Grid = () => {
   const grid = useRef<GridHelper>(null);
   const infiniteGrid = useRef<Mesh>(null);
   const currentTheme = useSettings((state) => state.interface.theme);
-  const themeTokens = currentTheme ? themes.get(currentTheme) ?? theme : theme;
+  const themeTokens = currentTheme ? THEMES.get(currentTheme) ?? theme : theme;
   const gridColor = new Color(
     toThreeSafeHSL(themeTokens.colors.textLowContrast_accent.value),
   );

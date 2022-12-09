@@ -1,8 +1,8 @@
 import { RenamePartsOptions } from 'core/part/renameParts';
-import merge from 'lodash/merge';
+import { merge } from 'lodash';
 import { theme, themeDark } from 'stitches.config';
 import create from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, subscribeWithSelector } from 'zustand/middleware';
 
 export enum SidebarTab {
   Left,
@@ -16,7 +16,7 @@ export enum InterfaceMode {
 
 type Theme = typeof theme;
 
-export const themes = new Map<string, Theme>([
+export const THEMES = new Map<string, Theme>([
   ['theme-dark', themeDark as Theme],
 ]);
 
@@ -34,7 +34,7 @@ export interface UseSettings {
   interface: {
     mode: InterfaceMode | null; // null is auto detect
     language: string;
-    theme?: string;
+    theme: string | null;
     showOrientationPrompt: boolean;
     welcomePromptCompleted: boolean;
 
@@ -118,11 +118,16 @@ export const UseSettingsData: UseSettings = {
   },
 };
 
-const useSettings = create<UseSettings, [['zustand/persist', UseSettings]]>(
-  persist(() => UseSettingsData, {
-    name: 'settings',
-    merge: (persistedState, currentState) =>
-      merge(currentState, persistedState),
-  }),
+const useSettings = create<
+  UseSettings,
+  [['zustand/subscribeWithSelector', never], ['zustand/persist', UseSettings]]
+>(
+  subscribeWithSelector(
+    persist(() => UseSettingsData, {
+      name: 'settings',
+      merge: (persistedState, currentState) =>
+        merge(currentState, persistedState),
+    }),
+  ),
 );
 export default useSettings;

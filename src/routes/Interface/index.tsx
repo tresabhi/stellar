@@ -50,10 +50,9 @@ const Interface = () => {
 
 const useWelcomePopup = () => {
   const { welcomePromptCompleted } = useSettings.getState().interface;
-  const { welcomePopupDismissed } = useApp.getState().interface;
 
-  if (!welcomePromptCompleted && !welcomePopupDismissed) {
-    popup(WelcomePopup, 'welcome-popup');
+  if (!welcomePromptCompleted) {
+    popup(WelcomePopup, false, 'welcome-popup');
   }
 };
 

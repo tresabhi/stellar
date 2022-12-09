@@ -18,13 +18,20 @@ const AppContainer = styled('div', {
 });
 
 const useRootTheme = () => {
-  const theme = useSettings((state) => state.interface.theme);
-
   useEffect(() => {
-    if (theme) {
-      document.body.classList.add(theme);
-      return () => document.body.classList.remove(theme);
-    }
+    const element = document.body;
+    const initialTheme = useSettings.getState().interface.theme;
+    const unsubscribe = useSettings.subscribe(
+      (state) => state.interface.theme,
+      (theme, prevTheme) => {
+        prevTheme && element.classList.remove(prevTheme);
+        theme && element.classList.add(theme);
+      },
+    );
+
+    initialTheme && element.classList.add(initialTheme);
+
+    return () => unsubscribe();
   });
 };
 

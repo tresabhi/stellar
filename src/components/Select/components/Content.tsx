@@ -33,16 +33,20 @@ export const Content: FC<SelectPrimitive.SelectContentProps> = ({
   ...props
 }) => {
   return (
-    <Container {...props}>
-      <ScrollUpButton>
-        <UpIcon />
-      </ScrollUpButton>
+    <SelectPrimitive.Portal>
+      <Container {...props}>
+        <SelectPrimitive.Viewport>
+          <ScrollUpButton>
+            <UpIcon />
+          </ScrollUpButton>
 
-      {children}
+          {children}
 
-      <ScrollDownButton>
-        <DownIcon />
-      </ScrollDownButton>
-    </Container>
+          <ScrollDownButton>
+            <DownIcon />
+          </ScrollDownButton>
+        </SelectPrimitive.Viewport>
+      </Container>
+    </SelectPrimitive.Portal>
   );
 };

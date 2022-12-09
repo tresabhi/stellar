@@ -8,6 +8,7 @@ export interface PopupProps {
 
 export interface Popup {
   id: string;
+  dismissByBlur: boolean;
   node: ReactNode;
 }
 

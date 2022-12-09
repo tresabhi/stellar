@@ -27,8 +27,10 @@ const Container = styled('div', {
 
 export const Viewport = () => {
   const popups = usePopups((state) => state.popups);
-  const popupNodes = popups.map(({ id, node }) => {
-    const handleClick = () => dismissPopup(id);
+  const popupNodes = popups.map(({ id, dismissByBlur, node }) => {
+    const handleClick = () => {
+      dismissByBlur && dismissPopup(id);
+    };
 
     return (
       <Container onClick={handleClick} key={id}>

@@ -1,13 +1,14 @@
 import { Anchor } from 'components/Anchor';
 import * as Popup from 'components/Popup';
 import * as Select from 'components/Select';
-import { mutateApp, mutateSettings } from 'core/app';
+import { mutateSettings } from 'core/app';
 import { dismissPopup } from 'core/interface';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
 import { TRANSLATIONS, useTranslator } from 'hooks/useTranslator';
 import { FC, ReactNode, useState } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PopupProps } from 'stores/popups';
+import { THEMES } from 'stores/settings';
 
 const fixedLangNames: Record<string, string> = {
   'en-PT': 'English (Pirate)',
@@ -15,6 +16,13 @@ const fixedLangNames: Record<string, string> = {
 
 const Mono = styled('span', {
   fontFamily: theme.fonts.mono,
+  color: theme.colors.textLowContrast,
+  position: 'absolute',
+  right: theme.space.paddingMinor,
+
+  [`${Select.Trigger} &`]: {
+    display: 'none',
+  },
 });
 
 const Slide1 = () => {
@@ -28,7 +36,8 @@ const Slide1 = () => {
 
     languages.push(
       <Select.Item value={code} key={`language-${code}`}>
-        <Mono>[{code}]</Mono> {displayName}
+        {displayName}
+        <Mono>[{code}]</Mono>
       </Select.Item>,
     );
   }
@@ -42,42 +51,95 @@ const Slide1 = () => {
   return (
     <>
       <Popup.Info>
-        <Popup.Title>{t`popups.welcome_slide_1.title`}</Popup.Title>
+        <Popup.Title>{t`popups.welcome.slides.1.title`}</Popup.Title>
         <Popup.Description>
-          {f`popups.welcome_slide_1.description`[0]}
+          {f`popups.welcome.slides.1.description`[0]}
           <Anchor
             href="https://crowdin.com/project/stellareditor/"
             target="_blank"
           >
-            {f`popups.welcome_slide_1.description`[1]}
+            {f`popups.welcome.slides.1.description`[1]}
           </Anchor>
-          {f`popups.welcome_slide_1.description`[2]}
+          {f`popups.welcome.slides.1.description`[2]}
         </Popup.Description>
       </Popup.Info>
 
-      <Select.Root onValueChange={handleValueChange}>
-        <Select.Trigger placeholder={t`popups.welcome_slide_1.select`} />
+      <Select.Root key="1" onValueChange={handleValueChange}>
+        <Select.Trigger placeholder={t`popups.welcome.slides.1.select`} />
+        <Select.Content>{languages}</Select.Content>
+      </Select.Root>
+    </>
+  );
+};
 
-        <Select.Portal>
-          <Select.Content>
-            <Select.Viewport>{languages}</Select.Viewport>
-          </Select.Content>
-        </Select.Portal>
+const Slide2 = () => {
+  const { t, translate } = useTranslator();
+  const handleNoneClick = () => {
+    mutateSettings((draft) => {
+      draft.interface.theme = null;
+    });
+  };
+  const themes: JSX.Element[] = [
+    <Select.Item
+      value="none"
+      onClick={handleNoneClick}
+      key="theme-none"
+    >{t`themes.none`}</Select.Item>,
+  ];
+
+  THEMES.forEach((code) => {
+    const handleClick = () => {
+      mutateSettings((draft) => {
+        draft.interface.theme = code.toString();
+      });
+    };
+
+    themes.push(
+      <Select.Item
+        value={code.toString()}
+        onClick={handleClick}
+        key={`theme-${code.toString()}`}
+      >
+        {translate(`themes.${code.toString().split('-').join('_')}`)}
+      </Select.Item>,
+    );
+  });
+
+  const handleValueChange = (value: string) => {
+    mutateSettings((draft) => {
+      if (value === 'none') {
+        draft.interface.theme = null;
+      } else {
+        draft.interface.theme = value;
+      }
+    });
+  };
+
+  return (
+    <>
+      <Popup.Info>
+        <Popup.Title>{t`popups.welcome.slides.2.title`}</Popup.Title>
+        <Popup.Description>
+          {t`popups.welcome.slides.2.description`}
+        </Popup.Description>
+      </Popup.Info>
+
+      <Select.Root key="2" onValueChange={handleValueChange}>
+        <Select.Trigger placeholder={t`popups.welcome.slides.2.select`} />
+        <Select.Content>{themes}</Select.Content>
       </Select.Root>
     </>
   );
 };
 
 export const WelcomePopup: FC<PopupProps> = ({ id }) => {
+  const { t } = useTranslator();
   const [index, setIndex] = useState(0);
-  const slides = [Slide1];
+  const slides = [Slide1, Slide2];
   const lastSlide = index === slides.length - 1;
 
-  const handleDismissClick = () => {
-    mutateApp((draft) => {
-      draft.interface.welcomePopupDismissed = true;
-    });
-    dismissPopup(id);
+  const handleBackClick = () => {
+    setIndex((state) => state - 1);
   };
   const handleNextClick = () => setIndex((state) => state + 1);
   const handleFinishClick = () => {
@@ -95,12 +157,18 @@ export const WelcomePopup: FC<PopupProps> = ({ id }) => {
         {slides[index]()}
 
         <Popup.Actions>
-          <Popup.Action onClick={handleDismissClick}>Dismiss</Popup.Action>
+          {index > 0 && (
+            <Popup.Action
+              onClick={handleBackClick}
+            >{t`popups.welcome.actions.back`}</Popup.Action>
+          )}
           <Popup.Action
             color="accent"
             onClick={lastSlide ? handleFinishClick : handleNextClick}
           >
-            {lastSlide ? 'Finish' : 'Next'}
+            {lastSlide
+              ? t`popups.welcome.actions.finish`
+              : t`popups.welcome.actions.next`}
           </Popup.Action>
         </Popup.Actions>
       </Popup.Content>
