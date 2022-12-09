@@ -2,45 +2,45 @@
   "tabs": {
     "coming_soon": "This tab is coming soon!",
     "create": {
-      "$": "Napravi",
+      "$": "Create",
       "templates": {
         "input_placeholder": "Search templates...",
         "list": {
-          "apollo_mission": "\"Apolo\" Misija",
-          "basic_rocket": "Osnovna Raketa",
-          "hopper": "Skakač",
-          "joints": "Zglobovi",
-          "light_lander": "Laki Sletač",
-          "orbit_and_re_entry": "Orbita i Ponovan-ulazak",
-          "parachute_and_separator": "Padobran i Razdvajač",
-          "race_car": "Trkački Auto",
+          "apollo_mission": "Apollo Mission",
+          "basic_rocket": "Basic Rocket",
+          "hopper": "Hopper",
+          "joints": "Joints",
+          "light_lander": "Light Lander",
+          "orbit_and_re_entry": "Orbit & Re-entry",
+          "parachute_and_separator": "Parachute & Separator",
+          "race_car": "Race Car",
           "rover": "Rover"
         }
       },
       "file_options": {
-        "motto": "Uređivanje planova redefinisano",
-        "from_scratch": "Počni iz početka",
-        "import": "Ubaci Plan",
-        "open": "Otvori \"Stellar\" Fajl"
+        "motto": "Blueprint editing redefined",
+        "from_scratch": "Start From Scratch",
+        "import": "Import Blueprint File",
+        "open": "Open Stellar File"
       },
       "status_bar": {
-        "docs": "Dokumenti"
+        "docs": "Docs"
       }
     },
     "layout": {
-      "$": "Raspored",
+      "$": "Layout",
       "toolbar": {
         "file": {
-          "new": "Novi",
-          "open": "Otvori...",
-          "save": "Sačuvaj",
-          "save_as": "Sačuvaj kao...",
-          "import": "Uvezi...",
-          "export": "Izvezi..."
+          "new": "New",
+          "open": "Open...",
+          "save": "Save",
+          "save_as": "Save As...",
+          "import": "Import...",
+          "export": "Export..."
         },
         "tool": {
-          "move": "Pomeri",
-          "pan": "Pomeraj"
+          "move": "Move",
+          "pan": "Pan"
         },
         "clipboard": {
           "copy": "Copy",
@@ -56,26 +56,26 @@
           "ungroup": "Ungroup"
         },
         "help": {
-          "about": "O aplikaciji \"Stellar\"",
-          "report": "Prijavi problem",
+          "about": "About Stellar",
+          "report": "Report an Issue",
           "discord": "Discord",
           "github": "GitHub"
         },
         "preferences": {
-          "settings": "Podešavanja",
-          "keybinds": "Prečice na tastaturi"
+          "settings": "Settings",
+          "keybinds": "Keybinds"
         }
       },
       "left_sidebar": {
         "parts": {
-          "$": "Delovi",
+          "$": "Parts",
           "no_parts": {
             "$": "No Parts in Blueprint",
             "instructions": "Tap the %1$s icon in the Toolbar to insert a part."
           }
         },
         "snippets": {
-          "$": "Isečci",
+          "$": "Snippets",
           "coming_soon": {
             "$": "Snippets Coming Soon!",
             "instructions": "You will be able to insert small sections of other blueprints here as snippets. You will be able to create a new snippet by going to Toolbar > %1$s Clipboard > %2$s Create Snippet."
@@ -84,7 +84,7 @@
       },
       "right_sidebar": {
         "properties": {
-          "$": "Svojstva",
+          "$": "Properties",
           "no_selection": {
             "$": "No Parts Selected",
             "instructions": "Click on a part either on the blueprint or in the sidebar to select it."
@@ -94,12 +94,12 @@
             "instructions": "The part(s) you have selected lack adjustable properties probably because they're either abstract or a work in progress."
           },
           "transformations": {
-            "$": "Transformacije",
-            "x_position": "X pozicija",
-            "y_position": "Y pozicija",
-            "rotation": "Rotacija",
-            "x_scale": "X Opseg",
-            "y_scale": "Y Opseg",
+            "$": "Transformations",
+            "x_position": "X Position",
+            "y_position": "Y Position",
+            "rotation": "Rotation",
+            "x_scale": "X Scale",
+            "y_scale": "Y Scale",
             "constraint": "Constraint"
           },
           "engine": {
@@ -108,16 +108,16 @@
             "heat_damage": "Heat Damage"
           },
           "fuel_tank": {
-            "$": "Kanister sa Gorivom",
-            "top_width": "Gornja Širina",
-            "bottom_width": "Donja Širina",
+            "$": "Fuel Tank",
+            "top_width": "Top Width",
+            "bottom_width": "Bottom Width",
             "constraint": "Constraint",
-            "height": "Visina",
-            "fuel": "Gorivo"
+            "height": "Height",
+            "fuel": "Fuel"
           }
         },
         "inspect": {
-          "$": "Prouči",
+          "$": "Inspect",
           "select_one_part": {
             "$": "Select a Part",
             "instructions": "You have either no parts or more than 1 parts currently selected"
@@ -146,25 +146,25 @@
       "popup": {
         "insert_part": {
           "input_placeholder": "Insert part...",
-          "abstract": "Ostalo (Abstraktno)",
+          "abstract": "Abstract",
           "fallback": "No parts found",
           "cancel": "Cancel"
         },
         "rename": {
           "input_placeholder": "Label...",
-          "trim": "Izbriši razmake na krajevima",
-          "skip_locked": "Preskoči zaključane delove",
-          "suffix": "Dodaj jedinstvene numeričke sufikse",
-          "cancel": "Poništi",
-          "apply": "Primeni"
+          "trim": "Trim whitespace on ends",
+          "skip_locked": "Skip locked parts",
+          "suffix": "Add unique numerical suffixes",
+          "cancel": "Cancel",
+          "apply": "Apply"
         }
       }
     },
     "staging": {
-      "$": "Faze"
+      "$": "Staging"
     },
     "export": {
-      "$": "Izvezi"
+      "$": "Export"
     }
   },
   "landscape_prompt": {
@@ -181,5 +181,40 @@
         "dismiss": "Dismiss"
       }
     }
+  },
+  "popups": {
+    "welcome_slide_1": {},
+    "welcome": {
+      "slides": {
+        "1": {
+          "title": "Welcome!",
+          "description": "Select a language to continue. Some languages may not be fully translated. Help us translate Stellar on %1$sCrowdin%2$s.",
+          "select": "Select a language..."
+        },
+        "2": {
+          "title": "Pick a theme",
+          "description": "Themes change the look and feel of the editor. Pick one that fits your needs.",
+          "select": "Select a theme..."
+        }
+      },
+      "actions": {
+        "back": "Back",
+        "next": "Next",
+        "finish": "Finish"
+      }
+    },
+    "alpha_warning": {
+      "title": "You are using an experimental version",
+      "description": "Use the %1$sbeta version%2$s instead. You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+      "actions": {
+        "never": "Never Ask Again",
+        "dismiss": "Dismiss",
+        "beta": "Go to Beta"
+      }
+    }
+  },
+  "themes": {
+    "none": "None",
+    "theme_dark": "Stellar Dark"
   }
 }
