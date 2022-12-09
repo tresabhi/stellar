@@ -182,13 +182,25 @@
       }
     }
   },
-  "prompts": {
+  "popups": {
+    "welcome_slide_1": {},
     "welcome": {
-      "title": "Welcome!",
-      "description": "Select a language to continue.",
+      "slides": {
+        "1": {
+          "title": "Welcome!",
+          "description": "Select a language to continue. Some languages may not be fully translated. Help us translate Stellar on %1$sCrowdin%2$s.",
+          "select": "Select a language..."
+        },
+        "2": {
+          "title": "Pick a theme",
+          "description": "Themes change the look and feel of the editor. Pick one that fits your needs.",
+          "select": "Select a theme..."
+        }
+      },
       "actions": {
-        "dismiss": "Dismiss",
-        "apply": "Apply"
+        "back": "Back",
+        "next": "Next",
+        "finish": "Finish"
       }
     },
     "alpha_warning": {
@@ -200,5 +212,9 @@
         "beta": "Go to Beta"
       }
     }
+  },
+  "themes": {
+    "none": "None",
+    "theme_dark": "Stellar Dark"
   }
 }
