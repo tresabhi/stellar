@@ -187,34 +187,34 @@
     "welcome": {
       "slides": {
         "1": {
-          "title": "Welcome!",
-          "description": "Select a language to continue. Some languages may not be fully translated. Help us translate Stellar on %1$sCrowdin%2$s.",
-          "select": "Select a language..."
+          "title": "¡Bienvenido!",
+          "description": "Selecciona un idioma para continuar. Algunos idiomas podrían no estar completamente traducidos. Ayúdanos a traducir Stellar en %1$sCrowdin%2$s.",
+          "select": "Selecciona un idioma..."
         },
         "2": {
-          "title": "Pick a theme",
-          "description": "Themes change the look and feel of the editor. Pick one that fits your needs.",
-          "select": "Select a theme..."
+          "title": "Elige un tema",
+          "description": "Los temas cambian la apariencia del editor. Elige uno que se adapte a tus necesidades.",
+          "select": "Selecciona un tema..."
         }
       },
       "actions": {
-        "back": "Back",
-        "next": "Next",
-        "finish": "Finish"
+        "back": "Atrás",
+        "next": "Siguiente",
+        "finish": "Terminar"
       }
     },
     "alpha_warning": {
-      "title": "You are using an experimental version",
-      "description": "Use the %1$sbeta version%2$s instead. You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+      "title": "Estás usando una versión experimental",
+      "description": "Usa la %1$sversión beta%2$s en su lugar. Ahora mismo estás usando la versión alfa de Stellar. Esta versión puede ser altamente inestable y no probada. Si sabes lo que estás haciendo, puedes seguir.",
       "actions": {
-        "never": "Never Ask Again",
-        "dismiss": "Dismiss",
-        "beta": "Go to Beta"
+        "never": "No volver a preguntar de nuevo",
+        "dismiss": "Descartar",
+        "beta": "Ir a la beta"
       }
     }
   },
   "themes": {
-    "none": "None",
-    "theme_dark": "Stellar Dark"
+    "none": "Ninguno",
+    "theme_dark": "Stellar oscuro"
   }
 }
