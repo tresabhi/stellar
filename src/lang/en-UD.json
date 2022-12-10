@@ -187,34 +187,34 @@
     "welcome": {
       "slides": {
         "1": {
-          "title": "Welcome!",
-          "description": "Select a language to continue. Some languages may not be fully translated. Help us translate Stellar on %1$sCrowdin%2$s.",
-          "select": "Select a language..."
+          "title": "¡ǝɯoɔlǝM",
+          "description": "˙%2$suᴉpʍoɹƆ%1$s uo ɹɐllǝʇS ǝʇɐlsuɐɹʇ sn dlǝH ˙pǝʇɐlsuɐɹʇ ʎllnɟ ǝq ʇou ʎɐɯ sǝƃɐnƃuɐl ǝɯoS ˙ǝnuᴉʇuoɔ oʇ ǝƃɐnƃuɐl ɐ ʇɔǝlǝS",
+          "select": "˙˙˙ǝƃɐnƃuɐl ɐ ʇɔǝlǝS"
         },
         "2": {
-          "title": "Pick a theme",
-          "description": "Themes change the look and feel of the editor. Pick one that fits your needs.",
-          "select": "Select a theme..."
+          "title": "ǝɯǝɥʇ ɐ ʞɔᴉԀ",
+          "description": "˙spǝǝu ɹnoʎ sʇᴉɟ ʇɐɥʇ ǝuo ʞɔᴉԀ ˙ɹoʇᴉpǝ ǝɥʇ ɟo lǝǝɟ puɐ ʞool ǝɥʇ ǝƃuɐɥɔ sǝɯǝɥ┴",
+          "select": "˙˙˙ǝɯǝɥʇ ɐ ʇɔǝlǝS"
         }
       },
       "actions": {
-        "back": "Back",
-        "next": "Next",
-        "finish": "Finish"
+        "back": "ʞɔɐq",
+        "next": "ʇxǝN",
+        "finish": "ɥsᴉuᴉℲ"
       }
     },
     "alpha_warning": {
-      "title": "You are using an experimental version",
-      "description": "Use the %1$sbeta version%2$s instead. You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+      "title": "uoᴉsɹǝʌ lɐʇuǝɯᴉɹǝdxǝ uɐ ƃuᴉsn ǝɹɐ no⅄",
+      "description": "˙pǝǝɔoɹd ʎɐɯ noʎ 'ƃuᴉop ǝɹɐ noʎ ʇɐɥʍ ʍouʞ noʎ ɟI ˙pǝʇsǝʇun puɐ ǝlqɐʇsun ʎlɥƃᴉɥ ǝq uɐɔ uoᴉsɹǝʌ sᴉɥ┴ ˙ɹɐllǝʇS ɟo uoᴉsɹǝʌ ɐɥdlɐ ǝɥʇ ƃuᴉsn ʎlʇuǝɹɹnɔ ǝɹɐ no⅄ ˙pɐǝʇsuᴉ %2$suoᴉsɹǝʌ ɐʇǝqs%1$s ǝɥʇ ǝs∩",
       "actions": {
-        "never": "Never Ask Again",
-        "dismiss": "Dismiss",
-        "beta": "Go to Beta"
+        "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
+        "dismiss": "ssᴉɯsᴉp",
+        "beta": "ɐʇǝq oʇ oפ"
       }
     }
   },
   "themes": {
-    "none": "None",
-    "theme_dark": "Stellar Dark"
+    "none": "ǝuoN",
+    "theme_dark": "ʞɹɐp ɹɐllǝʇS"
   }
 }
