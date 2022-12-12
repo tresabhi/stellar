@@ -33,7 +33,7 @@ export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
   );
 
   useBoundsUpdated(partOrder, () => {
-    const bounds = getBoundsFromParts(partOrder);
+    const [bounds] = getBoundsFromParts(partOrder);
     boundsStore[id] = { bounds, needsRecomputation: false };
 
     declareBoundsUpdated(id);
