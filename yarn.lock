@@ -5107,10 +5107,10 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.yarnpkg.com/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz#784fd3d679722bc103b1b4b8030bcddb5db2a699"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
-ts-unused-exports@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/ts-unused-exports/-/ts-unused-exports-8.0.0.tgz#6dd15ff26286e0b7e5663cda3b98c77ea6f3ffe7"
-  integrity sha512-gylHFyJqC80PSb4zy35KTckykEW1vmKjnOHjBeX9iKBo4b/SzqQIcXXbYSuif4YMgNm6ewFF62VM1C9z0bGZPw==
+ts-unused-exports@^8.0.5:
+  version "8.0.5"
+  resolved "https://registry.yarnpkg.com/ts-unused-exports/-/ts-unused-exports-8.0.5.tgz#43b1ac25822ec9445b5fc3e57862c0d1f23471cb"
+  integrity sha512-ewEHxTtQsYQFQCI12CnMx8D0xxn1/Uui1Wr5jbiX4me+4LlSiOGvt4mGz0hxtIC3eElVaLrKEPbeT3TPrm4JvA==
   dependencies:
     chalk "^4.0.0"
     tsconfig-paths "^3.9.0"
