@@ -41,7 +41,6 @@ export interface UseApp {
     preventNextSelection: boolean;
     clipboard?: Snippet;
     camera?: Camera;
-    invalidateFrame?: () => void;
   };
 }
 
@@ -66,7 +65,6 @@ export const UseAppData: UseApp = {
     preventNextSelection: false,
     clipboard: undefined,
     camera: undefined,
-    invalidateFrame: undefined,
   },
 };
 

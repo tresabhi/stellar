@@ -9,6 +9,7 @@ import { FC, MutableRefObject, useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
+import snap from 'utilities/snap';
 import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
 /**
@@ -31,6 +32,7 @@ export interface ResizeNodeProps {
 export const CANVAS_MATRIX_SCALE = new Vector2(1, -1);
 const ORIGIN = new Vector2();
 const SNAP_SIZE = 1 / 5; // TODO: unify all these snaps
+const STEP = 1 / 10 ** 8;
 
 export const sideToPoint = (
   bounds: Bounds,
@@ -84,10 +86,16 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       .rotateAround(ORIGIN, -bounds.current.rotation);
     normalizedMoved.copy(moved).rotateAround(ORIGIN, -bounds.current.rotation);
     normalizedSize.copy(normalizedMovable).sub(normalizedConstant);
-    normalizedScale
-      .copy(normalizedMoved)
-      .sub(normalizedConstant)
-      .divide(normalizedSize);
+    normalizedScale.copy(normalizedMoved).sub(normalizedConstant);
+
+    normalizedScale.x =
+      snap(normalizedSize.x, STEP) === 0
+        ? 1
+        : normalizedScale.x / normalizedSize.x;
+    normalizedScale.y =
+      snap(normalizedSize.y, STEP) === 0
+        ? 1
+        : normalizedScale.y / normalizedSize.y;
   };
   const updateValues = () => {
     constant.set(...sideToPoint(bounds.current, constantSide));
@@ -149,6 +157,9 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       deferUpdates();
     }
 
+    moved.copy(movable).add(offset);
+    lastOffset.copy(offset);
+
     offset
       .set(event.clientX, event.clientY)
       .sub(initial)
@@ -158,12 +169,9 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       .round()
       .multiplyScalar(SNAP_SIZE);
 
+    applyNormalizations();
+
     if (!offset.equals(lastOffset)) {
-      moved.copy(movable).add(offset);
-      lastOffset.copy(offset);
-
-      applyNormalizations();
-
       selections.forEach((selection) => {
         resizePartAsync(
           selection,
@@ -172,9 +180,9 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
           bounds.current.rotation,
         );
       });
-
-      invalidate();
     }
+
+    invalidate();
   };
   const handlePointerUp = () => {
     if (offset.length() > 0) {
@@ -218,6 +226,8 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
           }
         });
       });
+
+      invalidate();
     }
 
     if (!firstMove) undeferUpdates();

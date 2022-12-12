@@ -1,4 +1,4 @@
-import { invalidate, useThree } from '@react-three/fiber';
+import { useThree } from '@react-three/fiber';
 import { mutateApp } from 'core/app';
 
 export const Expose = () => {
@@ -6,7 +6,6 @@ export const Expose = () => {
 
   mutateApp((draft) => {
     draft.editor.camera = camera;
-    draft.editor.invalidateFrame = invalidate;
   });
 
   return null;

@@ -1,3 +1,4 @@
+import { invalidate } from '@react-three/fiber';
 import { mutateSettings } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
 import { mutatePopups } from 'core/app/mutatePopups';
@@ -49,10 +50,8 @@ const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_SNAP, 0];
 const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_SNAP, 0];
 
 const translate = (vector: PrimitiveVector2Tuple) => {
-  const { invalidateFrame } = useApp.getState().editor;
-
   translateTranslatablePartsBySelection(vector[0], vector[1]);
-  invalidateFrame && invalidateFrame();
+  invalidate();
 };
 
 interface BindOptions {
