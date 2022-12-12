@@ -1,8 +1,10 @@
 import { invalidate } from '@react-three/fiber';
 import { declareBoundsUpdated } from 'core/bounds';
 import { getPart, PartScaleEventDetail } from 'core/part';
+import { PartResizeEventDetail } from 'core/part/resizePartAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
+import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { Object3D, Vector3 } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
@@ -32,20 +34,40 @@ export const PartWithScaleData: PartWithScale = {
 export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
   const scale = new Vector3();
 
-  const handlePartMove = (event: CustomEvent<PartScaleEventDetail>) => {
+  const handlePartScale = (event: CustomEvent<PartScaleEventDetail>) => {
     if (object.current && getPart(id)?.selected) {
       object.current.scale.multiply(
-        scale.set(event.detail.x, event.detail.y, 0),
+        scale.set(event.detail.x, event.detail.y, 1),
       );
       invalidate();
     }
   };
 
+  const handlePartResize = (event: CustomEvent<PartResizeEventDetail>) => {
+    const part = useBlueprint.getState().parts[id] as PartWithScale;
+
+    if (object.current) {
+      object.current.scale.set(
+        part.o.x * event.detail.normalizedScale[0],
+        part.o.y * event.detail.normalizedScale[1],
+        object.current.scale.z,
+      );
+    }
+  };
+
   useEffect(() => {
-    window.addEventListener('partscale', handlePartMove as EventListener);
+    window.addEventListener('partscale', handlePartScale as EventListener);
+    window.addEventListener(
+      `partresize${id}`,
+      handlePartResize as EventListener,
+    );
 
     return () => {
-      window.removeEventListener('partscale', handlePartMove as EventListener);
+      window.removeEventListener('partscale', handlePartScale as EventListener);
+      window.removeEventListener(
+        `partresize${id}`,
+        handlePartResize as EventListener,
+      );
     };
   });
 

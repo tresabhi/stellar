@@ -42,4 +42,3 @@ export const Item = forwardRef<HTMLDivElement, SelectPrimitive.SelectItemProps>(
     );
   },
 );
-

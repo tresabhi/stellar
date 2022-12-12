@@ -1,18 +1,20 @@
 import { Vector2Tuple } from 'three';
 
 export interface PartResizeEventDetail {
-  constant: Vector2Tuple;
-  scale: Vector2Tuple;
+  normalizedConstant: Vector2Tuple;
+  normalizedScale: Vector2Tuple;
+  rotation: number;
 }
 
 export const resizePartAsync = (
   id: string,
-  constant: Vector2Tuple,
-  scale: Vector2Tuple,
+  normalizedConstant: Vector2Tuple,
+  normalizedScale: Vector2Tuple,
+  rotation: number,
 ) => {
   window.dispatchEvent(
     new CustomEvent<PartResizeEventDetail>(`partresize${id}`, {
-      detail: { constant, scale },
+      detail: { normalizedConstant, normalizedScale, rotation },
     }),
   );
 };

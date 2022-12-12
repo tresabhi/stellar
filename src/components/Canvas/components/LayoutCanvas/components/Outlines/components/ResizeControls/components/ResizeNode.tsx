@@ -1,5 +1,7 @@
 import { Line } from '@react-three/drei';
 import { invalidate, ThreeEvent, useFrame, useThree } from '@react-three/fiber';
+import { mutateBlueprint } from 'core/blueprint';
+import { deferUpdates, undeferUpdates } from 'core/bounds';
 import { resizePartAsync } from 'core/part/resizePartAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
@@ -9,14 +11,25 @@ import { Bounds } from 'stores/bounds';
 import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
 import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
+/**
+ * WARNING!
+ *
+ * THE CODE HERE IS VERY UGLY AND MAY CAUSE TRAUMA AND/OR STROKE(S)
+ * READERS BEWARE, I PHYSICALLY CRIED YESTERDAY WRITING THIS
+ *
+ * DON'T ASK ME WHY I HAD TO NORMALIZE THE OFFSETS AND SCALES
+ * THE MATH MAKES SENSE EITHER WAY AND IT WORKS
+ * (┬┬﹏┬┬)
+ */
+
 export interface ResizeNodeProps {
   bounds: MutableRefObject<Bounds>;
   constant: Vector2Tuple;
   movable: Vector2Tuple;
-  maintainSlope?: boolean;
 }
 
 export const CANVAS_MATRIX_SCALE = new Vector2(1, -1);
+const ORIGIN = new Vector2();
 const SNAP_SIZE = 1 / 5; // TODO: unify all these snaps
 
 export const sideToPoint = (
@@ -47,31 +60,53 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   bounds,
   constant: constantSide,
   movable: movableSide,
-  maintainSlope = false,
-  // maintainSlope = true,
 }) => {
+  let firstMove = true;
   const camera = useThree((state) => state.camera);
   const wrapper = useRef<Group>(null);
   const constant = new Vector2();
   const movable = new Vector2();
-  const movedMovable = new Vector2();
-  const size = new Vector2();
-  const scaledSize = new Vector2();
-  const scale = new Vector2();
+  const moved = new Vector2();
+  const normalizedConstant = new Vector2();
+  const normalizedMovable = new Vector2();
+  const normalizedMoved = new Vector2();
+  const normalizedSize = new Vector2();
+  const normalizedScale = new Vector2();
   const initial = new Vector2();
   const offset = new Vector2();
+  const lastOffset = new Vector2();
   let blueprint = useBlueprint.getState();
   let selections: string[] = [];
 
-  const handleUpdateResizeNodes = () => {
+  const applyNormalizations = () => {
+    normalizedMovable
+      .copy(movable)
+      .rotateAround(ORIGIN, -bounds.current.rotation);
+    normalizedMoved.copy(moved).rotateAround(ORIGIN, -bounds.current.rotation);
+    normalizedSize.copy(normalizedMovable).sub(normalizedConstant);
+    normalizedScale
+      .copy(normalizedMoved)
+      .sub(normalizedConstant)
+      .divide(normalizedSize);
+  };
+  const updateValues = () => {
     constant.set(...sideToPoint(bounds.current, constantSide));
     movable.set(...sideToPoint(bounds.current, movableSide));
-    movedMovable.copy(movable);
-    size.copy(movable).sub(constant);
-    scaledSize.copy(size);
-    scale.set(1, 1);
+    moved.copy(movable);
+    normalizedConstant
+      .copy(constant)
+      .rotateAround(ORIGIN, -bounds.current.rotation);
+    normalizedSize.set(1, 1);
+    offset.set(0, 0);
+    lastOffset.copy(offset);
 
-    wrapper.current?.position.set(...movedMovable.toArray(), 2);
+    applyNormalizations();
+  };
+
+  const handleUpdateResizeNodes = () => {
+    updateValues();
+
+    wrapper.current?.position.set(...moved.toArray(), 2);
     wrapper.current?.rotation.set(0, 0, bounds.current.rotation);
   };
   handleUpdateResizeNodes();
@@ -90,10 +125,11 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
     event.stopPropagation();
+    updateValues();
 
     initial.set(event.clientX, event.clientY);
-    movedMovable.copy(movable);
 
+    firstMove = true;
     blueprint = useBlueprint.getState();
     selections = blueprint.selections.filter((selection) => {
       const part = blueprint.parts[selection];
@@ -108,6 +144,11 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     window.addEventListener('pointerup', handlePointerUp);
   };
   const handlePointerMove = (event: PointerEvent) => {
+    if (firstMove) {
+      firstMove = false;
+      deferUpdates();
+    }
+
     offset
       .set(event.clientX, event.clientY)
       .sub(initial)
@@ -116,52 +157,71 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       .divideScalar(SNAP_SIZE)
       .round()
       .multiplyScalar(SNAP_SIZE);
-    movedMovable.copy(movable).add(offset);
-    const pointerX = movable.x + offset.x;
-    const pointerY = movable.y + offset.y;
 
-    if (maintainSlope) {
-      const slope = (movable.y - constant.y) / (movable.x - constant.x);
-      const perpendicular = -1 / slope;
+    if (!offset.equals(lastOffset)) {
+      moved.copy(movable).add(offset);
+      lastOffset.copy(offset);
 
-      const movedX = isFinite(slope)
-        ? isFinite(perpendicular)
-          ? (-constant.x * slope +
-              pointerX * perpendicular +
-              constant.y -
-              pointerY) /
-            (perpendicular - slope)
-          : pointerX
-        : constant.x;
-      const movedY = isFinite(slope)
-        ? isFinite(perpendicular)
-          ? (-constant.x * perpendicular * slope +
-              pointerX * perpendicular * slope +
-              constant.y * perpendicular -
-              pointerY * slope) /
-            (perpendicular - slope)
-          : constant.y
-        : pointerY;
+      applyNormalizations();
 
-      wrapper.current?.position.set(movedX, movedY, wrapper.current.position.z);
-    } else {
-      wrapper.current?.position.set(
-        pointerX,
-        pointerY,
-        wrapper.current.position.z,
-      );
+      selections.forEach((selection) => {
+        resizePartAsync(
+          selection,
+          normalizedConstant.toArray(),
+          normalizedScale.toArray(),
+          bounds.current.rotation,
+        );
+      });
+
+      invalidate();
     }
-
-    scaledSize.copy(movedMovable).sub(constant);
-    scale.copy(scaledSize).divide(size);
-
-    selections.forEach((selection) => {
-      resizePartAsync(selection, [constant.x, constant.y], [scale.x, scale.y]);
-    });
-
-    invalidate();
   };
   const handlePointerUp = () => {
+    if (offset.length() > 0) {
+      mutateBlueprint((draft) => {
+        selections.forEach((selection) => {
+          const part = draft.parts[selection];
+
+          if (
+            (part as PartWithPosition).p !== undefined &&
+            (part as PartWithScale).o !== undefined
+          ) {
+            (part as PartWithScale).o.x *= normalizedScale.x;
+            (part as PartWithScale).o.y *= normalizedScale.y;
+
+            const originOffset = Math.hypot(
+              (part as PartWithPosition).p.x,
+              (part as PartWithPosition).p.y,
+            );
+            const originAngle =
+              Math.atan2(
+                (part as PartWithPosition).p.y,
+                (part as PartWithPosition).p.x,
+              ) - bounds.current.rotation;
+            const rotatedOriginX = originOffset * Math.cos(originAngle);
+            const rotatedOriginY = originOffset * Math.sin(originAngle);
+            const offsetX = rotatedOriginX - normalizedConstant.x;
+            const offsetY = rotatedOriginY - normalizedConstant.y;
+            const scaledOffsetX =
+              offsetX * normalizedScale.x + normalizedConstant.x;
+            const scaledOffsetY =
+              offsetY * normalizedScale.y + normalizedConstant.y;
+            const scaledOffset = Math.hypot(scaledOffsetX, scaledOffsetY);
+            const scaledAngle =
+              Math.atan2(scaledOffsetY, scaledOffsetX) +
+              bounds.current.rotation;
+            const x = scaledOffset * Math.cos(scaledAngle);
+            const y = scaledOffset * Math.sin(scaledAngle);
+
+            (part as PartWithPosition).p.x = x;
+            (part as PartWithPosition).p.y = y;
+          }
+        });
+      });
+    }
+
+    if (!firstMove) undeferUpdates();
+
     window.removeEventListener('pointermove', handlePointerMove);
     window.removeEventListener('pointerup', handlePointerUp);
   };

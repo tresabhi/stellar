@@ -86,7 +86,6 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[0, -1]}
         movable={[0, 1]}
-        maintainSlope
       />
       <ResizeNode // top right
         bounds={bounds}
@@ -97,7 +96,6 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[-1, 0]}
         movable={[1, 0]}
-        maintainSlope
       />
       <ResizeNode // bottom right
         bounds={bounds}
@@ -108,7 +106,6 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[0, 1]}
         movable={[0, -1]}
-        maintainSlope
       />
       <ResizeNode // bottom left
         bounds={bounds}
@@ -119,7 +116,6 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[1, 0]}
         movable={[-1, 0]}
-        maintainSlope
       />
     </group>
   );
