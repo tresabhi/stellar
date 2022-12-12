@@ -10,6 +10,10 @@ import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
 import { ResizeNode } from './components/ResizeNode';
 
+export interface UpdateResizeNodesDetail {
+  maintainSlope: boolean;
+}
+
 export const ResizeControls = () => {
   const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
@@ -23,13 +27,19 @@ export const ResizeControls = () => {
   });
 
   const recalculateBounds = () => {
-    bounds.current = getBoundsFromParts(selections);
+    const boundsFromParts = getBoundsFromParts(selections);
+
+    bounds.current = boundsFromParts.bounds;
 
     outline.current?.position.set(bounds.current.x, bounds.current.y, 0);
     outline.current?.rotation.set(0, 0, bounds.current.rotation);
     outline.current?.scale.set(bounds.current.width, bounds.current.height, 1);
 
-    window.dispatchEvent(new CustomEvent('updateresizenodes'));
+    window.dispatchEvent(
+      new CustomEvent<UpdateResizeNodesDetail>('updateresizenodes', {
+        detail: { maintainSlope: !boundsFromParts.hasMutualAngle },
+      }),
+    );
     invalidate();
   };
   const debouncedRecalculateBounds = fallingEdgeDebounce(recalculateBounds, 0);
@@ -86,6 +96,7 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[0, -1]}
         movable={[0, 1]}
+        hideOnMaintainSlope
       />
       <ResizeNode // top right
         bounds={bounds}
@@ -96,6 +107,7 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[-1, 0]}
         movable={[1, 0]}
+        hideOnMaintainSlope
       />
       <ResizeNode // bottom right
         bounds={bounds}
@@ -106,6 +118,7 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[0, 1]}
         movable={[0, -1]}
+        hideOnMaintainSlope
       />
       <ResizeNode // bottom left
         bounds={bounds}
@@ -116,6 +129,7 @@ export const ResizeControls = () => {
         bounds={bounds}
         constant={[1, 0]}
         movable={[-1, 0]}
+        hideOnMaintainSlope
       />
     </group>
   );

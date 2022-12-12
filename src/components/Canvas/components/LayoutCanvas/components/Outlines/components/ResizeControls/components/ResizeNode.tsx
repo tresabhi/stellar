@@ -10,6 +10,7 @@ import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
 import snap from 'utilities/snap';
+import { UpdateResizeNodesDetail } from '..';
 import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
 /**
@@ -27,6 +28,7 @@ export interface ResizeNodeProps {
   bounds: MutableRefObject<Bounds>;
   constant: Vector2Tuple;
   movable: Vector2Tuple;
+  hideOnMaintainSlope?: boolean;
 }
 
 export const CANVAS_MATRIX_SCALE = new Vector2(1, -1);
@@ -62,6 +64,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   bounds,
   constant: constantSide,
   movable: movableSide,
+  hideOnMaintainSlope = false,
 }) => {
   let firstMove = true;
   const camera = useThree((state) => state.camera);
@@ -79,6 +82,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   const lastOffset = new Vector2();
   let blueprint = useBlueprint.getState();
   let selections: string[] = [];
+  let maintainSlope = false;
 
   const applyNormalizations = () => {
     normalizedMovable
@@ -111,23 +115,41 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     applyNormalizations();
   };
 
-  const handleUpdateResizeNodes = () => {
+  const updateResizeNode = () => {
     updateValues();
 
     wrapper.current?.position.set(...moved.toArray(), 2);
     wrapper.current?.rotation.set(0, 0, bounds.current.rotation);
   };
-  handleUpdateResizeNodes();
+  updateResizeNode();
 
   useFrame(({ camera }) => {
     const scale = (1 / camera.zoom) * NODE_SIZE;
     wrapper.current?.scale.set(scale, scale, scale);
   });
   useEffect(() => {
-    window.addEventListener('updateresizenodes', handleUpdateResizeNodes);
+    const handleUpdateResizeNodes = (
+      event: CustomEvent<UpdateResizeNodesDetail>,
+    ) => {
+      maintainSlope = event.detail.maintainSlope;
+
+      if (hideOnMaintainSlope && wrapper.current) {
+        wrapper.current.visible = !maintainSlope;
+      }
+
+      updateResizeNode();
+    };
+
+    window.addEventListener(
+      'updateresizenodes',
+      handleUpdateResizeNodes as EventListener,
+    );
 
     return () => {
-      window.removeEventListener('updateresizenodes', handleUpdateResizeNodes);
+      window.removeEventListener(
+        'updateresizenodes',
+        handleUpdateResizeNodes as EventListener,
+      );
     };
   });
 
@@ -168,6 +190,35 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       .divideScalar(SNAP_SIZE)
       .round()
       .multiplyScalar(SNAP_SIZE);
+
+    if (maintainSlope) {
+      const pointerX = offset.x + movable.x;
+      const pointerY = offset.y + movable.y;
+
+      const slope = (movable.y - constant.y) / (movable.x - constant.x);
+      const perpendicular = -1 / slope;
+
+      const movedX = isFinite(slope)
+        ? isFinite(perpendicular)
+          ? (-constant.x * slope +
+              pointerX * perpendicular +
+              constant.y -
+              pointerY) /
+            (perpendicular - slope)
+          : pointerX
+        : constant.x;
+      const movedY = isFinite(slope)
+        ? isFinite(perpendicular)
+          ? (-constant.x * perpendicular * slope +
+              pointerX * perpendicular * slope +
+              constant.y * perpendicular -
+              pointerY * slope) /
+            (perpendicular - slope)
+          : constant.y
+        : pointerY;
+
+      offset.set(movedX, movedY).sub(movable);
+    }
 
     applyNormalizations();
 

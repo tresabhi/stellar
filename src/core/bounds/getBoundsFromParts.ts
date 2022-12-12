@@ -30,7 +30,7 @@ export const getBoundsFromParts = (ids: string[]) => {
         rotation: 0,
       };
 
-      return bounds;
+      return { bounds, hasMutualAngle: false };
     } else {
       ids.forEach((id) => {
         const { bounds } = boundsStore[id];
@@ -92,11 +92,11 @@ export const getBoundsFromParts = (ids: string[]) => {
         rotation,
       };
 
-      return bounds;
+      return { bounds, hasMutualAngle: true };
     }
   } else {
     const bounds: Bounds = { x: 0, y: 0, width: 0, height: 0, rotation: 0 };
 
-    return bounds;
+    return { bounds, hasMutualAngle: true };
   }
 };
