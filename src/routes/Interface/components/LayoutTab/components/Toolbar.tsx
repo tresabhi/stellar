@@ -101,35 +101,6 @@ const Toolbar = () => {
   const hasNoItemInClipboard = useApp(
     (state) => state.editor.clipboard === undefined,
   );
-
-  const handleMoveClick = () =>
-    mutateApp((draft) => {
-      draft.editor.tool = Tool.Move;
-    });
-  const handlePanClick = () =>
-    mutateApp((draft) => {
-      draft.editor.tool = Tool.Pan;
-    });
-  const handlePlusClick = () => popup(InsertPartPopup);
-  const handleNewClick = () => loadBlueprint();
-  const handleOpenClick = () => openFile();
-  const handleSaveClick = () => saveFile();
-  const handleSaveAsClick = () => saveFileAs();
-  const handleImportClick = () => importFile();
-  const handleExportClick = () => exportFile();
-  const handleEyeClick = () => togglePartsVisibilityBySelection();
-  const handleLockClick = () => togglePartsLockBySelection();
-  const handleCopyClick = () => copyPartsBySelection();
-  const handleCutClick = () => cutPartsBySelection();
-  const handlePasteClick = () => pasteParts();
-  const handleDuplicateClick = () => duplicatePartsBySelection();
-  // const handleSnippetClick =
-  const handleSelectAllClick = () => selectAllPartsAtRoot();
-  const handleUnselectAllClick = () => unselectAllParts();
-  const handleGroupClick = () => groupPartsBySelection();
-  const handleUngroupClick = () => ungroupGroupsBySelection();
-  const handleUndoClick = () => undoVersion();
-  const handleRedoClick = () => redoVersion();
   const link = (url: string) => () => window.open(url, '_blank');
 
   return (
@@ -143,7 +114,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<FilePlusIcon />}
             keybind="Ctrl + N"
-            onClick={handleNewClick}
+            onClick={() => loadBlueprint()}
           >
             {t`tabs.layout.toolbar.file.new`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -151,7 +122,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<UploadIcon />}
             keybind="Ctrl + O"
-            onClick={handleOpenClick}
+            onClick={() => openFile()}
           >
             {t`tabs.layout.toolbar.file.open`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -159,7 +130,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<DownloadIcon />}
             keybind="Ctrl + S"
-            onClick={handleSaveClick}
+            onClick={() => saveFile()}
           >
             {t`tabs.layout.toolbar.file.save`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -167,7 +138,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<DownloadIcon />}
             keybind="Ctrl + Shift + S"
-            onClick={handleSaveAsClick}
+            onClick={() => saveFileAs()}
           >
             {t`tabs.layout.toolbar.file.save_as`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -175,7 +146,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<EnterIcon />}
             keybind="Ctrl + I"
-            onClick={handleImportClick}
+            onClick={() => importFile()}
           >
             {t`tabs.layout.toolbar.file.import`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -183,7 +154,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<ExitIcon />}
             keybind="Ctrl + E"
-            onClick={handleExportClick}
+            onClick={() => exportFile()}
           >
             {t`tabs.layout.toolbar.file.export`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -194,7 +165,11 @@ const Toolbar = () => {
         >
           <ToolbarPrimitive.DropdownMenuItem
             icon={<CursorArrowIcon />}
-            onClick={handleMoveClick}
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.editor.tool = Tool.Move;
+              })
+            }
           >
             {t`tabs.layout.toolbar.tool.move`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -202,13 +177,17 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<HandIcon />}
             keybind="Space"
-            onClick={handlePanClick}
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.editor.tool = Tool.Pan;
+              })
+            }
           >
             {t`tabs.layout.toolbar.tool.pan`}
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarPrimitive.Button onClick={handlePlusClick}>
+        <ToolbarPrimitive.Button onClick={() => popup(InsertPartPopup)}>
           <PlusIcon />
         </ToolbarPrimitive.Button>
       </ToolbarPrimitive.Group>
@@ -220,7 +199,7 @@ const Toolbar = () => {
         >
           <ToolbarPrimitive.DropdownMenuItem
             icon={<ClipboardCopyIcon />}
-            onClick={handleCopyClick}
+            onClick={() => copyPartsBySelection()}
             keybind="Ctrl + C"
             disabled={hasNoSelections}
           >
@@ -229,7 +208,7 @@ const Toolbar = () => {
 
           <ToolbarPrimitive.DropdownMenuItem
             icon={<ScissorsIcon />}
-            onClick={handleCutClick}
+            onClick={() => cutPartsBySelection()}
             keybind="Ctrl + X"
             disabled={hasNoSelections}
           >
@@ -238,7 +217,7 @@ const Toolbar = () => {
 
           <ToolbarPrimitive.DropdownMenuItem
             icon={<ClipboardIcon />}
-            onClick={handlePasteClick}
+            onClick={() => pasteParts()}
             keybind="Ctrl + V"
             disabled={hasNoItemInClipboard}
           >
@@ -247,7 +226,7 @@ const Toolbar = () => {
 
           <ToolbarPrimitive.DropdownMenuItem
             icon={<StackIcon />}
-            onClick={handleDuplicateClick}
+            onClick={() => duplicatePartsBySelection()}
             keybind="Ctrl + D"
             disabled={hasNoSelections}
           >
@@ -270,7 +249,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={!hasParts}
             icon={<CardStackPlusIcon />}
-            onClick={handleSelectAllClick}
+            onClick={() => selectAllPartsAtRoot()}
             keybind="Ctrl + A"
           >
             {t`tabs.layout.toolbar.selection.select_all`}
@@ -279,7 +258,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<CardStackMinusIcon />}
-            onClick={handleUnselectAllClick}
+            onClick={() => unselectAllParts()}
             keybind="Esc"
           >
             {t`tabs.layout.toolbar.selection.unselect_all`}
@@ -288,7 +267,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<GroupIcon />}
-            onClick={handleGroupClick}
+            onClick={() => groupPartsBySelection()}
             keybind="Ctrl + G"
           >
             {t`tabs.layout.toolbar.selection.group`}
@@ -297,7 +276,7 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<StackIcon />}
-            onClick={handleUngroupClick}
+            onClick={() => ungroupGroupsBySelection()}
             keybind="Ctrl + Shift + G"
           >
             {t`tabs.layout.toolbar.selection.ungroup`}
@@ -393,11 +372,17 @@ const Toolbar = () => {
       </ToolbarPrimitive.Group>
 
       <ToolbarPrimitive.Group>
-        <ToolbarPrimitive.Button onClick={handleUndoClick} disabled={!hasUndos}>
+        <ToolbarPrimitive.Button
+          onClick={() => undoVersion()}
+          disabled={!hasUndos}
+        >
           <ResetIcon />
         </ToolbarPrimitive.Button>
 
-        <ToolbarPrimitive.Button onClick={handleRedoClick} disabled={!hasRedos}>
+        <ToolbarPrimitive.Button
+          onClick={() => redoVersion()}
+          disabled={!hasRedos}
+        >
           <ResetIcon style={{ transform: 'scaleX(-1)' }} />
         </ToolbarPrimitive.Button>
 
