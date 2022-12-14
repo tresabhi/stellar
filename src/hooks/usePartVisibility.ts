@@ -1,3 +1,4 @@
+import { invalidate } from '@react-three/fiber';
 import { RefObject } from 'react';
 import { Object3D } from 'three';
 import usePartProperty from './usePartProperty';
@@ -7,7 +8,10 @@ const usePartVisibility = (id: string, mesh: RefObject<Object3D>) => {
     id,
     (state) => state.hidden,
     (hidden) => {
-      if (mesh.current) mesh.current.visible = !hidden;
+      if (mesh.current) {
+        mesh.current.visible = !hidden;
+        invalidate();
+      }
     },
   );
 };

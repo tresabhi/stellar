@@ -1,11 +1,14 @@
 import {
   CardStackMinusIcon,
   CardStackPlusIcon,
+  ChevronDownIcon,
+  CircleIcon,
   ClipboardCopyIcon,
   ClipboardIcon,
   Component1Icon,
   CursorArrowIcon,
   DiscordLogoIcon,
+  DoubleArrowDownIcon,
   DownloadIcon,
   EnterIcon,
   ExclamationTriangleIcon,
@@ -20,20 +23,24 @@ import {
   HandIcon,
   InfoCircledIcon,
   KeyboardIcon,
+  LightningBoltIcon,
   LockClosedIcon,
   LockOpen2Icon,
+  Pencil1Icon,
+  PlusCircledIcon,
   PlusIcon,
-  QuestionMarkCircledIcon,
   ResetIcon,
+  RulerSquareIcon,
   ScissorsIcon,
   StackIcon,
   TrashIcon,
   UploadIcon,
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
-import * as ToolbarComponent from 'components/Toolbar';
+import * as ToolbarPrimitive from 'components/Toolbar';
 import { DISCORD, WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
+import { mutateSettings } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
 import {
   exportFile,
@@ -49,6 +56,7 @@ import { popup } from 'core/interface';
 import {
   copyPartsBySelection,
   cutPartsBySelection,
+  deletePartsBySelection,
   groupPartsBySelection,
   pasteParts,
   selectAllPartsAtRoot,
@@ -60,12 +68,17 @@ import {
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { useTranslator } from 'hooks/useTranslator';
 import { InsertPartPopup } from 'routes/components/InsertPartPopup';
+import { RenamePartsPopup } from 'routes/components/RenamePartsPopup';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
+import useSettings from 'stores/settings';
 import useVersionControl from 'stores/versionControl';
 
 const Toolbar = () => {
-  const { t } = useTranslator();
+  const { t, translate } = useTranslator();
+  const selectMultiple = useSettings((state) => state.editor.selectMultiple);
+  const selectDeep = useSettings((state) => state.editor.selectDeep);
+  const focusMode = useApp((state) => state.interface.focusMode);
   const tool = useApp((state) =>
     state.editor.isSpacePanning || state.editor.isTouchPanning
       ? Tool.Pan
@@ -120,254 +133,323 @@ const Toolbar = () => {
   const link = (url: string) => () => window.open(url, '_blank');
 
   return (
-    <ToolbarComponent.Container>
-      <ToolbarComponent.Group>
-        <ToolbarComponent.Button disabled>
+    <ToolbarPrimitive.Container>
+      <ToolbarPrimitive.Group>
+        <ToolbarPrimitive.Button disabled>
           <StellarIcon />
-        </ToolbarComponent.Button>
+        </ToolbarPrimitive.Button>
 
-        <ToolbarComponent.DropdownMenu icon={<FileIcon />}>
-          <ToolbarComponent.DropdownMenuItem
+        <ToolbarPrimitive.DropdownMenu icon={<FileIcon />}>
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<FilePlusIcon />}
             keybind="Ctrl + N"
             onClick={handleNewClick}
           >
             {t`tabs.layout.toolbar.file.new`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<UploadIcon />}
             keybind="Ctrl + O"
             onClick={handleOpenClick}
           >
             {t`tabs.layout.toolbar.file.open`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<DownloadIcon />}
             keybind="Ctrl + S"
             onClick={handleSaveClick}
           >
             {t`tabs.layout.toolbar.file.save`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<DownloadIcon />}
             keybind="Ctrl + Shift + S"
             onClick={handleSaveAsClick}
           >
             {t`tabs.layout.toolbar.file.save_as`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<EnterIcon />}
             keybind="Ctrl + I"
             onClick={handleImportClick}
           >
             {t`tabs.layout.toolbar.file.import`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<ExitIcon />}
             keybind="Ctrl + E"
             onClick={handleExportClick}
           >
             {t`tabs.layout.toolbar.file.export`}
-          </ToolbarComponent.DropdownMenuItem>
-        </ToolbarComponent.DropdownMenu>
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarComponent.DropdownMenu
+        <ToolbarPrimitive.DropdownMenu
           icon={tool === Tool.Pan ? <HandIcon /> : <CursorArrowIcon />}
         >
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<CursorArrowIcon />}
             onClick={handleMoveClick}
           >
             {t`tabs.layout.toolbar.tool.move`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<HandIcon />}
             keybind="Space"
             onClick={handlePanClick}
           >
             {t`tabs.layout.toolbar.tool.pan`}
-          </ToolbarComponent.DropdownMenuItem>
-        </ToolbarComponent.DropdownMenu>
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarComponent.Button onClick={handlePlusClick}>
+        <ToolbarPrimitive.Button onClick={handlePlusClick}>
           <PlusIcon />
-        </ToolbarComponent.Button>
-      </ToolbarComponent.Group>
+        </ToolbarPrimitive.Button>
+      </ToolbarPrimitive.Group>
 
-      <ToolbarComponent.Group>
-        <ToolbarComponent.DropdownMenu
-          disabled={!hasParts && hasNoSelections}
-          icon={<GroupIcon />}
-        >
-          <ToolbarComponent.DropdownMenuItem
-            disabled={!hasParts}
-            icon={<CardStackPlusIcon />}
-            onClick={handleSelectAllClick}
-            keybind="Ctrl + A"
-          >
-            {t`tabs.layout.toolbar.selection.select_all`}
-          </ToolbarComponent.DropdownMenuItem>
-
-          <ToolbarComponent.DropdownMenuItem
-            disabled={hasNoSelections}
-            icon={<CardStackMinusIcon />}
-            onClick={handleUnselectAllClick}
-            keybind="Esc"
-          >
-            {t`tabs.layout.toolbar.selection.unselect_all`}
-          </ToolbarComponent.DropdownMenuItem>
-
-          <ToolbarComponent.DropdownMenuItem
-            disabled={hasNoSelections}
-            icon={<GroupIcon />}
-            onClick={handleGroupClick}
-            keybind="Ctrl + G"
-          >
-            {t`tabs.layout.toolbar.selection.group`}
-          </ToolbarComponent.DropdownMenuItem>
-
-          <ToolbarComponent.DropdownMenuItem
-            disabled={hasNoSelections}
-            icon={<StackIcon />}
-            onClick={handleUngroupClick}
-            keybind="Ctrl + Shift + G"
-          >
-            {t`tabs.layout.toolbar.selection.ungroup`}
-          </ToolbarComponent.DropdownMenuItem>
-        </ToolbarComponent.DropdownMenu>
-
-        <ToolbarComponent.DropdownMenu
+      <ToolbarPrimitive.Group>
+        <ToolbarPrimitive.DropdownMenu
           disabled={hasNoItemInClipboard && hasNoSelections}
           icon={<ClipboardIcon />}
         >
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<ClipboardCopyIcon />}
             onClick={handleCopyClick}
             keybind="Ctrl + C"
             disabled={hasNoSelections}
           >
             {t`tabs.layout.toolbar.clipboard.copy`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<ScissorsIcon />}
             onClick={handleCutClick}
             keybind="Ctrl + X"
             disabled={hasNoSelections}
           >
             {t`tabs.layout.toolbar.clipboard.cut`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<ClipboardIcon />}
             onClick={handlePasteClick}
             keybind="Ctrl + V"
             disabled={hasNoItemInClipboard}
           >
             {t`tabs.layout.toolbar.clipboard.paste`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<StackIcon />}
             onClick={handleDuplicateClick}
             keybind="Ctrl + D"
             disabled={hasNoSelections}
           >
             {t`tabs.layout.toolbar.clipboard.duplicate`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<Component1Icon />}
             keybind="Ctrl + M"
             disabled
           >
             {t`tabs.layout.toolbar.clipboard.create_snippet`}
-          </ToolbarComponent.DropdownMenuItem>
-        </ToolbarComponent.DropdownMenu>
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarComponent.Button disabled={hasNoSelections}>
-          <TrashIcon />
-        </ToolbarComponent.Button>
-
-        <ToolbarComponent.Button
-          disabled={hasNoSelections}
-          onClick={handleEyeClick}
+        <ToolbarPrimitive.DropdownMenu
+          disabled={!hasParts && hasNoSelections}
+          icon={<GroupIcon />}
         >
-          {isOneHidden ? <EyeClosedIcon /> : <EyeOpenIcon />}
-        </ToolbarComponent.Button>
+          <ToolbarPrimitive.DropdownMenuItem
+            disabled={!hasParts}
+            icon={<CardStackPlusIcon />}
+            onClick={handleSelectAllClick}
+            keybind="Ctrl + A"
+          >
+            {t`tabs.layout.toolbar.selection.select_all`}
+          </ToolbarPrimitive.DropdownMenuItem>
 
-        <ToolbarComponent.Button
+          <ToolbarPrimitive.DropdownMenuItem
+            disabled={hasNoSelections}
+            icon={<CardStackMinusIcon />}
+            onClick={handleUnselectAllClick}
+            keybind="Esc"
+          >
+            {t`tabs.layout.toolbar.selection.unselect_all`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            disabled={hasNoSelections}
+            icon={<GroupIcon />}
+            onClick={handleGroupClick}
+            keybind="Ctrl + G"
+          >
+            {t`tabs.layout.toolbar.selection.group`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            disabled={hasNoSelections}
+            icon={<StackIcon />}
+            onClick={handleUngroupClick}
+            keybind="Ctrl + Shift + G"
+          >
+            {t`tabs.layout.toolbar.selection.ungroup`}
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+
+        <ToolbarPrimitive.DropdownMenu
           disabled={hasNoSelections}
-          onClick={handleLockClick}
+          icon={<Pencil1Icon />}
         >
-          {isOneLocked ? <LockClosedIcon /> : <LockOpen2Icon />}
-        </ToolbarComponent.Button>
-      </ToolbarComponent.Group>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<Pencil1Icon />}
+            onClick={() => popup(RenamePartsPopup)}
+            keybind="Ctrl + R"
+          >
+            {t`tabs.layout.toolbar.edit.rename`}
+          </ToolbarPrimitive.DropdownMenuItem>
 
-      <ToolbarComponent.Group>
-        <ToolbarComponent.Button onClick={handleUndoClick} disabled={!hasUndos}>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={isOneHidden ? <EyeOpenIcon /> : <EyeClosedIcon />}
+            onClick={() => togglePartsVisibilityBySelection()}
+          >
+            {translate(
+              `tabs.layout.toolbar.edit.${isOneHidden ? 'hidden' : 'unhidden'}`,
+            )}
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={isOneLocked ? <LockOpen2Icon /> : <LockClosedIcon />}
+            onClick={() => togglePartsLockBySelection()}
+          >
+            {translate(
+              `tabs.layout.toolbar.edit.${isOneLocked ? 'locked' : 'unlocked'}`,
+            )}
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<TrashIcon />}
+            onClick={() => deletePartsBySelection()}
+            keybind="Del"
+          >
+            {t`tabs.layout.toolbar.edit.delete`}
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+
+        <ToolbarPrimitive.DropdownMenu icon={<CursorArrowIcon />}>
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() =>
+              mutateSettings((draft) => {
+                draft.editor.selectDeep = !draft.editor.selectDeep;
+              })
+            }
+            icon={selectDeep ? <ChevronDownIcon /> : <DoubleArrowDownIcon />}
+            keybind="Ctrl"
+          >
+            {translate(
+              `tabs.layout.toolbar.cursor.${
+                selectDeep ? 'select_cascade' : 'select_deep'
+              }`,
+            )}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() =>
+              mutateSettings((draft) => {
+                draft.editor.selectMultiple = !draft.editor.selectMultiple;
+              })
+            }
+            icon={selectMultiple ? <CircleIcon /> : <PlusCircledIcon />}
+            keybind="Shift"
+          >
+            {translate(
+              `tabs.layout.toolbar.cursor.${
+                selectMultiple ? 'select_concurrent' : 'select_multiple'
+              }`,
+            )}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.interface.focusMode = !draft.interface.focusMode;
+              })
+            }
+            icon={focusMode ? <RulerSquareIcon /> : <LightningBoltIcon />}
+            keybind="Alt + F"
+          >
+            {translate(
+              `tabs.layout.toolbar.cursor.${
+                focusMode ? 'normal_mode' : 'focus_mode'
+              }`,
+            )}
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+      </ToolbarPrimitive.Group>
+
+      <ToolbarPrimitive.Group>
+        <ToolbarPrimitive.Button onClick={handleUndoClick} disabled={!hasUndos}>
           <ResetIcon />
-        </ToolbarComponent.Button>
+        </ToolbarPrimitive.Button>
 
-        <ToolbarComponent.Button onClick={handleRedoClick} disabled={!hasRedos}>
+        <ToolbarPrimitive.Button onClick={handleRedoClick} disabled={!hasRedos}>
           <ResetIcon style={{ transform: 'scaleX(-1)' }} />
-        </ToolbarComponent.Button>
+        </ToolbarPrimitive.Button>
 
-        <ToolbarComponent.DropdownMenu icon={<QuestionMarkCircledIcon />}>
-          <ToolbarComponent.DropdownMenuItem
+        <ToolbarPrimitive.DropdownMenu icon={<InfoCircledIcon />}>
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<InfoCircledIcon />}
             keybind="F1"
             onClick={link(WEBSITE)}
           >
             {t`tabs.layout.toolbar.help.about`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<ExclamationTriangleIcon />}
             keybind="F4"
             onClick={link(`${GH_REPO_URL}issues/new/choose`)}
           >
             {t`tabs.layout.toolbar.help.report`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<DiscordLogoIcon />}
             onClick={link(DISCORD)}
           >
             {t`tabs.layout.toolbar.help.discord`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<GitHubLogoIcon />}
             onClick={link(GH_REPO_URL)}
           >
             {t`tabs.layout.toolbar.help.github`}
-          </ToolbarComponent.DropdownMenuItem>
-        </ToolbarComponent.DropdownMenu>
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarComponent.DropdownMenu disabled icon={<GearIcon />}>
-          <ToolbarComponent.DropdownMenuItem
+        <ToolbarPrimitive.DropdownMenu disabled icon={<GearIcon />}>
+          <ToolbarPrimitive.DropdownMenuItem
             icon={<GearIcon />}
             keybind="Ctrl + ,"
           >
             {t`tabs.layout.toolbar.preferences.settings`}
-          </ToolbarComponent.DropdownMenuItem>
+          </ToolbarPrimitive.DropdownMenuItem>
 
-          <ToolbarComponent.DropdownMenuItem
+          <ToolbarPrimitive.DropdownMenuItem
             keybind="Ctrl + K"
             icon={<KeyboardIcon />}
           >
             {t`tabs.layout.toolbar.preferences.keybinds`}
-          </ToolbarComponent.DropdownMenuItem>
-        </ToolbarComponent.DropdownMenu>
-      </ToolbarComponent.Group>
-    </ToolbarComponent.Container>
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+      </ToolbarPrimitive.Group>
+    </ToolbarPrimitive.Container>
   );
 };
 export default Toolbar;

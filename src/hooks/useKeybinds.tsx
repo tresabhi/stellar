@@ -150,9 +150,9 @@ const useKeybinds = () => {
         }
       });
     });
-    bind('alt+z', () => {
+    bind('alt+f', () => {
       mutateApp((draft) => {
-        draft.interface.zenMode = !draft.interface.zenMode;
+        draft.interface.focusMode = !draft.interface.focusMode;
       });
     });
 

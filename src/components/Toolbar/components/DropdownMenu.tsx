@@ -61,8 +61,14 @@ const Caret = styled(CaretDownIcon, {
   width: `${theme.sizes[8]} !important`,
   height: `${theme.sizes[8]} !important`,
 
-  [`${Trigger}[data-state="open"] &`]: {
-    transform: 'rotate(180deg)',
+  variants: {
+    disabled: {
+      false: {
+        [`${Trigger}[data-state="open"] &`]: {
+          transform: 'rotate(180deg)',
+        },
+      },
+    },
   },
 });
 
@@ -75,9 +81,11 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   <Root {...props}>
     <Trigger disabled={disabled}>
       {icon}
-      <Caret />
+      <Caret disabled={disabled} />
     </Trigger>
 
-    <DropdownMenuPrimitive.Content>{children}</DropdownMenuPrimitive.Content>
+    {!disabled && (
+      <DropdownMenuPrimitive.Content>{children}</DropdownMenuPrimitive.Content>
+    )}
   </Root>
 );

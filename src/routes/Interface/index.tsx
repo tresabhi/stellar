@@ -25,7 +25,7 @@ export const Container = styled('div', {
 });
 
 const Interface = () => {
-  const zenMode = useApp((state) => state.interface.zenMode);
+  const zenMode = useApp((state) => state.interface.focusMode);
   const interfaceMode = useInterfaceMode();
   const tab = useApp((state) => state.interface.tab);
 

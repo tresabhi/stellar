@@ -237,7 +237,7 @@ export const Fallback: FC<FallbackProps> = ({
     <Container {...props}>
       <InfoContainer>
         <Title mono={debug}>
-          <ExclamationTriangleIcon />{' '}
+          <ExclamationTriangleIcon />
           {debug ? error.name : 'Stellar Ran Into an Issue'}
         </Title>
 
