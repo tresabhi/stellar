@@ -8,7 +8,7 @@ import { PartWithScale } from 'game/parts/PartWithScale';
 import { FC, MutableRefObject, useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
-import { Group, LineBasicMaterial, Vector2, Vector2Tuple } from 'three';
+import { Group, Vector2, Vector2Tuple } from 'three';
 import snap from 'utilities/snap';
 import { UpdateResizeNodesDetail } from '..';
 import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
@@ -55,10 +55,6 @@ export const sideToPoint = (
 
 const NODE_SIZE = 10;
 const NODE_COLOR = '#eeedef';
-
-export const borderMaterial = new LineBasicMaterial({
-  color: '#8f8f8f',
-});
 
 export const ResizeNode: FC<ResizeNodeProps> = ({
   bounds,
