@@ -56,20 +56,20 @@
           "ungroup": "Desagrupar"
         },
         "edit": {
-          "rename": "Rename",
-          "hidden": "Unhide",
-          "unhidden": "Hide",
-          "locked": "Unlock",
-          "unlocked": "Lock",
-          "delete": "Delete"
+          "rename": "Renombrar",
+          "hidden": "Desocultar",
+          "unhidden": "Ocultar",
+          "locked": "Desbloquear",
+          "unlocked": "Bloquear",
+          "delete": "Eliminar"
         },
         "cursor": {
-          "select_deep": "Select Deep",
-          "select_cascade": "Select Cascade",
-          "select_multiple": "Select Multiple",
-          "select_concurrent": "Select Concurrent",
-          "focus_mode": "Focus Mode",
-          "normal_mode": "Normal Mode"
+          "select_deep": "Seleccionar profundo",
+          "select_cascade": "Seleccionar cascada",
+          "select_multiple": "Seleccionar varios",
+          "select_concurrent": "Seleccionar concurrente",
+          "focus_mode": "Modo de enfoque",
+          "normal_mode": "Modo normal"
         },
         "help": {
           "about": "Acerca de Stellar",
