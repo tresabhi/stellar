@@ -56,20 +56,20 @@
           "ungroup": "dnoɹƃu∩"
         },
         "edit": {
-          "rename": "Rename",
-          "hidden": "Unhide",
-          "unhidden": "Hide",
-          "locked": "Unlock",
-          "unlocked": "Lock",
-          "delete": "Delete"
+          "rename": "ǝɯɐuǝɹ",
+          "hidden": "ǝpᴉɥu∩",
+          "unhidden": "ǝpᴉH",
+          "locked": "ʞɔolu∩",
+          "unlocked": "ʞɔo˥",
+          "delete": "ǝʇǝlǝp"
         },
         "cursor": {
-          "select_deep": "Select Deep",
-          "select_cascade": "Select Cascade",
-          "select_multiple": "Select Multiple",
-          "select_concurrent": "Select Concurrent",
-          "focus_mode": "Focus Mode",
-          "normal_mode": "Normal Mode"
+          "select_deep": "dǝǝp ʇɔǝlǝS",
+          "select_cascade": "ǝpɐɔsɐƆ ʇɔǝlǝS",
+          "select_multiple": "ǝldᴉʇlnW ʇɔǝlǝS",
+          "select_concurrent": "ʇuǝɹɹnɔuoƆ ʇɔǝlǝS",
+          "focus_mode": "ǝpoW snɔoℲ",
+          "normal_mode": "ǝpoW lɐɯɹoN"
         },
         "help": {
           "about": "ɹɐllǝʇS ʇnoq∀",
