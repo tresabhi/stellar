@@ -1,6 +1,6 @@
 import { BarLoader } from 'react-spinners';
 import { styled, theme, themeDark } from 'stitches.config';
-import getStellarContext from 'utilities/getContext';
+import { getContext } from 'utilities/getContext';
 
 const Container = styled('div', {
   backgroundColor: theme.colors.appBackground1,
@@ -22,11 +22,11 @@ const Container = styled('div', {
 });
 
 const SplashScreen = () => {
-  const stellarContext = getStellarContext();
+  const { Icon } = getContext();
 
   return (
     <Container className={themeDark}>
-      <stellarContext.Icon />
+      <Icon />
 
       <BarLoader
         color={theme.colors.componentSolidBackground_accent.toString()}

@@ -8,12 +8,12 @@ import { useTranslator } from 'hooks/useTranslator';
 import { useEffect, useState } from 'react';
 import { parse } from 'semver';
 import { styled, theme } from 'stitches.config';
-import getStellarContext from 'utilities/getContext';
+import { getContext, StellarName } from 'utilities/getContext';
 import { prettifyVersion } from 'utilities/prettifyVersion';
 import packageJSON from '../../../../../../package.json';
 
 export const GITHUB_REPO = 'tresabhi/stellar';
-const { Icon, codeName } = getStellarContext();
+const { Icon } = getContext();
 let licenseCache: string | undefined;
 
 const StellarIcon = styled(Icon, {
@@ -22,6 +22,7 @@ const StellarIcon = styled(Icon, {
 });
 
 export const StatusBar = () => {
+  const { name } = getContext();
   const { t } = useTranslator();
   const date = new Date();
   const year = date.getUTCFullYear();
@@ -31,7 +32,7 @@ export const StatusBar = () => {
   const user = splitRepo[0];
   const repo = splitRepo[1];
   const releaseNotes = parsedVersion
-    ? codeName !== 'alpha' && codeName !== 'dev'
+    ? name !== StellarName.Alpha && name !== StellarName.Dev
       ? undefined
       : `${parsedVersion.major}.${parsedVersion.minor}${
           parsedVersion.patch === 0 ? '' : parsedVersion.patch

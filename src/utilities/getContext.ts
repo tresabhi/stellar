@@ -1,50 +1,9 @@
-// type CodeName = 'alpha' | 'beta' | 'release' | 'dev';
+import { ReactComponent as StellarAlphaIcon } from 'assets/icons/stellar-alpha.svg';
+import { ReactComponent as StellarBetaIcon } from 'assets/icons/stellar-beta.svg';
+import { ReactComponent as StellarDevIcon } from 'assets/icons/stellar-dev.svg';
+import { ReactComponent as StellarIcon } from 'assets/icons/stellar.svg';
 
-// /**
-//  * TODO: needs rework and a cleanup
-//  * @deprecated
-//  */
-// export default function getStellarContext() {
-//   const version = parse(packageJSON.version);
-//   let title: string;
-//   let codeName: CodeName;
-//   let Icon: FC<SVGProps<SVGSVGElement>>;
-
-//   switch (window.location.hostname) {
-//     case 'stellaralpha.web.app':
-//       title = 'Stellar Alpha';
-//       codeName = 'alpha';
-//       Icon = StellarAlphaIcon;
-//       break;
-
-//     case 'stellarbeta.web.app':
-//       title = 'Stellar Beta';
-//       codeName = 'beta';
-//       Icon = StellarBetaIcon;
-//       break;
-
-//     case 'stellaredit.web.app':
-//       title = 'Stellar';
-//       codeName = 'release';
-//       Icon = StellarIcon;
-//       break;
-
-//     default:
-//       title = 'Stellar Dev';
-//       codeName = 'dev';
-//       Icon = StellarDevIcon;
-//       break;
-//   }
-
-//   return {
-//     title,
-//     codeName,
-//     version,
-//     Icon,
-//   };
-// }
-
-export enum Version {
+export enum StellarName {
   Dev,
   Alpha,
   Beta,
@@ -53,8 +12,29 @@ export enum Version {
 }
 
 export const getContext = () => {
-  const version: Version = Version.Unknown;
-  alert(import.meta.env.BASE_URL);
+  let name: StellarName = StellarName.Unknown;
+  let title = 'Stellar Unknown';
+  let Icon = StellarIcon;
+
   if (import.meta.env.DEV) {
+    name = StellarName.Dev;
+    title = 'Stellar Dev';
+    Icon = StellarDevIcon;
+  } else {
+    if (window.location.hostname === 'stellaralpha.web.app') {
+      name = StellarName.Alpha;
+      title = 'Stellar Alpha';
+      Icon = StellarAlphaIcon;
+    } else if (window.location.hostname === 'stellarbeta.web.app') {
+      name = StellarName.Beta;
+      title = 'Stellar Beta';
+      Icon = StellarBetaIcon;
+    } else if (window.location.hostname === 'stellaredit.web.app') {
+      name = StellarName.Release;
+      title = 'Stellar';
+      Icon = StellarIcon;
+    }
   }
+
+  return { name, title, Icon };
 };

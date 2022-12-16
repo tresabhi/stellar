@@ -27,7 +27,7 @@ import { useMemo, useRef } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
-import getStellarContext from 'utilities/getContext';
+import { getContext } from 'utilities/getContext';
 import { StatusBar } from './components/StatusBar';
 
 const Container = styled('div', {
@@ -68,8 +68,7 @@ const StellarContainer = styled('div', {
   gap: theme.space.gapUnrelatedMajor,
 });
 
-const { Icon } = getStellarContext();
-const StellarIcon = styled(Icon, {
+const StellarIcon = styled(getContext().Icon, {
   width: theme.sizes[64],
   height: theme.sizes[64],
 });
