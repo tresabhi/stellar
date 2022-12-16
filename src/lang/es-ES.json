@@ -221,7 +221,7 @@
     },
     "alpha_warning": {
       "title": "Estás usando una versión experimental",
-      "description": "Usa la %1$sversión beta%2$s en su lugar. Ahora mismo estás usando la versión alfa de Stellar. Esta versión puede ser altamente inestable y no probada. Si sabes lo que estás haciendo, puedes seguir.",
+      "description": "Do you want to use the %1$sbeta version%2$s instead? You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
       "actions": {
         "never": "No volver a preguntar de nuevo",
         "dismiss": "Descartar",
@@ -230,7 +230,7 @@
     }
   },
   "themes": {
-    "none": "Ninguno",
+    "theme_light": "Stellar Light",
     "theme_dark": "Stellar oscuro"
   }
 }
