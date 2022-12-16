@@ -221,7 +221,7 @@
     },
     "alpha_warning": {
       "title": "uoᴉsɹǝʌ lɐʇuǝɯᴉɹǝdxǝ uɐ ƃuᴉsn ǝɹɐ no⅄",
-      "description": "˙pǝǝɔoɹd ʎɐɯ noʎ 'ƃuᴉop ǝɹɐ noʎ ʇɐɥʍ ʍouʞ noʎ ɟI ˙pǝʇsǝʇun puɐ ǝlqɐʇsun ʎlɥƃᴉɥ ǝq uɐɔ uoᴉsɹǝʌ sᴉɥ┴ ˙ɹɐllǝʇS ɟo uoᴉsɹǝʌ ɐɥdlɐ ǝɥʇ ƃuᴉsn ʎlʇuǝɹɹnɔ ǝɹɐ no⅄ ˙pɐǝʇsuᴉ %2$suoᴉsɹǝʌ ɐʇǝqs%1$s ǝɥʇ ǝs∩",
+      "description": "Do you want to use the %1$sbeta version%2$s instead? You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
       "actions": {
         "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
         "dismiss": "ssᴉɯsᴉp",
@@ -230,7 +230,7 @@
     }
   },
   "themes": {
-    "none": "ǝuoN",
+    "theme_light": "Stellar Light",
     "theme_dark": "ʞɹɐp ɹɐllǝʇS"
   }
 }
