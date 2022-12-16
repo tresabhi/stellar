@@ -1,20 +1,16 @@
 import { Button } from 'components/Button';
-import { ComponentPropsWithoutRef, FC } from 'react';
 import { styled, theme } from 'stitches.config';
 
-const Trigger = styled(Button, {
+export const Action = styled(Button, {
   padding: theme.space.paddingMinor,
   fontSize: theme.fontSizes[12],
   borderRadius: theme.radii[4],
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  flex: 1,
 
   defaultVariants: {
     border: 'true',
   },
 });
-
-export const Action: FC<ComponentPropsWithoutRef<typeof Button>> = (props) => (
-  <Trigger {...props} />
-);

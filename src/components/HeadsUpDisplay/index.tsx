@@ -33,7 +33,7 @@ const HeadsUpDisplay: FC<HeadsUpDisplayProps> = ({
 
   renderer.autoClear = false;
   if (!isInteger(priority)) {
-    throw new Error('Priority propr must be an integer');
+    throw new Error('Priority property must be an integer');
   }
 
   return <>{portal}</>;

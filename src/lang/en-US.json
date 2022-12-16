@@ -277,7 +277,7 @@
 
     "alpha_warning": {
       "title": "You are using an experimental version",
-      "description": "Use the %1$sbeta version%2$s instead. You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+      "description": "Do you want to use the %1$sbeta version%2$s instead? You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
 
       "actions": {
         "never": "Never Ask Again",
@@ -288,7 +288,7 @@
   },
 
   "themes": {
-    "none": "None",
+    "theme_light": "Stellar Light",
     "theme_dark": "Stellar Dark"
   }
 }

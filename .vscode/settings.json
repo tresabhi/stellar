@@ -136,7 +136,6 @@
     "zustand",
     "हिन्दी"
   ],
-  "docwriter.style": "JSDoc",
   "css.lint.unknownAtRules": "ignore",
   "yaml.schemas": {
     "https://json.schemastore.org/github-issue-config.json": "file:///workspace/Stellar/.github/ISSUE_TEMPLATE/config.yml"
@@ -148,5 +147,8 @@
       "scheme": "file"
     }
   ],
-  "liveServer.settings.multiRootWorkspaceName": "Stellar"
+  "liveServer.settings.multiRootWorkspaceName": "Stellar",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  }
 }

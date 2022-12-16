@@ -5,7 +5,7 @@ export const Root = styled('div', {
   flexDirection: 'column',
   padding: theme.space.paddingMajor,
   gap: theme.space.gapRelatedMajor,
-  backgroundColor: theme.colors.componentBackground,
+  backgroundColor: theme.colors.appBackground2,
   borderRadius: theme.radii[4],
   border: theme.borderStyles.componentInteractive,
   width: theme.sizes.toastWidth,

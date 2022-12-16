@@ -8,7 +8,7 @@ import { useTranslator } from 'hooks/useTranslator';
 import { useEffect, useState } from 'react';
 import { parse } from 'semver';
 import { styled, theme } from 'stitches.config';
-import getStellarContext from 'utilities/getStellarContext';
+import getStellarContext from 'utilities/getContext';
 import { prettifyVersion } from 'utilities/prettifyVersion';
 import packageJSON from '../../../../../../package.json';
 

@@ -25,12 +25,12 @@ const updateSW = registerSW({
             <Toast.Description>{t`toasts.update_available.description`}</Toast.Description>
           </Toast.Info>
           <Toast.Actions>
-            <Toast.Action
-              onClick={() => updateSW(true)}
-            >{t`toasts.update_available.actions.restart`}</Toast.Action>
-            <Toast.Action
-              onClick={() => dismissToast(id)}
-            >{t`toasts.update_available.actions.dismiss`}</Toast.Action>
+            <Toast.Action onClick={() => dismissToast(id)}>
+              {t`toasts.update_available.actions.dismiss`}
+            </Toast.Action>
+            <Toast.Action color="accent" onClick={() => updateSW(true)}>
+              {t`toasts.update_available.actions.restart`}
+            </Toast.Action>
           </Toast.Actions>
         </Toast.Root>
       );

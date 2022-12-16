@@ -84,7 +84,7 @@ const Slide2 = () => {
       value="none"
       onClick={handleNoneClick}
       key="theme-none"
-    >{t`themes.none`}</Select.Item>,
+    >{t`themes.stellar_light`}</Select.Item>,
   ];
 
   THEMES.forEach((code) => {

@@ -27,7 +27,7 @@ import { useMemo, useRef } from 'react';
 import { TabContainer } from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
-import getStellarContext from 'utilities/getStellarContext';
+import getStellarContext from 'utilities/getContext';
 import { StatusBar } from './components/StatusBar';
 
 const Container = styled('div', {

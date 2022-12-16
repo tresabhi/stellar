@@ -37,7 +37,7 @@ const Container = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   gap: theme.space.gapUnrelatedMajor,
-  backgroundColor: theme.colors.appBackground1,
+  backgroundColor: theme.colors.appBackground2,
   padding: theme.space.paddingMajor,
 });
 
@@ -129,7 +129,7 @@ const DebugContentContainer = styled('div', {
   flex: 1,
   height: '100%',
   overflow: 'auto',
-  backgroundColor: theme.colors.appBackground2,
+  backgroundColor: theme.colors.componentBackground,
   border: theme.borderStyles.componentNonInteractive,
   padding: theme.space.padding,
   borderRadius: theme.radii[4],
@@ -161,7 +161,6 @@ export const Fallback: FC<FallbackProps> = ({
           .filter((value, index) => index !== 0)
           .map((value) => `at ${value}`),
   );
-  // alert(location.origin);
   const [stack, setStack] = useState<ReactNode>(
     <DebugContent>Mapping...</DebugContent>,
   );
