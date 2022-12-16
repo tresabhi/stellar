@@ -173,7 +173,7 @@
     "dismiss": "Dismiss For Now"
   },
   "toasts": {
-    "update_available": {
+    "update": {
       "title": "Stellar updated to a newer version",
       "description": "A restart is required to apply the changes. You can restart now or do it later.",
       "actions": {

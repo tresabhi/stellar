@@ -24,7 +24,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 - Updates from Figma
   - Notifications
     - Button orders and colors
-    - Remove "available offline" notification
     - Add PWA installable notification
     - Fix button font size
   - Popups

@@ -235,17 +235,28 @@
   "landscape_prompt": {
     "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
     "never": "Never Ask Again",
-    "dismiss": "Dismiss For Now"
+    "dismiss": "Dismiss"
   },
 
   "toasts": {
-    "update_available": {
+    "update": {
       "title": "Stellar updated to a newer version",
       "description": "A restart is required to apply the changes. You can restart now or do it later.",
 
       "actions": {
         "restart": "Restart",
         "dismiss": "Dismiss"
+      }
+    },
+
+    "installable": {
+      "title": "Stellar can now be installed!",
+      "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
+
+      "actions": {
+        "never": "Never Ask Again",
+        "dismiss": "Dismiss",
+        "install": "Install"
       }
     }
   },

@@ -173,7 +173,7 @@
     "dismiss": "Descartar por ahora"
   },
   "toasts": {
-    "update_available": {
+    "update": {
       "title": "Stellar actualizado a una versión más nueva",
       "description": "Es necesario reiniciar para aplicar los cambios. Puedes reiniciar ahora o hacerlo más tarde.",
       "actions": {

@@ -9,6 +9,7 @@ export const Action = styled(Button, {
   alignItems: 'center',
   justifyContent: 'center',
   flex: 1,
+  whiteSpace: 'nowrap',
 
   defaultVariants: {
     border: 'true',
