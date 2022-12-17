@@ -186,15 +186,24 @@
   "landscape_prompt": {
     "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
     "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
-    "dismiss": "ʍoN ɹoℲ ssᴉɯsᴉp"
+    "dismiss": "Dismiss"
   },
   "toasts": {
-    "update_available": {
-      "title": "uoᴉsɹǝʌ ɹǝʍǝu ɐ oʇ pǝʇɐpdn ɹɐllǝʇS",
-      "description": "˙ɹǝʇɐl ʇᴉ op ɹo ʍou ʇɹɐʇsǝɹ uɐɔ no⅄ ˙sǝƃuɐɥɔ ǝɥʇ ʎlddɐ oʇ pǝɹᴉnbǝɹ sᴉ ʇɹɐʇsǝɹ ∀",
+    "update": {
+      "title": "Stellar updated to a newer version",
+      "description": "A restart is required to apply the changes. You can restart now or do it later.",
       "actions": {
-        "restart": "ʇɹɐʇsǝɹ",
-        "dismiss": "ssᴉɯsᴉp"
+        "restart": "Restart",
+        "dismiss": "Dismiss"
+      }
+    },
+    "installable": {
+      "title": "Stellar can now be installed!",
+      "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
+      "actions": {
+        "never": "Never Ask Again",
+        "dismiss": "Dismiss",
+        "install": "Install"
       }
     }
   },
