@@ -186,24 +186,24 @@
   "landscape_prompt": {
     "message": "Parece que estás en modo retrato. Por favor, gira al modo horizontal.%1$sSi estás en un escritorio, esto puede ser descartado.",
     "never": "No volver a preguntar de nuevo",
-    "dismiss": "Dismiss"
+    "dismiss": "Descartar"
   },
   "toasts": {
     "update": {
-      "title": "Stellar updated to a newer version",
-      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "title": "Stellar actualizado a una versión más nueva",
+      "description": "Es necesario reiniciar para aplicar los cambios. Puedes reiniciar ahora o hacerlo más tarde.",
       "actions": {
-        "restart": "Restart",
-        "dismiss": "Dismiss"
+        "restart": "Reiniciar",
+        "dismiss": "Descartar"
       }
     },
     "installable": {
-      "title": "Stellar can now be installed!",
-      "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
+      "title": "¡Ahora Stellar puede instalarse!",
+      "description": "Stellar es un %1$sPWA%2$s y puede ser instalado en tu dispositivo para uso sin conexión y para un fácil acceso.",
       "actions": {
-        "never": "Never Ask Again",
-        "dismiss": "Dismiss",
-        "install": "Install"
+        "never": "No volver a preguntar de nuevo",
+        "dismiss": "Descartar",
+        "install": "Instalar"
       }
     }
   },
@@ -230,7 +230,7 @@
     },
     "alpha_warning": {
       "title": "Estás usando una versión experimental",
-      "description": "Do you want to use the %1$sbeta version%2$s instead? You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+      "description": "¿Quieres usar la %1$sversión beta%2$s en su lugar? Ahora mismo estás usando la versión alfa de Stellar. Esta versión puede ser altamente inestable y no probada. Si sabes lo que estás haciendo, puedes seguir.",
       "actions": {
         "never": "No volver a preguntar de nuevo",
         "dismiss": "Descartar",
@@ -239,7 +239,7 @@
     }
   },
   "themes": {
-    "theme_light": "Stellar Light",
+    "theme_light": "Stellar claro",
     "theme_dark": "Stellar oscuro"
   }
 }
