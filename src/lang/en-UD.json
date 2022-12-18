@@ -186,24 +186,24 @@
   "landscape_prompt": {
     "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
     "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
-    "dismiss": "Dismiss"
+    "dismiss": "ssᴉɯsᴉp"
   },
   "toasts": {
     "update": {
-      "title": "Stellar updated to a newer version",
-      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "title": "uoᴉsɹǝʌ ɹǝʍǝu ɐ oʇ pǝʇɐpdn ɹɐllǝʇS",
+      "description": "˙ɹǝʇɐl ʇᴉ op ɹo ʍou ʇɹɐʇsǝɹ uɐɔ no⅄ ˙sǝƃuɐɥɔ ǝɥʇ ʎlddɐ oʇ pǝɹᴉnbǝɹ sᴉ ʇɹɐʇsǝɹ ∀",
       "actions": {
-        "restart": "Restart",
-        "dismiss": "Dismiss"
+        "restart": "ʇɹɐʇsǝɹ",
+        "dismiss": "ssᴉɯsᴉp"
       }
     },
     "installable": {
-      "title": "Stellar can now be installed!",
-      "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
+      "title": "¡pǝllɐʇsuᴉ ǝq ʍou uɐɔ ɹɐllǝʇS",
+      "description": "˙ssǝɔɔɐ ʎsɐǝ puɐ ǝsn ǝuᴉlɟɟo ɹoɟ ǝɔᴉʌǝp ɹnoʎ oʇ pǝllɐʇsuᴉ ǝq uɐɔ puɐ %2$s∀MԀ%1$s ɐ sᴉ ɹɐllǝʇS",
       "actions": {
-        "never": "Never Ask Again",
-        "dismiss": "Dismiss",
-        "install": "Install"
+        "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
+        "dismiss": "ssᴉɯsᴉp",
+        "install": "llɐʇsuI"
       }
     }
   },
@@ -230,7 +230,7 @@
     },
     "alpha_warning": {
       "title": "uoᴉsɹǝʌ lɐʇuǝɯᴉɹǝdxǝ uɐ ƃuᴉsn ǝɹɐ no⅄",
-      "description": "Do you want to use the %1$sbeta version%2$s instead? You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+      "description": "˙pǝǝɔoɹd ʎɐɯ noʎ 'ƃuᴉop ǝɹɐ noʎ ʇɐɥʍ ʍouʞ noʎ ɟI ˙pǝʇsǝʇun puɐ ǝlqɐʇsun ʎlɥƃᴉɥ ǝq uɐɔ uoᴉsɹǝʌ sᴉɥ┴ ˙ɹɐllǝʇS ɟo uoᴉsɹǝʌ ɐɥdlɐ ǝɥʇ ƃuᴉsn ʎlʇuǝɹɹnɔ ǝɹɐ no⅄ ¿pɐǝʇsuᴉ %2$suoᴉsɹǝʌ ɐʇǝq%1$s ǝɥʇ ǝsn oʇ ʇuɐʍ noʎ op",
       "actions": {
         "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
         "dismiss": "ssᴉɯsᴉp",
@@ -239,7 +239,7 @@
     }
   },
   "themes": {
-    "theme_light": "Stellar Light",
+    "theme_light": "ʇɥƃᴉ˥ ɹɐllǝʇS",
     "theme_dark": "ʞɹɐp ɹɐllǝʇS"
   }
 }
