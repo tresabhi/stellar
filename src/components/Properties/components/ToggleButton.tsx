@@ -6,7 +6,7 @@ import { Label } from './Label';
 
 export interface ToggleButtonProps
   extends ComponentPropsWithoutRef<typeof ButtonPrimitive>,
-    PropertyWithLabel {
+  PropertyWithLabel {
   selected: boolean;
 }
 
@@ -31,13 +31,11 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
   children,
   selected,
   ...props
-}) => {
-  return (
-    <Container>
-      <Label>{label}</Label>
-      <Trigger {...props} border color={selected ? 'accent' : undefined}>
-        {children}
-      </Trigger>
-    </Container>
-  );
-};
+}) => (
+  <Container>
+    <Label>{label}</Label>
+    <Trigger {...props} border color={selected ? 'accent' : undefined}>
+      {children}
+    </Trigger>
+  </Container>
+);

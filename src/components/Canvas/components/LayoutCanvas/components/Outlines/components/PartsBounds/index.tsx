@@ -5,7 +5,7 @@ import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
 import { PartBounds } from './components/PartBounds';
 
-export const PartsBounds = () => {
+export function PartsBounds() {
   const partBounds: JSX.Element[] = [];
   const parts = useBlueprint((state) => state.parts);
   const wrapper = useRef<Group>(null);
@@ -34,4 +34,4 @@ export const PartsBounds = () => {
   }, []);
 
   return <group ref={wrapper}>{partBounds}</group>;
-};
+}

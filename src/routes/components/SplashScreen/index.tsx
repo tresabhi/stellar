@@ -21,7 +21,7 @@ const Container = styled('div', {
   },
 });
 
-const SplashScreen = () => {
+function SplashScreen() {
   const { Icon } = getContext();
 
   return (
@@ -33,6 +33,6 @@ const SplashScreen = () => {
       />
     </Container>
   );
-};
+}
 
 export default SplashScreen;

@@ -9,18 +9,15 @@ import { mutateApp } from 'core/app/mutateApp';
 import { useTranslator } from 'hooks/useTranslator';
 import useApp, { Tab } from 'stores/app';
 
-export const Tabs = () => {
+export function Tabs() {
   const { t } = useTranslator();
   const tab = useApp((state) => state.interface.tab);
-  const is = (targetTab: Tab) => {
-    return {
-      selected: tab === targetTab,
-      onClick: () =>
-        mutateApp((draft) => {
-          draft.interface.tab = targetTab;
-        }),
-    };
-  };
+  const is = (targetTab: Tab) => ({
+    selected: tab === targetTab,
+    onClick: () => mutateApp((draft) => {
+      draft.interface.tab = targetTab;
+    }),
+  });
 
   return (
     <TabBar.Container>
@@ -38,4 +35,4 @@ export const Tabs = () => {
       </TabBar.Tab>
     </TabBar.Container>
   );
-};
+}

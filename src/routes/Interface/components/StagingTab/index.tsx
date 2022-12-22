@@ -2,7 +2,7 @@ import { useTranslator } from 'hooks/useTranslator';
 import { theme } from 'stitches.config';
 import { TabContainer } from '../TabContainer';
 
-export const StagingTab = () => {
+export function StagingTab() {
   const { t } = useTranslator();
 
   return (
@@ -23,4 +23,4 @@ export const StagingTab = () => {
       </div>
     </TabContainer>
   );
-};
+}

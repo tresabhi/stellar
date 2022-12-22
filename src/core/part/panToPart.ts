@@ -8,7 +8,6 @@ export const panToPart = (id: string) => {
 
   if (camera) {
     camera.position.set(bounds.x, bounds.y, camera.position.z);
-    (camera as OrthographicCamera).zoom =
-      1 / Math.max(bounds.width, bounds.height) / 2;
+    (camera as OrthographicCamera).zoom = 1 / Math.max(bounds.width, bounds.height) / 2;
   }
 };

@@ -154,38 +154,37 @@ const FileActions = styled('div', {
   gap: theme.space.gapRelatedMajor,
 });
 
-export const CreateTab = () => {
+export function CreateTab() {
   const { t, translate, language } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
   const templates = useMemo(
-    () =>
-      TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
-        ({ name, blueprint, credit }) => {
-          const translation = translate(`tabs.create.templates.list.${name}`);
+    () => TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
+      ({ name, blueprint, credit }) => {
+        const translation = translate(`tabs.create.templates.list.${name}`);
 
-          const handleClick = () => {
-            loadBlueprint(blueprint);
-            toLayout();
-          };
+        const handleClick = () => {
+          loadBlueprint(blueprint);
+          toLayout();
+        };
 
-          const searchItem: SearchItem = {
-            string: translation,
-            node: (
-              <Popup.SearchItem
-                icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
-                onClick={handleClick}
-                key={`item-${name}`}
-                note={credit ?? 'In-Built'}
-              >
-                {translation}
-              </Popup.SearchItem>
-            ),
-            callback: handleClick,
-          };
+        const searchItem: SearchItem = {
+          string: translation,
+          node: (
+            <Popup.SearchItem
+              icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
+              onClick={handleClick}
+              key={`item-${name}`}
+              note={credit ?? 'In-Built'}
+            >
+              {translation}
+            </Popup.SearchItem>
+          ),
+          callback: handleClick,
+        };
 
-          return searchItem;
-        },
-      ),
+        return searchItem;
+      },
+    ),
     [language],
   );
 
@@ -238,13 +237,19 @@ export const CreateTab = () => {
 
           <FileActions>
             <Button onClick={handleScratchClick} priority="solid">
-              <FilePlusIcon /> {t`tabs.create.file_options.from_scratch`}
+              <FilePlusIcon />
+              {' '}
+              {t`tabs.create.file_options.from_scratch`}
             </Button>
             <Button onClick={handleImportClick}>
-              <EnterIcon /> {t`tabs.create.file_options.import`}
+              <EnterIcon />
+              {' '}
+              {t`tabs.create.file_options.import`}
             </Button>
             <Button onClick={handleOpenClick}>
-              <UploadIcon /> {t`tabs.create.file_options.open`}
+              <UploadIcon />
+              {' '}
+              {t`tabs.create.file_options.open`}
             </Button>
           </FileActions>
         </SectionContainer>
@@ -253,4 +258,4 @@ export const CreateTab = () => {
       <StatusBar />
     </TabContainer>
   );
-};
+}

@@ -8,7 +8,6 @@ export const getParts = (
 ): (Part | undefined)[] => {
   if (draft) {
     return ids.map((id) => draft.parts[id]);
-  } else {
-    return getParts(ids, useBlueprint.getState());
   }
+  return getParts(ids, useBlueprint.getState());
 };

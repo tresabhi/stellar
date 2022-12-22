@@ -3,13 +3,15 @@ import { mutateApp } from 'core/app';
 import useMousePosition from 'hooks/useMousePosition';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/app';
-import { OrthographicCamera, Vector2, Vector2Tuple, Vector3 } from 'three';
+import {
+  OrthographicCamera, Vector2, Vector2Tuple, Vector3,
+} from 'three';
 
 const MIN_ZOOM = 2.2;
 const MAX_ZOOM = 512;
 const ZOOM_SENSITIVITY = 1 / 250;
 
-export const PanControls = () => {
+export function PanControls() {
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
   const getMousePos = useMousePosition();
@@ -115,8 +117,8 @@ export const PanControls = () => {
 
         if (firstTouch && secondTouch) {
           lastHypotenuse = Math.sqrt(
-            Math.abs(firstTouch[0] - secondTouch[0]) ** 2 +
-              Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
+            Math.abs(firstTouch[0] - secondTouch[0]) ** 2
+              + Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
           );
         }
       }
@@ -144,8 +146,8 @@ export const PanControls = () => {
 
         if (firstTouch && secondTouch) {
           const hypotenuse = Math.sqrt(
-            Math.abs(firstTouch[0] - secondTouch[0]) ** 2 +
-              Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
+            Math.abs(firstTouch[0] - secondTouch[0]) ** 2
+              + Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
           );
           const scale = lastHypotenuse / hypotenuse;
 
@@ -193,4 +195,4 @@ export const PanControls = () => {
   });
 
   return null;
-};
+}

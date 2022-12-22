@@ -74,22 +74,16 @@ import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
 import useVersionControl from 'stores/versionControl';
 
-const Toolbar = () => {
+function Toolbar() {
   const { t, translate } = useTranslator();
   const selectMultiple = useSettings((state) => state.editor.selectMultiple);
   const selectDeep = useSettings((state) => state.editor.selectDeep);
   const focusMode = useApp((state) => state.interface.focusMode);
-  const tool = useApp((state) =>
-    state.editor.isSpacePanning || state.editor.isTouchPanning
-      ? Tool.Pan
-      : state.editor.tool,
-  );
-  const isOneHidden = useBlueprint((state) =>
-    state.selections.some((selection) => state.parts[selection].hidden),
-  );
-  const isOneLocked = useBlueprint((state) =>
-    state.selections.some((selection) => state.parts[selection].locked),
-  );
+  const tool = useApp((state) => (state.editor.isSpacePanning || state.editor.isTouchPanning
+    ? Tool.Pan
+    : state.editor.tool));
+  const isOneHidden = useBlueprint((state) => state.selections.some((selection) => state.parts[selection].hidden));
+  const isOneLocked = useBlueprint((state) => state.selections.some((selection) => state.parts[selection].locked));
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
   );
@@ -165,11 +159,9 @@ const Toolbar = () => {
         >
           <ToolbarPrimitive.DropdownMenuItem
             icon={<CursorArrowIcon />}
-            onClick={() =>
-              mutateApp((draft) => {
-                draft.editor.tool = Tool.Move;
-              })
-            }
+            onClick={() => mutateApp((draft) => {
+              draft.editor.tool = Tool.Move;
+            })}
           >
             {t`tabs.layout.toolbar.tool.move`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -177,11 +169,9 @@ const Toolbar = () => {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<HandIcon />}
             keybind="Space"
-            onClick={() =>
-              mutateApp((draft) => {
-                draft.editor.tool = Tool.Pan;
-              })
-            }
+            onClick={() => mutateApp((draft) => {
+              draft.editor.tool = Tool.Pan;
+            })}
           >
             {t`tabs.layout.toolbar.tool.pan`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -322,11 +312,9 @@ const Toolbar = () => {
 
         <ToolbarPrimitive.DropdownMenu icon={<CursorArrowIcon />}>
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() =>
-              mutateSettings((draft) => {
-                draft.editor.selectDeep = !draft.editor.selectDeep;
-              })
-            }
+            onClick={() => mutateSettings((draft) => {
+              draft.editor.selectDeep = !draft.editor.selectDeep;
+            })}
             icon={selectDeep ? <ChevronDownIcon /> : <DoubleArrowDownIcon />}
             keybind="Ctrl"
           >
@@ -338,11 +326,9 @@ const Toolbar = () => {
           </ToolbarPrimitive.DropdownMenuItem>
 
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() =>
-              mutateSettings((draft) => {
-                draft.editor.selectMultiple = !draft.editor.selectMultiple;
-              })
-            }
+            onClick={() => mutateSettings((draft) => {
+              draft.editor.selectMultiple = !draft.editor.selectMultiple;
+            })}
             icon={selectMultiple ? <CircleIcon /> : <PlusCircledIcon />}
             keybind="Shift"
           >
@@ -354,11 +340,9 @@ const Toolbar = () => {
           </ToolbarPrimitive.DropdownMenuItem>
 
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() =>
-              mutateApp((draft) => {
-                draft.interface.focusMode = !draft.interface.focusMode;
-              })
-            }
+            onClick={() => mutateApp((draft) => {
+              draft.interface.focusMode = !draft.interface.focusMode;
+            })}
             icon={focusMode ? <RulerSquareIcon /> : <LightningBoltIcon />}
             keybind="Alt + F"
           >
@@ -436,5 +420,5 @@ const Toolbar = () => {
       </ToolbarPrimitive.Group>
     </ToolbarPrimitive.Container>
   );
-};
+}
 export default Toolbar;

@@ -5,7 +5,9 @@ import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import {
+  Part, PartData, VanillaPart, VanillaPartData,
+} from './Part';
 
 export interface VanillaPartWithOrientation extends VanillaPart {
   /**

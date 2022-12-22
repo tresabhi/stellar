@@ -15,12 +15,10 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   const leftSidebar = useSettings(
     (state) => state.interface.tabs.layout.leftSidebar,
   );
-  const handleClick = (tab: SidebarTab) => {
-    return () => {
-      mutateSettings((draft) => {
-        draft.interface.tabs.layout.leftSidebar.tab = tab;
-      });
-    };
+  const handleClick = (tab: SidebarTab) => () => {
+    mutateSettings((draft) => {
+      draft.interface.tabs.layout.leftSidebar.tab = tab;
+    });
   };
 
   return (

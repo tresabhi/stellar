@@ -4,7 +4,7 @@ import * as Sidebar from 'components/Sidebar';
 import { useTranslator } from 'hooks/useTranslator';
 import useBlueprint from 'stores/blueprint';
 
-export const Parts = () => {
+export function Parts() {
   const { t, f } = useTranslator();
   const hasNoParts = useBlueprint((state) => state.part_order.length === 0);
 
@@ -20,4 +20,4 @@ export const Parts = () => {
   ) : (
     <PartsExplorer.Container fullHeight overflow parentId={null} />
   );
-};
+}

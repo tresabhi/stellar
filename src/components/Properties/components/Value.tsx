@@ -1,5 +1,7 @@
 import useClipboard from 'hooks/useClipboard';
-import { FC, HTMLAttributes, MouseEvent, ReactNode } from 'react';
+import {
+  FC, HTMLAttributes, MouseEvent, ReactNode,
+} from 'react';
 import { styled, theme } from 'stitches.config';
 import { Label as LabelPrimitive } from './Label';
 import { Row as RowPrimitive } from './Row';

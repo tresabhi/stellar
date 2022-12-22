@@ -22,9 +22,8 @@ interface GroupedProperties {
 
 const groupedProperties: GroupedProperties[] = [
   {
-    test: (part) =>
-      (part as PartWithTransformations).p !== undefined &&
-      (part as PartWithTransformations).o !== undefined,
+    test: (part) => (part as PartWithTransformations).p !== undefined
+      && (part as PartWithTransformations).o !== undefined,
     Component: PartWithTransformationsPropertyComponent,
   },
   {
@@ -33,7 +32,7 @@ const groupedProperties: GroupedProperties[] = [
   },
 ];
 
-export const Properties = () => {
+export function Properties() {
   const { t } = useTranslator();
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
@@ -105,4 +104,4 @@ export const Properties = () => {
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   );
-};
+}

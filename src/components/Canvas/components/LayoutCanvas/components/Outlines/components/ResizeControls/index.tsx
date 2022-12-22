@@ -14,7 +14,7 @@ export interface UpdateResizeNodesDetail {
   maintainSlope: boolean;
 }
 
-export const ResizeControls = () => {
+export function ResizeControls() {
   const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
   const selections = useBlueprint((state) => state.selections);
@@ -80,12 +80,7 @@ export const ResizeControls = () => {
 
   return (
     <group ref={wrapper} visible={selections.length > 0}>
-      <Line
-        ref={outline}
-        lineWidth={2}
-        color={'#9d5bd2'}
-        points={UNIT_POINTS}
-      />
+      <Line ref={outline} lineWidth={2} color="#9d5bd2" points={UNIT_POINTS} />
 
       <ResizeNode // top left
         bounds={bounds}
@@ -133,4 +128,4 @@ export const ResizeControls = () => {
       />
     </group>
   );
-};
+}

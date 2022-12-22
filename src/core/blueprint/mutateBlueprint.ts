@@ -21,18 +21,16 @@ export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
       );
 
       draft.history.push({
-        inversePatches: inversePatches,
-        patches: patches,
+        inversePatches,
+        patches,
       });
 
       if (undoLimit === 0) {
         draft.index++;
+      } else if (draft.history.length > undoLimit) {
+        draft.history.shift();
       } else {
-        if (draft.history.length > undoLimit) {
-          draft.history.shift();
-        } else {
-          draft.index++;
-        }
+        draft.index++;
       }
     });
 

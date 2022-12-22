@@ -7,7 +7,6 @@ export const getInterfaceMode = (
 ) => {
   if (isNull(mode)) {
     return isMobile ? InterfaceMode.Compact : InterfaceMode.Comfortable;
-  } else {
-    return mode;
   }
+  return mode;
 };

@@ -29,22 +29,19 @@ export const subscribeToPart = <Type extends Part, Slice>(
       if (part) {
         if (slicer) {
           return slicer(part);
-        } else {
-          return part as unknown as Slice;
         }
-      } else {
-        skipNextEvent = true;
-        unsubscribe();
+        return part as unknown as Slice;
       }
+      skipNextEvent = true;
+      unsubscribe();
     },
     (slice, prevSlice) => {
       if (!skipNextEvent && slice !== undefined) handler(slice, prevSlice);
     },
     {
-      equalityFn: (a, b) =>
-        a === undefined || b === undefined
-          ? false
-          : mergedOptions.equalityFn(a, b),
+      equalityFn: (a, b) => (a === undefined || b === undefined
+        ? false
+        : mergedOptions.equalityFn(a, b)),
     },
   );
 

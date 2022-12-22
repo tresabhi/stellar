@@ -25,7 +25,7 @@ const Mono = styled('span', {
   },
 });
 
-const Slide1 = () => {
+function Slide1() {
   const { t, f } = useTranslator();
   const languages: ReactNode[] = [];
 
@@ -37,7 +37,11 @@ const Slide1 = () => {
     languages.push(
       <Select.Item value={code} key={`language-${code}`}>
         {displayName}
-        <Mono>[{code}]</Mono>
+        <Mono>
+          [
+          {code}
+          ]
+        </Mono>
       </Select.Item>,
     );
   }
@@ -70,9 +74,9 @@ const Slide1 = () => {
       </Select.Root>
     </>
   );
-};
+}
 
-const Slide2 = () => {
+function Slide2() {
   const { t, translate } = useTranslator();
   const handleNoneClick = () => {
     mutateSettings((draft) => {
@@ -80,11 +84,9 @@ const Slide2 = () => {
     });
   };
   const themes: JSX.Element[] = [
-    <Select.Item
-      value="none"
-      onClick={handleNoneClick}
-      key="theme-none"
-    >{t`themes.stellar_light`}</Select.Item>,
+    <Select.Item value="none" onClick={handleNoneClick} key="theme-none">
+      {t`themes.stellar_light`}
+    </Select.Item>,
   ];
 
   THEMES.forEach((code) => {
@@ -130,7 +132,7 @@ const Slide2 = () => {
       </Select.Root>
     </>
   );
-};
+}
 
 export const WelcomePopup: FC<PopupProps> = ({ id }) => {
   const { t } = useTranslator();
@@ -158,9 +160,9 @@ export const WelcomePopup: FC<PopupProps> = ({ id }) => {
 
         <Popup.Actions>
           {index > 0 && (
-            <Popup.Action
-              onClick={handleBackClick}
-            >{t`popups.welcome.actions.back`}</Popup.Action>
+            <Popup.Action onClick={handleBackClick}>
+              {t`popups.welcome.actions.back`}
+            </Popup.Action>
           )}
           <Popup.Action
             color="accent"

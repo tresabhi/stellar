@@ -24,7 +24,7 @@ export const Container = styled('div', {
   flexDirection: 'column',
 });
 
-const Interface = () => {
+function Interface() {
   const zenMode = useApp((state) => state.interface.focusMode);
   const interfaceMode = useInterfaceMode();
   const tab = useApp((state) => state.interface.tab);
@@ -46,7 +46,7 @@ const Interface = () => {
       <Toast.Viewport />
     </Container>
   );
-};
+}
 
 const useWelcomePopup = () => {
   const { welcomePromptCompleted } = useSettings.getState().interface;

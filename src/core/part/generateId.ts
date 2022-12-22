@@ -14,7 +14,6 @@ export const generateId = (parts?: Record<string, Part>): string => {
     }
 
     return id;
-  } else {
-    return generateId(useBlueprint.getState().parts);
   }
+  return generateId(useBlueprint.getState().parts);
 };

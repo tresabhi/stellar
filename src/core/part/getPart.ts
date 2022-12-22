@@ -8,7 +8,6 @@ export const getPart = <Type extends Part>(
 ): Type => {
   if (draft) {
     return draft.parts[id] as Type;
-  } else {
-    return getPart<Type>(id, useBlueprint.getState());
   }
+  return getPart<Type>(id, useBlueprint.getState());
 };

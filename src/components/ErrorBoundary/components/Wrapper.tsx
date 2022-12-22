@@ -9,9 +9,9 @@ export const Wrapper: FC<HTMLAttributes<HTMLDivElement>> = ({
   children,
   ...props
 }) => {
-  const StyledFallback = (fallbackProps: FallbackPrimitiveProps) => (
-    <Fallback {...fallbackProps} {...props} />
-  );
+  function StyledFallback(fallbackProps: FallbackPrimitiveProps) {
+    return <Fallback {...fallbackProps} {...props} />;
+  }
 
   return (
     <ErrorBoundary FallbackComponent={StyledFallback}>{children}</ErrorBoundary>

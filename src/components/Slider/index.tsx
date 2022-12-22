@@ -5,8 +5,8 @@ import { styled, theme } from 'stitches.config';
 
 export interface SliderProps
   extends Omit<
-    SliderPrimitive.SliderProps,
-    'value' | 'defaultValue' | 'onValueChange'
+  SliderPrimitive.SliderProps,
+  'value' | 'defaultValue' | 'onValueChange'
   > {
   value?: number;
   defaultValue?: number;

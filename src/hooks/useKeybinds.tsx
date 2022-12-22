@@ -83,9 +83,9 @@ const bind = (
       const { isInteracting, tab } = useApp.getState().interface;
 
       if (
-        (mergedOptions.preventRepeats ? !event.repeat : true) &&
-        (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
-        (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
+        (mergedOptions.preventRepeats ? !event.repeat : true)
+        && (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true)
+        && (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
       ) {
         if (mergedOptions.preventDefault) event.preventDefault();
 
@@ -97,14 +97,12 @@ const bind = (
 };
 
 const useKeybinds = () => {
-  const toTool = (tool: Tool) => () =>
-    mutateApp((draft) => {
-      draft.editor.tool = tool;
-    });
-  const toLayout = () =>
-    mutateApp((draft) => {
-      draft.interface.tab = Tab.Layout;
-    });
+  const toTool = (tool: Tool) => () => mutateApp((draft) => {
+    draft.editor.tool = tool;
+  });
+  const toLayout = () => mutateApp((draft) => {
+    draft.interface.tab = Tab.Layout;
+  });
 
   useEffect(() => {
     bind('ctrl+a', selectAllPartsAtRoot);
@@ -135,18 +133,15 @@ const useKeybinds = () => {
 
     bind('alt+1', () => {
       mutateSettings((draft: UseSettings) => {
-        draft.interface.tabs.layout.leftSidebar.visible =
-          !draft.interface.tabs.layout.leftSidebar.visible;
+        draft.interface.tabs.layout.leftSidebar.visible = !draft.interface.tabs.layout.leftSidebar.visible;
       });
     });
     bind('alt+2', () => {
       mutateSettings((draft: UseSettings) => {
         if (getInterfaceMode() === InterfaceMode.Compact) {
-          draft.interface.tabs.layout.rightSidebar.visible.inCompactMode =
-            !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
+          draft.interface.tabs.layout.rightSidebar.visible.inCompactMode = !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
         } else {
-          draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode =
-            !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
+          draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode = !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
         }
       });
     });
@@ -160,10 +155,9 @@ const useKeybinds = () => {
       ['ctrl+tab', ']'],
       () => {
         mutateApp((draft) => {
-          draft.interface.tab =
-            draft.interface.tab === TAB_ORDER[TAB_ORDER.length - 1]
-              ? TAB_ORDER[0]
-              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
+          draft.interface.tab = draft.interface.tab === TAB_ORDER[TAB_ORDER.length - 1]
+            ? TAB_ORDER[0]
+            : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
         });
       },
       { preventOnNonLayoutTab: false },
@@ -172,10 +166,9 @@ const useKeybinds = () => {
       ['ctrl+shift+tab', '['],
       () => {
         mutateApp((draft) => {
-          draft.interface.tab =
-            draft.interface.tab === 0
-              ? TAB_ORDER[TAB_ORDER.length - 1]
-              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
+          draft.interface.tab = draft.interface.tab === 0
+            ? TAB_ORDER[TAB_ORDER.length - 1]
+            : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
         });
       },
       { preventOnNonLayoutTab: false },

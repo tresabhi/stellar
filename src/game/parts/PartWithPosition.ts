@@ -7,7 +7,9 @@ import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { Object3D, Vector3 } from 'three';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import {
+  Part, PartData, VanillaPart, VanillaPartData,
+} from './Part';
 
 export interface VanillaPartWithPosition extends VanillaPart {
   /**
@@ -59,15 +61,12 @@ export const usePartWithPosition = (
     const rotatedOriginY = originOffset * Math.sin(originAngle);
     const offsetX = rotatedOriginX - event.detail.normalizedConstant[0];
     const offsetY = rotatedOriginY - event.detail.normalizedConstant[1];
-    const scaledOffsetX =
-      offsetX * event.detail.normalizedScale[0] +
-      event.detail.normalizedConstant[0];
-    const scaledOffsetY =
-      offsetY * event.detail.normalizedScale[1] +
-      event.detail.normalizedConstant[1];
+    const scaledOffsetX = offsetX * event.detail.normalizedScale[0]
+      + event.detail.normalizedConstant[0];
+    const scaledOffsetY = offsetY * event.detail.normalizedScale[1]
+      + event.detail.normalizedConstant[1];
     const scaledOffset = Math.hypot(scaledOffsetX, scaledOffsetY);
-    const scaledAngle =
-      Math.atan2(scaledOffsetY, scaledOffsetX) + event.detail.rotation;
+    const scaledAngle = Math.atan2(scaledOffsetY, scaledOffsetX) + event.detail.rotation;
     const x = scaledOffset * Math.cos(scaledAngle);
     const y = scaledOffset * Math.sin(scaledAngle);
 

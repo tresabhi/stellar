@@ -15,13 +15,13 @@ import model from './model.gltf';
 
 export interface VanillaEngineFrontier
   extends VanillaPartWithTransformations,
-    VanillaPartWithEngine {
+  VanillaPartWithEngine {
   readonly n: 'Engine Frontier';
 }
 
 export interface EngineFrontier
   extends Omit<Part, 'n'>,
-    VanillaEngineFrontier {}
+  VanillaEngineFrontier {}
 
 export const VanillaEngineFrontierData: VanillaEngineFrontier = {
   ...VanillaPartWithTransformationsData,

@@ -3,7 +3,9 @@ import { useCheckboxProperty } from 'hooks/propertyControllers';
 import { useTranslator } from 'hooks/useTranslator';
 import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import {
+  Part, PartData, VanillaPart, VanillaPartData,
+} from './Part';
 
 export interface VanillaPartWithEngine extends VanillaPart {
   /**
@@ -37,7 +39,7 @@ export const PartWithEngineData: PartWithEngine = {
 };
 
 export const PartWithEnginePropertyComponent: FC<
-  PartPropertyComponentProps
+PartPropertyComponentProps
 > = ({ ids }) => {
   const { t } = useTranslator();
 

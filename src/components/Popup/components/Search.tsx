@@ -7,7 +7,7 @@ import { styled, theme } from 'stitches.config';
 
 export interface SearchProps
   extends SearchPrimitiveProps,
-    HTMLAttributes<HTMLDivElement> {}
+  HTMLAttributes<HTMLDivElement> {}
 
 const Container = styled('div', {
   display: 'flex',
@@ -24,16 +24,14 @@ export const Search: FC<SearchProps> = ({
   escape,
   debounce,
   ...props
-}) => {
-  return (
-    <Container {...props}>
-      <SearchPrimitive
-        list={list}
-        input={input}
-        fallback={fallback}
-        escape={escape}
-        debounce={debounce}
-      />
-    </Container>
-  );
-};
+}) => (
+  <Container {...props}>
+    <SearchPrimitive
+      list={list}
+      input={input}
+      fallback={fallback}
+      escape={escape}
+      debounce={debounce}
+    />
+  </Container>
+);

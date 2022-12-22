@@ -10,7 +10,6 @@ export const partExportify = (part: Part, context: Blueprint) => {
 
   if (customExportifier) {
     return customExportifier(clonedPart, context);
-  } else {
-    return removePartMetaData(clonedPart as Part);
   }
+  return removePartMetaData(clonedPart as Part);
 };

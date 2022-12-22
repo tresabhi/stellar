@@ -21,7 +21,13 @@ export const getBoundsFromObject = (object: Object3D) => {
 
   object.rotation.z = rotation;
 
-  const partBounds: Bounds = { width, height, x, y, rotation };
+  const partBounds: Bounds = {
+    width,
+    height,
+    x,
+    y,
+    rotation,
+  };
 
   return partBounds;
 };

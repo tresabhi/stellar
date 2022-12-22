@@ -32,9 +32,8 @@ export const Container: FC<ContainerProps> = ({
   const part_order = useBlueprint((state) => {
     if (parent === null) {
       return state.part_order;
-    } else {
-      return getPart<Group>(parent, state).part_order;
     }
+    return getPart<Group>(parent, state).part_order;
   });
   const children = part_order.map((id) => (
     <Listing indent={indent} id={id} key={`part-${id}`} />

@@ -23,19 +23,19 @@ const useRootTheme = () => {
     const initialTheme = useSettings.getState().interface.theme;
     const unsubscribe = useSettings.subscribe(
       (state) => state.interface.theme,
-      (theme, prevTheme) => {
-        prevTheme && element.classList.remove(prevTheme);
-        theme && element.classList.add(theme);
+      (nextTheme, prevTheme) => {
+        if (prevTheme) element.classList.remove(prevTheme);
+        if (nextTheme) element.classList.add(nextTheme);
       },
     );
 
-    initialTheme && element.classList.add(initialTheme);
+    if (initialTheme) element.classList.add(initialTheme);
 
     return () => unsubscribe();
   });
 };
 
-const App = () => {
+function App() {
   useRootTheme();
   usePrerender();
 
@@ -51,5 +51,5 @@ const App = () => {
       </LandscapePrompt>
     </ErrorBoundary.Wrapper>
   );
-};
+}
 export default App;

@@ -13,16 +13,14 @@ const Wrapper = styled('div', {
   gap: theme.space.gapUnrelatedMajor,
 });
 
-export const Container: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
-  return (
-    <Root>
-      <ScrollArea.Viewport>
-        <Wrapper {...props} />
-      </ScrollArea.Viewport>
+export const Container: FC<HTMLAttributes<HTMLDivElement>> = (props) => (
+  <Root>
+    <ScrollArea.Viewport>
+      <Wrapper {...props} />
+    </ScrollArea.Viewport>
 
-      <ScrollArea.Scrollbar orientation="vertical">
-        <ScrollArea.Thumb />
-      </ScrollArea.Scrollbar>
-    </Root>
-  );
-};
+    <ScrollArea.Scrollbar orientation="vertical">
+      <ScrollArea.Thumb />
+    </ScrollArea.Scrollbar>
+  </Root>
+);

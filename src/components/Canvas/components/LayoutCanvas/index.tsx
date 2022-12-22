@@ -4,7 +4,9 @@ import {
   Props as CanvasPrimitiveProps,
 } from '@react-three/fiber';
 import { unselectAllParts } from 'core/part';
-import { FC, RefObject, useEffect, useRef } from 'react';
+import {
+  FC, RefObject, useEffect, useRef,
+} from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';

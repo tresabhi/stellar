@@ -7,7 +7,7 @@ export const WATERMARK_VALUE = `${window.location.origin}/`;
 
 type AnyBlueprint = VanillaBlueprint | Blueprint;
 type AnyBlueprintWithWatermark = AnyBlueprint &
-  Record<typeof WATERMARK_KEY, string | undefined>;
+Record<typeof WATERMARK_KEY, string | undefined>;
 
 export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
   const newBlueprint = cloneDeep(blueprintData);

@@ -13,8 +13,8 @@ import { styled, theme } from 'stitches.config';
 
 export interface CheckboxProps
   extends Omit<
-    ComponentPropsWithoutRef<typeof Trigger>,
-    'value' | 'defaultValue' | 'onChange' | 'ref'
+  ComponentPropsWithoutRef<typeof Trigger>,
+  'value' | 'defaultValue' | 'onChange' | 'ref'
   > {
   value?: boolean;
   defaultValue?: boolean;

@@ -44,7 +44,9 @@ const Label = styled('span', {
   fontSize: theme.fontSizes[12],
 });
 
-export const Tab: FC<TabProps> = ({ selected, icon, children, ...props }) => (
+export const Tab: FC<TabProps> = ({
+  selected, icon, children, ...props
+}) => (
   <Container {...props} selected={selected}>
     {icon}
     <Label>{children}</Label>

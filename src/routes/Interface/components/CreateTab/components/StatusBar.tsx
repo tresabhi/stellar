@@ -21,7 +21,7 @@ const StellarIcon = styled(Icon, {
   height: theme.sizes[16],
 });
 
-export const StatusBar = () => {
+export function StatusBar() {
   const { name } = getContext();
   const { t } = useTranslator();
   const date = new Date();
@@ -35,12 +35,12 @@ export const StatusBar = () => {
     ? name !== StellarName.Alpha && name !== StellarName.Dev
       ? undefined
       : `${parsedVersion.major}.${parsedVersion.minor}${
-          parsedVersion.patch === 0 ? '' : parsedVersion.patch
-        }${
-          parsedVersion.prerelease.length === 0
-            ? ''
-            : `-${parsedVersion.prerelease[0]}.${parsedVersion.prerelease[1]}`
-        }/`
+        parsedVersion.patch === 0 ? '' : parsedVersion.patch
+      }${
+        parsedVersion.prerelease.length === 0
+          ? ''
+          : `-${parsedVersion.prerelease[0]}.${parsedVersion.prerelease[1]}`
+      }/`
     : undefined;
 
   const license = useLicense();
@@ -83,7 +83,9 @@ export const StatusBar = () => {
             target="_blank"
             href={`https://github.com/${GITHUB_REPO}/commits/`}
           >
-            &copy; {year}
+            &copy;
+            {' '}
+            {year}
           </StatusBarComponent.Anchor>
 
           <StatusBarComponent.Dot />
@@ -105,7 +107,9 @@ export const StatusBar = () => {
             target="_blank"
             href={`https://tresabhi.github.io/stellar/changelogs/${releaseNotes}`}
           >
-            Stellar {prettyVersion}
+            Stellar
+            {' '}
+            {prettyVersion}
           </StatusBarComponent.Anchor>
 
           <StatusBarComponent.Dot />
@@ -120,7 +124,7 @@ export const StatusBar = () => {
       </StatusBarComponent.Group>
     </StatusBarComponent.Container>
   );
-};
+}
 
 const useLicense = () => {
   const [license, setLicense] = useState(licenseCache ?? 'LICENSE');

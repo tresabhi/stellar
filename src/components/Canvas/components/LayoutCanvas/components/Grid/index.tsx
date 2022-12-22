@@ -9,7 +9,7 @@ import { InfiniteGridHelper } from './components/InfiniteGridHelper';
 const MINOR_MARK = 1 / 5;
 const MAJOR_MARK = 1;
 
-export const Grid = () => {
+export function Grid() {
   const initialState = useBlueprint.getState();
   const grid = useRef<GridHelper>(null);
   const infiniteGrid = useRef<Mesh>(null);
@@ -43,7 +43,7 @@ export const Grid = () => {
       />
     </>
   );
-};
+}
 
 const useCenter = (
   grid: RefObject<GridHelper>,

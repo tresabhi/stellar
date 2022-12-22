@@ -4,7 +4,7 @@ import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 const useBlueprint = create<
-  Blueprint,
-  [['zustand/subscribeWithSelector', never]]
+Blueprint,
+[['zustand/subscribeWithSelector', never]]
 >(subscribeWithSelector(() => cloneDeep(blueprintData)));
 export default useBlueprint;

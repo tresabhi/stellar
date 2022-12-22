@@ -20,20 +20,18 @@ export const getContext = () => {
     name = StellarName.Dev;
     title = 'Stellar Dev';
     Icon = StellarDevIcon;
-  } else {
-    if (window.location.hostname === 'stellaralpha.web.app') {
-      name = StellarName.Alpha;
-      title = 'Stellar Alpha';
-      Icon = StellarAlphaIcon;
-    } else if (window.location.hostname === 'stellarbeta.web.app') {
-      name = StellarName.Beta;
-      title = 'Stellar Beta';
-      Icon = StellarBetaIcon;
-    } else if (window.location.hostname === 'stellaredit.web.app') {
-      name = StellarName.Release;
-      title = 'Stellar';
-      Icon = StellarIcon;
-    }
+  } else if (window.location.hostname === 'stellaralpha.web.app') {
+    name = StellarName.Alpha;
+    title = 'Stellar Alpha';
+    Icon = StellarAlphaIcon;
+  } else if (window.location.hostname === 'stellarbeta.web.app') {
+    name = StellarName.Beta;
+    title = 'Stellar Beta';
+    Icon = StellarBetaIcon;
+  } else if (window.location.hostname === 'stellaredit.web.app') {
+    name = StellarName.Release;
+    title = 'Stellar';
+    Icon = StellarIcon;
   }
 
   return { name, title, Icon };

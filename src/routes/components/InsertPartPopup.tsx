@@ -20,7 +20,7 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
   const lastSelectionId = selections[selections.length - 1];
   const lastSelection = getPart(lastSelectionId);
   let parentId: string | null = null;
-  let index: number | undefined = undefined;
+  let index: number | undefined;
 
   if (lastSelection) {
     if (lastSelection.n === 'Group') {
@@ -39,10 +39,9 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
   const handleCancelClick = () => dismissPopup(id);
 
   partRegistry.forEach(({ vanillaData, Icon, data: { label } }, name) => {
-    const note =
-      vanillaData === null
-        ? t`tabs.layout.popup.insert_part.abstract`
-        : undefined;
+    const note = vanillaData === null
+      ? t`tabs.layout.popup.insert_part.abstract`
+      : undefined;
 
     const handleClick = () => {
       insertNewPart(name, parentId, {
@@ -93,9 +92,9 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
       />
 
       <Popup.Actions>
-        <Popup.Action
-          onClick={handleCancelClick}
-        >{t`tabs.layout.popup.insert_part.cancel`}</Popup.Action>
+        <Popup.Action onClick={handleCancelClick}>
+          {t`tabs.layout.popup.insert_part.cancel`}
+        </Popup.Action>
       </Popup.Actions>
     </Popup.Container>
   );

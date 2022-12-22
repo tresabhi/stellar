@@ -15,10 +15,10 @@ export const useSliderProperty = <
   Type extends Part,
   Value extends number = number,
 >(
-  ids: string[],
-  slice: (state: Type) => Value,
-  mutate: (draft: Type, value: Value) => void,
-) => {
+    ids: string[],
+    slice: (state: Type) => Value,
+    mutate: (draft: Type, value: Value) => void,
+  ) => {
   const slider = useRef<SliderWithInputRef>(null);
   let value = getMutualProperty<Type, Value>(ids, slice);
   const firstRender = useRef(true);
@@ -51,9 +51,7 @@ export const useSliderProperty = <
   };
 
   useEffect(() => {
-    const unsubscribes = ids.map((id) => {
-      return subscribeToPart(id, debouncedRecomputeAndRerender, slice);
-    });
+    const unsubscribes = ids.map((id) => subscribeToPart(id, debouncedRecomputeAndRerender, slice));
 
     return () => {
       unsubscribes.forEach((unsubscribe) => unsubscribe());
@@ -68,13 +66,12 @@ export const useSliderProperty = <
     }
   });
 
-  const hook: Partial<SliderWithInputProps & { ref: Ref<SliderWithInputRef> }> =
-    {
-      ref: slider,
-      defaultValue: value,
-      indeterminate: value === undefined,
-      onValueChange,
-    };
+  const hook: Partial<SliderWithInputProps & { ref: Ref<SliderWithInputRef> }> = {
+    ref: slider,
+    defaultValue: value,
+    indeterminate: value === undefined,
+    onValueChange,
+  };
 
   return hook;
 };

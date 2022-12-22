@@ -10,7 +10,9 @@ import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { useInputEscape } from 'hooks/useInputEscape';
 import usePartProperty from 'hooks/usePartProperty';
-import { memo, MouseEvent, PointerEvent, useRef } from 'react';
+import {
+  memo, MouseEvent, PointerEvent, useRef,
+} from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry, { PartRegistryItem } from 'stores/partRegistry';

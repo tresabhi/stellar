@@ -225,8 +225,7 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
   );
   const handleConstraintClick = () => {
     mutateSettings((state) => {
-      state.editor.constraintFuelTankWidths =
-        !state.editor.constraintFuelTankWidths;
+      state.editor.constraintFuelTankWidths = !state.editor.constraintFuelTankWidths;
     });
   };
 

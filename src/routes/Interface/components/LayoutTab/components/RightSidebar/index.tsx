@@ -17,18 +17,15 @@ export const RightSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   const handleCollapseClick = () => {
     mutateSettings((draft) => {
       if (interfaceMode === InterfaceMode.Compact) {
-        draft.interface.tabs.layout.rightSidebar.visible.inCompactMode =
-          !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
+        draft.interface.tabs.layout.rightSidebar.visible.inCompactMode = !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
       } else {
-        draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode =
-          !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
+        draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode = !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
       }
     });
   };
-  const expanded =
-    interfaceMode === InterfaceMode.Compact
-      ? rightSidebar.visible.inCompactMode
-      : rightSidebar.visible.inComfortableMode;
+  const expanded = interfaceMode === InterfaceMode.Compact
+    ? rightSidebar.visible.inCompactMode
+    : rightSidebar.visible.inComfortableMode;
 
   return (
     <Sidebar.Container visible={expanded} position="right">

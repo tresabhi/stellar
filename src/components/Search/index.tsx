@@ -1,5 +1,7 @@
 import { go } from 'fuzzysort';
-import { FC, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import {
+  FC, ReactNode, RefObject, useEffect, useRef, useState,
+} from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
 export type SearchItem = {

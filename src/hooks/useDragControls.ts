@@ -27,13 +27,13 @@ const useDragControls = (id: string) => {
     const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
     if (
-      part &&
-      (part.selected || part.parent_id === null) && // is selected or is at root level
-      !part.hidden &&
-      !part.locked &&
-      tool === Tool.Move &&
-      !isSpacePanning &&
-      !isTouchPanning
+      part
+      && (part.selected || part.parent_id === null) // is selected or is at root level
+      && !part.hidden
+      && !part.locked
+      && tool === Tool.Move
+      && !isSpacePanning
+      && !isTouchPanning
     ) {
       event.stopPropagation();
 

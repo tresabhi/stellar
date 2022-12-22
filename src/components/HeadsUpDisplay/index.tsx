@@ -45,10 +45,10 @@ export default HeadsUpDisplay;
  * HeadsUpDisplay; caused because there are not HeadsUpDisplay components
  * with `1` priority.
  */
-export const RenderDefault = () => {
+export function RenderDefault() {
   const { gl: renderer, scene, camera } = useThree();
 
   useFrame(() => renderer.render(scene, camera));
 
   return null;
-};
+}

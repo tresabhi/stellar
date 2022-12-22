@@ -31,22 +31,20 @@ const DownIcon = styled(ChevronDownIcon, {
 export const Content: FC<SelectPrimitive.SelectContentProps> = ({
   children,
   ...props
-}) => {
-  return (
-    <SelectPrimitive.Portal>
-      <Container {...props}>
-        <SelectPrimitive.Viewport>
-          <ScrollUpButton>
-            <UpIcon />
-          </ScrollUpButton>
+}) => (
+  <SelectPrimitive.Portal>
+    <Container {...props}>
+      <SelectPrimitive.Viewport>
+        <ScrollUpButton>
+          <UpIcon />
+        </ScrollUpButton>
 
-          {children}
+        {children}
 
-          <ScrollDownButton>
-            <DownIcon />
-          </ScrollDownButton>
-        </SelectPrimitive.Viewport>
-      </Container>
-    </SelectPrimitive.Portal>
-  );
-};
+        <ScrollDownButton>
+          <DownIcon />
+        </ScrollDownButton>
+      </SelectPrimitive.Viewport>
+    </Container>
+  </SelectPrimitive.Portal>
+);

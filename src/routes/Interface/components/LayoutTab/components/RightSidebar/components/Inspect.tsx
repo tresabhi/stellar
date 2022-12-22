@@ -9,7 +9,7 @@ import useBlueprint from 'stores/blueprint';
 
 const INDENT = 2;
 
-export const Inspect = () => {
+export function Inspect() {
   const { t } = useTranslator();
   const { copy } = useClipboard();
   const isOneSelected = useBlueprint((state) => state.selections.length === 1);
@@ -17,8 +17,7 @@ export const Inspect = () => {
   const id = state.selections[0];
   const data = usePart(id);
   const JSON_ = JSON.stringify(data, undefined, INDENT);
-  const vanillaJSON =
-    data && JSON.stringify(partExportify(data, state), undefined, INDENT);
+  const vanillaJSON = data && JSON.stringify(partExportify(data, state), undefined, INDENT);
 
   const handleJSONClick = () => copy(JSON_);
   const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);
@@ -94,24 +93,28 @@ export const Inspect = () => {
 
       <Properties.Group>
         <Properties.TitleWithButton
-          buttons={
+          buttons={(
             <Properties.TitleButton onClick={handleJSONClick}>
               <CopyIcon />
             </Properties.TitleButton>
-          }
-        >{t`tabs.layout.right_sidebar.inspect.json`}</Properties.TitleWithButton>
+          )}
+        >
+          {t`tabs.layout.right_sidebar.inspect.json`}
+        </Properties.TitleWithButton>
 
         <Properties.TextArea value={JSON_} />
       </Properties.Group>
 
       <Properties.Group>
         <Properties.TitleWithButton
-          buttons={
+          buttons={(
             <Properties.TitleButton onClick={handleVanillaJSONClick}>
               <CopyIcon />
             </Properties.TitleButton>
-          }
-        >{t`tabs.layout.right_sidebar.inspect.vanilla_json`}</Properties.TitleWithButton>
+          )}
+        >
+          {t`tabs.layout.right_sidebar.inspect.vanilla_json`}
+        </Properties.TitleWithButton>
 
         <Properties.TextArea value={vanillaJSON} />
       </Properties.Group>
@@ -124,4 +127,4 @@ export const Inspect = () => {
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   );
-};
+}

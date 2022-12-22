@@ -25,7 +25,7 @@ const Container = styled('div', {
   backgroundColor: theme.colors.popupBackground,
 });
 
-export const Viewport = () => {
+export function Viewport() {
   const popups = usePopups((state) => state.popups);
   const popupNodes = popups.map(({ id, dismissByBlur, node }) => {
     const handleClick = () => {
@@ -40,4 +40,4 @@ export const Viewport = () => {
   });
 
   return <Wrapper>{popupNodes}</Wrapper>;
-};
+}

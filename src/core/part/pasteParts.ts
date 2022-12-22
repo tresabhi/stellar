@@ -55,8 +55,8 @@ export const pasteParts = () => {
       });
 
       if (
-        newClipboard.part_order.length > 0 &&
-        Object.keys(newClipboard.parts).length > 0
+        newClipboard.part_order.length > 0
+        && Object.keys(newClipboard.parts).length > 0
       ) {
         draft.editor.clipboard = newClipboard;
       }

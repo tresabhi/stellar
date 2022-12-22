@@ -4,7 +4,7 @@ import { styled, theme } from 'stitches.config';
 
 export interface ContainerProps
   extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof Primitive> {}
+  VariantProps<typeof Primitive> {}
 
 const Primitive = styled('div', {
   display: 'flex',

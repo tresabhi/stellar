@@ -30,8 +30,7 @@ export const clonePart = (
         const clonedGroupChildData = clonePart(child.id, draft);
 
         if (clonedGroupChildData) {
-          const [clonedGroupChildId, clonedGroupChildrenParts] =
-            clonedGroupChildData;
+          const [clonedGroupChildId, clonedGroupChildrenParts] = clonedGroupChildData;
           const clonedGroupChild = clonedGroupChildrenParts[clonedGroupChildId];
 
           clonedGroup.part_order[index] = clonedGroupChildId;
@@ -48,7 +47,6 @@ export const clonePart = (
     });
 
     return [clonedGroup.id, clonedParts];
-  } else {
-    return [clonedPart.id, { [clonedPart.id]: clonedPart }];
   }
+  return [clonedPart.id, { [clonedPart.id]: clonedPart }];
 };

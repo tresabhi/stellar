@@ -37,27 +37,24 @@ export const createTranslator = (
     const translation = string
       .split('.')
       .reduce(
-        (object: Translations | string | undefined, key) =>
-          typeof object === string
-            ? object
-            : (object as Translations | undefined)?.[key],
+        (object: Translations | string | undefined, key) => (typeof object === string
+          ? object
+          : (object as Translations | undefined)?.[key]),
         translations as Translations,
       );
 
-    const applyTokens = (string: string) =>
-      tokens.reduce(
-        (previousTranslation, currentTranslation, index) =>
-          previousTranslation.replaceAll(`%${index + 1}$s`, tokens[index]),
-        string,
-      );
+    const applyTokens = (string: string) => tokens.reduce(
+      (previousTranslation, currentTranslation, index) => previousTranslation.replaceAll(`%${index + 1}$s`, tokens[index]),
+      string,
+    );
 
     return translation === undefined
       ? string // if translation is not found, return the original string
       : typeof translation === 'string'
-      ? applyTokens(translation) // if translation is a string, return the translation
-      : translation.$ === undefined
-      ? string // if root translation does not exists, return the string
-      : applyTokens(translation.$); // if root translation exists, return the root translation
+        ? applyTokens(translation) // if translation is a string, return the translation
+        : translation.$ === undefined
+          ? string // if root translation does not exists, return the string
+          : applyTokens(translation.$); // if root translation exists, return the root translation
   };
 
   const fragments = (string: string) => translate(string).split(/%[0-9]\$s/);
@@ -65,7 +62,13 @@ export const createTranslator = (
   const t = (string: TemplateStringsArray) => translate(string[0]);
   const f = (string: TemplateStringsArray) => fragments(string[0]);
 
-  const hook = { language, translate, fragment: fragments, t, f };
+  const hook = {
+    language,
+    translate,
+    fragment: fragments,
+    t,
+    f,
+  };
 
   return hook;
 };

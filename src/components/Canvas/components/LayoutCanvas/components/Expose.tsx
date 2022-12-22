@@ -1,7 +1,7 @@
 import { useThree } from '@react-three/fiber';
 import { mutateApp } from 'core/app';
 
-export const Expose = () => {
+export function Expose() {
   const camera = useThree((state) => state.camera);
 
   mutateApp((draft) => {
@@ -9,4 +9,4 @@ export const Expose = () => {
   });
 
   return null;
-};
+}

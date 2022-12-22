@@ -70,10 +70,9 @@ export const LandscapePrompt: FC<LandscapePromptProps> = ({
   const showOrientationPrompt = useSettings(
     (state) => state.interface.showOrientationPrompt,
   );
-  const showChildren =
-    !showOrientationPrompt ||
-    orientationPromptDismissed ||
-    orientation === Orientation.Landscape;
+  const showChildren = !showOrientationPrompt
+    || orientationPromptDismissed
+    || orientation === Orientation.Landscape;
 
   const handleNeverClick = () => {
     mutateSettings((draft) => {
@@ -103,12 +102,12 @@ export const LandscapePrompt: FC<LandscapePromptProps> = ({
             {f`landscape_prompt.message`[1]}
           </Message>
           <Actions>
-            <Action
-              onClick={handleNeverClick}
-            >{t`landscape_prompt.never`}</Action>
-            <Action
-              onClick={handleDismissClick}
-            >{t`landscape_prompt.dismiss`}</Action>
+            <Action onClick={handleNeverClick}>
+              {t`landscape_prompt.never`}
+            </Action>
+            <Action onClick={handleDismissClick}>
+              {t`landscape_prompt.dismiss`}
+            </Action>
           </Actions>
         </Container>
       )}

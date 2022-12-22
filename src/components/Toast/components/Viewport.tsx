@@ -13,9 +13,9 @@ const Container = styled('div', {
   listStyle: 'none',
 });
 
-export const Viewport = () => {
+export function Viewport() {
   const toasts = useToasts((state) => state.toasts);
   const toastNodes = toasts.map(({ node }) => node);
 
   return <Container>{toastNodes}</Container>;
-};
+}

@@ -48,19 +48,17 @@ const IconContainer = styled('div', {
 });
 
 export const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
-  ({ iconSide = InputWithIconSide.Right, icon, ...props }, ref) => {
-    return (
-      <Container>
-        {iconSide === InputWithIconSide.Left && (
-          <IconContainer>{icon}</IconContainer>
-        )}
+  ({ iconSide = InputWithIconSide.Right, icon, ...props }, ref) => (
+    <Container>
+      {iconSide === InputWithIconSide.Left && (
+        <IconContainer>{icon}</IconContainer>
+      )}
 
-        <Input {...props} ref={ref} />
+      <Input {...props} ref={ref} />
 
-        {iconSide === InputWithIconSide.Right && (
-          <IconContainer>{icon}</IconContainer>
-        )}
-      </Container>
-    );
-  },
+      {iconSide === InputWithIconSide.Right && (
+        <IconContainer>{icon}</IconContainer>
+      )}
+    </Container>
+  ),
 );

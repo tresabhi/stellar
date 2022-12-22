@@ -1,7 +1,9 @@
 import { Line } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
 import { getPart, subscribeToPart } from 'core/part';
-import { memo, RefObject, useEffect, useRef } from 'react';
+import {
+  memo, RefObject, useEffect, useRef,
+} from 'react';
 import boundsStore from 'stores/bounds';
 import {
   Group,
@@ -54,7 +56,7 @@ export const PartBounds = memo<PartBoundProps>(
       <group ref={wrapper} visible={getPart(id).selected}>
         <Line
           ref={outline}
-          color={'#9d5bd2'}
+          color="#9d5bd2"
           points={UNIT_POINTS}
           lineWidth={2}
         />

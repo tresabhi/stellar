@@ -15,8 +15,7 @@ export const LeftSidebar: FC<TabLayoutProps> = ({ swapSecondTab }) => {
   );
   const handleCollapseClick = () => {
     mutateSettings((draft) => {
-      draft.interface.tabs.layout.leftSidebar.visible =
-        !draft.interface.tabs.layout.leftSidebar.visible;
+      draft.interface.tabs.layout.leftSidebar.visible = !draft.interface.tabs.layout.leftSidebar.visible;
     });
   };
 

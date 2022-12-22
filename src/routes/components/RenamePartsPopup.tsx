@@ -17,19 +17,17 @@ export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
   const apply = () => {
-    input.current &&
-      renamePartsBySelection(
+    input.current
+      && renamePartsBySelection(
         input.current.value,
         useSettings.getState().editor.rename,
       );
     dismissPopup(id);
   };
-  const handleClick = (type: keyof RenamePartsOptions) => {
-    return () => {
-      mutateSettings((draft) => {
-        draft.editor.rename[type] = !draft.editor.rename[type];
-      });
-    };
+  const handleClick = (type: keyof RenamePartsOptions) => () => {
+    mutateSettings((draft) => {
+      draft.editor.rename[type] = !draft.editor.rename[type];
+    });
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -76,9 +74,9 @@ export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
       </Popup.Content>
 
       <Popup.Actions>
-        <Popup.Action
-          onClick={handleCancelClick}
-        >{t`tabs.layout.popup.rename.cancel`}</Popup.Action>
+        <Popup.Action onClick={handleCancelClick}>
+          {t`tabs.layout.popup.rename.cancel`}
+        </Popup.Action>
         <Popup.Action
           onClick={handleApplyClick}
           priority="callToAction"

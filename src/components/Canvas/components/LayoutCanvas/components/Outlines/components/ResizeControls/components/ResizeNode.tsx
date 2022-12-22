@@ -1,11 +1,15 @@
 import { Line } from '@react-three/drei';
-import { invalidate, ThreeEvent, useFrame, useThree } from '@react-three/fiber';
+import {
+  invalidate, ThreeEvent, useFrame, useThree,
+} from '@react-three/fiber';
 import { mutateBlueprint } from 'core/blueprint';
 import { deferUpdates, undeferUpdates } from 'core/bounds';
 import { resizePartAsync } from 'core/part/resizePartAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
-import { FC, MutableRefObject, useEffect, useRef } from 'react';
+import {
+  FC, MutableRefObject, useEffect, useRef,
+} from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group, Vector2, Vector2Tuple } from 'three';
@@ -88,14 +92,12 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     normalizedSize.copy(normalizedMovable).sub(normalizedConstant);
     normalizedScale.copy(normalizedMoved).sub(normalizedConstant);
 
-    normalizedScale.x =
-      snap(normalizedSize.x, STEP) === 0
-        ? 1
-        : normalizedScale.x / normalizedSize.x;
-    normalizedScale.y =
-      snap(normalizedSize.y, STEP) === 0
-        ? 1
-        : normalizedScale.y / normalizedSize.y;
+    normalizedScale.x = snap(normalizedSize.x, STEP) === 0
+      ? 1
+      : normalizedScale.x / normalizedSize.x;
+    normalizedScale.y = snap(normalizedSize.y, STEP) === 0
+      ? 1
+      : normalizedScale.y / normalizedSize.y;
   };
   const updateValues = () => {
     constant.set(...sideToPoint(bounds.current, constantSide));
@@ -161,8 +163,8 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       const part = blueprint.parts[selection];
 
       return (
-        (part as PartWithPosition).p !== undefined &&
-        (part as PartWithScale).o !== undefined
+        (part as PartWithPosition).p !== undefined
+        && (part as PartWithScale).o !== undefined
       );
     });
 
@@ -196,20 +198,20 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
       const movedX = isFinite(slope)
         ? isFinite(perpendicular)
-          ? (-constant.x * slope +
-              pointerX * perpendicular +
-              constant.y -
-              pointerY) /
-            (perpendicular - slope)
+          ? (-constant.x * slope
+              + pointerX * perpendicular
+              + constant.y
+              - pointerY)
+            / (perpendicular - slope)
           : pointerX
         : constant.x;
       const movedY = isFinite(slope)
         ? isFinite(perpendicular)
-          ? (-constant.x * perpendicular * slope +
-              pointerX * perpendicular * slope +
-              constant.y * perpendicular -
-              pointerY * slope) /
-            (perpendicular - slope)
+          ? (-constant.x * perpendicular * slope
+              + pointerX * perpendicular * slope
+              + constant.y * perpendicular
+              - pointerY * slope)
+            / (perpendicular - slope)
           : constant.y
         : pointerY;
 
@@ -238,8 +240,8 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
           const part = draft.parts[selection];
 
           if (
-            (part as PartWithPosition).p !== undefined &&
-            (part as PartWithScale).o !== undefined
+            (part as PartWithPosition).p !== undefined
+            && (part as PartWithScale).o !== undefined
           ) {
             (part as PartWithScale).o.x *= normalizedScale.x;
             (part as PartWithScale).o.y *= normalizedScale.y;
@@ -248,23 +250,19 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
               (part as PartWithPosition).p.x,
               (part as PartWithPosition).p.y,
             );
-            const originAngle =
-              Math.atan2(
-                (part as PartWithPosition).p.y,
-                (part as PartWithPosition).p.x,
-              ) - bounds.current.rotation;
+            const originAngle = Math.atan2(
+              (part as PartWithPosition).p.y,
+              (part as PartWithPosition).p.x,
+            ) - bounds.current.rotation;
             const rotatedOriginX = originOffset * Math.cos(originAngle);
             const rotatedOriginY = originOffset * Math.sin(originAngle);
             const offsetX = rotatedOriginX - normalizedConstant.x;
             const offsetY = rotatedOriginY - normalizedConstant.y;
-            const scaledOffsetX =
-              offsetX * normalizedScale.x + normalizedConstant.x;
-            const scaledOffsetY =
-              offsetY * normalizedScale.y + normalizedConstant.y;
+            const scaledOffsetX = offsetX * normalizedScale.x + normalizedConstant.x;
+            const scaledOffsetY = offsetY * normalizedScale.y + normalizedConstant.y;
             const scaledOffset = Math.hypot(scaledOffsetX, scaledOffsetY);
-            const scaledAngle =
-              Math.atan2(scaledOffsetY, scaledOffsetX) +
-              bounds.current.rotation;
+            const scaledAngle = Math.atan2(scaledOffsetY, scaledOffsetX)
+              + bounds.current.rotation;
             const x = scaledOffset * Math.cos(scaledAngle);
             const y = scaledOffset * Math.sin(scaledAngle);
 
@@ -292,7 +290,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
       <Line
         position={[0, 0, 2]}
-        color={'#8f8f8f'}
+        color="#8f8f8f"
         points={UNIT_POINTS}
         lineWidth={2}
       />

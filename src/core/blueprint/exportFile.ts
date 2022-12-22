@@ -12,9 +12,8 @@ export const exportFile = async () => {
   const {
     file: { handle },
   } = useApp.getState();
-  const fileName =
-    handle?.name.replace(FILE_EXTENSION_REGEX, '') ??
-    UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');
+  const fileName = handle?.name.replace(FILE_EXTENSION_REGEX, '')
+    ?? UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');
   const data = exportifyBlueprint(useBlueprint.getState());
   const blob = new Blob(
     [

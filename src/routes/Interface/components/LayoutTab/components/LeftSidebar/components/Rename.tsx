@@ -34,7 +34,7 @@ const Button = styled(ButtonPrimitive, {
   },
 });
 
-export const Rename = () => {
+export function Rename() {
   const visible = useBlueprint((state) => state.selections.length > 0);
   const handleClick = () => popup(RenamePartsPopup);
 
@@ -43,4 +43,4 @@ export const Rename = () => {
       <Pencil1Icon />
     </Button>
   );
-};
+}
