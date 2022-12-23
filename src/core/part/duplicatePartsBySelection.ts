@@ -1,13 +1,13 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { duplicateParts } from './duplicateParts';
+import duplicateParts from './duplicateParts';
 
-export const duplicatePartsBySelection = (draft?: Blueprint) => {
-  if (draft) {
-    duplicateParts(draft.selections, draft);
+export default function duplicatePartsBySelection(blueprint?: Blueprint) {
+  if (blueprint) {
+    duplicateParts(blueprint.selections, blueprint);
   } else {
     mutateBlueprint((draft) => {
       duplicatePartsBySelection(draft);
     });
   }
-};
+}

@@ -1,6 +1,6 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { scaleParts } from './scaleParts';
+import scaleParts from './scaleParts';
 
 export default function scalePartsBySelection(
   x: number,

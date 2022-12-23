@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
-import { cutParts } from './cutParts';
+import cutParts from './cutParts';
 
-export const cutPart = (id: string, draft?: Blueprint) => {
-  cutParts([id], draft);
-};
+export default function cutPart(id: string, blueprint?: Blueprint) {
+  cutParts([id], blueprint);
+}

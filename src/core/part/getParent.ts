@@ -1,15 +1,18 @@
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import useBlueprint from 'stores/blueprint';
-import { getPart } from '.';
-import { getParentId } from './getParentId';
+import getParentId from './getParentId';
+import getPart from './getPart';
 
-export const getParent = (id: string, draft?: Blueprint) => {
-  if (draft) {
+export default function getParent(
+  id: string,
+  blueprint?: Blueprint,
+): Group | null {
+  if (blueprint) {
     const parentId = getParentId(id);
 
-    if (parentId) return getPart<Group>(parentId, draft);
-  } else {
-    getParent(id, useBlueprint.getState());
+    if (parentId) return getPart<Group>(parentId, blueprint);
+    return null;
   }
-};
+  return getParent(id, useBlueprint.getState());
+}

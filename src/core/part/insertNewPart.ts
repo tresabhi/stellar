@@ -5,7 +5,7 @@ import useApp from 'stores/app';
 import { ParentId } from 'types/Parts';
 import { createNewPart } from './createNewPart';
 import { getPart } from './getPart';
-import { selectPartOnly } from './selectPartOnly';
+import selectPartOnly from './selectPartOnly';
 
 export interface InsertPartOptions {
   index: number;
@@ -18,11 +18,11 @@ export const insertPartDefaultOptions: InsertPartOptions = {
   select: false,
 };
 
-export const insertNewPart = (
+export default function insertNewPart(
   partName: string,
   parentId?: ParentId,
   options: Partial<InsertPartOptions> = insertPartDefaultOptions,
-) => {
+) {
   const mergedOptions: InsertPartOptions = {
     ...insertPartDefaultOptions,
     ...options,
@@ -53,4 +53,4 @@ export const insertNewPart = (
       selectPartOnly(newPart.id, draft);
     }
   });
-};
+}

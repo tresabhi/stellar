@@ -1,13 +1,15 @@
+import { invalidate } from '@react-three/fiber';
 import useApp from 'stores/app';
 import boundsStore from 'stores/bounds';
-import { OrthographicCamera } from 'three';
 
-export const panToPart = (id: string) => {
+export default function panToPart(id: string) {
   const { camera } = useApp.getState().editor;
   const { bounds } = boundsStore[id];
 
   if (camera) {
     camera.position.set(bounds.x, bounds.y, camera.position.z);
-    (camera as OrthographicCamera).zoom = 1 / Math.max(bounds.width, bounds.height) / 2;
+    invalidate();
+    // TODO: implement zoom
+    // (camera as OrthographicCamera).zoom = 1 / Math.max(bounds.width, bounds.height) / 2;
   }
-};
+}

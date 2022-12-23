@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
-import { copyParts } from './copyParts';
+import copyParts from './copyParts';
 
-export const copyPart = (id: string, draft?: Blueprint) => {
-  copyParts([id], draft);
-};
+export default function copyPart(id: string, blueprint?: Blueprint) {
+  copyParts([id], blueprint);
+}

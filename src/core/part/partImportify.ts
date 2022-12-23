@@ -3,11 +3,11 @@ import { cloneDeep, merge } from 'lodash';
 import { ParentId } from 'types/Parts';
 import { getPartRegistry } from './getPartRegistry';
 
-export const partImportify = (
+export default function partImportify(
   part: VanillaPart | Part,
   id: string,
   parentId?: ParentId,
-) => {
+) {
   const clonedPartData = cloneDeep(part);
   const clonedDefaultData = cloneDeep(getPartRegistry(clonedPartData.n)?.data);
 
@@ -19,4 +19,5 @@ export const partImportify = (
 
     return newPart;
   }
-};
+  return null;
+}

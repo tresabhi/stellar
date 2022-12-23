@@ -1,6 +1,10 @@
 import { Blueprint } from 'game/Blueprint';
-import { rotateParts } from './rotateParts';
+import rotateParts from './rotateParts';
 
-export const rotatePart = (z: number, id: string, draft?: Blueprint) => {
-  rotateParts(z, [id], draft);
-};
+export default function rotatePart(
+  z: number,
+  id: string,
+  blueprint?: Blueprint,
+) {
+  rotateParts(z, [id], blueprint);
+}

@@ -2,12 +2,12 @@ import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
 import useBlueprint from 'stores/blueprint';
 
-export const getParts = (
+export default function getParts(
   ids: string[],
   draft?: Blueprint,
-): (Part | undefined)[] => {
+): (Part | undefined)[] {
   if (draft) {
     return ids.map((id) => draft.parts[id]);
   }
   return getParts(ids, useBlueprint.getState());
-};
+}

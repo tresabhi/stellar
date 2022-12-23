@@ -1,15 +1,14 @@
 import { Blueprint } from 'game/Blueprint';
-import {
-  renameParts,
+import renameParts, {
   renamePartsDefaultOptions,
   RenamePartsOptions,
 } from './renameParts';
 
-export const renamePart = (
+export default function renamePart(
   id: string,
   name: string,
   options: RenamePartsOptions = renamePartsDefaultOptions,
-  draft?: Blueprint,
-) => {
-  renameParts([id], name, options, draft);
-};
+  blueprint?: Blueprint,
+) {
+  renameParts([id], name, options, blueprint);
+}

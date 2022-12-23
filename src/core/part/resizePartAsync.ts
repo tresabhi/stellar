@@ -6,15 +6,15 @@ export interface PartResizeEventDetail {
   rotation: number;
 }
 
-export const resizePartAsync = (
+export default function resizePartAsync(
   id: string,
   normalizedConstant: Vector2Tuple,
   normalizedScale: Vector2Tuple,
   rotation: number,
-) => {
+) {
   window.dispatchEvent(
     new CustomEvent<PartResizeEventDetail>(`partresize${id}`, {
       detail: { normalizedConstant, normalizedScale, rotation },
     }),
   );
-};
+}

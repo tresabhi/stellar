@@ -1,13 +1,16 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { rotateParts } from './rotateParts';
+import rotateParts from './rotateParts';
 
-export const rotatePartsBySelection = (z: number, draft?: Blueprint) => {
-  if (draft) {
-    rotateParts(z, draft.selections, draft);
+export default function rotatePartsBySelection(
+  z: number,
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
+    rotateParts(z, blueprint.selections, blueprint);
   } else {
     mutateBlueprint((draft) => {
       rotateParts(z, draft.selections, draft);
     });
   }
-};
+}

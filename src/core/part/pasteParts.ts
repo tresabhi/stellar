@@ -4,9 +4,9 @@ import { Group } from 'game/parts/Group';
 import useApp from 'stores/app';
 import { Snippet } from 'stores/snippets';
 import { clonePart } from './clonePart';
-import { selectPartsOnly } from './selectPartsOnly';
+import selectPartsOnly from './selectPartsOnly';
 
-export const pasteParts = () => {
+export default function pasteParts() {
   const {
     editor: { clipboard },
   } = useApp.getState();
@@ -22,14 +22,14 @@ export const pasteParts = () => {
         ? parent.part_order.indexOf(firstSelection)
         : 0;
 
-      for (const partId in clipboard.parts) {
+      Object.keys(clipboard.parts).forEach((partId) => {
         const part = clipboard.parts[partId];
 
         draft.parts[partId] = {
           ...part,
           parent_id: parentId,
         };
-      }
+      });
       parent.part_order.splice(insertIndex, 0, ...clipboard.part_order);
       selectPartsOnly(clipboard.part_order, draft);
     });
@@ -47,10 +47,10 @@ export const pasteParts = () => {
           const [clonedPartId, clonedParts] = clonedPartData;
           newClipboard.part_order.push(clonedPartId);
 
-          for (const clonedChildPartId in clonedParts) {
+          Object.keys(clonedParts).forEach((clonedChildPartId) => {
             const clonedChildPart = clonedParts[clonedChildPartId];
             newClipboard.parts[clonedChildPartId] = clonedChildPart;
-          }
+          });
         }
       });
 
@@ -62,4 +62,4 @@ export const pasteParts = () => {
       }
     });
   }
-};
+}

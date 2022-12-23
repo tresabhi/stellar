@@ -1,32 +1,32 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { selectPart } from '.';
 import { clonePart } from './clonePart';
-import { getParent } from './getParent';
-import { unselectAllParts } from './unselectAllParts';
+import getParent from './getParent';
+import selectPart from './selectPart';
+import unselectAllParts from './unselectAllParts';
 
-export const duplicateParts = (ids: string[], draft?: Blueprint) => {
-  if (draft) {
-    unselectAllParts(draft);
+export default function duplicateParts(ids: string[], blueprint?: Blueprint) {
+  if (blueprint) {
+    unselectAllParts(blueprint);
 
     ids.forEach((id) => {
-      const parent = getParent(id, draft) ?? draft;
+      const parent = getParent(id, blueprint) ?? blueprint;
       const partIndex = parent.part_order.indexOf(id);
 
       if (partIndex !== -1) {
-        const clonedPartData = clonePart(id, draft);
+        const clonedPartData = clonePart(id, blueprint);
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;
 
           parent.part_order.splice(partIndex + 1, 0, clonedPartId);
 
-          for (const clonedPartChildId in clonedParts) {
+          Object.keys(clonedParts).forEach((clonedPartChildId) => {
             const clonedPart = clonedParts[clonedPartChildId];
-            draft.parts[clonedPartChildId] = clonedPart;
-          }
+            blueprint.parts[clonedPartChildId] = clonedPart;
+          });
 
-          selectPart(clonedPartId, draft);
+          selectPart(clonedPartId, blueprint);
         }
       }
     });
@@ -35,4 +35,4 @@ export const duplicateParts = (ids: string[], draft?: Blueprint) => {
       duplicateParts(ids, draft);
     });
   }
-};
+}

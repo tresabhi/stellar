@@ -1,36 +1,38 @@
 import { mutateBlueprint } from 'core/blueprint';
-import { createNewPart, getParent, selectPartOnly } from 'core/part';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
+import { createNewPart } from './createNewPart';
+import { getParent } from './getParent';
+import selectPartOnly from './selectPartOnly';
 
-export const groupParts = (
+export default function groupParts(
   ids: string[],
   replaceId: string,
-  draft?: Blueprint,
-) => {
-  if (draft) {
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
     const newGroup = createNewPart<Group>('Group');
-    const newGroupParent = getParent(replaceId, draft) ?? draft;
+    const newGroupParent = getParent(replaceId, blueprint) ?? blueprint;
 
     if (newGroup) {
-      draft.parts[newGroup.id] = newGroup;
+      blueprint.parts[newGroup.id] = newGroup;
       newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] = newGroup.id;
       newGroup.part_order = ids;
 
       ids.forEach((id) => {
-        const currentParent = getParent(id, draft) ?? draft;
-        const currentPart = draft.parts[id];
+        const currentParent = getParent(id, blueprint) ?? blueprint;
+        const currentPart = blueprint.parts[id];
         const spliceIndex = currentParent.part_order.indexOf(id);
 
         if (currentPart) currentPart.parent_id = newGroup.id;
         if (spliceIndex !== -1) currentParent.part_order.splice(spliceIndex, 1);
       });
 
-      selectPartOnly(newGroup.id, draft);
+      selectPartOnly(newGroup.id, blueprint);
     }
   } else {
     mutateBlueprint((draft) => {
       groupParts(ids, replaceId, draft);
     });
   }
-};
+}

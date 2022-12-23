@@ -2,17 +2,17 @@ import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { cloneDeep } from 'lodash';
 import { Snippet } from 'stores/snippets';
-import { generateId } from './generateId';
+import generateId from './generateId';
 
 /**
  * Carefully clones a part and also:
  * - Maintains the correct descendent tree
  * - Assigns new ids for all parts
  */
-export const clonePart = (
+export default function clonePart(
   id: string,
   draft: Snippet,
-): [string, Record<string, Part>] => {
+): [string, Record<string, Part>] {
   const part = draft.parts[id];
 
   const clonedPart = cloneDeep(part);
@@ -38,10 +38,13 @@ export const clonePart = (
           if (clonedGroupChild) {
             clonedGroupChild.parent_id = clonedGroup.id;
           }
-          for (const id in clonedGroupChildrenParts) {
-            const part = clonedGroupChildrenParts[id];
-            clonedParts[id] = part;
-          }
+
+          Object.keys(clonedGroupChildrenParts).forEach(
+            (clonedGroupChildrenPartId) => {
+              const clonedGroupChildrenPart = clonedGroupChildrenParts[clonedGroupChildrenPartId];
+              clonedParts[clonedGroupChildrenPartId] = clonedGroupChildrenPart;
+            },
+          );
         }
       }
     });
@@ -49,4 +52,4 @@ export const clonePart = (
     return [clonedGroup.id, clonedParts];
   }
   return [clonedPart.id, { [clonedPart.id]: clonedPart }];
-};
+}

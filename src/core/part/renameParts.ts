@@ -14,30 +14,31 @@ export const renamePartsDefaultOptions: RenamePartsOptions = {
   suffix: true,
 };
 
-export const renameParts = (
+export default function renameParts(
   ids: string[],
   name: string,
   options: RenamePartsOptions = renamePartsDefaultOptions,
-  draft?: Blueprint,
-) => {
+  blueprint?: Blueprint,
+) {
+  let newName = name;
   const mergedOptions = { ...renamePartsDefaultOptions, ...options };
 
-  if (mergedOptions.trim) name = name.trim();
+  if (mergedOptions.trim) newName = newName.trim();
 
-  if (draft) {
+  if (blueprint) {
     ids.forEach((id, index) => {
-      const part = draft.parts[id];
+      const part = blueprint.parts[id];
       const partRegistry = getPartRegistry(part.n);
 
       if (partRegistry && (mergedOptions.skipLocked ? !part.locked : true)) {
-        part.label = `${name.length === 0 ? partRegistry.data.label : name} ${
-          mergedOptions.suffix ? index + 1 : ''
-        }`.trim();
+        part.label = `${
+          newName.length === 0 ? partRegistry.data.label : newName
+        } ${mergedOptions.suffix ? index + 1 : ''}`.trim();
       }
     });
   } else {
     mutateBlueprint((draft) => {
-      renameParts(ids, name, options, draft);
+      renameParts(ids, newName, options, draft);
     });
   }
-};
+}

@@ -1,11 +1,11 @@
 import { Blueprint } from 'game/Blueprint';
 import useBlueprint from 'stores/blueprint';
-import { copyParts } from './copyParts';
+import copyParts from './copyParts';
 
-export const copyPartsBySelection = (draft?: Blueprint) => {
-  if (draft) {
-    copyParts(draft.selections, draft);
+export default function copyPartsBySelection(blueprint?: Blueprint) {
+  if (blueprint) {
+    copyParts(blueprint.selections, blueprint);
   } else {
     copyPartsBySelection(useBlueprint.getState());
   }
-};
+}

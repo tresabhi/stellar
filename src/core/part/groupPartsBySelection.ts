@@ -1,17 +1,17 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { groupParts } from './groupParts';
+import groupParts from './groupParts';
 
-export const groupPartsBySelection = (draft?: Blueprint) => {
-  if (draft && draft.selections.length > 0) {
+export default function groupPartsBySelection(blueprint?: Blueprint) {
+  if (blueprint && blueprint.selections.length > 0) {
     groupParts(
-      draft.selections,
-      draft.selections[draft.selections.length - 1],
-      draft,
+      blueprint.selections,
+      blueprint.selections[blueprint.selections.length - 1],
+      blueprint,
     );
   } else {
     mutateBlueprint((draft) => {
       groupPartsBySelection(draft);
     });
   }
-};
+}

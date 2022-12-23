@@ -4,25 +4,25 @@ import useBlueprint from 'stores/blueprint';
 import { Snippet } from 'stores/snippets';
 import { clonePart } from './clonePart';
 
-export const copyParts = (ids: string[], draft?: Blueprint) => {
-  if (draft) {
+export default function copyParts(ids: string[], blueprint?: Blueprint) {
+  if (blueprint) {
     const clipboard: Snippet = {
       parts: {},
       part_order: [],
     };
 
     ids.forEach((id) => {
-      const part = draft.parts[id];
-      const clonedPartData = clonePart(part.id, draft);
+      const part = blueprint.parts[id];
+      const clonedPartData = clonePart(part.id, blueprint);
 
       if (clonedPartData) {
         const [clonedPartId, clonedParts] = clonedPartData;
         clipboard.part_order.push(clonedPartId);
 
-        for (const clonedPartChildId in clonedParts) {
+        Object.keys(clonedParts).forEach((clonedPartChildId) => {
           const clonedPart = clonedParts[clonedPartChildId];
           clipboard.parts[clonedPartChildId] = clonedPart;
-        }
+        });
       }
     });
 
@@ -39,4 +39,4 @@ export const copyParts = (ids: string[], draft?: Blueprint) => {
   } else {
     copyParts(ids, useBlueprint.getState());
   }
-};
+}

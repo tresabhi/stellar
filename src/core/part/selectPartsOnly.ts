@@ -1,7 +1,7 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
-import { mutateParts } from './mutateParts';
+import mutateParts from './mutateParts';
 
 export default function selectPartsOnly(
   ids: string[],
@@ -14,6 +14,7 @@ export default function selectPartsOnly(
       (draft) => {
         draft.selected = false;
       },
+      false,
       blueprint,
     );
     mutateParts(
@@ -24,6 +25,7 @@ export default function selectPartsOnly(
           (draft as Group).expanded = true;
         }
       },
+      false,
       blueprint,
     );
 

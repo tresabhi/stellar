@@ -2,18 +2,18 @@ import { Blueprint } from 'game/Blueprint';
 import { PartWithScale } from 'game/parts/PartWithScale';
 import { mutateParts } from './mutateParts';
 
-export const scaleParts = (
+export default function scaleParts(
   x: number,
   y: number,
   ids: string[],
-  draft?: Blueprint,
-) => {
+  blueprint?: Blueprint,
+) {
   mutateParts<PartWithScale>(
     ids,
     (draft) => {
       draft.o.x *= x;
       draft.o.y *= y;
     },
-    draft,
+    blueprint,
   );
-};
+}

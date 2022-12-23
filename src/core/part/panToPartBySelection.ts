@@ -1,8 +1,7 @@
 import useBlueprint from 'stores/blueprint';
-import { panToPart } from '.';
+import { panToPart } from './panToPart';
 
-export const panToPartBySelection = () => {
+export default function panToPartBySelection() {
   const lastSelection = useBlueprint.getState().selections[0];
-
   if (lastSelection) panToPart(lastSelection);
-};
+}

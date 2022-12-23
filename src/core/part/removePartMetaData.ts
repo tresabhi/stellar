@@ -4,10 +4,10 @@ export const partMetaDataKeys = (
   Object.keys(PartData) as (keyof Part)[]
 ).filter((key) => key !== 'n');
 
-export const removePartMetaData = (part: Part) => {
+export default function removePartMetaData(part: Part) {
   partMetaDataKeys.forEach((key) => {
     delete part[key];
   });
 
   return part;
-};
+}
