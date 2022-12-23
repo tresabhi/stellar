@@ -1,4 +1,5 @@
-import { generateId, partImportify } from 'core/part';
+import generateId from 'core/part/generateId';
+import partImportify from 'core/part/partImportify';
 import { Blueprint, blueprintData, VanillaBlueprint } from 'game/Blueprint';
 import { cloneDeep, isArray } from 'lodash';
 
@@ -34,11 +35,13 @@ export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
       }
     });
   } else {
-    for (const id in importedBlueprint.parts) {
-      const importifiedPart = partImportify(importedBlueprint.parts[id], id);
-
+    Object.keys(importedBlueprint.parts).forEach((id) => {
+      const importifiedPart = partImportify(
+        (importedBlueprint as Blueprint).parts[id],
+        id,
+      );
       if (importifiedPart) newBlueprint.parts[id] = importifiedPart;
-    }
+    });
 
     newBlueprint.part_order = (importedBlueprint as Blueprint).part_order;
   }

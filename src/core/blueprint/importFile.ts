@@ -1,9 +1,9 @@
 import { fileOpen } from 'browser-fs-access';
 import { mutateApp } from 'core/app/mutateApp';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
-import { loadBlueprint } from './loadBlueprint';
+import loadBlueprint from './loadBlueprint';
 
-export const importFile = async () => {
+export default async function importFile() {
   const file = await fileOpen({
     description: 'SFS blueprint file',
     mimeTypes: ['application/json'],
@@ -16,4 +16,4 @@ export const importFile = async () => {
     draft.file.handle = file.handle;
   });
   declareNoUnsavedChanges();
-};
+}

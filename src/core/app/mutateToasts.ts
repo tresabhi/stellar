@@ -1,6 +1,6 @@
 import produce from 'immer';
-import useToasts, { UseToasts } from 'stores/toasts';
+import useNotifications, { UseNotifications } from 'stores/notifications';
 
-export const mutateToasts = (recipe: (draft: UseToasts) => void) => {
-  useToasts.setState(produce(recipe));
+export const mutateToasts = (recipe: (draft: UseNotifications) => void) => {
+  useNotifications.setState(produce(recipe));
 };

@@ -8,4 +8,6 @@ window.addEventListener('deferupdates', ((
   deferUpdates = event.detail;
 }) as EventListener);
 
-export const getDeferUpdates = () => deferUpdates;
+export default function getDeferUpdates() {
+  return deferUpdates;
+}

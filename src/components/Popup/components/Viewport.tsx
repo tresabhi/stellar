@@ -1,6 +1,6 @@
-import { dismissPopup } from 'core/interface/dismissPopup';
+import { dismissPrompt } from 'core/interface/dismissPopup';
 import { styled, theme } from 'stitches.config';
-import usePopups from 'stores/popups';
+import usePrompts from 'stores/prompts';
 
 const Wrapper = styled('div', {
   pointerEvents: 'none',
@@ -26,10 +26,10 @@ const Container = styled('div', {
 });
 
 export function Viewport() {
-  const popups = usePopups((state) => state.popups);
+  const popups = usePrompts((state) => state.prompts);
   const popupNodes = popups.map(({ id, dismissByBlur, node }) => {
     const handleClick = () => {
-      dismissByBlur && dismissPopup(id);
+      dismissByBlur && dismissPrompt(id);
     };
 
     return (

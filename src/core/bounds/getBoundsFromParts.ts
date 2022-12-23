@@ -2,7 +2,7 @@ import { sideToPoint } from 'components/Canvas/components/LayoutCanvas/component
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
 
-export const getBoundsFromParts = (ids: string[]) => {
+export default function getBoundsFromParts(ids: string[]) {
   if (ids.length > 0) {
     const box2 = new Box2();
     const point = new Vector2();
@@ -100,4 +100,4 @@ export const getBoundsFromParts = (ids: string[]) => {
   };
 
   return { bounds, hasMutualAngle: true };
-};
+}

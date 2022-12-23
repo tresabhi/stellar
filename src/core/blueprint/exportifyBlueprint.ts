@@ -1,9 +1,9 @@
-import { partExportify } from 'core/part';
+import partExportify from 'core/part/partExportify';
 import { Blueprint, vanillaBlueprintData } from 'game/Blueprint';
 import { VanillaPart } from 'game/parts/Part';
 import { cloneDeep, isArray } from 'lodash';
 
-export const exportifyBlueprint = (blueprint: Blueprint) => {
+export default function exportifyBlueprint(blueprint: Blueprint) {
   const clonedBlueprint = cloneDeep(blueprint);
   const exportifiedBlueprint = cloneDeep(vanillaBlueprintData);
 
@@ -25,4 +25,4 @@ export const exportifyBlueprint = (blueprint: Blueprint) => {
   });
 
   return exportifiedBlueprint;
-};
+}

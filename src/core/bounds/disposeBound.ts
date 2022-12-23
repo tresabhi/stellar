@@ -1,3 +1,5 @@
-import { disposeBounds } from './disposeBounds';
+import disposeBounds from './disposeBounds';
 
-export const disposeBound = (id: string) => disposeBounds([id]);
+export default function disposeBound(id: string) {
+  disposeBounds([id]);
+}

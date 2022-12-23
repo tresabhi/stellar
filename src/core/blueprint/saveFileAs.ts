@@ -4,13 +4,13 @@ import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
-import { savifyBlueprint } from './savifyBlueprint';
+import savifyBlueprint from './savifyBlueprint';
 
 export const UNNAMED_BLUEPRINT_FILE_NAME = 'Blueprint.stbp';
 
 export const FILE_EXTENSION_REGEX = /\.[^/.]+$/;
 
-export const saveFileAs = async () => {
+export default async function saveFileAs() {
   const {
     file: { handle },
   } = useApp.getState();
@@ -36,4 +36,4 @@ export const saveFileAs = async () => {
     draft.file.handle = newHandle ?? undefined;
   });
   declareNoUnsavedChanges();
-};
+}

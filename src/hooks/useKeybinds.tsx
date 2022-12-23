@@ -1,38 +1,34 @@
 import { invalidate } from '@react-three/fiber';
-import { mutateSettings } from 'core/app';
 import { mutateApp } from 'core/app/mutateApp';
 import { mutatePopups } from 'core/app/mutatePopups';
-import {
-  exportFile,
-  importFile,
-  loadBlueprint,
-  openFile,
-  redoVersion,
-  saveFile,
-  saveFileAs,
-  undoVersion,
-} from 'core/blueprint';
-import { popup } from 'core/interface/popup';
-import {
-  copyPartsBySelection,
-  cutPartsBySelection,
-  deletePartsBySelection,
-  groupPartsBySelection,
-  panToPartBySelection,
-  pasteParts,
-  selectAllPartsAtRoot,
-  translateTranslatablePartsBySelection,
-  ungroupGroupsBySelection,
-  unselectAllParts,
-} from 'core/part';
-import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
+import { mutateSettings } from 'core/app/mutateSettings';
+import { exportFile } from 'core/blueprint/exportFile';
+import { importFile } from 'core/blueprint/importFile';
+import { loadBlueprint } from 'core/blueprint/loadBlueprint';
+import { openFile } from 'core/blueprint/openFile';
+import { redoVersion } from 'core/blueprint/redoVersion';
+import { saveFile } from 'core/blueprint/saveFile';
+import { saveFileAs } from 'core/blueprint/saveFileAs';
+import { undoVersion } from 'core/blueprint/undoVersion';
+import prompt from 'core/interface/prompt';
+import copyPartsBySelection from 'core/part/copyPartsBySelection';
+import cutPartsBySelection from 'core/part/cutPartsBySelection';
+import deletePartsBySelection from 'core/part/deletePartsBySelection';
+import duplicatePartsBySelection from 'core/part/duplicatePartsBySelection';
+import groupPartsBySelection from 'core/part/groupPartsBySelection';
+import panToPartBySelection from 'core/part/panToPartBySelection';
+import pasteParts from 'core/part/pasteParts';
+import selectAllPartsAtRoot from 'core/part/selectAllPartsAtRoot';
+import translateTranslatablePartsBySelection from 'core/part/translateTranslatablePartsBySelection';
+import ungroupGroupsBySelection from 'core/part/ungroupGroupsBySelection';
+import unselectAllParts from 'core/part/unselectAllParts';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
 import InsertPartPopup from 'routes/components/InsertPartPopup';
 import RenamePartsPopup from 'routes/components/RenamePartsPopup';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import usePopups from 'stores/popups';
+import usePrompts from 'stores/prompts';
 import { InterfaceMode, UseSettings } from 'stores/settings';
 import getInterfaceMode from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
@@ -109,9 +105,9 @@ const useKeybinds = () => {
     bind(
       'esc',
       () => {
-        if (usePopups.getState().popups.length > 0) {
+        if (usePrompts.getState().prompts.length > 0) {
           mutatePopups((draft) => {
-            draft.popups.pop();
+            draft.prompts.pop();
           });
         } else {
           unselectAllParts();
@@ -271,10 +267,10 @@ const useKeybinds = () => {
     bind('ctrl+g', groupPartsBySelection);
     bind('ctrl+shift+g', ungroupGroupsBySelection);
 
-    bind('ctrl+shift+i', () => popup(InsertPartPopup, true, 'insert-part'));
+    bind('ctrl+shift+i', () => prompt(InsertPartPopup, true, 'insert-part'));
     bind('ctrl+r', () => {
       if (useBlueprint.getState().selections.length > 0) {
-        popup(RenamePartsPopup, true, 'rename-parts');
+        prompt(RenamePartsPopup, true, 'rename-parts');
       }
     });
 

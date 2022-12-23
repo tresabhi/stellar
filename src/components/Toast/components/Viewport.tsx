@@ -1,5 +1,5 @@
 import { styled, theme } from 'stitches.config';
-import useToasts from 'stores/toasts';
+import useNotifications from 'stores/notifications';
 
 const Container = styled('div', {
   position: 'fixed',
@@ -14,7 +14,7 @@ const Container = styled('div', {
 });
 
 export function Viewport() {
-  const toasts = useToasts((state) => state.toasts);
+  const toasts = useNotifications((state) => state.notifications);
   const toastNodes = toasts.map(({ node }) => node);
 
   return <Container>{toastNodes}</Container>;

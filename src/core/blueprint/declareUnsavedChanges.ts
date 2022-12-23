@@ -1,7 +1,7 @@
 import { mutateApp } from 'core/app/mutateApp';
 
-export const declareUnsavedChanges = () => {
+export default function declareUnsavedChanges() {
   mutateApp((draft) => {
     draft.file.hasUnsavedChanges = true;
   });
-};
+}

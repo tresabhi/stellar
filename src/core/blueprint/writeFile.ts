@@ -4,9 +4,9 @@ import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
-import { savifyBlueprint } from './savifyBlueprint';
+import savifyBlueprint from './savifyBlueprint';
 
-export const writeFile = async () => {
+export default async function writeFile() {
   const {
     file: { handle },
   } = useApp.getState();
@@ -32,4 +32,4 @@ export const writeFile = async () => {
     draft.file.handle = newHandle;
   });
   declareNoUnsavedChanges();
-};
+}

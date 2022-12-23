@@ -1,6 +1,6 @@
 import produce from 'immer';
-import usePopups, { UsePopups } from 'stores/popups';
+import usePrompts, { UsePrompts } from 'stores/prompts';
 
-export const mutatePopups = (recipe: (draft: UsePopups) => void) => {
-  usePopups.setState(produce(recipe));
+export const mutatePopups = (recipe: (draft: UsePrompts) => void) => {
+  usePrompts.setState(produce(recipe));
 };

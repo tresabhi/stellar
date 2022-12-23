@@ -1,11 +1,11 @@
 import { invalidate } from '@react-three/fiber';
-import { mutateVersionControl } from 'core/app';
+import { mutateVersionControl } from 'core/app/mutateVersionControl';
 import { applyPatches } from 'immer';
 import useBlueprint from 'stores/blueprint';
 import { UseVersionControl } from 'stores/versionControl';
 import { declareUnsavedChanges } from './declareUnsavedChanges';
 
-export const undoVersion = () => {
+export default function undoVersion() {
   mutateVersionControl((draft: UseVersionControl) => {
     const inversePatches = draft.history[draft.index]?.inversePatches;
 
@@ -20,4 +20,4 @@ export const undoVersion = () => {
   });
 
   declareUnsavedChanges();
-};
+}

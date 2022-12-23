@@ -2,16 +2,16 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { InputWithIcon } from 'components/InputWithIcon';
 import * as Popup from 'components/Popup';
 import { SearchItem } from 'components/Search';
-import { dismissPopup } from 'core/interface/dismissPopup';
+import { dismissPrompt } from 'core/interface/dismissPopup';
 import { getParent, getPart, insertNewPart } from 'core/part';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
 import { useTranslator } from 'hooks/useTranslator';
 import { useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry from 'stores/partRegistry';
-import { PopupProps } from 'stores/popups';
+import { PromptProps } from 'stores/prompts';
 
-export default function InsertPartPopup({ id }: PopupProps) {
+export default function InsertPartPopup({ id }: PromptProps) {
   const { t } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
   const list: SearchItem[] = [];
@@ -35,8 +35,8 @@ export default function InsertPartPopup({ id }: PopupProps) {
     }
   }
 
-  const handleEscape = () => dismissPopup(id);
-  const handleCancelClick = () => dismissPopup(id);
+  const handleEscape = () => dismissPrompt(id);
+  const handleCancelClick = () => dismissPrompt(id);
 
   partRegistry.forEach(({ vanillaData, Icon, data: { label, n } }) => {
     const note = vanillaData === null
@@ -49,7 +49,7 @@ export default function InsertPartPopup({ id }: PopupProps) {
         nearCamera: true,
         select: true,
       });
-      dismissPopup(id);
+      dismissPrompt(id);
     };
 
     list.push({

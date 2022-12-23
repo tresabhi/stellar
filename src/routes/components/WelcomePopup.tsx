@@ -7,7 +7,7 @@ import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
 import { TRANSLATIONS, useTranslator } from 'hooks/useTranslator';
 import { ReactNode, useState } from 'react';
 import { styled, theme } from 'stitches.config';
-import { PopupProps } from 'stores/popups';
+import { PromptProps } from 'stores/prompts';
 import { THEMES } from 'stores/settings';
 
 const fixedLangNames: Record<string, string> = {
@@ -134,7 +134,7 @@ function Slide2() {
   );
 }
 
-export default function WelcomePopup({ id }: PopupProps) {
+export default function WelcomePopup({ id }: PromptProps) {
   const { t } = useTranslator();
   const [index, setIndex] = useState(0);
   const slides = [Slide1, Slide2];

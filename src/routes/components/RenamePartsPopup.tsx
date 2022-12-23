@@ -3,16 +3,16 @@ import { CheckboxWithLabel } from 'components/CheckboxWithLabel';
 import { InputWithIcon } from 'components/InputWithIcon';
 import * as Popup from 'components/Popup';
 import { mutateSettings } from 'core/app';
-import { dismissPopup } from 'core/interface/dismissPopup';
+import { dismissPrompt } from 'core/interface/dismissPopup';
 import { RenamePartsOptions } from 'core/part/renameParts';
 import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
 import { useTranslator } from 'hooks/useTranslator';
 import { KeyboardEvent, useRef } from 'react';
-import { PopupProps } from 'stores/popups';
+import { PromptProps } from 'stores/prompts';
 import useSettings from 'stores/settings';
 
-export default function RenamePartsPopup({ id }: PopupProps) {
+export default function RenamePartsPopup({ id }: PromptProps) {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
@@ -23,7 +23,7 @@ export default function RenamePartsPopup({ id }: PopupProps) {
         useSettings.getState().editor.rename,
       );
     }
-    dismissPopup(id);
+    dismissPrompt(id);
   };
   const handleClick = (type: keyof RenamePartsOptions) => () => {
     mutateSettings((draft) => {
@@ -35,10 +35,10 @@ export default function RenamePartsPopup({ id }: PopupProps) {
     if (event.key === 'Enter') {
       apply();
     } else if (event.key === 'Escape') {
-      dismissPopup(id);
+      dismissPrompt(id);
     }
   };
-  const handleCancelClick = () => dismissPopup(id);
+  const handleCancelClick = () => dismissPrompt(id);
   const handleApplyClick = apply;
 
   usePopupConcurrency();
