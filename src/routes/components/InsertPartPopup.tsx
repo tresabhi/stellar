@@ -5,7 +5,7 @@ import { SearchItem } from 'components/Search';
 import { dismissPrompt } from 'core/interface/dismissPopup';
 import { getParent, getPart, insertNewPart } from 'core/part';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry from 'stores/partRegistry';

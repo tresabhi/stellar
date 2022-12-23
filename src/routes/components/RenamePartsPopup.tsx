@@ -7,7 +7,7 @@ import { dismissPrompt } from 'core/interface/dismissPopup';
 import { RenamePartsOptions } from 'core/part/renameParts';
 import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { KeyboardEvent, useRef } from 'react';
 import { PromptProps } from 'stores/prompts';
 import useSettings from 'stores/settings';

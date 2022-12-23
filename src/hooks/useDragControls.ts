@@ -1,5 +1,5 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import { CANVAS_MATRIX_SCALE } from 'components/Canvas/components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
+import { CANVAS_MATRIX_SCALE } from 'components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
 import { mutateApp } from 'core/app';
 import { deferUpdates, undeferUpdates } from 'core/bounds';
 import {

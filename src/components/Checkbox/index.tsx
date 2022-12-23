@@ -1,5 +1,5 @@
 import { CheckIcon, DashIcon } from '@radix-ui/react-icons';
-import { Button } from 'components/Button';
+import Button from 'components/Button';
 import {
   ComponentPropsWithoutRef,
   forwardRef,
@@ -87,8 +87,8 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
       setValue((state) => !state);
       setIndeterminate(false);
 
-      onClick && onClick(event);
-      onChange && onChange({ ...event, value: !value, indeterminate: false });
+      if (onClick) onClick(event);
+      if (onChange) onChange({ ...event, value: !value, indeterminate: false });
     };
 
     useEffect(() => {
@@ -96,7 +96,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
         (trigger.current as CheckboxRef).setValue = setValue;
         (trigger.current as CheckboxRef).setIndeterminate = setIndeterminate;
       }
-    });
+    }, []);
 
     useImperativeHandle(ref, () => trigger.current as CheckboxRef);
 

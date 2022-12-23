@@ -1,5 +1,5 @@
 import useKeybinds from 'hooks/useKeybinds';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import globalStyles from 'stitches.config/styles/global';
 import useApp from 'stores/app';
 import { getContext } from 'utilities/getContext';

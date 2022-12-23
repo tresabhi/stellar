@@ -1,6 +1,6 @@
 import * as Properties from 'components/Properties';
 import useCheckboxProperty from 'hooks/propertyControllers/useCheckboxProperty';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { PartPropertyComponentProps } from 'types/Parts';
 import {
   Part, PartData, VanillaPart, VanillaPartData,

@@ -40,33 +40,29 @@ import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
 import * as ToolbarPrimitive from 'components/Toolbar';
 import { DISCORD, WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
-import { mutateSettings } from 'core/app';
-import { mutateApp } from 'core/app/mutateApp';
-import {
-  exportFile,
-  importFile,
-  loadBlueprint,
-  openFile,
-  redoVersion,
-  saveFile,
-  saveFileAs,
-  undoVersion,
-} from 'core/blueprint';
-import { popup } from 'core/interface';
-import {
-  copyPartsBySelection,
-  cutPartsBySelection,
-  deletePartsBySelection,
-  groupPartsBySelection,
-  pasteParts,
-  selectAllPartsAtRoot,
-  togglePartsLockBySelection,
-  togglePartsVisibilityBySelection,
-  ungroupGroupsBySelection,
-  unselectAllParts,
-} from 'core/part';
-import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
-import { useTranslator } from 'hooks/useTranslator';
+import mutateApp from 'core/app/mutateApp';
+import mutateSettings from 'core/app/mutateSettings';
+import exportFile from 'core/blueprint/exportFile';
+import importFile from 'core/blueprint/importFile';
+import loadBlueprint from 'core/blueprint/loadBlueprint';
+import openFile from 'core/blueprint/openFile';
+import redoVersion from 'core/blueprint/redoVersion';
+import saveFile from 'core/blueprint/saveFile';
+import saveFileAs from 'core/blueprint/saveFileAs';
+import undoVersion from 'core/blueprint/undoVersion';
+import prompt from 'core/interface/prompt';
+import copyPartsBySelection from 'core/part/copyPartsBySelection';
+import cutPartsBySelection from 'core/part/cutPartsBySelection';
+import deletePartsBySelection from 'core/part/deletePartsBySelection';
+import duplicatePartsBySelection from 'core/part/duplicatePartsBySelection';
+import groupPartsBySelection from 'core/part/groupPartsBySelection';
+import pasteParts from 'core/part/pasteParts';
+import selectAllPartsAtRoot from 'core/part/selectAllPartsAtRoot';
+import togglePartsLockBySelection from 'core/part/togglePartsLockBySelection';
+import togglePartsVisibilityBySelection from 'core/part/togglePartsVisibilityBySelection';
+import ungroupGroupsBySelection from 'core/part/ungroupGroupsBySelection';
+import unselectAllParts from 'core/part/unselectAllParts';
+import useTranslator from 'hooks/useTranslator';
 import InsertPartPopup from 'routes/components/InsertPartPopup';
 import RenamePartsPopup from 'routes/components/RenamePartsPopup';
 import useApp, { Tool } from 'stores/app';
@@ -82,8 +78,14 @@ function Toolbar() {
   const tool = useApp((state) => (state.editor.isSpacePanning || state.editor.isTouchPanning
     ? Tool.Pan
     : state.editor.tool));
-  const isOneHidden = useBlueprint((state) => state.selections.some((selection) => state.parts[selection].hidden));
-  const isOneLocked = useBlueprint((state) => state.selections.some((selection) => state.parts[selection].locked));
+  const isOneHidden = useBlueprint(({ selections, parts }) => selections.some((selection) => {
+    const part = parts[selection];
+    return part.hidden;
+  }));
+  const isOneLocked = useBlueprint(({ selections, parts }) => selections.some((selection) => {
+    const part = parts[selection];
+    return part.locked;
+  }));
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
   );
@@ -177,7 +179,7 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarPrimitive.Button onClick={() => popup(InsertPartPopup)}>
+        <ToolbarPrimitive.Button onClick={() => prompt(InsertPartPopup)}>
           <PlusIcon />
         </ToolbarPrimitive.Button>
       </ToolbarPrimitive.Group>
@@ -279,7 +281,7 @@ function Toolbar() {
         >
           <ToolbarPrimitive.DropdownMenuItem
             icon={<Pencil1Icon />}
-            onClick={() => popup(RenamePartsPopup)}
+            onClick={() => prompt(RenamePartsPopup)}
             keybind="Ctrl + R"
           >
             {t`tabs.layout.toolbar.edit.rename`}

@@ -1,5 +1,5 @@
 import { Object3DNode } from '@react-three/fiber';
-import { UpdateResizeNodesDetail } from 'components/Canvas/components/LayoutCanvas/components/Outlines/components/ResizeControls';
+import { UpdateResizeNodesDetail } from 'components/LayoutCanvas/components/Outlines/components/ResizeControls';
 import { PartMoveEventDetail } from 'core/part';
 import { PartResizeEventDetail } from 'core/part/resizePartAsync';
 import { Line2 } from 'three/examples/jsm/lines/Line2';

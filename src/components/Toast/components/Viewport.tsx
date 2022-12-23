@@ -13,7 +13,7 @@ const Container = styled('div', {
   listStyle: 'none',
 });
 
-export default function Viewport() {
+export function Viewport() {
   const toasts = useNotifications((state) => state.notifications);
   const toastNodes = toasts.map(({ node }) => node);
 

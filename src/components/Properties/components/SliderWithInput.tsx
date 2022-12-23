@@ -1,8 +1,9 @@
 import { Slider as SliderPrimitive, SliderProps } from 'components/Slider';
-import { MIXED_VALUE_PLACEHOLDER } from 'hooks/propertyControllers';
+import { MIXED_VALUE_PLACEHOLDER } from 'hooks/propertyControllers/useNumericalInputProperty';
 import {
   FocusEvent,
   forwardRef,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -68,7 +69,10 @@ SliderWithInputProps
     const [value, setValue] = useState(defaultValue ?? min);
     const [indeterminate, setIndeterminate] = useState(givenIndeterminate);
 
-    const normalizedValue = (value: number) => (indeterminate ? MIXED_VALUE_PLACEHOLDER : `${value}`);
+    const normalizedValue = useCallback(
+      (newValue: number) => (indeterminate ? MIXED_VALUE_PLACEHOLDER : `${newValue}`),
+      [indeterminate],
+    );
 
     const handleSliderValueChange = (newValue: number) => {
       if (givenValue === undefined && input.current) {
@@ -78,20 +82,20 @@ SliderWithInputProps
         setValue(newValue);
       }
 
-      onValueChange && onValueChange(newValue);
+      if (onValueChange) onValueChange(newValue);
     };
     const handleInputBlur = (event: FocusEvent<InputRef>) => {
       if (givenValue === undefined) {
         let evaluated = evaluateExpression(event.target.value);
 
-        if (isNaN(evaluated)) {
+        if (Number.isNaN(evaluated)) {
           event.target.value = normalizedValue(givenValue ?? value);
         } else {
           evaluated = Math.round(evaluated / step) * step;
           evaluated = Math.min(max, Math.max(min, evaluated));
           event.target.value = normalizedValue(evaluated);
 
-          onValueChange && onValueChange(evaluated);
+          if (onValueChange) onValueChange(evaluated);
           setValue(evaluated);
         }
         event.target.resize();
@@ -112,7 +116,7 @@ SliderWithInputProps
         };
         (container.current as SliderWithInputRef).setIndeterminate = setIndeterminate;
       }
-    });
+    }, [normalizedValue]);
 
     useImperativeHandle(ref, () => container.current as SliderWithInputRef);
 

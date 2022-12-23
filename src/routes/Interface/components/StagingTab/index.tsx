@@ -1,4 +1,4 @@
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { theme } from 'stitches.config';
 import TabContainer from '../TabContainer';
 

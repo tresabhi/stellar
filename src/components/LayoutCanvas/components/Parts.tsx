@@ -1,7 +1,5 @@
-import PartCluster, {
-  PartClusterProps,
-} from 'components/Canvas/components/PartCluster';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
+import PartCluster, { PartClusterProps } from 'components/PartCluster';
 import {
   forwardRef,
   RefObject,
@@ -11,7 +9,7 @@ import {
 } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
-import { Layer } from '../../../constants/layer';
+import { Layer } from '..';
 
 export type PartsProps = Omit<PartClusterProps, 'parentId'>;
 

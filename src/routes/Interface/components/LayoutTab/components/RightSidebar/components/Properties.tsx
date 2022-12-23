@@ -10,7 +10,7 @@ import {
   PartWithTransformations,
   PartWithTransformationsPropertyComponent,
 } from 'game/parts/PartWithTransformations';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { PartPropertyComponentProps } from 'types/Parts';

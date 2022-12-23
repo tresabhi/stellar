@@ -70,8 +70,8 @@ export const createTranslator = (
   return hook;
 };
 
-export const useTranslator = () => {
+export default function useTranslator() {
   const language = useSettings((state) => state.interface.language);
 
   return createTranslator(language);
-};
+}

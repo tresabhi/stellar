@@ -1,5 +1,5 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
-import PartCluster from 'components/Canvas/components/PartCluster';
+import PartCluster from 'components/PartCluster';
 import { declareBoundsUpdated, getBoundsFromParts } from 'core/bounds';
 import { getPart, partExportify, removePartMetaData } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';

@@ -3,7 +3,7 @@ import {
   Canvas as CanvasPrimitive,
   Props as CanvasPrimitiveProps,
 } from '@react-three/fiber';
-import { unselectAllParts } from 'core/part/unselectAllParts';
+import unselectAllParts from 'core/part/unselectAllParts';
 import { RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
@@ -13,7 +13,18 @@ import { Group } from 'three';
 import PanControls from '../PanControls';
 import Expose from './components/Expose';
 import Outlines from './components/Outlines';
-import { Parts } from './components/Parts';
+import Parts from './components/Parts';
+
+export enum Layer {
+  PartRenderUnder,
+  PartRenderBetween,
+  PartRenderOver,
+
+  /**
+   * TODO: Make this more specific
+   */
+  Tools,
+}
 
 const Canvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,

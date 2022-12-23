@@ -4,7 +4,7 @@ import {
   TwitterLogoIcon,
 } from '@radix-ui/react-icons';
 import * as StatusBarComponent from 'components/StatusBar';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { useEffect, useState } from 'react';
 import { parse } from 'semver';
 import { styled, theme } from 'stitches.config';

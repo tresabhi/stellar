@@ -22,7 +22,7 @@ import { SearchItem } from 'components/Search';
 import { mutateApp } from 'core/app/mutateApp';
 import { importFile, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { useMemo, useRef } from 'react';
 import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';

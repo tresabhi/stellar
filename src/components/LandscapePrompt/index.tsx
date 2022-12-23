@@ -3,7 +3,7 @@ import Button from 'components/Button';
 import mutateApp from 'core/app/mutateApp';
 import mutateSettings from 'core/app/mutateSettings';
 import { Orientation, useOrientation } from 'hooks/useOrientation';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { HTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import useApp from 'stores/app';

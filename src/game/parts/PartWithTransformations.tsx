@@ -1,5 +1,5 @@
 import * as Properties from 'components/Properties';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { RefObject } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 

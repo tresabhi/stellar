@@ -33,5 +33,4 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
     );
   },
 );
-
 export default PartCluster;

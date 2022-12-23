@@ -1,4 +1,4 @@
-import { sideToPoint } from 'components/Canvas/components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
+import { sideToPoint } from 'components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
 

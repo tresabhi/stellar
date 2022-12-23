@@ -80,11 +80,6 @@ export const Input = forwardRef<InputRef, InputProps>(
       input.current?.focus();
       input.current?.select();
     };
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-      resize();
-      if (onChange) onChange(event);
-    };
-    const handleKeyDown = useInputEscape(onKeyDown);
     const resize = () => {
       if (input.current) {
         input.current.style.width = `${Math.min(
@@ -93,6 +88,11 @@ export const Input = forwardRef<InputRef, InputProps>(
         )}ch`;
       }
     };
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+      resize();
+      if (onChange) onChange(event);
+    };
+    const handleKeyDown = useInputEscape(onKeyDown);
 
     useEffect(() => {
       resize();

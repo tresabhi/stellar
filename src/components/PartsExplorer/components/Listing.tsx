@@ -1,11 +1,9 @@
 import { CaretRightIcon } from '@radix-ui/react-icons';
 import { Input } from 'components/Input';
-import {
-  getPart,
-  mutatePart,
-  selectPartOnly,
-  togglePartSelection,
-} from 'core/part';
+import getPart from 'core/part/getPart';
+import mutatePart from 'core/part/mutatePart';
+import selectPartOnly from 'core/part/selectPartOnly';
+import togglePartSelection from 'core/part/togglePartSelection';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { useInputEscape } from 'hooks/useInputEscape';
@@ -107,8 +105,8 @@ const Label = styled(Input, {
   },
 });
 
-export const Listing = memo<ListingProps>(
-  ({ id, indent }) => {
+export const Listing = memo(
+  ({ id, indent }: ListingProps) => {
     /**
      * we know, for sure, this part and registry exists because it was
      * successfully imported in the first place

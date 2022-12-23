@@ -1,5 +1,5 @@
-import { Layer } from 'components/Canvas/constants/layer';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
+import { Layer } from 'components/LayoutCanvas/layer';
 import PartsBounds from './components/PartsBounds';
 import { ResizeControls } from './components/ResizeControls';
 

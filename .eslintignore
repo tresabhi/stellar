@@ -4,7 +4,7 @@
 draft.*
 /temp
 _site
-# .eslintrc.cjs
+.eslintrc.cjs
 
 # dependencies
 node_modules
@@ -16,3 +16,7 @@ yarn-error.log
 .jekyll-metadata
 .sass-cache
 vendor
+
+# build
+scripts
+vite.config.ts

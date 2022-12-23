@@ -5,7 +5,7 @@ import {
 } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
 import { mutateSettings } from 'core/app';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../../..';
 

@@ -3,7 +3,7 @@ import { Anchor } from 'components/Anchor';
 import * as Toast from 'components/Toast';
 import { mutateSettings } from 'core/app';
 import { dismissToast, toast } from 'core/interface';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
 import useSettings from 'stores/settings';
 import { BufferGeometry, Mesh } from 'three';

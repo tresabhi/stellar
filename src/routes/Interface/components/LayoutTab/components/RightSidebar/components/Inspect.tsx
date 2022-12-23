@@ -4,7 +4,7 @@ import * as Sidebar from 'components/Sidebar';
 import { partExportify } from 'core/part';
 import useClipboard from 'hooks/useClipboard';
 import usePart from 'hooks/usePart';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import useBlueprint from 'stores/blueprint';
 
 const INDENT = 2;

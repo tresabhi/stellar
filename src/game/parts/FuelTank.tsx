@@ -7,7 +7,7 @@ import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInp
 import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
 import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { useRef } from 'react';
 import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';

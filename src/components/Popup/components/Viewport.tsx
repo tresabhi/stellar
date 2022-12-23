@@ -1,4 +1,4 @@
-import { dismissPrompt } from 'core/interface/dismissPopup';
+import dismissPrompt from 'core/interface/dismissPrompt';
 import { styled, theme } from 'stitches.config';
 import usePrompts from 'stores/prompts';
 
@@ -25,11 +25,11 @@ const Container = styled('div', {
   backgroundColor: theme.colors.popupBackground,
 });
 
-export default function Viewport() {
+export function Viewport() {
   const popups = usePrompts((state) => state.prompts);
   const popupNodes = popups.map(({ id, dismissByBlur, node }) => {
     const handleClick = () => {
-      dismissByBlur && dismissPrompt(id);
+      if (dismissByBlur) dismissPrompt(id);
     };
 
     return (
