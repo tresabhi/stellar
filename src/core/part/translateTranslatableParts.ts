@@ -4,22 +4,22 @@ import { Group } from 'game/parts/Group';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { translatePart } from './translatePart';
 
-export const translateTranslatableParts = (
+export default function translateTranslatableParts(
   x: number,
   y: number,
   ids: string[],
-  draft?: Blueprint,
-) => {
-  if (draft) {
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
     const translate = (selections: string[]) => {
       selections.forEach((selection) => {
-        const part = draft.parts[selection];
+        const part = blueprint.parts[selection];
 
         if (!part.locked) {
           if (part.n === 'Group') {
             translate((part as Group).part_order);
           } else if ((part as PartWithTransformations).p) {
-            translatePart(part.id, x, y, draft);
+            translatePart(part.id, x, y, blueprint);
           }
         }
       });
@@ -31,4 +31,4 @@ export const translateTranslatableParts = (
       translateTranslatableParts(x, y, ids, draft);
     });
   }
-};
+}

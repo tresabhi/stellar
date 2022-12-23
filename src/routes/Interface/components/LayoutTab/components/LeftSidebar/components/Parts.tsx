@@ -4,7 +4,7 @@ import * as Sidebar from 'components/Sidebar';
 import { useTranslator } from 'hooks/useTranslator';
 import useBlueprint from 'stores/blueprint';
 
-export function Parts() {
+export default function Parts() {
   const { t, f } = useTranslator();
   const hasNoParts = useBlueprint((state) => state.part_order.length === 0);
 

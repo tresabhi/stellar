@@ -9,9 +9,9 @@ const usePartProperty = <Type extends Part, Slice>(
   handler: (slice: Slice, prevState: Slice) => void,
   options?: Partial<SubscribeToPartOptions<Slice>>,
 ) => {
-  let lastState = slicer(useBlueprint.getState().parts[id] as Type);
-
   useEffect(() => {
+    let lastState = slicer(useBlueprint.getState().parts[id] as Type);
+
     const unsubscribe = subscribeToPart(
       id,
       (slice: Slice) => {
@@ -23,6 +23,6 @@ const usePartProperty = <Type extends Part, Slice>(
     );
 
     return () => unsubscribe();
-  }, [id, handler, slicer]);
+  }, [id, handler, slicer, options]);
 };
 export default usePartProperty;

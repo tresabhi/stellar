@@ -3,13 +3,30 @@ import { theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import useSettings, { THEMES } from 'stores/settings';
 import { Color, GridHelper, Mesh } from 'three';
-import { toThreeSafeHSL } from 'utilities/toThreeSafeHSL';
-import { InfiniteGridHelper } from './components/InfiniteGridHelper';
+import toThreeSafeHSL from 'utilities/toThreeSafeHSL';
+import InfiniteGridHelper from './components/InfiniteGridHelper';
 
 const MINOR_MARK = 1 / 5;
 const MAJOR_MARK = 1;
 
-export function Grid() {
+const useCenter = (
+  grid: RefObject<GridHelper>,
+  infiniteGrid: RefObject<Mesh>,
+) => {
+  useEffect(() => {
+    const unsubscribe = useBlueprint.subscribe(
+      (state) => state.center,
+      (value) => {
+        grid.current?.position.setX(value);
+        infiniteGrid.current?.position.setX(value % MAJOR_MARK);
+      },
+    );
+
+    return unsubscribe;
+  }, [grid, infiniteGrid]);
+};
+
+export default function Grid() {
   const initialState = useBlueprint.getState();
   const grid = useRef<GridHelper>(null);
   const infiniteGrid = useRef<Mesh>(null);
@@ -44,22 +61,3 @@ export function Grid() {
     </>
   );
 }
-
-const useCenter = (
-  grid: RefObject<GridHelper>,
-  infiniteGrid: RefObject<Mesh>,
-) => {
-  useEffect(() => {
-    const unsubscribe = useBlueprint.subscribe(
-      (state) => state.center,
-      (value) => {
-        grid.current?.position.setX(value);
-        infiniteGrid.current?.position.setX(value % MAJOR_MARK);
-      },
-    );
-
-    return unsubscribe;
-  }, []);
-};
-
-export * from './components/InfiniteGridHelper';

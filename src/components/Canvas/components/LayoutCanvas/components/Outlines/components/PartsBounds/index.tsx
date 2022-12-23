@@ -3,9 +3,9 @@ import { DeferUpdatesEventDetail } from 'core/bounds';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
-import { PartBounds } from './components/PartBounds';
+import PartBounds from './components/PartBounds';
 
-export function PartsBounds() {
+export default function PartsBounds() {
   const partBounds: JSX.Element[] = [];
   const parts = useBlueprint((state) => state.parts);
   const wrapper = useRef<Group>(null);
@@ -15,9 +15,9 @@ export function PartsBounds() {
     invalidate();
   };
 
-  for (const id in parts) {
+  Object.keys(parts).forEach((id) => {
     partBounds.push(<PartBounds id={id} key={`part-bound-${id}`} />);
-  }
+  });
 
   useEffect(() => {
     window.addEventListener(

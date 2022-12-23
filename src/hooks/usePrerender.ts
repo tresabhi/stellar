@@ -1,12 +1,12 @@
 import useKeybinds from 'hooks/useKeybinds';
 import { useTranslator } from 'hooks/useTranslator';
-import { globalStyles } from 'stitches.config';
+import globalStyles from 'stitches.config/styles/global';
 import useApp from 'stores/app';
 import { getContext } from 'utilities/getContext';
-import { prettifyVersion } from 'utilities/prettifyVersion';
+import prettifyVersion from 'utilities/prettifyVersion';
 import packageJSON from '../../package.json';
 
-export const usePrerender = () => {
+export default function usePrerender() {
   const { title } = getContext();
   useTranslator();
   globalStyles();
@@ -32,4 +32,4 @@ export const usePrerender = () => {
     rerenderDocumentTitle,
   );
   useApp.subscribe((state) => state.file.handle, rerenderDocumentTitle);
-};
+}

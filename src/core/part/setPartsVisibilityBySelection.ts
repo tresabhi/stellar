@@ -1,14 +1,14 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { setPartsVisibility } from './setPartsVisibility';
+import setPartsVisibility from './setPartsVisibility';
 
-export const setPartsVisibilityBySelection = (
+export default function setPartsVisibilityBySelection(
   hidden: boolean,
-  draft?: Blueprint,
-) => {
-  if (draft) {
-    setPartsVisibility(draft.selections, hidden, draft);
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
+    setPartsVisibility(blueprint.selections, hidden, blueprint);
   } else {
     mutateBlueprint((draft) => setPartsVisibilityBySelection(hidden, draft));
   }
-};
+}

@@ -1,11 +1,11 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { togglePartsLock } from './togglePartsLock';
+import togglePartsLock from './togglePartsLock';
 
-export const togglePartsLockBySelection = (draft?: Blueprint) => {
-  if (draft) {
-    togglePartsLock(draft.selections, draft);
+export default function togglePartsLockBySelection(blueprint?: Blueprint) {
+  if (blueprint) {
+    togglePartsLock(blueprint.selections, blueprint);
   } else {
     mutateBlueprint((draft) => togglePartsLockBySelection(draft));
   }
-};
+}

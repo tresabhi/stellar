@@ -1,7 +1,6 @@
 import * as Properties from 'components/Properties';
-import { useCheckboxProperty } from 'hooks/propertyControllers';
+import useCheckboxProperty from 'hooks/propertyControllers/useCheckboxProperty';
 import { useTranslator } from 'hooks/useTranslator';
-import { FC } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 import {
   Part, PartData, VanillaPart, VanillaPartData,
@@ -38,9 +37,9 @@ export const PartWithEngineData: PartWithEngine = {
   label: 'Unlabeled Part Engine',
 };
 
-export const PartWithEnginePropertyComponent: FC<
-PartPropertyComponentProps
-> = ({ ids }) => {
+export function PartWithEnginePropertyComponent({
+  ids,
+}: PartPropertyComponentProps) {
   const { t } = useTranslator();
 
   const enabled = useCheckboxProperty<PartWithEngine>(
@@ -74,6 +73,6 @@ PartPropertyComponentProps
       </Properties.Row>
     </Properties.Group>
   );
-};
+}
 
 export const registry = null;

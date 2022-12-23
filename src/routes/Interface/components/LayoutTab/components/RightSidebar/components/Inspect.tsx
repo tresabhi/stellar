@@ -9,17 +9,17 @@ import useBlueprint from 'stores/blueprint';
 
 const INDENT = 2;
 
-export function Inspect() {
+export default function Inspect() {
   const { t } = useTranslator();
   const { copy } = useClipboard();
   const isOneSelected = useBlueprint((state) => state.selections.length === 1);
   const state = useBlueprint.getState();
   const id = state.selections[0];
   const data = usePart(id);
-  const JSON_ = JSON.stringify(data, undefined, INDENT);
+  const stringifiedJSON = JSON.stringify(data, undefined, INDENT);
   const vanillaJSON = data && JSON.stringify(partExportify(data, state), undefined, INDENT);
 
-  const handleJSONClick = () => copy(JSON_);
+  const handleJSONClick = () => copy(stringifiedJSON);
   const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);
 
   return isOneSelected && data ? (
@@ -102,7 +102,7 @@ export function Inspect() {
           {t`tabs.layout.right_sidebar.inspect.json`}
         </Properties.TitleWithButton>
 
-        <Properties.TextArea value={JSON_} />
+        <Properties.TextArea value={stringifiedJSON} />
       </Properties.Group>
 
       <Properties.Group>

@@ -28,13 +28,13 @@ import {
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
-import { InsertPartPopup } from 'routes/components/InsertPartPopup';
-import { RenamePartsPopup } from 'routes/components/RenamePartsPopup';
+import InsertPartPopup from 'routes/components/InsertPartPopup';
+import RenamePartsPopup from 'routes/components/RenamePartsPopup';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import usePopups from 'stores/popups';
 import { InterfaceMode, UseSettings } from 'stores/settings';
-import { getInterfaceMode } from 'utilities/getInterfaceMode';
+import getInterfaceMode from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 
 const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
@@ -133,15 +133,18 @@ const useKeybinds = () => {
 
     bind('alt+1', () => {
       mutateSettings((draft: UseSettings) => {
-        draft.interface.tabs.layout.leftSidebar.visible = !draft.interface.tabs.layout.leftSidebar.visible;
+        const { leftSidebar } = draft.interface.tabs.layout;
+        leftSidebar.visible = !leftSidebar.visible;
       });
     });
     bind('alt+2', () => {
       mutateSettings((draft: UseSettings) => {
+        const { visible } = draft.interface.tabs.layout.rightSidebar;
+
         if (getInterfaceMode() === InterfaceMode.Compact) {
-          draft.interface.tabs.layout.rightSidebar.visible.inCompactMode = !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
+          visible.inCompactMode = !visible.inCompactMode;
         } else {
-          draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode = !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
+          visible.inComfortableMode = !visible.inComfortableMode;
         }
       });
     });

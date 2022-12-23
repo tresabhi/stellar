@@ -13,7 +13,7 @@ export const TRANSLATIONS = import.meta.glob<true, string, Translations>(
   },
 );
 
-for (const path in TRANSLATIONS) {
+Object.keys(TRANSLATIONS).forEach((path) => {
   const localeMatch = path.match(localePattern);
 
   if (localeMatch) {
@@ -22,16 +22,12 @@ for (const path in TRANSLATIONS) {
     TRANSLATIONS[locale] = TRANSLATIONS[path];
     delete TRANSLATIONS[path];
   }
-}
+});
 
 export const createTranslator = (
   language = useSettings.getState().interface.language,
 ) => {
   const translations = TRANSLATIONS[language] ?? TRANSLATIONS[FALLBACK_LANG];
-
-  if (translations === undefined) {
-    console.warn(`No translations for language ${language}`);
-  }
 
   const translate = (string: string, tokens: string[] = []) => {
     const translation = string
@@ -43,18 +39,19 @@ export const createTranslator = (
         translations as Translations,
       );
 
-    const applyTokens = (string: string) => tokens.reduce(
+    const applyTokens = (initialToken: string) => tokens.reduce(
       (previousTranslation, currentTranslation, index) => previousTranslation.replaceAll(`%${index + 1}$s`, tokens[index]),
-      string,
+      initialToken,
     );
 
-    return translation === undefined
-      ? string // if translation is not found, return the original string
-      : typeof translation === 'string'
-        ? applyTokens(translation) // if translation is a string, return the translation
-        : translation.$ === undefined
-          ? string // if root translation does not exists, return the string
-          : applyTokens(translation.$); // if root translation exists, return the root translation
+    // if translation is not found, return the original string
+    if (translation === undefined) return string;
+    // if translation is a string, return the translation
+    if (typeof translation === 'string') return applyTokens(translation);
+    // if root translation does not exists, return the string
+    if (translation.$ === undefined) return string;
+    // if root translation exists, return the root translation
+    return applyTokens(translation.$);
   };
 
   const fragments = (string: string) => translate(string).split(/%[0-9]\$s/);

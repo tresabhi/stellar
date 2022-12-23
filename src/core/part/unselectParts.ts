@@ -1,13 +1,13 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 
-export const unselectParts = (ids: string[], draft?: Blueprint) => {
-  if (draft) {
+export default function unselectParts(ids: string[], blueprint?: Blueprint) {
+  if (blueprint) {
     ids.forEach((id) => {
-      draft.parts[id].selected = false;
+      blueprint.parts[id].selected = false;
     });
 
-    draft.selections = draft.selections.filter(
+    blueprint.selections = blueprint.selections.filter(
       (selection) => !ids.includes(selection),
     );
   } else {
@@ -15,4 +15,4 @@ export const unselectParts = (ids: string[], draft?: Blueprint) => {
       unselectParts(ids, draft);
     });
   }
-};
+}

@@ -2,16 +2,19 @@ import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { mutatePart } from './mutatePart';
 
-export const togglePartVisibility = (id: string, draft?: Blueprint) => {
-  if (draft) {
+export default function togglePartVisibility(
+  id: string,
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
     mutatePart(
       id,
       (draft) => {
         draft.hidden = !draft.hidden;
       },
-      draft,
+      blueprint,
     );
   } else {
     mutateBlueprint((draft) => togglePartVisibility(id, draft));
   }
-};
+}

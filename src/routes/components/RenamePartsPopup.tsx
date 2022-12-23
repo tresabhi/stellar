@@ -8,20 +8,21 @@ import { RenamePartsOptions } from 'core/part/renameParts';
 import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
 import { useTranslator } from 'hooks/useTranslator';
-import { FC, KeyboardEvent, useRef } from 'react';
+import { KeyboardEvent, useRef } from 'react';
 import { PopupProps } from 'stores/popups';
 import useSettings from 'stores/settings';
 
-export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
+export default function RenamePartsPopup({ id }: PopupProps) {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
   const apply = () => {
-    input.current
-      && renamePartsBySelection(
+    if (input.current) {
+      renamePartsBySelection(
         input.current.value,
         useSettings.getState().editor.rename,
       );
+    }
     dismissPopup(id);
   };
   const handleClick = (type: keyof RenamePartsOptions) => () => {
@@ -87,4 +88,4 @@ export const RenamePartsPopup: FC<PopupProps> = ({ id }) => {
       </Popup.Actions>
     </Popup.Container>
   );
-};
+}

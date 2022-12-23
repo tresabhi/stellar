@@ -4,6 +4,7 @@
 draft.*
 /temp
 _site
+# .eslintrc.cjs
 
 # dependencies
 node_modules

@@ -1,6 +1,7 @@
 import { Line } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
-import { getPart, subscribeToPart } from 'core/part';
+import { getPart } from 'core/part/getPart';
+import { subscribeToPart } from 'core/part/subscribeToPart';
 import {
   memo, RefObject, useEffect, useRef,
 } from 'react';
@@ -33,8 +34,37 @@ export interface PartBoundProps {
   id: string;
 }
 
-export const PartBounds = memo<PartBoundProps>(
-  ({ id }) => {
+const useVisibility = (
+  id: string,
+  wrapper: RefObject<Group>,
+  resize: () => void,
+) => {
+  useEffect(() => {
+    resize();
+
+    const unsubscribeSelected = subscribeToPart(
+      id,
+      (selected: boolean) => {
+        if (wrapper.current) {
+          wrapper.current.visible = selected;
+          invalidate();
+        }
+      },
+      (newState) => newState.selected,
+    );
+
+    window.addEventListener(`boundsupdated${id}`, resize);
+
+    return () => {
+      unsubscribeSelected();
+
+      window.removeEventListener(`boundsupdated${id}`, resize);
+    };
+  });
+};
+
+const PartBounds = memo(
+  ({ id }: PartBoundProps) => {
     const outline = useRef<Line2>(null);
     const shading = useRef<Mesh>(null);
     const wrapper = useRef<Group>(null);
@@ -66,32 +96,4 @@ export const PartBounds = memo<PartBoundProps>(
   },
   (prevProps, nextProps) => prevProps.id === nextProps.id,
 );
-
-const useVisibility = (
-  id: string,
-  wrapper: RefObject<Group>,
-  resize: () => void,
-) => {
-  useEffect(() => {
-    resize();
-
-    const unsubscribeSelected = subscribeToPart(
-      id,
-      (selected: boolean) => {
-        if (wrapper.current) {
-          wrapper.current.visible = selected;
-          invalidate();
-        }
-      },
-      (state) => state.selected,
-    );
-
-    window.addEventListener(`boundsupdated${id}`, resize);
-
-    return () => {
-      unsubscribeSelected();
-
-      window.removeEventListener(`boundsupdated${id}`, resize);
-    };
-  });
-};
+export default PartBounds;

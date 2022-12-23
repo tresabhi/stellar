@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
-import { togglePartsSelection } from './togglePartsSelection';
+import togglePartsSelection from './togglePartsSelection';
 
-export const togglePartSelection = (id: string, draft?: Blueprint) => {
-  togglePartsSelection([id], draft);
-};
+export default function togglePartSelection(id: string, blueprint?: Blueprint) {
+  togglePartsSelection([id], blueprint);
+}

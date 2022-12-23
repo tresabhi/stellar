@@ -2,17 +2,17 @@ import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { mutateParts } from './mutateParts';
 
-export const unselectAllParts = (draft?: Blueprint) => {
-  if (draft) {
+export default function unselectAllParts(blueprint?: Blueprint) {
+  if (blueprint) {
     mutateParts(
-      draft.selections,
+      blueprint.selections,
       (draft) => {
         draft.selected = false;
       },
-      draft,
+      blueprint,
     );
-    draft.selections = [];
+    blueprint.selections = [];
   } else {
     mutateBlueprint((draft) => unselectAllParts(draft));
   }
-};
+}

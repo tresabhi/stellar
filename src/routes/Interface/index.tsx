@@ -2,7 +2,7 @@ import * as Popup from 'components/Popup';
 import * as Toast from 'components/Toast';
 import { popup } from 'core/interface';
 import { useInterfaceMode } from 'hooks/useInterfaceMode';
-import { WelcomePopup } from 'routes/components/WelcomePopup';
+import WelcomePopup from 'routes/components/WelcomePopup';
 import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/app';
 import useSettings, { InterfaceMode } from 'stores/settings';
@@ -10,7 +10,7 @@ import { CreateTab } from './components/CreateTab';
 import { ExportTab } from './components/ExportTab';
 import { LayoutTab } from './components/LayoutTab';
 import { StagingTab } from './components/StagingTab';
-import { Tabs } from './components/Tabs';
+import Tabs from './components/Tabs';
 
 export interface SidebarTabProps {
   selected: boolean;
@@ -23,6 +23,14 @@ export const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 });
+
+const useWelcomePopup = () => {
+  const { welcomePromptCompleted } = useSettings.getState().interface;
+
+  if (!welcomePromptCompleted) {
+    popup(WelcomePopup, false, 'welcome-popup');
+  }
+};
 
 function Interface() {
   const zenMode = useApp((state) => state.interface.focusMode);
@@ -47,13 +55,5 @@ function Interface() {
     </Container>
   );
 }
-
-const useWelcomePopup = () => {
-  const { welcomePromptCompleted } = useSettings.getState().interface;
-
-  if (!welcomePromptCompleted) {
-    popup(WelcomePopup, false, 'welcome-popup');
-  }
-};
 
 export default Interface;

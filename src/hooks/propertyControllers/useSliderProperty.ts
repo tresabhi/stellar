@@ -6,26 +6,26 @@ import { mutateParts, subscribeToPart } from 'core/part';
 import { Part } from 'game/parts/Part';
 import { Ref, useEffect, useRef } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
-import { getMutualProperty } from 'utilities/getMutualProperty';
+import getMutualProperty from 'utilities/getMutualProperty';
 
 export const COMMIT_DEBOUNCE = 500;
 export const RERENDER_DEBOUNCE = 500;
 
-export const useSliderProperty = <
+export default function useSliderProperty<
   Type extends Part,
   Value extends number = number,
 >(
-    ids: string[],
-    slice: (state: Type) => Value,
-    mutate: (draft: Type, value: Value) => void,
-  ) => {
+  ids: string[],
+  slice: (state: Type) => Value,
+  mutate: (draft: Type, value: Value) => void,
+) {
   const slider = useRef<SliderWithInputRef>(null);
   let value = getMutualProperty<Type, Value>(ids, slice);
   const firstRender = useRef(true);
 
-  const commit = fallingEdgeDebounce((value: Value) => {
+  const commit = fallingEdgeDebounce((newValue: Value) => {
     mutateParts<Type>(ids, (draft) => {
-      mutate(draft, value);
+      mutate(draft, newValue);
     });
   }, COMMIT_DEBOUNCE);
   const recomputeAndRerender = () => {
@@ -74,4 +74,4 @@ export const useSliderProperty = <
   };
 
   return hook;
-};
+}

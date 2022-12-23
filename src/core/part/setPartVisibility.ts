@@ -1,10 +1,10 @@
 import { Blueprint } from 'game/Blueprint';
-import { setPartsVisibility } from './setPartsVisibility';
+import setPartsVisibility from './setPartsVisibility';
 
-export const setPartVisibility = (
+export default function setPartVisibility(
   id: string,
   hidden: boolean,
-  draft?: Blueprint,
-) => {
-  setPartsVisibility([id], hidden, draft);
-};
+  blueprint?: Blueprint,
+) {
+  setPartsVisibility([id], hidden, blueprint);
+}

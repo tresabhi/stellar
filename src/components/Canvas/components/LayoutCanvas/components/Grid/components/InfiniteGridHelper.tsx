@@ -12,17 +12,10 @@ interface InfiniteGridHelperProps extends MeshProps {
 /**
  * Thanks, Fyrestar, for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
  */
-export const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
-  (
-    {
-      size1 = 10,
-      size2 = 100,
-      color = new Color('white'),
-      axes = 'xzy',
-      ...props
-    },
-    ref,
-  ) => {
+const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
+  ({
+    size1, size2, color, axes = 'xzy', distance, ...props
+  }, ref) => {
     const planeAxes = axes.slice(0, 2);
 
     return (
@@ -35,7 +28,7 @@ export const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
                 uSize1: { value: size1 },
                 uSize2: { value: size2 },
                 uColor: { value: color },
-                uDistance: { value: 1e4 },
+                uDistance: { value: distance },
               },
               extensions: { derivatives: true },
               transparent: true,
@@ -86,3 +79,13 @@ export const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
     );
   },
 );
+
+InfiniteGridHelper.defaultProps = {
+  size1: 10,
+  size2: 100,
+  color: new Color('white'),
+  axes: 'xzy',
+  distance: 1e4,
+};
+
+export default InfiniteGridHelper;

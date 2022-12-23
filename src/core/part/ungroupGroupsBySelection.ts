@@ -2,10 +2,10 @@ import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { ungroupGroups } from './ungroupGroups';
 
-export const ungroupGroupsBySelection = (draft?: Blueprint) => {
-  if (draft) {
-    ungroupGroups(draft.selections, draft);
+export default function ungroupGroupsBySelection(blueprint?: Blueprint) {
+  if (blueprint) {
+    ungroupGroups(blueprint.selections, blueprint);
   } else {
     mutateBlueprint((draft) => ungroupGroupsBySelection(draft));
   }
-};
+}

@@ -6,11 +6,10 @@ import {
 import * as Sidebar from 'components/Sidebar';
 import { mutateSettings } from 'core/app';
 import { useTranslator } from 'hooks/useTranslator';
-import { FC } from 'react';
 import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../../..';
 
-export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
+export default function Tabs({ swapSecondTab }: TabLayoutProps) {
   const { t } = useTranslator();
   const leftSidebar = useSettings(
     (state) => state.interface.tabs.layout.leftSidebar,
@@ -41,4 +40,4 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
       </Sidebar.Tab>
     </Sidebar.TabContainer>
   );
-};
+}

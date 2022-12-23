@@ -1,19 +1,19 @@
 import { useGLTF } from '@react-three/drei';
 import usePhysicalPart from 'hooks/usePhysicalPart';
-import { FC, useRef } from 'react';
+import { useRef } from 'react';
 import { Group, MeshStandardMaterial, Vector2Tuple } from 'three';
 import GLTFResult from 'types/GLTFResult';
 import { PartComponentProps } from 'types/Parts';
 
 // TODO: depricate offset
 
-export const createPhysicalPart = (
+export default function createPhysicalPart(
   model: string,
   offset: Vector2Tuple = [0, 0],
-) => {
+) {
   useGLTF.preload(model);
 
-  const Component: FC<PartComponentProps> = ({ id }) => {
+  function Component({ id }: PartComponentProps) {
     const wrapper = useRef<Group>(null);
     const props = usePhysicalPart(id, wrapper);
     const { nodes } = useGLTF(model) as unknown as GLTFResult;
@@ -36,7 +36,7 @@ export const createPhysicalPart = (
         {meshes}
       </group>
     );
-  };
+  }
 
   return Component;
-};
+}

@@ -1,11 +1,13 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { togglePartsVisibility } from './togglePartsVisibility';
+import togglePartsVisibility from './togglePartsVisibility';
 
-export const togglePartsVisibilityBySelection = (draft?: Blueprint) => {
-  if (draft) {
-    togglePartsVisibility(draft.selections, draft);
+export default function togglePartsVisibilityBySelection(
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
+    togglePartsVisibility(blueprint.selections, blueprint);
   } else {
     mutateBlueprint((draft) => togglePartsVisibilityBySelection(draft));
   }
-};
+}

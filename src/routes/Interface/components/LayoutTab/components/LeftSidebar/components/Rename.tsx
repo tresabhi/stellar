@@ -34,7 +34,7 @@ const Button = styled(ButtonPrimitive, {
   },
 });
 
-export function Rename() {
+export default function Rename() {
   const visible = useBlueprint((state) => state.selections.length > 0);
   const handleClick = () => popup(RenamePartsPopup);
 

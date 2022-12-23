@@ -11,7 +11,7 @@ import {
 } from 'core/part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
-import { getSnapDistance } from 'utilities/getSnapDistance';
+import getSnapDistance from 'utilities/getSnapDistance';
 import useApp, { Tool } from '../stores/app';
 
 const useDragControls = (id: string) => {
@@ -22,34 +22,11 @@ const useDragControls = (id: string) => {
   const initial = new Vector2();
   const movement = new Vector2();
 
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    const part = getPart(id) as PartWithTransformations | undefined;
-    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
-
-    if (
-      part
-      && (part.selected || part.parent_id === null) // is selected or is at root level
-      && !part.hidden
-      && !part.locked
-      && tool === Tool.Move
-      && !isSpacePanning
-      && !isTouchPanning
-    ) {
-      event.stopPropagation();
-
-      firstMove = true;
-      selectedInitially = part.selected;
-      initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
-      movement.set(0, 0);
-
-      window.addEventListener('pointerup', handlePointerUp);
-      window.addEventListener('pointermove', handlePointerMove);
-    }
-  };
   const handlePointerMove = (event: PointerEvent) => {
     const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       handlePointerUp();
     } else {
       if (firstMove) {
@@ -110,6 +87,30 @@ const useDragControls = (id: string) => {
 
     window.removeEventListener('pointerup', handlePointerUp);
     window.removeEventListener('pointermove', handlePointerMove);
+  };
+  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+    const part = getPart(id) as PartWithTransformations | undefined;
+    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
+
+    if (
+      part
+      && (part.selected || part.parent_id === null) // is selected or is at root level
+      && !part.hidden
+      && !part.locked
+      && tool === Tool.Move
+      && !isSpacePanning
+      && !isTouchPanning
+    ) {
+      event.stopPropagation();
+
+      firstMove = true;
+      selectedInitially = part.selected;
+      initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
+      movement.set(0, 0);
+
+      window.addEventListener('pointerup', handlePointerUp);
+      window.addEventListener('pointermove', handlePointerMove);
+    }
   };
 
   return handlePointerDown;

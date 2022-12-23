@@ -1,20 +1,20 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
-import { selectParts } from './selectParts';
-import { unselectAllParts } from './unselectAllParts';
+import selectParts from './selectParts';
+import unselectAllParts from './unselectAllParts';
 
-export const selectAllPartsAtRoot = (draft?: Blueprint) => {
-  if (draft) {
-    if (draft.selections.length > 0) {
-      unselectAllParts(draft);
+export default function selectAllPartsAtRoot(blueprint?: Blueprint) {
+  if (blueprint) {
+    if (blueprint.selections.length > 0) {
+      unselectAllParts(blueprint);
     }
 
-    if (draft.part_order.length > 0) {
-      selectParts(draft.part_order, draft);
+    if (blueprint.part_order.length > 0) {
+      selectParts(blueprint.part_order, blueprint);
     }
   } else {
     mutateBlueprint((draft) => {
       selectAllPartsAtRoot(draft);
     });
   }
-};
+}

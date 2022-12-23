@@ -1,16 +1,16 @@
 import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 
-export const setPartsLock = (
+export default function setPartsLock(
   ids: string[],
   locked: boolean,
-  draft?: Blueprint,
-) => {
-  if (draft) {
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
     ids.forEach((id) => {
-      draft.parts[id].locked = locked;
+      blueprint.parts[id].locked = locked;
     });
   } else {
     mutateBlueprint((draft) => setPartsLock(ids, locked, draft));
   }
-};
+}

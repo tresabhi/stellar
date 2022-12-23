@@ -3,19 +3,19 @@ import {
   disposeBound,
   getBoundsFromObject,
 } from 'core/bounds';
-import { RefObject, useEffect } from 'react';
+import { RefObject, useCallback, useEffect } from 'react';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
 
 const usePartWithBounds = (id: string, object: RefObject<Object3D>) => {
-  const recomputeBounds = () => {
+  const recomputeBounds = useCallback(() => {
     if (object.current) {
       const bounds = getBoundsFromObject(object.current);
       boundsStore[id] = { bounds, needsRecomputation: false };
     }
 
     window.dispatchEvent(new CustomEvent(`boundsupdated${id}`));
-  };
+  }, [id, object]);
 
   useEffect(recomputeBounds);
 
@@ -39,6 +39,6 @@ const usePartWithBounds = (id: string, object: RefObject<Object3D>) => {
       );
       disposeBound(id);
     };
-  }, []);
+  }, [id, recomputeBounds]);
 };
 export default usePartWithBounds;

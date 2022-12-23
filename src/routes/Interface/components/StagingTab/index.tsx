@@ -1,8 +1,8 @@
 import { useTranslator } from 'hooks/useTranslator';
 import { theme } from 'stitches.config';
-import { TabContainer } from '../TabContainer';
+import TabContainer from '../TabContainer';
 
-export function StagingTab() {
+export default function StagingTab() {
   const { t } = useTranslator();
 
   return (

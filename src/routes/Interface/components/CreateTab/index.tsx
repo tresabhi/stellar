@@ -24,7 +24,7 @@ import { importFile, loadBlueprint } from 'core/blueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
 import { useTranslator } from 'hooks/useTranslator';
 import { useMemo, useRef } from 'react';
-import { TabContainer } from 'routes/Interface/components/TabContainer';
+import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
 import { getContext } from 'utilities/getContext';
@@ -154,9 +154,16 @@ const FileActions = styled('div', {
   gap: theme.space.gapRelatedMajor,
 });
 
-export function CreateTab() {
-  const { t, translate, language } = useTranslator();
+export default function CreateTab() {
+  const { t, translate } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
+
+  const toLayout = () => {
+    mutateApp((draft) => {
+      draft.interface.tab = Tab.Layout;
+    });
+  };
+
   const templates = useMemo(
     () => TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
       ({ name, blueprint, credit }) => {
@@ -185,14 +192,8 @@ export function CreateTab() {
         return searchItem;
       },
     ),
-    [language],
+    [translate],
   );
-
-  const toLayout = () => {
-    mutateApp((draft) => {
-      draft.interface.tab = Tab.Layout;
-    });
-  };
 
   const handleScratchClick = () => {
     loadBlueprint();
@@ -238,17 +239,14 @@ export function CreateTab() {
           <FileActions>
             <Button onClick={handleScratchClick} priority="solid">
               <FilePlusIcon />
-              {' '}
               {t`tabs.create.file_options.from_scratch`}
             </Button>
             <Button onClick={handleImportClick}>
               <EnterIcon />
-              {' '}
               {t`tabs.create.file_options.import`}
             </Button>
             <Button onClick={handleOpenClick}>
               <UploadIcon />
-              {' '}
               {t`tabs.create.file_options.open`}
             </Button>
           </FileActions>

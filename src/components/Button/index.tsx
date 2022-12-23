@@ -1,6 +1,6 @@
 import { styled, theme } from 'stitches.config';
 
-export const Button = styled('button', {
+const Button = styled('button', {
   cursor: 'pointer',
 
   variants: {
@@ -212,3 +212,4 @@ export const Button = styled('button', {
     priority: 'default',
   },
 });
+export default Button;

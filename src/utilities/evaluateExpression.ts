@@ -1,7 +1,7 @@
 import { simplify } from 'mathjs';
-import { validateNumber } from './validateNumber';
+import validateNumber from './validateNumber';
 
-export const evaluateExpression = (expression: string) => {
+export default function evaluateExpression(expression: string) {
   try {
     const evaluated = simplify(expression).evaluate();
 
@@ -9,4 +9,4 @@ export const evaluateExpression = (expression: string) => {
   } catch {
     return NaN;
   }
-};
+}

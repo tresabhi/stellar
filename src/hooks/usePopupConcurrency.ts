@@ -1,10 +1,10 @@
 import { setPopupsEnabled } from 'core/interface';
 import { useEffect } from 'react';
 
-export const usePopupConcurrency = () => {
+export default function usePopupConcurrency() {
   useEffect(() => {
     setPopupsEnabled(false);
 
     return () => setPopupsEnabled(true);
   });
-};
+}

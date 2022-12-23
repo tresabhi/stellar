@@ -5,7 +5,7 @@ import { mutateSettings } from 'core/app';
 import { dismissPopup } from 'core/interface';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
 import { TRANSLATIONS, useTranslator } from 'hooks/useTranslator';
-import { FC, ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PopupProps } from 'stores/popups';
 import { THEMES } from 'stores/settings';
@@ -29,7 +29,7 @@ function Slide1() {
   const { t, f } = useTranslator();
   const languages: ReactNode[] = [];
 
-  for (const translation in TRANSLATIONS) {
+  Object.keys(TRANSLATIONS).forEach((translation) => {
     const code = translation;
     const displayNames = new Intl.DisplayNames([code], { type: 'language' });
     const displayName = fixedLangNames[code] ?? displayNames.of(code);
@@ -44,7 +44,7 @@ function Slide1() {
         </Mono>
       </Select.Item>,
     );
-  }
+  });
 
   const handleValueChange = (value: string) => {
     mutateSettings((draft) => {
@@ -134,7 +134,7 @@ function Slide2() {
   );
 }
 
-export const WelcomePopup: FC<PopupProps> = ({ id }) => {
+export default function WelcomePopup({ id }: PopupProps) {
   const { t } = useTranslator();
   const [index, setIndex] = useState(0);
   const slides = [Slide1, Slide2];
@@ -176,4 +176,4 @@ export const WelcomePopup: FC<PopupProps> = ({ id }) => {
       </Popup.Content>
     </Popup.Container>
   );
-};
+}

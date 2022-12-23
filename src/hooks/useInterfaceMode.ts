@@ -1,9 +1,9 @@
 import useSettings from 'stores/settings';
-import { getInterfaceMode } from 'utilities/getInterfaceMode';
+import getInterfaceMode from 'utilities/getInterfaceMode';
 
-export const useInterfaceMode = () => {
+export default function useInterfaceMode() {
   const mode = useSettings((state) => state.interface.mode);
   const interfaceMode = getInterfaceMode(mode);
 
   return interfaceMode;
-};
+}

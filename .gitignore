@@ -5,6 +5,7 @@ draft.*
 /temp
 _site
 /stories_template
+dev-dist
 
 # dependencies
 node_modules

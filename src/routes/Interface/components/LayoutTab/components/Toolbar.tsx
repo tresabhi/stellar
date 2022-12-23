@@ -67,8 +67,8 @@ import {
 } from 'core/part';
 import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
 import { useTranslator } from 'hooks/useTranslator';
-import { InsertPartPopup } from 'routes/components/InsertPartPopup';
-import { RenamePartsPopup } from 'routes/components/RenamePartsPopup';
+import InsertPartPopup from 'routes/components/InsertPartPopup';
+import RenamePartsPopup from 'routes/components/RenamePartsPopup';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';

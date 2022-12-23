@@ -20,37 +20,39 @@ interface GroupedProperties {
   Component: FC<PartPropertyComponentProps>;
 }
 
-const groupedProperties: GroupedProperties[] = [
-  {
+const groupedProperties: Record<string, GroupedProperties> = {
+  transformations: {
     test: (part) => (part as PartWithTransformations).p !== undefined
       && (part as PartWithTransformations).o !== undefined,
     Component: PartWithTransformationsPropertyComponent,
   },
-  {
+  engine: {
     test: (part) => (part as PartWithEngine).B !== undefined,
     Component: PartWithEnginePropertyComponent,
   },
-];
+};
 
-export function Properties() {
+export default function Properties() {
   const { t } = useTranslator();
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
   );
   const selections = useBlueprint((state) => state.selections);
-  const typeSortedParts = new Map<number, string[]>();
-  const nameSortedParts = new Map<string, string[]>();
+  const typeSortedParts: Record<string, string[]> = {};
+  const nameSortedParts: Record<string, string[]> = {};
   const children: JSX.Element[] = [];
 
-  groupedProperties.forEach(({ test }, index) => {
+  Object.keys(groupedProperties).forEach((groupedPropertyId) => {
+    const { test } = groupedProperties[groupedPropertyId];
+
     selections.forEach((selection) => {
       const part = getPart(selection);
 
       if (test(part)) {
-        if (typeSortedParts.has(index)) {
-          typeSortedParts.get(index)?.push(selection);
+        if (typeSortedParts[groupedPropertyId]) {
+          typeSortedParts[groupedPropertyId].push(selection);
         } else {
-          typeSortedParts.set(index, [selection]);
+          typeSortedParts[groupedPropertyId] = [selection];
         }
       }
     });
@@ -59,14 +61,15 @@ export function Properties() {
   selections.forEach((selection) => {
     const part = getPart(selection);
 
-    if (nameSortedParts.has(part.n)) {
-      nameSortedParts.get(part.n)?.push(selection);
+    if (nameSortedParts[part.n]) {
+      nameSortedParts[part.n].push(selection);
     } else {
-      nameSortedParts.set(part.n, [selection]);
+      nameSortedParts[part.n] = [selection];
     }
   });
 
-  typeSortedParts.forEach((ids, index) => {
+  Object.keys(typeSortedParts).forEach((index) => {
+    const ids = typeSortedParts[index];
     const { Component } = groupedProperties[index];
 
     children.push(
@@ -74,7 +77,8 @@ export function Properties() {
     );
   });
 
-  nameSortedParts.forEach((ids, name) => {
+  Object.keys(nameSortedParts).forEach((name) => {
+    const ids = nameSortedParts[name];
     const partRegistry = getPartRegistry(name);
 
     if (partRegistry && partRegistry.PropertyEditor) {
@@ -87,16 +91,22 @@ export function Properties() {
     }
   });
 
-  return hasNoSelections ? (
-    <Sidebar.MessageContainer>
-      <Sidebar.Message>{t`tabs.layout.right_sidebar.properties.no_selection`}</Sidebar.Message>
-      <Sidebar.Message subMessage>
-        {t`tabs.layout.right_sidebar.properties.no_selection.instructions`}
-      </Sidebar.Message>
-    </Sidebar.MessageContainer>
-  ) : children.length > 0 ? (
-    <PropertiesPrimitive.Container>{children}</PropertiesPrimitive.Container>
-  ) : (
+  if (hasNoSelections) {
+    return (
+      <Sidebar.MessageContainer>
+        <Sidebar.Message>{t`tabs.layout.right_sidebar.properties.no_selection`}</Sidebar.Message>
+        <Sidebar.Message subMessage>
+          {t`tabs.layout.right_sidebar.properties.no_selection.instructions`}
+        </Sidebar.Message>
+      </Sidebar.MessageContainer>
+    );
+  }
+  if (children.length > 0) {
+    return (
+      <PropertiesPrimitive.Container>{children}</PropertiesPrimitive.Container>
+    );
+  }
+  return (
     <Sidebar.MessageContainer>
       <Sidebar.Message>{t`tabs.layout.right_sidebar.properties.no_properties`}</Sidebar.Message>
       <Sidebar.Message subMessage>

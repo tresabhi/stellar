@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
-import { selectParts } from './selectParts';
+import selectParts from './selectParts';
 
-export const selectPart = (id: string, draft?: Blueprint) => {
-  selectParts([id], draft);
-};
+export default function selectPart(id: string, blueprint?: Blueprint) {
+  selectParts([id], blueprint);
+}

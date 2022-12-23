@@ -11,20 +11,21 @@ const MIN_ZOOM = 2.2;
 const MAX_ZOOM = 512;
 const ZOOM_SENSITIVITY = 1 / 250;
 
-export function PanControls() {
+export default function PanControls() {
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
   const getMousePos = useMousePosition();
   const touchMemories = new Map<number, [number, number]>();
-  let lastHypotenuse = 0;
-  let initialMousePos: Vector2Tuple;
 
   useEffect(() => {
+    let lastHypotenuse = 0;
+    let initialMousePos: Vector2Tuple;
+
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
 
       if (event.ctrlKey) {
-        const initialMousePos = getMousePos(event);
+        initialMousePos = getMousePos(event);
 
         const zoom = Math.max(
           MIN_ZOOM,
@@ -62,15 +63,9 @@ export function PanControls() {
       invalidate();
     };
 
-    const handlePointerDown = (event: PointerEvent) => {
-      if (!useApp.getState().editor.isTouchPanning) {
-        const { tool, isSpacePanning } = useApp.getState().editor;
-
-        if (tool === Tool.Pan || isSpacePanning) {
-          initialMousePos = getMousePos(event);
-          canvas.addEventListener('pointermove', handlePointerMove);
-        }
-      }
+    const handlePointerUp = () => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      canvas.removeEventListener('pointermove', handlePointerMove);
     };
     const handlePointerMove = (event: PointerEvent) => {
       if (useApp.getState().editor.isTouchPanning) {
@@ -87,42 +82,17 @@ export function PanControls() {
         invalidate();
       }
     };
-    const handlePointerUp = () => {
-      canvas.removeEventListener('pointermove', handlePointerMove);
-    };
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!useApp.getState().editor.isTouchPanning) {
+        const { tool, isSpacePanning } = useApp.getState().editor;
 
-    const handleTouchStart = (event: TouchEvent) => {
-      if (touchMemories.size === 0) {
-        window.addEventListener('touchmove', handleTouchMove);
-        window.addEventListener('touchend', handleTouchEnd);
-        window.addEventListener('touchcancel', handleTouchEnd);
-      }
-
-      [...event.changedTouches].forEach((changedTouch) => {
-        touchMemories.set(changedTouch.identifier, [
-          changedTouch.clientX,
-          changedTouch.clientY,
-        ]);
-      });
-
-      if (touchMemories.size === 2) {
-        event.preventDefault();
-
-        const firstTouch = touchMemories.get(0);
-        const secondTouch = touchMemories.get(1);
-
-        mutateApp((draft) => {
-          draft.editor.isTouchPanning = true;
-        });
-
-        if (firstTouch && secondTouch) {
-          lastHypotenuse = Math.sqrt(
-            Math.abs(firstTouch[0] - secondTouch[0]) ** 2
-              + Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
-          );
+        if (tool === Tool.Pan || isSpacePanning) {
+          initialMousePos = getMousePos(event);
+          canvas.addEventListener('pointermove', handlePointerMove);
         }
       }
     };
+
     const handleTouchMove = (event: TouchEvent) => {
       if (touchMemories.size === 2) {
         [...event.changedTouches].forEach((changedTouch) => {
@@ -178,6 +148,38 @@ export function PanControls() {
         window.removeEventListener('touchmove', handleTouchMove);
         window.removeEventListener('touchend', handleTouchEnd);
         window.removeEventListener('touchcancel', handleTouchEnd);
+      }
+    };
+    const handleTouchStart = (event: TouchEvent) => {
+      if (touchMemories.size === 0) {
+        window.addEventListener('touchmove', handleTouchMove);
+        window.addEventListener('touchend', handleTouchEnd);
+        window.addEventListener('touchcancel', handleTouchEnd);
+      }
+
+      [...event.changedTouches].forEach((changedTouch) => {
+        touchMemories.set(changedTouch.identifier, [
+          changedTouch.clientX,
+          changedTouch.clientY,
+        ]);
+      });
+
+      if (touchMemories.size === 2) {
+        event.preventDefault();
+
+        const firstTouch = touchMemories.get(0);
+        const secondTouch = touchMemories.get(1);
+
+        mutateApp((draft) => {
+          draft.editor.isTouchPanning = true;
+        });
+
+        if (firstTouch && secondTouch) {
+          lastHypotenuse = Math.sqrt(
+            Math.abs(firstTouch[0] - secondTouch[0]) ** 2
+              + Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
+          );
+        }
       }
     };
 

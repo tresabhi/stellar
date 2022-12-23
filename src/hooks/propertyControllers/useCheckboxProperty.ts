@@ -6,24 +6,24 @@ import {
   Ref, useCallback, useEffect, useRef,
 } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
-import { getMutualProperty } from 'utilities/getMutualProperty';
+import getMutualProperty from 'utilities/getMutualProperty';
 import { COMMIT_DEBOUNCE } from './useSliderProperty';
 
-export const useCheckboxProperty = <
+export default function useCheckboxProperty<
   Type extends Part,
   Value extends boolean = boolean,
 >(
-    ids: string[],
-    slice: (state: Type) => Value,
-    mutate: (draft: Type, value: Value) => void,
-  ) => {
+  ids: string[],
+  slice: (state: Type) => Value,
+  mutate: (draft: Type, value: Value) => void,
+) {
   const checkbox = useRef<CheckboxRef>(null);
   const value = useRef(getMutualProperty<Type, Value>(ids, slice));
   const firstRender = useRef(true);
 
-  const commit = fallingEdgeDebounce((value: Value) => {
+  const commit = fallingEdgeDebounce((newValue: Value) => {
     mutateParts<Type>(ids, (draft) => {
-      mutate(draft, value);
+      mutate(draft, newValue);
     });
   }, COMMIT_DEBOUNCE);
   const recomputeAndRerender = useCallback(() => {
@@ -67,4 +67,4 @@ export const useCheckboxProperty = <
   };
 
   return hook;
-};
+}

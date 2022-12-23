@@ -3,18 +3,18 @@ import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { mutateParts } from './mutateParts';
 
-export const selectPartsOnly = (
+export default function selectPartsOnly(
   ids: string[],
-  draft?: Blueprint,
+  blueprint?: Blueprint,
   expandGroups?: boolean,
-) => {
-  if (draft) {
+) {
+  if (blueprint) {
     mutateParts(
-      draft.selections,
+      blueprint.selections,
       (draft) => {
         draft.selected = false;
       },
-      draft,
+      blueprint,
     );
     mutateParts(
       ids,
@@ -24,13 +24,13 @@ export const selectPartsOnly = (
           (draft as Group).expanded = true;
         }
       },
-      draft,
+      blueprint,
     );
 
-    draft.selections = ids;
+    blueprint.selections = ids;
   } else {
     mutateBlueprint((draft) => {
       selectPartsOnly(ids, draft);
     });
   }
-};
+}

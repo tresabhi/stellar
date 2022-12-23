@@ -7,9 +7,7 @@ import { deferUpdates, undeferUpdates } from 'core/bounds';
 import { resizePartAsync } from 'core/part/resizePartAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
-import {
-  FC, MutableRefObject, useEffect, useRef,
-} from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group, Vector2, Vector2Tuple } from 'three';
@@ -60,12 +58,12 @@ export const sideToPoint = (
 const NODE_SIZE = 10;
 const NODE_COLOR = '#eeedef';
 
-export const ResizeNode: FC<ResizeNodeProps> = ({
+export default function ResizeNode({
   bounds,
   constant: constantSide,
   movable: movableSide,
-  hideOnMaintainSlope = false,
-}) => {
+  hideOnMaintainSlope,
+}: ResizeNodeProps) {
   let firstMove = true;
   const camera = useThree((state) => state.camera);
   const wrapper = useRef<Group>(null);
@@ -82,7 +80,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   const lastOffset = new Vector2();
   let blueprint = useBlueprint.getState();
   let selections: string[] = [];
-  let maintainSlope = false;
+  const maintainSlope = useRef(false);
 
   const applyNormalizations = () => {
     normalizedMovable
@@ -112,7 +110,6 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
 
     applyNormalizations();
   };
-
   const updateResizeNode = () => {
     updateValues();
 
@@ -121,7 +118,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
   };
   updateResizeNode();
 
-  useFrame(({ camera }) => {
+  useFrame(() => {
     const scale = (1 / camera.zoom) * NODE_SIZE;
     wrapper.current?.scale.set(scale, scale, scale);
   });
@@ -129,10 +126,10 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     const handleUpdateResizeNodes = (
       event: CustomEvent<UpdateResizeNodesDetail>,
     ) => {
-      maintainSlope = event.detail.maintainSlope;
+      maintainSlope.current = event.detail.maintainSlope;
 
       if (hideOnMaintainSlope && wrapper.current) {
-        wrapper.current.visible = !maintainSlope;
+        wrapper.current.visible = !maintainSlope.current;
       }
 
       updateResizeNode();
@@ -151,26 +148,6 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     };
   });
 
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
-    updateValues();
-
-    initial.set(event.clientX, event.clientY);
-
-    firstMove = true;
-    blueprint = useBlueprint.getState();
-    selections = blueprint.selections.filter((selection) => {
-      const part = blueprint.parts[selection];
-
-      return (
-        (part as PartWithPosition).p !== undefined
-        && (part as PartWithScale).o !== undefined
-      );
-    });
-
-    window.addEventListener('pointermove', handlePointerMove);
-    window.addEventListener('pointerup', handlePointerUp);
-  };
   const handlePointerMove = (event: PointerEvent) => {
     if (firstMove) {
       firstMove = false;
@@ -189,31 +166,43 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       .round()
       .multiplyScalar(SNAP_SIZE);
 
-    if (maintainSlope) {
+    if (maintainSlope.current) {
       const pointerX = offset.x + movable.x;
       const pointerY = offset.y + movable.y;
 
       const slope = (movable.y - constant.y) / (movable.x - constant.x);
       const perpendicular = -1 / slope;
 
-      const movedX = isFinite(slope)
-        ? isFinite(perpendicular)
-          ? (-constant.x * slope
+      let movedX = 0;
+      let movedY = 0;
+
+      if (Number.isFinite(slope)) {
+        if (Number.isFinite(perpendicular)) {
+          movedX = (-constant.x * slope
               + pointerX * perpendicular
               + constant.y
               - pointerY)
-            / (perpendicular - slope)
-          : pointerX
-        : constant.x;
-      const movedY = isFinite(slope)
-        ? isFinite(perpendicular)
-          ? (-constant.x * perpendicular * slope
+            / (perpendicular - slope);
+        } else {
+          movedX = pointerX;
+        }
+      } else {
+        movedX = constant.x;
+      }
+
+      if (Number.isFinite(slope)) {
+        if (Number.isFinite(perpendicular)) {
+          movedY = (-constant.x * perpendicular * slope
               + pointerX * perpendicular * slope
               + constant.y * perpendicular
               - pointerY * slope)
-            / (perpendicular - slope)
-          : constant.y
-        : pointerY;
+            / (perpendicular - slope);
+        } else {
+          movedY = constant.y;
+        }
+      } else {
+        movedY = pointerY;
+      }
 
       offset.set(movedX, movedY).sub(movable);
     }
@@ -280,6 +269,26 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
     window.removeEventListener('pointermove', handlePointerMove);
     window.removeEventListener('pointerup', handlePointerUp);
   };
+  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+    event.stopPropagation();
+    updateValues();
+
+    initial.set(event.clientX, event.clientY);
+
+    firstMove = true;
+    blueprint = useBlueprint.getState();
+    selections = blueprint.selections.filter((selection) => {
+      const part = blueprint.parts[selection];
+
+      return (
+        (part as PartWithPosition).p !== undefined
+        && (part as PartWithScale).o !== undefined
+      );
+    });
+
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp);
+  };
 
   return (
     <group ref={wrapper} onPointerDown={handlePointerDown}>
@@ -296,4 +305,7 @@ export const ResizeNode: FC<ResizeNodeProps> = ({
       />
     </group>
   );
+}
+ResizeNode.defaultProps = {
+  hideOnMaintainSlope: false,
 };

@@ -6,12 +6,12 @@ import { dismissPopup } from 'core/interface/dismissPopup';
 import { getParent, getPart, insertNewPart } from 'core/part';
 import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
 import { useTranslator } from 'hooks/useTranslator';
-import { FC, useRef } from 'react';
+import { useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry from 'stores/partRegistry';
 import { PopupProps } from 'stores/popups';
 
-export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
+export default function InsertPartPopup({ id }: PopupProps) {
   const { t } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
   const list: SearchItem[] = [];
@@ -38,13 +38,13 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
   const handleEscape = () => dismissPopup(id);
   const handleCancelClick = () => dismissPopup(id);
 
-  partRegistry.forEach(({ vanillaData, Icon, data: { label } }, name) => {
+  partRegistry.forEach(({ vanillaData, Icon, data: { label, n } }) => {
     const note = vanillaData === null
       ? t`tabs.layout.popup.insert_part.abstract`
       : undefined;
 
     const handleClick = () => {
-      insertNewPart(name, parentId, {
+      insertNewPart(n, parentId, {
         index,
         nearCamera: true,
         select: true,
@@ -59,7 +59,7 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
           : label,
       node: (
         <Popup.SearchItem
-          key={`part-${name}`}
+          key={`part-${n}`}
           icon={<Icon />}
           note={note}
           onClick={handleClick}
@@ -98,4 +98,4 @@ export const InsertPartPopup: FC<PopupProps> = ({ id }) => {
       </Popup.Actions>
     </Popup.Container>
   );
-};
+}

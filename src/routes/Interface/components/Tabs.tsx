@@ -9,7 +9,7 @@ import { mutateApp } from 'core/app/mutateApp';
 import { useTranslator } from 'hooks/useTranslator';
 import useApp, { Tab } from 'stores/app';
 
-export function Tabs() {
+export default function Tabs() {
   const { t } = useTranslator();
   const tab = useApp((state) => state.interface.tab);
   const is = (targetTab: Tab) => ({

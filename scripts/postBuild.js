@@ -1,5 +1,4 @@
 /* eslint-env node */
-
 import argsParser from 'args-parser';
 import { argv } from 'process';
 import generateFavicons from './generateFavicons.js';

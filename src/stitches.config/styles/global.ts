@@ -1,6 +1,6 @@
 import { globalCss, theme } from 'stitches.config';
 
-export const globalStyles = globalCss({
+const globalStyles = globalCss({
   '@import': [
     'https://fonts.googleapis.com/css?family=Roboto+Flex&display=swap',
     'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
@@ -40,3 +40,4 @@ export const globalStyles = globalCss({
     backgroundColor: 'transparent',
   },
 });
+export default globalStyles;

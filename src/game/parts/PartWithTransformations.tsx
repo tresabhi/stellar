@@ -1,11 +1,11 @@
 import * as Properties from 'components/Properties';
-import { useNumericalInputProperty } from 'hooks/propertyControllers';
 import { useTranslator } from 'hooks/useTranslator';
-import { FC, RefObject } from 'react';
+import { RefObject } from 'react';
 import { PartPropertyComponentProps } from 'types/Parts';
 
 import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { mutateSettings } from 'core/app';
+import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
 import useSettings from 'stores/settings';
 import { Object3D } from 'three';
 import {
@@ -72,10 +72,11 @@ export const usePartWithTransformations = (
   usePartWithScale(id, object);
 };
 
-export const PartWithTransformationsPropertyComponent: FC<
-PartPropertyComponentProps
-> = ({ ids }) => {
+export function PartWithTransformationsPropertyComponent({
+  ids,
+}: PartPropertyComponentProps) {
   const { t } = useTranslator();
+  const constraint = useSettings((state) => state.editor.constraintScales);
   const xPosition = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.p.x,
@@ -118,7 +119,6 @@ PartPropertyComponentProps
     },
   );
 
-  const constraint = useSettings((state) => state.editor.constraintScales);
   const handleConstraintClick = () => {
     mutateSettings((state) => {
       state.editor.constraintScales = !state.editor.constraintScales;
@@ -168,6 +168,6 @@ PartPropertyComponentProps
       </Properties.Row>
     </Properties.Group>
   );
-};
+}
 
 export const registry = null;

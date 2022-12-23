@@ -15,6 +15,19 @@ import { Layer } from '../../../constants/layer';
 
 export type PartsProps = Omit<PartClusterProps, 'parentId'>;
 
+const useOffset = (parts: RefObject<Group>) => {
+  useEffect(() => {
+    const unsubscribe = useBlueprint.subscribe(
+      (state) => state.offset,
+      (offset) => {
+        parts.current?.position.set(offset.x, offset.y, 0);
+      },
+    );
+
+    return unsubscribe;
+  }, [parts]);
+};
+
 export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
   const initialState = useBlueprint.getState();
   const parts = useRef<Group>(null);
@@ -40,16 +53,3 @@ export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
     </HeadsUpDisplay>
   );
 });
-
-const useOffset = (parts: RefObject<Group>) => {
-  useEffect(() => {
-    const unsubscribe = useBlueprint.subscribe(
-      (state) => state.offset,
-      (offset) => {
-        parts.current?.position.set(offset.x, offset.y, 0);
-      },
-    );
-
-    return unsubscribe;
-  }, []);
-};

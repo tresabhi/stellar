@@ -2,16 +2,16 @@ import { mutateBlueprint } from 'core/blueprint';
 import { Blueprint } from 'game/Blueprint';
 import { scaleParts } from './scaleParts';
 
-export const scalePartsBySelection = (
+export default function scalePartsBySelection(
   x: number,
   y: number,
-  draft?: Blueprint,
-) => {
-  if (draft) {
-    scaleParts(x, y, draft.selections);
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
+    scaleParts(x, y, blueprint.selections);
   } else {
     mutateBlueprint((draft) => {
       scalePartsBySelection(x, y, draft);
     });
   }
-};
+}

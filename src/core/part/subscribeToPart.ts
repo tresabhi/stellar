@@ -6,16 +6,18 @@ export interface SubscribeToPartOptions<Slice> {
   fireInitially: boolean;
   equalityFn: (a: Slice, b: Slice) => boolean;
 }
+
 const subscribeToPartDefaultOptions: SubscribeToPartOptions<unknown> = {
   fireInitially: false,
   equalityFn: (a, b) => a === b,
 };
-export const subscribeToPart = <Type extends Part, Slice>(
+
+export default function subscribeToPart<Type extends Part, Slice>(
   id: string,
   handler: (slice: Slice, prevSlice?: Slice) => void,
   slicer?: (part: Type) => Slice,
   options?: Partial<SubscribeToPartOptions<Slice>>,
-) => {
+) {
   const mergedOptions = {
     ...subscribeToPartDefaultOptions,
     ...(options ?? {}),
@@ -34,6 +36,8 @@ export const subscribeToPart = <Type extends Part, Slice>(
       }
       skipNextEvent = true;
       unsubscribe();
+
+      return undefined;
     },
     (slice, prevSlice) => {
       if (!skipNextEvent && slice !== undefined) handler(slice, prevSlice);
@@ -56,4 +60,4 @@ export const subscribeToPart = <Type extends Part, Slice>(
   }
 
   return unsubscribe;
-};
+}

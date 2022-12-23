@@ -1,6 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
-import { selectPartsOnly } from './selectPartsOnly';
+import selectPartsOnly from './selectPartsOnly';
 
-export const selectPartOnly = (id: string, draft?: Blueprint) => {
-  selectPartsOnly([id], draft);
-};
+// TODO: rename to selectPartsConcurrently
+export default function selectPartOnly(id: string, blueprint?: Blueprint) {
+  selectPartsOnly([id], blueprint);
+}
