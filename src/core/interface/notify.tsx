@@ -1,4 +1,4 @@
-import { mutateToasts } from 'core/app/mutateToasts';
+import mutateToasts from 'core/app/mutateToasts';
 import { nanoid } from 'nanoid';
 import { FC } from 'react';
 import { NotificationsProps } from 'stores/notifications';

@@ -2,9 +2,6 @@ import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { invalidate } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as Properties from 'components/Properties';
-import { mutateSettings } from 'core/app';
-import { declareBoundsUpdated } from 'core/bounds';
-import { getPart } from 'core/part';
 import PartCategory from 'hooks/constants/partCategory';
 import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
 import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
@@ -113,7 +110,7 @@ export const FuelTankData: FuelTank = {
   label: 'Fuel Tank',
 };
 
-export function FuelTankLayoutComponent({ id }: PartComponentProps) {
+export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const mesh = useRef<Mesh>(null);
   const state = getPart<FuelTank>(id);
@@ -220,8 +217,8 @@ export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
   );
 
   const handleConstraintClick = () => {
-    mutateSettings((state) => {
-      state.editor.constraintFuelTankWidths = !state.editor.constraintFuelTankWidths;
+    mutateSettings((draft) => {
+      draft.editor.constraintFuelTankWidths = !draft.editor.constraintFuelTankWidths;
     });
   };
 

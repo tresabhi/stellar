@@ -41,7 +41,7 @@ const useLicense = () => {
   return license;
 };
 
-export function StatusBar() {
+export default function StatusBar() {
   const { name } = getContext();
   const { t } = useTranslator();
   const date = new Date();

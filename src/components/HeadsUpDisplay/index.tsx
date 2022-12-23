@@ -1,6 +1,6 @@
 import { createPortal, useFrame, useThree } from '@react-three/fiber';
 import { isInteger } from 'lodash';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Scene } from 'three';
 
 export interface HeadsUpDisplayProps {
@@ -11,10 +11,10 @@ export interface HeadsUpDisplayProps {
  * Renders `children` above the default scene, even if the priority is a
  * negative number.
  */
-const HeadsUpDisplay: FC<HeadsUpDisplayProps> = ({
+export default function HeadsUpDisplay({
   priority = 1,
   children,
-}) => {
+}: HeadsUpDisplayProps) {
   const { gl: renderer, scene: defaultScene, camera } = useThree();
   const scene = new Scene();
   const portal = createPortal(children, scene, {
@@ -36,9 +36,8 @@ const HeadsUpDisplay: FC<HeadsUpDisplayProps> = ({
     throw new Error('Priority property must be an integer');
   }
 
-  return <>{portal}</>;
-};
-export default HeadsUpDisplay;
+  return portal;
+}
 
 /**
  * Use this component if the default scene disappears on usage of the

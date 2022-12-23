@@ -1,5 +1,5 @@
-import { Button } from 'components/Button';
-import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
+import Button from 'components/Button';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface SearchItemProps
@@ -42,15 +42,17 @@ const Note = styled('span', {
   fontSize: theme.fontSizes[10],
 });
 
-export const SearchItem: FC<SearchItemProps> = ({
+export function SearchItem({
   icon,
   note,
   children,
   ...props
-}) => (
-  <Container {...props}>
-    {icon && <IconContainer>{icon}</IconContainer>}
-    <Label>{children}</Label>
-    <Note>{note}</Note>
-  </Container>
-);
+}: SearchItemProps) {
+  return (
+    <Container {...props}>
+      {icon && <IconContainer>{icon}</IconContainer>}
+      <Label>{children}</Label>
+      <Note>{note}</Note>
+    </Container>
+  );
+}

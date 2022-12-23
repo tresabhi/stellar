@@ -1,6 +1,6 @@
 export * from './components/Action';
 export * from './components/Actions';
-export * from './components/Container';
+export * from './components/Root';
 export * from './components/Content';
 export * from './components/Description';
 export * from './components/Info';

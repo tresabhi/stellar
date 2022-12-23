@@ -28,7 +28,7 @@ const useOffset = (parts: RefObject<Group>) => {
   }, [parts]);
 };
 
-export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
+const Parts = forwardRef<Group, PartsProps>((props, ref) => {
   const initialState = useBlueprint.getState();
   const parts = useRef<Group>(null);
 
@@ -53,3 +53,4 @@ export const Parts = forwardRef<Group, PartsProps>((props, ref) => {
     </HeadsUpDisplay>
   );
 });
+export default Parts;

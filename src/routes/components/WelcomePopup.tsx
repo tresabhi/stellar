@@ -154,7 +154,7 @@ export default function WelcomePopup({ id }: PromptProps) {
   usePopupConcurrency();
 
   return (
-    <Popup.Container>
+    <Popup.Root>
       <Popup.Content>
         {slides[index]()}
 
@@ -174,6 +174,6 @@ export default function WelcomePopup({ id }: PromptProps) {
           </Popup.Action>
         </Popup.Actions>
       </Popup.Content>
-    </Popup.Container>
+    </Popup.Root>
   );
 }

@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxProps, CheckboxRef } from 'components/Checkbox';
-import { FC, MouseEvent, useRef } from 'react';
+import { MouseEvent, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface CheckboxWithLabelProps extends CheckboxProps {
@@ -19,11 +19,11 @@ const Label = styled('span', {
   fontSize: theme.fontSizes[12],
 });
 
-export const CheckboxWithLabel: FC<CheckboxWithLabelProps> = ({
+export default function CheckboxWithLabel({
   children,
   onClick,
   ...props
-}) => {
+}: CheckboxWithLabelProps) {
   const checkbox = useRef<CheckboxRef>(null);
   const handleContainerClick = () => (checkbox.current as HTMLButtonElement | null)?.click();
   const handleTriggerClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -38,4 +38,4 @@ export const CheckboxWithLabel: FC<CheckboxWithLabelProps> = ({
       <Label>{children}</Label>
     </Container>
   );
-};
+}

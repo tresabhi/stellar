@@ -1,6 +1,6 @@
 import { go } from 'fuzzysort';
 import {
-  FC, ReactNode, RefObject, useEffect, useRef, useState,
+  ReactNode, RefObject, useEffect, useRef, useState,
 } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
@@ -18,13 +18,13 @@ export interface SearchProps {
   debounce?: number;
 }
 
-export const Search: FC<SearchProps> = ({
+export default function Search({
   list,
   input,
   fallback,
   escape,
   debounce = 0,
-}) => {
+}: SearchProps) {
   const [defaultList] = useState(list.map(({ node }) => node));
   const [children, setChildren] = useState(defaultList);
   const firstCallback = useRef<(() => void) | undefined>(list[0]?.callback);
@@ -56,21 +56,24 @@ export const Search: FC<SearchProps> = ({
   }, debounce);
   const handleKeydown = (event: Event) => {
     if ((event as KeyboardEvent).key === 'Enter') {
-      firstCallback.current && firstCallback.current();
+      if (firstCallback.current) firstCallback.current();
     } else if ((event as KeyboardEvent).key === 'Escape') {
-      escape && escape();
+      if (escape) escape();
     }
   };
 
   useEffect(() => {
-    input.current?.addEventListener('input', handleChange);
-    input.current?.addEventListener('keydown', handleKeydown);
+    const copiedInput = input.current;
+
+    copiedInput?.addEventListener('input', handleChange);
+    copiedInput?.addEventListener('keydown', handleKeydown);
 
     return () => {
-      input.current?.removeEventListener('input', handleChange);
-      input.current?.removeEventListener('keydown', handleKeydown);
+      copiedInput?.removeEventListener('input', handleChange);
+      copiedInput?.removeEventListener('keydown', handleKeydown);
     };
   });
 
+  // eslint-disable-next-line react/jsx-no-useless-fragment
   return <>{children}</>;
-};
+}

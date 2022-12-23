@@ -1,9 +1,9 @@
 import { ComponentProps } from '@stitches/react';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Item } from './Item';
 
-export interface InputWithIconProps extends ComponentProps<typeof Item> {
+export interface ItemWithIconProps extends ComponentProps<typeof Item> {
   icon?: ReactNode;
   keybind?: ReactNode;
   disabled?: boolean;
@@ -60,16 +60,18 @@ const Keybind = styled('span', {
   fontFamily: theme.fonts.mono,
 });
 
-export const ItemWithIcon: FC<InputWithIconProps> = ({
+export function ItemWithIcon({
   icon,
   children,
   keybind,
   disabled,
   ...props
-}) => (
-  <Item disabled={disabled} {...props}>
-    <IconContainer disabled={disabled}>{icon}</IconContainer>
-    <Label disabled={disabled}>{children}</Label>
-    <Keybind>{keybind}</Keybind>
-  </Item>
-);
+}: ItemWithIconProps) {
+  return (
+    <Item disabled={disabled} {...props}>
+      <IconContainer disabled={disabled}>{icon}</IconContainer>
+      <Label disabled={disabled}>{children}</Label>
+      <Keybind>{keybind}</Keybind>
+    </Item>
+  );
+}

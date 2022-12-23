@@ -1,8 +1,7 @@
-import {
-  Search as SearchPrimitive,
+import SearchPrimitive, {
   SearchProps as SearchPrimitiveProps,
 } from 'components/Search';
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface SearchProps
@@ -17,21 +16,23 @@ const Container = styled('div', {
   overflowY: 'auto',
 });
 
-export const Search: FC<SearchProps> = ({
+export function Search({
   list,
   input,
   fallback,
   escape,
   debounce,
   ...props
-}) => (
-  <Container {...props}>
-    <SearchPrimitive
-      list={list}
-      input={input}
-      fallback={fallback}
-      escape={escape}
-      debounce={debounce}
-    />
-  </Container>
-);
+}: SearchProps) {
+  return (
+    <Container {...props}>
+      <SearchPrimitive
+        list={list}
+        input={input}
+        fallback={fallback}
+        escape={escape}
+        debounce={debounce}
+      />
+    </Container>
+  );
+}

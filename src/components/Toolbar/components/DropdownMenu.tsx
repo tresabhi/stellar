@@ -1,6 +1,6 @@
 import { CaretDownIcon } from '@radix-ui/react-icons';
 import * as DropdownMenuPrimitive from 'components/DropdownMenu';
-import { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
+import { ComponentPropsWithoutRef, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface DropdownMenuProps
@@ -72,20 +72,24 @@ const Caret = styled(CaretDownIcon, {
   },
 });
 
-export const DropdownMenu: FC<DropdownMenuProps> = ({
+export function DropdownMenu({
   children,
   icon,
   disabled,
   ...props
-}) => (
-  <Root {...props}>
-    <Trigger disabled={disabled}>
-      {icon}
-      <Caret disabled={disabled} />
-    </Trigger>
+}: DropdownMenuProps) {
+  return (
+    <Root {...props}>
+      <Trigger disabled={disabled}>
+        {icon}
+        <Caret disabled={disabled} />
+      </Trigger>
 
-    {!disabled && (
-      <DropdownMenuPrimitive.Content>{children}</DropdownMenuPrimitive.Content>
-    )}
-  </Root>
-);
+      {!disabled && (
+        <DropdownMenuPrimitive.Content>
+          {children}
+        </DropdownMenuPrimitive.Content>
+      )}
+    </Root>
+  );
+}

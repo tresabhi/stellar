@@ -102,9 +102,7 @@ export default function Properties() {
     );
   }
   if (children.length > 0) {
-    return (
-      <PropertiesPrimitive.Container>{children}</PropertiesPrimitive.Container>
-    );
+    return <PropertiesPrimitive.Root>{children}</PropertiesPrimitive.Root>;
   }
   return (
     <Sidebar.MessageContainer>

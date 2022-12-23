@@ -74,7 +74,7 @@ export default function InsertPartPopup({ id }: PromptProps) {
   usePopupConcurrency();
 
   return (
-    <Popup.Container>
+    <Popup.Root>
       <InputWithIcon
         ref={input}
         icon={<MagnifyingGlassIcon />}
@@ -96,6 +96,6 @@ export default function InsertPartPopup({ id }: PromptProps) {
           {t`tabs.layout.popup.insert_part.cancel`}
         </Popup.Action>
       </Popup.Actions>
-    </Popup.Container>
+    </Popup.Root>
   );
 }

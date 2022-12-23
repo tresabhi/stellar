@@ -11,7 +11,8 @@ module.exports = {
   ],
 
   rules: {
-    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-props-no-spreading': 0,
+
     /**
      * Conflicts with immer
      */
@@ -19,20 +20,35 @@ module.exports = {
       'error',
       { ignorePropertyModificationsFor: ['draft'] },
     ],
+
     /**
      * Conflicts with react three fiber props. Should be handled by typescript
      * anyway.
      */
-    'react/no-unknown-property': [0],
+    'react/no-unknown-property': 0,
+
     /**
      * Conflicts with nodejs imports.
      */
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+
     /**
      * Conflicts with vite's mighty dependency resolver. Isn't an issue so it
      * shouldn't be flagged. Plus, disabling this saves a lot of lint time.
      */
-    'import/no-cycle': [0],
+    'import/no-cycle': 0,
+
+    /**
+     * Conflicts with component folders.
+     */
+    'import/prefer-default-export': 0,
+
+    /**
+     * TypeScript does a good job of making sure props don't work without
+     * defaults. React's run-time default props management is unnecessary as
+     * there is really no uncontrolled props being passed anyway.
+     */
+    'react/require-default-props': 0,
   },
 
   plugins: ['@typescript-eslint'],

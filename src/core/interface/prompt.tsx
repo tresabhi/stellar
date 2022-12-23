@@ -1,4 +1,4 @@
-import { mutatePopups } from 'core/app/mutatePopups';
+import mutatePopups from 'core/app/mutatePopups';
 import { nanoid } from 'nanoid';
 import { FC } from 'react';
 import useApp from 'stores/app';

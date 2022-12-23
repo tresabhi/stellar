@@ -2,9 +2,9 @@ import { Line } from '@react-three/drei';
 import {
   invalidate, ThreeEvent, useFrame, useThree,
 } from '@react-three/fiber';
-import { mutateBlueprint } from 'core/blueprint';
-import { deferUpdates, undeferUpdates } from 'core/bounds';
-import { resizePartAsync } from 'core/part/resizePartAsync';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
+import deferUpdates from 'core/bounds/deferUpdates';
+import resizePartAsync from 'core/part/resizePartAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
 import { MutableRefObject, useEffect, useRef } from 'react';
@@ -264,7 +264,7 @@ export default function ResizeNode({
       invalidate();
     }
 
-    if (!firstMove) undeferUpdates();
+    if (!firstMove) deferUpdates();
 
     window.removeEventListener('pointermove', handlePointerMove);
     window.removeEventListener('pointerup', handlePointerUp);
@@ -306,6 +306,3 @@ export default function ResizeNode({
     </group>
   );
 }
-ResizeNode.defaultProps = {
-  hideOnMaintainSlope: false,
-};

@@ -1,6 +1,6 @@
 import { MeshProps } from '@react-three/fiber';
 import { forwardRef } from 'react';
-import { Color, DoubleSide, Mesh } from 'three';
+import { DoubleSide, Mesh } from 'three';
 
 interface InfiniteGridHelperProps extends MeshProps {
   size1?: number;
@@ -79,13 +79,4 @@ const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
     );
   },
 );
-
-InfiniteGridHelper.defaultProps = {
-  size1: 10,
-  size2: 100,
-  color: new Color('white'),
-  axes: 'xzy',
-  distance: 1e4,
-};
-
 export default InfiniteGridHelper;

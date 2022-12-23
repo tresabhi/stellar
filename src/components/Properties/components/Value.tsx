@@ -1,7 +1,5 @@
 import useClipboard from 'hooks/useClipboard';
-import {
-  FC, HTMLAttributes, MouseEvent, ReactNode,
-} from 'react';
+import { HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Label as LabelPrimitive } from './Label';
 import { Row as RowPrimitive } from './Row';
@@ -32,7 +30,7 @@ const DisplayValue = styled('span', {
   userSelect: 'all',
 });
 
-export const Value: FC<ValueProps> = ({ label, children, ...props }) => {
+export function Value({ label, children, ...props }: ValueProps) {
   const { copy } = useClipboard();
 
   const handleClick = (event: MouseEvent<HTMLSpanElement>) => {
@@ -45,4 +43,4 @@ export const Value: FC<ValueProps> = ({ label, children, ...props }) => {
       <DisplayValue onClick={handleClick}>{children}</DisplayValue>
     </Row>
   );
-};
+}

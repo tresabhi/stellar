@@ -23,7 +23,7 @@ export default function Inspect() {
   const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);
 
   return isOneSelected && data ? (
-    <Properties.Container>
+    <Properties.Root>
       <Properties.Group>
         <Properties.Title>{t`tabs.layout.right_sidebar.inspect.meta_data`}</Properties.Title>
 
@@ -118,7 +118,7 @@ export default function Inspect() {
 
         <Properties.TextArea value={vanillaJSON} />
       </Properties.Group>
-    </Properties.Container>
+    </Properties.Root>
   ) : (
     <Sidebar.MessageContainer>
       <Sidebar.Message>{t`tabs.layout.right_sidebar.inspect.select_one_part`}</Sidebar.Message>

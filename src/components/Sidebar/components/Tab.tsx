@@ -1,5 +1,5 @@
-import { Button } from 'components/Button';
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import Button from 'components/Button';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface TabProps
@@ -44,11 +44,13 @@ const Label = styled('span', {
   fontSize: theme.fontSizes[12],
 });
 
-export const Tab: FC<TabProps> = ({
+export function Tab({
   selected, icon, children, ...props
-}) => (
-  <Container {...props} selected={selected}>
-    {icon}
-    <Label>{children}</Label>
-  </Container>
-);
+}: TabProps) {
+  return (
+    <Container {...props} selected={selected}>
+      {icon}
+      <Label>{children}</Label>
+    </Container>
+  );
+}

@@ -1,7 +1,7 @@
 import * as ScrollArea from 'components/ScrollArea';
-import { getPart, unselectAllParts } from 'core/part';
+import getPart from 'core/part/getPart';
+import unselectAllParts from 'core/part/unselectAllParts';
 import { Group } from 'game/parts/Group';
-import { FC } from 'react';
 import { styled } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import { ParentId } from 'types/Parts';
@@ -24,18 +24,14 @@ const Wrapper = styled('div', {
   flexDirection: 'column',
 });
 
-export const Container: FC<ContainerProps> = ({
-  parentId: parent,
-  indent = 0,
-  ...props
-}) => {
-  const part_order = useBlueprint((state) => {
-    if (parent === null) {
+export function Container({ parentId, indent = 0, ...props }: ContainerProps) {
+  const partOrder = useBlueprint((state) => {
+    if (parentId === null) {
       return state.part_order;
     }
-    return getPart<Group>(parent, state).part_order;
+    return getPart<Group>(parentId, state).part_order;
   });
-  const children = part_order.map((id) => (
+  const children = partOrder.map((id) => (
     <Listing indent={indent} id={id} key={`part-${id}`} />
   ));
 
@@ -55,6 +51,4 @@ export const Container: FC<ContainerProps> = ({
       </ScrollArea.Scrollbar>
     </Root>
   );
-
-  return null;
-};
+}

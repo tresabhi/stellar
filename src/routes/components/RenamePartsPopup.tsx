@@ -44,7 +44,7 @@ export default function RenamePartsPopup({ id }: PromptProps) {
   usePopupConcurrency();
 
   return (
-    <Popup.Container>
+    <Popup.Root>
       <InputWithIcon
         ref={input}
         onKeyDown={handleKeyDown}
@@ -86,6 +86,6 @@ export default function RenamePartsPopup({ id }: PromptProps) {
           {t`tabs.layout.popup.rename.apply`}
         </Popup.Action>
       </Popup.Actions>
-    </Popup.Container>
+    </Popup.Root>
   );
 }

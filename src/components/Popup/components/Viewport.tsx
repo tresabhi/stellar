@@ -25,7 +25,7 @@ const Container = styled('div', {
   backgroundColor: theme.colors.popupBackground,
 });
 
-export function Viewport() {
+export default function Viewport() {
   const popups = usePrompts((state) => state.prompts);
   const popupNodes = popups.map(({ id, dismissByBlur, node }) => {
     const handleClick = () => {

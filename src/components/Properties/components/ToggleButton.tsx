@@ -1,11 +1,11 @@
-import { Button as ButtonPrimitive } from 'components/Button';
-import { ComponentPropsWithoutRef, FC } from 'react';
+import Button from 'components/Button';
+import { ComponentPropsWithoutRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PropertyWithLabel } from '../types/propertyWithLabel';
 import { Label } from './Label';
 
 export interface ToggleButtonProps
-  extends ComponentPropsWithoutRef<typeof ButtonPrimitive>,
+  extends ComponentPropsWithoutRef<typeof Button>,
   PropertyWithLabel {
   selected: boolean;
 }
@@ -18,7 +18,7 @@ const Container = styled('div', {
   cursor: 'text',
 });
 
-const Trigger = styled(ButtonPrimitive, {
+const Trigger = styled(Button, {
   borderRadius: theme.radii[4],
   display: 'flex',
   alignItems: 'center',
@@ -26,16 +26,18 @@ const Trigger = styled(ButtonPrimitive, {
   flex: 1,
 });
 
-export const ToggleButton: FC<ToggleButtonProps> = ({
+export function ToggleButton({
   label,
   children,
   selected,
   ...props
-}) => (
-  <Container>
-    <Label>{label}</Label>
-    <Trigger {...props} border color={selected ? 'accent' : undefined}>
-      {children}
-    </Trigger>
-  </Container>
-);
+}: ToggleButtonProps) {
+  return (
+    <Container>
+      <Label>{label}</Label>
+      <Trigger {...props} border color={selected ? 'accent' : undefined}>
+        {children}
+      </Trigger>
+    </Container>
+  );
+}
