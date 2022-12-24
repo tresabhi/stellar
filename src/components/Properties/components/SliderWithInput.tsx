@@ -1,4 +1,4 @@
-import { Slider as SliderPrimitive, SliderProps } from 'components/Slider';
+import SliderPrimitive, { SliderProps } from 'components/Slider';
 import { MIXED_VALUE_PLACEHOLDER } from 'hooks/propertyControllers/useNumericalInputProperty';
 import {
   FocusEvent,

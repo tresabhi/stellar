@@ -3,7 +3,7 @@ import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import createNewPart from './createNewPart';
 import getParent from './getParent';
-import selectPartOnly from './selectPartOnly';
+import selectConcurrent from './selectConcurrent';
 
 export default function groupParts(
   ids: string[],
@@ -28,7 +28,7 @@ export default function groupParts(
         if (spliceIndex !== -1) currentParent.part_order.splice(spliceIndex, 1);
       });
 
-      selectPartOnly(newGroup.id, blueprint);
+      selectConcurrent(newGroup.id, blueprint);
     }
   } else {
     mutateBlueprint((draft) => {

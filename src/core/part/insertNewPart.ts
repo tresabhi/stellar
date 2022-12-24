@@ -5,7 +5,7 @@ import useApp from 'stores/app';
 import { ParentId } from 'types/Parts';
 import createNewPart from './createNewPart';
 import getPart from './getPart';
-import selectPartOnly from './selectPartOnly';
+import selectConcurrent from './selectConcurrent';
 
 export interface InsertPartOptions {
   index: number;
@@ -50,7 +50,7 @@ export default function insertNewPart(
         draft.parts[newPart.id] = newPart;
       }
 
-      selectPartOnly(newPart.id, draft);
+      selectConcurrent(newPart.id, draft);
     }
   });
 }

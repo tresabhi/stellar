@@ -77,7 +77,7 @@ const Icon = styled(DragHandleDots2Icon, {
   height: theme.sizes[10],
 });
 
-export function Slider({
+export default function Slider({
   disabled,
   value,
   defaultValue,

@@ -3,7 +3,7 @@ import {
   Canvas as CanvasPrimitive,
   Props as CanvasPrimitiveProps,
 } from '@react-three/fiber';
-import unselectAllParts from 'core/part/unselectAllParts';
+import unselectAll from 'core/part/unselectAll';
 import { RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
@@ -73,7 +73,7 @@ export default function LayoutCanvas(
     } = useApp.getState();
     const { selections } = useBlueprint.getState();
     if (selections.length > 0 && tool === Tool.Move && !isSpacePanning) {
-      unselectAllParts();
+      unselectAll();
     }
   };
 

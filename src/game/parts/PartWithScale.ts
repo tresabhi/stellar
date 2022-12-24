@@ -2,7 +2,7 @@ import { invalidate } from '@react-three/fiber';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
 import { PartResizeEventDetail } from 'core/part/resizePartAsync';
-import { PartScaleEventDetail } from 'core/part/scalePartsBySelectionAsync';
+import { PartScaleEventDetail } from 'core/part/scaleSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';

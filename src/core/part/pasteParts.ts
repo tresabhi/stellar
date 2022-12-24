@@ -4,7 +4,7 @@ import { Group } from 'game/parts/Group';
 import useApp from 'stores/app';
 import { Snippet } from 'stores/snippets';
 import clonePart from './clonePart';
-import selectPartsOnly from './selectPartsOnly';
+import selectConcurrent from './selectConcurrent';
 
 export default function pasteParts() {
   const {
@@ -31,7 +31,7 @@ export default function pasteParts() {
         };
       });
       parent.part_order.splice(insertIndex, 0, ...clipboard.part_order);
-      selectPartsOnly(clipboard.part_order, draft);
+      selectConcurrent(clipboard.part_order, draft);
     });
 
     mutateApp((draft) => {

@@ -2,8 +2,8 @@ import { CaretRightIcon } from '@radix-ui/react-icons';
 import { Input } from 'components/Input';
 import getPart from 'core/part/getPart';
 import mutatePart from 'core/part/mutatePart';
-import selectPartOnly from 'core/part/selectPartOnly';
-import togglePartSelection from 'core/part/togglePartSelection';
+import selectConcurrent from 'core/part/selectConcurrent';
+import toggleSelection from 'core/part/toggleSelection';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { useInputEscape } from 'hooks/useInputEscape';
@@ -15,7 +15,7 @@ import { css, styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry, { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
-import { Container } from './Container';
+import { Root } from './Root';
 
 export interface ListingProps {
   id: string;
@@ -163,10 +163,10 @@ export const Listing = memo(
           if (lastSelection) {
             // TODO: add shift selections
           } else {
-            selectPartOnly(id);
+            selectConcurrent(id);
           }
         } else {
-          togglePartSelection(id);
+          toggleSelection(id);
         }
       } else if (event.shiftKey) {
         const { selections } = useBlueprint.getState();
@@ -175,10 +175,10 @@ export const Listing = memo(
         if (lastSelection) {
           // TODO: add shift selections
         } else {
-          selectPartOnly(id);
+          selectConcurrent(id);
         }
       } else {
-        selectPartOnly(id);
+        selectConcurrent(id);
       }
     };
     const handleTriggerDoubleClick = () => {
@@ -231,7 +231,7 @@ export const Listing = memo(
           />
         </summary>
 
-        {isGroup && <Container indent={indent + 1} parentId={part.id} />}
+        {isGroup && <Root indent={indent + 1} parentId={part.id} />}
       </Details>
     );
   },

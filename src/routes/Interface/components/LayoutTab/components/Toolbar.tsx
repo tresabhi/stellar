@@ -57,11 +57,11 @@ import deletePartsBySelection from 'core/part/deletePartsBySelection';
 import duplicatePartsBySelection from 'core/part/duplicatePartsBySelection';
 import groupPartsBySelection from 'core/part/groupPartsBySelection';
 import pasteParts from 'core/part/pasteParts';
-import selectAllPartsAtRoot from 'core/part/selectAllPartsAtRoot';
-import togglePartsLockBySelection from 'core/part/togglePartsLockBySelection';
-import togglePartsVisibilityBySelection from 'core/part/togglePartsVisibilityBySelection';
-import ungroupGroupsBySelection from 'core/part/ungroupGroupsBySelection';
-import unselectAllParts from 'core/part/unselectAllParts';
+import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
+import toggleSelectedHidden from 'core/part/toggleSelectedHidden';
+import toggleSelectedLocked from 'core/part/toggleSelectedLocked';
+import ungroupSelected from 'core/part/ungroupSelected';
+import unselectAll from 'core/part/unselectAll';
 import useTranslator from 'hooks/useTranslator';
 import InsertPartPopup from 'routes/components/InsertPartPopup';
 import RenamePartsPopup from 'routes/components/RenamePartsPopup';
@@ -241,7 +241,7 @@ function Toolbar() {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={!hasParts}
             icon={<CardStackPlusIcon />}
-            onClick={() => selectAllPartsAtRoot()}
+            onClick={() => selectConcurrentAtRoot()}
             keybind="Ctrl + A"
           >
             {t`tabs.layout.toolbar.selection.select_all`}
@@ -250,7 +250,7 @@ function Toolbar() {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<CardStackMinusIcon />}
-            onClick={() => unselectAllParts()}
+            onClick={() => unselectAll()}
             keybind="Esc"
           >
             {t`tabs.layout.toolbar.selection.unselect_all`}
@@ -268,7 +268,7 @@ function Toolbar() {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<StackIcon />}
-            onClick={() => ungroupGroupsBySelection()}
+            onClick={() => ungroupSelected()}
             keybind="Ctrl + Shift + G"
           >
             {t`tabs.layout.toolbar.selection.ungroup`}
@@ -289,7 +289,7 @@ function Toolbar() {
 
           <ToolbarPrimitive.DropdownMenuItem
             icon={isOneHidden ? <EyeOpenIcon /> : <EyeClosedIcon />}
-            onClick={() => togglePartsVisibilityBySelection()}
+            onClick={() => toggleSelectedHidden()}
           >
             {translate(
               `tabs.layout.toolbar.edit.${isOneHidden ? 'hidden' : 'unhidden'}`,
@@ -297,7 +297,7 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
           <ToolbarPrimitive.DropdownMenuItem
             icon={isOneLocked ? <LockOpen2Icon /> : <LockClosedIcon />}
-            onClick={() => togglePartsLockBySelection()}
+            onClick={() => toggleSelectedLocked()}
           >
             {translate(
               `tabs.layout.toolbar.edit.${isOneLocked ? 'locked' : 'unlocked'}`,

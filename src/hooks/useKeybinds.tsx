@@ -18,10 +18,10 @@ import duplicatePartsBySelection from 'core/part/duplicatePartsBySelection';
 import groupPartsBySelection from 'core/part/groupPartsBySelection';
 import panToPartBySelection from 'core/part/panToPartBySelection';
 import pasteParts from 'core/part/pasteParts';
-import selectAllPartsAtRoot from 'core/part/selectAllPartsAtRoot';
-import translateTranslatablePartsBySelection from 'core/part/translateTranslatablePartsBySelection';
-import ungroupGroupsBySelection from 'core/part/ungroupGroupsBySelection';
-import unselectAllParts from 'core/part/unselectAllParts';
+import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
+import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
+import ungroupSelected from 'core/part/ungroupSelected';
+import unselectAll from 'core/part/unselectAll';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
 import InsertPartPopup from 'routes/components/InsertPartPopup';
@@ -30,6 +30,7 @@ import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import usePrompts from 'stores/prompts';
 import { InterfaceMode, UseSettings } from 'stores/settings';
+import { MethodIds } from 'types/Parts';
 import getInterfaceMode from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 
@@ -46,7 +47,7 @@ const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_SNAP, 0];
 const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_SNAP, 0];
 
 const translate = (vector: PrimitiveVector2Tuple) => {
-  translateTranslatablePartsBySelection(vector[0], vector[1]);
+  translateSelectedRecursive(vector[0], vector[1]);
   invalidate();
 };
 
@@ -67,7 +68,7 @@ const bindDefaultOptions: BindOptions = {
 };
 
 const bind = (
-  keys: string | string[],
+  keys: MethodIds,
   callback: () => void,
   options?: Partial<BindOptions>,
 ) => {
@@ -101,7 +102,7 @@ const useKeybinds = () => {
   });
 
   useEffect(() => {
-    bind('ctrl+a', selectAllPartsAtRoot);
+    bind('ctrl+a', selectConcurrentAtRoot);
     bind(
       'esc',
       () => {
@@ -110,7 +111,7 @@ const useKeybinds = () => {
             draft.prompts.pop();
           });
         } else {
-          unselectAllParts();
+          unselectAll();
         }
       },
       { preventWhenInteractingWithUI: false },
@@ -265,7 +266,7 @@ const useKeybinds = () => {
     bind('ctrl+v', pasteParts);
     bind('ctrl+d', duplicatePartsBySelection);
     bind('ctrl+g', groupPartsBySelection);
-    bind('ctrl+shift+g', ungroupGroupsBySelection);
+    bind('ctrl+shift+g', ungroupSelected);
 
     bind('ctrl+shift+i', () => prompt(InsertPartPopup, true, 'insert-part'));
     bind('ctrl+r', () => {

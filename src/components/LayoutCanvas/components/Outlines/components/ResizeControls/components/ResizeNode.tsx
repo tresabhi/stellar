@@ -15,17 +15,6 @@ import snap from 'utilities/snap';
 import { UpdateResizeNodesDetail } from '..';
 import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
-/**
- * WARNING!
- *
- * THE CODE HERE IS VERY UGLY AND MAY CAUSE TRAUMA AND/OR STROKE(S)
- * READERS BEWARE, I PHYSICALLY CRIED YESTERDAY WRITING THIS
- *
- * DON'T ASK ME WHY I HAD TO NORMALIZE THE OFFSETS AND SCALES
- * THE MATH MAKES SENSE EITHER WAY AND IT WORKS
- * (┬┬﹏┬┬)
- */
-
 export interface ResizeNodeProps {
   bounds: MutableRefObject<Bounds>;
   constant: Vector2Tuple;

@@ -3,10 +3,10 @@ import { CANVAS_MATRIX_SCALE } from 'components/LayoutCanvas/components/Outlines
 import mutateApp from 'core/app/mutateApp';
 import deferUpdates from 'core/bounds/deferUpdates';
 import getPart from 'core/part/getPart';
-import selectPart from 'core/part/selectPart';
-import selectPartOnly from 'core/part/selectPartOnly';
-import translatePartsBySelectionAsync from 'core/part/translatePartsBySelectionAsync';
-import translateTranslatablePartsBySelection from 'core/part/translateTranslatablePartsBySelection';
+import select from 'core/part/select';
+import selectConcurrent from 'core/part/selectConcurrent';
+import translateSelectedAsync from 'core/part/translateSelectedAsync';
+import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import getSnapDistance from 'utilities/getSnapDistance';
@@ -49,16 +49,16 @@ const useDragControls = (id: string) => {
 
       if (!selectedInitially) {
         if (event.shiftKey) {
-          selectPart(id);
+          select(id);
         } else {
-          selectPartOnly(id);
+          selectConcurrent(id);
         }
 
         selectedInitially = true;
       }
 
       if (delta.length() > 0) {
-        translatePartsBySelectionAsync(delta.x, delta.y);
+        translateSelectedAsync(delta.x, delta.y);
         movement.copy(newMovement);
       }
     }
@@ -75,7 +75,7 @@ const useDragControls = (id: string) => {
     };
 
     if (movement.length() > 0) {
-      translateTranslatablePartsBySelection(movement.x, movement.y);
+      translateSelectedRecursive(movement.x, movement.y);
 
       mutateApp((draft) => {
         draft.editor.preventNextSelection = true;

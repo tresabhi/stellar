@@ -1,5 +1,4 @@
-import {
-  Slider as SliderPrimitive,
+import SliderPrimitive, {
   SliderProps as SliderPrimitiveProps,
 } from 'components/Slider';
 import { styled } from 'stitches.config';

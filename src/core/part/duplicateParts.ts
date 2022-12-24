@@ -2,12 +2,12 @@ import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import clonePart from './clonePart';
 import getParent from './getParent';
-import selectPart from './selectPart';
-import unselectAllParts from './unselectAllParts';
+import select from './select';
+import unselectAll from './unselectAll';
 
 export default function duplicateParts(ids: string[], blueprint?: Blueprint) {
   if (blueprint) {
-    unselectAllParts(blueprint);
+    unselectAll(blueprint);
 
     ids.forEach((id) => {
       const parent = getParent(id, blueprint) ?? blueprint;
@@ -26,7 +26,7 @@ export default function duplicateParts(ids: string[], blueprint?: Blueprint) {
             blueprint.parts[clonedPartChildId] = clonedPart;
           });
 
-          selectPart(clonedPartId, blueprint);
+          select(clonedPartId, blueprint);
         }
       }
     });
