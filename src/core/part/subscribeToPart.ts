@@ -1,6 +1,6 @@
 import { Part } from 'game/parts/Part';
 import useBlueprint from 'stores/blueprint';
-import { getPart } from './getPart';
+import getPart from './getPart';
 
 export interface SubscribeToPartOptions<Slice> {
   fireInitially: boolean;

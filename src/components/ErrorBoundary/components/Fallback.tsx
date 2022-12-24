@@ -5,8 +5,8 @@ import {
   ExclamationTriangleIcon,
   ResetIcon,
 } from '@radix-ui/react-icons';
-import { Button as ButtonPrimitive } from 'components/Button';
-import { mutateSettings } from 'core/app';
+import ButtonPrimitive from 'components/Button';
+import mutateSettings from 'core/app/mutateSettings';
 import moment from 'moment';
 import {
   HTMLAttributes, ReactNode, useEffect, useRef, useState,

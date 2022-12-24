@@ -1,7 +1,7 @@
-import mutatePopups from 'core/app/mutatePopups';
+import mutatePrompts from 'core/app/mutatePrompts';
 
 export default function dismissPrompt(id: string) {
-  mutatePopups((draft) => {
+  mutatePrompts((draft) => {
     const index = draft.prompts.findIndex((popup) => popup.id === id);
     if (index !== -1) draft.prompts.splice(index, 1);
   });

@@ -1,7 +1,7 @@
 import { Part, VanillaPart } from 'game/parts/Part';
 import { cloneDeep, merge } from 'lodash';
 import { ParentId } from 'types/Parts';
-import { getPartRegistry } from './getPartRegistry';
+import getPartRegistry from './getPartRegistry';
 
 export default function partImportify(
   part: VanillaPart | Part,

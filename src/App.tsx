@@ -1,10 +1,10 @@
 import 'App.css';
 import * as ErrorBoundary from 'components/ErrorBoundary';
-import { LandscapePrompt } from 'components/LandscapePrompt';
-import { usePrerender } from 'hooks/usePrerender';
+import LandscapePrompt from 'components/LandscapePrompt';
+import usePrerender from 'hooks/usePrerender';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Home } from 'routes/Home';
+import Home from 'routes/Home';
 import Interface from 'routes/Interface';
 import { styled, theme } from 'stitches.config';
 import useSettings from 'stores/settings';

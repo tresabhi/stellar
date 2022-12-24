@@ -4,7 +4,7 @@ import {
   MixerVerticalIcon,
 } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
-import { mutateSettings } from 'core/app';
+import mutateSettings from 'core/app/mutateSettings';
 import useTranslator from 'hooks/useTranslator';
 import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../../..';

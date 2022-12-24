@@ -1,8 +1,8 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import { translatePart } from './translatePart';
+import translatePart from './translatePart';
 
 export default function translateTranslatableParts(
   x: number,

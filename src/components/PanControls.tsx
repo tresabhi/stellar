@@ -1,5 +1,5 @@
 import { invalidate, useThree } from '@react-three/fiber';
-import { mutateApp } from 'core/app';
+import mutateApp from 'core/app/mutateApp';
 import useMousePosition from 'hooks/useMousePosition';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/app';

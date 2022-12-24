@@ -1,7 +1,7 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
-import { mutateParts } from './mutateParts';
+import mutateParts from './mutateParts';
 
 export default function translateParts(
   ids: string[],
@@ -16,6 +16,7 @@ export default function translateParts(
         draft.p.x += x;
         draft.p.y += y;
       },
+      false,
       blueprint,
     );
   } else {

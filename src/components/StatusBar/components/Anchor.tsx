@@ -1,4 +1,4 @@
-import { Anchor as AnchorPrimitive } from 'components/Anchor';
+import AnchorPrimitive from 'components/Anchor';
 import { styled, theme } from 'stitches.config';
 
 export const Anchor = styled(AnchorPrimitive, {

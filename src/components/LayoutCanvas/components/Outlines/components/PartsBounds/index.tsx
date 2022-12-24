@@ -1,5 +1,5 @@
 import { invalidate } from '@react-three/fiber';
-import { DeferUpdatesEventDetail } from 'core/bounds';
+import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';

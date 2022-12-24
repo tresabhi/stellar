@@ -1,6 +1,6 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { copyParts } from './copyParts';
+import copyParts from './copyParts';
 import deleteParts from './deleteParts';
 
 export default function cutParts(ids: string[], blueprint?: Blueprint) {

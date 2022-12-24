@@ -1,11 +1,11 @@
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
-import { Layer } from 'components/LayoutCanvas/layer';
+import { Layer } from 'components/LayoutCanvas';
 import PartsBounds from './components/PartsBounds';
-import { ResizeControls } from './components/ResizeControls';
+import ResizeControls from './components/ResizeControls';
 
 export default function Outlines() {
   return (
-    <HeadsUpDisplay priority={Layer.Tool}>
+    <HeadsUpDisplay priority={Layer.Tools}>
       <PartsBounds />
       <ResizeControls />
     </HeadsUpDisplay>

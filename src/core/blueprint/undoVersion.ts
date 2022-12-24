@@ -1,9 +1,9 @@
 import { invalidate } from '@react-three/fiber';
-import { mutateVersionControl } from 'core/app/mutateVersionControl';
+import mutateVersionControl from 'core/app/mutateVersionControl';
 import { applyPatches } from 'immer';
 import useBlueprint from 'stores/blueprint';
 import { UseVersionControl } from 'stores/versionControl';
-import { declareUnsavedChanges } from './declareUnsavedChanges';
+import declareUnsavedChanges from './declareUnsavedChanges';
 
 export default function undoVersion() {
   mutateVersionControl((draft: UseVersionControl) => {

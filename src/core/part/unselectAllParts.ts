@@ -1,6 +1,6 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { mutateParts } from './mutateParts';
+import mutateParts from './mutateParts';
 
 export default function unselectAllParts(blueprint?: Blueprint) {
   if (blueprint) {
@@ -9,6 +9,7 @@ export default function unselectAllParts(blueprint?: Blueprint) {
       (draft) => {
         draft.selected = false;
       },
+      false,
       blueprint,
     );
     blueprint.selections = [];

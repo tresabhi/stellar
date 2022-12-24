@@ -1,6 +1,6 @@
 import { invalidate } from '@react-three/fiber';
 import mutateApp from 'core/app/mutateApp';
-import mutatePopups from 'core/app/mutatePopups';
+import mutatePrompts from 'core/app/mutatePrompts';
 import mutateSettings from 'core/app/mutateSettings';
 import exportFile from 'core/blueprint/exportFile';
 import importFile from 'core/blueprint/importFile';
@@ -106,7 +106,7 @@ const useKeybinds = () => {
       'esc',
       () => {
         if (usePrompts.getState().prompts.length > 0) {
-          mutatePopups((draft) => {
+          mutatePrompts((draft) => {
             draft.prompts.pop();
           });
         } else {

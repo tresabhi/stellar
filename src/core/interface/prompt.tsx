@@ -1,4 +1,4 @@
-import mutatePopups from 'core/app/mutatePopups';
+import mutatePrompts from 'core/app/mutatePrompts';
 import { nanoid } from 'nanoid';
 import { FC } from 'react';
 import useApp from 'stores/app';
@@ -11,7 +11,7 @@ export default function prompt(
   id = nanoid(),
 ) {
   if (useApp.getState().interface.newPopupsEnabled) {
-    mutatePopups((draft) => {
+    mutatePrompts((draft) => {
       if (draft.prompts.findIndex((popup) => popup.id === id) === -1) {
         draft.prompts.push({
           id,

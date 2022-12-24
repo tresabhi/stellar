@@ -1,6 +1,6 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { clonePart } from './clonePart';
+import clonePart from './clonePart';
 import getParent from './getParent';
 import selectPart from './selectPart';
 import unselectAllParts from './unselectAllParts';

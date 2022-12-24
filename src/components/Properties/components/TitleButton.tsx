@@ -1,4 +1,4 @@
-import { Button } from 'components/Button';
+import Button from 'components/Button';
 import { styled, theme } from 'stitches.config';
 
 export const TitleButton = styled(Button, {

@@ -1,10 +1,11 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
-import { getParent } from './getParent';
-import { selectParts } from './selectParts';
-import { unselectAllParts } from './unselectAllParts';
+import getParent from './getParent';
+import selectParts from './selectParts';
+import unselectAllParts from './unselectAllParts';
 
+// TODO: rename to simply ungroup
 export default function ungroupGroups(ids: string[], blueprint?: Blueprint) {
   if (blueprint) {
     unselectAllParts(blueprint);

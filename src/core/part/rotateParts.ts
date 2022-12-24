@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
 import { PartWithOrientation } from 'game/parts/PartWithOrientation';
-import { mutateParts } from './mutateParts';
+import mutateParts from './mutateParts';
 
 export default function rotateParts(
   z: number,
@@ -12,6 +12,7 @@ export default function rotateParts(
     (draft) => {
       draft.o.z += z;
     },
+    false,
     blueprint,
   );
 }

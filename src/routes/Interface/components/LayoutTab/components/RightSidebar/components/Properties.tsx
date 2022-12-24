@@ -1,6 +1,7 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
-import { getPart, getPartRegistry } from 'core/part';
+import getPart from 'core/part/getPart';
+import getPartRegistry from 'core/part/getPartRegistry';
 import { Part } from 'game/parts/Part';
 import {
   PartWithEngine,

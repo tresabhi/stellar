@@ -1,6 +1,6 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { mutateParts } from './mutateParts';
+import mutateParts from './mutateParts';
 
 export default function togglePartsLock(ids: string[], blueprint?: Blueprint) {
   if (blueprint) {
@@ -12,6 +12,7 @@ export default function togglePartsLock(ids: string[], blueprint?: Blueprint) {
       (draft) => {
         draft.locked = isMixed ? false : !firstLock;
       },
+      false,
       blueprint,
     );
   } else {

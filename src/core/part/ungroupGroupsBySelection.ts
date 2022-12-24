@@ -1,6 +1,6 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { ungroupGroups } from './ungroupGroups';
+import ungroupGroups from './ungroupGroups';
 
 export default function ungroupGroupsBySelection(blueprint?: Blueprint) {
   if (blueprint) {

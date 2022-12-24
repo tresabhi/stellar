@@ -1,8 +1,8 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
-import { createNewPart } from './createNewPart';
-import { getParent } from './getParent';
+import createNewPart from './createNewPart';
+import getParent from './getParent';
 import selectPartOnly from './selectPartOnly';
 
 export default function groupParts(

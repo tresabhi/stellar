@@ -1,8 +1,8 @@
-import { mutateApp } from 'core/app/mutateApp';
+import mutateApp from 'core/app/mutateApp';
 import { Blueprint } from 'game/Blueprint';
 import useBlueprint from 'stores/blueprint';
 import { Snippet } from 'stores/snippets';
-import { clonePart } from './clonePart';
+import clonePart from './clonePart';
 
 export default function copyParts(ids: string[], blueprint?: Blueprint) {
   if (blueprint) {

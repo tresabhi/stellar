@@ -1,6 +1,7 @@
 import { Line } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
-import { DeferUpdatesEventDetail, getBoundsFromParts } from 'core/bounds';
+import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
+import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
@@ -8,7 +9,7 @@ import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
-import { ResizeNode } from './components/ResizeNode';
+import ResizeNode from './components/ResizeNode';
 
 export interface UpdateResizeNodesDetail {
   maintainSlope: boolean;

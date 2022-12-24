@@ -1,4 +1,4 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 
 export default function togglePartLock(id: string) {
   mutateBlueprint((draft) => {

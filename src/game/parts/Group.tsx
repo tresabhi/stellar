@@ -1,7 +1,10 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/PartCluster';
-import { declareBoundsUpdated, getBoundsFromParts } from 'core/bounds';
-import { getPart, partExportify, removePartMetaData } from 'core/part';
+import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
+import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
+import getPart from 'core/part/getPart';
+import partExportify from 'core/part/partExportify';
+import removePartMetaData from 'core/part/removePartMetaData';
 import PartCategory from 'hooks/constants/partCategory';
 import { isArray } from 'lodash';
 import { useEffect } from 'react';

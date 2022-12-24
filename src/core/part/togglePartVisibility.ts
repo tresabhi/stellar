@@ -1,6 +1,6 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { mutatePart } from './mutatePart';
+import mutatePart from './mutatePart';
 
 export default function togglePartVisibility(
   id: string,
@@ -12,6 +12,7 @@ export default function togglePartVisibility(
       (draft) => {
         draft.hidden = !draft.hidden;
       },
+      false,
       blueprint,
     );
   } else {

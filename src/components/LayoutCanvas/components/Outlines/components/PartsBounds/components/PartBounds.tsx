@@ -1,7 +1,7 @@
 import { Line } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
-import { getPart } from 'core/part/getPart';
-import { subscribeToPart } from 'core/part/subscribeToPart';
+import getPart from 'core/part/getPart';
+import subscribeToPart from 'core/part/subscribeToPart';
 import {
   memo, RefObject, useEffect, useRef,
 } from 'react';

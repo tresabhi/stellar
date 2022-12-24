@@ -1,9 +1,9 @@
-import { mutateApp } from 'core/app/mutateApp';
-import { mutateBlueprint } from 'core/blueprint';
+import mutateApp from 'core/app/mutateApp';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Group } from 'game/parts/Group';
 import useApp from 'stores/app';
 import { Snippet } from 'stores/snippets';
-import { clonePart } from './clonePart';
+import clonePart from './clonePart';
 import selectPartsOnly from './selectPartsOnly';
 
 export default function pasteParts() {

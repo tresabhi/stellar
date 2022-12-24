@@ -1,7 +1,7 @@
 import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
 import { cloneDeep } from 'lodash';
-import { getPartRegistry } from './getPartRegistry';
+import getPartRegistry from './getPartRegistry';
 import removePartMetaData from './removePartMetaData';
 
 export default function partExportify(part: Part, blueprint: Blueprint) {

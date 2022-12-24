@@ -1,4 +1,4 @@
-import { mutatePartRegistry } from 'core/app';
+import mutatePartRegistry from 'core/app/mutatePartRegistry';
 import { Part } from 'game/parts/Part';
 import { PartRegistryItem, UsePartRegistry } from 'stores/partRegistry';
 

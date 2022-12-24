@@ -1,6 +1,6 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { getPartRegistry } from './getPartRegistry';
+import getPartRegistry from './getPartRegistry';
 
 export interface RenamePartsOptions {
   trim: boolean;

@@ -1,6 +1,6 @@
 import { Blueprint } from 'game/Blueprint';
 import { PartWithScale } from 'game/parts/PartWithScale';
-import { mutateParts } from './mutateParts';
+import mutateParts from './mutateParts';
 
 export default function scaleParts(
   x: number,
@@ -14,6 +14,7 @@ export default function scaleParts(
       draft.o.x *= x;
       draft.o.y *= y;
     },
+    false,
     blueprint,
   );
 }

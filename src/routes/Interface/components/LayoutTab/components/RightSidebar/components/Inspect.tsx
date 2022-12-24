@@ -1,7 +1,7 @@
 import { CopyIcon } from '@radix-ui/react-icons';
 import * as Properties from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
-import { partExportify } from 'core/part';
+import partExportify from 'core/part/partExportify';
 import useClipboard from 'hooks/useClipboard';
 import usePart from 'hooks/usePart';
 import useTranslator from 'hooks/useTranslator';

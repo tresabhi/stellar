@@ -1,9 +1,9 @@
-import { mutateVersionControl } from 'core/app/mutateVersionControl';
+import mutateVersionControl from 'core/app/mutateVersionControl';
 import { Blueprint } from 'game/Blueprint';
 import { produceWithPatches } from 'immer';
 import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
-import { declareUnsavedChanges } from './declareUnsavedChanges';
+import declareUnsavedChanges from './declareUnsavedChanges';
 
 export default function mutateBlueprint(producer: (state: Blueprint) => void) {
   const [nextState, patches, inversePatches] = produceWithPatches(

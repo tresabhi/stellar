@@ -1,10 +1,10 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Group } from 'game/parts/Group';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import useApp from 'stores/app';
 import { ParentId } from 'types/Parts';
-import { createNewPart } from './createNewPart';
-import { getPart } from './getPart';
+import createNewPart from './createNewPart';
+import getPart from './getPart';
 import selectPartOnly from './selectPartOnly';
 
 export interface InsertPartOptions {

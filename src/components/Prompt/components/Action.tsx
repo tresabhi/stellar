@@ -1,4 +1,4 @@
-import { Button as ButtonPrimitive } from 'components/Button';
+import ButtonPrimitive from 'components/Button';
 import { styled, theme } from 'stitches.config';
 
 export const Action = styled(ButtonPrimitive, {
