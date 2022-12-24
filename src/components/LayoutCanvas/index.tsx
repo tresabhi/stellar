@@ -1,4 +1,4 @@
-import { AdaptiveDpr, Grid } from '@react-three/drei';
+import { AdaptiveDpr } from '@react-three/drei';
 import {
   Canvas as CanvasPrimitive,
   Props as CanvasPrimitiveProps,
@@ -12,6 +12,7 @@ import useSettings from 'stores/settings';
 import { Group } from 'three';
 import PanControls from '../PanControls';
 import Expose from './components/Expose';
+import Grid from './components/Grid';
 import Outlines from './components/Outlines';
 import Parts from './components/Parts';
 
