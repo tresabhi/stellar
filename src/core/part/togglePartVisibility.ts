@@ -12,7 +12,6 @@ export default function togglePartVisibility(
       (draft) => {
         draft.hidden = !draft.hidden;
       },
-      false,
       blueprint,
     );
   } else {

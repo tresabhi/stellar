@@ -84,7 +84,7 @@ function Slide2() {
   };
   const themes: JSX.Element[] = [
     <Select.Item value="none" onClick={handleNoneClick} key="theme-none">
-      {t`themes.stellar_light`}
+      {t`themes.theme_light`}
     </Select.Item>,
   ];
 

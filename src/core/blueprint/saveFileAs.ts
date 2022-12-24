@@ -2,7 +2,7 @@ import { fileSave } from 'browser-fs-access';
 import mutateApp from 'core/app/mutateApp';
 import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import declareNoUnsavedChanges from './declareNoUnsavedChanges';
+import declareUnsavedChanges from './declareUnsavedChanges';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 import savifyBlueprint from './savifyBlueprint';
 
@@ -35,5 +35,5 @@ export default async function saveFileAs() {
   mutateApp((draft) => {
     draft.file.handle = newHandle ?? undefined;
   });
-  declareNoUnsavedChanges();
+  declareUnsavedChanges(false);
 }

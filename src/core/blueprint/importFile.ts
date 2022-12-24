@@ -1,6 +1,6 @@
 import { fileOpen } from 'browser-fs-access';
 import mutateApp from 'core/app/mutateApp';
-import declareNoUnsavedChanges from './declareNoUnsavedChanges';
+import declareUnsavedChanges from './declareUnsavedChanges';
 import loadBlueprint from './loadBlueprint';
 
 export default async function importFile() {
@@ -15,5 +15,5 @@ export default async function importFile() {
   mutateApp((draft) => {
     draft.file.handle = file.handle;
   });
-  declareNoUnsavedChanges();
+  declareUnsavedChanges(false);
 }

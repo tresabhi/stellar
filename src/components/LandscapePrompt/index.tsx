@@ -87,7 +87,8 @@ export default function LandscapePrompt({
   };
 
   return showChildren ? (
-    children
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>{children}</>
   ) : (
     <Container {...props}>
       <IconsContainer>
