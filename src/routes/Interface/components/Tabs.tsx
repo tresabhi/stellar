@@ -5,7 +5,7 @@ import {
   RulerHorizontalIcon,
 } from '@radix-ui/react-icons';
 import * as TabBar from 'components/TabBar';
-import { mutateApp } from 'core/app/mutateApp';
+import mutateApp from 'core/app/mutateApp';
 import useTranslator from 'hooks/useTranslator';
 import useApp, { Tab } from 'stores/app';
 

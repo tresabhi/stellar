@@ -1,12 +1,12 @@
 import * as Sidebar from 'components/Sidebar';
-import { mutateSettings } from 'core/app';
+import mutateSettings from 'core/app/mutateSettings';
 import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../..';
 import Properties from '../RightSidebar/components/Properties';
-import { Parts } from './components/Parts';
-import { Rename } from './components/Rename';
-import { Snippets } from './components/Snippets';
-import { Tabs } from './components/Tabs';
+import Parts from './components/Parts';
+import Rename from './components/Rename';
+import Snippets from './components/Snippets';
+import Tabs from './components/Tabs';
 
 export default function LeftSidebar({ swapSecondTab }: TabLayoutProps) {
   const { visible, tab } = useSettings(

@@ -1,4 +1,4 @@
-import { mutatePopups } from 'core/app/mutatePopups';
+import mutatePopups from 'core/app/mutatePopups';
 
 export default function dismissPrompt(id: string) {
   mutatePopups((draft) => {

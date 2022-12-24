@@ -1,6 +1,7 @@
 import { RenamePartsOptions } from 'core/part/renameParts';
 import { merge } from 'lodash';
-import { theme, themeDark } from 'stitches.config';
+import { theme } from 'stitches.config';
+import themeDark from 'stitches.config/themes/dark';
 import create from 'zustand';
 import { persist, subscribeWithSelector } from 'zustand/middleware';
 

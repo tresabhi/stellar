@@ -4,6 +4,7 @@ import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface PromptProps {
   id: string;
+  dismiss: () => void;
 }
 
 export interface Prompt {

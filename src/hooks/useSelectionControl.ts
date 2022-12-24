@@ -1,14 +1,12 @@
 import { ThreeEvent } from '@react-three/fiber';
-import { mutateApp } from 'core/app/mutateApp';
-import { mutateBlueprint } from 'core/blueprint';
-import {
-  getParent,
-  getParentId,
-  getPart,
-  selectPartOnly,
-  togglePartSelection,
-  unselectPart,
-} from 'core/part';
+import mutateApp from 'core/app/mutateApp';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
+import getParent from 'core/part/getParent';
+import getParentId from 'core/part/getParentId';
+import getPart from 'core/part/getPart';
+import selectPartOnly from 'core/part/selectPartOnly';
+import togglePartSelection from 'core/part/togglePartSelection';
+import unselectPart from 'core/part/unselectPart';
 import useApp, { Tool } from 'stores/app';
 import useSettings from 'stores/settings';
 

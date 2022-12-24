@@ -4,6 +4,7 @@ import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface NotificationsProps {
   id: string;
+  dismiss: () => void;
 }
 
 export interface Notification {

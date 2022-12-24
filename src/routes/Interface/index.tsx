@@ -1,15 +1,15 @@
-import * as Popup from 'components/Popup';
-import * as Toast from 'components/Toast';
-import { popup } from 'core/interface';
-import { useInterfaceMode } from 'hooks/useInterfaceMode';
+import * as Notification from 'components/Notification';
+import * as Prompt from 'components/Prompt';
+import prompt from 'core/interface/prompt';
+import useInterfaceMode from 'hooks/useInterfaceMode';
 import WelcomePopup from 'routes/components/WelcomePopup';
 import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/app';
 import useSettings, { InterfaceMode } from 'stores/settings';
-import { CreateTab } from './components/CreateTab';
-import { ExportTab } from './components/ExportTab';
-import { LayoutTab } from './components/LayoutTab';
-import { StagingTab } from './components/StagingTab';
+import CreateTab from './components/CreateTab';
+import ExportTab from './components/ExportTab';
+import LayoutTab from './components/LayoutTab';
+import StagingTab from './components/StagingTab';
 import Tabs from './components/Tabs';
 
 export interface SidebarTabProps {
@@ -28,7 +28,7 @@ const useWelcomePopup = () => {
   const { welcomePromptCompleted } = useSettings.getState().interface;
 
   if (!welcomePromptCompleted) {
-    popup(WelcomePopup, false, 'welcome-popup');
+    prompt(WelcomePopup, false, 'welcome-popup');
   }
 };
 
@@ -50,8 +50,8 @@ function Interface() {
       {tab === Tab.Staging && <StagingTab />}
       {tab === Tab.Export && <ExportTab />}
 
-      <Popup.Viewport />
-      <Toast.Viewport />
+      <Prompt.Viewport />
+      <Notification.Viewport />
     </Container>
   );
 }

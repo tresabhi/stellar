@@ -1,8 +1,6 @@
-import {
-  DeferUpdatesEventDetail,
-  disposeBound,
-  getBoundsFromObject,
-} from 'core/bounds';
+import disposeBound from 'core/bounds/disposeBound';
+import getBoundsFromObject from 'core/bounds/getBoundsFromObject';
+import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import { RefObject, useCallback, useEffect } from 'react';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';

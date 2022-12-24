@@ -1,8 +1,10 @@
 import { extend } from '@react-three/fiber';
-import { Anchor } from 'components/Anchor';
-import * as Toast from 'components/Toast';
-import { mutateSettings } from 'core/app';
-import { dismissToast, toast } from 'core/interface';
+import Anchor from 'components/Anchor';
+import * as Notification from 'components/Notification';
+import mutateSettings from 'core/app/mutateSettings';
+import dismissNotification from 'core/interface/dismissNotification';
+import notify from 'core/interface/notify';
+import prompt from 'core/interface/prompt';
 import useTranslator from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
 import useSettings from 'stores/settings';
@@ -18,14 +20,14 @@ import { registerSW } from 'virtual:pwa-register';
 
 window.addEventListener('beforeinstallprompt', (event) => {
   if (useSettings.getState().interface.showInstallationPrompt) {
-    toast(({ id }) => {
+    prompt(({ id }) => {
       const { t, f } = useTranslator();
 
       return (
-        <Toast.Root>
-          <Toast.Info>
-            <Toast.Title>{t`toasts.installable.title`}</Toast.Title>
-            <Toast.Description>
+        <Notification.Root>
+          <Notification.Info>
+            <Notification.Title>{t`toasts.installable.title`}</Notification.Title>
+            <Notification.Description>
               {f`toasts.installable.description`[0]}
               <Anchor
                 href="https://web.dev/progressive-web-apps/"
@@ -34,35 +36,35 @@ window.addEventListener('beforeinstallprompt', (event) => {
                 {f`toasts.installable.description`[1]}
               </Anchor>
               {f`toasts.installable.description`[2]}
-            </Toast.Description>
-          </Toast.Info>
+            </Notification.Description>
+          </Notification.Info>
 
-          <Toast.Actions>
-            <Toast.Action
+          <Notification.Actions>
+            <Notification.Action
               onClick={() => {
                 mutateSettings((draft) => {
                   draft.interface.showInstallationPrompt = false;
                 });
-                dismissToast(id);
+                dismissNotification(id);
               }}
             >
               {t`toasts.installable.actions.never`}
-            </Toast.Action>
-            <Toast.Action onClick={() => dismissToast(id)}>
+            </Notification.Action>
+            <Notification.Action onClick={() => dismissNotification(id)}>
               {t`toasts.installable.actions.dismiss`}
-            </Toast.Action>
-            <Toast.Action
+            </Notification.Action>
+            <Notification.Action
               color="accent"
               onClick={async () => {
                 event.prompt();
-                const { outcome } = await event.userChoice;
-                if (outcome === 'accepted') dismissToast(id);
+                await event.userChoice;
+                dismissNotification(id);
               }}
             >
               {t`toasts.installable.actions.install`}
-            </Toast.Action>
-          </Toast.Actions>
-        </Toast.Root>
+            </Notification.Action>
+          </Notification.Actions>
+        </Notification.Root>
       );
     });
   }
@@ -70,25 +72,25 @@ window.addEventListener('beforeinstallprompt', (event) => {
 
 const updateSW = registerSW({
   onNeedRefresh: () => {
-    toast(({ id }) => {
+    notify(({ id }) => {
       const { t } = useTranslator();
 
       return (
-        <Toast.Root>
-          <Toast.Info>
-            <Toast.Title>{t`toasts.update.title`}</Toast.Title>
-            <Toast.Description>{t`toasts.update.description`}</Toast.Description>
-          </Toast.Info>
+        <Notification.Root>
+          <Notification.Info>
+            <Notification.Title>{t`toasts.update.title`}</Notification.Title>
+            <Notification.Description>{t`toasts.update.description`}</Notification.Description>
+          </Notification.Info>
 
-          <Toast.Actions>
-            <Toast.Action onClick={() => dismissToast(id)}>
+          <Notification.Actions>
+            <Notification.Action onClick={() => dismissNotification(id)}>
               {t`toasts.update.actions.dismiss`}
-            </Toast.Action>
-            <Toast.Action color="accent" onClick={() => updateSW(true)}>
+            </Notification.Action>
+            <Notification.Action color="accent" onClick={() => updateSW(true)}>
               {t`toasts.update.actions.restart`}
-            </Toast.Action>
-          </Toast.Actions>
-        </Toast.Root>
+            </Notification.Action>
+          </Notification.Actions>
+        </Notification.Root>
       );
     });
   },

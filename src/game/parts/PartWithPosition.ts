@@ -1,7 +1,8 @@
 import { invalidate } from '@react-three/fiber';
-import { declareBoundsUpdated } from 'core/bounds';
-import { getPart, PartMoveEventDetail } from 'core/part';
+import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
+import getPart from 'core/part/getPart';
 import { PartResizeEventDetail } from 'core/part/resizePartAsync';
+import { PartMoveEventDetail } from 'core/part/translatePartsBySelectionAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';

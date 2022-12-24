@@ -1,6 +1,6 @@
 import { fileOpen } from 'browser-fs-access';
-import { mutateApp } from 'core/app/mutateApp';
-import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
+import mutateApp from 'core/app/mutateApp';
+import declareNoUnsavedChanges from './declareNoUnsavedChanges';
 import loadBlueprint from './loadBlueprint';
 
 export default async function importFile() {

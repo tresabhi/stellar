@@ -15,12 +15,13 @@ import parachuteAndSeparator from 'assets/blueprints/parachute-and-separator.jso
 import raceCar from 'assets/blueprints/race-car.json';
 import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
-import { Button as ButtonPrimitive } from 'components/Button';
+import ButtonPrimitive from 'components/Button';
 import { InputWithIcon } from 'components/InputWithIcon';
-import * as Popup from 'components/Popup';
+import * as Prompt from 'components/Prompt';
 import { SearchItem } from 'components/Search';
-import { mutateApp } from 'core/app/mutateApp';
-import { importFile, loadBlueprint } from 'core/blueprint';
+import mutateApp from 'core/app/mutateApp';
+import importFile from 'core/blueprint/importFile';
+import loadBlueprint from 'core/blueprint/loadBlueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
 import useTranslator from 'hooks/useTranslator';
 import { useMemo, useRef } from 'react';
@@ -28,7 +29,7 @@ import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
 import { getContext } from 'utilities/getContext';
-import { StatusBar } from './components/StatusBar';
+import StatusBar from './components/StatusBar';
 
 const Container = styled('div', {
   flex: '1 0 0',
@@ -85,7 +86,7 @@ const SearchWrapper = styled('div', {
   maxHeight: theme.sizes.createTabContentMaxHeight,
 });
 
-const StyledSearch = styled(Popup.Search, {
+const StyledSearch = styled(Prompt.Search, {
   flex: '1 0 0',
   width: '100%',
   backgroundColor: theme.colors.appBackground2,
@@ -177,14 +178,14 @@ export default function CreateTab() {
         const searchItem: SearchItem = {
           string: translation,
           node: (
-            <Popup.SearchItem
+            <Prompt.SearchItem
               icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
               onClick={handleClick}
               key={`item-${name}`}
               note={credit ?? 'In-Built'}
             >
               {translation}
-            </Popup.SearchItem>
+            </Prompt.SearchItem>
           ),
           callback: handleClick,
         };

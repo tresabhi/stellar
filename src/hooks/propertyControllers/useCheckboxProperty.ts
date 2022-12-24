@@ -1,6 +1,6 @@
 import { CheckboxRef } from 'components/Checkbox';
 import { CheckboxProps } from 'components/Properties';
-import { mutateParts, subscribeToPart } from 'core/part';
+import mutateParts from 'core/part/mutateParts';
 import { Part } from 'game/parts/Part';
 import {
   Ref, useCallback, useEffect, useRef,

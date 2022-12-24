@@ -1,14 +1,12 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
 import { CANVAS_MATRIX_SCALE } from 'components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
-import { mutateApp } from 'core/app';
-import { deferUpdates, undeferUpdates } from 'core/bounds';
-import {
-  getPart,
-  selectPart,
-  selectPartOnly,
-  translatePartsBySelectionAsync,
-  translateTranslatablePartsBySelection,
-} from 'core/part';
+import mutateApp from 'core/app/mutateApp';
+import deferUpdates from 'core/bounds/deferUpdates';
+import getPart from 'core/part/getPart';
+import selectPart from 'core/part/selectPart';
+import selectPartOnly from 'core/part/selectPartOnly';
+import translatePartsBySelectionAsync from 'core/part/translatePartsBySelectionAsync';
+import translateTranslatablePartsBySelection from 'core/part/translateTranslatablePartsBySelection';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import getSnapDistance from 'utilities/getSnapDistance';
@@ -66,7 +64,7 @@ const useDragControls = (id: string) => {
     }
   };
   const handlePointerUp = () => {
-    if (!firstMove) undeferUpdates();
+    if (!firstMove) deferUpdates(false);
 
     const removeSelectionRestriction = () => {
       window.removeEventListener('pointerup', removeSelectionRestriction);

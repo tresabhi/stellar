@@ -1,4 +1,4 @@
-import { getPart } from 'core/part';
+import getPart from 'core/part/getPart';
 import { Part } from 'game/parts/Part';
 
 export default function getMutualProperty<

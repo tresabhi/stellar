@@ -1,18 +1,17 @@
 import { Pencil1Icon } from '@radix-ui/react-icons';
-import { CheckboxWithLabel } from 'components/CheckboxWithLabel';
+import CheckboxWithLabel from 'components/CheckboxWithLabel';
 import { InputWithIcon } from 'components/InputWithIcon';
-import * as Popup from 'components/Popup';
-import { mutateSettings } from 'core/app';
-import { dismissPrompt } from 'core/interface/dismissPopup';
+import * as Prompt from 'components/Prompt';
+import mutateSettings from 'core/app/mutateSettings';
 import { RenamePartsOptions } from 'core/part/renameParts';
-import { renamePartsBySelection } from 'core/part/renamePartsBySelection';
-import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
+import renamePartsBySelection from 'core/part/renamePartsBySelection';
+import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { KeyboardEvent, useRef } from 'react';
 import { PromptProps } from 'stores/prompts';
 import useSettings from 'stores/settings';
 
-export default function RenamePartsPopup({ id }: PromptProps) {
+export default function RenamePartsPopup({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
@@ -23,7 +22,7 @@ export default function RenamePartsPopup({ id }: PromptProps) {
         useSettings.getState().editor.rename,
       );
     }
-    dismissPrompt(id);
+    dismiss();
   };
   const handleClick = (type: keyof RenamePartsOptions) => () => {
     mutateSettings((draft) => {
@@ -35,16 +34,16 @@ export default function RenamePartsPopup({ id }: PromptProps) {
     if (event.key === 'Enter') {
       apply();
     } else if (event.key === 'Escape') {
-      dismissPrompt(id);
+      dismiss();
     }
   };
-  const handleCancelClick = () => dismissPrompt(id);
+  const handleCancelClick = () => dismiss();
   const handleApplyClick = apply;
 
   usePopupConcurrency();
 
   return (
-    <Popup.Root>
+    <Prompt.Root>
       <InputWithIcon
         ref={input}
         onKeyDown={handleKeyDown}
@@ -53,7 +52,7 @@ export default function RenamePartsPopup({ id }: PromptProps) {
         placeholder={t`tabs.layout.popup.rename.input_placeholder`}
       />
 
-      <Popup.Content>
+      <Prompt.Content>
         <CheckboxWithLabel
           defaultValue={rename.trim}
           onChange={handleClick('trim')}
@@ -72,20 +71,20 @@ export default function RenamePartsPopup({ id }: PromptProps) {
         >
           {t`tabs.layout.popup.rename.suffix`}
         </CheckboxWithLabel>
-      </Popup.Content>
+      </Prompt.Content>
 
-      <Popup.Actions>
-        <Popup.Action onClick={handleCancelClick}>
+      <Prompt.Actions>
+        <Prompt.Action onClick={handleCancelClick}>
           {t`tabs.layout.popup.rename.cancel`}
-        </Popup.Action>
-        <Popup.Action
+        </Prompt.Action>
+        <Prompt.Action
           onClick={handleApplyClick}
           priority="callToAction"
           color="accent"
         >
           {t`tabs.layout.popup.rename.apply`}
-        </Popup.Action>
-      </Popup.Actions>
-    </Popup.Root>
+        </Prompt.Action>
+      </Prompt.Actions>
+    </Prompt.Root>
   );
 }

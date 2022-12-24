@@ -2,7 +2,8 @@ import {
   SliderWithInputProps,
   SliderWithInputRef,
 } from 'components/Properties';
-import { mutateParts, subscribeToPart } from 'core/part';
+import mutateParts from 'core/part/mutateParts';
+import subscribeToPart from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
 import { Ref, useEffect, useRef } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';

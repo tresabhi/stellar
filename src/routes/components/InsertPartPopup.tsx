@@ -1,17 +1,18 @@
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { InputWithIcon } from 'components/InputWithIcon';
-import * as Popup from 'components/Popup';
+import * as Prompt from 'components/Prompt';
 import { SearchItem } from 'components/Search';
-import { dismissPrompt } from 'core/interface/dismissPopup';
-import { getParent, getPart, insertNewPart } from 'core/part';
-import { usePopupConcurrency } from 'hooks/usePopupConcurrency';
+import getParent from 'core/part/getParent';
+import getPart from 'core/part/getPart';
+import insertNewPart from 'core/part/insertNewPart';
+import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry from 'stores/partRegistry';
 import { PromptProps } from 'stores/prompts';
 
-export default function InsertPartPopup({ id }: PromptProps) {
+export default function InsertPartPopup({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
   const list: SearchItem[] = [];
@@ -35,9 +36,6 @@ export default function InsertPartPopup({ id }: PromptProps) {
     }
   }
 
-  const handleEscape = () => dismissPrompt(id);
-  const handleCancelClick = () => dismissPrompt(id);
-
   partRegistry.forEach(({ vanillaData, Icon, data: { label, n } }) => {
     const note = vanillaData === null
       ? t`tabs.layout.popup.insert_part.abstract`
@@ -49,7 +47,7 @@ export default function InsertPartPopup({ id }: PromptProps) {
         nearCamera: true,
         select: true,
       });
-      dismissPrompt(id);
+      dismiss();
     };
 
     list.push({
@@ -58,14 +56,14 @@ export default function InsertPartPopup({ id }: PromptProps) {
           ? `${label} ${t`tabs.layout.popup.insert_part.abstract`}`
           : label,
       node: (
-        <Popup.SearchItem
+        <Prompt.SearchItem
           key={`part-${n}`}
           icon={<Icon />}
           note={note}
           onClick={handleClick}
         >
           {label}
-        </Popup.SearchItem>
+        </Prompt.SearchItem>
       ),
       callback: handleClick,
     });
@@ -74,7 +72,7 @@ export default function InsertPartPopup({ id }: PromptProps) {
   usePopupConcurrency();
 
   return (
-    <Popup.Root>
+    <Prompt.Root>
       <InputWithIcon
         ref={input}
         icon={<MagnifyingGlassIcon />}
@@ -82,20 +80,20 @@ export default function InsertPartPopup({ id }: PromptProps) {
         autoFocus
       />
 
-      <Popup.Search
+      <Prompt.Search
         list={list}
         input={input}
         fallback={
-          <Popup.SearchFallback>{t`tabs.layout.popup.insert_part.fallback`}</Popup.SearchFallback>
+          <Prompt.SearchFallback>{t`tabs.layout.popup.insert_part.fallback`}</Prompt.SearchFallback>
         }
-        escape={handleEscape}
+        escape={dismiss}
       />
 
-      <Popup.Actions>
-        <Popup.Action onClick={handleCancelClick}>
+      <Prompt.Actions>
+        <Prompt.Action onClick={dismiss}>
           {t`tabs.layout.popup.insert_part.cancel`}
-        </Popup.Action>
-      </Popup.Actions>
-    </Popup.Root>
+        </Prompt.Action>
+      </Prompt.Actions>
+    </Prompt.Root>
   );
 }

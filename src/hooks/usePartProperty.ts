@@ -1,4 +1,6 @@
-import { subscribeToPart, SubscribeToPartOptions } from 'core/part';
+import subscribeToPart, {
+  SubscribeToPartOptions,
+} from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
 import { useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';

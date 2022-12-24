@@ -2,10 +2,11 @@ import mutatePopups from 'core/app/mutatePopups';
 import { nanoid } from 'nanoid';
 import { FC } from 'react';
 import useApp from 'stores/app';
-import { NotificationsProps } from 'stores/notifications';
+import { PromptProps } from 'stores/prompts';
+import dismissPrompt from './dismissPrompt';
 
 export default function prompt(
-  Component: FC<NotificationsProps>,
+  Component: FC<PromptProps>,
   dismissByBlur = true,
   id = nanoid(),
 ) {
@@ -15,7 +16,13 @@ export default function prompt(
         draft.prompts.push({
           id,
           dismissByBlur,
-          node: <Component id={id} key={`popup-${id}`} />,
+          node: (
+            <Component
+              id={id}
+              key={`popup-${id}`}
+              dismiss={() => dismissPrompt(id)}
+            />
+          ),
         });
       }
     });

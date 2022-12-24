@@ -1,4 +1,4 @@
-import { LayoutCanvas } from 'components/Canvas';
+import LayoutCanvas from 'components/LayoutCanvas';
 import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled } from 'stitches.config';
 import useApp from 'stores/app';

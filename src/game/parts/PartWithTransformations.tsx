@@ -1,13 +1,12 @@
+import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import * as Properties from 'components/Properties';
+import mutateSettings from 'core/app/mutateSettings';
+import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
 import useTranslator from 'hooks/useTranslator';
 import { RefObject } from 'react';
-import { PartPropertyComponentProps } from 'types/Parts';
-
-import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
-import { mutateSettings } from 'core/app';
-import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
 import useSettings from 'stores/settings';
 import { Object3D } from 'three';
+import { PartPropertyComponentProps } from 'types/Parts';
 import {
   Part, PartData, VanillaPart, VanillaPartData,
 } from './Part';

@@ -1,10 +1,10 @@
 import * as Sidebar from 'components/Sidebar';
-import { mutateSettings } from 'core/app';
-import { useInterfaceMode } from 'hooks/useInterfaceMode';
+import mutateSettings from 'core/app/mutateSettings';
+import useInterfaceMode from 'hooks/useInterfaceMode';
 import useSettings, { InterfaceMode, SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../..';
-import { Snippets } from '../LeftSidebar/components/Snippets';
-import { Inspect } from './components/Inspect';
+import Snippets from '../LeftSidebar/components/Snippets';
+import Inspect from './components/Inspect';
 import Properties from './components/Properties';
 import Tabs from './components/Tabs';
 
