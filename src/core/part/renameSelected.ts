@@ -1,20 +1,20 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import renameParts, {
+import rename, {
   renamePartsDefaultOptions,
   RenamePartsOptions,
-} from './renameParts';
+} from './rename';
 
-export default function renamePartsBySelection(
+export default function renameSelected(
   name: string,
   options: RenamePartsOptions = renamePartsDefaultOptions,
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    renameParts(blueprint.selections, name, options, blueprint);
+    rename(blueprint.selections, name, options, blueprint);
   } else {
     mutateBlueprint((draft) => {
-      renamePartsBySelection(name, options, draft);
+      renameSelected(name, options, draft);
     });
   }
 }

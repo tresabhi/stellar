@@ -3,8 +3,8 @@ import CheckboxWithLabel from 'components/CheckboxWithLabel';
 import { InputWithIcon } from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
 import mutateSettings from 'core/app/mutateSettings';
-import { RenamePartsOptions } from 'core/part/renameParts';
-import renamePartsBySelection from 'core/part/renamePartsBySelection';
+import { RenamePartsOptions } from 'core/part/rename';
+import renameSelected from 'core/part/renameSelected';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { KeyboardEvent, useRef } from 'react';
@@ -17,10 +17,7 @@ export default function RenamePartsPopup({ dismiss }: PromptProps) {
   const input = useRef<HTMLInputElement>(null);
   const apply = () => {
     if (input.current) {
-      renamePartsBySelection(
-        input.current.value,
-        useSettings.getState().editor.rename,
-      );
+      renameSelected(input.current.value, useSettings.getState().editor.rename);
     }
     dismiss();
   };

@@ -3,7 +3,7 @@ import { cloneDeep, merge } from 'lodash';
 import { ParentId } from 'types/Parts';
 import getPartRegistry from './getPartRegistry';
 
-export default function partImportify(
+export default function importifyPart(
   part: VanillaPart | Part,
   id: string,
   parentId?: ParentId,

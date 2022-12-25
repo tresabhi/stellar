@@ -9,7 +9,7 @@ import generateId from './generateId';
  * - Maintains the correct descendent tree
  * - Assigns new ids for all parts
  */
-export default function clonePart(
+export default function clone(
   id: string,
   draft: Snippet,
 ): [string, Record<string, Part>] {
@@ -27,7 +27,7 @@ export default function clonePart(
       const child = draft.parts[childId] as Group;
 
       if (child) {
-        const clonedGroupChildData = clonePart(child.id, draft);
+        const clonedGroupChildData = clone(child.id, draft);
 
         if (clonedGroupChildData) {
           const [clonedGroupChildId, clonedGroupChildrenParts] = clonedGroupChildData;

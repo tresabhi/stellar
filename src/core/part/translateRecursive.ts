@@ -3,7 +3,7 @@ import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { MethodIds } from 'types/Parts';
-import normalIds from 'utilities/normalIds';
+import normalizeIds from 'utilities/normalizeIds';
 import translate from './translate';
 
 export default function translateRecursive(
@@ -27,7 +27,7 @@ export default function translateRecursive(
       });
     };
 
-    translateInternal(normalIds(ids));
+    translateInternal(normalizeIds(ids));
   } else {
     mutateBlueprint((draft) => {
       translateRecursive(ids, x, y, draft);

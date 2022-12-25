@@ -1,7 +1,7 @@
 import { CopyIcon } from '@radix-ui/react-icons';
 import * as Properties from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
-import partExportify from 'core/part/partExportify';
+import exportifyPart from 'core/part/exportifyPart';
 import useClipboard from 'hooks/useClipboard';
 import usePart from 'hooks/usePart';
 import useTranslator from 'hooks/useTranslator';
@@ -17,7 +17,7 @@ export default function Inspect() {
   const id = state.selections[0];
   const data = usePart(id);
   const stringifiedJSON = JSON.stringify(data, undefined, INDENT);
-  const vanillaJSON = data && JSON.stringify(partExportify(data, state), undefined, INDENT);
+  const vanillaJSON = data && JSON.stringify(exportifyPart(data, state), undefined, INDENT);
 
   const handleJSONClick = () => copy(stringifiedJSON);
   const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);

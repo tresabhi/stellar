@@ -5,7 +5,7 @@ import getParent from './getParent';
 /**
  * Fork of `deleteParts` for selections splicing optimization
  */
-export default function deletePartsBySelection(blueprint?: Blueprint) {
+export default function deleteSelected(blueprint?: Blueprint) {
   if (blueprint) {
     [...blueprint.selections].forEach((selection) => {
       const parent = getParent(selection, blueprint) ?? blueprint;
@@ -20,7 +20,7 @@ export default function deletePartsBySelection(blueprint?: Blueprint) {
     blueprint.selections = [];
   } else {
     mutateBlueprint((draft) => {
-      deletePartsBySelection(draft);
+      deleteSelected(draft);
     });
   }
 }

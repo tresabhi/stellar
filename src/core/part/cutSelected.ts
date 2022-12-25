@@ -1,10 +1,10 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import cutParts from './cutParts';
+import cut from './cut';
 
 export default function cutPartsBySelection(blueprint?: Blueprint) {
   if (blueprint) {
-    cutParts([...blueprint.selections], blueprint);
+    cut([...blueprint.selections], blueprint);
   } else {
     mutateBlueprint((draft) => cutPartsBySelection(draft));
   }

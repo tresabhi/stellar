@@ -2,9 +2,9 @@ import { TransformIcon as Icon } from '@radix-ui/react-icons';
 import PartCluster from 'components/PartCluster';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
+import exportifyPart from 'core/part/exportifyPart';
 import getPart from 'core/part/getPart';
-import partExportify from 'core/part/partExportify';
-import removePartMetaData from 'core/part/removePartMetaData';
+import removeMetaData from 'core/part/removeMetaData';
 import PartCategory from 'hooks/constants/partCategory';
 import { isArray } from 'lodash';
 import { useEffect } from 'react';
@@ -67,13 +67,13 @@ export const GroupIcon = Icon;
 
 export const groupExportify: PartExportifier<Group> = (part, draft) => {
   const exportedParts: VanillaPart[] = [];
-  const partWithoutMetaData = removePartMetaData(part) as Group;
+  const partWithoutMetaData = removeMetaData(part) as Group;
 
   partWithoutMetaData.part_order.forEach((id) => {
     const childPart = draft.parts[id];
 
     if (childPart) {
-      const exportedPart = partExportify(childPart, draft);
+      const exportedPart = exportifyPart(childPart, draft);
 
       if (exportedPart) {
         if (isArray(exportedPart)) {

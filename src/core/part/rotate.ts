@@ -1,14 +1,16 @@
 import { Blueprint } from 'game/Blueprint';
 import { PartWithOrientation } from 'game/parts/PartWithOrientation';
+import { MethodIds } from 'types/Parts';
+import normalizeIds from 'utilities/normalizeIds';
 import mutateParts from './mutateParts';
 
-export default function rotateParts(
+export default function rotate(
+  ids: MethodIds,
   z: number,
-  ids: string[],
   blueprint?: Blueprint,
 ) {
   mutateParts<PartWithOrientation>(
-    ids,
+    normalizeIds(ids),
     (draft) => {
       draft.o.z += z;
     },

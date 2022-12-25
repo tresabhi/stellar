@@ -1,20 +1,22 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import clonePart from './clonePart';
+import { MethodIds } from 'types/Parts';
+import normalizeIds from 'utilities/normalizeIds';
+import clone from './clone';
 import getParent from './getParent';
 import select from './select';
 import unselectAll from './unselectAll';
 
-export default function duplicateParts(ids: string[], blueprint?: Blueprint) {
+export default function duplicate(ids: MethodIds, blueprint?: Blueprint) {
   if (blueprint) {
     unselectAll(blueprint);
 
-    ids.forEach((id) => {
+    normalizeIds(ids).forEach((id) => {
       const parent = getParent(id, blueprint) ?? blueprint;
       const partIndex = parent.part_order.indexOf(id);
 
       if (partIndex !== -1) {
-        const clonedPartData = clonePart(id, blueprint);
+        const clonedPartData = clone(id, blueprint);
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;
@@ -32,7 +34,7 @@ export default function duplicateParts(ids: string[], blueprint?: Blueprint) {
     });
   } else {
     mutateBlueprint((draft) => {
-      duplicateParts(ids, draft);
+      duplicate(ids, draft);
     });
   }
 }

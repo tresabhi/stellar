@@ -2,7 +2,8 @@ import { invalidate } from '@react-three/fiber';
 import useApp from 'stores/app';
 import boundsStore from 'stores/bounds';
 
-export default function panToPart(id: string) {
+// TODO: get bounds for all selections and then figure out camera zoom and position
+export default function panTo(id: string) {
   const { camera } = useApp.getState().editor;
   const { bounds } = boundsStore[id];
 

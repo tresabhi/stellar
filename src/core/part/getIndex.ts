@@ -4,8 +4,8 @@ import useBlueprint from 'stores/blueprint';
 import { ParentId } from 'types/Parts';
 import getPart from './getPart';
 
-export default function getPartIndex(
-  partId: string,
+export default function getIndex(
+  id: string,
   parentId: ParentId,
   blueprint?: Blueprint,
 ) {
@@ -13,5 +13,5 @@ export default function getPartIndex(
     ? getPart(parentId)
     : blueprint ?? useBlueprint.getState();
 
-  return (parent as Group | Blueprint).part_order.indexOf(partId);
+  return (parent as Group | Blueprint).part_order.indexOf(id);
 }

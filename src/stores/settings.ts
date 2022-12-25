@@ -1,4 +1,4 @@
-import { RenamePartsOptions } from 'core/part/renameParts';
+import { RenamePartsOptions } from 'core/part/rename';
 import { merge } from 'lodash';
 import { theme } from 'stitches.config';
 import themeDark from 'stitches.config/themes/dark';

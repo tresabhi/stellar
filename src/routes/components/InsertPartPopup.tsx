@@ -4,7 +4,7 @@ import * as Prompt from 'components/Prompt';
 import { SearchItem } from 'components/Search';
 import getParent from 'core/part/getParent';
 import getPart from 'core/part/getPart';
-import insertNewPart from 'core/part/insertNewPart';
+import insert from 'core/part/insert';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { useRef } from 'react';
@@ -42,7 +42,7 @@ export default function InsertPartPopup({ dismiss }: PromptProps) {
       : undefined;
 
     const handleClick = () => {
-      insertNewPart(n, parentId, {
+      insert(n, parentId, {
         index,
         nearCamera: true,
         select: true,

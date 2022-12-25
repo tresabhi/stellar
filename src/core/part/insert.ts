@@ -3,7 +3,7 @@ import { Group } from 'game/parts/Group';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import useApp from 'stores/app';
 import { ParentId } from 'types/Parts';
-import createNewPart from './createNewPart';
+import create from './create';
 import getPart from './getPart';
 import selectConcurrent from './selectConcurrent';
 
@@ -18,8 +18,8 @@ export const insertPartDefaultOptions: InsertPartOptions = {
   select: false,
 };
 
-export default function insertNewPart(
-  partName: string,
+export default function insert(
+  name: string,
   parentId?: ParentId,
   options: Partial<InsertPartOptions> = insertPartDefaultOptions,
 ) {
@@ -29,7 +29,7 @@ export default function insertNewPart(
   };
 
   mutateBlueprint((draft) => {
-    const newPart = createNewPart(partName);
+    const newPart = create(name);
     const { camera } = useApp.getState().editor;
 
     if (newPart) {

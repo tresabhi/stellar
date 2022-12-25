@@ -2,7 +2,7 @@ import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { MethodIds } from 'types/Parts';
-import normalIds from 'utilities/normalIds';
+import normalizeIds from 'utilities/normalizeIds';
 import mutateParts from './mutateParts';
 
 export default function selectConcurrent(
@@ -20,7 +20,7 @@ export default function selectConcurrent(
       blueprint,
     );
     mutateParts(
-      normalIds(ids),
+      normalizeIds(ids),
       (draft) => {
         draft.selected = true;
         if (expandGroups && draft.n === 'Group') {
@@ -31,7 +31,7 @@ export default function selectConcurrent(
       blueprint,
     );
 
-    blueprint.selections = normalIds(ids);
+    blueprint.selections = normalizeIds(ids);
   } else {
     mutateBlueprint((draft) => {
       selectConcurrent(ids, draft);

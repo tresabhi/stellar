@@ -1,7 +1,7 @@
 import { CaretRightIcon } from '@radix-ui/react-icons';
 import { Input } from 'components/Input';
 import getPart from 'core/part/getPart';
-import mutatePart from 'core/part/mutatePart';
+import mutateParts from 'core/part/mutateParts';
 import selectConcurrent from 'core/part/selectConcurrent';
 import toggleSelection from 'core/part/toggleSelection';
 import { Group } from 'game/parts/Group';
@@ -132,7 +132,7 @@ export const Listing = memo(
             label.current.value = newLabel;
             lastLabel = newLabel;
 
-            mutatePart(id, (draft) => {
+            mutateParts(id, (draft) => {
               draft.label = newLabel;
             });
           } else {
@@ -142,7 +142,7 @@ export const Listing = memo(
           label.current.value = data.label;
           lastLabel = data.label;
 
-          mutatePart(id, (draft) => {
+          mutateParts(id, (draft) => {
             draft.label = data.label;
           });
         }

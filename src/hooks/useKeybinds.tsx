@@ -11,13 +11,13 @@ import saveFile from 'core/blueprint/saveFile';
 import saveFileAs from 'core/blueprint/saveFileAs';
 import undoVersion from 'core/blueprint/undoVersion';
 import prompt from 'core/interface/prompt';
-import copyPartsBySelection from 'core/part/copyPartsBySelection';
-import cutPartsBySelection from 'core/part/cutPartsBySelection';
-import deletePartsBySelection from 'core/part/deletePartsBySelection';
-import duplicatePartsBySelection from 'core/part/duplicatePartsBySelection';
-import groupPartsBySelection from 'core/part/groupPartsBySelection';
-import panToPartBySelection from 'core/part/panToPartBySelection';
-import pasteParts from 'core/part/pasteParts';
+import copySelected from 'core/part/copySelected';
+import cutPartsBySelection from 'core/part/cutSelected';
+import deleteSelected from 'core/part/deleteSelected';
+import duplicateSelected from 'core/part/duplicateSelected';
+import groupSelected from 'core/part/groupSelected';
+import panToSelected from 'core/part/panToSelected';
+import paste from 'core/part/paste';
 import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
 import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import ungroupSelected from 'core/part/ungroupSelected';
@@ -126,7 +126,7 @@ const useKeybinds = () => {
       { preventOnNonLayoutTab: false },
     );
 
-    bind(['del', 'backspace'], deletePartsBySelection);
+    bind(['del', 'backspace'], deleteSelected);
 
     bind('alt+1', () => {
       mutateSettings((draft: UseSettings) => {
@@ -261,11 +261,11 @@ const useKeybinds = () => {
       toLayout();
     });
 
-    bind('ctrl+c', copyPartsBySelection);
+    bind('ctrl+c', copySelected);
     bind('ctrl+x', cutPartsBySelection);
-    bind('ctrl+v', pasteParts);
-    bind('ctrl+d', duplicatePartsBySelection);
-    bind('ctrl+g', groupPartsBySelection);
+    bind('ctrl+v', paste);
+    bind('ctrl+d', duplicateSelected);
+    bind('ctrl+g', groupSelected);
     bind('ctrl+shift+g', ungroupSelected);
 
     bind('ctrl+shift+i', () => prompt(InsertPartPopup, true, 'insert-part'));
@@ -275,7 +275,7 @@ const useKeybinds = () => {
       }
     });
 
-    bind('.', panToPartBySelection);
+    bind('.', panToSelected);
   }, []);
 };
 export default useKeybinds;

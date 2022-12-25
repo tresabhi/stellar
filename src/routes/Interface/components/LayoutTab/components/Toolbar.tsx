@@ -51,12 +51,12 @@ import saveFile from 'core/blueprint/saveFile';
 import saveFileAs from 'core/blueprint/saveFileAs';
 import undoVersion from 'core/blueprint/undoVersion';
 import prompt from 'core/interface/prompt';
-import copyPartsBySelection from 'core/part/copyPartsBySelection';
-import cutPartsBySelection from 'core/part/cutPartsBySelection';
-import deletePartsBySelection from 'core/part/deletePartsBySelection';
-import duplicatePartsBySelection from 'core/part/duplicatePartsBySelection';
-import groupPartsBySelection from 'core/part/groupPartsBySelection';
-import pasteParts from 'core/part/pasteParts';
+import copySelected from 'core/part/copySelected';
+import cutPartsBySelection from 'core/part/cutSelected';
+import deleteSelected from 'core/part/deleteSelected';
+import duplicateSelected from 'core/part/duplicateSelected';
+import groupSelected from 'core/part/groupSelected';
+import paste from 'core/part/paste';
 import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
 import toggleSelectedHidden from 'core/part/toggleSelectedHidden';
 import toggleSelectedLocked from 'core/part/toggleSelectedLocked';
@@ -191,7 +191,7 @@ function Toolbar() {
         >
           <ToolbarPrimitive.DropdownMenuItem
             icon={<ClipboardCopyIcon />}
-            onClick={() => copyPartsBySelection()}
+            onClick={() => copySelected()}
             keybind="Ctrl + C"
             disabled={hasNoSelections}
           >
@@ -209,7 +209,7 @@ function Toolbar() {
 
           <ToolbarPrimitive.DropdownMenuItem
             icon={<ClipboardIcon />}
-            onClick={() => pasteParts()}
+            onClick={() => paste()}
             keybind="Ctrl + V"
             disabled={hasNoItemInClipboard}
           >
@@ -218,7 +218,7 @@ function Toolbar() {
 
           <ToolbarPrimitive.DropdownMenuItem
             icon={<StackIcon />}
-            onClick={() => duplicatePartsBySelection()}
+            onClick={() => duplicateSelected()}
             keybind="Ctrl + D"
             disabled={hasNoSelections}
           >
@@ -259,7 +259,7 @@ function Toolbar() {
           <ToolbarPrimitive.DropdownMenuItem
             disabled={hasNoSelections}
             icon={<GroupIcon />}
-            onClick={() => groupPartsBySelection()}
+            onClick={() => groupSelected()}
             keybind="Ctrl + G"
           >
             {t`tabs.layout.toolbar.selection.group`}
@@ -305,7 +305,7 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
           <ToolbarPrimitive.DropdownMenuItem
             icon={<TrashIcon />}
-            onClick={() => deletePartsBySelection()}
+            onClick={() => deleteSelected()}
             keybind="Del"
           >
             {t`tabs.layout.toolbar.edit.delete`}

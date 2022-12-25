@@ -14,7 +14,7 @@ export const renamePartsDefaultOptions: RenamePartsOptions = {
   suffix: true,
 };
 
-export default function renameParts(
+export default function rename(
   ids: string[],
   name: string,
   options: RenamePartsOptions = renamePartsDefaultOptions,
@@ -38,7 +38,7 @@ export default function renameParts(
     });
   } else {
     mutateBlueprint((draft) => {
-      renameParts(ids, newName, options, draft);
+      rename(ids, newName, options, draft);
     });
   }
 }

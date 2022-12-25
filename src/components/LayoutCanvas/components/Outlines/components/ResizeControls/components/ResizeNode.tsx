@@ -4,7 +4,7 @@ import {
 } from '@react-three/fiber';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import deferUpdates from 'core/bounds/deferUpdates';
-import resizePartAsync from 'core/part/resizePartAsync';
+import resizeAsync from 'core/part/resizeAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
 import { MutableRefObject, useEffect, useRef } from 'react';
@@ -199,14 +199,12 @@ export default function ResizeNode({
     applyNormalizations();
 
     if (!offset.equals(lastOffset)) {
-      selections.forEach((selection) => {
-        resizePartAsync(
-          selection,
-          normalizedConstant.toArray(),
-          normalizedScale.toArray(),
-          bounds.current.rotation,
-        );
-      });
+      resizeAsync(
+        selections,
+        normalizedConstant.toArray(),
+        normalizedScale.toArray(),
+        bounds.current.rotation,
+      );
     }
 
     invalidate();

@@ -3,10 +3,10 @@ import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Group } from 'game/parts/Group';
 import useApp from 'stores/app';
 import { Snippet } from 'stores/snippets';
-import clonePart from './clonePart';
+import clone from './clone';
 import selectConcurrent from './selectConcurrent';
 
-export default function pasteParts() {
+export default function paste() {
   const {
     editor: { clipboard },
   } = useApp.getState();
@@ -41,7 +41,7 @@ export default function pasteParts() {
       };
 
       clipboard.part_order.forEach((partId) => {
-        const clonedPartData = clonePart(partId, clipboard);
+        const clonedPartData = clone(partId, clipboard);
 
         if (clonedPartData) {
           const [clonedPartId, clonedParts] = clonedPartData;
