@@ -15,20 +15,21 @@ import parachuteAndSeparator from 'assets/blueprints/parachute-and-separator.jso
 import raceCar from 'assets/blueprints/race-car.json';
 import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
-import { Button as ButtonPrimitive } from 'components/Button';
+import ButtonPrimitive from 'components/Button';
 import { InputWithIcon } from 'components/InputWithIcon';
-import * as Popup from 'components/Popup';
+import * as Prompt from 'components/Prompt';
 import { SearchItem } from 'components/Search';
-import { mutateApp } from 'core/app/mutateApp';
-import { importFile, loadBlueprint } from 'core/blueprint';
+import mutateApp from 'core/app/mutateApp';
+import importFile from 'core/blueprint/importFile';
+import loadBlueprint from 'core/blueprint/loadBlueprint';
 import { VanillaBlueprint } from 'game/Blueprint';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import { useMemo, useRef } from 'react';
-import { TabContainer } from 'routes/Interface/components/TabContainer';
+import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
-import getStellarContext from 'utilities/getStellarContext';
-import { StatusBar } from './components/StatusBar';
+import { getContext } from 'utilities/getContext';
+import StatusBar from './components/StatusBar';
 
 const Container = styled('div', {
   flex: '1 0 0',
@@ -68,8 +69,7 @@ const StellarContainer = styled('div', {
   gap: theme.space.gapUnrelatedMajor,
 });
 
-const { Icon } = getStellarContext();
-const StellarIcon = styled(Icon, {
+const StellarIcon = styled(getContext().Icon, {
   width: theme.sizes[64],
   height: theme.sizes[64],
 });
@@ -86,7 +86,7 @@ const SearchWrapper = styled('div', {
   maxHeight: theme.sizes.createTabContentMaxHeight,
 });
 
-const StyledSearch = styled(Popup.Search, {
+const StyledSearch = styled(Prompt.Search, {
   flex: '1 0 0',
   width: '100%',
   backgroundColor: theme.colors.appBackground2,
@@ -155,46 +155,46 @@ const FileActions = styled('div', {
   gap: theme.space.gapRelatedMajor,
 });
 
-export const CreateTab = () => {
-  const { t, translate, language } = useTranslator();
+export default function CreateTab() {
+  const { t, translate } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
-  const templates = useMemo(
-    () =>
-      TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
-        ({ name, blueprint, credit }) => {
-          const translation = translate(`tabs.create.templates.list.${name}`);
-
-          const handleClick = () => {
-            loadBlueprint(blueprint);
-            toLayout();
-          };
-
-          const searchItem: SearchItem = {
-            string: translation,
-            node: (
-              <Popup.SearchItem
-                icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
-                onClick={handleClick}
-                key={`item-${name}`}
-                note={credit ?? 'In-Built'}
-              >
-                {translation}
-              </Popup.SearchItem>
-            ),
-            callback: handleClick,
-          };
-
-          return searchItem;
-        },
-      ),
-    [language],
-  );
 
   const toLayout = () => {
     mutateApp((draft) => {
       draft.interface.tab = Tab.Layout;
     });
   };
+
+  const templates = useMemo(
+    () => TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
+      ({ name, blueprint, credit }) => {
+        const translation = translate(`tabs.create.templates.list.${name}`);
+
+        const handleClick = () => {
+          loadBlueprint(blueprint);
+          toLayout();
+        };
+
+        const searchItem: SearchItem = {
+          string: translation,
+          node: (
+            <Prompt.SearchItem
+              icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
+              onClick={handleClick}
+              key={`item-${name}`}
+              note={credit ?? 'In-Built'}
+            >
+              {translation}
+            </Prompt.SearchItem>
+          ),
+          callback: handleClick,
+        };
+
+        return searchItem;
+      },
+    ),
+    [translate],
+  );
 
   const handleScratchClick = () => {
     loadBlueprint();
@@ -239,13 +239,16 @@ export const CreateTab = () => {
 
           <FileActions>
             <Button onClick={handleScratchClick} priority="solid">
-              <FilePlusIcon /> {t`tabs.create.file_options.from_scratch`}
+              <FilePlusIcon />
+              {t`tabs.create.file_options.from_scratch`}
             </Button>
             <Button onClick={handleImportClick}>
-              <EnterIcon /> {t`tabs.create.file_options.import`}
+              <EnterIcon />
+              {t`tabs.create.file_options.import`}
             </Button>
             <Button onClick={handleOpenClick}>
-              <UploadIcon /> {t`tabs.create.file_options.open`}
+              <UploadIcon />
+              {t`tabs.create.file_options.open`}
             </Button>
           </FileActions>
         </SectionContainer>
@@ -254,4 +257,4 @@ export const CreateTab = () => {
       <StatusBar />
     </TabContainer>
   );
-};
+}

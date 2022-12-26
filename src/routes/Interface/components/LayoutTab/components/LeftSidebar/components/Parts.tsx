@@ -1,10 +1,10 @@
 import { PlusIcon } from '@radix-ui/react-icons';
 import * as PartsExplorer from 'components/PartsExplorer';
 import * as Sidebar from 'components/Sidebar';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import useBlueprint from 'stores/blueprint';
 
-export const Parts = () => {
+export default function Parts() {
   const { t, f } = useTranslator();
   const hasNoParts = useBlueprint((state) => state.part_order.length === 0);
 
@@ -18,6 +18,6 @@ export const Parts = () => {
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   ) : (
-    <PartsExplorer.Container fullHeight overflow parentId={null} />
+    <PartsExplorer.Root fullHeight overflow parentId={null} />
   );
-};
+}

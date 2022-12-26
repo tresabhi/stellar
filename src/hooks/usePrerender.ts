@@ -1,21 +1,19 @@
 import useKeybinds from 'hooks/useKeybinds';
-import { useTranslator } from 'hooks/useTranslator';
-import { globalStyles } from 'stitches.config';
+import useTranslator from 'hooks/useTranslator';
+import globalStyles from 'stitches.config/styles/global';
 import useApp from 'stores/app';
-import getStellarContext from 'utilities/getStellarContext';
-import { prettifyVersion } from 'utilities/prettifyVersion';
+import { getContext } from 'utilities/getContext';
+import prettifyVersion from 'utilities/prettifyVersion';
 import packageJSON from '../../package.json';
 
-export const usePrerender = () => {
-  const stellarContext = getStellarContext();
+export default function usePrerender() {
+  const { title } = getContext();
   useTranslator();
   globalStyles();
   useKeybinds();
 
-  // const version = stellarContext.version.split('.');
-  // document.title = `${stellarContext.title} ${version[0]}.${version[1]}`;
   const prettifiedVersion = prettifyVersion(packageJSON.version);
-  document.title = `${stellarContext.title}${
+  document.title = `${title}${
     prettifiedVersion ? ` ${prettifiedVersion}` : ''
   }`;
 
@@ -24,7 +22,7 @@ export const usePrerender = () => {
       file: { handle, hasUnsavedChanges },
     } = useApp.getState();
 
-    document.title = `${stellarContext.title} ${
+    document.title = `${title} ${
       handle ? `- ${handle.name}` : `${prettifiedVersion}`
     }${hasUnsavedChanges ? '*' : ''}`;
   };
@@ -34,4 +32,4 @@ export const usePrerender = () => {
     rerenderDocumentTitle,
   );
   useApp.subscribe((state) => state.file.handle, rerenderDocumentTitle);
-};
+}

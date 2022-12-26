@@ -1,10 +1,18 @@
-import { setPopupsEnabled } from 'core/interface';
+import mutateApp from 'core/app/mutateApp';
 import { useEffect } from 'react';
+import useApp from 'stores/app';
 
-export const usePopupConcurrency = () => {
+export default function usePopupConcurrency() {
   useEffect(() => {
-    setPopupsEnabled(false);
+    if (useApp.getState().interface.newPopupsEnabled) {
+      mutateApp((draft) => {
+        draft.interface.newPopupsEnabled = false;
+      });
 
-    return () => setPopupsEnabled(true);
+      return () => mutateApp((draft) => {
+        draft.interface.newPopupsEnabled = true;
+      });
+    }
+    return undefined;
   });
-};
+}

@@ -1,10 +1,13 @@
 import { TransformIcon as Icon } from '@radix-ui/react-icons';
-import PartCluster from 'components/Canvas/components/PartCluster';
-import { declareBoundsUpdated, getBoundsFromParts } from 'core/bounds';
-import { getPart, partExportify, removePartMetaData } from 'core/part';
+import PartCluster from 'components/PartCluster';
+import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
+import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
+import exportifyPart from 'core/part/exportifyPart';
+import getPart from 'core/part/getPart';
+import removeMetaData from 'core/part/removeMetaData';
 import PartCategory from 'hooks/constants/partCategory';
 import { isArray } from 'lodash';
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
@@ -27,21 +30,6 @@ export const GroupData: Group = {
   part_order: [],
 };
 
-export const GroupLayoutComponent: FC<PartComponentProps> = ({ id }) => {
-  const partOrder = useBlueprint(
-    (state) => getPart<Group>(id, state).part_order,
-  );
-
-  useBoundsUpdated(partOrder, () => {
-    const bounds = getBoundsFromParts(partOrder);
-    boundsStore[id] = { bounds, needsRecomputation: false };
-
-    declareBoundsUpdated(id);
-  });
-
-  return <PartCluster parentId={id} />;
-};
-
 const useBoundsUpdated = (ids: string[], callback: () => void) => {
   const debouncedCallback = fallingEdgeDebounce(callback, 0);
 
@@ -60,17 +48,32 @@ const useBoundsUpdated = (ids: string[], callback: () => void) => {
   });
 };
 
+export function GroupLayoutComponent({ id }: PartComponentProps) {
+  const partOrder = useBlueprint(
+    (state) => getPart<Group>(id, state).part_order,
+  );
+
+  useBoundsUpdated(partOrder, () => {
+    const { bounds } = getBoundsFromParts(partOrder);
+    boundsStore[id] = { bounds, needsRecomputation: false };
+
+    declareBoundsUpdated(id);
+  });
+
+  return <PartCluster parentId={id} />;
+}
+
 export const GroupIcon = Icon;
 
 export const groupExportify: PartExportifier<Group> = (part, draft) => {
   const exportedParts: VanillaPart[] = [];
-  const partWithoutMetaData = removePartMetaData(part) as Group;
+  const partWithoutMetaData = removeMetaData(part) as Group;
 
   partWithoutMetaData.part_order.forEach((id) => {
     const childPart = draft.parts[id];
 
     if (childPart) {
-      const exportedPart = partExportify(childPart, draft);
+      const exportedPart = exportifyPart(childPart, draft);
 
       if (exportedPart) {
         if (isArray(exportedPart)) {

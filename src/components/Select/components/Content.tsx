@@ -1,6 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { FC } from 'react';
 import { styled, theme } from 'stitches.config';
 
 const Container = styled(SelectPrimitive.Content, {
@@ -28,10 +27,10 @@ const DownIcon = styled(ChevronDownIcon, {
   color: theme.colors.textLowContrast,
 });
 
-export const Content: FC<SelectPrimitive.SelectContentProps> = ({
+export function Content({
   children,
   ...props
-}) => {
+}: SelectPrimitive.SelectContentProps) {
   return (
     <SelectPrimitive.Portal>
       <Container {...props}>
@@ -49,4 +48,4 @@ export const Content: FC<SelectPrimitive.SelectContentProps> = ({
       </Container>
     </SelectPrimitive.Portal>
   );
-};
+}

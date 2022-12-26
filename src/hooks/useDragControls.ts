@@ -1,17 +1,15 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import { CANVAS_MATRIX_SCALE } from 'components/Canvas/components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
-import { mutateApp } from 'core/app';
-import { deferUpdates, undeferUpdates } from 'core/bounds';
-import {
-  getPart,
-  selectPart,
-  selectPartOnly,
-  translatePartsBySelectionAsync,
-  translateTranslatablePartsBySelection,
-} from 'core/part';
+import { CANVAS_MATRIX_SCALE } from 'components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
+import mutateApp from 'core/app/mutateApp';
+import deferUpdates from 'core/bounds/deferUpdates';
+import getPart from 'core/part/getPart';
+import select from 'core/part/select';
+import selectConcurrent from 'core/part/selectConcurrent';
+import translateSelectedAsync from 'core/part/translateSelectedAsync';
+import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
-import { getSnapDistance } from 'utilities/getSnapDistance';
+import getSnapDistance from 'utilities/getSnapDistance';
 import useApp, { Tool } from '../stores/app';
 
 const useDragControls = (id: string) => {
@@ -22,34 +20,11 @@ const useDragControls = (id: string) => {
   const initial = new Vector2();
   const movement = new Vector2();
 
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    const part = getPart(id) as PartWithTransformations | undefined;
-    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
-
-    if (
-      part &&
-      (part.selected || part.parent_id === null) && // is selected or is at root level
-      !part.hidden &&
-      !part.locked &&
-      tool === Tool.Move &&
-      !isSpacePanning &&
-      !isTouchPanning
-    ) {
-      event.stopPropagation();
-
-      firstMove = true;
-      selectedInitially = part.selected;
-      initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
-      movement.set(0, 0);
-
-      window.addEventListener('pointerup', handlePointerUp);
-      window.addEventListener('pointermove', handlePointerMove);
-    }
-  };
   const handlePointerMove = (event: PointerEvent) => {
     const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       handlePointerUp();
     } else {
       if (firstMove) {
@@ -74,22 +49,22 @@ const useDragControls = (id: string) => {
 
       if (!selectedInitially) {
         if (event.shiftKey) {
-          selectPart(id);
+          select(id);
         } else {
-          selectPartOnly(id);
+          selectConcurrent(id);
         }
 
         selectedInitially = true;
       }
 
       if (delta.length() > 0) {
-        translatePartsBySelectionAsync(delta.x, delta.y);
+        translateSelectedAsync(delta.x, delta.y);
         movement.copy(newMovement);
       }
     }
   };
   const handlePointerUp = () => {
-    if (!firstMove) undeferUpdates();
+    if (!firstMove) deferUpdates(false);
 
     const removeSelectionRestriction = () => {
       window.removeEventListener('pointerup', removeSelectionRestriction);
@@ -100,7 +75,7 @@ const useDragControls = (id: string) => {
     };
 
     if (movement.length() > 0) {
-      translateTranslatablePartsBySelection(movement.x, movement.y);
+      translateSelectedRecursive(movement.x, movement.y);
 
       mutateApp((draft) => {
         draft.editor.preventNextSelection = true;
@@ -110,6 +85,30 @@ const useDragControls = (id: string) => {
 
     window.removeEventListener('pointerup', handlePointerUp);
     window.removeEventListener('pointermove', handlePointerMove);
+  };
+  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+    const part = getPart(id) as PartWithTransformations | undefined;
+    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
+
+    if (
+      part
+      && (part.selected || part.parent_id === null) // is selected or is at root level
+      && !part.hidden
+      && !part.locked
+      && tool === Tool.Move
+      && !isSpacePanning
+      && !isTouchPanning
+    ) {
+      event.stopPropagation();
+
+      firstMove = true;
+      selectedInitially = part.selected;
+      initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
+      movement.set(0, 0);
+
+      window.addEventListener('pointerup', handlePointerUp);
+      window.addEventListener('pointermove', handlePointerMove);
+    }
   };
 
   return handlePointerDown;

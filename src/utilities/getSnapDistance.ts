@@ -9,11 +9,7 @@ export interface EventWithModifiers {
   metaKey: boolean;
 }
 
-export const getSnapDistance = (event: EventWithModifiers) =>
-  event.ctrlKey
-    ? event.shiftKey
-      ? 0
-      : FINE_SNAP
-    : event.shiftKey
-    ? MAJOR_SNAP
-    : DEFAULT_SNAP;
+export default function getSnapDistance(event: EventWithModifiers) {
+  if (event.ctrlKey) return event.shiftKey ? 0 : FINE_SNAP;
+  return event.shiftKey ? MAJOR_SNAP : DEFAULT_SNAP;
+}

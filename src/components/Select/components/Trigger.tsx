@@ -1,9 +1,8 @@
 import { CaretSortIcon } from '@radix-ui/react-icons';
 import * as SelectPrimitive from '@radix-ui/react-select';
-import { FC } from 'react';
 import { styled, theme } from 'stitches.config';
 
-const Primitive = styled(SelectPrimitive.Trigger, {
+const StyledTrigger = styled(SelectPrimitive.Trigger, {
   backgroundColor: theme.colors.componentBackground,
   padding: theme.space.paddingMinor,
   gap: theme.space.gapRelated,
@@ -47,12 +46,14 @@ const CaretIcon = styled(CaretSortIcon, {
   height: theme.sizes[12],
 });
 
-export const Trigger: FC<SelectPrimitive.SelectValueProps> = (props) => (
-  <Primitive>
-    <SelectPrimitive.Value {...props} />
-    <SelectPrimitive.Icon>
-      <CaretIcon />
-    </SelectPrimitive.Icon>
-  </Primitive>
-);
-Trigger.toString = Primitive.toString;
+export function Trigger(props: SelectPrimitive.SelectValueProps) {
+  return (
+    <StyledTrigger>
+      <SelectPrimitive.Value {...props} />
+      <SelectPrimitive.Icon>
+        <CaretIcon />
+      </SelectPrimitive.Icon>
+    </StyledTrigger>
+  );
+}
+Trigger.toString = StyledTrigger.toString;

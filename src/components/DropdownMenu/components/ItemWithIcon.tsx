@@ -1,12 +1,12 @@
-import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { FC, ReactNode } from 'react';
+import { ComponentProps } from '@stitches/react';
+import { ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Item } from './Item';
 
-export interface InputWithIconProps
-  extends DropdownMenuPrimitive.DropdownMenuItemProps {
+export interface ItemWithIconProps extends ComponentProps<typeof Item> {
   icon?: ReactNode;
   keybind?: ReactNode;
+  disabled?: boolean;
 }
 
 const IconContainer = styled('div', {
@@ -60,15 +60,18 @@ const Keybind = styled('span', {
   fontFamily: theme.fonts.mono,
 });
 
-export const ItemWithIcon: FC<InputWithIconProps> = ({
+export function ItemWithIcon({
   icon,
   children,
   keybind,
+  disabled,
   ...props
-}) => (
-  <Item {...props}>
-    <IconContainer>{icon}</IconContainer>
-    <Label>{children}</Label>
-    <Keybind>{keybind}</Keybind>
-  </Item>
-);
+}: ItemWithIconProps) {
+  return (
+    <Item disabled={disabled} {...props}>
+      <IconContainer disabled={disabled}>{icon}</IconContainer>
+      <Label disabled={disabled}>{children}</Label>
+      <Keybind>{keybind}</Keybind>
+    </Item>
+  );
+}

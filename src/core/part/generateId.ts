@@ -4,7 +4,7 @@ import useBlueprint from 'stores/blueprint';
 
 export const ID_LENGTH = 16;
 
-export const generateId = (parts?: Record<string, Part>): string => {
+export default function generateId(parts?: Record<string, Part>): string {
   if (parts) {
     let id = '';
 
@@ -14,7 +14,6 @@ export const generateId = (parts?: Record<string, Part>): string => {
     }
 
     return id;
-  } else {
-    return generateId(useBlueprint.getState().parts);
   }
-};
+  return generateId(useBlueprint.getState().parts);
+}

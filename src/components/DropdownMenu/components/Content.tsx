@@ -1,5 +1,4 @@
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
-import { FC } from 'react';
 import { styled, theme } from 'stitches.config';
 
 const StyledContent = styled(DropdownMenuPrimitive.Content, {
@@ -17,14 +16,16 @@ const Arrow = styled(DropdownMenuPrimitive.Arrow, {
   fill: theme.colors.componentNonInteractiveBorder,
 });
 
-export const Content: FC<DropdownMenuPrimitive.DropdownMenuContentProps> = ({
+export function Content({
   children,
   ...props
-}) => (
-  <DropdownMenuPrimitive.Portal>
-    <StyledContent {...props}>
-      <Arrow />
-      {children}
-    </StyledContent>
-  </DropdownMenuPrimitive.Portal>
-);
+}: DropdownMenuPrimitive.DropdownMenuContentProps) {
+  return (
+    <DropdownMenuPrimitive.Portal>
+      <StyledContent {...props}>
+        <Arrow />
+        {children}
+      </StyledContent>
+    </DropdownMenuPrimitive.Portal>
+  );
+}

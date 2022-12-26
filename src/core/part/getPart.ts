@@ -2,13 +2,10 @@ import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
 import useBlueprint from 'stores/blueprint';
 
-export const getPart = <Type extends Part>(
+export default function getPart<Type extends Part>(
   id: string,
-  draft?: Blueprint,
-): Type => {
-  if (draft) {
-    return draft.parts[id] as Type;
-  } else {
-    return getPart<Type>(id, useBlueprint.getState());
-  }
-};
+  blueprint?: Blueprint,
+): Type {
+  if (blueprint) return blueprint.parts[id] as Type;
+  return getPart<Type>(id, useBlueprint.getState());
+}

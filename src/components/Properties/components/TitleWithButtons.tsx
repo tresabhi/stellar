@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Title as TitlePrimitive } from './Title';
 
@@ -17,12 +17,11 @@ const Title = styled(TitlePrimitive, {
   flex: 1,
 });
 
-export const TitleWithButton: FC<TitleWithButtonProps> = ({
-  buttons,
-  ...props
-}) => (
-  <Container>
-    <Title {...props} />
-    {buttons}
-  </Container>
-);
+export function TitleWithButton({ buttons, ...props }: TitleWithButtonProps) {
+  return (
+    <Container>
+      <Title {...props} />
+      {buttons}
+    </Container>
+  );
+}

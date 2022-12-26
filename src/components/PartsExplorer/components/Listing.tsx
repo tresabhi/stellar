@@ -1,21 +1,21 @@
 import { CaretRightIcon } from '@radix-ui/react-icons';
 import { Input } from 'components/Input';
-import {
-  getPart,
-  mutatePart,
-  selectPartOnly,
-  togglePartSelection,
-} from 'core/part';
+import getPart from 'core/part/getPart';
+import mutateParts from 'core/part/mutateParts';
+import selectConcurrent from 'core/part/selectConcurrent';
+import toggleSelection from 'core/part/toggleSelection';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { useInputEscape } from 'hooks/useInputEscape';
 import usePartProperty from 'hooks/usePartProperty';
-import { memo, MouseEvent, PointerEvent, useRef } from 'react';
+import {
+  memo, MouseEvent, PointerEvent, useRef,
+} from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry, { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
-import { Container } from './Container';
+import { Root } from './Root';
 
 export interface ListingProps {
   id: string;
@@ -105,8 +105,8 @@ const Label = styled(Input, {
   },
 });
 
-export const Listing = memo<ListingProps>(
-  ({ id, indent }) => {
+export const Listing = memo(
+  ({ id, indent }: ListingProps) => {
     /**
      * we know, for sure, this part and registry exists because it was
      * successfully imported in the first place
@@ -132,7 +132,7 @@ export const Listing = memo<ListingProps>(
             label.current.value = newLabel;
             lastLabel = newLabel;
 
-            mutatePart(id, (draft) => {
+            mutateParts(id, (draft) => {
               draft.label = newLabel;
             });
           } else {
@@ -142,7 +142,7 @@ export const Listing = memo<ListingProps>(
           label.current.value = data.label;
           lastLabel = data.label;
 
-          mutatePart(id, (draft) => {
+          mutateParts(id, (draft) => {
             draft.label = data.label;
           });
         }
@@ -163,10 +163,10 @@ export const Listing = memo<ListingProps>(
           if (lastSelection) {
             // TODO: add shift selections
           } else {
-            selectPartOnly(id);
+            selectConcurrent(id);
           }
         } else {
-          togglePartSelection(id);
+          toggleSelection(id);
         }
       } else if (event.shiftKey) {
         const { selections } = useBlueprint.getState();
@@ -175,10 +175,10 @@ export const Listing = memo<ListingProps>(
         if (lastSelection) {
           // TODO: add shift selections
         } else {
-          selectPartOnly(id);
+          selectConcurrent(id);
         }
       } else {
-        selectPartOnly(id);
+        selectConcurrent(id);
       }
     };
     const handleTriggerDoubleClick = () => {
@@ -231,7 +231,7 @@ export const Listing = memo<ListingProps>(
           />
         </summary>
 
-        {isGroup && <Container indent={indent + 1} parentId={part.id} />}
+        {isGroup && <Root indent={indent + 1} parentId={part.id} />}
       </Details>
     );
   },

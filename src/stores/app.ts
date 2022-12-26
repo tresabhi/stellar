@@ -30,7 +30,7 @@ export interface UseApp {
     tab: Tab;
     isInteracting: boolean;
     orientationPromptDismissed: boolean;
-    zenMode: boolean;
+    focusMode: boolean;
     newPopupsEnabled: boolean;
   };
 
@@ -41,7 +41,6 @@ export interface UseApp {
     preventNextSelection: boolean;
     clipboard?: Snippet;
     camera?: Camera;
-    invalidateFrame?: () => void;
   };
 }
 
@@ -55,7 +54,7 @@ export const UseAppData: UseApp = {
     tab: Tab.Create,
     isInteracting: false,
     orientationPromptDismissed: false,
-    zenMode: false,
+    focusMode: false,
     newPopupsEnabled: true,
   },
 
@@ -66,7 +65,6 @@ export const UseAppData: UseApp = {
     preventNextSelection: false,
     clipboard: undefined,
     camera: undefined,
-    invalidateFrame: undefined,
   },
 };
 

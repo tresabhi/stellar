@@ -1,14 +1,13 @@
-import { mutateVersionControl } from 'core/app';
+import { invalidate } from '@react-three/fiber';
+import mutateVersionControl from 'core/app/mutateVersionControl';
 import { applyPatches } from 'immer';
-import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { UseVersionControl } from 'stores/versionControl';
-import { declareUnsavedChanges } from './declareUnsavedChanges';
+import declareUnsavedChanges from './declareUnsavedChanges';
 
-export const undoVersion = () => {
+export default function undoVersion() {
   mutateVersionControl((draft: UseVersionControl) => {
     const inversePatches = draft.history[draft.index]?.inversePatches;
-    const { invalidateFrame } = useApp.getState().editor;
 
     if (inversePatches) {
       useBlueprint.setState(
@@ -17,8 +16,8 @@ export const undoVersion = () => {
     }
 
     draft.index = Math.max(-1, draft.index - 1);
-    invalidateFrame && invalidateFrame();
+    invalidate();
   });
 
   declareUnsavedChanges();
-};
+}

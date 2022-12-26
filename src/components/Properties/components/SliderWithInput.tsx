@@ -1,15 +1,16 @@
-import { Slider as SliderPrimitive, SliderProps } from 'components/Slider';
-import { MIXED_VALUE_PLACEHOLDER } from 'hooks/propertyControllers';
+import SliderPrimitive, { SliderProps } from 'components/Slider';
+import { MIXED_VALUE_PLACEHOLDER } from 'hooks/propertyControllers/useNumericalInputProperty';
 import {
   FocusEvent,
   forwardRef,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
 import { styled, theme } from 'stitches.config';
-import { evaluateExpression } from 'utilities/evaluateExpression';
+import evaluateExpression from 'utilities/evaluateExpression';
 import { PropertyWithLabel } from '../types/propertyWithLabel';
 import { PropertyWithUnit } from '../types/propertyWithUnit';
 import { Input, InputRef } from './Input';
@@ -17,8 +18,8 @@ import { Label } from './Label';
 
 export interface SliderWithInputProps
   extends SliderProps,
-    PropertyWithLabel,
-    PropertyWithUnit {
+  PropertyWithLabel,
+  PropertyWithUnit {
   indeterminate?: boolean;
 }
 
@@ -45,8 +46,8 @@ const Slider = styled(SliderPrimitive, {
 });
 
 export const SliderWithInput = forwardRef<
-  SliderWithInputRef,
-  SliderWithInputProps
+SliderWithInputRef,
+SliderWithInputProps
 >(
   (
     {
@@ -68,9 +69,10 @@ export const SliderWithInput = forwardRef<
     const [value, setValue] = useState(defaultValue ?? min);
     const [indeterminate, setIndeterminate] = useState(givenIndeterminate);
 
-    const normalizedValue = (value: number) => {
-      return indeterminate ? MIXED_VALUE_PLACEHOLDER : `${value}`;
-    };
+    const normalizedValue = useCallback(
+      (newValue: number) => (indeterminate ? MIXED_VALUE_PLACEHOLDER : `${newValue}`),
+      [indeterminate],
+    );
 
     const handleSliderValueChange = (newValue: number) => {
       if (givenValue === undefined && input.current) {
@@ -80,20 +82,20 @@ export const SliderWithInput = forwardRef<
         setValue(newValue);
       }
 
-      onValueChange && onValueChange(newValue);
+      if (onValueChange) onValueChange(newValue);
     };
     const handleInputBlur = (event: FocusEvent<InputRef>) => {
       if (givenValue === undefined) {
         let evaluated = evaluateExpression(event.target.value);
 
-        if (isNaN(evaluated)) {
+        if (Number.isNaN(evaluated)) {
           event.target.value = normalizedValue(givenValue ?? value);
         } else {
           evaluated = Math.round(evaluated / step) * step;
           evaluated = Math.min(max, Math.max(min, evaluated));
           event.target.value = normalizedValue(evaluated);
 
-          onValueChange && onValueChange(evaluated);
+          if (onValueChange) onValueChange(evaluated);
           setValue(evaluated);
         }
         event.target.resize();
@@ -112,10 +114,9 @@ export const SliderWithInput = forwardRef<
 
           setValue(newValue);
         };
-        (container.current as SliderWithInputRef).setIndeterminate =
-          setIndeterminate;
+        (container.current as SliderWithInputRef).setIndeterminate = setIndeterminate;
       }
-    });
+    }, [normalizedValue]);
 
     useImperativeHandle(ref, () => container.current as SliderWithInputRef);
 

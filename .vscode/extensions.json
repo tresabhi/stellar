@@ -1,7 +1,7 @@
 {
   "recommendations": [
     "streetsidesoftware.code-spell-checker",
-    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
     "cesium.gltf-vscode"
   ]
 }

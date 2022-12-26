@@ -1,8 +1,8 @@
 import { ClipboardIcon, Component1Icon } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 
-export const Snippets = () => {
+export default function Snippets() {
   const { t, f } = useTranslator();
 
   return (
@@ -17,4 +17,4 @@ export const Snippets = () => {
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   );
-};
+}

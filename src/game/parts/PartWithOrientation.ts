@@ -1,11 +1,14 @@
 import { invalidate } from '@react-three/fiber';
-import { declareBoundsUpdated } from 'core/bounds';
-import { getPart, PartRotateEventDetail } from 'core/part';
+import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
+import getPart from 'core/part/getPart';
+import { PartRotateEventDetail } from 'core/part/rotateSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import {
+  Part, PartData, VanillaPart, VanillaPartData,
+} from './Part';
 
 export interface VanillaPartWithOrientation extends VanillaPart {
   /**

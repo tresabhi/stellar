@@ -1,11 +1,11 @@
-import { DeferUpdatesEventDetail, getDeferUpdates } from './getDeferUpdates';
+import getDeferUpdates, { DeferUpdatesEventDetail } from './getDeferUpdates';
 
-export const deferUpdates = () => {
-  if (!getDeferUpdates()) {
+export default function deferUpdates(defer = true) {
+  if (getDeferUpdates() !== defer) {
     window.dispatchEvent(
       new CustomEvent<DeferUpdatesEventDetail>('deferupdates', {
-        detail: true,
+        detail: defer,
       }),
     );
   }
-};
+}

@@ -1,30 +1,35 @@
 import { InputProps, InputRef } from 'components/Properties';
-import { mutateParts, subscribeToPart } from 'core/part';
+import mutateParts from 'core/part/mutateParts';
+import subscribeToPart from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
-import { ChangeEvent, Ref, useEffect, useRef } from 'react';
-import { evaluateExpression } from 'utilities/evaluateExpression';
+import {
+  ChangeEvent, Ref, useEffect, useRef,
+} from 'react';
+import evaluateExpression from 'utilities/evaluateExpression';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
-import { fixFloatRounding } from 'utilities/fixFloatRounding';
-import { getMutualProperty } from 'utilities/getMutualProperty';
+import fixFloatRounding from 'utilities/fixFloatRounding';
+import getMutualProperty from 'utilities/getMutualProperty';
 import { RERENDER_DEBOUNCE } from './useSliderProperty';
 
 export const MIXED_VALUE_PLACEHOLDER = '~';
 
-export const useNumericalInputProperty = <
+export default function useNumericalInputProperty<
   Type extends Part,
   Value extends number = number,
 >(
   ids: string[],
   slice: (state: Type) => Value,
   mutate: (draft: Type, newValue: Value, lastValue?: Value) => Value | void,
-) => {
+) {
   const input = useRef<InputRef>(null);
   let value: Value | undefined = getMutualProperty(ids, slice);
 
-  const setInputValue = (value?: number) => {
+  const setInputValue = (newValue?: number) => {
     if (input.current) {
       input.current.value = `${
-        value === undefined ? MIXED_VALUE_PLACEHOLDER : fixFloatRounding(value)
+        newValue === undefined
+          ? MIXED_VALUE_PLACEHOLDER
+          : fixFloatRounding(newValue)
       }`;
       input.current.resize();
     }
@@ -47,7 +52,7 @@ export const useNumericalInputProperty = <
   const onBlur = (event: ChangeEvent<HTMLInputElement>) => {
     const evaluated = evaluateExpression(event.target.value) as Value;
 
-    if (isNaN(evaluated)) {
+    if (Number.isNaN(evaluated)) {
       setInputValue(value);
     } else {
       setInputValue(evaluated);
@@ -61,9 +66,7 @@ export const useNumericalInputProperty = <
   });
 
   useEffect(() => {
-    const unsubscribes = ids.map((id) => {
-      return subscribeToPart(id, recomputeAndRerender, slice);
-    });
+    const unsubscribes = ids.map((id) => subscribeToPart(id, recomputeAndRerender, slice));
 
     return () => {
       unsubscribes.forEach((unsubscribe) => unsubscribe());
@@ -77,4 +80,4 @@ export const useNumericalInputProperty = <
   };
 
   return hook;
-};
+}

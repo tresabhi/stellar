@@ -1,5 +1,5 @@
 import { CheckIcon, DashIcon } from '@radix-ui/react-icons';
-import { Button } from 'components/Button';
+import Button from 'components/Button';
 import {
   ComponentPropsWithoutRef,
   forwardRef,
@@ -13,18 +13,13 @@ import { styled, theme } from 'stitches.config';
 
 export interface CheckboxProps
   extends Omit<
-    ComponentPropsWithoutRef<typeof Trigger>,
-    'value' | 'defaultValue' | 'onChange' | 'ref'
+  ComponentPropsWithoutRef<typeof Trigger>,
+  'value' | 'defaultValue' | 'onChange' | 'ref'
   > {
   value?: boolean;
   defaultValue?: boolean;
   indeterminate?: boolean;
-  onChange?: (
-    event: MouseEvent<HTMLButtonElement> & {
-      value: boolean;
-      indeterminate: boolean;
-    },
-  ) => void;
+  onChange?: (value: boolean) => void;
 }
 
 export interface CheckboxRef extends HTMLButtonElement {
@@ -85,10 +80,10 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       setValue((state) => !state);
-      setIndeterminate(false);
+      if (indeterminate) setIndeterminate(false);
 
-      onClick && onClick(event);
-      onChange && onChange({ ...event, value: !value, indeterminate: false });
+      if (onClick) onClick(event);
+      if (onChange) onChange(!value);
     };
 
     useEffect(() => {
@@ -96,7 +91,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
         (trigger.current as CheckboxRef).setValue = setValue;
         (trigger.current as CheckboxRef).setIndeterminate = setIndeterminate;
       }
-    });
+    }, []);
 
     useImperativeHandle(ref, () => trigger.current as CheckboxRef);
 

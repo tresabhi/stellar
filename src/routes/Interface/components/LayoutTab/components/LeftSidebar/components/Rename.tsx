@@ -1,7 +1,7 @@
 import { Pencil1Icon } from '@radix-ui/react-icons';
-import { Button as ButtonPrimitive } from 'components/Button';
-import { popup } from 'core/interface';
-import { RenamePartsPopup } from 'routes/components/RenamePartsPopup';
+import ButtonPrimitive from 'components/Button';
+import prompt from 'core/interface/prompt';
+import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
 import { styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 
@@ -34,13 +34,13 @@ const Button = styled(ButtonPrimitive, {
   },
 });
 
-export const Rename = () => {
+export default function Rename() {
   const visible = useBlueprint((state) => state.selections.length > 0);
-  const handleClick = () => popup(RenamePartsPopup);
+  const handleClick = () => prompt(RenamePartsPrompt);
 
   return (
     <Button visible={visible} onClick={handleClick}>
       <Pencil1Icon />
     </Button>
   );
-};
+}

@@ -1,20 +1,19 @@
 import { fileSave } from 'browser-fs-access';
 import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import { exportifyBlueprint } from './exportifyBlueprint';
+import exportifyBlueprint from './exportifyBlueprint';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 import {
   FILE_EXTENSION_REGEX,
   UNNAMED_BLUEPRINT_FILE_NAME,
 } from './saveFileAs';
 
-export const exportFile = async () => {
+export default async function exportFile() {
   const {
     file: { handle },
   } = useApp.getState();
-  const fileName =
-    handle?.name.replace(FILE_EXTENSION_REGEX, '') ??
-    UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');
+  const fileName = handle?.name.replace(FILE_EXTENSION_REGEX, '')
+    ?? UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');
   const data = exportifyBlueprint(useBlueprint.getState());
   const blob = new Blob(
     [
@@ -34,4 +33,4 @@ export const exportFile = async () => {
     mimeTypes: ['application/json'],
     extensions: ['.json', '.txt'],
   });
-};
+}

@@ -1,11 +1,11 @@
-import { mutateVersionControl } from 'core/app';
+import mutateVersionControl from 'core/app/mutateVersionControl';
 import { Blueprint } from 'game/Blueprint';
 import { produceWithPatches } from 'immer';
 import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
-import { declareUnsavedChanges } from './declareUnsavedChanges';
+import declareUnsavedChanges from './declareUnsavedChanges';
 
-export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
+export default function mutateBlueprint(producer: (state: Blueprint) => void) {
   const [nextState, patches, inversePatches] = produceWithPatches(
     useBlueprint.getState(),
     producer,
@@ -21,18 +21,16 @@ export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
       );
 
       draft.history.push({
-        inversePatches: inversePatches,
-        patches: patches,
+        inversePatches,
+        patches,
       });
 
       if (undoLimit === 0) {
-        draft.index++;
+        draft.index += 1;
+      } else if (draft.history.length > undoLimit) {
+        draft.history.shift();
       } else {
-        if (draft.history.length > undoLimit) {
-          draft.history.shift();
-        } else {
-          draft.index++;
-        }
+        draft.index += 1;
       }
     });
 
@@ -41,4 +39,4 @@ export const mutateBlueprint = (producer: (state: Blueprint) => void) => {
   } else {
     // TODO: warn in verbose mode
   }
-};
+}

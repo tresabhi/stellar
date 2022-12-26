@@ -1,8 +1,8 @@
 import * as ScrollArea from 'components/ScrollArea';
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { styled, theme } from 'stitches.config';
 
-const Root = styled(ScrollArea.Root, {
+const StyledRoot = styled(ScrollArea.Root, {
   flex: '1 0 0',
 });
 
@@ -13,9 +13,9 @@ const Wrapper = styled('div', {
   gap: theme.space.gapUnrelatedMajor,
 });
 
-export const Container: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
+export function Root(props: HTMLAttributes<HTMLDivElement>) {
   return (
-    <Root>
+    <StyledRoot>
       <ScrollArea.Viewport>
         <Wrapper {...props} />
       </ScrollArea.Viewport>
@@ -23,6 +23,6 @@ export const Container: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
       <ScrollArea.Scrollbar orientation="vertical">
         <ScrollArea.Thumb />
       </ScrollArea.Scrollbar>
-    </Root>
+    </StyledRoot>
   );
-};
+}

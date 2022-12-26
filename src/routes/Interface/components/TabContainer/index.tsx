@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { styled } from 'stitches.config';
 
 const Container = styled('div', {
@@ -11,6 +11,6 @@ export interface TabContainerProps {
   children: ReactNode;
 }
 
-export const TabContainer: FC<TabContainerProps> = ({ children }) => (
-  <Container>{children}</Container>
-);
+export default function TabContainer({ children }: TabContainerProps) {
+  return <Container>{children}</Container>;
+}

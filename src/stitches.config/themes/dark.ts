@@ -15,7 +15,7 @@ const colorsDark = {
   componentSolidBackgroundActive_accent: purpleDark.purple11,
 };
 
-export const themeDark = createTheme('theme-dark', {
+const themeDark = createTheme('theme-dark', {
   colors: colorsDark,
 
   borderStyles: {
@@ -34,3 +34,4 @@ export const themeDark = createTheme('theme-dark', {
     componentInteractiveActive_accent: `${colorsDark.componentInteractiveBorderActive_accent} solid 0.0625rem`,
   },
 });
+export default themeDark;

@@ -1,16 +1,16 @@
 import { fileSave } from 'browser-fs-access';
-import { mutateApp } from 'core/app/mutateApp';
+import mutateApp from 'core/app/mutateApp';
 import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import { declareNoUnsavedChanges } from './declareNoUnsavedChanges';
+import declareUnsavedChanges from './declareUnsavedChanges';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
-import { savifyBlueprint } from './savifyBlueprint';
+import savifyBlueprint from './savifyBlueprint';
 
 export const UNNAMED_BLUEPRINT_FILE_NAME = 'Blueprint.stbp';
 
 export const FILE_EXTENSION_REGEX = /\.[^/.]+$/;
 
-export const saveFileAs = async () => {
+export default async function saveFileAs() {
   const {
     file: { handle },
   } = useApp.getState();
@@ -35,5 +35,5 @@ export const saveFileAs = async () => {
   mutateApp((draft) => {
     draft.file.handle = newHandle ?? undefined;
   });
-  declareNoUnsavedChanges();
-};
+  declareUnsavedChanges(false);
+}

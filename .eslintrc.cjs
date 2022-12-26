@@ -1,7 +1,61 @@
-/* eslint-env node */
 module.exports = {
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
   root: true,
+
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'airbnb',
+    'airbnb/hooks',
+    'airbnb-typescript',
+    'plugin:react/jsx-runtime',
+  ],
+
+  rules: {
+    'react/jsx-props-no-spreading': 0,
+
+    /**
+     * Conflicts with immer
+     */
+    'no-param-reassign': [
+      'error',
+      { ignorePropertyModificationsFor: ['draft'] },
+    ],
+
+    /**
+     * Conflicts with react three fiber props. Should be handled by typescript
+     * anyway.
+     */
+    'react/no-unknown-property': 0,
+
+    /**
+     * Conflicts with nodejs imports.
+     */
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+
+    /**
+     * Conflicts with vite's mighty dependency resolver. Isn't an issue so it
+     * shouldn't be flagged. Plus, disabling this saves a lot of lint time.
+     */
+    'import/no-cycle': 0,
+
+    /**
+     * Conflicts with component folders.
+     */
+    'import/prefer-default-export': 0,
+
+    /**
+     * TypeScript does a good job of making sure props don't work without
+     * defaults. React's run-time default props management is unnecessary as
+     * there is really no uncontrolled props being passed anyway.
+     */
+    'react/require-default-props': 0,
+  },
+
+  plugins: ['@typescript-eslint'],
+
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: './tsconfig.json',
+    tsconfigRootDir: __dirname,
+  },
 };

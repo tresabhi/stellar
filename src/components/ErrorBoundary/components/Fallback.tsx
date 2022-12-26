@@ -5,16 +5,11 @@ import {
   ExclamationTriangleIcon,
   ResetIcon,
 } from '@radix-ui/react-icons';
-import { Button as ButtonPrimitive } from 'components/Button';
-import { mutateSettings } from 'core/app';
+import ButtonPrimitive from 'components/Button';
+import mutateSettings from 'core/app/mutateSettings';
 import moment from 'moment';
 import {
-  FC,
-  HTMLAttributes,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
+  HTMLAttributes, ReactNode, useEffect, useRef, useState,
 } from 'react';
 import { deviceDetect } from 'react-device-detect';
 import { FallbackProps as FallbackPrimitiveProps } from 'react-error-boundary';
@@ -24,7 +19,7 @@ import useSettings from 'stores/settings';
 
 export interface FallbackProps
   extends FallbackPrimitiveProps,
-    HTMLAttributes<HTMLDivElement> {}
+  HTMLAttributes<HTMLDivElement> {}
 
 const Container = styled('div', {
   width: '100vw',
@@ -37,7 +32,7 @@ const Container = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   gap: theme.space.gapUnrelatedMajor,
-  backgroundColor: theme.colors.appBackground1,
+  backgroundColor: theme.colors.appBackground2,
   padding: theme.space.paddingMajor,
 });
 
@@ -129,7 +124,7 @@ const DebugContentContainer = styled('div', {
   flex: 1,
   height: '100%',
   overflow: 'auto',
-  backgroundColor: theme.colors.appBackground2,
+  backgroundColor: theme.colors.componentBackground,
   border: theme.borderStyles.componentNonInteractive,
   padding: theme.space.padding,
   borderRadius: theme.radii[4],
@@ -147,27 +142,27 @@ const DebugContent = styled('span', {
   whiteSpace: 'nowrap',
 });
 
-export const Fallback: FC<FallbackProps> = ({
+export default function Fallback({
   error,
   resetErrorBoundary,
   ...props
-}) => {
+}: FallbackProps) {
   const debug = useSettings((state) => state.debug.errorScreen.showDebug);
   const rawStack = useRef(
     error.stack === undefined
       ? 'No stack provided'
       : error.stack
-          .split(' at ')
-          .filter((value, index) => index !== 0)
-          .map((value) => `at ${value}`),
+        .split(' at ')
+        .filter((value, index) => index !== 0)
+        .map((value) => `at ${value}`),
   );
-  // alert(location.origin);
   const [stack, setStack] = useState<ReactNode>(
     <DebugContent>Mapping...</DebugContent>,
   );
   const [mapped, setMapped] = useState(false);
+  let errorMessage = error.message;
 
-  if (error.message.length === 0) error.message = 'No message provided';
+  if (error.message.length === 0) errorMessage = 'No message provided';
 
   const handleRefreshClick = () => resetErrorBoundary();
   const handleRestartClick = () => window.location.reload();
@@ -184,12 +179,10 @@ export const Fallback: FC<FallbackProps> = ({
       .map((key) => `${key}: ${deviceInfo[key]}`)
       .join('\n');
 
-    const title = `${error.name}: ${error.message}`;
-    const about =
-      '# About\n\n<REPLACE ME WITH INFORMATION ABOUT WHAT HAPPENED>';
-    const reproduce =
-      '# Reproduce\n\n<REPLACE ME WITH INFORMATION ON HOW TO REPRODUCE THIS ISSUE>';
-    const message = `# Message\n\n\`\`\`\n${error.message}\n\`\`\``;
+    const title = `${error.name}: ${errorMessage}`;
+    const about = '# About\n\n<REPLACE ME WITH INFORMATION ABOUT WHAT HAPPENED>';
+    const reproduce = '# Reproduce\n\n<REPLACE ME WITH INFORMATION ON HOW TO REPRODUCE THIS ISSUE>';
+    const message = `# Message\n\n\`\`\`\n${errorMessage}\n\`\`\``;
     const stackReport = `# Stack\n\n\`\`\`\n${
       typeof rawStack.current === 'string'
         ? rawStack.current
@@ -221,7 +214,7 @@ export const Fallback: FC<FallbackProps> = ({
         rawStack.current.map((stackItem) => (
           <DebugContent>
             {stackItem
-              .replace(`${location.origin}/`, '')
+              .replace(`${window.location.origin}/`, '')
               .replace(/\?[a-zA-Z]=(.*?):/, ':')
               .replace('at ', '')}
           </DebugContent>
@@ -237,7 +230,7 @@ export const Fallback: FC<FallbackProps> = ({
     <Container {...props}>
       <InfoContainer>
         <Title mono={debug}>
-          <ExclamationTriangleIcon />{' '}
+          <ExclamationTriangleIcon />
           {debug ? error.name : 'Stellar Ran Into an Issue'}
         </Title>
 
@@ -256,7 +249,7 @@ export const Fallback: FC<FallbackProps> = ({
           <DebugInfo>
             <DebugTitle>Message</DebugTitle>
             <DebugContentContainer>
-              <DebugContent>{error.message}</DebugContent>
+              <DebugContent>{errorMessage}</DebugContent>
             </DebugContentContainer>
           </DebugInfo>
 
@@ -269,18 +262,22 @@ export const Fallback: FC<FallbackProps> = ({
 
       <ButtonsRow>
         <Button onClick={handleRefreshClick}>
-          <CounterClockwiseClockIcon /> Refresh
+          <CounterClockwiseClockIcon />
+          Refresh
         </Button>
         <Button onClick={handleRestartClick}>
-          <ResetIcon /> Restart
+          <ResetIcon />
+          Restart
         </Button>
         <Button onClick={handleReportClick}>
-          <EnvelopeClosedIcon /> Report
+          <EnvelopeClosedIcon />
+          Report
         </Button>
         <Button onClick={handleDebugClick} color={debug ? 'accent' : undefined}>
-          <CodeIcon /> Debug
+          <CodeIcon />
+          Debug
         </Button>
       </ButtonsRow>
     </Container>
   );
-};
+}

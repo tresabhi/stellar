@@ -1,32 +1,34 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
+import { MethodIds } from 'types/Parts';
+import normalizeIds from 'utilities/normalizeIds';
 
-export const mutateParts = <Type extends Part>(
-  ids: string[],
-  mutator: (draft: Type, index:number) => void,
-  draft?: Blueprint,
+export default function mutateParts<Type extends Part>(
+  ids: MethodIds,
+  mutator: (draft: Type, index: number) => void,
   recursive = false,
-) => {
-  if (draft) {
-    ids.forEach((id,index) => {
-      const part = draft.parts[id] as Type;
+  blueprint?: Blueprint,
+) {
+  if (blueprint) {
+    normalizeIds(ids).forEach((id, index) => {
+      const part = blueprint.parts[id] as Type;
 
       if (recursive && part.n === 'Group') {
         mutateParts(
           (part as unknown as Group).part_order,
           mutator,
-          draft,
           true,
+          blueprint,
         );
       } else {
-        mutator(part,index);
+        mutator(part, index);
       }
     });
   } else {
     mutateBlueprint((draft) => {
-      mutateParts(ids, mutator, draft, recursive);
+      mutateParts(ids, mutator, recursive, draft);
     });
   }
-};
+}

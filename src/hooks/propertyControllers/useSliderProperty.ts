@@ -2,30 +2,31 @@ import {
   SliderWithInputProps,
   SliderWithInputRef,
 } from 'components/Properties';
-import { mutateParts, subscribeToPart } from 'core/part';
+import mutateParts from 'core/part/mutateParts';
+import subscribeToPart from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
 import { Ref, useEffect, useRef } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
-import { getMutualProperty } from 'utilities/getMutualProperty';
+import getMutualProperty from 'utilities/getMutualProperty';
 
 export const COMMIT_DEBOUNCE = 500;
 export const RERENDER_DEBOUNCE = 500;
 
-export const useSliderProperty = <
+export default function useSliderProperty<
   Type extends Part,
   Value extends number = number,
 >(
   ids: string[],
   slice: (state: Type) => Value,
   mutate: (draft: Type, value: Value) => void,
-) => {
+) {
   const slider = useRef<SliderWithInputRef>(null);
   let value = getMutualProperty<Type, Value>(ids, slice);
   const firstRender = useRef(true);
 
-  const commit = fallingEdgeDebounce((value: Value) => {
+  const commit = fallingEdgeDebounce((newValue: Value) => {
     mutateParts<Type>(ids, (draft) => {
-      mutate(draft, value);
+      mutate(draft, newValue);
     });
   }, COMMIT_DEBOUNCE);
   const recomputeAndRerender = () => {
@@ -51,9 +52,7 @@ export const useSliderProperty = <
   };
 
   useEffect(() => {
-    const unsubscribes = ids.map((id) => {
-      return subscribeToPart(id, debouncedRecomputeAndRerender, slice);
-    });
+    const unsubscribes = ids.map((id) => subscribeToPart(id, debouncedRecomputeAndRerender, slice));
 
     return () => {
       unsubscribes.forEach((unsubscribe) => unsubscribe());
@@ -68,13 +67,12 @@ export const useSliderProperty = <
     }
   });
 
-  const hook: Partial<SliderWithInputProps & { ref: Ref<SliderWithInputRef> }> =
-    {
-      ref: slider,
-      defaultValue: value,
-      indeterminate: value === undefined,
-      onValueChange,
-    };
+  const hook: Partial<SliderWithInputProps & { ref: Ref<SliderWithInputRef> }> = {
+    ref: slider,
+    defaultValue: value,
+    indeterminate: value === undefined,
+    onValueChange,
+  };
 
   return hook;
-};
+}

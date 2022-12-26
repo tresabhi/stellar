@@ -1,8 +1,6 @@
-import {
-  Slider as SliderPrimitive,
+import SliderPrimitive, {
   SliderProps as SliderPrimitiveProps,
 } from 'components/Slider';
-import { FC } from 'react';
 import { styled } from 'stitches.config';
 import { PropertyWithLabel } from '../types/propertyWithLabel';
 import { Label } from './Label';
@@ -14,9 +12,11 @@ const Container = styled('div', {
   flexDirection: 'column',
 });
 
-export const Slider: FC<SliderProps> = ({ label, ...props }) => (
-  <Container>
-    <Label>{label}</Label>
-    <SliderPrimitive {...props} />
-  </Container>
-);
+export function Slider({ label, ...props }: SliderProps) {
+  return (
+    <Container>
+      <Label>{label}</Label>
+      <SliderPrimitive {...props} />
+    </Container>
+  );
+}

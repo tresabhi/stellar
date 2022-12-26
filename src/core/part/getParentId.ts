@@ -1,7 +1,9 @@
 import { Blueprint } from 'game/Blueprint';
 import useBlueprint from 'stores/blueprint';
 
-export const getParentId = (
+export default function getParentId(
   id: string,
-  draft: Blueprint = useBlueprint.getState(),
-) => draft.parts[id].parent_id;
+  blueprint: Blueprint = useBlueprint.getState(),
+) {
+  return blueprint.parts[id].parent_id;
+}

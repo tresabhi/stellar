@@ -1,30 +1,29 @@
 import { CopyIcon } from '@radix-ui/react-icons';
 import * as Properties from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
-import { partExportify } from 'core/part';
+import exportifyPart from 'core/part/exportifyPart';
 import useClipboard from 'hooks/useClipboard';
 import usePart from 'hooks/usePart';
-import { useTranslator } from 'hooks/useTranslator';
+import useTranslator from 'hooks/useTranslator';
 import useBlueprint from 'stores/blueprint';
 
 const INDENT = 2;
 
-export const Inspect = () => {
+export default function Inspect() {
   const { t } = useTranslator();
   const { copy } = useClipboard();
   const isOneSelected = useBlueprint((state) => state.selections.length === 1);
   const state = useBlueprint.getState();
   const id = state.selections[0];
   const data = usePart(id);
-  const JSON_ = JSON.stringify(data, undefined, INDENT);
-  const vanillaJSON =
-    data && JSON.stringify(partExportify(data, state), undefined, INDENT);
+  const stringifiedJSON = JSON.stringify(data, undefined, INDENT);
+  const vanillaJSON = data && JSON.stringify(exportifyPart(data, state), undefined, INDENT);
 
-  const handleJSONClick = () => copy(JSON_);
+  const handleJSONClick = () => copy(stringifiedJSON);
   const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);
 
   return isOneSelected && data ? (
-    <Properties.Container>
+    <Properties.Root>
       <Properties.Group>
         <Properties.Title>{t`tabs.layout.right_sidebar.inspect.meta_data`}</Properties.Title>
 
@@ -94,28 +93,32 @@ export const Inspect = () => {
 
       <Properties.Group>
         <Properties.TitleWithButton
-          buttons={
+          buttons={(
             <Properties.TitleButton onClick={handleJSONClick}>
               <CopyIcon />
             </Properties.TitleButton>
-          }
-        >{t`tabs.layout.right_sidebar.inspect.json`}</Properties.TitleWithButton>
+          )}
+        >
+          {t`tabs.layout.right_sidebar.inspect.json`}
+        </Properties.TitleWithButton>
 
-        <Properties.TextArea value={JSON_} />
+        <Properties.TextArea value={stringifiedJSON} />
       </Properties.Group>
 
       <Properties.Group>
         <Properties.TitleWithButton
-          buttons={
+          buttons={(
             <Properties.TitleButton onClick={handleVanillaJSONClick}>
               <CopyIcon />
             </Properties.TitleButton>
-          }
-        >{t`tabs.layout.right_sidebar.inspect.vanilla_json`}</Properties.TitleWithButton>
+          )}
+        >
+          {t`tabs.layout.right_sidebar.inspect.vanilla_json`}
+        </Properties.TitleWithButton>
 
         <Properties.TextArea value={vanillaJSON} />
       </Properties.Group>
-    </Properties.Container>
+    </Properties.Root>
   ) : (
     <Sidebar.MessageContainer>
       <Sidebar.Message>{t`tabs.layout.right_sidebar.inspect.select_one_part`}</Sidebar.Message>
@@ -124,4 +127,4 @@ export const Inspect = () => {
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   );
-};
+}

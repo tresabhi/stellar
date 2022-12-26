@@ -1,11 +1,9 @@
-import { LayoutCanvas } from 'components/Canvas';
-import { FC } from 'react';
-import { TabContainer } from 'routes/Interface/components/TabContainer';
+import LayoutCanvas from 'components/LayoutCanvas';
+import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled } from 'stitches.config';
 import useApp from 'stores/app';
-import { CanvasControls } from './components/CanvasControls';
-import { LeftSidebar } from './components/LeftSidebar';
-import { RightSidebar } from './components/RightSidebar';
+import LeftSidebar from './components/LeftSidebar';
+import RightSidebar from './components/RightSidebar';
 import Toolbar from './components/Toolbar';
 
 export interface TabLayoutProps {
@@ -26,8 +24,8 @@ const CanvasContainer = styled('div', {
   flex: 1,
 });
 
-export const LayoutTab: FC<TabLayoutProps> = ({ swapSecondTab }) => {
-  const zenMode = useApp((state) => state.interface.zenMode);
+export default function LayoutTab({ swapSecondTab }: TabLayoutProps) {
+  const zenMode = useApp((state) => state.interface.focusMode);
 
   return (
     <TabContainer>
@@ -38,12 +36,10 @@ export const LayoutTab: FC<TabLayoutProps> = ({ swapSecondTab }) => {
 
         <CanvasContainer>
           <LayoutCanvas style={{ position: 'absolute' }} />
-
-          <CanvasControls />
         </CanvasContainer>
 
         {!zenMode && <RightSidebar swapSecondTab={swapSecondTab} />}
       </HorizontalContainer>
     </TabContainer>
   );
-};
+}

@@ -4,23 +4,20 @@ import {
   MixerVerticalIcon,
 } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
-import { mutateSettings } from 'core/app';
-import { useTranslator } from 'hooks/useTranslator';
-import { FC } from 'react';
+import mutateSettings from 'core/app/mutateSettings';
+import useTranslator from 'hooks/useTranslator';
 import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../../..';
 
-export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
+export default function Tabs({ swapSecondTab }: TabLayoutProps) {
   const { t } = useTranslator();
   const leftSidebar = useSettings(
     (state) => state.interface.tabs.layout.leftSidebar,
   );
-  const handleClick = (tab: SidebarTab) => {
-    return () => {
-      mutateSettings((draft) => {
-        draft.interface.tabs.layout.leftSidebar.tab = tab;
-      });
-    };
+  const handleClick = (tab: SidebarTab) => () => {
+    mutateSettings((draft) => {
+      draft.interface.tabs.layout.leftSidebar.tab = tab;
+    });
   };
 
   return (
@@ -43,4 +40,4 @@ export const Tabs: FC<TabLayoutProps> = ({ swapSecondTab }) => {
       </Sidebar.Tab>
     </Sidebar.TabContainer>
   );
-};
+}

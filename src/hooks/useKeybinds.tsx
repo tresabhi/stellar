@@ -1,39 +1,39 @@
-import { mutateSettings } from 'core/app';
-import { mutateApp } from 'core/app/mutateApp';
-import { mutatePopups } from 'core/app/mutatePopups';
-import {
-  exportFile,
-  importFile,
-  loadBlueprint,
-  openFile,
-  redoVersion,
-  saveFile,
-  saveFileAs,
-  undoVersion,
-} from 'core/blueprint';
-import { popup } from 'core/interface/popup';
-import {
-  copyPartsBySelection,
-  cutPartsBySelection,
-  deletePartsBySelection,
-  groupPartsBySelection,
-  panToPartBySelection,
-  pasteParts,
-  selectAllPartsAtRoot,
-  translateTranslatablePartsBySelection,
-  ungroupGroupsBySelection,
-  unselectAllParts,
-} from 'core/part';
-import { duplicatePartsBySelection } from 'core/part/duplicatePartsBySelection';
+import { invalidate } from '@react-three/fiber';
+import { WEBSITE } from 'constants/social';
+import { GH_REPO_URL } from 'constants/sourceCode';
+import mutateApp from 'core/app/mutateApp';
+import mutatePrompts from 'core/app/mutatePrompts';
+import mutateSettings from 'core/app/mutateSettings';
+import exportFile from 'core/blueprint/exportFile';
+import importFile from 'core/blueprint/importFile';
+import loadBlueprint from 'core/blueprint/loadBlueprint';
+import openFile from 'core/blueprint/openFile';
+import redoVersion from 'core/blueprint/redoVersion';
+import saveFile from 'core/blueprint/saveFile';
+import saveFileAs from 'core/blueprint/saveFileAs';
+import undoVersion from 'core/blueprint/undoVersion';
+import prompt from 'core/interface/prompt';
+import copySelected from 'core/part/copySelected';
+import cutPartsBySelection from 'core/part/cutSelected';
+import deleteSelected from 'core/part/deleteSelected';
+import duplicateSelected from 'core/part/duplicateSelected';
+import groupSelected from 'core/part/groupSelected';
+import panToSelected from 'core/part/panToSelected';
+import paste from 'core/part/paste';
+import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
+import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
+import ungroupSelected from 'core/part/ungroupSelected';
+import unselectAll from 'core/part/unselectAll';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
-import { InsertPartPopup } from 'routes/components/InsertPartPopup';
-import { RenamePartsPopup } from 'routes/components/RenamePartsPopup';
+import InsertPartPrompt from 'routes/components/InsertPartPrompt';
+import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import usePopups from 'stores/popups';
+import usePrompts from 'stores/prompts';
 import { InterfaceMode, UseSettings } from 'stores/settings';
-import { getInterfaceMode } from 'utilities/getInterfaceMode';
+import { MethodIds } from 'types/Parts';
+import getInterfaceMode from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 
 const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
@@ -49,10 +49,8 @@ const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_SNAP, 0];
 const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_SNAP, 0];
 
 const translate = (vector: PrimitiveVector2Tuple) => {
-  const { invalidateFrame } = useApp.getState().editor;
-
-  translateTranslatablePartsBySelection(vector[0], vector[1]);
-  invalidateFrame && invalidateFrame();
+  translateSelectedRecursive(vector[0], vector[1]);
+  invalidate();
 };
 
 interface BindOptions {
@@ -72,7 +70,7 @@ const bindDefaultOptions: BindOptions = {
 };
 
 const bind = (
-  keys: string | string[],
+  keys: MethodIds,
   callback: () => void,
   options?: Partial<BindOptions>,
 ) => {
@@ -84,9 +82,9 @@ const bind = (
       const { isInteracting, tab } = useApp.getState().interface;
 
       if (
-        (mergedOptions.preventRepeats ? !event.repeat : true) &&
-        (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
-        (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
+        (mergedOptions.preventRepeats ? !event.repeat : true)
+        && (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true)
+        && (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
       ) {
         if (mergedOptions.preventDefault) event.preventDefault();
 
@@ -98,26 +96,24 @@ const bind = (
 };
 
 const useKeybinds = () => {
-  const toTool = (tool: Tool) => () =>
-    mutateApp((draft) => {
-      draft.editor.tool = tool;
-    });
-  const toLayout = () =>
-    mutateApp((draft) => {
-      draft.interface.tab = Tab.Layout;
-    });
+  const toTool = (tool: Tool) => () => mutateApp((draft) => {
+    draft.editor.tool = tool;
+  });
+  const toLayout = () => mutateApp((draft) => {
+    draft.interface.tab = Tab.Layout;
+  });
 
   useEffect(() => {
-    bind('ctrl+a', selectAllPartsAtRoot);
+    bind('ctrl+a', selectConcurrentAtRoot);
     bind(
       'esc',
       () => {
-        if (usePopups.getState().popups.length > 0) {
-          mutatePopups((draft) => {
-            draft.popups.pop();
+        if (usePrompts.getState().prompts.length > 0) {
+          mutatePrompts((draft) => {
+            draft.prompts.pop();
           });
         } else {
-          unselectAllParts();
+          unselectAll();
         }
       },
       { preventWhenInteractingWithUI: false },
@@ -132,28 +128,28 @@ const useKeybinds = () => {
       { preventOnNonLayoutTab: false },
     );
 
-    bind(['del', 'backspace'], deletePartsBySelection);
+    bind(['del', 'backspace'], deleteSelected);
 
     bind('alt+1', () => {
       mutateSettings((draft: UseSettings) => {
-        draft.interface.tabs.layout.leftSidebar.visible =
-          !draft.interface.tabs.layout.leftSidebar.visible;
+        const { leftSidebar } = draft.interface.tabs.layout;
+        leftSidebar.visible = !leftSidebar.visible;
       });
     });
     bind('alt+2', () => {
       mutateSettings((draft: UseSettings) => {
+        const { visible } = draft.interface.tabs.layout.rightSidebar;
+
         if (getInterfaceMode() === InterfaceMode.Compact) {
-          draft.interface.tabs.layout.rightSidebar.visible.inCompactMode =
-            !draft.interface.tabs.layout.rightSidebar.visible.inCompactMode;
+          visible.inCompactMode = !visible.inCompactMode;
         } else {
-          draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode =
-            !draft.interface.tabs.layout.rightSidebar.visible.inComfortableMode;
+          visible.inComfortableMode = !visible.inComfortableMode;
         }
       });
     });
-    bind('alt+z', () => {
+    bind('alt+f', () => {
       mutateApp((draft) => {
-        draft.interface.zenMode = !draft.interface.zenMode;
+        draft.interface.focusMode = !draft.interface.focusMode;
       });
     });
 
@@ -161,10 +157,9 @@ const useKeybinds = () => {
       ['ctrl+tab', ']'],
       () => {
         mutateApp((draft) => {
-          draft.interface.tab =
-            draft.interface.tab === TAB_ORDER[TAB_ORDER.length - 1]
-              ? TAB_ORDER[0]
-              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
+          draft.interface.tab = draft.interface.tab === TAB_ORDER[TAB_ORDER.length - 1]
+            ? TAB_ORDER[0]
+            : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
         });
       },
       { preventOnNonLayoutTab: false },
@@ -173,10 +168,9 @@ const useKeybinds = () => {
       ['ctrl+shift+tab', '['],
       () => {
         mutateApp((draft) => {
-          draft.interface.tab =
-            draft.interface.tab === 0
-              ? TAB_ORDER[TAB_ORDER.length - 1]
-              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
+          draft.interface.tab = draft.interface.tab === 0
+            ? TAB_ORDER[TAB_ORDER.length - 1]
+            : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
         });
       },
       { preventOnNonLayoutTab: false },
@@ -269,21 +263,28 @@ const useKeybinds = () => {
       toLayout();
     });
 
-    bind('ctrl+c', copyPartsBySelection);
+    bind('ctrl+c', copySelected);
     bind('ctrl+x', cutPartsBySelection);
-    bind('ctrl+v', pasteParts);
-    bind('ctrl+d', duplicatePartsBySelection);
-    bind('ctrl+g', groupPartsBySelection);
-    bind('ctrl+shift+g', ungroupGroupsBySelection);
+    bind('ctrl+v', paste);
+    bind('ctrl+d', duplicateSelected);
+    bind('ctrl+g', groupSelected);
+    bind('ctrl+shift+g', ungroupSelected);
 
-    bind('ctrl+shift+i', () => popup(InsertPartPopup, true, 'insert-part'));
+    bind('ctrl+shift+i', () => prompt(InsertPartPrompt, true, 'insert-part'));
     bind('ctrl+r', () => {
       if (useBlueprint.getState().selections.length > 0) {
-        popup(RenamePartsPopup, true, 'rename-parts');
+        prompt(RenamePartsPrompt, true, 'rename-parts');
       }
     });
 
-    bind('.', panToPartBySelection);
+    bind('.', panToSelected);
+
+    bind('f1', () => window.open(WEBSITE, '_blank'), {
+      preventOnNonLayoutTab: false,
+    });
+    bind('f4', () => window.open(`${GH_REPO_URL}issues/new/choose`, '_blank'), {
+      preventOnNonLayoutTab: false,
+    });
   }, []);
 };
 export default useKeybinds;

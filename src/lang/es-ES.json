@@ -190,8 +190,8 @@
   },
   "notifications": {
     "update": {
-      "title": "Stellar updated to a newer version",
-      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "title": "Stellar actualizado a una versión más nueva",
+      "description": "Es necesario reiniciar para aplicar los cambios. Puedes reiniciar ahora o hacerlo más tarde.",
       "actions": {
         "restart": "Restart",
         "dismiss": "Dismiss"

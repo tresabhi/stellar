@@ -1,13 +1,16 @@
 import { invalidate } from '@react-three/fiber';
-import { declareBoundsUpdated } from 'core/bounds';
-import { getPart, PartMoveEventDetail } from 'core/part';
-import { PartResizeEventDetail } from 'core/part/resizePartAsync';
+import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
+import getPart from 'core/part/getPart';
+import { PartResizeEventDetail } from 'core/part/resizeAsync';
+import { PartMoveEventDetail } from 'core/part/translateSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { Object3D, Vector3 } from 'three';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import {
+  Part, PartData, VanillaPart, VanillaPartData,
+} from './Part';
 
 export interface VanillaPartWithPosition extends VanillaPart {
   /**
@@ -53,14 +56,24 @@ export const usePartWithPosition = (
   const handlePartResize = (event: CustomEvent<PartResizeEventDetail>) => {
     const part = useBlueprint.getState().parts[id] as PartWithPosition;
 
-    const offsetX = part.p.x - event.detail.constant[0];
-    const offsetY = part.p.y - event.detail.constant[1];
-    const scaledOffsetX = offsetX * event.detail.scale[0];
-    const scaledOffsetY = offsetY * event.detail.scale[1];
-    const x = event.detail.constant[0] + scaledOffsetX;
-    const y = event.detail.constant[1] + scaledOffsetY;
+    const originOffset = Math.hypot(part.p.x, part.p.y);
+    const originAngle = Math.atan2(part.p.y, part.p.x) - event.detail.rotation;
+    const rotatedOriginX = originOffset * Math.cos(originAngle);
+    const rotatedOriginY = originOffset * Math.sin(originAngle);
+    const offsetX = rotatedOriginX - event.detail.normalizedConstant[0];
+    const offsetY = rotatedOriginY - event.detail.normalizedConstant[1];
+    const scaledOffsetX = offsetX * event.detail.normalizedScale[0]
+      + event.detail.normalizedConstant[0];
+    const scaledOffsetY = offsetY * event.detail.normalizedScale[1]
+      + event.detail.normalizedConstant[1];
+    const scaledOffset = Math.hypot(scaledOffsetX, scaledOffsetY);
+    const scaledAngle = Math.atan2(scaledOffsetY, scaledOffsetX) + event.detail.rotation;
+    const x = scaledOffset * Math.cos(scaledAngle);
+    const y = scaledOffset * Math.sin(scaledAngle);
 
-    object.current?.position.set(x, y, 0);
+    if (object.current) {
+      object.current.position.set(x, y, object.current.position.z);
+    }
   };
 
   useEffect(() => {

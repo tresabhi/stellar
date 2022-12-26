@@ -28,8 +28,7 @@ export const useSnippetsData: UseSnippets = { snippets: [] };
 const useSnippets = create<UseSnippets, [['zustand/persist', UseSnippets]]>(
   persist(() => useSnippetsData, {
     name: 'snippets',
-    merge: (persistedState, currentState) =>
-      merge(currentState, persistedState),
+    merge: (persistedState, currentState) => merge(currentState, persistedState),
   }),
 );
 export default useSnippets;

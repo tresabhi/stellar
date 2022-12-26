@@ -31,15 +31,12 @@ const Icon = styled(CheckIcon, {
 });
 
 export const Item = forwardRef<HTMLDivElement, SelectPrimitive.SelectItemProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <Trigger {...props} ref={ref}>
-        <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-        <ItemIndicator>
-          <Icon />
-        </ItemIndicator>
-      </Trigger>
-    );
-  },
+  ({ children, ...props }, ref) => (
+    <Trigger {...props} ref={ref}>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+      <ItemIndicator>
+        <Icon />
+      </ItemIndicator>
+    </Trigger>
+  ),
 );
-

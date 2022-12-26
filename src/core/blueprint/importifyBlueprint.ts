@@ -1,4 +1,5 @@
-import { generateId, partImportify } from 'core/part';
+import generateId from 'core/part/generateId';
+import importifyPart from 'core/part/importifyPart';
 import { Blueprint, blueprintData, VanillaBlueprint } from 'game/Blueprint';
 import { cloneDeep, isArray } from 'lodash';
 
@@ -7,7 +8,7 @@ export const WATERMARK_VALUE = `${window.location.origin}/`;
 
 type AnyBlueprint = VanillaBlueprint | Blueprint;
 type AnyBlueprintWithWatermark = AnyBlueprint &
-  Record<typeof WATERMARK_KEY, string | undefined>;
+Record<typeof WATERMARK_KEY, string | undefined>;
 
 export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
   const newBlueprint = cloneDeep(blueprintData);
@@ -26,7 +27,7 @@ export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
     // vanilla blueprint
     (importedBlueprint as VanillaBlueprint).parts.forEach((vanillaPart) => {
       const id = generateId(newBlueprint.parts);
-      const importifiedPart = partImportify(vanillaPart, id);
+      const importifiedPart = importifyPart(vanillaPart, id);
 
       if (importifiedPart) {
         newBlueprint.parts[id] = importifiedPart;
@@ -34,11 +35,13 @@ export const importifyBlueprint = (importedBlueprint: AnyBlueprint) => {
       }
     });
   } else {
-    for (const id in importedBlueprint.parts) {
-      const importifiedPart = partImportify(importedBlueprint.parts[id], id);
-
+    Object.keys(importedBlueprint.parts).forEach((id) => {
+      const importifiedPart = importifyPart(
+        (importedBlueprint as Blueprint).parts[id],
+        id,
+      );
       if (importifiedPart) newBlueprint.parts[id] = importifiedPart;
-    }
+    });
 
     newBlueprint.part_order = (importedBlueprint as Blueprint).part_order;
   }

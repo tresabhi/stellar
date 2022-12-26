@@ -1,16 +1,16 @@
-import { mutateBlueprint } from 'core/blueprint';
+import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { getParent } from './getParent';
+import getParent from './getParent';
 
-export const deleteParts = (ids: string[], draft?: Blueprint) => {
-  if (draft) {
+export default function deleteParts(ids: string[], blueprint?: Blueprint) {
+  if (blueprint) {
     ids.forEach((id) => {
-      const parent = getParent(id, draft) ?? draft;
-      const selectionIndex = draft.selections.indexOf(id);
+      const parent = getParent(id, blueprint) ?? blueprint;
+      const selectionIndex = blueprint.selections.indexOf(id);
 
-      delete draft.parts[id];
+      delete blueprint.parts[id];
 
-      if (selectionIndex !== -1) draft.selections.splice(selectionIndex, 1);
+      if (selectionIndex !== -1) blueprint.selections.splice(selectionIndex, 1);
       if (parent) parent.part_order.splice(parent.part_order.indexOf(id), 1);
     });
   } else {
@@ -18,4 +18,4 @@ export const deleteParts = (ids: string[], draft?: Blueprint) => {
       deleteParts(ids, draft);
     });
   }
-};
+}

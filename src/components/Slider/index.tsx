@@ -1,12 +1,12 @@
 import { DragHandleDots2Icon } from '@radix-ui/react-icons';
 import * as SliderPrimitive from '@radix-ui/react-slider';
-import { FC, FocusEvent } from 'react';
+import { FocusEvent } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export interface SliderProps
   extends Omit<
-    SliderPrimitive.SliderProps,
-    'value' | 'defaultValue' | 'onValueChange'
+  SliderPrimitive.SliderProps,
+  'value' | 'defaultValue' | 'onValueChange'
   > {
   value?: number;
   defaultValue?: number;
@@ -77,18 +77,18 @@ const Icon = styled(DragHandleDots2Icon, {
   height: theme.sizes[10],
 });
 
-export const Slider: FC<SliderProps> = ({
+export default function Slider({
   disabled,
   value,
   defaultValue,
   onValueChange,
   ...props
-}) => {
+}: SliderProps) {
   const handleFocus = (event: FocusEvent<HTMLSpanElement>) => {
     if (disabled) event.target.blur();
   };
-  const handleValueChange = ([value]: [number]) => {
-    onValueChange && onValueChange(value);
+  const handleValueChange = ([newValue]: [number]) => {
+    if (onValueChange) onValueChange(newValue);
   };
 
   return (
@@ -107,4 +107,4 @@ export const Slider: FC<SliderProps> = ({
       </Thumb>
     </Root>
   );
-};
+}

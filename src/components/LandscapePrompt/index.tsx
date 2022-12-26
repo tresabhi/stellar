@@ -1,9 +1,10 @@
 import { MobileIcon, ThickArrowRightIcon } from '@radix-ui/react-icons';
-import { Button } from 'components/Button';
-import { mutateApp, mutateSettings } from 'core/app';
+import Button from 'components/Button';
+import mutateApp from 'core/app/mutateApp';
+import mutateSettings from 'core/app/mutateSettings';
 import { Orientation, useOrientation } from 'hooks/useOrientation';
-import { useTranslator } from 'hooks/useTranslator';
-import { FC, HTMLAttributes, ReactNode } from 'react';
+import useTranslator from 'hooks/useTranslator';
+import { HTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import useApp from 'stores/app';
 import useSettings from 'stores/settings';
@@ -58,10 +59,10 @@ const Action = styled(Button, {
   },
 });
 
-export const LandscapePrompt: FC<LandscapePromptProps> = ({
+export default function LandscapePrompt({
   children,
   ...props
-}) => {
+}: LandscapePromptProps) {
   const { f, t } = useTranslator();
   const orientation = useOrientation();
   const orientationPromptDismissed = useApp(
@@ -70,10 +71,9 @@ export const LandscapePrompt: FC<LandscapePromptProps> = ({
   const showOrientationPrompt = useSettings(
     (state) => state.interface.showOrientationPrompt,
   );
-  const showChildren =
-    !showOrientationPrompt ||
-    orientationPromptDismissed ||
-    orientation === Orientation.Landscape;
+  const showChildren = !showOrientationPrompt
+    || orientationPromptDismissed
+    || orientation === Orientation.Landscape;
 
   const handleNeverClick = () => {
     mutateSettings((draft) => {
@@ -86,32 +86,27 @@ export const LandscapePrompt: FC<LandscapePromptProps> = ({
     });
   };
 
-  return (
-    <>
-      {showChildren ? (
-        children
-      ) : (
-        <Container {...props}>
-          <IconsContainer>
-            <MobileIcon />
-            <ThickArrowRightIcon />
-            <MobileIcon style={{ transform: 'rotate(-90deg)' }} />
-          </IconsContainer>
-          <Message>
-            {f`landscape_prompt.message`[0]}
-            <br />
-            {f`landscape_prompt.message`[1]}
-          </Message>
-          <Actions>
-            <Action
-              onClick={handleNeverClick}
-            >{t`landscape_prompt.never`}</Action>
-            <Action
-              onClick={handleDismissClick}
-            >{t`landscape_prompt.dismiss`}</Action>
-          </Actions>
-        </Container>
-      )}
-    </>
+  return showChildren ? (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>{children}</>
+  ) : (
+    <Container {...props}>
+      <IconsContainer>
+        <MobileIcon />
+        <ThickArrowRightIcon />
+        <MobileIcon style={{ transform: 'rotate(-90deg)' }} />
+      </IconsContainer>
+      <Message>
+        {f`landscape_prompt.message`[0]}
+        <br />
+        {f`landscape_prompt.message`[1]}
+      </Message>
+      <Actions>
+        <Action onClick={handleNeverClick}>{t`landscape_prompt.never`}</Action>
+        <Action onClick={handleDismissClick}>
+          {t`landscape_prompt.dismiss`}
+        </Action>
+      </Actions>
+    </Container>
   );
-};
+}

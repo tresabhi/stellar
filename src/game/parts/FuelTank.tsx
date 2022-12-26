@@ -2,18 +2,16 @@ import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { invalidate } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as Properties from 'components/Properties';
-import { mutateSettings } from 'core/app';
-import { declareBoundsUpdated } from 'core/bounds';
-import { getPart } from 'core/part';
+import mutateSettings from 'core/app/mutateSettings';
+import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
+import getPart from 'core/part/getPart';
 import PartCategory from 'hooks/constants/partCategory';
-import {
-  useNumericalInputProperty,
-  useSliderProperty,
-} from 'hooks/propertyControllers';
+import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
+import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
 import usePartProperty from 'hooks/usePartProperty';
 import usePhysicalPart from 'hooks/usePhysicalPart';
-import { useTranslator } from 'hooks/useTranslator';
-import { FC, useRef } from 'react';
+import useTranslator from 'hooks/useTranslator';
+import { useRef } from 'react';
 import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
@@ -115,7 +113,7 @@ export const FuelTankData: FuelTank = {
   label: 'Fuel Tank',
 };
 
-export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
+export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const mesh = useRef<Mesh>(null);
   const state = getPart<FuelTank>(id);
@@ -123,7 +121,7 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
 
   usePartProperty(
     id,
-    (state: FuelTank) => state.N,
+    (newState: FuelTank) => newState.N,
     (N) => {
       if (mesh.current) {
         mesh.current.geometry = new CylinderGeometry(
@@ -175,12 +173,13 @@ export const FuelTankLayoutComponent: FC<PartComponentProps> = ({ id }) => {
       </mesh>
     </group>
   );
-};
+}
 
-export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
-  ids,
-}) => {
+export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
   const { t } = useTranslator();
+  const constraint = useSettings(
+    (state) => state.editor.constraintFuelTankWidths,
+  );
   const topWidth = useNumericalInputProperty<FuelTank>(
     ids,
     (state) => state.N.width_b,
@@ -220,13 +219,9 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
     },
   );
 
-  const constraint = useSettings(
-    (state) => state.editor.constraintFuelTankWidths,
-  );
   const handleConstraintClick = () => {
-    mutateSettings((state) => {
-      state.editor.constraintFuelTankWidths =
-        !state.editor.constraintFuelTankWidths;
+    mutateSettings((draft) => {
+      draft.editor.constraintFuelTankWidths = !draft.editor.constraintFuelTankWidths;
     });
   };
 
@@ -273,7 +268,7 @@ export const FuelTankPropertyComponent: FC<PartPropertyComponentProps> = ({
       </Properties.Row>
     </Properties.Group>
   );
-};
+}
 
 export const FuelTankIcon = Icon;
 

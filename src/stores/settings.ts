@@ -1,6 +1,7 @@
-import { RenamePartsOptions } from 'core/part/renameParts';
+import { RenamePartsOptions } from 'core/part/rename';
 import { merge } from 'lodash';
-import { theme, themeDark } from 'stitches.config';
+import { theme } from 'stitches.config';
+import themeDark from 'stitches.config/themes/dark';
 import create from 'zustand';
 import { persist, subscribeWithSelector } from 'zustand/middleware';
 
@@ -36,6 +37,8 @@ export interface UseSettings {
     language: string;
     theme: string | null;
     showOrientationPrompt: boolean;
+    showInstallationPrompt: boolean;
+    showInstabilityWarning: boolean;
     welcomePromptCompleted: boolean;
 
     tabs: {
@@ -83,6 +86,8 @@ export const UseSettingsData: UseSettings = {
     language: 'en-US',
     theme: themeDark.toString(),
     showOrientationPrompt: true,
+    showInstallationPrompt: true,
+    showInstabilityWarning: true,
     welcomePromptCompleted: false,
 
     tabs: {
@@ -119,14 +124,13 @@ export const UseSettingsData: UseSettings = {
 };
 
 const useSettings = create<
-  UseSettings,
-  [['zustand/subscribeWithSelector', never], ['zustand/persist', UseSettings]]
+UseSettings,
+[['zustand/subscribeWithSelector', never], ['zustand/persist', UseSettings]]
 >(
   subscribeWithSelector(
     persist(() => UseSettingsData, {
       name: 'settings',
-      merge: (persistedState, currentState) =>
-        merge(currentState, persistedState),
+      merge: (persistedState, currentState) => merge(currentState, persistedState),
     }),
   ),
 );

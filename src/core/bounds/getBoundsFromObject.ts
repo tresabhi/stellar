@@ -1,7 +1,7 @@
 import { Bounds } from 'stores/bounds';
 import { Box3, Object3D } from 'three';
 
-export const getBoundsFromObject = (object: Object3D) => {
+export default function getBoundsFromObject(object: Object3D) {
   const rotation = object.rotation.z;
 
   object.rotation.z = 0;
@@ -21,7 +21,13 @@ export const getBoundsFromObject = (object: Object3D) => {
 
   object.rotation.z = rotation;
 
-  const partBounds: Bounds = { width, height, x, y, rotation };
+  const partBounds: Bounds = {
+    width,
+    height,
+    x,
+    y,
+    rotation,
+  };
 
   return partBounds;
-};
+}

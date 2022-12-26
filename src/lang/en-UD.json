@@ -190,8 +190,8 @@
   },
   "notifications": {
     "update": {
-      "title": "Stellar updated to a newer version",
-      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "title": "uoᴉsɹǝʌ ɹǝʍǝu ɐ oʇ pǝʇɐpdn ɹɐllǝʇS",
+      "description": "˙ɹǝʇɐl ʇᴉ op ɹo ʍou ʇɹɐʇsǝɹ uɐɔ no⅄ ˙sǝƃuɐɥɔ ǝɥʇ ʎlddɐ oʇ pǝɹᴉnbǝɹ sᴉ ʇɹɐʇsǝɹ ∀",
       "actions": {
         "restart": "Restart",
         "dismiss": "Dismiss"

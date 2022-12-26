@@ -17,8 +17,8 @@ const MAX_CHARACTERS = 6;
 
 export interface InputProps
   extends ComponentPropsWithoutRef<typeof InputPrimitive>,
-    PropertyWithLabel,
-    PropertyWithUnit {}
+  PropertyWithLabel,
+  PropertyWithUnit {}
 
 export interface InputRef extends HTMLInputElement {
   resize: () => void;
@@ -70,7 +70,9 @@ const Unit = styled('span', {
 
 export const Input = forwardRef<InputRef, InputProps>(
   (
-    { label, unit, onChange, onKeyDown, value, defaultValue, ...props },
+    {
+      label, unit, onChange, onKeyDown, value, defaultValue, ...props
+    },
     ref,
   ) => {
     const input = useRef<HTMLInputElement>(null);
@@ -78,11 +80,6 @@ export const Input = forwardRef<InputRef, InputProps>(
       input.current?.focus();
       input.current?.select();
     };
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-      resize();
-      if (onChange) onChange(event);
-    };
-    const handleKeyDown = useInputEscape(onKeyDown);
     const resize = () => {
       if (input.current) {
         input.current.style.width = `${Math.min(
@@ -91,6 +88,11 @@ export const Input = forwardRef<InputRef, InputProps>(
         )}ch`;
       }
     };
+    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+      resize();
+      if (onChange) onChange(event);
+    };
+    const handleKeyDown = useInputEscape(onKeyDown);
 
     useEffect(() => {
       resize();

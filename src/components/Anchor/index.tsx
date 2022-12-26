@@ -1,6 +1,6 @@
 import { styled, theme } from 'stitches.config';
 
-export const Anchor = styled('a', {
+const Anchor = styled('a', {
   color: theme.colors.textLowContrast,
   borderRadius: theme.radii[2],
   cursor: 'default',
@@ -44,3 +44,4 @@ export const Anchor = styled('a', {
     accent: true,
   },
 });
+export default Anchor;

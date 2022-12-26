@@ -3,9 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import SplashScreen from 'routes/components/SplashScreen';
 
-import('utilities/preroot').then((value) => {
-  value.default();
-});
+import('utilities/preroot').then(({ default: preroot }) => preroot());
 
 const container = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(container);

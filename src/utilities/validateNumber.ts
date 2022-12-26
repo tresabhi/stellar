@@ -1,8 +1,8 @@
-export const validateNumber = (value: number) => {
+export default function validateNumber(value: number) {
   return (
-    typeof value === 'number' &&
-    value !== Infinity &&
-    value !== -Infinity &&
-    !isNaN(value)
+    typeof value === 'number'
+    && value !== Infinity
+    && value !== -Infinity
+    && !Number.isNaN(value)
   );
-};
+}

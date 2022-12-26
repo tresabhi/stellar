@@ -5,7 +5,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 ## v1.0 Beta 6
 
 - Remove part mesh wrappers
-- And fix other non-snake cases issues
 - Parts
   - 3D
     - `Engine Titan`: https://i.imgur.com/9zLhESv.png
@@ -23,24 +22,20 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
     - `Cone`: https://i.imgur.com/DKOMgyf.png
     - `Cone Side`: https://i.imgur.com/tetvUJC.png
 - Updates from Figma
-- Error screen
-  - Background color
-  - Text area background color
-- Notifications
-  - Button orders and colors
-  - Remove "available offline" notification
-  - Add PWA installable notification
-  - Fix button font size
-- Popups
-  - Button paddings
-- Create tab "stellar" text
-  - Update subtitle font size
-- Canvas
-  - Move all to toolbar
-  - Move zen-mode to preferences
-- Property editor
-  - Property hints
-- Add settings
+  - Notifications
+    - Button orders and colors
+    - Add PWA installable notification
+    - Fix button font size
+  - Popups
+    - Button paddings
+  - Create tab "stellar" text
+    - Update subtitle font size
+  - Canvas
+    - Move all to toolbar
+    - Move zen-mode to preferences
+  - Property editor
+    - Property hints
+  - Add settings
 
 ## v1.0 Beta 7
 

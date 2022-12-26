@@ -1,7 +1,7 @@
 import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
-import { createPhysicalPart } from 'utilities/createPhysicalPart';
+import createPhysicalPart from 'utilities/createPhysicalPart';
 import { Part, PartData } from '../Part';
 import {
   VanillaPartWithEngine,
@@ -15,7 +15,7 @@ import model from './model.gltf';
 
 export interface VanillaEngineKolibri
   extends VanillaPartWithTransformations,
-    VanillaPartWithEngine {
+  VanillaPartWithEngine {
   readonly n: 'Engine Kolibri';
 }
 

@@ -1,3 +1,5 @@
-import { StagingTab } from '../StagingTab';
+import StagingTab from '../StagingTab';
 
-export const ExportTab = StagingTab;
+export default function ExportTab() {
+  return <StagingTab />;
+}

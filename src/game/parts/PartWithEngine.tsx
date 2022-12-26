@@ -1,18 +1,13 @@
 import * as Properties from 'components/Properties';
-import { useCheckboxProperty } from 'hooks/propertyControllers';
-import { useTranslator } from 'hooks/useTranslator';
-import { FC } from 'react';
+import useCheckboxProperty from 'hooks/propertyControllers/useCheckboxProperty';
+import useTranslator from 'hooks/useTranslator';
 import { PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import {
+  Part, PartData, VanillaPart, VanillaPartData,
+} from './Part';
 
 export interface VanillaPartWithEngine extends VanillaPart {
-  /**
-   * Data about engine parts
-   */
   B: {
-    /**
-     * Part will exert thrust and abide the thrust throttle
-     */
     engine_on: boolean;
     head_on__for_creative_use: boolean;
   };
@@ -36,9 +31,9 @@ export const PartWithEngineData: PartWithEngine = {
   label: 'Unlabeled Part Engine',
 };
 
-export const PartWithEnginePropertyComponent: FC<
-  PartPropertyComponentProps
-> = ({ ids }) => {
+export function PartWithEnginePropertyComponent({
+  ids,
+}: PartPropertyComponentProps) {
   const { t } = useTranslator();
 
   const enabled = useCheckboxProperty<PartWithEngine>(
@@ -72,6 +67,6 @@ export const PartWithEnginePropertyComponent: FC<
       </Properties.Row>
     </Properties.Group>
   );
-};
+}
 
 export const registry = null;

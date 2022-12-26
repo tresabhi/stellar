@@ -1,10 +1,10 @@
 import 'App.css';
 import * as ErrorBoundary from 'components/ErrorBoundary';
-import { LandscapePrompt } from 'components/LandscapePrompt';
-import { usePrerender } from 'hooks/usePrerender';
+import LandscapePrompt from 'components/LandscapePrompt';
+import usePrerender from 'hooks/usePrerender';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Home } from 'routes/Home';
+import Home from 'routes/Home';
 import Interface from 'routes/Interface';
 import { styled, theme } from 'stitches.config';
 import useSettings from 'stores/settings';
@@ -23,19 +23,19 @@ const useRootTheme = () => {
     const initialTheme = useSettings.getState().interface.theme;
     const unsubscribe = useSettings.subscribe(
       (state) => state.interface.theme,
-      (theme, prevTheme) => {
-        prevTheme && element.classList.remove(prevTheme);
-        theme && element.classList.add(theme);
+      (nextTheme, prevTheme) => {
+        if (prevTheme) element.classList.remove(prevTheme);
+        if (nextTheme) element.classList.add(nextTheme);
       },
     );
 
-    initialTheme && element.classList.add(initialTheme);
+    if (initialTheme) element.classList.add(initialTheme);
 
     return () => unsubscribe();
   });
 };
 
-const App = () => {
+function App() {
   useRootTheme();
   usePrerender();
 
@@ -51,5 +51,5 @@ const App = () => {
       </LandscapePrompt>
     </ErrorBoundary.Wrapper>
   );
-};
+}
 export default App;
