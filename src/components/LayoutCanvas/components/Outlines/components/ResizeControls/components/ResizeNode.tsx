@@ -253,7 +253,7 @@ export default function ResizeNode({
       invalidate();
     }
 
-    if (!firstMove) deferUpdates();
+    if (!firstMove) deferUpdates(false);
 
     window.removeEventListener('pointermove', handlePointerMove);
     window.removeEventListener('pointerup', handlePointerUp);
