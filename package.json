@@ -69,7 +69,7 @@
     "vite-plugin-checker": "^0.5.3",
     "vite-plugin-pwa": "^0.13.3",
     "vite-plugin-svgr": "^2.2.2",
-    "vite-tsconfig-paths": "^3.6.0"
+    "vite-tsconfig-paths": "^4.0.3"
   },
   "scripts": {
     "start": "vite --host",
