@@ -78,11 +78,8 @@
 
         "cursor": {
           "select_deep": "Select Deep",
-          "select_cascade": "Select Cascade",
           "select_multiple": "Select Multiple",
-          "select_concurrent": "Select Concurrent",
-          "focus_mode": "Focus Mode",
-          "normal_mode": "Normal Mode"
+          "focus_mode": "Focus Mode"
         },
 
         "help": {

@@ -1,11 +1,10 @@
 import {
+  AllSidesIcon,
   CardStackMinusIcon,
   CardStackPlusIcon,
-  ChevronDownIcon,
-  CircleIcon,
-  ClipboardCopyIcon,
   ClipboardIcon,
   Component1Icon,
+  CopyIcon,
   CursorArrowIcon,
   DiscordLogoIcon,
   DoubleArrowDownIcon,
@@ -30,9 +29,9 @@ import {
   PlusCircledIcon,
   PlusIcon,
   ResetIcon,
-  RulerSquareIcon,
   ScissorsIcon,
   StackIcon,
+  TransformIcon,
   TrashIcon,
   UploadIcon,
 } from '@radix-ui/react-icons';
@@ -185,12 +184,47 @@ function Toolbar() {
       </ToolbarPrimitive.Group>
 
       <ToolbarPrimitive.Group>
+        <ToolbarPrimitive.DropdownMenu icon={<AllSidesIcon />}>
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() => mutateSettings((draft) => {
+              draft.editor.selectDeep = !draft.editor.selectDeep;
+            })}
+            color={selectDeep ? 'accent' : undefined}
+            icon={<DoubleArrowDownIcon />}
+            keybind="Ctrl"
+          >
+            {t`tabs.layout.toolbar.cursor.select_deep`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() => mutateSettings((draft) => {
+              draft.editor.selectMultiple = !draft.editor.selectMultiple;
+            })}
+            color={selectMultiple ? 'accent' : undefined}
+            icon={<PlusCircledIcon />}
+            keybind="Shift"
+          >
+            {t`tabs.layout.toolbar.cursor.select_multiple`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() => mutateApp((draft) => {
+              draft.interface.focusMode = !draft.interface.focusMode;
+            })}
+            color={focusMode ? 'accent' : undefined}
+            icon={<LightningBoltIcon />}
+            keybind="Alt + F"
+          >
+            {t`tabs.layout.toolbar.cursor.focus_mode`}
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+
         <ToolbarPrimitive.DropdownMenu
           disabled={hasNoItemInClipboard && hasNoSelections}
           icon={<ClipboardIcon />}
         >
           <ToolbarPrimitive.DropdownMenuItem
-            icon={<ClipboardCopyIcon />}
+            icon={<CopyIcon />}
             onClick={() => copySelected()}
             keybind="Ctrl + C"
             disabled={hasNoSelections}
@@ -258,7 +292,7 @@ function Toolbar() {
 
           <ToolbarPrimitive.DropdownMenuItem
             disabled={hasNoSelections}
-            icon={<GroupIcon />}
+            icon={<TransformIcon />}
             onClick={() => groupSelected()}
             keybind="Ctrl + G"
           >
@@ -309,50 +343,6 @@ function Toolbar() {
             keybind="Del"
           >
             {t`tabs.layout.toolbar.edit.delete`}
-          </ToolbarPrimitive.DropdownMenuItem>
-        </ToolbarPrimitive.DropdownMenu>
-
-        <ToolbarPrimitive.DropdownMenu icon={<CursorArrowIcon />}>
-          <ToolbarPrimitive.DropdownMenuItem
-            onClick={() => mutateSettings((draft) => {
-              draft.editor.selectDeep = !draft.editor.selectDeep;
-            })}
-            icon={selectDeep ? <ChevronDownIcon /> : <DoubleArrowDownIcon />}
-            keybind="Ctrl"
-          >
-            {translate(
-              `tabs.layout.toolbar.cursor.${
-                selectDeep ? 'select_cascade' : 'select_deep'
-              }`,
-            )}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            onClick={() => mutateSettings((draft) => {
-              draft.editor.selectMultiple = !draft.editor.selectMultiple;
-            })}
-            icon={selectMultiple ? <CircleIcon /> : <PlusCircledIcon />}
-            keybind="Shift"
-          >
-            {translate(
-              `tabs.layout.toolbar.cursor.${
-                selectMultiple ? 'select_concurrent' : 'select_multiple'
-              }`,
-            )}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            onClick={() => mutateApp((draft) => {
-              draft.interface.focusMode = !draft.interface.focusMode;
-            })}
-            icon={focusMode ? <RulerSquareIcon /> : <LightningBoltIcon />}
-            keybind="Alt + F"
-          >
-            {translate(
-              `tabs.layout.toolbar.cursor.${
-                focusMode ? 'normal_mode' : 'focus_mode'
-              }`,
-            )}
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
       </ToolbarPrimitive.Group>
