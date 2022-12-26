@@ -38,6 +38,7 @@ export interface UseSettings {
     theme: string | null;
     showOrientationPrompt: boolean;
     showInstallationPrompt: boolean;
+    showInstabilityWarning: boolean;
     welcomePromptCompleted: boolean;
 
     tabs: {
@@ -86,6 +87,7 @@ export const UseSettingsData: UseSettings = {
     theme: themeDark.toString(),
     showOrientationPrompt: true,
     showInstallationPrompt: true,
+    showInstabilityWarning: true,
     welcomePromptCompleted: false,
 
     tabs: {

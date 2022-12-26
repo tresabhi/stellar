@@ -63,8 +63,8 @@ import toggleSelectedLocked from 'core/part/toggleSelectedLocked';
 import ungroupSelected from 'core/part/ungroupSelected';
 import unselectAll from 'core/part/unselectAll';
 import useTranslator from 'hooks/useTranslator';
-import InsertPartPopup from 'routes/components/InsertPartPopup';
-import RenamePartsPopup from 'routes/components/RenamePartsPopup';
+import InsertPartPrompt from 'routes/components/InsertPartPrompt';
+import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
@@ -179,7 +179,7 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarPrimitive.Button onClick={() => prompt(InsertPartPopup)}>
+        <ToolbarPrimitive.Button onClick={() => prompt(InsertPartPrompt)}>
           <PlusIcon />
         </ToolbarPrimitive.Button>
       </ToolbarPrimitive.Group>
@@ -281,7 +281,7 @@ function Toolbar() {
         >
           <ToolbarPrimitive.DropdownMenuItem
             icon={<Pencil1Icon />}
-            onClick={() => prompt(RenamePartsPopup)}
+            onClick={() => prompt(RenamePartsPrompt)}
             keybind="Ctrl + R"
           >
             {t`tabs.layout.toolbar.edit.rename`}

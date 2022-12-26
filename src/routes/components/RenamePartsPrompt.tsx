@@ -11,7 +11,7 @@ import { KeyboardEvent, useRef } from 'react';
 import { PromptProps } from 'stores/prompts';
 import useSettings from 'stores/settings';
 
-export default function RenamePartsPopup({ dismiss }: PromptProps) {
+export default function RenamePartsPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);

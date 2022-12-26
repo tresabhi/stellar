@@ -172,7 +172,7 @@
     "never": "Never Ask Again",
     "dismiss": "Dismiss For Now"
   },
-  "toasts": {
+  "notifications": {
     "update": {
       "title": "Stellar updated to a newer version",
       "description": "A restart is required to apply the changes. You can restart now or do it later.",
@@ -182,7 +182,7 @@
       }
     }
   },
-  "popups": {
+  "prompts": {
     "welcome_slide_1": {},
     "welcome": {
       "slides": {

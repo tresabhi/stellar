@@ -9,8 +9,11 @@ export default function prompt(
   Component: FC<PromptProps>,
   dismissByBlur = true,
   id = nanoid(),
+  overrideConcurrency = false,
 ) {
-  if (useApp.getState().interface.newPopupsEnabled) {
+  if (
+    overrideConcurrency ? true : useApp.getState().interface.newPopupsEnabled
+  ) {
     mutatePrompts((draft) => {
       if (draft.prompts.findIndex((popup) => popup.id === id) === -1) {
         draft.prompts.push({
@@ -27,4 +30,6 @@ export default function prompt(
       }
     });
   }
+
+  return id;
 }

@@ -12,7 +12,7 @@ import useBlueprint from 'stores/blueprint';
 import usePartRegistry from 'stores/partRegistry';
 import { PromptProps } from 'stores/prompts';
 
-export default function InsertPartPopup({ dismiss }: PromptProps) {
+export default function InsertPartPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
   const list: SearchItem[] = [];

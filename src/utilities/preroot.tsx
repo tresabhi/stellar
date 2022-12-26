@@ -26,16 +26,16 @@ window.addEventListener('beforeinstallprompt', (event) => {
       return (
         <Notification.Root>
           <Notification.Info>
-            <Notification.Title>{t`toasts.installable.title`}</Notification.Title>
+            <Notification.Title>{t`notifications.installable.title`}</Notification.Title>
             <Notification.Description>
-              {f`toasts.installable.description`[0]}
+              {f`notifications.installable.description`[0]}
               <Anchor
                 href="https://web.dev/progressive-web-apps/"
                 target="_blank"
               >
-                {f`toasts.installable.description`[1]}
+                {f`notifications.installable.description`[1]}
               </Anchor>
-              {f`toasts.installable.description`[2]}
+              {f`notifications.installable.description`[2]}
             </Notification.Description>
           </Notification.Info>
 
@@ -48,10 +48,10 @@ window.addEventListener('beforeinstallprompt', (event) => {
                 dismissNotification(id);
               }}
             >
-              {t`toasts.installable.actions.never`}
+              {t`notifications.installable.actions.never`}
             </Notification.Action>
             <Notification.Action onClick={() => dismissNotification(id)}>
-              {t`toasts.installable.actions.dismiss`}
+              {t`notifications.installable.actions.dismiss`}
             </Notification.Action>
             <Notification.Action
               color="accent"
@@ -61,7 +61,7 @@ window.addEventListener('beforeinstallprompt', (event) => {
                 dismissNotification(id);
               }}
             >
-              {t`toasts.installable.actions.install`}
+              {t`notifications.installable.actions.install`}
             </Notification.Action>
           </Notification.Actions>
         </Notification.Root>
@@ -78,16 +78,16 @@ const updateSW = registerSW({
       return (
         <Notification.Root>
           <Notification.Info>
-            <Notification.Title>{t`toasts.update.title`}</Notification.Title>
-            <Notification.Description>{t`toasts.update.description`}</Notification.Description>
+            <Notification.Title>{t`notifications.update.title`}</Notification.Title>
+            <Notification.Description>{t`notifications.update.description`}</Notification.Description>
           </Notification.Info>
 
           <Notification.Actions>
             <Notification.Action onClick={() => dismissNotification(id)}>
-              {t`toasts.update.actions.dismiss`}
+              {t`notifications.update.actions.dismiss`}
             </Notification.Action>
             <Notification.Action color="accent" onClick={() => updateSW(true)}>
-              {t`toasts.update.actions.restart`}
+              {t`notifications.update.actions.restart`}
             </Notification.Action>
           </Notification.Actions>
         </Notification.Root>

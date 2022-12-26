@@ -172,7 +172,7 @@
     "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
     "dismiss": "ʍoN ɹoℲ ssᴉɯsᴉp"
   },
-  "toasts": {
+  "notifications": {
     "update": {
       "title": "uoᴉsɹǝʌ ɹǝʍǝu ɐ oʇ pǝʇɐpdn ɹɐllǝʇS",
       "description": "˙ɹǝʇɐl ʇᴉ op ɹo ʍou ʇɹɐʇsǝɹ uɐɔ no⅄ ˙sǝƃuɐɥɔ ǝɥʇ ʎlddɐ oʇ pǝɹᴉnbǝɹ sᴉ ʇɹɐʇsǝɹ ∀",
@@ -182,7 +182,7 @@
       }
     }
   },
-  "popups": {
+  "prompts": {
     "welcome_slide_1": {},
     "welcome": {
       "slides": {

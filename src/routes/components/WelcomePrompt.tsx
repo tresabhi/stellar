@@ -2,12 +2,14 @@ import Anchor from 'components/Anchor';
 import * as Prompt from 'components/Prompt';
 import * as Select from 'components/Select';
 import mutateSettings from 'core/app/mutateSettings';
+import prompt from 'core/interface/prompt';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
 import { ReactNode, useState } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PromptProps } from 'stores/prompts';
-import { THEMES } from 'stores/settings';
+import useSettings, { THEMES } from 'stores/settings';
+import InstabilityWarningPrompt from './InstabilityWarningPrompt';
 
 const fixedLangNames: Record<string, string> = {
   'en-PT': 'English (Pirate)',
@@ -54,21 +56,21 @@ function Slide1() {
   return (
     <>
       <Prompt.Info>
-        <Prompt.Title>{t`popups.welcome.slides.1.title`}</Prompt.Title>
+        <Prompt.Title>{t`prompts.welcome.slides.1.title`}</Prompt.Title>
         <Prompt.Description>
-          {f`popups.welcome.slides.1.description`[0]}
+          {f`prompts.welcome.slides.1.description`[0]}
           <Anchor
             href="https://crowdin.com/project/stellareditor/"
             target="_blank"
           >
-            {f`popups.welcome.slides.1.description`[1]}
+            {f`prompts.welcome.slides.1.description`[1]}
           </Anchor>
-          {f`popups.welcome.slides.1.description`[2]}
+          {f`prompts.welcome.slides.1.description`[2]}
         </Prompt.Description>
       </Prompt.Info>
 
       <Select.Root key="1" onValueChange={handleValueChange}>
-        <Select.Trigger placeholder={t`popups.welcome.slides.1.select`} />
+        <Select.Trigger placeholder={t`prompts.welcome.slides.1.select`} />
         <Select.Content>{languages}</Select.Content>
       </Select.Root>
     </>
@@ -119,21 +121,21 @@ function Slide2() {
   return (
     <>
       <Prompt.Info>
-        <Prompt.Title>{t`popups.welcome.slides.2.title`}</Prompt.Title>
+        <Prompt.Title>{t`prompts.welcome.slides.2.title`}</Prompt.Title>
         <Prompt.Description>
-          {t`popups.welcome.slides.2.description`}
+          {t`prompts.welcome.slides.2.description`}
         </Prompt.Description>
       </Prompt.Info>
 
       <Select.Root key="2" onValueChange={handleValueChange}>
-        <Select.Trigger placeholder={t`popups.welcome.slides.2.select`} />
+        <Select.Trigger placeholder={t`prompts.welcome.slides.2.select`} />
         <Select.Content>{themes}</Select.Content>
       </Select.Root>
     </>
   );
 }
 
-export default function WelcomePopup({ dismiss }: PromptProps) {
+export default function WelcomePrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const [index, setIndex] = useState(0);
   const slides = [Slide1, Slide2];
@@ -148,6 +150,10 @@ export default function WelcomePopup({ dismiss }: PromptProps) {
       draft.interface.welcomePromptCompleted = true;
     });
     dismiss();
+
+    if (useSettings.getState().interface.showInstabilityWarning) {
+      prompt(InstabilityWarningPrompt, false, undefined, true);
+    }
   };
 
   usePopupConcurrency();
@@ -160,7 +166,7 @@ export default function WelcomePopup({ dismiss }: PromptProps) {
         <Prompt.Actions>
           {index > 0 && (
             <Prompt.Action onClick={handleBackClick}>
-              {t`popups.welcome.actions.back`}
+              {t`prompts.welcome.actions.back`}
             </Prompt.Action>
           )}
           <Prompt.Action
@@ -168,8 +174,8 @@ export default function WelcomePopup({ dismiss }: PromptProps) {
             onClick={lastSlide ? handleFinishClick : handleNextClick}
           >
             {lastSlide
-              ? t`popups.welcome.actions.finish`
-              : t`popups.welcome.actions.next`}
+              ? t`prompts.welcome.actions.finish`
+              : t`prompts.welcome.actions.next`}
           </Prompt.Action>
         </Prompt.Actions>
       </Prompt.Content>

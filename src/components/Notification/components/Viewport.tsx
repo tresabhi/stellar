@@ -14,8 +14,8 @@ const Container = styled('div', {
 });
 
 export function Viewport() {
-  const toasts = useNotifications((state) => state.notifications);
-  const toastNodes = toasts.map(({ node }) => node);
+  const notifications = useNotifications((state) => state.notifications);
+  const toastNodes = notifications.map(({ node }) => node);
 
   return <Container>{toastNodes}</Container>;
 }

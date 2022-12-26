@@ -1,16 +1,22 @@
 import * as Notification from 'components/Notification';
 import * as Prompt from 'components/Prompt';
+import dismissPrompt from 'core/interface/dismissPrompt';
 import prompt from 'core/interface/prompt';
 import useInterfaceMode from 'hooks/useInterfaceMode';
-import WelcomePopup from 'routes/components/WelcomePopup';
+import { useEffect } from 'react';
+import InstabilityWarningPrompt from 'routes/components/InstabilityWarningPrompt';
+import WelcomePrompt from 'routes/components/WelcomePrompt';
 import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/app';
 import useSettings, { InterfaceMode } from 'stores/settings';
+import { getContext, StellarName } from 'utilities/getContext';
 import CreateTab from './components/CreateTab';
 import ExportTab from './components/ExportTab';
 import LayoutTab from './components/LayoutTab';
 import StagingTab from './components/StagingTab';
 import Tabs from './components/Tabs';
+
+const UNSTABLE_VERSIONS = [StellarName.Alpha, StellarName.Unknown];
 
 export interface SidebarTabProps {
   selected: boolean;
@@ -28,8 +34,26 @@ const useWelcomePopup = () => {
   const { welcomePromptCompleted } = useSettings.getState().interface;
 
   if (!welcomePromptCompleted) {
-    prompt(WelcomePopup, false, 'welcome-popup');
+    prompt(WelcomePrompt, false, 'welcome-popup');
   }
+};
+
+const useAlphaWarning = () => {
+  useEffect(() => {
+    const { name } = getContext();
+    const { showInstabilityWarning, welcomePromptCompleted } = useSettings.getState().interface;
+    let id: string;
+
+    if (
+      welcomePromptCompleted
+      && showInstabilityWarning
+      && UNSTABLE_VERSIONS.includes(name)
+    ) {
+      id = prompt(InstabilityWarningPrompt, false);
+    }
+
+    return () => dismissPrompt(id);
+  }, []);
 };
 
 function Interface() {
@@ -37,6 +61,7 @@ function Interface() {
   const interfaceMode = useInterfaceMode();
   const tab = useApp((state) => state.interface.tab);
 
+  useAlphaWarning();
   useWelcomePopup();
 
   return (

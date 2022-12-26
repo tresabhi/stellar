@@ -24,8 +24,8 @@ import ungroupSelected from 'core/part/ungroupSelected';
 import unselectAll from 'core/part/unselectAll';
 import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
-import InsertPartPopup from 'routes/components/InsertPartPopup';
-import RenamePartsPopup from 'routes/components/RenamePartsPopup';
+import InsertPartPrompt from 'routes/components/InsertPartPrompt';
+import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import usePrompts from 'stores/prompts';
@@ -268,10 +268,10 @@ const useKeybinds = () => {
     bind('ctrl+g', groupSelected);
     bind('ctrl+shift+g', ungroupSelected);
 
-    bind('ctrl+shift+i', () => prompt(InsertPartPopup, true, 'insert-part'));
+    bind('ctrl+shift+i', () => prompt(InsertPartPrompt, true, 'insert-part'));
     bind('ctrl+r', () => {
       if (useBlueprint.getState().selections.length > 0) {
-        prompt(RenamePartsPopup, true, 'rename-parts');
+        prompt(RenamePartsPrompt, true, 'rename-parts');
       }
     });
 

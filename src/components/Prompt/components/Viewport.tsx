@@ -26,8 +26,8 @@ const Container = styled('div', {
 });
 
 export function Viewport() {
-  const popups = usePrompts((state) => state.prompts);
-  const popupNodes = popups.map(({ id, dismissByBlur, node }) => {
+  const prompts = usePrompts((state) => state.prompts);
+  const popupNodes = prompts.map(({ id, dismissByBlur, node }) => {
     const handleClick = () => {
       if (dismissByBlur) dismissPrompt(id);
     };

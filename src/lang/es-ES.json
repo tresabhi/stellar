@@ -172,7 +172,7 @@
     "never": "No volver a preguntar de nuevo",
     "dismiss": "Descartar por ahora"
   },
-  "toasts": {
+  "notifications": {
     "update": {
       "title": "Stellar actualizado a una versión más nueva",
       "description": "Es necesario reiniciar para aplicar los cambios. Puedes reiniciar ahora o hacerlo más tarde.",
@@ -182,7 +182,7 @@
       }
     }
   },
-  "popups": {
+  "prompts": {
     "welcome_slide_1": {},
     "welcome": {
       "slides": {
