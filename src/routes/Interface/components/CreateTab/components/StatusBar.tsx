@@ -103,19 +103,17 @@ export default function StatusBar() {
 
           <StatusBarComponent.Anchor
             target="_blank"
-            href={`https://github.com/${GITHUB_REPO}/commits/`}
+            href={`https://github.com/${GITHUB_REPO}/blob/main/LICENSE`}
           >
-            &copy;
-            {year}
+            {license}
           </StatusBarComponent.Anchor>
 
           <StatusBarComponent.Dot />
 
-          <StatusBarComponent.Anchor
-            target="_blank"
-            href={`https://github.com/${GITHUB_REPO}/blob/main/LICENSE`}
-          >
-            {license}
+          <StatusBarComponent.Anchor target="_blank">
+            &copy;
+            {' '}
+            {year}
           </StatusBarComponent.Anchor>
         </StatusBarComponent.Group>
       </StatusBarComponent.Group>

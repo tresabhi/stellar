@@ -8,12 +8,9 @@ import {
 import apolloMission from 'assets/blueprints/apollo-mission.json';
 import basicRocket from 'assets/blueprints/basic-rocket.json';
 import hopper from 'assets/blueprints/hopper.json';
-import joints from 'assets/blueprints/joints.json';
 import lightLander from 'assets/blueprints/light-lander.json';
 import orbitAndReEntry from 'assets/blueprints/orbit-and-re-entry.json';
 import parachuteAndSeparator from 'assets/blueprints/parachute-and-separator.json';
-import raceCar from 'assets/blueprints/race-car.json';
-import rover from 'assets/blueprints/rover.json';
 import { fileOpen } from 'browser-fs-access';
 import ButtonPrimitive from 'components/Button';
 import { InputWithIcon } from 'components/InputWithIcon';
@@ -141,11 +138,11 @@ const TEMPLATES: Template[] = [
   { name: 'hopper', blueprint: hopper },
   { name: 'apollo_mission', blueprint: apolloMission },
   { name: 'light_lander', blueprint: lightLander },
-  { name: 'rover', blueprint: rover },
+  // { name: 'rover', blueprint: rover },
   { name: 'parachute_and_separator', blueprint: parachuteAndSeparator },
-  { name: 'joints', blueprint: joints },
+  // { name: 'joints', blueprint: joints },
   { name: 'orbit_and_re_entry', blueprint: orbitAndReEntry },
-  { name: 'race_car', blueprint: raceCar },
+  // { name: 'race_car', blueprint: raceCar },
   { name: 'basic_rocket', blueprint: basicRocket },
 ];
 
