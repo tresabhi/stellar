@@ -39,8 +39,10 @@ export default function useCheckboxProperty<
     }
   }, [ids, slice]);
 
-  const onChange = ({ value: newValue }: { value: boolean }) => {
+  const onChange = (newValue: boolean) => {
     value.current = newValue as Value;
+    checkbox.current?.setValue(newValue);
+    checkbox.current?.setIndeterminate(false);
     commit(newValue as Value);
   };
 
@@ -63,7 +65,7 @@ export default function useCheckboxProperty<
   const hook: Partial<CheckboxProps & { ref: Ref<CheckboxRef> }> = {
     ref: checkbox,
     defaultValue: value.current,
-    indeterminate: value === undefined,
+    indeterminate: value.current === undefined,
     onChange,
   };
 

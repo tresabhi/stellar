@@ -7,13 +7,7 @@ import {
 } from './Part';
 
 export interface VanillaPartWithEngine extends VanillaPart {
-  /**
-   * Data about engine parts
-   */
   B: {
-    /**
-     * Part will exert thrust and abide the thrust throttle
-     */
     engine_on: boolean;
     head_on__for_creative_use: boolean;
   };

@@ -19,12 +19,7 @@ export interface CheckboxProps
   value?: boolean;
   defaultValue?: boolean;
   indeterminate?: boolean;
-  onChange?: (
-    event: MouseEvent<HTMLButtonElement> & {
-      value: boolean;
-      indeterminate: boolean;
-    },
-  ) => void;
+  onChange?: (value: boolean) => void;
 }
 
 export interface CheckboxRef extends HTMLButtonElement {
@@ -85,10 +80,10 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
       setValue((state) => !state);
-      setIndeterminate(false);
+      if (indeterminate) setIndeterminate(false);
 
       if (onClick) onClick(event);
-      if (onChange) onChange({ ...event, value: !value, indeterminate: false });
+      if (onChange) onChange(!value);
     };
 
     useEffect(() => {
