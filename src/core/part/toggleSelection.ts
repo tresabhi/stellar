@@ -13,7 +13,7 @@ export default function toggleSelection(ids: MethodIds, blueprint?: Blueprint) {
 
       if (part.selected) {
         const index = blueprint.selections.indexOf(ids);
-        blueprint.selections.splice(index);
+        blueprint.selections.splice(index, 1);
       } else {
         blueprint.selections.push(ids);
       }
