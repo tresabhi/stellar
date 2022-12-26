@@ -1,4 +1,6 @@
 import { invalidate } from '@react-three/fiber';
+import { WEBSITE } from 'constants/social';
+import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';
 import mutatePrompts from 'core/app/mutatePrompts';
 import mutateSettings from 'core/app/mutateSettings';
@@ -276,6 +278,13 @@ const useKeybinds = () => {
     });
 
     bind('.', panToSelected);
+
+    bind('f1', () => window.open(WEBSITE, '_blank'), {
+      preventOnNonLayoutTab: false,
+    });
+    bind('f4', () => window.open(`${GH_REPO_URL}issues/new/choose`, '_blank'), {
+      preventOnNonLayoutTab: false,
+    });
   }, []);
 };
 export default useKeybinds;
