@@ -55,6 +55,22 @@
           "group": "Group",
           "ungroup": "Ungroup"
         },
+        "edit": {
+          "rename": "Rename",
+          "hidden": "Unhide",
+          "unhidden": "Hide",
+          "locked": "Unlock",
+          "unlocked": "Lock",
+          "delete": "Delete"
+        },
+        "cursor": {
+          "select_deep": "Select Deep",
+          "select_cascade": "Select Cascade",
+          "select_multiple": "Select Multiple",
+          "select_concurrent": "Select Concurrent",
+          "focus_mode": "Focus Mode",
+          "normal_mode": "Normal Mode"
+        },
         "help": {
           "about": "About Stellar",
           "report": "Report an Issue",
@@ -170,7 +186,7 @@
   "landscape_prompt": {
     "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
     "never": "Never Ask Again",
-    "dismiss": "Dismiss For Now"
+    "dismiss": "Dismiss"
   },
   "notifications": {
     "update": {
@@ -179,6 +195,15 @@
       "actions": {
         "restart": "Restart",
         "dismiss": "Dismiss"
+      }
+    },
+    "installable": {
+      "title": "Stellar can now be installed!",
+      "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
+      "actions": {
+        "never": "Never Ask Again",
+        "dismiss": "Dismiss",
+        "install": "Install"
       }
     }
   },
@@ -203,18 +228,18 @@
         "finish": "Finish"
       }
     },
-    "alpha_warning": {
-      "title": "You are using an experimental version",
-      "description": "Use the %1$sbeta version%2$s instead. You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+    "unstable": {
+      "title": "Unstable version!",
+      "description": "You are currently using %1$s, which can be highly unstable as it remains very untested. You may want to use %2$sthe beta version%3$s instead.",
       "actions": {
         "never": "Never Ask Again",
         "dismiss": "Dismiss",
-        "beta": "Go to Beta"
+        "beta": "Use Beta"
       }
     }
   },
   "themes": {
-    "none": "None",
+    "theme_light": "Stellar Light",
     "theme_dark": "Stellar Dark"
   }
 }
