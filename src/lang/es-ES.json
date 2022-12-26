@@ -55,6 +55,22 @@
           "group": "Agrupar",
           "ungroup": "Desagrupar"
         },
+        "edit": {
+          "rename": "Renombrar",
+          "hidden": "Desocultar",
+          "unhidden": "Ocultar",
+          "locked": "Desbloquear",
+          "unlocked": "Bloquear",
+          "delete": "Eliminar"
+        },
+        "cursor": {
+          "select_deep": "Seleccionar profundo",
+          "select_cascade": "Seleccionar cascada",
+          "select_multiple": "Seleccionar varios",
+          "select_concurrent": "Seleccionar concurrente",
+          "focus_mode": "Modo de enfoque",
+          "normal_mode": "Modo normal"
+        },
         "help": {
           "about": "Acerca de Stellar",
           "report": "Reportar un problema",
@@ -170,15 +186,24 @@
   "landscape_prompt": {
     "message": "Parece que estás en modo retrato. Por favor, gira al modo horizontal.%1$sSi estás en un escritorio, esto puede ser descartado.",
     "never": "No volver a preguntar de nuevo",
-    "dismiss": "Descartar por ahora"
+    "dismiss": "Descartar"
   },
   "notifications": {
     "update": {
       "title": "Stellar actualizado a una versión más nueva",
       "description": "Es necesario reiniciar para aplicar los cambios. Puedes reiniciar ahora o hacerlo más tarde.",
       "actions": {
-        "restart": "Reiniciar",
-        "dismiss": "Descartar"
+        "restart": "Restart",
+        "dismiss": "Dismiss"
+      }
+    },
+    "installable": {
+      "title": "Stellar can now be installed!",
+      "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
+      "actions": {
+        "never": "Never Ask Again",
+        "dismiss": "Dismiss",
+        "install": "Install"
       }
     }
   },
@@ -203,18 +228,18 @@
         "finish": "Finish"
       }
     },
-    "alpha_warning": {
-      "title": "You are using an experimental version",
-      "description": "Use the %1$sbeta version%2$s instead. You are currently using the alpha version of Stellar. This version can be highly unstable and untested. If you know what you are doing, you may proceed.",
+    "unstable": {
+      "title": "Unstable version!",
+      "description": "You are currently using %1$s, which can be highly unstable as it remains very untested. You may want to use %2$sthe beta version%3$s instead.",
       "actions": {
         "never": "Never Ask Again",
         "dismiss": "Dismiss",
-        "beta": "Go to Beta"
+        "beta": "Use Beta"
       }
     }
   },
   "themes": {
-    "none": "None",
-    "theme_dark": "Stellar Dark"
+    "theme_light": "Stellar claro",
+    "theme_dark": "Stellar oscuro"
   }
 }

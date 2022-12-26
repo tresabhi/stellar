@@ -10,7 +10,7 @@
     "@radix-ui/react-scroll-area": "^1.0.1",
     "@radix-ui/react-select": "^1.1.2",
     "@radix-ui/react-slider": "^1.1.0",
-    "@react-three/drei": "^9.46.4",
+    "@react-three/drei": "^9.48.1",
     "@react-three/fiber": "^8.9.1",
     "@stitches/react": "^1.2.8",
     "bepaint": "^0.1.11-beta",
@@ -40,7 +40,7 @@
     "@types/lodash": "^4.14.191",
     "@types/mousetrap": "^1.6.10",
     "@types/react": "^18.0.20",
-    "@types/react-dom": "^18.0.9",
+    "@types/react-dom": "^18.0.10",
     "@types/react-router-dom": "^5.3.3",
     "@types/semver": "^7.3.12",
     "@types/three": "^0.146.0",
@@ -66,10 +66,10 @@
     "typescript": "^4.9.4",
     "unzipper": "^0.10.11",
     "vite": "^3.2.5",
-    "vite-plugin-checker": "^0.5.1",
-    "vite-plugin-pwa": "^0.13.3",
+    "vite-plugin-checker": "^0.5.3",
+    "vite-plugin-pwa": "^0.14.0",
     "vite-plugin-svgr": "^2.2.2",
-    "vite-tsconfig-paths": "^3.6.0"
+    "vite-tsconfig-paths": "^4.0.3"
   },
   "scripts": {
     "start": "vite --host",
