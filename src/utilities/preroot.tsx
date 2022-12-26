@@ -4,7 +4,6 @@ import * as Notification from 'components/Notification';
 import mutateSettings from 'core/app/mutateSettings';
 import dismissNotification from 'core/interface/dismissNotification';
 import notify from 'core/interface/notify';
-import prompt from 'core/interface/prompt';
 import useTranslator from 'hooks/useTranslator';
 import { enableMapSet, enablePatches } from 'immer';
 import useSettings from 'stores/settings';
@@ -20,7 +19,7 @@ import { registerSW } from 'virtual:pwa-register';
 
 window.addEventListener('beforeinstallprompt', (event) => {
   if (useSettings.getState().interface.showInstallationPrompt) {
-    prompt(({ id }) => {
+    notify(({ id }) => {
       const { t, f } = useTranslator();
 
       return (
