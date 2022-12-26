@@ -160,25 +160,23 @@ export default function WelcomePrompt({ dismiss }: PromptProps) {
 
   return (
     <Prompt.Root>
-      <Prompt.Content>
-        {slides[index]()}
+      {slides[index]()}
 
-        <Prompt.Actions>
-          {index > 0 && (
-            <Prompt.Action onClick={handleBackClick}>
-              {t`prompts.welcome.actions.back`}
-            </Prompt.Action>
-          )}
-          <Prompt.Action
-            color="accent"
-            onClick={lastSlide ? handleFinishClick : handleNextClick}
-          >
-            {lastSlide
-              ? t`prompts.welcome.actions.finish`
-              : t`prompts.welcome.actions.next`}
+      <Prompt.Actions>
+        {index > 0 && (
+          <Prompt.Action onClick={handleBackClick}>
+            {t`prompts.welcome.actions.back`}
           </Prompt.Action>
-        </Prompt.Actions>
-      </Prompt.Content>
+        )}
+        <Prompt.Action
+          color="accent"
+          onClick={lastSlide ? handleFinishClick : handleNextClick}
+        >
+          {lastSlide
+            ? t`prompts.welcome.actions.finish`
+            : t`prompts.welcome.actions.next`}
+        </Prompt.Action>
+      </Prompt.Actions>
     </Prompt.Root>
   );
 }

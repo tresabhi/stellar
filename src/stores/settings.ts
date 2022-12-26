@@ -39,6 +39,7 @@ export interface UseSettings {
     showOrientationPrompt: boolean;
     showInstallationPrompt: boolean;
     showInstabilityWarning: boolean;
+    showMissingParts: boolean;
     welcomePromptCompleted: boolean;
 
     tabs: {
@@ -88,6 +89,7 @@ export const UseSettingsData: UseSettings = {
     showOrientationPrompt: true,
     showInstallationPrompt: true,
     showInstabilityWarning: true,
+    showMissingParts: true,
     welcomePromptCompleted: false,
 
     tabs: {

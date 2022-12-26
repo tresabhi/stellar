@@ -13,7 +13,7 @@ const StyledDiv = styled('div', {
   borderRadius: theme.radii[4],
   border: theme.borderStyles.componentNonInteractive,
   backgroundColor: theme.colors.appBackground2,
-  padding: theme.space.padding,
+  padding: theme.space.paddingMajor,
 
   variants: {
     width: {

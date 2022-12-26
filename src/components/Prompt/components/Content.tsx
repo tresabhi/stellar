@@ -4,5 +4,5 @@ export const Content = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: theme.space.gapRelatedMajor,
-  padding: theme.space.padding,
+  // padding: theme.space.padding,
 });

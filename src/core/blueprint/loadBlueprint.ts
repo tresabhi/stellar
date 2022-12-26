@@ -5,7 +5,10 @@ import { importifyBlueprint } from './importifyBlueprint';
 
 export default function loadBlueprint(
   importData?: VanillaBlueprint | Blueprint,
+  warnMissing = true,
 ) {
-  useBlueprint.setState(importifyBlueprint(importData ?? blueprintData));
+  useBlueprint.setState(
+    importifyBlueprint(importData ?? blueprintData, warnMissing),
+  );
   clearVersionControl();
 }

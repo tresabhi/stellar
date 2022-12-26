@@ -49,26 +49,24 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
         placeholder={t`tabs.layout.popup.rename.input_placeholder`}
       />
 
-      <Prompt.Content>
-        <CheckboxWithLabel
-          defaultValue={rename.trim}
-          onChange={handleClick('trim')}
-        >
-          {t`tabs.layout.popup.rename.trim`}
-        </CheckboxWithLabel>
-        <CheckboxWithLabel
-          defaultValue={rename.skipLocked}
-          onChange={handleClick('skipLocked')}
-        >
-          {t`tabs.layout.popup.rename.skip_locked`}
-        </CheckboxWithLabel>
-        <CheckboxWithLabel
-          defaultValue={rename.suffix}
-          onChange={handleClick('suffix')}
-        >
-          {t`tabs.layout.popup.rename.suffix`}
-        </CheckboxWithLabel>
-      </Prompt.Content>
+      <CheckboxWithLabel
+        defaultValue={rename.trim}
+        onChange={handleClick('trim')}
+      >
+        {t`tabs.layout.popup.rename.trim`}
+      </CheckboxWithLabel>
+      <CheckboxWithLabel
+        defaultValue={rename.skipLocked}
+        onChange={handleClick('skipLocked')}
+      >
+        {t`tabs.layout.popup.rename.skip_locked`}
+      </CheckboxWithLabel>
+      <CheckboxWithLabel
+        defaultValue={rename.suffix}
+        onChange={handleClick('suffix')}
+      >
+        {t`tabs.layout.popup.rename.suffix`}
+      </CheckboxWithLabel>
 
       <Prompt.Actions>
         <Prompt.Action onClick={handleCancelClick}>
