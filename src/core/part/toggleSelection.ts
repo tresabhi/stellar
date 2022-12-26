@@ -14,6 +14,8 @@ export default function toggleSelection(ids: MethodIds, blueprint?: Blueprint) {
       if (part.selected) {
         const index = blueprint.selections.indexOf(ids);
         blueprint.selections.splice(index);
+      } else {
+        blueprint.selections.push(ids);
       }
 
       part.selected = !part.selected;
