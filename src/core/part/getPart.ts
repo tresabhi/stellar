@@ -6,8 +6,6 @@ export default function getPart<Type extends Part>(
   id: string,
   blueprint?: Blueprint,
 ): Type {
-  if (blueprint) {
-    return blueprint.parts[id] as Type;
-  }
+  if (blueprint) return blueprint.parts[id] as Type;
   return getPart<Type>(id, useBlueprint.getState());
 }

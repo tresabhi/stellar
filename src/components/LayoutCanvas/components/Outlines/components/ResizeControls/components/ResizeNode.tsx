@@ -4,6 +4,8 @@ import {
 } from '@react-three/fiber';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import deferUpdates from 'core/bounds/deferUpdates';
+import filter from 'core/part/filter';
+import getChildrenRecursive from 'core/part/getChildrenRecursive';
 import resizeAsync from 'core/part/resizeAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
@@ -264,14 +266,11 @@ export default function ResizeNode({
 
     firstMove = true;
     blueprint = useBlueprint.getState();
-    selections = blueprint.selections.filter((selection) => {
-      const part = blueprint.parts[selection];
-
-      return (
-        (part as PartWithPosition).p !== undefined
-        && (part as PartWithScale).o !== undefined
-      );
-    });
+    selections = filter(
+      getChildrenRecursive(blueprint.selections),
+      (part) => (part as PartWithPosition).p !== undefined
+        && (part as PartWithScale).o !== undefined,
+    );
 
     window.addEventListener('pointermove', handlePointerMove);
     window.addEventListener('pointerup', handlePointerUp);
