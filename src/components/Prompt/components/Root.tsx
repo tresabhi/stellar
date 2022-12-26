@@ -13,7 +13,6 @@ const StyledDiv = styled('div', {
   borderRadius: theme.radii[4],
   border: theme.borderStyles.componentNonInteractive,
   backgroundColor: theme.colors.appBackground2,
-  padding: theme.space.paddingMajor,
 
   variants: {
     width: {
@@ -21,10 +20,16 @@ const StyledDiv = styled('div', {
         width: theme.sizes.popupWidth,
       },
     },
+
+    padding: {
+      regular: { padding: theme.space.paddingMajor },
+      thin: { padding: theme.space.padding },
+    },
   },
 
   defaultVariants: {
     width: 'regular',
+    padding: 'regular',
   },
 });
 

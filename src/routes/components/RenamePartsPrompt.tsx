@@ -40,7 +40,7 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
   usePopupConcurrency();
 
   return (
-    <Prompt.Root>
+    <Prompt.Root padding="thin">
       <InputWithIcon
         ref={input}
         onKeyDown={handleKeyDown}

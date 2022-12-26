@@ -72,7 +72,7 @@ export default function InsertPartPrompt({ dismiss }: PromptProps) {
   usePopupConcurrency();
 
   return (
-    <Prompt.Root>
+    <Prompt.Root padding="thin">
       <InputWithIcon
         ref={input}
         icon={<MagnifyingGlassIcon />}
