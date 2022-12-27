@@ -220,55 +220,6 @@ function Toolbar() {
         </ToolbarPrimitive.DropdownMenu>
 
         <ToolbarPrimitive.DropdownMenu
-          disabled={hasNoItemInClipboard && hasNoSelections}
-          icon={<ClipboardIcon />}
-        >
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<CopyIcon />}
-            onClick={() => copySelected()}
-            keybind="Ctrl + C"
-            disabled={hasNoSelections}
-          >
-            {t`tabs.layout.toolbar.clipboard.copy`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<ScissorsIcon />}
-            onClick={() => cutPartsBySelection()}
-            keybind="Ctrl + X"
-            disabled={hasNoSelections}
-          >
-            {t`tabs.layout.toolbar.clipboard.cut`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<ClipboardIcon />}
-            onClick={() => paste()}
-            keybind="Ctrl + V"
-            disabled={hasNoItemInClipboard}
-          >
-            {t`tabs.layout.toolbar.clipboard.paste`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<StackIcon />}
-            onClick={() => duplicateSelected()}
-            keybind="Ctrl + D"
-            disabled={hasNoSelections}
-          >
-            {t`tabs.layout.toolbar.clipboard.duplicate`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<Component1Icon />}
-            keybind="Ctrl + M"
-            disabled
-          >
-            {t`tabs.layout.toolbar.clipboard.create_snippet`}
-          </ToolbarPrimitive.DropdownMenuItem>
-        </ToolbarPrimitive.DropdownMenu>
-
-        <ToolbarPrimitive.DropdownMenu
           disabled={!hasParts && hasNoSelections}
           icon={<GroupIcon />}
         >
@@ -343,6 +294,55 @@ function Toolbar() {
             keybind="Del"
           >
             {t`tabs.layout.toolbar.edit.delete`}
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+
+        <ToolbarPrimitive.DropdownMenu
+          disabled={hasNoItemInClipboard && hasNoSelections}
+          icon={<ClipboardIcon />}
+        >
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<CopyIcon />}
+            onClick={() => copySelected()}
+            keybind="Ctrl + C"
+            disabled={hasNoSelections}
+          >
+            {t`tabs.layout.toolbar.clipboard.copy`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<ScissorsIcon />}
+            onClick={() => cutPartsBySelection()}
+            keybind="Ctrl + X"
+            disabled={hasNoSelections}
+          >
+            {t`tabs.layout.toolbar.clipboard.cut`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<ClipboardIcon />}
+            onClick={() => paste()}
+            keybind="Ctrl + V"
+            disabled={hasNoItemInClipboard}
+          >
+            {t`tabs.layout.toolbar.clipboard.paste`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<StackIcon />}
+            onClick={() => duplicateSelected()}
+            keybind="Ctrl + D"
+            disabled={hasNoSelections}
+          >
+            {t`tabs.layout.toolbar.clipboard.duplicate`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<Component1Icon />}
+            keybind="Ctrl + M"
+            disabled
+          >
+            {t`tabs.layout.toolbar.clipboard.create_snippet`}
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
       </ToolbarPrimitive.Group>

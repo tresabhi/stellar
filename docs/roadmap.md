@@ -7,9 +7,8 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 - Remove part mesh wrappers
 - Parts
   - 3D
-    - `Engine Titan`: https://i.imgur.com/9zLhESv.png
     - `Engine Hawk`: https://i.imgur.com/5MdIm2G.png
-    - `Engine Fontier`: https://i.imgur.com/Zfmk9sz.png
+    - `Engine Frontier`: https://i.imgur.com/Zfmk9sz.png
     - `Engine Valiant`: https://i.imgur.com/dJau6vf.png
     - `Engine Kolibri`: https://i.imgur.com/2PMB5JX.png
     - `Placeholder Ion`: https://i.imgur.com/Up8gkgP.png
@@ -31,7 +30,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
   - Create tab "stellar" text
     - Update subtitle font size
   - Canvas
-    - Move all to toolbar
     - Move zen-mode to preferences
   - Property editor
     - Property hints
