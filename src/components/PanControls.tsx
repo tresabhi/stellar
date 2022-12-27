@@ -7,8 +7,8 @@ import {
   OrthographicCamera, Vector2, Vector2Tuple, Vector3,
 } from 'three';
 
-const MIN_ZOOM = 2.2;
-const MAX_ZOOM = 512;
+export const MIN_ZOOM = 2.2;
+export const MAX_ZOOM = 512;
 const ZOOM_SENSITIVITY = 1 / 250;
 
 export default function PanControls() {

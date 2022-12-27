@@ -2,14 +2,17 @@ import { sideToPoint } from 'components/LayoutCanvas/components/Outlines/compone
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
 
-export default function getBoundsFromParts(ids: string[]) {
+export default function getBoundsFromParts(
+  ids: string[],
+  useMutualAngle = true,
+) {
   if (ids.length > 0) {
     const box2 = new Box2();
     const point = new Vector2();
-    const angle = boundsStore[ids[0]].bounds.rotation;
-    const noMutualAngle = ids.some(
-      (id) => boundsStore[id].bounds.rotation !== angle,
-    );
+    const angle = useMutualAngle ? boundsStore[ids[0]].bounds.rotation : 0;
+    const noMutualAngle = useMutualAngle
+      ? ids.some((id) => boundsStore[id].bounds.rotation !== angle)
+      : false;
 
     if (noMutualAngle) {
       ids.forEach((id) => {

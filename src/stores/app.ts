@@ -1,4 +1,4 @@
-import { Camera } from 'three';
+import { OrthographicCamera } from 'three';
 import create from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 import { Snippet } from './snippets';
@@ -40,7 +40,8 @@ export interface UseApp {
     isTouchPanning: boolean;
     preventNextSelection: boolean;
     clipboard?: Snippet;
-    camera?: Camera;
+    camera?: OrthographicCamera;
+    canvas?: HTMLCanvasElement;
   };
 }
 
@@ -65,6 +66,7 @@ export const UseAppData: UseApp = {
     preventNextSelection: false,
     clipboard: undefined,
     camera: undefined,
+    canvas: undefined,
   },
 };
 
