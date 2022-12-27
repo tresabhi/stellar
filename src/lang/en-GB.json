@@ -65,11 +65,8 @@
         },
         "cursor": {
           "select_deep": "Select Deep",
-          "select_cascade": "Select Cascade",
           "select_multiple": "Select Multiple",
-          "select_concurrent": "Select Concurrent",
-          "focus_mode": "Focus Mode",
-          "normal_mode": "Normal Mode"
+          "focus_mode": "Focus Mode"
         },
         "help": {
           "about": "About Stellar",
@@ -208,7 +205,6 @@
     }
   },
   "prompts": {
-    "welcome_slide_1": {},
     "welcome": {
       "slides": {
         "1": {
@@ -235,6 +231,16 @@
         "never": "Never Ask Again",
         "dismiss": "Dismiss",
         "beta": "Use Beta"
+      }
+    },
+    "missing_parts": {
+      "title": "1 part not imported",
+      "title_plural": "%1$s parts not imported",
+      "description": "The following part was not imported because it doesn't exist in %1$s yet:",
+      "description_plural": "The following parts were not imported because they don't exist in %1$s yet:",
+      "actions": {
+        "never": "Never Show Again",
+        "proceed": "Proceed"
       }
     }
   },
