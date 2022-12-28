@@ -50,7 +50,7 @@ export default function Inspect() {
         <Properties.Value
           label={t`tabs.layout.right_sidebar.inspect.meta_data.hidden`}
         >
-          {`${data.hidden}`}
+          {`${data.visible}`}
         </Properties.Value>
         <Properties.Value
           label={t`tabs.layout.right_sidebar.inspect.meta_data.locked`}

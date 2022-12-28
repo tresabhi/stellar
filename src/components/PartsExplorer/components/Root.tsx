@@ -2,10 +2,11 @@ import * as ScrollArea from 'components/ScrollArea';
 import getPart from 'core/part/getPart';
 import unselectAll from 'core/part/unselectAll';
 import { Group } from 'game/parts/Group';
+import { MouseEvent } from 'react';
 import { styled } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import { ParentId } from 'types/Parts';
-import { Listing } from './Listing';
+import { Item } from './Item';
 
 export interface ContainerProps {
   fullHeight?: boolean;
@@ -32,15 +33,18 @@ export function Root({ parentId, indent = 0, ...props }: ContainerProps) {
     return getPart<Group>(parentId, state).part_order;
   });
   const children = partOrder.map((id) => (
-    <Listing indent={indent} id={id} key={`part-${id}`} />
+    <Item indent={indent} id={id} key={`part-${id}`} />
   ));
 
-  const handleClick = () => unselectAll();
+  const handleScrollAreaClick = () => unselectAll();
+  const handleWrapperClick = (event: MouseEvent) => event.stopPropagation();
 
   return (
     <Primitive>
-      <ScrollArea.Viewport onClick={handleClick}>
-        <Wrapper {...props}>{children}</Wrapper>
+      <ScrollArea.Viewport onClick={handleScrollAreaClick}>
+        <Wrapper {...props} onClick={handleWrapperClick}>
+          {children}
+        </Wrapper>
       </ScrollArea.Viewport>
 
       <ScrollArea.Scrollbar orientation="vertical">

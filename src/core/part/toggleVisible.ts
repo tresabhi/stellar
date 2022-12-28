@@ -3,26 +3,26 @@ import { Blueprint } from 'game/Blueprint';
 import { MethodIds } from 'types/Parts';
 import mutateParts from './mutateParts';
 
-export default function toggleHidden(ids: MethodIds, blueprint?: Blueprint) {
+export default function toggleVisible(ids: MethodIds, blueprint?: Blueprint) {
   if (blueprint) {
     if (typeof ids === 'string') {
-      blueprint.parts[ids].hidden = !blueprint.parts[ids].hidden;
+      blueprint.parts[ids].visible = !blueprint.parts[ids].visible;
     } else {
-      const firstHidden = blueprint.parts[ids[0]].hidden ?? true;
+      const firstHidden = blueprint.parts[ids[0]].visible ?? true;
       const isMixed = ids.some(
-        (id) => blueprint.parts[id].hidden !== firstHidden,
+        (id) => blueprint.parts[id].visible !== firstHidden,
       );
 
       mutateParts(
         ids,
         (draft) => {
-          draft.hidden = isMixed ? false : !firstHidden;
+          draft.visible = isMixed ? false : !firstHidden;
         },
         false,
         blueprint,
       );
     }
   } else {
-    mutateBlueprint((draft) => toggleHidden(ids, draft));
+    mutateBlueprint((draft) => toggleVisible(ids, draft));
   }
 }

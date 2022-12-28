@@ -57,8 +57,8 @@ import duplicateSelected from 'core/part/duplicateSelected';
 import groupSelected from 'core/part/groupSelected';
 import paste from 'core/part/paste';
 import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
-import toggleSelectedHidden from 'core/part/toggleSelectedHidden';
 import toggleSelectedLocked from 'core/part/toggleSelectedLocked';
+import toggleSelectedVisible from 'core/part/toggleSelectedVisible';
 import ungroupSelected from 'core/part/ungroupSelected';
 import unselectAll from 'core/part/unselectAll';
 import useTranslator from 'hooks/useTranslator';
@@ -79,7 +79,7 @@ function Toolbar() {
     : state.editor.tool));
   const isOneHidden = useBlueprint(({ selections, parts }) => selections.some((selection) => {
     const part = parts[selection];
-    return part.hidden;
+    return !part.visible;
   }));
   const isOneLocked = useBlueprint(({ selections, parts }) => selections.some((selection) => {
     const part = parts[selection];
@@ -274,7 +274,7 @@ function Toolbar() {
 
           <ToolbarPrimitive.DropdownMenuItem
             icon={isOneHidden ? <EyeOpenIcon /> : <EyeClosedIcon />}
-            onClick={() => toggleSelectedHidden()}
+            onClick={() => toggleSelectedVisible()}
           >
             {translate(
               `tabs.layout.toolbar.edit.${isOneHidden ? 'hidden' : 'unhidden'}`,

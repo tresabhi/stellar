@@ -93,7 +93,7 @@ const useDragControls = (id: string) => {
     if (
       part
       && (part.selected || part.parent_id === null) // is selected or is at root level
-      && !part.hidden
+      && part.visible
       && !part.locked
       && tool === Tool.Move
       && !isSpacePanning

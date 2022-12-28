@@ -26,7 +26,7 @@ const useSelectionControl = (id: string) => {
       const part = getPart(id);
       const parent = getParent(id);
 
-      if (!part.hidden && !part.locked) {
+      if (part.visible && !part.locked) {
         if (
           part.parent_id === null // part is at root
           || (parent && parent.selected) // parent is selected

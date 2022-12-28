@@ -28,7 +28,7 @@ export interface Part extends VanillaPart {
   /**
    * Part is hidden temporarily from view by the user
    */
-  hidden: boolean;
+  visible: boolean;
   /**
    * Part is made non-intractable by the user
    */
@@ -46,7 +46,7 @@ export const PartData: Part = {
   parent_id: null,
   label: 'Unlabeled Part',
   selected: false,
-  hidden: false,
+  visible: true,
   locked: false,
 };
 

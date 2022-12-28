@@ -1,37 +1,23 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
-import { Group } from 'game/parts/Group';
 import { MethodIds } from 'types/Parts';
 import normalizeIds from 'utilities/normalizeIds';
-import mutateParts from './mutateParts';
 
 export default function selectConcurrent(
   ids: MethodIds,
   blueprint?: Blueprint,
-  expandGroups?: boolean,
 ) {
   if (blueprint) {
-    mutateParts(
-      blueprint.selections,
-      (draft) => {
-        draft.selected = false;
-      },
-      false,
-      blueprint,
-    );
-    mutateParts(
-      normalizeIds(ids),
-      (draft) => {
-        draft.selected = true;
-        if (expandGroups && draft.n === 'Group') {
-          (draft as Group).expanded = true;
-        }
-      },
-      false,
-      blueprint,
-    );
+    const normalizedIds = normalizeIds(ids);
 
-    blueprint.selections = normalizeIds(ids);
+    blueprint.selections.forEach((id) => {
+      blueprint.parts[id].selected = false;
+    });
+    normalizedIds.forEach((id) => {
+      blueprint.parts[id].selected = true;
+    });
+
+    blueprint.selections = normalizedIds;
   } else {
     mutateBlueprint((draft) => {
       selectConcurrent(ids, draft);

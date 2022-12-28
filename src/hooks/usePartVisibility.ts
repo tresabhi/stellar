@@ -6,10 +6,10 @@ import usePartProperty from './usePartProperty';
 const usePartVisibility = (id: string, mesh: RefObject<Object3D>) => {
   usePartProperty(
     id,
-    (state) => state.hidden,
-    (hidden) => {
+    (state) => state.visible,
+    (visible) => {
       if (mesh.current) {
-        mesh.current.visible = !hidden;
+        mesh.current.visible = visible;
         invalidate();
       }
     },
