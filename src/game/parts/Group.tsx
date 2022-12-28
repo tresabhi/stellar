@@ -6,8 +6,9 @@ import exportifyPart from 'core/part/exportifyPart';
 import getPart from 'core/part/getPart';
 import removeMetaData from 'core/part/removeMetaData';
 import PartCategory from 'hooks/constants/partCategory';
+import usePartVisibility from 'hooks/usePartVisibility';
 import { isArray } from 'lodash';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
@@ -49,10 +50,12 @@ const useBoundsUpdated = (ids: string[], callback: () => void) => {
 };
 
 export function GroupLayoutComponent({ id }: PartComponentProps) {
+  const group = useRef<THREE.Group>(null);
   const partOrder = useBlueprint(
     (state) => getPart<Group>(id, state).part_order,
   );
 
+  usePartVisibility(id, group);
   useBoundsUpdated(partOrder, () => {
     const { bounds } = getBoundsFromParts(partOrder);
     boundsStore[id] = { bounds, needsRecomputation: false };
@@ -60,7 +63,7 @@ export function GroupLayoutComponent({ id }: PartComponentProps) {
     declareBoundsUpdated(id);
   });
 
-  return <PartCluster parentId={id} />;
+  return <PartCluster ref={group} parentId={id} />;
 }
 
 export const GroupIcon = Icon;
