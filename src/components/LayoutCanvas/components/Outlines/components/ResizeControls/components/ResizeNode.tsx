@@ -268,7 +268,9 @@ export default function ResizeNode({
     blueprint = useBlueprint.getState();
     selections = filter(
       getChildrenRecursive(blueprint.selections),
-      (part) => (part as PartWithPosition).p !== undefined
+      (part) => !part.locked
+        && part.visible
+        && (part as PartWithPosition).p !== undefined
         && (part as PartWithScale).o !== undefined,
     );
 
