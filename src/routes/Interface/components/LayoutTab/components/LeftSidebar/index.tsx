@@ -4,7 +4,6 @@ import useSettings, { SidebarTab } from 'stores/settings';
 import { TabLayoutProps } from '../..';
 import Properties from '../RightSidebar/components/Properties';
 import Parts from './components/Parts';
-import Rename from './components/Rename';
 import Snippets from './components/Snippets';
 import Tabs from './components/Tabs';
 
@@ -27,8 +26,6 @@ export default function LeftSidebar({ swapSecondTab }: TabLayoutProps) {
           {tab === SidebarTab.Left && <Parts />}
           {swapSecondTab && tab === SidebarTab.Right && <Properties />}
           {!swapSecondTab && tab === SidebarTab.Right && <Snippets />}
-
-          {tab === SidebarTab.Left && <Rename />}
         </>
       )}
 
