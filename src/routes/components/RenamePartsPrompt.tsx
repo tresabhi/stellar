@@ -7,7 +7,8 @@ import { RenamePartsOptions } from 'core/part/rename';
 import renameSelected from 'core/part/renameSelected';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
-import { KeyboardEvent, useRef } from 'react';
+import { KeyboardEvent, useEffect, useRef } from 'react';
+import useBlueprint from 'stores/blueprint';
 import { PromptProps } from 'stores/prompts';
 import useSettings from 'stores/settings';
 
@@ -15,6 +16,18 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
+  const { selections, parts } = useBlueprint.getState();
+  let defaultLabel = parts[selections[0]].label;
+
+  selections.some((selection) => {
+    if (parts[selection].label !== defaultLabel) {
+      defaultLabel = '';
+      return true;
+    }
+
+    return false;
+  });
+
   const apply = () => {
     if (input.current) {
       renameSelected(input.current.value, useSettings.getState().editor.rename);
@@ -39,6 +52,8 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
 
   usePopupConcurrency();
 
+  useEffect(() => input.current?.select());
+
   return (
     <Prompt.Root padding="thin">
       <InputWithIcon
@@ -47,6 +62,7 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
         autoFocus
         icon={<Pencil1Icon />}
         placeholder={t`tabs.layout.popup.rename.input_placeholder`}
+        defaultValue={defaultLabel}
       />
 
       <CheckboxWithLabel
