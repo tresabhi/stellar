@@ -16,9 +16,12 @@ import toggleSelection from 'core/part/toggleSelection';
 import toggleVisible from 'core/part/toggleVisible';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
+import { useInputEscape } from 'hooks/useInputEscape';
 import usePart from 'hooks/usePart';
 import usePartProperty from 'hooks/usePartProperty';
-import { memo, MouseEvent, useRef } from 'react';
+import {
+  KeyboardEvent, memo, MouseEvent, PointerEvent, useRef,
+} from 'react';
 import { styled, theme } from 'stitches.config';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Root } from './Root';
@@ -113,6 +116,7 @@ export const Item = memo(
     const isGroup = state.n === 'Group';
     const expanded = isGroup ? (state as Group).expanded : false;
     const { Icon } = getPartRegistry(state.n) as PartRegistryItem<Part>;
+    let lastLabel = state.label;
 
     usePartProperty(
       id,
@@ -135,6 +139,10 @@ export const Item = memo(
         selectConcurrent(id);
       }
     };
+    const handleSummaryDoubleClick = () => {
+      label.current?.focus();
+      label.current?.select();
+    };
     const handleIconClick = (event: MouseEvent) => {
       if (isGroup && !event.ctrlKey && !event.shiftKey) {
         event.stopPropagation();
@@ -155,6 +163,37 @@ export const Item = memo(
       event.stopPropagation();
       deleteParts(id);
     };
+    const handleLabelKeyDown = useInputEscape();
+    const handleLabelKeyUp = (event: KeyboardEvent) => {
+      event.stopPropagation();
+      event.preventDefault();
+    };
+    const handleLabelBlur = () => {
+      if (label.current) {
+        const newLabel = label.current.value.trim();
+
+        if (newLabel.length > 0) {
+          if (newLabel !== lastLabel) {
+            label.current.value = newLabel;
+            lastLabel = newLabel;
+
+            mutateParts(id, (draft) => {
+              draft.label = newLabel;
+            });
+          } else {
+            label.current.value = lastLabel;
+          }
+        } else {
+          label.current.value = state.label;
+          lastLabel = state.label;
+
+          mutateParts(id, (draft) => {
+            draft.label = state.label;
+          });
+        }
+      }
+    };
+    const handleLabelPointerDown = (event: PointerEvent) => event.preventDefault();
 
     return (
       <StyledDetails>
@@ -162,6 +201,7 @@ export const Item = memo(
           css={{ paddingLeft: `calc(${theme.space.padding} * ${indent})` }}
           selected={state.selected}
           onClick={handleSummaryClick}
+          onDoubleClick={handleSummaryDoubleClick}
         >
           <IconHolder onClick={handleIconClick}>
             {!isGroup && <Icon />}
@@ -169,7 +209,14 @@ export const Item = memo(
               && (expanded ? <TriangleDownIcon /> : <TriangleRightIcon />)}
           </IconHolder>
 
-          <Label ref={label} defaultValue={state.label} />
+          <Label
+            ref={label}
+            onKeyUp={handleLabelKeyUp}
+            onKeyDown={handleLabelKeyDown}
+            onBlur={handleLabelBlur}
+            onPointerDown={handleLabelPointerDown}
+            defaultValue={state.label}
+          />
 
           <Action onClick={handleEyeClick} onlyShowOnHover={state.visible}>
             {state.visible ? <EyeOpenIcon /> : <EyeClosedIcon />}
