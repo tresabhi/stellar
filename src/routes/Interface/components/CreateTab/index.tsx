@@ -104,7 +104,7 @@ const Title = styled('span', {
 
 const SubTitle = styled('span', {
   color: theme.colors.textLowContrast,
-  fontSize: theme.fontSizes[12],
+  fontSize: theme.fontSizes[14],
 });
 
 const Button = styled(ButtonPrimitive, {
