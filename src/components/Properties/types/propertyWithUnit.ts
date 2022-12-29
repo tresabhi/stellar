@@ -1,3 +1,3 @@
-export interface PropertyWithUnit {
+export default interface PropertyWithUnit {
   unit?: string;
 }

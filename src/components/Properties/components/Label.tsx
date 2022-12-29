@@ -1,26 +1,28 @@
 import { ComponentProps } from '@stitches/react';
+import Hint from 'components/Hint';
 import { styled, theme } from 'stitches.config';
 
-export interface LabelProps extends ComponentProps<typeof Primitive> {
+export interface LabelProps extends ComponentProps<typeof Container> {
   hint?: string;
 }
 
 const Container = styled('div', {
   display: 'flex',
   gap: theme.space.gapRelated,
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  color: theme.colors.textLowContrast,
 });
 
 const Primitive = styled('span', {
   fontSize: theme.fontSizes[10],
-  color: theme.colors.textLowContrast,
 });
 
-export function Label({ hint, ...props }: LabelProps) {
-  return hint ? (
-    <Container>
-      <Primitive {...props} />
+export function Label({ hint, children, ...props }: LabelProps) {
+  return (
+    <Container {...props}>
+      <Primitive>{children}</Primitive>
+      {hint && <Hint>{hint}</Hint>}
     </Container>
-  ) : (
-    <Primitive {...props} />
   );
 }

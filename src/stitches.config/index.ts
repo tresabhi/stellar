@@ -85,6 +85,7 @@ export const {
       sidebarCollapseButtonHeight: '2rem',
       propertiesTextAreaHeight: '10rem',
       toastWidth: '18rem',
+      hintMaxWidth: '12rem',
     },
 
     radii: {
@@ -120,6 +121,10 @@ export const {
       ...createSpaces(),
 
       32: '2rem',
+    },
+
+    shadows: {
+      regular: `0 0.125rem 0.25rem ${blackA.blackA10}`,
     },
   },
 });

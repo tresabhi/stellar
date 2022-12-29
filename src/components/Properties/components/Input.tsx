@@ -9,8 +9,8 @@ import {
   useRef,
 } from 'react';
 import { styled, theme } from 'stitches.config';
-import { PropertyWithLabel } from '../types/propertyWithLabel';
-import { PropertyWithUnit } from '../types/propertyWithUnit';
+import PropertyWithLabel from '../types/propertyWithLabel';
+import PropertyWithUnit from '../types/propertyWithUnit';
 import { Label } from './Label';
 
 const MAX_CHARACTERS = 6;

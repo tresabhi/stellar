@@ -1,12 +1,14 @@
 import { ComponentProps } from '@stitches/react';
 import Button from 'components/Button';
 import { styled, theme } from 'stitches.config';
-import { PropertyWithLabel } from '../types/propertyWithLabel';
+import PropertyWithHint from '../types/propertyWithHint';
+import PropertyWithLabel from '../types/propertyWithLabel';
 import { Label } from './Label';
 
 export interface ToggleButtonProps
   extends ComponentProps<typeof Button>,
-  PropertyWithLabel {
+  PropertyWithLabel,
+  PropertyWithHint {
   selected: boolean;
 }
 
@@ -30,11 +32,12 @@ export function ToggleButton({
   label,
   children,
   selected,
+  hint,
   ...props
 }: ToggleButtonProps) {
   return (
     <Container>
-      <Label>{label}</Label>
+      <Label hint={hint}>{label}</Label>
       <Trigger {...props} border color={selected ? 'accent' : undefined}>
         {children}
       </Trigger>

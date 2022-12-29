@@ -1,3 +1,3 @@
-export interface PropertyWithLabel {
+export default interface PropertyWithLabel {
   label?: string;
 }

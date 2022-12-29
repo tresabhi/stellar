@@ -75,7 +75,7 @@ export function PartWithTransformationsPropertyComponent({
   ids,
 }: PartPropertyComponentProps) {
   const { t } = useTranslator();
-  const constraint = useSettings((state) => state.editor.constraintScales);
+  const constrain = useSettings((state) => state.editor.constrainScales);
   const xPosition = useNumericalInputProperty<PartWithTransformations>(
     ids,
     (state) => state.p.x,
@@ -102,7 +102,7 @@ export function PartWithTransformationsPropertyComponent({
     (state) => state.o.x,
     (draft, newValue, lastValue) => {
       draft.o.x = newValue;
-      if (constraint && lastValue !== undefined && lastValue !== 0) {
+      if (constrain && lastValue !== undefined && lastValue !== 0) {
         draft.o.y *= newValue / lastValue;
       }
     },
@@ -112,15 +112,15 @@ export function PartWithTransformationsPropertyComponent({
     (state) => state.o.y,
     (draft, newValue, lastValue) => {
       draft.o.y = newValue;
-      if (constraint && lastValue !== undefined && lastValue !== 0) {
+      if (constrain && lastValue !== undefined && lastValue !== 0) {
         draft.o.x *= newValue / lastValue;
       }
     },
   );
 
-  const handleConstraintClick = () => {
+  const handleConstrainClick = () => {
     mutateSettings((state) => {
-      state.editor.constraintScales = !state.editor.constraintScales;
+      state.editor.constrainScales = !state.editor.constrainScales;
     });
   };
 
@@ -158,11 +158,12 @@ export function PartWithTransformationsPropertyComponent({
           unit="x"
         />
         <Properties.ToggleButton
-          label={t`tabs.layout.right_sidebar.properties.transformations.constraint`}
-          onClick={handleConstraintClick}
-          selected={constraint}
+          label={t`tabs.layout.right_sidebar.properties.transformations.constrain`}
+          hint={t`tabs.layout.right_sidebar.properties.transformations.constrain.hint`}
+          onClick={handleConstrainClick}
+          selected={constrain}
         >
-          {constraint ? <Link1Icon /> : <LinkNone1Icon />}
+          {constrain ? <Link1Icon /> : <LinkNone1Icon />}
         </Properties.ToggleButton>
       </Properties.Row>
     </Properties.Group>

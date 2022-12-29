@@ -177,8 +177,8 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
 
 export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
   const { t } = useTranslator();
-  const constraint = useSettings(
-    (state) => state.editor.constraintFuelTankWidths,
+  const constrain = useSettings(
+    (state) => state.editor.constrainFuelTankWidths,
   );
   const topWidth = useNumericalInputProperty<FuelTank>(
     ids,
@@ -186,7 +186,7 @@ export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
     (draft, newValue, lastValue) => {
       draft.N.width_b = newValue;
 
-      if (constraint && lastValue !== undefined && lastValue !== 0) {
+      if (constrain && lastValue !== undefined && lastValue !== 0) {
         draft.N.width_a *= newValue / lastValue;
         draft.N.width_original *= newValue / lastValue;
       }
@@ -199,7 +199,7 @@ export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
       draft.N.width_a = newValue;
       draft.N.width_original = newValue;
 
-      if (constraint && lastValue !== undefined && lastValue !== 0) {
+      if (constrain && lastValue !== undefined && lastValue !== 0) {
         draft.N.width_b *= newValue / lastValue;
       }
     },
@@ -219,9 +219,9 @@ export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
     },
   );
 
-  const handleConstraintClick = () => {
+  const handleConstrainClick = () => {
     mutateSettings((draft) => {
-      draft.editor.constraintFuelTankWidths = !draft.editor.constraintFuelTankWidths;
+      draft.editor.constrainFuelTankWidths = !draft.editor.constrainFuelTankWidths;
     });
   };
 
@@ -249,11 +249,12 @@ export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
           unit="m"
         />
         <Properties.ToggleButton
-          label={t`tabs.layout.right_sidebar.properties.fuel_tank.constraint`}
-          onClick={handleConstraintClick}
-          selected={constraint}
+          label={t`tabs.layout.right_sidebar.properties.fuel_tank.constrain`}
+          hint={t`tabs.layout.right_sidebar.properties.fuel_tank.constrain.hint`}
+          onClick={handleConstrainClick}
+          selected={constrain}
         >
-          {constraint ? <Link1Icon /> : <LinkNone1Icon />}
+          {constrain ? <Link1Icon /> : <LinkNone1Icon />}
         </Properties.ToggleButton>
       </Properties.Row>
 

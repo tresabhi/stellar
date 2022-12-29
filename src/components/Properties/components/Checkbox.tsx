@@ -5,7 +5,7 @@ import {
 } from 'components/Checkbox';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
-import { PropertyWithLabel } from '../types/propertyWithLabel';
+import PropertyWithLabel from '../types/propertyWithLabel';
 import { Label as LabelPrimitive } from './Label';
 
 export interface CheckboxProps

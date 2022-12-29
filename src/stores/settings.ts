@@ -55,7 +55,7 @@ export interface UseSettings {
             inComfortableMode: boolean;
           };
           tab: SidebarTab;
-          scaleConstrained: boolean;
+          scaleConstrain: boolean;
         };
       };
     };
@@ -66,8 +66,8 @@ export interface UseSettings {
     selectDeep: boolean;
     undoLimit: number;
     rename: RenamePartsOptions;
-    constraintScales: boolean;
-    constraintFuelTankWidths: boolean;
+    constrainScales: boolean;
+    constrainFuelTankWidths: boolean;
   };
 }
 
@@ -105,7 +105,7 @@ export const UseSettingsData: UseSettings = {
             inComfortableMode: true,
           },
           tab: SidebarTab.Left,
-          scaleConstrained: false,
+          scaleConstrain: false,
         },
       },
     },
@@ -120,8 +120,8 @@ export const UseSettingsData: UseSettings = {
       skipLocked: true,
       suffix: false,
     },
-    constraintScales: true,
-    constraintFuelTankWidths: true,
+    constrainScales: true,
+    constrainFuelTankWidths: true,
   },
 };
 

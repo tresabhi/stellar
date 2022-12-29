@@ -11,8 +11,8 @@ import {
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import evaluateExpression from 'utilities/evaluateExpression';
-import { PropertyWithLabel } from '../types/propertyWithLabel';
-import { PropertyWithUnit } from '../types/propertyWithUnit';
+import PropertyWithLabel from '../types/propertyWithLabel';
+import PropertyWithUnit from '../types/propertyWithUnit';
 import { Input, InputRef } from './Input';
 import { Label } from './Label';
 
