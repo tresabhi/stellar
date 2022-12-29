@@ -1,11 +1,11 @@
+import { ComponentProps } from '@stitches/react';
 import Button from 'components/Button';
-import { ComponentPropsWithoutRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PropertyWithLabel } from '../types/propertyWithLabel';
 import { Label } from './Label';
 
 export interface ToggleButtonProps
-  extends ComponentPropsWithoutRef<typeof Button>,
+  extends ComponentProps<typeof Button>,
   PropertyWithLabel {
   selected: boolean;
 }
