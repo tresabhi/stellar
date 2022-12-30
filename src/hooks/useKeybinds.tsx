@@ -37,7 +37,7 @@ import { MethodIds } from 'types/Parts';
 import getInterfaceMode from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 
-const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
+export const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
 type PrimitiveVector2Tuple = [number, number];
 const upVector: PrimitiveVector2Tuple = [0, DEFAULT_SNAP];

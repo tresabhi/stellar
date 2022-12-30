@@ -4,6 +4,7 @@ import { theme } from 'stitches.config';
 import themeDark from 'stitches.config/themes/dark';
 import create from 'zustand';
 import { persist, subscribeWithSelector } from 'zustand/middleware';
+import { Tab } from './app';
 
 export enum SidebarTab {
   Left,
@@ -41,6 +42,7 @@ export interface UseSettings {
     showInstabilityWarning: boolean;
     showMissingParts: boolean;
     welcomePromptCompleted: boolean;
+    defaultTab: Tab,
 
     tabs: {
       layout: {
@@ -91,6 +93,7 @@ export const UseSettingsData: UseSettings = {
     showInstabilityWarning: true,
     showMissingParts: true,
     welcomePromptCompleted: false,
+    defaultTab: Tab.Create,
 
     tabs: {
       layout: {

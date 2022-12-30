@@ -7,6 +7,7 @@ import {
   CursorArrowIcon,
   DesktopIcon,
   FileIcon,
+  HomeIcon,
   LightningBoltIcon,
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
@@ -15,10 +16,12 @@ import { InputWithIcon } from 'components/InputWithIcon';
 import Search from 'components/Search';
 import * as Select from 'components/Select';
 import mutateSettings from 'core/app/mutateSettings';
+import { TAB_ORDER } from 'hooks/useKeybinds';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { RefObject, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
+import { Tab } from 'stores/app';
 import useSettings, { THEMES } from 'stores/settings';
 import { NULL_THEME_KEY } from './WelcomePrompt';
 
@@ -131,20 +134,37 @@ const Description = styled('span', {
   color: theme.colors.textLowContrast,
 });
 
+export const TAB_MAP = {
+  [Tab.Create]: 'create',
+  [Tab.Layout]: 'layout',
+  [Tab.Staging]: 'staging',
+  [Tab.Export]: 'export',
+};
+export const TAB_MAP_INVERSE = {
+  create: Tab.Create,
+  layout: Tab.Layout,
+  staging: Tab.Staging,
+  export: Tab.Export,
+};
+
 function InterfaceSettings({ search }: SubSettingsProps) {
   const { t, translate } = useTranslator();
-  const handleNoneClick = () => {
+
+  const initialThemeValue = useSettings.getState().interface.theme ?? NULL_THEME_KEY;
+  const handleThemeNoneClick = () => {
     mutateSettings((draft) => {
       draft.interface.theme = null;
     });
   };
-  const initialThemeValue = useSettings.getState().interface.theme ?? NULL_THEME_KEY;
   const themes: JSX.Element[] = [
-    <Select.Item value="none" onClick={handleNoneClick} key={NULL_THEME_KEY}>
+    <Select.Item
+      value="none"
+      onClick={handleThemeNoneClick}
+      key={NULL_THEME_KEY}
+    >
       {t`themes.theme_light`}
     </Select.Item>,
   ];
-
   THEMES.forEach((code) => {
     const handleClick = () => {
       mutateSettings((draft) => {
@@ -162,8 +182,7 @@ function InterfaceSettings({ search }: SubSettingsProps) {
       </Select.Item>,
     );
   });
-
-  const handleValueChange = (value: string) => {
+  const handleThemeValueChange = (value: string) => {
     mutateSettings((draft) => {
       if (value === 'none') {
         draft.interface.theme = null;
@@ -173,11 +192,23 @@ function InterfaceSettings({ search }: SubSettingsProps) {
     });
   };
 
+  const initialTabValue = TAB_MAP[useSettings.getState().interface.defaultTab];
+  const tabs = TAB_ORDER.map((tab) => (
+    <Select.Item value={TAB_MAP[tab]}>
+      {translate(`tabs.${TAB_MAP[tab]}`)}
+    </Select.Item>
+  ));
+  const handleTabValueChange = (value: keyof typeof TAB_MAP_INVERSE) => {
+    mutateSettings((draft) => {
+      draft.interface.defaultTab = TAB_MAP_INVERSE[value];
+    });
+  };
+
   return (
     <>
       <Section>
         <DesktopIcon />
-        Interface
+        {t`prompts.settings.groups.interface`}
       </Section>
 
       <Search
@@ -188,13 +219,13 @@ function InterfaceSettings({ search }: SubSettingsProps) {
               <Option>
                 <Title>
                   <BlendingModeIcon />
-                  Theme
+                  {t`prompts.settings.groups.interface.theme.title`}
                 </Title>
                 <Description>
-                  Controls the color palette of the entire interface.
+                  {t`prompts.settings.groups.interface.theme.description`}
                 </Description>
                 <Select.Root
-                  onValueChange={handleValueChange}
+                  onValueChange={handleThemeValueChange}
                   defaultValue={initialThemeValue}
                 >
                   <Select.Trigger />
@@ -202,7 +233,29 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                 </Select.Root>
               </Option>
             ),
-            string: 'Theme Controls the color palette of the entire interface.',
+            string: `${t`prompts.settings.groups.interface.theme.title`} ${t`prompts.settings.groups.interface.theme.description`}`,
+          },
+
+          {
+            node: (
+              <Option>
+                <Title>
+                  <HomeIcon />
+                  {t`prompts.settings.groups.interface.default_tab.title`}
+                </Title>
+                <Description>
+                  {t`prompts.settings.groups.interface.default_tab.description`}
+                </Description>
+                <Select.Root
+                  onValueChange={handleTabValueChange}
+                  defaultValue={initialTabValue}
+                >
+                  <Select.Trigger />
+                  <Select.Content>{tabs}</Select.Content>
+                </Select.Root>
+              </Option>
+            ),
+            string: `${t`prompts.settings.groups.interface.default_tab.title`} ${t`prompts.settings.groups.interface.default_tab.description`}`,
           },
         ]}
       />
@@ -211,6 +264,7 @@ function InterfaceSettings({ search }: SubSettingsProps) {
 }
 
 export default function SettingsPrompt() {
+  const { t } = useTranslator();
   const search = useRef<HTMLInputElement>(null);
 
   usePopupConcurrency();
@@ -220,44 +274,44 @@ export default function SettingsPrompt() {
       <Navigation>
         <InputWithIcon
           ref={search}
-          placeholder="Search settings..."
+          placeholder={t`prompts.settings.navigation.search`}
           icon={<MagnifyingGlassIcon />}
         />
 
         <NavigationButtons>
           <NavigationButton selected>
             <DesktopIcon />
-            <NavigationButtonText>Interface</NavigationButtonText>
+            <NavigationButtonText>{t`prompts.settings.navigation.interface`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
           <NavigationButton>
             <CursorArrowIcon />
-            <NavigationButtonText>Editor</NavigationButtonText>
+            <NavigationButtonText>{t`prompts.settings.navigation.editor`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
           <NavigationButton>
             <LightningBoltIcon />
-            <NavigationButtonText>Performance</NavigationButtonText>
+            <NavigationButtonText>{t`prompts.settings.navigation.performance`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
           <NavigationButton>
             <ArchiveIcon />
-            <NavigationButtonText>Features</NavigationButtonText>
+            <NavigationButtonText>{t`prompts.settings.navigation.features`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
           <NavigationButton>
             <FileIcon />
-            <NavigationButtonText>File Preferences</NavigationButtonText>
+            <NavigationButtonText>{t`prompts.settings.navigation.file_preferences`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
           <NavigationButton>
             <AccessibilityIcon />
-            <NavigationButtonText>Accessibility</NavigationButtonText>
+            <NavigationButtonText>{t`prompts.settings.navigation.accessibility`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
           <NavigationButton>
             <CodeIcon />
-            <NavigationButtonText>Debug</NavigationButtonText>
+            <NavigationButtonText>{t`prompts.settings.navigation.debug`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
         </NavigationButtons>

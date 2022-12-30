@@ -1,7 +1,9 @@
+import mutateApp from 'core/app/mutateApp';
 import useKeybinds from 'hooks/useKeybinds';
 import useTranslator from 'hooks/useTranslator';
 import globalStyles from 'stitches.config/styles/global';
 import useApp from 'stores/app';
+import useSettings from 'stores/settings';
 import { getContext } from 'utilities/getContext';
 import prettifyVersion from 'utilities/prettifyVersion';
 import packageJSON from '../../package.json';
@@ -32,4 +34,8 @@ export default function usePrerender() {
     rerenderDocumentTitle,
   );
   useApp.subscribe((state) => state.file.handle, rerenderDocumentTitle);
+
+  mutateApp((draft) => {
+    draft.interface.tab = useSettings.getState().interface.defaultTab;
+  });
 }

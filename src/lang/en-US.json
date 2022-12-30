@@ -310,6 +310,34 @@
         "never": "Never Show Again",
         "proceed": "Proceed"
       }
+    },
+
+    "settings": {
+      "navigation": {
+        "search": "Search settings...",
+        "interface": "Interface",
+        "editor": "Editor",
+        "performance": "Performance",
+        "features": "Features",
+        "file_preferences": "File Preferences",
+        "accessibility": "Accessibility",
+        "debug": "Debug"
+      },
+
+      "groups": {
+        "interface": {
+          "$": "Interface",
+
+          "theme": {
+            "title": "Theme",
+            "description": "Controls the color palette of the entire interface."
+          },
+          "default_tab": {
+            "title": "Default Tab",
+            "description": "Specifies which tab Stellar will open on launch by default."
+          }
+        }
+      }
     }
   },
 
