@@ -1,57 +1,57 @@
 {
   "tabs": {
-    "coming_soon": "This tab is coming soon!",
+    "coming_soon": "This tab be comin' fortnight!",
     "create": {
-      "$": "Create",
+      "$": "Erect",
       "templates": {
-        "input_placeholder": "Search templates...",
+        "input_placeholder": "Sail frames...",
         "list": {
-          "apollo_mission": "Apollo Mission",
-          "basic_rocket": "Basic Rocket",
-          "hopper": "Hopper",
-          "joints": "Joints",
-          "light_lander": "Light Lander",
-          "orbit_and_re_entry": "Orbit & Re-entry",
-          "parachute_and_separator": "Parachute & Separator",
-          "race_car": "Race Car",
-          "rover": "Rover"
+          "apollo_mission": "Up Yonder's Cheese Lootin'",
+          "basic_rocket": "Pathetic Up Yonderer",
+          "hopper": "Nothin' a Ship can't do",
+          "joints": "Joinin'",
+          "light_lander": "Speedy Docker",
+          "orbit_and_re_entry": "Up Yonder 'n Dockin' Speedy",
+          "parachute_and_separator": "Dockin' Snail 'n Undockin'",
+          "race_car": "Speedy Soil Ship",
+          "rover": "Savvy Soil Ship"
         }
       },
       "file_options": {
-        "motto": "Blueprint editing redefined",
-        "from_scratch": "Start From Scratch",
-        "import": "Import Blueprint File",
-        "open": "Open Stellar File"
+        "motto": "Paper markin' done right",
+        "from_scratch": "Sail From Dock",
+        "import": "Hard Dock Markin' Paper",
+        "open": "Dock Savvy Paper Markin'"
       },
       "status_bar": {
-        "docs": "Docs"
+        "docs": "Maps"
       }
     },
     "layout": {
-      "$": "Layout",
+      "$": "Keel",
       "toolbar": {
         "file": {
-          "new": "New",
-          "open": "Open...",
-          "save": "Save",
-          "save_as": "Save As...",
-          "import": "Import...",
-          "export": "Export..."
+          "new": "Savvy",
+          "open": "Dock...",
+          "save": "Deport",
+          "save_as": "Mockery Deport...",
+          "import": "Hard Dock...",
+          "export": "Deport..."
         },
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "move": "Sail",
+          "pan": "Change Them Draft"
         },
         "clipboard": {
-          "copy": "Copy",
-          "cut": "Cut",
-          "paste": "Paste",
-          "duplicate": "Duplicate",
-          "create_snippet": "Create Snippet"
+          "copy": "Loot",
+          "cut": "Seize",
+          "paste": "Walk The Plank",
+          "duplicate": "Witchcraft",
+          "create_snippet": "Erect Booty"
         },
         "selection": {
-          "select_all": "Select All",
-          "unselect_all": "Unselect All",
+          "select_all": "Lookin' at Them All",
+          "unselect_all": "Ain't Lookin' At All",
           "group": "Group",
           "ungroup": "Ungroup"
         },
@@ -113,7 +113,10 @@
             "rotation": "Rotation",
             "x_scale": "X Scale",
             "y_scale": "Y Scale",
-            "constraint": "Constraint"
+            "constrain": {
+              "$": "Constrain",
+              "hint": "Maintains the ratio between X and Y scale"
+            }
           },
           "engine": {
             "$": "Engine",
@@ -124,9 +127,12 @@
             "$": "Fuel Tank",
             "top_width": "Top Width",
             "bottom_width": "Bottom Width",
-            "constraint": "Constraint",
             "height": "Height",
-            "fuel": "Fuel"
+            "fuel": "Fuel",
+            "constrain": {
+              "$": "Constrain",
+              "hint": "Maintains the ratio between X and Y scale"
+            }
           }
         },
         "inspect": {
@@ -241,6 +247,31 @@
       "actions": {
         "never": "Never Show Again",
         "proceed": "Proceed"
+      }
+    },
+    "settings": {
+      "navigation": {
+        "search": "Search settings...",
+        "interface": "Interface",
+        "editor": "Editor",
+        "performance": "Performance",
+        "features": "Features",
+        "file_preferences": "File Preferences",
+        "accessibility": "Accessibility",
+        "debug": "Debug"
+      },
+      "groups": {
+        "interface": {
+          "$": "Interface",
+          "theme": {
+            "title": "Theme",
+            "description": "Controls the color palette of the entire interface."
+          },
+          "default_tab": {
+            "title": "Default Tab",
+            "description": "Specifies which tab Stellar will open on launch by default."
+          }
+        }
       }
     }
   },
