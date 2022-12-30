@@ -20,12 +20,9 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
     - `RCS`: https://i.imgur.com/breaWuI.png
     - `Cone`: https://i.imgur.com/DKOMgyf.png
     - `Cone Side`: https://i.imgur.com/tetvUJC.png
-- Updates from Figma
-  - Property editor
-    - Property hints
   - Add settings
 
 ## v1.0 Beta 7
 
 - Implement the rest of the parts
-- Add padding for drop downs and hints
+- Add padding for drop-downs and hints

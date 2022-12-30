@@ -17,7 +17,7 @@ const StyledDiv = styled('div', {
   variants: {
     width: {
       regular: {
-        width: theme.sizes.popupWidth,
+        width: theme.sizes.promptWidth,
       },
     },
 

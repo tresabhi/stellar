@@ -68,7 +68,8 @@ export const {
       inputSizeMajor: '2rem',
       tabMaxWidth: '15rem',
       paletteMaxHeight: '15rem',
-      popupWidth: '18rem',
+      promptWidth: '18rem',
+      promptPadding: '2rem',
       separatorWidth: '0.0625rem',
       createTabContentMaxWidth: '35rem',
       createTabContentMaxHeight: '25rem',
@@ -86,6 +87,9 @@ export const {
       propertiesTextAreaHeight: '10rem',
       toastWidth: '18rem',
       hintMaxWidth: '12rem',
+      settingsMaxWidth: '40rem',
+      settingsMaxHeight: '30rem',
+      settingsNavigationWidth: '12rem',
     },
 
     radii: {

@@ -77,6 +77,7 @@ function Slide1() {
   );
 }
 
+export const NULL_THEME_KEY = 'theme-none';
 function Slide2() {
   const { t, translate } = useTranslator();
   const handleNoneClick = () => {
@@ -85,7 +86,7 @@ function Slide2() {
     });
   };
   const themes: JSX.Element[] = [
-    <Select.Item value="none" onClick={handleNoneClick} key="theme-none">
+    <Select.Item value="none" onClick={handleNoneClick} key={NULL_THEME_KEY}>
       {t`themes.theme_light`}
     </Select.Item>,
   ];

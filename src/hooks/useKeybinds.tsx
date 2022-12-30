@@ -28,6 +28,7 @@ import { bind as mousetrapBind } from 'mousetrap';
 import { useEffect } from 'react';
 import InsertPartPrompt from 'routes/components/InsertPartPrompt';
 import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
+import SettingsPrompt from 'routes/components/SettingsPrompt';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import usePrompts from 'stores/prompts';
@@ -276,6 +277,7 @@ const useKeybinds = () => {
         prompt(RenamePartsPrompt, true, 'rename-parts');
       }
     });
+    bind('ctrl+,', () => prompt(SettingsPrompt));
 
     bind('.', panToSelected);
 

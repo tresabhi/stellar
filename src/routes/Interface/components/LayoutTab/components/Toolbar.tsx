@@ -49,6 +49,7 @@ import redoVersion from 'core/blueprint/redoVersion';
 import saveFile from 'core/blueprint/saveFile';
 import saveFileAs from 'core/blueprint/saveFileAs';
 import undoVersion from 'core/blueprint/undoVersion';
+import dismissPrompt from 'core/interface/dismissPrompt';
 import prompt from 'core/interface/prompt';
 import copySelected from 'core/part/copySelected';
 import cutPartsBySelection from 'core/part/cutSelected';
@@ -62,8 +63,10 @@ import toggleSelectedVisible from 'core/part/toggleSelectedVisible';
 import ungroupSelected from 'core/part/ungroupSelected';
 import unselectAll from 'core/part/unselectAll';
 import useTranslator from 'hooks/useTranslator';
+import { useEffect } from 'react';
 import InsertPartPrompt from 'routes/components/InsertPartPrompt';
 import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
+import SettingsPrompt from 'routes/components/SettingsPrompt';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
@@ -97,6 +100,11 @@ function Toolbar() {
     (state) => state.editor.clipboard === undefined,
   );
   const link = (url: string) => () => window.open(url, '_blank');
+
+  useEffect(() => {
+    const id = prompt(SettingsPrompt);
+    return () => dismissPrompt(id);
+  });
 
   return (
     <ToolbarPrimitive.Container>
@@ -394,8 +402,9 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
 
-        <ToolbarPrimitive.DropdownMenu disabled icon={<GearIcon />}>
+        <ToolbarPrimitive.DropdownMenu icon={<GearIcon />}>
           <ToolbarPrimitive.DropdownMenuItem
+            onClick={() => prompt(SettingsPrompt)}
             icon={<GearIcon />}
             keybind="Ctrl + ,"
           >
@@ -403,6 +412,7 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
 
           <ToolbarPrimitive.DropdownMenuItem
+            disabled
             keybind="Ctrl + K"
             icon={<KeyboardIcon />}
           >
