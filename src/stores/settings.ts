@@ -11,11 +11,6 @@ export enum SidebarTab {
   Right,
 }
 
-export enum InterfaceMode {
-  Compact,
-  Comfortable,
-}
-
 type Theme = typeof theme;
 
 export const THEMES = new Map<string, Theme>([
@@ -34,7 +29,7 @@ export interface UseSettings {
   };
 
   interface: {
-    mode: InterfaceMode | null; // null is auto detect
+    touchscreenMode: boolean | null;
     language: string;
     theme: string | null;
     showOrientationPrompt: boolean;
@@ -42,7 +37,7 @@ export interface UseSettings {
     showInstabilityWarning: boolean;
     showMissingParts: boolean;
     welcomePromptCompleted: boolean;
-    defaultTab: Tab,
+    defaultTab: Tab;
 
     tabs: {
       layout: {
@@ -85,7 +80,7 @@ export const UseSettingsData: UseSettings = {
   },
 
   interface: {
-    mode: null,
+    touchscreenMode: null,
     language: 'en-US',
     theme: themeDark.toString(),
     showOrientationPrompt: true,

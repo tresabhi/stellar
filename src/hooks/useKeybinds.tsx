@@ -32,10 +32,10 @@ import SettingsPrompt from 'routes/components/SettingsPrompt';
 import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import usePrompts from 'stores/prompts';
-import { InterfaceMode, UseSettings } from 'stores/settings';
+import { UseSettings } from 'stores/settings';
 import { MethodIds } from 'types/Parts';
-import getInterfaceMode from 'utilities/getInterfaceMode';
 import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
+import getTouchscreenMode from 'utilities/getTouchscreenMode';
 
 export const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
@@ -141,7 +141,7 @@ const useKeybinds = () => {
       mutateSettings((draft: UseSettings) => {
         const { visible } = draft.interface.tabs.layout.rightSidebar;
 
-        if (getInterfaceMode() === InterfaceMode.Compact) {
+        if (getTouchscreenMode()) {
           visible.inCompactMode = !visible.inCompactMode;
         } else {
           visible.inComfortableMode = !visible.inComfortableMode;

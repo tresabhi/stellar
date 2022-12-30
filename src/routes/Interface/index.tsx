@@ -2,13 +2,13 @@ import * as Notification from 'components/Notification';
 import * as Prompt from 'components/Prompt';
 import dismissPrompt from 'core/interface/dismissPrompt';
 import prompt from 'core/interface/prompt';
-import useInterfaceMode from 'hooks/useInterfaceMode';
+import useTouchscreenMode from 'hooks/useTouchscreenMode';
 import { useEffect } from 'react';
 import InstabilityWarningPrompt from 'routes/components/InstabilityWarningPrompt';
 import WelcomePrompt from 'routes/components/WelcomePrompt';
 import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/app';
-import useSettings, { InterfaceMode } from 'stores/settings';
+import useSettings from 'stores/settings';
 import { getContext, StellarName } from 'utilities/getContext';
 import CreateTab from './components/CreateTab';
 import ExportTab from './components/ExportTab';
@@ -58,7 +58,7 @@ const useAlphaWarning = () => {
 
 function Interface() {
   const zenMode = useApp((state) => state.interface.focusMode);
-  const interfaceMode = useInterfaceMode();
+  const touchscreenMode = useTouchscreenMode();
   const tab = useApp((state) => state.interface.tab);
 
   useAlphaWarning();
@@ -69,9 +69,7 @@ function Interface() {
       {!zenMode && <Tabs />}
 
       {tab === Tab.Create && <CreateTab />}
-      {tab === Tab.Layout && (
-        <LayoutTab swapSecondTab={interfaceMode === InterfaceMode.Compact} />
-      )}
+      {tab === Tab.Layout && <LayoutTab swapSecondTab={touchscreenMode} />}
       {tab === Tab.Staging && <StagingTab />}
       {tab === Tab.Export && <ExportTab />}
 
