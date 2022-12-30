@@ -1,6 +1,11 @@
 import { go } from 'fuzzysort';
 import {
-  ReactNode, RefObject, useEffect, useRef, useState,
+  Fragment,
+  ReactNode,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
@@ -25,7 +30,9 @@ export default function Search({
   escape,
   debounce = 0,
 }: SearchProps) {
-  const [defaultList] = useState(list.map(({ node }) => node));
+  const [defaultList] = useState<ReactNode[]>(
+    list.map(({ node, string }) => <Fragment key={string}>{node}</Fragment>),
+  );
   const [children, setChildren] = useState(defaultList);
   const firstCallback = useRef<(() => void) | undefined>(list[0]?.callback);
 
