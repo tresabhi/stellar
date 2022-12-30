@@ -113,7 +113,10 @@
             "rotation": "Rotation",
             "x_scale": "X Scale",
             "y_scale": "Y Scale",
-            "constraint": "Constraint"
+            "constrain": {
+              "$": "Constrain",
+              "hint": "Maintains the ratio between X and Y scale"
+            }
           },
           "engine": {
             "$": "Engine",
@@ -124,9 +127,12 @@
             "$": "Fuel Tank",
             "top_width": "Top Width",
             "bottom_width": "Bottom Width",
-            "constraint": "Constraint",
             "height": "Height",
-            "fuel": "Fuel"
+            "fuel": "Fuel",
+            "constrain": {
+              "$": "Constrain",
+              "hint": "Maintains the ratio between X and Y scale"
+            }
           }
         },
         "inspect": {
@@ -241,6 +247,31 @@
       "actions": {
         "never": "Never Show Again",
         "proceed": "Proceed"
+      }
+    },
+    "settings": {
+      "navigation": {
+        "search": "Search settings...",
+        "interface": "Interface",
+        "editor": "Editor",
+        "performance": "Performance",
+        "features": "Features",
+        "file_preferences": "File Preferences",
+        "accessibility": "Accessibility",
+        "debug": "Debug"
+      },
+      "groups": {
+        "interface": {
+          "$": "Interface",
+          "theme": {
+            "title": "Theme",
+            "description": "Controls the color palette of the entire interface."
+          },
+          "default_tab": {
+            "title": "Default Tab",
+            "description": "Specifies which tab Stellar will open on launch by default."
+          }
+        }
       }
     }
   },
