@@ -2,7 +2,7 @@ import SliderPrimitive, {
   SliderProps as SliderPrimitiveProps,
 } from 'components/Slider';
 import { styled } from 'stitches.config';
-import { PropertyWithLabel } from '../types/propertyWithLabel';
+import PropertyWithLabel from '../types/propertyWithLabel';
 import { Label } from './Label';
 
 export interface SliderProps extends SliderPrimitiveProps, PropertyWithLabel {}
