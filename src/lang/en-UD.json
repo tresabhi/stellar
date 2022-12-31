@@ -114,8 +114,8 @@
             "x_scale": "ǝlɐɔS X",
             "y_scale": "ǝlɐɔS ⅄",
             "constrain": {
-              "$": "Constrain",
-              "hint": "Maintains the ratio between X and Y scale"
+              "$": "uᴉɐɹʇsuoƆ",
+              "hint": "ǝlɐɔs ⅄ puɐ X uǝǝʍʇǝq oᴉʇɐɹ ǝɥʇ suᴉɐʇuᴉɐW"
             }
           },
           "engine": {
@@ -130,8 +130,8 @@
             "height": "ʇɥƃᴉǝH",
             "fuel": "lǝnℲ",
             "constrain": {
-              "$": "Constrain",
-              "hint": "Maintains the ratio between X and Y scale"
+              "$": "uᴉɐɹʇsuoƆ",
+              "hint": "ǝlɐɔs ⅄ puɐ X uǝǝʍʇǝq oᴉʇɐɹ ǝɥʇ suᴉɐʇuᴉɐW"
             }
           }
         },
@@ -251,25 +251,25 @@
     },
     "settings": {
       "navigation": {
-        "search": "Search settings...",
-        "interface": "Interface",
-        "editor": "Editor",
-        "performance": "Performance",
-        "features": "Features",
-        "file_preferences": "File Preferences",
-        "accessibility": "Accessibility",
-        "debug": "Debug"
+        "search": "˙˙˙sƃuᴉʇʇǝs ɥɔɹɐǝS",
+        "interface": "ǝɔɐɟɹǝʇuI",
+        "editor": "ɹoʇ!pƎ",
+        "performance": "ǝɔuɐɯɹoɟɹǝԀ",
+        "features": "sǝɹnʇɐǝℲ",
+        "file_preferences": "sǝɔuǝɹǝɟǝɹԀ ǝlᴉℲ",
+        "accessibility": "ʎʇᴉlᴉqᴉssǝɔɔ∀",
+        "debug": "ƃnqǝp"
       },
       "groups": {
         "interface": {
-          "$": "Interface",
+          "$": "ǝɔɐɟɹǝʇuI",
           "theme": {
-            "title": "Theme",
-            "description": "Controls the color palette of the entire interface."
+            "title": "ǝɯǝɥ┴",
+            "description": "˙ǝɔɐɟɹǝʇuᴉ ǝɹᴉʇuǝ ǝɥʇ ɟo ǝʇʇǝlɐd ɹoloɔ ǝɥʇ sloɹʇuoƆ"
           },
           "default_tab": {
-            "title": "Default Tab",
-            "description": "Specifies which tab Stellar will open on launch by default."
+            "title": "qɐ┴ ʇlnɐɟǝp",
+            "description": "˙ʇlnɐɟǝp ʎq ɥɔunɐl uo uǝdo llᴉʍ ɹɐllǝʇS qɐʇ ɥɔᴉɥʍ sǝᴉɟᴉɔǝdS"
           }
         }
       }
