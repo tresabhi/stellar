@@ -102,8 +102,12 @@ function Toolbar() {
   const link = (url: string) => () => window.open(url, '_blank');
 
   useEffect(() => {
-    const id = prompt(SettingsPrompt);
-    return () => dismissPrompt(id);
+    if (import.meta.env.DEV) {
+      const id = prompt(SettingsPrompt);
+      return () => dismissPrompt(id);
+    }
+
+    return undefined;
   });
 
   return (
