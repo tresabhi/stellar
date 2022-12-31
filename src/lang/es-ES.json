@@ -114,8 +114,8 @@
             "x_scale": "Escala X",
             "y_scale": "Escala Y",
             "constrain": {
-              "$": "Constrain",
-              "hint": "Maintains the ratio between X and Y scale"
+              "$": "Restringir",
+              "hint": "Mantiene la relación entre las escalas X e Y"
             }
           },
           "engine": {
@@ -130,8 +130,8 @@
             "height": "Altura",
             "fuel": "Combustible",
             "constrain": {
-              "$": "Constrain",
-              "hint": "Maintains the ratio between X and Y scale"
+              "$": "Restringir",
+              "hint": "Mantiene la relación entre las escalas X e Y"
             }
           }
         },
@@ -251,25 +251,25 @@
     },
     "settings": {
       "navigation": {
-        "search": "Search settings...",
-        "interface": "Interface",
+        "search": "Ajustes de búsqueda...",
+        "interface": "Interfaz",
         "editor": "Editor",
-        "performance": "Performance",
-        "features": "Features",
-        "file_preferences": "File Preferences",
-        "accessibility": "Accessibility",
-        "debug": "Debug"
+        "performance": "Rendimiento",
+        "features": "Características",
+        "file_preferences": "Preferencias de archivo",
+        "accessibility": "Accesibilidad",
+        "debug": "Depuración"
       },
       "groups": {
         "interface": {
-          "$": "Interface",
+          "$": "Interfaz",
           "theme": {
-            "title": "Theme",
-            "description": "Controls the color palette of the entire interface."
+            "title": "Tema",
+            "description": "Controla la paleta de colores de toda la interfaz."
           },
           "default_tab": {
-            "title": "Default Tab",
-            "description": "Specifies which tab Stellar will open on launch by default."
+            "title": "Pestaña por defecto",
+            "description": "Especifica qué pestaña de Stellar se abrirá por defecto al iniciar."
           }
         }
       }
