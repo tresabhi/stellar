@@ -18,3 +18,4 @@ yarn-error.log
 .sass-cache
 vendor
 /dev-dist
+vite.config.ts.timestamp-*.mjs

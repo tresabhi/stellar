@@ -1,4 +1,4 @@
-import { Input as InputPrimitive } from 'components/Input';
+import InputPrimitive from 'components/Input';
 import { ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 

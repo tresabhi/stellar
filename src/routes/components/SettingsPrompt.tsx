@@ -13,10 +13,12 @@ import {
   MagnifyingGlassIcon,
   MobileIcon,
   TextIcon,
+  TransparencyGridIcon,
 } from '@radix-ui/react-icons';
 import Anchor from 'components/Anchor';
 import Button from 'components/Button';
 import { Checkbox } from 'components/Checkbox';
+import InputPrimitive from 'components/Input';
 import { InputWithIcon } from 'components/InputWithIcon';
 import Search from 'components/Search';
 import * as Select from 'components/Select';
@@ -24,10 +26,12 @@ import mutateSettings from 'core/app/mutateSettings';
 import { TAB_ORDER } from 'hooks/useKeybinds';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
+import { clamp } from 'lodash';
 import { RefObject, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
 import useSettings, { THEMES } from 'stores/settings';
+import createInputEscape from 'utilities/createInputEscape';
 import { FIXED_LANG_NAMES, NULL_THEME_KEY } from './WelcomePrompt';
 
 interface SubSettingsProps {
@@ -158,6 +162,14 @@ const Separator = styled('div', {
   backgroundColor: theme.colors.componentNonInteractiveBorder,
   margin: `${theme.space.marginUnrelatedMajor} auto`,
   borderRadius: theme.radii[1],
+});
+const Input = styled(InputPrimitive, {
+  backgroundColor: theme.colors.componentBackground,
+  padding: theme.space.paddingMinor,
+  border: theme.borderStyles.componentInteractive,
+  borderRadius: theme.radii[4],
+  fontSize: theme.fontSizes[12],
+  color: theme.colors.textHighContrast,
 });
 
 export const TAB_MAP = {
@@ -428,6 +440,63 @@ function DebugSettings({ search }: SubSettingsProps) {
   );
 }
 
+function PerformanceSettings({ search }: SubSettingsProps) {
+  const { t, translate } = useTranslator();
+
+  const createString = stringCurry('performance', translate);
+
+  return (
+    <>
+      <Section>
+        <LightningBoltIcon />
+        {t`prompts.settings.groups.performance`}
+      </Section>
+
+      <Search
+        input={search}
+        list={[
+          {
+            node: (
+              <OptionVertical key="regress">
+                <Title>
+                  <TransparencyGridIcon />
+                  {t`prompts.settings.groups.performance.regress.title`}
+                </Title>
+                <Description>
+                  {t`prompts.settings.groups.performance.regress.description`}
+                </Description>
+                <Input
+                  type="number"
+                  step={0.1}
+                  min={0.1}
+                  max={1}
+                  defaultValue={
+                    useSettings.getState().performance.regressAmount
+                  }
+                  onBlur={(event) => {
+                    const clampedValue = clamp(
+                      Number(event.target.value),
+                      0.1,
+                      1,
+                    );
+                    event.target.value = `${clampedValue}`;
+
+                    mutateSettings((draft) => {
+                      draft.performance.regressAmount = clampedValue;
+                    });
+                  }}
+                  onKeyDown={createInputEscape()}
+                />
+              </OptionVertical>
+            ),
+            string: createString('regress'),
+          },
+        ]}
+      />
+    </>
+  );
+}
+
 export default function SettingsPrompt() {
   const { t } = useTranslator();
   const search = useRef<HTMLInputElement>(null);
@@ -484,6 +553,8 @@ export default function SettingsPrompt() {
       <Options>
         <OptionsWrapper>
           <InterfaceSettings search={search} />
+          <Separator />
+          <PerformanceSettings search={search} />
           <Separator />
           <DebugSettings search={search} />
         </OptionsWrapper>

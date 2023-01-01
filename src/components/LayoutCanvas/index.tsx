@@ -93,7 +93,7 @@ export default function LayoutCanvas(
       onPointerMissed={handlePointerMissed}
       frameloop="demand"
     >
-      {regressAmount > 0 ? <AdaptiveDpr pixelated /> : undefined}
+      {regressAmount < 1 && <AdaptiveDpr pixelated />}
       <Expose />
 
       <PanControls />

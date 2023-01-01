@@ -5,7 +5,7 @@ import {
 
 export const ESCAPE_KEYS = ['Escape', 'Enter'];
 
-export const useInputEscape = (callback?: KeyboardEventHandler) => {
+export default function createInputEscape(callback?: KeyboardEventHandler) {
   const handleKeyDown = (
     event: ReactKeyboardEvent<HTMLInputElement> | Event,
   ) => {
@@ -17,4 +17,4 @@ export const useInputEscape = (callback?: KeyboardEventHandler) => {
   };
 
   return handleKeyDown;
-};
+}

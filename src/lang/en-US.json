@@ -352,6 +352,15 @@
           }
         },
 
+        "performance": {
+          "$": "Performance",
+
+          "regress": {
+            "title": "Regress Amount",
+            "description": "Reduces the canvas resolution when performing computationally expensive tasks like panning, scaling, rotation, etc. Lower the value, the more aggressive the regression."
+          }
+        },
+
         "debug": {
           "$": "Debug",
 

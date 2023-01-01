@@ -18,7 +18,7 @@ export default defineConfig({
     VitePWA({ registerType: 'prompt' }),
     checker({
       typescript: true,
-      eslint: { lintCommand: 'eslint .' },
+      eslint: { lintCommand: 'eslint --ext ts,tsx src' },
       enableBuild: true,
     }),
     react(),

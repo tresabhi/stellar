@@ -1,5 +1,4 @@
-import { Input as InputPrimitive } from 'components/Input';
-import { useInputEscape } from 'hooks/useInputEscape';
+import InputPrimitive from 'components/Input';
 import {
   ChangeEvent,
   ComponentPropsWithoutRef,
@@ -9,6 +8,7 @@ import {
   useRef,
 } from 'react';
 import { styled, theme } from 'stitches.config';
+import createInputEscape from 'utilities/createInputEscape';
 import PropertyWithLabel from '../types/propertyWithLabel';
 import PropertyWithUnit from '../types/propertyWithUnit';
 import { Label } from './Label';
@@ -92,7 +92,7 @@ export const Input = forwardRef<InputRef, InputProps>(
       resize();
       if (onChange) onChange(event);
     };
-    const handleKeyDown = useInputEscape(onKeyDown);
+    const handleKeyDown = createInputEscape(onKeyDown);
 
     useEffect(() => {
       resize();

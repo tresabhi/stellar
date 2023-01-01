@@ -16,7 +16,6 @@ import toggleSelection from 'core/part/toggleSelection';
 import toggleVisible from 'core/part/toggleVisible';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
-import { useInputEscape } from 'hooks/useInputEscape';
 import usePart from 'hooks/usePart';
 import usePartProperty from 'hooks/usePartProperty';
 import {
@@ -24,6 +23,7 @@ import {
 } from 'react';
 import { styled, theme } from 'stitches.config';
 import { PartRegistryItem } from 'stores/partRegistry';
+import createInputEscape from 'utilities/createInputEscape';
 import { Root } from './Root';
 
 export interface ListingProps {
@@ -163,7 +163,7 @@ export const Item = memo(
       event.stopPropagation();
       deleteParts(id);
     };
-    const handleLabelKeyDown = useInputEscape();
+    const handleLabelKeyDown = createInputEscape();
     const handleLabelKeyUp = (event: KeyboardEvent) => {
       event.stopPropagation();
       event.preventDefault();
