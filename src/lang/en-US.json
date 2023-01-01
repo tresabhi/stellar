@@ -335,6 +335,16 @@
           "default_tab": {
             "title": "Default Tab",
             "description": "Specifies which tab Stellar will open on launch by default."
+          },
+          "touchscreen_mode": {
+            "title": "Touchscreen Mode",
+            "description": "Controls how on-screen information is presented in compliance with your screen type.",
+
+            "options": {
+              "auto": "Auto-Detect",
+              "on": "On",
+              "off": "Off"
+            }
           }
         }
       }

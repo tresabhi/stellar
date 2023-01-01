@@ -10,6 +10,7 @@ import {
   HomeIcon,
   LightningBoltIcon,
   MagnifyingGlassIcon,
+  MobileIcon,
 } from '@radix-ui/react-icons';
 import Button from 'components/Button';
 import { InputWithIcon } from 'components/InputWithIcon';
@@ -158,7 +159,7 @@ function InterfaceSettings({ search }: SubSettingsProps) {
   };
   const themes: JSX.Element[] = [
     <Select.Item
-      value="none"
+      value={NULL_THEME_KEY}
       onClick={handleThemeNoneClick}
       key={NULL_THEME_KEY}
     >
@@ -204,6 +205,30 @@ function InterfaceSettings({ search }: SubSettingsProps) {
     });
   };
 
+  const initialTouchscreenValue = `${
+    useSettings.getState().interface.touchscreenMode
+  }`;
+  const handleTouchscreenValueChange = (value: string) => {
+    mutateSettings((draft) => {
+      if (value === 'true') {
+        draft.interface.touchscreenMode = true;
+      } else if (value === 'false') {
+        draft.interface.touchscreenMode = false;
+      } else {
+        draft.interface.touchscreenMode = null;
+      }
+    });
+  };
+  const touchscreenModes = [
+    <Select.Item value="null">{t`prompts.settings.groups.interface.touchscreen_mode.options.auto`}</Select.Item>,
+    <Select.Item value="true">{t`prompts.settings.groups.interface.touchscreen_mode.options.on`}</Select.Item>,
+    <Select.Item value="false">{t`prompts.settings.groups.interface.touchscreen_mode.options.off`}</Select.Item>,
+  ];
+
+  const createGroupString = (string: string) => `${translate(
+    `prompts.settings.groups.interface.${string}.title`,
+  )} ${translate(`prompts.settings.groups.interface.${string}.description`)}`;
+
   return (
     <>
       <Section>
@@ -216,7 +241,7 @@ function InterfaceSettings({ search }: SubSettingsProps) {
         list={[
           {
             node: (
-              <Option>
+              <Option key="theme">
                 <Title>
                   <BlendingModeIcon />
                   {t`prompts.settings.groups.interface.theme.title`}
@@ -233,12 +258,12 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                 </Select.Root>
               </Option>
             ),
-            string: `${t`prompts.settings.groups.interface.theme.title`} ${t`prompts.settings.groups.interface.theme.description`}`,
+            string: createGroupString('theme'),
           },
 
           {
             node: (
-              <Option>
+              <Option key="default-tab">
                 <Title>
                   <HomeIcon />
                   {t`prompts.settings.groups.interface.default_tab.title`}
@@ -255,7 +280,29 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                 </Select.Root>
               </Option>
             ),
-            string: `${t`prompts.settings.groups.interface.default_tab.title`} ${t`prompts.settings.groups.interface.default_tab.description`}`,
+            string: createGroupString('default_tab'),
+          },
+
+          {
+            node: (
+              <Option key="touchscreen-mode">
+                <Title>
+                  <MobileIcon />
+                  {t`prompts.settings.groups.interface.touchscreen_mode.title`}
+                </Title>
+                <Description>
+                  {t`prompts.settings.groups.interface.touchscreen_mode.description`}
+                </Description>
+                <Select.Root
+                  onValueChange={handleTouchscreenValueChange}
+                  defaultValue={initialTouchscreenValue}
+                >
+                  <Select.Trigger />
+                  <Select.Content>{touchscreenModes}</Select.Content>
+                </Select.Root>
+              </Option>
+            ),
+            string: createGroupString('touchscreen_mode'),
           },
         ]}
       />
