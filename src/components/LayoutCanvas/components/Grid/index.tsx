@@ -31,7 +31,7 @@ export default function Grid() {
   const grid = useRef<GridHelper>(null);
   const infiniteGrid = useRef<Mesh>(null);
   const currentTheme = useSettings((state) => state.interface.theme);
-  const themeTokens = currentTheme ? THEMES.get(currentTheme) ?? theme : theme;
+  const themeTokens = currentTheme ? THEMES[currentTheme] ?? theme : theme;
   const gridColor = new Color(
     toThreeSafeHSL(themeTokens.colors.textLowContrast_accent.value),
   );

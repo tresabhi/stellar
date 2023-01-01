@@ -350,6 +350,15 @@
             "title": "Language",
             "description": "Specifies what language the text on screen is translated to. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           }
+        },
+
+        "debug": {
+          "$": "Debug",
+
+          "error_screen_debug": {
+            "title": "Show Debug Info on Error Screen",
+            "description": "Displays the full error message and a source-mapped stack trace when a critical error interrupts Stellar."
+          }
         }
       }
     }

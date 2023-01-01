@@ -14,12 +14,12 @@ import { styled, theme } from 'stitches.config';
 export interface CheckboxProps
   extends Omit<
   ComponentPropsWithoutRef<typeof Trigger>,
-  'value' | 'defaultValue' | 'onChange' | 'ref'
+  'value' | 'defaultValue' | 'onChange' | 'ref' | 'defaultChecked'
   > {
   value?: boolean;
   defaultValue?: boolean;
   indeterminate?: boolean;
-  onChange?: (value: boolean) => void;
+  onValueChange?: (value: boolean) => void;
 }
 
 export interface CheckboxRef extends HTMLButtonElement {
@@ -66,7 +66,7 @@ export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
       defaultValue = false,
       value: givenValue,
       indeterminate: givenIndeterminate = false,
-      onChange,
+      onValueChange: onChange,
       onClick,
       ...props
     },

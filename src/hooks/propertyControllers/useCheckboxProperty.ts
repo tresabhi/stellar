@@ -66,7 +66,7 @@ export default function useCheckboxProperty<
     ref: checkbox,
     defaultValue: value.current,
     indeterminate: value.current === undefined,
-    onChange,
+    onValueChange: onChange,
   };
 
   return hook;

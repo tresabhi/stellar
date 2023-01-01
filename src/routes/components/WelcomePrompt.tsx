@@ -74,25 +74,25 @@ function Slide2() {
     <Select.Item value="none" onClick={handleNoneClick} key={NULL_THEME_KEY}>
       {t`themes.theme_light`}
     </Select.Item>,
+
+    ...Object.keys(THEMES).map((code) => {
+      const handleClick = () => {
+        mutateSettings((draft) => {
+          draft.interface.theme = code.toString();
+        });
+      };
+
+      return (
+        <Select.Item
+          value={code.toString()}
+          onClick={handleClick}
+          key={`theme-${code.toString()}`}
+        >
+          {translate(`themes.${code.toString().split('-').join('_')}`)}
+        </Select.Item>
+      );
+    }),
   ];
-
-  THEMES.forEach((code) => {
-    const handleClick = () => {
-      mutateSettings((draft) => {
-        draft.interface.theme = code.toString();
-      });
-    };
-
-    themes.push(
-      <Select.Item
-        value={code.toString()}
-        onClick={handleClick}
-        key={`theme-${code.toString()}`}
-      >
-        {translate(`themes.${code.toString().split('-').join('_')}`)}
-      </Select.Item>,
-    );
-  });
 
   const handleValueChange = (value: string) => {
     mutateSettings((draft) => {

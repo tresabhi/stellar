@@ -13,9 +13,9 @@ export enum SidebarTab {
 
 type Theme = typeof theme;
 
-export const THEMES = new Map<string, Theme>([
-  ['theme-dark', themeDark as Theme],
-]);
+export const THEMES: Record<string, Theme> = {
+  'theme-dark': themeDark as Theme,
+};
 
 export interface UseSettings {
   debug: {

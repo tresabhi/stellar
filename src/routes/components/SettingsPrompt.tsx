@@ -8,12 +8,15 @@ import {
   DesktopIcon,
   FileIcon,
   HomeIcon,
+  InfoCircledIcon,
   LightningBoltIcon,
   MagnifyingGlassIcon,
   MobileIcon,
+  TextIcon,
 } from '@radix-ui/react-icons';
 import Anchor from 'components/Anchor';
 import Button from 'components/Button';
+import { Checkbox } from 'components/Checkbox';
 import { InputWithIcon } from 'components/InputWithIcon';
 import Search from 'components/Search';
 import * as Select from 'components/Select';
@@ -21,7 +24,7 @@ import mutateSettings from 'core/app/mutateSettings';
 import { TAB_ORDER } from 'hooks/useKeybinds';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
-import { ReactNode, RefObject, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
 import useSettings, { THEMES } from 'stores/settings';
@@ -107,16 +110,30 @@ const Section = styled('span', {
   alignItems: 'center',
   justifyContent: 'left',
   gap: theme.space.gapRelatedMajor,
+  margin: `${theme.space.marginRelatedMajor} 0`,
 
   '& svg': {
     width: theme.sizes[24],
     height: theme.sizes[24],
   },
 });
-const Option = styled('div', {
+const OptionVertical = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: theme.space.gapRelated,
+
+  variants: {
+    fill: {
+      true: {
+        flex: 1,
+      },
+    },
+  },
+});
+const OptionHorizontal = styled('div', {
+  gap: theme.space.gapRelatedMajor,
+  display: 'flex',
+  alignItems: 'center',
 });
 const Title = styled('span', {
   color: theme.colors.textHighContrast,
@@ -135,6 +152,13 @@ const Description = styled('span', {
   fontSize: theme.fontSizes[12],
   color: theme.colors.textLowContrast,
 });
+const Separator = styled('div', {
+  height: theme.sizes[1],
+  width: '75%',
+  backgroundColor: theme.colors.componentNonInteractiveBorder,
+  margin: `${theme.space.marginUnrelatedMajor} auto`,
+  borderRadius: theme.radii[1],
+});
 
 export const TAB_MAP = {
   [Tab.Create]: 'create',
@@ -149,100 +173,14 @@ export const TAB_MAP_INVERSE = {
   export: Tab.Export,
 };
 
+const stringCurry = (group: string, translate: (string: string) => string) => (string: string) => `${translate(
+  `prompts.settings.groups.${group}.${string}.title`,
+)} ${translate(`prompts.settings.groups.${group}.${string}.description`)}`;
+
 function InterfaceSettings({ search }: SubSettingsProps) {
   const { t, f, translate } = useTranslator();
 
-  const initialThemeValue = useSettings.getState().interface.theme ?? NULL_THEME_KEY;
-  const handleThemeNoneClick = () => {
-    mutateSettings((draft) => {
-      draft.interface.theme = null;
-    });
-  };
-  const themes: JSX.Element[] = [
-    <Select.Item
-      value={NULL_THEME_KEY}
-      onClick={handleThemeNoneClick}
-      key={NULL_THEME_KEY}
-    >
-      {t`themes.theme_light`}
-    </Select.Item>,
-  ];
-  THEMES.forEach((code) => {
-    const handleClick = () => {
-      mutateSettings((draft) => {
-        draft.interface.theme = code.toString();
-      });
-    };
-
-    themes.push(
-      <Select.Item
-        value={code.toString()}
-        onClick={handleClick}
-        key={`theme-${code.toString()}`}
-      >
-        {translate(`themes.${code.toString().split('-').join('_')}`)}
-      </Select.Item>,
-    );
-  });
-  const handleThemeValueChange = (value: string) => {
-    mutateSettings((draft) => {
-      if (value === 'none') {
-        draft.interface.theme = null;
-      } else {
-        draft.interface.theme = value;
-      }
-    });
-  };
-
-  const initialTabValue = TAB_MAP[useSettings.getState().interface.defaultTab];
-  const tabs = TAB_ORDER.map((tab) => (
-    <Select.Item value={TAB_MAP[tab]}>
-      {translate(`tabs.${TAB_MAP[tab]}`)}
-    </Select.Item>
-  ));
-  const handleTabValueChange = (value: keyof typeof TAB_MAP_INVERSE) => {
-    mutateSettings((draft) => {
-      draft.interface.defaultTab = TAB_MAP_INVERSE[value];
-    });
-  };
-
-  const initialTouchscreenValue = `${
-    useSettings.getState().interface.touchscreenMode
-  }`;
-  const handleTouchscreenValueChange = (value: string) => {
-    mutateSettings((draft) => {
-      if (value === 'true') {
-        draft.interface.touchscreenMode = true;
-      } else if (value === 'false') {
-        draft.interface.touchscreenMode = false;
-      } else {
-        draft.interface.touchscreenMode = null;
-      }
-    });
-  };
-
-  const initialLanguageValue = useSettings.getState().interface.language;
-  const languages: ReactNode[] = [];
-  Object.keys(TRANSLATIONS).forEach((translation) => {
-    const code = translation;
-    const displayNames = new Intl.DisplayNames([code], { type: 'language' });
-    const displayName = FIXED_LANG_NAMES[code] ?? displayNames.of(code);
-
-    languages.push(
-      <Select.Item value={code} key={`language-${code}`}>
-        {displayName}
-      </Select.Item>,
-    );
-  });
-  const handleLanguageValueChange = (value: string) => {
-    mutateSettings((draft) => {
-      draft.interface.language = value;
-    });
-  };
-
-  const createGroupString = (string: string) => `${translate(
-    `prompts.settings.groups.interface.${string}.title`,
-  )} ${translate(`prompts.settings.groups.interface.${string}.description`)}`;
+  const createString = stringCurry('interface', translate);
 
   return (
     <>
@@ -256,7 +194,7 @@ function InterfaceSettings({ search }: SubSettingsProps) {
         list={[
           {
             node: (
-              <Option key="theme">
+              <OptionVertical key="theme">
                 <Title>
                   <BlendingModeIcon />
                   {t`prompts.settings.groups.interface.theme.title`}
@@ -265,20 +203,60 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                   {t`prompts.settings.groups.interface.theme.description`}
                 </Description>
                 <Select.Root
-                  onValueChange={handleThemeValueChange}
-                  defaultValue={initialThemeValue}
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      if (value === 'none') {
+                        draft.interface.theme = null;
+                      } else {
+                        draft.interface.theme = value;
+                      }
+                    });
+                  }}
+                  defaultValue={
+                    useSettings.getState().interface.theme ?? NULL_THEME_KEY
+                  }
                 >
                   <Select.Trigger />
-                  <Select.Content>{themes}</Select.Content>
+                  <Select.Content>
+                    <Select.Item
+                      value={NULL_THEME_KEY}
+                      onClick={() => mutateSettings((draft) => {
+                        draft.interface.theme = null;
+                      })}
+                      key={NULL_THEME_KEY}
+                    >
+                      {t`themes.theme_light`}
+                    </Select.Item>
+
+                    {Object.keys(THEMES).map((code) => {
+                      const handleClick = () => {
+                        mutateSettings((draft) => {
+                          draft.interface.theme = code.toString();
+                        });
+                      };
+
+                      return (
+                        <Select.Item
+                          value={code.toString()}
+                          onClick={handleClick}
+                          key={`theme-${code.toString()}`}
+                        >
+                          {translate(
+                            `themes.${code.toString().split('-').join('_')}`,
+                          )}
+                        </Select.Item>
+                      );
+                    })}
+                  </Select.Content>
                 </Select.Root>
-              </Option>
+              </OptionVertical>
             ),
-            string: createGroupString('theme'),
+            string: createString('theme'),
           },
 
           {
             node: (
-              <Option key="default-tab">
+              <OptionVertical key="default-tab">
                 <Title>
                   <HomeIcon />
                   {t`prompts.settings.groups.interface.default_tab.title`}
@@ -287,20 +265,32 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                   {t`prompts.settings.groups.interface.default_tab.description`}
                 </Description>
                 <Select.Root
-                  onValueChange={handleTabValueChange}
-                  defaultValue={initialTabValue}
+                  onValueChange={(value: keyof typeof TAB_MAP_INVERSE) => {
+                    mutateSettings((draft) => {
+                      draft.interface.defaultTab = TAB_MAP_INVERSE[value];
+                    });
+                  }}
+                  defaultValue={
+                    TAB_MAP[useSettings.getState().interface.defaultTab]
+                  }
                 >
                   <Select.Trigger />
-                  <Select.Content>{tabs}</Select.Content>
+                  <Select.Content>
+                    {TAB_ORDER.map((tab) => (
+                      <Select.Item value={TAB_MAP[tab]}>
+                        {translate(`tabs.${TAB_MAP[tab]}`)}
+                      </Select.Item>
+                    ))}
+                  </Select.Content>
                 </Select.Root>
-              </Option>
+              </OptionVertical>
             ),
-            string: createGroupString('default_tab'),
+            string: createString('default_tab'),
           },
 
           {
             node: (
-              <Option key="touchscreen-mode">
+              <OptionVertical key="touchscreen-mode">
                 <Title>
                   <MobileIcon />
                   {t`prompts.settings.groups.interface.touchscreen_mode.title`}
@@ -309,8 +299,20 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                   {t`prompts.settings.groups.interface.touchscreen_mode.description`}
                 </Description>
                 <Select.Root
-                  onValueChange={handleTouchscreenValueChange}
-                  defaultValue={initialTouchscreenValue}
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      if (value === 'true') {
+                        draft.interface.touchscreenMode = true;
+                      } else if (value === 'false') {
+                        draft.interface.touchscreenMode = false;
+                      } else {
+                        draft.interface.touchscreenMode = null;
+                      }
+                    });
+                  }}
+                  defaultValue={`${
+                    useSettings.getState().interface.touchscreenMode
+                  }`}
                 >
                   <Select.Trigger />
                   <Select.Content>
@@ -319,16 +321,16 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                     <Select.Item value="false">{t`prompts.settings.groups.interface.touchscreen_mode.options.off`}</Select.Item>
                   </Select.Content>
                 </Select.Root>
-              </Option>
+              </OptionVertical>
             ),
-            string: createGroupString('touchscreen_mode'),
+            string: createString('touchscreen_mode'),
           },
 
           {
             node: (
-              <Option key="language">
+              <OptionVertical key="language">
                 <Title>
-                  <MobileIcon />
+                  <TextIcon />
                   {t`prompts.settings.groups.interface.language.title`}
                 </Title>
                 <Description>
@@ -344,15 +346,81 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                   {f`prompts.settings.groups.interface.language.description`[2]}
                 </Description>
                 <Select.Root
-                  onValueChange={handleLanguageValueChange}
-                  defaultValue={initialLanguageValue}
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.interface.language = value;
+                    });
+                  }}
+                  defaultValue={useSettings.getState().interface.language}
                 >
                   <Select.Trigger />
-                  <Select.Content>{languages}</Select.Content>
+                  <Select.Content>
+                    {Object.keys(TRANSLATIONS).map((translation) => {
+                      const code = translation;
+                      const displayNames = new Intl.DisplayNames([code], {
+                        type: 'language',
+                      });
+                      const displayName = FIXED_LANG_NAMES[code] ?? displayNames.of(code);
+
+                      return (
+                        <Select.Item value={code} key={`language-${code}`}>
+                          {displayName}
+                        </Select.Item>
+                      );
+                    })}
+                  </Select.Content>
                 </Select.Root>
-              </Option>
+              </OptionVertical>
             ),
-            string: createGroupString('language'),
+            string: createString('language'),
+          },
+        ]}
+      />
+    </>
+  );
+}
+
+function DebugSettings({ search }: SubSettingsProps) {
+  const { t, translate } = useTranslator();
+
+  const createString = stringCurry('debug', translate);
+
+  return (
+    <>
+      <Section>
+        <CodeIcon />
+        {t`prompts.settings.groups.debug`}
+      </Section>
+
+      <Search
+        input={search}
+        list={[
+          {
+            node: (
+              <OptionHorizontal key="error-screen-debug">
+                <OptionVertical fill>
+                  <Title>
+                    <InfoCircledIcon />
+                    {t`prompts.settings.groups.debug.error_screen_debug.title`}
+                  </Title>
+                  <Description>
+                    {t`prompts.settings.groups.debug.error_screen_debug.description`}
+                  </Description>
+                </OptionVertical>
+
+                <Checkbox
+                  defaultValue={
+                    useSettings.getState().debug.errorScreen.showDebug
+                  }
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.debug.errorScreen.showDebug = value;
+                    });
+                  }}
+                />
+              </OptionHorizontal>
+            ),
+            string: createString('error_screen_debug'),
           },
         ]}
       />
@@ -416,6 +484,8 @@ export default function SettingsPrompt() {
       <Options>
         <OptionsWrapper>
           <InterfaceSettings search={search} />
+          <Separator />
+          <DebugSettings search={search} />
         </OptionsWrapper>
       </Options>
     </Container>

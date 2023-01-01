@@ -151,5 +151,9 @@
   "liveServer.settings.multiRootWorkspaceName": "Stellar",
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
-  }
+  },
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "files.autoSave": "onFocusChange"
 }
