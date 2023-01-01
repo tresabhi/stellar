@@ -6,25 +6,15 @@ import prompt from 'core/interface/prompt';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
 import { ReactNode, useState } from 'react';
-import { styled, theme } from 'stitches.config';
 import { PromptProps } from 'stores/prompts';
 import useSettings, { THEMES } from 'stores/settings';
 import InstabilityWarningPrompt from './InstabilityWarningPrompt';
 
-const fixedLangNames: Record<string, string> = {
+export const FIXED_LANG_NAMES: Record<string, string> = {
   'en-PT': 'English (Pirate)',
+  'en-UD': '(uʍop-ǝpᴉsd∩) ɥsᴉlƃuƎ',
+  'ol-US': 'LOLCAT',
 };
-
-const Mono = styled('span', {
-  fontFamily: theme.fonts.mono,
-  color: theme.colors.textLowContrast,
-  position: 'absolute',
-  right: theme.space.paddingMinor,
-
-  [`${Select.Trigger} &`]: {
-    display: 'none',
-  },
-});
 
 function Slide1() {
   const { t, f } = useTranslator();
@@ -33,16 +23,11 @@ function Slide1() {
   Object.keys(TRANSLATIONS).forEach((translation) => {
     const code = translation;
     const displayNames = new Intl.DisplayNames([code], { type: 'language' });
-    const displayName = fixedLangNames[code] ?? displayNames.of(code);
+    const displayName = FIXED_LANG_NAMES[code] ?? displayNames.of(code);
 
     languages.push(
       <Select.Item value={code} key={`language-${code}`}>
         {displayName}
-        <Mono>
-          [
-          {code}
-          ]
-        </Mono>
       </Select.Item>,
     );
   });

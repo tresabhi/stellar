@@ -345,6 +345,10 @@
               "on": "On",
               "off": "Off"
             }
+          },
+          "language": {
+            "title": "Language",
+            "description": "Specifies what language the text on screen is translated to. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           }
         }
       }

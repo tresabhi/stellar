@@ -12,6 +12,7 @@ import {
   MagnifyingGlassIcon,
   MobileIcon,
 } from '@radix-ui/react-icons';
+import Anchor from 'components/Anchor';
 import Button from 'components/Button';
 import { InputWithIcon } from 'components/InputWithIcon';
 import Search from 'components/Search';
@@ -19,12 +20,12 @@ import * as Select from 'components/Select';
 import mutateSettings from 'core/app/mutateSettings';
 import { TAB_ORDER } from 'hooks/useKeybinds';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
-import useTranslator from 'hooks/useTranslator';
-import { RefObject, useRef } from 'react';
+import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
+import { ReactNode, RefObject, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
 import useSettings, { THEMES } from 'stores/settings';
-import { NULL_THEME_KEY } from './WelcomePrompt';
+import { FIXED_LANG_NAMES, NULL_THEME_KEY } from './WelcomePrompt';
 
 interface SubSettingsProps {
   search: RefObject<HTMLInputElement>;
@@ -149,7 +150,7 @@ export const TAB_MAP_INVERSE = {
 };
 
 function InterfaceSettings({ search }: SubSettingsProps) {
-  const { t, translate } = useTranslator();
+  const { t, f, translate } = useTranslator();
 
   const initialThemeValue = useSettings.getState().interface.theme ?? NULL_THEME_KEY;
   const handleThemeNoneClick = () => {
@@ -219,11 +220,25 @@ function InterfaceSettings({ search }: SubSettingsProps) {
       }
     });
   };
-  const touchscreenModes = [
-    <Select.Item value="null">{t`prompts.settings.groups.interface.touchscreen_mode.options.auto`}</Select.Item>,
-    <Select.Item value="true">{t`prompts.settings.groups.interface.touchscreen_mode.options.on`}</Select.Item>,
-    <Select.Item value="false">{t`prompts.settings.groups.interface.touchscreen_mode.options.off`}</Select.Item>,
-  ];
+
+  const initialLanguageValue = useSettings.getState().interface.language;
+  const languages: ReactNode[] = [];
+  Object.keys(TRANSLATIONS).forEach((translation) => {
+    const code = translation;
+    const displayNames = new Intl.DisplayNames([code], { type: 'language' });
+    const displayName = FIXED_LANG_NAMES[code] ?? displayNames.of(code);
+
+    languages.push(
+      <Select.Item value={code} key={`language-${code}`}>
+        {displayName}
+      </Select.Item>,
+    );
+  });
+  const handleLanguageValueChange = (value: string) => {
+    mutateSettings((draft) => {
+      draft.interface.language = value;
+    });
+  };
 
   const createGroupString = (string: string) => `${translate(
     `prompts.settings.groups.interface.${string}.title`,
@@ -298,11 +313,46 @@ function InterfaceSettings({ search }: SubSettingsProps) {
                   defaultValue={initialTouchscreenValue}
                 >
                   <Select.Trigger />
-                  <Select.Content>{touchscreenModes}</Select.Content>
+                  <Select.Content>
+                    <Select.Item value="null">{t`prompts.settings.groups.interface.touchscreen_mode.options.auto`}</Select.Item>
+                    <Select.Item value="true">{t`prompts.settings.groups.interface.touchscreen_mode.options.on`}</Select.Item>
+                    <Select.Item value="false">{t`prompts.settings.groups.interface.touchscreen_mode.options.off`}</Select.Item>
+                  </Select.Content>
                 </Select.Root>
               </Option>
             ),
             string: createGroupString('touchscreen_mode'),
+          },
+
+          {
+            node: (
+              <Option key="language">
+                <Title>
+                  <MobileIcon />
+                  {t`prompts.settings.groups.interface.language.title`}
+                </Title>
+                <Description>
+                  {f`prompts.settings.groups.interface.language.description`[0]}
+                  <Anchor
+                    href="https://crowdin.com/project/stellareditor/"
+                    target="_blank"
+                  >
+                    {
+                      f`prompts.settings.groups.interface.language.description`[1]
+                    }
+                  </Anchor>
+                  {f`prompts.settings.groups.interface.language.description`[2]}
+                </Description>
+                <Select.Root
+                  onValueChange={handleLanguageValueChange}
+                  defaultValue={initialLanguageValue}
+                >
+                  <Select.Trigger />
+                  <Select.Content>{languages}</Select.Content>
+                </Select.Root>
+              </Option>
+            ),
+            string: createGroupString('language'),
           },
         ]}
       />
