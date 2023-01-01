@@ -21,6 +21,7 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
     - `Cone`: https://i.imgur.com/DKOMgyf.png
     - `Cone Side`: https://i.imgur.com/tetvUJC.png
   - Add settings
+  - Follow [capitalization guidelines](https://learn.microsoft.com/en-us/style-guide/capitalization)
 
 ## v1.0 Beta 7
 
