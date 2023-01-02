@@ -2,13 +2,17 @@ import {
   BlendingModeIcon,
   CaretRightIcon,
   CodeIcon,
+  CrumpledPaperIcon,
   CursorArrowIcon,
   DesktopIcon,
+  DownloadIcon,
   HomeIcon,
   InfoCircledIcon,
   LightningBoltIcon,
+  LinkBreak2Icon,
   MagnifyingGlassIcon,
   MobileIcon,
+  RotateCounterClockwiseIcon,
   TextIcon,
   TransparencyGridIcon,
 } from '@radix-ui/react-icons';
@@ -384,53 +388,130 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
             ),
             string: createString('language'),
           },
-        ]}
-      />
-    </>
-  );
-}
 
-function DebugSettings({ search, titleRef }: SubSettingsProps) {
-  const { t, translate } = useTranslator();
-
-  const createString = stringCurry('debug', translate);
-
-  return (
-    <>
-      <Section>
-        <CodeIcon />
-        {t`prompts.settings.groups.debug`}
-      </Section>
-
-      <Search
-        input={search}
-        list={[
           {
             node: (
-              <OptionHorizontal key="error-screen-debug">
+              <OptionHorizontal key="orientation-prompt">
                 <OptionVertical fill>
                   <Title ref={titleRef}>
-                    <InfoCircledIcon />
-                    {t`prompts.settings.groups.debug.error_screen_debug.title`}
+                    <RotateCounterClockwiseIcon />
+                    {t`prompts.settings.groups.interface.orientation_prompt.title`}
                   </Title>
                   <Description>
-                    {t`prompts.settings.groups.debug.error_screen_debug.description`}
+                    {t`prompts.settings.groups.interface.orientation_prompt.description`}
                   </Description>
                 </OptionVertical>
 
                 <Checkbox
                   defaultValue={
-                    useSettings.getState().debug.errorScreen.showDebug
+                    useSettings.getState().interface.showOrientationPrompt
                   }
                   onValueChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.debug.errorScreen.showDebug = value;
+                      draft.interface.showOrientationPrompt = value;
                     });
                   }}
                 />
               </OptionHorizontal>
             ),
-            string: createString('error_screen_debug'),
+            string: createString('orientation_prompt'),
+          },
+
+          {
+            node: (
+              <OptionHorizontal key="installation-prompt">
+                <OptionVertical fill>
+                  <Title ref={titleRef}>
+                    <DownloadIcon />
+                    {t`prompts.settings.groups.interface.installation_prompt.title`}
+                  </Title>
+                  <Description>
+                    {
+                      f`prompts.settings.groups.interface.installation_prompt.description`[0]
+                    }
+                    <Anchor
+                      href="https://web.dev/progressive-web-apps/"
+                      target="_blank"
+                    >
+                      {
+                        f`prompts.settings.groups.interface.installation_prompt.description`[1]
+                      }
+                    </Anchor>
+                    {
+                      f`prompts.settings.groups.interface.installation_prompt.description`[2]
+                    }
+                  </Description>
+                </OptionVertical>
+
+                <Checkbox
+                  defaultValue={
+                    useSettings.getState().interface.showInstallationPrompt
+                  }
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.interface.showInstallationPrompt = value;
+                    });
+                  }}
+                />
+              </OptionHorizontal>
+            ),
+            string: createString('installation_prompt'),
+          },
+
+          {
+            node: (
+              <OptionHorizontal key="instability-warning">
+                <OptionVertical fill>
+                  <Title ref={titleRef}>
+                    <CrumpledPaperIcon />
+                    {t`prompts.settings.groups.interface.instability_prompt.title`}
+                  </Title>
+                  <Description>
+                    {t`prompts.settings.groups.interface.instability_prompt.description`}
+                  </Description>
+                </OptionVertical>
+
+                <Checkbox
+                  defaultValue={
+                    useSettings.getState().interface.showInstabilityWarning
+                  }
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.interface.showInstabilityWarning = value;
+                    });
+                  }}
+                />
+              </OptionHorizontal>
+            ),
+            string: createString('instability_prompt'),
+          },
+
+          {
+            node: (
+              <OptionHorizontal key="missing-parts">
+                <OptionVertical fill>
+                  <Title ref={titleRef}>
+                    <LinkBreak2Icon />
+                    {t`prompts.settings.groups.interface.missing_parts.title`}
+                  </Title>
+                  <Description>
+                    {t`prompts.settings.groups.interface.missing_parts.description`}
+                  </Description>
+                </OptionVertical>
+
+                <Checkbox
+                  defaultValue={
+                    useSettings.getState().interface.showMissingParts
+                  }
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.interface.showMissingParts = value;
+                    });
+                  }}
+                />
+              </OptionHorizontal>
+            ),
+            string: createString('missing_parts'),
           },
         ]}
       />
@@ -488,6 +569,54 @@ function PerformanceSettings({ search, titleRef }: SubSettingsProps) {
               </OptionVertical>
             ),
             string: createString('regress'),
+          },
+        ]}
+      />
+    </>
+  );
+}
+
+function DebugSettings({ search, titleRef }: SubSettingsProps) {
+  const { t, translate } = useTranslator();
+
+  const createString = stringCurry('debug', translate);
+
+  return (
+    <>
+      <Section>
+        <CodeIcon />
+        {t`prompts.settings.groups.debug`}
+      </Section>
+
+      <Search
+        input={search}
+        list={[
+          {
+            node: (
+              <OptionHorizontal key="error-screen-debug">
+                <OptionVertical fill>
+                  <Title ref={titleRef}>
+                    <InfoCircledIcon />
+                    {t`prompts.settings.groups.debug.error_screen_debug.title`}
+                  </Title>
+                  <Description>
+                    {t`prompts.settings.groups.debug.error_screen_debug.description`}
+                  </Description>
+                </OptionVertical>
+
+                <Checkbox
+                  defaultValue={
+                    useSettings.getState().debug.errorScreen.showDebug
+                  }
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.debug.errorScreen.showDebug = value;
+                    });
+                  }}
+                />
+              </OptionHorizontal>
+            ),
+            string: createString('error_screen_debug'),
           },
         ]}
       />

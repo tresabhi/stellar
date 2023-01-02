@@ -346,6 +346,22 @@
           "language": {
             "title": "Language",
             "description": "Specifies what language the text on screen is translated to. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+          },
+          "orientation_prompt": {
+            "title": "Orientation Prompt",
+            "description": "Shows a prompt when your device is oriented in portrait mode."
+          },
+          "installation_prompt": {
+            "title": "Installation Prompt",
+            "description": "Notifies you when Stellar detects the capability within your device to install it as a %1$sPWA%2$s. Your device may be eligible regardless of a notification."
+          },
+          "instability_prompt": {
+            "title": "Instability Warning",
+            "description": "Warns you when you're running an unstable or unknown version of Stellar."
+          },
+          "missing_parts": {
+            "title": "Missing Parts",
+            "description": "Shows you a list of all the parts that could not be imported."
           }
         },
 
