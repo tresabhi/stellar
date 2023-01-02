@@ -318,9 +318,6 @@
         "interface": "Interface",
         "editor": "Editor",
         "performance": "Performance",
-        "features": "Features",
-        "file_preferences": "File Preferences",
-        "accessibility": "Accessibility",
         "debug": "Debug"
       },
 

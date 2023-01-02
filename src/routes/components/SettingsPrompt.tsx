@@ -1,12 +1,9 @@
 import {
-  AccessibilityIcon,
-  ArchiveIcon,
   BlendingModeIcon,
   CaretRightIcon,
   CodeIcon,
   CursorArrowIcon,
   DesktopIcon,
-  FileIcon,
   HomeIcon,
   InfoCircledIcon,
   LightningBoltIcon,
@@ -35,6 +32,7 @@ import createInputEscape from 'utilities/createInputEscape';
 import { FIXED_LANG_NAMES, NULL_THEME_KEY } from './WelcomePrompt';
 
 interface SubSettingsProps {
+  titleRef: RefObject<HTMLSpanElement>;
   search: RefObject<HTMLInputElement>;
 }
 
@@ -189,7 +187,7 @@ const stringCurry = (group: string, translate: (string: string) => string) => (s
   `prompts.settings.groups.${group}.${string}.title`,
 )} ${translate(`prompts.settings.groups.${group}.${string}.description`)}`;
 
-function InterfaceSettings({ search }: SubSettingsProps) {
+function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
   const { t, f, translate } = useTranslator();
 
   const createString = stringCurry('interface', translate);
@@ -207,7 +205,7 @@ function InterfaceSettings({ search }: SubSettingsProps) {
           {
             node: (
               <OptionVertical key="theme">
-                <Title>
+                <Title ref={titleRef}>
                   <BlendingModeIcon />
                   {t`prompts.settings.groups.interface.theme.title`}
                 </Title>
@@ -392,7 +390,7 @@ function InterfaceSettings({ search }: SubSettingsProps) {
   );
 }
 
-function DebugSettings({ search }: SubSettingsProps) {
+function DebugSettings({ search, titleRef }: SubSettingsProps) {
   const { t, translate } = useTranslator();
 
   const createString = stringCurry('debug', translate);
@@ -411,7 +409,7 @@ function DebugSettings({ search }: SubSettingsProps) {
             node: (
               <OptionHorizontal key="error-screen-debug">
                 <OptionVertical fill>
-                  <Title>
+                  <Title ref={titleRef}>
                     <InfoCircledIcon />
                     {t`prompts.settings.groups.debug.error_screen_debug.title`}
                   </Title>
@@ -440,7 +438,7 @@ function DebugSettings({ search }: SubSettingsProps) {
   );
 }
 
-function PerformanceSettings({ search }: SubSettingsProps) {
+function PerformanceSettings({ search, titleRef }: SubSettingsProps) {
   const { t, translate } = useTranslator();
 
   const createString = stringCurry('performance', translate);
@@ -458,7 +456,7 @@ function PerformanceSettings({ search }: SubSettingsProps) {
           {
             node: (
               <OptionVertical key="regress">
-                <Title>
+                <Title ref={titleRef}>
                   <TransparencyGridIcon />
                   {t`prompts.settings.groups.performance.regress.title`}
                 </Title>
@@ -499,7 +497,12 @@ function PerformanceSettings({ search }: SubSettingsProps) {
 
 export default function SettingsPrompt() {
   const { t } = useTranslator();
+  const options = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLInputElement>(null);
+  const interfaceTitle = useRef<HTMLSpanElement>(null);
+  // const editor = useRef<HTMLSpanElement>(null);
+  const performance = useRef<HTMLSpanElement>(null);
+  const debug = useRef<HTMLSpanElement>(null);
 
   usePopupConcurrency();
 
@@ -513,7 +516,11 @@ export default function SettingsPrompt() {
         />
 
         <NavigationButtons>
-          <NavigationButton selected>
+          <NavigationButton
+            onClick={() => interfaceTitle.current?.scrollIntoView({
+              block: 'center',
+            })}
+          >
             <DesktopIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.interface`}</NavigationButtonText>
             <CaretRightIcon />
@@ -523,40 +530,28 @@ export default function SettingsPrompt() {
             <NavigationButtonText>{t`prompts.settings.navigation.editor`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
-          <NavigationButton>
+          <NavigationButton
+            onClick={() => performance.current?.scrollIntoView()}
+          >
             <LightningBoltIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.performance`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
-          <NavigationButton>
-            <ArchiveIcon />
-            <NavigationButtonText>{t`prompts.settings.navigation.features`}</NavigationButtonText>
-            <CaretRightIcon />
-          </NavigationButton>
-          <NavigationButton>
-            <FileIcon />
-            <NavigationButtonText>{t`prompts.settings.navigation.file_preferences`}</NavigationButtonText>
-            <CaretRightIcon />
-          </NavigationButton>
-          <NavigationButton>
-            <AccessibilityIcon />
-            <NavigationButtonText>{t`prompts.settings.navigation.accessibility`}</NavigationButtonText>
-            <CaretRightIcon />
-          </NavigationButton>
-          <NavigationButton>
+          <NavigationButton onClick={() => debug.current?.scrollIntoView()}>
             <CodeIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.debug`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
         </NavigationButtons>
       </Navigation>
-      <Options>
+
+      <Options ref={options}>
         <OptionsWrapper>
-          <InterfaceSettings search={search} />
+          <InterfaceSettings titleRef={interfaceTitle} search={search} />
           <Separator />
-          <PerformanceSettings search={search} />
+          <PerformanceSettings titleRef={performance} search={search} />
           <Separator />
-          <DebugSettings search={search} />
+          <DebugSettings titleRef={debug} search={search} />
         </OptionsWrapper>
       </Options>
     </Container>
