@@ -255,9 +255,6 @@
         "interface": "Interfaz",
         "editor": "Editor",
         "performance": "Rendimiento",
-        "features": "Características",
-        "file_preferences": "Preferencias de archivo",
-        "accessibility": "Accesibilidad",
         "debug": "Depuración"
       },
       "groups": {
@@ -270,6 +267,49 @@
           "default_tab": {
             "title": "Pestaña por defecto",
             "description": "Especifica qué pestaña de Stellar se abrirá por defecto al iniciar."
+          },
+          "touchscreen_mode": {
+            "title": "Modo pantalla táctil",
+            "description": "Controla cómo la información en pantalla está presentada de acuerdo a tu tipo de pantalla.",
+            "options": {
+              "auto": "Autodetectar",
+              "on": "Activado",
+              "off": "Desactivado"
+            }
+          },
+          "language": {
+            "title": "Idioma",
+            "description": "Especifica a qué idioma el texto de la pantalla está traducido. Ayúdanos a traducir Stellar a tu idioma en %1$sCrowdin%2$s."
+          },
+          "orientation_prompt": {
+            "title": "Aviso de orientación",
+            "description": "Muestra un aviso cuando tu dispositivo está orientado en modo vertical."
+          },
+          "installation_prompt": {
+            "title": "Aviso de instalación",
+            "description": "Te notifica cuando Stellar detecta la capacidad dentro de tu dispositivo para instalarla como %1$sPWA%2$s. Tu dispositivo puede ser elegible sin importar de una notificación."
+          },
+          "instability_prompt": {
+            "title": "Advertencia de inestabilidad",
+            "description": "Te advierte cuando estás usando una versión inestable o desconocida de Stellar."
+          },
+          "missing_parts": {
+            "title": "Partes faltantes",
+            "description": "Te muestra una lista de todas las partes que no pudieron ser importadas."
+          }
+        },
+        "performance": {
+          "$": "Rendimiento",
+          "regress": {
+            "title": "Cantidad de regresión",
+            "description": "Reduce la resolución del lienzo cuando se realizan tareas computacionalmente costosas como: paneamiento, escalamiento, rotación, etc. Cuanto más bajo es el valor, más agresivo es la regresión."
+          }
+        },
+        "debug": {
+          "$": "Depuración",
+          "error_screen_debug": {
+            "title": "Mostrar la información de depuración en la pantalla de error",
+            "description": "Muestra el mensaje de error entero y un código fuente mapeado de la pila en seguimiento cuando un error crítico interrumpe Stellar."
           }
         }
       }
