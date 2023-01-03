@@ -702,9 +702,11 @@ export default function SettingsPrompt() {
 
         <NavigationButtons>
           <NavigationButton
-            onClick={() => interfaceTitle.current?.scrollIntoView({
-              block: 'center',
-            })}
+            onClick={() => {
+              if (options.current) {
+                options.current.scrollTop = 0;
+              }
+            }}
           >
             <DesktopIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.interface`}</NavigationButtonText>
