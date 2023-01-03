@@ -298,6 +298,13 @@
             "description": "˙pǝʇɹodɯᴉ ǝq ʇou plnoɔ ʇɐɥʇ sʇɹɐd ǝɥʇ llɐ ɟo ʇsᴉl ɐ noʎ sʍoɥS"
           }
         },
+        "editor": {
+          "$": "ɹoʇ!pƎ",
+          "undo_limit": {
+            "title": "ʇᴉɯᴉ˥ opu∩",
+            "description": "˙ɯnɯᴉuᴉɯ ǝɥʇ sᴉ 9Ɩ ;ɯnɯᴉxɐɯ ǝɥʇ sᴉ 960ㄣ ˙ǝɹoʇs plnoɥs ɹoʇᴉpǝ ǝɥʇ sǝɥɔʇɐd ʎɹoʇsᴉɥ uoᴉsɹǝʌ ɟo ɹǝqɯnu ɯnɯᴉxɐɯ ǝɥ┴"
+          }
+        },
         "performance": {
           "$": "ǝɔuɐɯɹoɟɹǝԀ",
           "regress": {
