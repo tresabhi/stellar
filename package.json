@@ -30,7 +30,7 @@
     "react-spinners": "^0.13.7",
     "semver": "^7.3.8",
     "sourcemapped-stacktrace": "^1.1.11",
-    "three": "^0.147.0",
+    "three": "^0.148.0",
     "three-mesh-bvh": "^0.5.19",
     "three-stdlib": "^2.21.1",
     "workbox-precaching": "^6.5.4",
