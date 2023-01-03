@@ -555,8 +555,8 @@ function PerformanceSettings({ search, titleRef }: SubSettingsProps) {
                   onBlur={(event) => {
                     const clampedValue = clamp(
                       Number(event.target.value),
-                      0.1,
-                      1,
+                      Number(event.target.min),
+                      Number(event.target.max),
                     );
                     event.target.value = `${clampedValue}`;
 
@@ -569,6 +569,62 @@ function PerformanceSettings({ search, titleRef }: SubSettingsProps) {
               </OptionVertical>
             ),
             string: createString('regress'),
+          },
+        ]}
+      />
+    </>
+  );
+}
+
+function EditorSettings({ search, titleRef }: SubSettingsProps) {
+  const { t, translate } = useTranslator();
+
+  const createString = stringCurry('editor', translate);
+
+  return (
+    <>
+      <Section>
+        <CursorArrowIcon />
+        {t`prompts.settings.groups.editor`}
+      </Section>
+
+      <Search
+        input={search}
+        list={[
+          {
+            node: (
+              <OptionVertical>
+                <Title ref={titleRef}>
+                  <InfoCircledIcon />
+                  {t`prompts.settings.groups.editor.undo_limit.title`}
+                </Title>
+                <Description>
+                  {t`prompts.settings.groups.editor.undo_limit.description`}
+                </Description>
+
+                <Input
+                  type="number"
+                  step={1}
+                  min={16}
+                  max={4096}
+                  defaultValue={useSettings.getState().editor.undoLimit}
+                  onBlur={(event) => {
+                    const clampedValue = clamp(
+                      Math.round(Number(event.target.value)),
+                      Number(event.target.min),
+                      Number(event.target.max),
+                    );
+                    event.target.value = `${clampedValue}`;
+
+                    mutateSettings((draft) => {
+                      draft.editor.undoLimit = clampedValue;
+                    });
+                  }}
+                  onKeyDown={createInputEscape()}
+                />
+              </OptionVertical>
+            ),
+            string: createString('undo_limit'),
           },
         ]}
       />
@@ -629,7 +685,7 @@ export default function SettingsPrompt() {
   const options = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLInputElement>(null);
   const interfaceTitle = useRef<HTMLSpanElement>(null);
-  // const editor = useRef<HTMLSpanElement>(null);
+  const editor = useRef<HTMLSpanElement>(null);
   const performance = useRef<HTMLSpanElement>(null);
   const debug = useRef<HTMLSpanElement>(null);
 
@@ -654,7 +710,7 @@ export default function SettingsPrompt() {
             <NavigationButtonText>{t`prompts.settings.navigation.interface`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
-          <NavigationButton>
+          <NavigationButton onClick={() => editor.current?.scrollIntoView()}>
             <CursorArrowIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.editor`}</NavigationButtonText>
             <CaretRightIcon />
@@ -677,6 +733,8 @@ export default function SettingsPrompt() {
       <Options ref={options}>
         <OptionsWrapper>
           <InterfaceSettings titleRef={interfaceTitle} search={search} />
+          <Separator />
+          <EditorSettings titleRef={editor} search={search} />
           <Separator />
           <PerformanceSettings titleRef={performance} search={search} />
           <Separator />

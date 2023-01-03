@@ -59,9 +59,9 @@ export interface UseSettings {
   };
 
   editor: {
+    undoLimit: number;
     selectMultiple: boolean;
     selectDeep: boolean;
-    undoLimit: number;
     rename: RenamePartsOptions;
     constrainScales: boolean;
     constrainFuelTankWidths: boolean;

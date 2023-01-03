@@ -365,6 +365,15 @@
           }
         },
 
+        "editor": {
+          "$": "Editor",
+
+          "undo_limit": {
+            "title": "Undo Limit",
+            "description": "The maximum number of version history patches the editor should store. 4096 is the maximum; 16 is the minimum."
+          }
+        },
+
         "performance": {
           "$": "Performance",
 
