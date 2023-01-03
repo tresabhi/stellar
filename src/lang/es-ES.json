@@ -298,6 +298,13 @@
             "description": "Te muestra una lista de todas las partes que no pudieron ser importadas."
           }
         },
+        "editor": {
+          "$": "Editor",
+          "undo_limit": {
+            "title": "Deshacer límite",
+            "description": "El número máximo de parches del historial de versiones que el editor debe almacenar. 4096 es el máximo; 16 es el mínimo."
+          }
+        },
         "performance": {
           "$": "Rendimiento",
           "regress": {
