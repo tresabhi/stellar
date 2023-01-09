@@ -63,7 +63,7 @@
     "prettier-eslint": "^15.0.1",
     "prettier-eslint-cli": "^7.1.0",
     "serve": "^14.0.1",
-    "ts-unused-exports": "^9.0.0",
+    "ts-unused-exports": "^9.0.1",
     "typescript": "^4.9.4",
     "unzipper": "^0.10.11",
     "vite": "^3.2.5",

@@ -5729,10 +5729,10 @@ troika-worker-utils@^0.47.0:
   resolved "https://registry.yarnpkg.com/troika-worker-utils/-/troika-worker-utils-0.47.0.tgz#bea382fee55333e177955e7ba6497d64b9d9388d"
   integrity sha512-PSUc9vunDEkbE23jpgXD3PcF96jQHKjgMjS+4o5g6DEK/ZAPTnldb+FNddhppawfUcuraMFrslo0GmIC8UpEmA==
 
-ts-unused-exports@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/ts-unused-exports/-/ts-unused-exports-9.0.0.tgz#fb4d7789623257f63f9c84c6b37fe91c25272e45"
-  integrity sha512-1ceabtcUClC2x2LlQIPZlMFUj7m6jqsR/GGS0zPJZ7TI6agCLKqUdC2H0gXZKQlb+iXy9eBlMMEWr0VnU71NRg==
+ts-unused-exports@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/ts-unused-exports/-/ts-unused-exports-9.0.1.tgz#31a9798ddb70719c48ef32bea4339d3d09032a42"
+  integrity sha512-nlP+g0guz1AGO8bV2wbRkbfYG8q+kIt6KiMCz2dRAMwfuX77sukuKN4hG1Bx9ilBeM+CNA4NskE5sdHejlVeug==
   dependencies:
     chalk "^4.0.0"
     tsconfig-paths "^3.9.0"
