@@ -31,7 +31,7 @@
     "semver": "^7.3.8",
     "sourcemapped-stacktrace": "^1.1.11",
     "three": "^0.148.0",
-    "three-mesh-bvh": "^0.5.19",
+    "three-mesh-bvh": "^0.5.22",
     "three-stdlib": "^2.21.1",
     "workbox-precaching": "^6.5.4",
     "zustand": "^4.1.3"
