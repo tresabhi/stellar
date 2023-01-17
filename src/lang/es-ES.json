@@ -255,7 +255,8 @@
         "interface": "Interfaz",
         "editor": "Editor",
         "performance": "Rendimiento",
-        "debug": "Depuración"
+        "debug": "Depuración",
+        "reset": "Reset to defaults"
       },
       "groups": {
         "interface": {
@@ -319,6 +320,14 @@
             "description": "Muestra el mensaje de error entero y un código fuente mapeado de la pila en seguimiento cuando un error crítico interrumpe Stellar."
           }
         }
+      }
+    },
+    "confirmation": {
+      "title": "Are you sure you want to do this?",
+      "description": "This action is may not be reversible.",
+      "actions": {
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   },
