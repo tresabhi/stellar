@@ -20,6 +20,14 @@ const Button = styled('button', {
           outline: theme.borderStyles.componentInteractiveActive_accent,
         },
       },
+
+      danger: {
+        color: theme.colors.textHighContrast_danger,
+
+        '&:focus': {
+          outline: theme.borderStyles.componentInteractiveActive_danger,
+        },
+      },
     },
 
     priority: {
@@ -79,6 +87,21 @@ const Button = styled('button', {
         },
       },
     },
+    {
+      color: 'danger',
+      priority: 'default',
+
+      css: {
+        backgroundColor: theme.colors.componentBackground_danger,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackgroundHover_danger,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackgroundActive_danger,
+        },
+      },
+    },
 
     {
       color: 'default',
@@ -109,6 +132,23 @@ const Button = styled('button', {
         '&:active': {
           backgroundColor:
             theme.colors.componentCallToActionBackgroundActive_accent,
+        },
+      },
+    },
+    {
+      color: 'danger',
+      priority: 'callToAction',
+
+      css: {
+        backgroundColor: theme.colors.componentCallToActionBackground_danger,
+
+        '&:hover': {
+          backgroundColor:
+            theme.colors.componentCallToActionBackgroundHover_danger,
+        },
+        '&:active': {
+          backgroundColor:
+            theme.colors.componentCallToActionBackgroundActive_danger,
         },
       },
     },
@@ -143,6 +183,21 @@ const Button = styled('button', {
         },
       },
     },
+    {
+      color: 'danger',
+      priority: 'solid',
+
+      css: {
+        backgroundColor: theme.colors.componentSolidBackground_danger,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentSolidBackgroundHover_danger,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentSolidBackgroundActive_danger,
+        },
+      },
+    },
 
     {
       color: 'default',
@@ -174,6 +229,21 @@ const Button = styled('button', {
         },
       },
     },
+    {
+      color: 'danger',
+      priority: 'disabled',
+
+      css: {
+        backgroundColor: theme.colors.componentBackground_danger,
+
+        '&:hover': {
+          backgroundColor: theme.colors.componentBackgroundHover_danger,
+        },
+        '&:active': {
+          backgroundColor: theme.colors.componentBackgroundActive_danger,
+        },
+      },
+    },
 
     {
       color: 'default',
@@ -202,6 +272,21 @@ const Button = styled('button', {
         },
         '&:active': {
           border: theme.borderStyles.componentInteractiveActive_accent,
+        },
+      },
+    },
+    {
+      color: 'danger',
+      border: true,
+
+      css: {
+        border: theme.borderStyles.componentInteractive_danger,
+
+        '&:hover': {
+          border: theme.borderStyles.componentInteractiveHover_danger,
+        },
+        '&:active': {
+          border: theme.borderStyles.componentInteractiveActive_danger,
         },
       },
     },

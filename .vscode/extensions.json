@@ -1,6 +1,3 @@
 {
-  "recommendations": [
-    "streetsidesoftware.code-spell-checker",
-    "rvest.vs-code-prettier-eslint"
-  ]
+  "recommendations": ["streetsidesoftware.code-spell-checker"]
 }

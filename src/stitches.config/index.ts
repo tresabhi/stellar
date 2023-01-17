@@ -7,16 +7,21 @@ import { createColors, createSpaces } from 'bepaint';
 const colorsLight = {
   ...createColors({ scale: mauve }),
   ...createColors({ scale: purple, suffix: 'accent' }),
-  ...createColors({ scale: red, suffix: 'error' }),
+  ...createColors({ scale: red, suffix: 'danger' }),
 
   // TODO: rename componentBackground to componentInteractiveBackground for consistency
 
   componentSolidBackground: mauve.mauve9,
   componentSolidBackgroundHover: mauve.mauve10,
   componentSolidBackgroundActive: mauve.mauve11,
+
   componentSolidBackground_accent: purple.purple9,
   componentSolidBackgroundHover_accent: purple.purple10,
   componentSolidBackgroundActive_accent: purple.purple11,
+
+  componentSolidBackground_danger: red.red9,
+  componentSolidBackgroundHover_danger: red.red10,
+  componentSolidBackgroundActive_danger: red.red11,
 };
 
 export const {
@@ -119,6 +124,13 @@ export const {
       componentInteractive_accent: `${colorsLight.componentInteractiveBorder_accent} solid 0.0625rem`,
       componentInteractiveHover_accent: `${colorsLight.componentInteractiveBorderHover_accent} solid 0.0625rem`,
       componentInteractiveActive_accent: `${colorsLight.componentInteractiveBorderActive_accent} solid 0.0625rem`,
+
+      componentNonInteractive_danger: `${colorsLight.componentNonInteractiveBorder_danger} solid 0.0625rem`,
+      componentNonInteractiveHover_danger: `${colorsLight.componentNonInteractiveBorderHover_danger} solid 0.0625rem`,
+      componentNonInteractiveActive_danger: `${colorsLight.componentNonInteractiveBorderActive_danger} solid 0.0625rem`,
+      componentInteractive_danger: `${colorsLight.componentInteractiveBorder_danger} solid 0.0625rem`,
+      componentInteractiveHover_danger: `${colorsLight.componentInteractiveBorderHover_danger} solid 0.0625rem`,
+      componentInteractiveActive_danger: `${colorsLight.componentInteractiveBorderActive_danger} solid 0.0625rem`,
     },
 
     space: {

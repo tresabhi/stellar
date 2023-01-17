@@ -24,6 +24,7 @@ import { InputWithIcon } from 'components/InputWithIcon';
 import Search from 'components/Search';
 import * as Select from 'components/Select';
 import mutateSettings from 'core/app/mutateSettings';
+import prompt from 'core/interface/prompt';
 import { TAB_ORDER } from 'hooks/useKeybinds';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
@@ -31,8 +32,10 @@ import { clamp } from 'lodash';
 import { RefObject, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
-import useSettings, { THEMES } from 'stores/settings';
+import { PromptProps } from 'stores/prompts';
+import useSettings, { THEMES, useSettingsData } from 'stores/settings';
 import createInputEscape from 'utilities/createInputEscape';
+import { confirmationPromptCurry } from './ConfirmationPrompt';
 import { FIXED_LANG_NAMES, NULL_THEME_KEY } from './WelcomePrompt';
 
 interface SubSettingsProps {
@@ -65,13 +68,13 @@ const NavigationButtons = styled('div', {
   gap: theme.space.gapRelatedMajor,
 });
 const NavigationButton = styled(Button, {
-  cursor: 'pointer',
   display: 'flex',
   padding: theme.space.padding,
   gap: theme.space.gapRelatedMajor,
   borderRadius: theme.radii[4],
   alignItems: 'center',
   justifyContent: 'center',
+  fontSize: theme.fontSizes[14],
 
   '& svg': {
     width: theme.sizes[12],
@@ -91,6 +94,16 @@ const NavigationButton = styled(Button, {
 
   defaultVariants: {
     transparent: true,
+  },
+});
+const ResetToDefault = styled(Button, {
+  padding: theme.space.padding,
+  borderRadius: theme.radii[4],
+  fontSize: theme.fontSizes[12],
+
+  defaultVariants: {
+    border: true,
+    color: 'danger',
   },
 });
 const NavigationButtonText = styled('span', {
@@ -187,9 +200,11 @@ export const TAB_MAP_INVERSE = {
   export: Tab.Export,
 };
 
-const stringCurry = (group: string, translate: (string: string) => string) => (string: string) => `${translate(
-  `prompts.settings.groups.${group}.${string}.title`,
-)} ${translate(`prompts.settings.groups.${group}.${string}.description`)}`;
+const stringCurry =
+  (group: string, translate: (string: string) => string) => (string: string) =>
+    `${translate(
+      `prompts.settings.groups.${group}.${string}.title`,
+    )} ${translate(`prompts.settings.groups.${group}.${string}.description`)}`;
 
 function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
   const { t, f, translate } = useTranslator();
@@ -234,9 +249,11 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
                   <Select.Content>
                     <Select.Item
                       value={NULL_THEME_KEY}
-                      onClick={() => mutateSettings((draft) => {
-                        draft.interface.theme = null;
-                      })}
+                      onClick={() =>
+                        mutateSettings((draft) => {
+                          draft.interface.theme = null;
+                        })
+                      }
                       key={NULL_THEME_KEY}
                     >
                       {t`themes.theme_light`}
@@ -291,7 +308,7 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
                   <Select.Trigger />
                   <Select.Content>
                     {TAB_ORDER.map((tab) => (
-                      <Select.Item value={TAB_MAP[tab]}>
+                      <Select.Item key={`tab-${tab}`} value={TAB_MAP[tab]}>
                         {translate(`tabs.${TAB_MAP[tab]}`)}
                       </Select.Item>
                     ))}
@@ -374,7 +391,8 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
                       const displayNames = new Intl.DisplayNames([code], {
                         type: 'language',
                       });
-                      const displayName = FIXED_LANG_NAMES[code] ?? displayNames.of(code);
+                      const displayName =
+                        FIXED_LANG_NAMES[code] ?? displayNames.of(code);
 
                       return (
                         <Select.Item value={code} key={`language-${code}`}>
@@ -680,7 +698,7 @@ function DebugSettings({ search, titleRef }: SubSettingsProps) {
   );
 }
 
-export default function SettingsPrompt() {
+export default function SettingsPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const options = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLInputElement>(null);
@@ -730,6 +748,25 @@ export default function SettingsPrompt() {
             <CaretRightIcon />
           </NavigationButton>
         </NavigationButtons>
+
+        <ResetToDefault
+          color="danger"
+          transparent={false}
+          border
+          onClick={() =>
+            prompt(
+              confirmationPromptCurry((success) => {
+                if (success) useSettings.setState(useSettingsData);
+                dismiss();
+              }),
+              true,
+              undefined,
+              true,
+            )
+          }
+        >
+          {t`prompts.settings.navigation.reset`}
+        </ResetToDefault>
       </Navigation>
 
       <Options ref={options}>

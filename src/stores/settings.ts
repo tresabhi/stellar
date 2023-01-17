@@ -1,5 +1,5 @@
 import { RenamePartsOptions } from 'core/part/rename';
-import { merge } from 'lodash';
+import { cloneDeep, merge } from 'lodash';
 import { theme } from 'stitches.config';
 import themeDark from 'stitches.config/themes/dark';
 import create from 'zustand';
@@ -68,7 +68,7 @@ export interface UseSettings {
   };
 }
 
-export const UseSettingsData: UseSettings = {
+export const useSettingsData: UseSettings = {
   debug: {
     errorScreen: {
       showDebug: false,
@@ -128,7 +128,7 @@ UseSettings,
 [['zustand/subscribeWithSelector', never], ['zustand/persist', UseSettings]]
 >(
   subscribeWithSelector(
-    persist(() => UseSettingsData, {
+    persist(() => cloneDeep(useSettingsData), {
       name: 'settings',
       merge: (persistedState, currentState) => merge(currentState, persistedState),
     }),

@@ -318,7 +318,8 @@
         "interface": "Interface",
         "editor": "Editor",
         "performance": "Performance",
-        "debug": "Debug"
+        "debug": "Debug",
+        "reset": "Reset to defaults"
       },
 
       "groups": {
@@ -391,6 +392,16 @@
             "description": "Displays the full error message and a source-mapped stack trace when a critical error interrupts Stellar."
           }
         }
+      }
+    },
+
+    "confirmation": {
+      "title": "Are you sure you want to do this?",
+      "description": "This action is may not be reversible.",
+
+      "actions": {
+        "cancel": "Cancel",
+        "yes": "Yes"
       }
     }
   },

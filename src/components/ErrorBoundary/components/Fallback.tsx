@@ -45,7 +45,7 @@ const InfoContainer = styled('div', {
 
 const Title = styled('span', {
   fontSize: theme.fontSizes[16],
-  color: theme.colors.textLowContrast_error,
+  color: theme.colors.textLowContrast_danger,
   display: 'flex',
   gap: theme.space.gapRelated,
   alignItems: 'center',

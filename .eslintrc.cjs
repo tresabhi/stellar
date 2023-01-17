@@ -8,7 +8,8 @@ module.exports = {
     'airbnb/hooks',
     'airbnb-typescript',
     'plugin:react/jsx-runtime',
-    'plugin:json/recommended'
+    'plugin:json/recommended',
+    'prettier',
   ],
 
   rules: {
