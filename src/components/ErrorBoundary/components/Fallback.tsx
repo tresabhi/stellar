@@ -8,9 +8,7 @@ import {
 import ButtonPrimitive from 'components/Button';
 import mutateSettings from 'core/app/mutateSettings';
 import moment from 'moment';
-import {
-  HTMLAttributes, ReactNode, useEffect, useRef, useState,
-} from 'react';
+import { HTMLAttributes, ReactNode, useEffect, useRef, useState } from 'react';
 import { deviceDetect } from 'react-device-detect';
 import { FallbackProps as FallbackPrimitiveProps } from 'react-error-boundary';
 import { mapStackTrace } from 'sourcemapped-stacktrace';
@@ -19,7 +17,7 @@ import useSettings from 'stores/settings';
 
 export interface FallbackProps
   extends FallbackPrimitiveProps,
-  HTMLAttributes<HTMLDivElement> {}
+    HTMLAttributes<HTMLDivElement> {}
 
 const Container = styled('div', {
   width: '100vw',
@@ -142,6 +140,10 @@ const DebugContent = styled('span', {
   whiteSpace: 'nowrap',
 });
 
+/**
+ * No translations will be added to avoid dependency on something that can
+ * cause a further issue.
+ */
 export default function Fallback({
   error,
   resetErrorBoundary,
@@ -152,9 +154,9 @@ export default function Fallback({
     error.stack === undefined
       ? 'No stack provided'
       : error.stack
-        .split(' at ')
-        .filter((value, index) => index !== 0)
-        .map((value) => `at ${value}`),
+          .split(' at ')
+          .filter((value, index) => index !== 0)
+          .map((value) => `at ${value}`),
   );
   const [stack, setStack] = useState<ReactNode>(
     <DebugContent>Mapping...</DebugContent>,
@@ -180,8 +182,10 @@ export default function Fallback({
       .join('\n');
 
     const title = `${error.name}: ${errorMessage}`;
-    const about = '# About\n\n<REPLACE ME WITH INFORMATION ABOUT WHAT HAPPENED>';
-    const reproduce = '# Reproduce\n\n<REPLACE ME WITH INFORMATION ON HOW TO REPRODUCE THIS ISSUE>';
+    const about =
+      '# About\n\n<REPLACE ME WITH INFORMATION ABOUT WHAT HAPPENED>';
+    const reproduce =
+      '# Reproduce\n\n<REPLACE ME WITH INFORMATION ON HOW TO REPRODUCE THIS ISSUE>';
     const message = `# Message\n\n\`\`\`\n${errorMessage}\n\`\`\``;
     const stackReport = `# Stack\n\n\`\`\`\n${
       typeof rawStack.current === 'string'
@@ -223,8 +227,6 @@ export default function Fallback({
       setMapped(true);
     });
   });
-
-  // TODO: translate this
 
   return (
     <Container {...props}>

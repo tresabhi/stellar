@@ -1,7 +1,5 @@
 import { Line } from '@react-three/drei';
-import {
-  invalidate, ThreeEvent, useFrame, useThree,
-} from '@react-three/fiber';
+import { invalidate, ThreeEvent, useFrame, useThree } from '@react-three/fiber';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import deferUpdates from 'core/bounds/deferUpdates';
 import filter from 'core/part/filter';
@@ -26,8 +24,9 @@ export interface ResizeNodeProps {
 
 export const CANVAS_MATRIX_SCALE = new Vector2(1, -1);
 const ORIGIN = new Vector2();
-const SNAP_SIZE = 1 / 5; // TODO: unify all these snaps
-const STEP = 1 / 10 ** 8;
+
+export const MOVE_STEP_REGULAR = 1 / 10;
+export const MOVE_STEP_MAJOR = 1;
 
 export const sideToPoint = (
   bounds: Bounds,
@@ -81,12 +80,14 @@ export default function ResizeNode({
     normalizedSize.copy(normalizedMovable).sub(normalizedConstant);
     normalizedScale.copy(normalizedMoved).sub(normalizedConstant);
 
-    normalizedScale.x = snap(normalizedSize.x, STEP) === 0
-      ? 1
-      : normalizedScale.x / normalizedSize.x;
-    normalizedScale.y = snap(normalizedSize.y, STEP) === 0
-      ? 1
-      : normalizedScale.y / normalizedSize.y;
+    normalizedScale.x =
+      snap(normalizedSize.x, 1 / 10 ** 8) === 0
+        ? 1
+        : normalizedScale.x / normalizedSize.x;
+    normalizedScale.y =
+      snap(normalizedSize.y, 1 / 10 ** 8) === 0
+        ? 1
+        : normalizedScale.y / normalizedSize.y;
   };
   const updateValues = () => {
     constant.set(...sideToPoint(bounds.current, constantSide));
@@ -153,9 +154,9 @@ export default function ResizeNode({
       .sub(initial)
       .multiply(CANVAS_MATRIX_SCALE)
       .divideScalar(camera.zoom)
-      .divideScalar(SNAP_SIZE)
+      .divideScalar(MOVE_STEP_REGULAR)
       .round()
-      .multiplyScalar(SNAP_SIZE);
+      .multiplyScalar(MOVE_STEP_REGULAR);
 
     if (maintainSlope.current) {
       const pointerX = offset.x + movable.x;
@@ -169,11 +170,12 @@ export default function ResizeNode({
 
       if (Number.isFinite(slope)) {
         if (Number.isFinite(perpendicular)) {
-          movedX = (-constant.x * slope
-              + pointerX * perpendicular
-              + constant.y
-              - pointerY)
-            / (perpendicular - slope);
+          movedX =
+            (-constant.x * slope +
+              pointerX * perpendicular +
+              constant.y -
+              pointerY) /
+            (perpendicular - slope);
         } else {
           movedX = pointerX;
         }
@@ -183,11 +185,12 @@ export default function ResizeNode({
 
       if (Number.isFinite(slope)) {
         if (Number.isFinite(perpendicular)) {
-          movedY = (-constant.x * perpendicular * slope
-              + pointerX * perpendicular * slope
-              + constant.y * perpendicular
-              - pointerY * slope)
-            / (perpendicular - slope);
+          movedY =
+            (-constant.x * perpendicular * slope +
+              pointerX * perpendicular * slope +
+              constant.y * perpendicular -
+              pointerY * slope) /
+            (perpendicular - slope);
         } else {
           movedY = constant.y;
         }
@@ -218,8 +221,8 @@ export default function ResizeNode({
           const part = draft.parts[selection];
 
           if (
-            (part as PartWithPosition).p !== undefined
-            && (part as PartWithScale).o !== undefined
+            (part as PartWithPosition).p !== undefined &&
+            (part as PartWithScale).o !== undefined
           ) {
             (part as PartWithScale).o.x *= normalizedScale.x;
             (part as PartWithScale).o.y *= normalizedScale.y;
@@ -228,19 +231,23 @@ export default function ResizeNode({
               (part as PartWithPosition).p.x,
               (part as PartWithPosition).p.y,
             );
-            const originAngle = Math.atan2(
-              (part as PartWithPosition).p.y,
-              (part as PartWithPosition).p.x,
-            ) - bounds.current.rotation;
+            const originAngle =
+              Math.atan2(
+                (part as PartWithPosition).p.y,
+                (part as PartWithPosition).p.x,
+              ) - bounds.current.rotation;
             const rotatedOriginX = originOffset * Math.cos(originAngle);
             const rotatedOriginY = originOffset * Math.sin(originAngle);
             const offsetX = rotatedOriginX - normalizedConstant.x;
             const offsetY = rotatedOriginY - normalizedConstant.y;
-            const scaledOffsetX = offsetX * normalizedScale.x + normalizedConstant.x;
-            const scaledOffsetY = offsetY * normalizedScale.y + normalizedConstant.y;
+            const scaledOffsetX =
+              offsetX * normalizedScale.x + normalizedConstant.x;
+            const scaledOffsetY =
+              offsetY * normalizedScale.y + normalizedConstant.y;
             const scaledOffset = Math.hypot(scaledOffsetX, scaledOffsetY);
-            const scaledAngle = Math.atan2(scaledOffsetY, scaledOffsetX)
-              + bounds.current.rotation;
+            const scaledAngle =
+              Math.atan2(scaledOffsetY, scaledOffsetX) +
+              bounds.current.rotation;
             const x = scaledOffset * Math.cos(scaledAngle);
             const y = scaledOffset * Math.sin(scaledAngle);
 
@@ -268,10 +275,11 @@ export default function ResizeNode({
     blueprint = useBlueprint.getState();
     selections = filter(
       getChildrenRecursive(blueprint.selections),
-      (part) => !part.locked
-        && part.visible
-        && (part as PartWithPosition).p !== undefined
-        && (part as PartWithScale).o !== undefined,
+      (part) =>
+        !part.locked &&
+        part.visible &&
+        (part as PartWithPosition).p !== undefined &&
+        (part as PartWithScale).o !== undefined,
     );
 
     window.addEventListener('pointermove', handlePointerMove);

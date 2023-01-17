@@ -1,4 +1,8 @@
 import { invalidate } from '@react-three/fiber';
+import {
+  MOVE_STEP_MAJOR,
+  MOVE_STEP_REGULAR,
+} from 'components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
 import { WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';
@@ -34,20 +38,19 @@ import useBlueprint from 'stores/blueprint';
 import usePrompts from 'stores/prompts';
 import { UseSettings } from 'stores/settings';
 import { MethodIds } from 'types/Parts';
-import { DEFAULT_SNAP, MAJOR_SNAP } from 'utilities/getSnapDistance';
 import getTouchscreenMode from 'utilities/getTouchscreenMode';
 
 export const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
 type PrimitiveVector2Tuple = [number, number];
-const upVector: PrimitiveVector2Tuple = [0, DEFAULT_SNAP];
-const downVector: PrimitiveVector2Tuple = [0, -DEFAULT_SNAP];
-const leftVector: PrimitiveVector2Tuple = [-DEFAULT_SNAP, 0];
-const rightVector: PrimitiveVector2Tuple = [DEFAULT_SNAP, 0];
-const upMajorVector: PrimitiveVector2Tuple = [0, MAJOR_SNAP];
-const downMajorVector: PrimitiveVector2Tuple = [0, -MAJOR_SNAP];
-const leftMajorVector: PrimitiveVector2Tuple = [-MAJOR_SNAP, 0];
-const rightMajorVector: PrimitiveVector2Tuple = [MAJOR_SNAP, 0];
+const upVector: PrimitiveVector2Tuple = [0, MOVE_STEP_REGULAR];
+const downVector: PrimitiveVector2Tuple = [0, -MOVE_STEP_REGULAR];
+const leftVector: PrimitiveVector2Tuple = [-MOVE_STEP_REGULAR, 0];
+const rightVector: PrimitiveVector2Tuple = [MOVE_STEP_REGULAR, 0];
+const upMajorVector: PrimitiveVector2Tuple = [0, MOVE_STEP_MAJOR];
+const downMajorVector: PrimitiveVector2Tuple = [0, -MOVE_STEP_MAJOR];
+const leftMajorVector: PrimitiveVector2Tuple = [-MOVE_STEP_MAJOR, 0];
+const rightMajorVector: PrimitiveVector2Tuple = [MOVE_STEP_MAJOR, 0];
 
 const translate = (vector: PrimitiveVector2Tuple) => {
   translateSelectedRecursive(vector[0], vector[1]);
@@ -83,9 +86,9 @@ const bind = (
       const { isInteracting, tab } = useApp.getState().interface;
 
       if (
-        (mergedOptions.preventRepeats ? !event.repeat : true)
-        && (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true)
-        && (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
+        (mergedOptions.preventRepeats ? !event.repeat : true) &&
+        (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
+        (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
       ) {
         if (mergedOptions.preventDefault) event.preventDefault();
 
@@ -96,13 +99,15 @@ const bind = (
   );
 };
 
-const useKeybinds = () => {
-  const toTool = (tool: Tool) => () => mutateApp((draft) => {
-    draft.editor.tool = tool;
-  });
-  const toLayout = () => mutateApp((draft) => {
-    draft.interface.tab = Tab.Layout;
-  });
+export default function useKeybinds() {
+  const toTool = (tool: Tool) => () =>
+    mutateApp((draft) => {
+      draft.editor.tool = tool;
+    });
+  const toLayout = () =>
+    mutateApp((draft) => {
+      draft.interface.tab = Tab.Layout;
+    });
 
   useEffect(() => {
     bind('ctrl+a', selectConcurrentAtRoot);
@@ -158,9 +163,10 @@ const useKeybinds = () => {
       ['ctrl+tab', ']'],
       () => {
         mutateApp((draft) => {
-          draft.interface.tab = draft.interface.tab === TAB_ORDER[TAB_ORDER.length - 1]
-            ? TAB_ORDER[0]
-            : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
+          draft.interface.tab =
+            draft.interface.tab === TAB_ORDER[TAB_ORDER.length - 1]
+              ? TAB_ORDER[0]
+              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
         });
       },
       { preventOnNonLayoutTab: false },
@@ -169,9 +175,10 @@ const useKeybinds = () => {
       ['ctrl+shift+tab', '['],
       () => {
         mutateApp((draft) => {
-          draft.interface.tab = draft.interface.tab === 0
-            ? TAB_ORDER[TAB_ORDER.length - 1]
-            : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
+          draft.interface.tab =
+            draft.interface.tab === 0
+              ? TAB_ORDER[TAB_ORDER.length - 1]
+              : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
         });
       },
       { preventOnNonLayoutTab: false },
@@ -288,5 +295,4 @@ const useKeybinds = () => {
       preventOnNonLayoutTab: false,
     });
   }, []);
-};
-export default useKeybinds;
+}

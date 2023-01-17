@@ -74,7 +74,7 @@
     "vite-tsconfig-paths": "^4.0.3"
   },
   "scripts": {
-    "start": "vite --host",
+    "dev": "vite --host",
     "build": "vite build",
     "build:lang": "echo this command is deprecated and does nothing",
     "preview": "vite preview",
