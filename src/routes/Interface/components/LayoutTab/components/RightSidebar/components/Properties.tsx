@@ -23,8 +23,9 @@ interface GroupedProperties {
 
 const groupedProperties: Record<string, GroupedProperties> = {
   transformations: {
-    test: (part) => (part as PartWithTransformations).p !== undefined
-      && (part as PartWithTransformations).o !== undefined,
+    test: (part) =>
+      (part as PartWithTransformations).p !== undefined &&
+      (part as PartWithTransformations).o !== undefined,
     Component: PartWithTransformationsPropertyComponent,
   },
   engine: {

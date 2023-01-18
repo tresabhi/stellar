@@ -221,7 +221,8 @@ export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
 
   const handleConstrainClick = () => {
     mutateSettings((draft) => {
-      draft.editor.constrainFuelTankWidths = !draft.editor.constrainFuelTankWidths;
+      draft.editor.constrainFuelTankWidths =
+        !draft.editor.constrainFuelTankWidths;
     });
   };
 

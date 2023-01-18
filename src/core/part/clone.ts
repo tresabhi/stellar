@@ -30,7 +30,8 @@ export default function clone(
         const clonedGroupChildData = clone(child.id, draft);
 
         if (clonedGroupChildData) {
-          const [clonedGroupChildId, clonedGroupChildrenParts] = clonedGroupChildData;
+          const [clonedGroupChildId, clonedGroupChildrenParts] =
+            clonedGroupChildData;
           const clonedGroupChild = clonedGroupChildrenParts[clonedGroupChildId];
 
           clonedGroup.part_order[index] = clonedGroupChildId;
@@ -41,7 +42,8 @@ export default function clone(
 
           Object.keys(clonedGroupChildrenParts).forEach(
             (clonedGroupChildrenPartId) => {
-              const clonedGroupChildrenPart = clonedGroupChildrenParts[clonedGroupChildrenPartId];
+              const clonedGroupChildrenPart =
+                clonedGroupChildrenParts[clonedGroupChildrenPartId];
               clonedParts[clonedGroupChildrenPartId] = clonedGroupChildrenPart;
             },
           );

@@ -1,6 +1,4 @@
-import {
-  blackA, mauve, purple, red,
-} from '@radix-ui/colors';
+import { blackA, mauve, purple, red } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
 import { createColors, createSpaces } from 'bepaint';
 

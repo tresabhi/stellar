@@ -13,9 +13,7 @@ interface InfiniteGridHelperProps extends MeshProps {
  * Thanks, Fyrestar, for [THREE.InfiniteGridHelper](https://github.com/Fyrestar/THREE.InfiniteGridHelper/)!
  */
 const InfiniteGridHelper = forwardRef<Mesh, InfiniteGridHelperProps>(
-  ({
-    size1, size2, color, axes = 'xzy', distance, ...props
-  }, ref) => {
+  ({ size1, size2, color, axes = 'xzy', distance, ...props }, ref) => {
     const planeAxes = axes.slice(0, 2);
 
     return (

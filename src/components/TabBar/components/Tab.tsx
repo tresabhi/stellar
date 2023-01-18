@@ -68,9 +68,7 @@ const Label = styled('span', {
   fontSize: theme.fontSizes[14],
 });
 
-export function Tab({
-  icon, selected, children, ...props
-}: TabProps) {
+export function Tab({ icon, selected, children, ...props }: TabProps) {
   return (
     <Trigger {...props} selected={selected}>
       {icon}

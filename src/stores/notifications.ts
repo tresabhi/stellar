@@ -17,7 +17,7 @@ export type UseNotifications = {
 };
 
 const useNotifications = create<
-UseNotifications,
-[['zustand/subscribeWithSelector', never]]
+  UseNotifications,
+  [['zustand/subscribeWithSelector', never]]
 >(subscribeWithSelector(() => ({ notifications: [] } as UseNotifications)));
 export default useNotifications;

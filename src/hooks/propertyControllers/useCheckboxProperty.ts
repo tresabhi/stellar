@@ -3,9 +3,7 @@ import { CheckboxProps } from 'components/Properties';
 import mutateParts from 'core/part/mutateParts';
 import subscribeToPart from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
-import {
-  Ref, useCallback, useEffect, useRef,
-} from 'react';
+import { Ref, useCallback, useEffect, useRef } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import getMutualProperty from 'utilities/getMutualProperty';
 import { COMMIT_DEBOUNCE } from './useSliderProperty';
@@ -47,7 +45,9 @@ export default function useCheckboxProperty<
   };
 
   useEffect(() => {
-    const unsubscribes = ids.map((id) => subscribeToPart(id, recomputeAndRerender, slice));
+    const unsubscribes = ids.map((id) =>
+      subscribeToPart(id, recomputeAndRerender, slice),
+    );
 
     return () => {
       unsubscribes.forEach((unsubscribe) => unsubscribe());

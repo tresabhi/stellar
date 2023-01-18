@@ -41,13 +41,14 @@ const useWelcomePopup = () => {
 const useAlphaWarning = () => {
   useEffect(() => {
     const { name } = getContext();
-    const { showInstabilityWarning, welcomePromptCompleted } = useSettings.getState().interface;
+    const { showInstabilityWarning, welcomePromptCompleted } =
+      useSettings.getState().interface;
     let id: string;
 
     if (
-      welcomePromptCompleted
-      && showInstabilityWarning
-      && UNSTABLE_VERSIONS.includes(name)
+      welcomePromptCompleted &&
+      showInstabilityWarning &&
+      UNSTABLE_VERSIONS.includes(name)
     ) {
       id = prompt(InstabilityWarningPrompt, false);
     }

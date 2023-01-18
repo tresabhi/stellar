@@ -14,9 +14,10 @@ export default function Tabs() {
   const tab = useApp((state) => state.interface.tab);
   const is = (targetTab: Tab) => ({
     selected: tab === targetTab,
-    onClick: () => mutateApp((draft) => {
-      draft.interface.tab = targetTab;
-    }),
+    onClick: () =>
+      mutateApp((draft) => {
+        draft.interface.tab = targetTab;
+      }),
   });
 
   return (

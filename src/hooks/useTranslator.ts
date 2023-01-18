@@ -33,16 +33,19 @@ export const createTranslator = (
     const translation = string
       .split('.')
       .reduce(
-        (object: Translations | string | undefined, key) => (typeof object === string
-          ? object
-          : (object as Translations | undefined)?.[key]),
+        (object: Translations | string | undefined, key) =>
+          typeof object === string
+            ? object
+            : (object as Translations | undefined)?.[key],
         translations as Translations,
       );
 
-    const applyTokens = (initialToken: string) => tokens.reduce(
-      (previousTranslation, currentTranslation, index) => previousTranslation.replaceAll(`%${index + 1}$s`, tokens[index]),
-      initialToken,
-    );
+    const applyTokens = (initialToken: string) =>
+      tokens.reduce(
+        (previousTranslation, currentTranslation, index) =>
+          previousTranslation.replaceAll(`%${index + 1}$s`, tokens[index]),
+        initialToken,
+      );
 
     // if translation is not found, return the original string
     if (translation === undefined) return string;

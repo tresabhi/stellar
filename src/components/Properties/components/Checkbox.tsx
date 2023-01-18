@@ -10,7 +10,7 @@ import { Label as LabelPrimitive } from './Label';
 
 export interface CheckboxProps
   extends CheckboxPrimitiveProps,
-  PropertyWithLabel {}
+    PropertyWithLabel {}
 
 const Container = styled('div', {
   flex: 1,

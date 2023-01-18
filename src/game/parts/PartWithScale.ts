@@ -8,9 +8,7 @@ import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { Object3D, Vector3 } from 'three';
-import {
-  Part, PartData, VanillaPart, VanillaPartData,
-} from './Part';
+import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithScale extends VanillaPart {
   /**

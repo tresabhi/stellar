@@ -52,7 +52,9 @@ export default function useSliderProperty<
   };
 
   useEffect(() => {
-    const unsubscribes = ids.map((id) => subscribeToPart(id, debouncedRecomputeAndRerender, slice));
+    const unsubscribes = ids.map((id) =>
+      subscribeToPart(id, debouncedRecomputeAndRerender, slice),
+    );
 
     return () => {
       unsubscribes.forEach((unsubscribe) => unsubscribe());
@@ -67,12 +69,13 @@ export default function useSliderProperty<
     }
   });
 
-  const hook: Partial<SliderWithInputProps & { ref: Ref<SliderWithInputRef> }> = {
-    ref: slider,
-    defaultValue: value,
-    indeterminate: value === undefined,
-    onValueChange,
-  };
+  const hook: Partial<SliderWithInputProps & { ref: Ref<SliderWithInputRef> }> =
+    {
+      ref: slider,
+      defaultValue: value,
+      indeterminate: value === undefined,
+      onValueChange,
+    };
 
   return hook;
 }

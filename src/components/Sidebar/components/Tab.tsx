@@ -44,9 +44,7 @@ const Label = styled('span', {
   fontSize: theme.fontSizes[12],
 });
 
-export function Tab({
-  selected, icon, children, ...props
-}: TabProps) {
+export function Tab({ selected, icon, children, ...props }: TabProps) {
   return (
     <Container {...props} selected={selected}>
       {icon}

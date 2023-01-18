@@ -2,9 +2,7 @@ import { InputProps, InputRef } from 'components/Properties';
 import mutateParts from 'core/part/mutateParts';
 import subscribeToPart from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
-import {
-  ChangeEvent, Ref, useEffect, useRef,
-} from 'react';
+import { ChangeEvent, Ref, useEffect, useRef } from 'react';
 import evaluateExpression from 'utilities/evaluateExpression';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import fixFloatRounding from 'utilities/fixFloatRounding';
@@ -66,7 +64,9 @@ export default function useNumericalInputProperty<
   });
 
   useEffect(() => {
-    const unsubscribes = ids.map((id) => subscribeToPart(id, recomputeAndRerender, slice));
+    const unsubscribes = ids.map((id) =>
+      subscribeToPart(id, recomputeAndRerender, slice),
+    );
 
     return () => {
       unsubscribes.forEach((unsubscribe) => unsubscribe());

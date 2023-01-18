@@ -163,33 +163,34 @@ export default function CreateTab() {
   };
 
   const templates = useMemo(
-    () => TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
-      ({ name, blueprint, credit }) => {
-        const translation = translate(`tabs.create.templates.list.${name}`);
+    () =>
+      TEMPLATES.sort((a, b) => a.name.localeCompare(b.name)).map(
+        ({ name, blueprint, credit }) => {
+          const translation = translate(`tabs.create.templates.list.${name}`);
 
-        const handleClick = () => {
-          loadBlueprint(blueprint);
-          toLayout();
-        };
+          const handleClick = () => {
+            loadBlueprint(blueprint);
+            toLayout();
+          };
 
-        const searchItem: SearchItem = {
-          string: translation,
-          node: (
-            <Prompt.SearchItem
-              icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
-              onClick={handleClick}
-              key={`item-${name}`}
-              note={credit ?? 'In-Built'}
-            >
-              {translation}
-            </Prompt.SearchItem>
-          ),
-          callback: handleClick,
-        };
+          const searchItem: SearchItem = {
+            string: translation,
+            node: (
+              <Prompt.SearchItem
+                icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
+                onClick={handleClick}
+                key={`item-${name}`}
+                note={credit ?? 'In-Built'}
+              >
+                {translation}
+              </Prompt.SearchItem>
+            ),
+            callback: handleClick,
+          };
 
-        return searchItem;
-      },
-    ),
+          return searchItem;
+        },
+      ),
     [translate],
   );
 

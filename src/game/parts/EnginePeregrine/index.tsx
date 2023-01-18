@@ -15,13 +15,13 @@ import model from './model.gltf';
 
 export interface VanillaEnginePeregrine
   extends VanillaPartWithTransformations,
-  VanillaPartWithEngine {
+    VanillaPartWithEngine {
   readonly n: 'Engine Peregrine';
 }
 
 export interface EnginePeregrine
   extends Omit<Part, 'n'>,
-  VanillaEnginePeregrine {}
+    VanillaEnginePeregrine {}
 
 export const VanillaEnginePeregrineData: VanillaEnginePeregrine = {
   ...VanillaPartWithTransformationsData,

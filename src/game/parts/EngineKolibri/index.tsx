@@ -15,7 +15,7 @@ import model from './model.gltf';
 
 export interface VanillaEngineKolibri
   extends VanillaPartWithTransformations,
-  VanillaPartWithEngine {
+    VanillaPartWithEngine {
   readonly n: 'Engine Kolibri';
 }
 

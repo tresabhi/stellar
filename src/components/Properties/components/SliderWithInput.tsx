@@ -18,8 +18,8 @@ import { Label } from './Label';
 
 export interface SliderWithInputProps
   extends SliderProps,
-  PropertyWithLabel,
-  PropertyWithUnit {
+    PropertyWithLabel,
+    PropertyWithUnit {
   indeterminate?: boolean;
 }
 
@@ -46,8 +46,8 @@ const Slider = styled(SliderPrimitive, {
 });
 
 export const SliderWithInput = forwardRef<
-SliderWithInputRef,
-SliderWithInputProps
+  SliderWithInputRef,
+  SliderWithInputProps
 >(
   (
     {
@@ -70,7 +70,8 @@ SliderWithInputProps
     const [indeterminate, setIndeterminate] = useState(givenIndeterminate);
 
     const normalizedValue = useCallback(
-      (newValue: number) => (indeterminate ? MIXED_VALUE_PLACEHOLDER : `${newValue}`),
+      (newValue: number) =>
+        indeterminate ? MIXED_VALUE_PLACEHOLDER : `${newValue}`,
       [indeterminate],
     );
 
@@ -114,7 +115,8 @@ SliderWithInputProps
 
           setValue(newValue);
         };
-        (container.current as SliderWithInputRef).setIndeterminate = setIndeterminate;
+        (container.current as SliderWithInputRef).setIndeterminate =
+          setIndeterminate;
       }
     }, [normalizedValue]);
 

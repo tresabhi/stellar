@@ -111,9 +111,7 @@ export default function StatusBar() {
           <StatusBarComponent.Dot />
 
           <StatusBarComponent.Anchor target="_blank">
-            &copy;
-            {' '}
-            {year}
+            &copy; {year}
           </StatusBarComponent.Anchor>
         </StatusBarComponent.Group>
       </StatusBarComponent.Group>

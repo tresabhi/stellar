@@ -43,9 +43,10 @@ export default function subscribeToPart<Type extends Part, Slice>(
       if (!skipNextEvent && slice !== undefined) handler(slice, prevSlice);
     },
     {
-      equalityFn: (a, b) => (a === undefined || b === undefined
-        ? false
-        : mergedOptions.equalityFn(a, b)),
+      equalityFn: (a, b) =>
+        a === undefined || b === undefined
+          ? false
+          : mergedOptions.equalityFn(a, b),
     },
   );
 

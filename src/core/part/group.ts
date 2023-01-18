@@ -18,7 +18,8 @@ export default function group(
 
     if (newGroup) {
       blueprint.parts[newGroup.id] = newGroup;
-      newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] = newGroup.id;
+      newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] =
+        newGroup.id;
       newGroup.part_order = normalizeIds(ids);
 
       newGroup.part_order.forEach((id) => {

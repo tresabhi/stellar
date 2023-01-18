@@ -12,10 +12,11 @@ export default function usePopupConcurrency() {
         draft.interface.isInteracting = true;
       });
 
-      return () => mutateApp((draft) => {
-        draft.interface.newPopupsEnabled = true;
-        draft.interface.isInteracting = initialIsInteracting;
-      });
+      return () =>
+        mutateApp((draft) => {
+          draft.interface.newPopupsEnabled = true;
+          draft.interface.isInteracting = initialIsInteracting;
+        });
     }
     return undefined;
   });

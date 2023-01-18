@@ -27,8 +27,8 @@ export default function copy(ids: string[], blueprint?: Blueprint) {
     });
 
     if (
-      Object.keys(clipboard.parts).length > 0
-      && clipboard.part_order.length > 0
+      Object.keys(clipboard.parts).length > 0 &&
+      clipboard.part_order.length > 0
     ) {
       mutateApp((draft) => {
         draft.editor.clipboard = clipboard;

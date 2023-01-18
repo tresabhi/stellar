@@ -37,9 +37,10 @@ export default function InsertPartPrompt({ dismiss }: PromptProps) {
   }
 
   partRegistry.forEach(({ vanillaData, Icon, data: { label, n } }) => {
-    const note = vanillaData === null
-      ? t`tabs.layout.popup.insert_part.abstract`
-      : undefined;
+    const note =
+      vanillaData === null
+        ? t`tabs.layout.popup.insert_part.abstract`
+        : undefined;
 
     const handleClick = () => {
       insert(n, parentId, {

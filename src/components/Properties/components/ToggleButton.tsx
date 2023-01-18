@@ -7,8 +7,8 @@ import { Label } from './Label';
 
 export interface ToggleButtonProps
   extends ComponentProps<typeof Button>,
-  PropertyWithLabel,
-  PropertyWithHint {
+    PropertyWithLabel,
+    PropertyWithHint {
   selected: boolean;
 }
 

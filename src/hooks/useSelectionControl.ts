@@ -12,15 +12,14 @@ import useSettings from 'stores/settings';
 
 const useSelectionControl = (id: string) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
-    const {
-      preventNextSelection, tool, isSpacePanning, isTouchPanning,
-    } = useApp.getState().editor;
+    const { preventNextSelection, tool, isSpacePanning, isTouchPanning } =
+      useApp.getState().editor;
 
     if (
-      !preventNextSelection
-      && tool === Tool.Move
-      && !isSpacePanning
-      && !isTouchPanning
+      !preventNextSelection &&
+      tool === Tool.Move &&
+      !isSpacePanning &&
+      !isTouchPanning
     ) {
       const { selectMultiple, selectDeep } = useSettings.getState().editor;
       const part = getPart(id);
@@ -28,10 +27,10 @@ const useSelectionControl = (id: string) => {
 
       if (part.visible && !part.locked) {
         if (
-          part.parent_id === null // part is at root
-          || (parent && parent.selected) // parent is selected
-          || event.ctrlKey // deep select is active
-          || selectDeep
+          part.parent_id === null || // part is at root
+          (parent && parent.selected) || // parent is selected
+          event.ctrlKey || // deep select is active
+          selectDeep
         ) {
           event.stopPropagation();
 

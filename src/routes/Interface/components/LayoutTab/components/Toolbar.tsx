@@ -75,17 +75,23 @@ function Toolbar() {
   const selectMultiple = useSettings((state) => state.editor.selectMultiple);
   const selectDeep = useSettings((state) => state.editor.selectDeep);
   const focusMode = useApp((state) => state.interface.focusMode);
-  const tool = useApp((state) => (state.editor.isSpacePanning || state.editor.isTouchPanning
-    ? Tool.Pan
-    : state.editor.tool));
-  const isOneHidden = useBlueprint(({ selections, parts }) => selections.some((selection) => {
-    const part = parts[selection];
-    return !part.visible;
-  }));
-  const isOneLocked = useBlueprint(({ selections, parts }) => selections.some((selection) => {
-    const part = parts[selection];
-    return part.locked;
-  }));
+  const tool = useApp((state) =>
+    state.editor.isSpacePanning || state.editor.isTouchPanning
+      ? Tool.Pan
+      : state.editor.tool,
+  );
+  const isOneHidden = useBlueprint(({ selections, parts }) =>
+    selections.some((selection) => {
+      const part = parts[selection];
+      return !part.visible;
+    }),
+  );
+  const isOneLocked = useBlueprint(({ selections, parts }) =>
+    selections.some((selection) => {
+      const part = parts[selection];
+      return part.locked;
+    }),
+  );
   const hasNoSelections = useBlueprint(
     (state) => state.selections.length === 0,
   );
@@ -161,9 +167,11 @@ function Toolbar() {
         >
           <ToolbarPrimitive.DropdownMenuItem
             icon={<CursorArrowIcon />}
-            onClick={() => mutateApp((draft) => {
-              draft.editor.tool = Tool.Move;
-            })}
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.editor.tool = Tool.Move;
+              })
+            }
           >
             {t`tabs.layout.toolbar.tool.move`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -171,9 +179,11 @@ function Toolbar() {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<HandIcon />}
             keybind="Space"
-            onClick={() => mutateApp((draft) => {
-              draft.editor.tool = Tool.Pan;
-            })}
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.editor.tool = Tool.Pan;
+              })
+            }
           >
             {t`tabs.layout.toolbar.tool.pan`}
           </ToolbarPrimitive.DropdownMenuItem>
@@ -187,9 +197,11 @@ function Toolbar() {
       <ToolbarPrimitive.Group>
         <ToolbarPrimitive.DropdownMenu icon={<AllSidesIcon />}>
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() => mutateSettings((draft) => {
-              draft.editor.selectDeep = !draft.editor.selectDeep;
-            })}
+            onClick={() =>
+              mutateSettings((draft) => {
+                draft.editor.selectDeep = !draft.editor.selectDeep;
+              })
+            }
             color={selectDeep ? 'accent' : undefined}
             icon={<DoubleArrowDownIcon />}
             keybind="Ctrl"
@@ -198,9 +210,11 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
 
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() => mutateSettings((draft) => {
-              draft.editor.selectMultiple = !draft.editor.selectMultiple;
-            })}
+            onClick={() =>
+              mutateSettings((draft) => {
+                draft.editor.selectMultiple = !draft.editor.selectMultiple;
+              })
+            }
             color={selectMultiple ? 'accent' : undefined}
             icon={<PlusCircledIcon />}
             keybind="Shift"
@@ -209,9 +223,11 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
 
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() => mutateApp((draft) => {
-              draft.interface.focusMode = !draft.interface.focusMode;
-            })}
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.interface.focusMode = !draft.interface.focusMode;
+              })
+            }
             color={focusMode ? 'accent' : undefined}
             icon={<LightningBoltIcon />}
             keybind="Alt + F"

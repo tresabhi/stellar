@@ -18,7 +18,7 @@ export const UseVersionControlData: UseVersionControl = {
 };
 
 const useVersionControl = create<
-UseVersionControl,
-[['zustand/subscribeWithSelector', never]]
+  UseVersionControl,
+  [['zustand/subscribeWithSelector', never]]
 >(subscribeWithSelector(() => UseVersionControlData));
 export default useVersionControl;

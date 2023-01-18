@@ -15,7 +15,7 @@ export const WATERMARK_VALUE = `${window.location.origin}/`;
 
 type AnyBlueprint = VanillaBlueprint | Blueprint;
 type AnyBlueprintWithWatermark = AnyBlueprint &
-Record<typeof WATERMARK_KEY, string | undefined>;
+  Record<typeof WATERMARK_KEY, string | undefined>;
 
 export const importifyBlueprint = (
   importedBlueprint: AnyBlueprint,
@@ -63,9 +63,9 @@ export const importifyBlueprint = (
   missingParts.sort();
 
   if (
-    useSettings.getState().interface.showMissingParts
-    && warnMissing
-    && missingParts.length > 0
+    useSettings.getState().interface.showMissingParts &&
+    warnMissing &&
+    missingParts.length > 0
   ) {
     prompt(({ dismiss }) => {
       const { t, f } = useTranslator();
@@ -85,17 +85,17 @@ export const importifyBlueprint = (
               {missingParts.length === 1
                 ? t`prompts.missing_parts.title`
                 : `${f`prompts.missing_parts.title_plural`[0]} ${
-                  missingParts.length
-                } ${f`prompts.missing_parts.title_plural`[1]}`}
+                    missingParts.length
+                  } ${f`prompts.missing_parts.title_plural`[1]}`}
             </Prompt.Title>
             <Prompt.Description>
               {missingParts.length === 1
                 ? `${f`prompts.missing_parts.description`[0]} ${title} ${
-                  f`prompts.missing_parts.description`[1]
-                }`
+                    f`prompts.missing_parts.description`[1]
+                  }`
                 : `${f`prompts.missing_parts.description_plural`[0]} ${title} ${
-                  f`prompts.missing_parts.description_plural`[1]
-                }`}
+                    f`prompts.missing_parts.description_plural`[1]
+                  }`}
               <ul>
                 {missingParts.map((missingPart) => (
                   <li>{missingPart}</li>

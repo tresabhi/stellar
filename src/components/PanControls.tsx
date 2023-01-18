@@ -3,9 +3,7 @@ import mutateApp from 'core/app/mutateApp';
 import useMousePosition from 'hooks/useMousePosition';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/app';
-import {
-  OrthographicCamera, Vector2, Vector2Tuple, Vector3,
-} from 'three';
+import { OrthographicCamera, Vector2, Vector2Tuple, Vector3 } from 'three';
 
 export const MIN_ZOOM = 2.2;
 export const MAX_ZOOM = 512;
@@ -118,8 +116,8 @@ export default function PanControls() {
 
         if (firstTouch && secondTouch) {
           const hypotenuse = Math.sqrt(
-            Math.abs(firstTouch[0] - secondTouch[0]) ** 2
-              + Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
+            Math.abs(firstTouch[0] - secondTouch[0]) ** 2 +
+              Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
           );
           const scale = lastHypotenuse / hypotenuse;
 
@@ -178,8 +176,8 @@ export default function PanControls() {
 
         if (firstTouch && secondTouch) {
           lastHypotenuse = Math.sqrt(
-            Math.abs(firstTouch[0] - secondTouch[0]) ** 2
-              + Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
+            Math.abs(firstTouch[0] - secondTouch[0]) ** 2 +
+              Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
           );
         }
       }

@@ -18,7 +18,7 @@ export type UsePrompts = {
 };
 
 const usePrompts = create<
-UsePrompts,
-[['zustand/subscribeWithSelector', never]]
+  UsePrompts,
+  [['zustand/subscribeWithSelector', never]]
 >(subscribeWithSelector(() => ({ prompts: [] } as UsePrompts)));
 export default usePrompts;

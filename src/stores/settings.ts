@@ -124,13 +124,14 @@ export const useSettingsData: UseSettings = {
 };
 
 const useSettings = create<
-UseSettings,
-[['zustand/subscribeWithSelector', never], ['zustand/persist', UseSettings]]
+  UseSettings,
+  [['zustand/subscribeWithSelector', never], ['zustand/persist', UseSettings]]
 >(
   subscribeWithSelector(
     persist(() => cloneDeep(useSettingsData), {
       name: 'settings',
-      merge: (persistedState, currentState) => merge(currentState, persistedState),
+      merge: (persistedState, currentState) =>
+        merge(currentState, persistedState),
     }),
   ),
 );

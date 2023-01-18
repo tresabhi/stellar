@@ -6,7 +6,7 @@ import { styled, theme } from 'stitches.config';
 
 export interface SearchProps
   extends SearchPrimitiveProps,
-  HTMLAttributes<HTMLDivElement> {}
+    HTMLAttributes<HTMLDivElement> {}
 
 const Container = styled('div', {
   display: 'flex',

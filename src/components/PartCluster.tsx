@@ -14,7 +14,8 @@ export interface PartClusterProps extends GroupProps {
 const PartCluster = forwardRef<Group, PartClusterProps>(
   ({ parentId, ...props }, ref) => {
     const partOrder = useBlueprint(
-      (state) => (parentId ? (state.parts[parentId] as GroupPart) : state).part_order,
+      (state) =>
+        (parentId ? (state.parts[parentId] as GroupPart) : state).part_order,
     );
     const partListing: JSX.Element[] = [];
 

@@ -71,9 +71,10 @@ export default function LandscapePrompt({
   const showOrientationPrompt = useSettings(
     (state) => state.interface.showOrientationPrompt,
   );
-  const showChildren = !showOrientationPrompt
-    || orientationPromptDismissed
-    || orientation === Orientation.Landscape;
+  const showChildren =
+    !showOrientationPrompt ||
+    orientationPromptDismissed ||
+    orientation === Orientation.Landscape;
 
   const handleNeverClick = () => {
     mutateSettings((draft) => {

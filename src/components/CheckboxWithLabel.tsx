@@ -25,7 +25,8 @@ export default function CheckboxWithLabel({
   ...props
 }: CheckboxWithLabelProps) {
   const checkbox = useRef<CheckboxRef>(null);
-  const handleContainerClick = () => (checkbox.current as HTMLButtonElement | null)?.click();
+  const handleContainerClick = () =>
+    (checkbox.current as HTMLButtonElement | null)?.click();
   const handleTriggerClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 

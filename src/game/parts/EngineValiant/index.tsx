@@ -15,7 +15,7 @@ import model from './model.gltf';
 
 export interface VanillaEngineValiant
   extends VanillaPartWithTransformations,
-  VanillaPartWithEngine {
+    VanillaPartWithEngine {
   readonly n: 'Engine Valiant';
 }
 

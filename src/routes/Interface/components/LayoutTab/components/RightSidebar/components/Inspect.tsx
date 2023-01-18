@@ -17,7 +17,8 @@ export default function Inspect() {
   const id = state.selections[0];
   const data = usePart(id);
   const stringifiedJSON = JSON.stringify(data, undefined, INDENT);
-  const vanillaJSON = data && JSON.stringify(exportifyPart(data, state), undefined, INDENT);
+  const vanillaJSON =
+    data && JSON.stringify(exportifyPart(data, state), undefined, INDENT);
 
   const handleJSONClick = () => copy(stringifiedJSON);
   const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);
@@ -93,11 +94,11 @@ export default function Inspect() {
 
       <Properties.Group>
         <Properties.TitleWithButton
-          buttons={(
+          buttons={
             <Properties.TitleButton onClick={handleJSONClick}>
               <CopyIcon />
             </Properties.TitleButton>
-          )}
+          }
         >
           {t`tabs.layout.right_sidebar.inspect.json`}
         </Properties.TitleWithButton>
@@ -107,11 +108,11 @@ export default function Inspect() {
 
       <Properties.Group>
         <Properties.TitleWithButton
-          buttons={(
+          buttons={
             <Properties.TitleButton onClick={handleVanillaJSONClick}>
               <CopyIcon />
             </Properties.TitleButton>
-          )}
+          }
         >
           {t`tabs.layout.right_sidebar.inspect.vanilla_json`}
         </Properties.TitleWithButton>
