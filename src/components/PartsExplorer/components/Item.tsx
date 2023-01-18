@@ -10,6 +10,8 @@ import {
 import deleteParts from 'core/part/deleteParts';
 import getPartRegistry from 'core/part/getPartRegistry';
 import mutateParts from 'core/part/mutateParts';
+import selectBetween from 'core/part/selectBetween';
+import selectBetweenConcurrent from 'core/part/selectBetweenConcurrent';
 import selectConcurrent from 'core/part/selectConcurrent';
 import toggleLocked from 'core/part/toggleLocked';
 import toggleSelection from 'core/part/toggleSelection';
@@ -18,10 +20,9 @@ import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import usePart from 'hooks/usePart';
 import usePartProperty from 'hooks/usePartProperty';
-import {
-  KeyboardEvent, memo, MouseEvent, PointerEvent, useRef,
-} from 'react';
+import { KeyboardEvent, memo, MouseEvent, PointerEvent, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
+import useBlueprint from 'stores/blueprint';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createInputEscape from 'utilities/createInputEscape';
 import { Root } from './Root';
@@ -127,14 +128,15 @@ export const Item = memo(
     );
 
     const handleSummaryClick = (event: MouseEvent) => {
+      const { selections } = useBlueprint.getState();
       if (event.ctrlKey) {
         if (event.shiftKey) {
-          // TODO: ctrl + shift
+          selectBetween(selections[0], id);
         } else {
           toggleSelection(id);
         }
       } else if (event.shiftKey) {
-        // TODO: shift
+        selectBetweenConcurrent(selections[0], id);
       } else {
         selectConcurrent(id);
       }
@@ -193,7 +195,8 @@ export const Item = memo(
         }
       }
     };
-    const handleLabelPointerDown = (event: PointerEvent) => event.preventDefault();
+    const handleLabelPointerDown = (event: PointerEvent) =>
+      event.preventDefault();
 
     return (
       <StyledDetails>
@@ -205,8 +208,8 @@ export const Item = memo(
         >
           <IconHolder onClick={handleIconClick}>
             {!isGroup && <Icon />}
-            {isGroup
-              && (expanded ? <TriangleDownIcon /> : <TriangleRightIcon />)}
+            {isGroup &&
+              (expanded ? <TriangleDownIcon /> : <TriangleRightIcon />)}
           </IconHolder>
 
           <Label
