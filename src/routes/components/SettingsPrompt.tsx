@@ -8,13 +8,11 @@ import {
   DownloadIcon,
   HomeIcon,
   InfoCircledIcon,
-  LightningBoltIcon,
   LinkBreak2Icon,
   MagnifyingGlassIcon,
   MobileIcon,
   RotateCounterClockwiseIcon,
   TextIcon,
-  TransparencyGridIcon,
 } from '@radix-ui/react-icons';
 import Anchor from 'components/Anchor';
 import Button from 'components/Button';
@@ -537,62 +535,62 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
   );
 }
 
-function PerformanceSettings({ search, titleRef }: SubSettingsProps) {
-  const { t, translate } = useTranslator();
+// function PerformanceSettings({ search, titleRef }: SubSettingsProps) {
+//   const { t, translate } = useTranslator();
 
-  const createString = stringCurry('performance', translate);
+//   const createString = stringCurry('performance', translate);
 
-  return (
-    <>
-      <Section>
-        <LightningBoltIcon />
-        {t`prompts.settings.groups.performance`}
-      </Section>
+//   return (
+//     <>
+//       <Section>
+//         <LightningBoltIcon />
+//         {t`prompts.settings.groups.performance`}
+//       </Section>
 
-      <Search
-        input={search}
-        list={[
-          {
-            node: (
-              <OptionVertical key="regress">
-                <Title ref={titleRef}>
-                  <TransparencyGridIcon />
-                  {t`prompts.settings.groups.performance.regress.title`}
-                </Title>
-                <Description>
-                  {t`prompts.settings.groups.performance.regress.description`}
-                </Description>
-                <Input
-                  type="number"
-                  step={0.1}
-                  min={0.1}
-                  max={1}
-                  defaultValue={
-                    useSettings.getState().performance.regressAmount
-                  }
-                  onBlur={(event) => {
-                    const clampedValue = clamp(
-                      Number(event.target.value),
-                      Number(event.target.min),
-                      Number(event.target.max),
-                    );
-                    event.target.value = `${clampedValue}`;
+//       <Search
+//         input={search}
+//         list={[
+//           {
+//             node: (
+//               <OptionVertical key="regress">
+//                 <Title ref={titleRef}>
+//                   <TransparencyGridIcon />
+//                   {t`prompts.settings.groups.performance.regress.title`}
+//                 </Title>
+//                 <Description>
+//                   {t`prompts.settings.groups.performance.regress.description`}
+//                 </Description>
+//                 <Input
+//                   type="number"
+//                   step={0.1}
+//                   min={0.1}
+//                   max={1}
+//                   defaultValue={
+//                     useSettings.getState().performance.regressAmount
+//                   }
+//                   onBlur={(event) => {
+//                     const clampedValue = clamp(
+//                       Number(event.target.value),
+//                       Number(event.target.min),
+//                       Number(event.target.max),
+//                     );
+//                     event.target.value = `${clampedValue}`;
 
-                    mutateSettings((draft) => {
-                      draft.performance.regressAmount = clampedValue;
-                    });
-                  }}
-                  onKeyDown={createInputEscape()}
-                />
-              </OptionVertical>
-            ),
-            string: createString('regress'),
-          },
-        ]}
-      />
-    </>
-  );
-}
+//                     mutateSettings((draft) => {
+//                       draft.performance.regressAmount = clampedValue;
+//                     });
+//                   }}
+//                   onKeyDown={createInputEscape()}
+//                 />
+//               </OptionVertical>
+//             ),
+//             string: createString('regress'),
+//           },
+//         ]}
+//       />
+//     </>
+//   );
+// }
 
 function EditorSettings({ search, titleRef }: SubSettingsProps) {
   const { t, translate } = useTranslator();
@@ -704,7 +702,7 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
   const search = useRef<HTMLInputElement>(null);
   const interfaceTitle = useRef<HTMLSpanElement>(null);
   const editor = useRef<HTMLSpanElement>(null);
-  const performance = useRef<HTMLSpanElement>(null);
+  // const performance = useRef<HTMLSpanElement>(null);
   const debug = useRef<HTMLSpanElement>(null);
 
   usePopupConcurrency();
@@ -735,13 +733,13 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
             <NavigationButtonText>{t`prompts.settings.navigation.editor`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
-          <NavigationButton
+          {/* <NavigationButton
             onClick={() => performance.current?.scrollIntoView()}
           >
             <LightningBoltIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.performance`}</NavigationButtonText>
             <CaretRightIcon />
-          </NavigationButton>
+          </NavigationButton> */}
           <NavigationButton onClick={() => debug.current?.scrollIntoView()}>
             <CodeIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.debug`}</NavigationButtonText>
@@ -774,8 +772,9 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
           <InterfaceSettings titleRef={interfaceTitle} search={search} />
           <Separator />
           <EditorSettings titleRef={editor} search={search} />
-          <Separator />
-          <PerformanceSettings titleRef={performance} search={search} />
+          {/* TODO: add regress settings back again */}
+          {/* <Separator />
+          <PerformanceSettings titleRef={performance} search={search} /> */}
           <Separator />
           <DebugSettings titleRef={debug} search={search} />
         </OptionsWrapper>
