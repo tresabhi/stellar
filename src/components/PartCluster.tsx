@@ -19,9 +19,6 @@ const PartCluster = forwardRef<Group, PartClusterProps>(
     );
     const partListing: JSX.Element[] = [];
 
-    document.title = `${
-      (Number.isNaN(Number(document.title)) ? 0 : Number(document.title)) + 1
-    }`;
     partOrder.forEach((id) => {
       const part = getPart(id);
       const LayoutComponent = getPartRegistry(part.n)?.Mesh;
