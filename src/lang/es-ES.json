@@ -256,7 +256,7 @@
         "editor": "Editor",
         "performance": "Rendimiento",
         "debug": "Depuración",
-        "reset": "Reset to defaults"
+        "reset": "Reiniciar a los valores por defecto"
       },
       "groups": {
         "interface": {
@@ -323,11 +323,11 @@
       }
     },
     "confirmation": {
-      "title": "Are you sure you want to do this?",
-      "description": "This action is may not be reversible.",
+      "title": "¿Estás seguro de que quieres hacer esto?",
+      "description": "Puede que esta acción no sea reversible.",
       "actions": {
-        "cancel": "Cancel",
-        "yes": "Yes"
+        "cancel": "Cancelar",
+        "yes": "Sí"
       }
     }
   },
