@@ -256,7 +256,7 @@
         "editor": "ɹoʇ!pƎ",
         "performance": "ǝɔuɐɯɹoɟɹǝԀ",
         "debug": "ƃnqǝp",
-        "reset": "Reset to defaults"
+        "reset": "sʇlnɐɟǝp oʇ ʇǝsǝɹ"
       },
       "groups": {
         "interface": {
@@ -323,11 +323,11 @@
       }
     },
     "confirmation": {
-      "title": "Are you sure you want to do this?",
-      "description": "This action is may not be reversible.",
+      "title": "¿sᴉɥʇ op oʇ ʇuɐʍ noʎ ǝɹns noʎ ǝɹ∀",
+      "description": "˙ǝlqᴉsɹǝʌǝɹ ǝq ʇou ʎɐɯ sᴉ uoᴉʇɔɐ sᴉɥ┴",
       "actions": {
-        "cancel": "Cancel",
-        "yes": "Yes"
+        "cancel": "lǝɔuɐƆ",
+        "yes": "sǝ⅄"
       }
     }
   },
