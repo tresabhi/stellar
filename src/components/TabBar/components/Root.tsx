@@ -1,6 +1,6 @@
 import { styled, theme } from 'stitches.config';
 
-export const Container = styled('div', {
+export const Root = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignContent: 'center',

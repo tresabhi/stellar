@@ -68,7 +68,7 @@ export default function StatusBar() {
   const license = useLicense();
 
   return (
-    <StatusBarComponent.Container>
+    <StatusBarComponent.Root>
       <StatusBarComponent.Group unrelated>
         <StatusBarComponent.Anchor
           target="_blank"
@@ -138,6 +138,6 @@ export default function StatusBar() {
           </StatusBarComponent.Anchor>
         </StatusBarComponent.Group>
       </StatusBarComponent.Group>
-    </StatusBarComponent.Container>
+    </StatusBarComponent.Root>
   );
 }

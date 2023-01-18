@@ -19,7 +19,7 @@ export default function LeftSidebar({ swapSecondTab }: TabLayoutProps) {
   };
 
   return (
-    <Sidebar.Container visible={visible} position="left">
+    <Sidebar.Root visible={visible} position="left">
       {visible && (
         <>
           <Tabs swapSecondTab={swapSecondTab} />
@@ -34,6 +34,6 @@ export default function LeftSidebar({ swapSecondTab }: TabLayoutProps) {
         expanded={visible}
         onClick={handleCollapseClick}
       />
-    </Sidebar.Container>
+    </Sidebar.Root>
   );
 }

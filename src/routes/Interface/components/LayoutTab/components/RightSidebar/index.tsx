@@ -29,7 +29,7 @@ export default function RightSidebar({ swapSecondTab }: TabLayoutProps) {
     : rightSidebar.visible.inComfortableMode;
 
   return (
-    <Sidebar.Container visible={expanded} position="right">
+    <Sidebar.Root visible={expanded} position="right">
       {expanded && (
         <>
           <Tabs swapSecondTab={swapSecondTab} />
@@ -48,6 +48,6 @@ export default function RightSidebar({ swapSecondTab }: TabLayoutProps) {
         expanded={expanded}
         onClick={handleCollapseClick}
       />
-    </Sidebar.Container>
+    </Sidebar.Root>
   );
 }

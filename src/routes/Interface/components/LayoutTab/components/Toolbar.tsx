@@ -106,7 +106,7 @@ function Toolbar() {
   const link = (url: string) => () => window.open(url, '_blank');
 
   return (
-    <ToolbarPrimitive.Container>
+    <ToolbarPrimitive.Root>
       <ToolbarPrimitive.Group>
         <ToolbarPrimitive.Button disabled>
           <StellarIcon />
@@ -429,7 +429,7 @@ function Toolbar() {
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
       </ToolbarPrimitive.Group>
-    </ToolbarPrimitive.Container>
+    </ToolbarPrimitive.Root>
   );
 }
 export default Toolbar;

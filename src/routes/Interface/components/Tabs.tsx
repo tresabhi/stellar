@@ -21,7 +21,7 @@ export default function Tabs() {
   });
 
   return (
-    <TabBar.Container>
+    <TabBar.Root>
       <TabBar.Tab {...is(Tab.Create)} icon={<FilePlusIcon />}>
         {t`tabs.create`}
       </TabBar.Tab>
@@ -34,6 +34,6 @@ export default function Tabs() {
       <TabBar.Tab {...is(Tab.Export)} icon={<ExitIcon />}>
         {t`tabs.export`}
       </TabBar.Tab>
-    </TabBar.Container>
+    </TabBar.Root>
   );
 }

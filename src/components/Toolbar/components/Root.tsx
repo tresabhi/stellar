@@ -1,6 +1,6 @@
 import { styled, theme } from 'stitches.config';
 
-export const Container = styled('div', {
+export const Root = styled('div', {
   backgroundColor: theme.colors.componentBackground,
   height: theme.sizes[40],
   display: 'flex',
