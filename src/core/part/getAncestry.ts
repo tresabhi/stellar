@@ -11,9 +11,8 @@ export default function getAncestry(
   let lastParentId: ParentId = id;
 
   while (lastParentId !== null) {
-    lastParentId = blueprint.parts[id].parent_id;
+    lastParentId = blueprint.parts[lastParentId].parent_id;
     if (lastParentId !== null) ancestry.push(lastParentId);
   }
-
   return full ? [...reverse(ancestry), id] : reverse(ancestry);
 }
