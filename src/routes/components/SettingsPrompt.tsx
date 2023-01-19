@@ -6,12 +6,16 @@ import {
   CursorArrowIcon,
   DesktopIcon,
   DownloadIcon,
+  FileIcon,
   HomeIcon,
   InfoCircledIcon,
+  InputIcon,
   LinkBreak2Icon,
   MagnifyingGlassIcon,
   MobileIcon,
   RotateCounterClockwiseIcon,
+  SewingPinFilledIcon,
+  TextAlignRightIcon,
   TextIcon,
 } from '@radix-ui/react-icons';
 import Anchor from 'components/Anchor';
@@ -206,12 +210,11 @@ const stringCurry =
 
 function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
   const { t, f, translate } = useTranslator();
-
   const createString = stringCurry('interface', translate);
 
   return (
     <>
-      <Section>
+      <Section ref={titleRef}>
         <DesktopIcon />
         {t`prompts.settings.groups.interface`}
       </Section>
@@ -222,7 +225,7 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
           {
             node: (
               <OptionVertical key="theme">
-                <Title ref={titleRef}>
+                <Title>
                   <BlendingModeIcon />
                   {t`prompts.settings.groups.interface.theme.title`}
                 </Title>
@@ -409,7 +412,7 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
             node: (
               <OptionHorizontal key="orientation-prompt">
                 <OptionVertical fill>
-                  <Title ref={titleRef}>
+                  <Title>
                     <RotateCounterClockwiseIcon />
                     {t`prompts.settings.groups.interface.orientation_prompt.title`}
                   </Title>
@@ -437,7 +440,7 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
             node: (
               <OptionHorizontal key="installation-prompt">
                 <OptionVertical fill>
-                  <Title ref={titleRef}>
+                  <Title>
                     <DownloadIcon />
                     {t`prompts.settings.groups.interface.installation_prompt.title`}
                   </Title>
@@ -478,7 +481,7 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
             node: (
               <OptionHorizontal key="instability-warning">
                 <OptionVertical fill>
-                  <Title ref={titleRef}>
+                  <Title>
                     <CrumpledPaperIcon />
                     {t`prompts.settings.groups.interface.instability_prompt.title`}
                   </Title>
@@ -506,7 +509,7 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
             node: (
               <OptionHorizontal key="missing-parts">
                 <OptionVertical fill>
-                  <Title ref={titleRef}>
+                  <Title>
                     <LinkBreak2Icon />
                     {t`prompts.settings.groups.interface.missing_parts.title`}
                   </Title>
@@ -537,12 +540,11 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
 
 // function PerformanceSettings({ search, titleRef }: SubSettingsProps) {
 //   const { t, translate } = useTranslator();
-
 //   const createString = stringCurry('performance', translate);
 
 //   return (
 //     <>
-//       <Section>
+//       <Section ref={titleRef}>
 //         <LightningBoltIcon />
 //         {t`prompts.settings.groups.performance`}
 //       </Section>
@@ -553,7 +555,7 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
 //           {
 //             node: (
 //               <OptionVertical key="regress">
-//                 <Title ref={titleRef}>
+//                 <Title >
 //                   <TransparencyGridIcon />
 //                   {t`prompts.settings.groups.performance.regress.title`}
 //                 </Title>
@@ -594,12 +596,11 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
 
 function EditorSettings({ search, titleRef }: SubSettingsProps) {
   const { t, translate } = useTranslator();
-
   const createString = stringCurry('editor', translate);
 
   return (
     <>
-      <Section>
+      <Section ref={titleRef}>
         <CursorArrowIcon />
         {t`prompts.settings.groups.editor`}
       </Section>
@@ -609,8 +610,8 @@ function EditorSettings({ search, titleRef }: SubSettingsProps) {
         list={[
           {
             node: (
-              <OptionVertical>
-                <Title ref={titleRef}>
+              <OptionVertical key="undo-limit">
+                <Title>
                   <InfoCircledIcon />
                   {t`prompts.settings.groups.editor.undo_limit.title`}
                 </Title>
@@ -648,14 +649,109 @@ function EditorSettings({ search, titleRef }: SubSettingsProps) {
   );
 }
 
+function FileSettings({ search, titleRef }: SubSettingsProps) {
+  const { t, translate } = useTranslator();
+  const createString = stringCurry('file', translate);
+
+  return (
+    <>
+      <Section ref={titleRef}>
+        <FileIcon />
+        {t`prompts.settings.groups.file`}
+      </Section>
+
+      <Search
+        input={search}
+        list={[
+          {
+            node: (
+              <OptionHorizontal key="format">
+                <OptionVertical fill>
+                  <Title>
+                    <TextAlignRightIcon />
+                    {t`prompts.settings.groups.file.format.title`}
+                  </Title>
+                  <Description>
+                    {t`prompts.settings.groups.file.format.description`}
+                  </Description>
+                </OptionVertical>
+
+                <Checkbox
+                  defaultValue={useSettings.getState().file.format}
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.file.format = value;
+                    });
+                  }}
+                />
+              </OptionHorizontal>
+            ),
+            string: createString('format'),
+          },
+
+          {
+            node: (
+              <OptionHorizontal key="watermark">
+                <OptionVertical fill>
+                  <Title>
+                    <SewingPinFilledIcon />
+                    {t`prompts.settings.groups.file.watermark.title`}
+                  </Title>
+                  <Description>
+                    {t`prompts.settings.groups.file.watermark.description`}
+                  </Description>
+                </OptionVertical>
+
+                <Checkbox
+                  defaultValue={useSettings.getState().file.watermark}
+                  onValueChange={(value) => {
+                    mutateSettings((draft) => {
+                      draft.file.watermark = value;
+                    });
+                  }}
+                />
+              </OptionHorizontal>
+            ),
+            string: createString('watermark'),
+          },
+
+          {
+            node: (
+              <OptionVertical key="default-name">
+                <Title>
+                  <InputIcon />
+                  {t`prompts.settings.groups.file.default_name.title`}
+                </Title>
+                <Description>
+                  {t`prompts.settings.groups.file.default_name.description`}
+                </Description>
+
+                <Input
+                  defaultValue={useSettings.getState().file.defaultName}
+                  onBlur={(event) => {
+                    mutateSettings((draft) => {
+                      draft.file.defaultName = event.target.value;
+                    });
+                  }}
+                  onKeyDown={createInputEscape()}
+                />
+              </OptionVertical>
+            ),
+            string: createString('default_name'),
+          },
+        ]}
+      />
+    </>
+  );
+}
+
 function DebugSettings({ search, titleRef }: SubSettingsProps) {
   const { t, translate } = useTranslator();
-
   const createString = stringCurry('debug', translate);
 
   return (
     <>
-      <Section>
+      <Section ref={titleRef}>
         <CodeIcon />
         {t`prompts.settings.groups.debug`}
       </Section>
@@ -667,7 +763,7 @@ function DebugSettings({ search, titleRef }: SubSettingsProps) {
             node: (
               <OptionHorizontal key="error-screen-debug">
                 <OptionVertical fill>
-                  <Title ref={titleRef}>
+                  <Title>
                     <InfoCircledIcon />
                     {t`prompts.settings.groups.debug.error_screen_debug.title`}
                   </Title>
@@ -703,6 +799,7 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
   const interfaceTitle = useRef<HTMLSpanElement>(null);
   const editor = useRef<HTMLSpanElement>(null);
   // const performance = useRef<HTMLSpanElement>(null);
+  const file = useRef<HTMLSpanElement>(null);
   const debug = useRef<HTMLSpanElement>(null);
 
   usePopupConcurrency();
@@ -740,6 +837,11 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
             <NavigationButtonText>{t`prompts.settings.navigation.performance`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton> */}
+          <NavigationButton onClick={() => file.current?.scrollIntoView()}>
+            <FileIcon />
+            <NavigationButtonText>{t`prompts.settings.navigation.file`}</NavigationButtonText>
+            <CaretRightIcon />
+          </NavigationButton>
           <NavigationButton onClick={() => debug.current?.scrollIntoView()}>
             <CodeIcon />
             <NavigationButtonText>{t`prompts.settings.navigation.debug`}</NavigationButtonText>
@@ -772,6 +874,8 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
           <InterfaceSettings titleRef={interfaceTitle} search={search} />
           <Separator />
           <EditorSettings titleRef={editor} search={search} />
+          <Separator />
+          <FileSettings titleRef={file} search={search} />
           {/* TODO: add regress settings back again */}
           {/* <Separator />
           <PerformanceSettings titleRef={performance} search={search} /> */}

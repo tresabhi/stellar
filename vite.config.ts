@@ -20,6 +20,7 @@ export default defineConfig({
       typescript: true,
       eslint: { lintCommand: 'eslint --ext ts,tsx src' },
       enableBuild: true,
+      overlay: false,
     }),
     react(),
     svgrPlugin({ svgrOptions: { icon: true } }),

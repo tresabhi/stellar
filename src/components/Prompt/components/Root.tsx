@@ -33,7 +33,6 @@ const StyledDiv = styled('div', {
   },
 });
 
-// TODO: rename ALL CONTAINERS to Root
 export function Root({ onClick, ...props }: ContainerProps) {
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();

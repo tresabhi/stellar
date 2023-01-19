@@ -66,6 +66,12 @@ export interface UseSettings {
     constrainScales: boolean;
     constrainFuelTankWidths: boolean;
   };
+
+  file: {
+    format: boolean;
+    watermark: boolean;
+    defaultName: string;
+  };
 }
 
 export const useSettingsData: UseSettings = {
@@ -120,6 +126,12 @@ export const useSettingsData: UseSettings = {
     },
     constrainScales: true,
     constrainFuelTankWidths: true,
+  },
+
+  file: {
+    format: false,
+    watermark: true,
+    defaultName: 'Blueprint',
   },
 };
 

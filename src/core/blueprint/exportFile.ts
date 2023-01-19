@@ -1,29 +1,31 @@
 import { fileSave } from 'browser-fs-access';
 import useApp from 'stores/app';
 import useBlueprint from 'stores/blueprint';
+import useSettings from 'stores/settings';
 import exportifyBlueprint from './exportifyBlueprint';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
-import {
-  FILE_EXTENSION_REGEX,
-  UNNAMED_BLUEPRINT_FILE_NAME,
-} from './saveFileAs';
+import { FILE_EXTENSION_REGEX } from './saveFileAs';
 
 export default async function exportFile() {
-  const {
-    file: { handle },
-  } = useApp.getState();
+  const { handle } = useApp.getState().file;
+  const { format, watermark, defaultName } = useSettings.getState().file;
   const fileName =
-    handle?.name.replace(FILE_EXTENSION_REGEX, '') ??
-    UNNAMED_BLUEPRINT_FILE_NAME.replace(FILE_EXTENSION_REGEX, '');
+    handle?.name.replace(FILE_EXTENSION_REGEX, '') ?? defaultName;
   const data = exportifyBlueprint(useBlueprint.getState());
+  const stringifiedJSON = JSON.stringify(
+    data,
+    undefined,
+    format ? 2 : undefined,
+  );
   const blob = new Blob(
     [
-      `{\n"${WATERMARK_KEY}": "${WATERMARK_VALUE}"\n\n,${JSON.stringify(
-        data,
-      ).slice(1)}`,
+      watermark
+        ? `{\n"${WATERMARK_KEY}": "${WATERMARK_VALUE}"\n\n,${stringifiedJSON.slice(
+            1,
+          )}`
+        : stringifiedJSON,
     ],
     {
-      // TODO: formatting the JSON must be a settings option
       type: 'application/json',
     },
   );
