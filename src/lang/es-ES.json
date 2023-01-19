@@ -255,6 +255,7 @@
         "interface": "Interfaz",
         "editor": "Editor",
         "performance": "Rendimiento",
+        "file": "Preferencias de archivo",
         "debug": "Depuración",
         "reset": "Reiniciar a los valores por defecto"
       },
@@ -311,6 +312,21 @@
           "regress": {
             "title": "Cantidad de regresión",
             "description": "Reduce la resolución del lienzo cuando se realizan tareas computacionalmente costosas como: paneamiento, escalamiento, rotación, etc. Cuanto más bajo es el valor, más agresivo es la regresión."
+          }
+        },
+        "file": {
+          "$": "Preferencias de archivo",
+          "format": {
+            "title": "Formatear archivos emitidos",
+            "description": "Formatea el JSON en los archivos emitidos por Stellar para que sea más legible."
+          },
+          "watermark": {
+            "title": "Planos exportados con marca de agua",
+            "description": "Añade una marca de agua enlazada a la versión de Stellar usada para generar el archivo."
+          },
+          "default_name": {
+            "title": "Nombre por defecto de archivo emitido",
+            "description": "El nombre por defecto para cualquiera de los archivos sin nombrar que son exportados por Stellar."
           }
         },
         "debug": {
