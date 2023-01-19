@@ -255,6 +255,7 @@
         "interface": "Interface",
         "editor": "Editor",
         "performance": "Performance",
+        "file": "File Preferences",
         "debug": "Debug",
         "reset": "Reset to defaults"
       },
@@ -311,6 +312,21 @@
           "regress": {
             "title": "Regress Amount",
             "description": "Reduces the canvas resolution when performing computationally expensive tasks like panning, scaling, rotation, etc. Lower the value, the more aggressive the regression."
+          }
+        },
+        "file": {
+          "$": "File Preferences",
+          "format": {
+            "title": "Format Emitted Files",
+            "description": "Formats the JSON in files emitted by Stellar to be more readable."
+          },
+          "watermark": {
+            "title": "Watermark Exported Blueprints",
+            "description": "Adds a watermark linking to the version of Stellar used to generate the file."
+          },
+          "default_name": {
+            "title": "Emitted File Default Name",
+            "description": "The default name for any unnamed files that are exported by Stellar."
           }
         },
         "debug": {
