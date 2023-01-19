@@ -255,6 +255,7 @@
         "interface": "ǝɔɐɟɹǝʇuI",
         "editor": "ɹoʇ!pƎ",
         "performance": "ǝɔuɐɯɹoɟɹǝԀ",
+        "file": "sǝɔuǝɹǝɟǝɹԀ ǝlᴉℲ",
         "debug": "ƃnqǝp",
         "reset": "sʇlnɐɟǝp oʇ ʇǝsǝɹ"
       },
@@ -311,6 +312,21 @@
           "regress": {
             "title": "ʇunoɯ∀ ssǝɹƃǝɹ",
             "description": "˙uoᴉssǝɹƃǝɹ ǝɥʇ ǝʌᴉssǝɹƃƃɐ ǝɹoɯ ǝɥʇ 'ǝnlɐʌ ǝɥʇ ɹǝʍo˥ ˙ɔʇǝ 'uoᴉʇɐʇoɹ 'ƃuᴉlɐɔs 'ƃuᴉuuɐd ǝʞᴉl sʞsɐʇ ǝʌᴉsuǝdxǝ ʎllɐuoᴉʇɐʇndɯoɔ ƃuᴉɯɹoɟɹǝd uǝɥʍ uoᴉʇnlosǝɹ sɐʌuɐɔ ǝɥʇ sǝɔnpǝɹ"
+          }
+        },
+        "file": {
+          "$": "sǝɔuǝɹǝɟǝɹԀ ǝlᴉℲ",
+          "format": {
+            "title": "sǝlᴉℲ pǝʇʇᴉɯƎ ʇɐɯɹoℲ",
+            "description": "˙ǝlqɐpɐǝɹ ǝɹoɯ ǝq oʇ ɹɐllǝʇS ʎq pǝʇʇᴉɯǝ sǝlᴉɟ uᴉ NOSſ ǝɥʇ sʇɐɯɹoℲ"
+          },
+          "watermark": {
+            "title": "sʇuᴉɹdǝnlq pǝʇɹodxƎ ʞɹɐɯɹǝʇɐM",
+            "description": "˙ǝlᴉɟ ǝɥʇ ǝʇɐɹǝuǝƃ oʇ pǝsn ɹɐllǝʇS ɟo uoᴉsɹǝʌ ǝɥʇ oʇ ƃuᴉʞuᴉl ʞɹɐɯɹǝʇɐʍ ɐ spp∀"
+          },
+          "default_name": {
+            "title": "ǝɯɐN ʇlnɐɟǝp ǝlᴉℲ pǝʇʇᴉɯƎ",
+            "description": "˙ɹɐllǝʇS ʎq pǝʇɹodxǝ ǝɹɐ ʇɐɥʇ sǝlᴉɟ pǝɯɐuun ʎuɐ ɹoɟ ǝɯɐu ʇlnɐɟǝp ǝɥ┴"
           }
         },
         "debug": {
