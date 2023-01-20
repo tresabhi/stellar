@@ -93,6 +93,7 @@ export const {
       settingsMaxWidth: '40rem',
       settingsMaxHeight: '30rem',
       settingsNavigationWidth: '12rem',
+      partListingInputMinWidth: '2rem',
     },
 
     radii: {

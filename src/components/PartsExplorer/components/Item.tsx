@@ -32,13 +32,14 @@ export interface ListingProps {
   indent: number;
 }
 
-const StyledDetails = styled('details', {});
-const StyledSummary = styled('summary', {
+const Wrapper = styled('div', {});
+const Trigger = styled('button', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   listStyle: 'none',
   cursor: 'pointer',
+  width: '100%',
 
   variants: {
     selected: {
@@ -68,7 +69,8 @@ const Label = styled('input', {
   fontSize: theme.sizes[12],
   flex: 1,
   cursor: 'pointer',
-  minWidth: 0,
+  minWidth: theme.sizes.partListingInputMinWidth,
+  width: 0,
 
   '&:focus': {
     cursor: 'text',
@@ -81,26 +83,36 @@ const IconHolder = styled('div', {
   padding: theme.space.padding,
   color: theme.colors.textHighContrast,
   cursor: 'pointer',
+
+  '& > svg': {
+    width: theme.sizes[16],
+    height: theme.sizes[16],
+  },
 });
 const Action = styled('button', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   padding: theme.space.padding,
-  cursor: 'pointer',
   color: theme.colors.textHighContrast,
+  cursor: 'pointer',
+
+  '& > svg': {
+    width: theme.sizes[16],
+    height: theme.sizes[16],
+  },
 
   variants: {
     onlyShowOnHover: {
       true: {
-        [`${StyledSummary}:not(:hover) &`]: {
+        [`${Trigger}:not(:hover) &`]: {
           display: 'none',
         },
       },
       false: {
         color: theme.colors.textLowContrast,
 
-        [`${StyledSummary}:hover &`]: {
+        [`${Trigger}:hover &`]: {
           color: theme.colors.textHighContrast,
         },
       },
@@ -128,7 +140,9 @@ export const Item = memo(
     );
 
     const handleSummaryClick = (event: MouseEvent) => {
+      event.preventDefault();
       const { selections } = useBlueprint.getState();
+
       if (event.ctrlKey) {
         if (event.shiftKey) {
           selectBetween(selections[0], id);
@@ -199,8 +213,8 @@ export const Item = memo(
       event.preventDefault();
 
     return (
-      <StyledDetails>
-        <StyledSummary
+      <Wrapper>
+        <Trigger
           css={{ paddingLeft: `calc(${theme.space.padding} * ${indent})` }}
           selected={state.selected}
           onClick={handleSummaryClick}
@@ -230,10 +244,10 @@ export const Item = memo(
           <Action onClick={handleTrashClick}>
             <TrashIcon />
           </Action>
-        </StyledSummary>
+        </Trigger>
 
-        {isGroup && <Root indent={indent + 1} parentId={id} />}
-      </StyledDetails>
+        {isGroup && expanded && <Root indent={indent + 1} parentId={id} />}
+      </Wrapper>
     );
   },
   ({ id: prevId }, { id: nextId }) => prevId === nextId,
