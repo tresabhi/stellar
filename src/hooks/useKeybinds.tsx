@@ -83,6 +83,7 @@ const bind = (
   mousetrapBind(
     keys,
     (event) => {
+      if (mergedOptions.preventDefault) event.preventDefault();
       const { isInteracting, tab } = useApp.getState().interface;
 
       if (
@@ -90,8 +91,6 @@ const bind = (
         (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
         (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
       ) {
-        if (mergedOptions.preventDefault) event.preventDefault();
-
         callback();
       }
     },
