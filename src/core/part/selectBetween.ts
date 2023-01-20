@@ -18,7 +18,9 @@ export default function selectBetween(
     if (originIndex !== -1) {
       for (
         let index = originIndex;
-        RelativeDirection.Up ? index > 0 : index < parent.part_order.length;
+        relativeDirection === RelativeDirection.Up
+          ? index > -1
+          : index < parent.part_order.length;
         index += relativeDirection === RelativeDirection.Up ? -1 : 1
       ) {
         const childId = parent.part_order[index];
