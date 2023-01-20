@@ -61,7 +61,7 @@ interface BindOptions {
   preventDefault: boolean;
   preventRepeats: boolean;
   preventWhenInteractingWithUI: boolean;
-  preventOnNonLayoutTab: boolean;
+  preventOnNonEditingTab: boolean;
   action: 'keydown' | 'keyup' | 'keypress';
 }
 
@@ -69,7 +69,7 @@ const bindDefaultOptions: BindOptions = {
   preventDefault: true,
   preventRepeats: true,
   preventWhenInteractingWithUI: true,
-  preventOnNonLayoutTab: true,
+  preventOnNonEditingTab: true,
   action: 'keydown',
 };
 
@@ -89,7 +89,9 @@ const bind = (
       if (
         (mergedOptions.preventRepeats ? !event.repeat : true) &&
         (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
-        (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true)
+        (mergedOptions.preventOnNonEditingTab
+          ? tab === Tab.Layout || tab === Tab.Staging
+          : true)
       ) {
         callback();
       }
@@ -130,7 +132,7 @@ export default function useKeybinds() {
         // party mode easter egg
         document.body.classList.toggle('party');
       },
-      { preventOnNonLayoutTab: false },
+      { preventOnNonEditingTab: false },
     );
 
     bind(['del', 'backspace'], deleteSelected);
@@ -168,7 +170,7 @@ export default function useKeybinds() {
               : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
         });
       },
-      { preventOnNonLayoutTab: false },
+      { preventOnNonEditingTab: false },
     );
     bind(
       ['ctrl+shift+tab', '['],
@@ -180,7 +182,7 @@ export default function useKeybinds() {
               : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
         });
       },
-      { preventOnNonLayoutTab: false },
+      { preventOnNonEditingTab: false },
     );
 
     bind('up', () => translate(upVector), {
@@ -243,48 +245,27 @@ export default function useKeybinds() {
         loadBlueprint();
         toLayout();
       },
-      { preventOnNonLayoutTab: false },
+      { preventOnNonEditingTab: false },
     );
     bind(
       'ctrl+o',
-      () => {
-        openFile();
+      async () => {
+        await openFile();
         toLayout();
       },
-      { preventOnNonLayoutTab: false },
+      { preventOnNonEditingTab: false },
     );
-    bind(
-      'ctrl+s',
-      () => {
-        saveFile();
-        toLayout();
-      },
-      { preventOnNonLayoutTab: true },
-    );
-    bind(
-      'ctrl+shift+s',
-      () => {
-        saveFileAs();
-        toLayout();
-      },
-      { preventOnNonLayoutTab: true },
-    );
+    bind('ctrl+s', () => saveFile());
+    bind('ctrl+shift+s', () => saveFileAs());
     bind(
       'ctrl+i',
-      () => {
-        importFile();
+      async () => {
+        await importFile();
         toLayout();
       },
-      { preventOnNonLayoutTab: false },
+      { preventOnNonEditingTab: false },
     );
-    bind(
-      'ctrl+e',
-      () => {
-        exportFile();
-        toLayout();
-      },
-      { preventOnNonLayoutTab: false },
-    );
+    bind('ctrl+e', () => exportFile());
 
     bind('ctrl+c', copySelected);
     bind('ctrl+x', cutPartsBySelection);
@@ -300,16 +281,16 @@ export default function useKeybinds() {
       }
     });
     bind('ctrl+,', () => prompt(SettingsPrompt), {
-      preventOnNonLayoutTab: false,
+      preventOnNonEditingTab: false,
     });
 
     bind('.', panToSelected);
 
     bind('f1', () => window.open(WEBSITE, '_blank'), {
-      preventOnNonLayoutTab: false,
+      preventOnNonEditingTab: false,
     });
     bind('f4', () => window.open(`${GH_REPO_URL}issues/new/choose`, '_blank'), {
-      preventOnNonLayoutTab: false,
+      preventOnNonEditingTab: false,
     });
   }, []);
 }
