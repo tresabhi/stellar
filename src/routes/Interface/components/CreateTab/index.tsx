@@ -133,7 +133,6 @@ interface Template {
   credit?: string;
 }
 
-// TODO: add move templates with credits
 const TEMPLATES: Template[] = [
   { name: 'hopper', blueprint: hopper },
   { name: 'apollo_mission', blueprint: apolloMission },
@@ -142,7 +141,6 @@ const TEMPLATES: Template[] = [
   { name: 'parachute_and_separator', blueprint: parachuteAndSeparator },
   // { name: 'joints', blueprint: joints },
   { name: 'orbit_and_re_entry', blueprint: orbitAndReEntry },
-  // { name: 'race_car', blueprint: raceCar },
   { name: 'basic_rocket', blueprint: basicRocket },
 ];
 

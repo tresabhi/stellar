@@ -1,12 +1,12 @@
 import useClipboard from 'hooks/useClipboard';
-import { HTMLAttributes, MouseEvent, ReactNode } from 'react';
+import { forwardRef, HTMLAttributes, MouseEvent, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Label as LabelPrimitive } from './Label';
 import { Row as RowPrimitive } from './Row';
 
 export interface ValueProps extends HTMLAttributes<HTMLDivElement> {
   label: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const Row = styled(RowPrimitive, {
@@ -30,17 +30,21 @@ const DisplayValue = styled('span', {
   userSelect: 'all',
 });
 
-export function Value({ label, children, ...props }: ValueProps) {
-  const { copy } = useClipboard();
+export const Value = forwardRef<HTMLSpanElement, ValueProps>(
+  ({ label, children, ...props }, ref) => {
+    const { copy } = useClipboard();
 
-  const handleClick = (event: MouseEvent<HTMLSpanElement>) => {
-    copy((event.target as HTMLSpanElement).innerText);
-  };
+    const handleClick = (event: MouseEvent<HTMLSpanElement>) => {
+      copy((event.target as HTMLSpanElement).innerText);
+    };
 
-  return (
-    <Row {...props}>
-      <Label onClick={handleClick}>{label}</Label>
-      <DisplayValue onClick={handleClick}>{children}</DisplayValue>
-    </Row>
-  );
-}
+    return (
+      <Row {...props}>
+        <Label onClick={handleClick}>{label}</Label>
+        <DisplayValue ref={ref} onClick={handleClick}>
+          {children}
+        </DisplayValue>
+      </Row>
+    );
+  },
+);

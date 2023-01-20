@@ -5,7 +5,10 @@ import exportifyPart from 'core/part/exportifyPart';
 import useClipboard from 'hooks/useClipboard';
 import usePart from 'hooks/usePart';
 import useTranslator from 'hooks/useTranslator';
+import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
+import boundsStore from 'stores/bounds';
+import fixFloatRounding from 'utilities/fixFloatRounding';
 
 const INDENT = 2;
 
@@ -19,9 +22,46 @@ export default function Inspect() {
   const stringifiedJSON = JSON.stringify(data, undefined, INDENT);
   const vanillaJSON =
     data && JSON.stringify(exportifyPart(data, state), undefined, INDENT);
+  const boundsX = useRef<HTMLSpanElement>(null);
+  const boundsY = useRef<HTMLSpanElement>(null);
+  const boundsWidth = useRef<HTMLSpanElement>(null);
+  const boundsHeight = useRef<HTMLSpanElement>(null);
+  const boundsRotation = useRef<HTMLSpanElement>(null);
 
   const handleJSONClick = () => copy(stringifiedJSON);
   const handleVanillaJSONClick = () => copy(`${vanillaJSON}`);
+
+  useEffect(() => {
+    function update() {
+      const boundsListing = boundsStore[id];
+
+      if (boundsListing) {
+        const { bounds } = boundsListing;
+
+        if (boundsX.current)
+          boundsX.current.innerText = `${fixFloatRounding(bounds.x)}m`;
+        if (boundsY.current)
+          boundsY.current.innerText = `${fixFloatRounding(bounds.y)}m`;
+        if (boundsWidth.current)
+          boundsWidth.current.innerText = `${fixFloatRounding(bounds.width)}m`;
+        if (boundsHeight.current)
+          boundsHeight.current.innerText = `${fixFloatRounding(
+            bounds.height,
+          )}m`;
+        if (boundsRotation.current)
+          boundsRotation.current.innerText = `${fixFloatRounding(
+            bounds.rotation,
+          )}°`;
+      }
+    }
+
+    update();
+    window.addEventListener(`boundsupdated${id}`, update);
+
+    return () => {
+      window.removeEventListener(`boundsupdated${id}`, update);
+    };
+  });
 
   return isOneSelected && data ? (
     <Properties.Root>
@@ -60,37 +100,30 @@ export default function Inspect() {
         </Properties.Value>
       </Properties.Group>
 
-      {/* TODO: implement this */}
-
-      {/* <Properties.Group>
+      <Properties.Group>
         <Properties.Title>{t`tabs.layout.right_sidebar.inspect.bounds`}</Properties.Title>
 
         <Properties.Value
-          label={t`tabs.layout.right_sidebar.inspect.bounds.width`}
-        >
-          {fixFloatRounding(bounds.width)}m
-        </Properties.Value>
-        <Properties.Value
-          label={t`tabs.layout.right_sidebar.inspect.bounds.height`}
-        >
-          {fixFloatRounding(bounds.height)}m
-        </Properties.Value>
-        <Properties.Value
           label={t`tabs.layout.right_sidebar.inspect.bounds.x_position`}
-        >
-          {fixFloatRounding(bounds.x)}m
-        </Properties.Value>
+          ref={boundsX}
+        />
         <Properties.Value
           label={t`tabs.layout.right_sidebar.inspect.bounds.y_position`}
-        >
-          {fixFloatRounding(bounds.y)}m
-        </Properties.Value>
+          ref={boundsY}
+        />
+        <Properties.Value
+          label={t`tabs.layout.right_sidebar.inspect.bounds.width`}
+          ref={boundsWidth}
+        />
+        <Properties.Value
+          label={t`tabs.layout.right_sidebar.inspect.bounds.height`}
+          ref={boundsHeight}
+        />
         <Properties.Value
           label={t`tabs.layout.right_sidebar.inspect.bounds.rotation`}
-        >
-          {fixFloatRounding(bounds.rotation)}°
-        </Properties.Value>
-      </Properties.Group> */}
+          ref={boundsRotation}
+        />
+      </Properties.Group>
 
       <Properties.Group>
         <Properties.TitleWithButton

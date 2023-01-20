@@ -876,7 +876,6 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
           <EditorSettings titleRef={editor} search={search} />
           <Separator />
           <FileSettings titleRef={file} search={search} />
-          {/* TODO: add regress settings back again */}
           {/* <Separator />
           <PerformanceSettings titleRef={performance} search={search} /> */}
           <Separator />
