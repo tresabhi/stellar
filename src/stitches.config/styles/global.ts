@@ -4,7 +4,7 @@ const globalStyles = globalCss({
   '@import': [
     'https://fonts.googleapis.com/css?family=Roboto+Flex&display=swap',
     'https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap',
-    'https://cdn.jsdelivr.net/npm/normalize.css/normalize.css', // TODO: remove this when bepaint supports this
+    'https://cdn.jsdelivr.net/npm/normalize.css/normalize.css',
   ],
 
   'html, body': {

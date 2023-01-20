@@ -7,7 +7,7 @@ const colorsDark = {
   ...createColors({ scale: purpleDark, suffix: 'accent' }),
   ...createColors({ scale: redDark, suffix: 'danger' }),
 
-  componentSolidBackground: mauveDark.mauve9, // TODO: add solid backgrounds
+  componentSolidBackground: mauveDark.mauve9,
   componentSolidBackgroundHover: mauveDark.mauve10,
   componentSolidBackgroundActive: mauveDark.mauve11,
 

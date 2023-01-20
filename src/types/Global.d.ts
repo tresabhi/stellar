@@ -16,8 +16,6 @@ declare global {
     }[];
   }
 
-  // TODO: fix this eslint issue?
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
       line2: Object3DNode<Line2, typeof Line2>;
