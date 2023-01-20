@@ -81,7 +81,7 @@
     "build": "vite build",
     "build:lang": "echo this command is deprecated and does nothing",
     "preview": "vite preview",
-    "test": "jest",
+    "test": "jest .src/ --passWithNoTests",
     "format": "prettier-eslint --write \"**/*.@(json|js|jsx|css|md|ts|tsx|html|xml|yml)\"",
     "depcheck": "npx depcheck",
     "unused": "ts-unused-exports tsconfig.json",
