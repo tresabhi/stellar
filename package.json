@@ -88,7 +88,7 @@
     "host": "serve -s build",
     "host:new": "vite build && serve -s build",
     "update": "yarn upgrade --latest",
-    "lint": "eslint ."
+    "lint": "eslint ./src"
   },
   "eslintConfig": {
     "extends": [
