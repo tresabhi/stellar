@@ -238,14 +238,22 @@ export default function useKeybinds() {
       { action: 'keyup' },
     );
 
-    bind('ctrl+n', () => {
-      loadBlueprint();
-      toLayout();
-    });
-    bind('ctrl+o', () => {
-      openFile();
-      toLayout();
-    });
+    bind(
+      'ctrl+n',
+      () => {
+        loadBlueprint();
+        toLayout();
+      },
+      { preventOnNonLayoutTab: false },
+    );
+    bind(
+      'ctrl+o',
+      () => {
+        openFile();
+        toLayout();
+      },
+      { preventOnNonLayoutTab: false },
+    );
     bind(
       'ctrl+s',
       () => {
@@ -262,14 +270,22 @@ export default function useKeybinds() {
       },
       { preventOnNonLayoutTab: true },
     );
-    bind('ctrl+i', () => {
-      importFile();
-      toLayout();
-    });
-    bind('ctrl+e', () => {
-      exportFile();
-      toLayout();
-    });
+    bind(
+      'ctrl+i',
+      () => {
+        importFile();
+        toLayout();
+      },
+      { preventOnNonLayoutTab: false },
+    );
+    bind(
+      'ctrl+e',
+      () => {
+        exportFile();
+        toLayout();
+      },
+      { preventOnNonLayoutTab: false },
+    );
 
     bind('ctrl+c', copySelected);
     bind('ctrl+x', cutPartsBySelection);
@@ -284,7 +300,9 @@ export default function useKeybinds() {
         prompt(RenamePartsPrompt, true, 'rename-parts');
       }
     });
-    bind('ctrl+,', () => prompt(SettingsPrompt));
+    bind('ctrl+,', () => prompt(SettingsPrompt), {
+      preventOnNonLayoutTab: false,
+    });
 
     bind('.', panToSelected);
 
