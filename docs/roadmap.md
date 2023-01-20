@@ -2,9 +2,10 @@
 
 _❕ Items will be removed when they're completed. This is **not** a changelog._
 
-## v1.0 Beta 6
+## v1.0 Beta 7
 
 - Remove part mesh wrappers
+- Implement the rest of the parts
 - Parts
   - 3D
     - `Engine Hawk`: https://i.imgur.com/5MdIm2G.png
@@ -20,11 +21,9 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
     - `RCS`: https://i.imgur.com/breaWuI.png
     - `Cone`: https://i.imgur.com/DKOMgyf.png
     - `Cone Side`: https://i.imgur.com/tetvUJC.png
-- Add settings
-- Follow [capitalization guidelines](https://learn.microsoft.com/en-us/style-guide/capitalization)
 
-## v1.0 Beta 7
+## v1.0 Beta 8
 
-- Implement the rest of the parts
-- Add padding for drop-downs and hints
 - Move "never do X" to a checkbox
+- Add padding for drop-downs and hints
+- Follow [capitalization guidelines](https://learn.microsoft.com/en-us/style-guide/capitalization)
