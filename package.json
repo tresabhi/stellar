@@ -10,7 +10,7 @@
     "@radix-ui/react-scroll-area": "^1.0.1",
     "@radix-ui/react-select": "^1.1.2",
     "@radix-ui/react-slider": "^1.1.0",
-    "@react-three/drei": "^9.48.1",
+    "@react-three/drei": "^9.54.1",
     "@react-three/fiber": "^8.9.2",
     "@stitches/react": "^1.2.8",
     "bepaint": "^0.1.11-beta",
