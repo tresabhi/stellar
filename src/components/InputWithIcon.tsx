@@ -1,5 +1,5 @@
 import InputPrimitive from 'components/Input';
-import { ComponentPropsWithoutRef, forwardRef, ReactNode } from 'react';
+import { forwardRef, InputHTMLAttributes, ReactNode } from 'react';
 import { styled, theme } from 'stitches.config';
 
 export enum InputWithIconSide {
@@ -8,7 +8,7 @@ export enum InputWithIconSide {
 }
 
 export interface InputWithIconProps
-  extends ComponentPropsWithoutRef<typeof Input> {
+  extends InputHTMLAttributes<HTMLInputElement> {
   iconSide?: InputWithIconSide;
   icon: ReactNode;
 }

@@ -31,7 +31,7 @@ import { TAB_ORDER } from 'hooks/useKeybinds';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
 import { clamp } from 'lodash';
-import { RefObject, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
 import { PromptProps } from 'stores/prompts';
@@ -803,6 +803,7 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
   const debug = useRef<HTMLSpanElement>(null);
 
   usePopupConcurrency();
+  useEffect(() => search.current?.focus());
 
   return (
     <Container onClick={(event) => event.stopPropagation()}>
