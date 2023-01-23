@@ -45,7 +45,7 @@ const Title = styled('span', {
   fontSize: theme.fontSizes[16],
   color: theme.colors.textLowContrast_danger,
   display: 'flex',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
   alignItems: 'center',
   justifyContent: 'center',
 
@@ -81,7 +81,7 @@ const Button = styled(ButtonPrimitive, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
   borderRadius: theme.radii[4],
 
   '& > svg': {
@@ -122,13 +122,13 @@ const DebugContentContainer = styled('div', {
   flex: 1,
   height: '100%',
   overflow: 'auto',
-  backgroundColor: theme.colors.componentBackground,
-  border: theme.borderStyles.componentNonInteractive,
-  padding: theme.space.padding,
+  backgroundColor: theme.colors.component,
+  border: theme.borderStyles.borderNonInteractive,
+  padding: theme.space.paddingRegular,
   borderRadius: theme.radii[4],
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
 });
 
 const DebugContent = styled('span', {

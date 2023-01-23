@@ -1,26 +1,6 @@
 import { blackA, mauve, purple, red } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
-import { createColors, createSpaces } from 'bepaint';
-
-const colorsLight = {
-  ...createColors({ scale: mauve }),
-  ...createColors({ scale: purple, suffix: 'accent' }),
-  ...createColors({ scale: red, suffix: 'danger' }),
-
-  // TODO: rename componentBackground to componentInteractiveBackground for consistency
-
-  componentSolidBackground: mauve.mauve9,
-  componentSolidBackgroundHover: mauve.mauve10,
-  componentSolidBackgroundActive: mauve.mauve11,
-
-  componentSolidBackground_accent: purple.purple9,
-  componentSolidBackgroundHover_accent: purple.purple10,
-  componentSolidBackgroundActive_accent: purple.purple11,
-
-  componentSolidBackground_danger: red.red9,
-  componentSolidBackgroundHover_danger: red.red10,
-  componentSolidBackgroundActive_danger: red.red11,
-};
+import { createBordersStyles, createColors, createSpaces } from 'bepaint';
 
 export const {
   config,
@@ -36,7 +16,9 @@ export const {
 } = createStitches({
   theme: {
     colors: {
-      ...colorsLight,
+      ...createColors(mauve),
+      ...createColors(purple, 'accent'),
+      ...createColors(red, 'danger'),
 
       popupBackground: blackA.blackA9,
     },
@@ -79,7 +61,7 @@ export const {
       sidebarWidth: '16rem',
       scrollbarWidth: '1rem',
       scrollbarThumbWidth: '0.125rem',
-      scrollbarThumbWidthHover: '0.5rem',
+      scrollbarThumbWidthHovered: '0.5rem',
       sliderThumb: '1rem',
       sliderTrackWidth: '0.125rem',
       errorScreenInfoMaxWidth: '30rem',
@@ -110,26 +92,9 @@ export const {
     },
 
     borderStyles: {
-      componentNonInteractive: `${colorsLight.componentNonInteractiveBorder} solid 0.0625rem`,
-      componentNonInteractiveHover: `${colorsLight.componentNonInteractiveBorderHover} solid 0.0625rem`,
-      componentNonInteractiveActive: `${colorsLight.componentNonInteractiveBorderActive} solid 0.0625rem`,
-      componentInteractive: `${colorsLight.componentInteractiveBorder} solid 0.0625rem`,
-      componentInteractiveHover: `${colorsLight.componentInteractiveBorderHover} solid 0.0625rem`,
-      componentInteractiveActive: `${colorsLight.componentInteractiveBorderActive} solid 0.0625rem`,
-
-      componentNonInteractive_accent: `${colorsLight.componentNonInteractiveBorder_accent} solid 0.0625rem`,
-      componentNonInteractiveHover_accent: `${colorsLight.componentNonInteractiveBorderHover_accent} solid 0.0625rem`,
-      componentNonInteractiveActive_accent: `${colorsLight.componentNonInteractiveBorderActive_accent} solid 0.0625rem`,
-      componentInteractive_accent: `${colorsLight.componentInteractiveBorder_accent} solid 0.0625rem`,
-      componentInteractiveHover_accent: `${colorsLight.componentInteractiveBorderHover_accent} solid 0.0625rem`,
-      componentInteractiveActive_accent: `${colorsLight.componentInteractiveBorderActive_accent} solid 0.0625rem`,
-
-      componentNonInteractive_danger: `${colorsLight.componentNonInteractiveBorder_danger} solid 0.0625rem`,
-      componentNonInteractiveHover_danger: `${colorsLight.componentNonInteractiveBorderHover_danger} solid 0.0625rem`,
-      componentNonInteractiveActive_danger: `${colorsLight.componentNonInteractiveBorderActive_danger} solid 0.0625rem`,
-      componentInteractive_danger: `${colorsLight.componentInteractiveBorder_danger} solid 0.0625rem`,
-      componentInteractiveHover_danger: `${colorsLight.componentInteractiveBorderHover_danger} solid 0.0625rem`,
-      componentInteractiveActive_danger: `${colorsLight.componentInteractiveBorderActive_danger} solid 0.0625rem`,
+      ...createBordersStyles(mauve),
+      ...createBordersStyles(purple, 'accent'),
+      ...createBordersStyles(red, 'danger'),
     },
 
     space: {

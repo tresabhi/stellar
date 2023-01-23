@@ -30,7 +30,7 @@ const Root = styled(SliderPrimitive.Root, {
 });
 
 const Track = styled(SliderPrimitive.Track, {
-  backgroundColor: theme.colors.componentInteractiveBorder,
+  backgroundColor: theme.colors.borderInteractive,
   position: 'relative',
   flexGrow: 1,
   borderRadius: theme.radii[1],
@@ -41,7 +41,7 @@ const Track = styled(SliderPrimitive.Track, {
 
 const Range = styled(SliderPrimitive.Range, {
   position: 'absolute',
-  backgroundColor: theme.colors.componentInteractiveBorder_accent,
+  backgroundColor: theme.colors.borderInteractive_accent,
   borderRadius: theme.radii[1],
   height: '100%',
 });
@@ -50,24 +50,24 @@ const Thumb = styled(SliderPrimitive.Thumb, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: theme.borderStyles.componentInteractive,
+  border: theme.borderStyles.borderInteractive,
   cursor: 'grab',
   width: theme.sizes.sliderThumb,
   height: theme.sizes.sliderThumb,
-  backgroundColor: theme.colors.componentBackground,
+  backgroundColor: theme.colors.component,
   borderRadius: theme.radii[16],
 
   '&:hover': {
-    backgroundColor: theme.colors.componentBackgroundHover,
-    border: theme.borderStyles.componentInteractiveHover,
+    backgroundColor: theme.colors.componentHovered,
+    border: theme.borderStyles.borderInteractiveHovered,
   },
   '&:active': {
     cursor: 'grabbing',
-    backgroundColor: theme.colors.componentBackgroundActive,
-    border: theme.borderStyles.componentInteractiveActive,
+    backgroundColor: theme.colors.componentPressed,
+    border: theme.borderStyles.borderInteractivePressed,
   },
   '&:focus': {
-    outline: theme.borderStyles.componentInteractiveActive,
+    outline: theme.borderStyles.borderInteractivePressed,
   },
 });
 

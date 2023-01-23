@@ -44,17 +44,17 @@ const Trigger = styled('button', {
   variants: {
     selected: {
       true: {
-        backgroundColor: theme.colors.componentBackgroundActive,
+        backgroundColor: theme.colors.componentPressed,
       },
 
       false: {
-        backgroundColor: theme.colors.componentBackground,
+        backgroundColor: theme.colors.component,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover,
+          backgroundColor: theme.colors.componentHovered,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive,
+          backgroundColor: theme.colors.componentPressed,
         },
       },
     },
@@ -80,7 +80,7 @@ const IconHolder = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
   color: theme.colors.textHighContrast,
   cursor: 'pointer',
 
@@ -93,7 +93,7 @@ const Action = styled('button', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
   color: theme.colors.textHighContrast,
   cursor: 'pointer',
 
@@ -215,7 +215,9 @@ export const Item = memo(
     return (
       <Wrapper>
         <Trigger
-          css={{ paddingLeft: `calc(${theme.space.padding} * ${indent})` }}
+          css={{
+            paddingLeft: `calc(${theme.space.paddingRegular} * ${indent})`,
+          }}
           selected={state.selected}
           onClick={handleSummaryClick}
           onDoubleClick={handleSummaryDoubleClick}

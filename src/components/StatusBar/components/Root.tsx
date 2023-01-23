@@ -5,5 +5,5 @@ export const Root = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  padding: `${theme.space.padding} ${theme.space.paddingMajor}`,
+  padding: `${theme.space.paddingRegular} ${theme.space.paddingMajor}`,
 });

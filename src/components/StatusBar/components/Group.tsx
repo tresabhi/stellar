@@ -12,7 +12,7 @@ export const Group = styled('div', {
       },
 
       false: {
-        gap: theme.space.gapRelated,
+        gap: theme.space.gapRelatedRegular,
       },
     },
   },

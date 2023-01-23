@@ -30,7 +30,7 @@ import StatusBar from './components/StatusBar';
 
 const Container = styled('div', {
   flex: '1 0 0',
-  backgroundColor: theme.colors.componentBackground,
+  backgroundColor: theme.colors.component,
   display: 'flex',
   gap: theme.space.gapUnrelatedMajor,
   alignItems: 'stretch',
@@ -93,7 +93,7 @@ const Separator = styled('div', {
   width: theme.sizes.separatorWidth,
   height: '75%',
   // TODO: add a separator color
-  backgroundColor: theme.colors.componentNonInteractiveBorder,
+  backgroundColor: theme.colors.borderNonInteractive,
   borderRadius: theme.radii[1],
 });
 
@@ -112,8 +112,8 @@ const Button = styled(ButtonPrimitive, {
   justifyContent: 'center',
   alignItems: 'center',
   fontSize: theme.fontSizes[12],
-  gap: theme.space.gapRelated,
-  padding: theme.space.padding,
+  gap: theme.space.gapRelatedRegular,
+  padding: theme.space.paddingRegular,
   borderRadius: theme.radii[4],
 
   '& > svg': {

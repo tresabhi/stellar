@@ -14,7 +14,7 @@ const Trigger = styled(Button, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
   height: theme.sizes.inputSizeMajor,
   borderRadius: `${theme.radii[4]} ${theme.radii[4]} 0 0`,
   maxWidth: theme.sizes.tabMaxWidth,
@@ -34,11 +34,11 @@ const Trigger = styled(Button, {
 
       css: {
         color: theme.colors.textLowContrast_accent,
-        backgroundColor: theme.colors.componentBackground,
+        backgroundColor: theme.colors.component,
         cursor: 'default',
 
         '&:hover, &:active': {
-          backgroundColor: theme.colors.componentBackground,
+          backgroundColor: theme.colors.component,
         },
       },
     },
@@ -50,10 +50,10 @@ const Trigger = styled(Button, {
         backgroundColor: theme.colors.appBackground2,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover,
+          backgroundColor: theme.colors.componentHovered,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive,
+          backgroundColor: theme.colors.componentPressed,
         },
       },
     },

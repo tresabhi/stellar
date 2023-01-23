@@ -12,7 +12,7 @@ const Trigger = styled(SelectPrimitive.Item, {
   position: 'relative',
 
   '&[data-highlighted]': {
-    backgroundColor: theme.colors.componentBackgroundHover,
+    backgroundColor: theme.colors.componentHovered,
   },
 });
 const ItemIndicator = styled(SelectPrimitive.ItemIndicator, {

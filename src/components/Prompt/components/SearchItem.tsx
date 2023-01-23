@@ -11,7 +11,7 @@ export interface SearchItemProps
 const Container = styled(Button, {
   display: 'flex',
   gap: theme.space.gapRelatedMajor,
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
   color: theme.colors.textHighContrast,
 
   defaultVariants: {

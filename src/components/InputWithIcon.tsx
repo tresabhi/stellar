@@ -15,20 +15,20 @@ export interface InputWithIconProps
 
 const Container = styled('div', {
   display: 'flex',
-  padding: `0 ${theme.space.padding}`,
+  padding: `0 ${theme.space.paddingRegular}`,
   gap: theme.space.gapRelatedMajor,
   borderRadius: theme.radii[4],
   height: theme.sizes.inputSizeMajor,
   justifyContent: 'center',
   alignItems: 'center',
-  border: theme.borderStyles.componentInteractive,
+  border: theme.borderStyles.borderInteractive,
   cursor: 'text',
 
   '&:hover': {
-    border: theme.borderStyles.componentInteractiveHover,
+    border: theme.borderStyles.borderInteractiveHovered,
   },
   '&:active, &:focus-within': {
-    border: theme.borderStyles.componentInteractiveActive,
+    border: theme.borderStyles.borderInteractivePressed,
   },
 });
 

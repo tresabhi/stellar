@@ -5,6 +5,7 @@ export const Root = styled('div', {
   justifyContent: 'center',
   alignContent: 'center',
   gap: theme.space.gapRelatedMajor,
-  padding: `${theme.space.padding} ${theme.space.padding} 0 ${theme.space.padding}`,
+  padding: theme.space.paddingRegular,
+  paddingBottom: 0,
   backgroundColors: theme.colors.appBackground1,
 });

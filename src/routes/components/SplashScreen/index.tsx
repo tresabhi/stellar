@@ -29,9 +29,7 @@ function SplashScreen() {
     <Container className={themeDark}>
       <Icon />
 
-      <BarLoader
-        color={theme.colors.componentSolidBackground_accent.toString()}
-      />
+      <BarLoader color={theme.colors.solidBackground_accent.toString()} />
     </Container>
   );
 }

@@ -23,18 +23,18 @@ const globalStyles = globalCss({
     backgroundColor: 'transparent',
   },
   '::-webkit-scrollbar-thumb': {
-    backgroundColor: theme.colors.componentInteractiveBorder, // TODO: add scrollbar colors
-    borderRadius: 16, // chrome doesn't like rem (●__●)
+    backgroundColor: theme.colors.borderInteractive, // TODO: add scrollbar colors
+    borderRadius: 16, // chrome doesn't like rem
     border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidth}) / 2) solid transparent`,
     backgroundClip: 'content-box',
   },
   '::-webkit-scrollbar-thumb:hover': {
-    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHover}) / 2) solid transparent`,
-    backgroundColor: theme.colors.componentInteractiveBorderHover,
+    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHovered}) / 2) solid transparent`,
+    backgroundColor: theme.colors.borderInteractiveHovered,
   },
   '::-webkit-scrollbar-thumb:active': {
-    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHover}) / 2) solid transparent`,
-    backgroundColor: theme.colors.componentInteractiveBorderActive,
+    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHovered}) / 2) solid transparent`,
+    backgroundColor: theme.colors.borderInteractivePressed,
   },
   '::-webkit-scrollbar-corner': {
     backgroundColor: 'transparent',

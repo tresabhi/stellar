@@ -4,18 +4,18 @@ export const TextArea = styled('textarea', {
   fontFamily: theme.fonts.mono,
   fontSize: theme.fontSizes[10],
   color: theme.colors.textHighContrast,
-  backgroundColor: theme.colors.componentBackground,
-  border: theme.borderStyles.componentInteractive,
+  backgroundColor: theme.colors.component,
+  border: theme.borderStyles.borderInteractive,
   borderRadius: theme.radii[4],
   resize: 'none',
   height: theme.sizes.propertiesTextAreaHeight,
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
 
   '&:hover': {
-    backgroundColor: theme.colors.componentBackgroundHover,
-    border: theme.borderStyles.componentInteractive,
+    backgroundColor: theme.colors.componentHovered,
+    border: theme.borderStyles.borderInteractive,
   },
   '&:focus': {
-    outline: theme.borderStyles.componentInteractiveActive,
+    outline: theme.borderStyles.borderInteractivePressed,
   },
 });

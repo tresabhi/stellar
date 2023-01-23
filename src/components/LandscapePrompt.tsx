@@ -50,7 +50,7 @@ const Actions = styled('div', {
 });
 
 const Action = styled(Button, {
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
   borderRadius: theme.radii[4],
   fontSize: theme.fontSizes[14],
 

@@ -32,7 +32,7 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   flex: 2,
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
 });
 
 const Content = styled('div', {

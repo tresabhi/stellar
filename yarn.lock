@@ -2771,12 +2771,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
 
-bepaint@^0.1.11-beta:
-  version "0.1.11-beta"
-  resolved "https://registry.yarnpkg.com/bepaint/-/bepaint-0.1.11-beta.tgz#bbbfcb35de91cd5e5d474a770b397ebd38578d11"
-  integrity sha512-hrRIKJiFOmiCz5LDrLmbZbNG6O7fKxIfEJTgX4TuwsrGmQgVnvhXqdbwzlmOez+BGvqM1KEELBPbHVXOuorlug==
-  dependencies:
-    lodash "^4.17.21"
+bepaint@^0.1.0-beta.1:
+  version "0.1.0-beta.1"
+  resolved "https://registry.yarnpkg.com/bepaint/-/bepaint-0.1.0-beta.1.tgz#7c54be8010f28b019a7b0efe9c0723f1969c1870"
+  integrity sha512-FXjZIc6W96qZu6G18EkwFlDhSa2fWH4O2dS2bVi3GMD1EVEJnj5RrLXm5dzpwIZ1aw/u4kMpOS3U13wdVdQmYw==
 
 bidi-js@^1.0.2:
   version "1.0.2"

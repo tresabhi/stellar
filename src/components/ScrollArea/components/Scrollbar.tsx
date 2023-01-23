@@ -7,23 +7,23 @@ export const Scrollbar = styled(ScrollAreaPrimitive.Scrollbar, {
   backgroundColor: theme.colors.appBackground2,
 
   '&:hover': {
-    padding: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHover}) / 2)`,
+    padding: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHovered}) / 2)`,
   },
 
   '&[data-orientation="vertical"]': {
     width: theme.sizes.scrollbarThumbWidth,
-    borderLeft: theme.borderStyles.componentInteractive,
+    borderLeft: theme.borderStyles.borderInteractive,
   },
   '&[data-orientation="horizontal"]': {
     flexDirection: 'column',
     height: theme.sizes.scrollbarThumbWidth,
-    borderTop: theme.borderStyles.componentInteractive,
+    borderTop: theme.borderStyles.borderInteractive,
   },
 
   '&[data-orientation="vertical"]:hover': {
-    width: theme.sizes.scrollbarThumbWidthHover,
+    width: theme.sizes.scrollbarThumbWidthHovered,
   },
   '&[data-orientation="horizontal"]:hover': {
-    height: theme.sizes.scrollbarThumbWidthHover,
+    height: theme.sizes.scrollbarThumbWidthHovered,
   },
 });

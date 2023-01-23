@@ -8,7 +8,7 @@ export interface LabelProps extends ComponentProps<typeof Container> {
 
 const Container = styled('div', {
   display: 'flex',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
   alignItems: 'center',
   justifyContent: 'space-between',
   color: theme.colors.textLowContrast,

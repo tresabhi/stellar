@@ -28,7 +28,7 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   flex: 1,
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
   cursor: 'text',
 });
 
@@ -37,20 +37,20 @@ const FieldContainer = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   padding: theme.space.paddingMinor,
-  gap: theme.space.gapRelated,
-  backgroundColor: theme.colors.componentBackground,
-  border: theme.borderStyles.componentInteractive,
+  gap: theme.space.gapRelatedRegular,
+  backgroundColor: theme.colors.component,
+  border: theme.borderStyles.borderInteractive,
   cursor: 'text',
   borderRadius: theme.radii[4],
 
   '&:hover': {
-    backgroundColor: theme.colors.componentBackgroundHover,
-    border: theme.borderStyles.componentInteractiveHover,
+    backgroundColor: theme.colors.componentHovered,
+    border: theme.borderStyles.borderInteractiveHovered,
   },
 
   '&:active, &:focus, &:focus-within': {
-    backgroundColor: theme.colors.componentBackgroundActive,
-    border: theme.borderStyles.componentInteractiveActive,
+    backgroundColor: theme.colors.componentPressed,
+    border: theme.borderStyles.borderInteractivePressed,
   },
 });
 

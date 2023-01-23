@@ -9,9 +9,9 @@ export interface ContainerProps
 const StyledDiv = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.space.gapUnrelated,
+  gap: theme.space.gapUnrelatedRegular,
   borderRadius: theme.radii[4],
-  border: theme.borderStyles.componentNonInteractive,
+  border: theme.borderStyles.borderNonInteractive,
   backgroundColor: theme.colors.appBackground2,
 
   variants: {
@@ -23,7 +23,7 @@ const StyledDiv = styled('div', {
 
     padding: {
       regular: { padding: theme.space.paddingMajor },
-      thin: { padding: theme.space.padding },
+      thin: { padding: theme.space.paddingRegular },
     },
   },
 

@@ -4,5 +4,5 @@ export const SearchFallback = styled('span', {
   fontSize: theme.fontSizes[12],
   color: theme.colors.textLowContrast,
   textAlign: 'center',
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
 });

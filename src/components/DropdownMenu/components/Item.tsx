@@ -11,11 +11,11 @@ export const Item = styled(DropdownMenuPrimitive.Item, {
   variants: {
     color: {
       default: {
-        backgroundColor: theme.colors.componentBackground,
+        backgroundColor: theme.colors.component,
       },
 
       accent: {
-        backgroundColor: theme.colors.componentBackground_accent,
+        backgroundColor: theme.colors.component_accent,
       },
     },
 
@@ -33,13 +33,13 @@ export const Item = styled(DropdownMenuPrimitive.Item, {
 
       css: {
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover,
+          backgroundColor: theme.colors.componentHovered,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive,
+          backgroundColor: theme.colors.componentPressed,
         },
         '&:focus': {
-          outline: theme.borderStyles.componentInteractiveActive,
+          outline: theme.borderStyles.borderInteractivePressed,
         },
       },
     },
@@ -49,13 +49,13 @@ export const Item = styled(DropdownMenuPrimitive.Item, {
 
       css: {
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover_accent,
+          backgroundColor: theme.colors.componentHovered_accent,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive_accent,
+          backgroundColor: theme.colors.componentPressed_accent,
         },
         '&:focus': {
-          outline: theme.borderStyles.componentInteractiveActive_accent,
+          outline: theme.borderStyles.borderInteractivePressed_accent,
         },
       },
     },

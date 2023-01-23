@@ -3,7 +3,7 @@ import { styled, theme } from 'stitches.config';
 
 export const Thumb = styled(ScrollAreaPrimitive.Thumb, {
   flex: 1,
-  backgroundColor: theme.colors.componentInteractiveBorder,
+  backgroundColor: theme.colors.borderInteractive,
   borderRadius: theme.radii[4],
   position: 'relative',
 

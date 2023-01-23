@@ -9,7 +9,7 @@ const Button = styled('button', {
         color: theme.colors.textHighContrast,
 
         '&:focus': {
-          outline: theme.borderStyles.componentInteractiveActive,
+          outline: theme.borderStyles.borderInteractivePressed,
         },
       },
 
@@ -17,7 +17,7 @@ const Button = styled('button', {
         color: theme.colors.textHighContrast_accent,
 
         '&:focus': {
-          outline: theme.borderStyles.componentInteractiveActive_accent,
+          outline: theme.borderStyles.borderInteractivePressed_accent,
         },
       },
 
@@ -25,7 +25,7 @@ const Button = styled('button', {
         color: theme.colors.textHighContrast_danger,
 
         '&:focus': {
-          outline: theme.borderStyles.componentInteractiveActive_danger,
+          outline: theme.borderStyles.borderInteractivePressed_danger,
         },
       },
     },
@@ -62,13 +62,13 @@ const Button = styled('button', {
       priority: 'default',
 
       css: {
-        backgroundColor: theme.colors.componentBackground,
+        backgroundColor: theme.colors.component,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover,
+          backgroundColor: theme.colors.componentHovered,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive,
+          backgroundColor: theme.colors.componentPressed,
         },
       },
     },
@@ -77,13 +77,13 @@ const Button = styled('button', {
       priority: 'default',
 
       css: {
-        backgroundColor: theme.colors.componentBackground_accent,
+        backgroundColor: theme.colors.component_accent,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover_accent,
+          backgroundColor: theme.colors.componentHovered_accent,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive_accent,
+          backgroundColor: theme.colors.componentPressed_accent,
         },
       },
     },
@@ -92,13 +92,13 @@ const Button = styled('button', {
       priority: 'default',
 
       css: {
-        backgroundColor: theme.colors.componentBackground_danger,
+        backgroundColor: theme.colors.component_danger,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover_danger,
+          backgroundColor: theme.colors.componentHovered_danger,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive_danger,
+          backgroundColor: theme.colors.componentPressed_danger,
         },
       },
     },
@@ -108,13 +108,13 @@ const Button = styled('button', {
       priority: 'callToAction',
 
       css: {
-        backgroundColor: theme.colors.componentCallToActionBackground,
+        backgroundColor: theme.colors.componentCallToAction,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentCallToActionBackgroundHover,
+          backgroundColor: theme.colors.componentCallToActionHovered,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentCallToActionBackgroundActive,
+          backgroundColor: theme.colors.componentCallToActionPressed,
         },
       },
     },
@@ -123,15 +123,13 @@ const Button = styled('button', {
       priority: 'callToAction',
 
       css: {
-        backgroundColor: theme.colors.componentCallToActionBackground_accent,
+        backgroundColor: theme.colors.componentCallToAction_accent,
 
         '&:hover': {
-          backgroundColor:
-            theme.colors.componentCallToActionBackgroundHover_accent,
+          backgroundColor: theme.colors.componentCallToActionHovered_accent,
         },
         '&:active': {
-          backgroundColor:
-            theme.colors.componentCallToActionBackgroundActive_accent,
+          backgroundColor: theme.colors.componentCallToActionPressed_accent,
         },
       },
     },
@@ -140,15 +138,13 @@ const Button = styled('button', {
       priority: 'callToAction',
 
       css: {
-        backgroundColor: theme.colors.componentCallToActionBackground_danger,
+        backgroundColor: theme.colors.componentCallToAction_danger,
 
         '&:hover': {
-          backgroundColor:
-            theme.colors.componentCallToActionBackgroundHover_danger,
+          backgroundColor: theme.colors.componentCallToActionHovered_danger,
         },
         '&:active': {
-          backgroundColor:
-            theme.colors.componentCallToActionBackgroundActive_danger,
+          backgroundColor: theme.colors.componentCallToActionPressed_danger,
         },
       },
     },
@@ -158,13 +154,13 @@ const Button = styled('button', {
       priority: 'solid',
 
       css: {
-        backgroundColor: theme.colors.componentSolidBackground,
+        backgroundColor: theme.colors.componentSolid,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentSolidBackgroundHover,
+          backgroundColor: theme.colors.componentSolidHovered,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentSolidBackgroundActive,
+          backgroundColor: theme.colors.componentSolidPressed,
         },
       },
     },
@@ -173,13 +169,13 @@ const Button = styled('button', {
       priority: 'solid',
 
       css: {
-        backgroundColor: theme.colors.componentSolidBackground_accent,
+        backgroundColor: theme.colors.componentSolid_accent,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentSolidBackgroundHover_accent,
+          backgroundColor: theme.colors.componentSolidHovered_accent,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentSolidBackgroundActive_accent,
+          backgroundColor: theme.colors.componentSolidPressed_accent,
         },
       },
     },
@@ -188,13 +184,13 @@ const Button = styled('button', {
       priority: 'solid',
 
       css: {
-        backgroundColor: theme.colors.componentSolidBackground_danger,
+        backgroundColor: theme.colors.componentSolid_danger,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentSolidBackgroundHover_danger,
+          backgroundColor: theme.colors.componentSolidHovered_danger,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentSolidBackgroundActive_danger,
+          backgroundColor: theme.colors.componentSolidPressed_danger,
         },
       },
     },
@@ -204,13 +200,13 @@ const Button = styled('button', {
       priority: 'disabled',
 
       css: {
-        backgroundColor: theme.colors.componentBackground,
+        backgroundColor: theme.colors.component,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackground,
+          backgroundColor: theme.colors.component,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackground,
+          backgroundColor: theme.colors.component,
         },
       },
     },
@@ -219,13 +215,13 @@ const Button = styled('button', {
       priority: 'disabled',
 
       css: {
-        backgroundColor: theme.colors.componentBackground_accent,
+        backgroundColor: theme.colors.component_accent,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover_accent,
+          backgroundColor: theme.colors.componentHovered_accent,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive_accent,
+          backgroundColor: theme.colors.componentPressed_accent,
         },
       },
     },
@@ -234,13 +230,13 @@ const Button = styled('button', {
       priority: 'disabled',
 
       css: {
-        backgroundColor: theme.colors.componentBackground_danger,
+        backgroundColor: theme.colors.component_danger,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentBackgroundHover_danger,
+          backgroundColor: theme.colors.componentHovered_danger,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentBackgroundActive_danger,
+          backgroundColor: theme.colors.componentPressed_danger,
         },
       },
     },
@@ -250,13 +246,14 @@ const Button = styled('button', {
       border: true,
 
       css: {
-        border: theme.borderStyles.componentInteractive,
+        border: theme.borderStyles.borderInteractive,
 
         '&:hover': {
-          border: theme.borderStyles.componentInteractiveHover,
+          border: theme.borderStyles.borderInteractiveHovered,
         },
         '&:active': {
-          border: theme.borderStyles.componentInteractiveActive,
+          // BIG TODO: remove redundant "border" from border styles and rename pressed to active
+          border: theme.borderStyles.borderInteractivePressed,
         },
       },
     },
@@ -265,13 +262,13 @@ const Button = styled('button', {
       border: true,
 
       css: {
-        border: theme.borderStyles.componentInteractive_accent,
+        border: theme.borderStyles.borderInteractive,
 
         '&:hover': {
-          border: theme.borderStyles.componentInteractiveHover_accent,
+          border: theme.borderStyles.borderInteractiveHovered_accent,
         },
         '&:active': {
-          border: theme.borderStyles.componentInteractiveActive_accent,
+          border: theme.borderStyles.borderInteractivePressed_accent,
         },
       },
     },
@@ -280,13 +277,13 @@ const Button = styled('button', {
       border: true,
 
       css: {
-        border: theme.borderStyles.componentInteractive_danger,
+        border: theme.borderStyles.borderInteractive_danger,
 
         '&:hover': {
-          border: theme.borderStyles.componentInteractiveHover_danger,
+          border: theme.borderStyles.borderInteractiveHovered_danger,
         },
         '&:active': {
-          border: theme.borderStyles.componentInteractiveActive_danger,
+          border: theme.borderStyles.borderInteractivePressed_danger,
         },
       },
     },

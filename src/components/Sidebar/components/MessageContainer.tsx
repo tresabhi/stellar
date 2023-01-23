@@ -7,5 +7,5 @@ export const MessageContainer = styled('div', {
   justifyContent: 'center',
   flex: 1,
   padding: theme.space.paddingMajor,
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
 });

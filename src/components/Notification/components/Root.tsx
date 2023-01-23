@@ -7,6 +7,6 @@ export const Root = styled('div', {
   gap: theme.space.gapRelatedMajor,
   backgroundColor: theme.colors.appBackground2,
   borderRadius: theme.radii[4],
-  border: theme.borderStyles.componentInteractive,
+  border: theme.borderStyles.borderInteractive,
   width: theme.sizes.toastWidth,
 });

@@ -30,7 +30,7 @@ export const Root = styled('div', {
       position: 'left',
 
       css: {
-        borderRight: theme.borderStyles.componentNonInteractive,
+        borderRight: theme.borderStyles.borderNonInteractive,
       },
     },
     {
@@ -38,7 +38,7 @@ export const Root = styled('div', {
       position: 'right',
 
       css: {
-        borderLeft: theme.borderStyles.componentNonInteractive,
+        borderLeft: theme.borderStyles.borderNonInteractive,
       },
     },
   ],

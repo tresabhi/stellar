@@ -12,7 +12,7 @@ export interface TabProps
 const Container = styled(Button, {
   flex: 1,
   display: 'flex',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
   alignItems: 'center',
   justifyContent: 'center',
 

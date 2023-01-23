@@ -58,7 +58,7 @@ const Container = styled('div', {
 const Navigation = styled('div', {
   width: theme.sizes.settingsNavigationWidth,
   backgroundColor: theme.colors.appBackground2,
-  borderRight: theme.borderStyles.componentNonInteractive,
+  borderRight: theme.borderStyles.borderNonInteractive,
   padding: theme.space.paddingMajor,
   display: 'flex',
   flexDirection: 'column',
@@ -71,7 +71,7 @@ const NavigationButtons = styled('div', {
 });
 const NavigationButton = styled(Button, {
   display: 'flex',
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
   gap: theme.space.gapRelatedMajor,
   borderRadius: theme.radii[4],
   alignItems: 'center',
@@ -87,7 +87,7 @@ const NavigationButton = styled(Button, {
   variants: {
     selected: {
       true: {
-        backgroundColor: theme.colors.componentBackgroundHover,
+        backgroundColor: theme.colors.componentHovered,
       },
     },
 
@@ -99,7 +99,7 @@ const NavigationButton = styled(Button, {
   },
 });
 const ResetToDefault = styled(Button, {
-  padding: theme.space.padding,
+  padding: theme.space.paddingRegular,
   borderRadius: theme.radii[4],
   fontSize: theme.fontSizes[12],
 
@@ -141,7 +141,7 @@ const Section = styled('span', {
 const OptionVertical = styled('div', {
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
 
   variants: {
     fill: {
@@ -162,7 +162,7 @@ const Title = styled('span', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'left',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
 
   '& svg': {
     width: theme.sizes[14],
@@ -176,14 +176,14 @@ const Description = styled('span', {
 const Separator = styled('div', {
   height: theme.sizes[1],
   width: '75%',
-  backgroundColor: theme.colors.componentNonInteractiveBorder,
+  backgroundColor: theme.colors.borderNonInteractive,
   margin: `${theme.space.marginUnrelatedMajor} auto`,
   borderRadius: theme.radii[1],
 });
 const Input = styled(InputPrimitive, {
-  backgroundColor: theme.colors.componentBackground,
+  backgroundColor: theme.colors.component,
   padding: theme.space.paddingMinor,
-  border: theme.borderStyles.componentInteractive,
+  border: theme.borderStyles.borderInteractive,
   borderRadius: theme.radii[4],
   fontSize: theme.fontSizes[12],
   color: theme.colors.textHighContrast,

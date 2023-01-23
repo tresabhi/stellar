@@ -8,7 +8,7 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   padding: `0 ${theme.space.paddingMajor} ${theme.space.paddingMajor} 0`,
-  gap: theme.space.gapUnrelated,
+  gap: theme.space.gapUnrelatedRegular,
   margin: 0,
   listStyle: 'none',
 });

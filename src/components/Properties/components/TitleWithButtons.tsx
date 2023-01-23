@@ -10,7 +10,7 @@ const Container = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: theme.space.gapRelated,
+  gap: theme.space.gapRelatedRegular,
 });
 
 const Title = styled(TitlePrimitive, {
