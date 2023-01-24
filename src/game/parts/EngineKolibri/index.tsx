@@ -35,7 +35,7 @@ export const EngineKolibriData: EngineKolibri = {
   label: 'Kolibri Engine',
 };
 
-export const EngineKolibriLayoutComponent = createPhysicalPart(model, [0, -1]);
+export const EngineKolibriLayoutComponent = createPhysicalPart(model);
 
 export const EngineKolibriIcon = EngineIcon;
 

@@ -9,8 +9,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 - Implement the rest of the parts
 - Parts
   - 3D
-    - `Engine Valiant`: https://i.imgur.com/dJau6vf.png
-    - `Engine Kolibri`: https://i.imgur.com/2PMB5JX.png
     - `Placeholder Ion`: https://i.imgur.com/Up8gkgP.png
     - `Parachute`: https://i.imgur.com/YR58C0G.png
     - `Engine Peregrine`: REMOVE FOR NOW

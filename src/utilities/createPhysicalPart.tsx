@@ -1,15 +1,12 @@
 import { useGLTF } from '@react-three/drei';
 import usePhysicalPart from 'hooks/usePhysicalPart';
 import { useRef } from 'react';
-import { Group, MeshStandardMaterial, Vector2Tuple } from 'three';
+import { Group, MeshStandardMaterial } from 'three';
 import GLTFResult from 'types/GLTFResult';
 import { PartComponentProps } from 'types/Parts';
 
 // TODO: deprecate offset
-export default function createPhysicalPart(
-  model: string,
-  offset: Vector2Tuple = [0, 0],
-) {
+export default function createPhysicalPart(model: string) {
   useGLTF.preload(model);
 
   function Component({ id }: PartComponentProps) {
@@ -19,11 +16,7 @@ export default function createPhysicalPart(
 
     const nodeNames = Object.keys(nodes);
     const meshes = nodeNames.map((nodeName) => (
-      <mesh
-        position={[...offset, 0]}
-        geometry={nodes[nodeName].geometry}
-        key={`node-${nodeName}`}
-      >
+      <mesh geometry={nodes[nodeName].geometry} key={`node-${nodeName}`}>
         <meshBasicMaterial
           map={(nodes[nodeName].material as MeshStandardMaterial)?.map}
         />
