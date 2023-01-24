@@ -9,7 +9,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 - Implement the rest of the parts
 - Parts
   - 3D
-    - `Placeholder Ion`: https://i.imgur.com/Up8gkgP.png
     - `Parachute`: https://i.imgur.com/YR58C0G.png
     - `Engine Peregrine`: REMOVE FOR NOW
     - `Capsule`: https://i.imgur.com/ei0PBxQ.png
