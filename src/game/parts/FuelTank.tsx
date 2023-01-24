@@ -94,10 +94,10 @@ export const VanillaFuelTankData: VanillaFuelTank = {
 
   n: 'Fuel Tank',
   N: {
-    width_original: 1,
-    width_a: 1,
-    width_b: 1,
-    height: 1,
+    width_original: 2,
+    width_a: 2,
+    width_b: 2,
+    height: 2,
     fuel_percent: 1,
   },
   T: {

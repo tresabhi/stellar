@@ -12,7 +12,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
     - `Parachute`: https://i.imgur.com/YR58C0G.png
     - `Engine Peregrine`: REMOVE FOR NOW
     - `Capsule`: https://i.imgur.com/ei0PBxQ.png
-    - `Fuel Tank`: MAKE DEFAULT 2x2
   - Flat
     - `RCS`: https://i.imgur.com/breaWuI.png
     - `Cone`: https://i.imgur.com/DKOMgyf.png
