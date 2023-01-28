@@ -9,8 +9,6 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 - Implement the rest of the parts
 - Parts
   - 3D
-    - `Parachute`: https://i.imgur.com/YR58C0G.png
-    - `Engine Peregrine`: REMOVE FOR NOW
     - `Capsule`: https://i.imgur.com/ei0PBxQ.png
   - Flat
     - `RCS`: https://i.imgur.com/breaWuI.png
@@ -21,4 +19,3 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 
 - Move "never do X" to a checkbox
 - Add padding for drop-downs and hints
-- Follow [capitalization guidelines](https://learn.microsoft.com/en-us/style-guide/capitalization)
