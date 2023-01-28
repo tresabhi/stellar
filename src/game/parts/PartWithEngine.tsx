@@ -26,7 +26,7 @@ export const PartWithEngineData: PartWithEngine = {
   ...PartData,
   ...VanillaPartWithEngineData,
 
-  label: 'Unlabeled Part Engine',
+  label: 'Unlabeled Part With Engine',
 };
 
 export function PartWithEnginePropertyComponent({

@@ -35,6 +35,8 @@ export interface Part extends VanillaPart {
   locked: boolean;
 }
 
+export type PartWithoutName = Omit<Part, 'n'>;
+
 export const VanillaPartData: VanillaPart = {
   n: 'Unknown',
 };

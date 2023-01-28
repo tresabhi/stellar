@@ -2,7 +2,7 @@ import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
-import { Part, PartData } from '../Part';
+import { PartData, PartWithoutName } from '../Part';
 import {
   VanillaPartWithEngine,
   VanillaPartWithEngineData,
@@ -19,7 +19,7 @@ export interface VanillaEngineKolibri
   readonly n: 'Engine Kolibri';
 }
 
-export interface EngineKolibri extends Omit<Part, 'n'>, VanillaEngineKolibri {}
+export interface EngineKolibri extends PartWithoutName, VanillaEngineKolibri {}
 
 export const VanillaEngineKolibriData: VanillaEngineKolibri = {
   ...VanillaPartWithTransformationsData,

@@ -167,6 +167,12 @@
               "$": "Constrain",
               "hint": "Maintains the ratio between X and Y scale"
             }
+          },
+
+          "parachute": {
+            "$": "Parachute",
+
+            "deployed": "Deployed"
           }
         },
 

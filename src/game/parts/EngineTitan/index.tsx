@@ -2,7 +2,7 @@ import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
-import { Part, PartData } from '../Part';
+import { PartData, PartWithoutName } from '../Part';
 import {
   VanillaPartWithEngine,
   VanillaPartWithEngineData,
@@ -19,7 +19,7 @@ export interface VanillaEngineTitan
   readonly n: 'Engine Titan';
 }
 
-export interface EngineTitan extends Omit<Part, 'n'>, VanillaEngineTitan {}
+export interface EngineTitan extends PartWithoutName, VanillaEngineTitan {}
 
 export const VanillaEngineTitanData: VanillaEngineTitan = {
   ...VanillaPartWithTransformationsData,

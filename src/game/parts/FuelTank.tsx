@@ -17,7 +17,7 @@ import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
 import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData } from './Part';
+import { PartData } from './Part';
 import {
   VanillaPartWithTransformations,
   VanillaPartWithTransformationsData,
@@ -87,7 +87,7 @@ export interface VanillaFuelTank extends VanillaPartWithTransformations {
   };
 }
 
-export interface FuelTank extends Omit<Part, 'n'>, VanillaFuelTank {}
+export interface FuelTank extends PartWithoutName, VanillaFuelTank {}
 
 export const VanillaFuelTankData: VanillaFuelTank = {
   ...VanillaPartWithTransformationsData,

@@ -8,6 +8,10 @@ import {
   PartWithEnginePropertyComponent,
 } from 'game/parts/PartWithEngine';
 import {
+  PartWithParachute,
+  PartWithParachutePropertyComponent,
+} from 'game/parts/PartWithParachute';
+import {
   PartWithTransformations,
   PartWithTransformationsPropertyComponent,
 } from 'game/parts/PartWithTransformations';
@@ -31,6 +35,10 @@ const groupedProperties: Record<string, GroupedProperties> = {
   engine: {
     test: (part) => (part as PartWithEngine).B !== undefined,
     Component: PartWithEnginePropertyComponent,
+  },
+  parachute: {
+    test: (part) => (part as PartWithParachute).N !== undefined,
+    Component: PartWithParachutePropertyComponent,
   },
 };
 

@@ -262,7 +262,7 @@ const Button = styled('button', {
       border: true,
 
       css: {
-        border: theme.borderStyles.borderInteractive,
+        border: theme.borderStyles.borderInteractive_accent,
 
         '&:hover': {
           border: theme.borderStyles.borderInteractiveHovered_accent,

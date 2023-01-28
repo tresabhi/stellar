@@ -2,14 +2,14 @@ import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
-import { Part, PartData } from '../Part';
+import { PartData, PartWithoutName } from '../Part';
 import {
   VanillaPartWithEngine,
-  VanillaPartWithEngineData,
+  VanillaPartWithEngineData
 } from '../PartWithEngine';
 import {
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  VanillaPartWithTransformationsData
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
@@ -19,7 +19,7 @@ export interface VanillaEngineHawk
   readonly n: 'Engine Hawk';
 }
 
-export interface EngineHawk extends Omit<Part, 'n'>, VanillaEngineHawk {}
+export interface EngineHawk extends PartWithoutName, VanillaEngineHawk {}
 
 export const VanillaEngineHawkData: VanillaEngineHawk = {
   ...VanillaPartWithTransformationsData,
