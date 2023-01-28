@@ -6,22 +6,22 @@
       "templates": {
         "input_placeholder": "Buscar plantillas...",
         "list": {
-          "apollo_mission": "Misión Apolo",
-          "basic_rocket": "Cohete básico",
+          "apollo_mission": "Apollo mission",
+          "basic_rocket": "Basic rocket",
           "hopper": "Saltador",
           "joints": "Articulaciones",
-          "light_lander": "Módulo de aterrizaje ligero",
-          "orbit_and_re_entry": "Órbita y reentrada",
-          "parachute_and_separator": "Paracaídas y separador",
-          "race_car": "Coche de carreras",
+          "light_lander": "Light lander",
+          "orbit_and_re_entry": "Orbit & re-entry",
+          "parachute_and_separator": "Parachute & separator",
+          "race_car": "Race car",
           "rover": "Rover"
         }
       },
       "file_options": {
         "motto": "Edición de plano redefinida",
-        "from_scratch": "Empezar de cero",
-        "import": "Importar archivo de plano",
-        "open": "Abrir archivo de Estellar"
+        "from_scratch": "Start from scratch",
+        "import": "Import blueprint file",
+        "open": "Open stellar file"
       },
       "status_bar": {
         "docs": "Documentos"
@@ -34,7 +34,7 @@
           "new": "Nuevo",
           "open": "Abrir...",
           "save": "Guardar",
-          "save_as": "Guardar como...",
+          "save_as": "Save as...",
           "import": "Importar...",
           "export": "Exportar..."
         },
@@ -47,11 +47,11 @@
           "cut": "Cortar",
           "paste": "Pegar",
           "duplicate": "Duplicar",
-          "create_snippet": "Crear fragmento"
+          "create_snippet": "Create snippet"
         },
         "selection": {
-          "select_all": "Seleccionar todo",
-          "unselect_all": "Deseleccionar todo",
+          "select_all": "Select all",
+          "unselect_all": "Unselect all",
           "group": "Agrupar",
           "ungroup": "Desagrupar"
         },
@@ -64,13 +64,13 @@
           "delete": "Eliminar"
         },
         "cursor": {
-          "select_deep": "Seleccionar profundo",
-          "select_multiple": "Seleccionar varios",
-          "focus_mode": "Modo de enfoque"
+          "select_deep": "Select deep",
+          "select_multiple": "Select multiple",
+          "focus_mode": "Focus mode"
         },
         "help": {
           "about": "Acerca de Stellar",
-          "report": "Reportar un problema",
+          "report": "Report an issue",
           "discord": "Discord",
           "github": "GitHub"
         },
@@ -83,14 +83,14 @@
         "parts": {
           "$": "Partes",
           "no_parts": {
-            "$": "No hay partes en el plano",
-            "instructions": "Toca el icono %1$s en la barra de herramientas para insertar una parte."
+            "$": "No parts in blueprint",
+            "instructions": "Tap the %1$s icon in the toolbar to insert a part."
           }
         },
         "snippets": {
           "$": "Fragmentos",
           "coming_soon": {
-            "$": "¡Fragmentos próximamente!",
+            "$": "Snippets coming soon!",
             "instructions": "Podrás insertar pequeñas secciones en otros planos aquí como fragmentos. Podrás crear un nuevo fragmento yendo a Barra de herramientas > %1$s Portapapeles > %2$s Crear fragmento."
           }
         }
@@ -99,20 +99,20 @@
         "properties": {
           "$": "Propiedades",
           "no_selection": {
-            "$": "No hay partes seleccionadas",
+            "$": "No parts selected",
             "instructions": "Haz clic en una parte en el plano o en la barra lateral para seleccionarlo."
           },
           "no_properties": {
-            "$": "No hay propiedades para las partes seleccionadas",
+            "$": "No properties for selected parts",
             "instructions": "La(s) parte(s) que has seleccionado carece(n) de propiedades ajustables probablemente porque es/son abstracta(s) o un trabajo en curso."
           },
           "transformations": {
             "$": "Transformaciones",
-            "x_position": "Posición X",
-            "y_position": "Posición Y",
+            "x_position": "X position",
+            "y_position": "Y position",
             "rotation": "Rotación",
-            "x_scale": "Escala X",
-            "y_scale": "Escala Y",
+            "x_scale": "X scale",
+            "y_scale": "Y scale",
             "constrain": {
               "$": "Restringir",
               "hint": "Mantiene la relación entre las escalas X e Y"
@@ -121,28 +121,32 @@
           "engine": {
             "$": "Motor",
             "enabled": "Habilitado",
-            "heat_damage": "Daño de calor"
+            "heat_damage": "Heat damage"
           },
           "fuel_tank": {
-            "$": "Tanque de combustible",
-            "top_width": "Anchura superior",
-            "bottom_width": "Anchura inferior",
+            "$": "Fuel tank",
+            "top_width": "Top width",
+            "bottom_width": "Bottom width",
             "height": "Altura",
             "fuel": "Combustible",
             "constrain": {
               "$": "Restringir",
               "hint": "Mantiene la relación entre las escalas X e Y"
             }
+          },
+          "parachute": {
+            "$": "Parachute",
+            "deployed": "Deployed"
           }
         },
         "inspect": {
           "$": "Inspeccionar",
           "select_one_part": {
-            "$": "Seleccionar una parte",
-            "instructions": "O no has seleccionado ninguna parte o tienes actualmente más de una parte seleccionada"
+            "$": "Select a part",
+            "instructions": "Select a single part to inspect the details of"
           },
           "meta_data": {
-            "$": "Metadatos",
+            "$": "Meta data",
             "id": "ID",
             "parent_id": "ID Padre",
             "name": "Nombre",
@@ -188,7 +192,7 @@
   },
   "landscape_prompt": {
     "message": "Parece que estás en modo retrato. Por favor, gira al modo horizontal.%1$sSi estás en un escritorio, esto puede ser descartado.",
-    "never": "No volver a preguntar de nuevo",
+    "never": "Never ask again",
     "dismiss": "Descartar"
   },
   "notifications": {
@@ -204,7 +208,7 @@
       "title": "¡Ahora Stellar puede instalarse!",
       "description": "Stellar es un %1$sPWA%2$s y puede ser instalado en tu dispositivo para uso sin conexión y para un fácil acceso.",
       "actions": {
-        "never": "No volver a preguntar de nuevo",
+        "never": "Never ask again",
         "dismiss": "Descartar",
         "install": "Instalar"
       }
@@ -234,9 +238,9 @@
       "title": "¡Versión inestable!",
       "description": "Actualmente estás usando %1$s el cual puede ser altamente inestable ya que se ha probado muy poco. Quizás te gustaría usar %2$sla versión beta%3$s en su lugar.",
       "actions": {
-        "never": "No volver a preguntar de nuevo",
+        "never": "Never ask again",
         "dismiss": "Descartar",
-        "beta": "Usar beta"
+        "beta": "Use beta"
       }
     },
     "missing_parts": {
@@ -245,7 +249,7 @@
       "description": "La parte no fue importada porque aún no existe en %1$s:",
       "description_plural": "Las partes no fueron importadas porque aún no existen en %1$s:",
       "actions": {
-        "never": "No volver a mostrar de nuevo",
+        "never": "Never show again",
         "proceed": "Proceder"
       }
     },
@@ -255,7 +259,7 @@
         "interface": "Interfaz",
         "editor": "Editor",
         "performance": "Rendimiento",
-        "file": "Preferencias de archivo",
+        "file": "File preferences",
         "debug": "Depuración",
         "reset": "Reiniciar a los valores por defecto"
       },
@@ -267,14 +271,14 @@
             "description": "Controla la paleta de colores de toda la interfaz."
           },
           "default_tab": {
-            "title": "Pestaña por defecto",
+            "title": "Default tab",
             "description": "Especifica qué pestaña de Stellar se abrirá por defecto al iniciar."
           },
           "touchscreen_mode": {
-            "title": "Modo pantalla táctil",
+            "title": "Touchscreen mode",
             "description": "Controla cómo la información en pantalla está presentada de acuerdo a tu tipo de pantalla.",
             "options": {
-              "auto": "Autodetectar",
+              "auto": "Auto-detect",
               "on": "Activado",
               "off": "Desactivado"
             }
@@ -284,55 +288,55 @@
             "description": "Especifica a qué idioma el texto de la pantalla está traducido. Ayúdanos a traducir Stellar a tu idioma en %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
-            "title": "Aviso de orientación",
+            "title": "Orientation prompt",
             "description": "Muestra un aviso cuando tu dispositivo está orientado en modo vertical."
           },
           "installation_prompt": {
-            "title": "Aviso de instalación",
+            "title": "Installation prompt",
             "description": "Te notifica cuando Stellar detecta la capacidad dentro de tu dispositivo para instalarla como %1$sPWA%2$s. Tu dispositivo puede ser elegible sin importar de una notificación."
           },
           "instability_prompt": {
-            "title": "Advertencia de inestabilidad",
+            "title": "Instability warning",
             "description": "Te advierte cuando estás usando una versión inestable o desconocida de Stellar."
           },
           "missing_parts": {
-            "title": "Partes faltantes",
+            "title": "Missing parts",
             "description": "Te muestra una lista de todas las partes que no pudieron ser importadas."
           }
         },
         "editor": {
           "$": "Editor",
           "undo_limit": {
-            "title": "Deshacer límite",
+            "title": "Undo limit",
             "description": "El número máximo de parches del historial de versiones que el editor debe almacenar. 4096 es el máximo; 16 es el mínimo."
           }
         },
         "performance": {
           "$": "Rendimiento",
           "regress": {
-            "title": "Cantidad de regresión",
+            "title": "Regress amount",
             "description": "Reduce la resolución del lienzo cuando se realizan tareas computacionalmente costosas como: paneamiento, escalamiento, rotación, etc. Cuanto más bajo es el valor, más agresivo es la regresión."
           }
         },
         "file": {
-          "$": "Preferencias de archivo",
+          "$": "File preferences",
           "format": {
-            "title": "Formatear archivos emitidos",
+            "title": "Format Emitted files",
             "description": "Formatea el JSON en los archivos emitidos por Stellar para que sea más legible."
           },
           "watermark": {
-            "title": "Planos exportados con marca de agua",
+            "title": "Watermark exported blueprints",
             "description": "Añade una marca de agua enlazada a la versión de Stellar usada para generar el archivo."
           },
           "default_name": {
-            "title": "Nombre por defecto de archivo emitido",
+            "title": "Emitted file default name",
             "description": "El nombre por defecto para cualquiera de los archivos sin nombrar que son exportados por Stellar."
           }
         },
         "debug": {
           "$": "Depuración",
           "error_screen_debug": {
-            "title": "Mostrar la información de depuración en la pantalla de error",
+            "title": "Show debug info on error screen",
             "description": "Muestra el mensaje de error entero y un código fuente mapeado de la pila en seguimiento cuando un error crítico interrumpe Stellar."
           }
         }
@@ -348,7 +352,7 @@
     }
   },
   "themes": {
-    "theme_light": "Stellar claro",
-    "theme_dark": "Stellar oscuro"
+    "theme_light": "Stellar light",
+    "theme_dark": "Stellar dark"
   }
 }
