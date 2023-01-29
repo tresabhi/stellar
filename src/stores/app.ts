@@ -1,5 +1,5 @@
 import { OrthographicCamera } from 'three';
-import create from 'zustand';
+import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 import { Snippet } from './snippets';
 

@@ -1,6 +1,6 @@
 import { Part } from 'game/parts/Part';
 import { merge } from 'lodash';
-import create from 'zustand';
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export interface Snippet {

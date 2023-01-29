@@ -1,5 +1,5 @@
 import { Patch } from 'immer';
-import create from 'zustand';
+import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface VersionItem {

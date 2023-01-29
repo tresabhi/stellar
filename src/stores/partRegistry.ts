@@ -3,7 +3,7 @@ import { Part, VanillaPart } from 'game/parts/Part';
 import PartCategory from 'hooks/constants/partCategory';
 import { FC } from 'react';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
-import create from 'zustand';
+import { create } from 'zustand';
 
 export type PartRegistryItem<Type extends Part> = {
   category: PartCategory;

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import create from 'zustand';
+import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 export interface NotificationsProps {

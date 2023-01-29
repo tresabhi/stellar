@@ -1,6 +1,6 @@
 import { Blueprint, blueprintData } from 'game/Blueprint';
 import { cloneDeep } from 'lodash';
-import create from 'zustand';
+import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 
 const useBlueprint = create<

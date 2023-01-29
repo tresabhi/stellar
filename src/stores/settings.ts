@@ -2,7 +2,7 @@ import { RenamePartsOptions } from 'core/part/rename';
 import { cloneDeep, merge } from 'lodash';
 import { theme } from 'stitches.config';
 import themeDark from 'stitches.config/themes/dark';
-import create from 'zustand';
+import { create } from 'zustand';
 import { persist, subscribeWithSelector } from 'zustand/middleware';
 import { Tab } from './app';
 
