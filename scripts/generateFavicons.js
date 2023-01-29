@@ -106,7 +106,7 @@ async function generateFavicons(buildType, faviconAPIKey) {
 
             favicons.forEach((favicon) => {
               if (COPY_FILE_TYPES.includes(extname(favicon))) {
-                copyFileSync(`temp/favicons/${favicon}`, `build/${favicon}`);
+                copyFileSync(`temp/favicons/${favicon}`, `dist/${favicon}`);
               }
             });
 
