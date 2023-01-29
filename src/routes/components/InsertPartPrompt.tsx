@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { InputWithIcon } from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
-import { SearchItem } from 'components/Search';
+import { SearchItems } from 'components/Search';
 import getParent from 'core/part/getParent';
 import getPart from 'core/part/getPart';
 import insert from 'core/part/insert';
@@ -15,7 +15,7 @@ import { PromptProps } from 'stores/prompts';
 export default function InsertPartPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const input = useRef<HTMLInputElement>(null);
-  const list: SearchItem[] = [];
+  const list: SearchItems = [];
   const partRegistry = usePartRegistry();
   const { selections } = useBlueprint.getState();
   const lastSelectionId = selections[selections.length - 1];

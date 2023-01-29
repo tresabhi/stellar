@@ -9,11 +9,13 @@ import {
 } from 'react';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 
-export type SearchItem = {
+export interface SearchItem {
   string: string;
   node: ReactNode;
   callback?: () => void;
-};
+}
+
+export type SearchItems = SearchItem[];
 
 export interface SearchProps {
   list: SearchItem[];

@@ -3,7 +3,7 @@ import {
   FilePlusIcon,
   FileTextIcon,
   MagnifyingGlassIcon,
-  UploadIcon,
+  UploadIcon
 } from '@radix-ui/react-icons';
 import apolloMission from 'assets/blueprints/apollo-mission.json';
 import basicRocket from 'assets/blueprints/basic-rocket.json';
@@ -15,7 +15,6 @@ import { fileOpen } from 'browser-fs-access';
 import ButtonPrimitive from 'components/Button';
 import { InputWithIcon } from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
-import { SearchItem } from 'components/Search';
 import mutateApp from 'core/app/mutateApp';
 import importFile from 'core/blueprint/importFile';
 import loadBlueprint from 'core/blueprint/loadBlueprint';
@@ -171,7 +170,7 @@ export default function CreateTab() {
             toLayout();
           };
 
-          const searchItem: SearchItem = {
+          const searchItem = {
             string: translation,
             node: (
               <Prompt.SearchItem
