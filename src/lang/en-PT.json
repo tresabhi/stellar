@@ -6,22 +6,22 @@
       "templates": {
         "input_placeholder": "Sail frames...",
         "list": {
-          "apollo_mission": "Up Yonder's Cheese Lootin'",
-          "basic_rocket": "Pathetic Up Yonderer",
+          "apollo_mission": "Apollo mission",
+          "basic_rocket": "Basic rocket",
           "hopper": "Nothin' a Ship can't do",
           "joints": "Joinin'",
-          "light_lander": "Speedy Docker",
-          "orbit_and_re_entry": "Up Yonder 'n Dockin' Speedy",
-          "parachute_and_separator": "Dockin' Snail 'n Undockin'",
-          "race_car": "Speedy Soil Ship",
+          "light_lander": "Light lander",
+          "orbit_and_re_entry": "Orbit & re-entry",
+          "parachute_and_separator": "Parachute & separator",
+          "race_car": "Race car",
           "rover": "Savvy Soil Ship"
         }
       },
       "file_options": {
         "motto": "Paper markin' done right",
-        "from_scratch": "Sail From Dock",
-        "import": "Hard Dock Markin' Paper",
-        "open": "Dock Savvy Paper Markin'"
+        "from_scratch": "Start from scratch",
+        "import": "Import blueprint file",
+        "open": "Open stellar file"
       },
       "status_bar": {
         "docs": "Maps"
@@ -34,7 +34,7 @@
           "new": "Savvy",
           "open": "Dock...",
           "save": "Deport",
-          "save_as": "Mockery Deport...",
+          "save_as": "Save as...",
           "import": "Hard Dock...",
           "export": "Deport..."
         },
@@ -47,11 +47,11 @@
           "cut": "Seize",
           "paste": "Walk The Plank",
           "duplicate": "Witchcraft",
-          "create_snippet": "Erect Booty"
+          "create_snippet": "Create snippet"
         },
         "selection": {
-          "select_all": "Lookin' at Them All",
-          "unselect_all": "Ain't Lookin' At All",
+          "select_all": "Select all",
+          "unselect_all": "Unselect all",
           "group": "Group",
           "ungroup": "Ungroup"
         },
@@ -64,13 +64,13 @@
           "delete": "Delete"
         },
         "cursor": {
-          "select_deep": "Select Deep",
-          "select_multiple": "Select Multiple",
-          "focus_mode": "Focus Mode"
+          "select_deep": "Select deep",
+          "select_multiple": "Select multiple",
+          "focus_mode": "Focus mode"
         },
         "help": {
           "about": "About Stellar",
-          "report": "Report an Issue",
+          "report": "Report an issue",
           "discord": "Discord",
           "github": "GitHub"
         },
@@ -83,14 +83,14 @@
         "parts": {
           "$": "Parts",
           "no_parts": {
-            "$": "No Parts in Blueprint",
-            "instructions": "Tap the %1$s icon in the Toolbar to insert a part."
+            "$": "No parts in blueprint",
+            "instructions": "Tap the %1$s icon in the toolbar to insert a part."
           }
         },
         "snippets": {
           "$": "Snippets",
           "coming_soon": {
-            "$": "Snippets Coming Soon!",
+            "$": "Snippets coming soon!",
             "instructions": "You will be able to insert small sections of other blueprints here as snippets. You will be able to create a new snippet by going to Toolbar > %1$s Clipboard > %2$s Create Snippet."
           }
         }
@@ -99,20 +99,20 @@
         "properties": {
           "$": "Properties",
           "no_selection": {
-            "$": "No Parts Selected",
+            "$": "No parts selected",
             "instructions": "Click on a part either on the blueprint or in the sidebar to select it."
           },
           "no_properties": {
-            "$": "No Properties for Selected Parts",
+            "$": "No properties for selected parts",
             "instructions": "The part(s) you have selected lack adjustable properties probably because they're either abstract or a work in progress."
           },
           "transformations": {
             "$": "Transformations",
-            "x_position": "X Position",
-            "y_position": "Y Position",
+            "x_position": "X position",
+            "y_position": "Y position",
             "rotation": "Rotation",
-            "x_scale": "X Scale",
-            "y_scale": "Y Scale",
+            "x_scale": "X scale",
+            "y_scale": "Y scale",
             "constrain": {
               "$": "Constrain",
               "hint": "Maintains the ratio between X and Y scale"
@@ -121,28 +121,32 @@
           "engine": {
             "$": "Engine",
             "enabled": "Enabled",
-            "heat_damage": "Heat Damage"
+            "heat_damage": "Heat damage"
           },
           "fuel_tank": {
-            "$": "Fuel Tank",
-            "top_width": "Top Width",
-            "bottom_width": "Bottom Width",
+            "$": "Fuel tank",
+            "top_width": "Top width",
+            "bottom_width": "Bottom width",
             "height": "Height",
             "fuel": "Fuel",
             "constrain": {
               "$": "Constrain",
               "hint": "Maintains the ratio between X and Y scale"
             }
+          },
+          "parachute": {
+            "$": "Parachute",
+            "deployed": "Deployed"
           }
         },
         "inspect": {
           "$": "Inspect",
           "select_one_part": {
-            "$": "Select a Part",
-            "instructions": "You have either no parts or more than 1 parts currently selected"
+            "$": "Select a part",
+            "instructions": "Select a single part to inspect the details of"
           },
           "meta_data": {
-            "$": "Meta Data",
+            "$": "Meta data",
             "id": "ID",
             "parent_id": "Parent ID",
             "name": "Name",
@@ -188,7 +192,7 @@
   },
   "landscape_prompt": {
     "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
-    "never": "Never Ask Again",
+    "never": "Never ask again",
     "dismiss": "Dismiss"
   },
   "notifications": {
@@ -204,7 +208,7 @@
       "title": "Stellar can now be installed!",
       "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
       "actions": {
-        "never": "Never Ask Again",
+        "never": "Never ask again",
         "dismiss": "Dismiss",
         "install": "Install"
       }
@@ -234,9 +238,9 @@
       "title": "Unstable version!",
       "description": "You are currently using %1$s, which can be highly unstable as it remains very untested. You may want to use %2$sthe beta version%3$s instead.",
       "actions": {
-        "never": "Never Ask Again",
+        "never": "Never ask again",
         "dismiss": "Dismiss",
-        "beta": "Use Beta"
+        "beta": "Use beta"
       }
     },
     "missing_parts": {
@@ -245,7 +249,7 @@
       "description": "The following part was not imported because it doesn't exist in %1$s yet:",
       "description_plural": "The following parts were not imported because they don't exist in %1$s yet:",
       "actions": {
-        "never": "Never Show Again",
+        "never": "Never show again",
         "proceed": "Proceed"
       }
     },
@@ -255,7 +259,9 @@
         "interface": "Interface",
         "editor": "Editor",
         "performance": "Performance",
-        "debug": "Debug"
+        "file": "File preferences",
+        "debug": "Debug",
+        "reset": "Reset to defaults"
       },
       "groups": {
         "interface": {
@@ -265,14 +271,14 @@
             "description": "Controls the color palette of the entire interface."
           },
           "default_tab": {
-            "title": "Default Tab",
+            "title": "Default tab",
             "description": "Specifies which tab Stellar will open on launch by default."
           },
           "touchscreen_mode": {
-            "title": "Touchscreen Mode",
+            "title": "Touchscreen mode",
             "description": "Controls how on-screen information is presented in compliance with your screen type.",
             "options": {
-              "auto": "Auto-Detect",
+              "auto": "Auto-detect",
               "on": "On",
               "off": "Off"
             }
@@ -282,48 +288,71 @@
             "description": "Specifies what language the text on screen is translated to. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
-            "title": "Orientation Prompt",
+            "title": "Orientation prompt",
             "description": "Shows a prompt when your device is oriented in portrait mode."
           },
           "installation_prompt": {
-            "title": "Installation Prompt",
+            "title": "Installation prompt",
             "description": "Notifies you when Stellar detects the capability within your device to install it as a %1$sPWA%2$s. Your device may be eligible regardless of a notification."
           },
           "instability_prompt": {
-            "title": "Instability Warning",
+            "title": "Instability warning",
             "description": "Warns you when you're running an unstable or unknown version of Stellar."
           },
           "missing_parts": {
-            "title": "Missing Parts",
+            "title": "Missing parts",
             "description": "Shows you a list of all the parts that could not be imported."
           }
         },
         "editor": {
           "$": "Editor",
           "undo_limit": {
-            "title": "Undo Limit",
+            "title": "Undo limit",
             "description": "The maximum number of version history patches the editor should store. 4096 is the maximum; 16 is the minimum."
           }
         },
         "performance": {
           "$": "Performance",
           "regress": {
-            "title": "Regress Amount",
+            "title": "Regress amount",
             "description": "Reduces the canvas resolution when performing computationally expensive tasks like panning, scaling, rotation, etc. Lower the value, the more aggressive the regression."
+          }
+        },
+        "file": {
+          "$": "File preferences",
+          "format": {
+            "title": "Format Emitted files",
+            "description": "Formats the JSON in files emitted by Stellar to be more readable."
+          },
+          "watermark": {
+            "title": "Watermark exported blueprints",
+            "description": "Adds a watermark linking to the version of Stellar used to generate the file."
+          },
+          "default_name": {
+            "title": "Emitted file default name",
+            "description": "The default name for any unnamed files that are exported by Stellar."
           }
         },
         "debug": {
           "$": "Debug",
           "error_screen_debug": {
-            "title": "Show Debug Info on Error Screen",
+            "title": "Show debug info on error screen",
             "description": "Displays the full error message and a source-mapped stack trace when a critical error interrupts Stellar."
           }
         }
       }
+    },
+    "confirmation": {
+      "title": "Are you sure you want to do this?",
+      "description": "This action is may not be reversible.",
+      "actions": {
+        "cancel": "Cancel",
+        "yes": "Yes"
+      }
     }
   },
   "themes": {
-    "theme_light": "Stellar Light",
-    "theme_dark": "Stellar Dark"
+    "theme_light": "Stellar light",
+    "theme_dark": "Stellar dark"
   }
 }

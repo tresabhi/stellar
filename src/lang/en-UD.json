@@ -6,22 +6,22 @@
       "templates": {
         "input_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
         "list": {
-          "apollo_mission": "uoᴉssᴉW ollod∀",
-          "basic_rocket": "ʇǝʞɔoɹ ɔᴉsɐq",
+          "apollo_mission": "Apollo mission",
+          "basic_rocket": "Basic rocket",
           "hopper": "ɹǝddoH",
           "joints": "sʇuᴉoſ",
-          "light_lander": "ɹǝpuɐ˥ ʇɥƃᴉ˥",
-          "orbit_and_re_entry": "ʎɹʇuǝ-ǝɹ ⅋ ʇᴉqɹO",
-          "parachute_and_separator": "ɹoʇɐɹɐdǝS ⅋ ǝʇnɥɔɐɹɐԀ",
-          "race_car": "ɹɐƆ ǝɔɐɹ",
+          "light_lander": "Light lander",
+          "orbit_and_re_entry": "Orbit & re-entry",
+          "parachute_and_separator": "Parachute & separator",
+          "race_car": "Race car",
           "rover": "ɹǝʌoɹ"
         }
       },
       "file_options": {
         "motto": "pǝuᴉɟǝpǝɹ ƃuᴉʇᴉpǝ ʇuᴉɹdǝnlq",
-        "from_scratch": "ɥɔʇɐɹɔS ɯoɹℲ ʇɹɐʇS",
-        "import": "ǝlᴉℲ ʇuᴉɹdǝnlq ʇɹodɯI",
-        "open": "ǝlᴉℲ ɹɐllǝʇS uǝdO"
+        "from_scratch": "Start from scratch",
+        "import": "Import blueprint file",
+        "open": "Open stellar file"
       },
       "status_bar": {
         "docs": "sɔop"
@@ -34,7 +34,7 @@
           "new": "ʍǝN",
           "open": "…uǝdO",
           "save": "ǝʌɐS",
-          "save_as": "˙˙˙s∀ ǝʌɐS",
+          "save_as": "Save as...",
           "import": "…ʇɹodɯI",
           "export": "…ʇɹodxƎ"
         },
@@ -47,11 +47,11 @@
           "cut": "ʇnƆ",
           "paste": "ǝʇsɐԀ",
           "duplicate": "ǝʇɐɔᴉldnp",
-          "create_snippet": "ʇǝddᴉuS ǝʇɐǝɹƆ"
+          "create_snippet": "Create snippet"
         },
         "selection": {
-          "select_all": "ll∀ ʇɔǝlǝS",
-          "unselect_all": "ll∀ ʇɔǝlǝsu∩",
+          "select_all": "Select all",
+          "unselect_all": "Unselect all",
           "group": "dnoɹפ",
           "ungroup": "dnoɹƃu∩"
         },
@@ -64,13 +64,13 @@
           "delete": "ǝʇǝlǝp"
         },
         "cursor": {
-          "select_deep": "dǝǝp ʇɔǝlǝS",
-          "select_multiple": "ǝldᴉʇlnW ʇɔǝlǝS",
-          "focus_mode": "ǝpoW snɔoℲ"
+          "select_deep": "Select deep",
+          "select_multiple": "Select multiple",
+          "focus_mode": "Focus mode"
         },
         "help": {
           "about": "ɹɐllǝʇS ʇnoq∀",
-          "report": "ǝnssI uɐ ʇɹodǝɹ",
+          "report": "Report an issue",
           "discord": "pɹoɔsᴉp",
           "github": "qnHʇᴉפ"
         },
@@ -83,14 +83,14 @@
         "parts": {
           "$": "sʇɹɐԀ",
           "no_parts": {
-            "$": "ʇuᴉɹdǝnlq uᴉ sʇɹɐԀ oN",
-            "instructions": "˙ʇɹɐd ɐ ʇɹǝsuᴉ oʇ ɹɐqloo┴ ǝɥʇ uᴉ uoɔᴉ %1$s ǝɥʇ dɐ┴"
+            "$": "No parts in blueprint",
+            "instructions": "Tap the %1$s icon in the toolbar to insert a part."
           }
         },
         "snippets": {
           "$": "sʇǝddᴉuS",
           "coming_soon": {
-            "$": "¡uooS ƃuᴉɯoƆ sʇǝddᴉuS",
+            "$": "Snippets coming soon!",
             "instructions": "˙ʇǝddᴉuS ǝʇɐǝɹƆ %2$s < pɹɐoqdᴉlƆ %1$s < ɹɐqloo┴ oʇ ƃuᴉoƃ ʎq ʇǝddᴉus ʍǝu ɐ ǝʇɐǝɹɔ oʇ ǝlqɐ ǝq llᴉʍ no⅄ ˙sʇǝddᴉus sɐ ǝɹǝɥ sʇuᴉɹdǝnlq ɹǝɥʇo ɟo suoᴉʇɔǝs llɐɯs ʇɹǝsuᴉ oʇ ǝlqɐ ǝq llᴉʍ no⅄"
           }
         }
@@ -99,20 +99,20 @@
         "properties": {
           "$": "sǝᴉʇɹǝdoɹԀ",
           "no_selection": {
-            "$": "pǝʇɔǝlǝS sʇɹɐԀ oN",
+            "$": "No parts selected",
             "instructions": "˙ʇᴉ ʇɔǝlǝs oʇ ɹɐqǝpᴉs ǝɥʇ uᴉ ɹo ʇuᴉɹdǝnlq ǝɥʇ uo ɹǝɥʇᴉǝ ʇɹɐd ɐ uo ʞɔᴉlƆ"
           },
           "no_properties": {
-            "$": "sʇɹɐԀ pǝʇɔǝlǝS ɹoɟ sǝᴉʇɹǝdoɹԀ oN",
+            "$": "No properties for selected parts",
             "instructions": "˙ssǝɹƃoɹd uᴉ ʞɹoʍ ɐ ɹo ʇɔɐɹʇsqɐ ɹǝɥʇᴉǝ ǝɹ,ʎǝɥʇ ǝsnɐɔǝq ʎlqɐqoɹd sǝᴉʇɹǝdoɹd ǝlqɐʇsnɾpɐ ʞɔɐl pǝʇɔǝlǝs ǝʌɐɥ noʎ (s)ʇɹɐd ǝɥ┴"
           },
           "transformations": {
             "$": "suoᴉʇɐɯɹoɟsuɐɹ┴",
-            "x_position": "uoᴉʇᴉsoԀ X",
-            "y_position": "uoᴉʇᴉsoԀ ⅄",
+            "x_position": "X position",
+            "y_position": "Y position",
             "rotation": "uoᴉʇɐʇoɹ",
-            "x_scale": "ǝlɐɔS X",
-            "y_scale": "ǝlɐɔS ⅄",
+            "x_scale": "X scale",
+            "y_scale": "Y scale",
             "constrain": {
               "$": "uᴉɐɹʇsuoƆ",
               "hint": "ǝlɐɔs ⅄ puɐ X uǝǝʍʇǝq oᴉʇɐɹ ǝɥʇ suᴉɐʇuᴉɐW"
@@ -121,28 +121,32 @@
           "engine": {
             "$": "ǝuᴉƃuƎ",
             "enabled": "pǝlqɐuƎ",
-            "heat_damage": "ǝƃɐɯɐp ʇɐǝH"
+            "heat_damage": "Heat damage"
           },
           "fuel_tank": {
-            "$": "ʞuɐ┴ lǝnℲ",
-            "top_width": "ɥʇpᴉM do┴",
-            "bottom_width": "ɥʇpᴉM ɯoʇʇoq",
+            "$": "Fuel tank",
+            "top_width": "Top width",
+            "bottom_width": "Bottom width",
             "height": "ʇɥƃᴉǝH",
             "fuel": "lǝnℲ",
             "constrain": {
               "$": "uᴉɐɹʇsuoƆ",
               "hint": "ǝlɐɔs ⅄ puɐ X uǝǝʍʇǝq oᴉʇɐɹ ǝɥʇ suᴉɐʇuᴉɐW"
             }
+          },
+          "parachute": {
+            "$": "Parachute",
+            "deployed": "Deployed"
           }
         },
         "inspect": {
           "$": "ʇɔǝdsuI",
           "select_one_part": {
-            "$": "ʇɹɐԀ ɐ ʇɔǝlǝS",
-            "instructions": "pǝʇɔǝlǝs ʎlʇuǝɹɹnɔ sʇɹɐd 1 uɐɥʇ ǝɹoɯ ɹo sʇɹɐd ou ɹǝɥʇᴉǝ ǝʌɐɥ no⅄"
+            "$": "Select a part",
+            "instructions": "Select a single part to inspect the details of"
           },
           "meta_data": {
-            "$": "ɐʇɐp ɐʇǝW",
+            "$": "Meta data",
             "id": "pI",
             "parent_id": "pI ʇuǝɹɐԀ",
             "name": "ǝɯɐN",
@@ -188,7 +192,7 @@
   },
   "landscape_prompt": {
     "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
-    "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
+    "never": "Never ask again",
     "dismiss": "ssᴉɯsᴉp"
   },
   "notifications": {
@@ -204,7 +208,7 @@
       "title": "¡pǝllɐʇsuᴉ ǝq ʍou uɐɔ ɹɐllǝʇS",
       "description": "˙ssǝɔɔɐ ʎsɐǝ puɐ ǝsn ǝuᴉlɟɟo ɹoɟ ǝɔᴉʌǝp ɹnoʎ oʇ pǝllɐʇsuᴉ ǝq uɐɔ puɐ %2$s∀MԀ%1$s ɐ sᴉ ɹɐllǝʇS",
       "actions": {
-        "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
+        "never": "Never ask again",
         "dismiss": "ssᴉɯsᴉp",
         "install": "llɐʇsuI"
       }
@@ -234,9 +238,9 @@
       "title": "¡uoᴉsɹǝʌ ǝlqɐʇsu∩",
       "description": "˙pɐǝʇsuᴉ %3$suoᴉsɹǝʌ ɐʇǝq ǝɥʇ%2$s ǝsn oʇ ʇuɐʍ ʎɐɯ no⅄ ˙pǝʇsǝʇun ʎɹǝʌ suᴉɐɯǝɹ ʇᴉ sɐ ǝlqɐʇsun ʎlɥƃᴉɥ ǝq uɐɔ ɥɔᴉɥʍ '%1$s ƃuᴉsn ʎlʇuǝɹɹnɔ ǝɹɐ no⅄",
       "actions": {
-        "never": "uᴉɐƃ∀ ʞs∀ ɹǝʌǝN",
+        "never": "Never ask again",
         "dismiss": "ssᴉɯsᴉp",
-        "beta": "ɐʇǝq ǝs∩"
+        "beta": "Use beta"
       }
     },
     "missing_parts": {
@@ -245,7 +249,7 @@
       "description": ":ʇǝʎ %1$s uᴉ ʇsᴉxǝ ʇ,usǝop ʇᴉ ǝsnɐɔǝq pǝʇɹodɯᴉ ʇou sɐʍ ʇɹɐd ƃuᴉʍolloɟ ǝɥ┴",
       "description_plural": ":ʇǝʎ %1$s uᴉ ʇsᴉxǝ ʇ,uop ʎǝɥʇ ǝsnɐɔǝq pǝʇɹodɯᴉ ʇou ǝɹǝʍ sʇɹɐd ƃuᴉʍolloɟ ǝɥ┴",
       "actions": {
-        "never": "uᴉɐƃ∀ ʍoɥS ɹǝʌǝN",
+        "never": "Never show again",
         "proceed": "pǝǝɔoɹԀ"
       }
     },
@@ -255,7 +259,9 @@
         "interface": "ǝɔɐɟɹǝʇuI",
         "editor": "ɹoʇ!pƎ",
         "performance": "ǝɔuɐɯɹoɟɹǝԀ",
-        "debug": "ƃnqǝp"
+        "file": "File preferences",
+        "debug": "ƃnqǝp",
+        "reset": "sʇlnɐɟǝp oʇ ʇǝsǝɹ"
       },
       "groups": {
         "interface": {
@@ -265,14 +271,14 @@
             "description": "˙ǝɔɐɟɹǝʇuᴉ ǝɹᴉʇuǝ ǝɥʇ ɟo ǝʇʇǝlɐd ɹoloɔ ǝɥʇ sloɹʇuoƆ"
           },
           "default_tab": {
-            "title": "qɐ┴ ʇlnɐɟǝp",
+            "title": "Default tab",
             "description": "˙ʇlnɐɟǝp ʎq ɥɔunɐl uo uǝdo llᴉʍ ɹɐllǝʇS qɐʇ ɥɔᴉɥʍ sǝᴉɟᴉɔǝdS"
           },
           "touchscreen_mode": {
-            "title": "ǝpoW uǝǝɹɔsɥɔno┴",
+            "title": "Touchscreen mode",
             "description": "˙ǝdʎʇ uǝǝɹɔs ɹnoʎ ɥʇᴉʍ ǝɔuɐᴉldɯoɔ uᴉ pǝʇuǝsǝɹd sᴉ uoᴉʇɐɯɹoɟuᴉ uǝǝɹɔs-uo ʍoɥ sloɹʇuoƆ",
             "options": {
-              "auto": "ʇɔǝʇǝp-oʇn∀",
+              "auto": "Auto-detect",
               "on": "uO",
               "off": "ɟɟO"
             }
@@ -282,48 +288,71 @@
             "description": "˙%2$suᴉpʍoɹƆ%1$s uo ǝƃɐnƃuɐl ɹnoʎ oʇ ɹɐllǝʇS ǝʇɐlsuɐɹʇ sn dlǝH ˙oʇ pǝʇɐlsuɐɹʇ sᴉ uǝǝɹɔs uo ʇxǝʇ ǝɥʇ ǝƃɐnƃuɐl ʇɐɥʍ sǝᴉɟᴉɔǝdS"
           },
           "orientation_prompt": {
-            "title": "ʇdɯoɹԀ uoᴉʇɐʇuǝᴉɹO",
+            "title": "Orientation prompt",
             "description": "˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ pǝʇuǝᴉɹo sᴉ ǝɔᴉʌǝp ɹnoʎ uǝɥʍ ʇdɯoɹd ɐ sʍoɥS"
           },
           "installation_prompt": {
-            "title": "ʇdɯoɹԀ uoᴉʇɐllɐʇsuI",
+            "title": "Installation prompt",
             "description": "˙uoᴉʇɐɔᴉɟᴉʇou ɐ ɟo ssǝlpɹɐƃǝɹ ǝlqᴉƃᴉlǝ ǝq ʎɐɯ ǝɔᴉʌǝp ɹno⅄ ˙%2$s∀MԀ%1$s ɐ sɐ ʇᴉ llɐʇsuᴉ oʇ ǝɔᴉʌǝp ɹnoʎ uᴉɥʇᴉʍ ʎʇᴉlᴉqɐdɐɔ ǝɥʇ sʇɔǝʇǝp ɹɐllǝʇS uǝɥʍ noʎ sǝᴉɟᴉʇoN"
           },
           "instability_prompt": {
-            "title": "ƃuᴉuɹɐM ʎʇᴉlᴉqɐʇsuI",
+            "title": "Instability warning",
             "description": "˙ɹɐllǝʇS ɟo uoᴉsɹǝʌ uʍouʞun ɹo ǝlqɐʇsun uɐ ƃuᴉuunɹ ǝɹ,noʎ uǝɥʍ noʎ suɹɐM"
           },
           "missing_parts": {
-            "title": "sʇɹɐԀ ƃuᴉssᴉW",
+            "title": "Missing parts",
             "description": "˙pǝʇɹodɯᴉ ǝq ʇou plnoɔ ʇɐɥʇ sʇɹɐd ǝɥʇ llɐ ɟo ʇsᴉl ɐ noʎ sʍoɥS"
           }
         },
         "editor": {
           "$": "ɹoʇ!pƎ",
           "undo_limit": {
-            "title": "ʇᴉɯᴉ˥ opu∩",
+            "title": "Undo limit",
             "description": "˙ɯnɯᴉuᴉɯ ǝɥʇ sᴉ 9Ɩ ;ɯnɯᴉxɐɯ ǝɥʇ sᴉ 960ㄣ ˙ǝɹoʇs plnoɥs ɹoʇᴉpǝ ǝɥʇ sǝɥɔʇɐd ʎɹoʇsᴉɥ uoᴉsɹǝʌ ɟo ɹǝqɯnu ɯnɯᴉxɐɯ ǝɥ┴"
           }
         },
         "performance": {
           "$": "ǝɔuɐɯɹoɟɹǝԀ",
           "regress": {
-            "title": "ʇunoɯ∀ ssǝɹƃǝɹ",
+            "title": "Regress amount",
             "description": "˙uoᴉssǝɹƃǝɹ ǝɥʇ ǝʌᴉssǝɹƃƃɐ ǝɹoɯ ǝɥʇ 'ǝnlɐʌ ǝɥʇ ɹǝʍo˥ ˙ɔʇǝ 'uoᴉʇɐʇoɹ 'ƃuᴉlɐɔs 'ƃuᴉuuɐd ǝʞᴉl sʞsɐʇ ǝʌᴉsuǝdxǝ ʎllɐuoᴉʇɐʇndɯoɔ ƃuᴉɯɹoɟɹǝd uǝɥʍ uoᴉʇnlosǝɹ sɐʌuɐɔ ǝɥʇ sǝɔnpǝɹ"
+          }
+        },
+        "file": {
+          "$": "File preferences",
+          "format": {
+            "title": "Format Emitted files",
+            "description": "˙ǝlqɐpɐǝɹ ǝɹoɯ ǝq oʇ ɹɐllǝʇS ʎq pǝʇʇᴉɯǝ sǝlᴉɟ uᴉ NOSſ ǝɥʇ sʇɐɯɹoℲ"
+          },
+          "watermark": {
+            "title": "Watermark exported blueprints",
+            "description": "˙ǝlᴉɟ ǝɥʇ ǝʇɐɹǝuǝƃ oʇ pǝsn ɹɐllǝʇS ɟo uoᴉsɹǝʌ ǝɥʇ oʇ ƃuᴉʞuᴉl ʞɹɐɯɹǝʇɐʍ ɐ spp∀"
+          },
+          "default_name": {
+            "title": "Emitted file default name",
+            "description": "˙ɹɐllǝʇS ʎq pǝʇɹodxǝ ǝɹɐ ʇɐɥʇ sǝlᴉɟ pǝɯɐuun ʎuɐ ɹoɟ ǝɯɐu ʇlnɐɟǝp ǝɥ┴"
           }
         },
         "debug": {
           "$": "ƃnqǝp",
           "error_screen_debug": {
-            "title": "uǝǝɹɔS ɹoɹɹƎ uo oɟuI ƃnqǝp ʍoɥS",
+            "title": "Show debug info on error screen",
             "description": "˙ɹɐllǝʇS sʇdnɹɹǝʇuᴉ ɹoɹɹǝ lɐɔᴉʇᴉɹɔ ɐ uǝɥʍ ǝɔɐɹʇ ʞɔɐʇs pǝddɐɯ-ǝɔɹnos ɐ puɐ ǝƃɐssǝɯ ɹoɹɹǝ llnɟ ǝɥʇ sʎɐldsᴉp"
           }
         }
       }
+    },
+    "confirmation": {
+      "title": "¿sᴉɥʇ op oʇ ʇuɐʍ noʎ ǝɹns noʎ ǝɹ∀",
+      "description": "˙ǝlqᴉsɹǝʌǝɹ ǝq ʇou ʎɐɯ sᴉ uoᴉʇɔɐ sᴉɥ┴",
+      "actions": {
+        "cancel": "lǝɔuɐƆ",
+        "yes": "sǝ⅄"
+      }
     }
   },
   "themes": {
-    "theme_light": "ʇɥƃᴉ˥ ɹɐllǝʇS",
-    "theme_dark": "ʞɹɐp ɹɐllǝʇS"
+    "theme_light": "Stellar light",
+    "theme_dark": "Stellar dark"
   }
 }

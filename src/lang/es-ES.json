@@ -21,7 +21,7 @@
         "motto": "Edición de plano redefinida",
         "from_scratch": "Empezar de cero",
         "import": "Importar archivo de plano",
-        "open": "Abrir archivo de Estellar"
+        "open": "Abrir archivo de Stellar"
       },
       "status_bar": {
         "docs": "Documentos"
@@ -65,7 +65,7 @@
         },
         "cursor": {
           "select_deep": "Seleccionar profundo",
-          "select_multiple": "Seleccionar varios",
+          "select_multiple": "Seleccionar múltiple",
           "focus_mode": "Modo de enfoque"
         },
         "help": {
@@ -133,13 +133,17 @@
               "$": "Restringir",
               "hint": "Mantiene la relación entre las escalas X e Y"
             }
+          },
+          "parachute": {
+            "$": "Paracaídas",
+            "deployed": "Desplegado"
           }
         },
         "inspect": {
           "$": "Inspeccionar",
           "select_one_part": {
             "$": "Seleccionar una parte",
-            "instructions": "O no has seleccionado ninguna parte o tienes actualmente más de una parte seleccionada"
+            "instructions": "Selecciona una sola parte para inspeccionar los detalles de esta"
           },
           "meta_data": {
             "$": "Metadatos",
@@ -255,7 +259,9 @@
         "interface": "Interfaz",
         "editor": "Editor",
         "performance": "Rendimiento",
-        "debug": "Depuración"
+        "file": "File preferences",
+        "debug": "Depuración",
+        "reset": "Reiniciar a los valores por defecto"
       },
       "groups": {
         "interface": {
@@ -265,14 +271,14 @@
             "description": "Controla la paleta de colores de toda la interfaz."
           },
           "default_tab": {
-            "title": "Pestaña por defecto",
+            "title": "Default tab",
             "description": "Especifica qué pestaña de Stellar se abrirá por defecto al iniciar."
           },
           "touchscreen_mode": {
-            "title": "Modo pantalla táctil",
+            "title": "Touchscreen mode",
             "description": "Controla cómo la información en pantalla está presentada de acuerdo a tu tipo de pantalla.",
             "options": {
-              "auto": "Autodetectar",
+              "auto": "Auto-detect",
               "on": "Activado",
               "off": "Desactivado"
             }
@@ -282,48 +288,71 @@
             "description": "Especifica a qué idioma el texto de la pantalla está traducido. Ayúdanos a traducir Stellar a tu idioma en %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
-            "title": "Aviso de orientación",
+            "title": "Orientation prompt",
             "description": "Muestra un aviso cuando tu dispositivo está orientado en modo vertical."
           },
           "installation_prompt": {
-            "title": "Aviso de instalación",
+            "title": "Installation prompt",
             "description": "Te notifica cuando Stellar detecta la capacidad dentro de tu dispositivo para instalarla como %1$sPWA%2$s. Tu dispositivo puede ser elegible sin importar de una notificación."
           },
           "instability_prompt": {
-            "title": "Advertencia de inestabilidad",
+            "title": "Instability warning",
             "description": "Te advierte cuando estás usando una versión inestable o desconocida de Stellar."
           },
           "missing_parts": {
-            "title": "Partes faltantes",
+            "title": "Missing parts",
             "description": "Te muestra una lista de todas las partes que no pudieron ser importadas."
           }
         },
         "editor": {
           "$": "Editor",
           "undo_limit": {
-            "title": "Deshacer límite",
+            "title": "Undo limit",
             "description": "El número máximo de parches del historial de versiones que el editor debe almacenar. 4096 es el máximo; 16 es el mínimo."
           }
         },
         "performance": {
           "$": "Rendimiento",
           "regress": {
-            "title": "Cantidad de regresión",
+            "title": "Regress amount",
             "description": "Reduce la resolución del lienzo cuando se realizan tareas computacionalmente costosas como: paneamiento, escalamiento, rotación, etc. Cuanto más bajo es el valor, más agresivo es la regresión."
+          }
+        },
+        "file": {
+          "$": "File preferences",
+          "format": {
+            "title": "Format Emitted files",
+            "description": "Formatea el JSON en los archivos emitidos por Stellar para que sea más legible."
+          },
+          "watermark": {
+            "title": "Watermark exported blueprints",
+            "description": "Añade una marca de agua enlazada a la versión de Stellar usada para generar el archivo."
+          },
+          "default_name": {
+            "title": "Emitted file default name",
+            "description": "El nombre por defecto para cualquiera de los archivos sin nombrar que son exportados por Stellar."
           }
         },
         "debug": {
           "$": "Depuración",
           "error_screen_debug": {
-            "title": "Mostrar la información de depuración en la pantalla de error",
+            "title": "Show debug info on error screen",
             "description": "Muestra el mensaje de error entero y un código fuente mapeado de la pila en seguimiento cuando un error crítico interrumpe Stellar."
           }
         }
       }
+    },
+    "confirmation": {
+      "title": "¿Estás seguro de que quieres hacer esto?",
+      "description": "Puede que esta acción no sea reversible.",
+      "actions": {
+        "cancel": "Cancelar",
+        "yes": "Sí"
+      }
     }
   },
   "themes": {
-    "theme_light": "Stellar claro",
-    "theme_dark": "Stellar oscuro"
+    "theme_light": "Stellar light",
+    "theme_dark": "Stellar dark"
   }
 }
