@@ -31,7 +31,7 @@ export default async function exportFile() {
   );
 
   await fileSave(blob, {
-    fileName: `${fileName}.txt`, 
+    fileName: `${fileName}.txt`,
     description: 'SFS blueprint file',
     mimeTypes: ['application/json'],
     extensions: ['.json', '.txt'],

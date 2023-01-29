@@ -5,11 +5,11 @@ import createPhysicalPart from 'utilities/createPhysicalPart';
 import { PartData, PartWithoutName } from '../Part';
 import {
   VanillaPartWithEngine,
-  VanillaPartWithEngineData
+  VanillaPartWithEngineData,
 } from '../PartWithEngine';
 import {
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData
+  VanillaPartWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 

@@ -3,7 +3,7 @@ import {
   FilePlusIcon,
   FileTextIcon,
   MagnifyingGlassIcon,
-  UploadIcon
+  UploadIcon,
 } from '@radix-ui/react-icons';
 import apolloMission from 'assets/blueprints/apollo-mission.json';
 import basicRocket from 'assets/blueprints/basic-rocket.json';

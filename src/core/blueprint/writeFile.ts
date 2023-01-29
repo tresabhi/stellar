@@ -7,9 +7,7 @@ import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 import savifyBlueprint from './savifyBlueprint';
 
 export default async function writeFile() {
-  const {
-     handle
-  } = useApp.getState().file;
+  const { handle } = useApp.getState().file;
   const data = savifyBlueprint(useBlueprint.getState());
   const blob = new Blob(
     [
