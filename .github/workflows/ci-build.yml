@@ -46,5 +46,5 @@ jobs:
       - name: Archive build
         uses: actions/upload-artifact@v2
         with:
-          name: build
-          path: build
+          name: dist
+          path: dist

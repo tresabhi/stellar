@@ -116,11 +116,11 @@ async function generateFavicons(buildType, faviconAPIKey) {
               readFileSync('temp/favicons/site.webmanifest'),
             );
             const existingManifest = JSON.parse(
-              readFileSync('build/manifest.json'),
+              readFileSync('dist/manifest.json'),
             );
 
             writeFileSync(
-              'build/manifest.json',
+              'dist/manifest.json',
               JSON.stringify({
                 ...existingManifest,
                 icons: [...existingManifest.icons, ...providedManifest.icons],

@@ -11,10 +11,10 @@ const BUILD_NAMES = {
 export default function renameBuild(buildType, appName) {
   console.log(`Updating manifest.json keys for "${buildType}"`);
 
-  const manifest = JSON.parse(readFileSync('build/manifest.json'));
+  const manifest = JSON.parse(readFileSync('dist/manifest.json'));
   const newName = `${appName} ${BUILD_NAMES[buildType] ?? ''}`.trim();
   writeFileSync(
-    'build/manifest.json',
+    'dist/manifest.json',
     JSON.stringify({
       ...manifest,
 
