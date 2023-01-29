@@ -7,9 +7,7 @@ import clone from './clone';
 import selectConcurrent from './selectConcurrent';
 
 export default function paste() {
-  const {
-    editor: { clipboard },
-  } = useApp.getState();
+  const { clipboard } = useApp.getState().editor;
 
   if (clipboard) {
     mutateBlueprint((draft) => {

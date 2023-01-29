@@ -8,8 +8,8 @@ import savifyBlueprint from './savifyBlueprint';
 
 export default async function writeFile() {
   const {
-    file: { handle },
-  } = useApp.getState();
+     handle
+  } = useApp.getState().file;
   const data = savifyBlueprint(useBlueprint.getState());
   const blob = new Blob(
     [

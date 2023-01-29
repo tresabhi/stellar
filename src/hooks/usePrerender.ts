@@ -20,9 +20,7 @@ export default function usePrerender() {
   }`;
 
   const rerenderDocumentTitle = () => {
-    const {
-      file: { handle, hasUnsavedChanges },
-    } = useApp.getState();
+    const { handle, hasUnsavedChanges } = useApp.getState().file;
 
     document.title = `${title} ${
       handle ? `- ${handle.name}` : `${prettifiedVersion}`

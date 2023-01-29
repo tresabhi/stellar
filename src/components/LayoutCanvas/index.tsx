@@ -68,9 +68,7 @@ export default function LayoutCanvas(
   const initialBlueprintState = useBlueprint.getState();
 
   const handlePointerMissed = () => {
-    const {
-      editor: { tool, isSpacePanning },
-    } = useApp.getState();
+    const { tool, isSpacePanning } = useApp.getState().editor;
     const { selections } = useBlueprint.getState();
     if (selections.length > 0 && tool === Tool.Move && !isSpacePanning) {
       unselectAll();
