@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "release",
-      "public": "build",
+      "public": "dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
@@ -13,7 +13,7 @@
     },
     {
       "target": "beta",
-      "public": "build",
+      "public": "dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
@@ -24,7 +24,7 @@
     },
     {
       "target": "alpha",
-      "public": "build",
+      "public": "dist",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
         {
