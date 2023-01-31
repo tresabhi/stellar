@@ -6,8 +6,10 @@ import prompt from 'core/interface/prompt';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator, { TRANSLATIONS } from 'hooks/useTranslator';
 import { ReactNode, useState } from 'react';
+import { UNSTABLE_VERSIONS } from 'routes/Interface';
 import { PromptProps } from 'stores/prompts';
 import useSettings, { THEMES } from 'stores/settings';
+import { getContext } from 'utilities/getContext';
 import InstabilityWarningPrompt from './InstabilityWarningPrompt';
 
 export const FIXED_LANG_NAMES: Record<string, string> = {
@@ -132,12 +134,20 @@ export default function WelcomePrompt({ dismiss }: PromptProps) {
   };
   const handleNextClick = () => setIndex((state) => state + 1);
   const handleFinishClick = () => {
+    const { name } = getContext();
+    const { showInstabilityWarning, welcomePromptCompleted } =
+      useSettings.getState().interface;
+
     mutateSettings((draft) => {
       draft.interface.welcomePromptCompleted = true;
     });
     dismiss();
 
-    if (useSettings.getState().interface.showInstabilityWarning) {
+    if (
+      showInstabilityWarning &&
+      welcomePromptCompleted &&
+      UNSTABLE_VERSIONS.includes(name)
+    ) {
       prompt(InstabilityWarningPrompt, false, undefined, true);
     }
   };

@@ -16,7 +16,7 @@ import LayoutTab from './components/LayoutTab';
 import StagingTab from './components/StagingTab';
 import Tabs from './components/Tabs';
 
-const UNSTABLE_VERSIONS = [StellarName.Alpha, StellarName.Unknown];
+export const UNSTABLE_VERSIONS = [StellarName.Alpha, StellarName.Unknown];
 
 export interface SidebarTabProps {
   selected: boolean;
