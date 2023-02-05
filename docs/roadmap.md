@@ -9,7 +9,7 @@ _❕ Items will be removed when they're completed. This is **not** a changelog._
 - Implement the rest of the parts
 - Parts
   - 3D
-    - `Capsule`: https://i.imgur.com/ei0PBxQ.png
+    - `Capsule`: https://i.imgur.com/dRU71sd.png
   - Flat
     - `RCS`: https://i.imgur.com/breaWuI.png
     - `Cone`: https://i.imgur.com/DKOMgyf.png
