@@ -53,7 +53,7 @@ export function ParachuteLayoutComponent({ id, ...props }: PartComponentProps) {
 export const ParachuteIcon = EngineIcon;
 
 export const registry: PartRegistryItem<Parachute> = {
-  category: PartCategory.Propulsion,
+  category: PartCategory.Aerodynamic,
   vanillaData: VanillaParachuteData,
   data: ParachuteData,
 

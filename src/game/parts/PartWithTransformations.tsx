@@ -27,7 +27,6 @@ import {
 export interface VanillaPartWithTransformations
   extends VanillaPart,
     VanillaPartWithPosition,
-    // omit to fix o key conflict
     Omit<VanillaPartWithOrientation, 'o'>,
     Omit<VanillaPartWithScale, 'o'> {
   o: { x: number; y: number; z: number };
