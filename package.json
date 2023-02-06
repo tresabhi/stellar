@@ -11,7 +11,7 @@
     "@radix-ui/react-select": "^1.1.2",
     "@radix-ui/react-slider": "^1.1.0",
     "@react-three/drei": "^9.48.1",
-    "@react-three/fiber": "^8.9.2",
+    "@react-three/fiber": "^8.10.4",
     "@stitches/react": "^1.2.8",
     "bepaint": "^0.1.0-beta.1",
     "browser-fs-access": "^0.31.1",
