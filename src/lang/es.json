@@ -1,0 +1,358 @@
+{
+  "tabs": {
+    "coming_soon": "¡Esta pestaña llegará pronto!",
+    "create": {
+      "$": "Crear",
+      "templates": {
+        "input_placeholder": "Buscar plantillas...",
+        "list": {
+          "apollo_mission": "misión apolo",
+          "basic_rocket": "Cohete básico",
+          "hopper": "Tolva",
+          "joints": "Articulaciones",
+          "light_lander": "Módulo de aterrizaje ligero",
+          "orbit_and_re_entry": "Órbita y reingreso",
+          "parachute_and_separator": "Paracaídas y separador",
+          "race_car": "Coche de carreras",
+          "rover": "Vagabundo"
+        }
+      },
+      "file_options": {
+        "motto": "Edición de planos redefinida",
+        "from_scratch": "Empezar desde el principio",
+        "import": "Importar archivo de plano",
+        "open": "Abrir archivo estelar"
+      },
+      "status_bar": {
+        "docs": "Documentos"
+      }
+    },
+    "layout": {
+      "$": "Disposición",
+      "toolbar": {
+        "file": {
+          "new": "Nuevo",
+          "open": "Abierto...",
+          "save": "Ahorrar",
+          "save_as": "Guardar como...",
+          "import": "Importar...",
+          "export": "Exportar..."
+        },
+        "tool": {
+          "move": "Mover",
+          "pan": "Cacerola"
+        },
+        "clipboard": {
+          "copy": "Copiar",
+          "cut": "Cortar",
+          "paste": "Pegar",
+          "duplicate": "Duplicar",
+          "create_snippet": "Crear fragmento"
+        },
+        "selection": {
+          "select_all": "Seleccionar todo",
+          "unselect_all": "Deselecciona todo",
+          "group": "Grupo",
+          "ungroup": "Desagrupar"
+        },
+        "edit": {
+          "rename": "Rebautizar",
+          "hidden": "Mostrar",
+          "unhidden": "Esconder",
+          "locked": "desbloquear",
+          "unlocked": "Cerrar",
+          "delete": "Borrar"
+        },
+        "cursor": {
+          "select_deep": "Seleccionar profundo",
+          "select_multiple": "Seleccione varios",
+          "focus_mode": "Modo de enfoque"
+        },
+        "help": {
+          "about": "Sobre estelar",
+          "report": "Reportar un problema",
+          "discord": "Discordia",
+          "github": "GitHub"
+        },
+        "preferences": {
+          "settings": "Ajustes",
+          "keybinds": "combinaciones de teclas"
+        }
+      },
+      "left_sidebar": {
+        "parts": {
+          "$": "Partes",
+          "no_parts": {
+            "$": "No hay partes en el plano",
+            "instructions": "Toque el ícono %1$s en la barra de herramientas para insertar una parte."
+          }
+        },
+        "snippets": {
+          "$": "fragmentos",
+          "coming_soon": {
+            "$": "Fragmentos próximamente!",
+            "instructions": "Podrá insertar pequeñas secciones de otros planos aquí como fragmentos. Podrá crear un nuevo fragmento yendo a Barra de herramientas > %1$s Portapapeles > %2$s Crear fragmento."
+          }
+        }
+      },
+      "right_sidebar": {
+        "properties": {
+          "$": "Propiedades",
+          "no_selection": {
+            "$": "No hay partes seleccionadas",
+            "instructions": "Haga clic en una pieza en el plano o en la barra lateral para seleccionarla."
+          },
+          "no_properties": {
+            "$": "No hay propiedades para las partes seleccionadas",
+            "instructions": "Las partes que ha seleccionado carecen de propiedades ajustables probablemente porque son abstractas o un trabajo en progreso."
+          },
+          "transformations": {
+            "$": "Transformaciones",
+            "x_position": "Posición X",
+            "y_position": "posición Y",
+            "rotation": "Rotación",
+            "x_scale": "escala X",
+            "y_scale": "escala Y",
+            "constrain": {
+              "$": "Constreñir",
+              "hint": "Mantiene la relación entre la escala X e Y"
+            }
+          },
+          "engine": {
+            "$": "Motor",
+            "enabled": "Activado",
+            "heat_damage": "Daño causado por el calor"
+          },
+          "fuel_tank": {
+            "$": "Depósito de combustible",
+            "top_width": "Ancho superior",
+            "bottom_width": "Ancho de fondo",
+            "height": "Altura",
+            "fuel": "Combustible",
+            "constrain": {
+              "$": "Constreñir",
+              "hint": "Mantiene la relación entre la escala X e Y"
+            }
+          },
+          "parachute": {
+            "$": "Paracaídas",
+            "deployed": "Desplegada"
+          }
+        },
+        "inspect": {
+          "$": "Inspeccionar",
+          "select_one_part": {
+            "$": "Seleccione una parte",
+            "instructions": "Seleccione una sola pieza para inspeccionar los detalles de"
+          },
+          "meta_data": {
+            "$": "metadatos",
+            "id": "IDENTIFICACIÓN",
+            "parent_id": "Identificación de los padres",
+            "name": "Nombre",
+            "selected": "Seleccionado",
+            "hidden": "Oculto",
+            "locked": "bloqueado"
+          },
+          "bounds": {
+            "$": "Límites",
+            "width": "Ancho",
+            "height": "Altura",
+            "x_position": "Posición X",
+            "y_position": "Posición Y",
+            "rotation": "Rotación"
+          },
+          "json": "JSON",
+          "vanilla_json": "Vainilla JSON"
+        }
+      },
+      "popup": {
+        "insert_part": {
+          "input_placeholder": "Insertar pieza...",
+          "abstract": "Abstracto",
+          "fallback": "No se encontraron piezas",
+          "cancel": "Cancelar"
+        },
+        "rename": {
+          "input_placeholder": "Etiqueta...",
+          "trim": "Recortar espacios en blanco en los extremos",
+          "skip_locked": "Omitir partes bloqueadas",
+          "suffix": "Agregar sufijos numéricos únicos",
+          "cancel": "Cancelar",
+          "apply": "Aplicar"
+        }
+      }
+    },
+    "staging": {
+      "$": "Puesta en escena"
+    },
+    "export": {
+      "$": "Exportar"
+    }
+  },
+  "landscape_prompt": {
+    "message": "Parece que estás en modo retrato. Cambie al modo horizontal.%1$sSi está en una computadora de escritorio, es posible que se descarte.",
+    "never": "Nunca preguntes de nuevo",
+    "dismiss": "Despedir"
+  },
+  "notifications": {
+    "update": {
+      "title": "Stellar actualizado a una versión más nueva",
+      "description": "Es necesario reiniciar para aplicar los cambios. Puede reiniciar ahora o hacerlo más tarde.",
+      "actions": {
+        "restart": "Reanudar",
+        "dismiss": "Despedir"
+      }
+    },
+    "installable": {
+      "title": "¡Ya se puede instalar Stellar!",
+      "description": "Stellar es un %1$sPWA%2$s y se puede instalar en su dispositivo para usarlo sin conexión y acceder fácilmente.",
+      "actions": {
+        "never": "Nunca preguntes de nuevo",
+        "dismiss": "Despedir",
+        "install": "Instalar"
+      }
+    }
+  },
+  "prompts": {
+    "welcome": {
+      "slides": {
+        "1": {
+          "title": "¡Bienvenido!",
+          "description": "Seleccione un idioma para continuar. Es posible que algunos idiomas no estén completamente traducidos. Ayúdanos a traducir Stellar en %1$sCrowdin%2$s.",
+          "select": "Selecciona un idioma..."
+        },
+        "2": {
+          "title": "elige un tema",
+          "description": "Los temas cambian la apariencia del editor. Elija uno que se adapte a sus necesidades.",
+          "select": "Selecciona un tema..."
+        }
+      },
+      "actions": {
+        "back": "Atrás",
+        "next": "Próximo",
+        "finish": "Finalizar"
+      }
+    },
+    "unstable": {
+      "title": "¡Versión inestable!",
+      "description": "Actualmente está utilizando %1$s, que puede ser muy inestable ya que aún no se ha probado. Es posible que desee utilizar %2$sla versión beta%3$s en su lugar.",
+      "actions": {
+        "never": "Nunca preguntes de nuevo",
+        "dismiss": "Despedir",
+        "beta": "Usar beta"
+      }
+    },
+    "missing_parts": {
+      "title": "1 parte no importada",
+      "title_plural": "%1$s partes no importadas",
+      "description": "La siguiente parte no se importó porque aún no existe en %1$s:",
+      "description_plural": "Las siguientes piezas no se importaron porque todavía no existen en %1$s:",
+      "actions": {
+        "never": "Nunca lo muestres otra vez",
+        "proceed": "Proceder"
+      }
+    },
+    "settings": {
+      "navigation": {
+        "search": "Configuración de búsqueda...",
+        "interface": "Interfaz",
+        "editor": "Editor",
+        "performance": "Actuación",
+        "file": "Preferencias de archivo",
+        "debug": "Depurar",
+        "reset": "Restablecer los valores predeterminados"
+      },
+      "groups": {
+        "interface": {
+          "$": "Interfaz",
+          "theme": {
+            "title": "Tema",
+            "description": "Controla la paleta de colores de toda la interfaz."
+          },
+          "default_tab": {
+            "title": "Ficha predeterminada",
+            "description": "Especifica qué pestaña Stellar abrirá en el lanzamiento de forma predeterminada."
+          },
+          "touchscreen_mode": {
+            "title": "Modo pantalla táctil",
+            "description": "Controla cómo se presenta la información en pantalla de acuerdo con su tipo de pantalla.",
+            "options": {
+              "auto": "Detección automática",
+              "on": "En",
+              "off": "Apagado"
+            }
+          },
+          "language": {
+            "title": "Idioma",
+            "description": "Especifica a qué idioma se traduce el texto en pantalla. Ayúdanos a traducir Stellar a tu idioma en %1$sCrowdin%2$s."
+          },
+          "orientation_prompt": {
+            "title": "Indicación de orientación",
+            "description": "Muestra un mensaje cuando su dispositivo está orientado en modo vertical."
+          },
+          "installation_prompt": {
+            "title": "Indicación de instalación",
+            "description": "Le notifica cuando Stellar detecta la capacidad dentro de su dispositivo para instalarlo como %1$sPWA%2$s. Su dispositivo puede ser elegible independientemente de una notificación."
+          },
+          "instability_prompt": {
+            "title": "Advertencia de inestabilidad",
+            "description": "Le advierte cuando está ejecutando una versión inestable o desconocida de Stellar."
+          },
+          "missing_parts": {
+            "title": "Partes faltantes",
+            "description": "Le muestra una lista de todas las partes que no se pudieron importar."
+          }
+        },
+        "editor": {
+          "$": "Editor",
+          "undo_limit": {
+            "title": "Deshacer límite",
+            "description": "El número máximo de parches del historial de versiones que debe almacenar el editor. 4096 es el máximo; 16 es el mínimo."
+          }
+        },
+        "performance": {
+          "$": "Actuación",
+          "regress": {
+            "title": "Cantidad de regresión",
+            "description": "Reduce la resolución del lienzo cuando se realizan tareas computacionalmente costosas como panorámica, escalado, rotación, etc. Baje el valor, más agresiva será la regresión."
+          }
+        },
+        "file": {
+          "$": "Preferencias de archivo",
+          "format": {
+            "title": "Formatear archivos emitidos",
+            "description": "Formatea el JSON en archivos emitidos por Stellar para que sean más legibles."
+          },
+          "watermark": {
+            "title": "Blueprints exportados con marca de agua",
+            "description": "Agrega una marca de agua que vincula a la versión de Stellar utilizada para generar el archivo."
+          },
+          "default_name": {
+            "title": "Nombre predeterminado del archivo emitido",
+            "description": "El nombre predeterminado para cualquier archivo sin nombre que exporte Stellar."
+          }
+        },
+        "debug": {
+          "$": "Depurar",
+          "error_screen_debug": {
+            "title": "Mostrar información de depuración en la pantalla de error",
+            "description": "Muestra el mensaje de error completo y un seguimiento de la pila mapeada en la fuente cuando un error crítico interrumpe Stellar."
+          }
+        }
+      }
+    },
+    "confirmation": {
+      "title": "¿Seguro que quieres hacer esto?",
+      "description": "Esta acción puede no ser reversible.",
+      "actions": {
+        "cancel": "Cancelar",
+        "yes": "Sí"
+      }
+    }
+  },
+  "themes": {
+    "theme_light": "luz estelar",
+    "theme_dark": "Oscuridad estelar"
+  }
+}
