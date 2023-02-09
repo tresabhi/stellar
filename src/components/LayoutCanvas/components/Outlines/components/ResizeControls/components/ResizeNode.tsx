@@ -153,10 +153,14 @@ export default function ResizeNode({
       .set(event.clientX, event.clientY)
       .sub(initial)
       .multiply(CANVAS_MATRIX_SCALE)
-      .divideScalar(camera.zoom)
-      .divideScalar(MOVE_STEP_REGULAR)
-      .round()
-      .multiplyScalar(MOVE_STEP_REGULAR);
+      .divideScalar(camera.zoom);
+
+    if (!event.ctrlKey && !event.shiftKey) {
+      offset
+        .divideScalar(MOVE_STEP_REGULAR)
+        .round()
+        .multiplyScalar(MOVE_STEP_REGULAR);
+    }
 
     if (maintainSlope.current) {
       const pointerX = offset.x + movable.x;
@@ -210,9 +214,9 @@ export default function ResizeNode({
         normalizedScale.toArray(),
         bounds.current.rotation,
       );
-    }
 
-    invalidate();
+      invalidate();
+    }
   };
   const handlePointerUp = () => {
     if (offset.length() > 0) {
