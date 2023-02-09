@@ -20,7 +20,7 @@ export default function useNumericalInputProperty<
   mutate: (draft: Type, newValue: Value, lastValue?: Value) => Value | void,
 ) {
   const input = useRef<InputRef>(null);
-  let value: Value | undefined = getMutualProperty(ids, slice);
+  let { value } = getMutualProperty<Type, Value>(ids, slice);
 
   const setInputValue = (newValue?: number) => {
     if (input.current) {
@@ -43,7 +43,7 @@ export default function useNumericalInputProperty<
     });
   };
   const recomputeAndRerender = fallingEdgeDebounce(() => {
-    value = getMutualProperty(ids, slice);
+    value = getMutualProperty(ids, slice).value;
     setInputValue(value);
   }, RERENDER_DEBOUNCE);
 

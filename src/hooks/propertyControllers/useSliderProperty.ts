@@ -21,7 +21,7 @@ export default function useSliderProperty<
   mutate: (draft: Type, value: Value) => void,
 ) {
   const slider = useRef<SliderWithInputRef>(null);
-  let value = getMutualProperty<Type, Value>(ids, slice);
+  let { value } = getMutualProperty<Type, Value>(ids, slice);
   const firstRender = useRef(true);
 
   const commit = fallingEdgeDebounce((newValue: Value) => {
@@ -31,7 +31,7 @@ export default function useSliderProperty<
   }, COMMIT_DEBOUNCE);
   const recomputeAndRerender = () => {
     if (slider.current) {
-      value = getMutualProperty<Type, Value>(ids, slice);
+      value = getMutualProperty<Type, Value>(ids, slice).value;
 
       if (value === undefined) {
         slider.current.setIndeterminate(true);

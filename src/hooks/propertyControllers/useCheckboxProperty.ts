@@ -15,7 +15,7 @@ export default function useCheckboxProperty<
   mutate: (draft: Type, value: Value) => void,
 ) {
   const checkbox = useRef<CheckboxRef>(null);
-  const value = useRef(getMutualProperty<Type, Value>(ids, slice));
+  const value = useRef(getMutualProperty<Type, Value>(ids, slice).value);
   const firstRender = useRef(true);
 
   const commit = (newValue: Value) => {
@@ -24,7 +24,7 @@ export default function useCheckboxProperty<
     });
   };
   const recomputeAndRerender = useCallback(() => {
-    value.current = getMutualProperty<Type, Value>(ids, slice);
+    value.current = getMutualProperty<Type, Value>(ids, slice).value;
 
     if (value.current === undefined) {
       checkbox.current?.setValue(false);

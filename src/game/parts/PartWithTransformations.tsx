@@ -11,17 +11,17 @@ import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   usePartWithOrientation,
   VanillaPartWithOrientation,
-  VanillaPartWithOrientationData,
+  VanillaPartWithOrientationData
 } from './PartWithOrientation';
 import {
   usePartWithPosition,
   VanillaPartWithPosition,
-  VanillaPartWithPositionData,
+  VanillaPartWithPositionData
 } from './PartWithPosition';
 import {
   usePartWithScale,
   VanillaPartWithScale,
-  VanillaPartWithScaleData,
+  VanillaPartWithScaleData
 } from './PartWithScale';
 
 export interface VanillaPartWithTransformations
