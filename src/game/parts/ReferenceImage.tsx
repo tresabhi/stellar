@@ -148,6 +148,5 @@ export const registry: PartRegistryItem<ReferenceImage> = {
   data: ReferenceImageData,
 
   Icon: ReferenceImageIcon,
-  PropertyEditor: ReferenceImagePropertyComponent,
   Mesh: ReferenceImageLayoutComponent,
 };

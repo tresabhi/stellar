@@ -1,7 +1,7 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
-import getPartRegistry from 'core/part/getPartRegistry';
+import { FuelTank, FuelTankPropertyComponent } from 'game/parts/FuelTank';
 import { Part } from 'game/parts/Part';
 import {
   PartWithEngine,
@@ -15,6 +15,10 @@ import {
   PartWithTransformations,
   PartWithTransformationsPropertyComponent,
 } from 'game/parts/PartWithTransformations';
+import {
+  ReferenceImage,
+  ReferenceImagePropertyComponent,
+} from 'game/parts/ReferenceImage';
 import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
 import useBlueprint from 'stores/blueprint';
@@ -25,6 +29,7 @@ interface GroupedProperties {
   Component: FC<PartPropertyComponentProps>;
 }
 
+// TODO: sort these out
 const groupedProperties: Record<string, GroupedProperties> = {
   transformations: {
     test: (part) =>
@@ -37,8 +42,19 @@ const groupedProperties: Record<string, GroupedProperties> = {
     Component: PartWithEnginePropertyComponent,
   },
   parachute: {
-    test: (part) => (part as PartWithParachute).N !== undefined,
+    test: (part) =>
+      (part as PartWithParachute).N !== undefined &&
+      (part as PartWithParachute).N.deploy_state !== undefined &&
+      (part as PartWithParachute).N.animation_state !== undefined,
     Component: PartWithParachutePropertyComponent,
+  },
+  fuelTank: {
+    test: (part) => (part as FuelTank).n === 'Fuel Tank',
+    Component: FuelTankPropertyComponent,
+  },
+  referenceImage: {
+    test: (part) => (part as ReferenceImage).n === 'Reference Image',
+    Component: ReferenceImagePropertyComponent,
   },
 };
 
@@ -49,7 +65,6 @@ export default function Properties() {
   );
   const selections = useBlueprint((state) => state.selections);
   const typeSortedParts: Record<string, string[]> = {};
-  const nameSortedParts: Record<string, string[]> = {};
   const children: JSX.Element[] = [];
 
   Object.keys(groupedProperties).forEach((groupedPropertyId) => {
@@ -68,16 +83,6 @@ export default function Properties() {
     });
   });
 
-  selections.forEach((selection) => {
-    const part = getPart(selection);
-
-    if (nameSortedParts[part.n]) {
-      nameSortedParts[part.n].push(selection);
-    } else {
-      nameSortedParts[part.n] = [selection];
-    }
-  });
-
   Object.keys(typeSortedParts).forEach((index) => {
     const ids = typeSortedParts[index];
     const { Component } = groupedProperties[index];
@@ -85,20 +90,6 @@ export default function Properties() {
     children.push(
       <Component ids={ids} key={`type-sorted-properties-explorer-${index}`} />,
     );
-  });
-
-  Object.keys(nameSortedParts).forEach((name) => {
-    const ids = nameSortedParts[name];
-    const partRegistry = getPartRegistry(name);
-
-    if (partRegistry && partRegistry.PropertyEditor) {
-      children.push(
-        <partRegistry.PropertyEditor
-          ids={ids}
-          key={`properties-explorer-${name}`}
-        />,
-      );
-    }
   });
 
   if (hasNoSelections) {

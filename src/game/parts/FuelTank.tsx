@@ -280,7 +280,6 @@ export const registry: PartRegistryItem<FuelTank> = {
   data: FuelTankData,
 
   Icon: FuelTankIcon,
-  PropertyEditor: FuelTankPropertyComponent,
   Mesh: FuelTankLayoutComponent,
 
   exportify: undefined,

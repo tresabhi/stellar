@@ -2,7 +2,7 @@ import { Blueprint } from 'game/Blueprint';
 import { Part, VanillaPart } from 'game/parts/Part';
 import PartCategory from 'hooks/constants/partCategory';
 import { FC } from 'react';
-import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
+import { PartComponentProps } from 'types/Parts';
 import { create } from 'zustand';
 
 export type PartRegistryItem<Type extends Part> = {
@@ -11,7 +11,6 @@ export type PartRegistryItem<Type extends Part> = {
   data: Part;
 
   Icon: FC;
-  PropertyEditor?: FC<PartPropertyComponentProps>;
   Mesh: FC<PartComponentProps>;
 
   exportify?: PartExportifier<Type>;
