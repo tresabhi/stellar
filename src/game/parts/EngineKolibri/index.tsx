@@ -45,7 +45,6 @@ export const registry: PartRegistryItem<EngineKolibri> = {
   data: EngineKolibriData,
 
   Icon: EngineKolibriIcon,
-  PropertyEditor: undefined,
   Mesh: EngineKolibriLayoutComponent,
 
   exportify: undefined,

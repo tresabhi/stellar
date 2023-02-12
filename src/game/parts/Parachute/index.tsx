@@ -58,7 +58,6 @@ export const registry: PartRegistryItem<Parachute> = {
   data: ParachuteData,
 
   Icon: ParachuteIcon,
-  PropertyEditor: undefined,
   Mesh: ParachuteLayoutComponent,
 
   exportify: undefined,

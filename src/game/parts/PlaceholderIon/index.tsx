@@ -47,7 +47,6 @@ export const registry: PartRegistryItem<PlaceholderIon> = {
   data: PlaceholderIonData,
 
   Icon: PlaceholderIonIcon,
-  PropertyEditor: undefined,
   Mesh: PlaceholderIonLayoutComponent,
 
   exportify: undefined,

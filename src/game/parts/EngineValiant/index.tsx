@@ -45,7 +45,6 @@ export const registry: PartRegistryItem<EngineValiant> = {
   data: EngineValiantData,
 
   Icon: EngineValiantIcon,
-  PropertyEditor: undefined,
   Mesh: EngineValiantLayoutComponent,
 
   exportify: undefined,

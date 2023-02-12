@@ -47,7 +47,6 @@ export const registry: PartRegistryItem<EngineFrontier> = {
   data: EngineFrontierData,
 
   Icon: EngineFrontierIcon,
-  PropertyEditor: undefined,
   Mesh: EngineFrontierLayoutComponent,
 
   exportify: undefined,

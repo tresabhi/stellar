@@ -97,7 +97,6 @@ export const registry: PartRegistryItem<Group> = {
   data: GroupData,
 
   Icon: GroupIcon,
-  PropertyEditor: undefined,
   Mesh: GroupLayoutComponent,
 
   exportify: groupExportify,
