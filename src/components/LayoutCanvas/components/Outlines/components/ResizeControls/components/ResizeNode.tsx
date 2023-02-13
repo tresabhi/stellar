@@ -162,7 +162,7 @@ export default function ResizeNode({
         .multiplyScalar(MOVE_STEP_REGULAR);
     }
 
-    if (maintainSlope.current) {
+    if (maintainSlope.current || event.shiftKey) {
       const pointerX = offset.x + movable.x;
       const pointerY = offset.y + movable.y;
 
