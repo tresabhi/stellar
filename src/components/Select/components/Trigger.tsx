@@ -3,10 +3,10 @@ import * as SelectPrimitive from '@radix-ui/react-select';
 import { styled, theme } from 'stitches.config';
 
 const StyledTrigger = styled(SelectPrimitive.Trigger, {
-  backgroundColor: theme.colors.component,
+  backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
   gap: theme.space.gapRelatedRegular,
-  border: theme.borderStyles.borderInteractive,
+  border: theme.borderStyles.interactive,
   borderRadius: theme.radii[4],
   cursor: 'pointer',
   fontSize: theme.fontSizes[12],
@@ -31,13 +31,13 @@ const StyledTrigger = styled(SelectPrimitive.Trigger, {
   },
 
   '&:hover': {
-    backgroundColor: theme.colors.componentHovered,
+    backgroundColor: theme.colors.componentInteractiveHover,
   },
   '&:active': {
-    backgroundColor: theme.colors.componentPressed,
+    backgroundColor: theme.colors.componentInteractiveActive,
   },
   '&:focus': {
-    outline: theme.borderStyles.borderInteractivePressed,
+    outline: theme.borderStyles.interactiveActive,
   },
 });
 

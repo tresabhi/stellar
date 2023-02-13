@@ -58,7 +58,7 @@ const Container = styled('div', {
 const Navigation = styled('div', {
   width: theme.sizes.settingsNavigationWidth,
   backgroundColor: theme.colors.appBackground2,
-  borderRight: theme.borderStyles.borderNonInteractive,
+  borderRight: theme.borderStyles.nonInteractive,
   padding: theme.space.paddingMajor,
   display: 'flex',
   flexDirection: 'column',
@@ -87,7 +87,7 @@ const NavigationButton = styled(Button, {
   variants: {
     selected: {
       true: {
-        backgroundColor: theme.colors.componentHovered,
+        backgroundColor: theme.colors.componentInteractiveHover,
       },
     },
 
@@ -181,9 +181,9 @@ const Separator = styled('div', {
   borderRadius: theme.radii[1],
 });
 const Input = styled(InputPrimitive, {
-  backgroundColor: theme.colors.component,
+  backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
-  border: theme.borderStyles.borderInteractive,
+  border: theme.borderStyles.interactive,
   borderRadius: theme.radii[4],
   fontSize: theme.fontSizes[12],
   color: theme.colors.textHighContrast,

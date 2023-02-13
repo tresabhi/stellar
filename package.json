@@ -13,7 +13,7 @@
     "@react-three/drei": "^9.48.1",
     "@react-three/fiber": "^8.10.4",
     "@stitches/react": "^1.2.8",
-    "bepaint": "^0.1.0-beta.1",
+    "bepaint": "^0.1.0-beta.3",
     "browser-fs-access": "^0.31.1",
     "fuzzysort": "^2.0.4",
     "immer": "^9.0.15",

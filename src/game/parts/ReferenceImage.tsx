@@ -83,9 +83,7 @@ export function ReferenceImageLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export function ReferenceImagePropertyComponent({
-  ids,
-}: PartPropertyComponentProps) {
+export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
   const sourceName = useMutualProperty(
     ids,
     (state: ReferenceImage) => state.sourceName,
@@ -148,5 +146,6 @@ export const registry: PartRegistryItem<ReferenceImage> = {
   data: ReferenceImageData,
 
   Icon: ReferenceImageIcon,
+  // TODO: rename both key and layout component
   Mesh: ReferenceImageLayoutComponent,
 };

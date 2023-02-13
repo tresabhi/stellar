@@ -29,12 +29,12 @@ const globalStyles = globalCss({
     backgroundClip: 'content-box',
   },
   '::-webkit-scrollbar-thumb:hover': {
-    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHovered}) / 2) solid transparent`,
-    backgroundColor: theme.colors.borderInteractiveHovered,
+    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHover}) / 2) solid transparent`,
+    backgroundColor: theme.colors.borderInteractiveHover,
   },
   '::-webkit-scrollbar-thumb:active': {
-    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHovered}) / 2) solid transparent`,
-    backgroundColor: theme.colors.borderInteractivePressed,
+    border: `calc((${theme.sizes.scrollbarWidth} - ${theme.sizes.scrollbarThumbWidthHover}) / 2) solid transparent`,
+    backgroundColor: theme.colors.borderInteractiveActive,
   },
   '::-webkit-scrollbar-corner': {
     backgroundColor: 'transparent',

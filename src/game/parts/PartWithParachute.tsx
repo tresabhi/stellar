@@ -29,7 +29,7 @@ export const PartWithParachuteData: PartWithParachute = {
   label: 'Unlabeled Part With Parachute',
 };
 
-export function PartWithParachutePropertyComponent({
+export function PartWithParachuteProperties({
   ids,
 }: PartPropertyComponentProps) {
   const { t } = useTranslator();

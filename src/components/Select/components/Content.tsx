@@ -5,9 +5,9 @@ import { styled, theme } from 'stitches.config';
 const Container = styled(SelectPrimitive.Content, {
   zIndex: 2,
   overflow: 'hidden',
-  backgroundColor: theme.colors.component,
+  backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
-  border: theme.borderStyles.borderInteractive,
+  border: theme.borderStyles.interactive,
   borderRadius: theme.radii[4],
 });
 const ScrollUpButton = styled(SelectPrimitive.ScrollUpButton, {

@@ -8,8 +8,8 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
   padding: theme.sizes[8],
   gap: theme.sizes[8],
   borderRadius: theme.radii[4],
-  border: theme.borderStyles.borderNonInteractive,
-  backgroundColor: theme.colors.component,
+  border: theme.borderStyles.nonInteractive,
+  backgroundColor: theme.colors.componentInteractive,
 });
 
 const Arrow = styled(DropdownMenuPrimitive.Arrow, {

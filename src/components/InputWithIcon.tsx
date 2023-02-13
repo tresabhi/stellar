@@ -21,14 +21,14 @@ const Container = styled('div', {
   height: theme.sizes.inputSizeMajor,
   justifyContent: 'center',
   alignItems: 'center',
-  border: theme.borderStyles.borderInteractive,
+  border: theme.borderStyles.interactive,
   cursor: 'text',
 
   '&:hover': {
-    border: theme.borderStyles.borderInteractiveHovered,
+    border: theme.borderStyles.interactiveHover,
   },
   '&:active, &:focus-within': {
-    border: theme.borderStyles.borderInteractivePressed,
+    border: theme.borderStyles.interactiveActive,
   },
 });
 

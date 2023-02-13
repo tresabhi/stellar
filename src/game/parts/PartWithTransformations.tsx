@@ -11,17 +11,17 @@ import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   usePartWithOrientation,
   VanillaPartWithOrientation,
-  VanillaPartWithOrientationData
+  VanillaPartWithOrientationData,
 } from './PartWithOrientation';
 import {
   usePartWithPosition,
   VanillaPartWithPosition,
-  VanillaPartWithPositionData
+  VanillaPartWithPositionData,
 } from './PartWithPosition';
 import {
   usePartWithScale,
   VanillaPartWithScale,
-  VanillaPartWithScaleData
+  VanillaPartWithScaleData,
 } from './PartWithScale';
 
 export interface VanillaPartWithTransformations
@@ -69,7 +69,7 @@ export const usePartWithTransformations = (
   usePartWithScale(id, object);
 };
 
-export function PartWithTransformationsPropertyComponent({
+export function PartWithTransformationsProperties({
   ids,
 }: PartPropertyComponentProps) {
   const { t } = useTranslator();

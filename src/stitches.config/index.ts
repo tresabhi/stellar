@@ -1,6 +1,6 @@
 import { blackA, mauve, purple, red } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
-import { createBordersStyles, createColors, createSpaces } from 'bepaint';
+import { createBorderStyles, createColors, createSpaces } from 'bepaint';
 
 export const {
   config,
@@ -61,7 +61,7 @@ export const {
       sidebarWidth: '16rem',
       scrollbarWidth: '1rem',
       scrollbarThumbWidth: '0.125rem',
-      scrollbarThumbWidthHovered: '0.5rem',
+      scrollbarThumbWidthHover: '0.5rem',
       sliderThumb: '1rem',
       sliderTrackWidth: '0.125rem',
       errorScreenInfoMaxWidth: '30rem',
@@ -92,9 +92,9 @@ export const {
     },
 
     borderStyles: {
-      ...createBordersStyles(mauve),
-      ...createBordersStyles(purple, 'accent'),
-      ...createBordersStyles(red, 'danger'),
+      ...createBorderStyles(mauve),
+      ...createBorderStyles(purple, undefined, 'accent'),
+      ...createBorderStyles(red, undefined, 'danger'),
     },
 
     space: {

@@ -29,7 +29,7 @@ import StatusBar from './components/StatusBar';
 
 const Container = styled('div', {
   flex: '1 0 0',
-  backgroundColor: theme.colors.component,
+  backgroundColor: theme.colors.componentInteractive,
   display: 'flex',
   gap: theme.space.gapUnrelatedMajor,
   alignItems: 'stretch',

@@ -1,23 +1,23 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
-import { FuelTank, FuelTankPropertyComponent } from 'game/parts/FuelTank';
+import { FuelTank, FuelTankProperties } from 'game/parts/FuelTank';
 import { Part } from 'game/parts/Part';
 import {
   PartWithEngine,
-  PartWithEnginePropertyComponent,
+  PartWithEngineProperties,
 } from 'game/parts/PartWithEngine';
 import {
   PartWithParachute,
-  PartWithParachutePropertyComponent,
+  PartWithParachuteProperties,
 } from 'game/parts/PartWithParachute';
 import {
   PartWithTransformations,
-  PartWithTransformationsPropertyComponent,
+  PartWithTransformationsProperties,
 } from 'game/parts/PartWithTransformations';
 import {
   ReferenceImage,
-  ReferenceImagePropertyComponent,
+  ReferenceImageProperties,
 } from 'game/parts/ReferenceImage';
 import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
@@ -35,26 +35,26 @@ const groupedProperties: Record<string, GroupedProperties> = {
     test: (part) =>
       (part as PartWithTransformations).p !== undefined &&
       (part as PartWithTransformations).o !== undefined,
-    Component: PartWithTransformationsPropertyComponent,
+    Component: PartWithTransformationsProperties,
   },
   engine: {
     test: (part) => (part as PartWithEngine).B !== undefined,
-    Component: PartWithEnginePropertyComponent,
+    Component: PartWithEngineProperties,
   },
   parachute: {
     test: (part) =>
       (part as PartWithParachute).N !== undefined &&
       (part as PartWithParachute).N.deploy_state !== undefined &&
       (part as PartWithParachute).N.animation_state !== undefined,
-    Component: PartWithParachutePropertyComponent,
+    Component: PartWithParachuteProperties,
   },
   fuelTank: {
     test: (part) => (part as FuelTank).n === 'Fuel Tank',
-    Component: FuelTankPropertyComponent,
+    Component: FuelTankProperties,
   },
   referenceImage: {
     test: (part) => (part as ReferenceImage).n === 'Reference Image',
-    Component: ReferenceImagePropertyComponent,
+    Component: ReferenceImageProperties,
   },
 };
 

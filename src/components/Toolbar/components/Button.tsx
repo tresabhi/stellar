@@ -25,13 +25,13 @@ export const Button = styled('button', {
         color: theme.colors.textHighContrast,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentHovered,
+          backgroundColor: theme.colors.componentInteractiveHover,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentPressed,
+          backgroundColor: theme.colors.componentInteractiveActive,
         },
         '&:focus': {
-          outline: theme.borderStyles.borderInteractivePressed,
+          outline: theme.borderStyles.interactiveActive,
         },
       },
     },

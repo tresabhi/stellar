@@ -50,24 +50,24 @@ const Thumb = styled(SliderPrimitive.Thumb, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: theme.borderStyles.borderInteractive,
+  border: theme.borderStyles.interactive,
   cursor: 'grab',
   width: theme.sizes.sliderThumb,
   height: theme.sizes.sliderThumb,
-  backgroundColor: theme.colors.component,
+  backgroundColor: theme.colors.componentInteractive,
   borderRadius: theme.radii[16],
 
   '&:hover': {
-    backgroundColor: theme.colors.componentHovered,
-    border: theme.borderStyles.borderInteractiveHovered,
+    backgroundColor: theme.colors.componentInteractiveHover,
+    border: theme.borderStyles.interactiveHover,
   },
   '&:active': {
     cursor: 'grabbing',
-    backgroundColor: theme.colors.componentPressed,
-    border: theme.borderStyles.borderInteractivePressed,
+    backgroundColor: theme.colors.componentInteractiveActive,
+    border: theme.borderStyles.interactiveActive,
   },
   '&:focus': {
-    outline: theme.borderStyles.borderInteractivePressed,
+    outline: theme.borderStyles.interactiveActive,
   },
 });
 

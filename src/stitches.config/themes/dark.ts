@@ -1,5 +1,5 @@
 import { mauveDark, purpleDark, redDark } from '@radix-ui/colors';
-import { createBordersStyles, createColors } from 'bepaint';
+import { createBorderStyles, createColors } from 'bepaint';
 import { createTheme } from 'stitches.config';
 
 const themeDark = createTheme('theme-dark', {
@@ -9,9 +9,9 @@ const themeDark = createTheme('theme-dark', {
     ...createColors(redDark, 'danger'),
   },
   borderStyles: {
-    ...createBordersStyles(mauveDark),
-    ...createBordersStyles(purpleDark, 'accent'),
-    ...createBordersStyles(redDark, 'danger'),
+    ...createBorderStyles(mauveDark),
+    ...createBorderStyles(purpleDark, undefined, 'accent'),
+    ...createBorderStyles(redDark, undefined, 'danger'),
   },
 });
 export default themeDark;

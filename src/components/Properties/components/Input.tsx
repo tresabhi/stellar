@@ -38,19 +38,19 @@ const FieldContainer = styled('div', {
   justifyContent: 'center',
   padding: theme.space.paddingMinor,
   gap: theme.space.gapRelatedRegular,
-  backgroundColor: theme.colors.component,
-  border: theme.borderStyles.borderInteractive,
+  backgroundColor: theme.colors.componentInteractive,
+  border: theme.borderStyles.interactive,
   cursor: 'text',
   borderRadius: theme.radii[4],
 
   '&:hover': {
-    backgroundColor: theme.colors.componentHovered,
-    border: theme.borderStyles.borderInteractiveHovered,
+    backgroundColor: theme.colors.componentInteractiveHover,
+    border: theme.borderStyles.interactiveHover,
   },
 
   '&:active, &:focus, &:focus-within': {
-    backgroundColor: theme.colors.componentPressed,
-    border: theme.borderStyles.borderInteractivePressed,
+    backgroundColor: theme.colors.componentInteractiveActive,
+    border: theme.borderStyles.interactiveActive,
   },
 });
 

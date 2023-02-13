@@ -18,14 +18,14 @@ const Trigger = styled(DropdownMenu.Trigger, {
   },
 });
 const Content = styled(DropdownMenu.Content, {
-  backgroundColor: theme.colors.component,
+  backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
   borderRadius: theme.radii[4],
   maxWidth: theme.sizes.hintMaxWidth,
   boxShadow: theme.shadows.regular,
 });
 const Arrow = styled(DropdownMenu.Arrow, {
-  fill: theme.colors.component,
+  fill: theme.colors.componentInteractive,
 });
 const Text = styled('span', {
   color: theme.colors.textLowContrast,

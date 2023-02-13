@@ -11,7 +11,7 @@ const StyledDiv = styled('div', {
   flexDirection: 'column',
   gap: theme.space.gapUnrelatedRegular,
   borderRadius: theme.radii[4],
-  border: theme.borderStyles.borderNonInteractive,
+  border: theme.borderStyles.nonInteractive,
   backgroundColor: theme.colors.appBackground2,
 
   variants: {

@@ -34,11 +34,11 @@ const Trigger = styled(Button, {
 
       css: {
         color: theme.colors.textLowContrast_accent,
-        backgroundColor: theme.colors.component,
+        backgroundColor: theme.colors.componentInteractive,
         cursor: 'default',
 
         '&:hover, &:active': {
-          backgroundColor: theme.colors.component,
+          backgroundColor: theme.colors.componentInteractive,
         },
       },
     },
@@ -50,10 +50,10 @@ const Trigger = styled(Button, {
         backgroundColor: theme.colors.appBackground2,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentHovered,
+          backgroundColor: theme.colors.componentInteractiveHover,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentPressed,
+          backgroundColor: theme.colors.componentInteractiveActive,
         },
       },
     },

@@ -44,17 +44,17 @@ const Trigger = styled('button', {
   variants: {
     selected: {
       true: {
-        backgroundColor: theme.colors.componentPressed,
+        backgroundColor: theme.colors.componentInteractiveActive,
       },
 
       false: {
-        backgroundColor: theme.colors.component,
+        backgroundColor: theme.colors.componentInteractive,
 
         '&:hover': {
-          backgroundColor: theme.colors.componentHovered,
+          backgroundColor: theme.colors.componentInteractiveHover,
         },
         '&:active': {
-          backgroundColor: theme.colors.componentPressed,
+          backgroundColor: theme.colors.componentInteractiveActive,
         },
       },
     },

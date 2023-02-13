@@ -29,9 +29,7 @@ export const PartWithEngineData: PartWithEngine = {
   label: 'Unlabeled Part With Engine',
 };
 
-export function PartWithEnginePropertyComponent({
-  ids,
-}: PartPropertyComponentProps) {
+export function PartWithEngineProperties({ ids }: PartPropertyComponentProps) {
   const { t } = useTranslator();
 
   const enabled = useCheckboxProperty<PartWithEngine>(

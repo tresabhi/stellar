@@ -14,7 +14,7 @@ const Anchor = styled('a', {
       textDecoration: 'none',
     },
     '&:focus': {
-      outline: theme.borderStyles.borderInteractivePressed,
+      outline: theme.borderStyles.interactiveActive,
       textDecoration: 'none',
     },
   },
@@ -28,7 +28,7 @@ const Anchor = styled('a', {
           color: theme.colors.textHighContrast_accent,
         },
         '&:focus': {
-          outline: theme.borderStyles.borderInteractivePressed_accent,
+          outline: theme.borderStyles.interactiveActive_accent,
         },
       },
     },

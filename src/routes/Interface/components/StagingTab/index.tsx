@@ -9,7 +9,7 @@ export default function StagingTab() {
     <TabContainer>
       <div
         style={{
-          backgroundColor: theme.colors.component.toString(),
+          backgroundColor: theme.colors.componentInteractive.toString(),
           width: '100%',
           height: '100%',
           display: 'flex',

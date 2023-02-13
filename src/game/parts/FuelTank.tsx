@@ -175,7 +175,7 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export function FuelTankPropertyComponent({ ids }: PartPropertyComponentProps) {
+export function FuelTankProperties({ ids }: PartPropertyComponentProps) {
   const { t } = useTranslator();
   const constrain = useSettings(
     (state) => state.editor.constrainFuelTankWidths,
