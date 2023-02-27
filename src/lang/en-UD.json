@@ -6,14 +6,14 @@
       "templates": {
         "input_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
         "list": {
-          "apollo_mission": "Apollo mission",
-          "basic_rocket": "Basic rocket",
+          "apollo_mission": "uoᴉssᴉɯ ollod∀",
+          "basic_rocket": "ʇǝʞɔoɹ ɔᴉsɐq",
           "hopper": "ɹǝddoH",
           "joints": "sʇuᴉoſ",
-          "light_lander": "Light lander",
-          "orbit_and_re_entry": "Orbit & re-entry",
-          "parachute_and_separator": "Parachute & separator",
-          "race_car": "Race car",
+          "light_lander": "ɹǝpuɐl ʇɥƃᴉ˥",
+          "orbit_and_re_entry": "ʎɹʇuǝ-ǝɹ ⅋ ʇᴉqɹO",
+          "parachute_and_separator": "ɹoʇɐɹɐdǝs ⅋ ǝʇnɥɔɐɹɐԀ",
+          "race_car": "ɹɐɔ ǝɔɐɹ",
           "rover": "ɹǝʌoɹ"
         }
       },
@@ -353,6 +353,6 @@
   },
   "themes": {
     "theme_light": "Stellar light",
-    "theme_dark": "Stellar dark"
+    "theme_dark": "ʞɹɐp ɹɐllǝʇS"
   }
 }
