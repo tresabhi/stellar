@@ -137,6 +137,10 @@
           "parachute": {
             "$": "Parachute",
             "deployed": "Deployed"
+          },
+          "heat_shield": {
+            "$": "Heat Shield",
+            "size": "Size"
           }
         },
         "inspect": {
