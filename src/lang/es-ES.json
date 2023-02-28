@@ -137,6 +137,10 @@
           "parachute": {
             "$": "Paracaídas",
             "deployed": "Desplegado"
+          },
+          "heat_shield": {
+            "$": "Escudo de calor",
+            "size": "Tamaño"
           }
         },
         "inspect": {
