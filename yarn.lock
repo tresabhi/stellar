@@ -1907,7 +1907,7 @@
     "@react-spring/rafz" "~9.6.1"
     "@react-spring/types" "~9.6.1"
 
-"@react-spring/three@^9.3.1":
+"@react-spring/three@~9.6.1":
   version "9.6.1"
   resolved "https://registry.yarnpkg.com/@react-spring/three/-/three-9.6.1.tgz#095fcd1dc6509127c33c14486d88289b89baeb9d"
   integrity sha512-Tyw2YhZPKJAX3t2FcqvpLRb71CyTe1GvT3V+i+xJzfALgpk10uPGdGaQQ5Xrzmok1340DAeg2pR/MCfaW7b8AA==
@@ -1922,13 +1922,13 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.6.1.tgz#913d3a68c5cbc1124fdb18eff919432f7b6abdde"
   integrity sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==
 
-"@react-three/drei@^9.48.1":
-  version "9.56.24"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.56.24.tgz#b08b6f47f5bb817be3a122afffd9afbf0ff88dbf"
-  integrity sha512-sxM+l3dos6i9EYgWacLZ7ts752YjopftVcToR2U+buoKCIJ+xCNPAWh7Y9MggL+x/z82D1ItQmA+vdfj9aoyBw==
+"@react-three/drei@^9.56.27":
+  version "9.56.27"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.56.27.tgz#bbbbe9f40cfb1348cb114c94ad9e03a05605c7d1"
+  integrity sha512-NnhzBOagyd/PDWTo/BGu315e9ubUjvbeIKjJwkDBtjOnv4SpUsvAm0H9yxLSHBOXQ24Mik3Y3zETBd0+dHD5Ew==
   dependencies:
     "@babel/runtime" "^7.11.2"
-    "@react-spring/three" "^9.3.1"
+    "@react-spring/three" "~9.6.1"
     "@use-gesture/react" "^10.2.24"
     camera-controls "^2.1.0"
     detect-gpu "^5.0.10"
