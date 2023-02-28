@@ -9,7 +9,7 @@ import prompt from 'core/interface/prompt';
 import getPart from 'core/part/getPart';
 import PartCategory from 'hooks/constants/partCategory';
 import useMutualProperty from 'hooks/useMutualProperty';
-import usePhysicalPart from 'hooks/usePhysicalPart';
+import usePhysicalPart from 'hooks/usePartPhysical';
 import { useRef } from 'react';
 import ReferenceImageURLPrompt from 'routes/components/ReferenceImageURLPrompt';
 import useBlueprint from 'stores/blueprint';

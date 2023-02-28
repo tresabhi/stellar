@@ -133,14 +133,20 @@ interface Template {
 }
 
 const TEMPLATES: Template[] = [
-  { name: 'hopper', blueprint: hopper },
-  { name: 'apollo_mission', blueprint: apolloMission },
-  { name: 'light_lander', blueprint: lightLander },
+  { name: 'hopper', blueprint: hopper as VanillaBlueprint },
+  { name: 'apollo_mission', blueprint: apolloMission as VanillaBlueprint },
+  { name: 'light_lander', blueprint: lightLander as VanillaBlueprint },
   // { name: 'rover', blueprint: rover },
-  { name: 'parachute_and_separator', blueprint: parachuteAndSeparator },
+  {
+    name: 'parachute_and_separator',
+    blueprint: parachuteAndSeparator as VanillaBlueprint,
+  },
   // { name: 'joints', blueprint: joints },
-  { name: 'orbit_and_re_entry', blueprint: orbitAndReEntry },
-  { name: 'basic_rocket', blueprint: basicRocket },
+  {
+    name: 'orbit_and_re_entry',
+    blueprint: orbitAndReEntry as VanillaBlueprint,
+  },
+  { name: 'basic_rocket', blueprint: basicRocket as VanillaBlueprint },
 ];
 
 const FileActions = styled('div', {

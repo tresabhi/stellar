@@ -2,22 +2,23 @@ import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
 import { FuelTank, FuelTankProperties } from 'game/parts/FuelTank';
+import { HeatShield, HeatShieldProperties } from 'game/parts/HeatShield';
 import { Part } from 'game/parts/Part';
 import {
   PartWithEngine,
-  PartWithEngineProperties,
+  PartWithEngineProperties
 } from 'game/parts/PartWithEngine';
 import {
   PartWithParachute,
-  PartWithParachuteProperties,
+  PartWithParachuteProperties
 } from 'game/parts/PartWithParachute';
 import {
   PartWithTransformations,
-  PartWithTransformationsProperties,
+  PartWithTransformationsProperties
 } from 'game/parts/PartWithTransformations';
 import {
   ReferenceImage,
-  ReferenceImageProperties,
+  ReferenceImageProperties
 } from 'game/parts/ReferenceImage';
 import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
@@ -30,6 +31,7 @@ interface GroupedProperties {
 }
 
 // TODO: sort these out
+// BIG TODO: CREATE A HELPER FUNCTION FOR THIS
 const groupedProperties: Record<string, GroupedProperties> = {
   transformations: {
     test: (part) =>
@@ -55,6 +57,10 @@ const groupedProperties: Record<string, GroupedProperties> = {
   referenceImage: {
     test: (part) => (part as ReferenceImage).n === 'Reference Image',
     Component: ReferenceImageProperties,
+  },
+  heatShield: {
+    test: (part) => (part as HeatShield).n === 'Heat Shield',
+    Component: HeatShieldProperties,
   },
 };
 
