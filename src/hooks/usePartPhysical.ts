@@ -5,9 +5,6 @@ import usePartCanvasControls from './usePartCanvasControls';
 import usePartVisibility from './usePartVisibility';
 import usePartWithBounds from './usePartWithBounds';
 
-/**
- * Combines all usual part hooks in one to reduce boilerplate
- */
 const usePhysicalPart = (id: string, object: RefObject<Object3D>) => {
   const props = usePartCanvasControls(id);
   usePartWithTransformations(id, object);

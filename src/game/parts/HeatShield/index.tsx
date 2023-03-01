@@ -40,8 +40,8 @@ export const VanillaHeatShieldData: VanillaHeatShield = {
   n: 'Heat Shield',
 
   N: {
-    width_original: 2,
-    width: 2,
+    width_original: 1,
+    width: 1,
     shield_temp: '-Infinity',
   },
 };
@@ -59,27 +59,22 @@ export function HeatShieldLayoutComponent({ id }: PartComponentProps) {
   const widthWrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper);
   const meshes = useModel(model);
-  const firstRun = useRef(true);
+  const { width } = getPart<HeatShield>(id).N;
 
   usePartProperty(
     id,
     (state: HeatShield) => state.N.width,
-    (width, lastWidth) => {
-      const part = getPart<HeatShield>(id);
-      const trueLastWidth = firstRun.current ? 1 : lastWidth;
-      widthWrapper.current?.scale.set(width, width, 1);
+    (newWidth, lastWidth) => {
+      const { p } = getPart<HeatShield>(id);
+      const { bounds } = boundsStore[id];
+      const scale = newWidth / lastWidth;
 
-      boundsStore[id].bounds.width *= part.N.width / trueLastWidth;
-      boundsStore[id].bounds.height *= part.N.width / trueLastWidth;
-      boundsStore[id].bounds.x =
-        (boundsStore[id].bounds.x - part.p.x) * (part.N.width / trueLastWidth) +
-        part.p.x;
-      boundsStore[id].bounds.y =
-        (boundsStore[id].bounds.y - part.p.y) * (part.N.width / trueLastWidth) +
-        part.p.y;
+      bounds.width *= scale;
+      bounds.height *= scale;
+      bounds.x = (bounds.x - p.x) * scale + p.x;
+      bounds.y = (bounds.y - p.y) * scale + p.y;
 
-      firstRun.current = false;
-
+      widthWrapper.current?.scale.set(newWidth, newWidth, 1);
       invalidate();
       declareBoundsUpdated(id);
     },
@@ -87,7 +82,9 @@ export function HeatShieldLayoutComponent({ id }: PartComponentProps) {
 
   return (
     <group ref={wrapper} {...props}>
-      <group ref={widthWrapper}>{meshes}</group>
+      <group scale={[width, width, width]} ref={widthWrapper}>
+        {meshes}
+      </group>
     </group>
   );
 }
