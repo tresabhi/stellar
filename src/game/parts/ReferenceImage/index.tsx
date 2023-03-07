@@ -18,11 +18,11 @@ import { PartRegistryItem } from 'stores/partRegistry';
 import { Mesh, PlaneGeometry } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import getImageDimensionsByURL from 'utilities/getImageDimensionsByURL';
-import { PartData } from './Part';
+import { PartData } from '../Part';
 import {
   PartWithTransformations,
   PartWithTransformationsData,
-} from './PartWithTransformations';
+} from '../PartWithTransformations';
 
 export interface ReferenceImage extends PartWithTransformations {
   readonly n: 'Reference Image';

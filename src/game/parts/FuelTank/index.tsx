@@ -17,11 +17,11 @@ import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
 import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from './Part';
+import { PartData, PartWithoutName } from '../Part';
 import {
   VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData
-} from './PartWithTransformations';
+  VanillaPartWithTransformationsData,
+} from '../PartWithTransformations';
 
 // #region texture types
 type ColorTexture =

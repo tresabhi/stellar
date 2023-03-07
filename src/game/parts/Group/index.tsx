@@ -14,7 +14,7 @@ import boundsStore from 'stores/bounds';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
 import { PartComponentProps } from 'types/Parts';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
-import { Part, PartData, VanillaPart } from './Part';
+import { Part, PartData, VanillaPart } from '../Part';
 
 export interface Group extends Part {
   readonly n: 'Group';

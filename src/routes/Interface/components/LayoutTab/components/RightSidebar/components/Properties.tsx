@@ -7,19 +7,19 @@ import { HeatShield, HeatShieldProperties } from 'game/parts/HeatShield';
 import { Part } from 'game/parts/Part';
 import {
   PartWithEngine,
-  PartWithEngineProperties
+  PartWithEngineProperties,
 } from 'game/parts/PartWithEngine';
 import {
   PartWithParachute,
-  PartWithParachuteProperties
+  PartWithParachuteProperties,
 } from 'game/parts/PartWithParachute';
 import {
   PartWithTransformations,
-  PartWithTransformationsProperties
+  PartWithTransformationsProperties,
 } from 'game/parts/PartWithTransformations';
 import {
   ReferenceImage,
-  ReferenceImageProperties
+  ReferenceImageProperties,
 } from 'game/parts/ReferenceImage';
 import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
