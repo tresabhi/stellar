@@ -1,6 +1,7 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
+import { DockingPort, DockingPortProperties } from 'game/parts/DockingPort';
 import { FuelTank, FuelTankProperties } from 'game/parts/FuelTank';
 import { HeatShield, HeatShieldProperties } from 'game/parts/HeatShield';
 import { Part } from 'game/parts/Part';
@@ -61,6 +62,10 @@ const groupedProperties: Record<string, GroupedProperties> = {
   heatShield: {
     test: (part) => (part as HeatShield).n === 'Heat Shield',
     Component: HeatShieldProperties,
+  },
+  dockingPort: {
+    test: (part) => (part as DockingPort).n === 'Docking Port',
+    Component: DockingPortProperties,
   },
 };
 

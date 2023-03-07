@@ -24,6 +24,8 @@ import {
   VanillaPartWithScaleData,
 } from './PartWithScale';
 
+// BIG TODO: MERGE THESE WITH PART
+
 export interface VanillaPartWithTransformations
   extends VanillaPart,
     VanillaPartWithPosition,
