@@ -19,9 +19,9 @@
       },
       "file_options": {
         "motto": "pǝuᴉɟǝpǝɹ ƃuᴉʇᴉpǝ ʇuᴉɹdǝnlq",
-        "from_scratch": "Start from scratch",
-        "import": "Import blueprint file",
-        "open": "Open stellar file"
+        "from_scratch": "ɥɔʇɐɹɔs ɯoɹɟ ʇɹɐʇS",
+        "import": "ǝlᴉɟ ʇuᴉɹdǝnlq ʇɹodɯI",
+        "open": "ǝlᴉɟ ɹɐllǝʇs uǝdO"
       },
       "status_bar": {
         "docs": "sɔop"
@@ -34,7 +34,7 @@
           "new": "ʍǝN",
           "open": "…uǝdO",
           "save": "ǝʌɐS",
-          "save_as": "Save as...",
+          "save_as": "˙˙˙sɐ ǝʌɐS",
           "import": "…ʇɹodɯI",
           "export": "…ʇɹodxƎ"
         },
@@ -47,11 +47,11 @@
           "cut": "ʇnƆ",
           "paste": "ǝʇsɐԀ",
           "duplicate": "ǝʇɐɔᴉldnp",
-          "create_snippet": "Create snippet"
+          "create_snippet": "ʇǝddᴉus ǝʇɐǝɹƆ"
         },
         "selection": {
-          "select_all": "Select all",
-          "unselect_all": "Unselect all",
+          "select_all": "llɐ ʇɔǝlǝS",
+          "unselect_all": "llɐ ʇɔǝlǝsu∩",
           "group": "dnoɹפ",
           "ungroup": "dnoɹƃu∩"
         },
@@ -64,13 +64,13 @@
           "delete": "ǝʇǝlǝp"
         },
         "cursor": {
-          "select_deep": "Select deep",
-          "select_multiple": "Select multiple",
-          "focus_mode": "Focus mode"
+          "select_deep": "dǝǝp ʇɔǝlǝS",
+          "select_multiple": "ǝldᴉʇlnɯ ʇɔǝlǝS",
+          "focus_mode": "ǝpoɯ snɔoℲ"
         },
         "help": {
           "about": "ɹɐllǝʇS ʇnoq∀",
-          "report": "Report an issue",
+          "report": "ǝnssᴉ uɐ ʇɹodǝɹ",
           "discord": "pɹoɔsᴉp",
           "github": "qnHʇᴉפ"
         },
@@ -83,14 +83,14 @@
         "parts": {
           "$": "sʇɹɐԀ",
           "no_parts": {
-            "$": "No parts in blueprint",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a part."
+            "$": "ʇuᴉɹdǝnlq uᴉ sʇɹɐd oN",
+            "instructions": "˙ʇɹɐd ɐ ʇɹǝsuᴉ oʇ ɹɐqlooʇ ǝɥʇ uᴉ uoɔᴉ %1$s ǝɥʇ dɐ┴"
           }
         },
         "snippets": {
           "$": "sʇǝddᴉuS",
           "coming_soon": {
-            "$": "Snippets coming soon!",
+            "$": "¡uoos ƃuᴉɯoɔ sʇǝddᴉuS",
             "instructions": "˙ʇǝddᴉuS ǝʇɐǝɹƆ %2$s < pɹɐoqdᴉlƆ %1$s < ɹɐqloo┴ oʇ ƃuᴉoƃ ʎq ʇǝddᴉus ʍǝu ɐ ǝʇɐǝɹɔ oʇ ǝlqɐ ǝq llᴉʍ no⅄ ˙sʇǝddᴉus sɐ ǝɹǝɥ sʇuᴉɹdǝnlq ɹǝɥʇo ɟo suoᴉʇɔǝs llɐɯs ʇɹǝsuᴉ oʇ ǝlqɐ ǝq llᴉʍ no⅄"
           }
         }
@@ -99,20 +99,20 @@
         "properties": {
           "$": "sǝᴉʇɹǝdoɹԀ",
           "no_selection": {
-            "$": "No parts selected",
+            "$": "pǝʇɔǝlǝs sʇɹɐd oN",
             "instructions": "˙ʇᴉ ʇɔǝlǝs oʇ ɹɐqǝpᴉs ǝɥʇ uᴉ ɹo ʇuᴉɹdǝnlq ǝɥʇ uo ɹǝɥʇᴉǝ ʇɹɐd ɐ uo ʞɔᴉlƆ"
           },
           "no_properties": {
-            "$": "No properties for selected parts",
+            "$": "sʇɹɐd pǝʇɔǝlǝs ɹoɟ sǝᴉʇɹǝdoɹd oN",
             "instructions": "˙ssǝɹƃoɹd uᴉ ʞɹoʍ ɐ ɹo ʇɔɐɹʇsqɐ ɹǝɥʇᴉǝ ǝɹ,ʎǝɥʇ ǝsnɐɔǝq ʎlqɐqoɹd sǝᴉʇɹǝdoɹd ǝlqɐʇsnɾpɐ ʞɔɐl pǝʇɔǝlǝs ǝʌɐɥ noʎ (s)ʇɹɐd ǝɥ┴"
           },
           "transformations": {
             "$": "suoᴉʇɐɯɹoɟsuɐɹ┴",
-            "x_position": "X position",
-            "y_position": "Y position",
+            "x_position": "uoᴉʇᴉsod X",
+            "y_position": "uoᴉʇᴉsod ⅄",
             "rotation": "uoᴉʇɐʇoɹ",
-            "x_scale": "X scale",
-            "y_scale": "Y scale",
+            "x_scale": "ǝlɐɔs X",
+            "y_scale": "ǝlɐɔs ⅄",
             "constrain": {
               "$": "uᴉɐɹʇsuoƆ",
               "hint": "ǝlɐɔs ⅄ puɐ X uǝǝʍʇǝq oᴉʇɐɹ ǝɥʇ suᴉɐʇuᴉɐW"
@@ -121,12 +121,12 @@
           "engine": {
             "$": "ǝuᴉƃuƎ",
             "enabled": "pǝlqɐuƎ",
-            "heat_damage": "Heat damage"
+            "heat_damage": "ǝƃɐɯɐp ʇɐǝH"
           },
           "fuel_tank": {
-            "$": "Fuel tank",
-            "top_width": "Top width",
-            "bottom_width": "Bottom width",
+            "$": "ʞuɐʇ lǝnℲ",
+            "top_width": "ɥʇpᴉʍ do┴",
+            "bottom_width": "ɥʇpᴉʍ ɯoʇʇoq",
             "height": "ʇɥƃᴉǝH",
             "fuel": "lǝnℲ",
             "constrain": {
@@ -135,18 +135,28 @@
             }
           },
           "parachute": {
-            "$": "Parachute",
-            "deployed": "Deployed"
+            "$": "ǝʇnɥɔɐɹɐԀ",
+            "deployed": "pǝʎoldǝp"
+          },
+          "heat_shield": {
+            "$": "Heat shield",
+            "size": "ǝzᴉS"
+          },
+          "docking_port": {
+            "$": "Docking port",
+            "width": "Width",
+            "magnetic_force": "Magnetic force",
+            "separation_force": "Separation force"
           }
         },
         "inspect": {
           "$": "ʇɔǝdsuI",
           "select_one_part": {
-            "$": "Select a part",
-            "instructions": "Select a single part to inspect the details of"
+            "$": "ʇɹɐd ɐ ʇɔǝlǝS",
+            "instructions": "ɟo slᴉɐʇǝp ǝɥʇ ʇɔǝdsuᴉ oʇ ʇɹɐd ǝlƃuᴉs ɐ ʇɔǝlǝS"
           },
           "meta_data": {
-            "$": "Meta data",
+            "$": "ɐʇɐp ɐʇǝW",
             "id": "pI",
             "parent_id": "pI ʇuǝɹɐԀ",
             "name": "ǝɯɐN",
@@ -192,7 +202,7 @@
   },
   "landscape_prompt": {
     "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
-    "never": "Never ask again",
+    "never": "uᴉɐƃɐ ʞsɐ ɹǝʌǝN",
     "dismiss": "ssᴉɯsᴉp"
   },
   "notifications": {
@@ -208,7 +218,7 @@
       "title": "¡pǝllɐʇsuᴉ ǝq ʍou uɐɔ ɹɐllǝʇS",
       "description": "˙ssǝɔɔɐ ʎsɐǝ puɐ ǝsn ǝuᴉlɟɟo ɹoɟ ǝɔᴉʌǝp ɹnoʎ oʇ pǝllɐʇsuᴉ ǝq uɐɔ puɐ %2$s∀MԀ%1$s ɐ sᴉ ɹɐllǝʇS",
       "actions": {
-        "never": "Never ask again",
+        "never": "uᴉɐƃɐ ʞsɐ ɹǝʌǝN",
         "dismiss": "ssᴉɯsᴉp",
         "install": "llɐʇsuI"
       }
@@ -238,9 +248,9 @@
       "title": "¡uoᴉsɹǝʌ ǝlqɐʇsu∩",
       "description": "˙pɐǝʇsuᴉ %3$suoᴉsɹǝʌ ɐʇǝq ǝɥʇ%2$s ǝsn oʇ ʇuɐʍ ʎɐɯ no⅄ ˙pǝʇsǝʇun ʎɹǝʌ suᴉɐɯǝɹ ʇᴉ sɐ ǝlqɐʇsun ʎlɥƃᴉɥ ǝq uɐɔ ɥɔᴉɥʍ '%1$s ƃuᴉsn ʎlʇuǝɹɹnɔ ǝɹɐ no⅄",
       "actions": {
-        "never": "Never ask again",
+        "never": "uᴉɐƃɐ ʞsɐ ɹǝʌǝN",
         "dismiss": "ssᴉɯsᴉp",
-        "beta": "Use beta"
+        "beta": "ɐʇǝq ǝs∩"
       }
     },
     "missing_parts": {
@@ -249,7 +259,7 @@
       "description": ":ʇǝʎ %1$s uᴉ ʇsᴉxǝ ʇ,usǝop ʇᴉ ǝsnɐɔǝq pǝʇɹodɯᴉ ʇou sɐʍ ʇɹɐd ƃuᴉʍolloɟ ǝɥ┴",
       "description_plural": ":ʇǝʎ %1$s uᴉ ʇsᴉxǝ ʇ,uop ʎǝɥʇ ǝsnɐɔǝq pǝʇɹodɯᴉ ʇou ǝɹǝʍ sʇɹɐd ƃuᴉʍolloɟ ǝɥ┴",
       "actions": {
-        "never": "Never show again",
+        "never": "uᴉɐƃɐ ʍoɥs ɹǝʌǝN",
         "proceed": "pǝǝɔoɹԀ"
       }
     },
@@ -259,7 +269,7 @@
         "interface": "ǝɔɐɟɹǝʇuI",
         "editor": "ɹoʇ!pƎ",
         "performance": "ǝɔuɐɯɹoɟɹǝԀ",
-        "file": "File preferences",
+        "file": "sǝɔuǝɹǝɟǝɹd ǝlᴉℲ",
         "debug": "ƃnqǝp",
         "reset": "sʇlnɐɟǝp oʇ ʇǝsǝɹ"
       },
@@ -271,14 +281,14 @@
             "description": "˙ǝɔɐɟɹǝʇuᴉ ǝɹᴉʇuǝ ǝɥʇ ɟo ǝʇʇǝlɐd ɹoloɔ ǝɥʇ sloɹʇuoƆ"
           },
           "default_tab": {
-            "title": "Default tab",
+            "title": "qɐʇ ʇlnɐɟǝp",
             "description": "˙ʇlnɐɟǝp ʎq ɥɔunɐl uo uǝdo llᴉʍ ɹɐllǝʇS qɐʇ ɥɔᴉɥʍ sǝᴉɟᴉɔǝdS"
           },
           "touchscreen_mode": {
-            "title": "Touchscreen mode",
+            "title": "ǝpoɯ uǝǝɹɔsɥɔno┴",
             "description": "˙ǝdʎʇ uǝǝɹɔs ɹnoʎ ɥʇᴉʍ ǝɔuɐᴉldɯoɔ uᴉ pǝʇuǝsǝɹd sᴉ uoᴉʇɐɯɹoɟuᴉ uǝǝɹɔs-uo ʍoɥ sloɹʇuoƆ",
             "options": {
-              "auto": "Auto-detect",
+              "auto": "ʇɔǝʇǝp-oʇn∀",
               "on": "uO",
               "off": "ɟɟO"
             }
@@ -288,55 +298,55 @@
             "description": "˙%2$suᴉpʍoɹƆ%1$s uo ǝƃɐnƃuɐl ɹnoʎ oʇ ɹɐllǝʇS ǝʇɐlsuɐɹʇ sn dlǝH ˙oʇ pǝʇɐlsuɐɹʇ sᴉ uǝǝɹɔs uo ʇxǝʇ ǝɥʇ ǝƃɐnƃuɐl ʇɐɥʍ sǝᴉɟᴉɔǝdS"
           },
           "orientation_prompt": {
-            "title": "Orientation prompt",
+            "title": "ʇdɯoɹd uoᴉʇɐʇuǝᴉɹO",
             "description": "˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ pǝʇuǝᴉɹo sᴉ ǝɔᴉʌǝp ɹnoʎ uǝɥʍ ʇdɯoɹd ɐ sʍoɥS"
           },
           "installation_prompt": {
-            "title": "Installation prompt",
+            "title": "ʇdɯoɹd uoᴉʇɐllɐʇsuI",
             "description": "˙uoᴉʇɐɔᴉɟᴉʇou ɐ ɟo ssǝlpɹɐƃǝɹ ǝlqᴉƃᴉlǝ ǝq ʎɐɯ ǝɔᴉʌǝp ɹno⅄ ˙%2$s∀MԀ%1$s ɐ sɐ ʇᴉ llɐʇsuᴉ oʇ ǝɔᴉʌǝp ɹnoʎ uᴉɥʇᴉʍ ʎʇᴉlᴉqɐdɐɔ ǝɥʇ sʇɔǝʇǝp ɹɐllǝʇS uǝɥʍ noʎ sǝᴉɟᴉʇoN"
           },
           "instability_prompt": {
-            "title": "Instability warning",
+            "title": "ƃuᴉuɹɐʍ ʎʇᴉlᴉqɐʇsuI",
             "description": "˙ɹɐllǝʇS ɟo uoᴉsɹǝʌ uʍouʞun ɹo ǝlqɐʇsun uɐ ƃuᴉuunɹ ǝɹ,noʎ uǝɥʍ noʎ suɹɐM"
           },
           "missing_parts": {
-            "title": "Missing parts",
+            "title": "sʇɹɐd ƃuᴉssᴉW",
             "description": "˙pǝʇɹodɯᴉ ǝq ʇou plnoɔ ʇɐɥʇ sʇɹɐd ǝɥʇ llɐ ɟo ʇsᴉl ɐ noʎ sʍoɥS"
           }
         },
         "editor": {
           "$": "ɹoʇ!pƎ",
           "undo_limit": {
-            "title": "Undo limit",
+            "title": "ʇᴉɯᴉl opu∩",
             "description": "˙ɯnɯᴉuᴉɯ ǝɥʇ sᴉ 9Ɩ ;ɯnɯᴉxɐɯ ǝɥʇ sᴉ 960ㄣ ˙ǝɹoʇs plnoɥs ɹoʇᴉpǝ ǝɥʇ sǝɥɔʇɐd ʎɹoʇsᴉɥ uoᴉsɹǝʌ ɟo ɹǝqɯnu ɯnɯᴉxɐɯ ǝɥ┴"
           }
         },
         "performance": {
           "$": "ǝɔuɐɯɹoɟɹǝԀ",
           "regress": {
-            "title": "Regress amount",
+            "title": "ʇunoɯɐ ssǝɹƃǝɹ",
             "description": "˙uoᴉssǝɹƃǝɹ ǝɥʇ ǝʌᴉssǝɹƃƃɐ ǝɹoɯ ǝɥʇ 'ǝnlɐʌ ǝɥʇ ɹǝʍo˥ ˙ɔʇǝ 'uoᴉʇɐʇoɹ 'ƃuᴉlɐɔs 'ƃuᴉuuɐd ǝʞᴉl sʞsɐʇ ǝʌᴉsuǝdxǝ ʎllɐuoᴉʇɐʇndɯoɔ ƃuᴉɯɹoɟɹǝd uǝɥʍ uoᴉʇnlosǝɹ sɐʌuɐɔ ǝɥʇ sǝɔnpǝɹ"
           }
         },
         "file": {
-          "$": "File preferences",
+          "$": "sǝɔuǝɹǝɟǝɹd ǝlᴉℲ",
           "format": {
-            "title": "Format Emitted files",
+            "title": "sǝlᴉɟ pǝʇʇᴉɯƎ ʇɐɯɹoℲ",
             "description": "˙ǝlqɐpɐǝɹ ǝɹoɯ ǝq oʇ ɹɐllǝʇS ʎq pǝʇʇᴉɯǝ sǝlᴉɟ uᴉ NOSſ ǝɥʇ sʇɐɯɹoℲ"
           },
           "watermark": {
-            "title": "Watermark exported blueprints",
+            "title": "sʇuᴉɹdǝnlq pǝʇɹodxǝ ʞɹɐɯɹǝʇɐM",
             "description": "˙ǝlᴉɟ ǝɥʇ ǝʇɐɹǝuǝƃ oʇ pǝsn ɹɐllǝʇS ɟo uoᴉsɹǝʌ ǝɥʇ oʇ ƃuᴉʞuᴉl ʞɹɐɯɹǝʇɐʍ ɐ spp∀"
           },
           "default_name": {
-            "title": "Emitted file default name",
+            "title": "ǝɯɐu ʇlnɐɟǝp ǝlᴉɟ pǝʇʇᴉɯƎ",
             "description": "˙ɹɐllǝʇS ʎq pǝʇɹodxǝ ǝɹɐ ʇɐɥʇ sǝlᴉɟ pǝɯɐuun ʎuɐ ɹoɟ ǝɯɐu ʇlnɐɟǝp ǝɥ┴"
           }
         },
         "debug": {
           "$": "ƃnqǝp",
           "error_screen_debug": {
-            "title": "Show debug info on error screen",
+            "title": "uǝǝɹɔs ɹoɹɹǝ uo oɟuᴉ ƃnqǝp ʍoɥS",
             "description": "˙ɹɐllǝʇS sʇdnɹɹǝʇuᴉ ɹoɹɹǝ lɐɔᴉʇᴉɹɔ ɐ uǝɥʍ ǝɔɐɹʇ ʞɔɐʇs pǝddɐɯ-ǝɔɹnos ɐ puɐ ǝƃɐssǝɯ ɹoɹɹǝ llnɟ ǝɥʇ sʎɐldsᴉp"
           }
         }
@@ -352,7 +362,7 @@
     }
   },
   "themes": {
-    "theme_light": "Stellar light",
+    "theme_light": "ʇɥƃᴉl ɹɐllǝʇS",
     "theme_dark": "ʞɹɐp ɹɐllǝʇS"
   }
 }
