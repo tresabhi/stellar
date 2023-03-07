@@ -1,9 +1,9 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
-import { DockingPort, DockingPortProperties } from 'game/parts/DockingPort';
-import { FuelTank, FuelTankProperties } from 'game/parts/FuelTank';
-import { HeatShield, HeatShieldProperties } from 'game/parts/HeatShield';
+import { DockingPortProperties } from 'game/parts/DockingPort';
+import { FuelTankProperties } from 'game/parts/FuelTank';
+import { HeatShieldProperties } from 'game/parts/HeatShield';
 import { Part } from 'game/parts/Part';
 import {
   PartWithEngine,
@@ -17,10 +17,7 @@ import {
   PartWithTransformations,
   PartWithTransformationsProperties,
 } from 'game/parts/PartWithTransformations';
-import {
-  ReferenceImage,
-  ReferenceImageProperties,
-} from 'game/parts/ReferenceImage';
+import { ReferenceImageProperties } from 'game/parts/ReferenceImage';
 import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
 import useBlueprint from 'stores/blueprint';
@@ -31,40 +28,47 @@ interface GroupedProperties {
   Component: FC<PartPropertyComponentProps>;
 }
 
-// TODO: sort these out
-// BIG TODO: CREATE A HELPER FUNCTION FOR THIS
+function testProperties<Type extends Part>(
+  lister: (state: Type) => (unknown | undefined)[],
+) {
+  return (state: Part) =>
+    !lister(state as Type).some((item) => item === undefined);
+}
+function testName(name: string) {
+  return (state: Part) => state.n === name;
+}
+
 const groupedProperties: Record<string, GroupedProperties> = {
   transformations: {
-    test: (part) =>
-      (part as PartWithTransformations).p !== undefined &&
-      (part as PartWithTransformations).o !== undefined,
+    test: testProperties<PartWithTransformations>(({ p, o }) => [p, o]),
     Component: PartWithTransformationsProperties,
   },
   engine: {
-    test: (part) => (part as PartWithEngine).B !== undefined,
+    test: testProperties<PartWithEngine>(({ B }) => [B]),
     Component: PartWithEngineProperties,
   },
   parachute: {
-    test: (part) =>
-      (part as PartWithParachute).N !== undefined &&
-      (part as PartWithParachute).N.deploy_state !== undefined &&
-      (part as PartWithParachute).N.animation_state !== undefined,
+    test: testProperties<PartWithParachute>(({ N }) => [
+      N,
+      N.deploy_state,
+      N.animation_state,
+    ]),
     Component: PartWithParachuteProperties,
   },
   fuelTank: {
-    test: (part) => (part as FuelTank).n === 'Fuel Tank',
+    test: testName('Fuel Tank'),
     Component: FuelTankProperties,
   },
   referenceImage: {
-    test: (part) => (part as ReferenceImage).n === 'Reference Image',
+    test: testName('Reference Image'),
     Component: ReferenceImageProperties,
   },
   heatShield: {
-    test: (part) => (part as HeatShield).n === 'Heat Shield',
+    test: testName('Heat Shield'),
     Component: HeatShieldProperties,
   },
   dockingPort: {
-    test: (part) => (part as DockingPort).n === 'Docking Port',
+    test: testName('Docking Port'),
     Component: DockingPortProperties,
   },
 };
