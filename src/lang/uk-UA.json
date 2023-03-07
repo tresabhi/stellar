@@ -139,8 +139,14 @@
             "deployed": "Deployed"
           },
           "heat_shield": {
-            "$": "Heat Shield",
+            "$": "Heat shield",
             "size": "Size"
+          },
+          "docking_port": {
+            "$": "Docking port",
+            "width": "Width",
+            "magnetic_force": "Magnetic force",
+            "separation_force": "Separation force"
           }
         },
         "inspect": {
