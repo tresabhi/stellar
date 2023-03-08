@@ -147,6 +147,14 @@
             "width": "Width",
             "magnetic_force": "Magnetic force",
             "separation_force": "Separation force"
+          },
+          "texture": {
+            "$": "Texture",
+            "coming_soon": "Texture properties coming soon!"
+          },
+          "cone": {
+            "$": "Cone",
+            "size": "Size"
           }
         },
         "inspect": {
