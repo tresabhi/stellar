@@ -139,14 +139,22 @@
             "deployed": "pǝʎoldǝp"
           },
           "heat_shield": {
-            "$": "Heat shield",
+            "$": "plǝᴉɥs ʇɐǝH",
             "size": "ǝzᴉS"
           },
           "docking_port": {
-            "$": "Docking port",
-            "width": "Width",
-            "magnetic_force": "Magnetic force",
-            "separation_force": "Separation force"
+            "$": "ʇɹod ƃuᴉʞɔop",
+            "width": "ɥʇpᴉM",
+            "magnetic_force": "ǝɔɹoɟ ɔᴉʇǝuƃɐW",
+            "separation_force": "ǝɔɹoɟ uoᴉʇɐɹɐdǝS"
+          },
+          "texture": {
+            "$": "ǝɹnʇxǝ┴",
+            "coming_soon": "¡uoos ƃuᴉɯoɔ sǝᴉʇɹǝdoɹd ǝɹnʇxǝ┴"
+          },
+          "cone": {
+            "$": "ǝuoƆ",
+            "size": "ǝzᴉS"
           }
         },
         "inspect": {
