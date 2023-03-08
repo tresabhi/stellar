@@ -5,6 +5,7 @@ import { DockingPortProperties } from 'game/parts/DockingPort';
 import { FuelTankProperties } from 'game/parts/FuelTank';
 import { HeatShieldProperties } from 'game/parts/HeatShield';
 import { Part } from 'game/parts/Part';
+import { PartWithCone, PartWithConeProperties } from 'game/parts/PartWithCone';
 import {
   PartWithEngine,
   PartWithEngineProperties,
@@ -13,6 +14,10 @@ import {
   PartWithParachute,
   PartWithParachuteProperties,
 } from 'game/parts/PartWithParachute';
+import {
+  PartWithTexture,
+  PartWithTextureProperties,
+} from 'game/parts/PartWithTexture';
 import {
   PartWithTransformations,
   PartWithTransformationsProperties,
@@ -29,7 +34,7 @@ interface GroupedProperties {
 }
 
 function testProperties<Type extends Part>(
-  lister: (state: Type) => (unknown | undefined)[],
+  lister: (state: Partial<Type>) => (unknown | undefined)[],
 ) {
   return (state: Part) =>
     !lister(state as Type).some((item) => item === undefined);
@@ -50,10 +55,18 @@ const groupedProperties: Record<string, GroupedProperties> = {
   parachute: {
     test: testProperties<PartWithParachute>(({ N }) => [
       N,
-      N.deploy_state,
-      N.animation_state,
+      N?.deploy_state,
+      N?.animation_state,
     ]),
     Component: PartWithParachuteProperties,
+  },
+  texture: {
+    test: testProperties<PartWithTexture>(({ T }) => [T]),
+    Component: PartWithTextureProperties,
+  },
+  cone: {
+    test: testProperties<PartWithCone>(({ N }) => [N, N?.size]),
+    Component: PartWithConeProperties,
   },
   fuelTank: {
     test: testName('Fuel Tank'),
