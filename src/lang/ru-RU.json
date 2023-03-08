@@ -1,67 +1,67 @@
 {
   "tabs": {
-    "coming_soon": "This tab is coming soon!",
+    "coming_soon": "Эта вкладка скоро появится!",
     "create": {
-      "$": "Create",
+      "$": "Создать",
       "templates": {
-        "input_placeholder": "Search templates...",
+        "input_placeholder": "Найти шаблоны...",
         "list": {
-          "apollo_mission": "Apollo mission",
-          "basic_rocket": "Basic rocket",
-          "hopper": "Hopper",
-          "joints": "Joints",
-          "light_lander": "Light lander",
-          "orbit_and_re_entry": "Orbit & re-entry",
-          "parachute_and_separator": "Parachute & separator",
-          "race_car": "Race car",
-          "rover": "Rover"
+          "apollo_mission": "Миссия Apollo",
+          "basic_rocket": "Базовая ракета",
+          "hopper": "Хоппер",
+          "joints": "Стыковка",
+          "light_lander": "Посадочный модуль",
+          "orbit_and_re_entry": "Выход на орбиту и возвращение",
+          "parachute_and_separator": "Парашют и отделитель",
+          "race_car": "Гоночная машина",
+          "rover": "Вездеход"
         }
       },
       "file_options": {
-        "motto": "Blueprint editing redefined",
-        "from_scratch": "Start from scratch",
-        "import": "Import blueprint file",
-        "open": "Open stellar file"
+        "motto": "Редактирование чертежей по-новому",
+        "from_scratch": "Начать с нуля",
+        "import": "Импортировать файл чертежа",
+        "open": "Открыть файл Stellar"
       },
       "status_bar": {
-        "docs": "Docs"
+        "docs": "Документация"
       }
     },
     "layout": {
-      "$": "Layout",
+      "$": "Макет",
       "toolbar": {
         "file": {
-          "new": "New",
-          "open": "Open...",
-          "save": "Save",
-          "save_as": "Save as...",
-          "import": "Import...",
-          "export": "Export..."
+          "new": "Новый",
+          "open": "Открыть...",
+          "save": "Сохранить",
+          "save_as": "Сохранить как...",
+          "import": "Импорт...",
+          "export": "Экспорт..."
         },
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "move": "Переместить",
+          "pan": "Сдвинуть"
         },
         "clipboard": {
-          "copy": "Copy",
-          "cut": "Cut",
-          "paste": "Paste",
-          "duplicate": "Duplicate",
-          "create_snippet": "Create snippet"
+          "copy": "Копировать",
+          "cut": "Вырезать",
+          "paste": "Вставить",
+          "duplicate": "Дублировать",
+          "create_snippet": "Создать фрагмент"
         },
         "selection": {
-          "select_all": "Select all",
-          "unselect_all": "Unselect all",
-          "group": "Group",
-          "ungroup": "Ungroup"
+          "select_all": "Выбрать всё",
+          "unselect_all": "Снять выделение всего",
+          "group": "Группировать",
+          "ungroup": "Разгруппировать"
         },
         "edit": {
-          "rename": "Rename",
-          "hidden": "Unhide",
-          "unhidden": "Hide",
-          "locked": "Unlock",
-          "unlocked": "Lock",
-          "delete": "Delete"
+          "rename": "Переименовать",
+          "hidden": "Показать",
+          "unhidden": "Скрыть",
+          "locked": "Разблокировать",
+          "unlocked": "Заблокировать",
+          "delete": "Удалить"
         },
         "cursor": {
           "select_deep": "Select deep",
@@ -147,6 +147,14 @@
             "width": "Width",
             "magnetic_force": "Magnetic force",
             "separation_force": "Separation force"
+          },
+          "texture": {
+            "$": "Texture",
+            "coming_soon": "Texture properties coming soon!"
+          },
+          "cone": {
+            "$": "Cone",
+            "size": "Size"
           }
         },
         "inspect": {
