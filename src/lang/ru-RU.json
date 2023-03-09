@@ -64,171 +64,171 @@
           "delete": "Удалить"
         },
         "cursor": {
-          "select_deep": "Select deep",
-          "select_multiple": "Select multiple",
-          "focus_mode": "Focus mode"
+          "select_deep": "Глубокий выбор",
+          "select_multiple": "Выбрать несколько",
+          "focus_mode": "Режим фокусировки"
         },
         "help": {
-          "about": "About Stellar",
-          "report": "Report an issue",
+          "about": "О Stellar",
+          "report": "Сообщить о проблеме",
           "discord": "Discord",
           "github": "GitHub"
         },
         "preferences": {
-          "settings": "Settings",
-          "keybinds": "Keybinds"
+          "settings": "Настройки",
+          "keybinds": "Горячие клавиши"
         }
       },
       "left_sidebar": {
         "parts": {
-          "$": "Parts",
+          "$": "Детали",
           "no_parts": {
-            "$": "No parts in blueprint",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a part."
+            "$": "Нет деталей в чертеже",
+            "instructions": "Нажмите значок %1$s на панели инструментов, чтобы вставить детали."
           }
         },
         "snippets": {
-          "$": "Snippets",
+          "$": "Фрагменты",
           "coming_soon": {
-            "$": "Snippets coming soon!",
-            "instructions": "You will be able to insert small sections of other blueprints here as snippets. You will be able to create a new snippet by going to Toolbar > %1$s Clipboard > %2$s Create Snippet."
+            "$": "Фрагменты скоро появятся!",
+            "instructions": "Вы сможете вставлять небольшие части других чертежей сюда как фрагменты. Вы сможете создать новые фрагменты, перейдя в панель инструментов > %1$s Буфер обмена > %2$s Создать фрагмент."
           }
         }
       },
       "right_sidebar": {
         "properties": {
-          "$": "Properties",
+          "$": "Свойства",
           "no_selection": {
-            "$": "No parts selected",
-            "instructions": "Click on a part either on the blueprint or in the sidebar to select it."
+            "$": "Нет выбранных деталей",
+            "instructions": "Нажмите на деталь на чертеже или в боковой панели, чтобы выбрать её."
           },
           "no_properties": {
-            "$": "No properties for selected parts",
-            "instructions": "The part(s) you have selected lack adjustable properties probably because they're either abstract or a work in progress."
+            "$": "Нет свойств для выбранных деталей",
+            "instructions": "У выбранных вами деталей отсутствуют регулируемые свойства, скорее всего потому что они либо абстрактные, либо не доработанные."
           },
           "transformations": {
-            "$": "Transformations",
-            "x_position": "X position",
-            "y_position": "Y position",
-            "rotation": "Rotation",
-            "x_scale": "X scale",
-            "y_scale": "Y scale",
+            "$": "Трансформации",
+            "x_position": "Позиция X",
+            "y_position": "Позиция Y",
+            "rotation": "Поворот",
+            "x_scale": "Масштаб X",
+            "y_scale": "Масштаб Y",
             "constrain": {
-              "$": "Constrain",
-              "hint": "Maintains the ratio between X and Y scale"
+              "$": "Сохранение пропорций",
+              "hint": "Сохраняет пропорции масштаба X и Y"
             }
           },
           "engine": {
-            "$": "Engine",
-            "enabled": "Enabled",
-            "heat_damage": "Heat damage"
+            "$": "Двигатель",
+            "enabled": "Включен",
+            "heat_damage": "Тепловой урон"
           },
           "fuel_tank": {
-            "$": "Fuel tank",
-            "top_width": "Top width",
-            "bottom_width": "Bottom width",
-            "height": "Height",
-            "fuel": "Fuel",
+            "$": "Топливный бак",
+            "top_width": "Верхняя ширина",
+            "bottom_width": "Нижняя ширина",
+            "height": "Высота",
+            "fuel": "Топливо",
             "constrain": {
-              "$": "Constrain",
-              "hint": "Maintains the ratio between X and Y scale"
+              "$": "Сохранение пропорций",
+              "hint": "Сохраняет пропорции масштаба X и Y"
             }
           },
           "parachute": {
-            "$": "Parachute",
-            "deployed": "Deployed"
+            "$": "Парашют",
+            "deployed": "Раскрыт"
           },
           "heat_shield": {
-            "$": "Heat shield",
-            "size": "Size"
+            "$": "Тепловой щит",
+            "size": "Размер"
           },
           "docking_port": {
-            "$": "Docking port",
-            "width": "Width",
-            "magnetic_force": "Magnetic force",
-            "separation_force": "Separation force"
+            "$": "Стыковочный порт",
+            "width": "Ширина",
+            "magnetic_force": "Сила магнита",
+            "separation_force": "Сила отделения"
           },
           "texture": {
-            "$": "Texture",
-            "coming_soon": "Texture properties coming soon!"
+            "$": "Текстура",
+            "coming_soon": "Свойства текстур скоро появятся!"
           },
           "cone": {
-            "$": "Cone",
-            "size": "Size"
+            "$": "Конус",
+            "size": "Размер"
           }
         },
         "inspect": {
-          "$": "Inspect",
+          "$": "Исследовать",
           "select_one_part": {
-            "$": "Select a part",
-            "instructions": "Select a single part to inspect the details of"
+            "$": "Выберите деталь",
+            "instructions": "Выберите одну деталь, которую надо исследовать"
           },
           "meta_data": {
-            "$": "Meta data",
+            "$": "Метаданные",
             "id": "ID",
-            "parent_id": "Parent ID",
-            "name": "Name",
-            "selected": "Selected",
-            "hidden": "Hidden",
-            "locked": "Locked"
+            "parent_id": "ID родителя",
+            "name": "Имя",
+            "selected": "Выбрана",
+            "hidden": "Скрыта",
+            "locked": "Заблокирована"
           },
           "bounds": {
-            "$": "Bounds",
-            "width": "Width",
-            "height": "Height",
-            "x_position": "X Position",
-            "y_position": "Y Position",
-            "rotation": "Rotation"
+            "$": "Границы",
+            "width": "Ширина",
+            "height": "Высота",
+            "x_position": "Позиция X",
+            "y_position": "Позиция Y",
+            "rotation": "Поворот"
           },
           "json": "JSON",
-          "vanilla_json": "Vanilla JSON"
+          "vanilla_json": "Ванильный JSON"
         }
       },
       "popup": {
         "insert_part": {
-          "input_placeholder": "Insert part...",
-          "abstract": "Abstract",
-          "fallback": "No parts found",
-          "cancel": "Cancel"
+          "input_placeholder": "Добавить деталь...",
+          "abstract": "Абстрактная",
+          "fallback": "Деталей не найдено",
+          "cancel": "Отмена"
         },
         "rename": {
-          "input_placeholder": "Label...",
-          "trim": "Trim whitespace on ends",
-          "skip_locked": "Skip locked parts",
-          "suffix": "Add unique numerical suffixes",
-          "cancel": "Cancel",
-          "apply": "Apply"
+          "input_placeholder": "Название...",
+          "trim": "Обрезать пробелы на концах",
+          "skip_locked": "Пропускать заблокированные детали",
+          "suffix": "Добавлять уникальные числовые суффиксы",
+          "cancel": "Отмена",
+          "apply": "Применить"
         }
       }
     },
     "staging": {
-      "$": "Staging"
+      "$": "Ступени"
     },
     "export": {
-      "$": "Export"
+      "$": "Экспорт"
     }
   },
   "landscape_prompt": {
-    "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
-    "never": "Never ask again",
-    "dismiss": "Dismiss"
+    "message": "Похоже, что вы в книжной ориентации. Пожалуйста, поверните устройство в альбомную ориентацию.%1$sЕсли вы на компьютере, вы можете это проигнорировать.",
+    "never": "Больше не спрашивать",
+    "dismiss": "Игнорировать"
   },
   "notifications": {
     "update": {
-      "title": "Stellar updated to a newer version",
-      "description": "A restart is required to apply the changes. You can restart now or do it later.",
+      "title": "Stellar обновился до новой версии",
+      "description": "Для применения изменений необходим перезапуск. Вы можете перезапустить сейчас или сделать это позже.",
       "actions": {
-        "restart": "Restart",
-        "dismiss": "Dismiss"
+        "restart": "Перезапустить",
+        "dismiss": "Игнорировать"
       }
     },
     "installable": {
-      "title": "Stellar can now be installed!",
-      "description": "Stellar is a %1$sPWA%2$s and can be installed to your device for offline use and easy access.",
+      "title": "Stellar теперь может быть установлен!",
+      "description": "Stellar - %1$sPWA-приложение%2$s и может быть установлено на ваше устройство для оффлайн-использования и лёгкого доступа.",
       "actions": {
-        "never": "Never ask again",
-        "dismiss": "Dismiss",
-        "install": "Install"
+        "never": "Больше не спрашивать",
+        "dismiss": "Игнорировать",
+        "install": "Установить"
       }
     }
   },
@@ -236,141 +236,141 @@
     "welcome": {
       "slides": {
         "1": {
-          "title": "Welcome!",
-          "description": "Select a language to continue. Some languages may not be fully translated. Help us translate Stellar on %1$sCrowdin%2$s.",
-          "select": "Select a language..."
+          "title": "Добро пожаловать!",
+          "description": "Выберите язык, чтобы продолжить. Некоторые языки могут быть не полностью переведёнными. Помогите нам перевести Stellar на %1$sCrowdin%2$s.",
+          "select": "Выберите язык..."
         },
         "2": {
-          "title": "Pick a theme",
-          "description": "Themes change the look and feel of the editor. Pick one that fits your needs.",
-          "select": "Select a theme..."
+          "title": "Выберите тему",
+          "description": "Темы меняют внешний вид редактора. Выберите ту, которая вам подходит.",
+          "select": "Выберите тему..."
         }
       },
       "actions": {
-        "back": "Back",
-        "next": "Next",
-        "finish": "Finish"
+        "back": "Назад",
+        "next": "Далее",
+        "finish": "Завершить"
       }
     },
     "unstable": {
-      "title": "Unstable version!",
-      "description": "You are currently using %1$s, which can be highly unstable as it remains very untested. You may want to use %2$sthe beta version%3$s instead.",
+      "title": "Нестабильная версия!",
+      "description": "Сейчас вы используете %1$s, которая может быть очень нестабильной, ведь она не была тестирована. Рекомендуется вместо неё использовать %2$sбета-версию Stellar%3$s.",
       "actions": {
-        "never": "Never ask again",
-        "dismiss": "Dismiss",
-        "beta": "Use beta"
+        "never": "Больше не спрашивать",
+        "dismiss": "Игнорировать",
+        "beta": "Использовать бета-версию"
       }
     },
     "missing_parts": {
-      "title": "1 part not imported",
-      "title_plural": "%1$s parts not imported",
-      "description": "The following part was not imported because it doesn't exist in %1$s yet:",
-      "description_plural": "The following parts were not imported because they don't exist in %1$s yet:",
+      "title": "1 деталь не импортирована",
+      "title_plural": "%1$s деталей не импортировано",
+      "description": "Следующая деталь не была импортирована, так как она еще не существует в %1$s:",
+      "description_plural": "Следующие детали не были импортированы, так как они еще не существуют в %1$s:",
       "actions": {
-        "never": "Never show again",
-        "proceed": "Proceed"
+        "never": "Больше не показывать",
+        "proceed": "Продолжить"
       }
     },
     "settings": {
       "navigation": {
-        "search": "Search settings...",
-        "interface": "Interface",
-        "editor": "Editor",
-        "performance": "Performance",
-        "file": "File preferences",
-        "debug": "Debug",
-        "reset": "Reset to defaults"
+        "search": "Найти настройки...",
+        "interface": "Интерфейс",
+        "editor": "Редактор",
+        "performance": "Производительность",
+        "file": "Файлы",
+        "debug": "Отладка",
+        "reset": "Восстановить настройки по умолчанию"
       },
       "groups": {
         "interface": {
-          "$": "Interface",
+          "$": "Интерфейс",
           "theme": {
-            "title": "Theme",
-            "description": "Controls the color palette of the entire interface."
+            "title": "Тема",
+            "description": "Управляет цветовой палитрой интерфейса."
           },
           "default_tab": {
-            "title": "Default tab",
-            "description": "Specifies which tab Stellar will open on launch by default."
+            "title": "Вкладка по умолчанию",
+            "description": "Указывает, какую вкладку Stellar откроет при запуске."
           },
           "touchscreen_mode": {
-            "title": "Touchscreen mode",
-            "description": "Controls how on-screen information is presented in compliance with your screen type.",
+            "title": "Режим сенсорного экрана",
+            "description": "Управляет видом информации на экране в соответствии с типом вашего экрана.",
             "options": {
-              "auto": "Auto-detect",
-              "on": "On",
-              "off": "Off"
+              "auto": "Автоопределение",
+              "on": "Включен",
+              "off": "Выключен"
             }
           },
           "language": {
-            "title": "Language",
-            "description": "Specifies what language the text on screen is translated to. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+            "title": "Язык",
+            "description": "Указывает язык, на который переводится текст на экране. Помогите нам перевести Stellar на ваш язык на %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
-            "title": "Orientation prompt",
-            "description": "Shows a prompt when your device is oriented in portrait mode."
+            "title": "Уведомление ориентации",
+            "description": "Показывает уведомление, если устройство в книжной ориентации."
           },
           "installation_prompt": {
-            "title": "Installation prompt",
-            "description": "Notifies you when Stellar detects the capability within your device to install it as a %1$sPWA%2$s. Your device may be eligible regardless of a notification."
+            "title": "Уведомление установки",
+            "description": "Показывает уведомление если Stellar обнаруживает, что устройство позволяет установить его как %1$sPWA-приложение%2$s. Ваше устройство может иметь данную возможность независимо от уведомления."
           },
           "instability_prompt": {
-            "title": "Instability warning",
-            "description": "Warns you when you're running an unstable or unknown version of Stellar."
+            "title": "Предупреждение о нестабильности",
+            "description": "Предупреждает вас, если вы используете нестабильную или неизвестную версию Stellar."
           },
           "missing_parts": {
-            "title": "Missing parts",
-            "description": "Shows you a list of all the parts that could not be imported."
+            "title": "Отсутствующие детали",
+            "description": "Показывает список всех деталей, которые не удалось импортировать."
           }
         },
         "editor": {
-          "$": "Editor",
+          "$": "Редактор",
           "undo_limit": {
-            "title": "Undo limit",
-            "description": "The maximum number of version history patches the editor should store. 4096 is the maximum; 16 is the minimum."
+            "title": "Лимит отмен",
+            "description": "Максимальное количество изменений истории версий, которые должен хранить редактор. Максимум - 4096; минимум - 16."
           }
         },
         "performance": {
-          "$": "Performance",
+          "$": "Производительность",
           "regress": {
-            "title": "Regress amount",
-            "description": "Reduces the canvas resolution when performing computationally expensive tasks like panning, scaling, rotation, etc. Lower the value, the more aggressive the regression."
+            "title": "Количество регрессии",
+            "description": "Уменьшает разрешение холста при выполнении вычислительно дорогих задач, таких как сдвиг, масштабирование, поворот и т. д. Чем меньше значение, тем агрессивней регрессия."
           }
         },
         "file": {
-          "$": "File preferences",
+          "$": "Файлы",
           "format": {
-            "title": "Format Emitted files",
-            "description": "Formats the JSON in files emitted by Stellar to be more readable."
+            "title": "Форматированные файлы",
+            "description": "Форматирует JSON-файлы, генерируемые Stellar, чтобы они были более читаемыми."
           },
           "watermark": {
-            "title": "Watermark exported blueprints",
-            "description": "Adds a watermark linking to the version of Stellar used to generate the file."
+            "title": "Водяная марка на экспортированных чертежах",
+            "description": "Добавляет водяную марку с версией Stellar, использованную для генерации файла."
           },
           "default_name": {
-            "title": "Emitted file default name",
-            "description": "The default name for any unnamed files that are exported by Stellar."
+            "title": "Имя файла по умолчанию",
+            "description": "Имя по умолчанию для безымянных файлов, экспортированных в Stellar."
           }
         },
         "debug": {
-          "$": "Debug",
+          "$": "Отладка",
           "error_screen_debug": {
-            "title": "Show debug info on error screen",
-            "description": "Displays the full error message and a source-mapped stack trace when a critical error interrupts Stellar."
+            "title": "Показывать отладочную информацию на ошибочном экране",
+            "description": "Показывает полное сообщение об ошибке и трассировку стека, когда критическая ошибка прерывает работу Stellar."
           }
         }
       }
     },
     "confirmation": {
-      "title": "Are you sure you want to do this?",
-      "description": "This action is may not be reversible.",
+      "title": "Вы уверены, что хотите это сделать?",
+      "description": "Это действие может быть необратимо.",
       "actions": {
-        "cancel": "Cancel",
-        "yes": "Yes"
+        "cancel": "Отмена",
+        "yes": "Да"
       }
     }
   },
   "themes": {
-    "theme_light": "Stellar light",
-    "theme_dark": "Stellar dark"
+    "theme_light": "Stellar (светлая)",
+    "theme_dark": "Stellar (тёмная)"
   }
 }
