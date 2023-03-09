@@ -1,4 +1,5 @@
 import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
+import { useTexture } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
 import * as Properties from 'components/Properties';
@@ -15,7 +16,7 @@ import { useRef } from 'react';
 import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
-import { CylinderGeometry, Group, Mesh } from 'three';
+import { CylinderGeometry, Group, Mesh, NearestFilter } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { PartData, PartWithoutName } from '../Part';
 import {
@@ -26,6 +27,7 @@ import {
   VanillaPartWithTransformations,
   VanillaPartWithTransformationsData,
 } from '../PartWithTransformations';
+import texture from './texture.png';
 
 export interface VanillaFuelTank
   extends VanillaPartWithTexture,
@@ -63,10 +65,14 @@ export const FuelTankData: FuelTank = {
   label: 'Fuel Tank',
 };
 
+console.log(texture);
 export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const mesh = useRef<Mesh>(null);
   const props = usePhysicalPart(id, wrapper);
+  const colorMap = useTexture(texture);
+
+  colorMap.magFilter = NearestFilter;
 
   usePartProperty(
     id,
@@ -113,12 +119,7 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   return (
     <group ref={wrapper} {...props}>
       <mesh ref={mesh}>
-        <meshStandardMaterial
-          flatShading
-          roughness={0.8}
-          metalness={0.8}
-          color="white"
-        />
+        <meshBasicMaterial map={colorMap} />
       </mesh>
     </group>
   );
