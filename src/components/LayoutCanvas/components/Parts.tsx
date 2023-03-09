@@ -35,13 +35,6 @@ const Parts = forwardRef<Group, PartsProps>((props, ref) => {
 
   return (
     <HeadsUpDisplay priority={Layer.PartRenderBetween}>
-      {/**
-       * Temporary lighting solution for fuel tanks until we figure out the
-       * texturing issue
-       */}
-      <directionalLight position={[0, 0, 100]} intensity={0.8} />
-      <ambientLight intensity={0.2} />
-
       <PartCluster
         {...props}
         position={[initialState.offset.x, initialState.offset.y, 0]}

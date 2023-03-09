@@ -8,7 +8,10 @@ import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { Object3D, Vector3 } from 'three';
+import moduloAngle from 'utilities/moduloAngle';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { PartWithOrientation } from './PartWithOrientation';
+import { PartWithTransformations } from './PartWithTransformations';
 
 export interface VanillaPartWithScale extends VanillaPart {
   /**
@@ -32,8 +35,21 @@ export const PartWithScaleData: PartWithScale = {
   label: 'Unlabeled Part With Scale',
 };
 
-export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
+function rotationLighting(flipLight: boolean, rotation: number) {
+  if (flipLight) return moduloAngle(rotation) >= 180 ? -1 : 1;
+  return 1;
+}
+function scaleLighting(flipLight: boolean, scale: number) {
+  return flipLight ? Math.abs(scale) : scale;
+}
+
+export const usePartWithScale = (
+  id: string,
+  object: RefObject<Object3D>,
+  flipLighting = true,
+) => {
   const scale = new Vector3();
+  let rotation = getPart<PartWithOrientation>(id).o.z;
 
   const handlePartScale = (event: CustomEvent<PartScaleEventDetail>) => {
     if (object.current && getPart(id)?.selected) {
@@ -49,7 +65,9 @@ export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
 
     if (object.current) {
       object.current.scale.set(
-        part.o.x * event.detail.normalizedScale[0],
+        part.o.x *
+          scaleLighting(flipLighting, event.detail.normalizedScale[0]) *
+          rotationLighting(flipLighting, rotation),
         part.o.y * event.detail.normalizedScale[1],
         object.current.scale.z,
       );
@@ -74,9 +92,15 @@ export const usePartWithScale = (id: string, object: RefObject<Object3D>) => {
 
   usePartProperty(
     id,
-    (part: PartWithScale) => part.o,
+    (part: PartWithTransformations) => part.o,
     (o, prevO) => {
-      object.current?.scale.set(o.x, o.y, (Math.abs(o.x) + Math.abs(o.y)) / 2);
+      rotation = o.z;
+      object.current?.scale.set(
+        scaleLighting(flipLighting, o.x) *
+          rotationLighting(flipLighting, rotation),
+        o.y,
+        (Math.abs(o.x) + Math.abs(o.y)) / 2,
+      );
       invalidate();
 
       if (object.current && boundsStore[id]) {

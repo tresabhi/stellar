@@ -35,7 +35,7 @@ export const EngineValiantData: EngineValiant = {
   label: 'Valiant Engine',
 };
 
-export const EngineValiantLayoutComponent = createPhysicalPart(model);
+export const EngineValiantLayoutComponent = createPhysicalPart(model, false);
 
 export const EngineValiantIcon = EngineIcon;
 

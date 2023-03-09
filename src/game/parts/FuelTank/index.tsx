@@ -65,7 +65,6 @@ export const FuelTankData: FuelTank = {
   label: 'Fuel Tank',
 };
 
-console.log(texture);
 export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const mesh = useRef<Mesh>(null);

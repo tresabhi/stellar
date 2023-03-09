@@ -35,7 +35,7 @@ export const EngineTitanData: EngineTitan = {
   label: 'Titan Engine',
 };
 
-export const EngineTitanLayoutComponent = createPhysicalPart(model);
+export const EngineTitanLayoutComponent = createPhysicalPart(model, false);
 
 export const EngineTitanIcon = EngineIcon;
 

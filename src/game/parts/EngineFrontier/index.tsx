@@ -37,7 +37,7 @@ export const EngineFrontierData: EngineFrontier = {
   label: 'Frontier Engine',
 };
 
-export const EngineFrontierLayoutComponent = createPhysicalPart(model);
+export const EngineFrontierLayoutComponent = createPhysicalPart(model, false);
 
 export const EngineFrontierIcon = EngineIcon;
 

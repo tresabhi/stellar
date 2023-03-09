@@ -9,19 +9,19 @@ import { Object3D } from 'three';
 import { PartPropertyComponentProps } from 'types/Parts';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
-  usePartWithOrientation,
   VanillaPartWithOrientation,
   VanillaPartWithOrientationData,
+  usePartWithOrientation,
 } from './PartWithOrientation';
 import {
-  usePartWithPosition,
   VanillaPartWithPosition,
   VanillaPartWithPositionData,
+  usePartWithPosition,
 } from './PartWithPosition';
 import {
-  usePartWithScale,
   VanillaPartWithScale,
   VanillaPartWithScaleData,
+  usePartWithScale,
 } from './PartWithScale';
 
 export interface VanillaPartWithTransformations
@@ -63,10 +63,11 @@ export const PartWithTransformationsData: PartWithTransformations = {
 export const usePartWithTransformations = (
   id: string,
   object: RefObject<Object3D>,
+  flipLighting = true,
 ) => {
   usePartWithPosition(id, object);
   usePartWithOrientation(id, object);
-  usePartWithScale(id, object);
+  usePartWithScale(id, object, flipLighting);
 };
 
 export function PartWithTransformationsProperties({

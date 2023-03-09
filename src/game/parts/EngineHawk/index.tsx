@@ -35,7 +35,7 @@ export const EngineHawkData: EngineHawk = {
   label: 'Hawk Engine',
 };
 
-export const EngineHawkLayoutComponent = createPhysicalPart(model);
+export const EngineHawkLayoutComponent = createPhysicalPart(model, false);
 
 export const EngineHawkIcon = EngineIcon;
 
