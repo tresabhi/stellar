@@ -16,7 +16,7 @@ import { useRef } from 'react';
 import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
-import { CylinderGeometry, Group, Mesh, NearestFilter } from 'three';
+import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import { PartData, PartWithoutName } from '../Part';
 import {
@@ -67,28 +67,57 @@ export const FuelTankData: FuelTank = {
 
 export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
-  const mesh = useRef<Mesh>(null);
+  const meshTop = useRef<Mesh>(null);
+  const meshMiddle = useRef<Mesh>(null);
+  const meshBottom = useRef<Mesh>(null);
   const props = usePhysicalPart(id, wrapper);
   const colorMap = useTexture(texture);
-
-  colorMap.magFilter = NearestFilter;
 
   usePartProperty(
     id,
     (newState: FuelTank) => newState.N,
     (N) => {
-      if (mesh.current) {
-        mesh.current.geometry = new CylinderGeometry(
-          N.width_b / 2,
+      if (meshTop.current && meshMiddle.current && meshBottom.current) {
+        const slope = (height: number) =>
+          (N.width_a + (N.width_b - N.width_a) * (height / N.height)) / 2;
+        const topHeight = N.height < 0.3 ? N.height / 0.3 : 0.1;
+        const bottomHeight = topHeight;
+        const middleHeight = N.height - topHeight - bottomHeight;
+
+        meshBottom.current.position.set(0, bottomHeight / 2, 0);
+        meshMiddle.current.position.set(0, bottomHeight + middleHeight / 2, 0);
+        meshTop.current.position.set(0, N.height - topHeight / 2, 0);
+
+        meshBottom.current.geometry = new CylinderGeometry(
+          slope(bottomHeight),
           N.width_a / 2,
-          N.height,
+          bottomHeight,
           12,
           1,
           true,
-          Math.PI / -2,
+          -Math.PI / 2,
           Math.PI,
         );
-        mesh.current.position.set(0, N.height / 2, 0);
+        meshMiddle.current.geometry = new CylinderGeometry(
+          slope(middleHeight + bottomHeight),
+          slope(bottomHeight),
+          middleHeight,
+          12,
+          1,
+          true,
+          -Math.PI / 2,
+          Math.PI,
+        );
+        meshTop.current.geometry = new CylinderGeometry(
+          N.width_b / 2,
+          slope(middleHeight + bottomHeight),
+          topHeight,
+          12,
+          1,
+          true,
+          -Math.PI / 2,
+          Math.PI,
+        );
 
         if (boundsStore[id] && wrapper.current) {
           const { o } = getPart<FuelTank>(id);
@@ -117,8 +146,14 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
 
   return (
     <group ref={wrapper} {...props}>
-      <mesh ref={mesh}>
-        <meshBasicMaterial map={colorMap} />
+      <mesh ref={meshTop}>
+        <meshBasicMaterial map={colorMap} color="#ffffff" />
+      </mesh>
+      <mesh ref={meshMiddle}>
+        <meshBasicMaterial map={colorMap} color="#f2f2f2" />
+      </mesh>
+      <mesh ref={meshBottom}>
+        <meshBasicMaterial map={colorMap} color="#e4e4e4" />
       </mesh>
     </group>
   );
