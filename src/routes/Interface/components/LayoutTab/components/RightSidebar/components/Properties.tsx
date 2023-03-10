@@ -11,6 +11,10 @@ import {
   PartWithEngineProperties,
 } from 'game/parts/PartWithEngine';
 import {
+  PartWithFragment,
+  PartWithFragmentProperties,
+} from 'game/parts/PartWithFragment';
+import {
   PartWithParachute,
   PartWithParachuteProperties,
 } from 'game/parts/PartWithParachute';
@@ -60,8 +64,16 @@ const groupedProperties: Record<string, GroupedProperties> = {
     ]),
     Component: PartWithParachuteProperties,
   },
+  fragment: {
+    test: testProperties<PartWithFragment>(({ T }) => [T, T?.fragment]),
+    Component: PartWithFragmentProperties,
+  },
   texture: {
-    test: testProperties<PartWithTexture>(({ T }) => [T]),
+    test: testProperties<PartWithTexture>(({ T }) => [
+      T,
+      T?.color_tex,
+      T?.shape_tex,
+    ]),
     Component: PartWithTextureProperties,
   },
   cone: {
