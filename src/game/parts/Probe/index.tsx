@@ -20,7 +20,7 @@ export const VanillaProbeData: VanillaProbe = {
   ...VanillaPartWithTransformationsData,
 
   n: 'Probe',
-  N: { width: 1 },
+  N: { width: 2 },
 };
 
 export const ProbeData: Probe = {
