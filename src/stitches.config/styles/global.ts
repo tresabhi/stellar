@@ -10,6 +10,7 @@ const globalStyles = globalCss({
   'html, body': {
     // don't blow their eyes out on reload
     backgroundColor: theme.colors.appBackground1,
+    margin: 'none',
   },
 
   '*': {
