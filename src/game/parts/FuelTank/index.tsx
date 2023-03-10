@@ -80,7 +80,7 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
       if (meshTop.current && meshMiddle.current && meshBottom.current) {
         const slope = (height: number) =>
           (N.width_a + (N.width_b - N.width_a) * (height / N.height)) / 2;
-        const topHeight = N.height < 0.3 ? N.height / 0.3 : 0.1;
+        const topHeight = N.height < 0.3 ? N.height / 3 : 0.1;
         const bottomHeight = topHeight;
         const middleHeight = N.height - topHeight - bottomHeight;
 
