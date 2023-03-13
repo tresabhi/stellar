@@ -14,7 +14,7 @@
     "@react-three/fiber": "^8.11.5",
     "@stitches/react": "^1.2.8",
     "bepaint": "^0.1.0-beta.3",
-    "browser-fs-access": "^0.32.1",
+    "browser-fs-access": "^0.33.0",
     "fuzzysort": "^2.0.4",
     "immer": "^9.0.15",
     "lodash": "^4.17.21",
