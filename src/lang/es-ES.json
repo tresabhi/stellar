@@ -139,14 +139,22 @@
             "deployed": "Desplegado"
           },
           "heat_shield": {
-            "$": "Heat shield",
+            "$": "Escudo de calor",
             "size": "Tamaño"
           },
           "docking_port": {
-            "$": "Docking port",
-            "width": "Width",
-            "magnetic_force": "Magnetic force",
-            "separation_force": "Separation force"
+            "$": "Puerto de atraque",
+            "width": "Anchura",
+            "magnetic_force": "Fuerza magnética",
+            "separation_force": "Fuerza de separación"
+          },
+          "texture": {
+            "$": "Textura",
+            "coming_soon": "¡Propiedades de textura próximamente!"
+          },
+          "cone": {
+            "$": "Cono",
+            "size": "Tamaño"
           }
         },
         "inspect": {
