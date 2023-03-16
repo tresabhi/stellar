@@ -61,7 +61,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^29.3.1",
     "node-downloader-helper": "^2.1.5",
-    "node-fetch": "^3.2.10",
+    "node-fetch": "^3.3.1",
     "prettier": "^2.8.1",
     "prettier-eslint": "^15.0.1",
     "prettier-eslint-cli": "^7.1.0",
