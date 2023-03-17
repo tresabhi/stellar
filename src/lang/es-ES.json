@@ -155,6 +155,12 @@
           "cone": {
             "$": "Cono",
             "size": "Tamaño"
+          },
+          "fragment": {
+            "$": "Fragment",
+            "left": "Left",
+            "whole": "Whole",
+            "right": "Right"
           }
         },
         "inspect": {
