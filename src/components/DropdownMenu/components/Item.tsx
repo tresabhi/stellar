@@ -5,7 +5,7 @@ export const Item = styled(DropdownMenuPrimitive.Item, {
   display: 'flex',
   gap: theme.sizes[8],
   padding: theme.sizes[8],
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   alignItems: 'center',
 
   variants: {

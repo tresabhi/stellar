@@ -33,7 +33,7 @@ const Track = styled(SliderPrimitive.Track, {
   backgroundColor: theme.colors.borderInteractive,
   position: 'relative',
   flexGrow: 1,
-  borderRadius: theme.radii[1],
+  borderRadius: theme.radii.sharper,
 
   '&[data-orientation="horizontal"]': { height: theme.sizes.sliderTrackWidth },
   '&[data-orientation="vertical"]': { width: theme.sizes.sliderTrackWidth },
@@ -42,7 +42,7 @@ const Track = styled(SliderPrimitive.Track, {
 const Range = styled(SliderPrimitive.Range, {
   position: 'absolute',
   backgroundColor: theme.colors.borderInteractive_accent,
-  borderRadius: theme.radii[1],
+  borderRadius: theme.radii.sharper,
   height: '100%',
 });
 
@@ -55,7 +55,7 @@ const Thumb = styled(SliderPrimitive.Thumb, {
   width: theme.sizes.sliderThumb,
   height: theme.sizes.sliderThumb,
   backgroundColor: theme.colors.componentInteractive,
-  borderRadius: theme.radii[16],
+  borderRadius: theme.radii.blunter,
 
   '&:hover': {
     backgroundColor: theme.colors.componentInteractiveHover,

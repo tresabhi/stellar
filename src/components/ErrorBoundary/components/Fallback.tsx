@@ -82,7 +82,7 @@ const Button = styled(ButtonPrimitive, {
   alignItems: 'center',
   justifyContent: 'center',
   gap: theme.space.gapRelatedRegular,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
 
   '& > svg': {
     width: '1em',
@@ -125,7 +125,7 @@ const DebugContentContainer = styled('div', {
   backgroundColor: theme.colors.componentInteractive,
   border: theme.borderStyles.nonInteractive,
   padding: theme.space.paddingRegular,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   display: 'flex',
   flexDirection: 'column',
   gap: theme.space.gapRelatedRegular,

@@ -10,7 +10,7 @@ const StyledDiv = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: theme.space.gapUnrelatedRegular,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   border: theme.borderStyles.nonInteractive,
   backgroundColor: theme.colors.appBackground2,
 

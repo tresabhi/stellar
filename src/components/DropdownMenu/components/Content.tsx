@@ -7,7 +7,7 @@ const StyledContent = styled(DropdownMenuPrimitive.Content, {
   flexDirection: 'column',
   padding: theme.sizes[8],
   gap: theme.sizes[8],
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   border: theme.borderStyles.nonInteractive,
   backgroundColor: theme.colors.componentInteractive,
 });

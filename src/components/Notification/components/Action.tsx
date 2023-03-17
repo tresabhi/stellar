@@ -4,7 +4,7 @@ import { styled, theme } from 'stitches.config';
 export const Action = styled(Button, {
   padding: theme.space.paddingMinor,
   fontSize: theme.fontSizes[12],
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

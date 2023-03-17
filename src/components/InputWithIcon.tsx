@@ -17,7 +17,7 @@ const Container = styled('div', {
   display: 'flex',
   padding: `0 ${theme.space.paddingRegular}`,
   gap: theme.space.gapRelatedMajor,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   height: theme.sizes.inputSizeMajor,
   justifyContent: 'center',
   alignItems: 'center',

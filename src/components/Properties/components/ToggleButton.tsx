@@ -21,7 +21,7 @@ const Container = styled('div', {
 });
 
 const Trigger = styled(Button, {
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

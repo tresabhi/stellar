@@ -16,7 +16,7 @@ const Trigger = styled(Button, {
   alignItems: 'center',
   gap: theme.space.gapRelatedRegular,
   height: theme.sizes.inputSizeMajor,
-  borderRadius: `${theme.radii[4]} ${theme.radii[4]} 0 0`,
+  borderRadius: `${theme.radii.regular} ${theme.radii.regular} 0 0`,
   maxWidth: theme.sizes.tabMaxWidth,
 
   '& > svg': {

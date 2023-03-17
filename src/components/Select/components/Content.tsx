@@ -8,7 +8,7 @@ const Container = styled(SelectPrimitive.Content, {
   backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
   border: theme.borderStyles.interactive,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
 });
 const ScrollUpButton = styled(SelectPrimitive.ScrollUpButton, {
   display: 'flex',

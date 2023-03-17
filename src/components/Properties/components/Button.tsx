@@ -8,7 +8,7 @@ export const Button = styled(ButtonPrimitive, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   gap: theme.space.gapRelatedRegular,
 
   '& > svg': {

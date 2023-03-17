@@ -93,7 +93,7 @@ const Separator = styled('div', {
   height: '75%',
   // TODO: add a separator color
   backgroundColor: theme.colors.borderNonInteractive,
-  borderRadius: theme.radii[1],
+  borderRadius: theme.radii.sharper,
 });
 
 const Title = styled('span', {
@@ -113,7 +113,7 @@ const Button = styled(ButtonPrimitive, {
   fontSize: theme.fontSizes[12],
   gap: theme.space.gapRelatedRegular,
   padding: theme.space.paddingRegular,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
 
   '& > svg': {
     width: theme.sizes[16],

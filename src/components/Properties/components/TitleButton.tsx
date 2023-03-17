@@ -2,7 +2,7 @@ import Button from 'components/Button';
 import { styled, theme } from 'stitches.config';
 
 export const TitleButton = styled(Button, {
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   padding: theme.space.paddingMinor,
   display: 'flex',
 

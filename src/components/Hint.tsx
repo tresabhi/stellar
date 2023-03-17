@@ -20,7 +20,7 @@ const Trigger = styled(DropdownMenu.Trigger, {
 const Content = styled(DropdownMenu.Content, {
   backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   maxWidth: theme.sizes.hintMaxWidth,
   boxShadow: theme.shadows.regular,
 });

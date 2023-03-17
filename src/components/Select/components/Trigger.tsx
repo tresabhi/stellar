@@ -7,7 +7,7 @@ const StyledTrigger = styled(SelectPrimitive.Trigger, {
   padding: theme.space.paddingMinor,
   gap: theme.space.gapRelatedRegular,
   border: theme.borderStyles.interactive,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   cursor: 'pointer',
   fontSize: theme.fontSizes[12],
   color: theme.colors.textHighContrast,

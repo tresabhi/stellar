@@ -6,7 +6,7 @@ export const TextArea = styled('textarea', {
   color: theme.colors.textHighContrast,
   backgroundColor: theme.colors.componentInteractive,
   border: theme.borderStyles.interactive,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   resize: 'none',
   height: theme.sizes.propertiesTextAreaHeight,
   padding: theme.space.paddingRegular,

@@ -52,7 +52,7 @@ const Container = styled('div', {
   height: '100%',
   maxWidth: theme.sizes.settingsMaxWidth,
   maxHeight: theme.sizes.settingsMaxHeight,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   overflow: 'hidden',
 });
 const Navigation = styled('div', {
@@ -73,7 +73,7 @@ const NavigationButton = styled(Button, {
   display: 'flex',
   padding: theme.space.paddingRegular,
   gap: theme.space.gapRelatedMajor,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   alignItems: 'center',
   justifyContent: 'center',
   fontSize: theme.fontSizes[14],
@@ -100,7 +100,7 @@ const NavigationButton = styled(Button, {
 });
 const ResetToDefault = styled(Button, {
   padding: theme.space.paddingRegular,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   fontSize: theme.fontSizes[12],
 
   defaultVariants: {
@@ -178,13 +178,13 @@ const Separator = styled('div', {
   width: '75%',
   backgroundColor: theme.colors.borderNonInteractive,
   margin: `${theme.space.marginUnrelatedMajor} auto`,
-  borderRadius: theme.radii[1],
+  borderRadius: theme.radii.sharper,
 });
 const Input = styled(InputPrimitive, {
   backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
   border: theme.borderStyles.interactive,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   fontSize: theme.fontSizes[12],
   color: theme.colors.textHighContrast,
 });

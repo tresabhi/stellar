@@ -41,7 +41,7 @@ const FieldContainer = styled('div', {
   backgroundColor: theme.colors.componentInteractive,
   border: theme.borderStyles.interactive,
   cursor: 'text',
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
 
   '&:hover': {
     backgroundColor: theme.colors.componentInteractiveHover,

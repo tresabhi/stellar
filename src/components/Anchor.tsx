@@ -2,7 +2,7 @@ import { styled, theme } from 'stitches.config';
 
 const Anchor = styled('a', {
   color: theme.colors.textLowContrast,
-  borderRadius: theme.radii[2],
+  borderRadius: theme.radii.sharp,
   cursor: 'default',
 
   '&[href]': {

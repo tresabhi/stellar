@@ -8,7 +8,7 @@ const Trigger = styled(SelectPrimitive.Item, {
   fontSize: theme.fontSizes[12],
   padding: `${theme.space.paddingMinor} calc(${theme.space.paddingMinor} * 2 + ${theme.sizes[12]}) ${theme.space.paddingMinor} calc(${theme.space.paddingMinor} * 2 + ${theme.sizes[12]})`,
   cursor: 'pointer',
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   position: 'relative',
 
   '&[data-highlighted]': {

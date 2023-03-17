@@ -1,6 +1,11 @@
 import { blackA, mauve, purple, red } from '@radix-ui/colors';
 import { createStitches } from '@stitches/react';
-import { createBorderStyles, createColors, createSpaces } from 'bepaint';
+import {
+  createBorderStyles,
+  createColors,
+  createRadii,
+  createSpaces,
+} from 'bepaint';
 
 export const {
   config,
@@ -78,13 +83,7 @@ export const {
       partListingInputMinWidth: '2rem',
     },
 
-    radii: {
-      1: '0.0625rem',
-      2: '0.125rem',
-      4: '0.25rem',
-      8: '0.5rem',
-      16: '1rem',
-    },
+    radii: createRadii(),
 
     fonts: {
       default: 'Roboto Flex, Arial, Verdana',

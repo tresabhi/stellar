@@ -2,8 +2,8 @@ import { CheckIcon, DashIcon } from '@radix-ui/react-icons';
 import Button from 'components/Button';
 import {
   ComponentPropsWithoutRef,
-  forwardRef,
   MouseEvent,
+  forwardRef,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -30,7 +30,7 @@ export interface CheckboxRef extends HTMLButtonElement {
 const Trigger = styled(Button, {
   width: theme.sizes.inputSizeMinor,
   height: theme.sizes.inputSizeMinor,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

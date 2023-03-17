@@ -12,7 +12,7 @@ const Container = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: theme.colors.appBackground1,
-  borderRadius: theme.radii[4],
+  borderRadius: theme.radii.regular,
   overflowY: 'auto',
 });
 
