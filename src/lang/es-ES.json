@@ -157,10 +157,10 @@
             "size": "Tamaño"
           },
           "fragment": {
-            "$": "Fragment",
-            "left": "Left",
-            "whole": "Whole",
-            "right": "Right"
+            "$": "Fragmento",
+            "left": "Izquierda",
+            "whole": "Completo",
+            "right": "Derecha"
           }
         },
         "inspect": {
