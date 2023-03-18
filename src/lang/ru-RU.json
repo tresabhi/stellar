@@ -157,10 +157,10 @@
             "size": "Размер"
           },
           "fragment": {
-            "$": "Fragment",
-            "left": "Left",
-            "whole": "Whole",
-            "right": "Right"
+            "$": "Фрагмент",
+            "left": "Левый",
+            "whole": "Целый",
+            "right": "Правый"
           }
         },
         "inspect": {
