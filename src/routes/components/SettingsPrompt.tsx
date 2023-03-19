@@ -20,7 +20,7 @@ import {
 } from '@radix-ui/react-icons';
 import Anchor from 'components/Anchor';
 import Button from 'components/Button';
-import { Checkbox } from 'components/Checkbox';
+import Checkbox from 'components/Checkbox';
 import InputPrimitive from 'components/Input';
 import { InputWithIcon } from 'components/InputWithIcon';
 import Search from 'components/Search';
@@ -422,12 +422,12 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
                 </OptionVertical>
 
                 <Checkbox
-                  defaultValue={
+                  defaultChecked={
                     useSettings.getState().interface.showOrientationPrompt
                   }
-                  onValueChange={(value) => {
+                  onCheckedChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.interface.showOrientationPrompt = value;
+                      draft.interface.showOrientationPrompt = Boolean(value);
                     });
                   }}
                 />
@@ -463,12 +463,12 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
                 </OptionVertical>
 
                 <Checkbox
-                  defaultValue={
+                  defaultChecked={
                     useSettings.getState().interface.showInstallationPrompt
                   }
-                  onValueChange={(value) => {
+                  onCheckedChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.interface.showInstallationPrompt = value;
+                      draft.interface.showInstallationPrompt = Boolean(value);
                     });
                   }}
                 />
@@ -491,12 +491,12 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
                 </OptionVertical>
 
                 <Checkbox
-                  defaultValue={
+                  defaultChecked={
                     useSettings.getState().interface.showInstabilityWarning
                   }
-                  onValueChange={(value) => {
+                  onCheckedChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.interface.showInstabilityWarning = value;
+                      draft.interface.showInstabilityWarning = Boolean(value);
                     });
                   }}
                 />
@@ -519,12 +519,12 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
                 </OptionVertical>
 
                 <Checkbox
-                  defaultValue={
+                  defaultChecked={
                     useSettings.getState().interface.showMissingParts
                   }
-                  onValueChange={(value) => {
+                  onCheckedChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.interface.showMissingParts = value;
+                      draft.interface.showMissingParts = Boolean(value);
                     });
                   }}
                 />
@@ -677,10 +677,10 @@ function FileSettings({ search, titleRef }: SubSettingsProps) {
                 </OptionVertical>
 
                 <Checkbox
-                  defaultValue={useSettings.getState().file.format}
-                  onValueChange={(value) => {
+                  defaultChecked={useSettings.getState().file.format}
+                  onCheckedChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.file.format = value;
+                      draft.file.format = Boolean(value);
                     });
                   }}
                 />
@@ -703,10 +703,10 @@ function FileSettings({ search, titleRef }: SubSettingsProps) {
                 </OptionVertical>
 
                 <Checkbox
-                  defaultValue={useSettings.getState().file.watermark}
-                  onValueChange={(value) => {
+                  defaultChecked={useSettings.getState().file.watermark}
+                  onCheckedChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.file.watermark = value;
+                      draft.file.watermark = Boolean(value);
                     });
                   }}
                 />
@@ -773,12 +773,12 @@ function DebugSettings({ search, titleRef }: SubSettingsProps) {
                 </OptionVertical>
 
                 <Checkbox
-                  defaultValue={
+                  defaultChecked={
                     useSettings.getState().debug.errorScreen.showDebug
                   }
-                  onValueChange={(value) => {
+                  onCheckedChange={(value) => {
                     mutateSettings((draft) => {
-                      draft.debug.errorScreen.showDebug = value;
+                      draft.debug.errorScreen.showDebug = Boolean(value);
                     });
                   }}
                 />

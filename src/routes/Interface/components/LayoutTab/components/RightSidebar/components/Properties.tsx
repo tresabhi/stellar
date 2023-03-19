@@ -123,12 +123,12 @@ export default function Properties() {
     });
   });
 
-  Object.keys(typeSortedParts).forEach((index) => {
-    const ids = typeSortedParts[index];
-    const { Component } = groupedProperties[index];
+  Object.keys(typeSortedParts).forEach((type) => {
+    const ids = typeSortedParts[type];
+    const { Component } = groupedProperties[type];
 
     children.push(
-      <Component ids={ids} key={`type-sorted-properties-explorer-${index}`} />,
+      <Component ids={ids} key={`type-sorted-properties-explorer-${type}`} />,
     );
   });
 

@@ -1,16 +1,34 @@
 import { Pencil1Icon } from '@radix-ui/react-icons';
-import CheckboxWithLabel from 'components/CheckboxWithLabel';
+// import CheckboxWithLabel from 'components/CheckboxWithLabel';
+import Checkbox, { CheckboxProps } from 'components/Checkbox';
 import { InputWithIcon } from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
+import { Label } from 'components/Properties';
 import mutateSettings from 'core/app/mutateSettings';
 import { RenamePartsOptions } from 'core/part/rename';
 import renameSelected from 'core/part/renameSelected';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { KeyboardEvent, useEffect, useRef } from 'react';
+import { styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import { PromptProps } from 'stores/prompts';
 import useSettings from 'stores/settings';
+
+const CheckboxWithLabelContainer = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.space.gapRelatedRegular,
+});
+
+function CheckboxWithLabel({ children, ...props }: CheckboxProps) {
+  return (
+    <CheckboxWithLabelContainer>
+      <Checkbox {...props} />
+      <Label>{children}</Label>
+    </CheckboxWithLabelContainer>
+  );
+}
 
 export default function RenamePartsPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
@@ -66,20 +84,20 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
       />
 
       <CheckboxWithLabel
-        defaultValue={rename.trim}
-        onValueChange={handleClick('trim')}
+        defaultChecked={rename.trim}
+        onCheckedChange={handleClick('trim')}
       >
         {t`tabs.layout.popup.rename.trim`}
       </CheckboxWithLabel>
       <CheckboxWithLabel
-        defaultValue={rename.skipLocked}
-        onValueChange={handleClick('skipLocked')}
+        defaultChecked={rename.skipLocked}
+        onCheckedChange={handleClick('skipLocked')}
       >
         {t`tabs.layout.popup.rename.skip_locked`}
       </CheckboxWithLabel>
       <CheckboxWithLabel
-        defaultValue={rename.suffix}
-        onValueChange={handleClick('suffix')}
+        defaultChecked={rename.suffix}
+        onCheckedChange={handleClick('suffix')}
       >
         {t`tabs.layout.popup.rename.suffix`}
       </CheckboxWithLabel>

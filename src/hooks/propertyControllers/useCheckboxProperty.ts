@@ -1,70 +1,34 @@
-import { CheckboxRef } from 'components/Checkbox';
-import { CheckboxProps } from 'components/Properties';
+import { CheckboxProps } from 'components/Checkbox';
 import mutateParts from 'core/part/mutateParts';
-import subscribeToPart from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
-import { Ref, useCallback, useEffect, useRef } from 'react';
-import getMutualProperty from 'utilities/getMutualProperty';
+import { useMemo, useRef, useState } from 'react';
+import useBlueprint from 'stores/blueprint';
 
-export default function useCheckboxProperty<
-  Type extends Part,
-  Value extends boolean = boolean,
->(
+export default function useCheckboxProperty<Type extends Part>(
   ids: string[],
-  slice: (state: Type) => Value,
-  mutate: (draft: Type, value: Value) => void,
+  slice: (state: Type) => boolean,
+  mutate: (draft: Type, value: boolean) => void,
 ) {
-  const checkbox = useRef<CheckboxRef>(null);
-  const value = useRef(getMutualProperty<Type, Value>(ids, slice).value);
-  const firstRender = useRef(true);
+  const { parts } = useBlueprint.getState();
+  const mutualValue = slice(parts[ids[0]] as Type);
+  const indeterminate = useMemo(
+    () => ids.some((id) => slice(parts[id] as Type) !== mutualValue),
+    [ids, mutualValue, parts, slice],
+  );
+  const [checked, setChecked] = useState(mutualValue);
+  const firstRun = useRef(true);
+  const resolvedChecked = firstRun.current ? mutualValue : checked;
 
-  const commit = (newValue: Value) => {
-    mutateParts<Type>(ids, (draft) => {
-      mutate(draft, newValue);
-    });
-  };
-  const recomputeAndRerender = useCallback(() => {
-    value.current = getMutualProperty<Type, Value>(ids, slice).value;
-
-    if (value.current === undefined) {
-      checkbox.current?.setValue(false);
-      checkbox.current?.setIndeterminate(true);
-    } else {
-      checkbox.current?.setValue(value.current);
-      checkbox.current?.setIndeterminate(false);
-    }
-  }, [ids, slice]);
-
-  const onChange = (newValue: boolean) => {
-    value.current = newValue as Value;
-    checkbox.current?.setValue(newValue);
-    checkbox.current?.setIndeterminate(false);
-    commit(newValue as Value);
-  };
-
-  useEffect(() => {
-    const unsubscribes = ids.map((id) =>
-      subscribeToPart(id, recomputeAndRerender, slice),
-    );
-
-    return () => {
-      unsubscribes.forEach((unsubscribe) => unsubscribe());
-    };
-  }, [ids, recomputeAndRerender, slice]);
-
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-    } else {
-      recomputeAndRerender();
-    }
-  });
-
-  const hook: Partial<CheckboxProps & { ref: Ref<CheckboxRef> }> = {
-    ref: checkbox,
-    defaultValue: value.current,
-    indeterminate: value.current === undefined,
-    onValueChange: onChange,
+  const hook: CheckboxProps = {
+    checked: indeterminate ? 'indeterminate' : resolvedChecked,
+    onCheckedChange(newChecked) {
+      mutateParts<Type>(ids, (draft) => {
+        const normalizedCheck = Boolean(newChecked);
+        firstRun.current = false;
+        mutate(draft, normalizedCheck);
+        setChecked(normalizedCheck);
+      });
+    },
   };
 
   return hook;
