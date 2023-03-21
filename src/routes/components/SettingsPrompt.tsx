@@ -124,7 +124,7 @@ const OptionsWrapper = styled('div', {
   flexDirection: 'column',
   gap: theme.space.gapUnrelatedMajor,
 });
-const Section = styled('span', {
+export const SectionTitle = styled('span', {
   color: theme.colors.textHighContrast,
   fontSize: theme.fontSizes[24],
   display: 'flex',
@@ -138,7 +138,7 @@ const Section = styled('span', {
     height: theme.sizes[24],
   },
 });
-const OptionVertical = styled('div', {
+export const OptionVertical = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   gap: theme.space.gapRelatedRegular,
@@ -151,12 +151,12 @@ const OptionVertical = styled('div', {
     },
   },
 });
-const OptionHorizontal = styled('div', {
+export const OptionHorizontal = styled('div', {
   gap: theme.space.gapRelatedMajor,
   display: 'flex',
   alignItems: 'center',
 });
-const Title = styled('span', {
+export const Title = styled('span', {
   color: theme.colors.textHighContrast,
   fontSize: theme.fontSizes[14],
   display: 'flex',
@@ -164,14 +164,17 @@ const Title = styled('span', {
   justifyContent: 'left',
   gap: theme.space.gapRelatedRegular,
 
-  '& svg': {
-    width: theme.sizes[14],
-    height: theme.sizes[14],
-  },
+  '& svg': { width: '1em', height: '1em' },
 });
-const Description = styled('span', {
+export const Description = styled('span', {
   fontSize: theme.fontSizes[12],
   color: theme.colors.textLowContrast,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'left',
+  gap: theme.space.gapRelatedRegular,
+
+  '& svg': { width: '1em', height: '1em' },
 });
 const Separator = styled('div', {
   height: theme.sizes[1],
@@ -180,7 +183,7 @@ const Separator = styled('div', {
   margin: `${theme.space.marginUnrelatedMajor} auto`,
   borderRadius: theme.radii.sharper,
 });
-const Input = styled(InputPrimitive, {
+export const Input = styled(InputPrimitive, {
   backgroundColor: theme.colors.componentInteractive,
   padding: theme.space.paddingMinor,
   border: theme.borderStyles.interactive,
@@ -214,10 +217,10 @@ function InterfaceSettings({ search, titleRef }: SubSettingsProps) {
 
   return (
     <>
-      <Section ref={titleRef}>
+      <SectionTitle ref={titleRef}>
         <DesktopIcon />
         {t`prompts.settings.groups.interface`}
-      </Section>
+      </SectionTitle>
 
       <Search
         input={search}
@@ -600,10 +603,10 @@ function EditorSettings({ search, titleRef }: SubSettingsProps) {
 
   return (
     <>
-      <Section ref={titleRef}>
+      <SectionTitle ref={titleRef}>
         <CursorArrowIcon />
         {t`prompts.settings.groups.editor`}
-      </Section>
+      </SectionTitle>
 
       <Search
         input={search}
@@ -655,10 +658,10 @@ function FileSettings({ search, titleRef }: SubSettingsProps) {
 
   return (
     <>
-      <Section ref={titleRef}>
+      <SectionTitle ref={titleRef}>
         <FileIcon />
         {t`prompts.settings.groups.file`}
-      </Section>
+      </SectionTitle>
 
       <Search
         input={search}
@@ -751,10 +754,10 @@ function DebugSettings({ search, titleRef }: SubSettingsProps) {
 
   return (
     <>
-      <Section ref={titleRef}>
+      <SectionTitle ref={titleRef}>
         <CodeIcon />
         {t`prompts.settings.groups.debug`}
-      </Section>
+      </SectionTitle>
 
       <Search
         input={search}

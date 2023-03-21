@@ -14,8 +14,8 @@ import usePartRegistry from 'stores/partRegistry';
 import { PromptProps } from 'stores/prompts';
 
 const Root = styled(Prompt.Root, {
-  maxHeight: theme.sizes.insertPartMaxHeight
-})
+  maxHeight: theme.sizes.insertPartMaxHeight,
+});
 
 export default function InsertPartPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();

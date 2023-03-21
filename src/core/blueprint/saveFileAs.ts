@@ -7,7 +7,7 @@ import declareUnsavedChanges from './declareUnsavedChanges';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
 import savifyBlueprint from './savifyBlueprint';
 
-export const FILE_EXTENSION_REGEX = /\.[^/.]+$/;
+export const fileExtensionRegex = /\.[^/.]+$/;
 
 export default async function saveFileAs() {
   const { handle } = useApp.getState().file;

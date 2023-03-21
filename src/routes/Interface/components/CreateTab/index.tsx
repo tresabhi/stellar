@@ -27,7 +27,7 @@ import { Tab } from 'stores/app';
 import { getContext } from 'utilities/getContext';
 import StatusBar from './components/StatusBar';
 
-const Container = styled('div', {
+export const Container = styled('div', {
   flex: '1 0 0',
   backgroundColor: theme.colors.componentInteractive,
   display: 'flex',
@@ -37,7 +37,7 @@ const Container = styled('div', {
   overflowY: 'auto',
 });
 
-const SectionContainer = styled('div', {
+export const SectionContainer = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -88,12 +88,21 @@ const StyledSearch = styled(Prompt.Search, {
   backgroundColor: theme.colors.appBackground2,
 });
 
-const Separator = styled('div', {
-  width: theme.sizes.separatorWidth,
-  height: '75%',
+export const Separator = styled('div', {
   // TODO: add a separator color
   backgroundColor: theme.colors.borderNonInteractive,
   borderRadius: theme.radii.sharper,
+
+  variants: {
+    horizontal: {
+      true: { height: theme.sizes.separatorWidth, width: '75%' },
+      false: { width: theme.sizes.separatorWidth, height: '75%' },
+    },
+  },
+
+  defaultVariants: {
+    horizontal: false,
+  },
 });
 
 const Title = styled('span', {
@@ -106,7 +115,7 @@ const SubTitle = styled('span', {
   fontSize: theme.fontSizes[14],
 });
 
-const Button = styled(ButtonPrimitive, {
+export const Button = styled(ButtonPrimitive, {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -149,10 +158,19 @@ const TEMPLATES: Template[] = [
   { name: 'basic_rocket', blueprint: basicRocket as VanillaBlueprint },
 ];
 
-const FileActions = styled('div', {
+export const Actions = styled('div', {
   display: 'flex',
-  flexDirection: 'column',
   gap: theme.space.gapRelatedMajor,
+
+  variants: {
+    horizontal: {
+      false: { flexDirection: 'column' },
+    },
+  },
+
+  defaultVariants: {
+    horizontal: false,
+  },
 });
 
 export default function CreateTab() {
@@ -232,13 +250,13 @@ export default function CreateTab() {
           <StellarContainer>
             <StellarIcon />
 
-            <FileActions>
+            <Actions>
               <Title>Stellar</Title>
               <SubTitle>{t`tabs.create.file_options.motto`}</SubTitle>
-            </FileActions>
+            </Actions>
           </StellarContainer>
 
-          <FileActions>
+          <Actions>
             <Button onClick={handleScratchClick} priority="solid">
               <FilePlusIcon />
               {t`tabs.create.file_options.from_scratch`}
@@ -251,7 +269,7 @@ export default function CreateTab() {
               <UploadIcon />
               {t`tabs.create.file_options.open`}
             </Button>
-          </FileActions>
+          </Actions>
         </SectionContainer>
       </Container>
 

@@ -82,6 +82,7 @@ export const {
       settingsNavigationWidth: '12rem',
       partListingInputMinWidth: '2rem',
       insertPartMaxHeight: '20rem',
+      exportTabFileNameMaxWidth: '15rem',
     },
 
     radii: createRadii(),

@@ -4,13 +4,12 @@ import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
 import exportifyBlueprint from './exportifyBlueprint';
 import { WATERMARK_KEY, WATERMARK_VALUE } from './importifyBlueprint';
-import { FILE_EXTENSION_REGEX } from './saveFileAs';
+import { fileExtensionRegex } from './saveFileAs';
 
 export default async function exportFile() {
   const { handle } = useApp.getState().file;
   const { format, watermark, defaultName } = useSettings.getState().file;
-  const fileName =
-    handle?.name.replace(FILE_EXTENSION_REGEX, '') ?? defaultName;
+  const fileName = handle?.name.replace(fileExtensionRegex, '') ?? defaultName;
   const data = exportifyBlueprint(useBlueprint.getState());
   const stringifiedJSON = JSON.stringify(
     data,

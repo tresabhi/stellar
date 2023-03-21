@@ -276,7 +276,16 @@
     },
 
     "export": {
-      "$": "Export"
+      "$": "Export",
+
+      "options": "Options",
+
+      "export": {
+        "$": "Export",
+
+        "game": "Export to game",
+        "stellar": "Save Stellar format"
+      }
     }
   },
 
