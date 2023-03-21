@@ -6,7 +6,7 @@ export function Checkbox({
   ...props
 }: CheckboxProps & InputWithLabelProps) {
   return (
-    <InputWrapper label={label}>
+    <InputWrapper horizontal label={label}>
       <CheckboxPrimitive {...props} />
     </InputWrapper>
   );

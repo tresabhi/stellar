@@ -204,6 +204,8 @@
           "fragment": {
             "$": "Fragment",
 
+            "section": "Section",
+
             "left": "Left",
             "whole": "Whole",
             "right": "Right"

@@ -12,4 +12,5 @@ export * from './components/Title';
 export * from './components/TitleButton';
 export * from './components/TitleWithButtons';
 export * from './components/ToggleButton';
+export * from './components/ToggleGroup';
 export * from './components/Value';

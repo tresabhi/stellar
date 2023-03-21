@@ -22,6 +22,10 @@ const Root = styled(CheckboxPrimitive.Root, {
           border: theme.borderStyles.interactiveHover,
         },
 
+        '&:focus': {
+          outline: theme.borderStyles.interactiveActive,
+        },
+
         '&[data-state="checked"], &[data-state="indeterminate"]': {
           backgroundColor: theme.colors.componentInteractive_accent,
           border: theme.borderStyles.interactive_accent,

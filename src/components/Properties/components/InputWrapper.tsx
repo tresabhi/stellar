@@ -27,7 +27,7 @@ const Wrapper = styled('div', {
   },
 
   defaultVariants: {
-    horizontal: true,
+    horizontal: false,
   },
 });
 const Label = styled('span', {

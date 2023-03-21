@@ -1,13 +1,16 @@
-import { CheckboxProps } from 'components/Checkbox';
+import { ToggleGroupSingleProps } from 'components/ToggleGroup';
 import mutateParts from 'core/part/mutateParts';
 import { Part } from 'game/parts/Part';
 import { useEffect, useMemo, useState } from 'react';
 import useBlueprint from 'stores/blueprint';
 
-export default function useCheckboxProperty<Type extends Part>(
+export default function useToggleGroupProperty<
+  Type extends Part,
+  Slice extends string,
+>(
   ids: string[],
-  slice: (state: Type) => boolean,
-  mutate: (draft: Type, value: boolean) => void,
+  slice: (state: Type) => Slice,
+  mutate: (draft: Type, value: Slice) => void,
 ) {
   const { parts } = useBlueprint.getState();
   const mutualValue = slice(parts[ids[0]] as Type);
@@ -21,13 +24,13 @@ export default function useCheckboxProperty<Type extends Part>(
     setState(mutualValue);
   }, [mutualValue]);
 
-  const hook: CheckboxProps = {
-    checked: indeterminate ? 'indeterminate' : state,
-    onCheckedChange(newChecked) {
+  const hook: ToggleGroupSingleProps = {
+    type: 'single',
+    value: indeterminate ? undefined : state,
+    onValueChange(newValue: Slice) {
       mutateParts<Type>(ids, (draft) => {
-        const normalizedCheck = Boolean(newChecked);
-        mutate(draft, normalizedCheck);
-        setState(normalizedCheck);
+        mutate(draft, newValue);
+        setState(newValue);
       });
     },
   };
