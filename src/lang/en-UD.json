@@ -21,7 +21,7 @@
         "motto": "pǝuᴉɟǝpǝɹ ƃuᴉʇᴉpǝ ʇuᴉɹdǝnlq",
         "from_scratch": "ɥɔʇɐɹɔs ɯoɹɟ ʇɹɐʇS",
         "import": "ǝlᴉɟ ʇuᴉɹdǝnlq ʇɹodɯI",
-        "open": "ǝlᴉɟ ɹɐllǝʇs uǝdO"
+        "open": "Open Stellar file"
       },
       "status_bar": {
         "docs": "sɔop"
@@ -39,8 +39,9 @@
           "export": "…ʇɹodxƎ"
         },
         "tool": {
-          "move": "ǝʌoW",
-          "pan": "uɐԀ"
+          "pan": "uɐԀ",
+          "transform": "Transform",
+          "edit": "Edit"
         },
         "clipboard": {
           "copy": "ʎdoƆ",
@@ -91,7 +92,7 @@
           "$": "sʇǝddᴉuS",
           "coming_soon": {
             "$": "¡uoos ƃuᴉɯoɔ sʇǝddᴉuS",
-            "instructions": "˙ʇǝddᴉuS ǝʇɐǝɹƆ %2$s < pɹɐoqdᴉlƆ %1$s < ɹɐqloo┴ oʇ ƃuᴉoƃ ʎq ʇǝddᴉus ʍǝu ɐ ǝʇɐǝɹɔ oʇ ǝlqɐ ǝq llᴉʍ no⅄ ˙sʇǝddᴉus sɐ ǝɹǝɥ sʇuᴉɹdǝnlq ɹǝɥʇo ɟo suoᴉʇɔǝs llɐɯs ʇɹǝsuᴉ oʇ ǝlqɐ ǝq llᴉʍ no⅄"
+            "instructions": "Snippets will allow you to paste in small sections of other crafts."
           }
         }
       },
@@ -158,6 +159,7 @@
           },
           "fragment": {
             "$": "ʇuǝɯƃɐɹℲ",
+            "section": "Section",
             "left": "ʇɟǝ˥",
             "whole": "ǝloɥM",
             "right": "ʇɥƃᴉɹ"
@@ -167,7 +169,7 @@
           "$": "ʇɔǝdsuI",
           "select_one_part": {
             "$": "ʇɹɐd ɐ ʇɔǝlǝS",
-            "instructions": "ɟo slᴉɐʇǝp ǝɥʇ ʇɔǝdsuᴉ oʇ ʇɹɐd ǝlƃuᴉs ɐ ʇɔǝlǝS"
+            "instructions": "Select a single part to inspect details"
           },
           "meta_data": {
             "$": "ɐʇɐp ɐʇǝW",
@@ -182,8 +184,8 @@
             "$": "spunoq",
             "width": "ɥʇpᴉM",
             "height": "ʇɥƃᴉǝH",
-            "x_position": "uoᴉʇᴉsoԀ X",
-            "y_position": "uoᴉʇᴉsoԀ ⅄",
+            "x_position": "X position",
+            "y_position": "Y position",
             "rotation": "uoᴉʇɐʇoɹ"
           },
           "json": "NOSſ",
@@ -211,11 +213,17 @@
       "$": "ƃuᴉƃɐʇS"
     },
     "export": {
-      "$": "ʇɹodxƎ"
+      "$": "ʇɹodxƎ",
+      "options": "Options",
+      "export": {
+        "$": "Export",
+        "game": "Export to game",
+        "stellar": "Save Stellar format"
+      }
     }
   },
   "landscape_prompt": {
-    "message": "˙pǝssᴉɯsᴉp ǝq ʎɐɯ sᴉɥʇ 'doʇʞsǝp ɐ uo ǝɹ,noʎ ɟI%1$s˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
+    "message": "Seems like you're in portrait mode. Please turn to landscape mode.",
     "never": "uᴉɐƃɐ ʞsɐ ɹǝʌǝN",
     "dismiss": "ssᴉɯsᴉp"
   },
@@ -268,10 +276,8 @@
       }
     },
     "missing_parts": {
-      "title": "pǝʇɹodɯᴉ ʇou ʇɹɐd Ɩ",
-      "title_plural": "pǝʇɹodɯᴉ ʇou sʇɹɐd %1$s",
-      "description": ":ʇǝʎ %1$s uᴉ ʇsᴉxǝ ʇ,usǝop ʇᴉ ǝsnɐɔǝq pǝʇɹodɯᴉ ʇou sɐʍ ʇɹɐd ƃuᴉʍolloɟ ǝɥ┴",
-      "description_plural": ":ʇǝʎ %1$s uᴉ ʇsᴉxǝ ʇ,uop ʎǝɥʇ ǝsnɐɔǝq pǝʇɹodɯᴉ ʇou ǝɹǝʍ sʇɹɐd ƃuᴉʍolloɟ ǝɥ┴",
+      "title": "%1$s part(s) not imported",
+      "description": "The following part(s) was/were not imported because it doesn't exist in %1$s yet:",
       "actions": {
         "never": "uᴉɐƃɐ ʍoɥs ɹǝʌǝN",
         "proceed": "pǝǝɔoɹԀ"
@@ -292,15 +298,15 @@
           "$": "ǝɔɐɟɹǝʇuI",
           "theme": {
             "title": "ǝɯǝɥ┴",
-            "description": "˙ǝɔɐɟɹǝʇuᴉ ǝɹᴉʇuǝ ǝɥʇ ɟo ǝʇʇǝlɐd ɹoloɔ ǝɥʇ sloɹʇuoƆ"
+            "description": "Color scheme for the interface."
           },
           "default_tab": {
             "title": "qɐʇ ʇlnɐɟǝp",
-            "description": "˙ʇlnɐɟǝp ʎq ɥɔunɐl uo uǝdo llᴉʍ ɹɐllǝʇS qɐʇ ɥɔᴉɥʍ sǝᴉɟᴉɔǝdS"
+            "description": "The tab that will be opened by default."
           },
           "touchscreen_mode": {
             "title": "ǝpoɯ uǝǝɹɔsɥɔno┴",
-            "description": "˙ǝdʎʇ uǝǝɹɔs ɹnoʎ ɥʇᴉʍ ǝɔuɐᴉldɯoɔ uᴉ pǝʇuǝsǝɹd sᴉ uoᴉʇɐɯɹoɟuᴉ uǝǝɹɔs-uo ʍoɥ sloɹʇuoƆ",
+            "description": "Displays information in a compact manner if on a touchscreen device.",
             "options": {
               "auto": "ʇɔǝʇǝp-oʇn∀",
               "on": "uO",
@@ -309,59 +315,59 @@
           },
           "language": {
             "title": "ǝƃɐnƃuɐ˥",
-            "description": "˙%2$suᴉpʍoɹƆ%1$s uo ǝƃɐnƃuɐl ɹnoʎ oʇ ɹɐllǝʇS ǝʇɐlsuɐɹʇ sn dlǝH ˙oʇ pǝʇɐlsuɐɹʇ sᴉ uǝǝɹɔs uo ʇxǝʇ ǝɥʇ ǝƃɐnƃuɐl ʇɐɥʍ sǝᴉɟᴉɔǝdS"
+            "description": "Language of the test on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "ʇdɯoɹd uoᴉʇɐʇuǝᴉɹO",
-            "description": "˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ pǝʇuǝᴉɹo sᴉ ǝɔᴉʌǝp ɹnoʎ uǝɥʍ ʇdɯoɹd ɐ sʍoɥS"
+            "description": "Requests usage in landscape mode."
           },
           "installation_prompt": {
             "title": "ʇdɯoɹd uoᴉʇɐllɐʇsuI",
-            "description": "˙uoᴉʇɐɔᴉɟᴉʇou ɐ ɟo ssǝlpɹɐƃǝɹ ǝlqᴉƃᴉlǝ ǝq ʎɐɯ ǝɔᴉʌǝp ɹno⅄ ˙%2$s∀MԀ%1$s ɐ sɐ ʇᴉ llɐʇsuᴉ oʇ ǝɔᴉʌǝp ɹnoʎ uᴉɥʇᴉʍ ʎʇᴉlᴉqɐdɐɔ ǝɥʇ sʇɔǝʇǝp ɹɐllǝʇS uǝɥʍ noʎ sǝᴉɟᴉʇoN"
+            "description": "Notifies about installing Stellar."
           },
           "instability_prompt": {
             "title": "ƃuᴉuɹɐʍ ʎʇᴉlᴉqɐʇsuI",
-            "description": "˙ɹɐllǝʇS ɟo uoᴉsɹǝʌ uʍouʞun ɹo ǝlqɐʇsun uɐ ƃuᴉuunɹ ǝɹ,noʎ uǝɥʍ noʎ suɹɐM"
+            "description": "Warns about an unstable or unknown version of Stellar."
           },
           "missing_parts": {
             "title": "sʇɹɐd ƃuᴉssᴉW",
-            "description": "˙pǝʇɹodɯᴉ ǝq ʇou plnoɔ ʇɐɥʇ sʇɹɐd ǝɥʇ llɐ ɟo ʇsᴉl ɐ noʎ sʍoɥS"
+            "description": "Shows a list of parts that didn't imported."
           }
         },
         "editor": {
           "$": "ɹoʇ!pƎ",
           "undo_limit": {
             "title": "ʇᴉɯᴉl opu∩",
-            "description": "˙ɯnɯᴉuᴉɯ ǝɥʇ sᴉ 9Ɩ ;ɯnɯᴉxɐɯ ǝɥʇ sᴉ 960ㄣ ˙ǝɹoʇs plnoɥs ɹoʇᴉpǝ ǝɥʇ sǝɥɔʇɐd ʎɹoʇsᴉɥ uoᴉsɹǝʌ ɟo ɹǝqɯnu ɯnɯᴉxɐɯ ǝɥ┴"
+            "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
           }
         },
         "performance": {
           "$": "ǝɔuɐɯɹoɟɹǝԀ",
           "regress": {
             "title": "ʇunoɯɐ ssǝɹƃǝɹ",
-            "description": "˙uoᴉssǝɹƃǝɹ ǝɥʇ ǝʌᴉssǝɹƃƃɐ ǝɹoɯ ǝɥʇ 'ǝnlɐʌ ǝɥʇ ɹǝʍo˥ ˙ɔʇǝ 'uoᴉʇɐʇoɹ 'ƃuᴉlɐɔs 'ƃuᴉuuɐd ǝʞᴉl sʞsɐʇ ǝʌᴉsuǝdxǝ ʎllɐuoᴉʇɐʇndɯoɔ ƃuᴉɯɹoɟɹǝd uǝɥʍ uoᴉʇnlosǝɹ sɐʌuɐɔ ǝɥʇ sǝɔnpǝɹ"
+            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
           }
         },
         "file": {
           "$": "sǝɔuǝɹǝɟǝɹd ǝlᴉℲ",
           "format": {
-            "title": "sǝlᴉɟ pǝʇʇᴉɯƎ ʇɐɯɹoℲ",
-            "description": "˙ǝlqɐpɐǝɹ ǝɹoɯ ǝq oʇ ɹɐllǝʇS ʎq pǝʇʇᴉɯǝ sǝlᴉɟ uᴉ NOSſ ǝɥʇ sʇɐɯɹoℲ"
+            "title": "Format emitted files",
+            "description": "Formats JSON files emitted by Stellar for readability."
           },
           "watermark": {
             "title": "sʇuᴉɹdǝnlq pǝʇɹodxǝ ʞɹɐɯɹǝʇɐM",
-            "description": "˙ǝlᴉɟ ǝɥʇ ǝʇɐɹǝuǝƃ oʇ pǝsn ɹɐllǝʇS ɟo uoᴉsɹǝʌ ǝɥʇ oʇ ƃuᴉʞuᴉl ʞɹɐɯɹǝʇɐʍ ɐ spp∀"
+            "description": "Adds watermark linking to Stellar."
           },
           "default_name": {
             "title": "ǝɯɐu ʇlnɐɟǝp ǝlᴉɟ pǝʇʇᴉɯƎ",
-            "description": "˙ɹɐllǝʇS ʎq pǝʇɹodxǝ ǝɹɐ ʇɐɥʇ sǝlᴉɟ pǝɯɐuun ʎuɐ ɹoɟ ǝɯɐu ʇlnɐɟǝp ǝɥ┴"
+            "description": "Default name for any unnamed files."
           }
         },
         "debug": {
           "$": "ƃnqǝp",
           "error_screen_debug": {
-            "title": "uǝǝɹɔs ɹoɹɹǝ uo oɟuᴉ ƃnqǝp ʍoɥS",
-            "description": "˙ɹɐllǝʇS sʇdnɹɹǝʇuᴉ ɹoɹɹǝ lɐɔᴉʇᴉɹɔ ɐ uǝɥʍ ǝɔɐɹʇ ʞɔɐʇs pǝddɐɯ-ǝɔɹnos ɐ puɐ ǝƃɐssǝɯ ɹoɹɹǝ llnɟ ǝɥʇ sʎɐldsᴉp"
+            "title": "Debug info on error screen",
+            "description": "Display full error message on an interrupting critical error."
           }
         }
       }
