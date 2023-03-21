@@ -315,7 +315,7 @@
           },
           "language": {
             "title": "Idioma",
-            "description": "Language of the test on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+            "description": "Language of the text on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "Aviso de orientación",
@@ -331,7 +331,7 @@
           },
           "missing_parts": {
             "title": "Partes faltantes",
-            "description": "Shows a list of parts that didn't imported."
+            "description": "Shows a list of parts that didn't import."
           }
         },
         "editor": {
