@@ -79,7 +79,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "test": "jest .src/ --passWithNoTests",
-    "format": "prettier-eslint --write \"**/*.@(json|js|jsx|css|md|ts|tsx|html|xml|yml)\"",
+    "format": "prettier-eslint --write \"**/*.@(json|js|jsx|css|md|ts|tsx|html|xml|yml|gltf)\"",
     "lint": "tsc && eslint ./src"
   }
 }
