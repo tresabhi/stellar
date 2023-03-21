@@ -14,11 +14,11 @@ export default function PanControls() {
   const camera = useThree((state) => state.camera as OrthographicCamera);
   // const regress = useThree((state) => state.performance.regress);
   const getMousePos = useMousePosition();
-  const touchMemories = new Map<number, [number, number]>();
 
   useEffect(() => {
     let lastHypotenuse = 0;
     let initialMousePos: Vector2Tuple;
+    const touchMemories = new Map<number, [number, number]>();
 
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
@@ -83,11 +83,11 @@ export default function PanControls() {
         invalidate();
       }
     };
-    const handlePointerDown = (event: PointerEvent) => {
+    const handlePointerDown = (event: PointerEvent | MouseEvent) => {
       if (!useApp.getState().editor.isTouchPanning) {
         const { tool, isSpacePanning } = useApp.getState().editor;
 
-        if (tool === Tool.Pan || isSpacePanning) {
+        if (tool === Tool.Pan || isSpacePanning || event.button === 1) {
           initialMousePos = getMousePos(event);
           canvas.addEventListener('pointermove', handlePointerMove);
         }
@@ -183,19 +183,26 @@ export default function PanControls() {
         }
       }
     };
+    const handleMouseDown = (event: MouseEvent) => {
+      if (event.button === 1) handlePointerDown(event);
+    };
 
+    canvas.addEventListener('mousedown', handleMouseDown);
+    canvas.addEventListener('mouseup', handlePointerUp);
     canvas.addEventListener('wheel', handleWheel);
     canvas.addEventListener('pointerdown', handlePointerDown);
     canvas.addEventListener('pointerup', handlePointerUp);
     canvas.addEventListener('touchstart', handleTouchStart);
 
     return () => {
+      canvas.removeEventListener('mousedown', handleMouseDown);
+      canvas.removeEventListener('mouseup', handlePointerUp);
       canvas.removeEventListener('wheel', handleWheel);
       canvas.removeEventListener('pointerdown', handlePointerDown);
       canvas.removeEventListener('pointerup', handlePointerUp);
       canvas.removeEventListener('touchstart', handleTouchStart);
     };
-  });
+  }, [camera, canvas, getMousePos]);
 
   return null;
 }
