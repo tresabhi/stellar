@@ -110,8 +110,8 @@ export default function FuelTankControls({ id }: EditControlsProps) {
         .multiplyScalar(MOVE_STEP_REGULAR);
     }
 
-    offset.x = Math.max(offset.x, -part.N.width_b * part.o.x);
-    offset.y = Math.max(offset.y, -part.N.height * part.o.y);
+    offset.x = Math.max(offset.x, -part.N.width_b);
+    offset.y = Math.max(offset.y, -part.N.height);
 
     if (!offset.equals(lastOffset)) {
       window.dispatchEvent(
@@ -168,8 +168,8 @@ export default function FuelTankControls({ id }: EditControlsProps) {
         .multiplyScalar(MOVE_STEP_REGULAR);
     }
 
-    offset.x = Math.max(offset.x, -part.N.width_a * part.o.x);
-    offset.y = Math.max(offset.y, -part.N.height * part.o.y);
+    offset.x = Math.max(offset.x, -part.N.width_a);
+    offset.y = Math.max(offset.y, -part.N.height);
 
     if (!offset.equals(lastOffset)) {
       window.dispatchEvent(
