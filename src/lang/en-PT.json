@@ -21,7 +21,7 @@
         "motto": "Paper markin' done right",
         "from_scratch": "Start from scratch",
         "import": "Import blueprint file",
-        "open": "Open stellar file"
+        "open": "Open Stellar file"
       },
       "status_bar": {
         "docs": "Maps"
@@ -39,8 +39,9 @@
           "export": "Deport..."
         },
         "tool": {
-          "move": "Sail",
-          "pan": "Change Them Draft"
+          "pan": "Change Them Draft",
+          "transform": "Transform",
+          "edit": "Edit"
         },
         "clipboard": {
           "copy": "Loot",
@@ -91,7 +92,7 @@
           "$": "Snippets",
           "coming_soon": {
             "$": "Snippets coming soon!",
-            "instructions": "You will be able to insert small sections of other blueprints here as snippets. You will be able to create a new snippet by going to Toolbar > %1$s Clipboard > %2$s Create Snippet."
+            "instructions": "Snippets will allow you to paste in small sections of other crafts."
           }
         }
       },
@@ -158,6 +159,7 @@
           },
           "fragment": {
             "$": "Fragment",
+            "section": "Section",
             "left": "Left",
             "whole": "Whole",
             "right": "Right"
@@ -167,7 +169,7 @@
           "$": "Inspect",
           "select_one_part": {
             "$": "Select a part",
-            "instructions": "Select a single part to inspect the details of"
+            "instructions": "Select a single part to inspect details"
           },
           "meta_data": {
             "$": "Meta data",
@@ -182,8 +184,8 @@
             "$": "Bounds",
             "width": "Width",
             "height": "Height",
-            "x_position": "X Position",
-            "y_position": "Y Position",
+            "x_position": "X position",
+            "y_position": "Y position",
             "rotation": "Rotation"
           },
           "json": "JSON",
@@ -211,11 +213,17 @@
       "$": "Staging"
     },
     "export": {
-      "$": "Export"
+      "$": "Export",
+      "options": "Options",
+      "export": {
+        "$": "Export",
+        "game": "Export to game",
+        "stellar": "Save Stellar format"
+      }
     }
   },
   "landscape_prompt": {
-    "message": "Seems like you're in portrait mode. Please turn to landscape mode.%1$sIf you're on a desktop, this may be dismissed.",
+    "message": "Seems like you're in portrait mode. Please turn to landscape mode.",
     "never": "Never ask again",
     "dismiss": "Dismiss"
   },
@@ -268,10 +276,8 @@
       }
     },
     "missing_parts": {
-      "title": "1 part not imported",
-      "title_plural": "%1$s parts not imported",
-      "description": "The following part was not imported because it doesn't exist in %1$s yet:",
-      "description_plural": "The following parts were not imported because they don't exist in %1$s yet:",
+      "title": "%1$s part(s) not imported",
+      "description": "The following part(s) was/were not imported because it doesn't exist in %1$s yet:",
       "actions": {
         "never": "Never show again",
         "proceed": "Proceed"
@@ -292,15 +298,15 @@
           "$": "Interface",
           "theme": {
             "title": "Theme",
-            "description": "Controls the color palette of the entire interface."
+            "description": "Color scheme for the interface."
           },
           "default_tab": {
             "title": "Default tab",
-            "description": "Specifies which tab Stellar will open on launch by default."
+            "description": "The tab that will be opened by default."
           },
           "touchscreen_mode": {
             "title": "Touchscreen mode",
-            "description": "Controls how on-screen information is presented in compliance with your screen type.",
+            "description": "Displays information in a compact manner if on a touchscreen device.",
             "options": {
               "auto": "Auto-detect",
               "on": "On",
@@ -309,59 +315,59 @@
           },
           "language": {
             "title": "Language",
-            "description": "Specifies what language the text on screen is translated to. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+            "description": "Language of the test on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "Orientation prompt",
-            "description": "Shows a prompt when your device is oriented in portrait mode."
+            "description": "Requests usage in landscape mode."
           },
           "installation_prompt": {
             "title": "Installation prompt",
-            "description": "Notifies you when Stellar detects the capability within your device to install it as a %1$sPWA%2$s. Your device may be eligible regardless of a notification."
+            "description": "Notifies about installing Stellar."
           },
           "instability_prompt": {
             "title": "Instability warning",
-            "description": "Warns you when you're running an unstable or unknown version of Stellar."
+            "description": "Warns about an unstable or unknown version of Stellar."
           },
           "missing_parts": {
             "title": "Missing parts",
-            "description": "Shows you a list of all the parts that could not be imported."
+            "description": "Shows a list of parts that didn't imported."
           }
         },
         "editor": {
           "$": "Editor",
           "undo_limit": {
             "title": "Undo limit",
-            "description": "The maximum number of version history patches the editor should store. 4096 is the maximum; 16 is the minimum."
+            "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
           }
         },
         "performance": {
           "$": "Performance",
           "regress": {
             "title": "Regress amount",
-            "description": "Reduces the canvas resolution when performing computationally expensive tasks like panning, scaling, rotation, etc. Lower the value, the more aggressive the regression."
+            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
           }
         },
         "file": {
           "$": "File preferences",
           "format": {
-            "title": "Format Emitted files",
-            "description": "Formats the JSON in files emitted by Stellar to be more readable."
+            "title": "Format emitted files",
+            "description": "Formats JSON files emitted by Stellar for readability."
           },
           "watermark": {
             "title": "Watermark exported blueprints",
-            "description": "Adds a watermark linking to the version of Stellar used to generate the file."
+            "description": "Adds watermark linking to Stellar."
           },
           "default_name": {
             "title": "Emitted file default name",
-            "description": "The default name for any unnamed files that are exported by Stellar."
+            "description": "Default name for any unnamed files."
           }
         },
         "debug": {
           "$": "Debug",
           "error_screen_debug": {
-            "title": "Show debug info on error screen",
-            "description": "Displays the full error message and a source-mapped stack trace when a critical error interrupts Stellar."
+            "title": "Debug info on error screen",
+            "description": "Display full error message on an interrupting critical error."
           }
         }
       }
