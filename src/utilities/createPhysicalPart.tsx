@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
 
-// TODO: deprecate offset
 export default function createPhysicalPart(model: string, flipLighting = true) {
   useGLTF.preload(model);
 

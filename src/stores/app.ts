@@ -11,8 +11,9 @@ export enum Tab {
 }
 
 export enum Tool {
-  Move,
   Pan,
+  Transform,
+  Edit,
 }
 
 export interface LoadStatus {
@@ -60,7 +61,7 @@ export const UseAppData: UseApp = {
   },
 
   editor: {
-    tool: Tool.Move,
+    tool: Tool.Transform,
     isSpacePanning: false,
     isTouchPanning: false,
     preventNextSelection: false,

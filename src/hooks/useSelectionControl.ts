@@ -17,7 +17,7 @@ const useSelectionControl = (id: string) => {
 
     if (
       !preventNextSelection &&
-      tool === Tool.Move &&
+      tool === Tool.Transform &&
       !isSpacePanning &&
       !isTouchPanning
     ) {

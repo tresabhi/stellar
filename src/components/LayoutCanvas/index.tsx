@@ -70,7 +70,7 @@ export default function LayoutCanvas(
   const handlePointerMissed = () => {
     const { tool, isSpacePanning } = useApp.getState().editor;
     const { selections } = useBlueprint.getState();
-    if (selections.length > 0 && tool === Tool.Move && !isSpacePanning) {
+    if (selections.length > 0 && tool === Tool.Transform && !isSpacePanning) {
       unselectAll();
     }
   };

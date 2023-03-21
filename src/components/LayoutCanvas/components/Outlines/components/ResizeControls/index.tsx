@@ -3,6 +3,7 @@ import { invalidate } from '@react-three/fiber';
 import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
 import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import { useEffect, useRef } from 'react';
+import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group } from 'three';
@@ -16,6 +17,7 @@ export interface UpdateResizeNodesDetail {
 }
 
 export default function ResizeControls() {
+  const tool = useApp((state) => state.editor.tool);
   const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
   const selections = useBlueprint((state) => state.selections);
@@ -80,7 +82,10 @@ export default function ResizeControls() {
   });
 
   return (
-    <group ref={wrapper} visible={selections.length > 0}>
+    <group
+      ref={wrapper}
+      visible={selections.length > 0 && tool === Tool.Transform}
+    >
       <Line ref={outline} lineWidth={2} color="#9d5bd2" points={UNIT_POINTS} />
 
       <ResizeNode // top left

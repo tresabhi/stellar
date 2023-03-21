@@ -25,6 +25,7 @@ import {
   LightningBoltIcon,
   LockClosedIcon,
   LockOpen2Icon,
+  MagicWandIcon,
   Pencil1Icon,
   PlusCircledIcon,
   PlusIcon,
@@ -56,6 +57,7 @@ import deleteSelected from 'core/part/deleteSelected';
 import duplicateSelected from 'core/part/duplicateSelected';
 import groupSelected from 'core/part/groupSelected';
 import paste from 'core/part/paste';
+import selectConcurrent from 'core/part/selectConcurrent';
 import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
 import toggleSelectedLocked from 'core/part/toggleSelectedLocked';
 import toggleSelectedVisible from 'core/part/toggleSelectedVisible';
@@ -163,19 +165,15 @@ function Toolbar() {
         </ToolbarPrimitive.DropdownMenu>
 
         <ToolbarPrimitive.DropdownMenu
-          icon={tool === Tool.Pan ? <HandIcon /> : <CursorArrowIcon />}
+          icon={
+            <>
+              {tool === Tool.Pan && <HandIcon />}
+              {tool === Tool.Transform && <CursorArrowIcon />}
+              {tool === Tool.Edit && <MagicWandIcon />}
+            </>
+          }
         >
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<CursorArrowIcon />}
-            onClick={() =>
-              mutateApp((draft) => {
-                draft.editor.tool = Tool.Move;
-              })
-            }
-          >
-            {t`tabs.layout.toolbar.tool.move`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
+          {' '}
           <ToolbarPrimitive.DropdownMenuItem
             icon={<HandIcon />}
             keybind="Space"
@@ -186,6 +184,33 @@ function Toolbar() {
             }
           >
             {t`tabs.layout.toolbar.tool.pan`}
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<CursorArrowIcon />}
+            keybind="V"
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.editor.tool = Tool.Transform;
+              })
+            }
+          >
+            {t`tabs.layout.toolbar.tool.transform`}
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<MagicWandIcon />}
+            keybind="Enter"
+            onClick={() => {
+              const { selections } = useBlueprint.getState();
+
+              if (selections.length >= 1) {
+                if (selections.length > 1) selectConcurrent(selections[0]);
+                mutateApp((draft) => {
+                  draft.editor.tool = Tool.Edit;
+                });
+              }
+            }}
+          >
+            {t`tabs.layout.toolbar.tool.edit`}
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
 

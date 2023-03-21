@@ -24,6 +24,7 @@ import duplicateSelected from 'core/part/duplicateSelected';
 import groupSelected from 'core/part/groupSelected';
 import panToSelected from 'core/part/panToSelected';
 import paste from 'core/part/paste';
+import selectConcurrent from 'core/part/selectConcurrent';
 import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
 import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import ungroupSelected from 'core/part/ungroupSelected';
@@ -62,6 +63,7 @@ interface BindOptions {
   preventRepeats: boolean;
   preventWhenInteractingWithUI: boolean;
   preventOnNonEditingTab: boolean;
+  preventOnNonTransformTool: boolean;
   action: 'keydown' | 'keyup' | 'keypress';
 }
 
@@ -70,6 +72,7 @@ const bindDefaultOptions: BindOptions = {
   preventRepeats: true,
   preventWhenInteractingWithUI: true,
   preventOnNonEditingTab: true,
+  preventOnNonTransformTool: false,
   action: 'keydown',
 };
 
@@ -84,13 +87,19 @@ const bind = (
     keys,
     (event) => {
       if (mergedOptions.preventDefault) event.preventDefault();
-      const { isInteracting, tab } = useApp.getState().interface;
+      const {
+        interface: { isInteracting, tab },
+        editor: { tool, isSpacePanning, isTouchPanning },
+      } = useApp.getState();
 
       if (
         (mergedOptions.preventRepeats ? !event.repeat : true) &&
         (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
         (mergedOptions.preventOnNonEditingTab
           ? tab === Tab.Layout || tab === Tab.Staging
+          : true) &&
+        (mergedOptions.preventOnNonTransformTool
+          ? tool === Tool.Transform && !isSpacePanning && !isTouchPanning
           : true)
       ) {
         callback();
@@ -111,7 +120,7 @@ export default function useKeybinds() {
     });
 
   useEffect(() => {
-    bind('ctrl+a', selectConcurrentAtRoot);
+    bind('ctrl+a', selectConcurrentAtRoot, { preventOnNonTransformTool: true });
     bind(
       'esc',
       () => {
@@ -121,6 +130,12 @@ export default function useKeybinds() {
           });
         } else {
           unselectAll();
+        }
+
+        if (useApp.getState().editor.tool === Tool.Edit) {
+          mutateApp((draft) => {
+            draft.editor.tool = Tool.Transform;
+          });
         }
       },
       { preventWhenInteractingWithUI: false },
@@ -135,7 +150,9 @@ export default function useKeybinds() {
       { preventOnNonEditingTab: false },
     );
 
-    bind(['del', 'backspace'], deleteSelected);
+    bind(['del', 'backspace'], deleteSelected, {
+      preventOnNonTransformTool: true,
+    });
 
     bind('alt+1', () => {
       mutateSettings((draft: UseSettings) => {
@@ -187,27 +204,35 @@ export default function useKeybinds() {
 
     bind('up', () => translate(upVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
     bind('down', () => translate(downVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
     bind('left', () => translate(leftVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
     bind('right', () => translate(rightVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
     bind('shift+up', () => translate(upMajorVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
     bind('shift+down', () => translate(downMajorVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
     bind('shift+left', () => translate(leftMajorVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
     bind('shift+right', () => translate(rightMajorVector), {
       preventRepeats: false,
+      preventOnNonTransformTool: true,
     });
 
     bind('ctrl+z', undoVersion, {
@@ -217,8 +242,18 @@ export default function useKeybinds() {
       preventRepeats: false,
     });
 
-    bind('1', toTool(Tool.Move));
-    bind('2', toTool(Tool.Pan));
+    bind('1', toTool(Tool.Pan));
+    bind(['2', 'v'], toTool(Tool.Transform));
+    bind(['3', 'enter'], () => {
+      const { selections } = useBlueprint.getState();
+
+      if (selections.length >= 1) {
+        if (selections.length > 1) selectConcurrent(selections[0]);
+        mutateApp((draft) => {
+          draft.editor.tool = Tool.Edit;
+        });
+      }
+    });
 
     bind(
       'space',
@@ -267,14 +302,16 @@ export default function useKeybinds() {
     );
     bind('ctrl+e', () => exportFile());
 
-    bind('ctrl+c', copySelected);
-    bind('ctrl+x', cutPartsBySelection);
-    bind('ctrl+v', paste);
-    bind('ctrl+d', duplicateSelected);
-    bind('ctrl+g', groupSelected);
-    bind('ctrl+shift+g', ungroupSelected);
+    bind('ctrl+c', copySelected, { preventOnNonTransformTool: true });
+    bind('ctrl+x', cutPartsBySelection, { preventOnNonTransformTool: true });
+    bind('ctrl+v', paste, { preventOnNonTransformTool: true });
+    bind('ctrl+d', duplicateSelected, { preventOnNonTransformTool: true });
+    bind('ctrl+g', groupSelected, { preventOnNonTransformTool: true });
+    bind('ctrl+shift+g', ungroupSelected, { preventOnNonTransformTool: true });
 
-    bind('ctrl+shift+i', () => prompt(InsertPartPrompt, true, 'insert-part'));
+    bind('ctrl+shift+i', () => prompt(InsertPartPrompt, true, 'insert-part'), {
+      preventOnNonTransformTool: true,
+    });
     bind('ctrl+r', () => {
       if (useBlueprint.getState().selections.length > 0) {
         prompt(RenamePartsPrompt, true, 'rename-parts');

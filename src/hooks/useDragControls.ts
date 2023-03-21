@@ -20,7 +20,7 @@ const useDragControls = (id: string) => {
   const initial = new Vector2();
   const movement = new Vector2();
 
-  const handlePointerMove = (event: PointerEvent) => {
+  function handlePointerMove(event: PointerEvent) {
     const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
@@ -62,8 +62,8 @@ const useDragControls = (id: string) => {
         movement.copy(newMovement);
       }
     }
-  };
-  const handlePointerUp = () => {
+  }
+  function handlePointerUp() {
     if (!firstMove) deferUpdates(false);
 
     const removeSelectionRestriction = () => {
@@ -85,8 +85,8 @@ const useDragControls = (id: string) => {
 
     window.removeEventListener('pointerup', handlePointerUp);
     window.removeEventListener('pointermove', handlePointerMove);
-  };
-  const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+  }
+  function handlePointerDown(event: ThreeEvent<PointerEvent>) {
     const part = getPart(id) as PartWithTransformations | undefined;
     const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
@@ -95,7 +95,7 @@ const useDragControls = (id: string) => {
       (part.selected || part.parent_id === null) && // is selected or is at root level
       part.visible &&
       !part.locked &&
-      tool === Tool.Move &&
+      tool === Tool.Transform &&
       !isSpacePanning &&
       !isTouchPanning
     ) {
@@ -109,7 +109,7 @@ const useDragControls = (id: string) => {
       window.addEventListener('pointerup', handlePointerUp);
       window.addEventListener('pointermove', handlePointerMove);
     }
-  };
+  }
 
   return handlePointerDown;
 };

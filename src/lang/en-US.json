@@ -48,8 +48,9 @@
         },
 
         "tool": {
-          "move": "Move",
-          "pan": "Pan"
+          "pan": "Pan",
+          "transform": "Transform",
+          "edit": "Edit"
         },
 
         "clipboard": {
