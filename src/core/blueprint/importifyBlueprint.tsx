@@ -82,20 +82,14 @@ export const importifyBlueprint = (
         <Prompt.Root>
           <Prompt.Info>
             <Prompt.Title>
-              {missingParts.length === 1
-                ? t`prompts.missing_parts.title`
-                : `${f`prompts.missing_parts.title_plural`[0]} ${
-                    missingParts.length
-                  } ${f`prompts.missing_parts.title_plural`[1]}`}
+              {`${f`prompts.missing_parts.title`[0]}${missingParts.length}${
+                f`prompts.missing_parts.title`[1]
+              }`}
             </Prompt.Title>
             <Prompt.Description>
-              {missingParts.length === 1
-                ? `${f`prompts.missing_parts.description`[0]} ${title} ${
-                    f`prompts.missing_parts.description`[1]
-                  }`
-                : `${f`prompts.missing_parts.description_plural`[0]} ${title} ${
-                    f`prompts.missing_parts.description_plural`[1]
-                  }`}
+              {`${f`prompts.missing_parts.description`[0]} ${title} ${
+                f`prompts.missing_parts.description`[1]
+              }`}
               <ul>
                 {missingParts.map((missingPart) => (
                   <li>{missingPart}</li>

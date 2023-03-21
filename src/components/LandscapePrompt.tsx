@@ -5,6 +5,7 @@ import mutateSettings from 'core/app/mutateSettings';
 import { Orientation, useOrientation } from 'hooks/useOrientation';
 import useTranslator from 'hooks/useTranslator';
 import { HTMLAttributes, ReactNode } from 'react';
+import { isDesktop } from 'react-device-detect';
 import { styled, theme } from 'stitches.config';
 import useApp from 'stores/app';
 import useSettings from 'stores/settings';
@@ -63,7 +64,7 @@ export default function LandscapePrompt({
   children,
   ...props
 }: LandscapePromptProps) {
-  const { f, t } = useTranslator();
+  const { t } = useTranslator();
   const orientation = useOrientation();
   const orientationPromptDismissed = useApp(
     (state) => state.interface.orientationPromptDismissed,
@@ -74,7 +75,8 @@ export default function LandscapePrompt({
   const showChildren =
     !showOrientationPrompt ||
     orientationPromptDismissed ||
-    orientation === Orientation.Landscape;
+    orientation === Orientation.Landscape ||
+    isDesktop;
 
   const handleNeverClick = () => {
     mutateSettings((draft) => {
@@ -97,11 +99,7 @@ export default function LandscapePrompt({
         <ThickArrowRightIcon />
         <MobileIcon style={{ transform: 'rotate(-90deg)' }} />
       </IconsContainer>
-      <Message>
-        {f`landscape_prompt.message`[0]}
-        <br />
-        {f`landscape_prompt.message`[1]}
-      </Message>
+      <Message>{t`landscape_prompt.message`}</Message>
       <Actions>
         <Action onClick={handleNeverClick}>{t`landscape_prompt.never`}</Action>
         <Action onClick={handleDismissClick}>
