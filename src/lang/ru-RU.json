@@ -21,7 +21,7 @@
         "motto": "Редактирование чертежей по-новому",
         "from_scratch": "Начать с нуля",
         "import": "Импортировать файл чертежа",
-        "open": "Open Stellar file"
+        "open": "Открыть файл Stellar"
       },
       "status_bar": {
         "docs": "Документация"
@@ -40,8 +40,8 @@
         },
         "tool": {
           "pan": "Сдвинуть",
-          "transform": "Transform",
-          "edit": "Edit"
+          "transform": "Трансформировать",
+          "edit": "Редактировать"
         },
         "clipboard": {
           "copy": "Копировать",
@@ -92,7 +92,7 @@
           "$": "Фрагменты",
           "coming_soon": {
             "$": "Фрагменты скоро появятся!",
-            "instructions": "Snippets will allow you to paste in small sections of other crafts."
+            "instructions": "Фрагменты позволят вам вставлять маленькие части других чертежей."
           }
         }
       },
@@ -159,7 +159,7 @@
           },
           "fragment": {
             "$": "Фрагмент",
-            "section": "Section",
+            "section": "Раздел",
             "left": "Левый",
             "whole": "Целый",
             "right": "Правый"
@@ -169,7 +169,7 @@
           "$": "Исследовать",
           "select_one_part": {
             "$": "Выберите деталь",
-            "instructions": "Select a single part to inspect details"
+            "instructions": "Выберите одну деталь, которую надо исследовать"
           },
           "meta_data": {
             "$": "Метаданные",
@@ -184,8 +184,8 @@
             "$": "Границы",
             "width": "Ширина",
             "height": "Высота",
-            "x_position": "X position",
-            "y_position": "Y position",
+            "x_position": "Позиция X",
+            "y_position": "Позиция Y",
             "rotation": "Поворот"
           },
           "json": "JSON",
@@ -214,16 +214,16 @@
     },
     "export": {
       "$": "Экспорт",
-      "options": "Options",
+      "options": "Параметры",
       "export": {
-        "$": "Export",
-        "game": "Export to game",
-        "stellar": "Save Stellar format"
+        "$": "Экспорт",
+        "game": "Экспортировать в игру",
+        "stellar": "Сохранить в формате Stellar"
       }
     }
   },
   "landscape_prompt": {
-    "message": "Seems like you're in portrait mode. Please turn to landscape mode.",
+    "message": "Похоже, что устройство находится в портретном режиме. Переключитесь на альбомный режим.",
     "never": "Больше не спрашивать",
     "dismiss": "Игнорировать"
   },
@@ -276,8 +276,8 @@
       }
     },
     "missing_parts": {
-      "title": "%1$s part(s) not imported",
-      "description": "The following part(s) was/were not imported because it doesn't exist in %1$s yet:",
+      "title": "%1$s детал(ь/ей) не импортировано",
+      "description": "Следующ(ая/ие) детал(ь/и) не был(а/и) импортирован(а/ы), так как он(а/и) еще не существу(ет/ют) в %1$s:",
       "actions": {
         "never": "Больше не показывать",
         "proceed": "Продолжить"
@@ -298,15 +298,15 @@
           "$": "Интерфейс",
           "theme": {
             "title": "Тема",
-            "description": "Color scheme for the interface."
+            "description": "Цветовая схема интерфейса."
           },
           "default_tab": {
             "title": "Вкладка по умолчанию",
-            "description": "The tab that will be opened by default."
+            "description": "Вкладка, которая будет открыватся по умолчанию."
           },
           "touchscreen_mode": {
             "title": "Режим сенсорного экрана",
-            "description": "Displays information in a compact manner if on a touchscreen device.",
+            "description": "Отображает информацию компактней, если используется сенсорное устройство.",
             "options": {
               "auto": "Автоопределение",
               "on": "Включен",
@@ -315,59 +315,59 @@
           },
           "language": {
             "title": "Язык",
-            "description": "Language of the test on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+            "description": "Language of the text on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "Уведомление ориентации",
-            "description": "Requests usage in landscape mode."
+            "description": "Запрашивает использование в альбомном режиме."
           },
           "installation_prompt": {
             "title": "Уведомление установки",
-            "description": "Notifies about installing Stellar."
+            "description": "Уведомляет о возможности установки Stellar."
           },
           "instability_prompt": {
             "title": "Предупреждение о нестабильности",
-            "description": "Warns about an unstable or unknown version of Stellar."
+            "description": "Предупреждает о нестабильной или неизвестной версии Stellar."
           },
           "missing_parts": {
             "title": "Отсутствующие детали",
-            "description": "Shows a list of parts that didn't imported."
+            "description": "Shows a list of parts that didn't import."
           }
         },
         "editor": {
           "$": "Редактор",
           "undo_limit": {
             "title": "Лимит отмен",
-            "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
+            "description": "Максимальное количество отмен/повторений, хранящихся в памяти. Максимум 4096, минимум 16."
           }
         },
         "performance": {
           "$": "Производительность",
           "regress": {
             "title": "Количество регрессии",
-            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
+            "description": "Уменьшает разрешение холста при выполнении вычислительно дорогих задач."
           }
         },
         "file": {
           "$": "Файлы",
           "format": {
-            "title": "Format emitted files",
-            "description": "Formats JSON files emitted by Stellar for readability."
+            "title": "Форматированные файлы",
+            "description": "Форматирует JSON-файлы, генерируемые Stellar, для лучшей читаемости."
           },
           "watermark": {
             "title": "Водяная марка на экспортированных чертежах",
-            "description": "Adds watermark linking to Stellar."
+            "description": "Добавляет водяной знак, отсылающийся на Stellar."
           },
           "default_name": {
             "title": "Имя файла по умолчанию",
-            "description": "Default name for any unnamed files."
+            "description": "Имя по умолчанию для любых безымянных файлов."
           }
         },
         "debug": {
           "$": "Отладка",
           "error_screen_debug": {
-            "title": "Debug info on error screen",
-            "description": "Display full error message on an interrupting critical error."
+            "title": "Отладочная информация на ошибочном экране",
+            "description": "Показывать полное сообщение о критической ошибке, если такая происходит."
           }
         }
       }
