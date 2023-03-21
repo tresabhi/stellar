@@ -51,7 +51,9 @@ export default function TransformControls() {
     const handleDeferUpdates = (
       event: CustomEvent<DeferUpdatesEventDetail>,
     ) => {
-      if (wrapper.current) wrapper.current.visible = !event.detail;
+      if (wrapper.current && useApp.getState().editor.tool === Tool.Transform) {
+        wrapper.current.visible = !event.detail;
+      }
     };
 
     debouncedRecalculateBounds();

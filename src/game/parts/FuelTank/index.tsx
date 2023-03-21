@@ -2,6 +2,7 @@ import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { useTexture } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
+import { FuelTankEditDetail } from 'components/LayoutCanvas/components/Outlines/components/EditControls/components/FuelTankControls';
 import * as Properties from 'components/Properties';
 import mutateSettings from 'core/app/mutateSettings';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
@@ -12,7 +13,7 @@ import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
 import usePhysicalPart from 'hooks/usePartPhysical';
 import usePartProperty from 'hooks/usePartProperty';
 import useTranslator from 'hooks/useTranslator';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
@@ -65,6 +66,54 @@ export const FuelTankData: FuelTank = {
   label: 'Fuel Tank',
 };
 
+function constructGeometry(
+  N: FuelTankEditDetail,
+  meshTop: Mesh,
+  meshMiddle: Mesh,
+  meshBottom: Mesh,
+) {
+  const slope = (height: number) =>
+    (N.width_a + (N.width_b - N.width_a) * (height / N.height)) / 2;
+  const topHeight = N.height < 0.3 ? N.height / 3 : 0.1;
+  const bottomHeight = topHeight;
+  const middleHeight = N.height - topHeight - bottomHeight;
+
+  meshBottom.position.set(0, bottomHeight / 2, 0);
+  meshMiddle.position.set(0, bottomHeight + middleHeight / 2, 0);
+  meshTop.position.set(0, N.height - topHeight / 2, 0);
+
+  meshBottom.geometry = new CylinderGeometry(
+    slope(bottomHeight),
+    N.width_a / 2,
+    bottomHeight,
+    12,
+    1,
+    true,
+    -Math.PI / 2,
+    Math.PI,
+  );
+  meshMiddle.geometry = new CylinderGeometry(
+    slope(middleHeight + bottomHeight),
+    slope(bottomHeight),
+    middleHeight,
+    12,
+    1,
+    true,
+    -Math.PI / 2,
+    Math.PI,
+  );
+  meshTop.geometry = new CylinderGeometry(
+    N.width_b / 2,
+    slope(middleHeight + bottomHeight),
+    topHeight,
+    12,
+    1,
+    true,
+    -Math.PI / 2,
+    Math.PI,
+  );
+}
+
 export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const meshTop = useRef<Mesh>(null);
@@ -78,45 +127,11 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
     (newState: FuelTank) => newState.N,
     (N) => {
       if (meshTop.current && meshMiddle.current && meshBottom.current) {
-        const slope = (height: number) =>
-          (N.width_a + (N.width_b - N.width_a) * (height / N.height)) / 2;
-        const topHeight = N.height < 0.3 ? N.height / 3 : 0.1;
-        const bottomHeight = topHeight;
-        const middleHeight = N.height - topHeight - bottomHeight;
-
-        meshBottom.current.position.set(0, bottomHeight / 2, 0);
-        meshMiddle.current.position.set(0, bottomHeight + middleHeight / 2, 0);
-        meshTop.current.position.set(0, N.height - topHeight / 2, 0);
-
-        meshBottom.current.geometry = new CylinderGeometry(
-          slope(bottomHeight),
-          N.width_a / 2,
-          bottomHeight,
-          12,
-          1,
-          true,
-          -Math.PI / 2,
-          Math.PI,
-        );
-        meshMiddle.current.geometry = new CylinderGeometry(
-          slope(middleHeight + bottomHeight),
-          slope(bottomHeight),
-          middleHeight,
-          12,
-          1,
-          true,
-          -Math.PI / 2,
-          Math.PI,
-        );
-        meshTop.current.geometry = new CylinderGeometry(
-          N.width_b / 2,
-          slope(middleHeight + bottomHeight),
-          topHeight,
-          12,
-          1,
-          true,
-          -Math.PI / 2,
-          Math.PI,
+        constructGeometry(
+          N,
+          meshTop.current,
+          meshMiddle.current,
+          meshBottom.current,
         );
 
         if (boundsStore[id] && wrapper.current) {
@@ -143,6 +158,33 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
       }
     },
   );
+
+  useEffect(() => {
+    const handleFuelTankEdit = (event: CustomEvent<FuelTankEditDetail>) => {
+      if (meshTop.current && meshMiddle.current && meshBottom.current) {
+        constructGeometry(
+          event.detail,
+          meshTop.current,
+          meshMiddle.current,
+          meshBottom.current,
+        );
+
+        invalidate();
+      }
+    };
+
+    window.addEventListener(
+      `fueltankedit${id}`,
+      handleFuelTankEdit as EventListener,
+    );
+
+    return () => {
+      window.removeEventListener(
+        `fueltankedit${id}`,
+        handleFuelTankEdit as EventListener,
+      );
+    };
+  }, [id]);
 
   return (
     <group ref={wrapper} {...props}>

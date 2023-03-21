@@ -37,13 +37,13 @@ interface GroupedProperties {
   Component: FC<PartPropertyComponentProps>;
 }
 
-function testProperties<Type extends Part>(
+export function testProperties<Type extends Part>(
   lister: (state: Partial<Type>) => (unknown | undefined)[],
 ) {
   return (state: Part) =>
     !lister(state as Type).some((item) => item === undefined);
 }
-function testName(name: string) {
+export function testName(name: string) {
   return (state: Part) => state.n === name;
 }
 

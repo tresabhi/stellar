@@ -1,5 +1,5 @@
-import { Line } from '@react-three/drei';
-import { invalidate, ThreeEvent, useFrame, useThree } from '@react-three/fiber';
+import { invalidate, ThreeEvent, useThree } from '@react-three/fiber';
+import ControlDiamond from 'components/ControlDiamond';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import deferUpdates from 'core/bounds/deferUpdates';
 import filter from 'core/part/filter';
@@ -8,12 +8,12 @@ import transformAsync from 'core/part/resizeAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
 import { MutableRefObject, useEffect, useRef } from 'react';
+import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group, Vector2, Vector2Tuple } from 'three';
 import snap from 'utilities/snap';
 import { UpdateTransformNodesDetail } from '..';
-import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
 export interface TransformNodeProps {
   bounds: MutableRefObject<Bounds>;
@@ -44,9 +44,6 @@ export const sideToPoint = (
 
   return [x, y];
 };
-
-const NODE_SIZE = 10;
-const NODE_COLOR = '#eeedef';
 
 export default function TransformNode({
   bounds,
@@ -110,10 +107,6 @@ export default function TransformNode({
   };
   updateTransformNode();
 
-  useFrame(() => {
-    const scale = (1 / camera.zoom) * NODE_SIZE;
-    wrapper.current?.scale.set(scale, scale, scale);
-  });
   useEffect(() => {
     const handleUpdateTransformNodes = (
       event: CustomEvent<UpdateTransformNodesDetail>,
@@ -270,39 +263,27 @@ export default function TransformNode({
     window.removeEventListener('pointerup', handlePointerUp);
   };
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
-    updateValues();
+    if (useApp.getState().editor.tool === Tool.Transform) {
+      event.stopPropagation();
+      updateValues();
 
-    initial.set(event.clientX, event.clientY);
+      initial.set(event.clientX, event.clientY);
 
-    firstMove = true;
-    blueprint = useBlueprint.getState();
-    selections = filter(
-      getChildrenRecursive(blueprint.selections),
-      (part) =>
-        !part.locked &&
-        part.visible &&
-        (part as PartWithPosition).p !== undefined &&
-        (part as PartWithScale).o !== undefined,
-    );
+      firstMove = true;
+      blueprint = useBlueprint.getState();
+      selections = filter(
+        getChildrenRecursive(blueprint.selections),
+        (part) =>
+          !part.locked &&
+          part.visible &&
+          (part as PartWithPosition).p !== undefined &&
+          (part as PartWithScale).o !== undefined,
+      );
 
-    window.addEventListener('pointermove', handlePointerMove);
-    window.addEventListener('pointerup', handlePointerUp);
+      window.addEventListener('pointermove', handlePointerMove);
+      window.addEventListener('pointerup', handlePointerUp);
+    }
   };
 
-  return (
-    <group ref={wrapper} onPointerDown={handlePointerDown}>
-      <mesh>
-        <planeGeometry />
-        <meshBasicMaterial color={NODE_COLOR} />
-      </mesh>
-
-      <Line
-        position={[0, 0, 2]}
-        color="#8f8f8f"
-        points={UNIT_POINTS}
-        lineWidth={2}
-      />
-    </group>
-  );
+  return <ControlDiamond ref={wrapper} onPointerDown={handlePointerDown} />;
 }

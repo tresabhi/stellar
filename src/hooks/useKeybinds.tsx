@@ -245,13 +245,21 @@ export default function useKeybinds() {
     bind('1', toTool(Tool.Pan));
     bind(['2', 'v'], toTool(Tool.Transform));
     bind(['3', 'enter'], () => {
-      const { selections } = useBlueprint.getState();
+      const { tool } = useApp.getState().editor;
 
-      if (selections.length >= 1) {
-        if (selections.length > 1) selectConcurrent(selections[0]);
+      if (tool === Tool.Edit) {
         mutateApp((draft) => {
-          draft.editor.tool = Tool.Edit;
+          draft.editor.tool = Tool.Transform;
         });
+      } else {
+        const { selections } = useBlueprint.getState();
+
+        if (selections.length >= 1) {
+          if (selections.length > 1) selectConcurrent(selections[0]);
+          mutateApp((draft) => {
+            draft.editor.tool = Tool.Edit;
+          });
+        }
       }
     });
 
