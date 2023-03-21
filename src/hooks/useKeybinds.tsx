@@ -2,7 +2,7 @@ import { invalidate } from '@react-three/fiber';
 import {
   MOVE_STEP_MAJOR,
   MOVE_STEP_REGULAR,
-} from 'components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
+} from 'components/LayoutCanvas/components/Outlines/components/TransformControls/components/TransformNode';
 import { WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';

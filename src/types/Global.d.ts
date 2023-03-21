@@ -1,7 +1,7 @@
 import { Object3DNode } from '@react-three/fiber';
-import { UpdateResizeNodesDetail } from 'components/LayoutCanvas/components/Outlines/components/ResizeControls';
+import { UpdateTransformNodesDetail } from 'components/LayoutCanvas/components/Outlines/components/TransformControls';
 import { PartMoveEventDetail } from 'core/part';
-import { PartResizeEventDetail } from 'core/part/resizeAsync';
+import { PartTransformEventDetail } from 'core/part/resizeAsync';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
@@ -43,9 +43,9 @@ declare global {
       prompt(): Promise<void>;
     };
 
-    updateresizenodes: { detail: UpdateResizeNodesDetail };
+    updatetransformnodes: { detail: UpdateTransformNodesDetail };
 
-    [`partresize${string}`]: { detail: PartResizeEventDetail };
+    [`parttransform${string}`]: { detail: PartTransformEventDetail };
 
     partscale: { detail: PartScaleEventDetail };
 

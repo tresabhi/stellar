@@ -4,7 +4,7 @@ import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import deferUpdates from 'core/bounds/deferUpdates';
 import filter from 'core/part/filter';
 import getChildrenRecursive from 'core/part/getChildrenRecursive';
-import resizeAsync from 'core/part/resizeAsync';
+import transformAsync from 'core/part/resizeAsync';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
 import { MutableRefObject, useEffect, useRef } from 'react';
@@ -12,10 +12,10 @@ import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group, Vector2, Vector2Tuple } from 'three';
 import snap from 'utilities/snap';
-import { UpdateResizeNodesDetail } from '..';
+import { UpdateTransformNodesDetail } from '..';
 import { UNIT_POINTS } from '../../PartsBounds/components/PartBounds';
 
-export interface ResizeNodeProps {
+export interface TransformNodeProps {
   bounds: MutableRefObject<Bounds>;
   constant: Vector2Tuple;
   movable: Vector2Tuple;
@@ -48,12 +48,12 @@ export const sideToPoint = (
 const NODE_SIZE = 10;
 const NODE_COLOR = '#eeedef';
 
-export default function ResizeNode({
+export default function TransformNode({
   bounds,
   constant: constantSide,
   movable: movableSide,
   hideOnMaintainSlope,
-}: ResizeNodeProps) {
+}: TransformNodeProps) {
   let firstMove = true;
   const camera = useThree((state) => state.camera);
   const wrapper = useRef<Group>(null);
@@ -102,21 +102,21 @@ export default function ResizeNode({
 
     applyNormalizations();
   };
-  const updateResizeNode = () => {
+  const updateTransformNode = () => {
     updateValues();
 
     wrapper.current?.position.set(...moved.toArray(), 2);
     wrapper.current?.rotation.set(0, 0, bounds.current.rotation);
   };
-  updateResizeNode();
+  updateTransformNode();
 
   useFrame(() => {
     const scale = (1 / camera.zoom) * NODE_SIZE;
     wrapper.current?.scale.set(scale, scale, scale);
   });
   useEffect(() => {
-    const handleUpdateResizeNodes = (
-      event: CustomEvent<UpdateResizeNodesDetail>,
+    const handleUpdateTransformNodes = (
+      event: CustomEvent<UpdateTransformNodesDetail>,
     ) => {
       maintainSlope.current = event.detail.maintainSlope;
 
@@ -124,18 +124,18 @@ export default function ResizeNode({
         wrapper.current.visible = !maintainSlope.current;
       }
 
-      updateResizeNode();
+      updateTransformNode();
     };
 
     window.addEventListener(
-      'updateresizenodes',
-      handleUpdateResizeNodes as EventListener,
+      'updatetransformnodes',
+      handleUpdateTransformNodes as EventListener,
     );
 
     return () => {
       window.removeEventListener(
-        'updateresizenodes',
-        handleUpdateResizeNodes as EventListener,
+        'updatetransformnodes',
+        handleUpdateTransformNodes as EventListener,
       );
     };
   });
@@ -208,7 +208,7 @@ export default function ResizeNode({
     applyNormalizations();
 
     if (!offset.equals(lastOffset)) {
-      resizeAsync(
+      transformAsync(
         selections,
         normalizedConstant.toArray(),
         normalizedScale.toArray(),

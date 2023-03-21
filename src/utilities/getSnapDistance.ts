@@ -1,7 +1,7 @@
 import {
   MOVE_STEP_MAJOR,
   MOVE_STEP_REGULAR,
-} from 'components/LayoutCanvas/components/Outlines/components/ResizeControls/components/ResizeNode';
+} from 'components/LayoutCanvas/components/Outlines/components/TransformControls/components/TransformNode';
 
 export interface EventWithModifiers {
   ctrlKey: boolean;

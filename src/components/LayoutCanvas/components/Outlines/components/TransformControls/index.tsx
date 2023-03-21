@@ -10,13 +10,13 @@ import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
-import ResizeNode from './components/ResizeNode';
+import TransformNode from './components/TransformNode';
 
-export interface UpdateResizeNodesDetail {
+export interface UpdateTransformNodesDetail {
   maintainSlope: boolean;
 }
 
-export default function ResizeControls() {
+export default function TransformControls() {
   const tool = useApp((state) => state.editor.tool);
   const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
@@ -39,7 +39,7 @@ export default function ResizeControls() {
     outline.current?.scale.set(bounds.current.width, bounds.current.height, 1);
 
     window.dispatchEvent(
-      new CustomEvent<UpdateResizeNodesDetail>('updateresizenodes', {
+      new CustomEvent<UpdateTransformNodesDetail>('updatetransformnodes', {
         detail: { maintainSlope: !boundsFromParts.hasMutualAngle },
       }),
     );
@@ -88,45 +88,45 @@ export default function ResizeControls() {
     >
       <Line ref={outline} lineWidth={2} color="#9d5bd2" points={UNIT_POINTS} />
 
-      <ResizeNode // top left
+      <TransformNode // top left
         bounds={bounds}
         constant={[1, -1]}
         movable={[-1, 1]}
       />
-      <ResizeNode // top
+      <TransformNode // top
         bounds={bounds}
         constant={[0, -1]}
         movable={[0, 1]}
         hideOnMaintainSlope
       />
-      <ResizeNode // top right
+      <TransformNode // top right
         bounds={bounds}
         constant={[-1, -1]}
         movable={[1, 1]}
       />
-      <ResizeNode // right
+      <TransformNode // right
         bounds={bounds}
         constant={[-1, 0]}
         movable={[1, 0]}
         hideOnMaintainSlope
       />
-      <ResizeNode // bottom right
+      <TransformNode // bottom right
         bounds={bounds}
         constant={[-1, 1]}
         movable={[1, -1]}
       />
-      <ResizeNode // bottom
+      <TransformNode // bottom
         bounds={bounds}
         constant={[0, 1]}
         movable={[0, -1]}
         hideOnMaintainSlope
       />
-      <ResizeNode // bottom left
+      <TransformNode // bottom left
         bounds={bounds}
         constant={[1, 1]}
         movable={[-1, -1]}
       />
-      <ResizeNode // left
+      <TransformNode // left
         bounds={bounds}
         constant={[1, 0]}
         movable={[-1, 0]}

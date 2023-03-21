@@ -1,7 +1,7 @@
 import { invalidate } from '@react-three/fiber';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
-import { PartResizeEventDetail } from 'core/part/resizeAsync';
+import { PartTransformEventDetail } from 'core/part/resizeAsync';
 import { PartMoveEventDetail } from 'core/part/translateSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
@@ -51,7 +51,9 @@ export const usePartWithPosition = (
     }
   };
 
-  const handlePartResize = (event: CustomEvent<PartResizeEventDetail>) => {
+  const handlePartTransform = (
+    event: CustomEvent<PartTransformEventDetail>,
+  ) => {
     const part = useBlueprint.getState().parts[id] as PartWithPosition;
 
     const originOffset = Math.hypot(part.p.x, part.p.y);
@@ -80,15 +82,15 @@ export const usePartWithPosition = (
   useEffect(() => {
     window.addEventListener('partmove', handlePartMove as EventListener);
     window.addEventListener(
-      `partresize${id}`,
-      handlePartResize as EventListener,
+      `parttransform${id}`,
+      handlePartTransform as EventListener,
     );
 
     return () => {
       window.removeEventListener('partmove', handlePartMove as EventListener);
       window.removeEventListener(
-        `partresize${id}`,
-        handlePartResize as EventListener,
+        `parttransform${id}`,
+        handlePartTransform as EventListener,
       );
     };
   });

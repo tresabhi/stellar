@@ -1,7 +1,7 @@
 import { invalidate } from '@react-three/fiber';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
-import { PartResizeEventDetail } from 'core/part/resizeAsync';
+import { PartTransformEventDetail } from 'core/part/resizeAsync';
 import { PartScaleEventDetail } from 'core/part/scaleSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
@@ -60,7 +60,9 @@ export const usePartWithScale = (
     }
   };
 
-  const handlePartResize = (event: CustomEvent<PartResizeEventDetail>) => {
+  const handlePartTransform = (
+    event: CustomEvent<PartTransformEventDetail>,
+  ) => {
     const part = useBlueprint.getState().parts[id] as PartWithScale;
 
     if (object.current) {
@@ -77,15 +79,15 @@ export const usePartWithScale = (
   useEffect(() => {
     window.addEventListener('partscale', handlePartScale as EventListener);
     window.addEventListener(
-      `partresize${id}`,
-      handlePartResize as EventListener,
+      `parttransform${id}`,
+      handlePartTransform as EventListener,
     );
 
     return () => {
       window.removeEventListener('partscale', handlePartScale as EventListener);
       window.removeEventListener(
-        `partresize${id}`,
-        handlePartResize as EventListener,
+        `parttransform${id}`,
+        handlePartTransform as EventListener,
       );
     };
   });

@@ -2,13 +2,13 @@ import { Vector2Tuple } from 'three';
 import { MethodIds } from 'types/Parts';
 import normalizeIds from 'utilities/normalizeIds';
 
-export interface PartResizeEventDetail {
+export interface PartTransformEventDetail {
   normalizedConstant: Vector2Tuple;
   normalizedScale: Vector2Tuple;
   rotation: number;
 }
 
-export default function resizeAsync(
+export default function transformAsync(
   ids: MethodIds,
   normalizedConstant: Vector2Tuple,
   normalizedScale: Vector2Tuple,
@@ -16,7 +16,7 @@ export default function resizeAsync(
 ) {
   normalizeIds(ids).forEach((id) => {
     window.dispatchEvent(
-      new CustomEvent<PartResizeEventDetail>(`partresize${id}`, {
+      new CustomEvent<PartTransformEventDetail>(`parttransform${id}`, {
         detail: { normalizedConstant, normalizedScale, rotation },
       }),
     );
