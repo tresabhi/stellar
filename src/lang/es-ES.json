@@ -21,7 +21,7 @@
         "motto": "Edición de plano redefinida",
         "from_scratch": "Empezar de cero",
         "import": "Importar archivo de plano",
-        "open": "Abrir archivo de Stellar"
+        "open": "Open Stellar file"
       },
       "status_bar": {
         "docs": "Documentos"
@@ -39,8 +39,9 @@
           "export": "Exportar..."
         },
         "tool": {
-          "move": "Mover",
-          "pan": "Sartén"
+          "pan": "Sartén",
+          "transform": "Transform",
+          "edit": "Edit"
         },
         "clipboard": {
           "copy": "Copiar",
@@ -91,7 +92,7 @@
           "$": "Fragmentos",
           "coming_soon": {
             "$": "¡Fragmentos próximamente!",
-            "instructions": "Podrás insertar pequeñas secciones en otros planos aquí como fragmentos. Podrás crear un nuevo fragmento yendo a Barra de herramientas > %1$s Portapapeles > %2$s Crear fragmento."
+            "instructions": "Snippets will allow you to paste in small sections of other crafts."
           }
         }
       },
@@ -155,13 +156,20 @@
           "cone": {
             "$": "Cono",
             "size": "Tamaño"
+          },
+          "fragment": {
+            "$": "Fragmento",
+            "section": "Section",
+            "left": "Izquierda",
+            "whole": "Completo",
+            "right": "Derecha"
           }
         },
         "inspect": {
           "$": "Inspeccionar",
           "select_one_part": {
             "$": "Seleccionar una parte",
-            "instructions": "Selecciona una sola parte para inspeccionar los detalles de esta"
+            "instructions": "Select a single part to inspect details"
           },
           "meta_data": {
             "$": "Metadatos",
@@ -176,8 +184,8 @@
             "$": "Límites",
             "width": "Anchura",
             "height": "Altura",
-            "x_position": "Posición X",
-            "y_position": "Posición Y",
+            "x_position": "X position",
+            "y_position": "Y position",
             "rotation": "Ritación"
           },
           "json": "JSON",
@@ -205,11 +213,17 @@
       "$": "Puesta en escena"
     },
     "export": {
-      "$": "Exportar"
+      "$": "Exportar",
+      "options": "Options",
+      "export": {
+        "$": "Export",
+        "game": "Export to game",
+        "stellar": "Save Stellar format"
+      }
     }
   },
   "landscape_prompt": {
-    "message": "Parece que estás en modo retrato. Por favor, gira al modo horizontal.%1$sSi estás en un escritorio, esto puede ser descartado.",
+    "message": "Seems like you're in portrait mode. Please turn to landscape mode.",
     "never": "No volver a preguntar de nuevo",
     "dismiss": "Descartar"
   },
@@ -262,10 +276,8 @@
       }
     },
     "missing_parts": {
-      "title": "1 parte no importada",
-      "title_plural": "%1$s partes no importadas",
-      "description": "La parte no fue importada porque aún no existe en %1$s:",
-      "description_plural": "Las partes no fueron importadas porque aún no existen en %1$s:",
+      "title": "%1$s part(s) not imported",
+      "description": "The following part(s) was/were not imported because it doesn't exist in %1$s yet:",
       "actions": {
         "never": "No volver a mostrar de nuevo",
         "proceed": "Proceder"
@@ -286,15 +298,15 @@
           "$": "Interfaz",
           "theme": {
             "title": "Tema",
-            "description": "Controla la paleta de colores de toda la interfaz."
+            "description": "Color scheme for the interface."
           },
           "default_tab": {
             "title": "Pestaña por defecto",
-            "description": "Especifica qué pestaña de Stellar se abrirá por defecto al iniciar."
+            "description": "The tab that will be opened by default."
           },
           "touchscreen_mode": {
             "title": "Modo pantalla táctil",
-            "description": "Controla cómo la información en pantalla está presentada de acuerdo a tu tipo de pantalla.",
+            "description": "Displays information in a compact manner if on a touchscreen device.",
             "options": {
               "auto": "Autodetectar",
               "on": "Activado",
@@ -303,59 +315,59 @@
           },
           "language": {
             "title": "Idioma",
-            "description": "Especifica a qué idioma el texto de la pantalla está traducido. Ayúdanos a traducir Stellar a tu idioma en %1$sCrowdin%2$s."
+            "description": "Language of the test on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "Aviso de orientación",
-            "description": "Muestra un aviso cuando tu dispositivo está orientado en modo vertical."
+            "description": "Requests usage in landscape mode."
           },
           "installation_prompt": {
             "title": "Aviso de instalación",
-            "description": "Te notifica cuando Stellar detecta la capacidad dentro de tu dispositivo para instalarla como %1$sPWA%2$s. Tu dispositivo puede ser elegible sin importar de una notificación."
+            "description": "Notifies about installing Stellar."
           },
           "instability_prompt": {
             "title": "Advertencia de inestabilidad",
-            "description": "Te advierte cuando estás usando una versión inestable o desconocida de Stellar."
+            "description": "Warns about an unstable or unknown version of Stellar."
           },
           "missing_parts": {
             "title": "Partes faltantes",
-            "description": "Te muestra una lista de todas las partes que no pudieron ser importadas."
+            "description": "Shows a list of parts that didn't imported."
           }
         },
         "editor": {
           "$": "Editor",
           "undo_limit": {
             "title": "Deshacer límite",
-            "description": "El número máximo de parches del historial de versiones que el editor debe almacenar. 4096 es el máximo; 16 es el mínimo."
+            "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
           }
         },
         "performance": {
           "$": "Rendimiento",
           "regress": {
             "title": "Cantidad de regresión",
-            "description": "Reduce la resolución del lienzo cuando se realizan tareas computacionalmente costosas como: paneamiento, escalamiento, rotación, etc. Cuanto más bajo es el valor, más agresivo es la regresión."
+            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
           }
         },
         "file": {
           "$": "Preferencias de archivo",
           "format": {
-            "title": "Formatear archivos emitidos",
-            "description": "Formatea el JSON en los archivos emitidos por Stellar para que sea más legible."
+            "title": "Format emitted files",
+            "description": "Formats JSON files emitted by Stellar for readability."
           },
           "watermark": {
             "title": "Planos exportados con marca de agua",
-            "description": "Añade una marca de agua enlazada a la versión de Stellar usada para generar el archivo."
+            "description": "Adds watermark linking to Stellar."
           },
           "default_name": {
             "title": "Nombre por defecto de archivo emitido",
-            "description": "El nombre por defecto para cualquiera de los archivos sin nombrar que son exportados por Stellar."
+            "description": "Default name for any unnamed files."
           }
         },
         "debug": {
           "$": "Depuración",
           "error_screen_debug": {
-            "title": "Mostrar la información de depuración en la pantalla de error",
-            "description": "Muestra el mensaje de error entero y un código fuente mapeado de la pila en seguimiento cuando un error crítico interrumpe Stellar."
+            "title": "Debug info on error screen",
+            "description": "Display full error message on an interrupting critical error."
           }
         }
       }

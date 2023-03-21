@@ -21,7 +21,7 @@
         "motto": "Редактирование чертежей по-новому",
         "from_scratch": "Начать с нуля",
         "import": "Импортировать файл чертежа",
-        "open": "Открыть файл Stellar"
+        "open": "Open Stellar file"
       },
       "status_bar": {
         "docs": "Документация"
@@ -39,8 +39,9 @@
           "export": "Экспорт..."
         },
         "tool": {
-          "move": "Переместить",
-          "pan": "Сдвинуть"
+          "pan": "Сдвинуть",
+          "transform": "Transform",
+          "edit": "Edit"
         },
         "clipboard": {
           "copy": "Копировать",
@@ -91,7 +92,7 @@
           "$": "Фрагменты",
           "coming_soon": {
             "$": "Фрагменты скоро появятся!",
-            "instructions": "Вы сможете вставлять небольшие части других чертежей сюда как фрагменты. Вы сможете создать новые фрагменты, перейдя в панель инструментов > %1$s Буфер обмена > %2$s Создать фрагмент."
+            "instructions": "Snippets will allow you to paste in small sections of other crafts."
           }
         }
       },
@@ -155,13 +156,20 @@
           "cone": {
             "$": "Конус",
             "size": "Размер"
+          },
+          "fragment": {
+            "$": "Фрагмент",
+            "section": "Section",
+            "left": "Левый",
+            "whole": "Целый",
+            "right": "Правый"
           }
         },
         "inspect": {
           "$": "Исследовать",
           "select_one_part": {
             "$": "Выберите деталь",
-            "instructions": "Выберите одну деталь, которую надо исследовать"
+            "instructions": "Select a single part to inspect details"
           },
           "meta_data": {
             "$": "Метаданные",
@@ -176,8 +184,8 @@
             "$": "Границы",
             "width": "Ширина",
             "height": "Высота",
-            "x_position": "Позиция X",
-            "y_position": "Позиция Y",
+            "x_position": "X position",
+            "y_position": "Y position",
             "rotation": "Поворот"
           },
           "json": "JSON",
@@ -205,11 +213,17 @@
       "$": "Ступени"
     },
     "export": {
-      "$": "Экспорт"
+      "$": "Экспорт",
+      "options": "Options",
+      "export": {
+        "$": "Export",
+        "game": "Export to game",
+        "stellar": "Save Stellar format"
+      }
     }
   },
   "landscape_prompt": {
-    "message": "Похоже, что вы в книжной ориентации. Пожалуйста, поверните устройство в альбомную ориентацию.%1$sЕсли вы на компьютере, вы можете это проигнорировать.",
+    "message": "Seems like you're in portrait mode. Please turn to landscape mode.",
     "never": "Больше не спрашивать",
     "dismiss": "Игнорировать"
   },
@@ -262,10 +276,8 @@
       }
     },
     "missing_parts": {
-      "title": "1 деталь не импортирована",
-      "title_plural": "%1$s деталей не импортировано",
-      "description": "Следующая деталь не была импортирована, так как она еще не существует в %1$s:",
-      "description_plural": "Следующие детали не были импортированы, так как они еще не существуют в %1$s:",
+      "title": "%1$s part(s) not imported",
+      "description": "The following part(s) was/were not imported because it doesn't exist in %1$s yet:",
       "actions": {
         "never": "Больше не показывать",
         "proceed": "Продолжить"
@@ -286,15 +298,15 @@
           "$": "Интерфейс",
           "theme": {
             "title": "Тема",
-            "description": "Управляет цветовой палитрой интерфейса."
+            "description": "Color scheme for the interface."
           },
           "default_tab": {
             "title": "Вкладка по умолчанию",
-            "description": "Указывает, какую вкладку Stellar откроет при запуске."
+            "description": "The tab that will be opened by default."
           },
           "touchscreen_mode": {
             "title": "Режим сенсорного экрана",
-            "description": "Управляет видом информации на экране в соответствии с типом вашего экрана.",
+            "description": "Displays information in a compact manner if on a touchscreen device.",
             "options": {
               "auto": "Автоопределение",
               "on": "Включен",
@@ -303,59 +315,59 @@
           },
           "language": {
             "title": "Язык",
-            "description": "Указывает язык, на который переводится текст на экране. Помогите нам перевести Stellar на ваш язык на %1$sCrowdin%2$s."
+            "description": "Language of the test on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "Уведомление ориентации",
-            "description": "Показывает уведомление, если устройство в книжной ориентации."
+            "description": "Requests usage in landscape mode."
           },
           "installation_prompt": {
             "title": "Уведомление установки",
-            "description": "Показывает уведомление если Stellar обнаруживает, что устройство позволяет установить его как %1$sPWA-приложение%2$s. Ваше устройство может иметь данную возможность независимо от уведомления."
+            "description": "Notifies about installing Stellar."
           },
           "instability_prompt": {
             "title": "Предупреждение о нестабильности",
-            "description": "Предупреждает вас, если вы используете нестабильную или неизвестную версию Stellar."
+            "description": "Warns about an unstable or unknown version of Stellar."
           },
           "missing_parts": {
             "title": "Отсутствующие детали",
-            "description": "Показывает список всех деталей, которые не удалось импортировать."
+            "description": "Shows a list of parts that didn't imported."
           }
         },
         "editor": {
           "$": "Редактор",
           "undo_limit": {
             "title": "Лимит отмен",
-            "description": "Максимальное количество изменений истории версий, которые должен хранить редактор. Максимум - 4096; минимум - 16."
+            "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
           }
         },
         "performance": {
           "$": "Производительность",
           "regress": {
             "title": "Количество регрессии",
-            "description": "Уменьшает разрешение холста при выполнении вычислительно дорогих задач, таких как сдвиг, масштабирование, поворот и т. д. Чем меньше значение, тем агрессивней регрессия."
+            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
           }
         },
         "file": {
           "$": "Файлы",
           "format": {
-            "title": "Форматированные файлы",
-            "description": "Форматирует JSON-файлы, генерируемые Stellar, чтобы они были более читаемыми."
+            "title": "Format emitted files",
+            "description": "Formats JSON files emitted by Stellar for readability."
           },
           "watermark": {
             "title": "Водяная марка на экспортированных чертежах",
-            "description": "Добавляет водяную марку с версией Stellar, использованную для генерации файла."
+            "description": "Adds watermark linking to Stellar."
           },
           "default_name": {
             "title": "Имя файла по умолчанию",
-            "description": "Имя по умолчанию для безымянных файлов, экспортированных в Stellar."
+            "description": "Default name for any unnamed files."
           }
         },
         "debug": {
           "$": "Отладка",
           "error_screen_debug": {
-            "title": "Показывать отладочную информацию на ошибочном экране",
-            "description": "Показывает полное сообщение об ошибке и трассировку стека, когда критическая ошибка прерывает работу Stellar."
+            "title": "Debug info on error screen",
+            "description": "Display full error message on an interrupting critical error."
           }
         }
       }
