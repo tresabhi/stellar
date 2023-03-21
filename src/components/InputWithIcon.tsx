@@ -16,6 +16,7 @@ export interface InputWithIconProps
 const Container = styled('div', {
   display: 'flex',
   padding: `0 ${theme.space.paddingRegular}`,
+  flexShrink: 0,
   gap: theme.space.gapRelatedMajor,
   borderRadius: theme.radii.regular,
   height: theme.sizes.inputSizeMajor,

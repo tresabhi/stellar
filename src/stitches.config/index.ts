@@ -81,6 +81,7 @@ export const {
       settingsMaxHeight: '30rem',
       settingsNavigationWidth: '12rem',
       partListingInputMinWidth: '2rem',
+      insertPartMaxHeight: '20rem',
     },
 
     radii: createRadii(),

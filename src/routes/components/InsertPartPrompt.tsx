@@ -8,9 +8,14 @@ import insert from 'core/part/insert';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { useRef } from 'react';
+import { styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import usePartRegistry from 'stores/partRegistry';
 import { PromptProps } from 'stores/prompts';
+
+const Root = styled(Prompt.Root, {
+  maxHeight: theme.sizes.insertPartMaxHeight
+})
 
 export default function InsertPartPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
@@ -73,7 +78,7 @@ export default function InsertPartPrompt({ dismiss }: PromptProps) {
   usePopupConcurrency();
 
   return (
-    <Prompt.Root padding="thin">
+    <Root padding="thin">
       <InputWithIcon
         ref={input}
         icon={<MagnifyingGlassIcon />}
@@ -95,6 +100,6 @@ export default function InsertPartPrompt({ dismiss }: PromptProps) {
           {t`tabs.layout.popup.insert_part.cancel`}
         </Prompt.Action>
       </Prompt.Actions>
-    </Prompt.Root>
+    </Root>
   );
 }
