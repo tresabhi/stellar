@@ -46,8 +46,8 @@ const useAlphaWarning = () => {
     let id: string;
 
     if (
-      welcomePromptCompleted &&
       showInstabilityWarning &&
+      welcomePromptCompleted &&
       UNSTABLE_VERSIONS.includes(name)
     ) {
       id = prompt(InstabilityWarningPrompt, false);

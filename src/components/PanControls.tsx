@@ -66,7 +66,7 @@ export default function PanControls() {
 
     const handlePointerUp = () => {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      canvas.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointermove', handlePointerMove);
     };
     const handlePointerMove = (event: PointerEvent) => {
       if (useApp.getState().editor.isTouchPanning) {
@@ -89,7 +89,7 @@ export default function PanControls() {
 
         if (tool === Tool.Pan || isSpacePanning || event.button === 1) {
           initialMousePos = getMousePos(event);
-          canvas.addEventListener('pointermove', handlePointerMove);
+          window.addEventListener('pointermove', handlePointerMove);
         }
       }
     };
@@ -188,18 +188,18 @@ export default function PanControls() {
     };
 
     canvas.addEventListener('mousedown', handleMouseDown);
-    canvas.addEventListener('mouseup', handlePointerUp);
+    window.addEventListener('mouseup', handlePointerUp);
     canvas.addEventListener('wheel', handleWheel);
     canvas.addEventListener('pointerdown', handlePointerDown);
-    canvas.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointerup', handlePointerUp);
     canvas.addEventListener('touchstart', handleTouchStart);
 
     return () => {
       canvas.removeEventListener('mousedown', handleMouseDown);
-      canvas.removeEventListener('mouseup', handlePointerUp);
+      window.removeEventListener('mouseup', handlePointerUp);
       canvas.removeEventListener('wheel', handleWheel);
       canvas.removeEventListener('pointerdown', handlePointerDown);
-      canvas.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointerup', handlePointerUp);
       canvas.removeEventListener('touchstart', handleTouchStart);
     };
   }, [camera, canvas, getMousePos]);
