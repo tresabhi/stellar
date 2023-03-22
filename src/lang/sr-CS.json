@@ -374,7 +374,7 @@
     },
     "confirmation": {
       "title": "Jeste li sigurni da želite to da uradite?",
-      "description": "Ova akcija možda ne može da se povrati.",
+      "description": "This action may not be reversible.",
       "actions": {
         "cancel": "Poništi",
         "yes": "Da"
