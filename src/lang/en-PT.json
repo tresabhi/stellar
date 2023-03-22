@@ -6,22 +6,22 @@
       "templates": {
         "input_placeholder": "Sail frames...",
         "list": {
-          "apollo_mission": "Apollo mission",
-          "basic_rocket": "Basic rocket",
+          "apollo_mission": "Up yonder cheese lootin'",
+          "basic_rocket": "Ship ain't got booty",
           "hopper": "Nothin' a Ship can't do",
           "joints": "Joinin'",
-          "light_lander": "Light lander",
-          "orbit_and_re_entry": "Orbit & re-entry",
-          "parachute_and_separator": "Parachute & separator",
-          "race_car": "Race car",
+          "light_lander": "Docker ain't got booty",
+          "orbit_and_re_entry": "Up yonder goer & down low comer",
+          "parachute_and_separator": "Drapin' & undockin'",
+          "race_car": "Speedy land ship",
           "rover": "Savvy Soil Ship"
         }
       },
       "file_options": {
         "motto": "Paper markin' done right",
-        "from_scratch": "Start from scratch",
-        "import": "Import blueprint file",
-        "open": "Open Stellar file"
+        "from_scratch": "Sail from dock",
+        "import": "Hard dock markin' paper",
+        "open": "Dock savvy markin' paper"
       },
       "status_bar": {
         "docs": "Maps"
@@ -34,32 +34,32 @@
           "new": "Savvy",
           "open": "Dock...",
           "save": "Deport",
-          "save_as": "Save as...",
+          "save_as": "Mockin' deport...",
           "import": "Hard Dock...",
           "export": "Deport..."
         },
         "tool": {
           "pan": "Change Them Draft",
-          "transform": "Transform",
-          "edit": "Edit"
+          "transform": "Blowin'",
+          "edit": "Tamperin'"
         },
         "clipboard": {
           "copy": "Loot",
           "cut": "Seize",
           "paste": "Walk The Plank",
           "duplicate": "Witchcraft",
-          "create_snippet": "Create snippet"
+          "create_snippet": "Erect booty"
         },
         "selection": {
-          "select_all": "Select all",
-          "unselect_all": "Unselect all",
-          "group": "Group",
-          "ungroup": "Ungroup"
+          "select_all": "Lookin' at 'em all",
+          "unselect_all": "Ain't lookin' at all",
+          "group": "Crew up",
+          "ungroup": "Uncrew"
         },
         "edit": {
-          "rename": "Rename",
-          "hidden": "Unhide",
-          "unhidden": "Hide",
+          "rename": "Callin' names",
+          "hidden": "Showin' 'em",
+          "unhidden": "Ain't showin' 'em",
           "locked": "Unlock",
           "unlocked": "Lock",
           "delete": "Delete"
@@ -374,7 +374,7 @@
     },
     "confirmation": {
       "title": "Are you sure you want to do this?",
-      "description": "This action is may not be reversible.",
+      "description": "This action may not be reversible.",
       "actions": {
         "cancel": "Cancel",
         "yes": "Yes"
