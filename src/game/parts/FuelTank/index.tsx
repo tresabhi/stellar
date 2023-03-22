@@ -19,6 +19,7 @@ import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
 import { CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
+import preloadTexture from 'utilities/preloadTexture';
 import { PartData, PartWithoutName } from '../Part';
 import {
   VanillaPartWithTexture,
@@ -28,7 +29,8 @@ import {
   VanillaPartWithTransformations,
   VanillaPartWithTransformationsData,
 } from '../PartWithTransformations';
-import texture from './texture.png';
+import defaultTexture from './textures/default.png';
+import topTexture from './textures/top.png';
 
 export interface VanillaFuelTank
   extends VanillaPartWithTexture,
@@ -114,13 +116,16 @@ function constructGeometry(
   );
 }
 
+preloadTexture(defaultTexture);
+preloadTexture(topTexture);
 export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const meshTop = useRef<Mesh>(null);
   const meshMiddle = useRef<Mesh>(null);
   const meshBottom = useRef<Mesh>(null);
   const props = usePhysicalPart(id, wrapper);
-  const colorMap = useTexture(texture);
+  const defaultColorMap = useTexture(defaultTexture);
+  const topColorMap = useTexture(topTexture);
 
   usePartProperty(
     id,
@@ -189,13 +194,13 @@ export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
   return (
     <group ref={wrapper} {...props}>
       <mesh ref={meshTop}>
-        <meshBasicMaterial map={colorMap} color="#ffffff" />
+        <meshBasicMaterial map={topColorMap} />
       </mesh>
       <mesh ref={meshMiddle}>
-        <meshBasicMaterial map={colorMap} color="#f2f2f2" />
+        <meshBasicMaterial map={defaultColorMap} />
       </mesh>
       <mesh ref={meshBottom}>
-        <meshBasicMaterial map={colorMap} color="#e4e4e4" />
+        <meshBasicMaterial map={defaultColorMap} color="#e4e4e4" />
       </mesh>
     </group>
   );
