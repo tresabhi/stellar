@@ -374,7 +374,7 @@
     },
     "confirmation": {
       "title": "¿sᴉɥʇ op oʇ ʇuɐʍ noʎ ǝɹns noʎ ǝɹ∀",
-      "description": "˙ǝlqᴉsɹǝʌǝɹ ǝq ʇou ʎɐɯ sᴉ uoᴉʇɔɐ sᴉɥ┴",
+      "description": "This action may not be reversible.",
       "actions": {
         "cancel": "lǝɔuɐƆ",
         "yes": "sǝ⅄"
