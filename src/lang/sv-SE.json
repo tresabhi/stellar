@@ -374,7 +374,7 @@
     },
     "confirmation": {
       "title": "Are you sure you want to do this?",
-      "description": "This action is may not be reversible.",
+      "description": "This action may not be reversible.",
       "actions": {
         "cancel": "Cancel",
         "yes": "Yes"
