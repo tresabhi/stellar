@@ -21,7 +21,7 @@
         "motto": "Edición de plano redefinida",
         "from_scratch": "Empezar de cero",
         "import": "Importar archivo de plano",
-        "open": "Open Stellar file"
+        "open": "Abrir archivo de Stellar"
       },
       "status_bar": {
         "docs": "Documentos"
@@ -40,8 +40,8 @@
         },
         "tool": {
           "pan": "Sartén",
-          "transform": "Transform",
-          "edit": "Edit"
+          "transform": "Transformar",
+          "edit": "Editar"
         },
         "clipboard": {
           "copy": "Copiar",
@@ -169,7 +169,7 @@
           "$": "Inspeccionar",
           "select_one_part": {
             "$": "Seleccionar una parte",
-            "instructions": "Select a single part to inspect details"
+            "instructions": "Selecciona una sola parte para inspeccionar los detalles"
           },
           "meta_data": {
             "$": "Metadatos",
@@ -184,8 +184,8 @@
             "$": "Límites",
             "width": "Anchura",
             "height": "Altura",
-            "x_position": "X position",
-            "y_position": "Y position",
+            "x_position": "Posición X",
+            "y_position": "Posición Y",
             "rotation": "Ritación"
           },
           "json": "JSON",
@@ -214,16 +214,16 @@
     },
     "export": {
       "$": "Exportar",
-      "options": "Options",
+      "options": "Opciones",
       "export": {
-        "$": "Export",
-        "game": "Export to game",
-        "stellar": "Save Stellar format"
+        "$": "Exportar",
+        "game": "Exportar al juego",
+        "stellar": "Guardar formato Stellar"
       }
     }
   },
   "landscape_prompt": {
-    "message": "Seems like you're in portrait mode. Please turn to landscape mode.",
+    "message": "Parece que estás en modo retrato. Por favor, cambia al modo horizontal.",
     "never": "No volver a preguntar de nuevo",
     "dismiss": "Descartar"
   },
@@ -276,8 +276,8 @@
       }
     },
     "missing_parts": {
-      "title": "%1$s part(s) not imported",
-      "description": "The following part(s) was/were not imported because it doesn't exist in %1$s yet:",
+      "title": "%1$s parte(s) no importada(s)",
+      "description": "La(s) siguiente(s) parte(s) no fue/fueron importada(s) porque aún no existe/existen en %1$s:",
       "actions": {
         "never": "No volver a mostrar de nuevo",
         "proceed": "Proceder"
@@ -298,11 +298,11 @@
           "$": "Interfaz",
           "theme": {
             "title": "Tema",
-            "description": "Color scheme for the interface."
+            "description": "Esquema de color para la interfaz."
           },
           "default_tab": {
             "title": "Pestaña por defecto",
-            "description": "The tab that will be opened by default."
+            "description": "La pestaña que se abrirá por defecto."
           },
           "touchscreen_mode": {
             "title": "Modo pantalla táctil",
@@ -351,16 +351,16 @@
         "file": {
           "$": "Preferencias de archivo",
           "format": {
-            "title": "Format emitted files",
-            "description": "Formats JSON files emitted by Stellar for readability."
+            "title": "Formatear archivos emitidos",
+            "description": "Formatea los archivos JSON emitido por Stellar para legibilidad."
           },
           "watermark": {
             "title": "Planos exportados con marca de agua",
-            "description": "Adds watermark linking to Stellar."
+            "description": "Añade una marca de agua enlazada a Stellar."
           },
           "default_name": {
             "title": "Nombre por defecto de archivo emitido",
-            "description": "Default name for any unnamed files."
+            "description": "Nombre por defecto para cualquier archivo sin nombrar."
           }
         },
         "debug": {
@@ -374,7 +374,7 @@
     },
     "confirmation": {
       "title": "¿Estás seguro de que quieres hacer esto?",
-      "description": "Puede que esta acción no sea reversible.",
+      "description": "This action may not be reversible.",
       "actions": {
         "cancel": "Cancelar",
         "yes": "Sí"
