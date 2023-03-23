@@ -1,5 +1,5 @@
 import { useGLTF } from '@react-three/drei';
-import { ReactComponent as Icon } from 'assets/icons/nose-cone.svg';
+import { ReactComponent as Icon } from 'assets/icons/nose-cone-slanted.svg';
 import getPart from 'core/part/getPart';
 import PartCategory from 'hooks/constants/partCategory';
 import useModel from 'hooks/useModel';
@@ -24,35 +24,35 @@ import {
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
-export interface VanillaCone
+export interface VanillaConeSide
   extends VanillaPartWithCone,
     VanillaPartWithTexture,
     VanillaPartWithTransformations {
-  readonly n: 'Cone';
+  readonly n: 'Cone Side';
 }
 
-export interface Cone extends PartWithoutName, VanillaCone {}
+export interface ConeSide extends PartWithoutName, VanillaConeSide {}
 
-export const VanillaConeData: VanillaCone = {
+export const VanillaConeSideData: VanillaConeSide = {
   ...VanillaPartWithConeData,
   ...VanillaPartWithTransformationsData,
   ...VanillaPartWithTextureData,
 
-  n: 'Cone',
+  n: 'Cone Side',
 };
 
-export const ConeData: Cone = {
+export const ConeSideData: ConeSide = {
   ...PartData,
-  ...VanillaConeData,
+  ...VanillaConeSideData,
 
-  label: 'Cone',
+  label: 'Side Cone',
 };
 
 useGLTF.preload(model);
-export default function ConeLayoutComponent({ id }: PartComponentProps) {
+export default function ConeSideLayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const sizeWrapper = useRef<Group>(null);
-  const { size } = getPart<Cone>(id).N;
+  const { size } = getPart<ConeSide>(id).N;
   const props = usePhysicalPart(id, wrapper);
   const meshes = useModel(model);
 
@@ -67,15 +67,15 @@ export default function ConeLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export const ConeIcon = Icon;
+export const ConeSideIcon = Icon;
 
-export const registry: PartRegistryItem<Cone> = {
+export const registry: PartRegistryItem<ConeSide> = {
   category: PartCategory.Structural,
-  vanillaData: VanillaConeData,
-  data: ConeData,
+  vanillaData: VanillaConeSideData,
+  data: ConeSideData,
 
-  Icon: ConeIcon,
-  Mesh: ConeLayoutComponent,
+  Icon: ConeSideIcon,
+  Mesh: ConeSideLayoutComponent,
 
   exportify: undefined,
 };
