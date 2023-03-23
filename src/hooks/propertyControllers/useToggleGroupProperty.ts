@@ -1,7 +1,7 @@
 import { ToggleGroupSingleProps } from 'components/ToggleGroup';
 import mutateParts from 'core/part/mutateParts';
 import { Part } from 'game/parts/Part';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 import useBlueprint from 'stores/blueprint';
 
 export default function useToggleGroupProperty<
@@ -18,19 +18,31 @@ export default function useToggleGroupProperty<
     () => ids.some((id) => slice(parts[id] as Type) !== mutualValue),
     [ids, mutualValue, parts, slice],
   );
-  const [state, setState] = useState(mutualValue);
+
+  type Action = { type: 'SET_MUTUAL_VALUE'; value: Slice };
+
+  function reducer(state: Slice | undefined, action: Action) {
+    switch (action.type) {
+      case 'SET_MUTUAL_VALUE':
+        return action.value;
+      default:
+        return state;
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, mutualValue);
 
   useEffect(() => {
-    setState(mutualValue);
+    dispatch({ type: 'SET_MUTUAL_VALUE', value: mutualValue });
   }, [mutualValue]);
 
   const hook: ToggleGroupSingleProps = {
     type: 'single',
     value: indeterminate ? undefined : state,
-    onValueChange(newValue: Slice) {
+    onValueChange(newValue) {
       mutateParts<Type>(ids, (draft) => {
-        mutate(draft, newValue);
-        setState(newValue);
+        mutate(draft, newValue as Slice);
+        dispatch({ type: 'SET_MUTUAL_VALUE', value: newValue as Slice });
       });
     },
   };
