@@ -121,11 +121,26 @@ export default function PanControls() {
               Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
           );
           const scale = lastHypotenuse / hypotenuse;
+          const rect = canvas.getBoundingClientRect();
+          const canvasX = rect.left + rect.width / 2;
+          const canvasY = rect.top + rect.height / 2;
+          const touchX = (firstTouch[0] + secondTouch[0]) / 2;
+          const touchY = (firstTouch[1] + secondTouch[1]) / 2;
+          const deltaX = canvasX - touchX;
+          const deltaY = canvasY - touchY;
+          const zoomedDeltaX = deltaX / camera.zoom;
+          const zoomedDeltaY = deltaY / camera.zoom;
+          const scaledDeltaX = zoomedDeltaX * scale;
+          const scaledDeltaY = zoomedDeltaY * scale;
+          const offsetX = scaledDeltaX - zoomedDeltaX;
+          const offsetY = scaledDeltaY - zoomedDeltaY;
 
+          camera.position.x += offsetX;
+          camera.position.y -= offsetY;
           camera.zoom /= scale;
-          camera.updateProjectionMatrix();
-
           lastHypotenuse = hypotenuse;
+
+          camera.updateProjectionMatrix();
         }
       }
 
