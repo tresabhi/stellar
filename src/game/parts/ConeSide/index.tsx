@@ -56,7 +56,7 @@ export default function ConeSideLayoutComponent({ id }: PartComponentProps) {
   const props = usePhysicalPart(id, wrapper);
   const meshes = useModel(model);
 
-  usePartWithCone(id, wrapper);
+  usePartWithCone(id, sizeWrapper);
 
   return (
     <group ref={wrapper} {...props}>
