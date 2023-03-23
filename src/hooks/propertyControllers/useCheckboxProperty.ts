@@ -1,8 +1,13 @@
 import { CheckboxProps } from 'components/Checkbox';
 import mutateParts from 'core/part/mutateParts';
 import { Part } from 'game/parts/Part';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 import useBlueprint from 'stores/blueprint';
+
+interface Action {
+  type: 'SET_MUTUAL_VALUE';
+  value: boolean;
+}
 
 export default function useCheckboxProperty<Type extends Part>(
   ids: string[],
@@ -15,10 +20,20 @@ export default function useCheckboxProperty<Type extends Part>(
     () => ids.some((id) => slice(parts[id] as Type) !== mutualValue),
     [ids, mutualValue, parts, slice],
   );
-  const [state, setState] = useState(mutualValue);
+
+  function reducer(state: boolean, action: Action) {
+    switch (action.type) {
+      case 'SET_MUTUAL_VALUE':
+        return action.value;
+      default:
+        return state;
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, mutualValue);
 
   useEffect(() => {
-    setState(mutualValue);
+    dispatch({ type: 'SET_MUTUAL_VALUE', value: mutualValue });
   }, [mutualValue]);
 
   const hook: CheckboxProps = {
@@ -27,7 +42,7 @@ export default function useCheckboxProperty<Type extends Part>(
       mutateParts<Type>(ids, (draft) => {
         const normalizedCheck = Boolean(newChecked);
         mutate(draft, normalizedCheck);
-        setState(normalizedCheck);
+        dispatch({ type: 'SET_MUTUAL_VALUE', value: normalizedCheck });
       });
     },
   };
