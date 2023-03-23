@@ -16,6 +16,7 @@ import redoVersion from 'core/blueprint/redoVersion';
 import saveFile from 'core/blueprint/saveFile';
 import saveFileAs from 'core/blueprint/saveFileAs';
 import undoVersion from 'core/blueprint/undoVersion';
+import confirmProgressReset from 'core/interface/confirmProgressReset';
 import prompt from 'core/interface/prompt';
 import copySelected from 'core/part/copySelected';
 import cutPartsBySelection from 'core/part/cutSelected';
@@ -284,9 +285,9 @@ export default function useKeybinds() {
 
     bind(
       'ctrl+n',
-      () => {
-        loadBlueprint();
+      async () => {
         toLayout();
+        if (await confirmProgressReset()) loadBlueprint();
       },
       { preventOnNonEditingTab: false },
     );
@@ -294,7 +295,7 @@ export default function useKeybinds() {
       'ctrl+o',
       async () => {
         await openFile();
-        toLayout();
+        if (await confirmProgressReset()) toLayout();
       },
       { preventOnNonEditingTab: false },
     );
@@ -304,7 +305,7 @@ export default function useKeybinds() {
       'ctrl+i',
       async () => {
         await importFile();
-        toLayout();
+        if (await confirmProgressReset()) toLayout();
       },
       { preventOnNonEditingTab: false },
     );

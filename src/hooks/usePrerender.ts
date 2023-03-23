@@ -1,6 +1,7 @@
 import mutateApp from 'core/app/mutateApp';
 import useKeybinds from 'hooks/useKeybinds';
 import useTranslator from 'hooks/useTranslator';
+import { useEffect } from 'react';
 import globalStyles from 'stitches.config/styles/global';
 import useApp from 'stores/app';
 import useSettings from 'stores/settings';
@@ -36,4 +37,22 @@ export default function usePrerender() {
   mutateApp((draft) => {
     draft.interface.tab = useSettings.getState().interface.defaultTab;
   });
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (useApp.getState().file.hasUnsavedChanges) {
+        event.preventDefault();
+        event.returnValue = '';
+        return;
+      }
+
+      delete event.returnValue;
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 }

@@ -50,6 +50,7 @@ import redoVersion from 'core/blueprint/redoVersion';
 import saveFile from 'core/blueprint/saveFile';
 import saveFileAs from 'core/blueprint/saveFileAs';
 import undoVersion from 'core/blueprint/undoVersion';
+import confirmProgressReset from 'core/interface/confirmProgressReset';
 import prompt from 'core/interface/prompt';
 import copySelected from 'core/part/copySelected';
 import cutPartsBySelection from 'core/part/cutSelected';
@@ -118,7 +119,9 @@ function Toolbar() {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<FilePlusIcon />}
             keybind="Ctrl + N"
-            onClick={() => loadBlueprint()}
+            onClick={async () => {
+              if (await confirmProgressReset()) loadBlueprint();
+            }}
           >
             {t`tabs.layout.toolbar.file.new`}
           </ToolbarPrimitive.DropdownMenuItem>

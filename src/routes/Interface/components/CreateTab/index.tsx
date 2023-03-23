@@ -18,6 +18,7 @@ import * as Prompt from 'components/Prompt';
 import mutateApp from 'core/app/mutateApp';
 import importFile from 'core/blueprint/importFile';
 import loadBlueprint from 'core/blueprint/loadBlueprint';
+import confirmProgressReset from 'core/interface/confirmProgressReset';
 import { VanillaBlueprint } from 'game/Blueprint';
 import useTranslator from 'hooks/useTranslator';
 import { useMemo, useRef } from 'react';
@@ -189,9 +190,9 @@ export default function CreateTab() {
         ({ name, blueprint, credit }) => {
           const translation = translate(`tabs.create.templates.list.${name}`);
 
-          const handleClick = () => {
-            loadBlueprint(blueprint);
+          const handleClick = async () => {
             toLayout();
+            if (await confirmProgressReset()) loadBlueprint(blueprint);
           };
 
           const searchItem = {
