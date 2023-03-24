@@ -3,7 +3,7 @@ import {
   Canvas as CanvasPrimitive,
   Props as CanvasPrimitiveProps,
 } from '@react-three/fiber';
-import unselectAll from 'core/part/unselectAll';
+import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import { RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
@@ -11,21 +11,14 @@ import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
 import { Group } from 'three';
 import PanControls from '../PanControls';
+import EditControls from './components/EditControls';
 import Expose from './components/Expose';
 import Grid from './components/Grid';
-import Outlines from './components/Outlines';
 import Parts from './components/Parts';
-
-export enum Layer {
-  PartRenderUnder,
-  PartRenderBetween,
-  PartRenderOver,
-
-  /**
-   * TODO: Make this more specific
-   */
-  Tools,
-}
+import PartsBounds from './components/PartsBounds';
+import SelectBox from './components/SelectBox';
+import TransformControls from './components/TransformControls';
+import unselectAll from 'core/part/unselectAll';
 
 const Canvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,
@@ -97,9 +90,17 @@ export default function LayoutCanvas(
       <PanControls />
 
       <Grid />
-      <Outlines />
 
-      <Parts ref={parts} />
+      <HeadsUpDisplay priority={1}>
+        <Parts ref={parts} />
+      </HeadsUpDisplay>
+
+      <HeadsUpDisplay priority={2}>
+        <PartsBounds />
+        <TransformControls />
+        <EditControls />
+        <SelectBox />
+      </HeadsUpDisplay>
     </Canvas>
   );
 }

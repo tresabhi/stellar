@@ -3,7 +3,7 @@ import { GroupProps, useFrame, useThree } from '@react-three/fiber';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { Group, Vector3 } from 'three';
 import parseVector3Like from 'utilities/parseVector3Like';
-import { UNIT_POINTS } from './LayoutCanvas/components/Outlines/components/PartsBounds/components/PartBounds';
+import { UNIT_POINTS } from './LayoutCanvas/components/PartsBounds/components/PartBounds';
 
 export interface ControlDiamondProps extends GroupProps {
   size?: number;

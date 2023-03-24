@@ -2,6 +2,7 @@ import { invalidate, ThreeEvent, useThree } from '@react-three/fiber';
 import ControlDiamond from 'components/ControlDiamond';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import deferUpdates from 'core/bounds/deferUpdates';
+import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
 import filter from 'core/part/filter';
 import getChildrenRecursive from 'core/part/getChildrenRecursive';
 import transformAsync from 'core/part/resizeAsync';
@@ -258,6 +259,7 @@ export default function TransformNode({
     }
 
     if (!firstMove) deferUpdates(false);
+    declareInteractingWithPart(false);
 
     window.removeEventListener('pointermove', handlePointerMove);
     window.removeEventListener('pointerup', handlePointerUp);
@@ -266,6 +268,7 @@ export default function TransformNode({
     if (useApp.getState().editor.tool === Tool.Transform) {
       event.stopPropagation();
       updateValues();
+      declareInteractingWithPart();
 
       initial.set(event.clientX, event.clientY);
 

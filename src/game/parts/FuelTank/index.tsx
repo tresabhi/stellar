@@ -2,7 +2,7 @@ import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { useTexture } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import { FuelTankEditDetail } from 'components/LayoutCanvas/components/Outlines/components/EditControls/components/FuelTankControls';
+import { FuelTankEditDetail } from 'components/LayoutCanvas/components/EditControls/components/FuelTankControls';
 import * as Properties from 'components/Properties';
 import mutateSettings from 'core/app/mutateSettings';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';

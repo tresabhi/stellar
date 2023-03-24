@@ -2,7 +2,7 @@ import { invalidate } from '@react-three/fiber';
 import {
   MOVE_STEP_MAJOR,
   MOVE_STEP_REGULAR,
-} from 'components/LayoutCanvas/components/Outlines/components/TransformControls/components/TransformNode';
+} from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import { WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';
@@ -321,7 +321,7 @@ export default function useKeybinds() {
     bind('i', () => prompt(InsertPartPrompt, true, 'insert-part'), {
       preventOnNonTransformTool: true,
     });
-    bind(['ctrl+r', 'f2'], () => {
+    bind('f2', () => {
       if (useBlueprint.getState().selections.length > 0) {
         prompt(RenamePartsPrompt, true, 'rename-parts');
       }

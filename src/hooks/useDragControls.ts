@@ -1,7 +1,8 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import { CANVAS_MATRIX_SCALE } from 'components/LayoutCanvas/components/Outlines/components/TransformControls/components/TransformNode';
+import { CANVAS_MATRIX_SCALE } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import mutateApp from 'core/app/mutateApp';
 import deferUpdates from 'core/bounds/deferUpdates';
+import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
 import getPart from 'core/part/getPart';
 import select from 'core/part/select';
 import selectConcurrent from 'core/part/selectConcurrent';
@@ -66,6 +67,10 @@ const useDragControls = (id: string) => {
   function handlePointerUp() {
     if (!firstMove) deferUpdates(false);
 
+    if (useApp.getState().editor.isInteractingWithPart) {
+      declareInteractingWithPart(false);
+    }
+
     const removeSelectionRestriction = () => {
       window.removeEventListener('pointerup', removeSelectionRestriction);
 
@@ -88,7 +93,8 @@ const useDragControls = (id: string) => {
   }
   function handlePointerDown(event: ThreeEvent<PointerEvent>) {
     const part = getPart(id) as PartWithTransformations | undefined;
-    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
+    const { tool, isSpacePanning, isTouchPanning, isInteractingWithPart } =
+      useApp.getState().editor;
 
     if (
       part &&
@@ -97,9 +103,12 @@ const useDragControls = (id: string) => {
       !part.locked &&
       tool === Tool.Transform &&
       !isSpacePanning &&
-      !isTouchPanning
+      !isTouchPanning &&
+      !isInteractingWithPart
     ) {
       event.stopPropagation();
+
+      declareInteractingWithPart();
 
       firstMove = true;
       selectedInitially = part.selected;

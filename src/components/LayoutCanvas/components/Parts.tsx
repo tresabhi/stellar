@@ -1,4 +1,3 @@
-import HeadsUpDisplay from 'components/HeadsUpDisplay';
 import PartCluster, { PartClusterProps } from 'components/PartCluster';
 import {
   forwardRef,
@@ -9,7 +8,6 @@ import {
 } from 'react';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
-import { Layer } from '..';
 
 export type PartsProps = Omit<PartClusterProps, 'parentId'>;
 
@@ -34,14 +32,12 @@ const Parts = forwardRef<Group, PartsProps>((props, ref) => {
   useImperativeHandle(ref, () => parts.current as Group);
 
   return (
-    <HeadsUpDisplay priority={Layer.PartRenderBetween}>
-      <PartCluster
-        {...props}
-        position={[initialState.offset.x, initialState.offset.y, 0]}
-        ref={parts}
-        parentId={null}
-      />
-    </HeadsUpDisplay>
+    <PartCluster
+      {...props}
+      position={[initialState.offset.x, initialState.offset.y, 0]}
+      ref={parts}
+      parentId={null}
+    />
   );
 });
 export default Parts;

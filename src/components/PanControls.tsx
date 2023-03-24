@@ -1,5 +1,6 @@
 import { invalidate, useThree } from '@react-three/fiber';
 import mutateApp from 'core/app/mutateApp';
+import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
 import useMousePosition from 'hooks/useMousePosition';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/app';
@@ -19,6 +20,7 @@ export default function PanControls() {
     let lastHypotenuse = 0;
     let initialMousePos: Vector2Tuple;
     const touchMemories = new Map<number, [number, number]>();
+    let firstMove = true;
 
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
@@ -96,6 +98,11 @@ export default function PanControls() {
 
     const handleTouchMove = (event: TouchEvent) => {
       if (touchMemories.size === 2) {
+        if (firstMove) {
+          firstMove = false;
+          declareInteractingWithPart();
+        }
+
         [...event.changedTouches].forEach((changedTouch) => {
           const touchMemory = touchMemories.get(changedTouch.identifier);
 
@@ -159,6 +166,7 @@ export default function PanControls() {
       if (touchMemories.size === 0) {
         mutateApp((draft) => {
           draft.editor.isTouchPanning = false;
+          draft.editor.isInteractingWithPart = false;
         });
 
         window.removeEventListener('touchmove', handleTouchMove);
@@ -167,6 +175,8 @@ export default function PanControls() {
       }
     };
     const handleTouchStart = (event: TouchEvent) => {
+      firstMove = true;
+
       if (touchMemories.size === 0) {
         window.addEventListener('touchmove', handleTouchMove);
         window.addEventListener('touchend', handleTouchEnd);

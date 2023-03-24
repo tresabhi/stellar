@@ -39,6 +39,7 @@ export interface UseApp {
     tool: Tool;
     isSpacePanning: boolean;
     isTouchPanning: boolean;
+    isInteractingWithPart: boolean;
     preventNextSelection: boolean;
     clipboard?: Snippet;
     camera?: OrthographicCamera;
@@ -64,6 +65,7 @@ export const UseAppData: UseApp = {
     tool: Tool.Transform,
     isSpacePanning: false,
     isTouchPanning: false,
+    isInteractingWithPart: false,
     preventNextSelection: false,
     clipboard: undefined,
     camera: undefined,
