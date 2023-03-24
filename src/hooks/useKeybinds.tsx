@@ -318,10 +318,10 @@ export default function useKeybinds() {
     bind('ctrl+g', groupSelected, { preventOnNonTransformTool: true });
     bind('ctrl+shift+g', ungroupSelected, { preventOnNonTransformTool: true });
 
-    bind('ctrl+shift+i', () => prompt(InsertPartPrompt, true, 'insert-part'), {
+    bind('i', () => prompt(InsertPartPrompt, true, 'insert-part'), {
       preventOnNonTransformTool: true,
     });
-    bind('ctrl+r', () => {
+    bind(['ctrl+r', 'f2'], () => {
       if (useBlueprint.getState().selections.length > 0) {
         prompt(RenamePartsPrompt, true, 'rename-parts');
       }
