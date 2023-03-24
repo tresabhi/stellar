@@ -4,6 +4,7 @@ import {
   Props as CanvasPrimitiveProps,
 } from '@react-three/fiber';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
+import unselectAll from 'core/part/unselectAll';
 import { RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
@@ -18,7 +19,6 @@ import Parts from './components/Parts';
 import PartsBounds from './components/PartsBounds';
 import SelectBox from './components/SelectBox';
 import TransformControls from './components/TransformControls';
-import unselectAll from 'core/part/unselectAll';
 
 const Canvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,
