@@ -2,7 +2,7 @@
 
 * {
   user-select: none;
-  touch-action: none;
+  overscroll-behavior: none;
 }
 
 html,
