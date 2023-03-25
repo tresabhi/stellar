@@ -1,5 +1,6 @@
 import { Line } from '@react-three/drei';
 import { invalidate, useThree } from '@react-three/fiber';
+import select from 'core/part/select';
 import selectConcurrent from 'core/part/selectConcurrent';
 import useMousePosition from 'hooks/useMousePosition';
 import { useEffect, useRef } from 'react';
@@ -66,7 +67,7 @@ export default function SelectBox() {
       );
       invalidate();
     };
-    const handlePointerUp = () => {
+    const handlePointerUp = (event: PointerEvent) => {
       if (outline.current) outline.current.visible = false;
 
       const selected: string[] = [];
@@ -83,7 +84,13 @@ export default function SelectBox() {
         }
       });
 
-      if (selected.length > 1) selectConcurrent(selected);
+      if (selected.length > 1) {
+        if (event.shiftKey) {
+          select(selected);
+        } else {
+          selectConcurrent(selected);
+        }
+      }
       invalidate();
 
       window.removeEventListener('pointermove', handlePointerMove);
