@@ -5,7 +5,9 @@ import selectConcurrent from 'core/part/selectConcurrent';
 import useMousePosition from 'hooks/useMousePosition';
 import { useEffect, useRef } from 'react';
 import useApp, { Tool } from 'stores/app';
+import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
+import useSettings from 'stores/settings';
 import { Vector2Tuple } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { UNIT_POINTS } from './PartsBounds/components/PartBounds';
@@ -69,12 +71,17 @@ export default function SelectBox() {
     };
     const handlePointerUp = (event: PointerEvent) => {
       if (outline.current) outline.current.visible = false;
+      const { parts } = useBlueprint.getState();
+      const { selectMultiple, selectDeep } = useSettings.getState().editor;
 
       const selected: string[] = [];
       Object.keys(boundsStore).forEach((id) => {
         const { bounds } = boundsStore[id];
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        const { parent_id } = parts[id];
 
         if (
+          (event.ctrlKey || (selectDeep ? true : parent_id == null)) &&
           bounds.x >= bottomLeft[0] &&
           bounds.x <= topRight[0] &&
           bounds.y >= bottomLeft[1] &&
@@ -85,7 +92,7 @@ export default function SelectBox() {
       });
 
       if (selected.length > 1) {
-        if (event.shiftKey) {
+        if (event.shiftKey || selectMultiple) {
           select(selected);
         } else {
           selectConcurrent(selected);
