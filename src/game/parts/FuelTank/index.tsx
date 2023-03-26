@@ -17,7 +17,7 @@ import { useEffect, useRef } from 'react';
 import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
-import { CylinderGeometry, Group, Mesh } from 'three';
+import { BufferGeometry, CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import preloadTexture from 'utilities/preloadTexture';
 import { PartData, PartWithoutName } from '../Part';
@@ -74,46 +74,53 @@ function constructGeometry(
   meshMiddle: Mesh,
   meshBottom: Mesh,
 ) {
-  const slope = (height: number) =>
-    (N.width_a + (N.width_b - N.width_a) * (height / N.height)) / 2;
-  const topHeight = N.height < 0.3 ? N.height / 3 : 0.1;
-  const bottomHeight = topHeight;
-  const middleHeight = N.height - topHeight - bottomHeight;
+  if (N.height > 0) {
+    const slope = (height: number) =>
+      (N.width_a + (N.width_b - N.width_a) * (height / N.height)) / 2;
+    const topHeight = N.height < 0.3 ? N.height / 3 : 0.1;
+    const bottomHeight = topHeight;
+    const middleHeight = N.height - topHeight - bottomHeight;
 
-  meshBottom.position.set(0, bottomHeight / 2, 0);
-  meshMiddle.position.set(0, bottomHeight + middleHeight / 2, 0);
-  meshTop.position.set(0, N.height - topHeight / 2, 0);
+    meshBottom.position.set(0, bottomHeight / 2, 0);
+    meshMiddle.position.set(0, bottomHeight + middleHeight / 2, 0);
+    meshTop.position.set(0, N.height - topHeight / 2, 0);
 
-  meshBottom.geometry = new CylinderGeometry(
-    slope(bottomHeight),
-    N.width_a / 2,
-    bottomHeight,
-    12,
-    1,
-    true,
-    -Math.PI / 2,
-    Math.PI,
-  );
-  meshMiddle.geometry = new CylinderGeometry(
-    slope(middleHeight + bottomHeight),
-    slope(bottomHeight),
-    middleHeight,
-    12,
-    1,
-    true,
-    -Math.PI / 2,
-    Math.PI,
-  );
-  meshTop.geometry = new CylinderGeometry(
-    N.width_b / 2,
-    slope(middleHeight + bottomHeight),
-    topHeight,
-    12,
-    1,
-    true,
-    -Math.PI / 2,
-    Math.PI,
-  );
+    meshBottom.geometry = new CylinderGeometry(
+      slope(bottomHeight),
+      N.width_a / 2,
+      bottomHeight,
+      12,
+      1,
+      true,
+      -Math.PI / 2,
+      Math.PI,
+    );
+    meshMiddle.geometry = new CylinderGeometry(
+      slope(middleHeight + bottomHeight),
+      slope(bottomHeight),
+      middleHeight,
+      12,
+      1,
+      true,
+      -Math.PI / 2,
+      Math.PI,
+    );
+    meshTop.geometry = new CylinderGeometry(
+      N.width_b / 2,
+      slope(middleHeight + bottomHeight),
+      topHeight,
+      12,
+      1,
+      true,
+      -Math.PI / 2,
+      Math.PI,
+    );
+  } else {
+    // give them no geometry
+    meshBottom.geometry = new BufferGeometry();
+    meshMiddle.geometry = new BufferGeometry();
+    meshTop.geometry = new BufferGeometry();
+  }
 }
 
 preloadTexture(defaultTexture);
