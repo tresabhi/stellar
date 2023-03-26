@@ -315,7 +315,7 @@
           },
           "language": {
             "title": "Язык",
-            "description": "Language of the text on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+            "description": "Язык текста на экране. Помогите нам перевести Stellar на ваш язык на %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "Уведомление ориентации",
@@ -331,7 +331,7 @@
           },
           "missing_parts": {
             "title": "Отсутствующие детали",
-            "description": "Shows a list of parts that didn't import."
+            "description": "Показывает список деталей, которые не были импортированы."
           }
         },
         "editor": {
