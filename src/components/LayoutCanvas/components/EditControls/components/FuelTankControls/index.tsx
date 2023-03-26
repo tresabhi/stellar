@@ -8,6 +8,7 @@ import usePart from 'hooks/usePart';
 import { useEffect, useRef } from 'react';
 import useApp, { Tool } from 'stores/app';
 import { Group, Vector2 } from 'three';
+import { degToRad } from 'three/src/math/MathUtils';
 import { EditControlsProps } from '../..';
 import {
   CANVAS_MATRIX_SCALE,
@@ -20,6 +21,8 @@ export interface FuelTankEditDetail {
   height: number;
 }
 
+export const ORIGIN = new Vector2();
+
 /**
  * I know there is unnecessary code here for the bottom width since we are only
  * manipulating the bottom width on the x-axis; but I'll keep the vectors
@@ -31,6 +34,7 @@ const FUEL_TANK_BOTTOM_EDGE_MATRIX_SCALE = new Vector2(2, 0);
 
 export default function FuelTankControls({ id }: EditControlsProps) {
   const part = usePart<FuelTank>(id);
+  const wrapper = useRef<Group>(null);
   const camera = useThree((state) => state.camera);
   const top = useRef<Group>(null);
   const bottom = useRef<Group>(null);
@@ -41,16 +45,14 @@ export default function FuelTankControls({ id }: EditControlsProps) {
   let firstMove = true;
 
   useEffect(() => {
+    wrapper.current?.position.set(part.p.x, part.p.y, 2);
+    wrapper.current?.rotation.set(0, 0, degToRad(part.o.z));
     top.current?.position.set(
-      part.p.x + (part.N.width_b * part.o.x) / 2,
-      part.p.y + part.N.height * part.o.y,
-      2,
+      (part.N.width_b * part.o.x) / 2,
+      part.N.height * part.o.y,
+      0,
     );
-    bottom.current?.position.set(
-      part.p.x + (part.N.width_a * part.o.x) / 2,
-      part.p.y,
-      2,
-    );
+    bottom.current?.position.set((part.N.width_a * part.o.x) / 2, 0, 0);
 
     const handleDeferUpdates = (
       event: CustomEvent<DeferUpdatesEventDetail>,
@@ -98,6 +100,7 @@ export default function FuelTankControls({ id }: EditControlsProps) {
     offset
       .set(event.clientX, event.clientY)
       .sub(initial)
+      .rotateAround(ORIGIN, degToRad(part.o.z))
       .divideScalar(camera.zoom)
       .divide(scale)
       .multiply(CANVAS_MATRIX_SCALE)
@@ -156,6 +159,7 @@ export default function FuelTankControls({ id }: EditControlsProps) {
     offset
       .set(event.clientX, event.clientY)
       .sub(initial)
+      .rotateAround(ORIGIN, degToRad(part.o.z))
       .divideScalar(camera.zoom)
       .divide(scale)
       .multiply(CANVAS_MATRIX_SCALE)
@@ -196,7 +200,7 @@ export default function FuelTankControls({ id }: EditControlsProps) {
   };
 
   return (
-    <>
+    <group ref={wrapper}>
       <ControlDiamond
         ref={top}
         rotation={[0, 0, Math.PI / 4]}
@@ -211,6 +215,6 @@ export default function FuelTankControls({ id }: EditControlsProps) {
         colorOuter="#c49000"
         onPointerDown={handleBottomPointerDown}
       />
-    </>
+    </group>
   );
 }
