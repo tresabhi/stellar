@@ -1,4 +1,4 @@
-/* Contains styles that should be instantaneously applied */
+/* Contains styles that should be cached by the browser */
 
 * {
   user-select: none;

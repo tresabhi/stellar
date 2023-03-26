@@ -23,6 +23,7 @@ import TransformControls from './components/TransformControls';
 const Canvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,
   flex: 1,
+  touchAction: 'none',
 });
 
 const panningStyles = css({
