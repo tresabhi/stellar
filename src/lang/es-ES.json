@@ -92,7 +92,7 @@
           "$": "Fragmentos",
           "coming_soon": {
             "$": "¡Fragmentos próximamente!",
-            "instructions": "Snippets will allow you to paste in small sections of other crafts."
+            "instructions": "Los fragmentos te permitirán pegar en pequeñas secciones de otras fabricaciones."
           }
         }
       },
@@ -159,7 +159,7 @@
           },
           "fragment": {
             "$": "Fragmento",
-            "section": "Section",
+            "section": "Sección",
             "left": "Izquierda",
             "whole": "Completo",
             "right": "Derecha"
@@ -306,7 +306,7 @@
           },
           "touchscreen_mode": {
             "title": "Modo pantalla táctil",
-            "description": "Displays information in a compact manner if on a touchscreen device.",
+            "description": "Muestra la información en una forma compacta si se encuentra en un dispositivo de pantalla táctil.",
             "options": {
               "auto": "Autodetectar",
               "on": "Activado",
@@ -315,37 +315,37 @@
           },
           "language": {
             "title": "Idioma",
-            "description": "Language of the text on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+            "description": "Idioma del texto en la pantalla. Ayúdanos a traducir Stellar a tu idioma en %1$sCrowdin%2$s."
           },
           "orientation_prompt": {
             "title": "Aviso de orientación",
-            "description": "Requests usage in landscape mode."
+            "description": "Solicita uso en modo horizontal."
           },
           "installation_prompt": {
             "title": "Aviso de instalación",
-            "description": "Notifies about installing Stellar."
+            "description": "Notifica acerca de la instalación de Stellar."
           },
           "instability_prompt": {
             "title": "Advertencia de inestabilidad",
-            "description": "Warns about an unstable or unknown version of Stellar."
+            "description": "Advierte acerca de una versión inestable o desconocida de Stellar."
           },
           "missing_parts": {
             "title": "Partes faltantes",
-            "description": "Shows a list of parts that didn't import."
+            "description": "Muestra una lista de las partes que no se importaron."
           }
         },
         "editor": {
           "$": "Editor",
           "undo_limit": {
             "title": "Deshacer límite",
-            "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
+            "description": "Número máximo de deshaceres/rehaceres almacenados en memoria. Máx: 4096; mín: 16."
           }
         },
         "performance": {
           "$": "Rendimiento",
           "regress": {
             "title": "Cantidad de regresión",
-            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
+            "description": "Reduce la resolución del canvas cuando se realizan tareas computacionalmente costosas."
           }
         },
         "file": {
@@ -366,15 +366,15 @@
         "debug": {
           "$": "Depuración",
           "error_screen_debug": {
-            "title": "Debug info on error screen",
-            "description": "Display full error message on an interrupting critical error."
+            "title": "Información de depuración en la pantalla de error",
+            "description": "Mostrar el mensaje de error entero en un error crítico interrumpido."
           }
         }
       }
     },
     "confirmation": {
       "title": "¿Estás seguro de que quieres hacer esto?",
-      "description": "This action may not be reversible.",
+      "description": "Esta acción podría no ser reversible.",
       "actions": {
         "cancel": "Cancelar",
         "yes": "Sí"
