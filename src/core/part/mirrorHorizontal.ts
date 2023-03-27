@@ -3,9 +3,9 @@ import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import { PartWithScale } from 'game/parts/PartWithScale';
-import boundsStore from 'stores/bounds';
 import { MethodIds } from 'types/Parts';
 import normalizeIds from 'utilities/normalizeIds';
+import getCenter from './getCenter';
 
 export default function mirrorHorizontal(
   ids: MethodIds,
@@ -26,16 +26,7 @@ export default function mirrorHorizontal(
         }
       });
     } else {
-      const normalizedIds = normalizeIds(ids);
-      let min = boundsStore[normalizedIds[0]].bounds.x;
-      let max = boundsStore[normalizedIds[0]].bounds.x;
-
-      normalizedIds.forEach((id) => {
-        min = Math.min(min, boundsStore[id].bounds.x);
-        max = Math.max(max, boundsStore[id].bounds.x);
-      });
-
-      mirrorHorizontal(ids, (min + max) / 2, blueprint);
+      mirrorHorizontal(ids, getCenter(ids)[0], blueprint);
     }
   } else {
     mutateBlueprint((draft) => {
