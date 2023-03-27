@@ -73,7 +73,11 @@ const PartBounds = memo(
 
         wrapper.current?.position.set(bounds.x, bounds.y, 0);
         wrapper.current?.rotation.set(0, 0, bounds.rotation);
-        wrapper.current?.scale.set(bounds.width, bounds.height, 1);
+        wrapper.current?.scale.set(
+          Math.abs(bounds.width),
+          Math.abs(bounds.height),
+          1,
+        );
         invalidate();
       }
     };
