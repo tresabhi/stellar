@@ -74,6 +74,8 @@ export const usePartWithScale = (
         object.current.scale.z,
       );
     }
+
+    invalidate();
   };
 
   useEffect(() => {

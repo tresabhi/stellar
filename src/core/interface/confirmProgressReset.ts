@@ -4,7 +4,9 @@ import prompt from './prompt';
 
 export default function confirmProgressReset() {
   const promise = new Promise<boolean>((resolve) => {
-    if (useApp.getState().file.hasUnsavedChanges) {
+    if (
+      import.meta.env.DEV ? false : useApp.getState().file.hasUnsavedChanges
+    ) {
       prompt(
         confirmationPromptCurry((success) => {
           resolve(success);

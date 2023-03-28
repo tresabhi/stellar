@@ -17,6 +17,7 @@ export default function PanControls() {
   const getMousePos = useMousePosition();
 
   useEffect(() => {
+    const { snap } = useApp.getState().editor;
     let lastHypotenuse = 0;
     let initialMousePos: Vector2Tuple;
     const touchMemories = new Map<number, [number, number]>();
@@ -25,7 +26,7 @@ export default function PanControls() {
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
 
-      if (event.ctrlKey) {
+      if (event.ctrlKey || !snap) {
         initialMousePos = getMousePos(event);
 
         const zoom = Math.max(

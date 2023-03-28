@@ -60,8 +60,6 @@ export interface UseSettings {
 
   editor: {
     undoLimit: number;
-    selectMultiple: boolean;
-    selectDeep: boolean;
     rename: RenamePartsOptions;
     constrainScales: boolean;
     constrainFuelTankWidths: boolean;
@@ -116,8 +114,6 @@ export const useSettingsData: UseSettings = {
   },
 
   editor: {
-    selectMultiple: false,
-    selectDeep: false,
     undoLimit: 512,
     rename: {
       trim: true,

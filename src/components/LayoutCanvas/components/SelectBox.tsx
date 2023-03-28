@@ -7,7 +7,6 @@ import { useEffect, useRef } from 'react';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
-import useSettings from 'stores/settings';
 import { Vector2Tuple } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { UNIT_POINTS } from './PartsBounds/components/PartBounds';
@@ -72,7 +71,7 @@ export default function SelectBox() {
     const handlePointerUp = (event: PointerEvent) => {
       if (outline.current) outline.current.visible = false;
       const { parts } = useBlueprint.getState();
-      const { selectMultiple, selectDeep } = useSettings.getState().editor;
+      const { selectMultiple, selectDeep } = useApp.getState().editor;
 
       const selected: string[] = [];
       Object.keys(boundsStore).forEach((id) => {

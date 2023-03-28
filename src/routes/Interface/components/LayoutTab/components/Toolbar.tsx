@@ -1,5 +1,6 @@
 import {
   AllSidesIcon,
+  BoxModelIcon,
   CardStackMinusIcon,
   CardStackPlusIcon,
   ClipboardIcon,
@@ -26,10 +27,12 @@ import {
   LockClosedIcon,
   LockOpen2Icon,
   MagicWandIcon,
+  MarginIcon,
   Pencil1Icon,
   PlusCircledIcon,
   PlusIcon,
   ResetIcon,
+  RulerHorizontalIcon,
   ScissorsIcon,
   StackIcon,
   TransformIcon,
@@ -41,7 +44,6 @@ import * as ToolbarPrimitive from 'components/Toolbar';
 import { DISCORD, WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';
-import mutateSettings from 'core/app/mutateSettings';
 import exportFile from 'core/blueprint/exportFile';
 import importFile from 'core/blueprint/importFile';
 import loadBlueprint from 'core/blueprint/loadBlueprint';
@@ -70,14 +72,15 @@ import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
 import SettingsPrompt from 'routes/components/SettingsPrompt';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import useSettings from 'stores/settings';
 import useVersionControl from 'stores/versionControl';
 
 function Toolbar() {
   const { t, translate } = useTranslator();
-  const selectMultiple = useSettings((state) => state.editor.selectMultiple);
-  const selectDeep = useSettings((state) => state.editor.selectDeep);
+  const selectMultiple = useApp((state) => state.editor.selectMultiple);
+  const selectDeep = useApp((state) => state.editor.selectDeep);
   const focusMode = useApp((state) => state.interface.focusMode);
+  const snap = useApp((state) => state.editor.snap);
+  const scaleWithRatio = useApp((state) => state.editor.scaleWithRatio);
   const tool = useApp((state) =>
     state.editor.isSpacePanning || state.editor.isTouchPanning
       ? Tool.Pan
@@ -176,7 +179,6 @@ function Toolbar() {
             </>
           }
         >
-          {' '}
           <ToolbarPrimitive.DropdownMenuItem
             icon={<HandIcon />}
             keybind="Space"
@@ -223,44 +225,40 @@ function Toolbar() {
       </ToolbarPrimitive.Group>
 
       <ToolbarPrimitive.Group>
-        <ToolbarPrimitive.DropdownMenu icon={<AllSidesIcon />}>
+        <ToolbarPrimitive.DropdownMenu
+          disabled={hasNoSelections}
+          icon={<Pencil1Icon />}
+        >
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() =>
-              mutateSettings((draft) => {
-                draft.editor.selectDeep = !draft.editor.selectDeep;
-              })
-            }
-            color={selectDeep ? 'accent' : undefined}
-            icon={<DoubleArrowDownIcon />}
-            keybind="Ctrl"
+            icon={<Pencil1Icon />}
+            onClick={() => prompt(RenamePartsPrompt)}
+            keybind="Ctrl + R"
           >
-            {t`tabs.layout.toolbar.cursor.select_deep`}
+            {t`tabs.layout.toolbar.edit.rename`}
           </ToolbarPrimitive.DropdownMenuItem>
 
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() =>
-              mutateSettings((draft) => {
-                draft.editor.selectMultiple = !draft.editor.selectMultiple;
-              })
-            }
-            color={selectMultiple ? 'accent' : undefined}
-            icon={<PlusCircledIcon />}
-            keybind="Shift"
+            icon={isOneHidden ? <EyeOpenIcon /> : <EyeClosedIcon />}
+            onClick={() => toggleSelectedVisible()}
           >
-            {t`tabs.layout.toolbar.cursor.select_multiple`}
+            {translate(
+              `tabs.layout.toolbar.edit.${isOneHidden ? 'hidden' : 'unhidden'}`,
+            )}
           </ToolbarPrimitive.DropdownMenuItem>
-
           <ToolbarPrimitive.DropdownMenuItem
-            onClick={() =>
-              mutateApp((draft) => {
-                draft.interface.focusMode = !draft.interface.focusMode;
-              })
-            }
-            color={focusMode ? 'accent' : undefined}
-            icon={<LightningBoltIcon />}
-            keybind="Alt + F"
+            icon={isOneLocked ? <LockOpen2Icon /> : <LockClosedIcon />}
+            onClick={() => toggleSelectedLocked()}
           >
-            {t`tabs.layout.toolbar.cursor.focus_mode`}
+            {translate(
+              `tabs.layout.toolbar.edit.${isOneLocked ? 'locked' : 'unlocked'}`,
+            )}
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<TrashIcon />}
+            onClick={() => deleteSelected()}
+            keybind="Del"
+          >
+            {t`tabs.layout.toolbar.edit.delete`}
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
 
@@ -302,43 +300,6 @@ function Toolbar() {
             keybind="Ctrl + Shift + G"
           >
             {t`tabs.layout.toolbar.selection.ungroup`}
-          </ToolbarPrimitive.DropdownMenuItem>
-        </ToolbarPrimitive.DropdownMenu>
-
-        <ToolbarPrimitive.DropdownMenu
-          disabled={hasNoSelections}
-          icon={<Pencil1Icon />}
-        >
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<Pencil1Icon />}
-            onClick={() => prompt(RenamePartsPrompt)}
-            keybind="Ctrl + R"
-          >
-            {t`tabs.layout.toolbar.edit.rename`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={isOneHidden ? <EyeOpenIcon /> : <EyeClosedIcon />}
-            onClick={() => toggleSelectedVisible()}
-          >
-            {translate(
-              `tabs.layout.toolbar.edit.${isOneHidden ? 'hidden' : 'unhidden'}`,
-            )}
-          </ToolbarPrimitive.DropdownMenuItem>
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={isOneLocked ? <LockOpen2Icon /> : <LockClosedIcon />}
-            onClick={() => toggleSelectedLocked()}
-          >
-            {translate(
-              `tabs.layout.toolbar.edit.${isOneLocked ? 'locked' : 'unlocked'}`,
-            )}
-          </ToolbarPrimitive.DropdownMenuItem>
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<TrashIcon />}
-            onClick={() => deleteSelected()}
-            keybind="Del"
-          >
-            {t`tabs.layout.toolbar.edit.delete`}
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
 
@@ -388,6 +349,85 @@ function Toolbar() {
             disabled
           >
             {t`tabs.layout.toolbar.clipboard.create_snippet`}
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+
+        <ToolbarPrimitive.DropdownMenu icon={<AllSidesIcon />}>
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.editor.selectDeep = !draft.editor.selectDeep;
+              })
+            }
+            color={selectDeep ? 'accent' : undefined}
+            icon={<DoubleArrowDownIcon />}
+            keybind="Ctrl"
+          >
+            {t`tabs.layout.toolbar.cursor.select_deep`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.editor.selectMultiple = !draft.editor.selectMultiple;
+              })
+            }
+            color={selectMultiple ? 'accent' : undefined}
+            icon={<PlusCircledIcon />}
+            keybind="Shift"
+          >
+            {t`tabs.layout.toolbar.cursor.select_multiple`}
+          </ToolbarPrimitive.DropdownMenuItem>
+
+          <ToolbarPrimitive.DropdownMenuItem
+            onClick={() =>
+              mutateApp((draft) => {
+                draft.interface.focusMode = !draft.interface.focusMode;
+              })
+            }
+            color={focusMode ? 'accent' : undefined}
+            icon={<LightningBoltIcon />}
+            keybind="Alt + F"
+          >
+            {t`tabs.layout.toolbar.cursor.focus_mode`}
+          </ToolbarPrimitive.DropdownMenuItem>
+        </ToolbarPrimitive.DropdownMenu>
+
+        <ToolbarPrimitive.DropdownMenu icon={<RulerHorizontalIcon />}>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<MarginIcon />}
+            color={snap ? 'accent' : undefined}
+            onClick={() => {
+              mutateApp((draft) => {
+                draft.editor.snap = true;
+              });
+            }}
+          >
+            Snap to grid
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<BoxModelIcon />}
+            keybind="Ctrl"
+            color={!snap ? 'accent' : undefined}
+            onClick={() => {
+              mutateApp((draft) => {
+                draft.editor.snap = false;
+              });
+            }}
+          >
+            No snap
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<TransformIcon />}
+            keybind="Shift"
+            color={scaleWithRatio ? 'accent' : undefined}
+            onClick={() => {
+              mutateApp((draft) => {
+                draft.editor.scaleWithRatio = !draft.editor.scaleWithRatio;
+              });
+            }}
+          >
+            Scale with ratio
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
       </ToolbarPrimitive.Group>

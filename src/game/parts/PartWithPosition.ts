@@ -77,6 +77,8 @@ export const usePartWithPosition = (
     if (object.current) {
       object.current.position.set(x, y, object.current.position.z);
     }
+
+    invalidate();
   };
 
   useEffect(() => {

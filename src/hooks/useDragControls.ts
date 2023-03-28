@@ -1,5 +1,8 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import { CANVAS_MATRIX_SCALE } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
+import {
+  CANVAS_MATRIX_SCALE,
+  SNAP_SIZE,
+} from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import mutateApp from 'core/app/mutateApp';
 import deferUpdates from 'core/bounds/deferUpdates';
 import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
@@ -10,7 +13,6 @@ import translateSelectedAsync from 'core/part/translateSelectedAsync';
 import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
-import getSnapDistance from 'utilities/getSnapDistance';
 import useApp, { Tool } from '../stores/app';
 
 const useDragControls = (id: string) => {
@@ -22,7 +24,8 @@ const useDragControls = (id: string) => {
   const movement = new Vector2();
 
   function handlePointerMove(event: PointerEvent) {
-    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
+    const { tool, isSpacePanning, isTouchPanning, snap } =
+      useApp.getState().editor;
 
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -33,17 +36,13 @@ const useDragControls = (id: string) => {
         deferUpdates();
       }
 
-      const snapDistance = getSnapDistance(event);
       const newMovement = new Vector2(event.clientX, event.clientY)
         .sub(initial)
         .divideScalar(camera.zoom)
         .multiply(CANVAS_MATRIX_SCALE);
 
-      if (snapDistance !== 0) {
-        newMovement
-          .divideScalar(snapDistance)
-          .round()
-          .multiplyScalar(snapDistance);
+      if (!event.ctrlKey && snap) {
+        newMovement.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
       }
 
       const delta = newMovement.clone().sub(movement);

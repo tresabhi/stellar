@@ -13,7 +13,7 @@ import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { Bounds } from 'stores/bounds';
 import { Group, Vector2, Vector2Tuple } from 'three';
-import snap from 'utilities/snap';
+import stepped from 'utilities/stepped';
 import { UpdateTransformNodesDetail } from '..';
 
 export interface TransformNodeProps {
@@ -26,8 +26,7 @@ export interface TransformNodeProps {
 export const CANVAS_MATRIX_SCALE = new Vector2(1, -1);
 const ORIGIN = new Vector2();
 
-export const MOVE_STEP_REGULAR = 1 / 10;
-export const MOVE_STEP_MAJOR = 1;
+export const SNAP_SIZE = 1 / 5;
 
 export const sideToPoint = (
   bounds: Bounds,
@@ -79,11 +78,11 @@ export default function TransformNode({
     normalizedScale.copy(normalizedMoved).sub(normalizedConstant);
 
     normalizedScale.x =
-      snap(normalizedSize.x, 1 / 10 ** 8) === 0
+      stepped(normalizedSize.x, 1 / 10 ** 8) === 0
         ? 1
         : normalizedScale.x / normalizedSize.x;
     normalizedScale.y =
-      snap(normalizedSize.y, 1 / 10 ** 8) === 0
+      stepped(normalizedSize.y, 1 / 10 ** 8) === 0
         ? 1
         : normalizedScale.y / normalizedSize.y;
   };
@@ -135,6 +134,8 @@ export default function TransformNode({
   });
 
   const handlePointerMove = (event: PointerEvent) => {
+    const { snap, scaleWithRatio } = useApp.getState().editor;
+
     if (firstMove) {
       firstMove = false;
       deferUpdates();
@@ -149,14 +150,11 @@ export default function TransformNode({
       .multiply(CANVAS_MATRIX_SCALE)
       .divideScalar(camera.zoom);
 
-    if (!event.ctrlKey && !event.shiftKey) {
-      offset
-        .divideScalar(MOVE_STEP_REGULAR)
-        .round()
-        .multiplyScalar(MOVE_STEP_REGULAR);
+    if (!(event.ctrlKey || !snap) && !(event.shiftKey || scaleWithRatio)) {
+      offset.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
     }
 
-    if (maintainSlope.current || event.shiftKey) {
+    if (maintainSlope.current || event.shiftKey || scaleWithRatio) {
       const pointerX = offset.x + movable.x;
       const pointerY = offset.y + movable.y;
 
@@ -197,6 +195,10 @@ export default function TransformNode({
       }
 
       offset.set(movedX, movedY).sub(movable);
+
+      if (!event.ctrlKey && snap) {
+        offset.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
+      }
     }
 
     applyNormalizations();

@@ -8,7 +8,6 @@ import selectConcurrent from 'core/part/selectConcurrent';
 import toggleSelection from 'core/part/toggleSelection';
 import unselect from 'core/part/unselect';
 import useApp, { Tool } from 'stores/app';
-import useSettings from 'stores/settings';
 
 const useSelectionControl = (id: string) => {
   const handleClick = (event: ThreeEvent<MouseEvent>) => {
@@ -21,7 +20,7 @@ const useSelectionControl = (id: string) => {
       !isSpacePanning &&
       !isTouchPanning
     ) {
-      const { selectMultiple, selectDeep } = useSettings.getState().editor;
+      const { selectMultiple, selectDeep } = useApp.getState().editor;
       const part = getPart(id);
       const parent = getParent(id);
 

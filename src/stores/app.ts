@@ -36,6 +36,10 @@ export interface UseApp {
   };
 
   editor: {
+    selectMultiple: boolean;
+    selectDeep: boolean;
+    snap: boolean;
+    scaleWithRatio: boolean;
     tool: Tool;
     isSpacePanning: boolean;
     isTouchPanning: boolean;
@@ -62,6 +66,10 @@ export const UseAppData: UseApp = {
   },
 
   editor: {
+    selectMultiple: false,
+    selectDeep: false,
+    snap: true,
+    scaleWithRatio: false,
     tool: Tool.Transform,
     isSpacePanning: false,
     isTouchPanning: false,

@@ -1,8 +1,5 @@
 import { invalidate } from '@react-three/fiber';
-import {
-  MOVE_STEP_MAJOR,
-  MOVE_STEP_REGULAR,
-} from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
+import { SNAP_SIZE } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import { WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';
@@ -45,14 +42,6 @@ import getTouchscreenMode from 'utilities/getTouchscreenMode';
 export const TAB_ORDER = [Tab.Create, Tab.Layout, Tab.Staging, Tab.Export];
 
 type PrimitiveVector2Tuple = [number, number];
-const upVector: PrimitiveVector2Tuple = [0, MOVE_STEP_REGULAR];
-const downVector: PrimitiveVector2Tuple = [0, -MOVE_STEP_REGULAR];
-const leftVector: PrimitiveVector2Tuple = [-MOVE_STEP_REGULAR, 0];
-const rightVector: PrimitiveVector2Tuple = [MOVE_STEP_REGULAR, 0];
-const upMajorVector: PrimitiveVector2Tuple = [0, MOVE_STEP_MAJOR];
-const downMajorVector: PrimitiveVector2Tuple = [0, -MOVE_STEP_MAJOR];
-const leftMajorVector: PrimitiveVector2Tuple = [-MOVE_STEP_MAJOR, 0];
-const rightMajorVector: PrimitiveVector2Tuple = [MOVE_STEP_MAJOR, 0];
 
 const translate = (vector: PrimitiveVector2Tuple) => {
   translateSelectedRecursive(vector[0], vector[1]);
@@ -203,35 +192,35 @@ export default function useKeybinds() {
       { preventOnNonEditingTab: false },
     );
 
-    bind('up', () => translate(upVector), {
+    bind('up', () => translate([0, SNAP_SIZE]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('down', () => translate(downVector), {
+    bind('down', () => translate([0, -SNAP_SIZE]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('left', () => translate(leftVector), {
+    bind('left', () => translate([-SNAP_SIZE, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('right', () => translate(rightVector), {
+    bind('right', () => translate([SNAP_SIZE, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('shift+up', () => translate(upMajorVector), {
+    bind('shift+up', () => translate([0, 1]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('shift+down', () => translate(downMajorVector), {
+    bind('shift+down', () => translate([0, -1]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('shift+left', () => translate(leftMajorVector), {
+    bind('shift+left', () => translate([-1, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('shift+right', () => translate(rightMajorVector), {
+    bind('shift+right', () => translate([1, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });

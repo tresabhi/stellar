@@ -12,7 +12,7 @@ import { degToRad } from 'three/src/math/MathUtils';
 import { EditControlsProps } from '../..';
 import {
   CANVAS_MATRIX_SCALE,
-  MOVE_STEP_REGULAR,
+  SNAP_SIZE,
 } from '../../../TransformControls/components/TransformNode';
 
 export interface FuelTankEditDetail {
@@ -92,6 +92,8 @@ export default function FuelTankControls({ id }: EditControlsProps) {
     window.addEventListener('pointerup', handleTopPointerUp);
   };
   const handleTopPointerMove = (event: PointerEvent) => {
+    const { snap } = useApp.getState().editor;
+
     if (firstMove) {
       firstMove = false;
       deferUpdates();
@@ -106,11 +108,8 @@ export default function FuelTankControls({ id }: EditControlsProps) {
       .multiply(CANVAS_MATRIX_SCALE)
       .multiply(FUEL_TANK_TOP_EDGE_MATRIX_SCALE);
 
-    if (!event.ctrlKey) {
-      offset
-        .divideScalar(MOVE_STEP_REGULAR)
-        .round()
-        .multiplyScalar(MOVE_STEP_REGULAR);
+    if (!event.ctrlKey || snap) {
+      offset.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
     }
 
     offset.x = Math.max(offset.x, -part.N.width_b);
@@ -151,6 +150,8 @@ export default function FuelTankControls({ id }: EditControlsProps) {
     window.addEventListener('pointerup', handleBottomPointerUp);
   };
   const handleBottomPointerMove = (event: PointerEvent) => {
+    const { snap } = useApp.getState().editor;
+
     if (firstMove) {
       firstMove = false;
       deferUpdates();
@@ -165,11 +166,8 @@ export default function FuelTankControls({ id }: EditControlsProps) {
       .multiply(CANVAS_MATRIX_SCALE)
       .multiply(FUEL_TANK_BOTTOM_EDGE_MATRIX_SCALE);
 
-    if (!event.ctrlKey) {
-      offset
-        .divideScalar(MOVE_STEP_REGULAR)
-        .round()
-        .multiplyScalar(MOVE_STEP_REGULAR);
+    if (!event.ctrlKey || snap) {
+      offset.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
     }
 
     offset.x = Math.max(offset.x, -part.N.width_a);
