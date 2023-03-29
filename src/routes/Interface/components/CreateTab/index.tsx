@@ -202,7 +202,7 @@ export default function CreateTab() {
                 icon={credit ? <FilePlusIcon /> : <FileTextIcon />}
                 onClick={handleClick}
                 key={`item-${name}`}
-                note={credit ?? 'In-Built'}
+                note={credit ?? t`tabs.create.templates.in_built`}
               >
                 {translation}
               </Prompt.SearchItem>
