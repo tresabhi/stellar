@@ -5,6 +5,7 @@
       "$": "Crear",
       "templates": {
         "input_placeholder": "Buscar plantillas...",
+        "in_built": "In-built",
         "list": {
           "apollo_mission": "Misión Apolo",
           "basic_rocket": "Cohete básico",
