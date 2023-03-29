@@ -5,6 +5,7 @@
       "$": "Kreiraj",
       "templates": {
         "input_placeholder": "Pretraži šablone...",
+        "in_built": "In-built",
         "list": {
           "apollo_mission": "\"Apolo\" Misija",
           "basic_rocket": "Osnovna Raketa",
