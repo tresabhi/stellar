@@ -5,6 +5,7 @@
       "$": "Erect",
       "templates": {
         "input_placeholder": "Sail frames...",
+        "in_built": "In-built",
         "list": {
           "apollo_mission": "Up yonder cheese lootin'",
           "basic_rocket": "Ship ain't got booty",
