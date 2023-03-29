@@ -5,6 +5,7 @@
       "$": "Создать",
       "templates": {
         "input_placeholder": "Найти шаблоны...",
+        "in_built": "In-built",
         "list": {
           "apollo_mission": "Миссия Apollo",
           "basic_rocket": "Базовая ракета",
