@@ -6,6 +6,7 @@ import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import filter from 'core/part/filter';
 import getChildrenRecursive from 'core/part/getChildrenRecursive';
 import { useEffect, useRef, useState } from 'react';
+import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
@@ -40,6 +41,12 @@ export default function TransformControls() {
 
     calculateBounds();
 
+    const unsubscribeTool = useApp.subscribe(
+      (state) => state.editor.tool,
+      (tool) => {
+        if (wrapper.current) wrapper.current.visible = tool === Tool.Transform;
+      },
+    );
     window.addEventListener(
       'deferupdates',
       handleDeferUpdates as EventListener,
@@ -49,6 +56,7 @@ export default function TransformControls() {
     });
 
     return () => {
+      unsubscribeTool();
       selections.forEach((selection) => {
         window.removeEventListener(
           `boundsupdated${selection}`,
