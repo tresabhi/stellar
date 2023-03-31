@@ -213,7 +213,7 @@ export default function CreateTab() {
           return searchItem;
         },
       ),
-    [translate],
+    [t, translate],
   );
 
   const handleScratchClick = () => {
