@@ -1,7 +1,7 @@
 import { Object3DNode } from '@react-three/fiber';
 import { UpdateTransformNodesDetail } from 'components/LayoutCanvas/components/Outlines/components/TransformControls';
 import { PartMoveEventDetail } from 'core/part';
-import { PartTransformEventDetail } from 'core/part/resizeAsync';
+import { PartTransformEventDetail } from 'core/part/transformAsync';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';

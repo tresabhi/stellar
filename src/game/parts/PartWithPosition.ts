@@ -1,13 +1,13 @@
 import { invalidate } from '@react-three/fiber';
+import { ORIGIN } from 'components/LayoutCanvas/components/EditControls/components/FuelTankControls';
+import { PartTransformEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
-import { PartTransformEventDetail } from 'core/part/resizeAsync';
 import { PartMoveEventDetail } from 'core/part/translateSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
-import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
-import { Object3D, Vector3 } from 'three';
+import { Object3D, Vector2, Vector3 } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithPosition extends VanillaPart {
@@ -37,6 +37,10 @@ export const usePartWithPosition = (
   object: RefObject<Object3D>,
 ) => {
   const movement = new Vector3();
+  const constant = new Vector2();
+  const position = new Vector2();
+  const scale = new Vector2();
+  let { p } = getPart<PartWithPosition>(id);
 
   const handlePartMove = (event: CustomEvent<PartMoveEventDetail>) => {
     if (getPart(id)?.selected) {
@@ -54,30 +58,19 @@ export const usePartWithPosition = (
   const handlePartTransform = (
     event: CustomEvent<PartTransformEventDetail>,
   ) => {
-    const part = useBlueprint.getState().parts[id] as PartWithPosition;
+    scale.set(...event.detail.scale);
+    constant
+      .set(...event.detail.constant)
+      .rotateAround(ORIGIN, -event.detail.rotation);
+    position
+      .set(p.x, p.y)
+      .rotateAround(ORIGIN, -event.detail.rotation)
+      .sub(constant)
+      .multiply(scale)
+      .add(constant)
+      .rotateAround(ORIGIN, event.detail.rotation);
 
-    const originOffset = Math.hypot(part.p.x, part.p.y);
-    const originAngle = Math.atan2(part.p.y, part.p.x) - event.detail.rotation;
-    const rotatedOriginX = originOffset * Math.cos(originAngle);
-    const rotatedOriginY = originOffset * Math.sin(originAngle);
-    const offsetX = rotatedOriginX - event.detail.normalizedConstant[0];
-    const offsetY = rotatedOriginY - event.detail.normalizedConstant[1];
-    const scaledOffsetX =
-      offsetX * event.detail.normalizedScale[0] +
-      event.detail.normalizedConstant[0];
-    const scaledOffsetY =
-      offsetY * event.detail.normalizedScale[1] +
-      event.detail.normalizedConstant[1];
-    const scaledOffset = Math.hypot(scaledOffsetX, scaledOffsetY);
-    const scaledAngle =
-      Math.atan2(scaledOffsetY, scaledOffsetX) + event.detail.rotation;
-    const x = scaledOffset * Math.cos(scaledAngle);
-    const y = scaledOffset * Math.sin(scaledAngle);
-
-    if (object.current) {
-      object.current.position.set(x, y, object.current.position.z);
-    }
-
+    object.current?.position.set(position.x, position.y, 0);
     invalidate();
   };
 
@@ -100,15 +93,16 @@ export const usePartWithPosition = (
   usePartProperty(
     id,
     (part: PartWithPosition) => part.p,
-    (p, prevP) => {
-      object.current?.position.set(p.x, p.y, 0);
+    (newP, prevP) => {
+      p = newP;
+      object.current?.position.set(newP.x, newP.y, 0);
       invalidate();
 
       if (object.current && boundsStore[id]) {
         const { bounds } = boundsStore[id];
 
-        bounds.x += p.x - prevP.x;
-        bounds.y += p.y - prevP.y;
+        bounds.x += newP.x - prevP.x;
+        bounds.y += newP.y - prevP.y;
 
         declareBoundsUpdated(id);
       }

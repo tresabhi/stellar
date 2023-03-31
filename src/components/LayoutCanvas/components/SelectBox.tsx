@@ -104,7 +104,7 @@ export default function SelectBox() {
     };
 
     canvas.addEventListener('pointerdown', handlePointerDown);
-    const unsubscribeIsDraggingPart = useApp.subscribe(
+    const unsubscribeIsInteractingWithPart = useApp.subscribe(
       (state) => state.editor.isInteractingWithPart,
       (isDraggingPart) => {
         if (isDraggingPart) {
@@ -117,7 +117,7 @@ export default function SelectBox() {
 
     return () => {
       canvas.removeEventListener('pointerdown', handlePointerDown);
-      unsubscribeIsDraggingPart();
+      unsubscribeIsInteractingWithPart();
     };
   }, [canvas, getMousePosition]);
 

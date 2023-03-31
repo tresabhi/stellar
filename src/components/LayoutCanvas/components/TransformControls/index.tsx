@@ -1,138 +1,121 @@
 import { Line } from '@react-three/drei';
-import { invalidate } from '@react-three/fiber';
-import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
+import getBoundsFromParts, {
+  emptyBounds,
+} from 'core/bounds/getBoundsFromParts';
 import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
-import { useEffect, useRef } from 'react';
-import useApp, { Tool } from 'stores/app';
+import filter from 'core/part/filter';
+import getChildrenRecursive from 'core/part/getChildrenRecursive';
+import { useEffect, useRef, useState } from 'react';
 import useBlueprint from 'stores/blueprint';
-import { Bounds } from 'stores/bounds';
 import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
 import TransformNode from './components/TransformNode';
 
-export interface UpdateTransformNodesDetail {
-  maintainSlope: boolean;
-}
-
 export default function TransformControls() {
-  const tool = useApp((state) => state.editor.tool);
+  const selections = useBlueprint((state) => state.selections);
+  const mutableSelections = filter(
+    getChildrenRecursive(selections),
+    ({ locked }) => !locked,
+  );
   const wrapper = useRef<Group>(null);
   const outline = useRef<Line2>(null);
-  const selections = useBlueprint((state) => state.selections);
-  const bounds = useRef<Bounds>({
-    x: 0,
-    y: 0,
-    width: 0,
-    height: 0,
-    rotation: 0,
+  const [{ bounds, hasMutualAngle }, setBounds] = useState<
+    ReturnType<typeof getBoundsFromParts>
+  >({
+    hasMutualAngle: false,
+    bounds: emptyBounds,
   });
 
-  const recalculateBounds = () => {
-    const boundsFromParts = getBoundsFromParts(selections);
-
-    bounds.current = boundsFromParts.bounds;
-
-    outline.current?.position.set(bounds.current.x, bounds.current.y, 0);
-    outline.current?.rotation.set(0, 0, bounds.current.rotation);
-    outline.current?.scale.set(bounds.current.width, bounds.current.height, 1);
-
-    window.dispatchEvent(
-      new CustomEvent<UpdateTransformNodesDetail>('updatetransformnodes', {
-        detail: { maintainSlope: !boundsFromParts.hasMutualAngle },
-      }),
-    );
-    invalidate();
-  };
-  const debouncedRecalculateBounds = fallingEdgeDebounce(recalculateBounds, 0);
-
   useEffect(() => {
+    const calculateBounds = fallingEdgeDebounce(() => {
+      setBounds(getBoundsFromParts(selections));
+    }, 0);
     const handleDeferUpdates = (
       event: CustomEvent<DeferUpdatesEventDetail>,
     ) => {
-      if (wrapper.current && useApp.getState().editor.tool === Tool.Transform) {
-        wrapper.current.visible = !event.detail;
-      }
+      if (wrapper.current) wrapper.current.visible = !event.detail;
     };
 
-    debouncedRecalculateBounds();
+    calculateBounds();
 
     window.addEventListener(
       'deferupdates',
       handleDeferUpdates as EventListener,
     );
     selections.forEach((selection) => {
-      window.addEventListener(
-        `boundsupdated${selection}`,
-        debouncedRecalculateBounds,
-      );
+      window.addEventListener(`boundsupdated${selection}`, calculateBounds);
     });
 
     return () => {
+      selections.forEach((selection) => {
+        window.removeEventListener(
+          `boundsupdated${selection}`,
+          calculateBounds,
+        );
+      });
       window.removeEventListener(
         'deferupdates',
         handleDeferUpdates as EventListener,
       );
-      selections.forEach((selection) => {
-        window.removeEventListener(
-          `boundsupdated${selection}`,
-          debouncedRecalculateBounds,
-        );
-      });
     };
-  });
+  }, [selections]);
 
   return (
     <group
       ref={wrapper}
-      visible={selections.length > 0 && tool === Tool.Transform}
+      visible={selections.length > 0}
+      position={[bounds.x, bounds.y, 0]}
+      rotation={[0, 0, bounds.rotation]}
     >
-      <Line ref={outline} lineWidth={2} color="#9d5bd2" points={UNIT_POINTS} />
+      <Line
+        ref={outline}
+        scale={[bounds.width, bounds.height, 1]}
+        lineWidth={2}
+        color="#9d5bd2"
+        points={UNIT_POINTS}
+      />
 
       <TransformNode // top left
-        bounds={bounds}
-        constant={[1, -1]}
-        movable={[-1, 1]}
+        bounds={{ bounds, hasMutualAngle }}
+        position={[-1, 1]}
+        selections={mutableSelections}
       />
       <TransformNode // top
-        bounds={bounds}
-        constant={[0, -1]}
-        movable={[0, 1]}
-        hideOnMaintainSlope
+        bounds={{ bounds, hasMutualAngle }}
+        position={[0, 1]}
+        selections={mutableSelections}
       />
       <TransformNode // top right
-        bounds={bounds}
-        constant={[-1, -1]}
-        movable={[1, 1]}
+        bounds={{ bounds, hasMutualAngle }}
+        position={[1, 1]}
+        selections={mutableSelections}
       />
       <TransformNode // right
-        bounds={bounds}
-        constant={[-1, 0]}
-        movable={[1, 0]}
-        hideOnMaintainSlope
+        bounds={{ bounds, hasMutualAngle }}
+        position={[1, 0]}
+        selections={mutableSelections}
       />
       <TransformNode // bottom right
-        bounds={bounds}
-        constant={[-1, 1]}
-        movable={[1, -1]}
+        bounds={{ bounds, hasMutualAngle }}
+        position={[1, -1]}
+        selections={mutableSelections}
       />
       <TransformNode // bottom
-        bounds={bounds}
-        constant={[0, 1]}
-        movable={[0, -1]}
-        hideOnMaintainSlope
+        bounds={{ bounds, hasMutualAngle }}
+        position={[0, -1]}
+        selections={mutableSelections}
       />
       <TransformNode // bottom left
-        bounds={bounds}
-        constant={[1, 1]}
-        movable={[-1, -1]}
+        bounds={{ bounds, hasMutualAngle }}
+        position={[-1, -1]}
+        selections={mutableSelections}
       />
       <TransformNode // left
-        bounds={bounds}
-        constant={[1, 0]}
-        movable={[-1, 0]}
-        hideOnMaintainSlope
+        bounds={{ bounds, hasMutualAngle }}
+        position={[-1, 0]}
+        selections={mutableSelections}
       />
     </group>
   );

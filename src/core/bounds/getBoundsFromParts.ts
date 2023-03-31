@@ -2,6 +2,14 @@ import { sideToPoint } from 'components/LayoutCanvas/components/TransformControl
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
 
+export const emptyBounds: Bounds = {
+  x: 0,
+  y: 0,
+  width: 0,
+  height: 0,
+  rotation: 0,
+};
+
 export default function getBoundsFromParts(
   ids: string[],
   useMutualAngle = true,
@@ -11,7 +19,10 @@ export default function getBoundsFromParts(
     const point = new Vector2();
     const angle = useMutualAngle ? boundsStore[ids[0]].bounds.rotation : 0;
     const noMutualAngle = useMutualAngle
-      ? ids.some((id) => boundsStore[id].bounds.rotation !== angle)
+      ? ids.some(
+          (id) =>
+            (boundsStore[id].bounds.rotation - angle) % (Math.PI / 2) !== 0,
+        )
       : false;
 
     if (noMutualAngle) {

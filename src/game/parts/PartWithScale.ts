@@ -1,7 +1,7 @@
 import { invalidate } from '@react-three/fiber';
+import { PartTransformEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
-import { PartTransformEventDetail } from 'core/part/resizeAsync';
 import { PartScaleEventDetail } from 'core/part/scaleSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
@@ -63,14 +63,21 @@ export const usePartWithScale = (
   const handlePartTransform = (
     event: CustomEvent<PartTransformEventDetail>,
   ) => {
-    const part = useBlueprint.getState().parts[id] as PartWithScale;
+    const { bounds } = boundsStore[id];
+    const { o } = useBlueprint.getState().parts[id] as PartWithScale;
+    const rotationMod = (event.detail.rotation - bounds.rotation) % Math.PI;
+    let scaleX = event.detail.scale[0];
+    let scaleY = event.detail.scale[1];
+
+    if (rotationMod === Math.PI / 2 || rotationMod === -Math.PI / 2) {
+      [scaleX, scaleY] = [scaleY, scaleX];
+    }
 
     if (object.current) {
       object.current.scale.set(
-        part.o.x *
-          scaleLighting(flipLighting, event.detail.normalizedScale[0]) *
+        scaleLighting(flipLighting, o.x * scaleX) *
           rotationLighting(flipLighting, rotation),
-        part.o.y * event.detail.normalizedScale[1],
+        o.y * scaleY,
         object.current.scale.z,
       );
     }
