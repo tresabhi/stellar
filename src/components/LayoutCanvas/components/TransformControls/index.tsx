@@ -1,4 +1,5 @@
 import { Line } from '@react-three/drei';
+import { invalidate } from '@react-three/fiber';
 import getBoundsFromParts, {
   emptyBounds,
 } from 'core/bounds/getBoundsFromParts';
@@ -45,6 +46,7 @@ export default function TransformControls() {
       (state) => state.editor.tool,
       (tool) => {
         if (wrapper.current) wrapper.current.visible = tool === Tool.Transform;
+        invalidate();
       },
     );
     window.addEventListener(
