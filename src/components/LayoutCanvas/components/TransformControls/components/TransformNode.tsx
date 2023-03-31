@@ -1,5 +1,5 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import ControlDiamond from 'components/ControlDiamond';
+import ControlNode from 'components/ControlNode';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import deferUpdates from 'core/bounds/deferUpdates';
 import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
@@ -158,7 +158,7 @@ export default function TransformNode({
   };
 
   return !hasMutualAngle && (position.x === 0 || position.y === 0) ? null : (
-    <ControlDiamond
+    <ControlNode
       ref={wrapper}
       position={[
         (bounds.width * position.x) / 2,

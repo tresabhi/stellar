@@ -1,5 +1,5 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
-import ControlDiamond from 'components/ControlDiamond';
+import ControlNode from 'components/ControlNode';
 import deferUpdates from 'core/bounds/deferUpdates';
 import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import mutateParts from 'core/part/mutateParts';
@@ -199,14 +199,14 @@ export default function FuelTankControls({ id }: EditControlsProps) {
 
   return (
     <group ref={wrapper}>
-      <ControlDiamond
+      <ControlNode
         ref={top}
         rotation={[0, 0, Math.PI / 4]}
         colorInner="#fcba03"
         colorOuter="#c49000"
         onPointerDown={handleTopPointerDown}
       />
-      <ControlDiamond
+      <ControlNode
         ref={bottom}
         scale={[1, 2, 1]}
         colorInner="#fcba03"
