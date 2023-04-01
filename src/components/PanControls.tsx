@@ -13,7 +13,6 @@ const ZOOM_SENSITIVITY = 1 / 250;
 export default function PanControls() {
   const canvas = useThree((state) => state.gl.domElement);
   const camera = useThree((state) => state.camera as OrthographicCamera);
-  // const regress = useThree((state) => state.performance.regress);
   const getMousePos = useMousePosition();
 
   useEffect(() => {
@@ -63,8 +62,6 @@ export default function PanControls() {
       }
 
       invalidate();
-      // TODO: fix regress
-      // regress();
     };
 
     const handlePointerUp = () => {

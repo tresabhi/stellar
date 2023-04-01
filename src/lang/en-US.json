@@ -427,15 +427,6 @@
           }
         },
 
-        "performance": {
-          "$": "Performance",
-
-          "regress": {
-            "title": "Regress amount",
-            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
-          }
-        },
-
         "file": {
           "$": "File preferences",
 

@@ -1,4 +1,3 @@
-import { AdaptiveDpr } from '@react-three/drei';
 import {
   Canvas as CanvasPrimitive,
   Props as CanvasPrimitiveProps,
@@ -9,7 +8,6 @@ import { RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
-import useSettings from 'stores/settings';
 import { Group } from 'three';
 import PanControls from '../PanControls';
 import EditControls from './components/EditControls';
@@ -58,7 +56,6 @@ export default function LayoutCanvas(
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const parts = useRef<Group>(null);
-  const regressAmount = useSettings((state) => state.performance.regressAmount);
   const initialBlueprintState = useBlueprint.getState();
 
   const handlePointerMissed = () => {
@@ -81,11 +78,9 @@ export default function LayoutCanvas(
         position: [initialBlueprintState.center, 0, 100],
         rotation: [0, 0, 0],
       }}
-      performance={{ min: regressAmount }}
       onPointerMissed={handlePointerMissed}
       frameloop="demand"
     >
-      {regressAmount < 1 && <AdaptiveDpr pixelated />}
       <Expose />
 
       <PanControls />

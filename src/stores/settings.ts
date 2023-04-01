@@ -24,10 +24,6 @@ export interface UseSettings {
     };
   };
 
-  performance: {
-    regressAmount: number;
-  };
-
   interface: {
     touchscreenMode: boolean | null;
     language: string;
@@ -77,10 +73,6 @@ export const useSettingsData: UseSettings = {
     errorScreen: {
       showDebug: false,
     },
-  },
-
-  performance: {
-    regressAmount: 1,
   },
 
   interface: {
