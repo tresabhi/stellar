@@ -40,7 +40,7 @@ export default function usePrerender() {
 
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (useApp.getState().file.hasUnsavedChanges) {
+      if (useApp.getState().file.hasUnsavedChanges && !import.meta.env.DEV) {
         event.preventDefault();
         event.returnValue = '';
         return;
