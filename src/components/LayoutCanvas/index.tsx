@@ -56,7 +56,6 @@ export default function LayoutCanvas(
 ) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const parts = useRef<Group>(null);
-  const initialBlueprintState = useBlueprint.getState();
 
   const handlePointerMissed = () => {
     const { tool, isSpacePanning } = useApp.getState().editor;
@@ -75,7 +74,7 @@ export default function LayoutCanvas(
       orthographic
       camera={{
         zoom: 32,
-        position: [initialBlueprintState.center, 0, 100],
+        position: [0, 0, 1e3],
         rotation: [0, 0, 0],
       }}
       onPointerMissed={handlePointerMissed}
