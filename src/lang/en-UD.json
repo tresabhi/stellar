@@ -342,13 +342,6 @@
             "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
           }
         },
-        "performance": {
-          "$": "ǝɔuɐɯɹoɟɹǝԀ",
-          "regress": {
-            "title": "ʇunoɯɐ ssǝɹƃǝɹ",
-            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
-          }
-        },
         "file": {
           "$": "sǝɔuǝɹǝɟǝɹd ǝlᴉℲ",
           "format": {
