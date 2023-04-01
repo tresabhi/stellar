@@ -46,6 +46,7 @@ export default function getBoundsFromParts(
 
       return { bounds, hasMutualAngle: false };
     }
+
     ids.forEach((id) => {
       const { bounds } = boundsStore[id];
       const offset = Math.hypot(bounds.x, bounds.y);
@@ -53,31 +54,21 @@ export default function getBoundsFromParts(
       const rotatedOffsetAngle = offsetAngle - angle;
       const rotatedOffsetX = offset * Math.cos(rotatedOffsetAngle);
       const rotatedOffsetY = offset * Math.sin(rotatedOffsetAngle);
+      const width = bounds.rotation === angle ? bounds.width : bounds.height;
+      const height = bounds.rotation === angle ? bounds.height : bounds.width;
 
       box2
         .expandByPoint(
-          point.set(
-            rotatedOffsetX - bounds.width / 2,
-            rotatedOffsetY + bounds.height / 2,
-          ),
+          point.set(rotatedOffsetX - width / 2, rotatedOffsetY + height / 2),
         )
         .expandByPoint(
-          point.set(
-            rotatedOffsetX + bounds.width / 2,
-            rotatedOffsetY + bounds.height / 2,
-          ),
+          point.set(rotatedOffsetX + width / 2, rotatedOffsetY + height / 2),
         )
         .expandByPoint(
-          point.set(
-            rotatedOffsetX + bounds.width / 2,
-            rotatedOffsetY - bounds.height / 2,
-          ),
+          point.set(rotatedOffsetX + width / 2, rotatedOffsetY - height / 2),
         )
         .expandByPoint(
-          point.set(
-            rotatedOffsetX - bounds.width / 2,
-            rotatedOffsetY - bounds.height / 2,
-          ),
+          point.set(rotatedOffsetX - width / 2, rotatedOffsetY - height / 2),
         );
     });
 
