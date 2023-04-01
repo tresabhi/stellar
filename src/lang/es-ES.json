@@ -342,13 +342,6 @@
             "description": "Número máximo de deshaceres/rehaceres almacenados en memoria. Máx: 4096; mín: 16."
           }
         },
-        "performance": {
-          "$": "Rendimiento",
-          "regress": {
-            "title": "Cantidad de regresión",
-            "description": "Reduce la resolución del canvas cuando se realizan tareas computacionalmente costosas."
-          }
-        },
         "file": {
           "$": "Preferencias de archivo",
           "format": {
