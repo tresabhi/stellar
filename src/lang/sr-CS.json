@@ -342,13 +342,6 @@
             "description": "Maksimalan broj opoziva/ponovni radnji uskladištenih u memoriji. Maksimalno: 4096; minimalno: 16."
           }
         },
-        "performance": {
-          "$": "Performanse",
-          "regress": {
-            "title": "Iznos regresa",
-            "description": "Smanjuje rezoluciju platna prilikom obavljanja kompjuterski skupih zadataka."
-          }
-        },
         "file": {
           "$": "Željene postavke datoteka",
           "format": {
