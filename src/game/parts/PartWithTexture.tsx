@@ -58,6 +58,7 @@ export interface PartWithTexture extends Part, VanillaPartWithTexture {}
 export const VanillaPartWithTextureData: VanillaPartWithTexture = {
   ...VanillaPartData,
 
+  n: 'Part With Texture',
   T: { color_tex: '_', shape_tex: '_' },
 };
 

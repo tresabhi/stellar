@@ -40,6 +40,7 @@ import {
   UploadIcon,
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
+import { groupedControls } from 'components/LayoutCanvas/components/EditControls';
 import * as ToolbarPrimitive from 'components/Toolbar';
 import { DISCORD, WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
@@ -58,9 +59,9 @@ import copySelected from 'core/part/copySelected';
 import cutPartsBySelection from 'core/part/cutSelected';
 import deleteSelected from 'core/part/deleteSelected';
 import duplicateSelected from 'core/part/duplicateSelected';
+import enterEditMode from 'core/part/enterEditMode';
 import groupSelected from 'core/part/groupSelected';
 import paste from 'core/part/paste';
-import selectConcurrent from 'core/part/selectConcurrent';
 import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
 import toggleSelectedLocked from 'core/part/toggleSelectedLocked';
 import toggleSelectedVisible from 'core/part/toggleSelectedVisible';
@@ -110,6 +111,11 @@ function Toolbar() {
     (state) => state.editor.clipboard === undefined,
   );
   const link = (url: string) => () => window.open(url, '_blank');
+  const hasControllablePart = useBlueprint(
+    (state) =>
+      state.selections.length >= 1 &&
+      state.parts[state.selections[0]].n in groupedControls,
+  );
 
   return (
     <ToolbarPrimitive.Root>
@@ -202,18 +208,10 @@ function Toolbar() {
             {t`tabs.layout.toolbar.tool.transform`}
           </ToolbarPrimitive.DropdownMenuItem>
           <ToolbarPrimitive.DropdownMenuItem
+            disabled={!hasControllablePart}
             icon={<MagicWandIcon />}
             keybind="Enter"
-            onClick={() => {
-              const { selections } = useBlueprint.getState();
-
-              if (selections.length >= 1) {
-                if (selections.length > 1) selectConcurrent(selections[0]);
-                mutateApp((draft) => {
-                  draft.editor.tool = Tool.Edit;
-                });
-              }
-            }}
+            onClick={enterEditMode}
           >
             {t`tabs.layout.toolbar.tool.edit`}
           </ToolbarPrimitive.DropdownMenuItem>

@@ -14,9 +14,6 @@ import { PartWithOrientation } from './PartWithOrientation';
 import { PartWithTransformations } from './PartWithTransformations';
 
 export interface VanillaPartWithScale extends VanillaPart {
-  /**
-   * Scale of the part on both `x` and `y` axis
-   */
   o: { x: number; y: number };
 }
 
@@ -25,6 +22,7 @@ export interface PartWithScale extends Part, VanillaPartWithScale {}
 export const VanillaPartWithScaleData: VanillaPartWithScale = {
   ...VanillaPartData,
 
+  n: 'Part With Scale',
   o: { x: 1, y: 1 },
 };
 

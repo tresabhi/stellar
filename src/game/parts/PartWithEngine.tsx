@@ -16,6 +16,7 @@ export interface PartWithEngine extends Part, VanillaPartWithEngine {}
 export const VanillaPartWithEngineData: VanillaPartWithEngine = {
   ...VanillaPartData,
 
+  n: 'Part With Engine',
   B: {
     engine_on: false,
     head_on__for_creative_use: true,

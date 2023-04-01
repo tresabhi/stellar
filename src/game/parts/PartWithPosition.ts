@@ -11,9 +11,6 @@ import { Object3D, Vector2, Vector3 } from 'three';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export interface VanillaPartWithPosition extends VanillaPart {
-  /**
-   * Position of the part in `x` and `y` axis
-   */
   p: { x: number; y: number };
 }
 
@@ -22,6 +19,7 @@ export interface PartWithPosition extends Part, VanillaPartWithPosition {}
 export const VanillaPartWithPositionData: VanillaPartWithPosition = {
   ...VanillaPartData,
 
+  n: 'Part With Position',
   p: { x: 0, y: 0 },
 };
 

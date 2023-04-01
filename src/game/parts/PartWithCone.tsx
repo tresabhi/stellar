@@ -21,6 +21,7 @@ export interface PartWithCone extends Part, VanillaPartWithCone {}
 export const VanillaPartWithConeData: VanillaPartWithCone = {
   ...VanillaPartData,
 
+  n: 'Part With Cone',
   N: { size: 1 },
 };
 

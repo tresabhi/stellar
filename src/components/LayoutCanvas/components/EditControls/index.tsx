@@ -1,3 +1,4 @@
+import { FuelTankData } from 'game/parts/FuelTank';
 import { Part } from 'game/parts/Part';
 import { FC } from 'react';
 import { testName } from 'routes/Interface/components/LayoutTab/components/RightSidebar/components/Properties';
@@ -14,9 +15,9 @@ interface GroupedControls {
   Component: FC<EditControlsProps>;
 }
 
-const groupedControls: Record<string, GroupedControls> = {
-  fuelTank: {
-    test: testName('Fuel Tank'),
+export const groupedControls: Record<string, GroupedControls> = {
+  [FuelTankData.n]: {
+    test: testName(FuelTankData.n),
     Component: FuelTankControls,
   },
 };

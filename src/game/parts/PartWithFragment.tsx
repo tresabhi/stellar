@@ -14,6 +14,7 @@ export interface PartWithFragment extends Part, VanillaPartWithFragment {}
 export const VanillaPartWithFragmentData: VanillaPartWithFragment = {
   ...VanillaPartData,
 
+  n: 'Part With Fragment',
   T: { fragment: '' },
 };
 

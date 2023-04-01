@@ -43,10 +43,7 @@ export const VanillaPartWithTransformationsData: VanillaPartWithTransformations 
     ...VanillaPartWithOrientationData,
     ...VanillaPartWithScaleData,
 
-    /**
-     * Both scale and orientation of the part where the `x` and `y` axis
-     * represent scale and the `z` axis represents orientation
-     */
+    n: 'Part With Transformations',
     o: {
       ...VanillaPartWithScaleData.o,
       ...VanillaPartWithOrientationData.o,

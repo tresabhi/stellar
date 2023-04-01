@@ -19,10 +19,10 @@ import copySelected from 'core/part/copySelected';
 import cutPartsBySelection from 'core/part/cutSelected';
 import deleteSelected from 'core/part/deleteSelected';
 import duplicateSelected from 'core/part/duplicateSelected';
+import enterEditMode from 'core/part/enterEditMode';
 import groupSelected from 'core/part/groupSelected';
 import panToSelected from 'core/part/panToSelected';
 import paste from 'core/part/paste';
-import selectConcurrent from 'core/part/selectConcurrent';
 import selectConcurrentAtRoot from 'core/part/selectConcurrentAtRoot';
 import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import ungroupSelected from 'core/part/ungroupSelected';
@@ -234,24 +234,7 @@ export default function useKeybinds() {
 
     bind('1', toTool(Tool.Pan));
     bind(['2', 'v'], toTool(Tool.Transform));
-    bind(['3', 'enter'], () => {
-      const { tool } = useApp.getState().editor;
-
-      if (tool === Tool.Edit) {
-        mutateApp((draft) => {
-          draft.editor.tool = Tool.Transform;
-        });
-      } else {
-        const { selections } = useBlueprint.getState();
-
-        if (selections.length >= 1) {
-          if (selections.length > 1) selectConcurrent(selections[0]);
-          mutateApp((draft) => {
-            draft.editor.tool = Tool.Edit;
-          });
-        }
-      }
-    });
+    bind(['3', 'enter'], enterEditMode);
 
     bind(
       'space',

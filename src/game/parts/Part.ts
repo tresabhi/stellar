@@ -18,7 +18,7 @@ export interface Part extends VanillaPart {
 export type PartWithoutName = Omit<Part, 'n'>;
 
 export const VanillaPartData: VanillaPart = {
-  n: 'Unknown',
+  n: 'Part',
   t: '-Infinity',
 };
 

@@ -16,6 +16,7 @@ export interface PartWithParachute extends Part, VanillaPartWithParachute {}
 export const VanillaPartWithParachuteData: VanillaPartWithParachute = {
   ...VanillaPartData,
 
+  n: 'Part With Parachute',
   N: {
     deploy_state: 0.0,
     animation_state: 0.0,
