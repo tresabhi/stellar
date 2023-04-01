@@ -5,6 +5,7 @@
       "$": "Create",
       "templates": {
         "input_placeholder": "Search templates...",
+        "in_built": "In-built",
         "list": {
           "apollo_mission": "Apollo mission",
           "basic_rocket": "Basic rocket",
@@ -339,13 +340,6 @@
           "undo_limit": {
             "title": "Undo limit",
             "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
-          }
-        },
-        "performance": {
-          "$": "Performance",
-          "regress": {
-            "title": "Regress amount",
-            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
           }
         },
         "file": {

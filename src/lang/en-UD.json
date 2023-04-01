@@ -5,6 +5,7 @@
       "$": "ǝʇɐǝɹƆ",
       "templates": {
         "input_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
+        "in_built": "In-built",
         "list": {
           "apollo_mission": "uoᴉssᴉɯ ollod∀",
           "basic_rocket": "ʇǝʞɔoɹ ɔᴉsɐq",
@@ -339,13 +340,6 @@
           "undo_limit": {
             "title": "ʇᴉɯᴉl opu∩",
             "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
-          }
-        },
-        "performance": {
-          "$": "ǝɔuɐɯɹoɟɹǝԀ",
-          "regress": {
-            "title": "ʇunoɯɐ ssǝɹƃǝɹ",
-            "description": "Reduces canvas' resolution when performing computationally expensive tasks."
           }
         },
         "file": {

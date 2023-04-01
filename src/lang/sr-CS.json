@@ -5,6 +5,7 @@
       "$": "Kreiraj",
       "templates": {
         "input_placeholder": "Pretraži šablone...",
+        "in_built": "In-built",
         "list": {
           "apollo_mission": "\"Apolo\" Misija",
           "basic_rocket": "Osnovna Raketa",
@@ -339,13 +340,6 @@
           "undo_limit": {
             "title": "Opozovi ograničenje",
             "description": "Maksimalan broj opoziva/ponovni radnji uskladištenih u memoriji. Maksimalno: 4096; minimalno: 16."
-          }
-        },
-        "performance": {
-          "$": "Performanse",
-          "regress": {
-            "title": "Iznos regresa",
-            "description": "Smanjuje rezoluciju platna prilikom obavljanja kompjuterski skupih zadataka."
           }
         },
         "file": {
