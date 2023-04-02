@@ -55,6 +55,8 @@ export default function RotateNode({
   });
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+    event.stopPropagation();
+
     initialRotation = position
       .set(...getMousePosition(event))
       .sub(center)

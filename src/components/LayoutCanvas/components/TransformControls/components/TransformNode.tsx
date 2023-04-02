@@ -70,6 +70,8 @@ export default function TransformNode({
   constant.rotateAround(ORIGIN, bounds.rotation).add(center);
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
+    event.stopPropagation();
+
     initial.set(event.clientX, event.clientY);
     offsetCardinal.set(0, 0);
     offsetParallel.copy(offsetCardinal);
