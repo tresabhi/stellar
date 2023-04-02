@@ -18,6 +18,10 @@ import TransformNode from './components/TransformNode';
 
 export default function TransformControls() {
   const selections = useBlueprint((state) => state.selections);
+  const isToolTransform = useApp(
+    (state) => state.editor.tool === Tool.Transform,
+  );
+  const visible = selections.length > 0 && isToolTransform;
   const mutableSelections = filter(
     getChildrenRecursive(selections),
     ({ locked }) => !locked,
@@ -33,7 +37,7 @@ export default function TransformControls() {
 
   useEffect(() => {
     const calculateBounds = fallingEdgeDebounce(() => {
-      setBounds(getBoundsFromParts(selections));
+      if (visible) setBounds(getBoundsFromParts(selections));
     }, 0);
     const handleDeferUpdates = (
       event: CustomEvent<DeferUpdatesEventDetail>,
@@ -71,12 +75,11 @@ export default function TransformControls() {
         handleDeferUpdates as EventListener,
       );
     };
-  }, [selections]);
+  }, [selections, visible]);
 
-  return (
+  return visible ? (
     <group
       ref={wrapper}
-      visible={selections.length > 0}
       position={[bounds.x, bounds.y, 0]}
       rotation={[0, 0, bounds.rotation]}
     >
@@ -134,5 +137,5 @@ export default function TransformControls() {
         selections={mutableSelections}
       />
     </group>
-  );
+  ) : null;
 }
