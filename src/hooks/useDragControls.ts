@@ -23,6 +23,36 @@ const useDragControls = (id: string) => {
   const initial = new Vector2();
   const movement = new Vector2();
 
+  function handlePointerDown(event: ThreeEvent<PointerEvent>) {
+    const part = getPart(id) as PartWithTransformations | undefined;
+    const { tool, isSpacePanning, isTouchPanning, isInteractingWithPart } =
+      useApp.getState().editor;
+
+    if (
+      part &&
+      (part.selected || part.parent_id === null) && // is selected or is at root level
+      part.visible &&
+      !part.locked &&
+      tool === Tool.Transform &&
+      !isSpacePanning &&
+      !isTouchPanning &&
+      !isInteractingWithPart
+    ) {
+      event.stopPropagation();
+
+      declareInteractingWithPart();
+
+      firstMove = true;
+      selectedInitially = part.selected;
+      initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
+      movement.set(0, 0);
+
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      window.addEventListener('pointerup', handlePointerUp);
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      window.addEventListener('pointermove', handlePointerMove);
+    }
+  }
   function handlePointerMove(event: PointerEvent) {
     const { tool, isSpacePanning, isTouchPanning, snap } =
       useApp.getState().editor;
@@ -92,34 +122,6 @@ const useDragControls = (id: string) => {
 
     window.removeEventListener('pointerup', handlePointerUp);
     window.removeEventListener('pointermove', handlePointerMove);
-  }
-  function handlePointerDown(event: ThreeEvent<PointerEvent>) {
-    const part = getPart(id) as PartWithTransformations | undefined;
-    const { tool, isSpacePanning, isTouchPanning, isInteractingWithPart } =
-      useApp.getState().editor;
-
-    if (
-      part &&
-      (part.selected || part.parent_id === null) && // is selected or is at root level
-      part.visible &&
-      !part.locked &&
-      tool === Tool.Transform &&
-      !isSpacePanning &&
-      !isTouchPanning &&
-      !isInteractingWithPart
-    ) {
-      event.stopPropagation();
-
-      declareInteractingWithPart();
-
-      firstMove = true;
-      selectedInitially = part.selected;
-      initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
-      movement.set(0, 0);
-
-      window.addEventListener('pointerup', handlePointerUp);
-      window.addEventListener('pointermove', handlePointerMove);
-    }
   }
 
   return handlePointerDown;

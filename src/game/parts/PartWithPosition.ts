@@ -43,7 +43,7 @@ export const usePartWithPosition = (
   let { p } = getPart<PartWithPosition>(id);
 
   const handlePartMove = (event: CustomEvent<PartMoveEventDetail>) => {
-    if (getPart(id)?.selected) {
+    if (getPart(id).selected) {
       if (event.detail.relative) {
         object.current?.position.add(
           movement.set(event.detail.x, event.detail.y, 0),

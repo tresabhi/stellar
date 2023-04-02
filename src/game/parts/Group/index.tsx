@@ -6,6 +6,7 @@ import exportifyPart from 'core/part/exportifyPart';
 import getPart from 'core/part/getPart';
 import removeMetaData from 'core/part/removeMetaData';
 import PartCategory from 'hooks/constants/partCategory';
+import usePartCanvasControls from 'hooks/usePartCanvasControls';
 import usePartVisibility from 'hooks/usePartVisibility';
 import { isArray } from 'lodash';
 import { useEffect, useRef } from 'react';
@@ -54,6 +55,7 @@ export function GroupLayoutComponent({ id }: PartComponentProps) {
   const partOrder = useBlueprint(
     (state) => getPart<Group>(id, state).part_order,
   );
+  const props = usePartCanvasControls(id);
 
   usePartVisibility(id, group);
   useBoundsUpdated(partOrder, () => {
@@ -63,7 +65,7 @@ export function GroupLayoutComponent({ id }: PartComponentProps) {
     declareBoundsUpdated(id);
   });
 
-  return <PartCluster ref={group} parentId={id} />;
+  return <PartCluster {...props} ref={group} parentId={id} />;
 }
 
 export const GroupIcon = Icon;
