@@ -48,6 +48,4 @@ export const registry: PartRegistryItem<PlaceholderIon> = {
 
   Icon: PlaceholderIonIcon,
   Mesh: PlaceholderIonLayoutComponent,
-
-  exportify: undefined,
 };

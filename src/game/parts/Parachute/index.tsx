@@ -66,6 +66,4 @@ export const registry: PartRegistryItem<Parachute> = {
 
   Icon: ParachuteIcon,
   Mesh: ParachuteLayoutComponent,
-
-  exportify: undefined,
 };

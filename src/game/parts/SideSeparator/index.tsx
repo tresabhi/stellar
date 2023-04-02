@@ -72,6 +72,4 @@ export const registry: PartRegistryItem<SideSeparator> = {
 
   Icon: SideSeparatorIcon,
   Mesh: SideSeparatorLayoutComponent,
-
-  exportify: undefined,
 };

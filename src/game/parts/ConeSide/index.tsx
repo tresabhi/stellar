@@ -76,6 +76,4 @@ export const registry: PartRegistryItem<ConeSide> = {
 
   Icon: ConeSideIcon,
   Mesh: ConeSideLayoutComponent,
-
-  exportify: undefined,
 };

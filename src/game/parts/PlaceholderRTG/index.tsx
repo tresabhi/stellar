@@ -41,6 +41,4 @@ export const registry: PartRegistryItem<PlaceholderRTG> = {
 
   Icon: PlaceholderRTGIcon,
   Mesh: PlaceholderRTGLayoutComponent,
-
-  exportify: undefined,
 };

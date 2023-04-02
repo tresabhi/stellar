@@ -41,6 +41,4 @@ export const registry: PartRegistryItem<Probe> = {
 
   Icon: ProbeIcon,
   Mesh: ProbeLayoutComponent,
-
-  exportify: undefined,
 };

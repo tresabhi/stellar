@@ -123,6 +123,4 @@ export const registry: PartRegistryItem<HeatShield> = {
 
   Icon: HeatShieldIcon,
   Mesh: HeatShieldLayoutComponent,
-
-  exportify: undefined,
 };

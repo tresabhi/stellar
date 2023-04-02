@@ -161,6 +161,4 @@ export const registry: PartRegistryItem<DockingPort> = {
 
   Icon: DockingPortIcon,
   Mesh: DockingPortLayoutComponent,
-
-  exportify: undefined,
 };

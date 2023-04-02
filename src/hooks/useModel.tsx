@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei';
 import { MeshStandardMaterial } from 'three';
 import GLTFResult from 'types/GLTFResult';
 
-export default function useModel(src: string) {
+export default function useModel(src: string, transparent = false) {
   useGLTF.preload(src);
 
   const { nodes } = useGLTF(src) as GLTFResult;
@@ -14,6 +14,7 @@ export default function useModel(src: string) {
         <mesh geometry={nodes[nodeName].geometry} key={`node-${nodeName}`}>
           <meshBasicMaterial
             map={(nodes[nodeName].material as MeshStandardMaterial)?.map}
+            transparent={transparent}
           />
         </mesh>
       ))}

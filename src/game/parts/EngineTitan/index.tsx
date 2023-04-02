@@ -46,6 +46,4 @@ export const registry: PartRegistryItem<EngineTitan> = {
 
   Icon: EngineTitanIcon,
   Mesh: EngineTitanLayoutComponent,
-
-  exportify: undefined,
 };

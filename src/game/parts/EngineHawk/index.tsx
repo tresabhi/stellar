@@ -46,6 +46,4 @@ export const registry: PartRegistryItem<EngineHawk> = {
 
   Icon: EngineHawkIcon,
   Mesh: EngineHawkLayoutComponent,
-
-  exportify: undefined,
 };

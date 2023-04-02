@@ -39,6 +39,4 @@ export const registry: PartRegistryItem<Capsule> = {
 
   Icon: CapsuleIcon,
   Mesh: CapsuleLayoutComponent,
-
-  exportify: undefined,
 };
