@@ -3,6 +3,7 @@ import ControlNode from 'components/ControlNode';
 import deferUpdates from 'core/bounds/deferUpdates';
 import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import mutateParts from 'core/part/mutateParts';
+import shouldSnap from 'core/part/shouldSnap';
 import { FuelTank } from 'game/parts/FuelTank';
 import usePart from 'hooks/usePart';
 import { useEffect, useRef } from 'react';
@@ -92,8 +93,6 @@ export default function FuelTankControls({ id }: EditControlsProps) {
     window.addEventListener('pointerup', handleTopPointerUp);
   };
   const handleTopPointerMove = (event: PointerEvent) => {
-    const { snap } = useApp.getState().editor;
-
     if (firstMove) {
       firstMove = false;
       deferUpdates();
@@ -108,7 +107,7 @@ export default function FuelTankControls({ id }: EditControlsProps) {
       .multiply(CANVAS_MATRIX_SCALE)
       .multiply(FUEL_TANK_TOP_EDGE_MATRIX_SCALE);
 
-    if (!event.ctrlKey || snap) {
+    if (shouldSnap(event)) {
       offset
         .divideScalar(POSITION_SNAP_SIZE)
         .round()
@@ -153,8 +152,6 @@ export default function FuelTankControls({ id }: EditControlsProps) {
     window.addEventListener('pointerup', handleBottomPointerUp);
   };
   const handleBottomPointerMove = (event: PointerEvent) => {
-    const { snap } = useApp.getState().editor;
-
     if (firstMove) {
       firstMove = false;
       deferUpdates();
@@ -169,7 +166,7 @@ export default function FuelTankControls({ id }: EditControlsProps) {
       .multiply(CANVAS_MATRIX_SCALE)
       .multiply(FUEL_TANK_BOTTOM_EDGE_MATRIX_SCALE);
 
-    if (!event.ctrlKey || snap) {
+    if (shouldSnap(event)) {
       offset
         .divideScalar(POSITION_SNAP_SIZE)
         .round()

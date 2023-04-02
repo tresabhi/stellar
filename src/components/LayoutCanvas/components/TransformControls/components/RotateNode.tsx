@@ -6,10 +6,10 @@ import deferUpdates from 'core/bounds/deferUpdates';
 import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
 import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
 import getPart from 'core/part/getPart';
+import shouldSnap from 'core/part/shouldSnap';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import useMousePosition from 'hooks/useMousePosition';
 import { useRef } from 'react';
-import useApp from 'stores/app';
 import { Group, Vector2, Vector2Tuple } from 'three';
 import { Line2 } from 'three-stdlib';
 
@@ -71,8 +71,6 @@ export default function RotateNode({
     window.addEventListener('pointerup', handlePointerUp);
   };
   const handlePointerMove = (event: PointerEvent) => {
-    const { snap } = useApp.getState().editor;
-
     if (firstMove) {
       firstMove = false;
       deferUpdates();
@@ -85,7 +83,7 @@ export default function RotateNode({
         .sub(center)
         .angle() - initialRotation;
 
-    if (!(event.ctrlKey || !snap)) {
+    if (shouldSnap(event)) {
       offset = Math.round(offset / ROTATION_SNAP_SIZE) * ROTATION_SNAP_SIZE;
     }
 

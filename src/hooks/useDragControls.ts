@@ -14,6 +14,7 @@ import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import useApp, { Tool } from '../stores/app';
+import shouldSnap from 'core/part/shouldSnap';
 
 const useDragControls = (id: string) => {
   const camera = useThree((state) => state.camera);
@@ -54,7 +55,7 @@ const useDragControls = (id: string) => {
     }
   }
   function handlePointerMove(event: PointerEvent) {
-    const { tool, isSpacePanning, isTouchPanning, snap } =
+    const { tool, isSpacePanning, isTouchPanning,  } =
       useApp.getState().editor;
 
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
@@ -71,7 +72,7 @@ const useDragControls = (id: string) => {
         .divideScalar(camera.zoom)
         .multiply(CANVAS_MATRIX_SCALE);
 
-      if (!event.ctrlKey && snap) {
+      if (shouldSnap(event)) {
         newMovement
           .divideScalar(POSITION_SNAP_SIZE)
           .round()
