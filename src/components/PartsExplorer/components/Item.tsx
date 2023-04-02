@@ -20,7 +20,7 @@ import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import usePart from 'hooks/usePart';
 import usePartProperty from 'hooks/usePartProperty';
-import { KeyboardEvent, memo, MouseEvent, PointerEvent, useRef } from 'react';
+import { KeyboardEvent, MouseEvent, PointerEvent, memo, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import { PartRegistryItem } from 'stores/partRegistry';
@@ -65,7 +65,6 @@ const Trigger = styled('button', {
   },
 });
 const Label = styled('input', {
-  color: theme.colors.textHighContrast,
   fontSize: theme.sizes[12],
   flex: 1,
   cursor: 'pointer',
@@ -75,18 +74,31 @@ const Label = styled('input', {
   '&:focus': {
     cursor: 'text',
   },
+
+  variants: {
+    intractable: {
+      true: { color: theme.colors.textHighContrast },
+      false: { color: theme.colors.textLowContrast },
+    },
+  },
 });
 const IconHolder = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   padding: theme.space.paddingRegular,
-  color: theme.colors.textHighContrast,
   cursor: 'pointer',
 
   '& > svg': {
     width: theme.sizes[16],
     height: theme.sizes[16],
+  },
+
+  variants: {
+    intractable: {
+      true: { color: theme.colors.textHighContrast },
+      false: { color: theme.colors.textLowContrast },
+    },
   },
 });
 const Action = styled('button', {
@@ -130,6 +142,7 @@ export const Item = memo(
     const expanded = isGroup ? (state as Group).expanded : false;
     const { Icon } = getPartRegistry(state.n) as PartRegistryItem<Part>;
     let lastLabel = state.label;
+    const intractable = !state.locked && state.visible;
 
     usePartProperty(
       id,
@@ -222,7 +235,7 @@ export const Item = memo(
           onClick={handleSummaryClick}
           onDoubleClick={handleSummaryDoubleClick}
         >
-          <IconHolder onClick={handleIconClick}>
+          <IconHolder intractable={intractable} onClick={handleIconClick}>
             {!isGroup && <Icon />}
             {isGroup &&
               (expanded ? <TriangleDownIcon /> : <TriangleRightIcon />)}
@@ -235,6 +248,7 @@ export const Item = memo(
             onBlur={handleLabelBlur}
             onPointerDown={handleLabelPointerDown}
             defaultValue={state.label}
+            intractable={intractable}
           />
 
           <Action onClick={handleEyeClick} onlyShowOnHover={state.visible}>
