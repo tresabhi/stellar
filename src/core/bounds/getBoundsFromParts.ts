@@ -1,6 +1,7 @@
 import { sideToPoint } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
+import epsilonEquality from 'utilities/epsilonEquality';
 
 export const emptyBounds: Bounds = {
   x: 0,
@@ -19,10 +20,18 @@ export default function getBoundsFromParts(
     const point = new Vector2();
     const angle = useMutualAngle ? boundsStore[ids[0]].bounds.rotation : 0;
     const noMutualAngle = useMutualAngle
-      ? ids.some(
-          (id) =>
-            (boundsStore[id].bounds.rotation - angle) % (Math.PI / 2) !== 0,
-        )
+      ? ids.some((id) => {
+          const modulus =
+            (boundsStore[id].bounds.rotation - angle) % (Math.PI / 2);
+          const result = epsilonEquality(modulus, 0, 1 / 100);
+
+          if (!result) {
+            // might be smaller than PI / 2
+            return epsilonEquality(modulus, Math.PI / 2);
+          }
+
+          return !result;
+        })
       : false;
 
     if (noMutualAngle) {
