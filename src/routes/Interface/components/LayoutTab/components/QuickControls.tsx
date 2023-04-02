@@ -1,7 +1,12 @@
-import { ColumnSpacingIcon, RowSpacingIcon } from '@radix-ui/react-icons';
+import {
+  ColumnSpacingIcon,
+  ReloadIcon,
+  RowSpacingIcon,
+} from '@radix-ui/react-icons';
 import Button from 'components/Button';
 import mirrorSelectedHorizontal from 'core/part/mirrorSelectedHorizontal';
 import mirrorSelectedVertical from 'core/part/mirrorSelectedVertical';
+import rotateSelected from 'core/part/rotateSelected';
 import { styled, theme } from 'stitches.config';
 
 const Container = styled('div', {
@@ -22,6 +27,12 @@ const Action = styled(Button, {
 export default function QuickControls() {
   return (
     <Container>
+      <Action onClick={() => rotateSelected(Math.PI / 2)}>
+        <ReloadIcon style={{ transform: 'scaleX(-1)' }} />
+      </Action>
+      <Action onClick={() => rotateSelected(-Math.PI / 2)}>
+        <ReloadIcon />
+      </Action>
       <Action onClick={() => mirrorSelectedHorizontal()}>
         <ColumnSpacingIcon />
       </Action>
