@@ -50,7 +50,7 @@ export default function Inspect() {
           )}m`;
         if (boundsRotation.current)
           boundsRotation.current.innerText = `${fixFloatRounding(
-            bounds.rotation,
+            bounds.rotation * (180 / Math.PI),
           )}°`;
       }
     }
