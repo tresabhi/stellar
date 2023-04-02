@@ -1,5 +1,5 @@
 import { invalidate } from '@react-three/fiber';
-import { SNAP_SIZE } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
+import { POSITION_SNAP_SIZE } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import { WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';
@@ -192,19 +192,19 @@ export default function useKeybinds() {
       { preventOnNonEditingTab: false },
     );
 
-    bind('up', () => translate([0, SNAP_SIZE]), {
+    bind('up', () => translate([0, POSITION_SNAP_SIZE]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('down', () => translate([0, -SNAP_SIZE]), {
+    bind('down', () => translate([0, -POSITION_SNAP_SIZE]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('left', () => translate([-SNAP_SIZE, 0]), {
+    bind('left', () => translate([-POSITION_SNAP_SIZE, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });
-    bind('right', () => translate([SNAP_SIZE, 0]), {
+    bind('right', () => translate([POSITION_SNAP_SIZE, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
     });

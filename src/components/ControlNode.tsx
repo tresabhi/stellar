@@ -11,6 +11,7 @@ export interface ControlNodeProps extends GroupProps {
   colorInner?: string;
   colorOuter?: string;
   touchAreaSize?: Vector2Tuple;
+  circle?: boolean;
 }
 
 const ControlNode = forwardRef<Group, ControlNodeProps>(
@@ -21,6 +22,7 @@ const ControlNode = forwardRef<Group, ControlNodeProps>(
       colorInner = '#eeedef',
       colorOuter = '#8f8f8f',
       touchAreaSize = [4, 4],
+      circle = false,
       ...props
     },
     ref,
@@ -30,21 +32,26 @@ const ControlNode = forwardRef<Group, ControlNodeProps>(
     const mesh = useRef<Mesh>(null);
     const touchArea = useRef<Mesh>(null);
     const outline = useRef<Line2>(null);
+    const circleOutline = useRef<Mesh>(null);
     const camera = useThree((state) => state.camera);
+    const scaleVector = new Vector3();
 
     useImperativeHandle(ref, () => group.current as Group);
 
     useFrame(() => {
       const coefficient = (1 / camera.zoom) * size;
-      mesh.current?.scale.copy(parsedScale).multiplyScalar(coefficient);
-      touchArea.current?.scale.copy(parsedScale).multiplyScalar(coefficient);
-      outline.current?.scale.copy(parsedScale).multiplyScalar(coefficient);
+
+      scaleVector.copy(parsedScale).multiplyScalar(coefficient);
+      mesh.current?.scale.copy(scaleVector);
+      touchArea.current?.scale.copy(scaleVector);
+      outline.current?.scale.copy(scaleVector);
+      circleOutline.current?.scale.copy(scaleVector);
     });
 
     return (
       <group ref={group} {...props}>
-        <mesh ref={mesh}>
-          <planeGeometry />
+        <mesh ref={mesh} position={[0, 0, 1]}>
+          {circle ? <circleGeometry args={[0.5, 16]} /> : <planeGeometry />}
           <meshBasicMaterial color={colorInner} />
         </mesh>
 
@@ -52,13 +59,20 @@ const ControlNode = forwardRef<Group, ControlNodeProps>(
           <planeGeometry args={touchAreaSize} />
         </mesh>
 
-        <Line
-          ref={outline}
-          position={[0, 0, 2]}
-          color={colorOuter}
-          points={UNIT_POINTS}
-          lineWidth={2}
-        />
+        {circle ? (
+          <mesh ref={circleOutline} position={[0, 0, 0]}>
+            <circleGeometry args={[0.75, 16]} />
+            <meshBasicMaterial color={colorOuter} />
+          </mesh>
+        ) : (
+          <Line
+            ref={outline}
+            position={[0, 0, 2]}
+            color={colorOuter}
+            points={UNIT_POINTS}
+            lineWidth={2}
+          />
+        )}
       </group>
     );
   },

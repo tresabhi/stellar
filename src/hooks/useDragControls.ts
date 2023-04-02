@@ -1,7 +1,7 @@
 import { ThreeEvent, useThree } from '@react-three/fiber';
 import {
   CANVAS_MATRIX_SCALE,
-  SNAP_SIZE,
+  POSITION_SNAP_SIZE,
 } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import mutateApp from 'core/app/mutateApp';
 import deferUpdates from 'core/bounds/deferUpdates';
@@ -42,7 +42,10 @@ const useDragControls = (id: string) => {
         .multiply(CANVAS_MATRIX_SCALE);
 
       if (!event.ctrlKey && snap) {
-        newMovement.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
+        newMovement
+          .divideScalar(POSITION_SNAP_SIZE)
+          .round()
+          .multiplyScalar(POSITION_SNAP_SIZE);
       }
 
       const delta = newMovement.clone().sub(movement);

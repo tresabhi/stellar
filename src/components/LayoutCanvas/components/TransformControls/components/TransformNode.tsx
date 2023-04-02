@@ -26,7 +26,7 @@ export interface TransformNodeProps {
 
 export const CANVAS_MATRIX_SCALE = new Vector2(1, -1);
 
-export const SNAP_SIZE = 1 / 5;
+export const POSITION_SNAP_SIZE = 1 / 5;
 
 export const sideToPoint = (
   bounds: Bounds,
@@ -51,7 +51,7 @@ export default function TransformNode({
   selections,
 }: TransformNodeProps) {
   const camera = useThree((state) => state.camera);
-  const wrapper = useRef<Group>(null);
+  const node = useRef<Group>(null);
   const initial = new Vector2();
   const offsetCardinal = new Vector2();
   const offsetParallel = new Vector2();
@@ -82,13 +82,13 @@ export default function TransformNode({
     window.addEventListener('pointerup', handlePointerUp);
   };
   const handlePointerMove = (event: PointerEvent) => {
+    const { scaleWithRatio, snap } = useApp.getState().editor;
+
     if (firstMove) {
       firstMove = false;
       deferUpdates();
       declareInteractingWithPart();
     }
-
-    const { scaleWithRatio, snap } = useApp.getState().editor;
 
     offsetCardinal
       .set(event.clientX, event.clientY)
@@ -97,7 +97,10 @@ export default function TransformNode({
       .divideScalar(camera.zoom);
 
     if (!(event.ctrlKey || !snap)) {
-      offsetCardinal.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
+      offsetCardinal
+        .divideScalar(POSITION_SNAP_SIZE)
+        .round()
+        .multiplyScalar(POSITION_SNAP_SIZE);
     }
 
     offsetParallel
@@ -159,7 +162,7 @@ export default function TransformNode({
 
   return !hasMutualAngle && (position.x === 0 || position.y === 0) ? null : (
     <ControlNode
-      ref={wrapper}
+      ref={node}
       position={[
         (bounds.width * position.x) / 2,
         (bounds.height * position.y) / 2,

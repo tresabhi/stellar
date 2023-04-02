@@ -13,6 +13,7 @@ import { Group } from 'three';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
 import { UNIT_POINTS } from '../PartsBounds/components/PartBounds';
+import RotateNode from './components/RotateNode';
 import TransformNode from './components/TransformNode';
 
 export default function TransformControls() {
@@ -79,6 +80,11 @@ export default function TransformControls() {
       position={[bounds.x, bounds.y, 0]}
       rotation={[0, 0, bounds.rotation]}
     >
+      <RotateNode
+        bounds={{ bounds, hasMutualAngle }}
+        selections={mutableSelections}
+      />
+
       <Line
         ref={outline}
         scale={[bounds.width, bounds.height, 1]}

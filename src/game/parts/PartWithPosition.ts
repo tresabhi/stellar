@@ -1,5 +1,6 @@
 import { invalidate } from '@react-three/fiber';
 import { ORIGIN } from 'components/LayoutCanvas/components/EditControls/components/FuelTankControls';
+import { PartRotateEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/RotateNode';
 import { PartTransformEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
@@ -38,6 +39,7 @@ export const usePartWithPosition = (
   const constant = new Vector2();
   const position = new Vector2();
   const scale = new Vector2();
+  const center = new Vector2();
   let { p } = getPart<PartWithPosition>(id);
 
   const handlePartMove = (event: CustomEvent<PartMoveEventDetail>) => {
@@ -52,7 +54,6 @@ export const usePartWithPosition = (
       invalidate();
     }
   };
-
   const handlePartTransform = (
     event: CustomEvent<PartTransformEventDetail>,
   ) => {
@@ -71,6 +72,15 @@ export const usePartWithPosition = (
     object.current?.position.set(position.x, position.y, 0);
     invalidate();
   };
+  const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
+    if (object.current && getPart(id)?.selected) {
+      center.set(...event.detail.center);
+      position.set(p.x, p.y).rotateAround(center, event.detail.rotation);
+
+      object.current.position.set(position.x, position.y, 0);
+      invalidate();
+    }
+  };
 
   useEffect(() => {
     window.addEventListener('partmove', handlePartMove as EventListener);
@@ -78,6 +88,7 @@ export const usePartWithPosition = (
       `parttransform${id}`,
       handlePartTransform as EventListener,
     );
+    window.addEventListener('partrotate', handlePartRotate as EventListener);
 
     return () => {
       window.removeEventListener('partmove', handlePartMove as EventListener);
@@ -85,22 +96,26 @@ export const usePartWithPosition = (
         `parttransform${id}`,
         handlePartTransform as EventListener,
       );
+      window.removeEventListener(
+        'partrotate',
+        handlePartRotate as EventListener,
+      );
     };
   });
 
   usePartProperty(
     id,
     (part: PartWithPosition) => part.p,
-    (newP, prevP) => {
-      p = newP;
-      object.current?.position.set(newP.x, newP.y, 0);
+    (nextP, prevP) => {
+      p = nextP;
+      object.current?.position.set(nextP.x, nextP.y, 0);
       invalidate();
 
       if (object.current && boundsStore[id]) {
         const { bounds } = boundsStore[id];
 
-        bounds.x += newP.x - prevP.x;
-        bounds.y += newP.y - prevP.y;
+        bounds.x += nextP.x - prevP.x;
+        bounds.y += nextP.y - prevP.y;
 
         declareBoundsUpdated(id);
       }

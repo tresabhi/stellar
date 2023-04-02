@@ -12,7 +12,7 @@ import { degToRad } from 'three/src/math/MathUtils';
 import { EditControlsProps } from '../..';
 import {
   CANVAS_MATRIX_SCALE,
-  SNAP_SIZE,
+  POSITION_SNAP_SIZE,
 } from '../../../TransformControls/components/TransformNode';
 
 export interface FuelTankEditDetail {
@@ -109,7 +109,10 @@ export default function FuelTankControls({ id }: EditControlsProps) {
       .multiply(FUEL_TANK_TOP_EDGE_MATRIX_SCALE);
 
     if (!event.ctrlKey || snap) {
-      offset.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
+      offset
+        .divideScalar(POSITION_SNAP_SIZE)
+        .round()
+        .multiplyScalar(POSITION_SNAP_SIZE);
     }
 
     offset.x = Math.max(offset.x, -part.N.width_b);
@@ -167,7 +170,10 @@ export default function FuelTankControls({ id }: EditControlsProps) {
       .multiply(FUEL_TANK_BOTTOM_EDGE_MATRIX_SCALE);
 
     if (!event.ctrlKey || snap) {
-      offset.divideScalar(SNAP_SIZE).round().multiplyScalar(SNAP_SIZE);
+      offset
+        .divideScalar(POSITION_SNAP_SIZE)
+        .round()
+        .multiplyScalar(POSITION_SNAP_SIZE);
     }
 
     offset.x = Math.max(offset.x, -part.N.width_a);

@@ -1,7 +1,7 @@
 import { invalidate } from '@react-three/fiber';
+import { PartRotateEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/RotateNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
-import { PartRotateEventDetail } from 'core/part/rotateSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import boundsStore from 'stores/bounds';
@@ -32,9 +32,15 @@ export const usePartWithOrientation = (
   id: string,
   object: RefObject<Object3D>,
 ) => {
+  let { z } = getPart<PartWithOrientation>(id).o;
+
   const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
     if (object.current && getPart(id)?.selected) {
-      object.current.rotateZ((event.detail / 180) * Math.PI);
+      object.current.rotation.set(
+        0,
+        0,
+        z * (Math.PI / 180) + event.detail.rotation,
+      );
       invalidate();
     }
   };
@@ -53,13 +59,13 @@ export const usePartWithOrientation = (
   usePartProperty(
     id,
     (part: PartWithOrientation) => part.o.z,
-    (z, prevZ) => {
-      object.current?.rotation.set(0, 0, (z / 180) * Math.PI);
+    (nextZ, prevZ) => {
+      object.current?.rotation.set(0, 0, nextZ * (Math.PI / 180));
       invalidate();
 
       if (object.current && boundsStore[id]) {
         const { bounds } = boundsStore[id];
-        const deltaRotation = ((z - prevZ) / 180) * Math.PI;
+        const deltaRotation = ((nextZ - prevZ) / 180) * Math.PI;
         const offsetX = bounds.x - object.current.position.x;
         const offsetY = bounds.y - object.current.position.y;
         const offset = Math.hypot(offsetX, offsetY);
@@ -74,6 +80,7 @@ export const usePartWithOrientation = (
         bounds.x = x;
         bounds.y = y;
         bounds.rotation = rotation;
+        z = nextZ;
 
         declareBoundsUpdated(id);
       }
