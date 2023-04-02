@@ -1,7 +1,8 @@
-import { Part, PartData } from 'game/parts/Part';
+import { Part, PartData, VanillaPart, VanillaPartData } from 'game/parts/Part';
 
+const vanillaKeys = Object.keys(VanillaPartData);
 export const metadataKeys = (Object.keys(PartData) as (keyof Part)[]).filter(
-  (key) => key !== 'n',
+  (key) => !vanillaKeys.includes(key),
 );
 
 export default function removeMetaData(part: Part) {
@@ -9,5 +10,5 @@ export default function removeMetaData(part: Part) {
     delete part[key];
   });
 
-  return part;
+  return part as VanillaPart;
 }

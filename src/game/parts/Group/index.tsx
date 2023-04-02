@@ -70,15 +70,15 @@ export function GroupLayoutComponent({ id }: PartComponentProps) {
 
 export const GroupIcon = Icon;
 
-export const groupExportify: PartExportifier<Group> = (part, draft) => {
+export const groupExportify: PartExportifier<Group> = (part, blueprint) => {
   const exportedParts: VanillaPart[] = [];
   const partWithoutMetaData = removeMetaData(part) as Group;
 
   partWithoutMetaData.part_order.forEach((id) => {
-    const childPart = draft.parts[id];
+    const childPart = blueprint.parts[id];
 
     if (childPart) {
-      const exportedPart = exportifyPart(childPart, draft);
+      const exportedPart = exportifyPart(childPart, blueprint);
 
       if (exportedPart) {
         if (isArray(exportedPart)) {

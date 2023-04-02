@@ -10,7 +10,6 @@ export default function exportifyPart(part: Part, blueprint: Blueprint) {
   const customExportifier = partRegistry?.exportify;
 
   if (customExportifier) return customExportifier(clonedPart, blueprint);
-
   if (partRegistry?.vanillaData === null) return null;
 
   return removeMetaData(clonedPart as Part);

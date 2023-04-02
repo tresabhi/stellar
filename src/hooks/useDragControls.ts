@@ -9,12 +9,12 @@ import declareInteractingWithPart from 'core/interface/declareInteractingWithPar
 import getPart from 'core/part/getPart';
 import select from 'core/part/select';
 import selectConcurrent from 'core/part/selectConcurrent';
+import shouldSnap from 'core/part/shouldSnap';
 import translateSelectedAsync from 'core/part/translateSelectedAsync';
 import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import useApp, { Tool } from '../stores/app';
-import shouldSnap from 'core/part/shouldSnap';
 
 const useDragControls = (id: string) => {
   const camera = useThree((state) => state.camera);
@@ -55,8 +55,7 @@ const useDragControls = (id: string) => {
     }
   }
   function handlePointerMove(event: PointerEvent) {
-    const { tool, isSpacePanning, isTouchPanning,  } =
-      useApp.getState().editor;
+    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
     if (tool === Tool.Pan || isSpacePanning || isTouchPanning) {
       // eslint-disable-next-line @typescript-eslint/no-use-before-define

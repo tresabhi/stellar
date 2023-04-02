@@ -7,15 +7,17 @@ import * as Properties from 'components/Properties';
 import mutateSettings from 'core/app/mutateSettings';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
+import removeMetaData from 'core/part/removeMetaData';
 import PartCategory from 'hooks/constants/partCategory';
 import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
 import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
 import usePhysicalPart from 'hooks/usePartPhysical';
 import usePartProperty from 'hooks/usePartProperty';
 import useTranslator from 'hooks/useTranslator';
+import { cloneDeep } from 'lodash';
 import { useEffect, useRef } from 'react';
 import boundsStore from 'stores/bounds';
-import { PartRegistryItem } from 'stores/partRegistry';
+import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
 import { BufferGeometry, CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
@@ -226,7 +228,6 @@ export function FuelTankProperties({ ids }: PartPropertyComponentProps) {
 
       if (constrain && lastValue !== undefined && lastValue !== 0) {
         draft.N.width_a *= newValue / lastValue;
-        draft.N.width_original *= newValue / lastValue;
       }
     },
   );
@@ -235,10 +236,10 @@ export function FuelTankProperties({ ids }: PartPropertyComponentProps) {
     (state) => state.N.width_a,
     (draft, newValue, lastValue) => {
       draft.N.width_a = newValue;
-      draft.N.width_original = newValue;
 
       if (constrain && lastValue !== undefined && lastValue !== 0) {
         draft.N.width_b *= newValue / lastValue;
+        draft.N.width_original = draft.N.width_b;
       }
     },
   );
@@ -312,6 +313,22 @@ export function FuelTankProperties({ ids }: PartPropertyComponentProps) {
 
 export const FuelTankIcon = Icon;
 
+export const fuelTankExportify: PartExportifier<FuelTank> = (part) => {
+  const exportedPart = removeMetaData(part) as VanillaFuelTank;
+  const partCap = cloneDeep(exportedPart);
+
+  exportedPart.N.width_original = exportedPart.N.width_b;
+  partCap.N.width_original = exportedPart.N.width_a;
+  partCap.N.width_a = exportedPart.N.width_a;
+  partCap.N.width_b = exportedPart.N.width_a;
+  partCap.N.height = 0;
+
+  return exportedPart.N.width_original === exportedPart.N.width_a &&
+    exportedPart.N.width_original === exportedPart.N.width_b
+    ? exportedPart
+    : [exportedPart, partCap];
+};
+
 export const registry: PartRegistryItem<FuelTank> = {
   category: PartCategory.Structural,
   vanillaData: VanillaFuelTankData,
@@ -320,5 +337,5 @@ export const registry: PartRegistryItem<FuelTank> = {
   Icon: FuelTankIcon,
   Mesh: FuelTankLayoutComponent,
 
-  exportify: undefined,
+  exportify: fuelTankExportify,
 };

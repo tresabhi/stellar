@@ -134,6 +134,7 @@ export default function FuelTankControls({ id }: EditControlsProps) {
 
     mutateParts<FuelTank>(id, (draft) => {
       draft.N.width_b = part.N.width_b + offset.x;
+      draft.N.width_original = part.N.width_b;
       draft.N.height = part.N.height + offset.y;
     });
 
