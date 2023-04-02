@@ -2,13 +2,14 @@ import { invalidate, useThree } from '@react-three/fiber';
 import mutateApp from 'core/app/mutateApp';
 import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
 import useMousePosition from 'hooks/useMousePosition';
+import { clamp } from 'lodash';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/app';
 import { OrthographicCamera, Vector2, Vector2Tuple, Vector3 } from 'three';
 
 export const MIN_ZOOM = 2.2;
 export const MAX_ZOOM = 512;
-const ZOOM_SENSITIVITY = 1 / 250;
+const ZOOM_SENSITIVITY = 1 / 128;
 
 export default function PanControls() {
   const canvas = useThree((state) => state.gl.domElement);
@@ -28,15 +29,8 @@ export default function PanControls() {
       if (event.ctrlKey || !snap) {
         initialMousePos = getMousePos(event);
 
-        const zoom = Math.max(
-          MIN_ZOOM,
-          Math.min(
-            MAX_ZOOM,
-            camera.zoom - event.deltaY * ZOOM_SENSITIVITY * camera.zoom,
-          ),
-        );
-
-        camera.zoom = zoom;
+        camera.zoom *= Math.E ** (-event.deltaY * ZOOM_SENSITIVITY);
+        camera.zoom = clamp(camera.zoom, MIN_ZOOM, MAX_ZOOM);
         camera.updateProjectionMatrix();
 
         const newPos = getMousePos(event);
@@ -64,12 +58,20 @@ export default function PanControls() {
       invalidate();
     };
 
-    const handlePointerUp = () => {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      window.removeEventListener('pointermove', handlePointerMove);
+    const handlePointerDown = (event: PointerEvent | MouseEvent) => {
+      if (!useApp.getState().editor.isTouchPanning) {
+        const { tool, isSpacePanning } = useApp.getState().editor;
+
+        if (tool === Tool.Pan || isSpacePanning || event.button === 1) {
+          initialMousePos = getMousePos(event);
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          window.addEventListener('pointermove', handlePointerMove);
+        }
+      }
     };
     const handlePointerMove = (event: PointerEvent) => {
       if (useApp.getState().editor.isTouchPanning) {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         handlePointerUp();
       } else {
         const newPos = getMousePos(event);
@@ -83,17 +85,47 @@ export default function PanControls() {
         invalidate();
       }
     };
-    const handlePointerDown = (event: PointerEvent | MouseEvent) => {
-      if (!useApp.getState().editor.isTouchPanning) {
-        const { tool, isSpacePanning } = useApp.getState().editor;
+    const handlePointerUp = () => {
+      window.removeEventListener('pointermove', handlePointerMove);
+    };
 
-        if (tool === Tool.Pan || isSpacePanning || event.button === 1) {
-          initialMousePos = getMousePos(event);
-          window.addEventListener('pointermove', handlePointerMove);
+    const handleTouchStart = (event: TouchEvent) => {
+      firstMove = true;
+
+      if (touchMemories.size === 0) {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        window.addEventListener('touchmove', handleTouchMove);
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        window.addEventListener('touchend', handleTouchEnd);
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        window.addEventListener('touchcancel', handleTouchEnd);
+      }
+
+      [...event.changedTouches].forEach((changedTouch) => {
+        touchMemories.set(changedTouch.identifier, [
+          changedTouch.clientX,
+          changedTouch.clientY,
+        ]);
+      });
+
+      if (touchMemories.size === 2) {
+        event.preventDefault();
+
+        const firstTouch = touchMemories.get(0);
+        const secondTouch = touchMemories.get(1);
+
+        mutateApp((draft) => {
+          draft.editor.isTouchPanning = true;
+        });
+
+        if (firstTouch && secondTouch) {
+          lastHypotenuse = Math.sqrt(
+            Math.abs(firstTouch[0] - secondTouch[0]) ** 2 +
+              Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
+          );
         }
       }
     };
-
     const handleTouchMove = (event: TouchEvent) => {
       if (touchMemories.size === 2) {
         if (firstMove) {
@@ -172,40 +204,7 @@ export default function PanControls() {
         window.removeEventListener('touchcancel', handleTouchEnd);
       }
     };
-    const handleTouchStart = (event: TouchEvent) => {
-      firstMove = true;
 
-      if (touchMemories.size === 0) {
-        window.addEventListener('touchmove', handleTouchMove);
-        window.addEventListener('touchend', handleTouchEnd);
-        window.addEventListener('touchcancel', handleTouchEnd);
-      }
-
-      [...event.changedTouches].forEach((changedTouch) => {
-        touchMemories.set(changedTouch.identifier, [
-          changedTouch.clientX,
-          changedTouch.clientY,
-        ]);
-      });
-
-      if (touchMemories.size === 2) {
-        event.preventDefault();
-
-        const firstTouch = touchMemories.get(0);
-        const secondTouch = touchMemories.get(1);
-
-        mutateApp((draft) => {
-          draft.editor.isTouchPanning = true;
-        });
-
-        if (firstTouch && secondTouch) {
-          lastHypotenuse = Math.sqrt(
-            Math.abs(firstTouch[0] - secondTouch[0]) ** 2 +
-              Math.abs(firstTouch[1] - secondTouch[1]) ** 2,
-          );
-        }
-      }
-    };
     const handleMouseDown = (event: MouseEvent) => {
       if (event.button === 1) handlePointerDown(event);
     };
