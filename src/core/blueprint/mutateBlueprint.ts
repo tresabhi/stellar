@@ -36,7 +36,5 @@ export default function mutateBlueprint(producer: (state: Blueprint) => void) {
 
     declareUnsavedChanges();
     useBlueprint.setState(nextState);
-  } else {
-    // TODO: warn in verbose mode
   }
 }
