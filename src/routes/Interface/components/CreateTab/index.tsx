@@ -13,7 +13,7 @@ import orbitAndReEntry from 'assets/blueprints/orbit-and-re-entry.json';
 import parachuteAndSeparator from 'assets/blueprints/parachute-and-separator.json';
 import { fileOpen } from 'browser-fs-access';
 import ButtonPrimitive from 'components/Button';
-import { InputWithIcon } from 'components/InputWithIcon';
+import InputWithIcon from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
 import mutateApp from 'core/app/mutateApp';
 import importFile from 'core/blueprint/importFile';
@@ -25,7 +25,7 @@ import { useMemo, useRef } from 'react';
 import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled, theme } from 'stitches.config';
 import { Tab } from 'stores/app';
-import { getContext } from 'utilities/getContext';
+import getContext from 'utilities/getContext';
 import StatusBar from './components/StatusBar';
 
 export const Container = styled('div', {

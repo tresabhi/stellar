@@ -57,5 +57,3 @@ export function PartWithParachuteProperties({
     </Properties.Group>
   );
 }
-
-export const registry = null;

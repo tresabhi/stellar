@@ -9,7 +9,7 @@ import { ReactNode, useState } from 'react';
 import { UNSTABLE_VERSIONS } from 'routes/Interface';
 import { PromptProps } from 'stores/prompts';
 import useSettings, { THEMES } from 'stores/settings';
-import { getContext } from 'utilities/getContext';
+import getContext from 'utilities/getContext';
 import InstabilityWarningPrompt from './InstabilityWarningPrompt';
 
 export const FIXED_LANG_NAMES: Record<string, string> = {

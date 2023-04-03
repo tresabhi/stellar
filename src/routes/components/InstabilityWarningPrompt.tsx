@@ -3,7 +3,7 @@ import * as Prompt from 'components/Prompt';
 import mutateSettings from 'core/app/mutateSettings';
 import useTranslator from 'hooks/useTranslator';
 import { PromptProps } from 'stores/prompts';
-import { getContext } from 'utilities/getContext';
+import getContext from 'utilities/getContext';
 
 export default function InstabilityWarningPrompt({ dismiss }: PromptProps) {
   const { t, f } = useTranslator();

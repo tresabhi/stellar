@@ -32,5 +32,3 @@ export const PartData: Part = {
   visible: true,
   locked: false,
 };
-
-export const registry = null;

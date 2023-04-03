@@ -1,5 +1,5 @@
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { InputWithIcon } from 'components/InputWithIcon';
+import InputWithIcon from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
 import { SearchItems } from 'components/Search';
 import getParent from 'core/part/getParent';

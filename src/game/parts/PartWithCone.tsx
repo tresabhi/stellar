@@ -79,5 +79,3 @@ export function PartWithConeProperties({ ids }: PartPropertyComponentProps) {
     </Properties.Group>
   );
 }
-
-export const registry = null;

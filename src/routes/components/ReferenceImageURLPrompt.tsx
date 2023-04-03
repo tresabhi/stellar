@@ -1,5 +1,5 @@
 import { Link1Icon } from '@radix-ui/react-icons';
-import { InputWithIcon } from 'components/InputWithIcon';
+import InputWithIcon from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { ReferenceImage } from 'game/parts/ReferenceImage';

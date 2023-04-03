@@ -65,5 +65,3 @@ export function PartWithEngineProperties({ ids }: PartPropertyComponentProps) {
     </Properties.Group>
   );
 }
-
-export const registry = null;

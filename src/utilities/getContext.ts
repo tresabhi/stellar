@@ -11,7 +11,7 @@ export enum StellarName {
   Unknown,
 }
 
-export const getContext = () => {
+export default function getContext() {
   let name: StellarName = StellarName.Unknown;
   let title = 'Stellar Unknown';
   let Icon = StellarIcon;
@@ -35,4 +35,4 @@ export const getContext = () => {
   }
 
   return { name, title, Icon };
-};
+}

@@ -60,5 +60,3 @@ export function PartWithFragmentProperties({
     </Properties.Group>
   );
 }
-
-export const registry = null;

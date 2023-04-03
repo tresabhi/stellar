@@ -165,5 +165,3 @@ export function PartWithTransformationsProperties({
     </Properties.Group>
   );
 }
-
-export const registry = null;

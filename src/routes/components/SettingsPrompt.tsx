@@ -22,7 +22,7 @@ import Anchor from 'components/Anchor';
 import Button from 'components/Button';
 import Checkbox from 'components/Checkbox';
 import InputPrimitive from 'components/Input';
-import { InputWithIcon } from 'components/InputWithIcon';
+import InputWithIcon from 'components/InputWithIcon';
 import Search from 'components/Search';
 import * as Select from 'components/Select';
 import mutateSettings from 'core/app/mutateSettings';

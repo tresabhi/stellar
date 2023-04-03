@@ -79,5 +79,3 @@ export function PartWithTextureProperties() {
     </Properties.Group>
   );
 }
-
-export const registry = null;

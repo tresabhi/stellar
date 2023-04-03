@@ -7,6 +7,5 @@ export type Translations = {
 
 export type UseTranslationsCache = Map<string, Translations>;
 
-export const useTranslationsCache = create<UseTranslationsCache>(
-  () => new Map(),
-);
+const useTranslationsCache = create<UseTranslationsCache>(() => new Map());
+export default useTranslationsCache;

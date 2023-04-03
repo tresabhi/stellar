@@ -9,7 +9,7 @@ import WelcomePrompt from 'routes/components/WelcomePrompt';
 import { styled } from 'stitches.config';
 import useApp, { Tab } from 'stores/app';
 import useSettings from 'stores/settings';
-import { getContext, StellarName } from 'utilities/getContext';
+import getContext, { StellarName } from 'utilities/getContext';
 import CreateTab from './components/CreateTab';
 import ExportTab from './components/ExportTab';
 import LayoutTab from './components/LayoutTab';

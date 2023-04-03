@@ -1,7 +1,7 @@
 import { Pencil1Icon } from '@radix-ui/react-icons';
 // import CheckboxWithLabel from 'components/CheckboxWithLabel';
 import Checkbox, { CheckboxProps } from 'components/Checkbox';
-import { InputWithIcon } from 'components/InputWithIcon';
+import InputWithIcon from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
 import { Label } from 'components/Properties';
 import mutateSettings from 'core/app/mutateSettings';

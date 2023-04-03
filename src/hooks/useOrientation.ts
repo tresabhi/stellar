@@ -5,7 +5,7 @@ export enum Orientation {
   Portrait,
 }
 
-export const useOrientation = () => {
+export default function useOrientation() {
   const landscapeMatch = window.matchMedia('(orientation: landscape)');
   const [orientation, setOrientation] = useState(
     landscapeMatch.matches ? Orientation.Landscape : Orientation.Portrait,
@@ -20,4 +20,4 @@ export const useOrientation = () => {
   });
 
   return orientation;
-};
+}

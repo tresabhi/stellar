@@ -1,7 +1,7 @@
 import { BarLoader } from 'react-spinners';
 import { styled, theme } from 'stitches.config';
 import themeDark from 'stitches.config/themes/dark';
-import { getContext } from 'utilities/getContext';
+import getContext from 'utilities/getContext';
 
 const Container = styled('div', {
   backgroundColor: theme.colors.appBackground1,

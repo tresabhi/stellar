@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import globalStyles from 'stitches.config/styles/global';
 import useApp from 'stores/app';
 import useSettings from 'stores/settings';
-import { getContext } from 'utilities/getContext';
+import getContext from 'utilities/getContext';
 import prettifyVersion from 'utilities/prettifyVersion';
 import packageJSON from '../../package.json';
 

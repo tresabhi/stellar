@@ -2,7 +2,7 @@ import { MobileIcon, ThickArrowRightIcon } from '@radix-ui/react-icons';
 import Button from 'components/Button';
 import mutateApp from 'core/app/mutateApp';
 import mutateSettings from 'core/app/mutateSettings';
-import { Orientation, useOrientation } from 'hooks/useOrientation';
+import useOrientation, { Orientation } from 'hooks/useOrientation';
 import useTranslator from 'hooks/useTranslator';
 import { HTMLAttributes, ReactNode } from 'react';
 import { isDesktop } from 'react-device-detect';

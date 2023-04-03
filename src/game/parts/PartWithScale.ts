@@ -2,12 +2,11 @@ import { invalidate } from '@react-three/fiber';
 import { PartTransformEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
-import { PartScaleEventDetail } from 'core/part/scaleSelectedAsync';
 import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
-import { Object3D, Vector3 } from 'three';
+import { Object3D } from 'three';
 import moduloAngle from 'utilities/moduloAngle';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import { PartWithOrientation } from './PartWithOrientation';
@@ -46,17 +45,7 @@ export const usePartWithScale = (
   object: RefObject<Object3D>,
   flipLighting = true,
 ) => {
-  const scale = new Vector3();
   let rotation = getPart<PartWithOrientation>(id).o.z;
-
-  const handlePartScale = (event: CustomEvent<PartScaleEventDetail>) => {
-    if (object.current && getPart(id)?.selected) {
-      object.current.scale.multiply(
-        scale.set(event.detail.x, event.detail.y, 1),
-      );
-      invalidate();
-    }
-  };
 
   const handlePartTransform = (
     event: CustomEvent<PartTransformEventDetail>,
@@ -84,14 +73,12 @@ export const usePartWithScale = (
   };
 
   useEffect(() => {
-    window.addEventListener('partscale', handlePartScale as EventListener);
     window.addEventListener(
       `parttransform${id}`,
       handlePartTransform as EventListener,
     );
 
     return () => {
-      window.removeEventListener('partscale', handlePartScale as EventListener);
       window.removeEventListener(
         `parttransform${id}`,
         handlePartTransform as EventListener,
@@ -146,5 +133,3 @@ export const usePartWithScale = (
     { equalityFn: (a, b) => a.x === b.x && a.y === b.y },
   );
 };
-
-export const registry = null;

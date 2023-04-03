@@ -48,7 +48,7 @@ const IconContainer = styled('div', {
   },
 });
 
-export const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
+const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
   ({ iconSide = InputWithIconSide.Right, icon, ...props }, ref) => (
     <Container>
       {iconSide === InputWithIconSide.Left && (
@@ -63,3 +63,4 @@ export const InputWithIcon = forwardRef<HTMLInputElement, InputWithIconProps>(
     </Container>
   ),
 );
+export default InputWithIcon;

@@ -8,7 +8,7 @@ import useApp, { Tool } from 'stores/app';
 import { OrthographicCamera, Vector2, Vector2Tuple, Vector3 } from 'three';
 
 export const MIN_ZOOM = 2.2;
-export const MAX_ZOOM = 512;
+export const MAX_ZOOM = 1024;
 const ZOOM_SENSITIVITY = 1 / 128;
 
 export default function PanControls() {
