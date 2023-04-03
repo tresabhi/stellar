@@ -54,7 +54,7 @@ export const HeatShieldData: HeatShield = {
 };
 
 useGLTF.preload(model);
-export function HeatShieldLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const widthWrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper);
@@ -116,11 +116,11 @@ export function HeatShieldProperties({ ids }: PartPropertyComponentProps) {
   );
 }
 
-export const registry: PartRegistryItem<HeatShield> = {
+export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaHeatShieldData,
   data: HeatShieldData,
 
   Icon,
-  Mesh: HeatShieldLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<HeatShield>;

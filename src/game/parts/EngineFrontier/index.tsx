@@ -37,13 +37,13 @@ export const EngineFrontierData: EngineFrontier = {
   label: 'Frontier Engine',
 };
 
-export const EngineFrontierLayoutComponent = createPhysicalPart(model, false);
+const LayoutComponent = createPhysicalPart(model, false);
 
-export const registry: PartRegistryItem<EngineFrontier> = {
+export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineFrontierData,
   data: EngineFrontierData,
 
   Icon,
-  Mesh: EngineFrontierLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<EngineFrontier>;

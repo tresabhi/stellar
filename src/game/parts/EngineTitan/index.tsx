@@ -35,13 +35,13 @@ export const EngineTitanData: EngineTitan = {
   label: 'Titan Engine',
 };
 
-export const EngineTitanLayoutComponent = createPhysicalPart(model, false);
+const LayoutComponent = createPhysicalPart(model, false);
 
-export const registry: PartRegistryItem<EngineTitan> = {
+export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineTitanData,
   data: EngineTitanData,
 
   Icon,
-  Mesh: EngineTitanLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<EngineTitan>;

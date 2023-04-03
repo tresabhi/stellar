@@ -127,7 +127,7 @@ function constructGeometry(
 
 preloadTexture(defaultTexture);
 preloadTexture(topTexture);
-export default function FuelTankLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const meshTop = useRef<Mesh>(null);
   const meshMiddle = useRef<Mesh>(null);
@@ -327,13 +327,13 @@ export const fuelTankExportify: PartExportifier<FuelTank> = (part) => {
     : [exportedPart, partCap];
 };
 
-export const registry: PartRegistryItem<FuelTank> = {
+export default {
   category: PartCategory.Structural,
   vanillaData: VanillaFuelTankData,
   data: FuelTankData,
 
   Icon,
-  Mesh: FuelTankLayoutComponent,
+  LayoutComponent,
 
   exportify: fuelTankExportify,
-};
+} as PartRegistryItem<FuelTank>;

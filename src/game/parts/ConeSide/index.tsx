@@ -49,7 +49,7 @@ export const ConeSideData: ConeSide = {
 };
 
 useGLTF.preload(model);
-export default function ConeSideLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const sizeWrapper = useRef<Group>(null);
   const { size } = getPart<ConeSide>(id).N;
@@ -67,11 +67,11 @@ export default function ConeSideLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export const registry: PartRegistryItem<ConeSide> = {
+export default {
   category: PartCategory.Structural,
   vanillaData: VanillaConeSideData,
   data: ConeSideData,
 
   Icon,
-  Mesh: ConeSideLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<ConeSide>;

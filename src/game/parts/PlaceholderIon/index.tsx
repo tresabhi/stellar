@@ -37,13 +37,13 @@ export const PlaceholderIonData: PlaceholderIon = {
   label: 'Ion Engine',
 };
 
-export const PlaceholderIonLayoutComponent = createPhysicalPart(model);
+const LayoutComponent = createPhysicalPart(model);
 
-export const registry: PartRegistryItem<PlaceholderIon> = {
+export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaPlaceholderIonData,
   data: PlaceholderIonData,
 
   Icon,
-  Mesh: PlaceholderIonLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<PlaceholderIon>;

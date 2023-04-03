@@ -11,7 +11,7 @@ export type PartRegistryItem<Type extends Part> = {
   data: Part;
 
   Icon: FC;
-  Mesh: FC<PartComponentProps>;
+  LayoutComponent: FC<PartComponentProps>;
 
   exportify?: PartExportifier<Type>;
 };
@@ -24,10 +24,9 @@ export type PartExportifier<Type extends Part> = (
 export type UsePartRegistry = Map<string, PartRegistryItem<Part>>;
 
 const partsGlob = {
-  ...import.meta.glob('../game/parts/*', { eager: true, import: 'registry' }),
   ...import.meta.glob('../game/parts/*/index.tsx', {
     eager: true,
-    import: 'registry',
+    import: 'default',
   }),
 };
 

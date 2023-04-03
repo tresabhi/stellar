@@ -50,7 +50,7 @@ const useBoundsUpdated = (ids: string[], callback: () => void) => {
   });
 };
 
-export function GroupLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const group = useRef<THREE.Group>(null);
   const partOrder = useBlueprint(
     (state) => getPart<Group>(id, state).part_order,
@@ -91,13 +91,13 @@ export const groupExportify: PartExportifier<Group> = (part, blueprint) => {
   return exportedParts;
 };
 
-export const registry: PartRegistryItem<Group> = {
+export default {
   category: PartCategory.Abstract,
   vanillaData: null,
   data: GroupData,
 
   Icon,
-  Mesh: GroupLayoutComponent,
+  LayoutComponent,
 
   exportify: groupExportify,
-};
+} as PartRegistryItem<Group>;

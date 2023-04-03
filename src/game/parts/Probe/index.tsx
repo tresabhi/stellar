@@ -30,13 +30,13 @@ export const ProbeData: Probe = {
   label: 'Probe',
 };
 
-export const ProbeLayoutComponent = createPhysicalPart(model);
+const LayoutComponent = createPhysicalPart(model);
 
-export const registry: PartRegistryItem<Probe> = {
+export default {
   category: PartCategory.Structural,
   vanillaData: VanillaProbeData,
   data: ProbeData,
 
   Icon,
-  Mesh: ProbeLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<Probe>;

@@ -28,13 +28,13 @@ export const RCSData: RCS = {
   label: 'RCS',
 };
 
-export const RCSLayoutComponent = createPhysicalPart(model, false, true);
+const LayoutComponent = createPhysicalPart(model, false, true);
 
-export const registry: PartRegistryItem<RCS> = {
+export default {
   category: PartCategory.Structural,
   vanillaData: VanillaRCSData,
   data: RCSData,
 
   Icon,
-  Mesh: RCSLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<RCS>;

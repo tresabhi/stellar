@@ -49,7 +49,7 @@ export const DockingPortData: DockingPort = {
 useGLTF.preload(topModel);
 useGLTF.preload(middleModel);
 useGLTF.preload(bottomModel);
-export function DockingPortLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const { width } = getPart<DockingPort>(id).N;
   const wrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper);
@@ -152,11 +152,11 @@ export function DockingPortProperties({ ids }: PartPropertyComponentProps) {
   );
 }
 
-export const registry: PartRegistryItem<DockingPort> = {
+export default {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaDockingPortData,
   data: DockingPortData,
 
   Icon,
-  Mesh: DockingPortLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<DockingPort>;

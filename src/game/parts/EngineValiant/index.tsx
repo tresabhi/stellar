@@ -35,13 +35,13 @@ export const EngineValiantData: EngineValiant = {
   label: 'Valiant Engine',
 };
 
-export const EngineValiantLayoutComponent = createPhysicalPart(model, false);
+const LayoutComponent = createPhysicalPart(model, false);
 
-export const registry: PartRegistryItem<EngineValiant> = {
+export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineValiantData,
   data: EngineValiantData,
 
   Icon,
-  Mesh: EngineValiantLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<EngineValiant>;

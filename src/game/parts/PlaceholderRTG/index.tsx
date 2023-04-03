@@ -30,13 +30,13 @@ export const PlaceholderRTGData: PlaceholderRTG = {
   label: 'Battery',
 };
 
-export const PlaceholderRTGLayoutComponent = createPhysicalPart(model);
+const LayoutComponent = createPhysicalPart(model);
 
-export const registry: PartRegistryItem<PlaceholderRTG> = {
+export default {
   category: PartCategory.Structural,
   vanillaData: VanillaPlaceholderRTGData,
   data: PlaceholderRTGData,
 
   Icon,
-  Mesh: PlaceholderRTGLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<PlaceholderRTG>;

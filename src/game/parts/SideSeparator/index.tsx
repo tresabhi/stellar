@@ -48,7 +48,7 @@ export const SideSeparatorData: SideSeparator = {
 useGLTF.preload(regularModel);
 useGLTF.preload(leftModel);
 useGLTF.preload(rightModel);
-export function SideSeparatorLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const deployState = usePart<SideSeparator>(id).T.fragment;
   const wrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper, false);
@@ -63,11 +63,11 @@ export function SideSeparatorLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export const registry: PartRegistryItem<SideSeparator> = {
+export default {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaSideSeparatorData,
   data: SideSeparatorData,
 
   Icon,
-  Mesh: SideSeparatorLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<SideSeparator>;

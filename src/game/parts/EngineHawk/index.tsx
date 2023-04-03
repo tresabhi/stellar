@@ -35,13 +35,13 @@ export const EngineHawkData: EngineHawk = {
   label: 'Hawk Engine',
 };
 
-export const EngineHawkLayoutComponent = createPhysicalPart(model, false);
+const LayoutComponent = createPhysicalPart(model, false);
 
-export const registry: PartRegistryItem<EngineHawk> = {
+export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineHawkData,
   data: EngineHawkData,
 
   Icon,
-  Mesh: EngineHawkLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<EngineHawk>;

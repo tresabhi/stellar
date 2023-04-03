@@ -44,7 +44,7 @@ export const ParachuteData: Parachute = {
 
 useGLTF.preload(regularModel);
 useGLTF.preload(deployedModel);
-export function ParachuteLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const deployState = usePart<Parachute>(id).N.deploy_state;
   const wrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper);
@@ -57,11 +57,11 @@ export function ParachuteLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export const registry: PartRegistryItem<Parachute> = {
+export default {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaParachuteData,
   data: ParachuteData,
 
   Icon,
-  Mesh: ParachuteLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<Parachute>;

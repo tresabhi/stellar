@@ -28,13 +28,13 @@ export const CapsuleData: Capsule = {
   label: 'Capsule',
 };
 
-export const CapsuleLayoutComponent = createPhysicalPart(model);
+const LayoutComponent = createPhysicalPart(model);
 
-export const registry: PartRegistryItem<Capsule> = {
+export default {
   category: PartCategory.Structural,
   vanillaData: VanillaCapsuleData,
   data: CapsuleData,
 
   Icon,
-  Mesh: CapsuleLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<Capsule>;

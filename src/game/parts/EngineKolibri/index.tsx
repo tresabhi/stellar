@@ -35,13 +35,13 @@ export const EngineKolibriData: EngineKolibri = {
   label: 'Kolibri Engine',
 };
 
-export const EngineKolibriLayoutComponent = createPhysicalPart(model, false);
+const LayoutComponent = createPhysicalPart(model, false);
 
-export const registry: PartRegistryItem<EngineKolibri> = {
+export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineKolibriData,
   data: EngineKolibriData,
 
   Icon,
-  Mesh: EngineKolibriLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<EngineKolibri>;

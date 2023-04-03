@@ -40,7 +40,7 @@ export const ReferenceImageData: ReferenceImage = {
   sourceName: undefined,
 };
 
-export function ReferenceImageLayoutComponent({ id }: PartComponentProps) {
+function LayoutComponent({ id }: PartComponentProps) {
   const mesh = useRef<Mesh>(null);
   const source = useBlueprint(
     (draft) => (draft.parts[id] as ReferenceImage).source,
@@ -138,11 +138,11 @@ export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
   );
 }
 
-export const registry: PartRegistryItem<ReferenceImage> = {
+export default {
   category: PartCategory.Abstract,
   vanillaData: null,
   data: ReferenceImageData,
 
   Icon,
-  Mesh: ReferenceImageLayoutComponent,
-};
+  LayoutComponent,
+} as PartRegistryItem<ReferenceImage>;
