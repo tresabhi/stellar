@@ -20,14 +20,13 @@ export default function useNumericalInputProperty<
   mutate: (draft: Type, newValue: Value, lastValue?: Value) => Value | void,
 ) {
   const input = useRef<InputRef>(null);
-  let { value } = getMutualProperty<Type, Value>(ids, slice);
+  // eslint-disable-next-line prefer-const
+  let { mixed, value } = getMutualProperty<Type, Value>(ids, slice);
 
-  const setInputValue = (newValue?: number) => {
+  const setInputValue = (newMixed: boolean, newValue: number) => {
     if (input.current) {
       input.current.value = `${
-        newValue === undefined
-          ? MIXED_VALUE_PLACEHOLDER
-          : fixFloatRounding(newValue)
+        newMixed ? MIXED_VALUE_PLACEHOLDER : fixFloatRounding(newValue)
       }`;
       input.current.resize();
     }
@@ -38,29 +37,29 @@ export default function useNumericalInputProperty<
 
       if (returnValue !== undefined) {
         value = returnValue;
-        setInputValue(value);
+        setInputValue(false, value);
       }
     });
   };
   const recomputeAndRerender = fallingEdgeDebounce(() => {
-    value = getMutualProperty(ids, slice).value;
-    setInputValue(value);
+    const mutual = getMutualProperty(ids, slice);
+    setInputValue(mutual.mixed, mutual.value);
   }, RERENDER_DEBOUNCE);
 
   const onBlur = (event: ChangeEvent<HTMLInputElement>) => {
     const evaluated = evaluateExpression(event.target.value) as Value;
 
     if (Number.isNaN(evaluated)) {
-      setInputValue(value);
+      setInputValue(false, value);
     } else {
-      setInputValue(evaluated);
+      setInputValue(false, evaluated);
       commit(evaluated, value);
       value = evaluated;
     }
   };
 
   useEffect(() => {
-    setInputValue(value);
+    setInputValue(mixed, value);
   });
 
   useEffect(() => {
