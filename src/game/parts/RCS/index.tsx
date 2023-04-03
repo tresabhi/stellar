@@ -1,4 +1,4 @@
-import { ReactComponent as RCSIconPrimitive } from 'assets/icons/reaction-control-system.svg';
+import { ReactComponent as Icon } from 'assets/icons/reaction-control-system.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
@@ -30,13 +30,11 @@ export const RCSData: RCS = {
 
 export const RCSLayoutComponent = createPhysicalPart(model, false, true);
 
-export const RCSIcon = RCSIconPrimitive;
-
 export const registry: PartRegistryItem<RCS> = {
   category: PartCategory.Structural,
   vanillaData: VanillaRCSData,
   data: RCSData,
 
-  Icon: RCSIcon,
+  Icon,
   Mesh: RCSLayoutComponent,
 };

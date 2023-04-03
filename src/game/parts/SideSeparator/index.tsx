@@ -1,5 +1,5 @@
 import { useGLTF } from '@react-three/drei';
-import { ReactComponent as EngineIcon } from 'assets/icons/separator-side.svg';
+import { ReactComponent as Icon } from 'assets/icons/separator-side.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import useModel from 'hooks/useModel';
 import usePart from 'hooks/usePart';
@@ -63,13 +63,11 @@ export function SideSeparatorLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export const SideSeparatorIcon = EngineIcon;
-
 export const registry: PartRegistryItem<SideSeparator> = {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaSideSeparatorData,
   data: SideSeparatorData,
 
-  Icon: SideSeparatorIcon,
+  Icon,
   Mesh: SideSeparatorLayoutComponent,
 };

@@ -1,6 +1,6 @@
 import { useGLTF } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
-import { ReactComponent as DockingPortIcon } from 'assets/icons/docking-port.svg';
+import { ReactComponent as Icon } from 'assets/icons/docking-port.svg';
 import * as Properties from 'components/Properties';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
@@ -152,13 +152,11 @@ export function DockingPortProperties({ ids }: PartPropertyComponentProps) {
   );
 }
 
-export { ReactComponent as DockingPortIcon } from 'assets/icons/docking-port.svg';
-
 export const registry: PartRegistryItem<DockingPort> = {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaDockingPortData,
   data: DockingPortData,
 
-  Icon: DockingPortIcon,
+  Icon,
   Mesh: DockingPortLayoutComponent,
 };

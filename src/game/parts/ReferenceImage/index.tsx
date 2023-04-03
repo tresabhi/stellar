@@ -1,4 +1,4 @@
-import { ImageIcon, PlusIcon, UploadIcon } from '@radix-ui/react-icons';
+import { ImageIcon as Icon, PlusIcon, UploadIcon } from '@radix-ui/react-icons';
 import { useTexture } from '@react-three/drei';
 import referenceImageDefault from 'assets/images/referenceImageDefault.png';
 import { fileOpen } from 'browser-fs-access';
@@ -138,14 +138,11 @@ export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
   );
 }
 
-export const ReferenceImageIcon = ImageIcon;
-
 export const registry: PartRegistryItem<ReferenceImage> = {
   category: PartCategory.Abstract,
   vanillaData: null,
   data: ReferenceImageData,
 
-  Icon: ReferenceImageIcon,
-  // TODO: rename both key and layout component
+  Icon,
   Mesh: ReferenceImageLayoutComponent,
 };

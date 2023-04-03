@@ -1,4 +1,4 @@
-import { ReactComponent as ProbeIconPrimitive } from 'assets/icons/probe.svg';
+import { ReactComponent as Icon } from 'assets/icons/probe.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
@@ -32,13 +32,11 @@ export const ProbeData: Probe = {
 
 export const ProbeLayoutComponent = createPhysicalPart(model);
 
-export const ProbeIcon = ProbeIconPrimitive;
-
 export const registry: PartRegistryItem<Probe> = {
   category: PartCategory.Structural,
   vanillaData: VanillaProbeData,
   data: ProbeData,
 
-  Icon: ProbeIcon,
+  Icon,
   Mesh: ProbeLayoutComponent,
 };

@@ -1,4 +1,4 @@
-import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
+import { ReactComponent as Icon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
@@ -37,13 +37,11 @@ export const EngineValiantData: EngineValiant = {
 
 export const EngineValiantLayoutComponent = createPhysicalPart(model, false);
 
-export const EngineValiantIcon = EngineIcon;
-
 export const registry: PartRegistryItem<EngineValiant> = {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineValiantData,
   data: EngineValiantData,
 
-  Icon: EngineValiantIcon,
+  Icon,
   Mesh: EngineValiantLayoutComponent,
 };

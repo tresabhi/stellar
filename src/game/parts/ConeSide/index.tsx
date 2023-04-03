@@ -67,13 +67,11 @@ export default function ConeSideLayoutComponent({ id }: PartComponentProps) {
   );
 }
 
-export const ConeSideIcon = Icon;
-
 export const registry: PartRegistryItem<ConeSide> = {
   category: PartCategory.Structural,
   vanillaData: VanillaConeSideData,
   data: ConeSideData,
 
-  Icon: ConeSideIcon,
+  Icon,
   Mesh: ConeSideLayoutComponent,
 };

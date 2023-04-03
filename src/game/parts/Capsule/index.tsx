@@ -1,4 +1,4 @@
-import { ReactComponent as CapsuleIconPrimitive } from 'assets/icons/capsule.svg';
+import { ReactComponent as Icon } from 'assets/icons/capsule.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
@@ -30,13 +30,11 @@ export const CapsuleData: Capsule = {
 
 export const CapsuleLayoutComponent = createPhysicalPart(model);
 
-export const CapsuleIcon = CapsuleIconPrimitive;
-
 export const registry: PartRegistryItem<Capsule> = {
   category: PartCategory.Structural,
   vanillaData: VanillaCapsuleData,
   data: CapsuleData,
 
-  Icon: CapsuleIcon,
+  Icon,
   Mesh: CapsuleLayoutComponent,
 };

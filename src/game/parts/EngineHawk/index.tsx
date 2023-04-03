@@ -1,4 +1,4 @@
-import { ReactComponent as EngineIcon } from 'assets/icons/engine.svg';
+import { ReactComponent as Icon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
@@ -37,13 +37,11 @@ export const EngineHawkData: EngineHawk = {
 
 export const EngineHawkLayoutComponent = createPhysicalPart(model, false);
 
-export const EngineHawkIcon = EngineIcon;
-
 export const registry: PartRegistryItem<EngineHawk> = {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineHawkData,
   data: EngineHawkData,
 
-  Icon: EngineHawkIcon,
+  Icon,
   Mesh: EngineHawkLayoutComponent,
 };

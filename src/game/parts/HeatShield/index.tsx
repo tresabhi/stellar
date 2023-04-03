@@ -1,6 +1,6 @@
 import { useGLTF } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
-import { ReactComponent as HeatShieldIcon } from 'assets/icons/heat-shield.svg';
+import { ReactComponent as Icon } from 'assets/icons/heat-shield.svg';
 import * as Properties from 'components/Properties';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
@@ -121,6 +121,6 @@ export const registry: PartRegistryItem<HeatShield> = {
   vanillaData: VanillaHeatShieldData,
   data: HeatShieldData,
 
-  Icon: HeatShieldIcon,
+  Icon,
   Mesh: HeatShieldLayoutComponent,
 };

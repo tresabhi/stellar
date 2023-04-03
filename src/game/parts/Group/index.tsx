@@ -68,8 +68,6 @@ export function GroupLayoutComponent({ id }: PartComponentProps) {
   return <PartCluster {...props} ref={group} parentId={id} />;
 }
 
-export const GroupIcon = Icon;
-
 export const groupExportify: PartExportifier<Group> = (part, blueprint) => {
   const exportedParts: VanillaPart[] = [];
   const partWithoutMetaData = removeMetaData(part) as Group;
@@ -98,7 +96,7 @@ export const registry: PartRegistryItem<Group> = {
   vanillaData: null,
   data: GroupData,
 
-  Icon: GroupIcon,
+  Icon,
   Mesh: GroupLayoutComponent,
 
   exportify: groupExportify,

@@ -1,4 +1,4 @@
-import { ReactComponent as PlaceholderRTGIconPrimitive } from 'assets/icons/battery.svg';
+import { ReactComponent as Icon } from 'assets/icons/battery.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
@@ -32,13 +32,11 @@ export const PlaceholderRTGData: PlaceholderRTG = {
 
 export const PlaceholderRTGLayoutComponent = createPhysicalPart(model);
 
-export const PlaceholderRTGIcon = PlaceholderRTGIconPrimitive;
-
 export const registry: PartRegistryItem<PlaceholderRTG> = {
   category: PartCategory.Structural,
   vanillaData: VanillaPlaceholderRTGData,
   data: PlaceholderRTGData,
 
-  Icon: PlaceholderRTGIcon,
+  Icon,
   Mesh: PlaceholderRTGLayoutComponent,
 };

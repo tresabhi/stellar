@@ -311,8 +311,6 @@ export function FuelTankProperties({ ids }: PartPropertyComponentProps) {
   );
 }
 
-export const FuelTankIcon = Icon;
-
 export const fuelTankExportify: PartExportifier<FuelTank> = (part) => {
   const exportedPart = removeMetaData(part) as VanillaFuelTank;
   const partCap = cloneDeep(exportedPart);
@@ -334,7 +332,7 @@ export const registry: PartRegistryItem<FuelTank> = {
   vanillaData: VanillaFuelTankData,
   data: FuelTankData,
 
-  Icon: FuelTankIcon,
+  Icon,
   Mesh: FuelTankLayoutComponent,
 
   exportify: fuelTankExportify,
