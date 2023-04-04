@@ -140,6 +140,10 @@
             "$": "Padobran",
             "deployed": "Otvoreno"
           },
+          "landing_leg": {
+            "$": "Landing leg",
+            "deployed": "Extended"
+          },
           "heat_shield": {
             "$": "Toplotni štit",
             "size": "Veličina"

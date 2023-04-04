@@ -140,6 +140,10 @@
             "$": "Парашют",
             "deployed": "Раскрыт"
           },
+          "landing_leg": {
+            "$": "Landing leg",
+            "deployed": "Extended"
+          },
           "heat_shield": {
             "$": "Тепловой щит",
             "size": "Размер"

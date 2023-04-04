@@ -140,6 +140,10 @@
             "$": "Paracaídas",
             "deployed": "Desplegado"
           },
+          "landing_leg": {
+            "$": "Pierna de aterrizaje",
+            "deployed": "Extendida"
+          },
           "heat_shield": {
             "$": "Escudo de calor",
             "size": "Tamaño"

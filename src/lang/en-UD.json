@@ -140,6 +140,10 @@
             "$": "ǝʇnɥɔɐɹɐԀ",
             "deployed": "pǝʎoldǝp"
           },
+          "landing_leg": {
+            "$": "Landing leg",
+            "deployed": "Extended"
+          },
           "heat_shield": {
             "$": "plǝᴉɥs ʇɐǝH",
             "size": "ǝzᴉS"
