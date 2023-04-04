@@ -9,7 +9,7 @@ import { OrthographicCamera, Vector2, Vector2Tuple, Vector3 } from 'three';
 
 export const MIN_ZOOM = 2.2;
 export const MAX_ZOOM = 1024;
-const ZOOM_SENSITIVITY = 1 / 128;
+const ZOOM_SENSITIVITY = 1 / 256;
 
 export default function PanControls() {
   const canvas = useThree((state) => state.gl.domElement);

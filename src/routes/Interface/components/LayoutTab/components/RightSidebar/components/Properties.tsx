@@ -4,6 +4,8 @@ import getPart from 'core/part/getPart';
 import { DockingPortData, DockingPortProperties } from 'game/parts/DockingPort';
 import { FuelTankData, FuelTankProperties } from 'game/parts/FuelTank';
 import { HeatShieldData, HeatShieldProperties } from 'game/parts/HeatShield';
+import { LandingLegData } from 'game/parts/LandingLeg';
+import { ParachuteData } from 'game/parts/Parachute';
 import { Part } from 'game/parts/Part';
 import {
   PartWithCone,
@@ -21,7 +23,10 @@ import {
   PartWithFragmentProperties,
 } from 'game/parts/PartWithFragment';
 import {
-  PartWithParachute,
+  PartWithLandingLegData,
+  PartWithLandingLegProperties,
+} from 'game/parts/PartWithLandingLeg';
+import {
   PartWithParachuteData,
   PartWithParachuteProperties,
 } from 'game/parts/PartWithParachute';
@@ -55,8 +60,9 @@ export function testProperties<Type extends Part>(
   return (state: Part) =>
     !lister(state as Type).some((item) => item === undefined);
 }
-export function testName(name: string) {
-  return (state: Part) => state.n === name;
+export function testName(names: string | string[]) {
+  return (state: Part) =>
+    typeof names === 'string' ? names === state.n : names.includes(state.n);
 }
 
 const groupedProperties: Record<string, GroupedProperties> = {
@@ -69,12 +75,12 @@ const groupedProperties: Record<string, GroupedProperties> = {
     Component: PartWithEngineProperties,
   },
   [PartWithParachuteData.n]: {
-    test: testProperties<PartWithParachute>(({ N }) => [
-      N,
-      N?.deploy_state,
-      N?.animation_state,
-    ]),
+    test: testName(ParachuteData.n),
     Component: PartWithParachuteProperties,
+  },
+  [PartWithLandingLegData.n]: {
+    test: testName(LandingLegData.n),
+    Component: PartWithLandingLegProperties,
   },
   [PartWithFragmentData.n]: {
     test: testProperties<PartWithFragment>(({ T }) => [T, T?.fragment]),

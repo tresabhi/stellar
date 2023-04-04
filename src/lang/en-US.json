@@ -177,6 +177,12 @@
             "deployed": "Deployed"
           },
 
+          "landing_leg": {
+            "$": "Landing leg",
+
+            "deployed": "Extended"
+          },
+
           "heat_shield": {
             "$": "Heat shield",
 
