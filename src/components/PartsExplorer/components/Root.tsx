@@ -9,10 +9,8 @@ import { ParentId } from 'types/Parts';
 import { Item } from './Item';
 
 export interface ContainerProps {
-  fullHeight?: boolean;
   visible?: boolean;
   indent?: number;
-  overflow?: boolean;
   parentId: ParentId;
 }
 

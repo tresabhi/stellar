@@ -18,6 +18,6 @@ export default function Parts() {
       </Sidebar.Message>
     </Sidebar.MessageContainer>
   ) : (
-    <PartsExplorer.Root fullHeight overflow parentId={null} />
+    <PartsExplorer.Root parentId={null} />
   );
 }
