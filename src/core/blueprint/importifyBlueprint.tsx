@@ -92,7 +92,7 @@ export default function importifyBlueprint(
               }`}
               <ul>
                 {missingParts.map((missingPart) => (
-                  <li>{missingPart}</li>
+                  <li key={missingPart}>{missingPart}</li>
                 ))}
               </ul>
             </Prompt.Description>
