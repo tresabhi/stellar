@@ -1,5 +1,5 @@
 import 'App.css';
-import * as ErrorBoundary from 'components/ErrorBoundary';
+import ErrorBoundary from 'components/ErrorBoundary';
 import LandscapePrompt from 'components/LandscapePrompt';
 import usePrerender from 'hooks/usePrerender';
 import { useEffect } from 'react';
@@ -40,7 +40,7 @@ function App() {
   usePrerender();
 
   return (
-    <ErrorBoundary.Wrapper>
+    <ErrorBoundary>
       <LandscapePrompt>
         <AppContainer>
           <Routes>
@@ -49,7 +49,7 @@ function App() {
           </Routes>
         </AppContainer>
       </LandscapePrompt>
-    </ErrorBoundary.Wrapper>
+    </ErrorBoundary>
   );
 }
 export default App;

@@ -33,7 +33,7 @@ export default function HeadsUpDisplay({
 
   renderer.autoClear = false;
   if (!isInteger(priority)) {
-    throw new Error('Priority property must be an integer');
+    throw new TypeError('Priority property must be an integer');
   }
 
   return portal;

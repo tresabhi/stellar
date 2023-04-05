@@ -1,7 +1,7 @@
 const input = document.createElement('input');
 let isMounted = false;
 
-const useClipboard = () => {
+export default function useClipboard() {
   const copy = (text: string) => {
     if (navigator?.clipboard) {
       navigator.clipboard.writeText(text);
@@ -21,5 +21,4 @@ const useClipboard = () => {
   const hook = { copy };
 
   return hook;
-};
-export default useClipboard;
+}
