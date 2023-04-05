@@ -33,7 +33,7 @@ export interface ListingProps {
 }
 
 const Wrapper = styled('div', {});
-const Trigger = styled('button', {
+const Trigger = styled('div', {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
