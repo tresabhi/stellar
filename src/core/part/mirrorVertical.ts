@@ -3,7 +3,7 @@ import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { MethodIds } from 'types/Parts';
-import normalizeAngleDeg from 'utilities/normalizeAngleDeg';
+import normalizeAngle from 'utilities/normalizeAngle';
 import normalizeIds from 'utilities/normalizeIds';
 import getCenter from './getCenter';
 
@@ -23,8 +23,9 @@ export default function mirrorVertical(
           const offset = (part as PartWithTransformations).p.y - y;
           (part as PartWithTransformations).p.y -= offset * 2;
           (part as PartWithTransformations).o.y *= -1;
-          (part as PartWithTransformations).o.z = normalizeAngleDeg(
+          (part as PartWithTransformations).o.z = normalizeAngle(
             -(part as PartWithTransformations).o.z,
+            true,
           );
         }
       });

@@ -12,7 +12,7 @@ import useMousePosition from 'hooks/useMousePosition';
 import { useRef } from 'react';
 import { Group, Vector2, Vector2Tuple } from 'three';
 import { Line2 } from 'three-stdlib';
-import normalizeAngleDeg from 'utilities/normalizeAngleDeg';
+import normalizeAngle from 'utilities/normalizeAngle';
 
 export interface PartRotateEventDetail {
   rotation: number;
@@ -114,7 +114,7 @@ export default function RotateNode({
 
         p.x = partPosition.x;
         p.y = partPosition.y;
-        o.z = normalizeAngleDeg(o.z + offset * (180 / Math.PI));
+        o.z = normalizeAngle(o.z + offset * (180 / Math.PI), true);
       });
     });
 
