@@ -4,6 +4,7 @@ import { Blueprint } from 'game/Blueprint';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import { MethodIds } from 'types/Parts';
+import normalizeAngleDeg from 'utilities/normalizeAngleDeg';
 import normalizeIds from 'utilities/normalizeIds';
 import getPart from './getPart';
 
@@ -25,7 +26,7 @@ export default function rotate(
 
       p.x = partPosition.x;
       p.y = partPosition.y;
-      o.z += z * (180 / Math.PI);
+      o.z = normalizeAngleDeg(o.z + z * (180 / Math.PI));
     });
   } else {
     mutateBlueprint((draft) => {

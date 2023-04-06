@@ -7,6 +7,7 @@ import { RefObject } from 'react';
 import useSettings from 'stores/settings';
 import { Object3D } from 'three';
 import { PartPropertyComponentProps } from 'types/Parts';
+import normalizeAngleDeg from 'utilities/normalizeAngleDeg';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import {
   VanillaPartWithOrientation,
@@ -90,7 +91,7 @@ export function PartWithTransformationsProperties({
     ids,
     (state) => state.o.z,
     (draft, value) => {
-      draft.o.z = value % 360;
+      draft.o.z = normalizeAngleDeg(value);
     },
   );
   const xScale = useNumericalInputProperty<PartWithTransformations>(

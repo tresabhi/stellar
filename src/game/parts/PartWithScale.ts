@@ -7,7 +7,7 @@ import { RefObject, useEffect } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
-import moduloAngle from 'utilities/moduloAngle';
+import normalizeAngleDeg from 'utilities/normalizeAngleDeg';
 import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 import { PartWithOrientation } from './PartWithOrientation';
 import { PartWithTransformations } from './PartWithTransformations';
@@ -33,7 +33,7 @@ export const PartWithScaleData: PartWithScale = {
 };
 
 function rotationLighting(flipLight: boolean, rotation: number) {
-  if (flipLight) return moduloAngle(rotation) >= 180 ? -1 : 1;
+  if (flipLight) return normalizeAngleDeg(rotation) >= 180 ? -1 : 1;
   return 1;
 }
 function scaleLighting(flipLight: boolean, scale: number) {
