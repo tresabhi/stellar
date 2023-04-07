@@ -53,7 +53,7 @@ function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const sizeWrapper = useRef<Group>(null);
   const { size } = getPart<ConeSide>(id).N;
-  const props = usePhysicalPart(id, wrapper);
+  const props = usePhysicalPart(id, wrapper, false);
   const meshes = useModel(model);
 
   usePartWithCone(id, sizeWrapper);
