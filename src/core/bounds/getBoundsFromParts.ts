@@ -1,8 +1,10 @@
 import { ORIGIN } from 'components/LayoutCanvas/components/EditControls/components/FuelTankControls';
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
-import { radToDeg } from 'three/src/math/MathUtils';
+import { degToRad } from 'three/src/math/MathUtils';
 import epsilonEquality from 'utilities/epsilonEquality';
+
+export const ROTATIONAL_EPSILON = degToRad(1 / 2);
 
 export const emptyBounds: Bounds = {
   x: 0,
@@ -25,16 +27,15 @@ export default function getBoundsFromParts(
     ids.every((id) => {
       const modulus =
         (boundsStore[id].bounds.rotation - firstAngle) % (Math.PI / 2);
-      const equality = epsilonEquality(modulus, 0, 1 / 100);
+      const equality =
+        epsilonEquality(modulus, 0, ROTATIONAL_EPSILON) ||
+        epsilonEquality(modulus, Math.PI / 2, ROTATIONAL_EPSILON) ||
+        epsilonEquality(modulus, -Math.PI / 2, ROTATIONAL_EPSILON);
 
-      // might be smaller than PI / 2
-      if (!equality) return epsilonEquality(modulus, Math.PI / 2);
       return equality;
     })
       ? boundsStore[ids[0]].bounds.rotation
       : 0;
-
-  document.title = `${radToDeg(angle)}`;
 
   ids.forEach((id) => {
     const { bounds } = boundsStore[id];
