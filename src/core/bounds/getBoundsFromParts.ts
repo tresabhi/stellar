@@ -1,10 +1,10 @@
 import { ORIGIN } from 'components/LayoutCanvas/components/EditControls/components/FuelTankControls';
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
-import { degToRad } from 'three/src/math/MathUtils';
+import { radToDeg } from 'three/src/math/MathUtils';
 import epsilonEquality from 'utilities/epsilonEquality';
 
-export const ROTATIONAL_EPSILON = degToRad(1 / 2);
+export const ROTATIONAL_EPSILON = radToDeg(Number.EPSILON);
 
 export const emptyBounds: Bounds = {
   x: 0,
