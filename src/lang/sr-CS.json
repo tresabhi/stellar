@@ -142,7 +142,7 @@
           },
           "landing_leg": {
             "$": "Landing leg",
-            "deployed": "Extended"
+            "extended": "Extended"
           },
           "heat_shield": {
             "$": "Toplotni štit",
