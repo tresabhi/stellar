@@ -6,7 +6,7 @@
 
 <br>
 
-![Image of Stellar featuring Fuel Tanks](https://user-images.githubusercontent.com/43380238/189721254-951f9c8c-addd-4844-a09b-091f3cf83274.png)
+![Image of Stellar featuring the Saturn V template](https://i.imgur.com/Lg7qrJA.png)
 
 ## 🤔 About
 
