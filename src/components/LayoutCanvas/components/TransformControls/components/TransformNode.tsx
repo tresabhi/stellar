@@ -7,7 +7,7 @@ import declareInteractingWithPart from 'core/interface/declareInteractingWithPar
 import getPart from 'core/part/getPart';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { useRef } from 'react';
-import useApp from 'stores/app';
+import useApp, { Tool } from 'stores/app';
 import { Bounds } from 'stores/bounds';
 import { Group, Vector2, Vector2Tuple } from 'three';
 import { ORIGIN } from '../../EditControls/components/FuelTankControls';
@@ -70,18 +70,22 @@ export default function TransformNode({
   constant.rotateAround(ORIGIN, bounds.rotation).add(center);
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
+    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
-    initial.set(event.clientX, event.clientY);
-    offsetCardinal.set(0, 0);
-    offsetParallel.copy(offsetCardinal);
-    scale.set(1, 1);
-    firstMove = true;
+    if (tool === Tool.Transform && !isSpacePanning && !isTouchPanning) {
+      event.stopPropagation();
 
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    window.addEventListener('pointermove', handlePointerMove);
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    window.addEventListener('pointerup', handlePointerUp);
+      initial.set(event.clientX, event.clientY);
+      offsetCardinal.set(0, 0);
+      offsetParallel.copy(offsetCardinal);
+      scale.set(1, 1);
+      firstMove = true;
+
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      window.addEventListener('pointermove', handlePointerMove);
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      window.addEventListener('pointerup', handlePointerUp);
+    }
   };
   const handlePointerMove = (event: PointerEvent) => {
     const { scaleWithRatio, snap } = useApp.getState().editor;

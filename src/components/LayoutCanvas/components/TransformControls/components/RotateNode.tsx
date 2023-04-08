@@ -10,6 +10,7 @@ import shouldSnap from 'core/part/shouldSnap';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import useMousePosition from 'hooks/useMousePosition';
 import { useRef } from 'react';
+import useApp, { Tool } from 'stores/app';
 import { Group, Vector2, Vector2Tuple } from 'three';
 import { Line2 } from 'three-stdlib';
 import normalizeAngle from 'utilities/normalizeAngle';
@@ -56,20 +57,24 @@ export default function RotateNode({
   });
 
   const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-    event.stopPropagation();
+    const { tool, isSpacePanning, isTouchPanning } = useApp.getState().editor;
 
-    initialRotation = position
-      .set(...getMousePosition(event))
-      .sub(center)
-      .angle();
-    offset = 0;
-    lastOffset = offset;
-    firstMove = true;
+    if (tool === Tool.Transform && !isSpacePanning && !isTouchPanning) {
+      event.stopPropagation();
 
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    window.addEventListener('pointermove', handlePointerMove);
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    window.addEventListener('pointerup', handlePointerUp);
+      initialRotation = position
+        .set(...getMousePosition(event))
+        .sub(center)
+        .angle();
+      offset = 0;
+      lastOffset = offset;
+      firstMove = true;
+
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      window.addEventListener('pointermove', handlePointerMove);
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      window.addEventListener('pointerup', handlePointerUp);
+    }
   };
   const handlePointerMove = (event: PointerEvent) => {
     if (firstMove) {
