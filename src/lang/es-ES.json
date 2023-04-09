@@ -91,10 +91,11 @@
         },
         "snippets": {
           "$": "Fragmentos",
-          "coming_soon": {
-            "$": "¡Fragmentos próximamente!",
-            "instructions": "Los fragmentos te permitirán pegar en pequeñas secciones de otras fabricaciones."
-          }
+          "no_snippets": {
+            "$": "No snippets",
+            "instructions": "Create a snippet to save small sections of blueprints."
+          },
+          "unnamed": "Unnamed snippet %1$s"
         }
       },
       "right_sidebar": {
