@@ -91,10 +91,11 @@
         },
         "snippets": {
           "$": "Isečci",
-          "coming_soon": {
-            "$": "Isečci dolaye uskoro!",
-            "instructions": "Isečci ti omogućavaju da yalepiš male sekcije drugih raketa."
-          }
+          "no_snippets": {
+            "$": "No snippets",
+            "instructions": "Create a snippet to save small sections of blueprints."
+          },
+          "unnamed": "Unnamed snippet %1$s"
         }
       },
       "right_sidebar": {
