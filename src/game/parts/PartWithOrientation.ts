@@ -35,18 +35,20 @@ export const usePartWithOrientation = (
   let { z } = getPart<PartWithOrientation>(id).o;
 
   const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
-    if (object.current && getPart(id)?.selected) {
-      object.current.rotation.set(
-        0,
-        0,
-        z * (Math.PI / 180) + event.detail.rotation,
-      );
-      invalidate();
-    }
+    object.current?.rotation.set(
+      0,
+      0,
+      z * (Math.PI / 180) + event.detail.rotation,
+    );
+
+    invalidate();
   };
 
   useEffect(() => {
-    window.addEventListener('partrotate', handlePartRotate as EventListener);
+    window.addEventListener(
+      `partrotate${id}`,
+      handlePartRotate as EventListener,
+    );
 
     return () => {
       window.removeEventListener(

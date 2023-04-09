@@ -96,11 +96,13 @@ export default function RotateNode({
     if (offset !== lastOffset) {
       lastOffset = offset;
 
-      window.dispatchEvent(
-        new CustomEvent<PartRotateEventDetail>('partrotate', {
-          detail: { rotation: offset, center: center.toArray() },
-        }),
-      );
+      selections.forEach((selection) => {
+        window.dispatchEvent(
+          new CustomEvent<PartRotateEventDetail>(`partrotate${selection}`, {
+            detail: { rotation: offset, center: center.toArray() },
+          }),
+        );
+      });
     }
   };
   const handlePointerUp = () => {

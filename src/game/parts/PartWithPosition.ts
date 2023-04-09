@@ -73,13 +73,11 @@ export const usePartWithPosition = (
     invalidate();
   };
   const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
-    if (object.current && getPart(id)?.selected) {
       center.set(...event.detail.center);
       position.set(p.x, p.y).rotateAround(center, event.detail.rotation);
 
-      object.current.position.set(position.x, position.y, 0);
+      object.current?.position.set(position.x, position.y, 0);
       invalidate();
-    }
   };
 
   useEffect(() => {
@@ -88,7 +86,10 @@ export const usePartWithPosition = (
       `parttransform${id}`,
       handlePartTransform as EventListener,
     );
-    window.addEventListener('partrotate', handlePartRotate as EventListener);
+    window.addEventListener(
+      `partrotate${id}`,
+      handlePartRotate as EventListener,
+    );
 
     return () => {
       window.removeEventListener('partmove', handlePartMove as EventListener);
