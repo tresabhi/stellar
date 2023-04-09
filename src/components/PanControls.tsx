@@ -174,6 +174,7 @@ export default function PanControls() {
           camera.position.x += offsetX;
           camera.position.y -= offsetY;
           camera.zoom /= scale;
+          camera.zoom = clamp(camera.zoom, MIN_ZOOM, MAX_ZOOM);
           lastHypotenuse = hypotenuse;
 
           camera.updateProjectionMatrix();
