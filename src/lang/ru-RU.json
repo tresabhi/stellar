@@ -91,10 +91,11 @@
         },
         "snippets": {
           "$": "Фрагменты",
-          "coming_soon": {
-            "$": "Фрагменты скоро появятся!",
-            "instructions": "Фрагменты позволят вам вставлять маленькие части других чертежей."
-          }
+          "no_snippets": {
+            "$": "No snippets",
+            "instructions": "Create a snippet to save small sections of blueprints."
+          },
+          "unnamed": "Unnamed snippet %1$s"
         }
       },
       "right_sidebar": {
