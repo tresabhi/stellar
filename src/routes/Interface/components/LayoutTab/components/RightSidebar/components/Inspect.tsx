@@ -154,11 +154,11 @@ export default function Inspect() {
       </Properties.Group>
     </Properties.Root>
   ) : (
-    <Sidebar.MessageContainer>
+    <Sidebar.MessageRoot>
       <Sidebar.Message>{t`tabs.layout.right_sidebar.inspect.select_one_part`}</Sidebar.Message>
       <Sidebar.Message subMessage>
         {t`tabs.layout.right_sidebar.inspect.select_one_part.instructions`}
       </Sidebar.Message>
-    </Sidebar.MessageContainer>
+    </Sidebar.MessageRoot>
   );
 }

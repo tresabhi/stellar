@@ -16,6 +16,7 @@ import undoVersion from 'core/blueprint/undoVersion';
 import confirmProgressReset from 'core/interface/confirmProgressReset';
 import prompt from 'core/interface/prompt';
 import copySelected from 'core/part/copySelected';
+import createSnippetSelected from 'core/part/createSnippetSelected';
 import cutPartsBySelection from 'core/part/cutSelected';
 import deleteSelected from 'core/part/deleteSelected';
 import duplicateSelected from 'core/part/duplicateSelected';
@@ -155,9 +156,9 @@ export default function useKeybinds() {
         const { visible } = draft.interface.tabs.layout.rightSidebar;
 
         if (getTouchscreenMode()) {
-          visible.inCompactMode = !visible.inCompactMode;
+          visible.inTouchscreenMode = !visible.inTouchscreenMode;
         } else {
-          visible.inComfortableMode = !visible.inComfortableMode;
+          visible.inDesktopMode = !visible.inDesktopMode;
         }
       });
     });
@@ -289,6 +290,7 @@ export default function useKeybinds() {
     bind('ctrl+d', duplicateSelected, { preventOnNonTransformTool: true });
     bind('ctrl+g', groupSelected, { preventOnNonTransformTool: true });
     bind('ctrl+shift+g', ungroupSelected, { preventOnNonTransformTool: true });
+    bind('ctrl+m', createSnippetSelected, { preventOnNonTransformTool: true });
 
     bind('i', () => prompt(InsertPartPrompt, true, 'insert-part'), {
       preventOnNonTransformTool: true,

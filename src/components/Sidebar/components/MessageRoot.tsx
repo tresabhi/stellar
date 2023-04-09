@@ -1,6 +1,6 @@
 import { styled, theme } from 'stitches.config';
 
-export const MessageContainer = styled('div', {
+export const MessageRoot = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',

@@ -44,8 +44,8 @@ export interface UseSettings {
 
         rightSidebar: {
           visible: {
-            inCompactMode: boolean;
-            inComfortableMode: boolean;
+            inTouchscreenMode: boolean;
+            inDesktopMode: boolean;
           };
           tab: SidebarTab;
           scaleConstrain: boolean;
@@ -95,8 +95,8 @@ export const useSettingsData: UseSettings = {
 
         rightSidebar: {
           visible: {
-            inCompactMode: false,
-            inComfortableMode: true,
+            inTouchscreenMode: false,
+            inDesktopMode: true,
           },
           tab: SidebarTab.Left,
           scaleConstrain: false,

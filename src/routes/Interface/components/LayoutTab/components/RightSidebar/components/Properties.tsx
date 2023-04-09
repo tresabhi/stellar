@@ -152,23 +152,23 @@ export default function Properties() {
 
   if (hasNoSelections) {
     return (
-      <Sidebar.MessageContainer>
+      <Sidebar.MessageRoot>
         <Sidebar.Message>{t`tabs.layout.right_sidebar.properties.no_selection`}</Sidebar.Message>
         <Sidebar.Message subMessage>
           {t`tabs.layout.right_sidebar.properties.no_selection.instructions`}
         </Sidebar.Message>
-      </Sidebar.MessageContainer>
+      </Sidebar.MessageRoot>
     );
   }
   if (children.length > 0) {
     return <PropertiesPrimitive.Root>{children}</PropertiesPrimitive.Root>;
   }
   return (
-    <Sidebar.MessageContainer>
+    <Sidebar.MessageRoot>
       <Sidebar.Message>{t`tabs.layout.right_sidebar.properties.no_properties`}</Sidebar.Message>
       <Sidebar.Message subMessage>
         {t`tabs.layout.right_sidebar.properties.no_properties.instructions`}
       </Sidebar.Message>
-    </Sidebar.MessageContainer>
+    </Sidebar.MessageRoot>
   );
 }

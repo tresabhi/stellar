@@ -33,6 +33,7 @@ export interface UseApp {
     orientationPromptDismissed: boolean;
     focusMode: boolean;
     newPopupsEnabled: boolean;
+    snippetSelection?: number;
   };
 
   editor: {
@@ -63,6 +64,7 @@ export const UseAppData: UseApp = {
     orientationPromptDismissed: false,
     focusMode: false,
     newPopupsEnabled: true,
+    snippetSelection: undefined,
   },
 
   editor: {

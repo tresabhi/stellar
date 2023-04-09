@@ -11,23 +11,24 @@ import generateId from './generateId';
  */
 export default function clone(
   id: string,
-  draft: Snippet,
+  blueprint: Snippet,
 ): [string, Record<string, Part>] {
-  const part = draft.parts[id];
+  const part = blueprint.parts[id];
 
   const clonedPart = cloneDeep(part);
-  (clonedPart.id as string) = generateId(draft.parts);
+  (clonedPart.id as string) = generateId(blueprint.parts);
   clonedPart.parent_id = null;
+  clonedPart.selected = false;
 
   if (clonedPart.n === 'Group') {
     const clonedGroup = clonedPart as Group;
     const clonedParts: Record<string, Part> = { [clonedPart.id]: clonedPart };
 
     clonedGroup.part_order.forEach((childId, index) => {
-      const child = draft.parts[childId] as Group;
+      const child = blueprint.parts[childId] as Group;
 
       if (child) {
-        const clonedGroupChildData = clone(child.id, draft);
+        const clonedGroupChildData = clone(child.id, blueprint);
 
         if (clonedGroupChildData) {
           const [clonedGroupChildId, clonedGroupChildrenParts] =

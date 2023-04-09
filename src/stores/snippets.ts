@@ -9,8 +9,9 @@ export interface Snippet {
 }
 
 export interface SnippetListing {
+  image: string;
   label: string;
-  lastModified: number;
+  created: number;
   snippet: Snippet;
 }
 

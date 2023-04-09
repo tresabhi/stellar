@@ -16,20 +16,15 @@ export default function duplicate(ids: MethodIds, blueprint?: Blueprint) {
       const partIndex = parent.part_order.indexOf(id);
 
       if (partIndex !== -1) {
-        const clonedPartData = clone(id, blueprint);
+        const [clonedPartId, clonedParts] = clone(id, blueprint);
 
-        if (clonedPartData) {
-          const [clonedPartId, clonedParts] = clonedPartData;
+        parent.part_order.splice(partIndex + 1, 0, clonedPartId);
+        Object.keys(clonedParts).forEach((clonedPartChildId) => {
+          const clonedPart = clonedParts[clonedPartChildId];
+          blueprint.parts[clonedPartChildId] = clonedPart;
+        });
 
-          parent.part_order.splice(partIndex + 1, 0, clonedPartId);
-
-          Object.keys(clonedParts).forEach((clonedPartChildId) => {
-            const clonedPart = clonedParts[clonedPartChildId];
-            blueprint.parts[clonedPartChildId] = clonedPart;
-          });
-
-          select(clonedPartId, blueprint);
-        }
+        select(clonedPartId, blueprint);
       }
     });
   } else {

@@ -17,16 +17,16 @@ export default function RightSidebar({ swapSecondTab }: TabLayoutProps) {
     mutateSettings((draft) => {
       if (touchscreenMode) {
         const { visible } = draft.interface.tabs.layout.rightSidebar;
-        visible.inCompactMode = !visible.inCompactMode;
+        visible.inTouchscreenMode = !visible.inTouchscreenMode;
       } else {
         const { visible } = draft.interface.tabs.layout.rightSidebar;
-        visible.inComfortableMode = !visible.inComfortableMode;
+        visible.inDesktopMode = !visible.inDesktopMode;
       }
     });
   };
   const expanded = touchscreenMode
-    ? rightSidebar.visible.inCompactMode
-    : rightSidebar.visible.inComfortableMode;
+    ? rightSidebar.visible.inTouchscreenMode
+    : rightSidebar.visible.inDesktopMode;
 
   return (
     <Sidebar.Root visible={expanded} position="right">

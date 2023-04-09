@@ -56,6 +56,7 @@ import undoVersion from 'core/blueprint/undoVersion';
 import confirmProgressReset from 'core/interface/confirmProgressReset';
 import prompt from 'core/interface/prompt';
 import copySelected from 'core/part/copySelected';
+import createSnippetSelected from 'core/part/createSnippetSelected';
 import cutPartsBySelection from 'core/part/cutSelected';
 import deleteSelected from 'core/part/deleteSelected';
 import duplicateSelected from 'core/part/duplicateSelected';
@@ -344,7 +345,8 @@ function Toolbar() {
           <ToolbarPrimitive.DropdownMenuItem
             icon={<Component1Icon />}
             keybind="Ctrl + M"
-            disabled
+            disabled={hasNoSelections}
+            onClick={() => createSnippetSelected()}
           >
             {t`tabs.layout.toolbar.clipboard.create_snippet`}
           </ToolbarPrimitive.DropdownMenuItem>

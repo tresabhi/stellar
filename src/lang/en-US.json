@@ -111,11 +111,12 @@
         "snippets": {
           "$": "Snippets",
 
-          "coming_soon": {
-            "$": "Snippets coming soon!",
+          "no_snippets": {
+            "$": "No snippets",
 
-            "instructions": "Snippets will allow you to paste in small sections of other crafts."
-          }
+            "instructions": "Create a snippet to save small sections of blueprints."
+          },
+          "unnamed": "Unnamed snippet %1$s"
         }
       },
 

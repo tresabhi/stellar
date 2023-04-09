@@ -71,6 +71,7 @@ export default function LayoutCanvas(
     <Canvas
       {...props}
       ref={canvas}
+      gl={{ preserveDrawingBuffer: true }}
       orthographic
       camera={{
         zoom: 32,
