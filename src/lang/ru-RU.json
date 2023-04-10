@@ -92,10 +92,10 @@
         "snippets": {
           "$": "Фрагменты",
           "no_snippets": {
-            "$": "No snippets",
-            "instructions": "Create a snippet to save small sections of blueprints."
+            "$": "Создать фрагмент",
+            "instructions": "Создайте фрагмент, чтобы сохранить мелкие части чертежей."
           },
-          "unnamed": "Unnamed snippet %1$s"
+          "unnamed": "Безымянный фрагмент %1$s"
         }
       },
       "right_sidebar": {
@@ -142,8 +142,8 @@
             "deployed": "Раскрыт"
           },
           "landing_leg": {
-            "$": "Landing leg",
-            "extended": "Extended"
+            "$": "Посадочная опора",
+            "extended": "Раздвинута"
           },
           "heat_shield": {
             "$": "Тепловой щит",
