@@ -92,10 +92,10 @@
         "snippets": {
           "$": "Fragmentos",
           "no_snippets": {
-            "$": "No snippets",
-            "instructions": "Create a snippet to save small sections of blueprints."
+            "$": "No hay fragmentos",
+            "instructions": "Crea un fragmento para guardar pequeñas secciones de planos."
           },
-          "unnamed": "Unnamed snippet %1$s"
+          "unnamed": "Fragmento sin nombre %1$s"
         }
       },
       "right_sidebar": {
