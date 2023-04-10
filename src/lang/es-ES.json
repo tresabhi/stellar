@@ -91,10 +91,11 @@
         },
         "snippets": {
           "$": "Fragmentos",
-          "coming_soon": {
-            "$": "¡Fragmentos próximamente!",
-            "instructions": "Los fragmentos te permitirán pegar en pequeñas secciones de otras fabricaciones."
-          }
+          "no_snippets": {
+            "$": "No hay fragmentos",
+            "instructions": "Crea un fragmento para guardar pequeñas secciones de planos."
+          },
+          "unnamed": "Fragmento sin nombre %1$s"
         }
       },
       "right_sidebar": {
