@@ -77,7 +77,7 @@ export default function SelectBox() {
       Object.keys(boundsStore).forEach((id) => {
         const { bounds } = boundsStore[id];
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        const { parent_id } = parts[id];
+        const { parent: parent_id } = parts[id];
 
         if (
           (event.ctrlKey || (selectDeep ? true : parent_id == null)) &&

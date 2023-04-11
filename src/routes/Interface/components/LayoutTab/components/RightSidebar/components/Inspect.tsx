@@ -76,7 +76,7 @@ export default function Inspect() {
         <Properties.Value
           label={t`tabs.layout.right_sidebar.inspect.meta_data.parent_id`}
         >
-          {`${data.parent_id}`}
+          {`${data.parent}`}
         </Properties.Value>
         <Properties.Value
           label={t`tabs.layout.right_sidebar.inspect.meta_data.name`}

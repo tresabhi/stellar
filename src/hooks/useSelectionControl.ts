@@ -26,7 +26,7 @@ const useSelectionControl = (id: string) => {
 
       if (part.visible && !part.locked) {
         if (
-          part.parent_id === null || // part is at root
+          part.parent === null || // part is at root
           (parent && parent.selected) || // parent is selected
           event.ctrlKey || // deep select is active
           selectDeep

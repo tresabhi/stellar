@@ -470,6 +470,22 @@
         "cancel": "Cancel",
         "yes": "Yes"
       }
+    },
+
+    "incompatible_blueprint": {
+      "too_old": {
+        "title": "Blueprint is outdated",
+        "description": "Failed to upgrade blueprint because its format is deprecated"
+      },
+
+      "too_new": {
+        "title": "Blueprint is incompatible",
+        "description": "Failed to load blueprint because it's from a newer version"
+      },
+
+      "actions": {
+        "dismiss": "Dismiss"
+      }
     }
   },
 

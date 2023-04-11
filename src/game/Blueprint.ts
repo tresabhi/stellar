@@ -29,7 +29,7 @@ export const vanillaBlueprintData: VanillaBlueprint = {
 export const blueprintData: Blueprint = {
   ...vanillaBlueprintData,
 
-  format_version: 6,
+  format_version: 7,
 
   selections: [],
   parts: {},

@@ -12,7 +12,7 @@ export default function paste() {
   if (clipboard) {
     mutateBlueprint((draft) => {
       const firstSelection = draft.selections[0];
-      const parentId = draft.parts[firstSelection].parent_id;
+      const parentId = draft.parts[firstSelection].parent;
       const parent = parentId
         ? (draft.parts[parentId] as Group) ?? draft
         : draft;
@@ -25,7 +25,7 @@ export default function paste() {
 
         draft.parts[partId] = {
           ...part,
-          parent_id: parentId,
+          parent: parentId,
         };
       });
       parent.part_order.splice(insertIndex, 0, ...clipboard.part_order);

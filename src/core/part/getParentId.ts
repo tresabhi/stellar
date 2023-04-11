@@ -5,5 +5,5 @@ export default function getParentId(
   id: string,
   blueprint: Blueprint = useBlueprint.getState(),
 ) {
-  return blueprint.parts[id].parent_id;
+  return blueprint.parts[id].parent;
 }

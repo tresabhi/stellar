@@ -26,7 +26,7 @@ export default function ungroup(ids: MethodIds, blueprint?: Blueprint) {
 
         group.part_order.forEach((childId) => {
           const child = blueprint.parts[childId];
-          if (child) child.parent_id = group.parent_id;
+          if (child) child.parent = group.parent;
         });
         parent.part_order = [
           ...chunkBefore,

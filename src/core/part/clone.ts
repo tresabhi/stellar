@@ -17,7 +17,7 @@ export default function clone(
 
   const clonedPart = cloneDeep(part);
   (clonedPart.id as string) = generateId(blueprint.parts);
-  clonedPart.parent_id = null;
+  clonedPart.parent = null;
   clonedPart.selected = false;
 
   if (clonedPart.n === 'Group') {
@@ -38,7 +38,7 @@ export default function clone(
           clonedGroup.part_order[index] = clonedGroupChildId;
 
           if (clonedGroupChild) {
-            clonedGroupChild.parent_id = clonedGroup.id;
+            clonedGroupChild.parent = clonedGroup.id;
           }
 
           Object.keys(clonedGroupChildrenParts).forEach(

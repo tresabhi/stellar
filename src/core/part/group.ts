@@ -27,7 +27,7 @@ export default function group(
         const currentPart = blueprint.parts[id];
         const spliceIndex = currentParent.part_order.indexOf(id);
 
-        if (currentPart) currentPart.parent_id = newGroup.id;
+        if (currentPart) currentPart.parent = newGroup.id;
         if (spliceIndex !== -1) currentParent.part_order.splice(spliceIndex, 1);
       });
 

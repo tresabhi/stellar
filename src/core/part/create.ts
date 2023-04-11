@@ -15,7 +15,7 @@ export default function create<Type extends Part>(
     const newPart = cloneDeep(partData);
 
     (newPart.id as string) = id ?? generateId();
-    newPart.parent_id = parentId ?? null;
+    newPart.parent = parentId ?? null;
 
     return newPart as Type;
   }
