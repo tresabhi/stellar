@@ -9,7 +9,7 @@ export interface Part extends VanillaPart {
   readonly id: string;
   parent: ParentId;
 
-  label: string;
+  label?: string;
   selected: boolean;
   visible: boolean;
   locked: boolean;
@@ -27,7 +27,7 @@ export const PartData: Part = {
 
   id: '',
   parent: null,
-  label: 'Unlabeled Part',
+  label: undefined,
   selected: false,
   visible: true,
   locked: false,

@@ -31,8 +31,6 @@ export const VanillaEngineValiantData: VanillaEngineValiant = {
 export const EngineValiantData: EngineValiant = {
   ...PartData,
   ...VanillaEngineValiantData,
-
-  label: 'Valiant Engine',
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
@@ -41,6 +39,7 @@ export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineValiantData,
   data: EngineValiantData,
+  label: 'engine_valiant',
 
   Icon,
   LayoutComponent,

@@ -34,7 +34,6 @@ export const EngineFrontierData: EngineFrontier = {
   ...PartData,
   ...VanillaEngineFrontierData,
 
-  label: 'Frontier Engine',
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
@@ -43,6 +42,7 @@ export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineFrontierData,
   data: EngineFrontierData,
+  label: 'engine_frontier',
 
   Icon,
   LayoutComponent,

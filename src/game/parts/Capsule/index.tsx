@@ -24,8 +24,6 @@ export const VanillaCapsuleData: VanillaCapsule = {
 export const CapsuleData: Capsule = {
   ...PartData,
   ...VanillaCapsuleData,
-
-  label: 'Capsule',
 };
 
 const LayoutComponent = createPhysicalPart(model);
@@ -34,6 +32,7 @@ export default {
   category: PartCategory.Structural,
   vanillaData: VanillaCapsuleData,
   data: CapsuleData,
+  label: 'capsule',
 
   Icon,
   LayoutComponent,

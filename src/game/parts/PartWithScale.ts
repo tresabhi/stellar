@@ -29,7 +29,6 @@ export const PartWithScaleData: PartWithScale = {
   ...PartData,
   ...VanillaPartWithScaleData,
 
-  label: 'Unlabeled Part With Scale',
 };
 
 function rotationLighting(flipLight: boolean, rotation: number) {

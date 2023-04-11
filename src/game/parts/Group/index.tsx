@@ -27,7 +27,6 @@ export const GroupData: Group = {
   ...PartData,
 
   n: 'Group',
-  label: 'Group',
   expanded: false,
   part_order: [],
 };
@@ -95,6 +94,7 @@ export default {
   category: PartCategory.Abstract,
   vanillaData: null,
   data: GroupData,
+  label: 'group',
 
   Icon,
   LayoutComponent,

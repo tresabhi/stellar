@@ -21,8 +21,6 @@ export const VanillaPartWithFragmentData: VanillaPartWithFragment = {
 export const PartWithFragmentData: PartWithFragment = {
   ...PartData,
   ...VanillaPartWithFragmentData,
-
-  label: 'Unlabeled Part With Fragment',
 };
 
 export function PartWithFragmentProperties({

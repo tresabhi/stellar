@@ -32,7 +32,6 @@ export const EngineKolibriData: EngineKolibri = {
   ...PartData,
   ...VanillaEngineKolibriData,
 
-  label: 'Kolibri Engine',
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
@@ -41,6 +40,7 @@ export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineKolibriData,
   data: EngineKolibriData,
+  label: 'engine_kolibri',
 
   Icon,
   LayoutComponent,

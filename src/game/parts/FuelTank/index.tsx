@@ -66,8 +66,6 @@ export const VanillaFuelTankData: VanillaFuelTank = {
 export const FuelTankData: FuelTank = {
   ...PartData,
   ...VanillaFuelTankData,
-
-  label: 'Fuel Tank',
 };
 
 function constructGeometry(
@@ -331,6 +329,7 @@ export default {
   category: PartCategory.Structural,
   vanillaData: VanillaFuelTankData,
   data: FuelTankData,
+  label: 'fuel_tank',
 
   Icon,
   LayoutComponent,

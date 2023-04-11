@@ -38,8 +38,6 @@ export const VanillaLandingLegData: VanillaLandingLeg = {
 export const LandingLegData: LandingLeg = {
   ...PartData,
   ...VanillaLandingLegData,
-
-  label: 'Landing Leg',
 };
 
 useGLTF.preload(regularModel);
@@ -61,6 +59,7 @@ export default {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaLandingLegData,
   data: LandingLegData,
+  label: 'landing_leg',
 
   Icon,
   LayoutComponent,

@@ -26,8 +26,6 @@ export const VanillaPartWithLandingLegData: VanillaPartWithLandingLeg = {
 export const PartWithLandingLegData: PartWithLandingLeg = {
   ...PartData,
   ...VanillaPartWithLandingLegData,
-
-  label: 'Unlabeled Part With LandingLeg',
 };
 
 export function PartWithLandingLegProperties({

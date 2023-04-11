@@ -65,8 +65,6 @@ export const VanillaPartWithTextureData: VanillaPartWithTexture = {
 export const PartWithTextureData: PartWithTexture = {
   ...PartData,
   ...VanillaPartWithTextureData,
-
-  label: 'Unlabeled Part With Texture',
 };
 
 export function PartWithTextureProperties() {

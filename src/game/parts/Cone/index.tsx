@@ -44,8 +44,6 @@ export const VanillaConeData: VanillaCone = {
 export const ConeData: Cone = {
   ...PartData,
   ...VanillaConeData,
-
-  label: 'Cone',
 };
 
 useGLTF.preload(model);
@@ -71,6 +69,7 @@ export default {
   category: PartCategory.Structural,
   vanillaData: VanillaConeData,
   data: ConeData,
+  label: 'cone',
 
   Icon,
   LayoutComponent,

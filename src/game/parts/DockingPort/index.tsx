@@ -43,7 +43,6 @@ export const DockingPortData: DockingPort = {
   ...PartData,
   ...VanillaDockingPortData,
 
-  label: 'Docking Port',
 };
 
 useGLTF.preload(topModel);
@@ -156,6 +155,7 @@ export default {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaDockingPortData,
   data: DockingPortData,
+  label: 'docking_port',
 
   Icon,
   LayoutComponent,

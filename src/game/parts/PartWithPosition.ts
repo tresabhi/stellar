@@ -27,8 +27,6 @@ export const VanillaPartWithPositionData: VanillaPartWithPosition = {
 export const PartWithPositionData: PartWithPosition = {
   ...PartData,
   ...VanillaPartWithPositionData,
-
-  label: 'Unlabeled Part With Position',
 };
 
 export const usePartWithPosition = (

@@ -26,8 +26,6 @@ export const VanillaPartWithParachuteData: VanillaPartWithParachute = {
 export const PartWithParachuteData: PartWithParachute = {
   ...PartData,
   ...VanillaPartWithParachuteData,
-
-  label: 'Unlabeled Part With Parachute',
 };
 
 export function PartWithParachuteProperties({

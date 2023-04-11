@@ -32,7 +32,6 @@ export const EngineTitanData: EngineTitan = {
   ...PartData,
   ...VanillaEngineTitanData,
 
-  label: 'Titan Engine',
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
@@ -41,6 +40,7 @@ export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineTitanData,
   data: EngineTitanData,
+  label: 'engine_titan',
 
   Icon,
   LayoutComponent,

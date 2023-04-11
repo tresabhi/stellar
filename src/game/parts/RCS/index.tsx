@@ -24,8 +24,6 @@ export const VanillaRCSData: VanillaRCS = {
 export const RCSData: RCS = {
   ...PartData,
   ...VanillaRCSData,
-
-  label: 'RCS',
 };
 
 const LayoutComponent = createPhysicalPart(model, false, true);
@@ -34,6 +32,7 @@ export default {
   category: PartCategory.Structural,
   vanillaData: VanillaRCSData,
   data: RCSData,
+  label: 'rcs',
 
   Icon,
   LayoutComponent,

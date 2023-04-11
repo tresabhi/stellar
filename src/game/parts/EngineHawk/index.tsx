@@ -32,7 +32,6 @@ export const EngineHawkData: EngineHawk = {
   ...PartData,
   ...VanillaEngineHawkData,
 
-  label: 'Hawk Engine',
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
@@ -41,6 +40,7 @@ export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaEngineHawkData,
   data: EngineHawkData,
+  label: 'engine_hawk',
 
   Icon,
   LayoutComponent,

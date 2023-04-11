@@ -36,7 +36,6 @@ export const ReferenceImageData: ReferenceImage = {
   ...PartWithTransformationsData,
 
   n: 'Reference Image',
-  label: 'Reference Image',
   source: undefined,
   sourceName: undefined,
 };
@@ -147,6 +146,7 @@ export default {
   category: PartCategory.Abstract,
   vanillaData: null,
   data: ReferenceImageData,
+  label: 'reference_image',
 
   Icon,
   LayoutComponent,

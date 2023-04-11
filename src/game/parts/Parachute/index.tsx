@@ -39,7 +39,6 @@ export const ParachuteData: Parachute = {
   ...PartData,
   ...VanillaParachuteData,
 
-  label: 'Parachute',
 };
 
 useGLTF.preload(regularModel);
@@ -61,6 +60,7 @@ export default {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaParachuteData,
   data: ParachuteData,
+  label: 'parachute',
 
   Icon,
   LayoutComponent,

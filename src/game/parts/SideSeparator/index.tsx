@@ -41,8 +41,6 @@ export const VanillaSideSeparatorData: VanillaSideSeparator = {
 export const SideSeparatorData: SideSeparator = {
   ...PartData,
   ...VanillaSideSeparatorData,
-
-  label: 'Side Separator',
 };
 
 useGLTF.preload(regularModel);
@@ -67,6 +65,7 @@ export default {
   category: PartCategory.Aerodynamic,
   vanillaData: VanillaSideSeparatorData,
   data: SideSeparatorData,
+  label: 'side_separator',
 
   Icon,
   LayoutComponent,

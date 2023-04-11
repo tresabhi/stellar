@@ -49,8 +49,6 @@ export const VanillaHeatShieldData: VanillaHeatShield = {
 export const HeatShieldData: HeatShield = {
   ...PartData,
   ...VanillaHeatShieldData,
-
-  label: 'Heat Shield',
 };
 
 useGLTF.preload(model);
@@ -120,6 +118,7 @@ export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaHeatShieldData,
   data: HeatShieldData,
+  label: 'heat_shield',
 
   Icon,
   LayoutComponent,

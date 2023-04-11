@@ -28,8 +28,6 @@ export const VanillaPartWithConeData: VanillaPartWithCone = {
 export const PartWithConeData: PartWithCone = {
   ...PartData,
   ...VanillaPartWithConeData,
-
-  label: 'Unlabeled Part With Cone',
 };
 
 export function usePartWithCone(id: string, object: RefObject<Object3D>) {

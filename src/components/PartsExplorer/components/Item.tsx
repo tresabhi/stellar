@@ -8,6 +8,7 @@ import {
   TriangleRightIcon,
 } from '@radix-ui/react-icons';
 import deleteParts from 'core/part/deleteParts';
+import getLabel from 'core/part/getLabel';
 import getPartRegistry from 'core/part/getPartRegistry';
 import mutateParts from 'core/part/mutateParts';
 import selectBetween from 'core/part/selectBetween';
@@ -147,8 +148,8 @@ export const Item = memo(
     usePartProperty(
       id,
       (sliceableState) => sliceableState.label,
-      (newLabel) => {
-        if (label.current) label.current.value = newLabel;
+      () => {
+        if (label.current) label.current.value = getLabel(id);
       },
     );
 
@@ -213,7 +214,7 @@ export const Item = memo(
             label.current.value = lastLabel;
           }
         } else {
-          label.current.value = state.label;
+          label.current.value = getLabel(id);
           lastLabel = state.label;
 
           mutateParts(id, (draft) => {

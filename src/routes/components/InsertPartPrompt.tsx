@@ -2,6 +2,7 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import InputWithIcon from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
 import { SearchItems } from 'components/Search';
+import getLabelFromName from 'core/part/getLabelFromName';
 import getParent from 'core/part/getParent';
 import getPart from 'core/part/getPart';
 import insert from 'core/part/insert';
@@ -41,7 +42,8 @@ export default function InsertPartPrompt({ dismiss }: PromptProps) {
     }
   }
 
-  partRegistry.forEach(({ vanillaData, Icon, data: { label, n } }) => {
+  partRegistry.forEach(({ vanillaData, Icon, data: { n } }) => {
+    const label = getLabelFromName(n);
     const note =
       vanillaData === null
         ? t`tabs.layout.popup.insert_part.abstract`

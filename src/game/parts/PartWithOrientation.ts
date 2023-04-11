@@ -24,8 +24,6 @@ export const VanillaPartWithOrientationData: VanillaPartWithOrientation = {
 export const PartWithOrientationData: PartWithOrientation = {
   ...PartData,
   ...VanillaPartWithOrientationData,
-
-  label: 'Unlabeled Part With Orientation',
 };
 
 export const usePartWithOrientation = (

@@ -26,8 +26,6 @@ export const VanillaProbeData: VanillaProbe = {
 export const ProbeData: Probe = {
   ...PartData,
   ...VanillaProbeData,
-
-  label: 'Probe',
 };
 
 const LayoutComponent = createPhysicalPart(model);
@@ -36,6 +34,7 @@ export default {
   category: PartCategory.Structural,
   vanillaData: VanillaProbeData,
   data: ProbeData,
+  label: 'probe',
 
   Icon,
   LayoutComponent,

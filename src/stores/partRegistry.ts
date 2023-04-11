@@ -9,6 +9,7 @@ export type PartRegistryItem<Type extends Part> = {
   category: PartCategory;
   vanillaData: VanillaPart | null;
   data: Part;
+  label: string;
 
   Icon: FC;
   LayoutComponent: FC<PartComponentProps>;

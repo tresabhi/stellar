@@ -33,8 +33,6 @@ export const VanillaPlaceholderIonData: VanillaPlaceholderIon = {
 export const PlaceholderIonData: PlaceholderIon = {
   ...PartData,
   ...VanillaPlaceholderIonData,
-
-  label: 'Ion Engine',
 };
 
 const LayoutComponent = createPhysicalPart(model);
@@ -43,6 +41,7 @@ export default {
   category: PartCategory.Propulsion,
   vanillaData: VanillaPlaceholderIonData,
   data: PlaceholderIonData,
+  label: 'placeholder_ion',
 
   Icon,
   LayoutComponent,
