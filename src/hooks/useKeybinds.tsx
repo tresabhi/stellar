@@ -1,5 +1,5 @@
 import { invalidate } from '@react-three/fiber';
-import { POSITION_SNAP_SIZE } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
+import { POSITION_SNAP_SIZE } from 'components/Canvas/components/TransformControls/components/TransformNode';
 import { WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';

@@ -1,4 +1,4 @@
-import { groupedControls } from 'components/LayoutCanvas/components/EditControls';
+import { groupedControls } from 'components/Canvas/components/EditControls';
 import mutateApp from 'core/app/mutateApp';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';

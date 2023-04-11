@@ -1,5 +1,5 @@
 import { invalidate } from '@react-three/fiber';
-import { PartRotateEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/RotateNode';
+import { PartRotateEventDetail } from 'components/Canvas/components/TransformControls/components/RotateNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
 import usePartProperty from 'hooks/usePartProperty';

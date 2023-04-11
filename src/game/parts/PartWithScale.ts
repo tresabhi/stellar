@@ -1,5 +1,5 @@
 import { invalidate } from '@react-three/fiber';
-import { PartTransformEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
+import { PartTransformEventDetail } from 'components/Canvas/components/TransformControls/components/TransformNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
 import usePartProperty from 'hooks/usePartProperty';

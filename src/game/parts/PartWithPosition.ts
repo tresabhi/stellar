@@ -1,7 +1,7 @@
 import { invalidate } from '@react-three/fiber';
-import { ORIGIN } from 'components/LayoutCanvas/components/EditControls/components/FuelTankControls';
-import { PartRotateEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/RotateNode';
-import { PartTransformEventDetail } from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
+import { ORIGIN } from 'components/Canvas/components/EditControls/components/FuelTankControls';
+import { PartRotateEventDetail } from 'components/Canvas/components/TransformControls/components/RotateNode';
+import { PartTransformEventDetail } from 'components/Canvas/components/TransformControls/components/TransformNode';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
 import { PartMoveEventDetail } from 'core/part/translateSelectedAsync';
@@ -73,11 +73,11 @@ export const usePartWithPosition = (
     invalidate();
   };
   const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
-      center.set(...event.detail.center);
-      position.set(p.x, p.y).rotateAround(center, event.detail.rotation);
+    center.set(...event.detail.center);
+    position.set(p.x, p.y).rotateAround(center, event.detail.rotation);
 
-      object.current?.position.set(position.x, position.y, 0);
-      invalidate();
+    object.current?.position.set(position.x, position.y, 0);
+    invalidate();
   };
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { ORIGIN } from 'components/LayoutCanvas/components/EditControls/components/FuelTankControls';
+import { ORIGIN } from 'components/Canvas/components/EditControls/components/FuelTankControls';
 import boundsStore, { Bounds } from 'stores/bounds';
 import { Box2, Vector2 } from 'three';
 import { radToDeg } from 'three/src/math/MathUtils';

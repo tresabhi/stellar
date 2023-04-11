@@ -2,7 +2,7 @@ import { ThreeEvent, useThree } from '@react-three/fiber';
 import {
   CANVAS_MATRIX_SCALE,
   POSITION_SNAP_SIZE,
-} from 'components/LayoutCanvas/components/TransformControls/components/TransformNode';
+} from 'components/Canvas/components/TransformControls/components/TransformNode';
 import mutateApp from 'core/app/mutateApp';
 import deferUpdates from 'core/bounds/deferUpdates';
 import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';

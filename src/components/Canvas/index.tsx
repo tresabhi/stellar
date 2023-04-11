@@ -18,7 +18,7 @@ import PartsBounds from './components/PartsBounds';
 import SelectBox from './components/SelectBox';
 import TransformControls from './components/TransformControls';
 
-const Canvas = styled(CanvasPrimitive, {
+const StyledCanvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,
   flex: 1,
   touchAction: 'none',
@@ -51,9 +51,7 @@ const useCursor = (canvas: RefObject<HTMLCanvasElement>) => {
   });
 };
 
-export default function LayoutCanvas(
-  props: Omit<CanvasPrimitiveProps, 'children'>,
-) {
+export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const parts = useRef<Group>(null);
 
@@ -68,7 +66,7 @@ export default function LayoutCanvas(
   useCursor(canvas);
 
   return (
-    <Canvas
+    <StyledCanvas
       {...props}
       ref={canvas}
       gl={{ preserveDrawingBuffer: true }}
@@ -97,6 +95,6 @@ export default function LayoutCanvas(
         <EditControls />
         <SelectBox />
       </HeadsUpDisplay>
-    </Canvas>
+    </StyledCanvas>
   );
 }

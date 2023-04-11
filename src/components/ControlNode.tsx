@@ -4,7 +4,7 @@ import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { Group, Mesh, Vector2Tuple, Vector3 } from 'three';
 import { Line2 } from 'three-stdlib';
 import parseVector3Like from 'utilities/parseVector3Like';
-import { UNIT_POINTS } from './LayoutCanvas/components/PartsBounds/components/PartBounds';
+import { UNIT_POINTS } from './Canvas/components/PartsBounds/components/PartBounds';
 
 export interface ControlNodeProps extends GroupProps {
   size?: number;

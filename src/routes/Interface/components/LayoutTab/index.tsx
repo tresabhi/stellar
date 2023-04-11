@@ -1,4 +1,4 @@
-import LayoutCanvas from 'components/LayoutCanvas';
+import Canvas from 'components/Canvas';
 import TabContainer from 'routes/Interface/components/TabContainer';
 import { styled } from 'stitches.config';
 import useApp from 'stores/app';
@@ -36,7 +36,7 @@ export default function LayoutTab({ swapSecondTab }: TabLayoutProps) {
         {!zenMode && <LeftSidebar swapSecondTab={swapSecondTab} />}
 
         <CanvasContainer>
-          <LayoutCanvas style={{ position: 'absolute' }} />
+          <Canvas style={{ position: 'absolute' }} />
           <QuickControls />
         </CanvasContainer>
 
