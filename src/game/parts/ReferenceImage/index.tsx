@@ -10,6 +10,7 @@ import getPart from 'core/part/getPart';
 import PartCategory from 'hooks/constants/partCategory';
 import useMutualProperty from 'hooks/useMutualProperty';
 import usePhysicalPart from 'hooks/usePartPhysical';
+import useTranslator from 'hooks/useTranslator';
 import { useRef } from 'react';
 import ReferenceImageURLPrompt from 'routes/components/ReferenceImageURLPrompt';
 import useBlueprint from 'stores/blueprint';
@@ -84,12 +85,15 @@ function LayoutComponent({ id }: PartComponentProps) {
 }
 
 export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
+  const { t } = useTranslator();
   const sourceName = useMutualProperty(
     ids,
     (state: ReferenceImage) => state.sourceName,
   );
   const resolvedSourceName =
-    sourceName.value === undefined ? 'No file selected' : sourceName.value;
+    sourceName.value === undefined
+      ? t`tabs.layout.right_sidebar.properties.reference_image.unknown`
+      : sourceName.value;
 
   const handleImageURLClick = () => prompt(ReferenceImageURLPrompt);
   const handleImageUploadClick = async () => {
@@ -106,7 +110,8 @@ export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
           if (part.n === 'Reference Image') {
             (part as ReferenceImage).source = fileReader.result as string;
             (part as ReferenceImage).sourceName =
-              blob.handle?.name ?? 'Unknown file';
+              blob.handle?.name ??
+              t`tabs.layout.right_sidebar.properties.reference_image.no_file`;
           }
         });
       });
@@ -116,7 +121,7 @@ export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
 
   return (
     <Properties.Group>
-      <Properties.Title>Reference Image</Properties.Title>
+      <Properties.Title>{t`tabs.layout.right_sidebar.properties.reference_image`}</Properties.Title>
 
       <Properties.Row>
         <Properties.Label>
@@ -127,11 +132,11 @@ export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
       <Properties.Row>
         <Properties.Button onClick={handleImageURLClick}>
           <PlusIcon />
-          Add Image URL
+          {t`tabs.layout.right_sidebar.properties.reference_image.url`}
         </Properties.Button>
         <Properties.Button onClick={handleImageUploadClick}>
           <UploadIcon />
-          Upload Image
+          {t`tabs.layout.right_sidebar.properties.reference_image.upload`}
         </Properties.Button>
       </Properties.Row>
     </Properties.Group>

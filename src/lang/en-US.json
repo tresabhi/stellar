@@ -218,6 +218,15 @@
             "left": "Left",
             "whole": "Whole",
             "right": "Right"
+          },
+
+          "reference_image": {
+            "$": "Reference image",
+
+            "url": "Add image URL",
+            "upload": "Upload image",
+            "unknown": "Unknown file",
+            "no_file": "No file selected"
           }
         },
 
@@ -252,7 +261,6 @@
           },
 
           "json": "JSON",
-
           "vanilla_json": "Vanilla JSON"
         }
       },
