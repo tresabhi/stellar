@@ -1,6 +1,7 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
 import { Blueprint } from 'game/Blueprint';
+import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import { MethodIds } from 'types/Parts';
@@ -20,7 +21,7 @@ export default function rotate(
     const partPosition = new Vector2();
 
     normalizedIds.forEach((id) => {
-      const { p, o } = getPart<PartWithTransformations>(id, blueprint);
+      const { p, o } = getPart<Part & PartWithTransformations>(id, blueprint);
 
       partPosition.set(p.x, p.y).rotateAround(center, z);
 

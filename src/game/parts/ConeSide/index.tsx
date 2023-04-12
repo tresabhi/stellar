@@ -8,42 +8,46 @@ import { useRef } from 'react';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithCone,
-  VanillaPartWithConeData,
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import {
+  PartWithCone,
+  partWithConeData,
   usePartWithCone,
 } from '../PartWithCone';
+import { PartWithTexture, partWithTextureData } from '../PartWithTexture';
 import {
-  VanillaPartWithTexture,
-  VanillaPartWithTextureData,
-} from '../PartWithTexture';
-import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
 export interface VanillaConeSide
-  extends VanillaPartWithCone,
-    VanillaPartWithTexture,
-    VanillaPartWithTransformations {
+  extends VanillaPart,
+    PartWithCone,
+    PartWithTexture,
+    PartWithTransformations {
   readonly n: 'Cone Side';
 }
 
 export interface ConeSide extends PartWithoutName, VanillaConeSide {}
 
-export const VanillaConeSideData: VanillaConeSide = {
-  ...VanillaPartWithConeData,
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithTextureData,
+export const vanillaConeSideData: VanillaConeSide = {
+  ...vanillaPartData,
+  ...partWithConeData,
+  ...partWithTextureData,
+  ...partWithTransformationsData,
 
   n: 'Cone Side',
 };
 
-export const ConeSideData: ConeSide = {
-  ...PartData,
-  ...VanillaConeSideData,
+export const coneSideData: ConeSide = {
+  ...partData,
+  ...vanillaConeSideData,
 };
 
 useGLTF.preload(model);
@@ -67,8 +71,8 @@ function LayoutComponent({ id }: PartComponentProps) {
 
 export default {
   category: PartCategory.Structural,
-  vanillaData: VanillaConeSideData,
-  data: ConeSideData,
+  vanillaData: vanillaConeSideData,
+  data: coneSideData,
   label: 'cone_side',
 
   Icon,

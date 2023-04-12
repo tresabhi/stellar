@@ -2,44 +2,47 @@ import { ReactComponent as Icon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithEngine,
-  VanillaPartWithEngineData,
-} from '../PartWithEngine';
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
 export interface VanillaEngineKolibri
-  extends VanillaPartWithTransformations,
-    VanillaPartWithEngine {
+  extends VanillaPart,
+    PartWithTransformations,
+    PartWithEngine {
   readonly n: 'Engine Kolibri';
 }
 
 export interface EngineKolibri extends PartWithoutName, VanillaEngineKolibri {}
 
-export const VanillaEngineKolibriData: VanillaEngineKolibri = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithEngineData,
+export const vanillaEngineKolibriData: VanillaEngineKolibri = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
+  ...partWithEngineData,
 
   n: 'Engine Kolibri',
 };
 
-export const EngineKolibriData: EngineKolibri = {
-  ...PartData,
-  ...VanillaEngineKolibriData,
-
+export const engineKolibriData: EngineKolibri = {
+  ...partData,
+  ...vanillaEngineKolibriData,
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
 
 export default {
   category: PartCategory.Propulsion,
-  vanillaData: VanillaEngineKolibriData,
-  data: EngineKolibriData,
+  vanillaData: vanillaEngineKolibriData,
+  data: engineKolibriData,
   label: 'engine_kolibri',
 
   Icon,

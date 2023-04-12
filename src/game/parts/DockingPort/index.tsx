@@ -16,33 +16,40 @@ import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithoutName,
+  VanillaPart,
+  partData,
+  vanillaPartData,
+} from '../Part';
+import {
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import bottomModel from './models/bottom.gltf';
 import middleModel from './models/middle.gltf';
 import topModel from './models/top.gltf';
 
-export interface VanillaDockingPort extends VanillaPartWithTransformations {
+export interface VanillaDockingPort
+  extends VanillaPart,
+    PartWithTransformations {
   readonly n: 'Docking Port';
   N: { width: number; force_multiplier: number; sep_force_multiplier: number };
 }
 
 export interface DockingPort extends PartWithoutName, VanillaDockingPort {}
 
-export const VanillaDockingPortData: VanillaDockingPort = {
-  ...VanillaPartWithTransformationsData,
+export const vanillaDockingPortData: VanillaDockingPort = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
 
   n: 'Docking Port',
   N: { width: 0.95, force_multiplier: 0.5, sep_force_multiplier: 0.5 },
 };
 
-export const DockingPortData: DockingPort = {
-  ...PartData,
-  ...VanillaDockingPortData,
-
+export const dockingPortData: DockingPort = {
+  ...partData,
+  ...vanillaDockingPortData,
 };
 
 useGLTF.preload(topModel);
@@ -153,8 +160,8 @@ export function DockingPortProperties({ ids }: PartPropertyComponentProps) {
 
 export default {
   category: PartCategory.Aerodynamic,
-  vanillaData: VanillaDockingPortData,
-  data: DockingPortData,
+  vanillaData: vanillaDockingPortData,
+  data: dockingPortData,
   label: 'docking_port',
 
   Icon,

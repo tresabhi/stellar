@@ -6,31 +6,21 @@ import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 
-export interface VanillaPartWithOrientation extends VanillaPart {
+export interface PartWithOrientation {
   o: { z: number };
 }
 
-export interface PartWithOrientation extends Part, VanillaPartWithOrientation {}
-
-export const VanillaPartWithOrientationData: VanillaPartWithOrientation = {
-  ...VanillaPartData,
-
-  n: 'Part With Orientation',
+export const partWithOrientationData: PartWithOrientation = {
   o: { z: 0 },
-};
-
-export const PartWithOrientationData: PartWithOrientation = {
-  ...PartData,
-  ...VanillaPartWithOrientationData,
 };
 
 export const usePartWithOrientation = (
   id: string,
   object: RefObject<Object3D>,
 ) => {
-  let { z } = getPart<PartWithOrientation>(id).o;
+  let { z } = getPart<Part & PartWithOrientation>(id).o;
 
   const handlePartRotate = (event: CustomEvent<PartRotateEventDetail>) => {
     object.current?.rotation.set(
@@ -58,7 +48,7 @@ export const usePartWithOrientation = (
 
   usePartProperty(
     id,
-    (part: PartWithOrientation) => part.o.z,
+    (part: Part & PartWithOrientation) => part.o.z,
     (nextZ, prevZ) => {
       object.current?.rotation.set(0, 0, nextZ * (Math.PI / 180));
       invalidate();

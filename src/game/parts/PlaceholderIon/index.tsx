@@ -2,20 +2,23 @@ import { ReactComponent as Icon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithEngine,
-  VanillaPartWithEngineData,
-} from '../PartWithEngine';
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
 export interface VanillaPlaceholderIon
-  extends VanillaPartWithTransformations,
-    VanillaPartWithEngine {
+  extends VanillaPart,
+    PartWithTransformations,
+    PartWithEngine {
   readonly n: 'Placeholder Ion';
 }
 
@@ -23,24 +26,25 @@ export interface PlaceholderIon
   extends PartWithoutName,
     VanillaPlaceholderIon {}
 
-export const VanillaPlaceholderIonData: VanillaPlaceholderIon = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithEngineData,
+export const vanillaPlaceholderIonData: VanillaPlaceholderIon = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
+  ...partWithEngineData,
 
   n: 'Placeholder Ion',
 };
 
-export const PlaceholderIonData: PlaceholderIon = {
-  ...PartData,
-  ...VanillaPlaceholderIonData,
+export const placeholderIonData: PlaceholderIon = {
+  ...partData,
+  ...vanillaPlaceholderIonData,
 };
 
 const LayoutComponent = createPhysicalPart(model);
 
 export default {
   category: PartCategory.Propulsion,
-  vanillaData: VanillaPlaceholderIonData,
-  data: PlaceholderIonData,
+  vanillaData: vanillaPlaceholderIonData,
+  data: placeholderIonData,
   label: 'placeholder_ion',
 
   Icon,

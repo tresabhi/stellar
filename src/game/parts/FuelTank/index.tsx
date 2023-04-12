@@ -22,21 +22,20 @@ import useSettings from 'stores/settings';
 import { BufferGeometry, CylinderGeometry, Group, Mesh } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import preloadTexture from 'utilities/preloadTexture';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithTexture,
-  VanillaPartWithTextureData,
-} from '../PartWithTexture';
+  PartWithoutName,
+  VanillaPart,
+  partData,
+  vanillaPartData,
+} from '../Part';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import defaultTexture from './textures/default.png';
 import topTexture from './textures/top.png';
 
-export interface VanillaFuelTank
-  extends VanillaPartWithTexture,
-    VanillaPartWithTransformations {
+export interface VanillaFuelTank extends VanillaPart, PartWithTransformations {
   readonly n: 'Fuel Tank';
   N: {
     width_original: number;
@@ -49,9 +48,9 @@ export interface VanillaFuelTank
 
 export interface FuelTank extends PartWithoutName, VanillaFuelTank {}
 
-export const VanillaFuelTankData: VanillaFuelTank = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithTextureData,
+export const vanillaFuelTankData: VanillaFuelTank = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
 
   n: 'Fuel Tank',
   N: {
@@ -63,9 +62,9 @@ export const VanillaFuelTankData: VanillaFuelTank = {
   },
 };
 
-export const FuelTankData: FuelTank = {
-  ...PartData,
-  ...VanillaFuelTankData,
+export const fuelTankData: FuelTank = {
+  ...partData,
+  ...vanillaFuelTankData,
 };
 
 function constructGeometry(
@@ -327,8 +326,8 @@ export const fuelTankExportify: PartExportifier<FuelTank> = (part) => {
 
 export default {
   category: PartCategory.Structural,
-  vanillaData: VanillaFuelTankData,
-  data: FuelTankData,
+  vanillaData: vanillaFuelTankData,
+  data: fuelTankData,
   label: 'fuel_tank',
 
   Icon,

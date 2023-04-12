@@ -2,30 +2,14 @@ import * as Properties from 'components/Properties';
 import useCheckboxProperty from 'hooks/propertyControllers/useCheckboxProperty';
 import useTranslator from 'hooks/useTranslator';
 import { PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 
-export interface VanillaPartWithParachute extends VanillaPart {
-  N: {
-    deploy_state: number;
-    animation_state: number;
-  };
+export interface PartWithParachute {
+  N: { deploy_state: number; animation_state: number };
 }
 
-export interface PartWithParachute extends Part, VanillaPartWithParachute {}
-
-export const VanillaPartWithParachuteData: VanillaPartWithParachute = {
-  ...VanillaPartData,
-
-  n: 'Part With Parachute',
-  N: {
-    deploy_state: 0.0,
-    animation_state: 0.0,
-  },
-};
-
-export const PartWithParachuteData: PartWithParachute = {
-  ...PartData,
-  ...VanillaPartWithParachuteData,
+export const partWithParachuteData: PartWithParachute = {
+  N: { deploy_state: 0, animation_state: 0 },
 };
 
 export function PartWithParachuteProperties({
@@ -33,7 +17,7 @@ export function PartWithParachuteProperties({
 }: PartPropertyComponentProps) {
   const { t } = useTranslator();
 
-  const deployed = useCheckboxProperty<PartWithParachute>(
+  const deployed = useCheckboxProperty<Part & PartWithParachute>(
     ids,
     (state) => state.N.deploy_state !== 0,
     (draft, value) => {

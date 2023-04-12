@@ -8,37 +8,40 @@ import { useRef } from 'react';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithParachute,
-  VanillaPartWithParachuteData,
-} from '../PartWithParachute';
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import { PartWithParachute, partWithParachuteData } from '../PartWithParachute';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import regularModel from './models/default.gltf';
 import deployedModel from './models/deployed.gltf';
 
 export interface VanillaParachute
-  extends VanillaPartWithTransformations,
-    VanillaPartWithParachute {
+  extends VanillaPart,
+    PartWithTransformations,
+    PartWithParachute {
   readonly n: 'Parachute';
 }
 
 export interface Parachute extends PartWithoutName, VanillaParachute {}
 
-export const VanillaParachuteData: VanillaParachute = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithParachuteData,
+export const vanillaParachuteData: VanillaParachute = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
+  ...partWithParachuteData,
 
   n: 'Parachute',
 };
 
-export const ParachuteData: Parachute = {
-  ...PartData,
-  ...VanillaParachuteData,
-
+export const parachuteData: Parachute = {
+  ...partData,
+  ...vanillaParachuteData,
 };
 
 useGLTF.preload(regularModel);
@@ -58,8 +61,8 @@ function LayoutComponent({ id }: PartComponentProps) {
 
 export default {
   category: PartCategory.Aerodynamic,
-  vanillaData: VanillaParachuteData,
-  data: ParachuteData,
+  vanillaData: vanillaParachuteData,
+  data: parachuteData,
   label: 'parachute',
 
   Icon,

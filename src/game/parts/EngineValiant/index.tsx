@@ -2,43 +2,47 @@ import { ReactComponent as Icon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithEngine,
-  VanillaPartWithEngineData,
-} from '../PartWithEngine';
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
 export interface VanillaEngineValiant
-  extends VanillaPartWithTransformations,
-    VanillaPartWithEngine {
+  extends VanillaPart,
+    PartWithTransformations,
+    PartWithEngine {
   readonly n: 'Engine Valiant';
 }
 
 export interface EngineValiant extends PartWithoutName, VanillaEngineValiant {}
 
-export const VanillaEngineValiantData: VanillaEngineValiant = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithEngineData,
+export const vanillaEngineValiantData: VanillaEngineValiant = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
+  ...partWithEngineData,
 
   n: 'Engine Valiant',
 };
 
-export const EngineValiantData: EngineValiant = {
-  ...PartData,
-  ...VanillaEngineValiantData,
+export const engineValiantData: EngineValiant = {
+  ...partData,
+  ...vanillaEngineValiantData,
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
 
 export default {
   category: PartCategory.Propulsion,
-  vanillaData: VanillaEngineValiantData,
-  data: EngineValiantData,
+  vanillaData: vanillaEngineValiantData,
+  data: engineValiantData,
   label: 'engine_valiant',
 
   Icon,

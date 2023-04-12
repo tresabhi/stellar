@@ -1,7 +1,7 @@
-import { Part, PartData, VanillaPart, VanillaPartData } from 'game/parts/Part';
+import { Part, partData, VanillaPart, vanillaPartData } from 'game/parts/Part';
 
-const vanillaKeys = Object.keys(VanillaPartData);
-export const metadataKeys = (Object.keys(PartData) as (keyof Part)[]).filter(
+const vanillaKeys = Object.keys(vanillaPartData);
+export const metadataKeys = (Object.keys(partData) as (keyof Part)[]).filter(
   (key) => !vanillaKeys.includes(key),
 );
 

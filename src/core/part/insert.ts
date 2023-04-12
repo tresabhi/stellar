@@ -1,5 +1,6 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Group } from 'game/parts/Group';
+import { Part } from 'game/parts/Part';
 import { PartWithPosition } from 'game/parts/PartWithPosition';
 import useApp from 'stores/app';
 import { ParentId } from 'types/Parts';
@@ -33,9 +34,13 @@ export default function insert(
     const { camera } = useApp.getState().editor;
 
     if (newPart) {
-      if (camera && (newPart as PartWithPosition).p) {
-        (newPart as PartWithPosition).p.x = Math.round(camera.position.x);
-        (newPart as PartWithPosition).p.y = Math.round(camera.position.y);
+      if (camera && (newPart as Part & PartWithPosition).p) {
+        (newPart as Part & PartWithPosition).p.x = Math.round(
+          camera.position.x,
+        );
+        (newPart as Part & PartWithPosition).p.y = Math.round(
+          camera.position.y,
+        );
       }
 
       if (parentId) {

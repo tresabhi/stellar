@@ -3,24 +3,14 @@ import * as Properties from 'components/Properties';
 import useToggleGroupProperty from 'hooks/propertyControllers/useToggleGroupProperty';
 import useTranslator from 'hooks/useTranslator';
 import { PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 
-export interface VanillaPartWithFragment extends VanillaPart {
+export interface PartWithFragment {
   T: { fragment: null | '' | 'left' | 'right' };
 }
 
-export interface PartWithFragment extends Part, VanillaPartWithFragment {}
-
-export const VanillaPartWithFragmentData: VanillaPartWithFragment = {
-  ...VanillaPartData,
-
-  n: 'Part With Fragment',
+export const partWithFragmentData: PartWithFragment = {
   T: { fragment: '' },
-};
-
-export const PartWithFragmentData: PartWithFragment = {
-  ...PartData,
-  ...VanillaPartWithFragmentData,
 };
 
 export function PartWithFragmentProperties({
@@ -30,7 +20,7 @@ export function PartWithFragmentProperties({
 
   const fragment = useToggleGroupProperty(
     ids,
-    (state: PartWithFragment) =>
+    (state: Part & PartWithFragment) =>
       state.T.fragment === '' ? 'null' : `${state.T.fragment}`,
     (draft, value) => {
       draft.T.fragment = value === 'null' ? '' : value;

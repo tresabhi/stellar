@@ -15,14 +15,21 @@ import boundsStore from 'stores/bounds';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithoutName,
+  VanillaPart,
+  partData,
+  vanillaPartData,
+} from '../Part';
+import {
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
-export interface VanillaHeatShield extends VanillaPartWithTransformations {
+export interface VanillaHeatShield
+  extends VanillaPart,
+    PartWithTransformations {
   readonly n: 'Heat Shield';
 
   N: {
@@ -34,8 +41,9 @@ export interface VanillaHeatShield extends VanillaPartWithTransformations {
 
 export interface HeatShield extends PartWithoutName, VanillaHeatShield {}
 
-export const VanillaHeatShieldData: VanillaHeatShield = {
-  ...VanillaPartWithTransformationsData,
+export const vanillaHeatShieldData: VanillaHeatShield = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
 
   n: 'Heat Shield',
 
@@ -46,9 +54,9 @@ export const VanillaHeatShieldData: VanillaHeatShield = {
   },
 };
 
-export const HeatShieldData: HeatShield = {
-  ...PartData,
-  ...VanillaHeatShieldData,
+export const heatShieldData: HeatShield = {
+  ...partData,
+  ...vanillaHeatShieldData,
 };
 
 useGLTF.preload(model);
@@ -116,8 +124,8 @@ export function HeatShieldProperties({ ids }: PartPropertyComponentProps) {
 
 export default {
   category: PartCategory.Propulsion,
-  vanillaData: VanillaHeatShieldData,
-  data: HeatShieldData,
+  vanillaData: vanillaHeatShieldData,
+  data: heatShieldData,
   label: 'heat_shield',
 
   Icon,

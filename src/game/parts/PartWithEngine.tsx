@@ -2,43 +2,27 @@ import * as Properties from 'components/Properties';
 import useCheckboxProperty from 'hooks/propertyControllers/useCheckboxProperty';
 import useTranslator from 'hooks/useTranslator';
 import { PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 
-export interface VanillaPartWithEngine extends VanillaPart {
-  B: {
-    engine_on: boolean;
-    head_on__for_creative_use: boolean;
-  };
+export interface PartWithEngine {
+  B: { engine_on: boolean; head_on__for_creative_use: boolean };
 }
 
-export interface PartWithEngine extends Part, VanillaPartWithEngine {}
-
-export const VanillaPartWithEngineData: VanillaPartWithEngine = {
-  ...VanillaPartData,
-
-  n: 'Part With Engine',
-  B: {
-    engine_on: false,
-    head_on__for_creative_use: true,
-  },
-};
-
-export const PartWithEngineData: PartWithEngine = {
-  ...PartData,
-  ...VanillaPartWithEngineData,
+export const partWithEngineData: PartWithEngine = {
+  B: { engine_on: false, head_on__for_creative_use: true },
 };
 
 export function PartWithEngineProperties({ ids }: PartPropertyComponentProps) {
   const { t } = useTranslator();
 
-  const enabled = useCheckboxProperty<PartWithEngine>(
+  const enabled = useCheckboxProperty<Part & PartWithEngine>(
     ids,
     (state) => state.B.engine_on,
     (draft, value) => {
       draft.B.engine_on = value;
     },
   );
-  const heatDamage = useCheckboxProperty<PartWithEngine>(
+  const heatDamage = useCheckboxProperty<Part & PartWithEngine>(
     ids,
     (state) => state.B.head_on__for_creative_use,
     (draft, value) => {

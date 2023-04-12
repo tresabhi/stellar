@@ -1,47 +1,33 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
-import { DockingPortData, DockingPortProperties } from 'game/parts/DockingPort';
-import { FuelTankData, FuelTankProperties } from 'game/parts/FuelTank';
-import { HeatShieldData, HeatShieldProperties } from 'game/parts/HeatShield';
-import { LandingLegData } from 'game/parts/LandingLeg';
-import { ParachuteData } from 'game/parts/Parachute';
+import { dockingPortData, DockingPortProperties } from 'game/parts/DockingPort';
+import { fuelTankData, FuelTankProperties } from 'game/parts/FuelTank';
+import { heatShieldData, HeatShieldProperties } from 'game/parts/HeatShield';
+import { landingLegData } from 'game/parts/LandingLeg';
+import { parachuteData } from 'game/parts/Parachute';
 import { Part } from 'game/parts/Part';
-import {
-  PartWithCone,
-  PartWithConeData,
-  PartWithConeProperties,
-} from 'game/parts/PartWithCone';
+import { PartWithCone, PartWithConeProperties } from 'game/parts/PartWithCone';
 import {
   PartWithEngine,
-  PartWithEngineData,
   PartWithEngineProperties,
 } from 'game/parts/PartWithEngine';
 import {
   PartWithFragment,
-  PartWithFragmentData,
   PartWithFragmentProperties,
 } from 'game/parts/PartWithFragment';
-import {
-  PartWithLandingLegData,
-  PartWithLandingLegProperties,
-} from 'game/parts/PartWithLandingLeg';
-import {
-  PartWithParachuteData,
-  PartWithParachuteProperties,
-} from 'game/parts/PartWithParachute';
+import { PartWithLandingLegProperties } from 'game/parts/PartWithLandingLeg';
+import { PartWithParachuteProperties } from 'game/parts/PartWithParachute';
 import {
   PartWithTexture,
-  PartWithTextureData,
   PartWithTextureProperties,
 } from 'game/parts/PartWithTexture';
 import {
   PartWithTransformations,
-  PartWithTransformationsData,
   PartWithTransformationsProperties,
 } from 'game/parts/PartWithTransformations';
 import {
-  ReferenceImageData,
+  referenceImageData,
   ReferenceImageProperties,
 } from 'game/parts/ReferenceImage';
 import useTranslator from 'hooks/useTranslator';
@@ -66,52 +52,52 @@ export function testName(names: string | string[]) {
 }
 
 const groupedProperties: Record<string, GroupedProperties> = {
-  [PartWithTransformationsData.n]: {
-    test: testProperties<PartWithTransformations>(({ p, o }) => [p, o]),
+  partWithTransformations: {
+    test: testProperties<Part & PartWithTransformations>(({ p, o }) => [p, o]),
     Component: PartWithTransformationsProperties,
   },
-  [PartWithEngineData.n]: {
-    test: testProperties<PartWithEngine>(({ B }) => [B]),
+  partWithEngine: {
+    test: testProperties<Part & PartWithEngine>(({ B }) => [B]),
     Component: PartWithEngineProperties,
   },
-  [PartWithParachuteData.n]: {
-    test: testName(ParachuteData.n),
+  partWithParachute: {
+    test: testName(parachuteData.n),
     Component: PartWithParachuteProperties,
   },
-  [PartWithLandingLegData.n]: {
-    test: testName(LandingLegData.n),
+  partWithLandingLeg: {
+    test: testName(landingLegData.n),
     Component: PartWithLandingLegProperties,
   },
-  [PartWithFragmentData.n]: {
-    test: testProperties<PartWithFragment>(({ T }) => [T, T?.fragment]),
+  partWithFragment: {
+    test: testProperties<Part & PartWithFragment>(({ T }) => [T, T?.fragment]),
     Component: PartWithFragmentProperties,
   },
-  [PartWithTextureData.n]: {
-    test: testProperties<PartWithTexture>(({ T }) => [
+  partWithTexture: {
+    test: testProperties<Part & PartWithTexture>(({ T }) => [
       T,
       T?.color_tex,
       T?.shape_tex,
     ]),
     Component: PartWithTextureProperties,
   },
-  [PartWithConeData.n]: {
-    test: testProperties<PartWithCone>(({ N }) => [N, N?.size]),
+  partWithCone: {
+    test: testProperties<Part & PartWithCone>(({ N }) => [N, N?.size]),
     Component: PartWithConeProperties,
   },
-  [FuelTankData.n]: {
-    test: testName(FuelTankData.n),
+  fuelTank: {
+    test: testName(fuelTankData.n),
     Component: FuelTankProperties,
   },
-  [ReferenceImageData.n]: {
-    test: testName(ReferenceImageData.n),
+  referenceImage: {
+    test: testName(referenceImageData.n),
     Component: ReferenceImageProperties,
   },
-  [HeatShieldData.n]: {
-    test: testName(HeatShieldData.n),
+  heatShield: {
+    test: testName(heatShieldData.n),
     Component: HeatShieldProperties,
   },
-  [DockingPortData.n]: {
-    test: testName(DockingPortData.n),
+  dockingPort: {
+    test: testName(dockingPortData.n),
     Component: DockingPortProperties,
   },
 };

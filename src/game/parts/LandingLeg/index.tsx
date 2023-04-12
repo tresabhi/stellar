@@ -8,36 +8,43 @@ import { useRef } from 'react';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithLandingLeg,
-  VanillaPartWithLandingLegData,
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import {
+  PartWithLandingLeg,
+  partWithLandingLegData,
 } from '../PartWithLandingLeg';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import regularModel from './models/default.gltf';
 import extendedModel from './models/extended.gltf';
 
 export interface VanillaLandingLeg
-  extends VanillaPartWithTransformations,
-    VanillaPartWithLandingLeg {
+  extends VanillaPart,
+    PartWithTransformations,
+    PartWithLandingLeg {
   readonly n: 'Landing Leg';
 }
 
 export interface LandingLeg extends PartWithoutName, VanillaLandingLeg {}
 
-export const VanillaLandingLegData: VanillaLandingLeg = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithLandingLegData,
+export const vanillaLandingLegData: VanillaLandingLeg = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
+  ...partWithLandingLegData,
 
   n: 'Landing Leg',
 };
 
-export const LandingLegData: LandingLeg = {
-  ...PartData,
-  ...VanillaLandingLegData,
+export const landingLegData: LandingLeg = {
+  ...partData,
+  ...vanillaLandingLegData,
 };
 
 useGLTF.preload(regularModel);
@@ -57,8 +64,8 @@ function LayoutComponent({ id }: PartComponentProps) {
 
 export default {
   category: PartCategory.Aerodynamic,
-  vanillaData: VanillaLandingLegData,
-  data: LandingLegData,
+  vanillaData: vanillaLandingLegData,
+  data: landingLegData,
   label: 'landing_leg',
 
   Icon,

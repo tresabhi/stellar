@@ -9,24 +9,14 @@ import usePartProperty from 'hooks/usePartProperty';
 import { RefObject, useEffect } from 'react';
 import boundsStore from 'stores/bounds';
 import { Object3D, Vector2, Vector3 } from 'three';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 
-export interface VanillaPartWithPosition extends VanillaPart {
+export interface PartWithPosition {
   p: { x: number; y: number };
 }
 
-export interface PartWithPosition extends Part, VanillaPartWithPosition {}
-
-export const VanillaPartWithPositionData: VanillaPartWithPosition = {
-  ...VanillaPartData,
-
-  n: 'Part With Position',
+export const partWithPositionData: PartWithPosition = {
   p: { x: 0, y: 0 },
-};
-
-export const PartWithPositionData: PartWithPosition = {
-  ...PartData,
-  ...VanillaPartWithPositionData,
 };
 
 export const usePartWithPosition = (
@@ -38,7 +28,7 @@ export const usePartWithPosition = (
   const position = new Vector2();
   const scale = new Vector2();
   const center = new Vector2();
-  let { p } = getPart<PartWithPosition>(id);
+  let { p } = getPart<Part & PartWithPosition>(id);
 
   const handlePartMove = (event: CustomEvent<PartMoveEventDetail>) => {
     if (getPart(id).selected) {
@@ -104,7 +94,7 @@ export const usePartWithPosition = (
 
   usePartProperty(
     id,
-    (part: PartWithPosition) => part.p,
+    (part: Part & PartWithPosition) => part.p,
     (nextP, prevP) => {
       p = nextP;
       object.current?.position.set(nextP.x, nextP.y, 0);

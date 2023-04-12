@@ -2,7 +2,6 @@ import { ParentId } from 'types/Parts';
 
 export interface VanillaPart {
   readonly n: string;
-  readonly t: '-Infinity';
 }
 
 export interface Part extends VanillaPart {
@@ -17,13 +16,12 @@ export interface Part extends VanillaPart {
 
 export type PartWithoutName = Omit<Part, 'n'>;
 
-export const VanillaPartData: VanillaPart = {
+export const vanillaPartData: VanillaPart = {
   n: 'Part',
-  t: '-Infinity',
 };
 
-export const PartData: Part = {
-  ...VanillaPartData,
+export const partData: Part = {
+  ...vanillaPartData,
 
   id: '',
   parent: null,

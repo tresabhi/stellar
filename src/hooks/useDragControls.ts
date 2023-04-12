@@ -12,6 +12,7 @@ import selectConcurrent from 'core/part/selectConcurrent';
 import shouldSnap from 'core/part/shouldSnap';
 import translateSelectedAsync from 'core/part/translateSelectedAsync';
 import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
+import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import useApp, { Tool } from '../stores/app';
@@ -25,7 +26,7 @@ const useDragControls = (id: string) => {
   const movement = new Vector2();
 
   function handlePointerDown(event: ThreeEvent<PointerEvent>) {
-    const part = getPart(id) as PartWithTransformations | undefined;
+    const part = getPart(id) as (Part & PartWithTransformations) | undefined;
     const { tool, isSpacePanning, isTouchPanning, isInteractingWithPart } =
       useApp.getState().editor;
 

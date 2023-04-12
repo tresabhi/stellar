@@ -1,6 +1,7 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
+import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { MethodIds } from 'types/Parts';
 import normalizeIds from 'utilities/normalizeIds';
@@ -20,7 +21,7 @@ export default function translateRecursive(
         if (!part.locked) {
           if (part.n === 'Group') {
             translateInternal((part as Group).part_order);
-          } else if ((part as PartWithTransformations).p) {
+          } else if ((part as Part & PartWithTransformations).p) {
             translate(part.id, x, y, blueprint);
           }
         }

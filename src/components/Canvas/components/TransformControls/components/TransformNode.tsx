@@ -5,6 +5,7 @@ import deferUpdates from 'core/bounds/deferUpdates';
 import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
 import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
 import getPart from 'core/part/getPart';
+import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { useRef } from 'react';
 import useApp, { Tool } from 'stores/app';
@@ -145,7 +146,10 @@ export default function TransformNode({
 
     mutateBlueprint((draft) => {
       selections.forEach((selection) => {
-        const { o, p } = getPart<PartWithTransformations>(selection, draft);
+        const { o, p } = getPart<Part & PartWithTransformations>(
+          selection,
+          draft,
+        );
 
         partPosition
           .set(p.x, p.y)

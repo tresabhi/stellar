@@ -15,7 +15,7 @@ import boundsStore from 'stores/bounds';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
 import { PartComponentProps } from 'types/Parts';
 import fallingEdgeDebounce from 'utilities/fallingEdgeDebounce';
-import { Part, PartData, VanillaPart } from '../Part';
+import { Part, VanillaPart, partData } from '../Part';
 
 export interface Group extends Part {
   readonly n: 'Group';
@@ -23,8 +23,8 @@ export interface Group extends Part {
   part_order: string[];
 }
 
-export const GroupData: Group = {
-  ...PartData,
+export const groupData: Group = {
+  ...partData,
 
   n: 'Group',
   expanded: false,
@@ -93,7 +93,7 @@ export const groupExportify: PartExportifier<Group> = (part, blueprint) => {
 export default {
   category: PartCategory.Abstract,
   vanillaData: null,
-  data: GroupData,
+  data: groupData,
   label: 'group',
 
   Icon,

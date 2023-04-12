@@ -8,42 +8,46 @@ import { useRef } from 'react';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithCone,
-  VanillaPartWithConeData,
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import {
+  PartWithCone,
+  partWithConeData,
   usePartWithCone,
 } from '../PartWithCone';
+import { PartWithTexture, partWithTextureData } from '../PartWithTexture';
 import {
-  VanillaPartWithTexture,
-  VanillaPartWithTextureData,
-} from '../PartWithTexture';
-import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
 export interface VanillaCone
-  extends VanillaPartWithCone,
-    VanillaPartWithTexture,
-    VanillaPartWithTransformations {
+  extends VanillaPart,
+    PartWithCone,
+    PartWithTexture,
+    PartWithTransformations {
   readonly n: 'Cone';
 }
 
 export interface Cone extends PartWithoutName, VanillaCone {}
 
-export const VanillaConeData: VanillaCone = {
-  ...VanillaPartWithConeData,
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithTextureData,
+export const vanillaConeData: VanillaCone = {
+  ...vanillaPartData,
+  ...partWithConeData,
+  ...partWithTextureData,
+  ...partWithTransformationsData,
 
   n: 'Cone',
 };
 
-export const ConeData: Cone = {
-  ...PartData,
-  ...VanillaConeData,
+export const coneData: Cone = {
+  ...partData,
+  ...vanillaConeData,
 };
 
 useGLTF.preload(model);
@@ -67,8 +71,8 @@ function LayoutComponent({ id }: PartComponentProps) {
 
 export default {
   category: PartCategory.Structural,
-  vanillaData: VanillaConeData,
-  data: ConeData,
+  vanillaData: vanillaConeData,
+  data: coneData,
   label: 'cone',
 
   Icon,

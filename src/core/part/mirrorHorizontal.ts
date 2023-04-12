@@ -1,6 +1,7 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
+import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { MethodIds } from 'types/Parts';
 import normalizeAngle from 'utilities/normalizeAngle';
@@ -20,11 +21,12 @@ export default function mirrorHorizontal(
         if (part.n === 'Group') {
           mirrorHorizontal((part as Group).part_order, x, blueprint);
         } else {
-          const positionOffset = (part as PartWithTransformations).p.x - x;
-          (part as PartWithTransformations).p.x -= positionOffset * 2;
-          (part as PartWithTransformations).o.x *= -1;
-          (part as PartWithTransformations).o.z = normalizeAngle(
-            -(part as PartWithTransformations).o.z,
+          const positionOffset =
+            (part as Part & PartWithTransformations).p.x - x;
+          (part as Part & PartWithTransformations).p.x -= positionOffset * 2;
+          (part as Part & PartWithTransformations).o.x *= -1;
+          (part as Part & PartWithTransformations).o.z = normalizeAngle(
+            -(part as Part & PartWithTransformations).o.z,
             true,
           );
         }

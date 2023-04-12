@@ -8,39 +8,43 @@ import { useRef } from 'react';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithFragment,
-  VanillaPartWithFragmentData,
-} from '../PartWithFragment';
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import { PartWithFragment, partWithFragmentData } from '../PartWithFragment';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import regularModel from './models/default.gltf';
 import leftModel from './models/left.gltf';
 import rightModel from './models/right.gltf';
 
 export interface VanillaSideSeparator
-  extends VanillaPartWithTransformations,
-    VanillaPartWithFragment {
+  extends VanillaPart,
+    PartWithTransformations,
+    PartWithFragment {
   readonly n: 'Side Separator';
   N: { force_percent: number };
 }
 
 export interface SideSeparator extends PartWithoutName, VanillaSideSeparator {}
 
-export const VanillaSideSeparatorData: VanillaSideSeparator = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithFragmentData,
+export const vanillaSideSeparatorData: VanillaSideSeparator = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
+  ...partWithFragmentData,
 
   n: 'Side Separator',
   N: { force_percent: 0.5 },
 };
 
-export const SideSeparatorData: SideSeparator = {
-  ...PartData,
-  ...VanillaSideSeparatorData,
+export const sideSeparatorData: SideSeparator = {
+  ...partData,
+  ...vanillaSideSeparatorData,
 };
 
 useGLTF.preload(regularModel);
@@ -63,8 +67,8 @@ function LayoutComponent({ id }: PartComponentProps) {
 
 export default {
   category: PartCategory.Aerodynamic,
-  vanillaData: VanillaSideSeparatorData,
-  data: SideSeparatorData,
+  vanillaData: vanillaSideSeparatorData,
+  data: sideSeparatorData,
   label: 'side_separator',
 
   Icon,

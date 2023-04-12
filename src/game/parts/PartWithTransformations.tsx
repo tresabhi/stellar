@@ -8,52 +8,39 @@ import useSettings from 'stores/settings';
 import { Object3D } from 'three';
 import { PartPropertyComponentProps } from 'types/Parts';
 import normalizeAngle from 'utilities/normalizeAngle';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 import {
-  VanillaPartWithOrientation,
-  VanillaPartWithOrientationData,
+  PartWithOrientation,
+  partWithOrientationData,
   usePartWithOrientation,
 } from './PartWithOrientation';
 import {
-  VanillaPartWithPosition,
-  VanillaPartWithPositionData,
+  PartWithPosition,
+  partWithPositionData,
   usePartWithPosition,
 } from './PartWithPosition';
 import {
-  VanillaPartWithScale,
-  VanillaPartWithScaleData,
+  PartWithScale,
+  partWithScaleData,
   usePartWithScale,
 } from './PartWithScale';
 
-export interface VanillaPartWithTransformations
-  extends VanillaPart,
-    VanillaPartWithPosition,
-    Omit<VanillaPartWithOrientation, 'o'>,
-    Omit<VanillaPartWithScale, 'o'> {
+export interface PartWithTransformations
+  extends PartWithPosition,
+    Omit<PartWithOrientation, 'o'>,
+    Omit<PartWithScale, 'o'> {
   o: { x: number; y: number; z: number };
 }
 
-export interface PartWithTransformations
-  extends Part,
-    VanillaPartWithTransformations {}
+export const partWithTransformationsData: PartWithTransformations = {
+  ...partWithPositionData,
+  ...partWithOrientationData,
+  ...partWithScaleData,
 
-export const VanillaPartWithTransformationsData: VanillaPartWithTransformations =
-  {
-    ...VanillaPartData,
-    ...VanillaPartWithPositionData,
-    ...VanillaPartWithOrientationData,
-    ...VanillaPartWithScaleData,
-
-    n: 'Part With Transformations',
-    o: {
-      ...VanillaPartWithScaleData.o,
-      ...VanillaPartWithOrientationData.o,
-    },
-  };
-
-export const PartWithTransformationsData: PartWithTransformations = {
-  ...PartData,
-  ...VanillaPartWithTransformationsData,
+  o: {
+    ...partWithScaleData.o,
+    ...partWithOrientationData.o,
+  },
 };
 
 export const usePartWithTransformations = (
@@ -71,28 +58,28 @@ export function PartWithTransformationsProperties({
 }: PartPropertyComponentProps) {
   const { t } = useTranslator();
   const constrain = useSettings((state) => state.editor.constrainScales);
-  const xPosition = useNumericalInputProperty<PartWithTransformations>(
+  const xPosition = useNumericalInputProperty<Part & PartWithTransformations>(
     ids,
     (state) => state.p.x,
     (draft, value) => {
       draft.p.x = value;
     },
   );
-  const yPosition = useNumericalInputProperty<PartWithTransformations>(
+  const yPosition = useNumericalInputProperty<Part & PartWithTransformations>(
     ids,
     (state) => state.p.y,
     (draft, value) => {
       draft.p.y = value;
     },
   );
-  const rotation = useNumericalInputProperty<PartWithTransformations>(
+  const rotation = useNumericalInputProperty<Part & PartWithTransformations>(
     ids,
     (state) => state.o.z,
     (draft, value) => {
       draft.o.z = normalizeAngle(value, true);
     },
   );
-  const xScale = useNumericalInputProperty<PartWithTransformations>(
+  const xScale = useNumericalInputProperty<Part & PartWithTransformations>(
     ids,
     (state) => state.o.x,
     (draft, newValue, lastValue) => {
@@ -102,7 +89,7 @@ export function PartWithTransformationsProperties({
       }
     },
   );
-  const yScale = useNumericalInputProperty<PartWithTransformations>(
+  const yScale = useNumericalInputProperty<Part & PartWithTransformations>(
     ids,
     (state) => state.o.y,
     (draft, newValue, lastValue) => {

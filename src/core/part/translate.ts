@@ -1,5 +1,6 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
+import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { MethodIds } from 'types/Parts';
 import normalizeIds from 'utilities/normalizeIds';
@@ -12,7 +13,7 @@ export default function translate(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    mutateParts<PartWithTransformations>(
+    mutateParts<Part & PartWithTransformations>(
       normalizeIds(ids),
       (draft) => {
         draft.p.x += x;

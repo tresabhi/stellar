@@ -2,30 +2,14 @@ import * as Properties from 'components/Properties';
 import useCheckboxProperty from 'hooks/propertyControllers/useCheckboxProperty';
 import useTranslator from 'hooks/useTranslator';
 import { PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 
-export interface VanillaPartWithLandingLeg extends VanillaPart {
-  N: {
-    deploy_state: number;
-    animation_state: number;
-  };
+export interface PartWithLandingLeg {
+  N: { deploy_state: number; animation_state: number };
 }
 
-export interface PartWithLandingLeg extends Part, VanillaPartWithLandingLeg {}
-
-export const VanillaPartWithLandingLegData: VanillaPartWithLandingLeg = {
-  ...VanillaPartData,
-
-  n: 'Part With LandingLeg',
-  N: {
-    deploy_state: 0.0,
-    animation_state: 0.0,
-  },
-};
-
-export const PartWithLandingLegData: PartWithLandingLeg = {
-  ...PartData,
-  ...VanillaPartWithLandingLegData,
+export const partWithLandingLegData: PartWithLandingLeg = {
+  N: { deploy_state: 0, animation_state: 0 },
 };
 
 export function PartWithLandingLegProperties({
@@ -33,7 +17,7 @@ export function PartWithLandingLegProperties({
 }: PartPropertyComponentProps) {
   const { t } = useTranslator();
 
-  const deployed = useCheckboxProperty<PartWithLandingLeg>(
+  const deployed = useCheckboxProperty<Part & PartWithLandingLeg>(
     ids,
     (state) => state.N.deploy_state !== 0,
     (draft, value) => {

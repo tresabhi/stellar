@@ -19,21 +19,21 @@ import { PartRegistryItem } from 'stores/partRegistry';
 import { Mesh, PlaneGeometry } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import getImageDimensionsByURL from 'utilities/getImageDimensionsByURL';
-import { PartData } from '../Part';
+import { Part, partData } from '../Part';
 import {
   PartWithTransformations,
-  PartWithTransformationsData,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 
-export interface ReferenceImage extends PartWithTransformations {
+export interface ReferenceImage extends Part, PartWithTransformations {
   readonly n: 'Reference Image';
   source?: string;
   sourceName?: string;
 }
 
-export const ReferenceImageData: ReferenceImage = {
-  ...PartData,
-  ...PartWithTransformationsData,
+export const referenceImageData: ReferenceImage = {
+  ...partData,
+  ...partWithTransformationsData,
 
   n: 'Reference Image',
   source: undefined,
@@ -145,7 +145,7 @@ export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
 export default {
   category: PartCategory.Abstract,
   vanillaData: null,
-  data: ReferenceImageData,
+  data: referenceImageData,
   label: 'reference_image',
 
   Icon,

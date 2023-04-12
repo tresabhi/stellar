@@ -1,6 +1,5 @@
 import * as Properties from 'components/Properties';
 import useTranslator from 'hooks/useTranslator';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
 
 export type ColorTexture =
   | '_'
@@ -49,22 +48,12 @@ export type ShapeTexture =
   | 'Capsule'
   | 'Strut';
 
-export interface VanillaPartWithTexture extends VanillaPart {
+export interface PartWithTexture {
   T: { color_tex: ColorTexture; shape_tex: ShapeTexture };
 }
 
-export interface PartWithTexture extends Part, VanillaPartWithTexture {}
-
-export const VanillaPartWithTextureData: VanillaPartWithTexture = {
-  ...VanillaPartData,
-
-  n: 'Part With Texture',
+export const partWithTextureData: PartWithTexture = {
   T: { color_tex: '_', shape_tex: '_' },
-};
-
-export const PartWithTextureData: PartWithTexture = {
-  ...PartData,
-  ...VanillaPartWithTextureData,
 };
 
 export function PartWithTextureProperties() {

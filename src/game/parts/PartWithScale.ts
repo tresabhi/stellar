@@ -8,27 +8,16 @@ import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
 import normalizeAngle from 'utilities/normalizeAngle';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 import { PartWithOrientation } from './PartWithOrientation';
 import { PartWithTransformations } from './PartWithTransformations';
 
-export interface VanillaPartWithScale extends VanillaPart {
+export interface PartWithScale {
   o: { x: number; y: number };
 }
 
-export interface PartWithScale extends Part, VanillaPartWithScale {}
-
-export const VanillaPartWithScaleData: VanillaPartWithScale = {
-  ...VanillaPartData,
-
-  n: 'Part With Scale',
+export const partWithScaleData: PartWithScale = {
   o: { x: 1, y: 1 },
-};
-
-export const PartWithScaleData: PartWithScale = {
-  ...PartData,
-  ...VanillaPartWithScaleData,
-
 };
 
 function rotationLighting(flipLight: boolean, rotation: number) {
@@ -44,13 +33,13 @@ export const usePartWithScale = (
   object: RefObject<Object3D>,
   flipLighting = true,
 ) => {
-  let rotation = getPart<PartWithOrientation>(id).o.z;
+  let rotation = getPart<Part & PartWithOrientation>(id)?.o?.z ?? 0;
 
   const handlePartTransform = (
     event: CustomEvent<PartTransformEventDetail>,
   ) => {
     const { bounds } = boundsStore[id];
-    const { o } = useBlueprint.getState().parts[id] as PartWithScale;
+    const { o } = useBlueprint.getState().parts[id] as Part & PartWithScale;
     const rotationMod = (event.detail.rotation - bounds.rotation) % Math.PI;
     let scaleX = event.detail.scale[0];
     let scaleY = event.detail.scale[1];
@@ -87,7 +76,7 @@ export const usePartWithScale = (
 
   usePartProperty(
     id,
-    (part: PartWithTransformations) => part.o,
+    (part: Part & PartWithTransformations) => part.o,
     (o, prevO) => {
       rotation = o.z;
       object.current?.scale.set(

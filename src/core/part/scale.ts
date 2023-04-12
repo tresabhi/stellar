@@ -1,4 +1,5 @@
 import { Blueprint } from 'game/Blueprint';
+import { Part } from 'game/parts/Part';
 import { PartWithScale } from 'game/parts/PartWithScale';
 import { MethodIds } from 'types/Parts';
 import normalizeIds from 'utilities/normalizeIds';
@@ -10,7 +11,7 @@ export default function scaleParts(
   y: number,
   blueprint?: Blueprint,
 ) {
-  mutateParts<PartWithScale>(
+  mutateParts<Part & PartWithScale>(
     normalizeIds(ids),
     (draft) => {
       draft.o.x *= x;

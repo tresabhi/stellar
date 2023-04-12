@@ -9,35 +9,25 @@ import { RefObject } from 'react';
 import boundsStore from 'stores/bounds';
 import { Object3D } from 'three';
 import { PartPropertyComponentProps } from 'types/Parts';
-import { Part, PartData, VanillaPart, VanillaPartData } from './Part';
+import { Part } from './Part';
 import { PartWithPosition } from './PartWithPosition';
 
-export interface VanillaPartWithCone extends VanillaPart {
+export interface PartWithCone {
   N: { size: number };
 }
 
-export interface PartWithCone extends Part, VanillaPartWithCone {}
-
-export const VanillaPartWithConeData: VanillaPartWithCone = {
-  ...VanillaPartData,
-
-  n: 'Part With Cone',
+export const partWithConeData: PartWithCone = {
   N: { size: 1 },
-};
-
-export const PartWithConeData: PartWithCone = {
-  ...PartData,
-  ...VanillaPartWithConeData,
 };
 
 export function usePartWithCone(id: string, object: RefObject<Object3D>) {
   usePartProperty(
     id,
-    (newState: PartWithCone) => newState.N.size,
+    (newState: Part & PartWithCone) => newState.N.size,
     (newSize, lastSize) => {
       object.current?.scale.set(newSize, newSize, newSize);
 
-      const { p } = getPart<PartWithPosition>(id);
+      const { p } = getPart<Part & PartWithPosition>(id);
       const { bounds } = boundsStore[id];
       const changedScale = newSize / lastSize;
 
@@ -55,7 +45,7 @@ export function usePartWithCone(id: string, object: RefObject<Object3D>) {
 export function PartWithConeProperties({ ids }: PartPropertyComponentProps) {
   const { t } = useTranslator();
 
-  const size = useNumericalInputProperty<PartWithCone>(
+  const size = useNumericalInputProperty<Part & PartWithCone>(
     ids,
     (state) => state.N.size,
     (draft, newValue) => {

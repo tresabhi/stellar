@@ -7,6 +7,7 @@ import getBoundsFromParts from 'core/bounds/getBoundsFromParts';
 import declareInteractingWithPart from 'core/interface/declareInteractingWithPart';
 import getPart from 'core/part/getPart';
 import shouldSnap from 'core/part/shouldSnap';
+import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import useMousePosition from 'hooks/useMousePosition';
 import { useRef } from 'react';
@@ -115,7 +116,10 @@ export default function RotateNode({
 
     mutateBlueprint((draft) => {
       selections.forEach((selection) => {
-        const { p, o } = getPart<PartWithTransformations>(selection, draft);
+        const { p, o } = getPart<Part & PartWithTransformations>(
+          selection,
+          draft,
+        );
 
         partPosition.set(p.x, p.y).rotateAround(center, offset);
 

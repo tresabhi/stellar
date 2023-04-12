@@ -2,44 +2,47 @@ import { ReactComponent as Icon } from 'assets/icons/engine.svg';
 import PartCategory from 'hooks/constants/partCategory';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createPhysicalPart from 'utilities/createPhysicalPart';
-import { PartData, PartWithoutName } from '../Part';
 import {
-  VanillaPartWithEngine,
-  VanillaPartWithEngineData,
-} from '../PartWithEngine';
+  partData,
+  PartWithoutName,
+  VanillaPart,
+  vanillaPartData,
+} from '../Part';
+import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
 import {
-  VanillaPartWithTransformations,
-  VanillaPartWithTransformationsData,
+  PartWithTransformations,
+  partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
 
 export interface VanillaEngineHawk
-  extends VanillaPartWithTransformations,
-    VanillaPartWithEngine {
+  extends VanillaPart,
+    PartWithTransformations,
+    PartWithEngine {
   readonly n: 'Engine Hawk';
 }
 
 export interface EngineHawk extends PartWithoutName, VanillaEngineHawk {}
 
-export const VanillaEngineHawkData: VanillaEngineHawk = {
-  ...VanillaPartWithTransformationsData,
-  ...VanillaPartWithEngineData,
+export const vanillaEngineHawkData: VanillaEngineHawk = {
+  ...vanillaPartData,
+  ...partWithTransformationsData,
+  ...partWithEngineData,
 
   n: 'Engine Hawk',
 };
 
-export const EngineHawkData: EngineHawk = {
-  ...PartData,
-  ...VanillaEngineHawkData,
-
+export const engineHawkData: EngineHawk = {
+  ...partData,
+  ...vanillaEngineHawkData,
 };
 
 const LayoutComponent = createPhysicalPart(model, false);
 
 export default {
   category: PartCategory.Propulsion,
-  vanillaData: VanillaEngineHawkData,
-  data: EngineHawkData,
+  vanillaData: vanillaEngineHawkData,
+  data: engineHawkData,
   label: 'engine_hawk',
 
   Icon,
