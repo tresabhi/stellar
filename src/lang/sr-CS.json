@@ -70,6 +70,12 @@
           "select_multiple": "Izaberi više",
           "focus_mode": "Fokusiran mod"
         },
+        "measurements": {
+          "snap": "Snap to grid",
+          "no_snap": "No snap",
+          "scale_with_ratio": "Scale with ratio",
+          "center_of_build": "Center of build"
+        },
         "help": {
           "about": "O aplikaciji \"Stellar\"",
           "report": "Prijavi problem",
@@ -169,6 +175,13 @@
             "left": "Levo",
             "whole": "Celina",
             "right": "Desno"
+          },
+          "reference_image": {
+            "$": "Reference image",
+            "url": "Add image URL",
+            "upload": "Upload image",
+            "unknown": "Unknown file",
+            "no_file": "No file selected"
           }
         },
         "inspect": {
@@ -378,10 +391,44 @@
         "cancel": "Poništi",
         "yes": "Da"
       }
+    },
+    "incompatible_blueprint": {
+      "too_old": {
+        "title": "Blueprint is outdated",
+        "description": "Failed to upgrade blueprint because its format is deprecated"
+      },
+      "too_new": {
+        "title": "Blueprint is incompatible",
+        "description": "Failed to load blueprint because it's from a newer version"
+      },
+      "actions": {
+        "dismiss": "Dismiss"
+      }
     }
   },
   "themes": {
     "theme_light": "Stellar svetla tema",
     "theme_dark": "Stellar tamna tema"
+  },
+  "parts": {
+    "capsule": "Capsule",
+    "cone": "Cone",
+    "cone_side": "Side cone",
+    "docking_port": "Docking port",
+    "engine_frontier": "Frontier engine",
+    "engine_hawk": "Hawk engine",
+    "engine_kolibri": "Kolibri engine",
+    "engine_titan": "Titan engine",
+    "engine_valiant": "Valiant engine",
+    "fuel_tank": "Fuel tank",
+    "group": "Group",
+    "heat_shield": "Heat shield",
+    "landing_leg": "Landing leg",
+    "parachute": "Parachute",
+    "placeholder_ion": "Ion engine",
+    "probe": "Probe",
+    "rcs": "RCS",
+    "reference_image": "Reference image",
+    "side_separator": "Side separator"
   }
 }
