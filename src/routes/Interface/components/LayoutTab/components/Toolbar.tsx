@@ -40,7 +40,7 @@ import {
   UploadIcon,
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
-import centerOfBuild from 'assets/images/center-of-bounds.png';
+import centerOfBuild from 'assets/images/center-of-build.png';
 import { groupedControls } from 'components/Canvas/components/EditControls';
 import * as ToolbarPrimitive from 'components/Toolbar';
 import { DISCORD, WEBSITE } from 'constants/social';
