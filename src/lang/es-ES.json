@@ -70,6 +70,12 @@
           "select_multiple": "Seleccionar múltiple",
           "focus_mode": "Modo de enfoque"
         },
+        "measurements": {
+          "snap": "Snap to grid",
+          "no_snap": "No snap",
+          "scale_with_ratio": "Scale with ratio",
+          "center_of_build": "Center of build"
+        },
         "help": {
           "about": "Acerca de Stellar",
           "report": "Reportar un problema",
@@ -169,6 +175,13 @@
             "left": "Izquierda",
             "whole": "Completo",
             "right": "Derecha"
+          },
+          "reference_image": {
+            "$": "Imagen de referencia",
+            "url": "Add image URL",
+            "upload": "Subir imagen",
+            "unknown": "Archivo desconocido",
+            "no_file": "No hay archivos seleccionados"
           }
         },
         "inspect": {
@@ -378,10 +391,44 @@
         "cancel": "Cancelar",
         "yes": "Sí"
       }
+    },
+    "incompatible_blueprint": {
+      "too_old": {
+        "title": "El plano está desactualizado",
+        "description": "Failed to upgrade blueprint because its format is deprecated"
+      },
+      "too_new": {
+        "title": "El plano es incompatible",
+        "description": "Se falló al cargar el plano porque es de una versión más nueva"
+      },
+      "actions": {
+        "dismiss": "Descartar"
+      }
     }
   },
   "themes": {
     "theme_light": "Stellar claro",
     "theme_dark": "Stellar oscuro"
+  },
+  "parts": {
+    "capsule": "Cápsula",
+    "cone": "Cono",
+    "cone_side": "Cono lateral",
+    "docking_port": "Puerto de atraque",
+    "engine_frontier": "Frontier engine",
+    "engine_hawk": "Hawk engine",
+    "engine_kolibri": "Kolibri engine",
+    "engine_titan": "Titan engine",
+    "engine_valiant": "Valiant engine",
+    "fuel_tank": "Tanque de combustible",
+    "group": "Group",
+    "heat_shield": "Escudo de calor",
+    "landing_leg": "Pierna de aterrizaje",
+    "parachute": "Paracaídas",
+    "placeholder_ion": "Motor de iones",
+    "probe": "Probe",
+    "rcs": "RCS",
+    "reference_image": "Imagen de referencia",
+    "side_separator": "Separador lateral"
   }
 }
