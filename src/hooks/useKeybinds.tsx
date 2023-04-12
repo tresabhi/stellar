@@ -237,6 +237,12 @@ export default function useKeybinds() {
     bind(['2', 'v'], toTool(Tool.Transform));
     bind(['3', 'enter'], enterEditMode);
 
+    bind('alt+b', () => {
+      mutateSettings((draft) => {
+        draft.editor.showCenterOfBuild = !draft.editor.showCenterOfBuild;
+      });
+    });
+
     bind(
       'space',
       () => {

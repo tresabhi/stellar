@@ -59,6 +59,7 @@ export interface UseSettings {
     rename: RenamePartsOptions;
     constrainScales: boolean;
     constrainFuelTankWidths: boolean;
+    showCenterOfBuild: boolean;
   };
 
   file: {
@@ -114,6 +115,7 @@ export const useSettingsData: UseSettings = {
     },
     constrainScales: true,
     constrainFuelTankWidths: true,
+    showCenterOfBuild: false,
   },
 
   file: {

@@ -40,11 +40,13 @@ import {
   UploadIcon,
 } from '@radix-ui/react-icons';
 import { ReactComponent as StellarIcon } from 'assets/icons/stellar-icon.svg';
+import centerOfBuild from 'assets/images/center-of-bounds.png';
 import { groupedControls } from 'components/Canvas/components/EditControls';
 import * as ToolbarPrimitive from 'components/Toolbar';
 import { DISCORD, WEBSITE } from 'constants/social';
 import { GH_REPO_URL } from 'constants/sourceCode';
 import mutateApp from 'core/app/mutateApp';
+import mutateSettings from 'core/app/mutateSettings';
 import exportFile from 'core/blueprint/exportFile';
 import importFile from 'core/blueprint/importFile';
 import loadBlueprint from 'core/blueprint/loadBlueprint';
@@ -74,10 +76,14 @@ import RenamePartsPrompt from 'routes/components/RenamePartsPrompt';
 import SettingsPrompt from 'routes/components/SettingsPrompt';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
+import useSettings from 'stores/settings';
 import useVersionControl from 'stores/versionControl';
 
 function Toolbar() {
   const { t, translate } = useTranslator();
+  const showCenterOfBuild = useSettings(
+    (state) => state.editor.showCenterOfBuild,
+  );
   const selectMultiple = useApp((state) => state.editor.selectMultiple);
   const selectDeep = useApp((state) => state.editor.selectDeep);
   const focusMode = useApp((state) => state.interface.focusMode);
@@ -403,7 +409,7 @@ function Toolbar() {
               });
             }}
           >
-            Snap to grid
+            {t`tabs.layout.toolbar.measurements.snap`}
           </ToolbarPrimitive.DropdownMenuItem>
           <ToolbarPrimitive.DropdownMenuItem
             icon={<BoxModelIcon />}
@@ -415,7 +421,7 @@ function Toolbar() {
               });
             }}
           >
-            No snap
+            {t`tabs.layout.toolbar.measurements.no_snap`}
           </ToolbarPrimitive.DropdownMenuItem>
           <ToolbarPrimitive.DropdownMenuItem
             icon={<TransformIcon />}
@@ -427,7 +433,20 @@ function Toolbar() {
               });
             }}
           >
-            Scale with ratio
+            {t`tabs.layout.toolbar.measurements.scale_with_ratio`}
+          </ToolbarPrimitive.DropdownMenuItem>
+          <ToolbarPrimitive.DropdownMenuItem
+            icon={<img src={centerOfBuild} alt="center of build" />}
+            keybind="Alt + B"
+            color={showCenterOfBuild ? 'accent' : undefined}
+            onClick={() => {
+              mutateSettings((draft) => {
+                draft.editor.showCenterOfBuild =
+                  !draft.editor.showCenterOfBuild;
+              });
+            }}
+          >
+            {t`tabs.layout.toolbar.measurements.center_of_build`}
           </ToolbarPrimitive.DropdownMenuItem>
         </ToolbarPrimitive.DropdownMenu>
       </ToolbarPrimitive.Group>

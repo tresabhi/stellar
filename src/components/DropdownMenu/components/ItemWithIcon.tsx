@@ -13,7 +13,7 @@ const IconContainer = styled('div', {
   width: theme.sizes[16],
   height: theme.sizes[16],
 
-  '& > svg': {
+  '& > svg, & > img': {
     height: theme.sizes[16],
     width: theme.sizes[16],
     color: theme.colors.textHighContrast,

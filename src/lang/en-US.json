@@ -84,6 +84,14 @@
           "focus_mode": "Focus mode"
         },
 
+        "measurements": {
+          "snap": "Snap to grid",
+          "no_snap": "No snap",
+          "scale_with_ratio": "Scale with ratio",
+
+          "center_of_build": "Center of build"
+        },
+
         "help": {
           "about": "About Stellar",
           "report": "Report an issue",

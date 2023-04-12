@@ -3,13 +3,14 @@ import {
   Props as CanvasPrimitiveProps,
 } from '@react-three/fiber';
 import HeadsUpDisplay from 'components/HeadsUpDisplay';
+import PanControls from 'components/PanControls';
 import unselectAll from 'core/part/unselectAll';
 import { RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
-import PanControls from '../PanControls';
+import Centers from './components/Centers';
 import EditControls from './components/EditControls';
 import Expose from './components/Expose';
 import Grid from './components/Grid';
@@ -80,9 +81,9 @@ export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
       frameloop="demand"
     >
       <Expose />
-
       <PanControls />
 
+      {/* priority 0 */}
       <Grid />
 
       <HeadsUpDisplay priority={1}>
@@ -94,6 +95,7 @@ export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
         <TransformControls />
         <EditControls />
         <SelectBox />
+        <Centers />
       </HeadsUpDisplay>
     </StyledCanvas>
   );
