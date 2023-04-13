@@ -1,7 +1,6 @@
 import {
   BlendingModeIcon,
   CaretRightIcon,
-  CodeIcon,
   CrumpledPaperIcon,
   CursorArrowIcon,
   DesktopIcon,
@@ -692,53 +691,6 @@ function FileSettings({ search, titleRef }: SubSettingsProps) {
   );
 }
 
-function DebugSettings({ search, titleRef }: SubSettingsProps) {
-  const { t, translate } = useTranslator();
-  const createString = stringCurry('debug', translate);
-
-  return (
-    <>
-      <SectionTitle ref={titleRef}>
-        <CodeIcon />
-        {t`prompts.settings.groups.debug`}
-      </SectionTitle>
-
-      <Search
-        input={search}
-        list={[
-          {
-            node: (
-              <OptionHorizontal key="error-screen-debug">
-                <OptionVertical fill>
-                  <Title>
-                    <InfoCircledIcon />
-                    {t`prompts.settings.groups.debug.error_screen_debug.title`}
-                  </Title>
-                  <Description>
-                    {t`prompts.settings.groups.debug.error_screen_debug.description`}
-                  </Description>
-                </OptionVertical>
-
-                <Checkbox
-                  defaultChecked={
-                    useSettings.getState().debug.errorScreen.showDebug
-                  }
-                  onCheckedChange={(value) => {
-                    mutateSettings((draft) => {
-                      draft.debug.errorScreen.showDebug = Boolean(value);
-                    });
-                  }}
-                />
-              </OptionHorizontal>
-            ),
-            string: createString('error_screen_debug'),
-          },
-        ]}
-      />
-    </>
-  );
-}
-
 export default function SettingsPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const options = useRef<HTMLDivElement>(null);
@@ -746,7 +698,6 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
   const interfaceTitle = useRef<HTMLSpanElement>(null);
   const editor = useRef<HTMLSpanElement>(null);
   const file = useRef<HTMLSpanElement>(null);
-  const debug = useRef<HTMLSpanElement>(null);
 
   usePopupConcurrency();
   useEffect(() => search.current?.focus());
@@ -782,11 +733,6 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
             <NavigationButtonText>{t`prompts.settings.navigation.file`}</NavigationButtonText>
             <CaretRightIcon />
           </NavigationButton>
-          <NavigationButton onClick={() => debug.current?.scrollIntoView()}>
-            <CodeIcon />
-            <NavigationButtonText>{t`prompts.settings.navigation.debug`}</NavigationButtonText>
-            <CaretRightIcon />
-          </NavigationButton>
         </NavigationButtons>
 
         <ResetToDefault
@@ -816,8 +762,6 @@ export default function SettingsPrompt({ dismiss }: PromptProps) {
           <EditorSettings titleRef={editor} search={search} />
           <Separator />
           <FileSettings titleRef={file} search={search} />
-          <Separator />
-          <DebugSettings titleRef={debug} search={search} />
         </OptionsWrapper>
       </Options>
     </Container>

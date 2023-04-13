@@ -18,11 +18,6 @@ export const THEMES: Record<string, Theme> = {
 };
 
 export interface UseSettings {
-  debug: {
-    errorScreen: {
-      showDebug: boolean;
-    };
-  };
 
   interface: {
     touchscreenMode: boolean | null;
@@ -70,11 +65,6 @@ export interface UseSettings {
 }
 
 export const useSettingsData: UseSettings = {
-  debug: {
-    errorScreen: {
-      showDebug: false,
-    },
-  },
 
   interface: {
     touchscreenMode: null,
