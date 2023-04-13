@@ -5,7 +5,7 @@
       "$": "Create",
       "templates": {
         "input_placeholder": "Search templates...",
-        "in_built": "In-built",
+        "in_built": "Built-in",
         "list": {
           "apollo_mission": "Apollo mission",
           "basic_rocket": "Basic rocket",
@@ -191,7 +191,7 @@
             "instructions": "Select a single part to inspect details"
           },
           "meta_data": {
-            "$": "Meta data",
+            "$": "Metadata",
             "id": "ID",
             "parent_id": "Parent ID",
             "name": "Name",
