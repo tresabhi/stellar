@@ -2,6 +2,7 @@ import exportifyPart from 'core/part/exportifyPart';
 import { Blueprint, vanillaBlueprintData } from 'game/Blueprint';
 import { VanillaPart } from 'game/parts/Part';
 import { cloneDeep, isArray } from 'lodash';
+import exportifyStage from './exportifyStage';
 
 export default function exportifyBlueprint(blueprint: Blueprint) {
   const clonedBlueprint = cloneDeep(blueprint);
@@ -22,6 +23,10 @@ export default function exportifyBlueprint(blueprint: Blueprint) {
         exportifiedBlueprint.parts.push(exportifiedPart as VanillaPart);
       }
     }
+  });
+
+  exportifiedBlueprint.stages.forEach((stage, index) => {
+    exportifiedBlueprint.stages[index] = exportifyStage(stage);
   });
 
   return exportifiedBlueprint;
