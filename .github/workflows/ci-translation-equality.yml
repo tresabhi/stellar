@@ -1,4 +1,4 @@
-name: CI Test
+name: CI Translation Equality
 
 on: [push, pull_request]
 
@@ -8,7 +8,7 @@ concurrency:
 
 jobs:
   build:
-    name: Test
+    name: Check Translation Equality
     runs-on: ubuntu-latest
 
     strategy:
@@ -37,5 +37,5 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Lint
-        run: yarn run test
+      - name: Check language equality
+        run: node scripts/checkTranslationEquality.js
