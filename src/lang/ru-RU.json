@@ -70,6 +70,12 @@
           "select_multiple": "Выбрать несколько",
           "focus_mode": "Режим фокусировки"
         },
+        "measurements": {
+          "snap": "Привязка к сетке",
+          "no_snap": "Без привязки",
+          "scale_with_ratio": "Пропорциональное масштабирование",
+          "center_of_build": "Центр сооружения"
+        },
         "help": {
           "about": "О Stellar",
           "report": "Сообщить о проблеме",
@@ -169,6 +175,13 @@
             "left": "Левый",
             "whole": "Целый",
             "right": "Правый"
+          },
+          "reference_image": {
+            "$": "Эталонное изображение",
+            "url": "Добавить URL",
+            "upload": "Загрузить изображение",
+            "unknown": "Неизвестный файл",
+            "no_file": "Нет выбранного файла"
           }
         },
         "inspect": {
@@ -378,10 +391,44 @@
         "cancel": "Отмена",
         "yes": "Да"
       }
+    },
+    "incompatible_blueprint": {
+      "too_old": {
+        "title": "Устарелый чертеж",
+        "description": "Не удалось обновить чертеж, так как его формат устарел"
+      },
+      "too_new": {
+        "title": "Несовместимый чертеж",
+        "description": "Не удалось загрузить чертеж, так как он из более новой версии"
+      },
+      "actions": {
+        "dismiss": "Игнорировать"
+      }
     }
   },
   "themes": {
     "theme_light": "Stellar (светлая)",
     "theme_dark": "Stellar (тёмная)"
+  },
+  "parts": {
+    "capsule": "Капсула",
+    "cone": "Носовой конус",
+    "cone_side": "Носовой конус (боковой)",
+    "docking_port": "Стыковочный порт",
+    "engine_frontier": "Двигатель Рубеж",
+    "engine_hawk": "Двигатель Ястреб",
+    "engine_kolibri": "Двигатель Колибри",
+    "engine_titan": "Двигатель Титан",
+    "engine_valiant": "Двигатель Храбрый",
+    "fuel_tank": "Топливный бак",
+    "group": "Группа",
+    "heat_shield": "Тепловой щит",
+    "landing_leg": "Посадочная опора",
+    "parachute": "Парашют",
+    "placeholder_ion": "Ионный двигатель",
+    "probe": "Зонд",
+    "rcs": "Двигатели РСУ",
+    "reference_image": "Эталонное изображение",
+    "side_separator": "Боковой отделитель"
   }
 }
