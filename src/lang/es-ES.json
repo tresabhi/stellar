@@ -71,10 +71,10 @@
           "focus_mode": "Modo de enfoque"
         },
         "measurements": {
-          "snap": "Snap to grid",
-          "no_snap": "No snap",
-          "scale_with_ratio": "Scale with ratio",
-          "center_of_build": "Center of build"
+          "snap": "Ajustar con la cuadrícula",
+          "no_snap": "Sin ajustar",
+          "scale_with_ratio": "Escalar en relación",
+          "center_of_build": "Centro de construcción"
         },
         "help": {
           "about": "Acerca de Stellar",
@@ -178,7 +178,7 @@
           },
           "reference_image": {
             "$": "Imagen de referencia",
-            "url": "Add image URL",
+            "url": "Añadir URL de imagen",
             "upload": "Subir imagen",
             "unknown": "Archivo desconocido",
             "no_file": "No hay archivos seleccionados"
@@ -395,7 +395,7 @@
     "incompatible_blueprint": {
       "too_old": {
         "title": "El plano está desactualizado",
-        "description": "Failed to upgrade blueprint because its format is deprecated"
+        "description": "Se falló al actualizar el plano porque el formato está obsoleto"
       },
       "too_new": {
         "title": "El plano es incompatible",
@@ -421,12 +421,12 @@
     "engine_titan": "Titan engine",
     "engine_valiant": "Valiant engine",
     "fuel_tank": "Tanque de combustible",
-    "group": "Group",
+    "group": "Grupo",
     "heat_shield": "Escudo de calor",
     "landing_leg": "Pierna de aterrizaje",
     "parachute": "Paracaídas",
     "placeholder_ion": "Motor de iones",
-    "probe": "Probe",
+    "probe": "Sonda",
     "rcs": "RCS",
     "reference_image": "Imagen de referencia",
     "side_separator": "Separador lateral"
