@@ -302,7 +302,7 @@ export default function useKeybinds() {
       preventOnNonTransformTool: true,
     });
     bind('f2', () => {
-      if (useBlueprint.getState().selections.length > 0) {
+      if (useBlueprint.getState().part_selections.length > 0) {
         prompt(RenamePartsPrompt, true, 'rename-parts');
       }
     });

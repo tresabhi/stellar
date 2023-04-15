@@ -4,7 +4,7 @@ import toggleVisible from './toggleVisible';
 
 export default function toggleSelectedVisible(blueprint?: Blueprint) {
   if (blueprint) {
-    toggleVisible(blueprint.selections, blueprint);
+    toggleVisible(blueprint.part_selections, blueprint);
   } else {
     mutateBlueprint((draft) => toggleSelectedVisible(draft));
   }

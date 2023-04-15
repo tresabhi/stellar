@@ -14,7 +14,7 @@ export interface ContainerProps {
   parentId: ParentId;
 }
 
-const Primitive = styled(ScrollArea.Root, {
+const PrimitiveScrollArea = styled(ScrollArea.Root, {
   flex: '1 0 0',
 });
 
@@ -38,7 +38,7 @@ export function Root({ parentId, indent = 0, ...props }: ContainerProps) {
   const handleWrapperClick = (event: MouseEvent) => event.stopPropagation();
 
   return (
-    <Primitive>
+    <PrimitiveScrollArea>
       <ScrollArea.Viewport onClick={handleScrollAreaClick}>
         <Wrapper {...props} onClick={handleWrapperClick}>
           {children}
@@ -51,6 +51,6 @@ export function Root({ parentId, indent = 0, ...props }: ContainerProps) {
       <ScrollArea.Scrollbar orientation="horizontal">
         <ScrollArea.Thumb />
       </ScrollArea.Scrollbar>
-    </Primitive>
+    </PrimitiveScrollArea>
   );
 }

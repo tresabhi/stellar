@@ -9,9 +9,7 @@ export const dataFixerUppers: Record<
   3: null,
   4: null,
   5: null,
-  6: (oldBlueprint) => {
-    const blueprint = oldBlueprint;
-
+  6: (blueprint) => {
     Object.keys(blueprint.parts).forEach((id) => {
       blueprint.parts[id].parent = (
         blueprint.parts[id] as unknown as { parent_id: string | null }
@@ -21,6 +19,14 @@ export const dataFixerUppers: Record<
     });
 
     (blueprint.format_version as number) = 7;
+
+    return blueprint;
+  },
+  7: (blueprint) => {
+    blueprint.part_selections = (
+      blueprint as unknown as { selections: string[] }
+    ).selections;
+    delete (blueprint as unknown as { selections?: string[] }).selections;
 
     return blueprint;
   },

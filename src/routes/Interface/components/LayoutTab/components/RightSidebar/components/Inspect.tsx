@@ -15,9 +15,11 @@ const INDENT = 2;
 export default function Inspect() {
   const { t } = useTranslator();
   const { copy } = useClipboard();
-  const isOneSelected = useBlueprint((state) => state.selections.length === 1);
+  const isOneSelected = useBlueprint(
+    (state) => state.part_selections.length === 1,
+  );
   const state = useBlueprint.getState();
-  const id = state.selections[0];
+  const id = state.part_selections[0];
   const data = usePart(id);
   const stringifiedJSON = JSON.stringify(data, undefined, INDENT);
   const vanillaJSON =

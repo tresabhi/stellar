@@ -27,7 +27,7 @@ export default function selectBetween(
 
         if (!blueprint.parts[childId].selected) {
           blueprint.parts[childId].selected = true;
-          blueprint.selections.push(childId);
+          blueprint.part_selections.push(childId);
         }
 
         if (childId === targetId) break;

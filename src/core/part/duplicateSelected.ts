@@ -4,7 +4,7 @@ import duplicate from './duplicate';
 
 export default function duplicateSelected(blueprint?: Blueprint) {
   if (blueprint) {
-    duplicate(blueprint.selections, blueprint);
+    duplicate(blueprint.part_selections, blueprint);
   } else {
     mutateBlueprint((draft) => {
       duplicateSelected(draft);

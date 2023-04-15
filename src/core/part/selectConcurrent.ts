@@ -10,14 +10,14 @@ export default function selectConcurrent(
   if (blueprint) {
     const normalizedIds = normalizeIds(ids);
 
-    blueprint.selections.forEach((selection) => {
+    blueprint.part_selections.forEach((selection) => {
       blueprint.parts[selection].selected = false;
     });
     normalizedIds.forEach((id) => {
       blueprint.parts[id].selected = true;
     });
 
-    blueprint.selections = normalizedIds;
+    blueprint.part_selections = normalizedIds;
   } else {
     mutateBlueprint((draft) => {
       selectConcurrent(ids, draft);

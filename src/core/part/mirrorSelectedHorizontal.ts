@@ -7,10 +7,10 @@ export default function mirrorSelectedHorizontal(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    mirrorHorizontal(blueprint.selections, x, blueprint);
+    mirrorHorizontal(blueprint.part_selections, x, blueprint);
   } else {
     mutateBlueprint((draft) => {
-      mirrorHorizontal(draft.selections, x, draft);
+      mirrorHorizontal(draft.part_selections, x, draft);
     });
   }
 }

@@ -7,7 +7,7 @@ export default function setSelectedLocked(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    setLocked(blueprint.selections, locked, blueprint);
+    setLocked(blueprint.part_selections, locked, blueprint);
   } else {
     mutateBlueprint((draft) => setSelectedLocked(locked, draft));
   }

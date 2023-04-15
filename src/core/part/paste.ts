@@ -11,7 +11,7 @@ export default function paste() {
 
   if (clipboard) {
     mutateBlueprint((draft) => {
-      const firstSelection = draft.selections[0];
+      const firstSelection = draft.part_selections[0];
       const parentId = draft.parts[firstSelection].parent;
       const parent = parentId
         ? (draft.parts[parentId] as Group) ?? draft

@@ -4,7 +4,7 @@ import toggleLocked from './toggleLocked';
 
 export default function toggleSelectedLocked(blueprint?: Blueprint) {
   if (blueprint) {
-    toggleLocked(blueprint.selections, blueprint);
+    toggleLocked(blueprint.part_selections, blueprint);
   } else {
     mutateBlueprint((draft) => toggleSelectedLocked(draft));
   }

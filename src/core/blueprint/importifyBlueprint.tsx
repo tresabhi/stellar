@@ -32,7 +32,8 @@ export default function importifyBlueprint(providedBlueprint: AnyBlueprint) {
   // STEP 2: Copy all properties
   newBlueprint.center = importedBlueprint.center;
   newBlueprint.offset = importedBlueprint.offset;
-  newBlueprint.selections = (importedBlueprint as Blueprint).selections ?? [];
+  newBlueprint.part_selections =
+    (importedBlueprint as Blueprint).part_selections ?? [];
   newBlueprint.stages = importedBlueprint.stages;
 
   // STEP 3: Importify all parts

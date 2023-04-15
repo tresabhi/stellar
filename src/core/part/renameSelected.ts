@@ -11,7 +11,7 @@ export default function renameSelected(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    rename(blueprint.selections, name, options, blueprint);
+    rename(blueprint.part_selections, name, options, blueprint);
   } else {
     mutateBlueprint((draft) => {
       renameSelected(name, options, draft);

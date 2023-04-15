@@ -2,7 +2,6 @@ import * as Notification from 'components/Notification';
 import * as Prompt from 'components/Prompt';
 import dismissPrompt from 'core/interface/dismissPrompt';
 import prompt from 'core/interface/prompt';
-import useTouchscreenMode from 'hooks/useTouchscreenMode';
 import { useEffect } from 'react';
 import InstabilityWarningPrompt from 'routes/components/InstabilityWarningPrompt';
 import WelcomePrompt from 'routes/components/WelcomePrompt';
@@ -59,7 +58,6 @@ const useAlphaWarning = () => {
 
 function Interface() {
   const zenMode = useApp((state) => state.interface.focusMode);
-  const touchscreenMode = useTouchscreenMode();
   const tab = useApp((state) => state.interface.tab);
 
   useAlphaWarning();
@@ -70,7 +68,7 @@ function Interface() {
       {!zenMode && <Tabs />}
 
       {tab === Tab.Create && <CreateTab />}
-      {tab === Tab.Layout && <LayoutTab swapSecondTab={touchscreenMode} />}
+      {tab === Tab.Layout && <LayoutTab />}
       {tab === Tab.Staging && <StagingTab />}
       {tab === Tab.Export && <ExportTab />}
 

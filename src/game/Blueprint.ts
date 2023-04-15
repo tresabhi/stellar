@@ -20,10 +20,12 @@ export interface VanillaBlueprint {
 export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   readonly format_version: number;
 
-  selections: string[];
   parts: Record<string, Part>;
   part_order: string[];
+  part_selections: string[];
+
   stages: Stage[];
+  stage_selection: null | number;
 }
 
 export const vanillaBlueprintData: VanillaBlueprint = {
@@ -36,9 +38,12 @@ export const vanillaBlueprintData: VanillaBlueprint = {
 export const blueprintData: Blueprint = {
   ...vanillaBlueprintData,
 
-  format_version: 7,
+  format_version: 8,
 
-  selections: [],
   parts: {},
   part_order: [],
+  part_selections: [],
+
+  stages: [],
+  stage_selection: null,
 };

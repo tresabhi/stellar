@@ -5,7 +5,7 @@ import InputWithIcon from 'components/InputWithIcon';
 import * as Prompt from 'components/Prompt';
 import { Label } from 'components/Properties';
 import mutateSettings from 'core/app/mutateSettings';
-import getLabel from 'core/part/getLabel';
+import getPartLabel from 'core/part/getPartLabel';
 import { RenamePartsOptions } from 'core/part/rename';
 import renameSelected from 'core/part/renameSelected';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
@@ -35,10 +35,12 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
-  const { selections } = useBlueprint.getState();
-  let defaultLabel = getLabel(selections[0]);
+  const { part_selections: selections } = useBlueprint.getState();
+  let defaultLabel = getPartLabel(selections[0]);
 
-  if (selections.some((selection) => getLabel(selection) !== defaultLabel)) {
+  if (
+    selections.some((selection) => getPartLabel(selection) !== defaultLabel)
+  ) {
     defaultLabel = '';
   }
 

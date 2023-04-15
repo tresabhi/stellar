@@ -4,7 +4,7 @@ import createSnippet from './createSnippet';
 export default function createSnippetSelected(
   blueprint = useBlueprint.getState(),
 ) {
-  if (blueprint.selections.length > 0) {
-    createSnippet(blueprint.selections, blueprint);
+  if (blueprint.part_selections.length > 0) {
+    createSnippet(blueprint.part_selections, blueprint);
   }
 }

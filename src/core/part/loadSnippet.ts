@@ -26,11 +26,12 @@ export default function loadSnippet(
       });
     });
 
-    if (blueprint.selections.length === 0) {
+    if (blueprint.part_selections.length === 0) {
       blueprint.part_order.push(group.id);
     } else {
-      const parent = getParent(blueprint.selections[0], blueprint) ?? blueprint;
-      const index = parent.part_order.indexOf(blueprint.selections[0]);
+      const parent =
+        getParent(blueprint.part_selections[0], blueprint) ?? blueprint;
+      const index = parent.part_order.indexOf(blueprint.part_selections[0]);
 
       parent.part_order.splice(index + 1, 0, group.id);
     }

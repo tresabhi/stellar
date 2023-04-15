@@ -13,7 +13,7 @@ export default function enterEditMode() {
       draft.editor.tool = Tool.Transform;
     });
   } else {
-    const { selections } = useBlueprint.getState();
+    const { part_selections: selections } = useBlueprint.getState();
 
     if (selections.length >= 1 && getPart(selections[0]).n in groupedControls) {
       if (selections.length > 1) selectConcurrent(selections[0]);

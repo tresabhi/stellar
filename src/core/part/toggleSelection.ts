@@ -12,10 +12,10 @@ export default function toggleSelection(ids: MethodIds, blueprint?: Blueprint) {
       const part = blueprint.parts[ids];
 
       if (part.selected) {
-        const index = blueprint.selections.indexOf(ids);
-        blueprint.selections.splice(index, 1);
+        const index = blueprint.part_selections.indexOf(ids);
+        blueprint.part_selections.splice(index, 1);
       } else {
-        blueprint.selections.push(ids);
+        blueprint.part_selections.push(ids);
       }
 
       part.selected = !part.selected;
@@ -33,12 +33,12 @@ export default function toggleSelection(ids: MethodIds, blueprint?: Blueprint) {
       });
 
       spliceIds.forEach((id) => {
-        forEachRight(blueprint.selections, (selection, index) => {
-          if (isEqual(id, selection)) blueprint.selections.splice(index, 1);
+        forEachRight(blueprint.part_selections, (selection, index) => {
+          if (isEqual(id, selection)) blueprint.part_selections.splice(index, 1);
         });
       });
 
-      blueprint.selections.push(...insertIds);
+      blueprint.part_selections.push(...insertIds);
     }
   } else {
     mutateBlueprint((draft) => {

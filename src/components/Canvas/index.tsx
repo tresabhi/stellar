@@ -22,6 +22,7 @@ import TransformControls from './components/TransformControls';
 const StyledCanvas = styled(CanvasPrimitive, {
   backgroundColor: theme.colors.appBackground1,
   flex: 1,
+  position: 'absolute',
   touchAction: 'none',
 });
 
@@ -58,7 +59,7 @@ export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
 
   const handlePointerMissed = () => {
     const { tool, isSpacePanning } = useApp.getState().editor;
-    const { selections } = useBlueprint.getState();
+    const { part_selections: selections } = useBlueprint.getState();
     if (selections.length > 0 && tool === Tool.Transform && !isSpacePanning) {
       unselectAll();
     }

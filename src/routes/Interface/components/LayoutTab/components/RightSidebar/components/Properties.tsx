@@ -105,9 +105,9 @@ const groupedProperties: Record<string, GroupedProperties> = {
 export default function Properties() {
   const { t } = useTranslator();
   const hasNoSelections = useBlueprint(
-    (state) => state.selections.length === 0,
+    (state) => state.part_selections.length === 0,
   );
-  const selections = useBlueprint((state) => state.selections);
+  const selections = useBlueprint((state) => state.part_selections);
   const typeSortedParts: Record<string, string[]> = {};
   const children: JSX.Element[] = [];
 

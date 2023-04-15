@@ -7,7 +7,7 @@ export default function setSelectedVisible(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    setVisible(blueprint.selections, visible, blueprint);
+    setVisible(blueprint.part_selections, visible, blueprint);
   } else {
     mutateBlueprint((draft) => setSelectedVisible(visible, draft));
   }

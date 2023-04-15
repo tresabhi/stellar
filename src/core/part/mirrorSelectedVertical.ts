@@ -7,10 +7,10 @@ export default function mirrorSelectedVertical(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    mirrorVertical(blueprint.selections, y, blueprint);
+    mirrorVertical(blueprint.part_selections, y, blueprint);
   } else {
     mutateBlueprint((draft) => {
-      mirrorVertical(draft.selections, y, draft);
+      mirrorVertical(draft.part_selections, y, draft);
     });
   }
 }

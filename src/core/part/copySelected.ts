@@ -4,7 +4,7 @@ import copy from './copy';
 
 export default function copySelected(blueprint?: Blueprint) {
   if (blueprint) {
-    copy(blueprint.selections, blueprint);
+    copy(blueprint.part_selections, blueprint);
   } else {
     copySelected(useBlueprint.getState());
   }

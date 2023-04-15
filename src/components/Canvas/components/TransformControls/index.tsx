@@ -17,7 +17,7 @@ import RotateNode from './components/RotateNode';
 import TransformNode from './components/TransformNode';
 
 export default function TransformControls() {
-  const selections = useBlueprint((state) => state.selections);
+  const selections = useBlueprint((state) => state.part_selections);
   const isToolTransform = useApp(
     (state) => state.editor.tool === Tool.Transform,
   );

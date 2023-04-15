@@ -14,7 +14,7 @@ export default function select(
 
       if (!part.selected) {
         part.selected = true;
-        blueprint.selections.push(ids);
+        blueprint.part_selections.push(ids);
       }
     } else {
       ids.forEach((id) => {
@@ -25,7 +25,7 @@ export default function select(
           if (expandGroups && part.n === 'Group') {
             (part as Group).expanded = true;
           }
-          blueprint.selections.push(id);
+          blueprint.part_selections.push(id);
         }
       });
     }

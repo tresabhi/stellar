@@ -6,13 +6,13 @@ export default function unselect(ids: MethodIds, blueprint?: Blueprint) {
   if (blueprint) {
     if (typeof ids === 'string') {
       blueprint.parts[ids].selected = false;
-      blueprint.selections.splice(blueprint.selections.indexOf(ids), 1);
+      blueprint.part_selections.splice(blueprint.part_selections.indexOf(ids), 1);
     } else {
       ids.forEach((id) => {
         blueprint.parts[id].selected = false;
       });
 
-      blueprint.selections = blueprint.selections.filter(
+      blueprint.part_selections = blueprint.part_selections.filter(
         (selection) => !ids.includes(selection),
       );
     }

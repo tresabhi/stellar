@@ -23,7 +23,7 @@ export default function InsertPartPrompt({ dismiss }: PromptProps) {
   const input = useRef<HTMLInputElement>(null);
   const list: SearchItems = [];
   const partRegistry = usePartRegistry();
-  const { selections } = useBlueprint.getState();
+  const { part_selections: selections } = useBlueprint.getState();
   const lastSelectionId = selections[selections.length - 1];
   const lastSelection = getPart(lastSelectionId);
   let parentId: string | null = null;

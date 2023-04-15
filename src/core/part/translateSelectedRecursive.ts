@@ -8,7 +8,7 @@ export default function translateSelectedRecursive(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    translateRecursive(blueprint.selections, x, y, blueprint);
+    translateRecursive(blueprint.part_selections, x, y, blueprint);
   } else {
     mutateBlueprint((draft) => {
       translateSelectedRecursive(x, y, draft);

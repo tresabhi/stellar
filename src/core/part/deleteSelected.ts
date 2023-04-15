@@ -7,7 +7,7 @@ import getParent from './getParent';
  */
 export default function deleteSelected(blueprint?: Blueprint) {
   if (blueprint) {
-    [...blueprint.selections].forEach((selection) => {
+    [...blueprint.part_selections].forEach((selection) => {
       const parent = getParent(selection, blueprint) ?? blueprint;
 
       delete blueprint.parts[selection];
@@ -17,7 +17,7 @@ export default function deleteSelected(blueprint?: Blueprint) {
       }
     });
 
-    blueprint.selections = [];
+    blueprint.part_selections = [];
   } else {
     mutateBlueprint((draft) => {
       deleteSelected(draft);

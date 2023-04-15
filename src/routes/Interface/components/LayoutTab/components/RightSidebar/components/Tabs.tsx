@@ -5,11 +5,11 @@ import {
 } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
 import mutateSettings from 'core/app/mutateSettings';
+import useTouchscreenMode from 'hooks/useTouchscreenMode';
 import useTranslator from 'hooks/useTranslator';
 import useSettings, { SidebarTab } from 'stores/settings';
-import { TabLayoutProps } from '../../..';
 
-export default function Tabs({ swapSecondTab }: TabLayoutProps) {
+export default function Tabs() {
   const { t } = useTranslator();
   const rightSidebar = useSettings(
     (draft) => draft.interface.tabs.layout.rightSidebar,
@@ -19,15 +19,16 @@ export default function Tabs({ swapSecondTab }: TabLayoutProps) {
       draft.interface.tabs.layout.rightSidebar.tab = tab;
     });
   };
+  const touchscreenMode = useTouchscreenMode();
 
   return (
     <Sidebar.TabContainer>
       <Sidebar.Tab
         onClick={handleClick(SidebarTab.Left)}
         selected={rightSidebar.tab === SidebarTab.Left}
-        icon={swapSecondTab ? <Component1Icon /> : <MixerVerticalIcon />}
+        icon={touchscreenMode ? <Component1Icon /> : <MixerVerticalIcon />}
       >
-        {swapSecondTab
+        {touchscreenMode
           ? t`tabs.layout.left_sidebar.snippets`
           : t`tabs.layout.right_sidebar.properties`}
       </Sidebar.Tab>

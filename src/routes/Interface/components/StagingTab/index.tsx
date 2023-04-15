@@ -1,26 +1,27 @@
-import useTranslator from 'hooks/useTranslator';
-import { theme } from 'stitches.config';
+import Canvas from 'components/Canvas';
+import useTouchscreenMode from 'hooks/useTouchscreenMode';
+import { CanvasContainer, HorizontalContainer } from '../LayoutTab';
 import TabContainer from '../TabContainer';
+import LeftSidebar from './components/LeftSidebar';
+import RightSidebar from './components/RightSidebar';
+import Toolbar from './components/Toolbar';
 
 export default function StagingTab() {
-  const { t } = useTranslator();
+  const touchscreenMode = useTouchscreenMode();
 
   return (
     <TabContainer>
-      <div
-        style={{
-          backgroundColor: theme.colors.componentInteractive.toString(),
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: theme.colors.textHighContrast.toString(),
-          fontSize: theme.fontSizes[16].toString(),
-        }}
-      >
-        {t`tabs.coming_soon`}
-      </div>
+      <Toolbar />
+
+      <HorizontalContainer>
+        <LeftSidebar />
+
+        <CanvasContainer>
+          <Canvas />
+        </CanvasContainer>
+
+        {!touchscreenMode && <RightSidebar />}
+      </HorizontalContainer>
     </TabContainer>
   );
 }

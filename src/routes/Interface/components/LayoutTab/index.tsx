@@ -7,25 +7,21 @@ import QuickControls from './components/QuickControls';
 import RightSidebar from './components/RightSidebar';
 import Toolbar from './components/Toolbar';
 
-export interface TabLayoutProps {
-  swapSecondTab: boolean;
-}
-
 export interface TabContentProps {
   visible: boolean;
 }
 
-const HorizontalContainer = styled('div', {
+export const HorizontalContainer = styled('div', {
   display: 'flex',
   flex: 1,
 });
 
-const CanvasContainer = styled('div', {
+export const CanvasContainer = styled('div', {
   position: 'relative',
   flex: 1,
 });
 
-export default function LayoutTab({ swapSecondTab }: TabLayoutProps) {
+export default function LayoutTab() {
   const zenMode = useApp((state) => state.interface.focusMode);
 
   return (
@@ -33,14 +29,14 @@ export default function LayoutTab({ swapSecondTab }: TabLayoutProps) {
       <Toolbar />
 
       <HorizontalContainer>
-        {!zenMode && <LeftSidebar swapSecondTab={swapSecondTab} />}
+        {!zenMode && <LeftSidebar />}
 
         <CanvasContainer>
-          <Canvas style={{ position: 'absolute' }} />
+          <Canvas />
           <QuickControls />
         </CanvasContainer>
 
-        {!zenMode && <RightSidebar swapSecondTab={swapSecondTab} />}
+        {!zenMode && <RightSidebar />}
       </HorizontalContainer>
     </TabContainer>
   );

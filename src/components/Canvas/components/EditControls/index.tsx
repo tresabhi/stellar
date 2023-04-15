@@ -26,9 +26,9 @@ export default function EditControls() {
   const tool = useApp((state) => state.editor.tool);
   const blueprint = useBlueprint.getState();
 
-  if (tool !== Tool.Edit || blueprint.selections.length !== 1) return null;
+  if (tool !== Tool.Edit || blueprint.part_selections.length !== 1) return null;
 
-  const id = blueprint.selections[0];
+  const id = blueprint.part_selections[0];
   const part = blueprint.parts[id];
   let Controls: FC<EditControlsProps> | undefined;
 

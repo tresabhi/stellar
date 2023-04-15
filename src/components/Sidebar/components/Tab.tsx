@@ -7,6 +7,7 @@ export interface TabProps
   selected?: boolean;
   icon?: ReactNode;
   children: string;
+  readonly?: boolean;
 }
 
 const Container = styled(Button, {
@@ -44,9 +45,20 @@ const Label = styled('span', {
   fontSize: theme.fontSizes[12],
 });
 
-export function Tab({ selected, icon, children, ...props }: TabProps) {
+export function Tab({
+  selected,
+  icon,
+  children,
+  readonly,
+  ...props
+}: TabProps) {
   return (
-    <Container {...props} selected={selected}>
+    <Container
+      {...props}
+      selected={selected}
+      priority={readonly ? 'disabled' : undefined}
+      disabled={readonly}
+    >
       {icon}
       <Label>{children}</Label>
     </Container>

@@ -16,7 +16,7 @@ export default function ReferenceImageURLPrompt({ dismiss }: PromptProps) {
   const handleApplyClick = () => {
     if (input.current && isValidHttpUrl(input.current.value)) {
       mutateBlueprint((draft) => {
-        draft.selections.forEach((selection) => {
+        draft.part_selections.forEach((selection) => {
           const part = draft.parts[selection];
 
           if (part.n === 'Reference Image') {

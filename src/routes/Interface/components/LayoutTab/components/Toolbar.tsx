@@ -94,20 +94,20 @@ function Toolbar() {
       ? Tool.Pan
       : state.editor.tool,
   );
-  const isOneHidden = useBlueprint(({ selections, parts }) =>
+  const isOneHidden = useBlueprint(({ part_selections: selections, parts }) =>
     selections.some((selection) => {
       const part = parts[selection];
       return !part.visible;
     }),
   );
-  const isOneLocked = useBlueprint(({ selections, parts }) =>
+  const isOneLocked = useBlueprint(({ part_selections: selections, parts }) =>
     selections.some((selection) => {
       const part = parts[selection];
       return part.locked;
     }),
   );
   const hasNoSelections = useBlueprint(
-    (state) => state.selections.length === 0,
+    (state) => state.part_selections.length === 0,
   );
   const hasParts = useBlueprint((state) => Object.keys(state.parts).length > 0);
   const hasUndos = useVersionControl((state) => state.index > -1);
@@ -120,8 +120,8 @@ function Toolbar() {
   const link = (url: string) => () => window.open(url, '_blank');
   const hasControllablePart = useBlueprint(
     (state) =>
-      state.selections.length >= 1 &&
-      state.parts[state.selections[0]].n in groupedControls,
+      state.part_selections.length >= 1 &&
+      state.parts[state.part_selections[0]].n in groupedControls,
   );
 
   return (

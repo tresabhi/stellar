@@ -18,7 +18,6 @@ export const THEMES: Record<string, Theme> = {
 };
 
 export interface UseSettings {
-
   interface: {
     touchscreenMode: boolean | null;
     language: string;
@@ -46,6 +45,14 @@ export interface UseSettings {
           scaleConstrain: boolean;
         };
       };
+
+      staging: {
+        leftSidebar: {
+          visible: boolean;
+          tab: SidebarTab;
+        };
+        rightSidebar: boolean;
+      };
     };
   };
 
@@ -65,7 +72,6 @@ export interface UseSettings {
 }
 
 export const useSettingsData: UseSettings = {
-
   interface: {
     touchscreenMode: null,
     language: 'en-US',
@@ -92,6 +98,15 @@ export const useSettingsData: UseSettings = {
           tab: SidebarTab.Left,
           scaleConstrain: false,
         },
+      },
+
+      staging: {
+        leftSidebar: {
+          visible: true,
+          tab: SidebarTab.Left,
+        },
+
+        rightSidebar: true,
       },
     },
   },

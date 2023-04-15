@@ -4,10 +4,10 @@ import rotate from './rotate';
 
 export default function rotateSelected(z: number, blueprint?: Blueprint) {
   if (blueprint) {
-    rotate(blueprint.selections, z, blueprint);
+    rotate(blueprint.part_selections, z, blueprint);
   } else {
     mutateBlueprint((draft) => {
-      rotate(draft.selections, z, draft);
+      rotate(draft.part_selections, z, draft);
     });
   }
 }

@@ -103,7 +103,7 @@ export function ReferenceImageProperties({ ids }: PartPropertyComponentProps) {
 
     fileReader.onloadend = () => {
       mutateBlueprint((draft) => {
-        draft.selections.forEach((selection) => {
+        draft.part_selections.forEach((selection) => {
           const part = draft.parts[selection];
 
           if (part.n === 'Reference Image') {

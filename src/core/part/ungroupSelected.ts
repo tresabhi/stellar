@@ -4,7 +4,7 @@ import ungroup from './ungroup';
 
 export default function ungroupSelected(blueprint?: Blueprint) {
   if (blueprint) {
-    ungroup(blueprint.selections, blueprint);
+    ungroup(blueprint.part_selections, blueprint);
   } else {
     mutateBlueprint((draft) => ungroupSelected(draft));
   }
