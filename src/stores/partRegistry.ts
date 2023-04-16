@@ -21,7 +21,7 @@ export type PartRegistryItem<Type extends Part> = {
 export type PartExportifier<Type extends Part> = (
   part: Type,
   context: Blueprint,
-) => VanillaPart | VanillaPart[] | null;
+) => [VanillaPart[], Part[]];
 
 export type UsePartRegistry = Map<string, PartRegistryItem<Part>>;
 

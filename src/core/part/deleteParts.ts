@@ -1,12 +1,12 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import getParent from './getParent';
 
 export default function deleteParts(ids: MethodIds, blueprint?: Blueprint) {
   if (blueprint) {
-    normalizeIds(ids).forEach((id) => {
+    normalizeArray(ids).forEach((id) => {
       const parent = getParent(id, blueprint) ?? blueprint;
       const selectionIndex = blueprint.part_selections.indexOf(id);
 

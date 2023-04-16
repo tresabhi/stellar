@@ -2,7 +2,7 @@ import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import create from './create';
 import getParent from './getParent';
 import selectConcurrent from './selectConcurrent';
@@ -20,7 +20,7 @@ export default function group(
       blueprint.parts[newGroup.id] = newGroup;
       newGroupParent.part_order[newGroupParent.part_order.indexOf(replaceId)] =
         newGroup.id;
-      newGroup.part_order = normalizeIds(ids);
+      newGroup.part_order = normalizeArray(ids);
 
       newGroup.part_order.forEach((id) => {
         const currentParent = getParent(id, blueprint) ?? blueprint;

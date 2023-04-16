@@ -1,8 +1,7 @@
 import exportifyPart from 'core/part/exportifyPart';
 import { Blueprint, vanillaBlueprintData } from 'game/Blueprint';
-import { VanillaPart } from 'game/parts/Part';
-import { cloneDeep, isArray } from 'lodash';
-import exportifyStage from './exportifyStage';
+import { PartWithStage } from 'game/parts/PartWithStage';
+import { cloneDeep } from 'lodash';
 
 export default function exportifyBlueprint(blueprint: Blueprint) {
   const clonedBlueprint = cloneDeep(blueprint);
@@ -10,23 +9,28 @@ export default function exportifyBlueprint(blueprint: Blueprint) {
 
   exportifiedBlueprint.center = clonedBlueprint.center;
   exportifiedBlueprint.offset = clonedBlueprint.offset;
-  exportifiedBlueprint.stages = clonedBlueprint.stages;
+
+  exportifiedBlueprint.stages = clonedBlueprint.stages.map(() => ({
+    partIndexes: [],
+  }));
 
   clonedBlueprint.part_order.forEach((id) => {
     const part = clonedBlueprint.parts[id];
-    const exportifiedPart = exportifyPart(part, clonedBlueprint);
+    const [exportifiedParts, originalParts] = exportifyPart(
+      part,
+      clonedBlueprint,
+    );
 
-    if (exportifiedPart) {
-      if (isArray(exportifiedPart)) {
-        exportifiedBlueprint.parts.push(...(exportifiedPart as VanillaPart[]));
-      } else {
-        exportifiedBlueprint.parts.push(exportifiedPart as VanillaPart);
+    exportifiedParts.forEach((exportifiedPart, index) => {
+      const originalPart = originalParts[index];
+      exportifiedBlueprint.parts.push(exportifiedPart);
+
+      if ((originalPart as PartWithStage).stage !== undefined) {
+        exportifiedBlueprint.stages[
+          (originalPart as PartWithStage).stage as number
+        ].partIndexes.push(exportifiedBlueprint.parts.length - 1);
       }
-    }
-  });
-
-  exportifiedBlueprint.stages.forEach((stage, index) => {
-    exportifiedBlueprint.stages[index] = exportifyStage(stage);
+    });
   });
 
   return exportifiedBlueprint;

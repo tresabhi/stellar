@@ -110,9 +110,11 @@
           "$": "Parts",
 
           "no_parts": {
-            "$": "No parts in blueprint",
+            "$": "No parts to display",
 
-            "instructions": "Tap the %1$s icon in the toolbar in the layout tab to insert a part."
+            "instructions": "Tap the + icon in the toolbar to insert a part.",
+            "instructions_no_parts_in_staging": "Add parts in the layout tab.",
+            "instructions_no_stage_selected": "No stage selected."
           }
         },
 

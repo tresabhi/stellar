@@ -1,7 +1,7 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import clone from './clone';
 import getParent from './getParent';
 import select from './select';
@@ -11,7 +11,7 @@ export default function duplicate(ids: MethodIds, blueprint?: Blueprint) {
   if (blueprint) {
     unselectAll(blueprint);
 
-    normalizeIds(ids).forEach((id) => {
+    normalizeArray(ids).forEach((id) => {
       const parent = getParent(id, blueprint) ?? blueprint;
       const partIndex = parent.part_order.indexOf(id);
 

@@ -3,7 +3,7 @@ import { Blueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import mutateParts from './mutateParts';
 
 export default function translate(
@@ -14,7 +14,7 @@ export default function translate(
 ) {
   if (blueprint) {
     mutateParts<Part & PartWithTransformations>(
-      normalizeIds(ids),
+      normalizeArray(ids),
       (draft) => {
         draft.p.x += x;
         draft.p.y += y;

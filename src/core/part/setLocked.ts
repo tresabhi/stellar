@@ -1,7 +1,7 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 
 export default function setLocked(
   ids: MethodIds,
@@ -9,7 +9,7 @@ export default function setLocked(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    normalizeIds(ids).forEach((id) => {
+    normalizeArray(ids).forEach((id) => {
       blueprint.parts[id].locked = locked;
     });
   } else {

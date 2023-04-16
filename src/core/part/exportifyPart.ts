@@ -1,16 +1,24 @@
 import { Blueprint } from 'game/Blueprint';
-import { Part } from 'game/parts/Part';
+import { Part, VanillaPart } from 'game/parts/Part';
 import { cloneDeep } from 'lodash';
 import getPartRegistry from './getPartRegistry';
 import removeMetaData from './removeMetaData';
 
-export default function exportifyPart(part: Part, blueprint: Blueprint) {
+export default function exportifyPart(
+  part: Part,
+  blueprint: Blueprint,
+): [VanillaPart[], Part[]] {
   const partRegistry = getPartRegistry(part.n);
   const clonedPart = cloneDeep(part);
-  const customExportifier = partRegistry?.exportify;
 
-  if (customExportifier) return customExportifier(clonedPart, blueprint);
-  if (partRegistry?.vanillaData === null) return null;
+  if (clonedPart.visible) {
+    const customExportifier = partRegistry?.exportify;
 
-  return removeMetaData(clonedPart as Part);
+    if (customExportifier) return customExportifier(clonedPart, blueprint);
+    if (partRegistry?.vanillaData === null) return [[], []];
+
+    return [[removeMetaData(clonedPart as Part)], [clonedPart]];
+  }
+
+  return [[], []];
 }

@@ -9,7 +9,7 @@ import { SidebarTab } from 'stores/settings';
 import useSnippets, { Snippet, SnippetListing } from 'stores/snippets';
 import { MethodIds } from 'types/Parts';
 import getTouchscreenMode from 'utilities/getTouchscreenMode';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import resizeImage from 'utilities/resizeImage';
 import clone from './clone';
 import panToSelected from './panToSelected';
@@ -22,7 +22,7 @@ export default function createSnippet(
 ) {
   const snippet: Snippet = { parts: {}, part_order: [] };
 
-  normalizeIds(ids).forEach((id) => {
+  normalizeArray(ids).forEach((id) => {
     const [clonedPartId, clonedParts] = clone(id, blueprint);
 
     snippet.part_order.push(clonedPartId);

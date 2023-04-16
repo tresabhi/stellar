@@ -6,7 +6,7 @@ import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
 import { MethodIds } from 'types/Parts';
 import normalizeAngle from 'utilities/normalizeAngle';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import getPart from './getPart';
 
 export default function rotate(
@@ -15,7 +15,7 @@ export default function rotate(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    const normalizedIds = normalizeIds(ids);
+    const normalizedIds = normalizeArray(ids);
     const { bounds } = getBoundsFromParts(normalizedIds, false);
     const center = new Vector2(bounds.x, bounds.y);
     const partPosition = new Vector2();

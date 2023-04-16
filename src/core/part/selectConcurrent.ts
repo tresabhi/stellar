@@ -1,14 +1,14 @@
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 
 export default function selectConcurrent(
   ids: MethodIds,
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    const normalizedIds = normalizeIds(ids);
+    const normalizedIds = normalizeArray(ids);
 
     blueprint.part_selections.forEach((selection) => {
       blueprint.parts[selection].selected = false;

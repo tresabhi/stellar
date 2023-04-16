@@ -5,7 +5,7 @@ import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { MethodIds } from 'types/Parts';
 import normalizeAngle from 'utilities/normalizeAngle';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import getCenter from './getCenter';
 
 export default function mirrorHorizontal(
@@ -15,7 +15,7 @@ export default function mirrorHorizontal(
 ) {
   if (blueprint) {
     if (x) {
-      normalizeIds(ids).forEach((id) => {
+      normalizeArray(ids).forEach((id) => {
         const part = blueprint.parts[id];
 
         if (part.n === 'Group') {

@@ -2,14 +2,14 @@ import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 import getParent from './getParent';
 import select from './select';
 import unselectAll from './unselectAll';
 
 export default function ungroup(ids: MethodIds, blueprint?: Blueprint) {
   if (blueprint) {
-    normalizeIds(ids).forEach((id) => {
+    normalizeArray(ids).forEach((id) => {
       unselectAll(blueprint);
 
       const part = blueprint.parts[id];

@@ -3,7 +3,7 @@ import { Blueprint } from 'game/Blueprint';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { MethodIds } from 'types/Parts';
-import normalizeIds from 'utilities/normalizeIds';
+import normalizeArray from 'utilities/normalizeArray';
 
 export default function mutateParts<Type extends Part>(
   ids: MethodIds,
@@ -12,7 +12,7 @@ export default function mutateParts<Type extends Part>(
   blueprint?: Blueprint,
 ) {
   if (blueprint) {
-    normalizeIds(ids).forEach((id, index) => {
+    normalizeArray(ids).forEach((id, index) => {
       const part = blueprint.parts[id] as Type;
 
       if (recursive && part.n === 'Group') {
