@@ -92,7 +92,7 @@
           "$": "Partes",
           "no_parts": {
             "$": "No hay partes en el plano",
-            "instructions": "Toca el icono %1$s en la barra de herramientas para insertar una parte."
+            "instructions": "Tap the %1$s icon in the toolbar in the layout tab to insert a part."
           }
         },
         "snippets": {
