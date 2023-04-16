@@ -44,6 +44,7 @@ export default {
   vanillaData: vanillaEngineHawkData,
   data: engineHawkData,
   label: 'engine_hawk',
+  stageable: true,
 
   Icon,
   LayoutComponent,

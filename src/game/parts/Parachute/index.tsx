@@ -64,6 +64,7 @@ export default {
   vanillaData: vanillaParachuteData,
   data: parachuteData,
   label: 'parachute',
+  stageable: true,
 
   Icon,
   LayoutComponent,

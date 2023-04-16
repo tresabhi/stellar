@@ -3,12 +3,13 @@ import { Part, VanillaPart } from './parts/Part';
 export interface VanillaStage {
   partIndexes: number[];
 }
-export interface Stage extends VanillaStage {
+export interface Stage {
   label?: string;
+  part_order: string[];
 }
 
 export const vanillaStageData: VanillaStage = { partIndexes: [] };
-export const stageData: Stage = { ...vanillaStageData, label: undefined };
+export const stageData: Stage = { label: undefined, part_order: [] };
 
 export interface VanillaBlueprint {
   center: number;
@@ -17,7 +18,7 @@ export interface VanillaBlueprint {
   stages: VanillaStage[];
 }
 
-export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
+export interface Blueprint extends Omit<VanillaBlueprint, 'parts' | 'stages'> {
   readonly format_version: number;
 
   parts: Record<string, Part>;
@@ -25,7 +26,7 @@ export interface Blueprint extends Omit<VanillaBlueprint, 'parts'> {
   part_selections: string[];
 
   stages: Stage[];
-  stage_selection: null | number;
+  stage_selection: number | null;
 }
 
 export const vanillaBlueprintData: VanillaBlueprint = {

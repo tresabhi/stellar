@@ -15,10 +15,12 @@ import selectBetween from 'core/part/selectBetween';
 import selectBetweenConcurrent from 'core/part/selectBetweenConcurrent';
 import selectConcurrent from 'core/part/selectConcurrent';
 import toggleLocked from 'core/part/toggleLocked';
+import togglePartStage from 'core/part/togglePartStage';
 import toggleSelection from 'core/part/toggleSelection';
 import toggleVisible from 'core/part/toggleVisible';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
+import { PartWithStage } from 'game/parts/PartWithStage';
 import usePart from 'hooks/usePart';
 import usePartProperty from 'hooks/usePartProperty';
 import { KeyboardEvent, MouseEvent, PointerEvent, memo, useRef } from 'react';
@@ -40,8 +42,8 @@ const Trigger = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   listStyle: 'none',
-  cursor: 'pointer',
   width: '100%',
+  cursor: 'default',
 
   variants: {
     selected: {
@@ -51,7 +53,22 @@ const Trigger = styled('div', {
 
       false: {
         backgroundColor: theme.colors.componentInteractive,
+      },
+    },
 
+    disabled: {
+      false: {
+        cursor: 'pointer',
+      },
+    },
+  },
+
+  compoundVariants: [
+    {
+      selected: false,
+      disabled: false,
+
+      css: {
         '&:hover': {
           backgroundColor: theme.colors.componentInteractiveHover,
         },
@@ -60,16 +77,12 @@ const Trigger = styled('div', {
         },
       },
     },
-  },
-
-  '&::-webkit-details-marker': {
-    display: 'none',
-  },
+  ],
 });
 const Label = styled('input', {
   fontSize: theme.sizes[12],
   flex: 1,
-  cursor: 'pointer',
+  cursor: 'inherit',
   minWidth: theme.sizes.partListingInputMinWidth,
   width: 0,
 
@@ -89,7 +102,7 @@ const IconHolder = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   padding: theme.space.paddingRegular,
-  cursor: 'pointer',
+  cursor: 'inherit',
 
   '& > svg': {
     width: theme.sizes[16],
@@ -142,11 +155,16 @@ export const Item = memo(
     const state = usePart(id);
     const isGroup = state.n === 'Group';
     const expanded = isGroup ? (state as Group).expanded : false;
-    const { Icon } = getPartRegistry(state.n) as PartRegistryItem<Part>;
+    const { Icon, stageable } = getPartRegistry(
+      state.n,
+    ) as PartRegistryItem<Part>;
     let lastLabel = state.label;
-    const intractable = !state.locked && state.visible;
     const { tab } = useApp.getState().interface;
     const isLayout = tab === Tab.Layout;
+    const intractable = isLayout
+      ? !state.locked && state.visible
+      : stageable ?? false;
+    const stageSelection = useBlueprint((newState) => newState.stage_selection);
 
     usePartProperty(
       id,
@@ -173,11 +191,15 @@ export const Item = memo(
         } else {
           selectConcurrent(id);
         }
+      } else if (stageable) {
+        togglePartStage(id);
       }
     };
     const handleSummaryDoubleClick = () => {
-      label.current?.focus();
-      label.current?.select();
+      if (isLayout) {
+        label.current?.focus();
+        label.current?.select();
+      }
     };
     const handleIconClick = (event: MouseEvent) => {
       if (isGroup && !event.ctrlKey && !event.shiftKey) {
@@ -229,6 +251,7 @@ export const Item = memo(
         }
       }
     };
+
     const handleLabelPointerDown = (event: PointerEvent) =>
       event.preventDefault();
 
@@ -238,9 +261,14 @@ export const Item = memo(
           css={{
             paddingLeft: `calc(${theme.space.paddingRegular} * ${indent})`,
           }}
-          selected={isLayout && state.selected}
+          selected={
+            isLayout
+              ? state.selected
+              : stageable && (state as PartWithStage).stage === stageSelection
+          }
           onClick={handleSummaryClick}
           onDoubleClick={handleSummaryDoubleClick}
+          disabled={!isLayout && !stageable}
         >
           <IconHolder intractable={intractable} onClick={handleIconClick}>
             {!isGroup && <Icon />}

@@ -51,6 +51,11 @@ module.exports = {
      * there is really no uncontrolled props being passed anyway.
      */
     'react/require-default-props': 0,
+
+    /**
+     * Tooling is sufficiently advanced to work around this.
+     */
+    'no-plusplus': 0,
   },
 
   plugins: ['@typescript-eslint'],

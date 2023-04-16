@@ -70,6 +70,7 @@ export default {
   vanillaData: vanillaSideSeparatorData,
   data: sideSeparatorData,
   label: 'side_separator',
+  stageable: true,
 
   Icon,
   LayoutComponent,

@@ -44,6 +44,7 @@ export default {
   vanillaData: vanillaEngineTitanData,
   data: engineTitanData,
   label: 'engine_titan',
+  stageable: true,
 
   Icon,
   LayoutComponent,

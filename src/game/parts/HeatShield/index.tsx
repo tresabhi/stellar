@@ -127,6 +127,7 @@ export default {
   vanillaData: vanillaHeatShieldData,
   data: heatShieldData,
   label: 'heat_shield',
+  stageable: true,
 
   Icon,
   LayoutComponent,

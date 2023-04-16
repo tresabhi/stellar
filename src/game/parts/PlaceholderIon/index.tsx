@@ -46,6 +46,7 @@ export default {
   vanillaData: vanillaPlaceholderIonData,
   data: placeholderIonData,
   label: 'placeholder_ion',
+  stageable: true,
 
   Icon,
   LayoutComponent,

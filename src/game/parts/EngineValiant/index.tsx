@@ -44,6 +44,7 @@ export default {
   vanillaData: vanillaEngineValiantData,
   data: engineValiantData,
   label: 'engine_valiant',
+  stageable: true,
 
   Icon,
   LayoutComponent,

@@ -97,7 +97,7 @@ function Listing({ stage, index }: ListingProps) {
           });
         }}
       />
-      <Count>({stage.partIndexes.length})</Count>
+      <Count>({stage.part_order.length})</Count>
     </ListingContainer>
   );
 }

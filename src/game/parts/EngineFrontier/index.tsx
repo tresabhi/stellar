@@ -46,6 +46,7 @@ export default {
   vanillaData: vanillaEngineFrontierData,
   data: engineFrontierData,
   label: 'engine_frontier',
+  stageable: true,
 
   Icon,
   LayoutComponent,

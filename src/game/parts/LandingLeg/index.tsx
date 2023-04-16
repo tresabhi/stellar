@@ -67,6 +67,7 @@ export default {
   vanillaData: vanillaLandingLegData,
   data: landingLegData,
   label: 'landing_leg',
+  stageable: true,
 
   Icon,
   LayoutComponent,

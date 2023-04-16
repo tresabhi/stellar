@@ -10,6 +10,7 @@ export type PartRegistryItem<Type extends Part> = {
   vanillaData: VanillaPart | null;
   data: Part;
   label: string;
+  stageable?: boolean;
 
   Icon: FC;
   LayoutComponent: FC<PartComponentProps>;

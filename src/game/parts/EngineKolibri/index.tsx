@@ -44,6 +44,7 @@ export default {
   vanillaData: vanillaEngineKolibriData,
   data: engineKolibriData,
   label: 'engine_kolibri',
+  stageable: true,
 
   Icon,
   LayoutComponent,

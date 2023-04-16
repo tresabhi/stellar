@@ -163,6 +163,7 @@ export default {
   vanillaData: vanillaDockingPortData,
   data: dockingPortData,
   label: 'docking_port',
+  stageable: true,
 
   Icon,
   LayoutComponent,

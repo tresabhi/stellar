@@ -39,6 +39,7 @@ export default {
   vanillaData: vanillaRCSData,
   data: RCSData,
   label: 'rcs',
+  stageable: true,
 
   Icon,
   LayoutComponent,
