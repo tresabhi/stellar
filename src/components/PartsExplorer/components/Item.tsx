@@ -23,6 +23,7 @@ import usePart from 'hooks/usePart';
 import usePartProperty from 'hooks/usePartProperty';
 import { KeyboardEvent, MouseEvent, PointerEvent, memo, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
+import useApp, { Tab } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { PartRegistryItem } from 'stores/partRegistry';
 import createInputEscape from 'utilities/createInputEscape';
@@ -144,6 +145,8 @@ export const Item = memo(
     const { Icon } = getPartRegistry(state.n) as PartRegistryItem<Part>;
     let lastLabel = state.label;
     const intractable = !state.locked && state.visible;
+    const { tab } = useApp.getState().interface;
+    const isLayout = tab === Tab.Layout;
 
     usePartProperty(
       id,
@@ -155,18 +158,21 @@ export const Item = memo(
 
     const handleSummaryClick = (event: MouseEvent) => {
       event.preventDefault();
-      const { part_selections: selections } = useBlueprint.getState();
 
-      if (event.ctrlKey) {
-        if (event.shiftKey) {
-          selectBetween(selections[0], id);
+      if (isLayout) {
+        const { part_selections: selections } = useBlueprint.getState();
+
+        if (event.ctrlKey) {
+          if (event.shiftKey) {
+            selectBetween(selections[0], id);
+          } else {
+            toggleSelection(id);
+          }
+        } else if (event.shiftKey) {
+          selectBetweenConcurrent(selections[0], id);
         } else {
-          toggleSelection(id);
+          selectConcurrent(id);
         }
-      } else if (event.shiftKey) {
-        selectBetweenConcurrent(selections[0], id);
-      } else {
-        selectConcurrent(id);
       }
     };
     const handleSummaryDoubleClick = () => {
@@ -232,7 +238,7 @@ export const Item = memo(
           css={{
             paddingLeft: `calc(${theme.space.paddingRegular} * ${indent})`,
           }}
-          selected={state.selected}
+          selected={isLayout && state.selected}
           onClick={handleSummaryClick}
           onDoubleClick={handleSummaryDoubleClick}
         >
@@ -252,15 +258,19 @@ export const Item = memo(
             intractable={intractable}
           />
 
-          <Action onClick={handleEyeClick} onlyShowOnHover={state.visible}>
-            {state.visible ? <EyeOpenIcon /> : <EyeClosedIcon />}
-          </Action>
-          <Action onClick={handleLockClick} onlyShowOnHover={!state.locked}>
-            {state.locked ? <LockClosedIcon /> : <LockOpen1Icon />}
-          </Action>
-          <Action onClick={handleTrashClick}>
-            <TrashIcon />
-          </Action>
+          {isLayout && (
+            <>
+              <Action onClick={handleEyeClick} onlyShowOnHover={state.visible}>
+                {state.visible ? <EyeOpenIcon /> : <EyeClosedIcon />}
+              </Action>
+              <Action onClick={handleLockClick} onlyShowOnHover={!state.locked}>
+                {state.locked ? <LockClosedIcon /> : <LockOpen1Icon />}
+              </Action>
+              <Action onClick={handleTrashClick}>
+                <TrashIcon />
+              </Action>
+            </>
+          )}
         </Trigger>
 
         {isGroup && expanded && <Root indent={indent + 1} parentId={id} />}

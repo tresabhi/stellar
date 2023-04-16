@@ -1,5 +1,6 @@
 import * as Sidebar from 'components/Sidebar';
 import mutateSettings from 'core/app/mutateSettings';
+import Parts from 'routes/Interface/components/LayoutTab/components/LeftSidebar/components/Parts';
 import useSettings from 'stores/settings';
 import Tabs from './components/Tabs';
 
@@ -17,6 +18,8 @@ export default function RightSidebar() {
   return (
     <Sidebar.Root visible={visible} position="right">
       <Tabs />
+
+      <Parts />
 
       <Sidebar.Collapse
         position="right"

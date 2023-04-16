@@ -1,4 +1,4 @@
-import { PlusIcon } from '@radix-ui/react-icons';
+import { CardStackPlusIcon } from '@radix-ui/react-icons';
 import * as ToolbarPrimitive from 'components/Toolbar';
 import insertStage from 'core/blueprint/insertStage';
 
@@ -9,7 +9,7 @@ function Toolbar() {
 
       <ToolbarPrimitive.Group>
         <ToolbarPrimitive.Button onClick={() => insertStage()}>
-          <PlusIcon />
+          <CardStackPlusIcon />
         </ToolbarPrimitive.Button>
       </ToolbarPrimitive.Group>
 

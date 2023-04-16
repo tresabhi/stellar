@@ -21,7 +21,18 @@ const ListingContainer = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   cursor: 'pointer',
-  background: theme.colors.componentInteractive,
+
+  variants: {
+    selected: {
+      true: {
+        backgroundColor: theme.colors.componentInteractiveActive,
+      },
+
+      false: {
+        background: theme.colors.componentInteractive,
+      },
+    },
+  },
 });
 const Index = styled('div', {
   padding: theme.space.paddingRegular,
@@ -49,9 +60,16 @@ interface ListingProps {
 function Listing({ stage, index }: ListingProps) {
   const label = useRef<HTMLInputElement>(null);
   const handleKeyDown = createInputEscape();
+  const selected = useBlueprint((state) => state.stage_selection === index);
 
   return (
     <ListingContainer
+      selected={selected}
+      onClick={() => {
+        mutateBlueprint((draft) => {
+          draft.stage_selection = index;
+        });
+      }}
       onDoubleClick={() => {
         label.current?.focus();
         label.current?.select();
