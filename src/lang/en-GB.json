@@ -92,7 +92,7 @@
           "$": "Parts",
           "no_parts": {
             "$": "No parts in blueprint",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a part."
+            "instructions": "Tap the %1$s icon in the toolbar in the layout tab to insert a part."
           }
         },
         "snippets": {
