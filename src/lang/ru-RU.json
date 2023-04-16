@@ -92,7 +92,7 @@
           "$": "Детали",
           "no_parts": {
             "$": "Нет деталей в чертеже",
-            "instructions": "Нажмите значок %1$s на панели инструментов, чтобы вставить детали."
+            "instructions": "Tap the %1$s icon in the toolbar in the layout tab to insert a part."
           }
         },
         "snippets": {
