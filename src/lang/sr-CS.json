@@ -92,7 +92,7 @@
           "$": "Delovi",
           "no_parts": {
             "$": "Nema delova u planu",
-            "instructions": "Klikni %1$s ikonu u kutiji za alat da bi ubacio deo."
+            "instructions": "Tap the %1$s icon in the toolbar in the layout tab to insert a part."
           }
         },
         "snippets": {
