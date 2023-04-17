@@ -8,7 +8,6 @@ import removeMetaData from 'core/part/removeMetaData';
 import PartCategory from 'hooks/constants/partCategory';
 import usePartCanvasControls from 'hooks/usePartCanvasControls';
 import usePartVisibility from 'hooks/usePartVisibility';
-import { isArray } from 'lodash';
 import { useEffect, useRef } from 'react';
 import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
@@ -69,6 +68,7 @@ function LayoutComponent({ id }: PartComponentProps) {
 
 export const groupExportify: PartExportifier<Group> = (part, blueprint) => {
   const exportedParts: VanillaPart[] = [];
+  const originalParts: Part[] = [];
   const partWithoutMetaData = removeMetaData(part) as Group;
 
   partWithoutMetaData.part_order.forEach((id) => {
@@ -77,17 +77,12 @@ export const groupExportify: PartExportifier<Group> = (part, blueprint) => {
     if (childPart) {
       const exportedPart = exportifyPart(childPart, blueprint);
 
-      if (exportedPart) {
-        if (isArray(exportedPart)) {
-          exportedParts.push(...exportedPart);
-        } else {
-          exportedParts.push(exportedPart);
-        }
-      }
+      exportedParts.push(...exportedPart[0]);
+      originalParts.push(...exportedPart[1]);
     }
   });
 
-  return exportedParts;
+  return [exportedParts, originalParts];
 };
 
 export default {

@@ -320,8 +320,11 @@ export const fuelTankExportify: PartExportifier<FuelTank> = (part) => {
 
   return exportedPart.N.width_original === exportedPart.N.width_a &&
     exportedPart.N.width_original === exportedPart.N.width_b
-    ? exportedPart
-    : [exportedPart, partCap];
+    ? [[exportedPart], [part]]
+    : [
+        [exportedPart, partCap],
+        [part, part],
+      ];
 };
 
 export default {
