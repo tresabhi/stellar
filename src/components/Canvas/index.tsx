@@ -7,7 +7,7 @@ import PanControls from 'components/PanControls';
 import unselectAll from 'core/part/unselectAll';
 import { RefObject, useEffect, useRef } from 'react';
 import { css, styled, theme } from 'stitches.config';
-import useApp, { Tool } from 'stores/app';
+import useApp, { Tab, Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
 import { Group } from 'three';
 import Centers from './components/Centers';
@@ -56,6 +56,7 @@ const useCursor = (canvas: RefObject<HTMLCanvasElement>) => {
 export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
   const canvas = useRef<HTMLCanvasElement>(null);
   const parts = useRef<Group>(null);
+  const isLayout = useApp.getState().interface.tab === Tab.Layout;
 
   const handlePointerMissed = () => {
     const { tool, isSpacePanning } = useApp.getState().editor;
@@ -91,13 +92,15 @@ export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
         <Parts ref={parts} />
       </HeadsUpDisplay>
 
-      <HeadsUpDisplay priority={2}>
-        <PartsBounds />
-        <TransformControls />
-        <EditControls />
-        <SelectBox />
-        <Centers />
-      </HeadsUpDisplay>
+      {isLayout && (
+        <HeadsUpDisplay priority={2}>
+          <PartsBounds />
+          <TransformControls />
+          <EditControls />
+          <SelectBox />
+          <Centers />
+        </HeadsUpDisplay>
+      )}
     </StyledCanvas>
   );
 }

@@ -15,7 +15,7 @@ import translateSelectedRecursive from 'core/part/translateSelectedRecursive';
 import { Part } from 'game/parts/Part';
 import { PartWithTransformations } from 'game/parts/PartWithTransformations';
 import { Vector2 } from 'three';
-import useApp, { Tool } from '../stores/app';
+import useApp, { Tab, Tool } from '../stores/app';
 
 const useDragControls = (id: string) => {
   const camera = useThree((state) => state.camera);
@@ -27,8 +27,10 @@ const useDragControls = (id: string) => {
 
   function handlePointerDown(event: ThreeEvent<PointerEvent>) {
     const part = getPart(id) as (Part & PartWithTransformations) | undefined;
-    const { tool, isSpacePanning, isTouchPanning, isInteractingWithPart } =
-      useApp.getState().editor;
+    const {
+      editor: { tool, isSpacePanning, isTouchPanning, isInteractingWithPart },
+      interface: { tab },
+    } = useApp.getState();
 
     if (
       part &&
@@ -36,6 +38,7 @@ const useDragControls = (id: string) => {
       part.visible &&
       !part.locked &&
       tool === Tool.Transform &&
+      tab === Tab.Layout &&
       !isSpacePanning &&
       !isTouchPanning &&
       !isInteractingWithPart

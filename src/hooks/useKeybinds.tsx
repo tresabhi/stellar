@@ -53,7 +53,7 @@ interface BindOptions {
   preventDefault: boolean;
   preventRepeats: boolean;
   preventWhenInteractingWithUI: boolean;
-  preventOnNonEditingTab: boolean;
+  preventOnNonLayoutTab: boolean;
   preventOnNonTransformTool: boolean;
   action: 'keydown' | 'keyup' | 'keypress';
 }
@@ -62,7 +62,7 @@ const bindDefaultOptions: BindOptions = {
   preventDefault: true,
   preventRepeats: true,
   preventWhenInteractingWithUI: true,
-  preventOnNonEditingTab: true,
+  preventOnNonLayoutTab: true,
   preventOnNonTransformTool: false,
   action: 'keydown',
 };
@@ -86,9 +86,7 @@ const bind = (
       if (
         (mergedOptions.preventRepeats ? !event.repeat : true) &&
         (mergedOptions.preventWhenInteractingWithUI ? !isInteracting : true) &&
-        (mergedOptions.preventOnNonEditingTab
-          ? tab === Tab.Layout || tab === Tab.Staging
-          : true) &&
+        (mergedOptions.preventOnNonLayoutTab ? tab === Tab.Layout : true) &&
         (mergedOptions.preventOnNonTransformTool
           ? tool === Tool.Transform && !isSpacePanning && !isTouchPanning
           : true)
@@ -138,7 +136,7 @@ export default function useKeybinds() {
         // party mode easter egg
         document.body.classList.toggle('party');
       },
-      { preventOnNonEditingTab: false },
+      { preventOnNonLayoutTab: false },
     );
 
     bind(['del', 'backspace'], deleteSelected, {
@@ -178,7 +176,7 @@ export default function useKeybinds() {
               : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) + 1];
         });
       },
-      { preventOnNonEditingTab: false },
+      { preventOnNonLayoutTab: false },
     );
     bind(
       ['ctrl+shift+tab', '['],
@@ -190,47 +188,57 @@ export default function useKeybinds() {
               : TAB_ORDER[TAB_ORDER.indexOf(draft.interface.tab) - 1];
         });
       },
-      { preventOnNonEditingTab: false },
+      { preventOnNonLayoutTab: false },
     );
 
     bind('up', () => translate([0, POSITION_SNAP_SIZE]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('down', () => translate([0, -POSITION_SNAP_SIZE]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('left', () => translate([-POSITION_SNAP_SIZE, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('right', () => translate([POSITION_SNAP_SIZE, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('shift+up', () => translate([0, 1]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('shift+down', () => translate([0, -1]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('shift+left', () => translate([-1, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('shift+right', () => translate([1, 0]), {
       preventRepeats: false,
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
 
     bind('ctrl+z', undoVersion, {
       preventRepeats: false,
+      preventOnNonLayoutTab: false,
     });
     bind(['ctrl+shift+z', 'ctrl+y'], redoVersion, {
       preventRepeats: false,
+      preventOnNonLayoutTab: false,
     });
 
     bind('1', toTool(Tool.Pan));
@@ -268,7 +276,7 @@ export default function useKeybinds() {
         toLayout();
         if (await confirmProgressReset()) loadBlueprint();
       },
-      { preventOnNonEditingTab: false },
+      { preventOnNonLayoutTab: false },
     );
     bind(
       'ctrl+o',
@@ -276,7 +284,7 @@ export default function useKeybinds() {
         await openFile();
         if (await confirmProgressReset()) toLayout();
       },
-      { preventOnNonEditingTab: false },
+      { preventOnNonLayoutTab: false },
     );
     bind('ctrl+s', () => saveFile());
     bind('ctrl+shift+s', () => saveFileAs());
@@ -286,7 +294,7 @@ export default function useKeybinds() {
         await importFile();
         if (await confirmProgressReset()) toLayout();
       },
-      { preventOnNonEditingTab: false },
+      { preventOnNonLayoutTab: false },
     );
     bind('ctrl+e', () => exportFile());
 
@@ -300,6 +308,7 @@ export default function useKeybinds() {
 
     bind('i', () => prompt(InsertPartPrompt, true, 'insert-part'), {
       preventOnNonTransformTool: true,
+      preventOnNonLayoutTab: true,
     });
     bind('f2', () => {
       if (useBlueprint.getState().part_selections.length > 0) {
@@ -307,16 +316,16 @@ export default function useKeybinds() {
       }
     });
     bind('ctrl+,', () => prompt(SettingsPrompt), {
-      preventOnNonEditingTab: false,
+      preventOnNonLayoutTab: false,
     });
 
     bind('.', panToSelected);
 
     bind('f1', () => window.open(WEBSITE, '_blank'), {
-      preventOnNonEditingTab: false,
+      preventOnNonLayoutTab: false,
     });
     bind('f4', () => window.open(`${GH_REPO_URL}issues/new/choose`, '_blank'), {
-      preventOnNonEditingTab: false,
+      preventOnNonLayoutTab: false,
     });
   }, []);
 }
