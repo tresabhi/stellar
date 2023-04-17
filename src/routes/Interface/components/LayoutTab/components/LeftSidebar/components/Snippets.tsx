@@ -12,8 +12,6 @@ import useApp from 'stores/app';
 import useSnippets from 'stores/snippets';
 import createInputEscape from 'utilities/createInputEscape';
 
-// 2 listings per row
-
 const Listings = styled(ScrollArea.Root, {
   flex: '1 0 0',
 });

@@ -1,8 +1,10 @@
+import { CardStackPlusIcon } from '@radix-ui/react-icons';
 import * as ScrollArea from 'components/ScrollArea';
 import * as Sidebar from 'components/Sidebar';
 import getStageLabel from 'core/blueprint/getStageLabel';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Stage } from 'game/Blueprint';
+import useTranslator from 'hooks/useTranslator';
 import { useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
@@ -103,13 +105,16 @@ function Listing({ stage, index }: ListingProps) {
 }
 
 export default function Stages() {
+  const { t, f } = useTranslator();
   const stages = useBlueprint((state) => state.stages);
 
   return stages.length === 0 ? (
     <Sidebar.MessageRoot>
-      <Sidebar.Message>No stages</Sidebar.Message>
+      <Sidebar.Message>{t`tabs.staging.left_sidebar.stages.no_stages`}</Sidebar.Message>
       <Sidebar.Message subMessage>
-        Lorem ipsum sit ador somthin somthin
+        {f`tabs.staging.left_sidebar.stages.no_stages.instructions`[0]}
+        <CardStackPlusIcon />
+        {f`tabs.staging.left_sidebar.stages.no_stages.instructions`[1]}
       </Sidebar.Message>
     </Sidebar.MessageRoot>
   ) : (

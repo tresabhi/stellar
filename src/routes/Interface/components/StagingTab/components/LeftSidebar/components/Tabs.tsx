@@ -2,9 +2,11 @@ import { LayersIcon, TextAlignBottomIcon } from '@radix-ui/react-icons';
 import * as Sidebar from 'components/Sidebar';
 import mutateSettings from 'core/app/mutateSettings';
 import useTouchscreenMode from 'hooks/useTouchscreenMode';
+import useTranslator from 'hooks/useTranslator';
 import useSettings, { SidebarTab } from 'stores/settings';
 
 export default function Tabs() {
+  const { t } = useTranslator();
   const visibleTab = useSettings(
     (state) => state.interface.tabs.staging.leftSidebar.tab,
   );
@@ -23,7 +25,7 @@ export default function Tabs() {
         selected={touchscreenMode ? visibleTab === SidebarTab.Left : true}
         icon={<TextAlignBottomIcon />}
       >
-        Stages
+        {t`tabs.staging.left_sidebar.stages`}
       </Sidebar.Tab>
       {touchscreenMode && (
         <Sidebar.Tab
@@ -31,7 +33,7 @@ export default function Tabs() {
           selected={visibleTab === SidebarTab.Right}
           icon={<LayersIcon />}
         >
-          Parts
+          {t`tabs.layout.left_sidebar.parts`}
         </Sidebar.Tab>
       )}
     </Sidebar.TabContainer>
