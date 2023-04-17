@@ -4,6 +4,8 @@ import prompt from 'core/interface/prompt';
 import generateId from 'core/part/generateId';
 import importifyPart from 'core/part/importifyPart';
 import { Blueprint, blueprintData, VanillaBlueprint } from 'game/Blueprint';
+import { Part } from 'game/parts/Part';
+import { PartWithStage } from 'game/parts/PartWithStage';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { cloneDeep, isArray } from 'lodash';
@@ -38,6 +40,8 @@ export default function importifyBlueprint(providedBlueprint: AnyBlueprint) {
   if (isArray(importedBlueprint.parts)) {
     // vanilla blueprint
 
+    const allParts: (Part | null)[] = [];
+
     (importedBlueprint as VanillaBlueprint).parts.forEach((vanillaPart) => {
       const id = generateId(newBlueprint.parts);
       const importifiedPart = importifyPart(vanillaPart, id);
@@ -45,18 +49,37 @@ export default function importifyBlueprint(providedBlueprint: AnyBlueprint) {
       if (importifiedPart) {
         newBlueprint.parts[id] = importifiedPart;
         newBlueprint.part_order.push(id);
-      } else if (showMissingParts && !missingParts.includes(vanillaPart.n)) {
+        allParts.push(importifiedPart);
+
+        return;
+      }
+
+      if (showMissingParts && !missingParts.includes(vanillaPart.n)) {
         missingParts.push(vanillaPart.n);
       }
+
+      allParts.push(null);
     });
 
     newBlueprint.stages = (importedBlueprint as VanillaBlueprint).stages.map(
-      (importedStage) => ({
-        part_order: importedStage.partIndexes.map(
-          (partIndex) => newBlueprint.part_order[partIndex],
-        ),
+      (importedStage, stageIndex) => ({
+        part_order: importedStage.partIndexes
+          .map((partIndex) => {
+            const part = allParts[partIndex] as (Part & PartWithStage) | null;
+
+            if (part) {
+              part.stage = stageIndex;
+
+              return part.id;
+            }
+
+            return null;
+          })
+          .filter((id) => id !== null) as string[],
       }),
     );
+
+    newBlueprint.stage_selection = newBlueprint.stages.length > 0 ? 0 : null;
   } else {
     const fixedBlueprint = dataFixBlueprint(importedBlueprint as Blueprint);
 

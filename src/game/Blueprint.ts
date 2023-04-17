@@ -2,13 +2,14 @@ import { Part, VanillaPart } from './parts/Part';
 
 export interface VanillaStage {
   partIndexes: number[];
+  stageId: number;
 }
 export interface Stage {
   label?: string;
   part_order: string[];
 }
 
-export const vanillaStageData: VanillaStage = { partIndexes: [] };
+export const vanillaStageData: VanillaStage = { stageId: -1, partIndexes: [] };
 export const stageData: Stage = { label: undefined, part_order: [] };
 
 export interface VanillaBlueprint {

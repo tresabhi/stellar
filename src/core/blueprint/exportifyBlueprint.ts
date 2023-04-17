@@ -10,7 +10,8 @@ export default function exportifyBlueprint(blueprint: Blueprint) {
   exportifiedBlueprint.center = clonedBlueprint.center;
   exportifiedBlueprint.offset = clonedBlueprint.offset;
 
-  exportifiedBlueprint.stages = clonedBlueprint.stages.map(() => ({
+  exportifiedBlueprint.stages = clonedBlueprint.stages.map((stage, index) => ({
+    stageId: index + 1,
     partIndexes: [],
   }));
 
