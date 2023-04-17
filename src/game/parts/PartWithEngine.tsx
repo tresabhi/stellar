@@ -5,11 +5,11 @@ import { PartPropertyComponentProps } from 'types/Parts';
 import { Part } from './Part';
 
 export interface PartWithEngine {
-  B: { engine_on: boolean; head_on__for_creative_use: boolean };
+  B: { engine_on: boolean; heat_on__for_creative_use: boolean };
 }
 
 export const partWithEngineData: PartWithEngine = {
-  B: { engine_on: false, head_on__for_creative_use: true },
+  B: { engine_on: false, heat_on__for_creative_use: true },
 };
 
 export function PartWithEngineProperties({ ids }: PartPropertyComponentProps) {
@@ -24,9 +24,9 @@ export function PartWithEngineProperties({ ids }: PartPropertyComponentProps) {
   );
   const heatDamage = useCheckboxProperty<Part & PartWithEngine>(
     ids,
-    (state) => state.B.head_on__for_creative_use,
+    (state) => state.B.heat_on__for_creative_use,
     (draft, value) => {
-      draft.B.head_on__for_creative_use = value;
+      draft.B.heat_on__for_creative_use = value;
     },
   );
 
