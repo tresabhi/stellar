@@ -56,6 +56,12 @@ module.exports = {
      * Tooling is sufficiently advanced to work around this.
      */
     'no-plusplus': 0,
+
+    /**
+     * No 3rd party will be using these components; hence, TypeScript is
+     * enough for type validation.
+     */
+    'react/prop-types': 0,
   },
 
   plugins: ['@typescript-eslint'],

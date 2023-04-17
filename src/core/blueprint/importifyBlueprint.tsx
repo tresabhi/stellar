@@ -1,7 +1,8 @@
 import * as Prompt from 'components/Prompt';
 import mutateSettings from 'core/app/mutateSettings';
 import prompt from 'core/interface/prompt';
-import generateId from 'core/part/generateId';
+import generatePartId from 'core/part/generatePartId';
+import generateStageId from 'core/part/generateStageId';
 import importifyPart from 'core/part/importifyPart';
 import { Blueprint, blueprintData, VanillaBlueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
@@ -43,7 +44,7 @@ export default function importifyBlueprint(providedBlueprint: AnyBlueprint) {
     const allParts: (Part | null)[] = [];
 
     (importedBlueprint as VanillaBlueprint).parts.forEach((vanillaPart) => {
-      const id = generateId(newBlueprint.parts);
+      const id = generatePartId(newBlueprint.parts);
       const importifiedPart = importifyPart(vanillaPart, id);
 
       if (importifiedPart) {
@@ -63,6 +64,7 @@ export default function importifyBlueprint(providedBlueprint: AnyBlueprint) {
 
     newBlueprint.stages = (importedBlueprint as VanillaBlueprint).stages.map(
       (importedStage, stageIndex) => ({
+        id: generateStageId(newBlueprint.stages),
         part_order: importedStage.partIndexes
           .map((partIndex) => {
             const part = allParts[partIndex] as (Part & PartWithStage) | null;

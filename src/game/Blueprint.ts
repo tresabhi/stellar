@@ -5,12 +5,13 @@ export interface VanillaStage {
   stageId: number;
 }
 export interface Stage {
+  id: string;
   label?: string;
   part_order: string[];
 }
 
 export const vanillaStageData: VanillaStage = { stageId: -1, partIndexes: [] };
-export const stageData: Stage = { label: undefined, part_order: [] };
+export const stageData: Stage = { id: '', label: undefined, part_order: [] };
 
 export interface VanillaBlueprint {
   center: number;

@@ -2,7 +2,7 @@ import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
 import { cloneDeep } from 'lodash';
 import { Snippet } from 'stores/snippets';
-import generateId from './generateId';
+import generatePartId from './generatePartId';
 
 /**
  * Carefully clones a part and also:
@@ -16,7 +16,7 @@ export default function clone(
   const part = blueprint.parts[id];
 
   const clonedPart = cloneDeep(part);
-  (clonedPart.id as string) = generateId(blueprint.parts);
+  (clonedPart.id as string) = generatePartId(blueprint.parts);
   clonedPart.parent = null;
   clonedPart.selected = false;
 

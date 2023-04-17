@@ -5,7 +5,7 @@ import getStageLabel from 'core/blueprint/getStageLabel';
 import mutateBlueprint from 'core/blueprint/mutateBlueprint';
 import { Stage } from 'game/Blueprint';
 import useTranslator from 'hooks/useTranslator';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import { styled, theme } from 'stitches.config';
 import useBlueprint from 'stores/blueprint';
 import createInputEscape from 'utilities/createInputEscape';
@@ -59,50 +59,53 @@ interface ListingProps {
   index: number;
 }
 
-function Listing({ stage, index }: ListingProps) {
-  const label = useRef<HTMLInputElement>(null);
-  const handleKeyDown = createInputEscape();
-  const selected = useBlueprint((state) => state.stage_selection === index);
+const Listing = memo<ListingProps>(
+  ({ index, stage }) => {
+    const label = useRef<HTMLInputElement>(null);
+    const handleKeyDown = createInputEscape();
+    const selected = useBlueprint((state) => state.stage_selection === index);
 
-  return (
-    <ListingContainer
-      selected={selected}
-      onClick={() => {
-        mutateBlueprint((draft) => {
-          draft.stage_selection = index;
-        });
-      }}
-      onDoubleClick={() => {
-        label.current?.focus();
-        label.current?.select();
-      }}
-    >
-      <Index>{index + 1}.</Index>
-      <Label
-        ref={label}
-        defaultValue={getStageLabel(index)}
-        onPointerDown={(event) => event.preventDefault()}
-        onKeyDown={handleKeyDown}
-        onBlur={() => {
+    return (
+      <ListingContainer
+        selected={selected}
+        onClick={() => {
           mutateBlueprint((draft) => {
-            if (label.current) {
-              const trimmed = label.current.value.trim();
-              const previousLabel = getStageLabel(index);
-
-              if (trimmed.length > 0 && trimmed !== previousLabel) {
-                draft.stages[index].label = trimmed;
-                label.current.value = trimmed;
-              } else {
-                label.current.value = previousLabel;
-              }
-            }
+            draft.stage_selection = index;
           });
         }}
-      />
-      <Count>({stage.part_order.length})</Count>
-    </ListingContainer>
-  );
-}
+        onDoubleClick={() => {
+          label.current?.focus();
+          label.current?.select();
+        }}
+      >
+        <Index>{index + 1}.</Index>
+        <Label
+          ref={label}
+          defaultValue={getStageLabel(index)}
+          onPointerDown={(event) => event.preventDefault()}
+          onKeyDown={handleKeyDown}
+          onBlur={() => {
+            mutateBlueprint((draft) => {
+              if (label.current) {
+                const trimmed = label.current.value.trim();
+                const previousLabel = getStageLabel(index);
+
+                if (trimmed.length > 0 && trimmed !== previousLabel) {
+                  draft.stages[index].label = trimmed;
+                  label.current.value = trimmed;
+                } else {
+                  label.current.value = previousLabel;
+                }
+              }
+            });
+          }}
+        />
+        <Count>({stage.part_order.length})</Count>
+      </ListingContainer>
+    );
+  },
+  (prev, next) => prev.stage.id === next.stage.id,
+);
 
 export default function Stages() {
   const { t, f } = useTranslator();
@@ -122,7 +125,7 @@ export default function Stages() {
       <ScrollArea.Viewport>
         <Wrapper>
           {stages.map((stage, index) => (
-            <Listing stage={stage} index={index} />
+            <Listing stage={stage} index={index} key={`stage-${stage.id}`} />
           ))}
         </Wrapper>
       </ScrollArea.Viewport>

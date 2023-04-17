@@ -305,5 +305,5 @@ export const Item = memo(
       </Wrapper>
     );
   },
-  ({ id: prevId }, { id: nextId }) => prevId === nextId,
+  (prev, next) => prev.id === next.id,
 );

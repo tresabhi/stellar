@@ -1,5 +1,6 @@
-import { CardStackPlusIcon } from '@radix-ui/react-icons';
+import { CardStackPlusIcon, TrashIcon } from '@radix-ui/react-icons';
 import * as ToolbarPrimitive from 'components/Toolbar';
+import deleteSelectedStage from 'core/blueprint/deleteSelectedStage';
 import insertStage from 'core/blueprint/insertStage';
 
 function Toolbar() {
@@ -10,6 +11,9 @@ function Toolbar() {
       <ToolbarPrimitive.Group>
         <ToolbarPrimitive.Button onClick={() => insertStage()}>
           <CardStackPlusIcon />
+        </ToolbarPrimitive.Button>
+        <ToolbarPrimitive.Button onClick={() => deleteSelectedStage()}>
+          <TrashIcon />
         </ToolbarPrimitive.Button>
       </ToolbarPrimitive.Group>
 
