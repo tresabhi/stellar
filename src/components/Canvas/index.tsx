@@ -61,7 +61,12 @@ export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
   const handlePointerMissed = () => {
     const { tool, isSpacePanning } = useApp.getState().editor;
     const { part_selections: selections } = useBlueprint.getState();
-    if (selections.length > 0 && tool === Tool.Transform && !isSpacePanning) {
+    if (
+      selections.length > 0 &&
+      tool === Tool.Transform &&
+      !isSpacePanning &&
+      isLayout
+    ) {
       unselectAll();
     }
   };
@@ -92,15 +97,18 @@ export default function Canvas(props: Omit<CanvasPrimitiveProps, 'children'>) {
         <Parts ref={parts} />
       </HeadsUpDisplay>
 
-      {isLayout && (
-        <HeadsUpDisplay priority={2}>
-          <PartsBounds />
-          <TransformControls />
-          <EditControls />
-          <SelectBox />
-          <Centers />
-        </HeadsUpDisplay>
-      )}
+      <HeadsUpDisplay priority={2}>
+        <PartsBounds />
+
+        {isLayout && (
+          <>
+            <TransformControls />
+            <EditControls />
+            <SelectBox />
+            <Centers />
+          </>
+        )}
+      </HeadsUpDisplay>
     </StyledCanvas>
   );
 }

@@ -2,7 +2,11 @@ import { Line } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
 import getPart from 'core/part/getPart';
 import subscribeToPart from 'core/part/subscribeToPart';
+import { Part } from 'game/parts/Part';
+import { PartWithStage } from 'game/parts/PartWithStage';
 import { memo, RefObject, useEffect, useRef } from 'react';
+import useApp, { Tab } from 'stores/app';
+import useBlueprint from 'stores/blueprint';
 import boundsStore from 'stores/bounds';
 import {
   Group,
@@ -38,23 +42,74 @@ const useVisibility = (
   resize: () => void,
 ) => {
   useEffect(() => {
-    resize();
+    const isLayout = useApp.getState().interface.tab === Tab.Layout;
+    let { stage, visible, selected } = getPart<Part & PartWithStage>(id);
+    let stageSelection = useBlueprint.getState().stage_selection;
+    let unsubscribes: (() => void)[] = [];
 
-    const unsubscribeSelected = subscribeToPart(
-      id,
-      (selected: boolean) => {
-        if (wrapper.current) {
-          wrapper.current.visible = selected;
-          invalidate();
+    function toggleVisibility() {
+      if (wrapper.current) {
+        if (isLayout) {
+          wrapper.current.visible = visible && selected;
+        } else {
+          wrapper.current.visible =
+            stage !== undefined && stage === stageSelection;
         }
-      },
-      (newState) => newState.selected,
-    );
+      }
+
+      invalidate();
+    }
+
+    resize();
+    toggleVisibility();
+
+    if (isLayout) {
+      unsubscribes = [
+        subscribeToPart(
+          id,
+          (newSelected: boolean) => {
+            if (wrapper.current) {
+              selected = newSelected;
+              toggleVisibility();
+            }
+          },
+          (newState) => newState.selected,
+        ),
+        subscribeToPart(
+          id,
+          (newVisible: boolean) => {
+            if (wrapper.current) {
+              visible = newVisible;
+              toggleVisibility();
+            }
+          },
+          (newState) => newState.visible,
+        ),
+      ];
+    } else {
+      unsubscribes = [
+        subscribeToPart<Part & PartWithStage, number | undefined>(
+          id,
+          (newStage) => {
+            stage = newStage;
+            toggleVisibility();
+          },
+          (newState) => newState.stage,
+        ),
+        useBlueprint.subscribe(
+          (state) => state.stage_selection,
+          (newStageSelection) => {
+            stageSelection = newStageSelection;
+            toggleVisibility();
+          },
+        ),
+      ];
+    }
 
     window.addEventListener(`boundsupdated${id}`, resize);
 
     return () => {
-      unsubscribeSelected();
+      unsubscribes.forEach((unsubscribe) => unsubscribe());
 
       window.removeEventListener(`boundsupdated${id}`, resize);
     };
@@ -85,7 +140,7 @@ const PartBounds = memo(
     useVisibility(id, wrapper, resize);
 
     return (
-      <group ref={wrapper} visible={getPart(id).selected}>
+      <group ref={wrapper}>
         <Line
           ref={outline}
           color="#9d5bd2"
