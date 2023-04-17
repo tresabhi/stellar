@@ -91,8 +91,10 @@
         "parts": {
           "$": "Partes",
           "no_parts": {
-            "$": "No hay partes en el plano",
-            "instructions": "Tap the %1$s icon in the toolbar in the layout tab to insert a part."
+            "$": "No parts to display",
+            "instructions": "Tap the %1$s icon in the toolbar to insert a part.",
+            "instructions_no_parts_in_staging": "Add parts in the layout tab.",
+            "instructions_no_stage_selected": "No stage selected."
           }
         },
         "snippets": {
@@ -229,7 +231,16 @@
       }
     },
     "staging": {
-      "$": "Puesta en escena"
+      "$": "Puesta en escena",
+      "left_sidebar": {
+        "stages": {
+          "$": "Stages",
+          "no_stages": {
+            "$": "No stages",
+            "instructions": "Tap the %1$s icon in the toolbar to insert a stage."
+          }
+        }
+      }
     },
     "export": {
       "$": "Exportar",
