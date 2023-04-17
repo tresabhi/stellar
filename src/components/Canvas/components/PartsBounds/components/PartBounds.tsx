@@ -52,8 +52,7 @@ const useVisibility = (
         if (isLayout) {
           wrapper.current.visible = visible && selected;
         } else {
-          wrapper.current.visible =
-            stage !== undefined && stage === stageSelection;
+          wrapper.current.visible = visible && stage === stageSelection;
         }
       }
 
@@ -68,33 +67,28 @@ const useVisibility = (
         subscribeToPart(
           id,
           (newSelected: boolean) => {
-            if (wrapper.current) {
-              selected = newSelected;
-              toggleVisibility();
-            }
+            selected = newSelected;
+            toggleVisibility();
           },
           (newState) => newState.selected,
         ),
         subscribeToPart(
           id,
           (newVisible: boolean) => {
-            if (wrapper.current) {
-              visible = newVisible;
-              toggleVisibility();
-            }
+            visible = newVisible;
+            toggleVisibility();
           },
           (newState) => newState.visible,
         ),
       ];
     } else {
       unsubscribes = [
-        subscribeToPart<Part & PartWithStage, number | undefined>(
-          id,
+        useBlueprint.subscribe(
+          (state) => (state.parts[id] as PartWithStage).stage,
           (newStage) => {
             stage = newStage;
             toggleVisibility();
           },
-          (newState) => newState.stage,
         ),
         useBlueprint.subscribe(
           (state) => state.stage_selection,
