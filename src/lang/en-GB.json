@@ -42,7 +42,8 @@
         "tool": {
           "pan": "Pan",
           "transform": "Transform",
-          "edit": "Edit"
+          "edit": "Edit",
+          "stage": "Stage"
         },
         "clipboard": {
           "copy": "Copy",
