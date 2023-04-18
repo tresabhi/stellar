@@ -42,7 +42,8 @@
         "tool": {
           "pan": "Pomeraj",
           "transform": "Transformiši",
-          "edit": "Izmeni"
+          "edit": "Izmeni",
+          "stage": "Stage"
         },
         "clipboard": {
           "copy": "Kopiraj",
