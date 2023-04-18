@@ -42,7 +42,8 @@
         "tool": {
           "pan": "Change Them Draft",
           "transform": "Blowin'",
-          "edit": "Tamperin'"
+          "edit": "Tamperin'",
+          "stage": "Stage"
         },
         "clipboard": {
           "copy": "Loot",
