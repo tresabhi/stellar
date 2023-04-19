@@ -5,7 +5,7 @@
       "$": "ǝʇɐǝɹƆ",
       "templates": {
         "input_placeholder": "˙˙˙sǝʇɐldɯǝʇ ɥɔɹɐǝS",
-        "in_built": "In-built",
+        "in_built": "ʇlᴉnq-uI",
         "list": {
           "apollo_mission": "uoᴉssᴉɯ ollod∀",
           "basic_rocket": "ʇǝʞɔoɹ ɔᴉsɐq",
@@ -41,9 +41,9 @@
         },
         "tool": {
           "pan": "uɐԀ",
-          "transform": "Transform",
-          "edit": "Edit",
-          "stage": "Stage"
+          "transform": "ɯɹoɟsuɐɹ┴",
+          "edit": "ʇᴉpƎ",
+          "stage": "ǝƃɐʇS"
         },
         "clipboard": {
           "copy": "ʎdoƆ",
@@ -72,10 +72,10 @@
           "focus_mode": "ǝpoɯ snɔoℲ"
         },
         "measurements": {
-          "snap": "Snap to grid",
-          "no_snap": "No snap",
-          "scale_with_ratio": "Scale with ratio",
-          "center_of_build": "Center of build"
+          "snap": "pᴉɹƃ oʇ dɐuS",
+          "no_snap": "dɐus oN",
+          "scale_with_ratio": "oᴉʇɐɹ ɥʇᴉʍ ǝlɐɔS",
+          "center_of_build": "plᴉnq ɟo ɹǝʇuǝƆ"
         },
         "help": {
           "about": "ɹɐllǝʇS ʇnoq∀",
@@ -92,19 +92,19 @@
         "parts": {
           "$": "sʇɹɐԀ",
           "no_parts": {
-            "$": "No parts to display",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a part.",
-            "instructions_no_parts_in_staging": "Add parts in the layout tab.",
-            "instructions_no_stage_selected": "No stage selected."
+            "$": "ʎɐldsᴉp oʇ sʇɹɐd oN",
+            "instructions": "˙ʇɹɐd ɐ ʇɹǝsuᴉ oʇ ɹɐqlooʇ ǝɥʇ uᴉ uoɔᴉ %1$s ǝɥʇ dɐ┴",
+            "instructions_no_parts_in_staging": "˙qɐʇ ʇnoʎɐl ǝɥʇ uᴉ sʇɹɐd pp∀",
+            "instructions_no_stage_selected": "˙pǝʇɔǝlǝs ǝƃɐʇs oN"
           }
         },
         "snippets": {
           "$": "sʇǝddᴉuS",
           "no_snippets": {
-            "$": "No snippets",
-            "instructions": "Create a snippet to save small sections of blueprints."
+            "$": "sʇǝddᴉus oN",
+            "instructions": "˙sʇuᴉɹdǝnlq ɟo suoᴉʇɔǝs llɐɯs ǝʌɐs oʇ ʇǝddᴉus ɐ ǝʇɐǝɹƆ"
           },
-          "unnamed": "Unnamed snippet %1$s"
+          "unnamed": "%1$s ʇǝddᴉus pǝɯɐuu∩"
         }
       },
       "right_sidebar": {
@@ -151,8 +151,8 @@
             "deployed": "pǝʎoldǝp"
           },
           "landing_leg": {
-            "$": "Landing leg",
-            "extended": "Extended"
+            "$": "ƃǝl ƃuᴉpuɐ˥",
+            "extended": "pǝpuǝʇxƎ"
           },
           "heat_shield": {
             "$": "plǝᴉɥs ʇɐǝH",
@@ -174,24 +174,24 @@
           },
           "fragment": {
             "$": "ʇuǝɯƃɐɹℲ",
-            "section": "Section",
+            "section": "uoᴉʇɔǝS",
             "left": "ʇɟǝ˥",
             "whole": "ǝloɥM",
             "right": "ʇɥƃᴉɹ"
           },
           "reference_image": {
-            "$": "Reference image",
-            "url": "Add image URL",
-            "upload": "Upload image",
-            "unknown": "Unknown file",
-            "no_file": "No file selected"
+            "$": "ǝƃɐɯᴉ ǝɔuǝɹǝɟǝɹ",
+            "url": "˥ɹ∩ ǝƃɐɯᴉ pp∀",
+            "upload": "ǝƃɐɯᴉ pɐold∩",
+            "unknown": "ǝlᴉɟ uʍouʞu∩",
+            "no_file": "pǝʇɔǝlǝs ǝlᴉɟ oN"
           }
         },
         "inspect": {
           "$": "ʇɔǝdsuI",
           "select_one_part": {
             "$": "ʇɹɐd ɐ ʇɔǝlǝS",
-            "instructions": "Select a single part to inspect details"
+            "instructions": "slᴉɐʇǝp ʇɔǝdsuᴉ oʇ ʇɹɐd ǝlƃuᴉs ɐ ʇɔǝlǝS"
           },
           "meta_data": {
             "$": "ɐʇɐp ɐʇǝW",
@@ -206,8 +206,8 @@
             "$": "spunoq",
             "width": "ɥʇpᴉM",
             "height": "ʇɥƃᴉǝH",
-            "x_position": "X position",
-            "y_position": "Y position",
+            "x_position": "uoᴉʇᴉsod X",
+            "y_position": "uoᴉʇᴉsod ⅄",
             "rotation": "uoᴉʇɐʇoɹ"
           },
           "json": "NOSſ",
@@ -235,9 +235,9 @@
       "$": "ƃuᴉƃɐʇS",
       "left_sidebar": {
         "stages": {
-          "$": "Stages",
+          "$": "sǝƃɐʇS",
           "no_stages": {
-            "$": "No stages",
+            "$": "sǝƃɐʇs oN",
             "instructions": "Tap the %1$s icon in the toolbar to insert a stage."
           }
         }
