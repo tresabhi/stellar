@@ -22,7 +22,7 @@
         "motto": "pǝuᴉɟǝpǝɹ ƃuᴉʇᴉpǝ ʇuᴉɹdǝnlq",
         "from_scratch": "ɥɔʇɐɹɔs ɯoɹɟ ʇɹɐʇS",
         "import": "ǝlᴉɟ ʇuᴉɹdǝnlq ʇɹodɯI",
-        "open": "Open Stellar file"
+        "open": "ǝlᴉɟ ɹɐllǝʇS uǝdO"
       },
       "status_bar": {
         "docs": "sɔop"
@@ -238,23 +238,23 @@
           "$": "sǝƃɐʇS",
           "no_stages": {
             "$": "sǝƃɐʇs oN",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a stage."
+            "instructions": "˙ǝƃɐʇs ɐ ʇɹǝsuᴉ oʇ ɹɐqlooʇ ǝɥʇ uᴉ uoɔᴉ %1$s ǝɥʇ dɐ┴"
           }
         }
       }
     },
     "export": {
       "$": "ʇɹodxƎ",
-      "options": "Options",
+      "options": "suoᴉʇdO",
       "export": {
-        "$": "Export",
-        "game": "Export to game",
-        "stellar": "Save Stellar format"
+        "$": "ʇɹodxƎ",
+        "game": "ǝɯɐƃ oʇ ʇɹodxƎ",
+        "stellar": "ʇɐɯɹoɟ ɹɐllǝʇS ǝʌɐS"
       }
     }
   },
   "landscape_prompt": {
-    "message": "Seems like you're in portrait mode. Please turn to landscape mode.",
+    "message": "˙ǝpoɯ ǝdɐɔspuɐl oʇ uɹnʇ ǝsɐǝlԀ ˙ǝpoɯ ʇᴉɐɹʇɹod uᴉ ǝɹ,noʎ ǝʞᴉl sɯǝǝS",
     "never": "uᴉɐƃɐ ʞsɐ ɹǝʌǝN",
     "dismiss": "ssᴉɯsᴉp"
   },
@@ -307,8 +307,8 @@
       }
     },
     "missing_parts": {
-      "title": "%1$s part(s) not imported",
-      "description": "The following part(s) was/were not imported because it doesn't exist in %1$s yet:",
+      "title": "pǝʇɹodɯᴉ ʇou (s)ʇɹɐd %1$s",
+      "description": ":ʇǝʎ %1$s uᴉ ʇsᴉxǝ ʇ,usǝop ʇᴉ ǝsnɐɔǝq pǝʇɹodɯᴉ ʇou ǝɹǝʍ/sɐʍ (s)ʇɹɐd ƃuᴉʍolloɟ ǝɥ┴",
       "actions": {
         "never": "uᴉɐƃɐ ʍoɥs ɹǝʌǝN",
         "proceed": "pǝǝɔoɹԀ"
@@ -329,15 +329,15 @@
           "$": "ǝɔɐɟɹǝʇuI",
           "theme": {
             "title": "ǝɯǝɥ┴",
-            "description": "Color scheme for the interface."
+            "description": "˙ǝɔɐɟɹǝʇuᴉ ǝɥʇ ɹoɟ ǝɯǝɥɔs ɹoloƆ"
           },
           "default_tab": {
             "title": "qɐʇ ʇlnɐɟǝp",
-            "description": "The tab that will be opened by default."
+            "description": "˙ʇlnɐɟǝp ʎq pǝuǝdo ǝq llᴉʍ ʇɐɥʇ qɐʇ ǝɥ┴"
           },
           "touchscreen_mode": {
             "title": "ǝpoɯ uǝǝɹɔsɥɔno┴",
-            "description": "Displays information in a compact manner if on a touchscreen device.",
+            "description": "˙ǝɔᴉʌǝp uǝǝɹɔsɥɔnoʇ ɐ uo ɟᴉ ɹǝuuɐɯ ʇɔɐdɯoɔ ɐ uᴉ uoᴉʇɐɯɹoɟuᴉ sʎɐldsᴉp",
             "options": {
               "auto": "ʇɔǝʇǝp-oʇn∀",
               "on": "uO",
@@ -346,59 +346,59 @@
           },
           "language": {
             "title": "ǝƃɐnƃuɐ˥",
-            "description": "Language of the text on screen. Help us translate Stellar to your language on %1$sCrowdin%2$s."
+            "description": "˙%2$suᴉpʍoɹƆ%1$s uo ǝƃɐnƃuɐl ɹnoʎ oʇ ɹɐllǝʇS ǝʇɐlsuɐɹʇ sn dlǝH ˙uǝǝɹɔs uo ʇxǝʇ ǝɥʇ ɟo ǝƃɐnƃuɐ˥"
           },
           "orientation_prompt": {
             "title": "ʇdɯoɹd uoᴉʇɐʇuǝᴉɹO",
-            "description": "Requests usage in landscape mode."
+            "description": "˙ǝpoɯ ǝdɐɔspuɐl uᴉ ǝƃɐsn sʇsǝnbǝɹ"
           },
           "installation_prompt": {
             "title": "ʇdɯoɹd uoᴉʇɐllɐʇsuI",
-            "description": "Notifies about installing Stellar."
+            "description": "˙ɹɐllǝʇS ƃuᴉllɐʇsuᴉ ʇnoqɐ sǝᴉɟᴉʇoN"
           },
           "instability_prompt": {
             "title": "ƃuᴉuɹɐʍ ʎʇᴉlᴉqɐʇsuI",
-            "description": "Warns about an unstable or unknown version of Stellar."
+            "description": "˙ɹɐllǝʇS ɟo uoᴉsɹǝʌ uʍouʞun ɹo ǝlqɐʇsun uɐ ʇnoqɐ suɹɐM"
           },
           "missing_parts": {
             "title": "sʇɹɐd ƃuᴉssᴉW",
-            "description": "Shows a list of parts that didn't import."
+            "description": "˙ʇɹodɯᴉ ʇ,upᴉp ʇɐɥʇ sʇɹɐd ɟo ʇsᴉl ɐ sʍoɥS"
           }
         },
         "editor": {
           "$": "ɹoʇ!pƎ",
           "undo_limit": {
             "title": "ʇᴉɯᴉl opu∩",
-            "description": "Maximum number of undos/redos stored in memory. Max: 4096; min: 16."
+            "description": "˙9Ɩ :uᴉɯ ;960ㄣ :xɐW ˙ʎɹoɯǝɯ uᴉ pǝɹoʇs sopǝɹ/sopun ɟo ɹǝqɯnu ɯnɯᴉxɐW"
           }
         },
         "file": {
           "$": "sǝɔuǝɹǝɟǝɹd ǝlᴉℲ",
           "format": {
-            "title": "Format emitted files",
-            "description": "Formats JSON files emitted by Stellar for readability."
+            "title": "sǝlᴉɟ pǝʇʇᴉɯǝ ʇɐɯɹoℲ",
+            "description": "˙ʎʇᴉlᴉqɐpɐǝɹ ɹoɟ ɹɐllǝʇS ʎq pǝʇʇᴉɯǝ sǝlᴉɟ NOSſ sʇɐɯɹoℲ"
           },
           "watermark": {
             "title": "sʇuᴉɹdǝnlq pǝʇɹodxǝ ʞɹɐɯɹǝʇɐM",
-            "description": "Adds watermark linking to Stellar."
+            "description": "˙ɹɐllǝʇS oʇ ƃuᴉʞuᴉl ʞɹɐɯɹǝʇɐʍ spp∀"
           },
           "default_name": {
             "title": "ǝɯɐu ʇlnɐɟǝp ǝlᴉɟ pǝʇʇᴉɯƎ",
-            "description": "Default name for any unnamed files."
+            "description": "˙sǝlᴉɟ pǝɯɐuun ʎuɐ ɹoɟ ǝɯɐu ʇlnɐɟǝp"
           }
         },
         "debug": {
           "$": "ƃnqǝp",
           "error_screen_debug": {
-            "title": "Debug info on error screen",
-            "description": "Display full error message on an interrupting critical error."
+            "title": "uǝǝɹɔs ɹoɹɹǝ uo oɟuᴉ ƃnqǝp",
+            "description": "˙ɹoɹɹǝ lɐɔᴉʇᴉɹɔ ƃuᴉʇdnɹɹǝʇuᴉ uɐ uo ǝƃɐssǝɯ ɹoɹɹǝ llnɟ ʎɐldsᴉp"
           }
         }
       }
     },
     "confirmation": {
       "title": "¿sᴉɥʇ op oʇ ʇuɐʍ noʎ ǝɹns noʎ ǝɹ∀",
-      "description": "This action may not be reversible.",
+      "description": "˙ǝlqᴉsɹǝʌǝɹ ǝq ʇou ʎɐɯ uoᴉʇɔɐ sᴉɥ┴",
       "actions": {
         "cancel": "lǝɔuɐƆ",
         "yes": "sǝ⅄"
@@ -406,15 +406,15 @@
     },
     "incompatible_blueprint": {
       "too_old": {
-        "title": "Blueprint is outdated",
-        "description": "Failed to upgrade blueprint because its format is deprecated"
+        "title": "pǝʇɐpʇno sᴉ ʇuᴉɹdǝnlq",
+        "description": "pǝʇɐɔǝɹdǝp sᴉ ʇɐɯɹoɟ sʇᴉ ǝsnɐɔǝq ʇuᴉɹdǝnlq ǝpɐɹƃdn oʇ pǝlᴉɐℲ"
       },
       "too_new": {
-        "title": "Blueprint is incompatible",
-        "description": "Failed to load blueprint because it's from a newer version"
+        "title": "ǝlqᴉʇɐdɯoɔuᴉ sᴉ ʇuᴉɹdǝnlq",
+        "description": "uoᴉsɹǝʌ ɹǝʍǝu ɐ ɯoɹɟ s,ʇᴉ ǝsnɐɔǝq ʇuᴉɹdǝnlq pɐol oʇ pǝlᴉɐℲ"
       },
       "actions": {
-        "dismiss": "Dismiss"
+        "dismiss": "ssᴉɯsᴉp"
       }
     }
   },
@@ -423,24 +423,24 @@
     "theme_dark": "ʞɹɐp ɹɐllǝʇS"
   },
   "parts": {
-    "capsule": "Capsule",
-    "cone": "Cone",
-    "cone_side": "Side cone",
-    "docking_port": "Docking port",
-    "engine_frontier": "Frontier engine",
-    "engine_hawk": "Hawk engine",
-    "engine_kolibri": "Kolibri engine",
-    "engine_titan": "Titan engine",
-    "engine_valiant": "Valiant engine",
-    "fuel_tank": "Fuel tank",
-    "group": "Group",
-    "heat_shield": "Heat shield",
-    "landing_leg": "Landing leg",
-    "parachute": "Parachute",
-    "placeholder_ion": "Ion engine",
-    "probe": "Probe",
-    "rcs": "RCS",
-    "reference_image": "Reference image",
-    "side_separator": "Side separator"
+    "capsule": "ǝlnsdɐƆ",
+    "cone": "ǝuoƆ",
+    "cone_side": "ǝuoɔ ǝpᴉS",
+    "docking_port": "ʇɹod ƃuᴉʞɔop",
+    "engine_frontier": "ǝuᴉƃuǝ ɹǝᴉʇuoɹℲ",
+    "engine_hawk": "ǝuᴉƃuǝ ʞʍɐH",
+    "engine_kolibri": "ǝuᴉƃuǝ ᴉɹqᴉloʞ",
+    "engine_titan": "ǝuᴉƃuǝ uɐʇᴉ┴",
+    "engine_valiant": "ǝuᴉƃuǝ ʇuɐᴉlɐΛ",
+    "fuel_tank": "ʞuɐʇ lǝnℲ",
+    "group": "dnoɹפ",
+    "heat_shield": "plǝᴉɥs ʇɐǝH",
+    "landing_leg": "ƃǝl ƃuᴉpuɐ˥",
+    "parachute": "ǝʇnɥɔɐɹɐԀ",
+    "placeholder_ion": "ǝuᴉƃuǝ uoI",
+    "probe": "ǝqoɹԀ",
+    "rcs": "SƆɹ",
+    "reference_image": "ǝƃɐɯᴉ ǝɔuǝɹǝɟǝɹ",
+    "side_separator": "ɹoʇɐɹɐdǝs ǝpᴉS"
   }
 }
