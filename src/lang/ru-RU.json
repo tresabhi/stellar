@@ -43,7 +43,7 @@
           "pan": "Сдвинуть",
           "transform": "Трансформировать",
           "edit": "Редактировать",
-          "stage": "Stage"
+          "stage": "Ступень"
         },
         "clipboard": {
           "copy": "Копировать",
@@ -92,10 +92,10 @@
         "parts": {
           "$": "Детали",
           "no_parts": {
-            "$": "No parts to display",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a part.",
-            "instructions_no_parts_in_staging": "Add parts in the layout tab.",
-            "instructions_no_stage_selected": "No stage selected."
+            "$": "Нет деталей для отображения",
+            "instructions": "Нажмите значок %1$s на панели инструментов, чтобы вставить деталь.",
+            "instructions_no_parts_in_staging": "Добавьте детали во вкладке Макет.",
+            "instructions_no_stage_selected": "Нет выбранной ступени."
           }
         },
         "snippets": {
@@ -235,10 +235,10 @@
       "$": "Ступени",
       "left_sidebar": {
         "stages": {
-          "$": "Stages",
+          "$": "Ступени",
           "no_stages": {
-            "$": "No stages",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a stage."
+            "$": "Нет ступеней",
+            "instructions": "Нажмите значок %1$s на панели инструментов, чтобы добавить ступень."
           }
         }
       }
