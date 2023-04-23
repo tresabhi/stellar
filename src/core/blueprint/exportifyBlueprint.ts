@@ -28,11 +28,12 @@ export default function exportifyBlueprint(blueprint: Blueprint) {
         Partial<PartWithStages>;
       exportifiedBlueprint.parts.push(exportifiedPart);
 
-      // if ((originalPart as PartWithStage).stages !== undefined) {
-      //   exportifiedBlueprint.stages[
-      //     (originalPart as PartWithStage).stages as number
-      //   ].partIndexes.push(exportifiedBlueprint.parts.length - 1);
-      // }
+      if ((originalPart as Partial<PartWithStages>).stages !== undefined) {
+        const partIndex = exportifiedBlueprint.parts.length - 1;
+        (originalPart as PartWithStages).stages.forEach((stage) => {
+          exportifiedBlueprint.stages[stage].partIndexes.push(partIndex);
+        });
+      }
     });
   });
 
