@@ -21,7 +21,7 @@ import {
   partData,
   vanillaPartData,
 } from '../Part';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -42,7 +42,7 @@ export interface VanillaHeatShield
 
 export interface HeatShield
   extends PartWithoutName,
-    PartWithStage,
+    PartWithStages,
     VanillaHeatShield {}
 
 export const vanillaHeatShieldData: VanillaHeatShield = {
@@ -60,7 +60,7 @@ export const vanillaHeatShieldData: VanillaHeatShield = {
 
 export const heatShieldData: HeatShield = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaHeatShieldData,
 };
 

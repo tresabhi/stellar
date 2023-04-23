@@ -6,7 +6,7 @@ import generateStageId from 'core/part/generateStageId';
 import importifyPart from 'core/part/importifyPart';
 import { Blueprint, blueprintData, VanillaBlueprint } from 'game/Blueprint';
 import { Part } from 'game/parts/Part';
-import { PartWithStage } from 'game/parts/PartWithStage';
+import { PartWithStages } from 'game/parts/PartWithStages';
 import usePopupConcurrency from 'hooks/usePopupConcurrency';
 import useTranslator from 'hooks/useTranslator';
 import { cloneDeep, isArray } from 'lodash';
@@ -67,7 +67,7 @@ export default function importifyBlueprint(providedBlueprint: AnyBlueprint) {
         id: generateStageId(newBlueprint.stages),
         part_order: importedStage.partIndexes
           .map((partIndex) => {
-            const part = allParts[partIndex] as (Part & PartWithStage) | null;
+            const part = allParts[partIndex] as (Part & PartWithStages) | null;
 
             if (part) {
               part.stages?.push(stageIndex);

@@ -15,7 +15,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithParachute, partWithParachuteData } from '../PartWithParachute';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -32,7 +32,7 @@ export interface VanillaParachute
 
 export interface Parachute
   extends PartWithoutName,
-    PartWithStage,
+    PartWithStages,
     VanillaParachute {}
 
 export const vanillaParachuteData: VanillaParachute = {
@@ -45,7 +45,7 @@ export const vanillaParachuteData: VanillaParachute = {
 
 export const parachuteData: Parachute = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaParachuteData,
 };
 

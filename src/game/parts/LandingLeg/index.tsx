@@ -18,7 +18,7 @@ import {
   PartWithLandingLeg,
   partWithLandingLegData,
 } from '../PartWithLandingLeg';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -35,7 +35,7 @@ export interface VanillaLandingLeg
 
 export interface LandingLeg
   extends PartWithoutName,
-    PartWithStage,
+    PartWithStages,
     VanillaLandingLeg {}
 
 export const vanillaLandingLegData: VanillaLandingLeg = {
@@ -48,7 +48,7 @@ export const vanillaLandingLegData: VanillaLandingLeg = {
 
 export const landingLegData: LandingLeg = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaLandingLegData,
 };
 

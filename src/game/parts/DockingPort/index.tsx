@@ -22,7 +22,7 @@ import {
   partData,
   vanillaPartData,
 } from '../Part';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -40,7 +40,7 @@ export interface VanillaDockingPort
 
 export interface DockingPort
   extends PartWithoutName,
-    PartWithStage,
+    PartWithStages,
     VanillaDockingPort {}
 
 export const vanillaDockingPortData: VanillaDockingPort = {
@@ -53,7 +53,7 @@ export const vanillaDockingPortData: VanillaDockingPort = {
 
 export const dockingPortData: DockingPort = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaDockingPortData,
 };
 

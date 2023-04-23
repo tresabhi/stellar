@@ -9,7 +9,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -25,7 +25,7 @@ export interface VanillaEngineValiant
 
 export interface EngineValiant
   extends PartWithoutName,
-    PartWithStage,
+    PartWithStages,
     VanillaEngineValiant {}
 
 export const vanillaEngineValiantData: VanillaEngineValiant = {
@@ -38,7 +38,7 @@ export const vanillaEngineValiantData: VanillaEngineValiant = {
 
 export const engineValiantData: EngineValiant = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaEngineValiantData,
 };
 

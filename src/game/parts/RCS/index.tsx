@@ -8,7 +8,7 @@ import {
   VanillaPart,
   vanillaPartData,
 } from '../Part';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -19,7 +19,7 @@ export interface VanillaRCS extends VanillaPart, PartWithTransformations {
   readonly n: 'RCS';
 }
 
-export interface RCS extends PartWithoutName, PartWithStage, VanillaRCS {}
+export interface RCS extends PartWithoutName, PartWithStages, VanillaRCS {}
 
 export const vanillaRCSData: VanillaRCS = {
   ...vanillaPartData,
@@ -30,7 +30,7 @@ export const vanillaRCSData: VanillaRCS = {
 
 export const RCSData: RCS = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaRCSData,
 };
 

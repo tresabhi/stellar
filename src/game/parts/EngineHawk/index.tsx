@@ -9,7 +9,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -25,7 +25,7 @@ export interface VanillaEngineHawk
 
 export interface EngineHawk
   extends PartWithoutName,
-    PartWithStage,
+    PartWithStages,
     VanillaEngineHawk {}
 
 export const vanillaEngineHawkData: VanillaEngineHawk = {
@@ -38,7 +38,7 @@ export const vanillaEngineHawkData: VanillaEngineHawk = {
 
 export const engineHawkData: EngineHawk = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaEngineHawkData,
 };
 

@@ -20,7 +20,7 @@ import toggleSelection from 'core/part/toggleSelection';
 import toggleVisible from 'core/part/toggleVisible';
 import { Group } from 'game/parts/Group';
 import { Part } from 'game/parts/Part';
-import { PartWithStage } from 'game/parts/PartWithStage';
+import { PartWithStages } from 'game/parts/PartWithStages';
 import usePart from 'hooks/usePart';
 import usePartProperty from 'hooks/usePartProperty';
 import { KeyboardEvent, MouseEvent, PointerEvent, memo, useRef } from 'react';
@@ -152,14 +152,14 @@ const Action = styled('button', {
 export const Item = memo(
   ({ id, indent }: ListingProps) => {
     const label = useRef<HTMLInputElement>(null);
-    const state = usePart(id) as Part | (Part & PartWithStage);
+    const state = usePart(id) as Part | (Part & PartWithStages);
     const isGroup = state.n === 'Group';
     const expanded = isGroup ? (state as Group).expanded : false;
     const { Icon } = getPartRegistry(state.n) as PartRegistryItem<Part>;
     let lastLabel = state.label;
     const { tab } = useApp.getState().interface;
     const isLayout = tab === Tab.Layout;
-    const stageable = (state as Partial<PartWithStage>).stages !== undefined;
+    const stageable = (state as Partial<PartWithStages>).stages !== undefined;
     const intractable = isLayout
       ? !state.locked && state.visible
       : stageable ?? false;
@@ -265,7 +265,7 @@ export const Item = memo(
               ? state.selected
               : stageable &&
                 stageSelection !== null &&
-                (state as Part & PartWithStage).stages.includes(stageSelection)
+                (state as Part & PartWithStages).stages.includes(stageSelection)
           }
           onClick={handleSummaryClick}
           onDoubleClick={handleSummaryDoubleClick}

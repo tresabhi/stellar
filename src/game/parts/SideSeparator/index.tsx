@@ -15,7 +15,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithFragment, partWithFragmentData } from '../PartWithFragment';
-import { PartWithStage, partWithStageData } from '../PartWithStage';
+import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -34,7 +34,7 @@ export interface VanillaSideSeparator
 
 export interface SideSeparator
   extends PartWithoutName,
-    PartWithStage,
+    PartWithStages,
     VanillaSideSeparator {}
 
 export const vanillaSideSeparatorData: VanillaSideSeparator = {
@@ -48,7 +48,7 @@ export const vanillaSideSeparatorData: VanillaSideSeparator = {
 
 export const sideSeparatorData: SideSeparator = {
   ...partData,
-  ...partWithStageData,
+  ...partWithStagesData,
   ...vanillaSideSeparatorData,
 };
 

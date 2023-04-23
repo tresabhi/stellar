@@ -3,7 +3,7 @@ import { invalidate } from '@react-three/fiber';
 import getPart from 'core/part/getPart';
 import subscribeToPart from 'core/part/subscribeToPart';
 import { Part } from 'game/parts/Part';
-import { PartWithStage } from 'game/parts/PartWithStage';
+import { PartWithStages } from 'game/parts/PartWithStages';
 import { memo, RefObject, useEffect, useRef } from 'react';
 import useApp, { Tab } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
@@ -43,7 +43,7 @@ const useVisibility = (
 ) => {
   useEffect(() => {
     const isLayout = useApp.getState().interface.tab === Tab.Layout;
-    let { selected, visible, stages } = getPart<Part & Partial<PartWithStage>>(
+    let { selected, visible, stages } = getPart<Part & Partial<PartWithStages>>(
       id,
     );
     let stageSelection = useBlueprint.getState().stage_selection;
@@ -89,7 +89,7 @@ const useVisibility = (
     } else {
       unsubscribes = [
         useBlueprint.subscribe(
-          (state) => (state.parts[id] as Part & PartWithStage).stages,
+          (state) => (state.parts[id] as Part & PartWithStages).stages,
           (newStage) => {
             stages = newStage;
             toggleVisibility();

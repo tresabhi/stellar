@@ -1,11 +1,11 @@
 import { Part, partData, VanillaPart, vanillaPartData } from 'game/parts/Part';
-import { partWithStageData } from 'game/parts/PartWithStage';
+import { partWithStagesData } from 'game/parts/PartWithStages';
 
 const vanillaPartKeys = Object.keys(vanillaPartData);
 export const partMetadataKeys = (
   [
     ...Object.keys(partData),
-    ...Object.keys(partWithStageData),
+    ...Object.keys(partWithStagesData),
   ] as (keyof Part)[]
 ).filter((key) => !vanillaPartKeys.includes(key));
 
