@@ -21,6 +21,7 @@ import {
   partData,
   vanillaPartData,
 } from '../Part';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -39,7 +40,10 @@ export interface VanillaHeatShield
   };
 }
 
-export interface HeatShield extends PartWithoutName, VanillaHeatShield {}
+export interface HeatShield
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaHeatShield {}
 
 export const vanillaHeatShieldData: VanillaHeatShield = {
   ...vanillaPartData,
@@ -56,6 +60,7 @@ export const vanillaHeatShieldData: VanillaHeatShield = {
 
 export const heatShieldData: HeatShield = {
   ...partData,
+  ...partWithStageData,
   ...vanillaHeatShieldData,
 };
 
@@ -127,7 +132,6 @@ export default {
   vanillaData: vanillaHeatShieldData,
   data: heatShieldData,
   label: 'heat_shield',
-  stageable: true,
 
   Icon,
   LayoutComponent,

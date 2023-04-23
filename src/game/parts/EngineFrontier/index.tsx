@@ -14,6 +14,7 @@ import {
   partWithTransformationsData,
 } from '../PartWithTransformations';
 import model from './model.gltf';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 
 export interface VanillaEngineFrontier
   extends VanillaPart,
@@ -23,7 +24,7 @@ export interface VanillaEngineFrontier
 }
 
 export interface EngineFrontier
-  extends PartWithoutName,
+  extends PartWithoutName, PartWithStage,
     VanillaEngineFrontier {}
 
 export const vanillaEngineFrontierData: VanillaEngineFrontier = {
@@ -36,6 +37,7 @@ export const vanillaEngineFrontierData: VanillaEngineFrontier = {
 
 export const engineFrontierData: EngineFrontier = {
   ...partData,
+  ...partWithStageData,
   ...vanillaEngineFrontierData,
 };
 
@@ -46,7 +48,6 @@ export default {
   vanillaData: vanillaEngineFrontierData,
   data: engineFrontierData,
   label: 'engine_frontier',
-  stageable: true,
 
   Icon,
   LayoutComponent,

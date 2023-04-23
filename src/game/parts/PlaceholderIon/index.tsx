@@ -9,6 +9,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -24,6 +25,7 @@ export interface VanillaPlaceholderIon
 
 export interface PlaceholderIon
   extends PartWithoutName,
+    PartWithStage,
     VanillaPlaceholderIon {}
 
 export const vanillaPlaceholderIonData: VanillaPlaceholderIon = {
@@ -36,6 +38,7 @@ export const vanillaPlaceholderIonData: VanillaPlaceholderIon = {
 
 export const placeholderIonData: PlaceholderIon = {
   ...partData,
+  ...partWithStageData,
   ...vanillaPlaceholderIonData,
 };
 
@@ -46,7 +49,6 @@ export default {
   vanillaData: vanillaPlaceholderIonData,
   data: placeholderIonData,
   label: 'placeholder_ion',
-  stageable: true,
 
   Icon,
   LayoutComponent,

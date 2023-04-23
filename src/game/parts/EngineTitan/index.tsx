@@ -9,6 +9,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -22,7 +23,10 @@ export interface VanillaEngineTitan
   readonly n: 'Engine Titan';
 }
 
-export interface EngineTitan extends PartWithoutName, VanillaEngineTitan {}
+export interface EngineTitan
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaEngineTitan {}
 
 export const vanillaEngineTitanData: VanillaEngineTitan = {
   ...vanillaPartData,
@@ -34,6 +38,7 @@ export const vanillaEngineTitanData: VanillaEngineTitan = {
 
 export const engineTitanData: EngineTitan = {
   ...partData,
+  ...partWithStageData,
   ...vanillaEngineTitanData,
 };
 
@@ -44,7 +49,6 @@ export default {
   vanillaData: vanillaEngineTitanData,
   data: engineTitanData,
   label: 'engine_titan',
-  stageable: true,
 
   Icon,
   LayoutComponent,

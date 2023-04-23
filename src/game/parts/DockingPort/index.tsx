@@ -22,6 +22,7 @@ import {
   partData,
   vanillaPartData,
 } from '../Part';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -37,7 +38,10 @@ export interface VanillaDockingPort
   N: { width: number; force_multiplier: number; sep_force_multiplier: number };
 }
 
-export interface DockingPort extends PartWithoutName, VanillaDockingPort {}
+export interface DockingPort
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaDockingPort {}
 
 export const vanillaDockingPortData: VanillaDockingPort = {
   ...vanillaPartData,
@@ -49,6 +53,7 @@ export const vanillaDockingPortData: VanillaDockingPort = {
 
 export const dockingPortData: DockingPort = {
   ...partData,
+  ...partWithStageData,
   ...vanillaDockingPortData,
 };
 
@@ -163,7 +168,6 @@ export default {
   vanillaData: vanillaDockingPortData,
   data: dockingPortData,
   label: 'docking_port',
-  stageable: true,
 
   Icon,
   LayoutComponent,

@@ -1,7 +1,8 @@
+// rename to PartWithStages
 export interface PartWithStage {
-  stage?: number;
+  stages: number[];
 }
 
 export const partWithStageData: PartWithStage = {
-  stage: undefined,
+  stages: [],
 };

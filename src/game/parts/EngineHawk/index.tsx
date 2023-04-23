@@ -9,6 +9,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -22,7 +23,10 @@ export interface VanillaEngineHawk
   readonly n: 'Engine Hawk';
 }
 
-export interface EngineHawk extends PartWithoutName, VanillaEngineHawk {}
+export interface EngineHawk
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaEngineHawk {}
 
 export const vanillaEngineHawkData: VanillaEngineHawk = {
   ...vanillaPartData,
@@ -34,6 +38,7 @@ export const vanillaEngineHawkData: VanillaEngineHawk = {
 
 export const engineHawkData: EngineHawk = {
   ...partData,
+  ...partWithStageData,
   ...vanillaEngineHawkData,
 };
 
@@ -44,7 +49,6 @@ export default {
   vanillaData: vanillaEngineHawkData,
   data: engineHawkData,
   label: 'engine_hawk',
-  stageable: true,
 
   Icon,
   LayoutComponent,

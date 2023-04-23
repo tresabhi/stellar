@@ -1,5 +1,6 @@
 import exportifyPart from 'core/part/exportifyPart';
 import { Blueprint, vanillaBlueprintData } from 'game/Blueprint';
+import { Part } from 'game/parts/Part';
 import { PartWithStage } from 'game/parts/PartWithStage';
 import { cloneDeep } from 'lodash';
 
@@ -23,14 +24,15 @@ export default function exportifyBlueprint(blueprint: Blueprint) {
     );
 
     exportifiedParts.forEach((exportifiedPart, index) => {
-      const originalPart = originalParts[index];
+      const originalPart = originalParts[index] as Part & Partial<PartWithStage>;
       exportifiedBlueprint.parts.push(exportifiedPart);
 
-      if ((originalPart as PartWithStage).stage !== undefined) {
-        exportifiedBlueprint.stages[
-          (originalPart as PartWithStage).stage as number
-        ].partIndexes.push(exportifiedBlueprint.parts.length - 1);
-      }
+      // if ((originalPart as PartWithStage).stages !== undefined) {
+      //   exportifiedBlueprint.stages[
+      //     (originalPart as PartWithStage).stages as number
+      //   ].partIndexes.push(exportifiedBlueprint.parts.length - 1);
+      // }
+
     });
   });
 

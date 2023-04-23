@@ -34,7 +34,8 @@ export default function toggleSelection(ids: MethodIds, blueprint?: Blueprint) {
 
       spliceIds.forEach((id) => {
         forEachRight(blueprint.part_selections, (selection, index) => {
-          if (isEqual(id, selection)) blueprint.part_selections.splice(index, 1);
+          if (isEqual(id, selection))
+            blueprint.part_selections.splice(index, 1);
         });
       });
 

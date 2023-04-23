@@ -9,6 +9,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -22,7 +23,10 @@ export interface VanillaEngineValiant
   readonly n: 'Engine Valiant';
 }
 
-export interface EngineValiant extends PartWithoutName, VanillaEngineValiant {}
+export interface EngineValiant
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaEngineValiant {}
 
 export const vanillaEngineValiantData: VanillaEngineValiant = {
   ...vanillaPartData,
@@ -34,6 +38,7 @@ export const vanillaEngineValiantData: VanillaEngineValiant = {
 
 export const engineValiantData: EngineValiant = {
   ...partData,
+  ...partWithStageData,
   ...vanillaEngineValiantData,
 };
 
@@ -44,7 +49,6 @@ export default {
   vanillaData: vanillaEngineValiantData,
   data: engineValiantData,
   label: 'engine_valiant',
-  stageable: true,
 
   Icon,
   LayoutComponent,

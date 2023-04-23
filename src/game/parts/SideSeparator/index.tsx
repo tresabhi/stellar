@@ -15,6 +15,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithFragment, partWithFragmentData } from '../PartWithFragment';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -31,7 +32,10 @@ export interface VanillaSideSeparator
   N: { force_percent: number };
 }
 
-export interface SideSeparator extends PartWithoutName, VanillaSideSeparator {}
+export interface SideSeparator
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaSideSeparator {}
 
 export const vanillaSideSeparatorData: VanillaSideSeparator = {
   ...vanillaPartData,
@@ -44,6 +48,7 @@ export const vanillaSideSeparatorData: VanillaSideSeparator = {
 
 export const sideSeparatorData: SideSeparator = {
   ...partData,
+  ...partWithStageData,
   ...vanillaSideSeparatorData,
 };
 
@@ -70,7 +75,6 @@ export default {
   vanillaData: vanillaSideSeparatorData,
   data: sideSeparatorData,
   label: 'side_separator',
-  stageable: true,
 
   Icon,
   LayoutComponent,

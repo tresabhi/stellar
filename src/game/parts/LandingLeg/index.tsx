@@ -18,6 +18,7 @@ import {
   PartWithLandingLeg,
   partWithLandingLegData,
 } from '../PartWithLandingLeg';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -32,7 +33,10 @@ export interface VanillaLandingLeg
   readonly n: 'Landing Leg';
 }
 
-export interface LandingLeg extends PartWithoutName, VanillaLandingLeg {}
+export interface LandingLeg
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaLandingLeg {}
 
 export const vanillaLandingLegData: VanillaLandingLeg = {
   ...vanillaPartData,
@@ -44,6 +48,7 @@ export const vanillaLandingLegData: VanillaLandingLeg = {
 
 export const landingLegData: LandingLeg = {
   ...partData,
+  ...partWithStageData,
   ...vanillaLandingLegData,
 };
 
@@ -67,7 +72,6 @@ export default {
   vanillaData: vanillaLandingLegData,
   data: landingLegData,
   label: 'landing_leg',
-  stageable: true,
 
   Icon,
   LayoutComponent,

@@ -70,7 +70,7 @@ export default function importifyBlueprint(providedBlueprint: AnyBlueprint) {
             const part = allParts[partIndex] as (Part & PartWithStage) | null;
 
             if (part) {
-              part.stage = stageIndex;
+              part.stages?.push(stageIndex);
 
               return part.id;
             }

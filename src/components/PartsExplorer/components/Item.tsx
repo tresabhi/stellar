@@ -152,15 +152,14 @@ const Action = styled('button', {
 export const Item = memo(
   ({ id, indent }: ListingProps) => {
     const label = useRef<HTMLInputElement>(null);
-    const state = usePart(id);
+    const state = usePart(id) as Part | (Part & PartWithStage);
     const isGroup = state.n === 'Group';
     const expanded = isGroup ? (state as Group).expanded : false;
-    const { Icon, stageable } = getPartRegistry(
-      state.n,
-    ) as PartRegistryItem<Part>;
+    const { Icon } = getPartRegistry(state.n) as PartRegistryItem<Part>;
     let lastLabel = state.label;
     const { tab } = useApp.getState().interface;
     const isLayout = tab === Tab.Layout;
+    const stageable = (state as Partial<PartWithStage>).stages !== undefined;
     const intractable = isLayout
       ? !state.locked && state.visible
       : stageable ?? false;
@@ -264,7 +263,9 @@ export const Item = memo(
           selected={
             isLayout
               ? state.selected
-              : stageable && (state as PartWithStage).stage === stageSelection
+              : stageable &&
+                stageSelection !== null &&
+                (state as Part & PartWithStage).stages.includes(stageSelection)
           }
           onClick={handleSummaryClick}
           onDoubleClick={handleSummaryDoubleClick}

@@ -43,7 +43,9 @@ const useVisibility = (
 ) => {
   useEffect(() => {
     const isLayout = useApp.getState().interface.tab === Tab.Layout;
-    let { stage, visible, selected } = getPart<Part & PartWithStage>(id);
+    let { selected, visible, stages } = getPart<Part & Partial<PartWithStage>>(
+      id,
+    );
     let stageSelection = useBlueprint.getState().stage_selection;
     let unsubscribes: (() => void)[] = [];
 
@@ -52,7 +54,10 @@ const useVisibility = (
         if (isLayout) {
           wrapper.current.visible = visible && selected;
         } else {
-          wrapper.current.visible = visible && stage === stageSelection;
+          wrapper.current.visible =
+            visible &&
+            stageSelection !== null &&
+            (stages?.includes(stageSelection) ?? false);
         }
       }
 
@@ -84,9 +89,9 @@ const useVisibility = (
     } else {
       unsubscribes = [
         useBlueprint.subscribe(
-          (state) => (state.parts[id] as PartWithStage).stage,
+          (state) => (state.parts[id] as Part & PartWithStage).stages,
           (newStage) => {
-            stage = newStage;
+            stages = newStage;
             toggleVisibility();
           },
         ),

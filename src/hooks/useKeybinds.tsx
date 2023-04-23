@@ -286,7 +286,9 @@ export default function useKeybinds() {
       },
       { preventOnNonLayoutTab: false },
     );
-    bind('ctrl+s', () => saveFile());
+    bind('ctrl+s', () => saveFile(), {
+      preventOnNonLayoutTab: false,
+    });
     bind('ctrl+shift+s', () => saveFileAs());
     bind(
       'ctrl+i',

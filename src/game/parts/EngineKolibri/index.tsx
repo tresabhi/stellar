@@ -9,6 +9,7 @@ import {
   vanillaPartData,
 } from '../Part';
 import { PartWithEngine, partWithEngineData } from '../PartWithEngine';
+import { PartWithStage, partWithStageData } from '../PartWithStage';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -22,7 +23,10 @@ export interface VanillaEngineKolibri
   readonly n: 'Engine Kolibri';
 }
 
-export interface EngineKolibri extends PartWithoutName, VanillaEngineKolibri {}
+export interface EngineKolibri
+  extends PartWithoutName,
+    PartWithStage,
+    VanillaEngineKolibri {}
 
 export const vanillaEngineKolibriData: VanillaEngineKolibri = {
   ...vanillaPartData,
@@ -34,6 +38,7 @@ export const vanillaEngineKolibriData: VanillaEngineKolibri = {
 
 export const engineKolibriData: EngineKolibri = {
   ...partData,
+  ...partWithStageData,
   ...vanillaEngineKolibriData,
 };
 
@@ -44,7 +49,6 @@ export default {
   vanillaData: vanillaEngineKolibriData,
   data: engineKolibriData,
   label: 'engine_kolibri',
-  stageable: true,
 
   Icon,
   LayoutComponent,
