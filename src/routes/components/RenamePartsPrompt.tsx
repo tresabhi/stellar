@@ -35,11 +35,13 @@ export default function RenamePartsPrompt({ dismiss }: PromptProps) {
   const { t } = useTranslator();
   const { rename } = useSettings.getState().editor;
   const input = useRef<HTMLInputElement>(null);
-  const { part_selections: selections } = useBlueprint.getState();
-  let defaultLabel = getPartLabel(selections[0]);
+  const { part_selections } = useBlueprint.getState();
+  let defaultLabel = getPartLabel(part_selections[0]);
 
   if (
-    selections.some((selection) => getPartLabel(selection) !== defaultLabel)
+    part_selections.some(
+      (selection) => getPartLabel(selection) !== defaultLabel,
+    )
   ) {
     defaultLabel = '';
   }

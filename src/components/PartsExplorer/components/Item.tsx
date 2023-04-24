@@ -177,16 +177,16 @@ export const Item = memo(
       event.preventDefault();
 
       if (isLayout) {
-        const { part_selections: selections } = useBlueprint.getState();
+        const { part_selections } = useBlueprint.getState();
 
         if (event.ctrlKey) {
           if (event.shiftKey) {
-            selectBetween(selections[0], id);
+            selectBetween(part_selections[0], id);
           } else {
             toggleSelection(id);
           }
         } else if (event.shiftKey) {
-          selectBetweenConcurrent(selections[0], id);
+          selectBetweenConcurrent(part_selections[0], id);
         } else {
           selectConcurrent(id);
         }

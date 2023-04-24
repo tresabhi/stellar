@@ -235,14 +235,14 @@ export default function Toolbar() {
       ? Tool.Pan
       : state.editor.tool,
   );
-  const isOneHidden = useBlueprint(({ part_selections: selections, parts }) =>
-    selections.some((selection) => {
+  const isOneHidden = useBlueprint(({ part_selections, parts }) =>
+    part_selections.some((selection) => {
       const part = parts[selection];
       return !part.visible;
     }),
   );
-  const isOneLocked = useBlueprint(({ part_selections: selections, parts }) =>
-    selections.some((selection) => {
+  const isOneLocked = useBlueprint(({ part_selections, parts }) =>
+    part_selections.some((selection) => {
       const part = parts[selection];
       return part.locked;
     }),

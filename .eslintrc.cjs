@@ -62,6 +62,11 @@ module.exports = {
      * enough for type validation.
      */
     'react/prop-types': 0,
+
+    /**
+     * JSON naming convention conflicts with TypeScript.
+     */
+    '@typescript-eslint/naming-convention': 0,
   },
 
   plugins: ['@typescript-eslint'],
