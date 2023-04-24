@@ -17,10 +17,10 @@ jobs:
 
     steps:
       - name: Get code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -29,7 +29,7 @@ jobs:
         run: npm install --location=global yarn
 
       - name: Use node_modules cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
@@ -44,7 +44,7 @@ jobs:
         run: node scripts/postBuild.js --alpha -favicon-api-token=${{ secrets.REAL_FAVICON_GENERATOR_TOKEN }}
 
       - name: Archive build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: dist
           path: dist
