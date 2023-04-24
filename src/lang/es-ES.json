@@ -42,7 +42,8 @@
         "tool": {
           "pan": "Sartén",
           "transform": "Transformar",
-          "edit": "Editar"
+          "edit": "Editar",
+          "stage": "Etapa"
         },
         "clipboard": {
           "copy": "Copiar",
@@ -91,8 +92,10 @@
         "parts": {
           "$": "Partes",
           "no_parts": {
-            "$": "No hay partes en el plano",
-            "instructions": "Toca el icono %1$s en la barra de herramientas para insertar una parte."
+            "$": "No hay partes que mostrar",
+            "instructions": "Toca el icono %1$s en la barra de herramientas para insertar una parte.",
+            "instructions_no_parts_in_staging": "Añadir partes en la pestaña de diseño.",
+            "instructions_no_stage_selected": "Ninguna etapa seleccionada."
           }
         },
         "snippets": {
@@ -229,7 +232,16 @@
       }
     },
     "staging": {
-      "$": "Puesta en escena"
+      "$": "Puesta en escena",
+      "left_sidebar": {
+        "stages": {
+          "$": "Etapas",
+          "no_stages": {
+            "$": "No hay etapas",
+            "instructions": "Toca el icono %1$s en la barra de herramientas para insertar una etapa."
+          }
+        }
+      }
     },
     "export": {
       "$": "Exportar",

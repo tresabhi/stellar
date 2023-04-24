@@ -42,7 +42,8 @@
         "tool": {
           "pan": "Pan",
           "transform": "Transform",
-          "edit": "Edit"
+          "edit": "Edit",
+          "stage": "Stage"
         },
         "clipboard": {
           "copy": "Copy",
@@ -91,8 +92,10 @@
         "parts": {
           "$": "Parts",
           "no_parts": {
-            "$": "No parts in blueprint",
-            "instructions": "Tap the %1$s icon in the toolbar to insert a part."
+            "$": "No parts to display",
+            "instructions": "Tap the %1$s icon in the toolbar to insert a part.",
+            "instructions_no_parts_in_staging": "Add parts in the layout tab.",
+            "instructions_no_stage_selected": "No stage selected."
           }
         },
         "snippets": {
@@ -229,7 +232,16 @@
       }
     },
     "staging": {
-      "$": "Staging"
+      "$": "Staging",
+      "left_sidebar": {
+        "stages": {
+          "$": "Stages",
+          "no_stages": {
+            "$": "No stages",
+            "instructions": "Tap the %1$s icon in the toolbar to insert a stage."
+          }
+        }
+      }
     },
     "export": {
       "$": "Export",
