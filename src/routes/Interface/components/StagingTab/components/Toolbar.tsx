@@ -2,26 +2,22 @@ import {
   CardStackPlusIcon,
   CursorArrowIcon,
   HandIcon,
-  ResetIcon,
   TrashIcon,
 } from '@radix-ui/react-icons';
 import * as ToolbarPrimitive from 'components/Toolbar';
 import mutateApp from 'core/app/mutateApp';
 import deleteSelectedStage from 'core/blueprint/deleteSelectedStage';
 import insertStage from 'core/blueprint/insertStage';
-import redoVersion from 'core/blueprint/redoVersion';
-import undoVersion from 'core/blueprint/undoVersion';
 import useTranslator from 'hooks/useTranslator';
 import { useEffect } from 'react';
 import useApp, { Tool } from 'stores/app';
-import useVersionControl from 'stores/versionControl';
+import {
+  UniversalToolbarControlsLeft,
+  UniversalToolbarControlsRight,
+} from '../../LayoutTab/components/Toolbar';
 
 function Toolbar() {
   const { t } = useTranslator();
-  const hasUndos = useVersionControl((state) => state.index > -1);
-  const hasRedos = useVersionControl(
-    (state) => state.history.length - 1 > state.index,
-  );
   const tool = useApp((state) =>
     state.editor.isSpacePanning || state.editor.isTouchPanning
       ? Tool.Pan
@@ -37,6 +33,8 @@ function Toolbar() {
   return (
     <ToolbarPrimitive.Root>
       <ToolbarPrimitive.Group>
+        <UniversalToolbarControlsLeft />
+
         <ToolbarPrimitive.DropdownMenu
           icon={
             <>
@@ -79,21 +77,7 @@ function Toolbar() {
         </ToolbarPrimitive.Button>
       </ToolbarPrimitive.Group>
 
-      <ToolbarPrimitive.Group>
-        <ToolbarPrimitive.Button
-          onClick={() => undoVersion()}
-          disabled={!hasUndos}
-        >
-          <ResetIcon />
-        </ToolbarPrimitive.Button>
-
-        <ToolbarPrimitive.Button
-          onClick={() => redoVersion()}
-          disabled={!hasRedos}
-        >
-          <ResetIcon style={{ transform: 'scaleX(-1)' }} />
-        </ToolbarPrimitive.Button>
-      </ToolbarPrimitive.Group>
+      <UniversalToolbarControlsRight />
     </ToolbarPrimitive.Root>
   );
 }

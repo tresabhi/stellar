@@ -79,7 +79,148 @@ import useBlueprint from 'stores/blueprint';
 import useSettings from 'stores/settings';
 import useVersionControl from 'stores/versionControl';
 
-function Toolbar() {
+export function UniversalToolbarControlsRight() {
+  const { t } = useTranslator();
+  const hasUndos = useVersionControl((state) => state.index > -1);
+  const hasRedos = useVersionControl(
+    (state) => state.history.length - 1 > state.index,
+  );
+  const link = (url: string) => () => window.open(url, '_blank');
+
+  return (
+    <ToolbarPrimitive.Group>
+      <ToolbarPrimitive.Button
+        onClick={() => undoVersion()}
+        disabled={!hasUndos}
+      >
+        <ResetIcon />
+      </ToolbarPrimitive.Button>
+
+      <ToolbarPrimitive.Button
+        onClick={() => redoVersion()}
+        disabled={!hasRedos}
+      >
+        <ResetIcon style={{ transform: 'scaleX(-1)' }} />
+      </ToolbarPrimitive.Button>
+
+      <ToolbarPrimitive.DropdownMenu icon={<InfoCircledIcon />}>
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<InfoCircledIcon />}
+          keybind="F1"
+          onClick={link(WEBSITE)}
+        >
+          {t`tabs.layout.toolbar.help.about`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<ExclamationTriangleIcon />}
+          keybind="F4"
+          onClick={link(`${GH_REPO_URL}issues/new/choose`)}
+        >
+          {t`tabs.layout.toolbar.help.report`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<DiscordLogoIcon />}
+          onClick={link(DISCORD)}
+        >
+          {t`tabs.layout.toolbar.help.discord`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<GitHubLogoIcon />}
+          onClick={link(GH_REPO_URL)}
+        >
+          {t`tabs.layout.toolbar.help.github`}
+        </ToolbarPrimitive.DropdownMenuItem>
+      </ToolbarPrimitive.DropdownMenu>
+
+      <ToolbarPrimitive.DropdownMenu icon={<GearIcon />}>
+        <ToolbarPrimitive.DropdownMenuItem
+          onClick={() => prompt(SettingsPrompt)}
+          icon={<GearIcon />}
+          keybind="Ctrl + ,"
+        >
+          {t`tabs.layout.toolbar.preferences.settings`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          disabled
+          keybind="Ctrl + K"
+          icon={<KeyboardIcon />}
+        >
+          {t`tabs.layout.toolbar.preferences.keybinds`}
+        </ToolbarPrimitive.DropdownMenuItem>
+      </ToolbarPrimitive.DropdownMenu>
+    </ToolbarPrimitive.Group>
+  );
+}
+
+export function UniversalToolbarControlsLeft() {
+  const { t } = useTranslator();
+
+  return (
+    <>
+      <ToolbarPrimitive.Button disabled>
+        <StellarIcon />
+      </ToolbarPrimitive.Button>
+
+      <ToolbarPrimitive.DropdownMenu icon={<FileIcon />}>
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<FilePlusIcon />}
+          keybind="Ctrl + N"
+          onClick={async () => {
+            if (await confirmProgressReset()) loadBlueprint();
+          }}
+        >
+          {t`tabs.layout.toolbar.file.new`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<UploadIcon />}
+          keybind="Ctrl + O"
+          onClick={() => openFile()}
+        >
+          {t`tabs.layout.toolbar.file.open`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<DownloadIcon />}
+          keybind="Ctrl + S"
+          onClick={() => saveFile()}
+        >
+          {t`tabs.layout.toolbar.file.save`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<DownloadIcon />}
+          keybind="Ctrl + Shift + S"
+          onClick={() => saveFileAs()}
+        >
+          {t`tabs.layout.toolbar.file.save_as`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<EnterIcon />}
+          keybind="Ctrl + I"
+          onClick={() => importFile()}
+        >
+          {t`tabs.layout.toolbar.file.import`}
+        </ToolbarPrimitive.DropdownMenuItem>
+
+        <ToolbarPrimitive.DropdownMenuItem
+          icon={<ExitIcon />}
+          keybind="Ctrl + E"
+          onClick={() => exportFile()}
+        >
+          {t`tabs.layout.toolbar.file.export`}
+        </ToolbarPrimitive.DropdownMenuItem>
+      </ToolbarPrimitive.DropdownMenu>
+    </>
+  );
+}
+
+export default function Toolbar() {
   const { t, translate } = useTranslator();
   const showCenterOfBuild = useSettings(
     (state) => state.editor.showCenterOfBuild,
@@ -110,14 +251,9 @@ function Toolbar() {
     (state) => state.part_selections.length === 0,
   );
   const hasParts = useBlueprint((state) => Object.keys(state.parts).length > 0);
-  const hasUndos = useVersionControl((state) => state.index > -1);
-  const hasRedos = useVersionControl(
-    (state) => state.history.length - 1 > state.index,
-  );
   const hasNoItemInClipboard = useApp(
     (state) => state.editor.clipboard === undefined,
   );
-  const link = (url: string) => () => window.open(url, '_blank');
   const hasControllablePart = useBlueprint(
     (state) =>
       state.part_selections.length >= 1 &&
@@ -127,61 +263,7 @@ function Toolbar() {
   return (
     <ToolbarPrimitive.Root>
       <ToolbarPrimitive.Group>
-        <ToolbarPrimitive.Button disabled>
-          <StellarIcon />
-        </ToolbarPrimitive.Button>
-
-        <ToolbarPrimitive.DropdownMenu icon={<FileIcon />}>
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<FilePlusIcon />}
-            keybind="Ctrl + N"
-            onClick={async () => {
-              if (await confirmProgressReset()) loadBlueprint();
-            }}
-          >
-            {t`tabs.layout.toolbar.file.new`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<UploadIcon />}
-            keybind="Ctrl + O"
-            onClick={() => openFile()}
-          >
-            {t`tabs.layout.toolbar.file.open`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<DownloadIcon />}
-            keybind="Ctrl + S"
-            onClick={() => saveFile()}
-          >
-            {t`tabs.layout.toolbar.file.save`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<DownloadIcon />}
-            keybind="Ctrl + Shift + S"
-            onClick={() => saveFileAs()}
-          >
-            {t`tabs.layout.toolbar.file.save_as`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<EnterIcon />}
-            keybind="Ctrl + I"
-            onClick={() => importFile()}
-          >
-            {t`tabs.layout.toolbar.file.import`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<ExitIcon />}
-            keybind="Ctrl + E"
-            onClick={() => exportFile()}
-          >
-            {t`tabs.layout.toolbar.file.export`}
-          </ToolbarPrimitive.DropdownMenuItem>
-        </ToolbarPrimitive.DropdownMenu>
+        <UniversalToolbarControlsLeft />
 
         <ToolbarPrimitive.DropdownMenu
           icon={
@@ -451,72 +533,7 @@ function Toolbar() {
         </ToolbarPrimitive.DropdownMenu>
       </ToolbarPrimitive.Group>
 
-      <ToolbarPrimitive.Group>
-        <ToolbarPrimitive.Button
-          onClick={() => undoVersion()}
-          disabled={!hasUndos}
-        >
-          <ResetIcon />
-        </ToolbarPrimitive.Button>
-
-        <ToolbarPrimitive.Button
-          onClick={() => redoVersion()}
-          disabled={!hasRedos}
-        >
-          <ResetIcon style={{ transform: 'scaleX(-1)' }} />
-        </ToolbarPrimitive.Button>
-
-        <ToolbarPrimitive.DropdownMenu icon={<InfoCircledIcon />}>
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<InfoCircledIcon />}
-            keybind="F1"
-            onClick={link(WEBSITE)}
-          >
-            {t`tabs.layout.toolbar.help.about`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<ExclamationTriangleIcon />}
-            keybind="F4"
-            onClick={link(`${GH_REPO_URL}issues/new/choose`)}
-          >
-            {t`tabs.layout.toolbar.help.report`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<DiscordLogoIcon />}
-            onClick={link(DISCORD)}
-          >
-            {t`tabs.layout.toolbar.help.discord`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            icon={<GitHubLogoIcon />}
-            onClick={link(GH_REPO_URL)}
-          >
-            {t`tabs.layout.toolbar.help.github`}
-          </ToolbarPrimitive.DropdownMenuItem>
-        </ToolbarPrimitive.DropdownMenu>
-
-        <ToolbarPrimitive.DropdownMenu icon={<GearIcon />}>
-          <ToolbarPrimitive.DropdownMenuItem
-            onClick={() => prompt(SettingsPrompt)}
-            icon={<GearIcon />}
-            keybind="Ctrl + ,"
-          >
-            {t`tabs.layout.toolbar.preferences.settings`}
-          </ToolbarPrimitive.DropdownMenuItem>
-
-          <ToolbarPrimitive.DropdownMenuItem
-            disabled
-            keybind="Ctrl + K"
-            icon={<KeyboardIcon />}
-          >
-            {t`tabs.layout.toolbar.preferences.keybinds`}
-          </ToolbarPrimitive.DropdownMenuItem>
-        </ToolbarPrimitive.DropdownMenu>
-      </ToolbarPrimitive.Group>
+      <UniversalToolbarControlsRight />
     </ToolbarPrimitive.Root>
   );
 }
-export default Toolbar;
