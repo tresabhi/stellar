@@ -1,8 +1,10 @@
-# 🔌 Compatibility
+# Compatibility
 
-_❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it runs Stellar._
+::: tip
+If it runs Chrome, it runs Stellar.
+:::
 
-## 🕹️ Minimum Operating System
+## Minimum Operating System
 
 - [Windows](https://www.microsoft.com/windows) 7+
 - [OS X/macOS](https://www.apple.com/macos/) 10.11+
@@ -15,8 +17,8 @@ _❕ If it [runs Chrome](https://support.google.com/chrome/a/answer/7100626), it
 - [iOS](https://www.apple.com/ios/) 12+ (Chrome PWA)
 - [iOS](https://www.apple.com/ios/) 11+ (Safari PWA)
 
-## 💻 Minimum Hardware
+## Minimum Hardware
 
 - CPU: Intel Pentium 4+
-- RAM: 1GB+
-- Storage: 25MB+
+- RAM: 2GB+
+- Storage: 25MB+ of available storage

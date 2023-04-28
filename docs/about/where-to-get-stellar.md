@@ -1,10 +1,11 @@
-# 🌟 Where to Get Stellar
+# Where to Get Stellar
 
 Stellar can be used as a web app and downloaded as a PWA. There are three versions available:
 
-- Stellar: https://stellaredit.web.app/
-  - Recomended for daily usage
-  - **Unavailable - no releases yet**
+::: info
+There have been no releases created for Stellar Release so only the beta and alpha versions are available to use.
+:::
+
 - Stellar Beta: https://stellarbeta.web.app/
   - Early preview for upcoming features
   - Bound to be untested; report all issues
