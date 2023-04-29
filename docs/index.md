@@ -7,7 +7,7 @@ hero:
   text: 'Blueprint editing made simple'
   tagline: Professional blueprint editor for Spaceflight Simulator
   image:
-    src: ./assets/images/stellar.png
+    src: ./stellar.png
     alt: Stellar logo
   actions:
     - theme: brand
