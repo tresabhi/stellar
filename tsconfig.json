@@ -4,11 +4,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext", "ES6", "WebWorker"],
-    "types": [
-      "vite/client",
-      "vite-plugin-svgr/client",
-      "vite-plugin-pwa/client"
-    ],
+    "types": ["vite-plugin-svgr/client", "vite/client"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -22,6 +18,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "src/**/*.tsx", "src/**/*.ts", "src/**/*.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

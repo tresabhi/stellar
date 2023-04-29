@@ -29,6 +29,12 @@ declare global {
     export default url;
   }
 
+  module 'virtual:pwa-register' {
+    export function registerSW(
+      options?: RegisterSWOptions,
+    ): (reloadPage?: boolean) => Promise<void>;
+  }
+
   /**
    * Thank you, kremerd!
    * https://stackoverflow.com/a/51847335/12294756

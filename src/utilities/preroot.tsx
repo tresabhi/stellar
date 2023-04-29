@@ -15,6 +15,10 @@ import {
 } from 'three-mesh-bvh';
 import { Line2 } from 'three/examples/jsm/lines/Line2';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial';
+
+// temporary solution until https://github.com/vite-pwa/vite-plugin-pwa/issues/507 is resolved
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { registerSW } from 'virtual:pwa-register';
 
 window.addEventListener('beforeinstallprompt', (event) => {
