@@ -1,7 +1,7 @@
+import { readdirSync } from 'fs';
 import { DefaultTheme, defineConfig } from 'vitepress';
 import { getSidebar } from 'vitepress-plugin-auto-sidebar';
 
-// https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: 'Stellar',
   description: '🚀 Professional blueprint editor for Spaceflight Simulator',
@@ -10,7 +10,11 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
+      { text: 'About', link: '/about/what-is-stellar' },
+      {
+        text: 'Changelogs',
+        link: `/changelogs/${readdirSync('docs/changelogs').pop()}`,
+      },
     ],
 
     sidebar: getSidebar({
