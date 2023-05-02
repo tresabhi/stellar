@@ -1,5 +1,5 @@
 import { useTexture } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { invalidate, useFrame } from '@react-three/fiber';
 import centerOfBuild from 'assets/images/center-of-build.png';
 import getCenter from 'core/part/getCenter';
 import { useEffect, useRef } from 'react';
@@ -22,6 +22,7 @@ export default function CenterOfBuild() {
   useEffect(() => {
     const calculateBounds = fallingEdgeDebounce(() => {
       mesh.current?.position.set(...getCenter(partOrder, false), 0);
+      invalidate();
     }, 0);
 
     calculateBounds();
