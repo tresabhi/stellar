@@ -376,7 +376,7 @@
           "$": "Preferencias de archivo",
           "format": {
             "title": "Formatear archivos emitidos",
-            "description": "Formatea los archivos JSON emitido por Stellar para legibilidad."
+            "description": "Formatea los archivos JSON emitidos por Stellar para legibilidad."
           },
           "watermark": {
             "title": "Planos exportados con marca de agua",
