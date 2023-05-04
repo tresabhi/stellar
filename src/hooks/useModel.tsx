@@ -1,5 +1,6 @@
 import { useGLTF } from '@react-three/drei';
-import { MeshStandardMaterial } from 'three';
+import { useRef } from 'react';
+import { MeshBasicMaterial, MeshStandardMaterial } from 'three';
 import GLTFResult from 'types/GLTFResult';
 
 export default function useModel(src: string, transparent = false) {
@@ -7,17 +8,22 @@ export default function useModel(src: string, transparent = false) {
 
   const { nodes } = useGLTF(src) as GLTFResult;
   const nodeNames = Object.keys(nodes);
+  const lastMaterial = useRef<MeshBasicMaterial>(null);
 
-  return (
-    <>
-      {nodeNames.map((nodeName) => (
-        <mesh geometry={nodes[nodeName].geometry} key={`node-${nodeName}`}>
-          <meshBasicMaterial
-            map={(nodes[nodeName].material as MeshStandardMaterial)?.map}
-            transparent={transparent}
-          />
-        </mesh>
-      ))}
-    </>
-  );
+  return {
+    lastMaterial,
+    meshes: (
+      <>
+        {nodeNames.map((nodeName) => (
+          <mesh geometry={nodes[nodeName].geometry} key={`node-${nodeName}`}>
+            <meshBasicMaterial
+              ref={lastMaterial}
+              map={(nodes[nodeName].material as MeshStandardMaterial)?.map}
+              transparent={transparent}
+            />
+          </mesh>
+        ))}
+      </>
+    ),
+  };
 }

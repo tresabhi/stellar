@@ -13,6 +13,10 @@ import {
   PartWithEngineProperties,
 } from 'game/parts/PartWithEngine';
 import {
+  PartWithFairing,
+  PartWithFairingProperties,
+} from 'game/parts/PartWithFairing';
+import {
   PartWithFragment,
   PartWithFragmentProperties,
 } from 'game/parts/PartWithFragment';
@@ -99,6 +103,14 @@ const groupedProperties: Record<string, GroupedProperties> = {
   dockingPort: {
     test: testName(dockingPortData.n),
     Component: DockingPortProperties,
+  },
+  fairing: {
+    test: testProperties<Part & PartWithFairing>(({ B }) => [
+      B,
+      B?.adapt_to_tank,
+      B?.detach_edge,
+    ]),
+    Component: PartWithFairingProperties,
   },
 };
 

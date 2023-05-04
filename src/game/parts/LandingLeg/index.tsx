@@ -58,7 +58,7 @@ function LayoutComponent({ id }: PartComponentProps) {
   const deployState = usePart<LandingLeg>(id).N.deploy_state;
   const wrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper, false);
-  const meshes = useModel(deployState === 0 ? regularModel : extendedModel);
+  const { meshes } = useModel(deployState === 0 ? regularModel : extendedModel);
 
   return (
     <group ref={wrapper} {...props}>

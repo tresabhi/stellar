@@ -238,6 +238,14 @@
             "upload": "Upload image",
             "unknown": "Unknown file",
             "no_file": "No file selected"
+          },
+
+          "fairing": {
+            "$": "Fairing",
+
+            "size": "Size",
+            "separation_force": "Separation force",
+            "detach_edge": "Detach edge"
           }
         },
 
@@ -544,6 +552,7 @@
     "probe": "Probe",
     "rcs": "RCS",
     "reference_image": "Reference image",
-    "side_separator": "Side separator"
+    "side_separator": "Side separator",
+    "fairing_cone_round": "Round fairing cone"
   }
 }

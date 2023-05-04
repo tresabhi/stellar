@@ -15,7 +15,7 @@ export default function createPhysicalPart(
   function Component({ id }: PartComponentProps) {
     const wrapper = useRef<Group>(null);
     const props = usePhysicalPart(id, wrapper, flipLighting);
-    const meshes = useModel(model, transparent);
+    const { meshes } = useModel(model, transparent);
 
     return (
       <group ref={wrapper} {...props}>

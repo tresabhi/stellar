@@ -3,11 +3,15 @@ import {
   ReloadIcon,
   RowSpacingIcon,
 } from '@radix-ui/react-icons';
+import { ReactComponent as FairingFilled } from 'assets/icons/fairing-filled.svg';
+import { ReactComponent as Fairing } from 'assets/icons/fairing.svg';
 import Button from 'components/Button';
+import mutateSettings from 'core/app/mutateSettings';
 import mirrorSelectedHorizontal from 'core/part/mirrorSelectedHorizontal';
 import mirrorSelectedVertical from 'core/part/mirrorSelectedVertical';
 import rotateSelected from 'core/part/rotateSelected';
 import { styled, theme } from 'stitches.config';
+import useSettings from 'stores/settings';
 
 const Wrapper = styled('div', {
   bottom: 0,
@@ -33,9 +37,21 @@ const Action = styled(Button, {
 });
 
 export default function QuickControls() {
+  const interiorView = useSettings((state) => state.editor.interiorView);
+
   return (
     <Wrapper>
-      <Container>{/* TODO: add controls here too */}</Container>
+      <Container>
+        <Action
+          onClick={() =>
+            mutateSettings((draft) => {
+              draft.editor.interiorView = !draft.editor.interiorView;
+            })
+          }
+        >
+          {interiorView ? <Fairing /> : <FairingFilled />}
+        </Action>
+      </Container>
 
       <Container>
         <Action onClick={() => rotateSelected(Math.PI / 2)}>

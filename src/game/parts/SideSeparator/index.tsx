@@ -61,7 +61,7 @@ function LayoutComponent({ id }: PartComponentProps) {
   const props = usePhysicalPart(id, wrapper, false);
   const isModelDefault = deployState === null || deployState === '';
   const sidedModel = deployState === 'left' ? leftModel : rightModel;
-  const meshes = useModel(isModelDefault ? regularModel : sidedModel);
+  const { meshes } = useModel(isModelDefault ? regularModel : sidedModel);
 
   return (
     <group ref={wrapper} {...props}>

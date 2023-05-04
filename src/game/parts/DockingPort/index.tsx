@@ -64,9 +64,9 @@ function LayoutComponent({ id }: PartComponentProps) {
   const { width } = getPart<DockingPort>(id).N;
   const wrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper);
-  const topMesh = useModel(topModel);
-  const middleMesh = useModel(middleModel);
-  const bottomMesh = useModel(bottomModel);
+  const { meshes: topMesh } = useModel(topModel);
+  const { meshes: middleMesh } = useModel(middleModel);
+  const { meshes: bottomMesh } = useModel(bottomModel);
   const topGroup = useRef<Group>(null);
   const middleGroup = useRef<Group>(null);
   const bottomGroup = useRef<Group>(null);

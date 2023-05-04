@@ -1,75 +1,82 @@
 import { useGLTF } from '@react-three/drei';
-import { ReactComponent as Icon } from 'assets/icons/parachute.svg';
+import { ReactComponent as Icon } from 'assets/icons/fairing.svg';
+import getPart from 'core/part/getPart';
 import PartCategory from 'hooks/constants/partCategory';
 import useModel from 'hooks/useModel';
-import usePart from 'hooks/usePart';
 import usePhysicalPart from 'hooks/usePartPhysical';
 import { useRef } from 'react';
 import { PartRegistryItem } from 'stores/partRegistry';
 import { Group } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import {
-  partData,
   PartWithoutName,
   VanillaPart,
+  partData,
   vanillaPartData,
 } from '../Part';
-import { PartWithParachute, partWithParachuteData } from '../PartWithParachute';
+import {
+  PartWithFairing,
+  partWithFairingData,
+  usePartWithFairing,
+} from '../PartWithFairing';
 import { PartWithStages, partWithStagesData } from '../PartWithStages';
 import {
   PartWithTransformations,
   partWithTransformationsData,
 } from '../PartWithTransformations';
-import regularModel from './models/default.gltf';
-import deployedModel from './models/deployed.gltf';
+import model from './model.gltf';
 
-export interface VanillaParachute
+export interface VanillaHeatShield
   extends VanillaPart,
     PartWithTransformations,
-    PartWithParachute {
-  readonly n: 'Parachute';
+    PartWithFairing {
+  readonly n: 'Fairing Cone Round';
 }
 
-export interface Parachute
+export interface HeatShield
   extends PartWithoutName,
     PartWithStages,
-    VanillaParachute {}
+    VanillaHeatShield {}
 
-export const vanillaParachuteData: VanillaParachute = {
+export const vanillaHeatShieldData: VanillaHeatShield = {
   ...vanillaPartData,
   ...partWithTransformationsData,
-  ...partWithParachuteData,
+  ...partWithFairingData,
 
-  n: 'Parachute',
+  n: 'Fairing Cone Round',
 };
 
-export const parachuteData: Parachute = {
+export const heatShieldData: HeatShield = {
   ...partData,
   ...partWithStagesData,
-  ...vanillaParachuteData,
+  ...vanillaHeatShieldData,
 };
 
-useGLTF.preload(regularModel);
-useGLTF.preload(deployedModel);
+useGLTF.preload(model);
 function LayoutComponent({ id }: PartComponentProps) {
-  const deployState = usePart<Parachute>(id).N.deploy_state;
   const wrapper = useRef<Group>(null);
+  const widthWrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper);
-  const { meshes } = useModel(deployState === 0 ? regularModel : deployedModel);
+  const { meshes, lastMaterial } = useModel(model, true);
+  const { width } = getPart<HeatShield>(id).N;
+
+  usePartWithFairing(id, widthWrapper, lastMaterial);
 
   return (
     <group ref={wrapper} {...props}>
-      {meshes}
+      <group scale={[width, width, width]} ref={widthWrapper}>
+        {meshes}
+      </group>
     </group>
   );
 }
 
 export default {
-  category: PartCategory.Aerodynamic,
-  vanillaData: vanillaParachuteData,
-  data: parachuteData,
-  label: 'parachute',
+  category: PartCategory.Propulsion,
+  vanillaData: vanillaHeatShieldData,
+  data: heatShieldData,
+  label: 'fairing_cone_round',
 
   Icon,
   LayoutComponent,
-} as PartRegistryItem<Parachute>;
+} as PartRegistryItem<HeatShield>;

@@ -57,6 +57,7 @@ export interface UseSettings {
   };
 
   editor: {
+    interiorView: boolean;
     undoLimit: number;
     rename: RenamePartsOptions;
     constrainScales: boolean;
@@ -112,6 +113,7 @@ export const useSettingsData: UseSettings = {
   },
 
   editor: {
+    interiorView: true,
     undoLimit: 512,
     rename: {
       trim: true,

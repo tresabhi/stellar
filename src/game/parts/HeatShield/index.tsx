@@ -69,7 +69,7 @@ function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const widthWrapper = useRef<Group>(null);
   const props = usePhysicalPart(id, wrapper);
-  const meshes = useModel(model);
+  const { meshes } = useModel(model);
   const { width } = getPart<HeatShield>(id).N;
 
   usePartProperty(

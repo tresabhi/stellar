@@ -250,6 +250,11 @@ export default function useKeybinds() {
         draft.editor.showCenterOfBuild = !draft.editor.showCenterOfBuild;
       });
     });
+    bind('alt+i', () => {
+      mutateSettings((draft) => {
+        draft.editor.interiorView = !draft.editor.interiorView;
+      });
+    });
 
     bind(
       'space',
