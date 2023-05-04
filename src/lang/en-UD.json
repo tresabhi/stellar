@@ -185,6 +185,12 @@
             "upload": "ǝƃɐɯᴉ pɐold∩",
             "unknown": "ǝlᴉɟ uʍouʞu∩",
             "no_file": "pǝʇɔǝlǝs ǝlᴉɟ oN"
+          },
+          "fairing": {
+            "$": "Fairing",
+            "size": "Size",
+            "separation_force": "Separation force",
+            "detach_edge": "Detach edge"
           }
         },
         "inspect": {
@@ -441,6 +447,7 @@
     "probe": "ǝqoɹԀ",
     "rcs": "SƆɹ",
     "reference_image": "ǝƃɐɯᴉ ǝɔuǝɹǝɟǝɹ",
-    "side_separator": "ɹoʇɐɹɐdǝs ǝpᴉS"
+    "side_separator": "ɹoʇɐɹɐdǝs ǝpᴉS",
+    "fairing_cone_round": "Round fairing cone"
   }
 }
