@@ -185,6 +185,12 @@
             "upload": "Subir imagen",
             "unknown": "Archivo desconocido",
             "no_file": "No hay archivos seleccionados"
+          },
+          "fairing": {
+            "$": "Fairing",
+            "size": "Size",
+            "separation_force": "Separation force",
+            "detach_edge": "Detach edge"
           }
         },
         "inspect": {
@@ -376,7 +382,7 @@
           "$": "Preferencias de archivo",
           "format": {
             "title": "Formatear archivos emitidos",
-            "description": "Formatea los archivos JSON emitido por Stellar para legibilidad."
+            "description": "Formatea los archivos JSON emitidos por Stellar para legibilidad."
           },
           "watermark": {
             "title": "Planos exportados con marca de agua",
@@ -427,11 +433,11 @@
     "cone": "Cono",
     "cone_side": "Cono lateral",
     "docking_port": "Puerto de atraque",
-    "engine_frontier": "Frontier engine",
-    "engine_hawk": "Hawk engine",
-    "engine_kolibri": "Kolibri engine",
-    "engine_titan": "Titan engine",
-    "engine_valiant": "Valiant engine",
+    "engine_frontier": "Motor Frontier",
+    "engine_hawk": "Motor Hawk",
+    "engine_kolibri": "Motor Kolibri",
+    "engine_titan": "Motor Titan",
+    "engine_valiant": "Motor Valiant",
     "fuel_tank": "Tanque de combustible",
     "group": "Grupo",
     "heat_shield": "Escudo de calor",
@@ -441,6 +447,7 @@
     "probe": "Sonda",
     "rcs": "RCS",
     "reference_image": "Imagen de referencia",
-    "side_separator": "Separador lateral"
+    "side_separator": "Separador lateral",
+    "fairing_cone_round": "Round fairing cone"
   }
 }

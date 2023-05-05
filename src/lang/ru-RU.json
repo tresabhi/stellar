@@ -185,6 +185,12 @@
             "upload": "Загрузить изображение",
             "unknown": "Неизвестный файл",
             "no_file": "Нет выбранного файла"
+          },
+          "fairing": {
+            "$": "Fairing",
+            "size": "Size",
+            "separation_force": "Separation force",
+            "detach_edge": "Detach edge"
           }
         },
         "inspect": {
@@ -441,6 +447,7 @@
     "probe": "Зонд",
     "rcs": "Двигатели РСУ",
     "reference_image": "Эталонное изображение",
-    "side_separator": "Боковой отделитель"
+    "side_separator": "Боковой отделитель",
+    "fairing_cone_round": "Round fairing cone"
   }
 }
