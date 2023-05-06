@@ -1,15 +1,13 @@
 import { useTexture } from '@react-three/drei';
 import { ReactComponent as Icon } from 'assets/icons/truss.svg';
-import getPart from 'core/part/getPart';
 import PartCategory from 'hooks/constants/partCategory';
 import usePhysicalPart from 'hooks/usePartPhysical';
 import { useRef } from 'react';
 import { PartRegistryItem } from 'stores/partRegistry';
-import { Group, Mesh, RepeatWrapping } from 'three';
+import { Group, Mesh } from 'three';
 import { PartComponentProps } from 'types/Parts';
 import preloadTexture from 'utilities/preloadTexture';
 import {
-  Part,
   PartWithoutName,
   VanillaPart,
   partData,
@@ -61,7 +59,7 @@ preloadTexture(strutBottom);
 preloadTexture(strutMiddle);
 function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
-  const props = usePhysicalPart(id, wrapper);
+  const props = usePhysicalPart(id, wrapper, false);
   const left = useRef<Mesh>(null);
   const right = useRef<Mesh>(null);
   const top = useRef<Mesh>(null);
