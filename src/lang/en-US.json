@@ -221,6 +221,12 @@
             "size": "Size"
           },
 
+          "strut": {
+            "$": "Structural part",
+
+            "size": "Size"
+          },
+
           "fragment": {
             "$": "Fragment",
 
@@ -553,6 +559,7 @@
     "rcs": "RCS",
     "reference_image": "Reference image",
     "side_separator": "Side separator",
-    "fairing_cone_round": "Round fairing cone"
+    "fairing_cone_round": "Round fairing cone",
+    "strut": "Structural part"
   }
 }

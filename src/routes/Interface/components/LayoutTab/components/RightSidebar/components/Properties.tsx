@@ -1,13 +1,15 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
+import { coneData } from 'game/parts/Cone';
+import { coneSideData } from 'game/parts/ConeSide';
 import { dockingPortData, DockingPortProperties } from 'game/parts/DockingPort';
 import { fuelTankData, FuelTankProperties } from 'game/parts/FuelTank';
 import { heatShieldData, HeatShieldProperties } from 'game/parts/HeatShield';
 import { landingLegData } from 'game/parts/LandingLeg';
 import { parachuteData } from 'game/parts/Parachute';
 import { Part } from 'game/parts/Part';
-import { PartWithCone, PartWithConeProperties } from 'game/parts/PartWithCone';
+import { PartWithConeProperties } from 'game/parts/PartWithCone';
 import {
   PartWithEngine,
   PartWithEngineProperties,
@@ -22,6 +24,7 @@ import {
 } from 'game/parts/PartWithFragment';
 import { PartWithLandingLegProperties } from 'game/parts/PartWithLandingLeg';
 import { PartWithParachuteProperties } from 'game/parts/PartWithParachute';
+import { PartWithStrutProperties } from 'game/parts/PartWithStrut';
 import {
   PartWithTexture,
   PartWithTextureProperties,
@@ -34,6 +37,7 @@ import {
   referenceImageData,
   ReferenceImageProperties,
 } from 'game/parts/ReferenceImage';
+import { strutData } from 'game/parts/Strut';
 import useTranslator from 'hooks/useTranslator';
 import { FC } from 'react';
 import useBlueprint from 'stores/blueprint';
@@ -85,7 +89,7 @@ const groupedProperties: Record<string, GroupedProperties> = {
     Component: PartWithTextureProperties,
   },
   partWithCone: {
-    test: testProperties<Part & PartWithCone>(({ N }) => [N, N?.size]),
+    test: testName([coneData.n, coneSideData.n]),
     Component: PartWithConeProperties,
   },
   fuelTank: {
@@ -111,6 +115,10 @@ const groupedProperties: Record<string, GroupedProperties> = {
       B?.detach_edge,
     ]),
     Component: PartWithFairingProperties,
+  },
+  strut: {
+    test: testName(strutData.n),
+    Component: PartWithStrutProperties,
   },
 };
 

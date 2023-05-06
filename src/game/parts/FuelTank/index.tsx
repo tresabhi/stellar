@@ -135,7 +135,7 @@ function LayoutComponent({ id }: PartComponentProps) {
 
   usePartProperty(
     id,
-    (newState: FuelTank) => newState.N,
+    (state: FuelTank) => state.N,
     (N) => {
       if (meshTop.current && meshMiddle.current && meshBottom.current) {
         constructGeometry(
