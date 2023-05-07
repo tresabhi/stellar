@@ -172,6 +172,10 @@
             "$": "Конус",
             "size": "Размер"
           },
+          "strut": {
+            "$": "Structural part",
+            "size": "Size"
+          },
           "fragment": {
             "$": "Фрагмент",
             "section": "Раздел",
@@ -187,10 +191,10 @@
             "no_file": "Нет выбранного файла"
           },
           "fairing": {
-            "$": "Fairing",
-            "size": "Size",
-            "separation_force": "Separation force",
-            "detach_edge": "Detach edge"
+            "$": "Обтекатель",
+            "size": "Размер",
+            "separation_force": "Сила отделения",
+            "detach_edge": "Отделить основание"
           }
         },
         "inspect": {
@@ -448,6 +452,7 @@
     "rcs": "Двигатели РСУ",
     "reference_image": "Эталонное изображение",
     "side_separator": "Боковой отделитель",
-    "fairing_cone_round": "Round fairing cone"
+    "fairing_cone_round": "Круглый обтекающий конус",
+    "strut": "Structural part"
   }
 }
