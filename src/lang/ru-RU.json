@@ -173,8 +173,8 @@
             "size": "Размер"
           },
           "strut": {
-            "$": "Structural part",
-            "size": "Size"
+            "$": "Структурная деталь",
+            "size": "Размер"
           },
           "fragment": {
             "$": "Фрагмент",
@@ -453,6 +453,6 @@
     "reference_image": "Эталонное изображение",
     "side_separator": "Боковой отделитель",
     "fairing_cone_round": "Круглый обтекающий конус",
-    "strut": "Structural part"
+    "strut": "Структурная деталь"
   }
 }

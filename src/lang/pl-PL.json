@@ -1,15 +1,15 @@
 {
   "tabs": {
-    "coming_soon": "This tab is coming soon!",
+    "coming_soon": "Ta karta już wkrótce!",
     "create": {
-      "$": "Create",
+      "$": "Stwórz",
       "templates": {
-        "input_placeholder": "Search templates...",
-        "in_built": "In-built",
+        "input_placeholder": "Wyszukaj szablony...",
+        "in_built": "Wbudowany",
         "list": {
-          "apollo_mission": "Apollo mission",
-          "basic_rocket": "Basic rocket",
-          "hopper": "Hopper",
+          "apollo_mission": "Misja Apollo",
+          "basic_rocket": "Podstawowa rakieta",
+          "hopper": "Skoczek",
           "joints": "Joints",
           "light_lander": "Light lander",
           "orbit_and_re_entry": "Orbit & re-entry",
