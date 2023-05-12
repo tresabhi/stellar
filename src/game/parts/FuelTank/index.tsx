@@ -8,6 +8,7 @@ import mutateSettings from 'core/app/mutateSettings';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
 import removeMetaData from 'core/part/removeMetaData';
+import { FuelTankGeometry } from 'geometries/FuelTankGeometry';
 import PartCategory from 'hooks/constants/partCategory';
 import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
 import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
@@ -19,7 +20,7 @@ import { useEffect, useRef } from 'react';
 import boundsStore from 'stores/bounds';
 import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
 import useSettings from 'stores/settings';
-import { BufferGeometry, CylinderGeometry, Group, Mesh } from 'three';
+import { BufferGeometry, Group, Mesh, NearestFilter } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import preloadTexture from 'utilities/preloadTexture';
 import {
@@ -32,8 +33,9 @@ import {
   PartWithTransformations,
   partWithTransformationsData,
 } from '../PartWithTransformations';
-import defaultTexture from './textures/default.png';
-import topTexture from './textures/top.png';
+import edgeBright from './textures/edge-bright.png';
+import edge from './textures/edge.png';
+import middle from './textures/middle.png';
 
 export interface VanillaFuelTank extends VanillaPart, PartWithTransformations {
   readonly n: 'Fuel Tank';
@@ -84,35 +86,20 @@ function constructGeometry(
     meshMiddle.position.set(0, bottomHeight + middleHeight / 2, 0);
     meshTop.position.set(0, N.height - topHeight / 2, 0);
 
-    meshBottom.geometry = new CylinderGeometry(
+    meshBottom.geometry = new FuelTankGeometry(
       slope(bottomHeight),
       N.width_a / 2,
       bottomHeight,
-      12,
-      1,
-      true,
-      -Math.PI / 2,
-      Math.PI,
     );
-    meshMiddle.geometry = new CylinderGeometry(
+    meshMiddle.geometry = new FuelTankGeometry(
       slope(middleHeight + bottomHeight),
       slope(bottomHeight),
       middleHeight,
-      12,
-      1,
-      true,
-      -Math.PI / 2,
-      Math.PI,
     );
-    meshTop.geometry = new CylinderGeometry(
+    meshTop.geometry = new FuelTankGeometry(
       N.width_b / 2,
       slope(middleHeight + bottomHeight),
       topHeight,
-      12,
-      1,
-      true,
-      -Math.PI / 2,
-      Math.PI,
     );
   } else {
     // give them no geometry
@@ -122,16 +109,20 @@ function constructGeometry(
   }
 }
 
-preloadTexture(defaultTexture);
-preloadTexture(topTexture);
+preloadTexture(middle);
+preloadTexture(edge);
+preloadTexture(edgeBright);
 function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
   const meshTop = useRef<Mesh>(null);
   const meshMiddle = useRef<Mesh>(null);
   const meshBottom = useRef<Mesh>(null);
   const props = usePhysicalPart(id, wrapper);
-  const defaultColorMap = useTexture(defaultTexture);
-  const topColorMap = useTexture(topTexture);
+  const middleTexture = useTexture(middle);
+  const edgeTexture = useTexture(edge);
+  const edgeBrightTexture = useTexture(edgeBright);
+
+  middleTexture.magFilter = NearestFilter;
 
   usePartProperty(
     id,
@@ -200,13 +191,13 @@ function LayoutComponent({ id }: PartComponentProps) {
   return (
     <group ref={wrapper} {...props}>
       <mesh ref={meshTop}>
-        <meshBasicMaterial map={topColorMap} />
+        <meshBasicMaterial map={edgeBrightTexture} />
       </mesh>
       <mesh ref={meshMiddle}>
-        <meshBasicMaterial map={defaultColorMap} />
+        <meshBasicMaterial map={middleTexture} />
       </mesh>
       <mesh ref={meshBottom}>
-        <meshBasicMaterial map={defaultColorMap} color="#e4e4e4" />
+        <meshBasicMaterial map={edgeTexture} color="#e4e4e4" />
       </mesh>
     </group>
   );
