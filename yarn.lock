@@ -1575,6 +1575,11 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
+"@mediapipe/tasks-vision@^0.10.0":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@mediapipe/tasks-vision/-/tasks-vision-0.10.1.tgz#68047459352019cc141dc9c1d15c05b8ab689423"
+  integrity sha512-/zIKjOAIABx+KVfqe8hA6X2pxBGsBYlEtvD7/gpXecvzKefo/JQO6XaggmJul7+noaqiPYM0CVGZxmFJ2oTdSQ==
+
 "@messageformat/core@^3.0.1":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@messageformat/core/-/core-3.1.0.tgz#d4d2f5c3555228a6b5980b122a02b53dfc6458bd"
@@ -2073,12 +2078,13 @@
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.6.1.tgz#913d3a68c5cbc1124fdb18eff919432f7b6abdde"
   integrity sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==
 
-"@react-three/drei@^9.72.2":
-  version "9.72.2"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.72.2.tgz#aaaa7d6c5d5f7e3d9e55ff062bb0a541d650947d"
-  integrity sha512-isvUnQBvzjFAyGkSUgybYlJT02v3fBrmzE1yxSwx6Olr9jPJNeCFug0jy/CaJknHpV0W2128GpNZjpI4iG/IBg==
+"@react-three/drei@^9.74.7":
+  version "9.74.7"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-9.74.7.tgz#0b6d8316baa43307fd43a48c3d1812d126710695"
+  integrity sha512-rGl1WHEbVk83KDtRzpuQZkrOLGSmvpuu9uGEZpZzy1csxlVjOA8EWWwSCSKwmY/spWwcLnSIQ30haUMmL8ZSCw==
   dependencies:
     "@babel/runtime" "^7.11.2"
+    "@mediapipe/tasks-vision" "^0.10.0"
     "@react-spring/three" "~9.6.1"
     "@use-gesture/react" "^10.2.24"
     camera-controls "^2.3.1"
