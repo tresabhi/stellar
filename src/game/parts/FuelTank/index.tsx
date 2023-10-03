@@ -69,7 +69,7 @@ export const fuelTankData: FuelTank = {
   ...vanillaFuelTankData,
 };
 
-function constructGeometry(
+export function constructFuelTankGeometry(
   N: FuelTankEditDetail,
   meshTop: Mesh,
   meshMiddle: Mesh,
@@ -129,7 +129,7 @@ function LayoutComponent({ id }: PartComponentProps) {
     (state: FuelTank) => state.N,
     (N) => {
       if (meshTop.current && meshMiddle.current && meshBottom.current) {
-        constructGeometry(
+        constructFuelTankGeometry(
           N,
           meshTop.current,
           meshMiddle.current,
@@ -164,7 +164,7 @@ function LayoutComponent({ id }: PartComponentProps) {
   useEffect(() => {
     const handleFuelTankEdit = (event: CustomEvent<FuelTankEditDetail>) => {
       if (meshTop.current && meshMiddle.current && meshBottom.current) {
-        constructGeometry(
+        constructFuelTankGeometry(
           event.detail,
           meshTop.current,
           meshMiddle.current,

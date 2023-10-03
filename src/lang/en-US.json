@@ -183,6 +183,14 @@
             }
           },
 
+          "base_small": {
+            "$": "Small base",
+
+            "width": "Width",
+            "height": "Height",
+            "fuel": "Fuel"
+          },
+
           "parachute": {
             "$": "Parachute",
 
@@ -560,6 +568,7 @@
     "reference_image": "Reference image",
     "side_separator": "Side separator",
     "fairing_cone_round": "Round fairing cone",
-    "strut": "Structural part"
+    "strut": "Structural part",
+    "base_small": "Small base"
   }
 }

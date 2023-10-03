@@ -1,28 +1,24 @@
-import { Link1Icon, LinkNone1Icon } from '@radix-ui/react-icons';
 import { useTexture } from '@react-three/drei';
 import { invalidate } from '@react-three/fiber';
 import { ReactComponent as Icon } from 'assets/icons/fuel-tank.svg';
-import { BaseSmallEditDetail } from 'components/Canvas/components/EditControls/components/BaseSmallControls';
+import { BaseSmallEditDetail } from 'components/Canvas/components/EditControls/components/BaseSmall';
 import * as Properties from 'components/Properties';
-import mutateSettings from 'core/app/mutateSettings';
 import declareBoundsUpdated from 'core/bounds/declareBoundsUpdated';
 import getPart from 'core/part/getPart';
-import removeMetaData from 'core/part/removeMetaData';
-import { BaseSmallGeometry } from 'geometries/BaseSmallGeometry';
+import { FuelTankGeometry } from 'geometries/FuelTankGeometry';
 import PartCategory from 'hooks/constants/partCategory';
 import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
 import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
 import usePhysicalPart from 'hooks/usePartPhysical';
 import usePartProperty from 'hooks/usePartProperty';
 import useTranslator from 'hooks/useTranslator';
-import { cloneDeep } from 'lodash';
 import { useEffect, useRef } from 'react';
 import boundsStore from 'stores/bounds';
-import { PartExportifier, PartRegistryItem } from 'stores/partRegistry';
-import useSettings from 'stores/settings';
-import { BufferGeometry, Group, Mesh, NearestFilter } from 'three';
+import { PartRegistryItem } from 'stores/partRegistry';
+import { Group, Mesh, NearestFilter } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import preloadTexture from 'utilities/preloadTexture';
+import { constructFuelTankGeometry } from '../FuelTank';
 import {
   PartWithoutName,
   VanillaPart,
@@ -65,44 +61,57 @@ export const BaseSmallData: BaseSmall = {
   ...vanillaBaseSmallData,
 };
 
-function constructGeometry(
+const TOP_HEIGHT = 1 / 10;
+const TOP_1_HEIGHT = 4 / 100;
+const TOP_2_HEIGHT = TOP_HEIGHT - TOP_1_HEIGHT;
+const TOP_TOP_WIDTH = 8 / 100;
+const TOP_BOTTOM_WIDTH = 2 / 10;
+const TOP_SLOPE = (TOP_BOTTOM_WIDTH - TOP_TOP_WIDTH) / TOP_HEIGHT;
+const TOP_BETWEEN_WIDTH = TOP_SLOPE * TOP_1_HEIGHT + TOP_TOP_WIDTH;
+const BOTTOM_HEIGHT = 6 / 100;
+const BOTTOM_WIDTH = 5 / 10;
+
+function constructBaseSmallSideGeometry(
   N: BaseSmallEditDetail,
-  meshTop: Mesh,
+  side: -1 | 1,
+  meshTop1: Mesh,
+  meshTop2: Mesh,
   meshMiddle: Mesh,
   meshBottom: Mesh,
 ) {
-  if (N.height > 0) {
-    const slope = (height: number) =>
-      (N.width_a + (N.width_b - N.width_a) * (height / N.height)) / 2;
-    const topHeight = N.height < 0.3 ? N.height / 3 : 0.1;
-    const bottomHeight = topHeight;
-    const middleHeight = N.height - topHeight - bottomHeight;
+  meshTop1.position.set(side * (N.width / 2), N.height - TOP_1_HEIGHT / 2, 0);
+  meshTop2.position.set(
+    side * (N.width / 2),
+    N.height - TOP_HEIGHT + TOP_2_HEIGHT / 2,
+    0,
+  );
+  meshMiddle.position.set(
+    side * (N.width / 2),
+    BOTTOM_HEIGHT + (N.height - TOP_HEIGHT - BOTTOM_HEIGHT) / 2,
+    0,
+  );
+  meshBottom.position.set(side * (N.width / 2), BOTTOM_HEIGHT / 2, 0);
 
-    meshBottom.position.set(0, bottomHeight / 2, 0);
-    meshMiddle.position.set(0, bottomHeight + middleHeight / 2, 0);
-    meshTop.position.set(0, N.height - topHeight / 2, 0);
-
-    meshBottom.geometry = new BaseSmallGeometry(
-      slope(bottomHeight),
-      N.width_a / 2,
-      bottomHeight,
-    );
-    meshMiddle.geometry = new BaseSmallGeometry(
-      slope(middleHeight + bottomHeight),
-      slope(bottomHeight),
-      middleHeight,
-    );
-    meshTop.geometry = new BaseSmallGeometry(
-      N.width_b / 2,
-      slope(middleHeight + bottomHeight),
-      topHeight,
-    );
-  } else {
-    // give them no geometry
-    meshBottom.geometry = new BufferGeometry();
-    meshMiddle.geometry = new BufferGeometry();
-    meshTop.geometry = new BufferGeometry();
-  }
+  meshTop1.geometry = new FuelTankGeometry(
+    TOP_TOP_WIDTH / 2,
+    TOP_BETWEEN_WIDTH / 2,
+    TOP_1_HEIGHT,
+  );
+  meshTop2.geometry = new FuelTankGeometry(
+    TOP_BETWEEN_WIDTH / 2,
+    TOP_BOTTOM_WIDTH / 2,
+    TOP_2_HEIGHT,
+  );
+  meshMiddle.geometry = new FuelTankGeometry(
+    TOP_BOTTOM_WIDTH / 2,
+    N.width * (BOTTOM_WIDTH / 2),
+    N.height - TOP_HEIGHT - BOTTOM_HEIGHT,
+  );
+  meshBottom.geometry = new FuelTankGeometry(
+    N.width * (BOTTOM_WIDTH / 2),
+    N.width * (BOTTOM_WIDTH / 2),
+    BOTTOM_HEIGHT,
+  );
 }
 
 preloadTexture(middle);
@@ -110,9 +119,17 @@ preloadTexture(edge);
 preloadTexture(edgeBright);
 function LayoutComponent({ id }: PartComponentProps) {
   const wrapper = useRef<Group>(null);
-  const meshTop = useRef<Mesh>(null);
-  const meshMiddle = useRef<Mesh>(null);
-  const meshBottom = useRef<Mesh>(null);
+  const meshMiddleTop = useRef<Mesh>(null);
+  const meshMiddleMiddle = useRef<Mesh>(null);
+  const meshMiddleBottom = useRef<Mesh>(null);
+  const meshLeftTop1 = useRef<Mesh>(null);
+  const meshLeftTop2 = useRef<Mesh>(null);
+  const meshLeftMiddle = useRef<Mesh>(null);
+  const meshLeftBottom = useRef<Mesh>(null);
+  const meshRightTop1 = useRef<Mesh>(null);
+  const meshRightTop2 = useRef<Mesh>(null);
+  const meshRightMiddle = useRef<Mesh>(null);
+  const meshRightBottom = useRef<Mesh>(null);
   const props = usePhysicalPart(id, wrapper);
   const middleTexture = useTexture(middle);
   const edgeTexture = useTexture(edge);
@@ -124,18 +141,50 @@ function LayoutComponent({ id }: PartComponentProps) {
     id,
     (state: BaseSmall) => state.N,
     (N) => {
-      if (meshTop.current && meshMiddle.current && meshBottom.current) {
-        constructGeometry(
+      if (
+        meshMiddleTop.current &&
+        meshMiddleMiddle.current &&
+        meshMiddleBottom.current &&
+        meshLeftTop1.current &&
+        meshLeftTop2.current &&
+        meshLeftMiddle.current &&
+        meshLeftBottom.current &&
+        meshRightTop1.current &&
+        meshRightTop2.current &&
+        meshRightMiddle.current &&
+        meshRightBottom.current
+      ) {
+        constructFuelTankGeometry(
+          {
+            height: N.height,
+            width_a: N.width,
+            width_b: N.width,
+          },
+          meshMiddleTop.current,
+          meshMiddleMiddle.current,
+          meshMiddleBottom.current,
+        );
+        constructBaseSmallSideGeometry(
           N,
-          meshTop.current,
-          meshMiddle.current,
-          meshBottom.current,
+          -1,
+          meshLeftTop1.current,
+          meshLeftTop2.current,
+          meshLeftMiddle.current,
+          meshLeftBottom.current,
+        );
+        constructBaseSmallSideGeometry(
+          N,
+          1,
+          meshRightTop1.current,
+          meshRightTop2.current,
+          meshRightMiddle.current,
+          meshRightBottom.current,
         );
 
         if (boundsStore[id] && wrapper.current) {
           const { o } = getPart<BaseSmall>(id);
           const { bounds } = boundsStore[id];
-          const width = Math.max(N.width_a, N.width_b) * o.x;
+          const width = N.width * (1 + BOTTOM_WIDTH) * o.x;
           const height = N.height * o.y;
           const offset = height / 2;
           const offsetRotation = wrapper.current.rotation.z + Math.PI / 2;
@@ -159,12 +208,20 @@ function LayoutComponent({ id }: PartComponentProps) {
 
   useEffect(() => {
     const handleBaseSmallEdit = (event: CustomEvent<BaseSmallEditDetail>) => {
-      if (meshTop.current && meshMiddle.current && meshBottom.current) {
-        constructGeometry(
-          event.detail,
-          meshTop.current,
-          meshMiddle.current,
-          meshBottom.current,
+      if (
+        meshMiddleTop.current &&
+        meshMiddleMiddle.current &&
+        meshMiddleBottom.current
+      ) {
+        constructFuelTankGeometry(
+          {
+            height: event.detail.height,
+            width_a: event.detail.width,
+            width_b: event.detail.width,
+          },
+          meshMiddleTop.current,
+          meshMiddleMiddle.current,
+          meshMiddleBottom.current,
         );
 
         invalidate();
@@ -172,13 +229,13 @@ function LayoutComponent({ id }: PartComponentProps) {
     };
 
     window.addEventListener(
-      `BaseSmalledit${id}`,
+      `basesmalledit${id}`,
       handleBaseSmallEdit as EventListener,
     );
 
     return () => {
       window.removeEventListener(
-        `BaseSmalledit${id}`,
+        `basesmalledit${id}`,
         handleBaseSmallEdit as EventListener,
       );
     };
@@ -186,13 +243,39 @@ function LayoutComponent({ id }: PartComponentProps) {
 
   return (
     <group ref={wrapper} {...props}>
-      <mesh ref={meshTop}>
+      <mesh ref={meshMiddleTop}>
         <meshBasicMaterial map={edgeBrightTexture} />
       </mesh>
-      <mesh ref={meshMiddle}>
+      <mesh ref={meshMiddleMiddle}>
         <meshBasicMaterial map={middleTexture} />
       </mesh>
-      <mesh ref={meshBottom}>
+      <mesh ref={meshMiddleBottom}>
+        <meshBasicMaterial map={edgeTexture} color="#e4e4e4" />
+      </mesh>
+
+      <mesh ref={meshLeftTop1}>
+        <meshBasicMaterial map={edgeBrightTexture} />
+      </mesh>
+      <mesh ref={meshLeftTop2}>
+        <meshBasicMaterial map={middleTexture} />
+      </mesh>
+      <mesh ref={meshLeftMiddle}>
+        <meshBasicMaterial map={middleTexture} />
+      </mesh>
+      <mesh ref={meshLeftBottom}>
+        <meshBasicMaterial map={edgeTexture} color="#e4e4e4" />
+      </mesh>
+
+      <mesh ref={meshRightTop1}>
+        <meshBasicMaterial map={edgeBrightTexture} />
+      </mesh>
+      <mesh ref={meshRightTop2}>
+        <meshBasicMaterial map={middleTexture} />
+      </mesh>
+      <mesh ref={meshRightMiddle}>
+        <meshBasicMaterial map={middleTexture} />
+      </mesh>
+      <mesh ref={meshRightBottom}>
         <meshBasicMaterial map={edgeTexture} color="#e4e4e4" />
       </mesh>
     </group>
@@ -201,37 +284,18 @@ function LayoutComponent({ id }: PartComponentProps) {
 
 export function BaseSmallProperties({ ids }: PartPropertyComponentProps) {
   const { t } = useTranslator();
-  const constrain = useSettings(
-    (state) => state.editor.constrainFuelTankWidths,
-  );
-  const height = useNumericalInputProperty<BaseSmall>(
-    ids,
-    (state) => state.N.height,
-    (draft, newValue, lastValue) => {
-      draft.N.width_b = newValue;
-
-      if (constrain && lastValue !== undefined && lastValue !== 0) {
-        draft.N.width_a *= newValue / lastValue;
-      }
-    },
-  );
-  const bottomWidth = useNumericalInputProperty<BaseSmall>(
-    ids,
-    (state) => state.N.width_a,
-    (draft, newValue, lastValue) => {
-      draft.N.width_a = newValue;
-
-      if (constrain && lastValue !== undefined && lastValue !== 0) {
-        draft.N.width_b *= newValue / lastValue;
-        draft.N.width_original = draft.N.width_b;
-      }
-    },
-  );
   const height = useNumericalInputProperty<BaseSmall>(
     ids,
     (state) => state.N.height,
     (draft, value) => {
       draft.N.height = value;
+    },
+  );
+  const width = useNumericalInputProperty<BaseSmall>(
+    ids,
+    (state) => state.N.width,
+    (draft, value) => {
+      draft.N.width = value;
     },
   );
   const fuel = useSliderProperty<BaseSmall>(
@@ -242,50 +306,27 @@ export function BaseSmallProperties({ ids }: PartPropertyComponentProps) {
     },
   );
 
-  const handleConstrainClick = () => {
-    mutateSettings((draft) => {
-      draft.editor.constrainBaseSmallWidths =
-        !draft.editor.constrainBaseSmallWidths;
-    });
-  };
-
   return (
     <Properties.Group>
-      <Properties.Title>{t`tabs.layout.right_sidebar.properties.fuel_tank`}</Properties.Title>
+      <Properties.Title>{t`tabs.layout.right_sidebar.properties.base_small`}</Properties.Title>
 
       <Properties.Row>
+        <Properties.Input
+          {...width}
+          label={t`tabs.layout.right_sidebar.properties.base_small.width`}
+          unit="m"
+        />
         <Properties.Input
           {...height}
-          label={t`tabs.layout.right_sidebar.properties.fuel_tank.height`}
+          label={t`tabs.layout.right_sidebar.properties.base_small.height`}
           unit="m"
         />
-      </Properties.Row>
-
-      <Properties.Row>
-        <Properties.Input
-          {...topWidth}
-          label={t`tabs.layout.right_sidebar.properties.fuel_tank.top_width`}
-          unit="m"
-        />
-        <Properties.Input
-          {...bottomWidth}
-          label={t`tabs.layout.right_sidebar.properties.fuel_tank.bottom_width`}
-          unit="m"
-        />
-        <Properties.ToggleButton
-          label={t`tabs.layout.right_sidebar.properties.fuel_tank.constrain`}
-          hint={t`tabs.layout.right_sidebar.properties.fuel_tank.constrain.hint`}
-          onClick={handleConstrainClick}
-          selected={constrain}
-        >
-          {constrain ? <Link1Icon /> : <LinkNone1Icon />}
-        </Properties.ToggleButton>
       </Properties.Row>
 
       <Properties.Row>
         <Properties.SliderWithInput
           {...fuel}
-          label={t`tabs.layout.right_sidebar.properties.fuel_tank.fuel`}
+          label={t`tabs.layout.right_sidebar.properties.base_small.fuel`}
           unit="%"
           min={0}
           max={100}
@@ -295,33 +336,12 @@ export function BaseSmallProperties({ ids }: PartPropertyComponentProps) {
   );
 }
 
-export const BaseSmallExportify: PartExportifier<BaseSmall> = (part) => {
-  const exportedPart = removeMetaData(part) as VanillaBaseSmall;
-  const partCap = cloneDeep(exportedPart);
-
-  exportedPart.N.width_original = exportedPart.N.width_b;
-  partCap.N.width_original = exportedPart.N.width_a;
-  partCap.N.width_a = exportedPart.N.width_a;
-  partCap.N.width_b = exportedPart.N.width_a;
-  partCap.N.height = 0;
-
-  return exportedPart.N.width_original === exportedPart.N.width_a &&
-    exportedPart.N.width_original === exportedPart.N.width_b
-    ? [[exportedPart], [part]]
-    : [
-        [exportedPart, partCap],
-        [part, part],
-      ];
-};
-
 export default {
   category: PartCategory.Structural,
   vanillaData: vanillaBaseSmallData,
   data: BaseSmallData,
-  label: 'fuel_tank',
+  label: 'base_small',
 
   Icon,
   LayoutComponent,
-
-  exportify: BaseSmallExportify,
 } as PartRegistryItem<BaseSmall>;

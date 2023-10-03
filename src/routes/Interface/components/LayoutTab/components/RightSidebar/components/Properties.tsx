@@ -1,11 +1,12 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
+import { BaseSmallData, BaseSmallProperties } from 'game/parts/BaseSmall';
 import { coneData } from 'game/parts/Cone';
 import { coneSideData } from 'game/parts/ConeSide';
-import { dockingPortData, DockingPortProperties } from 'game/parts/DockingPort';
-import { fuelTankData, FuelTankProperties } from 'game/parts/FuelTank';
-import { heatShieldData, HeatShieldProperties } from 'game/parts/HeatShield';
+import { DockingPortProperties, dockingPortData } from 'game/parts/DockingPort';
+import { FuelTankProperties, fuelTankData } from 'game/parts/FuelTank';
+import { HeatShieldProperties, heatShieldData } from 'game/parts/HeatShield';
 import { landingLegData } from 'game/parts/LandingLeg';
 import { parachuteData } from 'game/parts/Parachute';
 import { Part } from 'game/parts/Part';
@@ -34,8 +35,8 @@ import {
   PartWithTransformationsProperties,
 } from 'game/parts/PartWithTransformations';
 import {
-  referenceImageData,
   ReferenceImageProperties,
+  referenceImageData,
 } from 'game/parts/ReferenceImage';
 import { strutData } from 'game/parts/Strut';
 import useTranslator from 'hooks/useTranslator';
@@ -119,6 +120,10 @@ const groupedProperties: Record<string, GroupedProperties> = {
   strut: {
     test: testName(strutData.n),
     Component: PartWithStrutProperties,
+  },
+  baseSmall: {
+    test: testName(BaseSmallData.n),
+    Component: BaseSmallProperties,
   },
 };
 

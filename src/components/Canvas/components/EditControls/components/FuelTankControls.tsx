@@ -10,11 +10,11 @@ import { useEffect, useRef } from 'react';
 import useApp, { Tool } from 'stores/app';
 import { Group, Vector2 } from 'three';
 import { degToRad } from 'three/src/math/MathUtils';
-import { EditControlsProps } from '../..';
+import { EditControlsProps } from '..';
 import {
   CANVAS_MATRIX_SCALE,
   POSITION_SNAP_SIZE,
-} from '../../../TransformControls/components/TransformNode';
+} from '../../TransformControls/components/TransformNode';
 
 export interface FuelTankEditDetail {
   width_a: number;
