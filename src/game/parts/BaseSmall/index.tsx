@@ -8,7 +8,6 @@ import getPart from 'core/part/getPart';
 import { FuelTankGeometry } from 'geometries/FuelTankGeometry';
 import PartCategory from 'hooks/constants/partCategory';
 import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
-import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
 import usePhysicalPart from 'hooks/usePartPhysical';
 import usePartProperty from 'hooks/usePartProperty';
 import useTranslator from 'hooks/useTranslator';
@@ -28,6 +27,7 @@ import {
   partData,
   vanillaPartData,
 } from '../Part';
+import { PartWithFuelN, partWithFuelData } from '../PartWithFuel';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -35,10 +35,9 @@ import {
 
 export interface VanillaBaseSmall extends VanillaPart, PartWithTransformations {
   readonly n: 'Base Small';
-  N: {
+  N: PartWithFuelN & {
     width: number;
     height: number;
-    fuel_percent: number;
   };
 }
 
@@ -50,9 +49,10 @@ export const vanillaBaseSmallData: VanillaBaseSmall = {
 
   n: 'Base Small',
   N: {
+    ...partWithFuelData.N,
+
     width: 1,
     height: 1,
-    fuel_percent: 1,
   },
 };
 
@@ -322,13 +322,6 @@ export function BaseSmallProperties({ ids }: PartPropertyComponentProps) {
       draft.N.width = value;
     },
   );
-  const fuel = useSliderProperty<BaseSmall>(
-    ids,
-    (state) => state.N.fuel_percent * 100,
-    (draft, value) => {
-      draft.N.fuel_percent = value / 100;
-    },
-  );
 
   return (
     <Properties.Group>
@@ -344,16 +337,6 @@ export function BaseSmallProperties({ ids }: PartPropertyComponentProps) {
           {...height}
           label={t`tabs.layout.right_sidebar.properties.base_small.height`}
           unit="m"
-        />
-      </Properties.Row>
-
-      <Properties.Row>
-        <Properties.SliderWithInput
-          {...fuel}
-          label={t`tabs.layout.right_sidebar.properties.base_small.fuel`}
-          unit="%"
-          min={0}
-          max={100}
         />
       </Properties.Row>
     </Properties.Group>

@@ -11,7 +11,6 @@ import removeMetaData from 'core/part/removeMetaData';
 import { FuelTankGeometry } from 'geometries/FuelTankGeometry';
 import PartCategory from 'hooks/constants/partCategory';
 import useNumericalInputProperty from 'hooks/propertyControllers/useNumericalInputProperty';
-import useSliderProperty from 'hooks/propertyControllers/useSliderProperty';
 import usePhysicalPart from 'hooks/usePartPhysical';
 import usePartProperty from 'hooks/usePartProperty';
 import useTranslator from 'hooks/useTranslator';
@@ -29,6 +28,7 @@ import {
   partData,
   vanillaPartData,
 } from '../Part';
+import { PartWithFuelN, partWithFuelData } from '../PartWithFuel';
 import {
   PartWithTransformations,
   partWithTransformationsData,
@@ -39,12 +39,11 @@ import middle from './textures/middle.png';
 
 export interface VanillaFuelTank extends VanillaPart, PartWithTransformations {
   readonly n: 'Fuel Tank';
-  N: {
+  N: PartWithFuelN & {
     width_original: number;
     width_a: number;
     width_b: number;
     height: number;
-    fuel_percent: number;
   };
 }
 
@@ -56,11 +55,12 @@ export const vanillaFuelTankData: VanillaFuelTank = {
 
   n: 'Fuel Tank',
   N: {
+    ...partWithFuelData.N,
+
     width_original: 1,
     width_a: 1,
     width_b: 1,
     height: 1,
-    fuel_percent: 1,
   },
 };
 
@@ -238,13 +238,6 @@ export function FuelTankProperties({ ids }: PartPropertyComponentProps) {
       draft.N.height = value;
     },
   );
-  const fuel = useSliderProperty<FuelTank>(
-    ids,
-    (state) => state.N.fuel_percent * 100,
-    (draft, value) => {
-      draft.N.fuel_percent = value / 100;
-    },
-  );
 
   const handleConstrainClick = () => {
     mutateSettings((draft) => {
@@ -284,16 +277,6 @@ export function FuelTankProperties({ ids }: PartPropertyComponentProps) {
         >
           {constrain ? <Link1Icon /> : <LinkNone1Icon />}
         </Properties.ToggleButton>
-      </Properties.Row>
-
-      <Properties.Row>
-        <Properties.SliderWithInput
-          {...fuel}
-          label={t`tabs.layout.right_sidebar.properties.fuel_tank.fuel`}
-          unit="%"
-          min={0}
-          max={100}
-        />
       </Properties.Row>
     </Properties.Group>
   );

@@ -23,6 +23,7 @@ import {
   PartWithFragment,
   PartWithFragmentProperties,
 } from 'game/parts/PartWithFragment';
+import { PartWithFuel, PartWithFuelProperties } from 'game/parts/PartWithFuel';
 import { PartWithLandingLegProperties } from 'game/parts/PartWithLandingLeg';
 import { PartWithParachuteProperties } from 'game/parts/PartWithParachute';
 import { PartWithStrutProperties } from 'game/parts/PartWithStrut';
@@ -124,6 +125,10 @@ const groupedProperties: Record<string, GroupedProperties> = {
   baseSmall: {
     test: testName(baseSmallData.n),
     Component: BaseSmallProperties,
+  },
+  fuel: {
+    test: testProperties<Part & PartWithFuel>(({ N }) => [N, N?.fuel_percent]),
+    Component: PartWithFuelProperties,
   },
 };
 

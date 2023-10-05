@@ -175,12 +175,17 @@
             "top_width": "Top width",
             "bottom_width": "Bottom width",
             "height": "Height",
-            "fuel": "Fuel",
 
             "constrain": {
               "$": "Constrain",
               "hint": "Maintains the ratio between X and Y scale"
             }
+          },
+
+          "fuel": {
+            "$": "Fuel",
+
+            "fuel": "Fuel"
           },
 
           "base_small": {
