@@ -4,7 +4,7 @@ import deferUpdates from 'core/bounds/deferUpdates';
 import { DeferUpdatesEventDetail } from 'core/bounds/getDeferUpdates';
 import mutateParts from 'core/part/mutateParts';
 import shouldSnap from 'core/part/shouldSnap';
-import { FuelTank } from 'game/parts/FuelTank';
+import { BOTTOM_WIDTH, Base } from 'game/parts/Base';
 import usePart from 'hooks/usePart';
 import { useEffect, useRef } from 'react';
 import useApp, { Tool } from 'stores/app';
@@ -15,26 +15,18 @@ import {
   CANVAS_MATRIX_SCALE,
   POSITION_SNAP_SIZE,
 } from '../../TransformControls/components/TransformNode';
+import { FUEL_TANK_TOP_EDGE_MATRIX_SCALE } from './FuelTankControls';
 
-export interface FuelTankEditDetail {
-  width_a: number;
-  width_b: number;
+export interface BaseEditDetail {
+  width: number;
   height: number;
+  extra: number;
 }
 
 export const ORIGIN = new Vector2();
 
-/**
- * I know there is unnecessary code here for the bottom width since we are only
- * manipulating the bottom width on the x-axis; but I'll keep the vectors
- * anyway just in case I wanna make it mutable on the y-axis too.
- */
-
-export const FUEL_TANK_TOP_EDGE_MATRIX_SCALE = new Vector2(2, 1);
-const FUEL_TANK_BOTTOM_EDGE_MATRIX_SCALE = new Vector2(2, 0);
-
-export default function FuelTankControls({ id }: EditControlsProps) {
-  const part = usePart<FuelTank>(id);
+export default function BaseControls({ id }: EditControlsProps) {
+  const part = usePart<Base>(id);
   const wrapper = useRef<Group>(null);
   const camera = useThree((state) => state.camera);
   const topControl = useRef<Group>(null);
@@ -49,11 +41,16 @@ export default function FuelTankControls({ id }: EditControlsProps) {
     wrapper.current?.position.set(part.p.x, part.p.y, 2);
     wrapper.current?.rotation.set(0, 0, degToRad(part.o.z));
     topControl.current?.position.set(
-      (part.N.width_b * part.o.x) / 2,
+      (part.N.width * part.o.x) / 2,
       part.N.height * part.o.y,
       0,
     );
-    bottomControl.current?.position.set((part.N.width_a * part.o.x) / 2, 0, 0);
+    bottomControl.current?.position.set(
+      (part.o.x * (part.N.width + part.N.width * BOTTOM_WIDTH + part.N.extra)) /
+        2,
+      0,
+      0,
+    );
 
     const handleDeferUpdates = (
       event: CustomEvent<DeferUpdatesEventDetail>,
@@ -114,16 +111,16 @@ export default function FuelTankControls({ id }: EditControlsProps) {
         .multiplyScalar(POSITION_SNAP_SIZE);
     }
 
-    offset.x = Math.max(offset.x, -part.N.width_b);
+    offset.x = Math.max(offset.x, -part.N.width);
     offset.y = Math.max(offset.y, -part.N.height);
 
     if (!offset.equals(lastOffset)) {
       window.dispatchEvent(
-        new CustomEvent<FuelTankEditDetail>(`fueltankedit${id}`, {
+        new CustomEvent<BaseEditDetail>(`baseedit${id}`, {
           detail: {
-            width_a: part.N.width_a,
-            width_b: part.N.width_b + offset.x,
+            width: part.N.width + offset.x,
             height: part.N.height + offset.y,
+            extra: part.N.extra,
           },
         }),
       );
@@ -132,15 +129,15 @@ export default function FuelTankControls({ id }: EditControlsProps) {
   const handleTopPointerUp = () => {
     if (!firstMove) deferUpdates(false);
 
-    mutateParts<FuelTank>(id, (draft) => {
-      draft.N.width_b = part.N.width_b + offset.x;
-      draft.N.width_original = part.N.width_b;
+    mutateParts<Base>(id, (draft) => {
+      draft.N.width = part.N.width + offset.x;
       draft.N.height = part.N.height + offset.y;
     });
 
     window.removeEventListener('pointermove', handleTopPointerMove);
     window.removeEventListener('pointerup', handleTopPointerUp);
   };
+
   const handleBottomPointerDown = (event: ThreeEvent<PointerEvent>) => {
     initial.set(event.nativeEvent.clientX, event.nativeEvent.clientY);
     lastOffset.set(0, 0);
@@ -165,7 +162,7 @@ export default function FuelTankControls({ id }: EditControlsProps) {
       .divideScalar(camera.zoom)
       .divide(scale)
       .multiply(CANVAS_MATRIX_SCALE)
-      .multiply(FUEL_TANK_BOTTOM_EDGE_MATRIX_SCALE);
+      .multiply(FUEL_TANK_TOP_EDGE_MATRIX_SCALE);
 
     if (shouldSnap(event)) {
       offset
@@ -174,16 +171,16 @@ export default function FuelTankControls({ id }: EditControlsProps) {
         .multiplyScalar(POSITION_SNAP_SIZE);
     }
 
-    offset.x = Math.max(offset.x, -part.N.width_a);
+    offset.x = Math.max(offset.x, -part.N.width);
     offset.y = Math.max(offset.y, -part.N.height);
 
     if (!offset.equals(lastOffset)) {
       window.dispatchEvent(
-        new CustomEvent<FuelTankEditDetail>(`fueltankedit${id}`, {
+        new CustomEvent<BaseEditDetail>(`baseedit${id}`, {
           detail: {
-            width_a: part.N.width_a + offset.x,
-            width_b: part.N.width_b,
-            height: part.N.height + offset.y,
+            width: part.N.width,
+            height: part.N.height,
+            extra: part.N.extra + offset.x,
           },
         }),
       );
@@ -192,9 +189,8 @@ export default function FuelTankControls({ id }: EditControlsProps) {
   const handleBottomPointerUp = () => {
     if (!firstMove) deferUpdates(false);
 
-    mutateParts<FuelTank>(id, (draft) => {
-      draft.N.width_a = part.N.width_a + offset.x;
-      draft.N.height = part.N.height + offset.y;
+    mutateParts<Base>(id, (draft) => {
+      draft.N.extra = part.N.extra + offset.x;
     });
 
     window.removeEventListener('pointermove', handleBottomPointerMove);

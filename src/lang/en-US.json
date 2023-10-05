@@ -196,6 +196,15 @@
             "fuel": "Fuel"
           },
 
+          "base": {
+            "$": "Base",
+
+            "width": "Width",
+            "height": "Height",
+            "extra": "Extra",
+            "fuel": "Fuel"
+          },
+
           "parachute": {
             "$": "Parachute",
 
@@ -574,6 +583,7 @@
     "side_separator": "Side separator",
     "fairing_cone_round": "Round fairing cone",
     "strut": "Structural part",
-    "base_small": "Small base"
+    "base_small": "Small base",
+    "base": "Base"
   }
 }

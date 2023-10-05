@@ -1,6 +1,7 @@
 import * as PropertiesPrimitive from 'components/Properties';
 import * as Sidebar from 'components/Sidebar';
 import getPart from 'core/part/getPart';
+import { baseData, BaseProperties } from 'game/parts/Base';
 import { baseSmallData, BaseSmallProperties } from 'game/parts/BaseSmall';
 import { coneData } from 'game/parts/Cone';
 import { coneSideData } from 'game/parts/ConeSide';
@@ -125,6 +126,10 @@ const groupedProperties: Record<string, GroupedProperties> = {
   baseSmall: {
     test: testName(baseSmallData.n),
     Component: BaseSmallProperties,
+  },
+  base: {
+    test: testName(baseData.n),
+    Component: BaseProperties,
   },
   fuel: {
     test: testProperties<Part & PartWithFuel>(({ N }) => [N, N?.fuel_percent]),
