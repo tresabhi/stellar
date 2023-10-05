@@ -19,6 +19,9 @@ import { Group, Mesh, NearestFilter } from 'three';
 import { PartComponentProps, PartPropertyComponentProps } from 'types/Parts';
 import preloadTexture from 'utilities/preloadTexture';
 import { constructFuelTankGeometry } from '../FuelTank';
+import edgeBright from '../FuelTank/textures/edge-bright.png';
+import edge from '../FuelTank/textures/edge.png';
+import middle from '../FuelTank/textures/middle.png';
 import {
   PartWithoutName,
   VanillaPart,
@@ -29,9 +32,6 @@ import {
   PartWithTransformations,
   partWithTransformationsData,
 } from '../PartWithTransformations';
-import edgeBright from './textures/edge-bright.png';
-import edge from './textures/edge.png';
-import middle from './textures/middle.png';
 
 export interface VanillaBaseSmall extends VanillaPart, PartWithTransformations {
   readonly n: 'Base Small';
