@@ -1,9 +1,11 @@
+import { baseSmallData } from 'game/parts/BaseSmall';
 import { fuelTankData } from 'game/parts/FuelTank';
 import { Part } from 'game/parts/Part';
 import { FC } from 'react';
 import { testName } from 'routes/Interface/components/LayoutTab/components/RightSidebar/components/Properties';
 import useApp, { Tool } from 'stores/app';
 import useBlueprint from 'stores/blueprint';
+import BaseSmallControls from './components/BaseSmall';
 import FuelTankControls from './components/FuelTankControls';
 
 export interface EditControlsProps {
@@ -19,6 +21,10 @@ export const groupedControls: Record<string, GroupedControls> = {
   [fuelTankData.n]: {
     test: testName(fuelTankData.n),
     Component: FuelTankControls,
+  },
+  [baseSmallData.n]: {
+    test: testName(baseSmallData.n),
+    Component: BaseSmallControls,
   },
 };
 

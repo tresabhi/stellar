@@ -30,7 +30,7 @@ export const ORIGIN = new Vector2();
  * anyway just in case I wanna make it mutable on the y-axis too.
  */
 
-const FUEL_TANK_TOP_EDGE_MATRIX_SCALE = new Vector2(2, 1);
+export const FUEL_TANK_TOP_EDGE_MATRIX_SCALE = new Vector2(2, 1);
 const FUEL_TANK_BOTTOM_EDGE_MATRIX_SCALE = new Vector2(2, 0);
 
 export default function FuelTankControls({ id }: EditControlsProps) {

@@ -56,7 +56,7 @@ export const vanillaBaseSmallData: VanillaBaseSmall = {
   },
 };
 
-export const BaseSmallData: BaseSmall = {
+export const baseSmallData: BaseSmall = {
   ...partData,
   ...vanillaBaseSmallData,
 };
@@ -211,7 +211,15 @@ function LayoutComponent({ id }: PartComponentProps) {
       if (
         meshMiddleTop.current &&
         meshMiddleMiddle.current &&
-        meshMiddleBottom.current
+        meshMiddleBottom.current &&
+        meshLeftTop1.current &&
+        meshLeftTop2.current &&
+        meshLeftMiddle.current &&
+        meshLeftBottom.current &&
+        meshRightTop1.current &&
+        meshRightTop2.current &&
+        meshRightMiddle.current &&
+        meshRightBottom.current
       ) {
         constructFuelTankGeometry(
           {
@@ -222,6 +230,22 @@ function LayoutComponent({ id }: PartComponentProps) {
           meshMiddleTop.current,
           meshMiddleMiddle.current,
           meshMiddleBottom.current,
+        );
+        constructBaseSmallSideGeometry(
+          event.detail,
+          -1,
+          meshLeftTop1.current,
+          meshLeftTop2.current,
+          meshLeftMiddle.current,
+          meshLeftBottom.current,
+        );
+        constructBaseSmallSideGeometry(
+          event.detail,
+          1,
+          meshRightTop1.current,
+          meshRightTop2.current,
+          meshRightMiddle.current,
+          meshRightBottom.current,
         );
 
         invalidate();
@@ -339,7 +363,7 @@ export function BaseSmallProperties({ ids }: PartPropertyComponentProps) {
 export default {
   category: PartCategory.Structural,
   vanillaData: vanillaBaseSmallData,
-  data: BaseSmallData,
+  data: baseSmallData,
   label: 'base_small',
 
   Icon,
