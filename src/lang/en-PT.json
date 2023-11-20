@@ -5,7 +5,7 @@
       "$": "Erect",
       "templates": {
         "input_placeholder": "Sail frames...",
-        "in_built": "In-built",
+        "in_built": "Already docked",
         "list": {
           "apollo_mission": "Up yonder cheese lootin'",
           "basic_rocket": "Ship ain't got booty",
@@ -43,7 +43,7 @@
           "pan": "Change Them Draft",
           "transform": "Blowin'",
           "edit": "Tamperin'",
-          "stage": "Stage"
+          "stage": "Poop deck"
         },
         "clipboard": {
           "copy": "Loot",
@@ -62,9 +62,9 @@
           "rename": "Callin' names",
           "hidden": "Showin' 'em",
           "unhidden": "Ain't showin' 'em",
-          "locked": "Unlock",
-          "unlocked": "Lock",
-          "delete": "Delete"
+          "locked": "Anchor up",
+          "unlocked": "Anchor down",
+          "delete": "Eradicate"
         },
         "cursor": {
           "select_deep": "Select deep",

@@ -173,8 +173,8 @@
             "size": "Tamaño"
           },
           "strut": {
-            "$": "Structural part",
-            "size": "Size"
+            "$": "Parte estructural",
+            "size": "Tamaño"
           },
           "fragment": {
             "$": "Fragmento",
@@ -191,10 +191,10 @@
             "no_file": "No hay archivos seleccionados"
           },
           "fairing": {
-            "$": "Fairing",
-            "size": "Size",
-            "separation_force": "Separation force",
-            "detach_edge": "Detach edge"
+            "$": "Mercado",
+            "size": "Tamaño",
+            "separation_force": "Fuerza de separación",
+            "detach_edge": "Separar borde"
           }
         },
         "inspect": {
@@ -452,7 +452,7 @@
     "rcs": "RCS",
     "reference_image": "Imagen de referencia",
     "side_separator": "Separador lateral",
-    "fairing_cone_round": "Round fairing cone",
-    "strut": "Structural part"
+    "fairing_cone_round": "Cono redondo",
+    "strut": "Parte estructural"
   }
 }
